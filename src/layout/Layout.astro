@@ -1,0 +1,34 @@
+---
+import Container from 'components/Container.astro';
+import Header from 'layout/Header.astro';
+import Footer from 'layout/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <Container class="flex flex-col h-full">
+      <Header />
+      <slot />
+      <Footer />
+    </Container>
+    <script is:inline src="./node_modules/preline/preline.js"></script>
+  </body>
+</html>
+
+<style is:global>
+  html {
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+</style>

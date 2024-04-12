@@ -1,0 +1,17 @@
+---
+import { config } from 'config';
+const { brand } = config;
+
+const { plain } = Astro.props;
+---
+
+{plain && <>OpenSimGear</>}
+
+{
+  !plain && (
+    <>
+      <span class="font-bold text-slate-800">{brand[0]}</span>
+      <span class="text-slate-500">{brand[1] + brand[2]}</span>
+    </>
+  )
+}
