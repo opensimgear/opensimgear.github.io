@@ -16,19 +16,43 @@ import Footer from 'layout/Footer.astro';
     <Container class="flex flex-col h-full">
       <Header />
       <slot />
+      <div class="h-5"></div>
       <Footer />
     </Container>
-    <script is:inline src="./node_modules/preline/preline.js"></script>
+    <script>import "preline/dist/preline.js";</script>
   </body>
 </html>
 
 <style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
   html {
     margin-left: calc(100vw - 100%);
     margin-right: 0;
   }
+
   html,
   body {
     height: 100%;
+  }
+
+  @layer base {
+    h1 {
+      @apply text-4xl;
+      @apply my-4;
+    }
+    h2 {
+      @apply text-3xl;
+      @apply my-4;
+    }
+    h3 {
+      @apply text-2xl;
+      @apply my-3;
+    }
+    p {
+      @apply mt-2;
+    }
   }
 </style>
