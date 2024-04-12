@@ -1,8 +1,9 @@
 ---
 layout: ../../layout/TermsLayout.astro
-title: Code of Conduct
 ---
-# Contributor Covenant Code of Conduct
+import {config} from 'config'
+
+# Code of Conduct
 
 ## Our Pledge
 
@@ -64,7 +65,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-[INSERT CONTACT METHOD].
+<a href={`mailto:${config.contacts.abuse}`}>{config.contacts.abuse}</a>.
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the

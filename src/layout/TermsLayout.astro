@@ -3,18 +3,7 @@ import Layout from './Layout.astro';
 ---
 
 <Layout>
-  <div class="terms">
+  <div class="terms prose">
     <slot />
   </div>
 </Layout>
-
-<style>
-  .terms :global(ul) {
-    @apply list-disc;
-    @apply list-inside;
-  }
-  .terms :global(ol) {
-    @apply list-decimal;
-    @apply list-inside;
-  }
-</style>

@@ -16,6 +16,12 @@ type FooterItem = {
 };
 
 export interface Config {
+  site: string;
+  contacts: {
+    info: string;
+    abuse: string;
+    legal: string;
+  };
   brand: string[];
   social: {
     github: string;
@@ -25,9 +31,21 @@ export interface Config {
   footer: {
     categories: FooterCategory[];
   };
+  googleAnalytics: {
+    id: string;
+  }
 }
 
 export const config: Config = {
+  site: 'https://opensimgear.org',
+  contacts: {
+    info: 'info@opensimgear.org',
+    abuse: 'abuse@opensimgear.org',
+    legal: 'legal@opensimgear.org',
+  },
+  googleAnalytics: {
+    id: 'G-ZQWXBWD37M',
+  },
   brand: ['Open', 'Sim', 'Gear'],
   social: {
     github: 'https://github.com/orgs/opensimgear/repositories',
@@ -53,8 +71,16 @@ export const config: Config = {
             path: '/about',
           },
           {
+            title: 'Code of Conduct',
+            path: '/policies/code-of-conduct',
+          },
+          {
             title: 'Contributing',
             path: '/contributing',
+          },
+          {
+            title: 'Contacts',
+            path: '/contacts',
           },
         ],
       },
@@ -62,20 +88,16 @@ export const config: Config = {
         title: 'Terms and Policies',
         children: [
           {
-            title: 'Code of Conduct',
-            path: '/policies/code-of-conduct',
-          },
-          {
-            title: 'License',
-            path: '/policies/license',
+            title: 'Licenses',
+            path: '/policies/licenses',
           },
           {
             title: 'Privacy Policy',
             path: '/policies/privacy-policy',
           },
           {
-            title: 'Terms of Service',
-            path: '/policies/terms-of-service',
+            title: 'Terms and Conditions',
+            path: '/policies/terms-and-conditions',
           },
         ],
       },

@@ -5,9 +5,11 @@ import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import tailwind from '@astrojs/tailwind';
 import icon from 'astro-icon';
-
 import sentry from '@sentry/astro';
 import spotlightjs from '@spotlightjs/astro';
+import jopSoftwarecookieconsent from '@jop-software/astro-cookieconsent';
+import cookieConsentConfig from './cookie-consent.config.mjs';
+import partytown from '@astrojs/partytown';
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,5 +25,11 @@ export default defineConfig({
       enabled: process.env.NODE_ENV === 'development',
     }),
     spotlightjs(),
+    jopSoftwarecookieconsent(cookieConsentConfig),
+    partytown({
+      config: {
+        forward: ['dataLayer.push'],
+      },
+    }),
   ],
 });

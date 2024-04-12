@@ -2,6 +2,9 @@
 import Container from 'components/Container.astro';
 import Header from 'layout/Header.astro';
 import Footer from 'layout/Footer.astro';
+import GoogleAnalytics from 'components/GoogleAnalytics.astro';
+
+import { config } from 'config';
 ---
 
 <!doctype html>
@@ -11,48 +14,30 @@ import Footer from 'layout/Footer.astro';
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <GoogleAnalytics id={config.googleAnalytics.id} partytown={true} />
   </head>
   <body>
     <Container class="flex flex-col h-full">
       <Header />
       <slot />
-      <div class="h-5"></div>
       <Footer />
     </Container>
-    <script>import "preline/dist/preline.js";</script>
+
+    <script>
+      import 'preline/dist/preline.js';
+    </script>
+
+    <style is:global>
+      /* avoid sidebar flicker */
+      html {
+        margin-left: calc(100vw - 100%);
+        margin-right: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+    </style>
   </body>
 </html>
-
-<style is:global>
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-
-  html {
-    margin-left: calc(100vw - 100%);
-    margin-right: 0;
-  }
-
-  html,
-  body {
-    height: 100%;
-  }
-
-  @layer base {
-    h1 {
-      @apply text-4xl;
-      @apply my-4;
-    }
-    h2 {
-      @apply text-3xl;
-      @apply my-4;
-    }
-    h3 {
-      @apply text-2xl;
-      @apply my-3;
-    }
-    p {
-      @apply mt-2;
-    }
-  }
-</style>
