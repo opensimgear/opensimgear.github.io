@@ -1,6 +1,14 @@
 ---
 import Layout from './Layout.astro';
+import Seo from 'components/Seo.astro';
+
+const { frontmatter } = Astro.props;
 ---
+
+<Seo
+  pageTitle={frontmatter.title}
+  description={frontmatter.description}
+/>
 
 <Layout>
   <div class="terms prose">

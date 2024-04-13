@@ -1,17 +1,17 @@
 ---
-import { AstroSeo } from '@astrolib/seo';
 import { Picture } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
 import Layout from 'layout/Layout.astro';
 import heroImage from 'assets/station.jpeg';
 import Button from 'components/ui/Button.astro';
+import Seo from 'components/Seo.astro';
+
+const description =
+  'OpenSimGear is a collection of open-source projects that aim to provide a complete ecosystem for racing and flight simulation enthusiasts.';
 ---
 
-<AstroSeo
-  title="OpenSimGear"
-  description="Open source ecosystem for racing and flight simulation"
-/>
+<Seo description={description} />
 
 <Layout>
   <main
@@ -34,8 +34,7 @@ import Button from 'components/ui/Button.astro';
         Open source ecosystem for racing and flight simulation
       </h1>
       <p class="text-lg mt-4 text-slate-600 max-w-xl">
-        OpenSimGear is a collection of open-source projects that aim to provide
-        a complete ecosystem for racing and flight simulation enthusiasts.
+        {description}
       </p>
       <div class="mt-6 flex flex-col sm:flex-row gap-3">
         <Button
