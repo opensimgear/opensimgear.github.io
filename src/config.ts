@@ -1,10 +1,3 @@
-type MenuItem = {
-  title: string;
-  path: string;
-  children?: MenuItem[];
-  badge?: boolean;
-};
-
 type FooterCategory = {
   title: string;
   children: FooterItem[];
@@ -27,13 +20,12 @@ export interface Config {
     github: string;
     discord: string;
   };
-  navbar: MenuItem[];
   footer: {
     categories: FooterCategory[];
   };
   googleAnalytics: {
     id: string;
-  }
+  };
 }
 
 export const config: Config = {
@@ -49,27 +41,13 @@ export const config: Config = {
   brand: ['Open', 'Sim', 'Gear'],
   social: {
     github: 'https://github.com/orgs/opensimgear/repositories',
-    discord: 'https://discord.gg/SyfGA4eA3j',
+    discord: 'https://discord.gg/f7yWUF6zUs',
   },
-  navbar: [
-    {
-      title: 'Docs',
-      path: '/docs',
-    },
-    {
-      title: 'About',
-      path: '/about',
-    },
-  ],
   footer: {
     categories: [
       {
         title: 'Project',
         children: [
-          {
-            title: 'About',
-            path: '/about',
-          },
           {
             title: 'Code of Conduct',
             path: '/policies/code-of-conduct',
@@ -78,26 +56,18 @@ export const config: Config = {
             title: 'Contributing',
             path: '/contributing',
           },
-          {
-            title: 'Contacts',
-            path: '/contacts',
-          },
         ],
       },
       {
         title: 'Terms and Policies',
         children: [
           {
-            title: 'Licenses',
-            path: '/policies/licenses',
+            title: 'Terms and Conditions',
+            path: '/policies/terms-and-conditions',
           },
           {
             title: 'Privacy Policy',
             path: '/policies/privacy-policy',
-          },
-          {
-            title: 'Terms and Conditions',
-            path: '/policies/terms-and-conditions',
           },
         ],
       },

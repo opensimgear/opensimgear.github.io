@@ -1,0 +1,14 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/PageFrame.astro';
+import CookieConsent from '~/components/util/CookieConsent.astro';
+---
+
+<Default {...Astro.props}>
+  <slot name="header" slot="header" />
+  <slot name="sidebar" slot="sidebar" />
+  <slot name="right-sidebar" slot="right-sidebar" />
+  <slot />
+</Default>
+
+<CookieConsent />

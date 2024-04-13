@@ -1,0 +1,22 @@
+---
+import { config } from '~/config';
+---
+
+<!-- Google Analytics -->
+<script
+  is:inline
+  async
+  src={`https://www.googletagmanager.com/gtag/js?id=${config.googleAnalytics.id}`}
+  type="text/partytown"
+  data-category="analytics"
+  data-service="ga"
+></script>
+
+<script is:inline define:vars={{ id: config.googleAnalytics.id }} data-category="analytics" data-service="ga">
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', id);
+</script>

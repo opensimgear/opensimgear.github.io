@@ -1,0 +1,9 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Head.astro';
+import GoogleAnalytics from '~/components/util/GoogleAnalytics.astro';
+---
+
+<Default {...Astro.props}><slot /></Default>
+<GoogleAnalytics />
+

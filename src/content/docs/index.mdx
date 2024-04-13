@@ -1,0 +1,66 @@
+---
+title: My docs
+description: Learn more about my project in this docs site built with Starlight.
+template: splash
+hero:
+  title: Open source ecosystem for racing and flight simulation
+  tagline: OpenSimGear is a collection of open-source projects that aim to provide a complete ecosystem for racing and flight simulation enthusiasts.
+  actions:
+    - text: Get started
+      icon: right-arrow
+      variant: primary
+      link: /getting-started/
+    - text: View on GitHub
+      icon: external
+      link: https://github.com/orgs/opensimgear/repositories
+---
+
+import HomeFooter from '~/components/HomeFooter.astro';
+import Features from '~/components/Features.astro';
+
+<Features
+  id="vision"
+  tagline="Vision"
+  title="Where do we want to be"
+  subtitle="This project aims on providing everything you need to fully immerse in sim racing and flight simulation."
+  items={[
+    {
+      title: 'Passion-Driven Community',
+      description:
+        'Join a vibrant community of like-minded individuals who share your enthusiasm for gaming and simulation.',
+      icon: 'tabler:users-group',
+    },
+    {
+      title: 'Modular design',
+      description:
+        'Build what you need and compose multiple components to create a unique integrated experience.',
+      icon: 'tabler:components',
+    },
+    {
+      title: 'Flexible and customizable',
+      description:
+        'Customize the components to fit your constraints for budget and your preferences with simple online tools.',
+      icon: 'tabler:adjustments-cog',
+    },
+    {
+      title: 'Cover all aspects of sim gear',
+      description:
+        'We aim to provide a complete ecosystem or hardware, firmware, and software for racing and flight simulation.',
+      icon: 'tabler:arrows-move',
+    },
+    {
+      title: 'Knowledge sharing',
+      description:
+        'Consult a information rich knowledge base to learn more about the theory and design your own sim gear.',
+      icon: 'tabler:message-share',
+    },
+    {
+      title: 'Open to new ideas and contributions',
+      description:
+        'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
+      icon: 'tabler:bulb',
+    },
+  ]}
+/>
+
+<HomeFooter />
