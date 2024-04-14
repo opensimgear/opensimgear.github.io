@@ -16,7 +16,8 @@ export default defineConfig({
     starlight({
       title: 'OpenSimGear',
       logo: {
-        src: '~/assets/logo.png',
+        light: '~/assets/logo.png',
+        dark: '~/assets/logo-dark.png',
         alt: 'OpenSimGear Logo',
         replacesTitle: true,
       },
