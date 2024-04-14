@@ -1,3 +1,4 @@
+import path from 'path';
 import { defineConfig } from 'astro/config';
 import playformCompress from '@playform/compress';
 import svelte from '@astrojs/svelte';
@@ -7,6 +8,10 @@ import spotlightjs from '@spotlightjs/astro';
 import partytown from '@astrojs/partytown';
 import starlight from '@astrojs/starlight';
 import icon from 'astro-icon';
+
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
@@ -63,4 +68,11 @@ export default defineConfig({
     }),
     playformCompress(),
   ],
+  vite: {
+    resolve: {
+      alias: {
+        '~': path.resolve(__dirname, './src'),
+      },
+    },
+  },
 });

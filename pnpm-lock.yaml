@@ -29,9 +29,6 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.1.0
     version: 5.1.0(astro@4.6.1)(tailwindcss@3.4.3)
-  '@astrolib/seo':
-    specifier: 1.0.0-beta.5
-    version: 1.0.0-beta.5(astro@4.6.1)
   '@iconify-json/mdi':
     specifier: ^1.1.66
     version: 1.1.66
@@ -82,6 +79,9 @@ dependencies:
     version: 3.0.1
 
 devDependencies:
+  '@astrolib/seo':
+    specifier: 1.0.0-beta.5
+    version: 1.0.0-beta.5(astro@4.6.1)
   '@eslint/js':
     specifier: ^9.0.0
     version: 9.0.0
@@ -260,7 +260,6 @@ packages:
       vfile: 6.0.1
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@astrojs/mdx@2.3.0(astro@4.6.1):
     resolution: {integrity: sha512-8Lqr3kK1R6B3rukM71GSYTc4BHm5/j+UVdp7UEa18WHW/EVstmhKupabGUHj2Em2L/5AQdFMNmOBVkKzzcPO4g==}
@@ -410,7 +409,6 @@ packages:
       which-pm-runs: 1.1.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@astrolib/seo@1.0.0-beta.5(astro@4.6.1):
     resolution: {integrity: sha512-poBnSB9TzkmOyf+PoMR642zVLSoVVZbUIKnYDHXHrKi/upkaegNiaBdVRsyqaQC93SIxxyagQrIbLRtnSJT4Xg==}
@@ -418,7 +416,7 @@ packages:
       astro: ^1.2.1 || ^2.0.0 || ^3.0.0-beta.0 || ^3.0.0 || ^4.0.0
     dependencies:
       astro: 4.6.1(typescript@5.4.5)
-    dev: false
+    dev: true
 
   /@babel/code-frame@7.24.2:
     resolution: {integrity: sha512-y5+tLQyV8pg3fsiln67BVLD1P13Eg4lh5RW9mF0zUuvLrv9uIQ4MCL+CRT+FTsBlBjcIan6PGsLcBN0m3ClUyQ==}
@@ -2788,7 +2786,6 @@ packages:
       - supports-color
       - terser
       - typescript
-    dev: false
 
   /astrojs-compiler-sync@0.3.5(@astrojs/compiler@2.7.1):
     resolution: {integrity: sha512-y420rhIIJ2HHDkYeqKArBHSdJNIIGMztLH90KGIX3zjcJyt/cr9Z2wYA8CP5J1w6KE7xqMh0DAkhfjhNDpQb2Q==}
