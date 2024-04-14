@@ -15,6 +15,11 @@ export default defineConfig({
     tailwind({ applyBaseStyles: false }),
     starlight({
       title: 'OpenSimGear',
+      logo: {
+        src: '~/assets/logo.png',
+        alt: 'OpenSimGear Logo',
+        replacesTitle: true,
+      },
       social: {
         github: 'https://github.com/orgs/opensimgear/repositories',
         discord: 'https://discord.gg/f7yWUF6zUs',
