@@ -5,18 +5,23 @@ template: splash
 hero:
   title: Open source ecosystem for racing and flight simulation
   tagline: OpenSimGear is a collection of open-source projects that aim to provide a complete ecosystem for racing and flight simulation enthusiasts.
+  image:
+    file: ~/assets/hero.jpg
   actions:
     - text: Get started
-      icon: right-arrow
+      icon: right-caret
       variant: primary
       link: /getting-started/
     - text: View on GitHub
       icon: external
+      variant: secondary
       link: https://github.com/orgs/opensimgear/repositories
+editUrl: false
 ---
 
 import HomeFooter from '~/components/HomeFooter.astro';
 import Features from '~/components/Features.astro';
+import Steps from '~/components/Steps.astro';
 
 <Features
   id="vision"
@@ -61,6 +66,40 @@ import Features from '~/components/Features.astro';
       icon: 'tabler:bulb',
     },
   ]}
+/>
+
+<Steps
+  title="What are the next steps?"
+  items={[
+    {
+      title: 'Create the knowledge base',
+      description:
+        "We need to populate the knowledge base with all the details. This will be the foundation for the rest of the project.",
+      icon: 'tabler:file-description',
+    },
+    {
+      title: 'Design the first OpenSimGear "gear"',
+      description:
+        "The we proceed with the design of the first simple piece of gear to develop all the necessary tools and processes.",
+      icon: 'tabler:pencil-check',
+    },
+    {
+      title: 'Build and test the first prototype',
+      description:
+        'Then we proceed to build and test the designed gear and adjust the design based on the results.',
+      icon: 'tabler:tool',
+    },
+    {
+      title: 'Create the configuration software',
+      description:
+        'Finally we create the config software to allow users to customize the gear to their needs and then we move on to the next gear!',
+      icon: 'tabler:adjustments-horizontal',
+    },
+  ]}
+  image={{
+    src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+    alt: 'Steps image',
+  }}
 />
 
 <HomeFooter />

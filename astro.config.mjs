@@ -21,6 +21,9 @@ export default defineConfig({
         alt: 'OpenSimGear Logo',
         replacesTitle: true,
       },
+      editLink: {
+        baseUrl: 'https://github.com/opensimgear/opensimgear.github.io/edit/main/',
+      },
       social: {
         github: 'https://github.com/orgs/opensimgear/repositories',
         discord: 'https://discord.gg/f7yWUF6zUs',
@@ -42,6 +45,7 @@ export default defineConfig({
       ],
       components: {
         Head: './src/components/overrides/Head.astro',
+        Hero: './src/components/overrides/Hero.astro',
         PageFrame: './src/components/overrides/PageFrame.astro',
       },
       plugins: [],

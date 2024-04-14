@@ -1,0 +1,76 @@
+---
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
+import { Icon } from '@astrojs/starlight/components';
+
+const { data } = Astro.props.entry;
+const { title = data.title, tagline, image, actions = [] } = data.hero || {};
+---
+
+<section class="relative not-prose">
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+    <div
+      class="py-12 md:py-20 lg:py-0 lg:flex lg:items-center lg:h-screen/2 lg:gap-8"
+    >
+      <div class="basis-1/2 text-center lg:text-left pb-10 md:pb-16 mx-auto">
+        {
+          title && (
+            <h1 class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200">
+              {title}
+            </h1>
+          )
+        }
+        <div class="max-w-3xl mx-auto lg:max-w-none">
+          {
+            tagline && (
+              <p class="text-xl text-muted mb-6 dark:text-slate-300">
+                {tagline}
+              </p>
+            )
+          }
+          {
+            actions && (
+              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:justify-start lg:m-0 lg:max-w-7xl">
+                {Array.isArray(actions) ? (
+                  actions.map((action) => (
+                    <div class="flex w-full sm:w-auto">
+                      <Button
+                        class="w-full sm:mb-0"
+                        variant={action.variant}
+                        href={action.link}
+                      >
+                        {action.text}
+                        <Icon class="ml-2" name={action.icon.name} size="1.5rem" />
+                      </Button>
+                    </div>
+                  ))
+                ) : (
+                  <Fragment set:html={actions} />
+                )}
+              </div>
+            )
+          }
+        </div>
+      </div>
+      <div class="basis-1/2">
+        {
+          image && (
+            <div class="relative m-auto max-w-5xl">
+              <Image
+                class="mx-auto rounded-md w-full"
+                widths={[400, 768, 1024, 2040]}
+                sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                loading="eager"
+                height={600}
+                src={image.file}
+                alt={image.alt || title}
+              />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

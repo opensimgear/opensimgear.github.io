@@ -11,7 +11,22 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 
 @layer components {
   .btn {
-    @apply py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center;
+    @apply no-underline text-center text-base leading-snug;
+    @apply transition ease-in duration-200;
+    @apply rounded-md py-3.5 px-6 md:px-8 cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent-600 text-white hover:bg-accent-500 dark:text-black dark:bg-accent-200 dark:hover:bg-accent-500;
+  }
+
+  .btn-secondary {
+    @apply btn text-black dark:text-white hover:underline;
+  }
+
+  .btn-tertiary {
+    @apply btn
   }
 }
 

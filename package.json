@@ -48,7 +48,8 @@
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "tailwind-merge": "^2.2.2",
-    "typescript-eslint": "^7.6.0"
+    "typescript-eslint": "^7.6.0",
+    "unpic": "^3.18.0"
   },
   "packageManager": "pnpm@latest"
 }

@@ -118,6 +118,9 @@ devDependencies:
   typescript-eslint:
     specifier: ^7.6.0
     version: 7.6.0(eslint@8.57.0)(typescript@5.4.5)
+  unpic:
+    specifier: ^3.18.0
+    version: 3.18.0
 
 packages:
 
@@ -7745,6 +7748,10 @@ packages:
       '@types/unist': 3.0.2
       unist-util-is: 6.0.0
       unist-util-visit-parents: 6.0.1
+
+  /unpic@3.18.0:
+    resolution: {integrity: sha512-JemzuG3nyKpEQ/DArrYM0l+LDSLLPYiUQvDfGXJY35+r0J0C984vPB4Zh8DyMVip102YSnTeZtZ6Q8OQegQDRQ==}
+    dev: true
 
   /unplugin@1.0.1:
     resolution: {integrity: sha512-aqrHaVBWW1JVKBHmGo33T5TxeL0qWzfvjWokObHA9bYmN7eNDkwOxmLjhioHl9878qDFMAaT51XNroRyuz7WxA==}
