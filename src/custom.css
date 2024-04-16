@@ -26,7 +26,7 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
   }
 
   .btn-tertiary {
-    @apply btn
+    @apply btn;
   }
 }
 

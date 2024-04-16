@@ -47,6 +47,10 @@ export default defineConfig({
           label: 'Docs',
           autogenerate: { directory: 'docs' },
         },
+        {
+          label: 'Gear',
+          autogenerate: { directory: 'gear' },
+        },
       ],
       components: {
         Head: './src/components/overrides/Head.astro',

@@ -299,7 +299,11 @@ export async function getImagesOptimized(
     console.error('Image', image);
   }
 
-  let breakpoints = getBreakpoints({ width: width, breakpoints: widths, layout: layout });
+  let breakpoints = getBreakpoints({
+    width: width,
+    breakpoints: widths,
+    layout: layout,
+  });
   breakpoints = [...new Set(breakpoints)].sort((a, b) => a - b);
 
   const srcset = (await transform(image, breakpoints, Number(width) || undefined, Number(height) || undefined))
