@@ -16,60 +16,94 @@ Sim racing hardware can vary significantly in complexity and realism, ranging fr
 advanced systems designed for the most immersive and realistic experience possible. Here’s a detailed look at these
 different tiers of hardware.
 
-### Basic
+We can categorize equipment into two tiers:
 
-#### Steering Wheel
+- Basic
+  - [Belt driven steering wheel](#steering-wheel)
+  - [Simple pedals](#simple-pedals)
+  - [Table mount or simple stand](#wheel-stand)
+- Advanced
+  - [Direct drive wheel base](#direct-drive-wheel-base)
+  - [Load cell or hydraulic pedals](#load-cell-or-hydraulic-pedals)
+  - [Rig or Cockpit](#rig-or-cockpit)
+  - [G-Belt (belt tensioning system)](#g-belt)
+  - [G-Seat](#g-seat)
+  - [G-Helmet](#g-helm)
+  - [Bass Shakers](#bass-shakers)
+  - [Wind simulation](#wind-simulation)
+  - [Motion simulation](#motion-simulators)
+  - [VR Headset](#vr-headsets)
+
+### Steering Wheel
+
+The cornerstone of any sim racing setup is the steering wheel.
 
 ![Logitech G29 Wheel](~/assets/docs/logitech-g29-wheel.webp)
 
-The cornerstone of any sim racing setup is the steering wheel. Basic wheels are typically made from plastic with rubber
-grips and use gear-driven or belt-driven mechanisms to provide force feedback, which simulates the resistance and
-vibrations you would feel when driving a real car.
+Basic wheels are typically made from plastic with rubber grips and use gear-driven or belt-driven mechanisms to provide
+force feedback, which simulates the resistance and vibrations you would feel when driving a real car.
 
-#### Pedals
+### Simple Pedals
+
+A basic pedal set usually includes accelerator and brake pedals, with higher quality sets also including a clutch pedal
+for more realistic gear shifting.
 
 ![Logitech G29 Wheel](~/assets/docs/logitech-g29-pedals.webp)
 
-A basic pedal set usually includes accelerator and brake pedals, with higher quality sets also including a clutch pedal
-for more realistic gear shifting. Entry-level pedals are often made from plastic and use potentiometers for sensing
-pedal position.
+Entry-level pedals are often made from plastic and use potentiometers for sensing pedal position.
 
-#### Rig or Cockpit
-
-![Sim Labs GT1 EVO Sim racing rig](~/assets/docs/gt1-evo-sim-racing-cockpit.webp)
+### Wheel stand
 
 At the basic level, a rig might simply be a stable stand for mounting the steering wheel and pedals to ensure they don’t
-move during racing. More elaborate entry-level setups might include a basic seat and frame that mimics the position of a
-car driver’s seat, enhancing the overall experience without a significant increase in cost.
+move during racing.
 
-### Advanced
+![Wheel Stand](~/assets/docs/wheel-stand-rig.jpg)
 
-#### Direct Drive Wheel base
+More elaborate entry-level setups might include a basic seat and frame that mimics the position of a car driver’s seat,
+enhancing the overall experience without a significant increase in cost.
+
+### Direct Drive Wheel base
+
+These are considered the pinnacle of sim racing hardware for their precision and realism.
 
 ![Moza R5 Wheel Base](~/assets/docs/moza-r5-wheel-base.webp)
 
-These are considered the pinnacle of sim racing hardware for their precision and realism. Unlike gear or belt-driven
-systems, direct drive wheels connect the steering wheel directly to the motor, resulting in incredibly accurate and
-realistic force feedback. This allows sim racers to feel even the smallest details of the road or track surface.
+Unlike gear or belt-driven systems, direct drive wheels connect the steering wheel directly to the motor, resulting in
+incredibly accurate and realistic force feedback. This allows sim racers to feel even the smallest details of the road
+or track surface.
 
-#### Load Cell or Hydraulic Pedals
+### Load Cell or Hydraulic Pedals
+
+Advanced pedal setups use load cells or hydraulic systems to simulate the feel of a car’s brake system.
 
 ![Asetek Forte Pedals](~/assets/docs/forte-pedals-asetek-simsports.jpg)
 
-Advanced pedal setups use load cells or hydraulic systems to simulate the feel of a car’s brake system. These pedals
-measure the pressure applied, which offers a more realistic braking feel, essential for precision racing.
+These pedals measure the pressure applied, which offers a more realistic braking feel, essential for precision racing.
 
-#### Belt Tensioning Systems
+### Rig or Cockpit
+
+Once a strong direct drive wheel base and high load brakes are introduced the stiffness of the system becomes important.
+This is why at that point is highly recommended to get a real sim racing rig, usually made of aluminium profiles.
+
+![Sim Labs GT1 EVO Sim racing rig](~/assets/docs/gt1-evo-sim-racing-cockpit.webp)
+
+or in more expensive setups of custom bent and welded pipes.
+
+![Alpine Racing TRX](~/assets/docs/alpine-racing-trxa.webp)
+
+### G-Belt
+
+G-Belts (know also as belt tensioning systems) are used to enhance the feeling of G-forces experienced during virtual
+racing or flying.
 
 ![PT Actuator G Belt](~/assets/docs/pt-actuator-g-belt.webp)
 
-in sim racing or flight simulation rigs are used to enhance the feeling of G-forces experienced during virtual racing or
-flying. These systems work by tightening and loosening seat belts in sync with the on-screen action, simulating the
-physical pressures that would be felt in high-speed turns or during acceleration and deceleration. This provides a more
-immersive experience, helping users feel more connected to the virtual environment and improving their ability to
-anticipate vehicle behavior based on the 'felt' forces.
+These systems work by tightening and loosening seat belts in sync with the on-screen action, simulating the physical
+pressures that would be felt in high-speed turns or during acceleration and deceleration. This provides a more immersive
+experience, helping users feel more connected to the virtual environment and improving their ability to anticipate
+vehicle behavior based on the 'felt' forces.
 
-#### G-Seat
+### G-Seat
 
 ![GS5 G Seat](~/assets/docs/gs5-g-seat.jpg)
 
@@ -79,7 +113,7 @@ against the occupant’s body in response to simulated movements. This is intend
 an actual cockpit or racing car, such as the push into the seat during acceleration or the pull to the side during sharp
 turns, enhancing the realism of the simulation.
 
-#### G-Helm
+### G-Helm
 
 ![Frex G Helm](~/assets/docs/frex-g-helm.jpg)
 
@@ -89,7 +123,7 @@ tightening around the head, and even temperature variations to replicate the exa
 face during intense scenarios. The G-Helm aims to increase the realism of simulations for training or entertainment
 purposes, allowing users to experience a closer approximation to actual conditions.
 
-#### Bass Shakers
+### Bass Shakers
 
 ![DIY Bass Shakers](~/assets/docs/bass-shakers.jpg)
 
@@ -101,25 +135,27 @@ drivers to 'feel' the sounds, which can provide crucial feedback about the car's
 Bass shakers help in creating a more engaging and realistic racing experience by simulating physical effects that would
 be felt in a real vehicle.
 
-#### Wind simulation
+### Wind simulation
+
+Wind simulation systems in sim racing are used to replicate the effect of air moving past the car at high speeds.
 
 ![DIY Wind Sim](~/assets/docs/wind-sim.webp)
 
-systems in sim racing are used to replicate the effect of air moving past the car at high speeds. These systems
-typically involve fans or air blowers that are controlled by the speed of the car in the simulation; the faster the car
-goes, the stronger the wind blows. The aim is to provide a physical cue that enhances the perception of speed and
-motion, contributing to a deeper level of immersion. Wind simulation not only adds to the realism by simulating the
-natural resistance felt when driving at high speeds but can also help in cooling the driver, making long sessions more
-comfortable. This feature is particularly effective in VR environments, where visual and auditory cues are already
-enhanced, and the addition of tactile wind effects can significantly heighten the overall sense of presence and realism.
+These systems typically involve fans or air blowers that are controlled by the speed of the car in the simulation; the
+faster the car goes, the stronger the wind blows. The aim is to provide a physical cue that enhances the perception of
+speed and motion, contributing to a deeper level of immersion. Wind simulation not only adds to the realism by
+simulating the natural resistance felt when driving at high speeds but can also help in cooling the driver, making long
+sessions more comfortable. This feature is particularly effective in VR environments, where visual and auditory cues are
+already enhanced, and the addition of tactile wind effects can significantly heighten the overall sense of presence and
+realism.
 
-#### Motion Simulators
+### Motion Simulators
 
 For the ultimate in immersion, motion simulators move the entire cockpit to simulate g-forces and other physical
 sensations of driving. These systems can tilt, shake, and shift to mimic acceleration, braking, cornering, and even road
 texture.
 
-#### VR Headsets
+### VR Headsets
 
 Although not necessary, VR headsets can be included in advanced setups to replace traditional monitors, placing the
 racer directly inside the virtual cockpit for an unmatched level of immersion.
