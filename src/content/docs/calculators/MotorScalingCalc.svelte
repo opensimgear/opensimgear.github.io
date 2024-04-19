@@ -1,4 +1,10 @@
 <script>
+  import { Canvas } from '@threlte/core';
+  import { T } from '@threlte/core';
+  import { Grid, OrbitControls, interactivity } from '@threlte/extras';
+  import Tree from '~/components/model/Tree.svelte';
+  import Servo from '~/components/model/hf-sp421.svelte';
+
   let requiredAxialSpeed = 300;
   let requiredAxialForce = 1000;
   const ballScrew = {

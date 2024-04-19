@@ -25,6 +25,9 @@
     "@spotlightjs/astro": "^1.0.20",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.12",
+    "@threlte/core": "^7.3.0",
+    "@threlte/extras": "^8.11.2",
+    "@types/three": "^0.163.0",
     "astro": "^4.6.1",
     "astro-expressive-code": "^0.34.1",
     "astro-icon": "^1.1.0",
@@ -33,6 +36,7 @@
     "sharp": "^0.33.3",
     "svelte": "^4.2.13",
     "tailwindcss": "^3.4.3",
+    "three": "^0.163.0",
     "typescript": "^5.4.5",
     "vanilla-cookieconsent": "^3.0.1"
   },
