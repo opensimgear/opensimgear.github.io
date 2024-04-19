@@ -48,6 +48,10 @@ export default defineConfig({
           autogenerate: { directory: 'docs' },
         },
         {
+          label: 'Calculators',
+          autogenerate: { directory: 'calculators' },
+        },
+        {
           label: 'Gear',
           autogenerate: { directory: 'gear' },
         },

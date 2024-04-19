@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 import defaultTheme from 'tailwindcss/defaultTheme';
 import typography from '@tailwindcss/typography';
+import forms from '@tailwindcss/forms';
 import starlightPlugin from '@astrojs/starlight-tailwind';
 
 // Generated color palettes
@@ -38,6 +39,6 @@ export default {
       serif: ['Merriweather', 'serif'],
     },
   },
-  plugins: [typography(), starlightPlugin()],
+  plugins: [typography(), forms(), starlightPlugin()],
   safelist: [...[...Array(5).keys()].map((i) => `lg:col-span-${i}`)],
 };
