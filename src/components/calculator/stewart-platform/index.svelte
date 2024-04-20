@@ -2,7 +2,7 @@
   import { Vector3 } from 'three';
   import { Canvas } from '@threlte/core';
   import { Gizmo } from '@threlte/extras';
-  import { Pane, Slider, Folder, Point, RotationEuler, IntervalSlider } from 'svelte-tweakpane-ui';
+  import { Pane, Button, Slider, Folder, Point, RotationEuler, IntervalSlider } from 'svelte-tweakpane-ui';
   import Scene from './Scene.svelte';
 
   let baseDiameter = 0.8;
@@ -10,10 +10,26 @@
   let platformHeight = 0.5;
   let alphaP = 10;
   let alphaB = 110;
-  // let acctuatorInterval: [number, number] = [0.35, 0.6];
+  let cor = { x: 0, y: 0, z: 0 };
+
+  const resetParams = () => {
+    baseDiameter = 0.8;
+    platformDiameter = 0.4;
+    platformHeight = 0.5;
+    alphaP = 10;
+    alphaB = 110;
+    cor = { x: 0, y: 0, z: 0 };
+  };
+
   let platformRotation = { x: 0, y: 0, z: 0 };
   let platformTranslation = { x: 0, y: 0, z: 0 };
-  let cor = { x: 0, y: 0, z: 0 };
+
+  const resetPlatform = () => {
+    platformRotation = { x: 0, y: 0, z: 0 };
+    platformTranslation = { x: 0, y: 0, z: 0 };
+  };
+
+  // let acctuatorInterval: [number, number] = [0.35, 0.6];
 
   const formatMM = (value: number) => `${(value * 1000).toFixed(0)} mm`;
   const formatAlpha = (value: number) => `${value}°`;
@@ -33,7 +49,7 @@
 
   const alphaOptions = { min: 10, max: 360 / 3 - 10, step: 1, format: formatAlpha };
 
-  $: centerOfRotationRelative = new Vector3(cor.x / 1000, cor.y / 1000, cor.z / 1000);
+  $: centerOfRotationRelative = new Vector3(cor.x, cor.y, cor.z);
 </script>
 
 <div class="w-full not-content border border-black rounded">
@@ -45,13 +61,14 @@
       <Slider bind:value={alphaB} label="Base Alpha" {...alphaOptions} />
       <Slider bind:value={alphaP} label="Platform Alpha" {...alphaOptions} />
       <Point
-        bind:value={centerOfRotationRelative}
+        bind:value={cor}
         label="Center of Rotation"
         {...configLinear}
         min={-platformDiameter}
         max={platformDiameter}
         optionsZ={{ ...configLinear, min: 0, max: platformDiameter }}
       />
+      <Button on:click={resetParams} label="Reset Params" title="Reset All" />
     </Folder>
     <!-- 
     <Folder title="Actuator Range">
@@ -74,6 +91,7 @@
         min={-platformDiameter}
         max={platformDiameter}
       />
+      <Button on:click={resetPlatform} label="Reset Platform" title="Reset All" />
     </Folder>
   </Pane>
   <div class="relative h-[600px] bg-gray-50">
