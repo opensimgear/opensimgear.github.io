@@ -1,55 +1,91 @@
 <script lang="ts">
+  import { Vector3 } from 'three';
   import { Canvas } from '@threlte/core';
   import { Gizmo } from '@threlte/extras';
+  import { Pane, Slider, Folder, Point, RotationEuler, IntervalSlider } from 'svelte-tweakpane-ui';
   import Scene from './Scene.svelte';
-  import PlatformParam from './PlatformParam.svelte';
-  import { Vector3 } from 'three';
 
-  let pitch = 0;
-  let roll = 0;
-  let yaw = 0;
-  let sway = 0;
-  let surge = 0;
-  let heave = 0;
+  let baseDiameter = 0.8;
+  let platformDiameter = 0.4;
+  let platformHeight = 0.5;
+  let alphaP = 10;
+  let alphaB = 110;
+  // let acctuatorInterval: [number, number] = [0.35, 0.6];
+  let platformRotation = { x: 0, y: 0, z: 0 };
+  let platformTranslation = { x: 0, y: 0, z: 0 };
+  let cor = { x: 0, y: 0, z: 0 };
 
-  let corX = 0;
-  let corY = 0;
-  let corZ = 0;
+  const formatMM = (value: number) => `${(value * 1000).toFixed(0)} mm`;
+  const formatAlpha = (value: number) => `${value}°`;
 
-  const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
+  const configLinear = {
+    step: 0.001,
+    pointerScale: 0.001,
+    format: formatMM,
+  };
 
-  $: centerOfRotationRelative = new Vector3(corX / 1000, corY / 1000, corZ / 1000);
+  const angleOption = { min: -90, max: 90, format: (val: any) => `${val}°` };
+  const configAngle = {
+    optionsX: angleOption,
+    optionsY: angleOption,
+    optionsZ: angleOption,
+  };
+
+  const alphaOptions = { min: 10, max: 360 / 3 - 10, step: 1, format: formatAlpha };
+
+  $: centerOfRotationRelative = new Vector3(cor.x / 1000, cor.y / 1000, cor.z / 1000);
 </script>
 
-<div class="w-full not-content">
-  <form>
-    <div class="flex flex-row my-4 gap-5">
-      <PlatformParam label="X" bind:value={corX} unit="mm" step={10} />
-      <PlatformParam label="y" bind:value={corY} unit="mm" step={10} />
-      <PlatformParam label="Z" bind:value={corZ} unit="mm" step={10} />
-    </div>
-    <div class="flex flex-row my-4 gap-5">
-      <div class="flex flex-col gap-3">
-        <PlatformParam label="Pitch" bind:value={pitch} unit="deg" />
-        <PlatformParam label="Roll" bind:value={roll} unit="deg" />
-        <PlatformParam label="Yaw" bind:value={yaw} unit="deg" />
-      </div>
-      <div class="flex flex-col gap-3">
-        <PlatformParam label="Sway" bind:value={sway} step={10} unit="mm" />
-        <PlatformParam label="Surge" bind:value={surge} step={10} unit="mm" />
-        <PlatformParam label="Heave" bind:value={heave} step={10} unit="mm" />
-      </div>
-    </div>
-  </form>
-  <div class="h-[600px] border border-black rounded">
+<div class="w-full not-content border border-black rounded">
+  <Pane title="Control Panel" position="inline">
+    <Folder title="Params">
+      <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={5} />
+      <Slider bind:value={platformDiameter} label="Platform Diameter" {...configLinear} min={0} max={baseDiameter} />
+      <Slider bind:value={platformHeight} label="Platform Height" {...configLinear} min={0} max={1} />
+      <Slider bind:value={alphaB} label="Base Alpha" {...alphaOptions} />
+      <Slider bind:value={alphaP} label="Platform Alpha" {...alphaOptions} />
+      <Point
+        bind:value={centerOfRotationRelative}
+        label="Center of Rotation"
+        {...configLinear}
+        min={-platformDiameter}
+        max={platformDiameter}
+        optionsZ={{ ...configLinear, min: 0, max: platformDiameter }}
+      />
+    </Folder>
+    <!-- 
+    <Folder title="Actuator Range">
+      <IntervalSlider bind:value={acctuatorInterval} {...configLinear} min={0} max={2} />
+    </Folder>
+    -->
+    <Folder title="Movement">
+      <RotationEuler
+        bind:value={platformRotation}
+        expanded={false}
+        label="Platform rotation"
+        picker={'inline'}
+        unit="deg"
+        {...configAngle}
+      />
+      <Point
+        bind:value={platformTranslation}
+        label="Platform Translation"
+        {...configLinear}
+        min={-platformDiameter}
+        max={platformDiameter}
+      />
+    </Folder>
+  </Pane>
+  <div class="relative h-[600px] bg-gray-50">
     <Canvas>
       <Scene
-        thetaX={toRadians(pitch)}
-        thetaY={toRadians(roll)}
-        thetaZ={toRadians(yaw)}
-        dX={sway / 1000}
-        dY={surge / 1000}
-        dZ={heave / 1000}
+        {baseDiameter}
+        {platformDiameter}
+        {platformHeight}
+        {alphaB}
+        {alphaP}
+        {platformTranslation}
+        {platformRotation}
         {centerOfRotationRelative}
       />
       <Gizmo
@@ -65,3 +101,6 @@
     </Canvas>
   </div>
 </div>
+
+<style>
+</style>

@@ -11,15 +11,13 @@
   export let platformHeight = 0.5;
   export let alphaP = 10;
   export let alphaB = 110;
+  export let platformTranslation = { x: 0, y: 0, z: 0 };
+  export let platformRotation = { x: 0, y: 0, z: 0 };
   export let centerOfRotationRelative: Vector3;
-  export let dX = 0;
-  export let dY = 0;
-  export let dZ = 0;
-  export let thetaX = 0;
-  export let thetaY = 0;
-  export let thetaZ = 0;
 
   let cameraX = baseDiameter * 1.2;
+  let cameraY = cameraX;
+  const cameraZ = platformHeight * 2;
 
   let initialPointsP: Vector3[] = [];
   let initialPointsB: Vector3[] = [];
@@ -55,6 +53,12 @@
   }
 
   $: {
+    const thetaX = (platformRotation.x * Math.PI) / 180;
+    const thetaY = (platformRotation.y * Math.PI) / 180;
+    const thetaZ = (platformRotation.z * Math.PI) / 180;
+    const dX = platformTranslation.x;
+    const dY = platformTranslation.y;
+    const dZ = platformTranslation.z;
     const qTheta = new Matrix3(1, 0, 0, 0, Math.cos(thetaX), -Math.sin(thetaX), 0, Math.sin(thetaX), Math.cos(thetaX))
       .multiply(new Matrix3(Math.cos(thetaY), 0, Math.sin(thetaY), 0, 1, 0, -Math.sin(thetaY), 0, Math.cos(thetaY)))
       .multiply(new Matrix3(Math.cos(thetaZ), -Math.sin(thetaZ), 0, Math.sin(thetaZ), Math.cos(thetaZ), 0, 0, 0, 1));
@@ -81,7 +85,9 @@
 
 <T.PerspectiveCamera
   makeDefault
-  position={[cameraX, cameraX, platformHeight * 2]}
+  position.x={cameraX}
+  position.y={cameraY}
+  position.z={cameraZ}
   up={[0, 0, 1]}
   on:create={({ ref }) => {
     ref.lookAt(0, 0, platformHeight);
@@ -93,7 +99,17 @@
 <T.DirectionalLight position={[3, 10, 7]} intensity={Math.PI} />
 <T.AmbientLight intensity={2} />
 
-<!--<Grid plane="xy" scale={0.1} type="polar" />-->
+<Grid
+  plane="xy"
+  scale={1}
+  cellColor="#66ccff"
+  cellSize={0.1}
+  cellThickness={0.5}
+  sectionColor="#66ccff"
+  sectionSize={1}
+  sectionThickness={0.7}
+  position={[0, 0, -0.01]}
+/>
 
 {#each transformedPointsP as point}
   <Joint position={point} />
