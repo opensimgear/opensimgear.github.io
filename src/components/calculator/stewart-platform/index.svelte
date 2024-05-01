@@ -55,7 +55,7 @@
 <div class="w-full not-content border border-black rounded">
   <Pane title="Control Panel" position="inline">
     <Folder title="Params">
-      <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={5} />
+      <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={3} />
       <Slider bind:value={platformDiameter} label="Platform Diameter" {...configLinear} min={0} max={baseDiameter} />
       <Slider bind:value={platformHeight} label="Platform Height" {...configLinear} min={0} max={1} />
       <Slider bind:value={alphaB} label="Base Alpha" {...alphaOptions} />
