@@ -28,7 +28,7 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Install, build, and upload your site
-        uses: withastro/action@604679169f7a347c33065aab494742732d401e0e # v2
+        uses: withastro/action@063f85a3c9fc861a0a5e5a956225d9031177eff9 # v4
   deploy:
     needs: build
     runs-on: ubuntu-latest
