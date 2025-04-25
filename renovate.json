@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "github.com:renovatebot/renovate-config-base"
+  ],
+  "include": [
+    "packages/astro",
+    "astro.config.mjs"
+  ],
+  "configMigration": true,
+  "packageRules": [
+    {
+      "packageNames": [
+        "astro"
+      ],
+      "versionStrategy": "minor"
+    }
+  ],
+  "labels": [
+    "Astro"
+  ]
+}
