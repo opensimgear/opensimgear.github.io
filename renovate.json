@@ -1,21 +1,31 @@
 {
   "extends": [
-    "github.com:renovatebot/renovate-config-base"
-  ],
-  "include": [
-    "packages/astro",
-    "astro.config.mjs"
+    "config:best-practices"
   ],
   "configMigration": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
   "packageRules": [
     {
-      "packageNames": [
-        "astro"
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
       ],
-      "versionStrategy": "minor"
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "automerge": true,
+      "automergeType": "branch"
     }
   ],
-  "labels": [
-    "Astro"
-  ]
+  "timezone": "Europe/Berlin"
 }
