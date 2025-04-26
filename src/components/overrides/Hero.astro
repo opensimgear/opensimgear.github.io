@@ -2,9 +2,21 @@
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
 import { Icon } from '@astrojs/starlight/components';
+import type { StarlightIcon } from '@astrojs/starlight/types';
+import type { ImageMetadata } from 'astro';
 
-const { data } = Astro.props.entry;
+const { data } = Astro.locals.starlightRoute.entry;
 const { title = data.title, tagline, image, actions = [] } = data.hero || {};
+let darkImage: ImageMetadata | undefined;
+let lightImage: ImageMetadata | undefined;
+if (image) {
+	if ('file' in image) {
+		darkImage = image.file;
+	} else if ('dark' in image) {
+		darkImage = image.dark;
+		lightImage = image.light;
+	}
+}
 ---
 
 <section class="relative not-prose">
@@ -42,7 +54,7 @@ const { title = data.title, tagline, image, actions = [] } = data.hero || {};
                         href={action.link}
                       >
                         {action.text}
-                        <Icon class="ml-2" name={action.icon.name} size="1.5rem" />
+                      <Icon class="ml-2" name={action.icon?.name as StarlightIcon} size="1.5rem" />
                       </Button>
                     </div>
                   ))
@@ -56,16 +68,29 @@ const { title = data.title, tagline, image, actions = [] } = data.hero || {};
       </div>
       <div class="basis-1/2">
         {
-          image && (
+          darkImage && (
             <div class="relative m-auto max-w-5xl">
               <Image
                 class="mx-auto rounded-md w-full"
                 widths={[400, 768, 1024, 2040]}
                 sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
                 loading="eager"
-                height={600}
-                src={image.file}
-                alt={image.alt || title}
+                src={darkImage.src}
+                alt={image?.alt || title}
+              />
+            </div>
+          ) 
+        }
+        {
+          lightImage && (
+            <div class="relative m-auto max-w-5xl">
+              <Image
+                class="mx-auto rounded-md w-full"
+                widths={[400, 768, 1024, 2040]}
+                sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                loading="eager"
+                src={lightImage.src}
+                alt={image?.alt || title}
               />
             </div>
           )
