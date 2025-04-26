@@ -55,13 +55,13 @@ importers:
         version: 0.5.16(tailwindcss@4.1.4)
       '@threlte/core':
         specifier: ^7.3.0
-        version: 7.3.1(svelte@4.2.19)(three@0.163.0)
+        version: 7.3.1(svelte@4.2.19)(three@0.176.0)
       '@threlte/extras':
         specifier: ^9.0.0
-        version: 9.1.4(@types/three@0.163.0)(svelte@4.2.19)(three@0.163.0)
+        version: 9.1.4(@types/three@0.176.0)(svelte@4.2.19)(three@0.176.0)
       '@types/three':
-        specifier: ^0.163.0
-        version: 0.163.0
+        specifier: ^0.176.0
+        version: 0.176.0
       astro:
         specifier: ^4.6.1
         version: 4.16.18(@types/node@22.15.2)(lightningcss@1.24.1)(rollup@4.40.0)(terser@5.30.3)(typescript@5.8.3)
@@ -90,8 +90,8 @@ importers:
         specifier: ^4.0.0
         version: 4.1.4
       three:
-        specifier: ^0.163.0
-        version: 0.163.0
+        specifier: ^0.176.0
+        version: 0.176.0
       typescript:
         specifier: ^5.4.5
         version: 5.8.3
@@ -348,6 +348,9 @@ packages:
   '@ctrl/tinycolor@4.1.0':
     resolution: {integrity: sha512-WyOx8cJQ+FQus4Mm4uPIZA64gbk3Wxh0so5Lcii0aJifqwoVOlfFtorjLE0Hen4OYyHZMXDWqMmaQemBhgxFRQ==}
     engines: {node: '>=14'}
+
+  '@dimforge/rapier3d-compat@0.12.0':
+    resolution: {integrity: sha512-uekIGetywIgopfD97oDL5PfeezkFpNhwlzlaEYNOA0N6ghdsOvh/HYjSMek5Q2O1PYvRSDFcqFVJl4r4ZBwOow==}
 
   '@emmetio/abbreviation@2.3.3':
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -1637,8 +1640,8 @@ packages:
   '@types/tar@6.1.13':
     resolution: {integrity: sha512-IznnlmU5f4WcGTh2ltRu/Ijpmk8wiWXfF0VA4s+HPjHZgvFggk1YaIkbo5krX/zUCzWF8N/l4+W/LNxnvAJ8nw==}
 
-  '@types/three@0.163.0':
-    resolution: {integrity: sha512-uIdDhsXRpQiBUkflBS/i1l3JX14fW6Ot9csed60nfbZNXHDTRsnV2xnTVwXcgbvTiboAR4IW+t+lTL5f1rqIqA==}
+  '@types/three@0.176.0':
+    resolution: {integrity: sha512-FwfPXxCqOtP7EdYMagCFePNKoG1AGBDUEVKtluv2BTVRpSt7b+X27xNsirPCTCqY1pGYsPUzaM3jgWP7dXSxlw==}
 
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
@@ -1759,6 +1762,9 @@ packages:
 
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
+
+  '@webgpu/types@0.1.60':
+    resolution: {integrity: sha512-8B/tdfRFKdrnejqmvq95ogp8tf52oZ51p3f4QD5m5Paey/qlX4Rhhy5Y8tgFMi7Ms70HzcMMw3EQjH/jdhTwlA==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -4559,8 +4565,8 @@ packages:
     peerDependencies:
       three: '>=0.162.0 <1.0.0'
 
-  three@0.163.0:
-    resolution: {integrity: sha512-HlMgCb2TF/dTLRtknBnjUTsR8FsDqBY43itYop2+Zg822I+Kd0Ua2vs8CvfBVefXkBdNDrLMoRTGCIIpfCuDew==}
+  three@0.176.0:
+    resolution: {integrity: sha512-PWRKYWQo23ojf9oZSlRGH8K09q7nRSWx6LY/HF/UUrMdYgN9i1e2OwJYHoQjwc6HF/4lvvYLC5YC1X8UJL2ZpA==}
 
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
@@ -5527,6 +5533,8 @@ snapshots:
   '@ctrl/tinycolor@3.6.1': {}
 
   '@ctrl/tinycolor@4.1.0': {}
+
+  '@dimforge/rapier3d-compat@0.12.0': {}
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:
@@ -6567,33 +6575,33 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 4.1.4
 
-  '@threejs-kit/instanced-sprite-mesh@2.5.1(@types/three@0.163.0)(three@0.163.0)':
+  '@threejs-kit/instanced-sprite-mesh@2.5.1(@types/three@0.176.0)(three@0.176.0)':
     dependencies:
       diet-sprite: 0.0.1
       earcut: 2.2.4
-      maath: 0.10.8(@types/three@0.163.0)(three@0.163.0)
-      three: 0.163.0
-      three-instanced-uniforms-mesh: 0.52.4(three@0.163.0)
-      troika-three-utils: 0.52.4(three@0.163.0)
+      maath: 0.10.8(@types/three@0.176.0)(three@0.176.0)
+      three: 0.176.0
+      three-instanced-uniforms-mesh: 0.52.4(three@0.176.0)
+      troika-three-utils: 0.52.4(three@0.176.0)
     transitivePeerDependencies:
       - '@types/three'
 
-  '@threlte/core@7.3.1(svelte@4.2.19)(three@0.163.0)':
+  '@threlte/core@7.3.1(svelte@4.2.19)(three@0.176.0)':
     dependencies:
       mitt: 3.0.1
       svelte: 4.2.19
-      three: 0.163.0
+      three: 0.176.0
 
-  '@threlte/extras@9.1.4(@types/three@0.163.0)(svelte@4.2.19)(three@0.163.0)':
+  '@threlte/extras@9.1.4(@types/three@0.176.0)(svelte@4.2.19)(three@0.176.0)':
     dependencies:
-      '@threejs-kit/instanced-sprite-mesh': 2.5.1(@types/three@0.163.0)(three@0.163.0)
-      camera-controls: 2.10.1(three@0.163.0)
+      '@threejs-kit/instanced-sprite-mesh': 2.5.1(@types/three@0.176.0)(three@0.176.0)
+      camera-controls: 2.10.1(three@0.176.0)
       svelte: 4.2.19
-      three: 0.163.0
-      three-mesh-bvh: 0.9.0(three@0.163.0)
-      three-perf: https://codeload.github.com/jerzakm/three-perf/tar.gz/322d7d38a17069f2b6e9734913edad0fc4a29169(three@0.163.0)
-      three-viewport-gizmo: 2.2.0(three@0.163.0)
-      troika-three-text: 0.52.4(three@0.163.0)
+      three: 0.176.0
+      three-mesh-bvh: 0.9.0(three@0.176.0)
+      three-perf: https://codeload.github.com/jerzakm/three-perf/tar.gz/322d7d38a17069f2b6e9734913edad0fc4a29169(three@0.176.0)
+      three-viewport-gizmo: 2.2.0(three@0.176.0)
+      troika-three-text: 0.52.4(three@0.176.0)
     transitivePeerDependencies:
       - '@types/three'
 
@@ -6695,11 +6703,13 @@ snapshots:
       '@types/node': 22.15.2
       minipass: 4.2.8
 
-  '@types/three@0.163.0':
+  '@types/three@0.176.0':
     dependencies:
+      '@dimforge/rapier3d-compat': 0.12.0
       '@tweenjs/tween.js': 23.1.3
       '@types/stats.js': 0.17.3
       '@types/webxr': 0.5.22
+      '@webgpu/types': 0.1.60
       fflate: 0.8.2
       meshoptimizer: 0.18.1
 
@@ -6877,6 +6887,8 @@ snapshots:
       vscode-uri: 3.1.0
 
   '@vscode/l10n@0.0.18': {}
+
+  '@webgpu/types@0.1.60': {}
 
   acorn-jsx@5.3.2(acorn@8.14.1):
     dependencies:
@@ -7368,9 +7380,9 @@ snapshots:
 
   camelcase@8.0.0: {}
 
-  camera-controls@2.10.1(three@0.163.0):
+  camera-controls@2.10.1(three@0.176.0):
     dependencies:
-      three: 0.163.0
+      three: 0.176.0
 
   caniuse-lite@1.0.30001715: {}
 
@@ -8973,10 +8985,10 @@ snapshots:
 
   lunr@2.3.9: {}
 
-  maath@0.10.8(@types/three@0.163.0)(three@0.163.0):
+  maath@0.10.8(@types/three@0.176.0)(three@0.176.0):
     dependencies:
-      '@types/three': 0.163.0
-      three: 0.163.0
+      '@types/three': 0.176.0
+      three: 0.176.0
 
   magic-string@0.30.17:
     dependencies:
@@ -10760,26 +10772,26 @@ snapshots:
 
   text-table@0.2.0: {}
 
-  three-instanced-uniforms-mesh@0.52.4(three@0.163.0):
+  three-instanced-uniforms-mesh@0.52.4(three@0.176.0):
     dependencies:
-      three: 0.163.0
-      troika-three-utils: 0.52.4(three@0.163.0)
+      three: 0.176.0
+      troika-three-utils: 0.52.4(three@0.176.0)
 
-  three-mesh-bvh@0.9.0(three@0.163.0):
+  three-mesh-bvh@0.9.0(three@0.176.0):
     dependencies:
-      three: 0.163.0
+      three: 0.176.0
 
-  three-perf@https://codeload.github.com/jerzakm/three-perf/tar.gz/322d7d38a17069f2b6e9734913edad0fc4a29169(three@0.163.0):
+  three-perf@https://codeload.github.com/jerzakm/three-perf/tar.gz/322d7d38a17069f2b6e9734913edad0fc4a29169(three@0.176.0):
     dependencies:
-      three: 0.163.0
-      troika-three-text: 0.52.4(three@0.163.0)
+      three: 0.176.0
+      troika-three-text: 0.52.4(three@0.176.0)
       tweakpane: 3.1.10
 
-  three-viewport-gizmo@2.2.0(three@0.163.0):
+  three-viewport-gizmo@2.2.0(three@0.176.0):
     dependencies:
-      three: 0.163.0
+      three: 0.176.0
 
-  three@0.163.0: {}
+  three@0.176.0: {}
 
   tinyexec@0.3.2: {}
 
@@ -10791,17 +10803,17 @@ snapshots:
 
   trim-lines@3.0.1: {}
 
-  troika-three-text@0.52.4(three@0.163.0):
+  troika-three-text@0.52.4(three@0.176.0):
     dependencies:
       bidi-js: 1.0.3
-      three: 0.163.0
-      troika-three-utils: 0.52.4(three@0.163.0)
+      three: 0.176.0
+      troika-three-utils: 0.52.4(three@0.176.0)
       troika-worker-utils: 0.52.0
       webgl-sdf-generator: 1.1.1
 
-  troika-three-utils@0.52.4(three@0.163.0):
+  troika-three-utils@0.52.4(three@0.176.0):
     dependencies:
-      three: 0.163.0
+      three: 0.176.0
 
   troika-worker-utils@0.52.0: {}
 
