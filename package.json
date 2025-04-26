@@ -21,7 +21,7 @@
     "@iconify-json/mdi": "^1.1.66",
     "@iconify-json/tabler": "^1.1.110",
     "@jop-software/astro-cookieconsent": "^3.0.0",
-    "@sentry/astro": "^7.110.0",
+    "@sentry/astro": "^9.0.0",
     "@spotlightjs/astro": "^1.0.20",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.12",
