@@ -15,7 +15,7 @@
     "@astrojs/partytown": "^2.0.4",
     "@astrojs/sitemap": "^3.1.2",
     "@astrojs/starlight": "^0.21.5",
-    "@astrojs/starlight-tailwind": "^2.0.2",
+    "@astrojs/starlight-tailwind": "^4.0.0",
     "@astrojs/svelte": "^5.4.0",
     "@astrojs/tailwind": "^5.1.0",
     "@iconify-json/mdi": "^1.1.66",
