@@ -1,12 +1,30 @@
 ---
 title: Motor Scaling Calculator
-description: Interactive motor scaling calculator for sim racing motion systems. Enter motor specs and load requirements to compute torque, gear ratios, and power needed for your custom actuator design.
-sidebar:
-  hidden: true
+description:
+  Motor selection tool for sim racing motion systems. Enter your axial speed and force requirements to find suitable
+  motors from the builtin database, with per-motor headroom analysis and optimal drive ratio calculation.
+tableOfContents: false
 ---
 
-import MotorScalingCalc from '~/components/calculator/motor-scaling/index.svelte'
+<style>{`:root { --sl-content-width: 90rem; }`}</style>
 
-## Motor calculations
-<MotorScalingCalc client:load/>
+import MotorScalingCalc from '~/components/calculator/motor-scaling/index.svelte';
 
+## Motor Scaling
+
+Choosing a motor for a ballscrew-driven motion system requires matching the motor's rated RPM, continuous torque, and power against what the screw geometry actually demands. A drive ratio (belt/pulley or gearbox) can multiply torque at the cost of speed, so the optimal ratio is different for every motor.
+
+This calculator takes your axial speed and force requirements, applies a safety margin, and scores every motor in the database across RPM, torque, and power headroom. It also computes the optimal drive ratio per motor (or lets you fix it manually) and flags inertia mismatch.
+
+### How to use
+
+1. **Requirements** — Enter the peak axial speed (mm/s) and axial force (N) your axis must deliver. Set a safety factor to add margin on top. Leave Auto Drive Ratio on to let the calculator find the best ratio per motor, or fix a ratio manually.
+2. **Ballscrew** — Select your ballscrew standard size (e.g. 1610 = 16 mm diameter, 10 mm pitch) or choose Custom to enter pitch and diameter directly. Adjust efficiency if you know the actual ballscrew efficiency.
+3. **Load Inertia** — Enter the screw length and the mass being moved. These are used to compute screw and load inertia for the inertia ratio column.
+4. **Calculated** — Shows the derived screw-shaft requirements (RPM, torque, power) at drive ratio 1:1 with safety applied. Use these as a sanity check.
+5. **Results table** — Motors are sorted by status (Pass → Warn → Fail) then by torque headroom. The coloured bars show rated vs required for RPM, torque, and power; the percentage is the margin above the requirement. The inertia column flags ratios above 10:1 in amber.
+6. **Custom motors** — Click **+ Add custom motor** at the bottom of the table to add a motor not in the database. Custom motors are saved in browser localStorage.
+
+### Calculator
+
+<MotorScalingCalc client:load />

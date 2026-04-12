@@ -3,9 +3,9 @@ import type { Motor } from './motors';
 export interface Requirements {
   axialSpeed_mm_s: number;
   axialForce_N: number;
-  safetyFactor: number;   // percent, e.g. 20 means ×1.20
+  safetyFactor: number; // percent, e.g. 20 means ×1.20
   ballscrewPitch_mm: number;
-  efficiency: number;     // fraction 0–1, e.g. 0.9
+  efficiency: number; // fraction 0–1, e.g. 0.9
 }
 
 export interface LoadInertia {
@@ -19,18 +19,14 @@ export interface MotorEvaluation {
   requiredTorque_Nm: number;
   requiredPower_W: number;
   reflectedInertia_kgm2: number;
-  rpmMargin: number;      // percent, positive = headroom
+  rpmMargin: number; // percent, positive = headroom
   torqueMargin: number;
   powerMargin: number;
-  inertiaRatio: number;   // reflectedInertia / motor.inertia_kgm2
+  inertiaRatio: number; // reflectedInertia / motor.inertia_kgm2
   status: 'pass' | 'warn' | 'fail';
 }
 
-export function computeRequiredRPM(
-  axialSpeed_mm_s: number,
-  driveRatio: number,
-  pitch_mm: number,
-): number {
+export function computeRequiredRPM(axialSpeed_mm_s: number, driveRatio: number, pitch_mm: number): number {
   return (axialSpeed_mm_s * 60 * driveRatio) / pitch_mm;
 }
 
@@ -38,7 +34,7 @@ export function computeRequiredTorque(
   axialForce_N: number,
   pitch_mm: number,
   driveRatio: number,
-  efficiency: number,
+  efficiency: number
 ): number {
   return (axialForce_N * pitch_mm) / (1000 * 2 * Math.PI * driveRatio * efficiency);
 }
@@ -51,39 +47,45 @@ export function computeReflectedInertia(
   screwMass_kg: number,
   loadMass_kg: number,
   pitch_mm: number,
-  driveRatio: number,
+  driveRatio: number
 ): number {
   const pitch_m = pitch_mm / 1000;
   return (screwMass_kg + loadMass_kg) * Math.pow(pitch_m / (2 * Math.PI * driveRatio), 2);
 }
 
+/** Steel density in kg/m³ (default: 7850). */
+export const STEEL_DENSITY_KG_M3 = 7850;
+
+/**
+ * Mass of a solid steel cylinder (ballscrew approximation).
+ * @param diameter_mm  outer diameter in mm
+ * @param length_mm    length in mm
+ * @param density      material density in kg/m³ (default: steel 7850)
+ */
+export function computeScrewMass(diameter_mm: number, length_mm: number, density = STEEL_DENSITY_KG_M3): number {
+  const r_m = diameter_mm / 2 / 1000;
+  const l_m = length_mm / 1000;
+  return density * Math.PI * r_m * r_m * l_m;
+}
+
 export function computeMargin(rated: number, required: number): number {
+  if (required === 0) return rated > 0 ? Infinity : 0;
   return ((rated - required) / required) * 100;
 }
 
-export function evaluateMotor(
-  motor: Motor,
-  req: Requirements,
-  load: LoadInertia,
-  driveRatio: number,
-): MotorEvaluation {
+export function evaluateMotor(motor: Motor, req: Requirements, load: LoadInertia, driveRatio: number): MotorEvaluation {
   const mult = 1 + req.safetyFactor / 100;
   const safeSpeed = req.axialSpeed_mm_s * mult;
   const safeForce = req.axialForce_N * mult;
 
   const requiredRPM = computeRequiredRPM(safeSpeed, driveRatio, req.ballscrewPitch_mm);
-  const requiredTorque_Nm = computeRequiredTorque(
-    safeForce,
-    req.ballscrewPitch_mm,
-    driveRatio,
-    req.efficiency,
-  );
+  const requiredTorque_Nm = computeRequiredTorque(safeForce, req.ballscrewPitch_mm, driveRatio, req.efficiency);
   const requiredPower_W = computeRequiredPower(requiredTorque_Nm, requiredRPM);
   const reflectedInertia_kgm2 = computeReflectedInertia(
     load.screwMass_kg,
     load.loadMass_kg,
     req.ballscrewPitch_mm,
-    driveRatio,
+    driveRatio
   );
 
   const rpmMargin = computeMargin(motor.ratedRPM, requiredRPM);
@@ -119,11 +121,7 @@ export function evaluateMotor(
  * As driveRatio increases: rpmMargin decreases, torqueMargin increases.
  * Optimal = crossover point where both are equal.
  */
-export function findOptimalDriveRatio(
-  motor: Motor,
-  req: Requirements,
-  load: LoadInertia,
-): number {
+export function findOptimalDriveRatio(motor: Motor, req: Requirements, _load: LoadInertia): number {
   const mult = 1 + req.safetyFactor / 100;
   const safeSpeed = req.axialSpeed_mm_s * mult;
   const safeForce = req.axialForce_N * mult;

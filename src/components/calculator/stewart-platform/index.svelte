@@ -3,7 +3,7 @@
   import { Canvas } from '@threlte/core';
   import { Gizmo } from '@threlte/extras';
   import { onMount } from 'svelte';
-  import { Pane, Button, Slider, Folder, Point, RotationEuler, IntervalSlider } from 'svelte-tweakpane-ui';
+  import { Pane, Button, Slider, Folder, Point, RotationEuler, IntervalSlider, Monitor } from 'svelte-tweakpane-ui';
   import Scene from './Scene.svelte';
 
   const DEFAULTS = {
@@ -18,23 +18,6 @@
     platformTranslation: { x: 0, y: 0, z: 0 },
   };
 
-  let baseDiameter = DEFAULTS.baseDiameter;
-  let platformDiameter = DEFAULTS.platformDiameter;
-  let alphaP = DEFAULTS.alphaP;
-  let alphaB = DEFAULTS.alphaB; // displayed as complement: geometric spread = 120° - alphaB
-  $: alphaBGeom = 360 / 3 - alphaB;
-  let cor = { ...DEFAULTS.cor };
-  let actuatorMin = DEFAULTS.actuatorMin;
-  let actuatorMax = DEFAULTS.actuatorMax;
-
-  // --- State Management via URL ---
-  const STATE_KEY = 'sps';
-  let mounted = false;
-
-  function encodeState(state: any) {
-    return btoa(JSON.stringify(state));
-  }
-
   function decodeState(encoded: string) {
     try {
       return JSON.parse(atob(encoded));
@@ -42,6 +25,33 @@
       console.error('Failed to decode state', e);
       return null;
     }
+  }
+
+  function getInitialState() {
+    if (typeof window === 'undefined') return null;
+
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get('sps');
+    return encoded ? decodeState(encoded) : null;
+  }
+
+  const initialState = getInitialState();
+
+  let baseDiameter = initialState?.baseDiameter ?? DEFAULTS.baseDiameter;
+  let platformDiameter = initialState?.platformDiameter ?? DEFAULTS.platformDiameter;
+  let alphaP = initialState?.alphaP ?? DEFAULTS.alphaP;
+  let alphaB = initialState?.alphaB ?? DEFAULTS.alphaB; // displayed as complement: geometric spread = 120° - alphaB
+  $: alphaBGeom = 360 / 3 - alphaB;
+  let cor = initialState?.cor ?? { ...DEFAULTS.cor };
+  let actuatorMin = initialState?.actuatorMin ?? DEFAULTS.actuatorMin;
+  let actuatorMax = initialState?.actuatorMax ?? DEFAULTS.actuatorMax;
+
+  // --- State Management via URL ---
+  const STATE_KEY = 'sps';
+  let mounted = false;
+
+  function encodeState(state: any) {
+    return btoa(JSON.stringify(state));
   }
 
   function updateUrl() {
@@ -295,112 +305,105 @@
 </script>
 
 <div class="w-full not-content border border-black rounded">
-  <Pane title="Control Panel" position="inline">
-    <Folder title="Params">
-      <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={3} />
-      <Slider bind:value={platformDiameter} label="Platform Diameter" {...configLinear} min={0} max={baseDiameter} />
-      <Slider value={platformHeight} label="Platform Height" {...configLinear} min={0} max={1} disabled />
-      <Slider bind:value={alphaB} label="Base Alpha" {...alphaOptions} />
-      <Slider bind:value={alphaP} label="Platform Alpha" {...alphaOptions} />
-      <Point
-        bind:value={cor}
-        label="Center of Rotation"
-        {...configLinear}
-        min={-platformDiameter}
-        max={platformDiameter}
-        optionsZ={{ ...configLinear, min: 0, max: platformDiameter }}
-      />
-      <Button on:click={resetParams} label="Reset Params" title="Reset All" />
-    </Folder>
-    <Folder title="Actuator Range">
-      <Slider bind:value={actuatorMin} label="Min Extension" {...configLinear} min={0.1} max={actuatorMax} />
-      <Slider bind:value={actuatorMax} label="Max Extension" {...configLinear} min={actuatorMin} max={2} />
-      <Button on:click={resetActuator} label="Reset Actuator" title="Reset" />
-    </Folder>
-    <Folder title="Movement">
-      <RotationEuler
-        bind:value={platformRotation}
-        expanded={false}
-        label="Platform rotation"
-        picker={'inline'}
-        unit="deg"
-        {...movementAngle}
-      />
-      <Point
-        bind:value={platformTranslation}
-        label="Platform Translation"
-        {...configLinear}
-        min={-platformDiameter}
-        max={platformDiameter}
-      />
-      <Button on:click={resetPlatform} label="Reset Platform" title="Reset All" />
-    </Folder>
-  </Pane>
-  <div class="relative h-[600px] bg-gray-50 flex-1">
-    <Canvas>
-      <Scene
-        {baseDiameter}
-        {platformDiameter}
-        {platformHeight}
-        alphaB={alphaBGeom}
-        {alphaP}
-        {platformTranslation}
-        {platformRotation}
-        {centerOfRotationRelative}
-        {actuatorMin}
-        {actuatorMax}
-      />
-      <Gizmo
-        verticalPlacement="top"
-        horizontalPlacement="right"
-        xColor="#ff0000"
-        yColor="#00ff00"
-        zColor="#0000ff"
-        size={128}
-        paddingX={20}
-        paddingY={20}
-      />
-    </Canvas>
-    <div
-      class="absolute top-3 right-3 bg-white/80 backdrop-blur-sm border border-gray-300 rounded px-3 py-2 text-xs font-mono pointer-events-none select-none"
-    >
-      <div class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Platform</div>
-      <div class="grid grid-cols-2 gap-x-3 gap-y-0.5">
-        <span class="text-gray-500">Pitch</span><span>{platformRotation.x.toFixed(1)}°</span>
-        <span class="text-gray-500">Roll</span><span>{platformRotation.y.toFixed(1)}°</span>
-        <span class="text-gray-500">Yaw</span><span>{platformRotation.z.toFixed(1)}°</span>
-        <span class="text-gray-500">X</span><span>{(platformTranslation.x * 1000).toFixed(0)} mm</span>
-        <span class="text-gray-500">Y</span><span>{(platformTranslation.y * 1000).toFixed(0)} mm</span>
-        <span class="text-gray-500">Z</span><span
-          >{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span
-        >
+  <div class="flex flex-row">
+    <div class="relative h-[600px] bg-gray-50 flex-1">
+      <Canvas>
+        <Scene
+          {baseDiameter}
+          {platformDiameter}
+          {platformHeight}
+          alphaB={alphaBGeom}
+          {alphaP}
+          {platformTranslation}
+          {platformRotation}
+          {centerOfRotationRelative}
+          {actuatorMin}
+          {actuatorMax}
+        />
+        <Gizmo
+          verticalPlacement="top"
+          horizontalPlacement="right"
+          xColor="#ff0000"
+          yColor="#00ff00"
+          zColor="#0000ff"
+          size={128}
+          paddingX={20}
+          paddingY={20}
+        />
+      </Canvas>
+      <div
+        class="absolute top-3 right-3 bg-white/80 backdrop-blur-sm border border-gray-300 rounded px-3 py-2 text-xs font-mono pointer-events-none select-none"
+      >
+        <div class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Platform</div>
+        <div class="grid grid-cols-2 gap-x-3 gap-y-0.5">
+          <span class="text-gray-500">Pitch</span><span>{platformRotation.x.toFixed(1)}°</span>
+          <span class="text-gray-500">Roll</span><span>{platformRotation.y.toFixed(1)}°</span>
+          <span class="text-gray-500">Yaw</span><span>{platformRotation.z.toFixed(1)}°</span>
+          <span class="text-gray-500">X</span><span>{(platformTranslation.x * 1000).toFixed(0)} mm</span>
+          <span class="text-gray-500">Y</span><span>{(platformTranslation.y * 1000).toFixed(0)} mm</span>
+          <span class="text-gray-500">Z</span><span
+            >{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span
+          >
+        </div>
       </div>
     </div>
-  </div>
-  <div class="border-t border-black grid grid-cols-2 divide-x divide-black text-sm font-mono">
-    <div class="p-3">
-      <div class="text-xs font-sans font-semibold uppercase tracking-wider text-gray-500 mb-2">Rotation</div>
-      <div class="grid grid-cols-2 gap-x-4 gap-y-1">
-        <span class="text-gray-500">Pitch</span><span>±{platformSpec.pitch.toFixed(1)}°</span>
-        <span class="text-gray-500">Roll</span><span>±{platformSpec.roll.toFixed(1)}°</span>
-        <span class="text-gray-500">Yaw</span><span>±{platformSpec.yaw.toFixed(1)}°</span>
-      </div>
-    </div>
-    <div class="p-3">
-      <div class="text-xs font-sans font-semibold uppercase tracking-wider text-gray-500 mb-2">Translation</div>
-      <div class="grid grid-cols-2 gap-x-4 gap-y-1">
-        <span class="text-gray-500">X</span><span>±{(platformSpec.transX * 1000).toFixed(0)} mm</span>
-        <span class="text-gray-500">Y</span><span>±{(platformSpec.transY * 1000).toFixed(0)} mm</span>
-        <span class="text-gray-500">Z</span><span
-          >{((platformHeight - platformSpec.transZDown) * 1000).toFixed(0)} / {(
-            (platformHeight + platformSpec.transZUp) *
-            1000
-          ).toFixed(0)} mm</span
-        >
-      </div>
+    <div class="border-l border-black flex flex-col divide-y divide-black shrink-0">
+      <Pane title="Parameters" position="inline">
+        <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={3} />
+        <Slider bind:value={platformDiameter} label="Platform Diameter" {...configLinear} min={0} max={baseDiameter} />
+        <Slider value={platformHeight} label="Platform Height" {...configLinear} min={0} max={1} disabled />
+        <Slider bind:value={alphaB} label="Base Alpha" {...alphaOptions} />
+        <Slider bind:value={alphaP} label="Platform Alpha" {...alphaOptions} />
+        <Point
+          bind:value={cor}
+          label="Center of Rotation"
+          {...configLinear}
+          min={-platformDiameter}
+          max={platformDiameter}
+          optionsZ={{ ...configLinear, min: 0, max: platformDiameter }}
+        />
+        <Button on:click={resetParams} label="Reset Params" title="Reset" />
+      </Pane>
+      <Pane title="Actuator Range" position="inline">
+        <Slider bind:value={actuatorMin} label="Min Extension" {...configLinear} min={0.1} max={actuatorMax} />
+        <Slider bind:value={actuatorMax} label="Max Extension" {...configLinear} min={actuatorMin} max={2} />
+        <Button on:click={resetActuator} label="Reset Actuator" title="Reset" />
+      </Pane>
+      <Pane title="Movement" position="inline">
+        <RotationEuler
+          bind:value={platformRotation}
+          expanded={false}
+          label="Platform rotation"
+          picker={'inline'}
+          unit="deg"
+          {...movementAngle}
+        />
+        <Point
+          bind:value={platformTranslation}
+          label="Platform Translation"
+          {...configLinear}
+          min={-platformDiameter}
+          max={platformDiameter}
+        />
+        <Button on:click={resetPlatform} label="Reset Platform" title="Reset" />
+      </Pane>
+      <Pane title="Constraints" position="inline">
+        <Monitor value={`±${platformSpec.pitch.toFixed(1)}°`} label="Pitch" />
+        <Monitor value={`±${platformSpec.roll.toFixed(1)}°`} label="Roll" />
+        <Monitor value={`±${platformSpec.yaw.toFixed(1)}°`} label="Yaw" />
+        <Monitor value={`±${(platformSpec.transX * 1000).toFixed(0)} mm`} label="Surge" />
+        <Monitor value={`±${(platformSpec.transY * 1000).toFixed(0)} mm`} label="Sway" />
+        <Monitor
+          value={`${((platformHeight - platformSpec.transZDown) * 1000).toFixed(0)} / ${((platformHeight + platformSpec.transZUp) * 1000).toFixed(0)} mm`}
+          label="Heave"
+        />
+      </Pane>
     </div>
   </div>
 </div>
 
 <style>
+  :global(.not-content .tp-rotv_t) {
+    text-align: left;
+  }
 </style>

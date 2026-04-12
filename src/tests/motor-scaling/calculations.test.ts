@@ -5,8 +5,10 @@ import {
   computeRequiredPower,
   computeReflectedInertia,
   computeMargin,
+  computeScrewMass,
   evaluateMotor,
   findOptimalDriveRatio,
+  STEEL_DENSITY_KG_M3,
 } from '../../components/calculator/motor-scaling/calculations';
 import type { Motor } from '../../components/calculator/motor-scaling/motors';
 
@@ -70,6 +72,34 @@ describe('computeReflectedInertia', () => {
     // (0.5+1.0) * (0.01 / (2π*1))^2
     const expected = 1.5 * Math.pow(0.01 / (2 * Math.PI), 2);
     expect(computeReflectedInertia(0.5, 1.0, 10, 1)).toBeCloseTo(expected, 10);
+  });
+});
+
+describe('computeScrewMass', () => {
+  it('returns ρ·π·r²·L for steel by default', () => {
+    // 16mm diameter, 500mm length
+    const r = 0.008; // 8mm in m
+    const l = 0.5; // 500mm in m
+    const expected = STEEL_DENSITY_KG_M3 * Math.PI * r * r * l;
+    expect(computeScrewMass(16, 500)).toBeCloseTo(expected, 6);
+  });
+
+  it('scales with length squared', () => {
+    const m1 = computeScrewMass(16, 100);
+    const m2 = computeScrewMass(16, 200);
+    expect(m2).toBeCloseTo(m1 * 2, 6);
+  });
+
+  it('scales with diameter squared', () => {
+    const m1 = computeScrewMass(16, 500);
+    const m2 = computeScrewMass(32, 500);
+    expect(m2).toBeCloseTo(m1 * 4, 6);
+  });
+
+  it('accepts a custom density', () => {
+    const mSteel = computeScrewMass(16, 500, STEEL_DENSITY_KG_M3);
+    const mAlum = computeScrewMass(16, 500, 2700);
+    expect(mAlum / mSteel).toBeCloseTo(2700 / STEEL_DENSITY_KG_M3, 5);
   });
 });
 

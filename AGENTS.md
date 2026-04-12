@@ -27,6 +27,7 @@ This is the **OpenSimGear documentation website** — a Starlight-based Astro si
 - **Tailwind CSS v4** configured via `@theme` blocks in `src/styles/global.css` (no `tailwind.config.*` file)
 - **Threlte + Three.js** for 3D rendering in the Stewart Platform calculator
 - **Path alias:** `~` maps to `./src` (used in imports as `~/components/...`)
+- **TweakPane** ui lib used for the settings in calculators. Widgets are here https://kitschpatrol.com/svelte-tweakpane-ui/docs/components/
 
 ### Content Structure
 
