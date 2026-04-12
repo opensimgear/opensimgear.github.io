@@ -36,8 +36,8 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3
       '@iconify-json/tabler':
-        specifier: ^1.2.24
-        version: 1.2.24
+        specifier: ^1.2.33
+        version: 1.2.33
       '@jop-software/astro-cookieconsent':
         specifier: ^3.0.1
         version: 3.0.1(vanilla-cookieconsent@3.1.0)
@@ -606,8 +606,8 @@ packages:
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
 
-  '@iconify-json/tabler@1.2.24':
-    resolution: {integrity: sha512-W1GIC36ckaQvr0fpQeyqC62HWyF3/r0yjJHtCByZmxA3qTMqLv0wJDdz/BffnmoCMulaBbxgjbTptFfKyn5e/g==}
+  '@iconify-json/tabler@1.2.33':
+    resolution: {integrity: sha512-q9nUQfE/cjIrGh5bAKHTphitAZpT0kX9SxDgZo3Sx8ofeDTsaHVdRwrn+CfKiJ5vQ1b1btqVwizXzIgz9KEPjA==}
 
   '@iconify/tools@4.2.0':
     resolution: {integrity: sha512-WRxPva/ipxYkqZd1+CkEAQmd86dQmrwH0vwK89gmp2Kh2WyyVw57XbPng0NehP3x4V1LzLsXUneP1uMfTMZmUA==}
@@ -5675,7 +5675,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/tabler@1.2.24':
+  '@iconify-json/tabler@1.2.33':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -6468,7 +6468,7 @@ snapshots:
   '@opentelemetry/resources@2.6.1(@opentelemetry/api@1.9.1)':
     dependencies:
       '@opentelemetry/api': 1.9.1
-      '@opentelemetry/core': 2.6.1(@opentelemetry/api@1.9.1)
+      '@opentelemetry/core': 2.6.1(@opentelemetry/api@1.9.0)
       '@opentelemetry/semantic-conventions': 1.40.0
 
   '@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0)':
