@@ -14,6 +14,14 @@
   export let platformTranslation = { x: 0, y: 0, z: 0 };
   export let platformRotation = { x: 0, y: 0, z: 0 };
   export let centerOfRotationRelative: Vector3;
+  export let actuatorMin = 0.35;
+  export let actuatorMax = 0.6;
+
+  type LegStatus = 'ok' | 'over-extended' | 'over-compressed';
+
+  let lastValidTransformedPointsP: Vector3[] = [];
+  let lastValidTransformedCor: Vector3 = new Vector3();
+  let legStatuses: LegStatus[] = Array(6).fill('ok');
 
   let cameraX = baseDiameter * 1.2;
   let cameraY = cameraX;
@@ -50,6 +58,8 @@
       const y = rP * Math.sin((angle * Math.PI) / 180);
       return new Vector3(x, y, platformHeight);
     });
+
+    lastValidTransformedPointsP = [];
   }
 
   $: {
@@ -72,14 +82,36 @@
     const qThetaY = new Vector3(a[3], a[4], a[5]);
     const qThetaZ = new Vector3(a[6], a[7], a[8]);
 
-    transformedPointsP = initialPointsP.map((point) => {
+    const candidatePointsP = initialPointsP.map((point) => {
       const pointTranslated = point.clone().add(new Vector3(dX, dY, dZ));
       const dM = point.clone().sub(centerOfRotation);
       const dTheta = new Vector3(dM.dot(qThetaX), dM.dot(qThetaY), dM.dot(qThetaZ));
       return pointTranslated.add(dTheta);
     });
+    const candidateCor = centerOfRotation.clone().add(new Vector3(dX, dY, dZ));
 
-    transformedCor = centerOfRotation.clone().add(new Vector3(dX, dY, dZ));
+    const candidateStatuses: LegStatus[] = initialPointsB.map((b, i) => {
+      const l = b.distanceTo(candidatePointsP[i]);
+      if (l > actuatorMax) return 'over-extended';
+      if (l < actuatorMin) return 'over-compressed';
+      return 'ok';
+    });
+
+    const valid =
+      lastValidTransformedPointsP.length === 0 ||
+      candidateStatuses.every((s) => s === 'ok');
+
+    if (valid) {
+      transformedPointsP = candidatePointsP;
+      transformedCor = candidateCor;
+      lastValidTransformedPointsP = candidatePointsP;
+      lastValidTransformedCor = candidateCor;
+    } else {
+      transformedPointsP = lastValidTransformedPointsP;
+      transformedCor = lastValidTransformedCor;
+    }
+
+    legStatuses = candidateStatuses;
   }
 </script>
 
@@ -125,5 +157,5 @@
 <Platform points={initialPointsB} color="blue" />
 
 {#each initialPointsB as point, i}
-  <Leg basePoint={point} platformPoint={transformedPointsP[i]} />
+  <Leg basePoint={point} platformPoint={transformedPointsP[i]} status={legStatuses[i]} {actuatorMin} />
 {/each}

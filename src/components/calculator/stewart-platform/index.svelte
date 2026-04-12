@@ -11,6 +11,8 @@
   let alphaP = 10;
   let alphaB = 110;
   let cor = { x: 0, y: 0, z: 0 };
+  let actuatorMin = 0.35;
+  let actuatorMax = 0.6;
 
   const resetParams = () => {
     baseDiameter = 0.8;
@@ -19,6 +21,13 @@
     alphaP = 10;
     alphaB = 110;
     cor = { x: 0, y: 0, z: 0 };
+    actuatorMin = 0.35;
+    actuatorMax = 0.6;
+  };
+
+  const resetActuator = () => {
+    actuatorMin = 0.35;
+    actuatorMax = 0.6;
   };
 
   let platformRotation = { x: 0, y: 0, z: 0 };
@@ -70,11 +79,11 @@
       />
       <Button on:click={resetParams} label="Reset Params" title="Reset All" />
     </Folder>
-    <!-- 
     <Folder title="Actuator Range">
-      <IntervalSlider bind:value={acctuatorInterval} {...configLinear} min={0} max={2} />
+      <Slider bind:value={actuatorMin} label="Min Extension" {...configLinear} min={0.1} max={actuatorMax} />
+      <Slider bind:value={actuatorMax} label="Max Extension" {...configLinear} min={actuatorMin} max={2} />
+      <Button on:click={resetActuator} label="Reset Actuator" title="Reset" />
     </Folder>
-    -->
     <Folder title="Movement">
       <RotationEuler
         bind:value={platformRotation}
@@ -105,6 +114,8 @@
         {platformTranslation}
         {platformRotation}
         {centerOfRotationRelative}
+        {actuatorMin}
+        {actuatorMax}
       />
       <Gizmo
         verticalPlacement="top"
