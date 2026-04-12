@@ -2,6 +2,7 @@
   import { Vector3, Matrix3 } from 'three';
   import { Canvas } from '@threlte/core';
   import { Gizmo } from '@threlte/extras';
+  import { onMount } from 'svelte';
   import { Pane, Button, Slider, Folder, Point, RotationEuler, IntervalSlider } from 'svelte-tweakpane-ui';
   import Scene from './Scene.svelte';
 
@@ -26,6 +27,68 @@
   let actuatorMin = DEFAULTS.actuatorMin;
   let actuatorMax = DEFAULTS.actuatorMax;
 
+  // --- State Management via URL ---
+  const STATE_KEY = 'sps';
+  let mounted = false;
+
+  function encodeState(state: any) {
+    return btoa(JSON.stringify(state));
+  }
+
+  function decodeState(encoded: string) {
+    try {
+      return JSON.parse(atob(encoded));
+    } catch (e) {
+      console.error('Failed to decode state', e);
+      return null;
+    }
+  }
+
+  function updateUrl() {
+    const state = {
+      baseDiameter,
+      platformDiameter,
+      alphaP,
+      alphaB,
+      cor,
+      actuatorMin,
+      actuatorMax,
+      platformRotation,
+      platformTranslation,
+    };
+    const encoded = encodeState(state);
+    const url = new URL(window.location.href);
+    url.searchParams.set(STATE_KEY, encoded);
+    window.history.replaceState({}, '', url.toString());
+  }
+
+  onMount(() => {
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get(STATE_KEY);
+    if (encoded) {
+      const state = decodeState(encoded);
+      if (state) {
+        baseDiameter = state.baseDiameter ?? DEFAULTS.baseDiameter;
+        platformDiameter = state.platformDiameter ?? DEFAULTS.platformDiameter;
+        alphaP = state.alphaP ?? DEFAULTS.alphaP;
+        alphaB = state.alphaB ?? DEFAULTS.alphaB;
+        cor = state.cor ?? { ...DEFAULTS.cor };
+        actuatorMin = state.actuatorMin ?? DEFAULTS.actuatorMin;
+        actuatorMax = state.actuatorMax ?? DEFAULTS.actuatorMax;
+        platformRotation = state.platformRotation ?? { ...DEFAULTS.platformRotation };
+        platformTranslation = state.platformTranslation ?? { ...DEFAULTS.platformTranslation };
+      }
+    }
+    mounted = true;
+  });
+
+  // Sync URL whenever parameters change, but only after mount to avoid
+  // overwriting URL params with defaults before they've been read.
+  $: if (mounted) {
+    baseDiameter, platformDiameter, alphaP, alphaB, cor, actuatorMin, actuatorMax, platformRotation, platformTranslation;
+    updateUrl();
+  }
+  
   // Optimal height: neutral leg length = midpoint of actuator range → max symmetric range of motion.
   // For each leg: L0 = sqrt(d_horiz² + h²), so h = sqrt(target² - avg(d_horiz²))
   $: platformHeight = (() => {
