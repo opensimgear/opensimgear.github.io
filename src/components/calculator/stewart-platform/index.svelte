@@ -5,19 +5,32 @@
   import { Pane, Button, Slider, Folder, Point, RotationEuler, IntervalSlider } from 'svelte-tweakpane-ui';
   import Scene from './Scene.svelte';
 
-  let baseDiameter = 0.8;
-  let platformDiameter = 0.4;
-  let alphaP = 10;
-  let alphaB = 110;
-  let cor = { x: 0, y: 0, z: 0 };
-  let actuatorMin = 0.35;
-  let actuatorMax = 0.6;
+  const DEFAULTS = {
+    baseDiameter: 1.0,
+    platformDiameter: 0.6,
+    alphaP: 15,
+    alphaB: 20,
+    cor: { x: 0, y: 0, z: 0 },
+    actuatorMin: 0.4,
+    actuatorMax: 0.6,
+    platformRotation: { x: 0, y: 0, z: 0 },
+    platformTranslation: { x: 0, y: 0, z: 0 },
+  };
+
+  let baseDiameter = DEFAULTS.baseDiameter;
+  let platformDiameter = DEFAULTS.platformDiameter;
+  let alphaP = DEFAULTS.alphaP;
+  let alphaB = DEFAULTS.alphaB; // displayed as complement: geometric spread = 120° - alphaB
+  $: alphaBGeom = 360 / 3 - alphaB;
+  let cor = { ...DEFAULTS.cor };
+  let actuatorMin = DEFAULTS.actuatorMin;
+  let actuatorMax = DEFAULTS.actuatorMax;
 
   // Optimal height: neutral leg length = midpoint of actuator range → max symmetric range of motion.
   // For each leg: L0 = sqrt(d_horiz² + h²), so h = sqrt(target² - avg(d_horiz²))
   $: platformHeight = (() => {
     const alphaPh = alphaP / 2;
-    const alphaBh = alphaB / 2;
+    const alphaBh = alphaBGeom / 2;
     const startingAngle = 270;
     const angles = [startingAngle, (startingAngle + 120) % 360, (startingAngle + 240) % 360];
     const anglesP = angles.flatMap((a) => [a - alphaPh, a + alphaPh]);
@@ -126,7 +139,7 @@
 
   $: platformSpec = (() => {
     const alphaPh = alphaP / 2;
-    const alphaBh = alphaB / 2;
+    const alphaBh = alphaBGeom / 2;
     const startingAngle = 270;
     const angles = [startingAngle, (startingAngle + 120) % 360, (startingAngle + 240) % 360];
     const anglesP = angles.flatMap((a) => [a - alphaPh, a + alphaPh]);
@@ -149,26 +162,26 @@
   })();
 
   const resetParams = () => {
-    baseDiameter = 0.8;
-    platformDiameter = 0.4;
-    actuatorMin = 0.35;
-    actuatorMax = 0.6;
-    alphaP = 10;
-    alphaB = 110;
-    cor = { x: 0, y: 0, z: 0 };
+    baseDiameter = DEFAULTS.baseDiameter;
+    platformDiameter = DEFAULTS.platformDiameter;
+    actuatorMin = DEFAULTS.actuatorMin;
+    actuatorMax = DEFAULTS.actuatorMax;
+    alphaP = DEFAULTS.alphaP;
+    alphaB = DEFAULTS.alphaB;
+    cor = { ...DEFAULTS.cor };
   };
 
   const resetActuator = () => {
-    actuatorMin = 0.35;
-    actuatorMax = 0.6;
+    actuatorMin = DEFAULTS.actuatorMin;
+    actuatorMax = DEFAULTS.actuatorMax;
   };
 
-  let platformRotation = { x: 0, y: 0, z: 0 };
-  let platformTranslation = { x: 0, y: 0, z: 0 };
+  let platformRotation = { ...DEFAULTS.platformRotation };
+  let platformTranslation = { ...DEFAULTS.platformTranslation };
 
   const resetPlatform = () => {
-    platformRotation = { x: 0, y: 0, z: 0 };
-    platformTranslation = { x: 0, y: 0, z: 0 };
+    platformRotation = { ...DEFAULTS.platformRotation };
+    platformTranslation = { ...DEFAULTS.platformTranslation };
   };
 
   // let acctuatorInterval: [number, number] = [0.35, 0.6];
@@ -182,12 +195,22 @@
     format: formatMM,
   };
 
-  const angleOption = { min: -90, max: 90, format: (val: any) => `${val}°` };
-  const configAngle = {
-    optionsX: angleOption,
-    optionsY: angleOption,
-    optionsZ: angleOption,
+  const formatDeg = (val: number) => `${val.toFixed(1)}°`;
+  $: movementAngle = {
+    optionsX: { min: -platformSpec.pitch, max: platformSpec.pitch, format: formatDeg },
+    optionsY: { min: -platformSpec.roll,  max: platformSpec.roll,  format: formatDeg },
+    optionsZ: { min: -platformSpec.yaw,   max: platformSpec.yaw,   format: formatDeg },
   };
+
+  // Clamp current movement values whenever the actuator limits change.
+  $: {
+    platformRotation.x = Math.max(-platformSpec.pitch,      Math.min(platformSpec.pitch,      platformRotation.x));
+    platformRotation.y = Math.max(-platformSpec.roll,       Math.min(platformSpec.roll,       platformRotation.y));
+    platformRotation.z = Math.max(-platformSpec.yaw,        Math.min(platformSpec.yaw,        platformRotation.z));
+    platformTranslation.x = Math.max(-platformSpec.transX,     Math.min(platformSpec.transX,     platformTranslation.x));
+    platformTranslation.y = Math.max(-platformSpec.transY,     Math.min(platformSpec.transY,     platformTranslation.y));
+    platformTranslation.z = Math.max(-platformSpec.transZDown, Math.min(platformSpec.transZUp,   platformTranslation.z));
+  }
 
   const alphaOptions = { min: 10, max: 360 / 3 - 10, step: 1, format: formatAlpha };
 
@@ -224,7 +247,7 @@
         label="Platform rotation"
         picker={'inline'}
         unit="deg"
-        {...configAngle}
+        {...movementAngle}
       />
       <Point
         bind:value={platformTranslation}
@@ -242,7 +265,7 @@
         {baseDiameter}
         {platformDiameter}
         {platformHeight}
-        {alphaB}
+        alphaB={alphaBGeom}
         {alphaP}
         {platformTranslation}
         {platformRotation}
@@ -261,6 +284,17 @@
         paddingY={20}
       />
     </Canvas>
+    <div class="absolute top-3 right-3 bg-white/80 backdrop-blur-sm border border-gray-300 rounded px-3 py-2 text-xs font-mono pointer-events-none select-none">
+      <div class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Platform</div>
+      <div class="grid grid-cols-2 gap-x-3 gap-y-0.5">
+        <span class="text-gray-500">Pitch</span><span>{platformRotation.x.toFixed(1)}°</span>
+        <span class="text-gray-500">Roll</span><span>{platformRotation.y.toFixed(1)}°</span>
+        <span class="text-gray-500">Yaw</span><span>{platformRotation.z.toFixed(1)}°</span>
+        <span class="text-gray-500">X</span><span>{(platformTranslation.x * 1000).toFixed(0)} mm</span>
+        <span class="text-gray-500">Y</span><span>{(platformTranslation.y * 1000).toFixed(0)} mm</span>
+        <span class="text-gray-500">Z</span><span>{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span>
+      </div>
+    </div>
   </div>
   <div class="border-t border-black grid grid-cols-2 divide-x divide-black text-sm font-mono">
     <div class="p-3">
