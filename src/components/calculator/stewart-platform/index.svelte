@@ -85,10 +85,18 @@
   // Sync URL whenever parameters change, but only after mount to avoid
   // overwriting URL params with defaults before they've been read.
   $: if (mounted) {
-    baseDiameter, platformDiameter, alphaP, alphaB, cor, actuatorMin, actuatorMax, platformRotation, platformTranslation;
+    (baseDiameter,
+      platformDiameter,
+      alphaP,
+      alphaB,
+      cor,
+      actuatorMin,
+      actuatorMax,
+      platformRotation,
+      platformTranslation);
     updateUrl();
   }
-  
+
   // Optimal height: neutral leg length = midpoint of actuator range → max symmetric range of motion.
   // For each leg: L0 = sqrt(d_horiz² + h²), so h = sqrt(target² - avg(d_horiz²))
   $: platformHeight = (() => {
@@ -129,7 +137,9 @@
       .multiply(new Matrix3(Math.cos(ty), 0, Math.sin(ty), 0, 1, 0, -Math.sin(ty), 0, Math.cos(ty)))
       .multiply(new Matrix3(Math.cos(tz), -Math.sin(tz), 0, Math.sin(tz), Math.cos(tz), 0, 0, 0, 1));
     const a = R.toArray();
-    a[0] -= 1; a[4] -= 1; a[8] -= 1;
+    a[0] -= 1;
+    a[4] -= 1;
+    a[8] -= 1;
     const qX = new Vector3(a[0], a[1], a[2]);
     const qY = new Vector3(a[3], a[4], a[5]);
     const qZ = new Vector3(a[6], a[7], a[8]);
@@ -150,7 +160,8 @@
     minL: number,
     maxL: number
   ): number {
-    let lo = 0, hi = 90;
+    let lo = 0,
+      hi = 90;
     for (let i = 0; i < 32; i++) {
       const mid = (lo + hi) / 2;
       const rot = { x: 0, y: 0, z: 0, [axis]: mid };
@@ -187,7 +198,8 @@
     minL: number,
     maxL: number
   ): number {
-    let lo = 0, hi = maxL;
+    let lo = 0,
+      hi = maxL;
     for (let i = 0; i < 32; i++) {
       const mid = (lo + hi) / 2;
       const d = { x: 0, y: 0, z: 0, [axis]: sign * mid };
@@ -211,15 +223,17 @@
     const rB = baseDiameter / 2;
     const toRad = (deg: number) => (deg * Math.PI) / 180;
     const basePoints = anglesB.map((a) => new Vector3(rB * Math.cos(toRad(a)), rB * Math.sin(toRad(a)), 0));
-    const platformPoints = anglesP.map((a) => new Vector3(rP * Math.cos(toRad(a)), rP * Math.sin(toRad(a)), platformHeight));
+    const platformPoints = anglesP.map(
+      (a) => new Vector3(rP * Math.cos(toRad(a)), rP * Math.sin(toRad(a)), platformHeight)
+    );
     const corVec = centerOfRotationRelative.clone().add(new Vector3(0, 0, platformHeight));
     return {
       pitch: maxAngleForAxis('x', basePoints, platformPoints, corVec, actuatorMin, actuatorMax),
-      roll:  maxAngleForAxis('y', basePoints, platformPoints, corVec, actuatorMin, actuatorMax),
-      yaw:   maxAngleForAxis('z', basePoints, platformPoints, corVec, actuatorMin, actuatorMax),
-      transX:    maxTranslation('x',  1, basePoints, platformPoints, actuatorMin, actuatorMax),
-      transY:    maxTranslation('y',  1, basePoints, platformPoints, actuatorMin, actuatorMax),
-      transZUp:  maxTranslation('z',  1, basePoints, platformPoints, actuatorMin, actuatorMax),
+      roll: maxAngleForAxis('y', basePoints, platformPoints, corVec, actuatorMin, actuatorMax),
+      yaw: maxAngleForAxis('z', basePoints, platformPoints, corVec, actuatorMin, actuatorMax),
+      transX: maxTranslation('x', 1, basePoints, platformPoints, actuatorMin, actuatorMax),
+      transY: maxTranslation('y', 1, basePoints, platformPoints, actuatorMin, actuatorMax),
+      transZUp: maxTranslation('z', 1, basePoints, platformPoints, actuatorMin, actuatorMax),
       transZDown: maxTranslation('z', -1, basePoints, platformPoints, actuatorMin, actuatorMax),
     };
   })();
@@ -261,18 +275,18 @@
   const formatDeg = (val: number) => `${val.toFixed(1)}°`;
   $: movementAngle = {
     optionsX: { min: -platformSpec.pitch, max: platformSpec.pitch, format: formatDeg },
-    optionsY: { min: -platformSpec.roll,  max: platformSpec.roll,  format: formatDeg },
-    optionsZ: { min: -platformSpec.yaw,   max: platformSpec.yaw,   format: formatDeg },
+    optionsY: { min: -platformSpec.roll, max: platformSpec.roll, format: formatDeg },
+    optionsZ: { min: -platformSpec.yaw, max: platformSpec.yaw, format: formatDeg },
   };
 
   // Clamp current movement values whenever the actuator limits change.
   $: {
-    platformRotation.x = Math.max(-platformSpec.pitch,      Math.min(platformSpec.pitch,      platformRotation.x));
-    platformRotation.y = Math.max(-platformSpec.roll,       Math.min(platformSpec.roll,       platformRotation.y));
-    platformRotation.z = Math.max(-platformSpec.yaw,        Math.min(platformSpec.yaw,        platformRotation.z));
-    platformTranslation.x = Math.max(-platformSpec.transX,     Math.min(platformSpec.transX,     platformTranslation.x));
-    platformTranslation.y = Math.max(-platformSpec.transY,     Math.min(platformSpec.transY,     platformTranslation.y));
-    platformTranslation.z = Math.max(-platformSpec.transZDown, Math.min(platformSpec.transZUp,   platformTranslation.z));
+    platformRotation.x = Math.max(-platformSpec.pitch, Math.min(platformSpec.pitch, platformRotation.x));
+    platformRotation.y = Math.max(-platformSpec.roll, Math.min(platformSpec.roll, platformRotation.y));
+    platformRotation.z = Math.max(-platformSpec.yaw, Math.min(platformSpec.yaw, platformRotation.z));
+    platformTranslation.x = Math.max(-platformSpec.transX, Math.min(platformSpec.transX, platformTranslation.x));
+    platformTranslation.y = Math.max(-platformSpec.transY, Math.min(platformSpec.transY, platformTranslation.y));
+    platformTranslation.z = Math.max(-platformSpec.transZDown, Math.min(platformSpec.transZUp, platformTranslation.z));
   }
 
   const alphaOptions = { min: 10, max: 360 / 3 - 10, step: 1, format: formatAlpha };
@@ -347,7 +361,9 @@
         paddingY={20}
       />
     </Canvas>
-    <div class="absolute top-3 right-3 bg-white/80 backdrop-blur-sm border border-gray-300 rounded px-3 py-2 text-xs font-mono pointer-events-none select-none">
+    <div
+      class="absolute top-3 right-3 bg-white/80 backdrop-blur-sm border border-gray-300 rounded px-3 py-2 text-xs font-mono pointer-events-none select-none"
+    >
       <div class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Platform</div>
       <div class="grid grid-cols-2 gap-x-3 gap-y-0.5">
         <span class="text-gray-500">Pitch</span><span>{platformRotation.x.toFixed(1)}°</span>
@@ -355,7 +371,9 @@
         <span class="text-gray-500">Yaw</span><span>{platformRotation.z.toFixed(1)}°</span>
         <span class="text-gray-500">X</span><span>{(platformTranslation.x * 1000).toFixed(0)} mm</span>
         <span class="text-gray-500">Y</span><span>{(platformTranslation.y * 1000).toFixed(0)} mm</span>
-        <span class="text-gray-500">Z</span><span>{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span>
+        <span class="text-gray-500">Z</span><span
+          >{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span
+        >
       </div>
     </div>
   </div>
@@ -373,7 +391,12 @@
       <div class="grid grid-cols-2 gap-x-4 gap-y-1">
         <span class="text-gray-500">X</span><span>±{(platformSpec.transX * 1000).toFixed(0)} mm</span>
         <span class="text-gray-500">Y</span><span>±{(platformSpec.transY * 1000).toFixed(0)} mm</span>
-        <span class="text-gray-500">Z</span><span>{((platformHeight - platformSpec.transZDown) * 1000).toFixed(0)} / {((platformHeight + platformSpec.transZUp) * 1000).toFixed(0)} mm</span>
+        <span class="text-gray-500">Z</span><span
+          >{((platformHeight - platformSpec.transZDown) * 1000).toFixed(0)} / {(
+            (platformHeight + platformSpec.transZUp) *
+            1000
+          ).toFixed(0)} mm</span
+        >
       </div>
     </div>
   </div>
