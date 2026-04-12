@@ -39,7 +39,7 @@ export default defineConfig({
           label: 'Discord',
           icon: 'discord',
           href: 'https://discord.gg/f7yWUF6zUs',
-        }
+        },
       ],
       customCss: ['./src/styles/global.css'],
       sidebar: [
@@ -62,6 +62,10 @@ export default defineConfig({
         {
           label: 'Gear',
           autogenerate: { directory: 'gear' },
+        },
+        {
+          label: '3rd Party',
+          autogenerate: { directory: '3rdparty' },
         },
       ],
       components: {
