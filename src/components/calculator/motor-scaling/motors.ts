@@ -9,7 +9,7 @@ export interface Motor {
   source: 'builtin' | 'user';
 }
 
-export const BUILTIN_MOTORS: Motor[] = [
+export const BUILTIN_MOTORS: ReadonlyArray<Motor> = [
   {
     id: 'jmc-ihss57-36-10-30',
     name: 'JMC iHSS57 (200W)',
@@ -80,6 +80,7 @@ export const BUILTIN_MOTORS: Motor[] = [
     inertia_kgm2: 2.4e-5,
     source: 'builtin',
   },
+  // Steppers have lower peak-to-rated ratio than AC servos (~1.5× vs 3×)
   {
     id: 'nema34-stepper',
     name: 'NEMA 34 Stepper (12Nm)',
@@ -94,12 +95,28 @@ export const BUILTIN_MOTORS: Motor[] = [
 
 const USER_MOTORS_KEY = 'motor-scaling-user-motors';
 
+function isValidMotor(v: unknown): v is Motor {
+  if (typeof v !== 'object' || v === null) return false;
+  const m = v as Record<string, unknown>;
+  return (
+    typeof m.id === 'string' &&
+    typeof m.name === 'string' &&
+    typeof m.ratedRPM === 'number' &&
+    typeof m.ratedTorque_Nm === 'number' &&
+    typeof m.peakTorque_Nm === 'number' &&
+    typeof m.continuousPower_W === 'number' &&
+    typeof m.inertia_kgm2 === 'number' &&
+    (m.source === 'builtin' || m.source === 'user')
+  );
+}
+
 export function loadUserMotors(): Motor[] {
   if (typeof localStorage === 'undefined') return [];
   try {
     const raw = localStorage.getItem(USER_MOTORS_KEY);
     if (!raw) return [];
-    return JSON.parse(raw) as Motor[];
+    const parsed: unknown = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as unknown[]).filter(isValidMotor) : [];
   } catch {
     return [];
   }
@@ -107,5 +124,6 @@ export function loadUserMotors(): Motor[] {
 
 export function saveUserMotors(motors: Motor[]): void {
   if (typeof localStorage === 'undefined') return;
-  localStorage.setItem(USER_MOTORS_KEY, JSON.stringify(motors));
+  const userOnly = motors.filter((m) => m.source === 'user');
+  localStorage.setItem(USER_MOTORS_KEY, JSON.stringify(userOnly));
 }
