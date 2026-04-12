@@ -29,7 +29,7 @@ export interface Config {
 }
 
 export const config: Config = {
-  site: 'https://opensimgear.org',
+  site: 'https://www.opensimgear.org',
   contacts: {
     info: 'info@opensimgear.org',
     abuse: 'abuse@opensimgear.org',

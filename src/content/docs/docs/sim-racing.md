@@ -1,6 +1,6 @@
 ---
 title: Sim Racing Overview
-description: Introduction to the fundamentals of Sim Racing
+description: A complete guide to sim racing hardware — from entry-level steering wheels and pedals to direct drive bases, motion simulators, G-belts, G-seats, bass shakers, and VR headsets.
 sidebar:
   order: 0
 ---

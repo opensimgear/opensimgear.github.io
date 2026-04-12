@@ -1,6 +1,6 @@
 ---
 title: Flight Simulation Overview
-description: Introduction to the fundamentals of Flight simulation
+description: A complete guide to flight simulation hardware — covering control sticks, yokes, throttle quadrants, rudder pedals, button panels, cockpit setups, VR headsets, and motion systems for home sim pilots.
 sidebar:
   order: 1
 ---

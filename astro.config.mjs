@@ -6,6 +6,7 @@ import sentry from '@sentry/astro';
 import spotlightjs from '@spotlightjs/astro';
 import partytown from '@astrojs/partytown';
 import starlight from '@astrojs/starlight';
+import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 
 import { fileURLToPath } from 'url';
@@ -75,6 +76,7 @@ export default defineConfig({
       },
       plugins: [],
     }),
+    sitemap(),
     icon(),
     svelte(),
     sentry({
