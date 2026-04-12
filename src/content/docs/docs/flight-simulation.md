@@ -37,7 +37,7 @@ Control Sticks, also known as joysticks, are central to the flight simulation ex
 fighter aircraft simulations. These devices provide precise control over the aircraft, allowing pilots to execute a wide
 range of maneuvers from basic flight paths to complex aerobatics.
 
-![VKB Gladiator EVO](~/assets/images/docs/vkb-gladiator-evo.png)
+![VKB Gladiator EVO](~/assets/images/docs/vkb-gladiator-evo.webp)
 
 Control sticks manage the aircraft's ailerons and elevators, which control roll and pitch, respectively. Many models
 also integrate additional functionalities, such as buttons and triggers on the stick itself, enabling quick access to
@@ -51,7 +51,7 @@ stick-controlled aircraft accurately.
 Yokes are essential input devices in flight simulation that replicate the control wheel found in many types of aircraft,
 particularly commercial and general aviation planes.
 
-![Honeycomb Alpha](~/assets/images/docs/honeycomb-alpha-yoke.png)
+![Honeycomb Alpha](~/assets/images/docs/honeycomb-alpha-yoke.webp)
 
 They function as the primary control interface for the pilot, managing the aircraft's ailerons and elevators through
 pitch and roll movements. This allows simulators to steer the plane, control altitude, and manage the bank angle during
@@ -66,7 +66,7 @@ for accessibility and efficiency in flight control.
 Throttle Quadrants are a key component of flight simulation setups, providing pilots with realistic controls for engine
 power management.
 
-![VKB Stecs](~/assets/images/docs/vkb-stecs.png)
+![VKB Stecs](~/assets/images/docs/vkb-stecs.webp)
 
 These devices mimic the throttle levers found in aircraft cockpits, allowing simulators to adjust the thrust of one or
 more engines. Throttle quadrants are crucial for accurately simulating takeoffs, in-flight power adjustments, and
@@ -83,7 +83,7 @@ braking systems. These devices mimic the pedals found in an actual aircraft cock
 maneuvers such as yawing the aircraft, coordinating turns, and controlling ground movements during taxiing, takeoff, and
 landing.
 
-![VKB Sim T-Rudder Pedals](~/assets/images/docs/vkb-sim-trudder.png)
+![VKB Sim T-Rudder Pedals](~/assets/images/docs/vkb-sim-trudder.webp)
 
 Well-designed flight simulation pedals enhance the overall realism of the experience by providing feedback and
 resistance that simulate real-world aircraft dynamics. They typically consist of two main parts: the rudder pedals,
@@ -97,7 +97,7 @@ Button Panels in flight simulation are essential hardware components designed to
 of a simulator setup. These panels serve as physical interfaces, providing a tactile experience for managing various
 aircraft systems and functions.
 
-![VKB GNX SEM](~/assets/images/docs/vkb-gnx-sem.png)
+![VKB GNX SEM](~/assets/images/docs/vkb-gnx-sem.webp)
 
 ### Cockpit Setups
 
@@ -105,7 +105,7 @@ Advanced simulators often feature detailed cockpit replicas that include every s
 actual aircraft. These setups can range from single-seat trainers to full-sized cockpit enclosures with wrap-around
 screens or projection systems to enhance the field of view and immersion.
 
-![DIY Cockpit](~/assets/images/docs/diy-cockpit.png)
+![DIY Cockpit](~/assets/images/docs/diy-cockpit.webp)
 
 ### VR Options
 

@@ -217,7 +217,7 @@ export const astroAsseetsOptimizer: ImagesOptimizer = async (image, breakpoints)
 
   return Promise.all(
     breakpoints.map(async (w: number) => {
-      const url = (await getImage({ src: image, width: w, inferSize: true })).src;
+      const url = (await getImage({ src: image, width: w, format: 'webp', inferSize: true })).src;
       return {
         src: url,
         width: w,

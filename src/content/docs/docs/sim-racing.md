@@ -57,7 +57,7 @@ Entry-level pedals are often made from plastic and use potentiometers for sensin
 At the basic level, a rig might simply be a stable stand for mounting the steering wheel and pedals to ensure they don’t
 move during racing.
 
-![Wheel Stand](~/assets/images/docs/wheel-stand-rig.jpg)
+![Wheel Stand](~/assets/images/docs/wheel-stand-rig.webp)
 
 More elaborate entry-level setups might include a basic seat and frame that mimics the position of a car driver’s seat,
 enhancing the overall experience without a significant increase in cost.
@@ -76,7 +76,7 @@ or track surface.
 
 Advanced pedal setups use load cells or hydraulic systems to simulate the feel of a car’s brake system.
 
-![Asetek Forte Pedals](~/assets/images/docs/forte-pedals-asetek-simsports.jpg)
+![Asetek Forte Pedals](~/assets/images/docs/forte-pedals-asetek-simsports.webp)
 
 These pedals measure the pressure applied, which offers a more realistic braking feel, essential for precision racing.
 
@@ -105,7 +105,7 @@ vehicle behavior based on the 'felt' forces.
 
 ### G-Seat
 
-![GS5 G Seat](~/assets/images/docs/gs5-g-seat.jpg)
+![GS5 G Seat](~/assets/images/docs/gs5-g-seat.webp)
 
 Type of motion simulator seat designed to simulate the sensation of G-forces acting on the body during flight or racing
 simulation. It typically incorporates various mechanical elements such as paddings, inflatables, or actuators that press
@@ -117,7 +117,7 @@ turns, enhancing the realism of the simulation.
 
 A simulation device that mimics the helmet sensations experienced by pilots or racers.
 
-![Frex G Helm](~/assets/images/docs/frex-g-helm.jpg)
+![Frex G Helm](~/assets/images/docs/frex-g-helm.webp)
 
 It is designed to simulate the weight and pressure changes in a helmet due to high-speed maneuvers and G-forces. This
 can include shifts in weight, tightening around the head, and even temperature variations to replicate the exact
@@ -129,7 +129,7 @@ for training or entertainment purposes, allowing users to experience a closer ap
 Also known as tactile transducers, are devices designed to enhance the physical sensation of low-frequency sounds in a
 sim racing setup. These devices are attached to the racing seat or cockpit and translate audio signals into vibrations.
 
-![DIY Bass Shakers](~/assets/images/docs/bass-shakers.jpg)
+![DIY Bass Shakers](~/assets/images/docs/bass-shakers.webp)
 
 They work by shaking the environment in sync with specific sounds from the game, such as the roar of the engine,
 collisions, or the rumble of tires on different track surfaces. This feature adds an extra layer of immersion, allowing
@@ -160,11 +160,11 @@ them is the degrees of freedom they can simulate.
 
 They can start from as low as 2 DOF or 3 DOF for simpler and cheaper variants:
 
-![DOF Reality](~/assets/images/docs/dof-reality-3.png)
+![DOF Reality](~/assets/images/docs/dof-reality-3.webp)
 
 To a total of 6 DOF for the most expensive models:
 
-![Qubic Systems QS-S25](~/assets/images/docs/qubic-systems-qs-s25.png)
+![Qubic Systems QS-S25](~/assets/images/docs/qubic-systems-qs-s25.webp)
 
 ### VR Headsets
 
@@ -173,7 +173,7 @@ racer directly inside the virtual cockpit for an unmatched level of immersion.
 
 You can start really cheap with a Oculus Quest:
 
-![Oculus Quest](~/assets/images/docs/oculus-quest.png)
+![Oculus Quest](~/assets/images/docs/oculus-quest.webp)
 
 And move into more premium headsets if you want better field of view and resolution.
 
