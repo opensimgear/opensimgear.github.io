@@ -9,7 +9,7 @@ export interface SortState {
 
 export const DEFAULT_SORT_STATE: SortState = {
   key: 'score',
-  descending: false,
+  descending: true,
 };
 
 export function toggleSortState(current: SortState, clicked: SortKey): SortState {

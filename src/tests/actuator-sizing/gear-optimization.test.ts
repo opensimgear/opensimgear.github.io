@@ -138,7 +138,7 @@ describe('findOptimalGearRatio', () => {
     expect(objective(0.5, BASE_CTX, motor)).toBeGreaterThanOrEqual(0);
   });
 
-  it('returns 10.0 (GEAR_MAX) when still torque-limited at the highest ratio', () => {
+  it('returns 5.0 (GEAR_MAX) when still torque-limited at the highest ratio', () => {
     // Tiny motor + very heavy load: torque deficit is large even at ratio=10
     const motor: ServoMotor = { ...BASE_MOTOR, peakTorque_Nm: 0.01, ratedTorque_Nm: 0.005 };
     const ctx: GearOptimizationContext = {
@@ -148,15 +148,15 @@ describe('findOptimalGearRatio', () => {
       F_hold_N: 4905,
     };
     const ratio = findOptimalGearRatio(ctx, motor);
-    expect(ratio).toBe(10.0);
+    expect(ratio).toBe(5.0);
     // Confirm torque-dominant at GEAR_MAX
-    expect(objective(10.0, ctx, motor)).toBeLessThanOrEqual(0);
+    expect(objective(5.0, ctx, motor)).toBeLessThanOrEqual(0);
   });
 
   it('returns a ratio within [0.5, 10] for a typical scenario', () => {
     const ratio = findOptimalGearRatio(BASE_CTX, BASE_MOTOR);
     expect(ratio).toBeGreaterThanOrEqual(0.5);
-    expect(ratio).toBeLessThanOrEqual(10.0);
+    expect(ratio).toBeLessThanOrEqual(5.0);
   });
 
   it('result is rounded to one decimal place', () => {
@@ -184,7 +184,7 @@ describe('findOptimalGearRatio', () => {
     const ratio = findOptimalGearRatio(ctx, motor);
     const defAtResult = maxDeficit(ratio, ctx, motor);
     const defAtMin = maxDeficit(0.5, ctx, motor);
-    const defAtMax = maxDeficit(10.0, ctx, motor);
+    const defAtMax = maxDeficit(5.0, ctx, motor);
 
     // Small tolerance to absorb 1-dp rounding
     expect(defAtResult).toBeLessThanOrEqual(defAtMin + 0.5);
@@ -202,9 +202,9 @@ describe('findOptimalGearRatio', () => {
 
     // Both are valid ratios
     expect(ratioA).toBeGreaterThanOrEqual(0.5);
-    expect(ratioA).toBeLessThanOrEqual(10.0);
+    expect(ratioA).toBeLessThanOrEqual(5.0);
     expect(ratioB).toBeGreaterThanOrEqual(0.5);
-    expect(ratioB).toBeLessThanOrEqual(10.0);
+    expect(ratioB).toBeLessThanOrEqual(5.0);
 
     // Different motor characteristics should generally produce different ratios
     expect(ratioA).not.toBe(ratioB);

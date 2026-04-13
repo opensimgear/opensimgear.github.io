@@ -15,14 +15,17 @@ export function computeScore(
   motor_peakTorque: number,
   n_required: number,
   motor_maxRPM: number,
-  inertiaRatio: number
+  inertiaRatio: number,
+  status: 'pass' | 'warn' | 'fail'
 ): number {
+  if (status === 'fail') return 0;
+
   const rmsUtil = Math.min(T_rms_required / motor_ratedTorque, 1.5);
   const peakUtil = Math.min(T_peak_required / motor_peakTorque, 1.5);
   const speedUtil = Math.min(n_required / motor_maxRPM, 1.5);
   const inertiaPenalty = Math.max(0, inertiaRatio - 10) * 0.01;
 
-  return Math.max(0, (0.4 * rmsUtil + 0.35 * peakUtil + 0.25 * speedUtil - inertiaPenalty) * 100);
+  return Math.max(1, (0.4 * rmsUtil + 0.35 * peakUtil + 0.25 * speedUtil - inertiaPenalty) * 100);
 }
 
 export function evaluateMotorForActuator(
@@ -76,7 +79,8 @@ export function evaluateMotorForActuator(
       motor.peakTorque_Nm,
       n_required,
       motor.maxRPM,
-      inertiaRatio
+      inertiaRatio,
+      status
     ),
   };
 }

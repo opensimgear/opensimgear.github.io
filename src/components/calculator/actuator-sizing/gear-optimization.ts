@@ -2,7 +2,7 @@ import { computeLoadInertia, computePhaseTorques, computeTotalInertia } from './
 import type { ServoMotor } from './types';
 
 const GEAR_MIN = 0.5;
-const GEAR_MAX = 10.0;
+const GEAR_MAX = 5.0;
 const ITERATIONS = 40;
 
 export interface GearOptimizationContext {

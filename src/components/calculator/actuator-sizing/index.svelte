@@ -779,8 +779,8 @@
           <Slider
             bind:value={gearRatio}
             label="Gear Ratio"
-            min={1}
-            max={10}
+            min={0.5}
+            max={5}
             step={0.1}
             format={(value) => `${value.toFixed(1)}:1`}
           />
