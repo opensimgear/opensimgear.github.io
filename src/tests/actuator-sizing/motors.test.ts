@@ -90,12 +90,33 @@ describe('motor catalog storage', () => {
 
   it('contains at least 30 built-in motors between 200 W and 1000 W', () => {
     expect(BUILTIN_SERVO_MOTORS.length).toBeGreaterThanOrEqual(30);
-    expect(BUILTIN_SERVO_MOTORS.every((motor) => motor.continuousPower_W >= 200 && motor.continuousPower_W <= 1000)).toBe(
-      true
-    );
+    expect(
+      BUILTIN_SERVO_MOTORS.every((motor) => motor.continuousPower_W >= 200 && motor.continuousPower_W <= 1000)
+    ).toBe(true);
   });
 
   it('keeps built-in entries source-backed with vendored datasheets', () => {
     expect(BUILTIN_SERVO_MOTORS.every((motor) => motor.datasheetPath?.startsWith('docs/motors/'))).toBe(true);
+  });
+
+  it('includes OMC StepperOnline motors in the supported power range', () => {
+    const omcMotorIds = BUILTIN_SERVO_MOTORS.filter((motor) => motor.manufacturer === 'StepperOnline').map(
+      (motor) => motor.id
+    );
+
+    expect(omcMotorIds).toEqual(
+      expect.arrayContaining([
+        'omc-a6m60-400h2a1-m17',
+        'omc-a6m80-750h2a1-m17',
+        'omc-a6m80-1000h2a1-m17',
+        'omc-t6m80-750h2a1-m23',
+        'omc-t6m80-1000h2a1-m23',
+        'omc-t7m60-400h2a1-m23',
+        'omc-t7m80-750h2a1-m23',
+        'omc-e6m60-400h2a2-m17s',
+        'omc-e6m80-750h2a2-m17s',
+        'omc-e6m80-1000h2a2-m17s',
+      ])
+    );
   });
 });
