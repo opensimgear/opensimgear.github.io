@@ -2,7 +2,7 @@
 title: Tactile Feedback
 description: Learn how tactile transducers work, what they can and cannot simulate, and how to integrate them well.
 sidebar:
-  order: 24
+  order: 26
 ---
 
 ## What it is
@@ -22,7 +22,8 @@ They are common in advanced sim racing setups and can also support some flight s
 
 ## How it works
 
-These systems do not reproduce full motion. They provide vibration cues that can suggest engine behavior, surface texture, impacts, or other events when tuned well.
+These systems do not reproduce full motion. They provide vibration cues that can suggest engine behavior, surface
+texture, impacts, or other events when tuned well.
 
 ## What matters when choosing
 
@@ -40,7 +41,8 @@ These systems do not reproduce full motion. They provide vibration cues that can
 
 ## Trade-offs and limitations
 
-Tactile systems can add useful information at lower cost than motion, but they cannot replace the body cues of a true moving system.
+Tactile systems can add useful information at lower cost than motion, but they cannot replace the body cues of a true
+moving system.
 
 ## Related components
 

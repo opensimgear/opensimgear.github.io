@@ -1,8 +1,9 @@
 ---
 title: Sensors and Input Detection
-description: Understand potentiometers, Hall sensors, load cells, and other common sensing methods used in simulator controls.
+description:
+  Understand potentiometers, Hall sensors, load cells, and other common sensing methods used in simulator controls.
 sidebar:
-  order: 1
+  order: 5
 ---
 
 ## Common sensor types
@@ -15,7 +16,8 @@ sidebar:
 
 ## What matters
 
-The important differences are repeatability, durability, noise sensitivity, calibration drift, mechanical integration, and whether the sensor is measuring position, force, or pressure.
+The important differences are repeatability, durability, noise sensitivity, calibration drift, mechanical integration,
+and whether the sensor is measuring position, force, or pressure.
 
 ## Why it matters
 

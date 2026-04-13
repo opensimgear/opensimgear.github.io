@@ -2,12 +2,13 @@
 title: Steering Wheels
 description: Learn how steering wheels differ by shape, controls, compatibility, and use case in sim racing setups.
 sidebar:
-  order: 1
+  order: 3
 ---
 
 ## What it is
 
-A steering wheel is the driver interface mounted to a wheel base. It defines grip shape, control access, diameter, and driving ergonomics.
+A steering wheel is the driver interface mounted to a wheel base. It defines grip shape, control access, diameter, and
+driving ergonomics.
 
 ## Where it is used
 
@@ -22,7 +23,8 @@ Steering wheels are primarily used in sim racing.
 
 ## How it works
 
-The wheel itself does not generate force feedback. It transmits input to the base and provides the shape, leverage, and button layout that influence control feel.
+The wheel itself does not generate force feedback. It transmits input to the base and provides the shape, leverage, and
+button layout that influence control feel.
 
 ## What matters when choosing
 
@@ -40,7 +42,8 @@ The wheel itself does not generate force feedback. It transmits input to the bas
 
 ## Trade-offs and limitations
 
-A heavier or feature-rich wheel can improve usability, but it may also dull response on weaker bases or complicate DIY assembly.
+A heavier or feature-rich wheel can improve usability, but it may also dull response on weaker bases or complicate DIY
+assembly.
 
 ## Related components
 

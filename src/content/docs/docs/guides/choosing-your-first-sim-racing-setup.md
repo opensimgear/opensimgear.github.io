@@ -2,7 +2,7 @@
 title: Choosing Your First Sim Racing Setup
 description: A practical guide to building a first sim racing setup without wasting money on the wrong upgrades.
 sidebar:
-  order: 1
+  order: 4
 ---
 
 ## Prioritize these first
@@ -20,7 +20,8 @@ sidebar:
 
 ## Good first-path logic
 
-Start with a dependable wheel-and-pedal setup, then improve mounting and braking consistency before moving into higher-end displays, tactile systems, or motion.
+Start with a dependable wheel-and-pedal setup, then improve mounting and braking consistency before moving into
+higher-end displays, tactile systems, or motion.
 
 ## Related pages
 

@@ -2,7 +2,7 @@
 title: Pedals
 description: Understand sim racing pedal sets, including sensing methods, brake feel, adjustability, and DIY trade-offs.
 sidebar:
-  order: 3
+  order: 5
 ---
 
 ## What it is
@@ -11,7 +11,9 @@ Pedals are foot-operated controls used for throttle, braking, and clutch operati
 
 ## Where it is used
 
-Pedal sets are a core sim racing control category. This page is about racing throttle-brake-clutch sets; flight-sim rudder pedals are covered separately because yaw control, toe brakes, and centering behavior matter more there than brake-force simulation.
+Pedal sets are a core sim racing control category. This page is about racing throttle-brake-clutch sets; flight-sim
+rudder pedals are covered separately because yaw control, toe brakes, and centering behavior matter more there than
+brake-force simulation.
 
 ## Main variants
 
@@ -22,7 +24,11 @@ Pedal sets are a core sim racing control category. This page is about racing thr
 
 ## How it works
 
-The key difference is not just pedal shape but sensing method and force model. Potentiometers read position through a contact-based resistor track, Hall sensors read position magnetically, and load cells measure force directly. Hydraulic-style hardware may change resistance and damping, but it is still important to ask what sensor is actually measuring the input. In sim racing, brake control often improves when the brake is force-based, while throttle and clutch are usually judged more by smoothness, consistency, and controllable travel.
+The key difference is not just pedal shape but sensing method and force model. Potentiometers read position through a
+contact-based resistor track, Hall sensors read position magnetically, and load cells measure force directly.
+Hydraulic-style hardware may change resistance and damping, but it is still important to ask what sensor is actually
+measuring the input. In sim racing, brake control often improves when the brake is force-based, while throttle and
+clutch are usually judged more by smoothness, consistency, and controllable travel.
 
 ## What matters when choosing
 
@@ -42,7 +48,10 @@ The key difference is not just pedal shape but sensing method and force model. P
 
 ## Trade-offs and limitations
 
-Potentiometer pedals are simple and inexpensive, Hall-sensor pedals often reduce wear and noise in the signal, and load-cell brakes usually improve repeatable braking once the rig can handle the force. Hydraulic-style systems can add damping and packaging complexity, but they do not automatically outperform a well-mounted mechanical pedal set with a well-chosen sensor.
+Potentiometer pedals are simple and inexpensive, Hall-sensor pedals often reduce wear and noise in the signal, and
+load-cell brakes usually improve repeatable braking once the rig can handle the force. Hydraulic-style systems can add
+damping and packaging complexity, but they do not automatically outperform a well-mounted mechanical pedal set with a
+well-chosen sensor.
 
 ## Related components
 

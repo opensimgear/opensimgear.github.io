@@ -2,7 +2,7 @@
 title: Choosing Your First Flight Sim Setup
 description: A practical guide to choosing flight sim hardware based on the aircraft you actually plan to fly.
 sidebar:
-  order: 2
+  order: 5
 ---
 
 ## Start with aircraft type

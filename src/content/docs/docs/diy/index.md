@@ -1,8 +1,9 @@
 ---
 title: DIY Reference
-description: Shared technical concepts for builders, including sensors, actuation, telemetry, mounting, safety, and reliability.
+description:
+  Shared technical concepts for builders, including sensors, actuation, telemetry, mounting, safety, and reliability.
 sidebar:
-  order: 3
+  order: 4
 ---
 
 This section collects the technical ideas that appear across many sim hardware projects.

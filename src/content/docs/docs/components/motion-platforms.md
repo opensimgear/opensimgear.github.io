@@ -1,13 +1,15 @@
 ---
 title: Motion Platforms
-description: Compare seat movers, frame movers, and more advanced motion systems used to add body cues in simulator setups.
+description:
+  Compare seat movers, frame movers, and more advanced motion systems used to add body cues in simulator setups.
 sidebar:
-  order: 28
+  order: 30
 ---
 
 ## What it is
 
-A motion platform physically moves the seat, cockpit, or whole rig to create body cues that complement the visual simulation.
+A motion platform physically moves the seat, cockpit, or whole rig to create body cues that complement the visual
+simulation.
 
 ## Where it is used
 
@@ -22,7 +24,10 @@ Motion systems are used in advanced sim racing and flight simulation setups.
 
 ## How it works
 
-Motion systems do not reproduce real sustained G-forces. They rely on motion cueing: short, timed movements that trick the body into sensing acceleration, road texture, turbulence, or attitude change. That is different from tactile vibration cues, which mainly add texture through transducers, and from sustained body-pressure cueing systems such as g-seats or belt tensioners, which push on the body without moving the whole rig the same way.
+Motion systems do not reproduce real sustained G-forces. They rely on motion cueing: short, timed movements that trick
+the body into sensing acceleration, road texture, turbulence, or attitude change. That is different from tactile
+vibration cues, which mainly add texture through transducers, and from sustained body-pressure cueing systems such as
+g-seats or belt tensioners, which push on the body without moving the whole rig the same way.
 
 ## What matters when choosing
 
@@ -41,7 +46,9 @@ Motion systems do not reproduce real sustained G-forces. They rely on motion cue
 
 ## Trade-offs and limitations
 
-Motion can be highly immersive, but it is expensive, space-hungry, mechanically complex, and easy to tune badly. A smaller, faster system with well-managed latency can be more convincing than a larger platform with poor profiles or deferred maintenance.
+Motion can be highly immersive, but it is expensive, space-hungry, mechanically complex, and easy to tune badly. A
+smaller, faster system with well-managed latency can be more convincing than a larger platform with poor profiles or
+deferred maintenance.
 
 ## Related components
 

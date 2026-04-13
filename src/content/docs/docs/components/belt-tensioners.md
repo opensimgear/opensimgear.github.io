@@ -1,8 +1,10 @@
 ---
 title: Belt Tensioners
-description: Learn how belt-tensioning systems create braking and acceleration cues and what makes them difficult to implement well.
+description:
+  Learn how belt-tensioning systems create braking and acceleration cues and what makes them difficult to implement
+  well.
 sidebar:
-  order: 26
+  order: 28
 ---
 
 ## What it is
@@ -21,7 +23,8 @@ It is mostly used in advanced sim racing and high-immersion motion setups.
 
 ## How it works
 
-The system controls belt tension in response to telemetry, often focusing on braking cues. Good systems rely on timing, smoothness, and safe force limits rather than raw pull strength.
+The system controls belt tension in response to telemetry, often focusing on braking cues. Good systems rely on timing,
+smoothness, and safe force limits rather than raw pull strength.
 
 ## What matters when choosing
 

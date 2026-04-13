@@ -2,14 +2,16 @@
 title: Seats and Ergonomics
 description: Understand seating posture, reach, comfort, and body support in sim racing and flight simulation setups.
 sidebar:
-  order: 21
+  order: 23
 ---
 
 ## What it is
 
-Seat choice and body positioning determine comfort, consistency, and how well you can use the controls over long sessions.
+Seat choice and body positioning determine comfort, consistency, and how well you can use the controls over long
+sessions.
 
-This page focuses on the human fit of the setup: posture, support, reach, and fatigue, regardless of whether the frame itself is simple or elaborate.
+This page focuses on the human fit of the setup: posture, support, reach, and fatigue, regardless of whether the frame
+itself is simple or elaborate.
 
 ## Where it is used
 
@@ -24,7 +26,8 @@ This matters in both sim racing and flight simulation.
 
 ## How it works
 
-Ergonomics is the relationship between the seat, controls, screen position, and body support. A technically good control set can feel poor when the posture is wrong.
+Ergonomics is the relationship between the seat, controls, screen position, and body support. A technically good control
+set can feel poor when the posture is wrong.
 
 ## What matters when choosing
 
@@ -46,8 +49,10 @@ Aggressive seating positions can improve realism for one discipline while making
 ## How it differs from related pages
 
 - Read this page for seat style, posture, support, and long-session comfort.
-- Read [Rigs and Cockpits](/docs/components/rigs-and-cockpits/) when the decision is mainly about frame type, modularity, or mounting architecture.
-- Read [Mounting, Rigidity, and Ergonomics](/docs/diy/mounting-rigidity-and-ergonomics/) when you are building or modifying brackets, pedal trays, side mounts, or other fit-critical structures.
+- Read [Rigs and Cockpits](/docs/components/rigs-and-cockpits/) when the decision is mainly about frame type,
+  modularity, or mounting architecture.
+- Read [Mounting, Rigidity, and Ergonomics](/docs/diy/mounting-rigidity-and-ergonomics/) when you are building or
+  modifying brackets, pedal trays, side mounts, or other fit-critical structures.
 
 ## Related components
 

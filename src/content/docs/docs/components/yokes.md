@@ -1,13 +1,16 @@
 ---
 title: Yokes
-description: Understand yoke-based flight controls, their strengths for GA and airliner setups, and the mechanical trade-offs involved.
+description:
+  Understand yoke-based flight controls, their strengths for GA and airliner setups, and the mechanical trade-offs
+  involved.
 sidebar:
-  order: 7
+  order: 9
 ---
 
 ## What it is
 
-A yoke is a flight control interface that manages pitch and roll in many general aviation and transport aircraft workflows.
+A yoke is a flight control interface that manages pitch and roll in many general aviation and transport aircraft
+workflows.
 
 ## Where it is used
 
@@ -22,7 +25,8 @@ Yokes are most common in general aviation and airliner-oriented flight simulatio
 
 ## How it works
 
-Yokes translate push-pull and rotational inputs into pitch and roll axes. The feel depends on travel range, friction, centering method, and how well the mechanism avoids play.
+Yokes translate push-pull and rotational inputs into pitch and roll axes. The feel depends on travel range, friction,
+centering method, and how well the mechanism avoids play.
 
 ## What matters when choosing
 
@@ -40,7 +44,8 @@ Yokes translate push-pull and rotational inputs into pitch and roll axes. The fe
 
 ## Trade-offs and limitations
 
-Yokes can improve realism for specific aircraft, but they are less flexible than joysticks for combat or helicopter-focused flying.
+Yokes can improve realism for specific aircraft, but they are less flexible than joysticks for combat or
+helicopter-focused flying.
 
 ## Related components
 

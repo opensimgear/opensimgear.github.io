@@ -1,8 +1,9 @@
 ---
 title: Wind Simulation
-description: Understand what wind simulation adds to a sim setup and why its value depends heavily on the rest of the system.
+description:
+  Understand what wind simulation adds to a sim setup and why its value depends heavily on the rest of the system.
 sidebar:
-  order: 25
+  order: 27
 ---
 
 ## What it is
@@ -21,7 +22,8 @@ It is more common in sim racing, though it can support some open-cockpit or imme
 
 ## How it works
 
-The system changes airflow based on telemetry or simulator data. This can enhance speed perception and comfort, especially in enclosed or VR-heavy setups.
+The system changes airflow based on telemetry or simulator data. This can enhance speed perception and comfort,
+especially in enclosed or VR-heavy setups.
 
 ## What matters when choosing
 
@@ -39,7 +41,8 @@ The system changes airflow based on telemetry or simulator data. This can enhanc
 
 ## Trade-offs and limitations
 
-Wind simulation can improve presence, but it is a finishing detail rather than a substitute for better core controls or displays.
+Wind simulation can improve presence, but it is a finishing detail rather than a substitute for better core controls or
+displays.
 
 ## Related components
 

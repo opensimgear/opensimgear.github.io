@@ -1,8 +1,9 @@
 ---
 title: Guides
-description: Practical guides for choosing hardware, sequencing upgrades, and deciding when building your own sim gear makes sense.
+description:
+  Practical guides for choosing hardware, sequencing upgrades, and deciding when building your own sim gear makes sense.
 sidebar:
-  order: 2
+  order: 3
 ---
 
 These pages are for decision-making rather than pure reference.

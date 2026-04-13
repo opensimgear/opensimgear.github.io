@@ -1,8 +1,10 @@
 ---
 title: VR and Head Tracking
-description: Understand the trade-offs between VR, head tracking, and traditional display setups in sim racing and flight simulation.
+description:
+  Understand the trade-offs between VR, head tracking, and traditional display setups in sim racing and flight
+  simulation.
 sidebar:
-  order: 23
+  order: 25
 ---
 
 ## What it is
@@ -11,7 +13,8 @@ VR and head tracking change the way the simulator responds to your head position
 
 ## Where it is used
 
-Both are used in sim racing and flight simulation, but their strengths differ by game support, comfort tolerance, and workflow.
+Both are used in sim racing and flight simulation, but their strengths differ by game support, comfort tolerance, and
+workflow.
 
 ## Main variants
 
@@ -22,7 +25,9 @@ Both are used in sim racing and flight simulation, but their strengths differ by
 
 ## How it works
 
-VR replaces the display view entirely, while head tracking modifies the in-game camera based on head movement. Each method changes visibility, depth cues, and cockpit interaction differently: VR adds stereoscopic depth and full head-coupled view control, while head tracking keeps a real monitor and real controls in sight.
+VR replaces the display view entirely, while head tracking modifies the in-game camera based on head movement. Each
+method changes visibility, depth cues, and cockpit interaction differently: VR adds stereoscopic depth and full
+head-coupled view control, while head tracking keeps a real monitor and real controls in sight.
 
 ## What matters when choosing
 
@@ -40,12 +45,16 @@ VR replaces the display view entirely, while head tracking modifies the in-game 
 
 ## Trade-offs and limitations
 
-Head tracking usually keeps setup simple and preserves access to real controls, but it does not deliver the same depth or cockpit presence as VR. VR can add unmatched presence, but it also adds performance demands, comfort limits, and more friction around reading checklists, finding switches, and managing heat.
+Head tracking usually keeps setup simple and preserves access to real controls, but it does not deliver the same depth
+or cockpit presence as VR. VR can add unmatched presence, but it also adds performance demands, comfort limits, and more
+friction around reading checklists, finding switches, and managing heat.
 
 ## Choose this when...
 
-- choose VR when cockpit presence, depth cues, and natural look-around matter more than quick access to keyboards, notes, or real panel labels
-- choose head tracking when you want easier access to real controls and longer sessions on a monitor, but still need view movement beyond a fixed screen
+- choose VR when cockpit presence, depth cues, and natural look-around matter more than quick access to keyboards,
+  notes, or real panel labels
+- choose head tracking when you want easier access to real controls and longer sessions on a monitor, but still need
+  view movement beyond a fixed screen
 
 ## Related components
 

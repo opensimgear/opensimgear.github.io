@@ -2,7 +2,7 @@
 title: Shifters
 description: Understand H-pattern and sequential shifters, what they add to sim racing, and what matters in DIY builds.
 sidebar:
-  order: 4
+  order: 6
 ---
 
 ## What it is

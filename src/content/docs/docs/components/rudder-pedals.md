@@ -2,7 +2,7 @@
 title: Rudder Pedals
 description: Learn how rudder pedal systems work, what toe brakes add, and what matters in flight sim pedal design.
 sidebar:
-  order: 10
+  order: 12
 ---
 
 ## What it is
@@ -11,7 +11,8 @@ Rudder pedals control yaw and often provide left and right toe-brake inputs.
 
 ## Where it is used
 
-Rudder pedals are used in many flight simulation setups and are especially valuable for coordinated turns, taxiing, and crosswind work.
+Rudder pedals are used in many flight simulation setups and are especially valuable for coordinated turns, taxiing, and
+crosswind work.
 
 ## Main variants
 
@@ -22,7 +23,8 @@ Rudder pedals are used in many flight simulation setups and are especially valua
 
 ## How it works
 
-The main axis controls yaw, while toe brake axes provide independent braking. Smooth travel, consistent centering, and low stiction matter more than raw force.
+The main axis controls yaw, while toe brake axes provide independent braking. Smooth travel, consistent centering, and
+low stiction matter more than raw force.
 
 ## What matters when choosing
 

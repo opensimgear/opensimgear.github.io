@@ -2,7 +2,7 @@
 title: Display Systems
 description: Compare single monitors, ultrawides, triples, projectors, and other display approaches used in sim setups.
 sidebar:
-  order: 22
+  order: 24
 ---
 
 ## What it is
@@ -23,7 +23,9 @@ Display choice matters in both sim racing and flight simulation.
 
 ## How it works
 
-Display layout affects how much of the virtual environment is visible without camera controls. Field of view, viewing distance, and alignment are often more important than panel size alone, because a badly placed triple setup can feel less convincing than a well-positioned single screen.
+Display layout affects how much of the virtual environment is visible without camera controls. Field of view, viewing
+distance, and alignment are often more important than panel size alone, because a badly placed triple setup can feel
+less convincing than a well-positioned single screen.
 
 ## What matters when choosing
 
@@ -41,7 +43,9 @@ Display layout affects how much of the virtual environment is visible without ca
 
 ## Trade-offs and limitations
 
-Single screens and ultrawides are easier to place and drive, while triples and curved multi-screen layouts improve side visibility at a much higher space, mounting, and GPU cost. Projector systems can solve special cockpit goals, but alignment and calibration effort rise quickly.
+Single screens and ultrawides are easier to place and drive, while triples and curved multi-screen layouts improve side
+visibility at a much higher space, mounting, and GPU cost. Projector systems can solve special cockpit goals, but
+alignment and calibration effort rise quickly.
 
 ## Related components
 

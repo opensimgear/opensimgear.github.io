@@ -1,13 +1,16 @@
 ---
 title: Components
-description: Browse the main hardware categories used in sim racing and flight simulation, from controls and cockpits to displays, tactile systems, and motion.
+description:
+  Browse the main hardware categories used in sim racing and flight simulation, from controls and cockpits to displays,
+  tactile systems, and motion.
 sidebar:
-  order: 1
+  order: 2
 ---
 
 This section explains the major hardware families used across sim racing and flight simulation.
 
-Use these pages when you want to understand what a component does, how it works, what trade-offs matter, and what to watch for if you plan to build your own.
+Use these pages when you want to understand what a component does, how it works, what trade-offs matter, and what to
+watch for if you plan to build your own.
 
 ## Core controls
 
@@ -23,7 +26,8 @@ Use these pages when you want to understand what a component does, how it works,
 - [Rudder Pedals](/docs/components/rudder-pedals/)
 - [Button Boxes and Panels](/docs/components/button-boxes-and-panels/)
 
-Flight controls are grouped here from the most common sim-racing inputs through fixed-wing flight controls and then into rotorcraft-specific hardware, so the sidebar journey mirrors how many readers narrow their setup.
+Flight controls are grouped here from the most common sim-racing inputs through fixed-wing flight controls and then into
+rotorcraft-specific hardware, so the sidebar journey mirrors how many readers narrow their setup.
 
 ## Mounting and immersion
 

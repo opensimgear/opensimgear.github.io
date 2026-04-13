@@ -2,12 +2,13 @@
 title: Telemetry and Software Integration
 description: Understand how simulator data reaches tactile systems, motion platforms, and other advanced hardware.
 sidebar:
-  order: 3
+  order: 7
 ---
 
 ## What telemetry does
 
-Telemetry provides simulator state that can drive external hardware such as tactile systems, fans, motion platforms, and dashboards.
+Telemetry provides simulator state that can drive external hardware such as tactile systems, fans, motion platforms, and
+dashboards.
 
 ## What matters
 

@@ -2,14 +2,15 @@
 title: Rigs and Cockpits
 description: Learn how mounting rigidity, adjustability, and layout affect sim racing and flight simulation performance.
 sidebar:
-  order: 20
+  order: 22
 ---
 
 ## What it is
 
 A rig or cockpit is the structural platform that supports controls, displays, seat position, and body ergonomics.
 
-This page is about the overall structure and layout: the frame, mounts, adjustability, and how well the platform supports future hardware.
+This page is about the overall structure and layout: the frame, mounts, adjustability, and how well the platform
+supports future hardware.
 
 ## Where it is used
 
@@ -25,7 +26,8 @@ Rigid mounting matters in both sim racing and flight simulation, though the exac
 
 ## How it works
 
-The rig does not only hold hardware in place. It controls flex, alignment, ergonomics, and how well the rest of the system performs under load.
+The rig does not only hold hardware in place. It controls flex, alignment, ergonomics, and how well the rest of the
+system performs under load.
 
 ## What matters when choosing
 
@@ -48,8 +50,10 @@ Light and compact setups save space, but stronger wheels, pedals, and motion sys
 ## How it differs from related pages
 
 - Read this page for frame choice, structural layout, and hardware mounting strategy.
-- Read [Seats and Ergonomics](/docs/components/seats-and-ergonomics/) when the main question is posture, support, or comfort over time.
-- Read [Mounting, Rigidity, and Ergonomics](/docs/diy/mounting-rigidity-and-ergonomics/) when you need build-focused guidance on stiffness, bracket design, and practical placement details.
+- Read [Seats and Ergonomics](/docs/components/seats-and-ergonomics/) when the main question is posture, support, or
+  comfort over time.
+- Read [Mounting, Rigidity, and Ergonomics](/docs/diy/mounting-rigidity-and-ergonomics/) when you need build-focused
+  guidance on stiffness, bracket design, and practical placement details.
 
 ## Related components
 

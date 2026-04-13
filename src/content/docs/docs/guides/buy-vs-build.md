@@ -1,8 +1,9 @@
 ---
 title: Buy vs Build
-description: Compare the benefits and drawbacks of buying commercial hardware versus building your own simulator components.
+description:
+  Compare the benefits and drawbacks of buying commercial hardware versus building your own simulator components.
 sidebar:
-  order: 4
+  order: 7
 ---
 
 ## Buying makes more sense when
@@ -19,4 +20,5 @@ sidebar:
 
 ## Categories differ
 
-Some devices are easier to build well than others. A switch box is a very different DIY challenge from a safe direct-drive wheel base or motion platform.
+Some devices are easier to build well than others. A switch box is a very different DIY challenge from a safe
+direct-drive wheel base or motion platform.

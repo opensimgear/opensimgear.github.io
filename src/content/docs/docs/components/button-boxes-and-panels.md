@@ -1,8 +1,10 @@
 ---
 title: Button Boxes and Panels
-description: Compare button boxes, switch panels, MFD-style controls, and other physical interfaces used in racing and flight simulation.
+description:
+  Compare button boxes, switch panels, MFD-style controls, and other physical interfaces used in racing and flight
+  simulation.
 sidebar:
-  order: 11
+  order: 13
 ---
 
 ## What it is
@@ -22,7 +24,10 @@ They are used in both sim racing and flight simulation, but flight sim usually b
 
 ## How it works
 
-Most devices present as USB input controllers, though some rely on simulator-specific integrations or external software layers. The main value is physical access to repeat-use functions without reaching for the keyboard. The useful distinction is whether the hardware is generic, function-grouped, display-coupled, or built around one aircraft workflow.
+Most devices present as USB input controllers, though some rely on simulator-specific integrations or external software
+layers. The main value is physical access to repeat-use functions without reaching for the keyboard. The useful
+distinction is whether the hardware is generic, function-grouped, display-coupled, or built around one aircraft
+workflow.
 
 ## What matters when choosing
 
@@ -40,7 +45,9 @@ Most devices present as USB input controllers, though some rely on simulator-spe
 
 ## Trade-offs and limitations
 
-More switches can improve immersion and efficiency, but poorly placed controls become clutter instead of help. Simple button boxes are flexible but easy to forget, switch panels work best for stable systems logic, MFD frames depend on matching screen layouts, and aircraft-specific panels pay off only when you fly that workflow often enough.
+More switches can improve immersion and efficiency, but poorly placed controls become clutter instead of help. Simple
+button boxes are flexible but easy to forget, switch panels work best for stable systems logic, MFD frames depend on
+matching screen layouts, and aircraft-specific panels pay off only when you fly that workflow often enough.
 
 ## Related components
 

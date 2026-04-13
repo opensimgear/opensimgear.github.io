@@ -2,12 +2,13 @@
 title: Handbrakes
 description: Learn how sim racing handbrakes work, when they matter, and what design choices affect feel and durability.
 sidebar:
-  order: 5
+  order: 7
 ---
 
 ## What it is
 
-A handbrake is a lever-operated input device used for rally, drifting, and other driving styles that benefit from rear brake control.
+A handbrake is a lever-operated input device used for rally, drifting, and other driving styles that benefit from rear
+brake control.
 
 ## Where it is used
 

@@ -1,8 +1,9 @@
 ---
 title: Force Feedback and Actuation
-description: Learn the basics of motors, actuators, cueing strategies, and why raw power numbers do not tell the whole story.
+description:
+  Learn the basics of motors, actuators, cueing strategies, and why raw power numbers do not tell the whole story.
 sidebar:
-  order: 2
+  order: 6
 ---
 
 ## Common actuator categories
@@ -15,7 +16,8 @@ sidebar:
 
 ## What matters
 
-Speed, control quality, backlash, compliance, travel, noise, payload, and safety all shape the result. A stronger actuator is not automatically a better one.
+Speed, control quality, backlash, compliance, travel, noise, payload, and safety all shape the result. A stronger
+actuator is not automatically a better one.
 
 ## Why it matters
 

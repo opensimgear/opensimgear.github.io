@@ -1,8 +1,10 @@
 ---
 title: Wheel Bases
-description: Compare gear-driven, belt-driven, and direct-drive wheel bases and understand the trade-offs that matter in sim racing.
+description:
+  Compare gear-driven, belt-driven, and direct-drive wheel bases and understand the trade-offs that matter in sim
+  racing.
 sidebar:
-  order: 2
+  order: 4
 ---
 
 ## What it is
@@ -21,7 +23,10 @@ Wheel bases are a core sim racing component.
 
 ## How it works
 
-The base combines motor control, steering position sensing, and force-feedback output. Gear-driven bases send torque through reduction gears, belt-driven bases add compliance through belts and pulleys, and direct-drive bases mount the wheel directly to the motor shaft. That drive path determines backlash, friction, peak torque behavior, and how faithfully small force-feedback details reach your hands.
+The base combines motor control, steering position sensing, and force-feedback output. Gear-driven bases send torque
+through reduction gears, belt-driven bases add compliance through belts and pulleys, and direct-drive bases mount the
+wheel directly to the motor shaft. That drive path determines backlash, friction, peak torque behavior, and how
+faithfully small force-feedback details reach your hands.
 
 ## What matters when choosing
 
@@ -41,7 +46,10 @@ The base combines motor control, steering position sensing, and force-feedback o
 
 ## Trade-offs and limitations
 
-Gear-driven bases are usually the cheapest and most compact, but gear mesh can add noise and notchiness. Belt-driven bases often feel smoother while still limiting peak torque and long-session thermal stability. Direct drive usually offers the best torque fidelity and response, but it raises cost, mounting demands, and safety expectations. Lower-torque systems can still be effective when matched to realistic expectations and solid pedals.
+Gear-driven bases are usually the cheapest and most compact, but gear mesh can add noise and notchiness. Belt-driven
+bases often feel smoother while still limiting peak torque and long-session thermal stability. Direct drive usually
+offers the best torque fidelity and response, but it raises cost, mounting demands, and safety expectations.
+Lower-torque systems can still be effective when matched to realistic expectations and solid pedals.
 
 ## Related components
 

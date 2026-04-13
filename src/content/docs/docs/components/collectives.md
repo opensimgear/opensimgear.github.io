@@ -1,17 +1,21 @@
 ---
 title: Collectives
-description: Understand helicopter collective controls, how they differ from fixed-wing throttles, and what matters for rotorcraft simulation.
+description:
+  Understand helicopter collective controls, how they differ from fixed-wing throttles, and what matters for rotorcraft
+  simulation.
 sidebar:
-  order: 9
+  order: 11
 ---
 
 ## What it is
 
-A collective is the helicopter power and lift control. It is usually operated with an up-down lever by the pilot's side rather than a forward-back throttle-style lever.
+A collective is the helicopter power and lift control. It is usually operated with an up-down lever by the pilot's side
+rather than a forward-back throttle-style lever.
 
 ## Where it is used
 
-Collectives matter in rotorcraft simulation, especially when you want helicopter-specific control feel instead of adapting fixed-wing hardware.
+Collectives matter in rotorcraft simulation, especially when you want helicopter-specific control feel instead of
+adapting fixed-wing hardware.
 
 ## Main variants
 
@@ -22,7 +26,8 @@ Collectives matter in rotorcraft simulation, especially when you want helicopter
 
 ## How it works
 
-Collective travel changes blade pitch across the rotor system, so it is tied to lift management rather than only engine power. That makes its ergonomics, friction, and hold position more important than on many fixed-wing throttle units.
+Collective travel changes blade pitch across the rotor system, so it is tied to lift management rather than only engine
+power. That makes its ergonomics, friction, and hold position more important than on many fixed-wing throttle units.
 
 ## What matters when choosing
 
@@ -39,7 +44,8 @@ Collective travel changes blade pitch across the rotor system, so it is tied to 
 
 ## Trade-offs and limitations
 
-Adapted throttles can work for casual helicopter flying, but dedicated collectives usually make hover work, low-speed handling, and muscle memory much easier.
+Adapted throttles can work for casual helicopter flying, but dedicated collectives usually make hover work, low-speed
+handling, and muscle memory much easier.
 
 ## Related components
 
