@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Button, Checkbox, Element, List, Monitor, Pane, Slider, WaveformMonitor } from 'svelte-tweakpane-ui';
+  import { Button, Checkbox, Element, Folder, List, Monitor, Pane, Slider, WaveformMonitor } from 'svelte-tweakpane-ui';
   import MotionProfileDiagram from './MotionProfileDiagram.svelte';
   import {
     computePhaseTorques,
@@ -28,9 +28,7 @@
     actuatorAngle: 70,
     totalMass: 150,
     imbalanceFactor: 1.2,
-    externalForce: 0,
-    frictionForce: 50,
-    guidePreloadForce: 0,
+    frictionForce: 30,
     ballscrewKey: '1610',
     customPitch: 10,
     customDiameter: 16,
@@ -38,10 +36,11 @@
     screwEfficiency: 90,
     autoGearRatio: true,
     gearRatio: 1,
-    gearEfficiency: 95,
+    gearEfficiency: 100,
     gearInertia: 0,
     safetyFactor: 20,
     holdingRequired: true,
+    advancedMode: false,
   };
 
   const BALLSCREW_OPTIONS = [
@@ -118,9 +117,7 @@
   let actuatorAngle = initialValue('actuatorAngle', DEFAULTS.actuatorAngle);
   let totalMass = initialValue('totalMass', DEFAULTS.totalMass);
   let imbalanceFactor = initialValue('imbalanceFactor', DEFAULTS.imbalanceFactor);
-  let externalForce = initialValue('externalForce', DEFAULTS.externalForce);
   let frictionForce = initialValue('frictionForce', DEFAULTS.frictionForce);
-  let guidePreloadForce = initialValue('guidePreloadForce', DEFAULTS.guidePreloadForce);
   let ballscrewKey = initialValue('ballscrewKey', DEFAULTS.ballscrewKey);
   let customPitch = initialValue('customPitch', DEFAULTS.customPitch);
   let customDiameter = initialValue('customDiameter', DEFAULTS.customDiameter);
@@ -132,6 +129,7 @@
   let gearInertia = initialValue('gearInertia', DEFAULTS.gearInertia);
   let safetyFactor = initialValue('safetyFactor', DEFAULTS.safetyFactor);
   let holdingRequired = initialValue('holdingRequired', DEFAULTS.holdingRequired);
+  let advancedMode = initialValue('advancedMode', DEFAULTS.advancedMode);
 
   let userMotors: ServoMotor[] = [];
   let mounted = false;
@@ -165,9 +163,7 @@
         actuatorAngle,
         totalMass,
         imbalanceFactor,
-        externalForce,
         frictionForce,
-        guidePreloadForce,
         ballscrewKey,
         customPitch,
         customDiameter,
@@ -179,6 +175,7 @@
         gearInertia,
         safetyFactor,
         holdingRequired,
+        advancedMode,
       })
     );
   }
@@ -199,9 +196,7 @@
       actuatorAngle,
       totalMass,
       imbalanceFactor,
-      externalForce,
       frictionForce,
-      guidePreloadForce,
       ballscrewKey,
       customPitch,
       customDiameter,
@@ -211,8 +206,17 @@
       gearEfficiency,
       gearInertia,
       safetyFactor,
-      holdingRequired);
+      holdingRequired,
+      advancedMode);
     updateUrl();
+  }
+
+  $: if (!advancedMode) {
+    frictionForce = DEFAULTS.frictionForce;
+    imbalanceFactor = DEFAULTS.imbalanceFactor;
+    screwEfficiency = DEFAULTS.screwEfficiency;
+    gearEfficiency = DEFAULTS.gearEfficiency;
+    gearInertia = DEFAULTS.gearInertia;
   }
 
   $: lead_mm = ballscrewKey === 'custom' ? customPitch : (BALLSCREW_PITCHES[ballscrewKey] ?? DEFAULTS.customPitch);
@@ -235,13 +239,14 @@
     dwellTime_s: dwellTime,
   });
   $: equivalentMassPerActuator_kg = computeForcePerActuator(totalMass, systemType, imbalanceFactor, actuatorAngle);
-  $: F_static_total = computeStaticForce(totalMass, frictionForce, externalForce, guidePreloadForce);
-  $: F_hold_total = computeHoldingForce(totalMass, guidePreloadForce);
+  $: F_static_total = computeStaticForce(totalMass, frictionForce);
+  $: F_hold_total = computeHoldingForce(totalMass);
   $: F_static_per = computeForcePerActuator(F_static_total, systemType, imbalanceFactor, actuatorAngle);
   $: F_hold_per = holdingRequired
     ? computeForcePerActuator(F_hold_total, systemType, imbalanceFactor, actuatorAngle)
     : 0;
   $: allMotors = [...BUILTIN_SERVO_MOTORS, ...userMotors];
+  $: maxG = Math.max(acceleration, deceleration) / 1000 / 9.81;
   $: motionBasis = systemType === 'stewart' ? 'Actuator values' : 'Axis values';
   $: unsortedMotorResults = allMotors.map((motor) => {
     const effectiveGearRatio = autoGearRatio
@@ -264,7 +269,7 @@
             screwEfficiency: screwEfficiency / 100,
             safetyFactor_pct: safetyFactor,
           } satisfies GearOptimizationContext,
-          motor,
+          motor
         )
       : gearRatio;
     const J_load = computeLoadInertia(equivalentMassPerActuator_kg, lead_m, effectiveGearRatio);
@@ -317,9 +322,22 @@
   function resetLoad() {
     totalMass = DEFAULTS.totalMass;
     frictionForce = DEFAULTS.frictionForce;
-    externalForce = DEFAULTS.externalForce;
-    guidePreloadForce = DEFAULTS.guidePreloadForce;
     imbalanceFactor = DEFAULTS.imbalanceFactor;
+  }
+
+  function resetBallScrew() {
+    ballscrewKey = DEFAULTS.ballscrewKey;
+    customPitch = DEFAULTS.customPitch;
+    customDiameter = DEFAULTS.customDiameter;
+    screwLength = DEFAULTS.screwLength;
+    screwEfficiency = DEFAULTS.screwEfficiency;
+  }
+
+  function resetTransmission() {
+    autoGearRatio = DEFAULTS.autoGearRatio;
+    gearRatio = DEFAULTS.gearRatio;
+    gearEfficiency = DEFAULTS.gearEfficiency;
+    gearInertia = DEFAULTS.gearInertia;
   }
 
   function deleteUserMotor(id: string) {
@@ -629,7 +647,13 @@
     </div>
 
     <div class="border-l border-black flex flex-col divide-y divide-black shrink-0">
+      <Pane title="Setting mode" position="inline">
+        <Checkbox bind:value={advancedMode} label="Advanced" />
+      </Pane>
       <Pane title="Motion Profile" position="inline">
+        <Element>
+          <MotionProfileDiagram diagram={profileDiagram} />
+        </Element>
         <Slider
           bind:value={strokeLength}
           label="Stroke"
@@ -670,9 +694,6 @@
           step={0.1}
           format={(value) => `${value.toFixed(1)} s`}
         />
-        <Element>
-          <MotionProfileDiagram diagram={profileDiagram} />
-        </Element>
         <Button on:click={resetMotionProfile} label="Reset" title="Reset" />
       </Pane>
 
@@ -689,121 +710,6 @@
           />
         {/if}
         <Checkbox bind:value={holdingRequired} label="Holding Required" />
-      </Pane>
-
-      <Pane title="Load" position="inline">
-        <Slider
-          bind:value={totalMass}
-          label="Total Mass"
-          min={1}
-          max={500}
-          step={1}
-          format={(value) => `${value} kg`}
-        />
-        <Slider
-          bind:value={frictionForce}
-          label="Friction"
-          min={0}
-          max={500}
-          step={5}
-          format={(value) => `${value} N`}
-        />
-        <Slider
-          bind:value={externalForce}
-          label="External Force"
-          min={0}
-          max={2000}
-          step={10}
-          format={(value) => `${value} N`}
-        />
-        <Slider
-          bind:value={guidePreloadForce}
-          label="Guide Preload"
-          min={0}
-          max={500}
-          step={5}
-          format={(value) => `${value} N`}
-        />
-        <Slider
-          bind:value={imbalanceFactor}
-          label="Imbalance"
-          min={1}
-          max={2}
-          step={0.05}
-          format={(value) => `×${value.toFixed(2)}`}
-        />
-        <Button on:click={resetLoad} label="Reset" title="Reset" />
-      </Pane>
-
-      <Pane title="Ball Screw" position="inline">
-        <List bind:value={ballscrewKey} options={BALLSCREW_OPTIONS} label="Type" />
-        {#if ballscrewKey === 'custom'}
-          <Slider
-            bind:value={customPitch}
-            label="Pitch"
-            min={1}
-            max={50}
-            step={0.5}
-            format={(value) => `${value} mm`}
-          />
-          <Slider
-            bind:value={customDiameter}
-            label="Diameter"
-            min={8}
-            max={63}
-            step={1}
-            format={(value) => `${value} mm`}
-          />
-        {/if}
-        <Slider
-          bind:value={screwLength}
-          label="Screw Length"
-          min={50}
-          max={3000}
-          step={10}
-          format={(value) => `${value} mm`}
-        />
-        <Slider
-          bind:value={screwEfficiency}
-          label="Efficiency"
-          min={50}
-          max={100}
-          step={1}
-          format={(value) => `${value}%`}
-        />
-      </Pane>
-
-      <Pane title="Transmission" position="inline">
-        <Checkbox bind:value={autoGearRatio} label="Auto Gear Ratio" />
-        {#if !autoGearRatio}
-          <Slider
-            bind:value={gearRatio}
-            label="Gear Ratio"
-            min={0.5}
-            max={5}
-            step={0.1}
-            format={(value) => `${value.toFixed(1)}:1`}
-          />
-        {/if}
-        <Slider
-          bind:value={gearEfficiency}
-          label="Gear Efficiency"
-          min={70}
-          max={100}
-          step={1}
-          format={(value) => `${value}%`}
-        />
-        <Slider
-          bind:value={gearInertia}
-          label="Gear Inertia"
-          min={0}
-          max={0.001}
-          step={0.00001}
-          format={(value) => `${value.toExponential(1)} kg·m²`}
-        />
-      </Pane>
-
-      <Pane title="Safety" position="inline">
         <Slider
           bind:value={safetyFactor}
           label="Safety Factor"
@@ -812,17 +718,123 @@
           step={5}
           format={(value) => `${value}%`}
         />
+        <Folder title="Load">
+          <Slider
+            bind:value={totalMass}
+            label="Total Mass"
+            min={1}
+            max={500}
+            step={1}
+            format={(value) => `${value} kg`}
+          />
+          {#if advancedMode}
+            <Slider
+              bind:value={frictionForce}
+              label="Friction"
+              min={0}
+              max={500}
+              step={5}
+              format={(value) => `${value} N`}
+            />
+          {/if}
+          {#if advancedMode}
+            <Slider
+              bind:value={imbalanceFactor}
+              label="Imbalance"
+              min={1}
+              max={2}
+              step={0.05}
+              format={(value) => `×${value.toFixed(2)}`}
+            />
+          {/if}
+          <Button on:click={resetLoad} label="Reset" title="Reset" />
+        </Folder>
+        <Folder title="Ball Screw">
+          <List bind:value={ballscrewKey} options={BALLSCREW_OPTIONS} label="Type" />
+          {#if ballscrewKey === 'custom'}
+            <Slider
+              bind:value={customPitch}
+              label="Pitch"
+              min={1}
+              max={50}
+              step={0.5}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
+              bind:value={customDiameter}
+              label="Diameter"
+              min={8}
+              max={63}
+              step={1}
+              format={(value) => `${value} mm`}
+            />
+          {/if}
+          <Slider
+            bind:value={screwLength}
+            label="Screw Length"
+            min={50}
+            max={3000}
+            step={10}
+            format={(value) => `${value} mm`}
+          />
+          {#if advancedMode}
+            <Slider
+              bind:value={screwEfficiency}
+              label="Efficiency"
+              min={50}
+              max={100}
+              step={1}
+              format={(value) => `${value}%`}
+            />
+          {/if}
+          <Button on:click={resetBallScrew} label="Reset" title="Reset" />
+        </Folder>
+        <Folder title="Transmission">
+          <Checkbox bind:value={autoGearRatio} label="Auto Gear Ratio" />
+          {#if !autoGearRatio}
+            <Slider
+              bind:value={gearRatio}
+              label="Gear Ratio"
+              min={0.5}
+              max={5}
+              step={0.1}
+              format={(value) => `${value.toFixed(1)}:1`}
+            />
+          {/if}
+          {#if advancedMode}
+            <Slider
+              bind:value={gearEfficiency}
+              label="Gear Efficiency"
+              min={70}
+              max={100}
+              step={1}
+              format={(value) => `${value}%`}
+            />
+            <Slider
+              bind:value={gearInertia}
+              label="Gear Inertia"
+              min={0}
+              max={0.001}
+              step={0.00001}
+              format={(value) => `${value.toExponential(1)} kg·m²`}
+            />
+          {/if}
+          <Button on:click={resetTransmission} label="Reset" title="Reset" />
+        </Folder>
       </Pane>
 
       <Pane title="Calculated" position="inline">
-        <Monitor value={`${lead_mm} mm`} label="Lead" />
         <Monitor value={`${screwMass_kg.toFixed(3)} kg`} label="Screw mass" />
-        <Monitor value={`${equivalentMassPerActuator_kg.toFixed(2)} kg`} label="Eq. mass/actuator" />
-        <Monitor value={`${F_static_per.toFixed(1)} N`} label="F/actuator" />
-        <Monitor value={`${profile.t_accel_s.toFixed(3)} s`} label="t_accel" />
-        <Monitor value={`${profile.t_const_s.toFixed(3)} s`} label="t_const" />
-        <Monitor value={`${profile.isTriangular ? 'triangular' : 'trapezoidal'}`} label="Profile" />
-        <Monitor value={motionBasis} label="Motion basis" />
+        <Monitor value={`${equivalentMassPerActuator_kg.toFixed(2)} kg`} label="Mass / act" />
+        <Monitor value={`${F_static_per.toFixed(1)} N`} label="F_static / act" />
+        <Monitor value={`${F_hold_per.toFixed(1)} N`} label="F_hold / act" />
+        <Monitor value={`${(profile.v_peak_m_s * 1000).toFixed(1)} mm/s`} label="v_peak" />
+        <Monitor value={`${maxG.toFixed(2)} g`} label="Max accel" />
+        <Monitor
+          value={`${(profile.t_accel_s + profile.t_const_s + profile.t_decel_s).toFixed(3)} s`}
+          label="Cycle time"
+        />
+        <Monitor value={profile.isTriangular ? 'triangular' : 'trapezoidal'} label="Profile" />
       </Pane>
     </div>
   </div>
@@ -837,7 +849,9 @@
       <div class="px-3 py-2 border-b border-gray-100">
         <div class="font-sans font-semibold text-gray-800 text-[11px]">{hoveredResult.motor.name}</div>
         <div class="text-[10px] text-gray-400 font-sans mt-0.5">
-          score {hoveredResult.score.toFixed(0)} · inertia {hoveredResult.inertiaRatio.toFixed(1)}:1 · ratio {hoveredResult.gearRatio.toFixed(1)}:1
+          score {hoveredResult.score.toFixed(0)} · inertia {hoveredResult.inertiaRatio.toFixed(1)}:1 · ratio {hoveredResult.gearRatio.toFixed(
+            1
+          )}:1
         </div>
       </div>
       <div class="px-3 py-2 grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-0.5">

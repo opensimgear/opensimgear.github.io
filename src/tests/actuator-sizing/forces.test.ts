@@ -15,16 +15,16 @@ describe('computeGravityForce', () => {
 });
 
 describe('computeStaticForce', () => {
-  it('sums gravity, friction, external, and guide forces', () => {
-    const F = computeStaticForce(50, 100, 50, 20);
-    expect(F).toBeCloseTo(50 * G + 100 + 50 + 20, 3);
+  it('sums gravity and friction', () => {
+    const F = computeStaticForce(50, 100);
+    expect(F).toBeCloseTo(50 * G + 100, 3);
   });
 });
 
 describe('computeHoldingForce', () => {
-  it('excludes friction (zero at rest)', () => {
-    const F = computeHoldingForce(50, 20);
-    expect(F).toBeCloseTo(50 * G + 20, 3);
+  it('returns gravity only (friction zero at rest)', () => {
+    const F = computeHoldingForce(50);
+    expect(F).toBeCloseTo(50 * G, 3);
   });
 });
 

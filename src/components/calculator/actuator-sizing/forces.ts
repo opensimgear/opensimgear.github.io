@@ -6,17 +6,12 @@ export function computeGravityForce(mass_kg: number): number {
   return mass_kg * G;
 }
 
-export function computeStaticForce(
-  mass_kg: number,
-  frictionForce_N: number,
-  externalForce_N: number,
-  guidePreloadForce_N: number
-): number {
-  return computeGravityForce(mass_kg) + frictionForce_N + externalForce_N + guidePreloadForce_N;
+export function computeStaticForce(mass_kg: number, frictionForce_N: number): number {
+  return computeGravityForce(mass_kg) + frictionForce_N;
 }
 
-export function computeHoldingForce(mass_kg: number, guidePreloadForce_N: number): number {
-  return computeGravityForce(mass_kg) + guidePreloadForce_N;
+export function computeHoldingForce(mass_kg: number): number {
+  return computeGravityForce(mass_kg);
 }
 
 export function computeForcePerActuator(
