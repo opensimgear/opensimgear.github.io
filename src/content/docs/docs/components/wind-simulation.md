@@ -5,8 +5,6 @@ sidebar:
   order: 25
 ---
 
-# Wind Simulation
-
 ## What it is
 
 Wind simulation uses fans or blowers to create airflow cues tied to vehicle or aircraft behavior.

@@ -5,8 +5,6 @@ sidebar:
   order: 21
 ---
 
-# Seats and Ergonomics
-
 ## What it is
 
 Seat choice and body positioning determine comfort, consistency, and how well you can use the controls over long sessions.

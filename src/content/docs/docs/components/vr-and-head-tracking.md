@@ -5,8 +5,6 @@ sidebar:
   order: 23
 ---
 
-# VR and Head Tracking
-
 ## What it is
 
 VR and head tracking change the way the simulator responds to your head position and viewing direction.

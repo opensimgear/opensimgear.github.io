@@ -5,8 +5,6 @@ sidebar:
   order: 1
 ---
 
-# Steering Wheels
-
 ## What it is
 
 A steering wheel is the driver interface mounted to a wheel base. It defines grip shape, control access, diameter, and driving ergonomics.

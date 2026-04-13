@@ -5,8 +5,6 @@ sidebar:
   order: 9
 ---
 
-# Collectives
-
 ## What it is
 
 A collective is the helicopter power and lift control. It is usually operated with an up-down lever by the pilot's side rather than a forward-back throttle-style lever.

@@ -5,8 +5,6 @@ sidebar:
   order: 5
 ---
 
-# Handbrakes
-
 ## What it is
 
 A handbrake is a lever-operated input device used for rally, drifting, and other driving styles that benefit from rear brake control.

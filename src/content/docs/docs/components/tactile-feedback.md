@@ -5,8 +5,6 @@ sidebar:
   order: 24
 ---
 
-# Tactile Feedback
-
 ## What it is
 
 Tactile feedback systems use transducers to convert audio or telemetry-derived signals into vibration.

@@ -5,8 +5,6 @@ sidebar:
   order: 3
 ---
 
-# DIY Reference
-
 This section collects the technical ideas that appear across many sim hardware projects.
 
 - [Sensors and Input Detection](/docs/diy/sensors-and-input-detection/)

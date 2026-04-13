@@ -5,8 +5,6 @@ sidebar:
   order: 4
 ---
 
-# Mounting, Rigidity, and Ergonomics
-
 ## Key idea
 
 The same hardware can feel excellent or disappointing depending on how it is mounted and how the user fits the controls.

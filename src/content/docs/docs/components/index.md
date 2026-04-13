@@ -5,8 +5,6 @@ sidebar:
   order: 1
 ---
 
-# Components
-
 This section explains the major hardware families used across sim racing and flight simulation.
 
 Use these pages when you want to understand what a component does, how it works, what trade-offs matter, and what to watch for if you plan to build your own.

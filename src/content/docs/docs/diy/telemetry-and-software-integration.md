@@ -5,8 +5,6 @@ sidebar:
   order: 3
 ---
 
-# Telemetry and Software Integration
-
 ## What telemetry does
 
 Telemetry provides simulator state that can drive external hardware such as tactile systems, fans, motion platforms, and dashboards.

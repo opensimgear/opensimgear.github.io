@@ -5,8 +5,6 @@ sidebar:
   order: 10
 ---
 
-# Rudder Pedals
-
 ## What it is
 
 Rudder pedals control yaw and often provide left and right toe-brake inputs.

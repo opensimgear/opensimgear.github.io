@@ -5,8 +5,6 @@ sidebar:
   order: 27
 ---
 
-# G-Seats
-
 ## What it is
 
 A G-seat changes body pressure around the torso and legs to simulate sustained loading cues.

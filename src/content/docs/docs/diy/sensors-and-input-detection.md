@@ -5,8 +5,6 @@ sidebar:
   order: 1
 ---
 
-# Sensors and Input Detection
-
 ## Common sensor types
 
 - potentiometers

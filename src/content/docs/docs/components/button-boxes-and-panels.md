@@ -5,8 +5,6 @@ sidebar:
   order: 11
 ---
 
-# Button Boxes and Panels
-
 ## What it is
 
 These are auxiliary control interfaces that move functions off the keyboard and onto dedicated physical inputs.

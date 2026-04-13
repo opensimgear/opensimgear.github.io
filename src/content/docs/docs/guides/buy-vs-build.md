@@ -5,8 +5,6 @@ sidebar:
   order: 4
 ---
 
-# Buy vs Build
-
 ## Buying makes more sense when
 
 - you want quick setup and vendor support

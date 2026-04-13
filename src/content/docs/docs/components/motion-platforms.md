@@ -5,8 +5,6 @@ sidebar:
   order: 28
 ---
 
-# Motion Platforms
-
 ## What it is
 
 A motion platform physically moves the seat, cockpit, or whole rig to create body cues that complement the visual simulation.

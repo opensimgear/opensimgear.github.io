@@ -5,8 +5,6 @@ sidebar:
   order: 8
 ---
 
-# Throttles
-
 ## What it is
 
 A throttle device controls engine power and often provides access to additional switches, hats, detents, and aircraft functions.

@@ -5,8 +5,6 @@ sidebar:
   order: 6
 ---
 
-# Joysticks
-
 ## What it is
 
 A joystick is a hand-operated flight control used for pitch and roll, often with additional buttons, hats, and triggers.

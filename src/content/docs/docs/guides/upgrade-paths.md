@@ -5,8 +5,6 @@ sidebar:
   order: 3
 ---
 
-# Upgrade Paths
-
 ## Sim racing
 
 For many users, the strongest early upgrades are pedals, mounting rigidity, and display or seating improvements before premium immersion add-ons.

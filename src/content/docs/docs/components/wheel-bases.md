@@ -5,8 +5,6 @@ sidebar:
   order: 2
 ---
 
-# Wheel Bases
-
 ## What it is
 
 A wheel base is the force-feedback drive unit that reads steering input and generates torque at the wheel.

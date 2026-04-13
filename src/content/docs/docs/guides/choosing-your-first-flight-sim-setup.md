@@ -5,8 +5,6 @@ sidebar:
   order: 2
 ---
 
-# Choosing Your First Flight Sim Setup
-
 ## Start with aircraft type
 
 Your first purchase decisions should follow the aircraft you fly most often, not the broadest possible hardware bundle.

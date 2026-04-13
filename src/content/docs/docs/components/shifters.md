@@ -5,8 +5,6 @@ sidebar:
   order: 4
 ---
 
-# Shifters
-
 ## What it is
 
 A shifter provides physical gear selection beyond wheel-mounted paddles.

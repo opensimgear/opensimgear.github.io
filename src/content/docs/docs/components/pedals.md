@@ -5,8 +5,6 @@ sidebar:
   order: 3
 ---
 
-# Pedals
-
 ## What it is
 
 Pedals are foot-operated controls used for throttle, braking, and clutch operation in sim racing setups.

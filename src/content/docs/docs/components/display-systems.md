@@ -5,8 +5,6 @@ sidebar:
   order: 22
 ---
 
-# Display Systems
-
 ## What it is
 
 Display systems provide the visual scene and strongly influence field of view, situational awareness, and immersion.

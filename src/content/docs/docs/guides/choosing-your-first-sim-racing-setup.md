@@ -5,8 +5,6 @@ sidebar:
   order: 1
 ---
 
-# Choosing Your First Sim Racing Setup
-
 ## Prioritize these first
 
 1. a control scheme you will actually use often

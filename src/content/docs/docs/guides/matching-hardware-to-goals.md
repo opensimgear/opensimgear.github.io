@@ -5,8 +5,6 @@ sidebar:
   order: 5
 ---
 
-# Matching Hardware to Goals
-
 ## Questions to ask first
 
 - do you want convenience, realism, or experimentation?

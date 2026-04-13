@@ -5,8 +5,6 @@ sidebar:
   order: 1
 ---
 
-# Flight Simulation Overview
-
 Flight simulation hardware should match the aircraft and procedures you care about most. A compact joystick can cover casual flying well, while more specialized setups may need a yoke or cyclic, a separate throttle, rudder pedals with toe brakes, panels, and better visibility tools. The right setup depends on whether you mostly fly general aviation, airliners, helicopters, or military aircraft.
 
 ## What matters most in flight sim hardware

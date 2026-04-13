@@ -5,8 +5,6 @@ sidebar:
   order: 0
 ---
 
-# Sim Racing Overview
-
 Sim racing hardware works best when the control chain is balanced: wheel base, pedals, mounting, and display all have to support the same goal. A desk setup for casual circuit driving can be satisfying, while a heavier rig for endurance racing or high-force braking needs better mounting, stronger pedals, and more deliberate display choices.
 
 ## What matters most in sim racing hardware

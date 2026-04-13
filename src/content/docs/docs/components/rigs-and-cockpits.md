@@ -5,8 +5,6 @@ sidebar:
   order: 20
 ---
 
-# Rigs and Cockpits
-
 ## What it is
 
 A rig or cockpit is the structural platform that supports controls, displays, seat position, and body ergonomics.

@@ -5,8 +5,6 @@ sidebar:
   order: 2
 ---
 
-# Force Feedback and Actuation
-
 ## Common actuator categories
 
 - small motors for control feel

@@ -5,8 +5,6 @@ sidebar:
   order: 2
 ---
 
-# Guides
-
 These pages are for decision-making rather than pure reference.
 
 - [Choosing Your First Sim Racing Setup](/docs/guides/choosing-your-first-sim-racing-setup/)

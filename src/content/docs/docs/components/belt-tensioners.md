@@ -5,8 +5,6 @@ sidebar:
   order: 26
 ---
 
-# Belt Tensioners
-
 ## What it is
 
 A belt tensioner tightens harness straps to suggest body load during braking, acceleration, or other simulated events.

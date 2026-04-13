@@ -5,8 +5,6 @@ sidebar:
   order: 5
 ---
 
-# Power, Safety, and Reliability
-
 ## What matters most
 
 - safe power distribution
