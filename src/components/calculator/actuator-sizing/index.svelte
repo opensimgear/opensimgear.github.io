@@ -414,6 +414,17 @@
       <span style="color:${color}" class="whitespace-nowrap">${label}</span>
     </div>`;
   }
+
+  function formatMotorType(motorType: ServoMotor['motorType']): string | null {
+    if (!motorType) {
+      return null;
+    }
+
+    return motorType
+      .split('-')
+      .map((part) => part.toUpperCase())
+      .join(' ');
+  }
 </script>
 
 <div class="w-full not-content border border-black rounded overflow-hidden">
@@ -853,6 +864,26 @@
             1
           )}:1
         </div>
+        {#if hoveredResult.motor.manufacturer || hoveredResult.motor.series || hoveredResult.motor.model || hoveredResult.motor.motorType}
+          <div class="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[10px]">
+            {#if hoveredResult.motor.manufacturer}
+              <span class="text-gray-400 font-sans uppercase tracking-wide">Maker</span>
+              <span>{hoveredResult.motor.manufacturer}</span>
+            {/if}
+            {#if hoveredResult.motor.series}
+              <span class="text-gray-400 font-sans uppercase tracking-wide">Series</span>
+              <span>{hoveredResult.motor.series}</span>
+            {/if}
+            {#if hoveredResult.motor.model}
+              <span class="text-gray-400 font-sans uppercase tracking-wide">Model</span>
+              <span>{hoveredResult.motor.model}</span>
+            {/if}
+            {#if formatMotorType(hoveredResult.motor.motorType)}
+              <span class="text-gray-400 font-sans uppercase tracking-wide">Type</span>
+              <span>{formatMotorType(hoveredResult.motor.motorType)}</span>
+            {/if}
+          </div>
+        {/if}
       </div>
       <div class="px-3 py-2 grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-0.5">
         <span></span>
@@ -894,6 +925,56 @@
         <span class="text-gray-500">Peak power</span>
         <span>{hoveredResult.P_peak_required_W.toFixed(0)} W</span>
       </div>
+      {#if hoveredResult.motor.voltage_V || hoveredResult.motor.encoder || hoveredResult.motor.hasBrake !== undefined || hoveredResult.motor.protectionRating}
+        <div class="px-3 py-2 border-t border-gray-100 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[10px]">
+          {#if hoveredResult.motor.voltage_V}
+            <span class="text-gray-500">Voltage</span>
+            <span>{hoveredResult.motor.voltage_V} V</span>
+          {/if}
+          {#if hoveredResult.motor.encoder}
+            <span class="text-gray-500">Encoder</span>
+            <span>{hoveredResult.motor.encoder}</span>
+          {/if}
+          {#if hoveredResult.motor.hasBrake !== undefined}
+            <span class="text-gray-500">Brake</span>
+            <span>{hoveredResult.motor.hasBrake ? 'Yes' : 'No'}</span>
+          {/if}
+          {#if hoveredResult.motor.protectionRating}
+            <span class="text-gray-500">IP</span>
+            <span>{hoveredResult.motor.protectionRating}</span>
+          {/if}
+        </div>
+      {/if}
+      {#if hoveredResult.motor.frameSize_mm || hoveredResult.motor.flange_mm || hoveredResult.motor.shaftDiameter_mm || hoveredResult.motor.mass_kg}
+        <div class="px-3 py-2 border-t border-gray-100 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[10px]">
+          {#if hoveredResult.motor.frameSize_mm}
+            <span class="text-gray-500">Frame</span>
+            <span>{hoveredResult.motor.frameSize_mm} mm</span>
+          {/if}
+          {#if hoveredResult.motor.flange_mm}
+            <span class="text-gray-500">Flange</span>
+            <span>{hoveredResult.motor.flange_mm} mm</span>
+          {/if}
+          {#if hoveredResult.motor.shaftDiameter_mm}
+            <span class="text-gray-500">Shaft</span>
+            <span>{hoveredResult.motor.shaftDiameter_mm} mm</span>
+          {/if}
+          {#if hoveredResult.motor.mass_kg}
+            <span class="text-gray-500">Mass</span>
+            <span>{hoveredResult.motor.mass_kg.toFixed(2)} kg</span>
+          {/if}
+        </div>
+      {/if}
+      {#if hoveredResult.motor.notes || hoveredResult.motor.sourceNote}
+        <div class="px-3 py-2 border-t border-gray-100 text-[10px] text-gray-500 leading-snug">
+          {#if hoveredResult.motor.notes}
+            <div>{hoveredResult.motor.notes}</div>
+          {/if}
+          {#if hoveredResult.motor.sourceNote}
+            <div class="mt-1">Source: {hoveredResult.motor.sourceNote}</div>
+          {/if}
+        </div>
+      {/if}
     </div>
   {/if}
 </div>
