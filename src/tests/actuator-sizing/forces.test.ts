@@ -9,43 +9,22 @@ import {
 const G = 9.81;
 
 describe('computeGravityForce', () => {
-  it('returns 0 for horizontal orientation', () => {
-    expect(computeGravityForce(100, 'horizontal', 0)).toBe(0);
-  });
-
-  it('returns m*g for vertical orientation', () => {
-    expect(computeGravityForce(50, 'vertical', 0)).toBeCloseTo(50 * G);
-  });
-
-  it('returns m*g*sin(angle) for inclined orientation', () => {
-    expect(computeGravityForce(100, 'inclined', 30)).toBeCloseTo(100 * G * 0.5, 3);
-  });
-
-  it('returns m*g for inclined at 90 degrees (vertical)', () => {
-    expect(computeGravityForce(100, 'inclined', 90)).toBeCloseTo(100 * G, 3);
+  it('returns m*g', () => {
+    expect(computeGravityForce(50)).toBeCloseTo(50 * G);
   });
 });
 
 describe('computeStaticForce', () => {
   it('sums gravity, friction, external, and guide forces', () => {
-    const F = computeStaticForce(50, 'vertical', 0, 100, 50, 20);
+    const F = computeStaticForce(50, 100, 50, 20);
     expect(F).toBeCloseTo(50 * G + 100 + 50 + 20, 3);
-  });
-
-  it('returns only friction+external+guide for horizontal axis', () => {
-    const F = computeStaticForce(100, 'horizontal', 0, 80, 30, 10);
-    expect(F).toBeCloseTo(80 + 30 + 10);
   });
 });
 
 describe('computeHoldingForce', () => {
   it('excludes friction (zero at rest)', () => {
-    const F = computeHoldingForce(50, 'vertical', 0, 20);
+    const F = computeHoldingForce(50, 20);
     expect(F).toBeCloseTo(50 * G + 20, 3);
-  });
-
-  it('returns 0 for horizontal axis with no guide preload', () => {
-    expect(computeHoldingForce(100, 'horizontal', 0, 0)).toBe(0);
   });
 });
 

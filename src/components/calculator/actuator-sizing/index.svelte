@@ -1,45 +1,45 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Button, Checkbox, List, Monitor, Pane, Slider } from 'svelte-tweakpane-ui';
-  import { computePhaseTorques, computeLoadInertia, computeScrewMass, computeScrewRotationalInertia, computeTotalInertia } from './dynamics';
+  import { Button, Checkbox, Element, List, Monitor, Pane, Slider, WaveformMonitor } from 'svelte-tweakpane-ui';
+  import MotionProfileDiagram from './MotionProfileDiagram.svelte';
+  import {
+    computePhaseTorques,
+    computeLoadInertia,
+    computeScrewMass,
+    computeScrewRotationalInertia,
+    computeTotalInertia,
+  } from './dynamics';
   import { evaluateMotorForActuator } from './evaluation';
   import { computeForcePerActuator, computeHoldingForce, computeStaticForce } from './forces';
   import { BUILTIN_SERVO_MOTORS, loadUserServoMotors, saveUserServoMotors } from './motors';
+  import { buildMotionProfileDiagram } from './motion-profile-diagram';
   import { computeTrapezoidalProfile } from './profile';
-  import {
-    DEFAULT_SORT_STATE,
-    getAriaSort,
-    sortMotorResults,
-    toggleSortState,
-    type SortKey,
-  } from './sorting';
-  import type { AxisOrientation, MotorEvaluationV2, ServoMotor, SystemType } from './types';
+  import { DEFAULT_SORT_STATE, getAriaSort, sortMotorResults, toggleSortState, type SortKey } from './sorting';
+  import type { MotorEvaluationV2, ServoMotor, SystemType } from './types';
 
   const DEFAULTS = {
-    strokeLength: 500,
+    strokeLength: 100,
     maxVelocity: 300,
     acceleration: 5000,
     deceleration: 5000,
-    dwellTime: 0.5,
-    systemType: 'single' as SystemType,
-    actuatorAngle: 45,
-    totalMass: 50,
+    dwellTime: 0.1,
+    systemType: 'stewart' as SystemType,
+    actuatorAngle: 70,
+    totalMass: 150,
     imbalanceFactor: 1.2,
     externalForce: 0,
     frictionForce: 50,
     guidePreloadForce: 0,
-    orientation: 'horizontal' as AxisOrientation,
-    inclineAngle: 30,
     ballscrewKey: '1610',
     customPitch: 10,
     customDiameter: 16,
-    screwLength: 500,
+    screwLength: 300,
     screwEfficiency: 90,
     gearRatio: 1,
     gearEfficiency: 95,
     gearInertia: 0,
     safetyFactor: 20,
-    holdingRequired: false,
+    holdingRequired: true,
   };
 
   const BALLSCREW_OPTIONS = [
@@ -82,12 +82,6 @@
     { text: '6-Actuator Stewart', value: 'stewart' },
   ];
 
-  const ORIENTATION_OPTIONS = [
-    { text: 'Horizontal', value: 'horizontal' },
-    { text: 'Vertical', value: 'vertical' },
-    { text: 'Inclined', value: 'inclined' },
-  ];
-
   const STATE_KEY = 'state';
 
   function decodeState(encoded: string): Record<string, unknown> | null {
@@ -125,8 +119,6 @@
   let externalForce = initialValue('externalForce', DEFAULTS.externalForce);
   let frictionForce = initialValue('frictionForce', DEFAULTS.frictionForce);
   let guidePreloadForce = initialValue('guidePreloadForce', DEFAULTS.guidePreloadForce);
-  let orientation = initialValue<AxisOrientation>('orientation', DEFAULTS.orientation);
-  let inclineAngle = initialValue('inclineAngle', DEFAULTS.inclineAngle);
   let ballscrewKey = initialValue('ballscrewKey', DEFAULTS.ballscrewKey);
   let customPitch = initialValue('customPitch', DEFAULTS.customPitch);
   let customDiameter = initialValue('customDiameter', DEFAULTS.customDiameter);
@@ -173,8 +165,6 @@
         externalForce,
         frictionForce,
         guidePreloadForce,
-        orientation,
-        inclineAngle,
         ballscrewKey,
         customPitch,
         customDiameter,
@@ -208,8 +198,6 @@
       externalForce,
       frictionForce,
       guidePreloadForce,
-      orientation,
-      inclineAngle,
       ballscrewKey,
       customPitch,
       customDiameter,
@@ -230,53 +218,58 @@
   $: screwMass_kg = computeScrewMass(screwDiameter_mm, screwLength);
   $: J_screw_rot = computeScrewRotationalInertia(screwMass_kg, screwDiameter_mm / 2 / 1000);
 
-  $: profile = computeTrapezoidalProfile(strokeLength / 1000, maxVelocity / 1000, acceleration / 1000, deceleration / 1000);
-  $: equivalentMassPerActuator_kg = computeForcePerActuator(totalMass, systemType, imbalanceFactor, actuatorAngle);
-  $: F_static_total = computeStaticForce(
-    totalMass,
-    orientation,
-    inclineAngle,
-    frictionForce,
-    externalForce,
-    guidePreloadForce
+  $: profile = computeTrapezoidalProfile(
+    strokeLength / 1000,
+    maxVelocity / 1000,
+    acceleration / 1000,
+    deceleration / 1000
   );
-  $: F_hold_total = computeHoldingForce(totalMass, orientation, inclineAngle, guidePreloadForce);
+  $: profileDiagram = buildMotionProfileDiagram({
+    t_accel_s: profile.t_accel_s,
+    t_const_s: profile.t_const_s,
+    t_decel_s: profile.t_decel_s,
+    dwellTime_s: dwellTime,
+  });
+  $: equivalentMassPerActuator_kg = computeForcePerActuator(totalMass, systemType, imbalanceFactor, actuatorAngle);
+  $: F_static_total = computeStaticForce(totalMass, frictionForce, externalForce, guidePreloadForce);
+  $: F_hold_total = computeHoldingForce(totalMass, guidePreloadForce);
   $: F_static_per = computeForcePerActuator(F_static_total, systemType, imbalanceFactor, actuatorAngle);
-  $: F_hold_per = holdingRequired ? computeForcePerActuator(F_hold_total, systemType, imbalanceFactor, actuatorAngle) : 0;
+  $: F_hold_per = holdingRequired
+    ? computeForcePerActuator(F_hold_total, systemType, imbalanceFactor, actuatorAngle)
+    : 0;
   $: allMotors = [...BUILTIN_SERVO_MOTORS, ...userMotors];
   $: motionBasis = systemType === 'stewart' ? 'Actuator values' : 'Axis values';
-  $: unsortedMotorResults = allMotors
-    .map((motor) => {
-      const J_load = computeLoadInertia(equivalentMassPerActuator_kg, lead_m, gearRatio);
-      const J_total = computeTotalInertia(motor.inertia_kgm2, gearInertia, J_screw_rot, J_load, gearRatio);
-      const phaseTorques = computePhaseTorques(
-        F_static_per,
-        F_hold_per,
-        J_total,
-        acceleration / 1000,
-        deceleration / 1000,
-        profile.v_peak_m_s,
-        lead_m,
-        gearRatio,
-        gearEfficiency / 100,
-        screwEfficiency / 100,
-        profile.t_accel_s,
-        profile.t_const_s,
-        profile.t_decel_s,
-        dwellTime
-      );
+  $: unsortedMotorResults = allMotors.map((motor) => {
+    const J_load = computeLoadInertia(equivalentMassPerActuator_kg, lead_m, gearRatio);
+    const J_total = computeTotalInertia(motor.inertia_kgm2, gearInertia, J_screw_rot, J_load, gearRatio);
+    const phaseTorques = computePhaseTorques(
+      F_static_per,
+      F_hold_per,
+      J_total,
+      acceleration / 1000,
+      deceleration / 1000,
+      profile.v_peak_m_s,
+      lead_m,
+      gearRatio,
+      gearEfficiency / 100,
+      screwEfficiency / 100,
+      profile.t_accel_s,
+      profile.t_const_s,
+      profile.t_decel_s,
+      dwellTime
+    );
 
-      return evaluateMotorForActuator(
-        motor,
-        phaseTorques.T_peak_Nm,
-        phaseTorques.T_rms_Nm,
-        phaseTorques.n_motor_rpm,
-        phaseTorques.P_peak_W,
-        J_load,
-        J_total,
-        safetyFactor
-      );
-    });
+    return evaluateMotorForActuator(
+      motor,
+      phaseTorques.T_peak_Nm,
+      phaseTorques.T_rms_Nm,
+      phaseTorques.n_motor_rpm,
+      phaseTorques.P_peak_W,
+      J_load,
+      J_total,
+      safetyFactor
+    );
+  });
   $: motorResults = sortMotorResults(unsortedMotorResults, { key: sortKey, descending: sortDescending });
 
   function onSortHeaderClick(key: SortKey) {
@@ -382,9 +375,14 @@
     <div class="overflow-x-auto bg-white flex-1 min-w-0">
       <table class="w-full text-xs font-mono border-collapse">
         <thead>
-          <tr class="border-b border-gray-200 bg-gray-50 text-left text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500">
+          <tr
+            class="border-b border-gray-200 bg-gray-50 text-left text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500"
+          >
             <th class="px-3 py-2 font-sans sticky left-0 bg-gray-50 z-10">Motor</th>
-            <th class="px-3 py-2 font-sans text-center" aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'status')}>
+            <th
+              class="px-3 py-2 font-sans text-center"
+              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'status')}
+            >
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-center font-inherit text-inherit shadow-none outline-none cursor-pointer"
@@ -393,7 +391,10 @@
                 <span>Status</span>
               </button>
             </th>
-            <th class="px-3 py-2 font-sans" aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'score')}>
+            <th
+              class="px-3 py-2 font-sans"
+              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'score')}
+            >
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
@@ -402,7 +403,10 @@
                 <span>Score</span>
               </button>
             </th>
-            <th class="px-2 py-2 font-sans min-w-[4.5rem]" aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'peak')}>
+            <th
+              class="px-2 py-2 font-sans min-w-[4.5rem]"
+              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'peak')}
+            >
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
@@ -411,7 +415,10 @@
                 <span>Peak Tq</span>
               </button>
             </th>
-            <th class="px-2 py-2 font-sans min-w-[4.5rem]" aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'rms')}>
+            <th
+              class="px-2 py-2 font-sans min-w-[4.5rem]"
+              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'rms')}
+            >
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
@@ -420,7 +427,10 @@
                 <span>RMS Tq</span>
               </button>
             </th>
-            <th class="px-2 py-2 font-sans min-w-[4.5rem]" aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'speed')}>
+            <th
+              class="px-2 py-2 font-sans min-w-[4.5rem]"
+              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'speed')}
+            >
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
@@ -429,7 +439,10 @@
                 <span>Speed</span>
               </button>
             </th>
-            <th class="px-3 py-2 font-sans" aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'inertia')}>
+            <th
+              class="px-3 py-2 font-sans"
+              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'inertia')}
+            >
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
@@ -474,8 +487,8 @@
                   <button
                     on:click={() => deleteUserMotor(result.motor.id)}
                     class="text-gray-300 hover:text-red-500 transition-colors leading-none"
-                    title="Remove motor"
-                  >✕</button>
+                    title="Remove motor">✕</button
+                  >
                 {/if}
               </td>
             </tr>
@@ -487,13 +500,16 @@
                 <button
                   on:click={() => (addFormOpen = true)}
                   class="text-[10px] font-sans font-semibold uppercase tracking-wide px-2.5 py-1 rounded border border-dashed border-gray-400 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-300 transition-colors"
-                >+ Add custom motor</button>
+                  >+ Add custom motor</button
+                >
               </td>
             </tr>
           {:else}
             <tr class="bg-gray-50">
               <td colspan="8" class="px-3 py-3">
-                <div class="font-sans text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-2">Add Motor</div>
+                <div class="font-sans text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-2">
+                  Add Motor
+                </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs font-mono">
                   <label class="col-span-2 flex flex-col gap-0.5">
                     <span class="text-gray-500 font-sans">Name</span>
@@ -501,36 +517,77 @@
                   </label>
                   <label class="flex flex-col gap-0.5">
                     <span class="text-gray-500 font-sans">Manufacturer</span>
-                    <input bind:value={addManufacturer} type="text" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                    <input
+                      bind:value={addManufacturer}
+                      type="text"
+                      class="border border-gray-300 rounded px-2 py-1 text-xs"
+                    />
                   </label>
                   <label class="flex flex-col gap-0.5">
                     <span class="text-gray-500 font-sans">Rated RPM</span>
-                    <input bind:value={addRatedRPM} type="number" min="1" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                    <input
+                      bind:value={addRatedRPM}
+                      type="number"
+                      min="1"
+                      class="border border-gray-300 rounded px-2 py-1 text-xs"
+                    />
                   </label>
                   <label class="flex flex-col gap-0.5">
                     <span class="text-gray-500 font-sans">Max RPM</span>
-                    <input bind:value={addMaxRPM} type="number" min="1" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                    <input
+                      bind:value={addMaxRPM}
+                      type="number"
+                      min="1"
+                      class="border border-gray-300 rounded px-2 py-1 text-xs"
+                    />
                   </label>
                   <label class="flex flex-col gap-0.5">
                     <span class="text-gray-500 font-sans">Rated Torque (Nm)</span>
-                    <input bind:value={addRatedTorque} type="number" min="0" step="0.01" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                    <input
+                      bind:value={addRatedTorque}
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      class="border border-gray-300 rounded px-2 py-1 text-xs"
+                    />
                   </label>
                   <label class="flex flex-col gap-0.5">
                     <span class="text-gray-500 font-sans">Peak Torque (Nm)</span>
-                    <input bind:value={addPeakTorque} type="number" min="0" step="0.01" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                    <input
+                      bind:value={addPeakTorque}
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      class="border border-gray-300 rounded px-2 py-1 text-xs"
+                    />
                   </label>
                   <label class="flex flex-col gap-0.5">
                     <span class="text-gray-500 font-sans">Cont. Power (W)</span>
-                    <input bind:value={addPower} type="number" min="1" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                    <input
+                      bind:value={addPower}
+                      type="number"
+                      min="1"
+                      class="border border-gray-300 rounded px-2 py-1 text-xs"
+                    />
                   </label>
                   <label class="flex flex-col gap-0.5">
                     <span class="text-gray-500 font-sans">Inertia (kg·m²)</span>
-                    <input bind:value={addInertia} type="number" min="0" step="0.000001" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+                    <input
+                      bind:value={addInertia}
+                      type="number"
+                      min="0"
+                      step="0.000001"
+                      class="border border-gray-300 rounded px-2 py-1 text-xs"
+                    />
                   </label>
                 </div>
                 <div class="flex gap-2 mt-2">
-                  <button on:click={addUserMotor} class="btn-primary text-xs py-1.5 px-3 rounded font-sans">Save</button>
-                  <button on:click={() => (addFormOpen = false)} class="text-xs text-gray-500 hover:text-gray-700 py-1.5 px-3 font-sans">
+                  <button on:click={addUserMotor} class="btn-primary text-xs py-1.5 px-3 rounded font-sans">Save</button
+                  >
+                  <button
+                    on:click={() => (addFormOpen = false)}
+                    class="text-xs text-gray-500 hover:text-gray-700 py-1.5 px-3 font-sans"
+                  >
                     Cancel
                   </button>
                 </div>
@@ -543,56 +600,185 @@
 
     <div class="border-l border-black flex flex-col divide-y divide-black shrink-0">
       <Pane title="Motion Profile" position="inline">
-        <Slider bind:value={strokeLength} label="Stroke" min={10} max={2000} step={10} format={(value) => `${value} mm`} />
-        <Slider bind:value={maxVelocity} label="Max Velocity" min={1} max={1000} step={1} format={(value) => `${value} mm/s`} />
-        <Slider bind:value={acceleration} label="Acceleration" min={100} max={20000} step={100} format={(value) => `${value} mm/s²`} />
-        <Slider bind:value={deceleration} label="Deceleration" min={100} max={20000} step={100} format={(value) => `${value} mm/s²`} />
-        <Slider bind:value={dwellTime} label="Dwell Time" min={0} max={5} step={0.1} format={(value) => `${value.toFixed(1)} s`} />
+        <Slider
+          bind:value={strokeLength}
+          label="Stroke"
+          min={10}
+          max={2000}
+          step={10}
+          format={(value) => `${value} mm`}
+        />
+        <Slider
+          bind:value={maxVelocity}
+          label="Max Velocity"
+          min={1}
+          max={1000}
+          step={1}
+          format={(value) => `${value} mm/s`}
+        />
+        <Slider
+          bind:value={acceleration}
+          label="Acceleration"
+          min={100}
+          max={20000}
+          step={100}
+          format={(value) => `${value} mm/s²`}
+        />
+        <Slider
+          bind:value={deceleration}
+          label="Deceleration"
+          min={100}
+          max={20000}
+          step={100}
+          format={(value) => `${value} mm/s²`}
+        />
+        <Slider
+          bind:value={dwellTime}
+          label="Dwell Time"
+          min={0}
+          max={5}
+          step={0.1}
+          format={(value) => `${value.toFixed(1)} s`}
+        />
+        <Element>
+          <MotionProfileDiagram diagram={profileDiagram} />
+        </Element>
         <Button on:click={resetMotionProfile} label="Reset" title="Reset" />
       </Pane>
 
       <Pane title="System" position="inline">
         <List bind:value={systemType} options={SYSTEM_OPTIONS} label="Type" />
         {#if systemType === 'stewart'}
-          <Slider bind:value={actuatorAngle} label="Actuator Angle" min={10} max={80} step={1} format={(value) => `${value}°`} />
+          <Slider
+            bind:value={actuatorAngle}
+            label="Actuator Angle"
+            min={10}
+            max={80}
+            step={1}
+            format={(value) => `${value}°`}
+          />
         {/if}
+        <Checkbox bind:value={holdingRequired} label="Holding Required" />
       </Pane>
 
       <Pane title="Load" position="inline">
-        <Slider bind:value={totalMass} label="Total Mass" min={1} max={500} step={1} format={(value) => `${value} kg`} />
-        <Slider bind:value={frictionForce} label="Friction" min={0} max={500} step={5} format={(value) => `${value} N`} />
-        <Slider bind:value={externalForce} label="External Force" min={0} max={2000} step={10} format={(value) => `${value} N`} />
-        <Slider bind:value={guidePreloadForce} label="Guide Preload" min={0} max={500} step={5} format={(value) => `${value} N`} />
-        <Slider bind:value={imbalanceFactor} label="Imbalance" min={1} max={2} step={0.05} format={(value) => `×${value.toFixed(2)}`} />
+        <Slider
+          bind:value={totalMass}
+          label="Total Mass"
+          min={1}
+          max={500}
+          step={1}
+          format={(value) => `${value} kg`}
+        />
+        <Slider
+          bind:value={frictionForce}
+          label="Friction"
+          min={0}
+          max={500}
+          step={5}
+          format={(value) => `${value} N`}
+        />
+        <Slider
+          bind:value={externalForce}
+          label="External Force"
+          min={0}
+          max={2000}
+          step={10}
+          format={(value) => `${value} N`}
+        />
+        <Slider
+          bind:value={guidePreloadForce}
+          label="Guide Preload"
+          min={0}
+          max={500}
+          step={5}
+          format={(value) => `${value} N`}
+        />
+        <Slider
+          bind:value={imbalanceFactor}
+          label="Imbalance"
+          min={1}
+          max={2}
+          step={0.05}
+          format={(value) => `×${value.toFixed(2)}`}
+        />
         <Button on:click={resetLoad} label="Reset" title="Reset" />
-      </Pane>
-
-      <Pane title="Axis" position="inline">
-        <List bind:value={orientation} options={ORIENTATION_OPTIONS} label="Orientation" />
-        {#if orientation === 'inclined'}
-          <Slider bind:value={inclineAngle} label="Incline Angle" min={1} max={89} step={1} format={(value) => `${value}°`} />
-        {/if}
-        <Checkbox bind:value={holdingRequired} label="Holding Required" />
       </Pane>
 
       <Pane title="Ball Screw" position="inline">
         <List bind:value={ballscrewKey} options={BALLSCREW_OPTIONS} label="Type" />
         {#if ballscrewKey === 'custom'}
-          <Slider bind:value={customPitch} label="Pitch" min={1} max={50} step={0.5} format={(value) => `${value} mm`} />
-          <Slider bind:value={customDiameter} label="Diameter" min={8} max={63} step={1} format={(value) => `${value} mm`} />
+          <Slider
+            bind:value={customPitch}
+            label="Pitch"
+            min={1}
+            max={50}
+            step={0.5}
+            format={(value) => `${value} mm`}
+          />
+          <Slider
+            bind:value={customDiameter}
+            label="Diameter"
+            min={8}
+            max={63}
+            step={1}
+            format={(value) => `${value} mm`}
+          />
         {/if}
-        <Slider bind:value={screwLength} label="Screw Length" min={50} max={3000} step={10} format={(value) => `${value} mm`} />
-        <Slider bind:value={screwEfficiency} label="Efficiency" min={50} max={100} step={1} format={(value) => `${value}%`} />
+        <Slider
+          bind:value={screwLength}
+          label="Screw Length"
+          min={50}
+          max={3000}
+          step={10}
+          format={(value) => `${value} mm`}
+        />
+        <Slider
+          bind:value={screwEfficiency}
+          label="Efficiency"
+          min={50}
+          max={100}
+          step={1}
+          format={(value) => `${value}%`}
+        />
       </Pane>
 
       <Pane title="Transmission" position="inline">
-        <Slider bind:value={gearRatio} label="Gear Ratio" min={1} max={10} step={0.1} format={(value) => `${value.toFixed(1)}:1`} />
-        <Slider bind:value={gearEfficiency} label="Gear Efficiency" min={70} max={100} step={1} format={(value) => `${value}%`} />
-        <Slider bind:value={gearInertia} label="Gear Inertia" min={0} max={0.001} step={0.00001} format={(value) => `${value.toExponential(1)} kg·m²`} />
+        <Slider
+          bind:value={gearRatio}
+          label="Gear Ratio"
+          min={1}
+          max={10}
+          step={0.1}
+          format={(value) => `${value.toFixed(1)}:1`}
+        />
+        <Slider
+          bind:value={gearEfficiency}
+          label="Gear Efficiency"
+          min={70}
+          max={100}
+          step={1}
+          format={(value) => `${value}%`}
+        />
+        <Slider
+          bind:value={gearInertia}
+          label="Gear Inertia"
+          min={0}
+          max={0.001}
+          step={0.00001}
+          format={(value) => `${value.toExponential(1)} kg·m²`}
+        />
       </Pane>
 
       <Pane title="Safety" position="inline">
-        <Slider bind:value={safetyFactor} label="Safety Factor" min={0} max={100} step={5} format={(value) => `${value}%`} />
+        <Slider
+          bind:value={safetyFactor}
+          label="Safety Factor"
+          min={0}
+          max={100}
+          step={5}
+          format={(value) => `${value}%`}
+        />
       </Pane>
 
       <Pane title="Calculated" position="inline">
@@ -611,7 +797,9 @@
   {#if hoveredResult}
     <div
       class="fixed z-50 pointer-events-none bg-white border border-gray-200 rounded shadow-xl text-xs font-mono"
-      style="left:{popupFlipLeft ? popupX - 16 : popupX + 16}px; top:{popupY}px; transform:{popupFlipLeft ? 'translate(-100%,-50%)' : 'translateY(-50%)'}; min-width:260px;"
+      style="left:{popupFlipLeft ? popupX - 16 : popupX + 16}px; top:{popupY}px; transform:{popupFlipLeft
+        ? 'translate(-100%,-50%)'
+        : 'translateY(-50%)'}; min-width:260px;"
     >
       <div class="px-3 py-2 border-b border-gray-100">
         <div class="font-sans font-semibold text-gray-800 text-[11px]">{hoveredResult.motor.name}</div>
@@ -626,19 +814,28 @@
 
         <span class="text-gray-500">Peak Tq</span>
         <span>{hoveredResult.motor.peakTorque_Nm.toFixed(2)} Nm</span>
-        <span class:text-red-500={hoveredResult.peakTorqueMargin_pct < 0} class:text-amber-500={hoveredResult.peakTorqueMargin_pct >= 0 && hoveredResult.peakTorqueMargin_pct < 20}>
+        <span
+          class:text-red-500={hoveredResult.peakTorqueMargin_pct < 0}
+          class:text-amber-500={hoveredResult.peakTorqueMargin_pct >= 0 && hoveredResult.peakTorqueMargin_pct < 20}
+        >
           {hoveredResult.T_peak_required_Nm.toFixed(2)} Nm
         </span>
 
         <span class="text-gray-500">RMS Tq</span>
         <span>{hoveredResult.motor.ratedTorque_Nm.toFixed(2)} Nm</span>
-        <span class:text-red-500={hoveredResult.rmsTorqueMargin_pct < 0} class:text-amber-500={hoveredResult.rmsTorqueMargin_pct >= 0 && hoveredResult.rmsTorqueMargin_pct < 20}>
+        <span
+          class:text-red-500={hoveredResult.rmsTorqueMargin_pct < 0}
+          class:text-amber-500={hoveredResult.rmsTorqueMargin_pct >= 0 && hoveredResult.rmsTorqueMargin_pct < 20}
+        >
           {hoveredResult.T_rms_required_Nm.toFixed(2)} Nm
         </span>
 
         <span class="text-gray-500">Speed</span>
         <span>{hoveredResult.motor.maxRPM.toLocaleString()} rpm</span>
-        <span class:text-red-500={hoveredResult.speedMargin_pct < 0} class:text-amber-500={hoveredResult.speedMargin_pct >= 0 && hoveredResult.speedMargin_pct < 20}>
+        <span
+          class:text-red-500={hoveredResult.speedMargin_pct < 0}
+          class:text-amber-500={hoveredResult.speedMargin_pct >= 0 && hoveredResult.speedMargin_pct < 20}
+        >
           {hoveredResult.n_required_rpm.toFixed(0)} rpm
         </span>
       </div>

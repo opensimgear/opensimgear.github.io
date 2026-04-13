@@ -1,4 +1,3 @@
-export type AxisOrientation = 'horizontal' | 'vertical' | 'inclined';
 export type SystemType = 'single' | '4actuator' | 'stewart';
 export type ProfileType = 'trapezoidal' | 'scurve';
 
