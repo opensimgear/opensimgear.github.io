@@ -12,6 +12,7 @@
   import { evaluateMotorForActuator } from './evaluation';
   import { computeForcePerActuator, computeHoldingForce, computeStaticForce } from './forces';
   import { BUILTIN_SERVO_MOTORS, loadUserServoMotors, saveUserServoMotors } from './motors';
+  import { findOptimalGearRatio, type GearOptimizationContext } from './gear-optimization';
   import { buildMotionProfileDiagram } from './motion-profile-diagram';
   import { computeTrapezoidalProfile } from './profile';
   import { DEFAULT_SORT_STATE, getAriaSort, sortMotorResults, toggleSortState, type SortKey } from './sorting';
@@ -35,6 +36,7 @@
     customDiameter: 16,
     screwLength: 300,
     screwEfficiency: 90,
+    autoGearRatio: true,
     gearRatio: 1,
     gearEfficiency: 95,
     gearInertia: 0,
@@ -124,6 +126,7 @@
   let customDiameter = initialValue('customDiameter', DEFAULTS.customDiameter);
   let screwLength = initialValue('screwLength', DEFAULTS.screwLength);
   let screwEfficiency = initialValue('screwEfficiency', DEFAULTS.screwEfficiency);
+  let autoGearRatio = initialValue('autoGearRatio', DEFAULTS.autoGearRatio);
   let gearRatio = initialValue('gearRatio', DEFAULTS.gearRatio);
   let gearEfficiency = initialValue('gearEfficiency', DEFAULTS.gearEfficiency);
   let gearInertia = initialValue('gearInertia', DEFAULTS.gearInertia);
@@ -170,6 +173,7 @@
         customDiameter,
         screwLength,
         screwEfficiency,
+        autoGearRatio,
         gearRatio,
         gearEfficiency,
         gearInertia,
@@ -240,8 +244,31 @@
   $: allMotors = [...BUILTIN_SERVO_MOTORS, ...userMotors];
   $: motionBasis = systemType === 'stewart' ? 'Actuator values' : 'Axis values';
   $: unsortedMotorResults = allMotors.map((motor) => {
-    const J_load = computeLoadInertia(equivalentMassPerActuator_kg, lead_m, gearRatio);
-    const J_total = computeTotalInertia(motor.inertia_kgm2, gearInertia, J_screw_rot, J_load, gearRatio);
+    const effectiveGearRatio = autoGearRatio
+      ? findOptimalGearRatio(
+          {
+            mass_kg: equivalentMassPerActuator_kg,
+            lead_m,
+            F_static_N: F_static_per,
+            F_hold_N: F_hold_per,
+            acceleration_m_s2: acceleration / 1000,
+            deceleration_m_s2: deceleration / 1000,
+            v_peak_m_s: profile.v_peak_m_s,
+            t_accel_s: profile.t_accel_s,
+            t_const_s: profile.t_const_s,
+            t_decel_s: profile.t_decel_s,
+            dwellTime_s: dwellTime,
+            J_screw_rot_kgm2: J_screw_rot,
+            J_gear_kgm2: gearInertia,
+            gearEfficiency: gearEfficiency / 100,
+            screwEfficiency: screwEfficiency / 100,
+            safetyFactor_pct: safetyFactor,
+          } satisfies GearOptimizationContext,
+          motor,
+        )
+      : gearRatio;
+    const J_load = computeLoadInertia(equivalentMassPerActuator_kg, lead_m, effectiveGearRatio);
+    const J_total = computeTotalInertia(motor.inertia_kgm2, gearInertia, J_screw_rot, J_load, effectiveGearRatio);
     const phaseTorques = computePhaseTorques(
       F_static_per,
       F_hold_per,
@@ -250,7 +277,7 @@
       deceleration / 1000,
       profile.v_peak_m_s,
       lead_m,
-      gearRatio,
+      effectiveGearRatio,
       gearEfficiency / 100,
       screwEfficiency / 100,
       profile.t_accel_s,
@@ -267,7 +294,8 @@
       phaseTorques.P_peak_W,
       J_load,
       J_total,
-      safetyFactor
+      safetyFactor,
+      effectiveGearRatio
     );
   });
   $: motorResults = sortMotorResults(unsortedMotorResults, { key: sortKey, descending: sortDescending });
@@ -451,6 +479,7 @@
                 <span>Inertia</span>
               </button>
             </th>
+            <th class="px-3 py-2 font-sans">Ratio</th>
             <th class="px-3 py-2 font-sans w-6"></th>
           </tr>
         </thead>
@@ -482,6 +511,7 @@
               <td class="px-3 py-2 whitespace-nowrap" class:text-amber-600={result.inertiaRatio > 10}>
                 {result.inertiaRatio.toFixed(1)}:1
               </td>
+              <td class="px-3 py-2 whitespace-nowrap text-gray-500">{result.gearRatio.toFixed(1)}:1</td>
               <td class="px-2 py-2">
                 {#if result.motor.source === 'user'}
                   <button
@@ -496,7 +526,7 @@
 
           {#if !addFormOpen}
             <tr>
-              <td colspan="8" class="px-3 py-2">
+              <td colspan="9" class="px-3 py-2">
                 <button
                   on:click={() => (addFormOpen = true)}
                   class="text-[10px] font-sans font-semibold uppercase tracking-wide px-2.5 py-1 rounded border border-dashed border-gray-400 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-300 transition-colors"
@@ -506,7 +536,7 @@
             </tr>
           {:else}
             <tr class="bg-gray-50">
-              <td colspan="8" class="px-3 py-3">
+              <td colspan="9" class="px-3 py-3">
                 <div class="font-sans text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-2">
                   Add Motor
                 </div>
@@ -744,14 +774,17 @@
       </Pane>
 
       <Pane title="Transmission" position="inline">
-        <Slider
-          bind:value={gearRatio}
-          label="Gear Ratio"
-          min={1}
-          max={10}
-          step={0.1}
-          format={(value) => `${value.toFixed(1)}:1`}
-        />
+        <Checkbox bind:value={autoGearRatio} label="Auto Gear Ratio" />
+        {#if !autoGearRatio}
+          <Slider
+            bind:value={gearRatio}
+            label="Gear Ratio"
+            min={1}
+            max={10}
+            step={0.1}
+            format={(value) => `${value.toFixed(1)}:1`}
+          />
+        {/if}
         <Slider
           bind:value={gearEfficiency}
           label="Gear Efficiency"
@@ -804,7 +837,7 @@
       <div class="px-3 py-2 border-b border-gray-100">
         <div class="font-sans font-semibold text-gray-800 text-[11px]">{hoveredResult.motor.name}</div>
         <div class="text-[10px] text-gray-400 font-sans mt-0.5">
-          score {hoveredResult.score.toFixed(0)} · inertia {hoveredResult.inertiaRatio.toFixed(1)}:1
+          score {hoveredResult.score.toFixed(0)} · inertia {hoveredResult.inertiaRatio.toFixed(1)}:1 · ratio {hoveredResult.gearRatio.toFixed(1)}:1
         </div>
       </div>
       <div class="px-3 py-2 grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-0.5">

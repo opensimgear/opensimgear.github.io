@@ -40,6 +40,7 @@ export interface ServoMotor {
 
 export interface MotorEvaluationV2 {
   motor: ServoMotor;
+  gearRatio: number;
   T_peak_required_Nm: number;
   T_rms_required_Nm: number;
   n_required_rpm: number;

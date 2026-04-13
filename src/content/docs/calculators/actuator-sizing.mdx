@@ -12,6 +12,11 @@ import ActuatorSizingCalc from '~/components/calculator/actuator-sizing/index.sv
 
 ## Intro
 
+:::caution
+This component is highly experimental, if you find a problem open an [issue](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=bug_report.md).
+If you have a suggestion on new features or improvements open a [feature request](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=feature_request.md).
+:::
+
 Selecting a motor for a ball-screw linear actuator requires more than matching peak force. The full motion cycle
 matters: inertial torque during acceleration, RMS heating over repeated cycles, speed at the target stroke rate, and
 whether the rotor inertia is a sensible match for the load.
@@ -23,20 +28,25 @@ safety factor.
 ### How to use
 
 1. **Motion Profile** — Set stroke, peak velocity, acceleration, deceleration, and dwell time. The calculator computes
-   the trapezoidal timing automatically and flags short-stroke triangular moves.
+   the trapezoidal timing automatically, flags short-stroke triangular moves, and renders a live velocity diagram.
 2. **System** — Choose Single Axis, 4-Actuator Platform, or 6-Actuator Stewart Platform. Multi-actuator modes distribute
-   force per actuator, including the Stewart angle projection.
-3. **Load** — Enter moving mass, friction, external load, guide preload, and an imbalance factor for uneven force
-   sharing.
-4. **Axis** — Set horizontal, vertical, or inclined orientation. Gravity is applied automatically for non-horizontal
-   axes. Enable holding if the actuator must support load at rest.
-5. **Ball Screw** — Choose a common screw size or enter custom pitch and diameter. Screw mass and rotational inertia
-   update live.
-6. **Transmission** — Add gear ratio, efficiency, and drivetrain inertia for belt or gearbox reductions. Direct drive is
-   `1.0:1`.
-7. **Safety** — Safety factor scales all required values before motors are checked.
-8. **Results table** — Re-sort by status, score, torque margin, speed margin, or inertia ratio. Hover a row for a
-   detailed breakdown of required torque, speed, power, and inertia.
+   force per actuator, including the Stewart angle projection. Set `Actuator Angle` (Stewart only) for the cosine
+   projection, and enable `Holding Required` if the actuator must support load at rest.
+3. **Load** — Enter moving mass, friction, external force, guide preload, and an imbalance factor for uneven force
+   sharing. Gravity acts on the full mass and is always included.
+4. **Ball Screw** — Choose a common screw size (16 mm–32 mm, 5 mm or 10 mm lead) or enter custom pitch and diameter.
+   Set screw length so mass and rotational inertia compute correctly. Adjust efficiency for the screw's mechanical
+   losses (typically 85–95 %).
+5. **Transmission** — Enable `Auto Gear Ratio` to let the calculator find the minimum ratio (in 1–10 ×) that keeps the
+   load-to-motor inertia ratio ≤ 10:1 for each motor individually. Disable it to set a fixed ratio. Add gear efficiency
+   and drivetrain inertia for belt or gearbox reductions.
+6. **Safety** — Safety factor scales all required torque, speed, and power values before motors are checked.
+7. **Results table** — Sorted by pass → warn → fail, then by score. Re-sort by any column header. The `Ratio` column
+   shows the effective gear ratio used per motor. Hover a row for a detailed breakdown of required vs. motor-rated
+   torque, speed, power, load inertia, and total inertia. Use `+ Add custom motor` to evaluate motors not in the
+   built-in database — custom entries are saved to browser local storage.
+8. **Sharing** — The full calculator state is encoded in the page URL automatically, so any configuration can be
+   bookmarked or shared as a link.
 
 ### Calculator
 
@@ -44,12 +54,24 @@ safety factor.
 
 ### Engineering notes
 
-- **Peak torque** is checked against the motor peak rating and occurs during acceleration when load torque and inertial
-  torque stack.
-- **RMS torque** is checked against rated continuous torque and represents thermal loading over the full move-and-dwell
-  cycle.
-- **Inertia ratio** above `10:1` is treated as a warning because it usually hurts responsiveness and tuning margin.
+- **Peak torque** is checked against the motor's peak rating. It equals the maximum of |T_accel|, |T_const|, |T_decel|,
+  and |T_hold|, where `T_accel = T_load + J_total × α_accel` and `T_decel = T_load − J_total × α_decel`.
+- **RMS torque** is checked against rated continuous torque and represents thermal loading over the full
+  move-and-dwell cycle: `T_rms = √((T_accel² × t_accel + T_const² × t_const + T_decel² × t_decel + T_hold² × t_dwell) / t_total)`.
+- **Holding torque** uses gravity plus guide preload only (friction and external forces are not present at rest).
 - **Negative deceleration torque** is valid regenerative behavior and still contributes to RMS heating through `T²`.
-- **Fit score** rewards motors that satisfy the constraints without being dramatically oversized.
-- In **Stewart** mode, the motion-profile inputs are treated as actuator-axis values. The calculator applies angle-based
-  load sharing, but it does not derive actuator travel from platform heave or pose kinematics.
+- **Status thresholds** — `fail` if any margin is negative; `warn` if any margin is below 20 % or the inertia ratio
+  exceeds 10:1; `pass` otherwise.
+- **Fit score** (0–100) weighs RMS torque utilization (40 %), peak torque utilization (35 %), and speed utilization
+  (25 %), then subtracts a penalty for inertia ratios above 10:1. Higher scores indicate better-matched motors;
+  severely over-sized motors score lower.
+- **Inertia model** — Load inertia reflected to the motor shaft: `J_load = m × (lead / (2π × ratio))²`.
+  Total inertia: `J_total = J_motor + J_gear + J_screw / ratio² + J_load`. The screw is modelled as a solid steel
+  cylinder (density 7 850 kg/m³).
+- **Auto gear ratio** uses binary search over [1, 10] to find the minimum ratio that satisfies `J_load / J_motor ≤ 10`.
+  Each motor is evaluated with its own optimal ratio, so a low-inertia motor can run direct drive while a
+  high-inertia motor gets geared.
+- **Force distribution** — Single axis: `F × imbalance`; 4-actuator: `F/4 × imbalance`; Stewart:
+  `F / (6 × cos(angle)) × imbalance`.
+- In **Stewart** mode, motion-profile inputs are actuator-axis values. The calculator applies angle-based load sharing
+  but does not derive actuator travel from platform pose kinematics.

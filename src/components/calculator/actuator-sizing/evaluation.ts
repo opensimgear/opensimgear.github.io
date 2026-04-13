@@ -33,7 +33,8 @@ export function evaluateMotorForActuator(
   P_peak_W: number,
   J_load_kgm2: number,
   J_total_kgm2: number,
-  safetyFactor_pct: number
+  safetyFactor_pct: number,
+  gearRatio = 1
 ): MotorEvaluationV2 {
   const multiplier = 1 + safetyFactor_pct / 100;
   const T_peak_required = T_peak_Nm * multiplier;
@@ -56,6 +57,7 @@ export function evaluateMotorForActuator(
 
   return {
     motor,
+    gearRatio,
     T_peak_required_Nm: T_peak_required,
     T_rms_required_Nm: T_rms_required,
     n_required_rpm: n_required,
