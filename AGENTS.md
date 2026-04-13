@@ -1,6 +1,8 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## **Important**
+- do not use superpowers unless asked
+- use the caveman skill unless disabled
 
 ## Commands
 
