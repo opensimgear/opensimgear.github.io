@@ -20,10 +20,32 @@ export interface PhaseTorques {
   P_peak_W: number;
 }
 
+export type MotorType = 'ac-servo' | 'dc-servo' | 'bldc-servo' | 'step-servo' | 'closed-loop-stepper';
+
+export interface MotorDimensionsMm {
+  width: number;
+  height: number;
+  length: number;
+}
+
+export interface TorqueCurvePoint {
+  rpm: number;
+  torque_Nm: number;
+}
+
+export interface SpeedTorqueCurvePoint {
+  rpm: number;
+  continuousTorque_Nm?: number;
+  peakTorque_Nm?: number;
+}
+
 export interface ServoMotor {
   id: string;
   name: string;
   manufacturer?: string;
+  motorType?: MotorType;
+  series?: string;
+  model?: string;
   ratedRPM: number;
   maxRPM: number;
   ratedTorque_Nm: number;
@@ -32,9 +54,32 @@ export interface ServoMotor {
   inertia_kgm2: number;
   mass_kg?: number;
   frameSize_mm?: number;
+  flange_mm?: number;
+  length_mm?: number;
+  dimensions_mm?: MotorDimensionsMm;
+  shaftDiameter_mm?: number;
+  shaftLength_mm?: number;
+  voltage_V?: number;
+  current_A?: number;
+  phases?: number;
+  poleCount?: number;
   hasBrake?: boolean;
+  encoder?: string;
+  protectionRating?: string;
+  insulationClass?: string;
+  cooling?: string;
+  resistance_ohm?: number;
+  inductance_mH?: number;
   thermalTimeConstant_s?: number;
   cost_usd?: number;
+  price_usd?: number;
+  datasheetPath?: string;
+  datasheetUrl?: string;
+  productUrl?: string;
+  sourceNote?: string;
+  torqueCurve?: TorqueCurvePoint[];
+  speedTorqueCurve?: SpeedTorqueCurvePoint[];
+  notes?: string;
   source: 'builtin' | 'user';
 }
 

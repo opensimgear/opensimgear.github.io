@@ -35,20 +35,20 @@ describe('computeMargin', () => {
 
 describe('computeScore', () => {
   it('returns a value between 0 and 150', () => {
-    const s = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4.2);
+    const s = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4.2, 'pass');
     expect(s).toBeGreaterThan(0);
     expect(s).toBeLessThanOrEqual(150);
   });
 
   it('gives higher score for better-utilized motor (closer to limits)', () => {
-    const sBig = computeScore(0.2, 10.0, 0.8, 30.0, 2160, 10000, 4.2);
-    const sFit = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4.2);
+    const sBig = computeScore(0.2, 10.0, 0.8, 30.0, 2160, 10000, 4.2, 'pass');
+    const sFit = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4.2, 'pass');
     expect(sFit).toBeGreaterThan(sBig);
   });
 
   it('penalizes inertia ratio > 10', () => {
-    const sNormal = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4);
-    const sBad = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 20);
+    const sNormal = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4, 'pass');
+    const sBad = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 20, 'pass');
     expect(sBad).toBeLessThan(sNormal);
   });
 });

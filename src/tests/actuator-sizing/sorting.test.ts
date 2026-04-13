@@ -25,6 +25,7 @@ function motor(id: string): ServoMotor {
 function result(id: string, overrides: Partial<MotorEvaluationV2>): MotorEvaluationV2 {
   return {
     motor: motor(id),
+    gearRatio: 1,
     T_peak_required_Nm: 0,
     T_rms_required_Nm: 0,
     n_required_rpm: 0,
@@ -42,8 +43,8 @@ function result(id: string, overrides: Partial<MotorEvaluationV2>): MotorEvaluat
 }
 
 describe('toggleSortState', () => {
-  it('uses score ascending as the default initial state', () => {
-    expect(DEFAULT_SORT_STATE).toEqual({ key: 'score', descending: false });
+  it('uses score descending as the default initial state', () => {
+    expect(DEFAULT_SORT_STATE).toEqual({ key: 'score', descending: true });
   });
 
   it('starts a newly clicked column in descending order', () => {
