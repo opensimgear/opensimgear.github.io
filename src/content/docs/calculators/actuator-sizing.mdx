@@ -1,5 +1,5 @@
 ---
-title: Actuator Motor Sizing Calculator
+title: Actuator Motor Sizing
 description:
   Engineering-grade motor selection tool for ball-screw linear actuators. Enter your motion profile, load, and screw
   geometry to find suitable servo motors with dynamic torque, speed, and inertia analysis.
@@ -10,7 +10,7 @@ tableOfContents: false
 
 import ActuatorSizingCalc from '~/components/calculator/actuator-sizing/index.svelte';
 
-## Actuator Motor Sizing
+## Intro
 
 Selecting a motor for a ball-screw linear actuator requires more than matching peak force. The full motion cycle
 matters: inertial torque during acceleration, RMS heating over repeated cycles, speed at the target stroke rate, and
@@ -38,6 +38,10 @@ safety factor.
 8. **Results table** — Re-sort by status, score, torque margin, speed margin, or inertia ratio. Hover a row for a
    detailed breakdown of required torque, speed, power, and inertia.
 
+### Calculator
+
+<ActuatorSizingCalc client:load />
+
 ### Engineering notes
 
 - **Peak torque** is checked against the motor peak rating and occurs during acceleration when load torque and inertial
@@ -49,7 +53,3 @@ safety factor.
 - **Fit score** rewards motors that satisfy the constraints without being dramatically oversized.
 - In **Stewart** mode, the motion-profile inputs are treated as actuator-axis values. The calculator applies angle-based
   load sharing, but it does not derive actuator travel from platform heave or pose kinematics.
-
-### Calculator
-
-<ActuatorSizingCalc client:load />
