@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { clampPlatformMovement } from '../../components/calculator/stewart-platform/state';
+import { clampPlatformMovement, hasPlatformMovementChange } from '../../components/calculator/stewart-platform/state';
 
 describe('clampPlatformMovement', () => {
   const spec = {
@@ -58,5 +58,19 @@ describe('clampPlatformMovement', () => {
   it('preserves exact asymmetric z translation bounds', () => {
     expect(clampPlatformMovement({ x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: -5 }, spec).translation.z).toBe(-5);
     expect(clampPlatformMovement({ x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 30 }, spec).translation.z).toBe(30);
+  });
+
+  it('detects when clamped values match current scalar values', () => {
+    const rotation = { x: -4, y: 6, z: -8 };
+    const translation = { x: 7, y: -9, z: 11 };
+    const movement = clampPlatformMovement(rotation, translation, spec);
+
+    expect(hasPlatformMovementChange(rotation, translation, movement)).toBe(false);
+    expect(
+      hasPlatformMovementChange(rotation, translation, {
+        rotation: { ...movement.rotation, x: 5 },
+        translation: movement.translation,
+      })
+    ).toBe(true);
   });
 });

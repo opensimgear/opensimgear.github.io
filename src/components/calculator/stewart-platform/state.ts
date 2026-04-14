@@ -11,11 +11,16 @@ type PlatformSpec = {
   transZDown: number;
 };
 
+type PlatformMovement = {
+  rotation: Rotation;
+  translation: Translation;
+};
+
 function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
 
-export function clampPlatformMovement(rotation: Rotation, translation: Translation, spec: PlatformSpec) {
+export function clampPlatformMovement(rotation: Rotation, translation: Translation, spec: PlatformSpec): PlatformMovement {
   return {
     rotation: {
       x: clamp(rotation.x, -spec.pitch, spec.pitch),
@@ -28,4 +33,15 @@ export function clampPlatformMovement(rotation: Rotation, translation: Translati
       z: clamp(translation.z, -spec.transZDown, spec.transZUp),
     },
   };
+}
+
+export function hasPlatformMovementChange(rotation: Rotation, translation: Translation, movement: PlatformMovement) {
+  return (
+    rotation.x !== movement.rotation.x ||
+    rotation.y !== movement.rotation.y ||
+    rotation.z !== movement.rotation.z ||
+    translation.x !== movement.translation.x ||
+    translation.y !== movement.translation.y ||
+    translation.z !== movement.translation.z
+  );
 }
