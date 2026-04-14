@@ -53,7 +53,7 @@ const sectionEntries = {
 
 function readSidebarOrder(relativePath: string) {
   const source = fs.readFileSync(path.join(docsRoot, relativePath), 'utf8');
-  const match = source.match(/sidebar:\s*\n\s*order:\s*(\d+)/);
+  const match = source.match(/sidebar:\s*\n(?:\s+.+\n)*\s+order:\s*(\d+)/);
 
   if (!match) {
     throw new Error(`Missing sidebar.order in ${relativePath}`);

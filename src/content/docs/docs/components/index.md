@@ -4,6 +4,7 @@ description:
   Browse the main hardware categories used in sim racing and flight simulation, from controls and cockpits to displays,
   tactile systems, and motion.
 sidebar:
+  label: Components
   order: 2
 ---
 

@@ -8,6 +8,7 @@ import partytown from '@astrojs/partytown';
 import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
+import { buildDocsSidebar } from './src/utils/docs-sidebar.ts';
 
 import { fileURLToPath } from 'url';
 
@@ -54,7 +55,7 @@ export default defineConfig({
         },
         {
           label: 'Docs',
-          autogenerate: { directory: 'docs' },
+          items: buildDocsSidebar(),
         },
         {
           label: 'Calculators',
