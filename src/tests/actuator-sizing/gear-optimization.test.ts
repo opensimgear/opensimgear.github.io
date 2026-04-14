@@ -39,7 +39,7 @@ const BASE_CTX: GearOptimizationContext = {
   J_screw_rot_kgm2: 1e-6,
   J_gear_kgm2: 0,
   gearEfficiency: 0.95,
-  screwEfficiency: 0.90,
+  screwEfficiency: 0.9,
   safetyFactor_pct: 20,
 };
 
@@ -49,13 +49,7 @@ const BASE_CTX: GearOptimizationContext = {
 function objective(ratio: number, ctx: GearOptimizationContext, motor: ServoMotor): number {
   const multiplier = 1 + ctx.safetyFactor_pct / 100;
   const J_load = computeLoadInertia(ctx.mass_kg, ctx.lead_m, ratio);
-  const J_total = computeTotalInertia(
-    motor.inertia_kgm2,
-    ctx.J_gear_kgm2,
-    ctx.J_screw_rot_kgm2,
-    J_load,
-    ratio,
-  );
+  const J_total = computeTotalInertia(motor.inertia_kgm2, ctx.J_gear_kgm2, ctx.J_screw_rot_kgm2, J_load, ratio);
   const phases = computePhaseTorques(
     ctx.F_static_N,
     ctx.F_hold_N,
@@ -70,36 +64,25 @@ function objective(ratio: number, ctx: GearOptimizationContext, motor: ServoMoto
     ctx.t_accel_s,
     ctx.t_const_s,
     ctx.t_decel_s,
-    ctx.dwellTime_s,
+    ctx.dwellTime_s
   );
-  const d = (req: number, rated: number) =>
-    req <= 0 ? -Infinity : ((req - rated) / req) * 100;
+  const d = (req: number, rated: number) => (req <= 0 ? -Infinity : ((req - rated) / req) * 100);
   const n_req = phases.n_motor_rpm * multiplier;
   const T_peak_req = phases.T_peak_Nm * multiplier;
   const T_rms_req = phases.T_rms_Nm * multiplier;
   const rpmDeficit = d(n_req, motor.maxRPM);
-  const torqueDeficit = Math.max(
-    d(T_peak_req, motor.peakTorque_Nm),
-    d(T_rms_req, motor.ratedTorque_Nm),
-  );
+  const torqueDeficit = Math.max(d(T_peak_req, motor.peakTorque_Nm), d(T_rms_req, motor.ratedTorque_Nm));
   return rpmDeficit - torqueDeficit;
 }
 
 function maxDeficit(ratio: number, ctx: GearOptimizationContext, motor: ServoMotor): number {
-  const obj = objective(ratio, ctx, motor);
   // max(rpmDeficit, torqueDeficit): when obj = rpm - tq, one of them equals (obj + tq + rpm)/2 ...
   // simpler: just compute directly the same way objective does, reuse the sum approach.
   // max(a, b) = (a + b + |a - b|) / 2, and obj = a - b → a = obj + b, max = max(obj+b, b)
   // Instead, recompute both components via a thin wrapper:
   const multiplier = 1 + ctx.safetyFactor_pct / 100;
   const J_load = computeLoadInertia(ctx.mass_kg, ctx.lead_m, ratio);
-  const J_total = computeTotalInertia(
-    motor.inertia_kgm2,
-    ctx.J_gear_kgm2,
-    ctx.J_screw_rot_kgm2,
-    J_load,
-    ratio,
-  );
+  const J_total = computeTotalInertia(motor.inertia_kgm2, ctx.J_gear_kgm2, ctx.J_screw_rot_kgm2, J_load, ratio);
   const phases = computePhaseTorques(
     ctx.F_static_N,
     ctx.F_hold_N,
@@ -114,15 +97,14 @@ function maxDeficit(ratio: number, ctx: GearOptimizationContext, motor: ServoMot
     ctx.t_accel_s,
     ctx.t_const_s,
     ctx.t_decel_s,
-    ctx.dwellTime_s,
+    ctx.dwellTime_s
   );
-  const d = (req: number, rated: number) =>
-    req <= 0 ? -Infinity : ((req - rated) / req) * 100;
+  const d = (req: number, rated: number) => (req <= 0 ? -Infinity : ((req - rated) / req) * 100);
   const n_req = phases.n_motor_rpm * multiplier;
   return Math.max(
     d(n_req, motor.maxRPM),
     d(phases.T_peak_Nm * multiplier, motor.peakTorque_Nm),
-    d(phases.T_rms_Nm * multiplier, motor.ratedTorque_Nm),
+    d(phases.T_rms_Nm * multiplier, motor.ratedTorque_Nm)
   );
 }
 
@@ -168,7 +150,7 @@ describe('findOptimalGearRatio', () => {
     // Motor tight on both speed and torque so the crossover lands inside [0.5, 10]
     const motor: ServoMotor = {
       ...BASE_MOTOR,
-      maxRPM: 1500,       // speed fails at high ratios
+      maxRPM: 1500, // speed fails at high ratios
       peakTorque_Nm: 2.5, // torque tight at low ratios
       ratedTorque_Nm: 1.0,
       inertia_kgm2: 1e-5,
