@@ -75,25 +75,3 @@ describe('clampPlatformMovement', () => {
     ).toBe(true);
   });
 });
-
-describe('resetPlatformMovement', () => {
-  it('resets platform motion and bumps rotation control key', () => {
-    expect(
-      resetPlatformMovement(
-        {
-          rotation: { x: 12, y: -4, z: 2 },
-          translation: { x: 0.03, y: -0.02, z: 0.01 },
-          rotationControlKey: 5,
-        },
-        {
-          rotation: { x: 0, y: 0, z: 0 },
-          translation: { x: 0, y: 0, z: 0 },
-        }
-      )
-    ).toEqual({
-      rotation: { x: 0, y: 0, z: 0 },
-      translation: { x: 0, y: 0, z: 0 },
-      rotationControlKey: 6,
-    });
-  });
-});

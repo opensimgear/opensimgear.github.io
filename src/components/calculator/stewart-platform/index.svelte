@@ -8,7 +8,7 @@
   import Scene from './Scene.svelte';
   import { clampPlatformMovement, type PlatformSpec, type Rotation, type Translation } from './state';
 
-  const STATE_KEY = 'sps';
+  const STATE_KEY = 'state';
 
   const DEFAULTS = {
     baseDiameter: 1.0,
