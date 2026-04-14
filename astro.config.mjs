@@ -40,7 +40,7 @@ export default defineConfig({
         {
           label: 'Discord',
           icon: 'discord',
-          href: 'https://discord.gg/f7yWUF6zUs',
+          href: 'https://discord.gg/ShBdugyn',
         },
       ],
       customCss: ['./src/styles/global.css'],
