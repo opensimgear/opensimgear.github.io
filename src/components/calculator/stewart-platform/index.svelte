@@ -47,11 +47,7 @@
 
     const candidate = value as Record<string, unknown>;
 
-    return (
-      isFiniteNumber(candidate.x) &&
-      isFiniteNumber(candidate.y) &&
-      isFiniteNumber(candidate.z)
-    );
+    return isFiniteNumber(candidate.x) && isFiniteNumber(candidate.y) && isFiniteNumber(candidate.z);
   }
 
   function readNumber(value: unknown, fallback: number) {
@@ -331,16 +327,7 @@
           {actuatorMin}
           {actuatorMax}
         />
-        <Gizmo
-          verticalPlacement="top"
-          horizontalPlacement="right"
-          xColor="#ff0000"
-          yColor="#00ff00"
-          zColor="#0000ff"
-          size={128}
-          paddingX={20}
-          paddingY={20}
-        />
+        <Gizmo size={128} />
       </Canvas>
       <div
         class="absolute top-3 right-3 bg-white/80 backdrop-blur-sm border border-gray-300 rounded px-3 py-2 text-xs font-mono pointer-events-none select-none"
@@ -362,7 +349,6 @@
       <Pane title="Parameters" position="inline">
         <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={3} />
         <Slider bind:value={platformDiameter} label="Platform Diameter" {...configLinear} min={0} max={baseDiameter} />
-        <Slider value={platformHeight} label="Platform Height" {...configLinear} min={0} max={1} disabled />
         <Slider bind:value={alphaB} label="Base Alpha" {...alphaOptions} />
         <Slider bind:value={alphaP} label="Platform Alpha" {...alphaOptions} />
         <Point
@@ -373,12 +359,12 @@
           max={platformDiameter}
           optionsZ={{ ...configLinear, min: 0, max: platformDiameter }}
         />
-        <Button onclick={resetParams} label="Reset Params" title="Reset" />
+        <Button on:click={resetParams} label="Reset Params" title="Reset" />
       </Pane>
       <Pane title="Actuator Range" position="inline">
         <Slider bind:value={actuatorMin} label="Min Extension" {...configLinear} min={0.1} max={actuatorMax} />
         <Slider bind:value={actuatorMax} label="Max Extension" {...configLinear} min={actuatorMin} max={2} />
-        <Button onclick={resetActuator} label="Reset Actuator" title="Reset" />
+        <Button on:click={resetActuator} label="Reset Actuator" title="Reset" />
       </Pane>
       <Pane title="Movement" position="inline">
         <RotationEuler
@@ -396,20 +382,20 @@
           min={-platformDiameter}
           max={platformDiameter}
         />
-        <Button onclick={resetPlatform} label="Reset Platform" title="Reset" />
+        <Button on:click={resetPlatform} label="Reset Platform" title="Reset" />
       </Pane>
       <section aria-label="Constraints">
         <h2 class="sr-only">Constraints</h2>
         <Pane title="Constraints" position="inline">
-        <Monitor value={`±${platformSpec.pitch.toFixed(1)}°`} label="Pitch" />
-        <Monitor value={`±${platformSpec.roll.toFixed(1)}°`} label="Roll" />
-        <Monitor value={`±${platformSpec.yaw.toFixed(1)}°`} label="Yaw" />
-        <Monitor value={`±${(platformSpec.transX * 1000).toFixed(0)} mm`} label="Surge" />
-        <Monitor value={`±${(platformSpec.transY * 1000).toFixed(0)} mm`} label="Sway" />
-        <Monitor
-          value={`${((platformHeight - platformSpec.transZDown) * 1000).toFixed(0)} / ${((platformHeight + platformSpec.transZUp) * 1000).toFixed(0)} mm`}
-          label="Heave"
-        />
+          <Monitor value={`±${platformSpec.pitch.toFixed(1)}°`} label="Pitch" />
+          <Monitor value={`±${platformSpec.roll.toFixed(1)}°`} label="Roll" />
+          <Monitor value={`±${platformSpec.yaw.toFixed(1)}°`} label="Yaw" />
+          <Monitor value={`±${(platformSpec.transX * 1000).toFixed(0)} mm`} label="Surge" />
+          <Monitor value={`±${(platformSpec.transY * 1000).toFixed(0)} mm`} label="Sway" />
+          <Monitor
+            value={`${((platformHeight - platformSpec.transZDown) * 1000).toFixed(0)} / ${((platformHeight + platformSpec.transZUp) * 1000).toFixed(0)} mm`}
+            label="Heave"
+          />
         </Pane>
       </section>
     </div>

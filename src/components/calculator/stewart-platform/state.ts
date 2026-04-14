@@ -16,11 +16,19 @@ export type PlatformMovement = {
   translation: Translation;
 };
 
+export type PlatformMovementControls = PlatformMovement & {
+  rotationControlKey: number;
+};
+
 function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
 
-export function clampPlatformMovement(rotation: Rotation, translation: Translation, spec: PlatformSpec): PlatformMovement {
+export function clampPlatformMovement(
+  rotation: Rotation,
+  translation: Translation,
+  spec: PlatformSpec
+): PlatformMovement {
   const nextRotation = {
     x: clamp(rotation.x, -spec.pitch, spec.pitch),
     y: clamp(rotation.y, -spec.roll, spec.roll),
@@ -34,7 +42,9 @@ export function clampPlatformMovement(rotation: Rotation, translation: Translati
   };
 
   return {
-    rotation: hasPlatformMovementChange(rotation, translation, { rotation: nextRotation, translation }) ? nextRotation : rotation,
+    rotation: hasPlatformMovementChange(rotation, translation, { rotation: nextRotation, translation })
+      ? nextRotation
+      : rotation,
     translation: hasPlatformMovementChange(rotation, translation, { rotation, translation: nextTranslation })
       ? nextTranslation
       : translation,

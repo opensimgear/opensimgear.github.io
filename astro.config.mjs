@@ -69,14 +69,6 @@ export default defineConfig({
           autogenerate: { directory: 'calculators' },
         },
         {
-          label: 'Gear',
-          autogenerate: { directory: 'gear' },
-          badge: {
-            text: 'WIP',
-            variant: 'caution',
-          },
-        },
-        {
           label: '3rd Party',
           items: buildDocsSidebar({
             docsRoot: path.resolve(__dirname, './src/content/docs/3rdparty'),

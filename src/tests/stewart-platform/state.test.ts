@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { clampPlatformMovement, hasPlatformMovementChange } from '../../components/calculator/stewart-platform/state';
+import {
+  clampPlatformMovement,
+  hasPlatformMovementChange,
+  resetPlatformMovement,
+} from '../../components/calculator/stewart-platform/state';
 
 describe('clampPlatformMovement', () => {
   const spec = {
@@ -14,13 +18,7 @@ describe('clampPlatformMovement', () => {
   };
 
   it('clamps out-of-range rotation and translation values to the platform bounds', () => {
-    expect(
-      clampPlatformMovement(
-        { x: 14, y: -20, z: 18 },
-        { x: -30, y: 40, z: -9 },
-        spec
-      )
-    ).toEqual({
+    expect(clampPlatformMovement({ x: 14, y: -20, z: 18 }, { x: -30, y: 40, z: -9 }, spec)).toEqual({
       rotation: {
         x: 10,
         y: -12,
@@ -35,13 +33,7 @@ describe('clampPlatformMovement', () => {
   });
 
   it('preserves in-range rotation and translation values', () => {
-    expect(
-      clampPlatformMovement(
-        { x: -4, y: 6, z: -8 },
-        { x: 7, y: -9, z: 11 },
-        spec
-      )
-    ).toEqual({
+    expect(clampPlatformMovement({ x: -4, y: 6, z: -8 }, { x: 7, y: -9, z: 11 }, spec)).toEqual({
       rotation: {
         x: -4,
         y: 6,
@@ -81,5 +73,27 @@ describe('clampPlatformMovement', () => {
         translation: movement.translation,
       })
     ).toBe(true);
+  });
+});
+
+describe('resetPlatformMovement', () => {
+  it('resets platform motion and bumps rotation control key', () => {
+    expect(
+      resetPlatformMovement(
+        {
+          rotation: { x: 12, y: -4, z: 2 },
+          translation: { x: 0.03, y: -0.02, z: 0.01 },
+          rotationControlKey: 5,
+        },
+        {
+          rotation: { x: 0, y: 0, z: 0 },
+          translation: { x: 0, y: 0, z: 0 },
+        }
+      )
+    ).toEqual({
+      rotation: { x: 0, y: 0, z: 0 },
+      translation: { x: 0, y: 0, z: 0 },
+      rotationControlKey: 6,
+    });
   });
 });
