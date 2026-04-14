@@ -1,10 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import {
-  clampPlatformMovement,
-  hasPlatformMovementChange,
-  resetPlatformMovement,
-} from '../../components/calculator/stewart-platform/state';
+import { clampPlatformMovement, hasPlatformMovementChange } from '../../components/calculator/stewart-platform/state';
 
 describe('clampPlatformMovement', () => {
   const spec = {
