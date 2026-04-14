@@ -1,13 +1,12 @@
-<script>
+<script lang="ts">
   import * as CookieConsent from 'vanilla-cookieconsent';
 
-  export let label = '';
+  let { label = '' }: { label?: string } = $props();
 
-  function showCookiePreferences(e) {
-    e.preventDefault();
-    debugger;
+  function showCookiePreferences(event: MouseEvent) {
+    event.preventDefault();
     CookieConsent.showPreferences();
   }
 </script>
 
-<button type="button" class="" on:click={showCookiePreferences}>{label}</button>
+<button type="button" class="" onclick={showCookiePreferences}>{label}</button>

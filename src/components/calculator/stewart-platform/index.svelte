@@ -387,7 +387,9 @@
         />
         <Button on:click={resetPlatform} label="Reset Platform" title="Reset" />
       </Pane>
-      <Pane title="Constraints" position="inline">
+      <section aria-label="Constraints">
+        <h2 class="sr-only">Constraints</h2>
+        <Pane title="Constraints" position="inline">
         <Monitor value={`±${platformSpec.pitch.toFixed(1)}°`} label="Pitch" />
         <Monitor value={`±${platformSpec.roll.toFixed(1)}°`} label="Roll" />
         <Monitor value={`±${platformSpec.yaw.toFixed(1)}°`} label="Yaw" />
@@ -397,7 +399,8 @@
           value={`${((platformHeight - platformSpec.transZDown) * 1000).toFixed(0)} / ${((platformHeight + platformSpec.transZUp) * 1000).toFixed(0)} mm`}
           label="Heave"
         />
-      </Pane>
+        </Pane>
+      </section>
     </div>
   </div>
 </div>

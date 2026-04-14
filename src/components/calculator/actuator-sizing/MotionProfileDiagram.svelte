@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { MotionProfileDiagramData, MotionProfileSegment } from './motion-profile-diagram';
 
-  export let diagram: MotionProfileDiagramData;
+  let { diagram }: { diagram: MotionProfileDiagramData } = $props();
 
   const width = 320;
   const chartHeight = 72;
