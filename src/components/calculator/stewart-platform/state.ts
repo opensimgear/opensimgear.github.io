@@ -1,7 +1,7 @@
-type Rotation = { x: number; y: number; z: number };
-type Translation = { x: number; y: number; z: number };
+export type Rotation = { x: number; y: number; z: number };
+export type Translation = { x: number; y: number; z: number };
 
-type PlatformSpec = {
+export type PlatformSpec = {
   pitch: number;
   roll: number;
   yaw: number;
@@ -11,7 +11,7 @@ type PlatformSpec = {
   transZDown: number;
 };
 
-type PlatformMovement = {
+export type PlatformMovement = {
   rotation: Rotation;
   translation: Translation;
 };
@@ -21,17 +21,23 @@ function clamp(value: number, min: number, max: number) {
 }
 
 export function clampPlatformMovement(rotation: Rotation, translation: Translation, spec: PlatformSpec): PlatformMovement {
+  const nextRotation = {
+    x: clamp(rotation.x, -spec.pitch, spec.pitch),
+    y: clamp(rotation.y, -spec.roll, spec.roll),
+    z: clamp(rotation.z, -spec.yaw, spec.yaw),
+  };
+
+  const nextTranslation = {
+    x: clamp(translation.x, -spec.transX, spec.transX),
+    y: clamp(translation.y, -spec.transY, spec.transY),
+    z: clamp(translation.z, -spec.transZDown, spec.transZUp),
+  };
+
   return {
-    rotation: {
-      x: clamp(rotation.x, -spec.pitch, spec.pitch),
-      y: clamp(rotation.y, -spec.roll, spec.roll),
-      z: clamp(rotation.z, -spec.yaw, spec.yaw),
-    },
-    translation: {
-      x: clamp(translation.x, -spec.transX, spec.transX),
-      y: clamp(translation.y, -spec.transY, spec.transY),
-      z: clamp(translation.z, -spec.transZDown, spec.transZUp),
-    },
+    rotation: hasPlatformMovementChange(rotation, translation, { rotation: nextRotation, translation }) ? nextRotation : rotation,
+    translation: hasPlatformMovementChange(rotation, translation, { rotation, translation: nextTranslation })
+      ? nextTranslation
+      : translation,
   };
 }
 

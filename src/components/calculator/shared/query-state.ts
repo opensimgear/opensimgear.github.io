@@ -31,11 +31,11 @@ export function encodeQueryState(state: Record<string, unknown>) {
   return bytesToBase64(utf8Encoder.encode(JSON.stringify(state)));
 }
 
-export function decodeQueryState(encoded: string): Record<string, unknown> | null {
+export function decodeQueryState<T extends Record<string, unknown> = Record<string, unknown>>(encoded: string): T | null {
   try {
     const decoded = JSON.parse(utf8Decoder.decode(base64ToBytes(encoded)));
 
-    return isQueryStateRecord(decoded) ? decoded : null;
+    return isQueryStateRecord(decoded) ? (decoded as T) : null;
   } catch {
     return null;
   }

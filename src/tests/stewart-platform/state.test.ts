@@ -55,6 +55,15 @@ describe('clampPlatformMovement', () => {
     });
   });
 
+  it('reuses existing movement objects when values already inside bounds', () => {
+    const rotation = { x: -4, y: 6, z: -8 };
+    const translation = { x: 7, y: -9, z: 11 };
+    const movement = clampPlatformMovement(rotation, translation, spec);
+
+    expect(movement.rotation).toBe(rotation);
+    expect(movement.translation).toBe(translation);
+  });
+
   it('preserves exact asymmetric z translation bounds', () => {
     expect(clampPlatformMovement({ x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: -5 }, spec).translation.z).toBe(-5);
     expect(clampPlatformMovement({ x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 30 }, spec).translation.z).toBe(30);

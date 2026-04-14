@@ -2,30 +2,33 @@
   import { T } from '@threlte/core';
   import { Euler, Quaternion, Vector3, type EulerOrder } from 'three';
 
-  export let basePoint = new Vector3(0, 0, 0);
-  export let platformPoint = new Vector3(0, 0, 0);
-  export let status: 'ok' | 'over-extended' | 'over-compressed' = 'ok';
-  export let actuatorMin = 0.35;
+  type LegStatus = 'ok' | 'over-extended' | 'over-compressed';
 
-  let rotation: [x: number, y: number, z: number, order: EulerOrder] = [0, 0, 0, 'XYZ'];
-  let positionBase: [number, number, number] = [0, 0, 0];
-  let positionPiston: [number, number, number] = [0, 0, 0];
+  let {
+    basePoint = new Vector3(0, 0, 0),
+    platformPoint = new Vector3(0, 0, 0),
+    status = 'ok',
+    actuatorMin = 0.35,
+  }: {
+    basePoint?: Vector3;
+    platformPoint?: Vector3;
+    status?: LegStatus;
+    actuatorMin?: number;
+  } = $props();
 
-  $: length = basePoint.distanceTo(platformPoint) * 0.95;
-  $: rodColor = status === 'over-extended' ? 'red' : status === 'over-compressed' ? 'orange' : 'grey';
-  $: {
+  const length = $derived(basePoint.distanceTo(platformPoint) * 0.95);
+  const rodColor = $derived(status === 'over-extended' ? 'red' : status === 'over-compressed' ? 'orange' : 'grey');
+  const rotation = $derived.by<[x: number, y: number, z: number, order: EulerOrder]>(() => {
     const direction = new Vector3().subVectors(platformPoint, basePoint).normalize();
     const euler = new Euler();
     euler.setFromQuaternion(new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), direction));
-    rotation = [euler.x, euler.y, euler.z, 'XYZ'] as [x: number, y: number, z: number, order: EulerOrder];
-  }
-  $: {
+    return [euler.x, euler.y, euler.z, 'XYZ'];
+  });
+  const positionBase = $derived.by<[number, number, number]>(() => {
     const direction = new Vector3().subVectors(platformPoint, basePoint).normalize();
-    positionBase = basePoint.clone().add(direction.multiplyScalar(actuatorMin / 2)).toArray();
-  }
-  $: {
-    positionPiston = basePoint.clone().add(platformPoint).divideScalar(2).toArray();
-  }
+    return basePoint.clone().add(direction.multiplyScalar(actuatorMin / 2)).toArray() as [number, number, number];
+  });
+  const positionPiston = $derived(basePoint.clone().add(platformPoint).divideScalar(2).toArray() as [number, number, number]);
 </script>
 
 <T.Mesh position={positionBase} {rotation}>

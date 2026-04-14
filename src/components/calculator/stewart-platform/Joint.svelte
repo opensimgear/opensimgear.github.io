@@ -2,9 +2,7 @@
   import { T } from '@threlte/core';
   import { Vector3 } from 'three';
 
-  export let position: Vector3;
-  export let scale = 0.01;
-  export let color = 'red';
+  let { position, scale = 0.01, color = 'red' }: { position: Vector3; scale?: number; color?: string } = $props();
 </script>
 
 <T.Mesh position={position.toArray()} {scale}>

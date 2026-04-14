@@ -1,11 +1,14 @@
 <script lang="ts">
-  import { Vector3, Matrix3 } from 'three';
   import { Canvas } from '@threlte/core';
   import { Gizmo } from '@threlte/extras';
   import { onMount } from 'svelte';
-  import { Pane, Button, Slider, Folder, Point, RotationEuler, IntervalSlider, Monitor } from 'svelte-tweakpane-ui';
+  import { Button, Monitor, Pane, Point, RotationEuler, Slider } from 'svelte-tweakpane-ui';
+  import { Matrix3, Vector3 } from 'three';
+  import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import Scene from './Scene.svelte';
-  import { clampPlatformMovement, hasPlatformMovementChange } from './state';
+  import { clampPlatformMovement, type PlatformSpec, type Rotation, type Translation } from './state';
+
+  const STATE_KEY = 'sps';
 
   const DEFAULTS = {
     baseDiameter: 1.0,
@@ -19,98 +22,87 @@
     platformTranslation: { x: 0, y: 0, z: 0 },
   };
 
-  function decodeState(encoded: string) {
-    try {
-      return JSON.parse(atob(encoded));
-    } catch (e) {
-      console.error('Failed to decode state', e);
-      return null;
+  type CenterOfRotation = typeof DEFAULTS.cor;
+
+  type StewartPlatformQueryState = {
+    baseDiameter?: number;
+    platformDiameter?: number;
+    alphaP?: number;
+    alphaB?: number;
+    cor?: CenterOfRotation;
+    actuatorMin?: number;
+    actuatorMax?: number;
+    platformRotation?: Rotation;
+    platformTranslation?: Translation;
+  };
+
+  function isFiniteNumber(value: unknown): value is number {
+    return typeof value === 'number' && Number.isFinite(value);
+  }
+
+  function isVectorState(value: unknown): value is Rotation {
+    if (typeof value !== 'object' || value === null) {
+      return false;
     }
+
+    const candidate = value as Record<string, unknown>;
+
+    return (
+      isFiniteNumber(candidate.x) &&
+      isFiniteNumber(candidate.y) &&
+      isFiniteNumber(candidate.z)
+    );
   }
 
-  function getInitialState() {
-    if (typeof window === 'undefined') return null;
-
-    const params = new URLSearchParams(window.location.search);
-    const encoded = params.get('sps');
-    return encoded ? decodeState(encoded) : null;
+  function readNumber(value: unknown, fallback: number) {
+    return isFiniteNumber(value) ? value : fallback;
   }
 
-  const initialState = getInitialState();
-
-  let baseDiameter = initialState?.baseDiameter ?? DEFAULTS.baseDiameter;
-  let platformDiameter = initialState?.platformDiameter ?? DEFAULTS.platformDiameter;
-  let alphaP = initialState?.alphaP ?? DEFAULTS.alphaP;
-  let alphaB = initialState?.alphaB ?? DEFAULTS.alphaB; // displayed as complement: geometric spread = 120° - alphaB
-  $: alphaBGeom = 360 / 3 - alphaB;
-  let cor = initialState?.cor ?? { ...DEFAULTS.cor };
-  let actuatorMin = initialState?.actuatorMin ?? DEFAULTS.actuatorMin;
-  let actuatorMax = initialState?.actuatorMax ?? DEFAULTS.actuatorMax;
-
-  // --- State Management via URL ---
-  const STATE_KEY = 'sps';
-  let mounted = false;
-
-  function encodeState(state: any) {
-    return btoa(JSON.stringify(state));
+  function readVectorState<T extends Rotation | Translation | CenterOfRotation>(value: unknown, fallback: T): T {
+    return isVectorState(value) ? ({ x: value.x, y: value.y, z: value.z } as T) : ({ ...fallback } as T);
   }
 
-  function updateUrl() {
-    const state = {
-      baseDiameter,
-      platformDiameter,
-      alphaP,
-      alphaB,
-      cor,
-      actuatorMin,
-      actuatorMax,
-      platformRotation,
-      platformTranslation,
-    };
-    const encoded = encodeState(state);
-    const url = new URL(window.location.href);
-    url.searchParams.set(STATE_KEY, encoded);
-    window.history.replaceState({}, '', url.toString());
+  function applyQueryState(state: StewartPlatformQueryState) {
+    baseDiameter = readNumber(state.baseDiameter, DEFAULTS.baseDiameter);
+    platformDiameter = readNumber(state.platformDiameter, DEFAULTS.platformDiameter);
+    alphaP = readNumber(state.alphaP, DEFAULTS.alphaP);
+    alphaB = readNumber(state.alphaB, DEFAULTS.alphaB);
+    cor = readVectorState(state.cor, DEFAULTS.cor);
+    actuatorMin = readNumber(state.actuatorMin, DEFAULTS.actuatorMin);
+    actuatorMax = readNumber(state.actuatorMax, DEFAULTS.actuatorMax);
+    platformRotation = readVectorState(state.platformRotation, DEFAULTS.platformRotation);
+    platformTranslation = readVectorState(state.platformTranslation, DEFAULTS.platformTranslation);
   }
+
+  let baseDiameter = $state(DEFAULTS.baseDiameter);
+  let platformDiameter = $state(DEFAULTS.platformDiameter);
+  let alphaP = $state(DEFAULTS.alphaP);
+  let alphaB = $state(DEFAULTS.alphaB);
+  let cor = $state<CenterOfRotation>({ ...DEFAULTS.cor });
+  let actuatorMin = $state(DEFAULTS.actuatorMin);
+  let actuatorMax = $state(DEFAULTS.actuatorMax);
+  let platformRotation = $state<Rotation>({ ...DEFAULTS.platformRotation });
+  let platformTranslation = $state<Translation>({ ...DEFAULTS.platformTranslation });
+  let mounted = $state(false);
+
+  const alphaBGeom = $derived(360 / 3 - alphaB);
+  const centerOfRotationRelative = $derived(new Vector3(cor.x, cor.y, cor.z));
 
   onMount(() => {
-    const params = new URLSearchParams(window.location.search);
-    const encoded = params.get(STATE_KEY);
+    const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
+
     if (encoded) {
-      const state = decodeState(encoded);
+      const state = decodeQueryState<StewartPlatformQueryState>(encoded);
+
       if (state) {
-        baseDiameter = state.baseDiameter ?? DEFAULTS.baseDiameter;
-        platformDiameter = state.platformDiameter ?? DEFAULTS.platformDiameter;
-        alphaP = state.alphaP ?? DEFAULTS.alphaP;
-        alphaB = state.alphaB ?? DEFAULTS.alphaB;
-        cor = state.cor ?? { ...DEFAULTS.cor };
-        actuatorMin = state.actuatorMin ?? DEFAULTS.actuatorMin;
-        actuatorMax = state.actuatorMax ?? DEFAULTS.actuatorMax;
-        platformRotation = state.platformRotation ?? { ...DEFAULTS.platformRotation };
-        platformTranslation = state.platformTranslation ?? { ...DEFAULTS.platformTranslation };
+        applyQueryState(state);
       }
     }
+
     mounted = true;
   });
 
-  // Sync URL whenever parameters change, but only after mount to avoid
-  // overwriting URL params with defaults before they've been read.
-  $: if (mounted) {
-    (baseDiameter,
-      platformDiameter,
-      alphaP,
-      alphaB,
-      cor,
-      actuatorMin,
-      actuatorMax,
-      platformRotation,
-      platformTranslation);
-    updateUrl();
-  }
-
-  // Optimal height: neutral leg length = midpoint of actuator range → max symmetric range of motion.
-  // For each leg: L0 = sqrt(d_horiz² + h²), so h = sqrt(target² - avg(d_horiz²))
-  $: platformHeight = (() => {
+  const platformHeight = $derived.by(() => {
     const alphaPh = alphaP / 2;
     const alphaBh = alphaBGeom / 2;
     const startingAngle = 270;
@@ -128,7 +120,7 @@
       }, 0) / anglesB.length;
     const target = (actuatorMin + actuatorMax) / 2;
     return Math.sqrt(Math.max(0, target * target - avgD2));
-  })();
+  });
 
   // Replicates Scene.svelte's rotation transform to check whether all legs stay within bounds.
   function isRotationValid(
@@ -223,7 +215,7 @@
     return lo;
   }
 
-  $: platformSpec = (() => {
+  const platformSpec = $derived.by<PlatformSpec>(() => {
     const alphaPh = alphaP / 2;
     const alphaBh = alphaBGeom / 2;
     const startingAngle = 270;
@@ -247,7 +239,7 @@
       transZUp: maxTranslation('z', 1, basePoints, platformPoints, actuatorMin, actuatorMax),
       transZDown: maxTranslation('z', -1, basePoints, platformPoints, actuatorMin, actuatorMax),
     };
-  })();
+  });
 
   const resetParams = () => {
     baseDiameter = DEFAULTS.baseDiameter;
@@ -263,9 +255,6 @@
     actuatorMin = DEFAULTS.actuatorMin;
     actuatorMax = DEFAULTS.actuatorMax;
   };
-
-  let platformRotation = { ...DEFAULTS.platformRotation };
-  let platformTranslation = { ...DEFAULTS.platformTranslation };
 
   const resetPlatform = () => {
     platformRotation = { ...DEFAULTS.platformRotation };
@@ -284,24 +273,46 @@
   };
 
   const formatDeg = (val: number) => `${val.toFixed(1)}°`;
-  $: movementAngle = {
+  const movementAngle = $derived({
     optionsX: { min: -platformSpec.pitch, max: platformSpec.pitch, format: formatDeg },
     optionsY: { min: -platformSpec.roll, max: platformSpec.roll, format: formatDeg },
     optionsZ: { min: -platformSpec.yaw, max: platformSpec.yaw, format: formatDeg },
-  };
+  });
 
-  // Clamp current movement values whenever the actuator limits change.
-  $: {
+  $effect(() => {
     const movement = clampPlatformMovement(platformRotation, platformTranslation, platformSpec);
-    if (hasPlatformMovementChange(platformRotation, platformTranslation, movement)) {
+
+    if (movement.rotation !== platformRotation) {
       platformRotation = movement.rotation;
+    }
+
+    if (movement.translation !== platformTranslation) {
       platformTranslation = movement.translation;
     }
-  }
+  });
+
+  $effect(() => {
+    if (!mounted || typeof window === 'undefined') return;
+
+    const url = new URL(window.location.href);
+    url.searchParams.set(
+      STATE_KEY,
+      encodeQueryState({
+        baseDiameter,
+        platformDiameter,
+        alphaP,
+        alphaB,
+        cor,
+        actuatorMin,
+        actuatorMax,
+        platformRotation,
+        platformTranslation,
+      })
+    );
+    window.history.replaceState({}, '', url.toString());
+  });
 
   const alphaOptions = { min: 10, max: 360 / 3 - 10, step: 1, format: formatAlpha };
-
-  $: centerOfRotationRelative = new Vector3(cor.x, cor.y, cor.z);
 </script>
 
 <div class="w-full not-content border border-black rounded">
@@ -362,12 +373,12 @@
           max={platformDiameter}
           optionsZ={{ ...configLinear, min: 0, max: platformDiameter }}
         />
-        <Button on:click={resetParams} label="Reset Params" title="Reset" />
+        <Button onclick={resetParams} label="Reset Params" title="Reset" />
       </Pane>
       <Pane title="Actuator Range" position="inline">
         <Slider bind:value={actuatorMin} label="Min Extension" {...configLinear} min={0.1} max={actuatorMax} />
         <Slider bind:value={actuatorMax} label="Max Extension" {...configLinear} min={actuatorMin} max={2} />
-        <Button on:click={resetActuator} label="Reset Actuator" title="Reset" />
+        <Button onclick={resetActuator} label="Reset Actuator" title="Reset" />
       </Pane>
       <Pane title="Movement" position="inline">
         <RotationEuler
@@ -385,7 +396,7 @@
           min={-platformDiameter}
           max={platformDiameter}
         />
-        <Button on:click={resetPlatform} label="Reset Platform" title="Reset" />
+        <Button onclick={resetPlatform} label="Reset Platform" title="Reset" />
       </Pane>
       <section aria-label="Constraints">
         <h2 class="sr-only">Constraints</h2>

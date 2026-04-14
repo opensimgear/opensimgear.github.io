@@ -1,74 +1,90 @@
 <script lang="ts">
   import { Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
+  import { Matrix3, Vector3 } from 'three';
   import Joint from './Joint.svelte';
   import Leg from './Leg.svelte';
   import Platform from './Platform.svelte';
-  import { Matrix3, Vector3 } from 'three';
-
-  export let baseDiameter = 0.8;
-  export let platformDiameter = 0.4;
-  export let platformHeight = 0.5;
-  export let alphaP = 10;
-  export let alphaB = 110;
-  export let platformTranslation = { x: 0, y: 0, z: 0 };
-  export let platformRotation = { x: 0, y: 0, z: 0 };
-  export let centerOfRotationRelative: Vector3;
-  export let actuatorMin = 0.35;
-  export let actuatorMax = 0.6;
 
   type LegStatus = 'ok' | 'over-extended' | 'over-compressed';
 
-  let lastValidTransformedPointsP: Vector3[] = [];
-  let lastValidTransformedCor: Vector3 = new Vector3();
-  let legStatuses: LegStatus[] = Array(6).fill('ok');
+  let {
+    baseDiameter = 0.8,
+    platformDiameter = 0.4,
+    platformHeight = 0.5,
+    alphaP = 10,
+    alphaB = 110,
+    platformTranslation = { x: 0, y: 0, z: 0 },
+    platformRotation = { x: 0, y: 0, z: 0 },
+    centerOfRotationRelative,
+    actuatorMin = 0.35,
+    actuatorMax = 0.6,
+  }: {
+    baseDiameter?: number;
+    platformDiameter?: number;
+    platformHeight?: number;
+    alphaP?: number;
+    alphaB?: number;
+    platformTranslation?: { x: number; y: number; z: number };
+    platformRotation?: { x: number; y: number; z: number };
+    centerOfRotationRelative: Vector3;
+    actuatorMin?: number;
+    actuatorMax?: number;
+  } = $props();
 
-  let cameraX = baseDiameter * 1.2;
-  let cameraY = cameraX;
-  const cameraZ = platformHeight * 2;
+  let lastValidTransformedPointsP = $state<Vector3[]>([]);
+  let lastValidTransformedCor = $state(new Vector3());
+  let legStatuses = $state<LegStatus[]>(Array(6).fill('ok'));
+  let transformedPointsP = $state<Vector3[]>([]);
+  let transformedCor = $state(new Vector3());
 
-  let initialPointsP: Vector3[] = [];
-  let initialPointsB: Vector3[] = [];
-  let transformedPointsP: Vector3[] = [];
-  let transformedCor: Vector3;
+  const cameraX = $derived(baseDiameter * 1.2);
+  const cameraY = $derived(baseDiameter * 1.2);
+  const cameraZ = $derived(platformHeight * 2);
 
-  $: centerOfRotation = centerOfRotationRelative.clone().add(new Vector3(0, 0, platformHeight));
+  const centerOfRotation = $derived(centerOfRotationRelative.clone().add(new Vector3(0, 0, platformHeight)));
 
-  $: {
+  const pointSets = $derived.by(() => {
     const alphaPh = alphaP / 2;
     const alphaBh = alphaB / 2;
-
     const startingAngle = 270;
     const angles = [startingAngle, (startingAngle + 120) % 360, (startingAngle + 240) % 360];
-
     const anglesP = angles.flatMap((angle) => [angle - alphaPh, angle + alphaPh]);
     const anglesB = angles.flatMap((angle) => [angle - alphaBh, angle + alphaBh]);
-
     const rP = platformDiameter / 2;
     const rB = baseDiameter / 2;
 
-    initialPointsB = anglesB.map((angle) => {
+    const basePoints = anglesB.map((angle) => {
       const x = rB * Math.cos((angle * Math.PI) / 180);
       const y = rB * Math.sin((angle * Math.PI) / 180);
       return new Vector3(x, y, 0);
     });
 
-    initialPointsP = anglesP.map((angle) => {
+    const platformPoints = anglesP.map((angle) => {
       const x = rP * Math.cos((angle * Math.PI) / 180);
       const y = rP * Math.sin((angle * Math.PI) / 180);
       return new Vector3(x, y, platformHeight);
     });
 
-    lastValidTransformedPointsP = [];
-  }
+    return { basePoints, platformPoints };
+  });
 
-  $: {
+  $effect(() => {
+    pointSets;
+    lastValidTransformedPointsP = [];
+    lastValidTransformedCor = centerOfRotation;
+    transformedPointsP = [];
+    transformedCor = centerOfRotation;
+  });
+
+  $effect(() => {
     const thetaX = (platformRotation.x * Math.PI) / 180;
     const thetaY = (platformRotation.y * Math.PI) / 180;
     const thetaZ = (platformRotation.z * Math.PI) / 180;
     const dX = platformTranslation.x;
     const dY = platformTranslation.y;
     const dZ = platformTranslation.z;
+    const { basePoints, platformPoints } = pointSets;
     const qTheta = new Matrix3(1, 0, 0, 0, Math.cos(thetaX), -Math.sin(thetaX), 0, Math.sin(thetaX), Math.cos(thetaX))
       .multiply(new Matrix3(Math.cos(thetaY), 0, Math.sin(thetaY), 0, 1, 0, -Math.sin(thetaY), 0, Math.cos(thetaY)))
       .multiply(new Matrix3(Math.cos(thetaZ), -Math.sin(thetaZ), 0, Math.sin(thetaZ), Math.cos(thetaZ), 0, 0, 0, 1));
@@ -82,7 +98,7 @@
     const qThetaY = new Vector3(a[3], a[4], a[5]);
     const qThetaZ = new Vector3(a[6], a[7], a[8]);
 
-    const candidatePointsP = initialPointsP.map((point) => {
+    const candidatePointsP = platformPoints.map((point) => {
       const pointTranslated = point.clone().add(new Vector3(dX, dY, dZ));
       const dM = point.clone().sub(centerOfRotation);
       const dTheta = new Vector3(dM.dot(qThetaX), dM.dot(qThetaY), dM.dot(qThetaZ));
@@ -90,7 +106,7 @@
     });
     const candidateCor = centerOfRotation.clone().add(new Vector3(dX, dY, dZ));
 
-    const candidateStatuses: LegStatus[] = initialPointsB.map((b, i) => {
+    const candidateStatuses: LegStatus[] = basePoints.map((b, i) => {
       const l = b.distanceTo(candidatePointsP[i]);
       if (l > actuatorMax) return 'over-extended';
       if (l < actuatorMin) return 'over-compressed';
@@ -112,7 +128,7 @@
     }
 
     legStatuses = candidateStatuses;
-  }
+  });
 </script>
 
 <T.PerspectiveCamera
@@ -147,15 +163,15 @@
   <Joint position={point} />
 {/each}
 
-{#each initialPointsB as point}
+{#each pointSets.basePoints as point}
   <Joint position={point} color="blue" />
 {/each}
 
 <Joint position={transformedCor} color="purple" />
 
 <Platform points={transformedPointsP} color="red" />
-<Platform points={initialPointsB} color="blue" />
+<Platform points={pointSets.basePoints} color="blue" />
 
-{#each initialPointsB as point, i}
+{#each pointSets.basePoints as point, i}
   <Leg basePoint={point} platformPoint={transformedPointsP[i]} status={legStatuses[i]} {actuatorMin} />
 {/each}
