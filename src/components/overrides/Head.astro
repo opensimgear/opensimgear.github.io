@@ -1,6 +1,16 @@
 ---
 import Default from '@astrojs/starlight/components/Head.astro';
 import GoogleAnalytics from '~/components/util/GoogleAnalytics.astro';
+import { buildSeoPageTitle, replaceSeoTitleTags } from '~/utils/page-title';
+
+const { starlightRoute } = Astro.locals;
+const seoTitle = buildSeoPageTitle({
+  pageTitle: starlightRoute.entry.data.title,
+  siteTitle: starlightRoute.siteTitle,
+  pathname: Astro.url.pathname,
+  sidebar: starlightRoute.sidebar,
+});
+starlightRoute.head = replaceSeoTitleTags(starlightRoute.head, seoTitle);
 ---
 
 <Default {...Astro.props}><slot /></Default>

@@ -232,8 +232,8 @@ sidebar:
     const sidebar = buildDocsSidebar({ docsRoot, basePath: '/docs' });
 
     expect(sidebar.map((item) => item.label)).toEqual([
-      'Sim Racing Overview',
-      'Flight Simulation Overview',
+      'Sim Racing',
+      'Flight Simulation',
       'Components',
       'Guides',
       'DIY Reference',
