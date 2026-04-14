@@ -1,5 +1,5 @@
 ---
-title: Sim Racing Overview
+title: Sim Racing
 description: Learn how sim racing hardware fits together, what matters most when choosing gear, and where to go deeper in the OpenSimGear wiki.
 sidebar:
   order: 0

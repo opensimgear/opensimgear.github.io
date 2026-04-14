@@ -1,5 +1,5 @@
 ---
-title: Flight Simulation Overview
+title: Flight Simulation
 description: Learn how flight sim hardware fits together, which controls matter for different aircraft types, and where to go deeper in the OpenSimGear wiki.
 sidebar:
   order: 1

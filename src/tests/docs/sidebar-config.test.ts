@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { buildDocsSidebar } from '../../utils/docs-sidebar';
 
 const docsRoot = path.resolve(process.cwd(), 'src/content/docs/docs');
+const thirdPartyRoot = path.resolve(process.cwd(), 'src/content/docs/3rdparty');
 
 const tempDirs: string[] = [];
 
@@ -30,7 +31,7 @@ afterEach(() => {
 
 describe('buildDocsSidebar', () => {
   it('uses sidebar.label from a section landing page for the group label', () => {
-    const sidebar = buildDocsSidebar({ docsRoot });
+    const sidebar = buildDocsSidebar({ docsRoot, basePath: '/docs' });
     const diyGroup = sidebar.find((item) => item.label === 'DIY Reference');
 
     expect(diyGroup).toBeDefined();
@@ -42,7 +43,10 @@ describe('buildDocsSidebar', () => {
       throw new Error('Expected DIY Reference to be a sidebar group');
     }
 
-    expect(diyGroup.items[0]).toEqual({ label: 'DIY Reference', link: '/docs/diy/' });
+    expect(diyGroup.items[0]).toEqual({
+      label: 'Sensors and Input Detection',
+      link: '/docs/diy/sensors-and-input-detection/',
+    });
   });
 
   it('falls back to the directory name when a section landing page omits sidebar.label', () => {
@@ -61,7 +65,7 @@ sidebar:
 `,
     });
 
-    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot });
+    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot, basePath: '/docs' });
 
     expect(sidebar).toMatchObject([
       {
@@ -98,7 +102,7 @@ sidebar:
 `,
     });
 
-    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot });
+    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot, basePath: '/docs' });
     const guidesGroup = sidebar.find((item) => item.label === 'Guides');
 
     if (!guidesGroup || !('items' in guidesGroup)) {
@@ -153,7 +157,7 @@ sidebar:
 `,
     });
 
-    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot });
+    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot, basePath: '/docs' });
 
     expect(sidebar).toEqual([
       { label: 'Top Level MDX', link: '/docs/top-level/' },
@@ -168,8 +172,64 @@ sidebar:
     ]);
   });
 
+  it('passes through sidebar.collapsed from a section landing page', () => {
+    const fixtureRoot = createDocsFixture({
+      'components/index.md': `---
+title: Components Overview
+sidebar:
+  label: Components
+  order: 0
+  collapsed: true
+---
+`,
+      'components/child.md': `---
+title: Child Page
+sidebar:
+  order: 1
+---
+`,
+    });
+
+    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot, basePath: '/docs' });
+
+    expect(sidebar).toMatchObject([
+      {
+        label: 'Components',
+        collapsed: true,
+        items: [
+          { label: 'Components Overview', link: '/docs/components/' },
+          { label: 'Child Page', link: '/docs/components/child/' },
+        ],
+      },
+    ]);
+  });
+
+  it('omits collapsed when a section landing page does not define sidebar.collapsed', () => {
+    const fixtureRoot = createDocsFixture({
+      'guides/index.md': `---
+title: Guides Overview
+sidebar:
+  label: Guides
+  order: 0
+---
+`,
+      'guides/child.md': `---
+title: Child Page
+sidebar:
+  order: 1
+---
+`,
+    });
+
+    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot, basePath: '/docs' });
+    const guidesGroup = sidebar.find((item) => item.label === 'Guides');
+
+    expect(guidesGroup).toBeDefined();
+    expect(guidesGroup).not.toHaveProperty('collapsed');
+  });
+
   it('preserves the intended top-level docs ordering', () => {
-    const sidebar = buildDocsSidebar({ docsRoot });
+    const sidebar = buildDocsSidebar({ docsRoot, basePath: '/docs' });
 
     expect(sidebar.map((item) => item.label)).toEqual([
       'Sim Racing Overview',
@@ -178,5 +238,29 @@ sidebar:
       'Guides',
       'DIY Reference',
     ]);
+  });
+
+  it('uses configured basePath for third-party docs slugs', () => {
+    const sidebar = buildDocsSidebar({ docsRoot: thirdPartyRoot, basePath: '/3rdparty' });
+
+    expect(sidebar).toContainEqual({
+      label: 'Overview',
+      link: '/3rdparty/overview/',
+    });
+
+    const beltTensionerGroup = sidebar.find((item) => item.label === 'Belt Tensioner');
+
+    if (!beltTensionerGroup || !('items' in beltTensionerGroup)) {
+      throw new Error('Expected Belt Tensioner to be a sidebar group');
+    }
+
+    expect(beltTensionerGroup.items).toContainEqual({
+      label: 'Flag Ghost Belt Tensioner',
+      link: '/3rdparty/belt-tensioner/flagghost/',
+    });
+    expect(beltTensionerGroup.items).not.toContainEqual({
+      label: 'Flag Ghost Belt Tensioner',
+      link: '/docs/belt-tensioner/flagghost/',
+    });
   });
 });

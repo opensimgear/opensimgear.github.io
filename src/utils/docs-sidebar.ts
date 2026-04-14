@@ -9,6 +9,7 @@ type SidebarLink = {
 type SidebarGroup = {
   label: string;
   items: SidebarLink[];
+  collapsed?: boolean;
 };
 
 type SidebarItem = SidebarLink | SidebarGroup;
@@ -18,6 +19,12 @@ type PageMeta = {
   order: number;
   hidden: boolean;
   sidebarLabel?: string;
+  sidebarCollapsed?: boolean;
+};
+
+type BuildDocsSidebarOptions = {
+  docsRoot: string;
+  basePath: string;
 };
 
 function parseFrontmatter(filePath: string): PageMeta {
@@ -37,6 +44,7 @@ function parseFrontmatter(filePath: string): PageMeta {
     order: Number(readBlockValue(sidebarBlock, 'order') ?? Number.MAX_SAFE_INTEGER),
     hidden: readBlockValue(sidebarBlock, 'hidden') === 'true',
     sidebarLabel: readBlockValue(sidebarBlock, 'label'),
+    sidebarCollapsed: readBlockValue(sidebarBlock, 'collapsed') === 'true' ? true : undefined,
   };
 }
 
@@ -68,20 +76,19 @@ function isDocFile(name: string) {
   return /\.mdx?$/.test(name);
 }
 
-function toDocLink(relativePath: string) {
+function toDocLink(relativePath: string, basePath: string) {
   const withoutExtension = relativePath.replace(/\.mdx?$/, '');
   const slug = withoutExtension === 'index' ? '' : withoutExtension.replace(/\/index$/, '');
+  const normalizedBasePath = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
 
-  return slug ? `/docs/${slug}/` : '/docs/';
+  return slug ? `${normalizedBasePath}/${slug}/` : `${normalizedBasePath}/`;
 }
 
 function comparePages(a: { order: number; relativePath: string }, b: { order: number; relativePath: string }) {
   return a.order - b.order || a.relativePath.localeCompare(b.relativePath);
 }
 
-export function buildDocsSidebar({
-  docsRoot = path.resolve(process.cwd(), 'src/content/docs/docs'),
-} = {}): SidebarItem[] {
+export function buildDocsSidebar({ docsRoot, basePath }: BuildDocsSidebarOptions): SidebarItem[] {
   const entries = fs.readdirSync(docsRoot, { withFileTypes: true });
   const sidebarEntries: Array<(SidebarLink | SidebarGroup) & { order: number; relativePath: string }> = [];
 
@@ -117,12 +124,13 @@ export function buildDocsSidebar({
         .filter(({ meta }) => !meta.hidden)
         .map(({ relativePath, meta }) => ({
           label: meta.title,
-          link: toDocLink(relativePath),
+          link: toDocLink(relativePath, basePath),
         }));
 
       sidebarEntries.push({
         label: landingPage.meta.sidebarLabel ?? entry.name,
         items,
+        ...(landingPage.meta.sidebarCollapsed === undefined ? {} : { collapsed: landingPage.meta.sidebarCollapsed }),
         order: landingPage.meta.order,
         relativePath: landingPage.relativePath,
       });
@@ -142,7 +150,7 @@ export function buildDocsSidebar({
 
     sidebarEntries.push({
       label: meta.title,
-      link: toDocLink(relativePath),
+      link: toDocLink(relativePath, basePath),
       order: meta.order,
       relativePath,
     });

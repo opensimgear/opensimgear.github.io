@@ -55,7 +55,14 @@ export default defineConfig({
         },
         {
           label: 'Docs',
-          items: buildDocsSidebar(),
+          items: buildDocsSidebar({
+            docsRoot: path.resolve(__dirname, './src/content/docs/docs'),
+            basePath: '/docs',
+          }),
+          badge: {
+            text: 'WIP',
+            variant: 'caution',
+          },
         },
         {
           label: 'Calculators',
@@ -64,10 +71,21 @@ export default defineConfig({
         {
           label: 'Gear',
           autogenerate: { directory: 'gear' },
+          badge: {
+            text: 'WIP',
+            variant: 'caution',
+          },
         },
         {
           label: '3rd Party',
-          autogenerate: { directory: '3rdparty' },
+          items: buildDocsSidebar({
+            docsRoot: path.resolve(__dirname, './src/content/docs/3rdparty'),
+            basePath: '/3rdparty',
+          }),
+          badge: {
+            text: 'WIP',
+            variant: 'caution',
+          },
         },
       ],
       components: {

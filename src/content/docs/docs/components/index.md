@@ -6,6 +6,7 @@ description:
 sidebar:
   label: Components
   order: 2
+  collapsed: true
 ---
 
 This section explains the major hardware families used across sim racing and flight simulation.
