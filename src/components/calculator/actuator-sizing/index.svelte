@@ -15,6 +15,7 @@
   import { findOptimalGearRatio, type GearOptimizationContext } from './gear-optimization';
   import { buildMotionProfileDiagram } from './motion-profile-diagram';
   import { computeTrapezoidalProfile } from './profile';
+  import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import { DEFAULT_SORT_STATE, getAriaSort, sortMotorResults, toggleSortState, type SortKey } from './sorting';
   import type { MotorEvaluationV2, ServoMotor, SystemType } from './types';
 
@@ -85,75 +86,146 @@
 
   const STATE_KEY = 'state';
 
-  function decodeState(encoded: string): Record<string, unknown> | null {
-    try {
-      return JSON.parse(atob(encoded));
-    } catch {
-      return null;
-    }
+  type ActuatorSizingQueryState = {
+    strokeLength?: number;
+    maxVelocity?: number;
+    acceleration?: number;
+    deceleration?: number;
+    dwellTime?: number;
+    systemType?: SystemType;
+    actuatorAngle?: number;
+    totalMass?: number;
+    imbalanceFactor?: number;
+    frictionForce?: number;
+    ballscrewKey?: string;
+    customPitch?: number;
+    customDiameter?: number;
+    screwLength?: number;
+    screwEfficiency?: number;
+    autoGearRatio?: boolean;
+    gearRatio?: number;
+    gearEfficiency?: number;
+    gearInertia?: number;
+    safetyFactor?: number;
+    holdingRequired?: boolean;
+    advancedMode?: boolean;
+  };
+
+  function isFiniteNumber(value: unknown): value is number {
+    return typeof value === 'number' && Number.isFinite(value);
   }
 
-  function getInitialState(): Record<string, unknown> | null {
-    if (typeof window === 'undefined') {
-      return null;
-    }
-
-    const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
-    return encoded ? decodeState(encoded) : null;
+  function readNumber(value: unknown, fallback: number) {
+    return isFiniteNumber(value) ? value : fallback;
   }
 
-  const initialState = getInitialState();
-
-  function initialValue<T>(key: string, fallback: T): T {
-    return (initialState?.[key] as T) ?? fallback;
+  function readBoolean(value: unknown, fallback: boolean) {
+    return typeof value === 'boolean' ? value : fallback;
   }
 
-  let strokeLength = initialValue('strokeLength', DEFAULTS.strokeLength);
-  let maxVelocity = initialValue('maxVelocity', DEFAULTS.maxVelocity);
-  let acceleration = initialValue('acceleration', DEFAULTS.acceleration);
-  let deceleration = initialValue('deceleration', DEFAULTS.deceleration);
-  let dwellTime = initialValue('dwellTime', DEFAULTS.dwellTime);
-  let systemType = initialValue<SystemType>('systemType', DEFAULTS.systemType);
-  let actuatorAngle = initialValue('actuatorAngle', DEFAULTS.actuatorAngle);
-  let totalMass = initialValue('totalMass', DEFAULTS.totalMass);
-  let imbalanceFactor = initialValue('imbalanceFactor', DEFAULTS.imbalanceFactor);
-  let frictionForce = initialValue('frictionForce', DEFAULTS.frictionForce);
-  let ballscrewKey = initialValue('ballscrewKey', DEFAULTS.ballscrewKey);
-  let customPitch = initialValue('customPitch', DEFAULTS.customPitch);
-  let customDiameter = initialValue('customDiameter', DEFAULTS.customDiameter);
-  let screwLength = initialValue('screwLength', DEFAULTS.screwLength);
-  let screwEfficiency = initialValue('screwEfficiency', DEFAULTS.screwEfficiency);
-  let autoGearRatio = initialValue('autoGearRatio', DEFAULTS.autoGearRatio);
-  let gearRatio = initialValue('gearRatio', DEFAULTS.gearRatio);
-  let gearEfficiency = initialValue('gearEfficiency', DEFAULTS.gearEfficiency);
-  let gearInertia = initialValue('gearInertia', DEFAULTS.gearInertia);
-  let safetyFactor = initialValue('safetyFactor', DEFAULTS.safetyFactor);
-  let holdingRequired = initialValue('holdingRequired', DEFAULTS.holdingRequired);
-  let advancedMode = initialValue('advancedMode', DEFAULTS.advancedMode);
+  function readString(value: unknown, fallback: string) {
+    return typeof value === 'string' ? value : fallback;
+  }
 
-  let userMotors: ServoMotor[] = [];
-  let mounted = false;
-  let sortKey: SortKey = DEFAULT_SORT_STATE.key;
-  let sortDescending = DEFAULT_SORT_STATE.descending;
+  function readSystemType(value: unknown, fallback: SystemType) {
+    return value === 'single' || value === '4actuator' || value === 'stewart' ? value : fallback;
+  }
 
-  let addFormOpen = false;
-  let addName = '';
-  let addManufacturer = '';
-  let addRatedRPM = 3000;
-  let addMaxRPM = 4500;
-  let addRatedTorque = 1.0;
-  let addPeakTorque = 3.0;
-  let addPower = 400;
-  let addInertia = 0.00003;
+  function applyQueryState(state: ActuatorSizingQueryState) {
+    strokeLength = readNumber(state.strokeLength, DEFAULTS.strokeLength);
+    maxVelocity = readNumber(state.maxVelocity, DEFAULTS.maxVelocity);
+    acceleration = readNumber(state.acceleration, DEFAULTS.acceleration);
+    deceleration = readNumber(state.deceleration, DEFAULTS.deceleration);
+    dwellTime = readNumber(state.dwellTime, DEFAULTS.dwellTime);
+    systemType = readSystemType(state.systemType, DEFAULTS.systemType);
+    actuatorAngle = readNumber(state.actuatorAngle, DEFAULTS.actuatorAngle);
+    totalMass = readNumber(state.totalMass, DEFAULTS.totalMass);
+    imbalanceFactor = readNumber(state.imbalanceFactor, DEFAULTS.imbalanceFactor);
+    frictionForce = readNumber(state.frictionForce, DEFAULTS.frictionForce);
+    ballscrewKey = readString(state.ballscrewKey, DEFAULTS.ballscrewKey);
+    customPitch = readNumber(state.customPitch, DEFAULTS.customPitch);
+    customDiameter = readNumber(state.customDiameter, DEFAULTS.customDiameter);
+    screwLength = readNumber(state.screwLength, DEFAULTS.screwLength);
+    screwEfficiency = readNumber(state.screwEfficiency, DEFAULTS.screwEfficiency);
+    autoGearRatio = readBoolean(state.autoGearRatio, DEFAULTS.autoGearRatio);
+    gearRatio = readNumber(state.gearRatio, DEFAULTS.gearRatio);
+    gearEfficiency = readNumber(state.gearEfficiency, DEFAULTS.gearEfficiency);
+    gearInertia = readNumber(state.gearInertia, DEFAULTS.gearInertia);
+    safetyFactor = readNumber(state.safetyFactor, DEFAULTS.safetyFactor);
+    holdingRequired = readBoolean(state.holdingRequired, DEFAULTS.holdingRequired);
+    advancedMode = readBoolean(state.advancedMode, DEFAULTS.advancedMode);
+  }
+
+  let strokeLength = $state(DEFAULTS.strokeLength);
+  let maxVelocity = $state(DEFAULTS.maxVelocity);
+  let acceleration = $state(DEFAULTS.acceleration);
+  let deceleration = $state(DEFAULTS.deceleration);
+  let dwellTime = $state(DEFAULTS.dwellTime);
+  let systemType = $state<SystemType>(DEFAULTS.systemType);
+  let actuatorAngle = $state(DEFAULTS.actuatorAngle);
+  let totalMass = $state(DEFAULTS.totalMass);
+  let imbalanceFactor = $state(DEFAULTS.imbalanceFactor);
+  let frictionForce = $state(DEFAULTS.frictionForce);
+  let ballscrewKey = $state(DEFAULTS.ballscrewKey);
+  let customPitch = $state(DEFAULTS.customPitch);
+  let customDiameter = $state(DEFAULTS.customDiameter);
+  let screwLength = $state(DEFAULTS.screwLength);
+  let screwEfficiency = $state(DEFAULTS.screwEfficiency);
+  let autoGearRatio = $state(DEFAULTS.autoGearRatio);
+  let gearRatio = $state(DEFAULTS.gearRatio);
+  let gearEfficiency = $state(DEFAULTS.gearEfficiency);
+  let gearInertia = $state(DEFAULTS.gearInertia);
+  let safetyFactor = $state(DEFAULTS.safetyFactor);
+  let holdingRequired = $state(DEFAULTS.holdingRequired);
+  let advancedMode = $state(DEFAULTS.advancedMode);
+
+  let userMotors = $state<ServoMotor[]>([]);
+  let mounted = $state(false);
+  let sortKey = $state<SortKey>(DEFAULT_SORT_STATE.key);
+  let sortDescending = $state(DEFAULT_SORT_STATE.descending);
+
+  let addFormOpen = $state(false);
+  let addName = $state('');
+  let addManufacturer = $state('');
+  let addRatedRPM = $state(3000);
+  let addMaxRPM = $state(4500);
+  let addRatedTorque = $state(1.0);
+  let addPeakTorque = $state(3.0);
+  let addPower = $state(400);
+  let addInertia = $state(0.00003);
 
   onMount(() => {
+    const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
+
+    if (encoded) {
+      const state = decodeQueryState<ActuatorSizingQueryState>(encoded);
+
+      if (state) {
+        applyQueryState(state);
+      }
+    }
+
     userMotors = loadUserServoMotors();
     mounted = true;
   });
 
-  function encodeState(): string {
-    return btoa(
-      JSON.stringify({
+  $effect(() => {
+    if (!advancedMode) {
+      if (frictionForce !== DEFAULTS.frictionForce) frictionForce = DEFAULTS.frictionForce;
+      if (imbalanceFactor !== DEFAULTS.imbalanceFactor) imbalanceFactor = DEFAULTS.imbalanceFactor;
+      if (screwEfficiency !== DEFAULTS.screwEfficiency) screwEfficiency = DEFAULTS.screwEfficiency;
+      if (gearEfficiency !== DEFAULTS.gearEfficiency) gearEfficiency = DEFAULTS.gearEfficiency;
+      if (gearInertia !== DEFAULTS.gearInertia) gearInertia = DEFAULTS.gearInertia;
+    }
+  });
+
+  $effect(() => {
+    if (!mounted || typeof window === 'undefined') return;
+
+    const url = new URL(window.location.href);
+    url.searchParams.set(
+      STATE_KEY,
+      encodeQueryState({
         strokeLength,
         maxVelocity,
         acceleration,
@@ -178,132 +250,100 @@
         advancedMode,
       })
     );
-  }
-
-  function updateUrl(): void {
-    const url = new URL(window.location.href);
-    url.searchParams.set(STATE_KEY, encodeState());
     window.history.replaceState({}, '', url.toString());
-  }
+  });
 
-  $: if (mounted) {
-    (strokeLength,
-      maxVelocity,
-      acceleration,
-      deceleration,
-      dwellTime,
-      systemType,
-      actuatorAngle,
-      totalMass,
-      imbalanceFactor,
-      frictionForce,
-      ballscrewKey,
-      customPitch,
-      customDiameter,
-      screwLength,
-      screwEfficiency,
-      gearRatio,
-      gearEfficiency,
-      gearInertia,
-      safetyFactor,
-      holdingRequired,
-      advancedMode);
-    updateUrl();
-  }
-
-  $: if (!advancedMode) {
-    frictionForce = DEFAULTS.frictionForce;
-    imbalanceFactor = DEFAULTS.imbalanceFactor;
-    screwEfficiency = DEFAULTS.screwEfficiency;
-    gearEfficiency = DEFAULTS.gearEfficiency;
-    gearInertia = DEFAULTS.gearInertia;
-  }
-
-  $: lead_mm = ballscrewKey === 'custom' ? customPitch : (BALLSCREW_PITCHES[ballscrewKey] ?? DEFAULTS.customPitch);
-  $: screwDiameter_mm =
-    ballscrewKey === 'custom' ? customDiameter : (BALLSCREW_DIAMETERS[ballscrewKey] ?? DEFAULTS.customDiameter);
-  $: lead_m = lead_mm / 1000;
-  $: screwMass_kg = computeScrewMass(screwDiameter_mm, screwLength);
-  $: J_screw_rot = computeScrewRotationalInertia(screwMass_kg, screwDiameter_mm / 2 / 1000);
-
-  $: profile = computeTrapezoidalProfile(
-    strokeLength / 1000,
-    maxVelocity / 1000,
-    acceleration / 1000,
-    deceleration / 1000
+  const lead_mm = $derived(
+    ballscrewKey === 'custom' ? customPitch : (BALLSCREW_PITCHES[ballscrewKey] ?? DEFAULTS.customPitch)
   );
-  $: profileDiagram = buildMotionProfileDiagram({
-    t_accel_s: profile.t_accel_s,
-    t_const_s: profile.t_const_s,
-    t_decel_s: profile.t_decel_s,
-    dwellTime_s: dwellTime,
-  });
-  $: equivalentMassPerActuator_kg = computeForcePerActuator(totalMass, systemType, imbalanceFactor, actuatorAngle);
-  $: F_static_total = computeStaticForce(totalMass, frictionForce);
-  $: F_hold_total = computeHoldingForce(totalMass);
-  $: F_static_per = computeForcePerActuator(F_static_total, systemType, imbalanceFactor, actuatorAngle);
-  $: F_hold_per = holdingRequired
-    ? computeForcePerActuator(F_hold_total, systemType, imbalanceFactor, actuatorAngle)
-    : 0;
-  $: allMotors = [...BUILTIN_SERVO_MOTORS, ...userMotors];
-  $: maxG = Math.max(acceleration, deceleration) / 1000 / 9.81;
-  $: motionBasis = systemType === 'stewart' ? 'Actuator values' : 'Axis values';
-  $: unsortedMotorResults = allMotors.map((motor) => {
-    const effectiveGearRatio = autoGearRatio
-      ? findOptimalGearRatio(
-          {
-            mass_kg: equivalentMassPerActuator_kg,
-            lead_m,
-            F_static_N: F_static_per,
-            F_hold_N: F_hold_per,
-            acceleration_m_s2: acceleration / 1000,
-            deceleration_m_s2: deceleration / 1000,
-            v_peak_m_s: profile.v_peak_m_s,
-            t_accel_s: profile.t_accel_s,
-            t_const_s: profile.t_const_s,
-            t_decel_s: profile.t_decel_s,
-            dwellTime_s: dwellTime,
-            J_screw_rot_kgm2: J_screw_rot,
-            J_gear_kgm2: gearInertia,
-            gearEfficiency: gearEfficiency / 100,
-            screwEfficiency: screwEfficiency / 100,
-            safetyFactor_pct: safetyFactor,
-          } satisfies GearOptimizationContext,
-          motor
-        )
-      : gearRatio;
-    const J_load = computeLoadInertia(equivalentMassPerActuator_kg, lead_m, effectiveGearRatio);
-    const J_total = computeTotalInertia(motor.inertia_kgm2, gearInertia, J_screw_rot, J_load, effectiveGearRatio);
-    const phaseTorques = computePhaseTorques(
-      F_static_per,
-      F_hold_per,
-      J_total,
-      acceleration / 1000,
-      deceleration / 1000,
-      profile.v_peak_m_s,
-      lead_m,
-      effectiveGearRatio,
-      gearEfficiency / 100,
-      screwEfficiency / 100,
-      profile.t_accel_s,
-      profile.t_const_s,
-      profile.t_decel_s,
-      dwellTime
-    );
+  const screwDiameter_mm = $derived(
+    ballscrewKey === 'custom' ? customDiameter : (BALLSCREW_DIAMETERS[ballscrewKey] ?? DEFAULTS.customDiameter)
+  );
+  const lead_m = $derived(lead_mm / 1000);
+  const screwMass_kg = $derived(computeScrewMass(screwDiameter_mm, screwLength));
+  const J_screw_rot = $derived(computeScrewRotationalInertia(screwMass_kg, screwDiameter_mm / 2 / 1000));
 
-    return evaluateMotorForActuator(
-      motor,
-      phaseTorques.T_peak_Nm,
-      phaseTorques.T_rms_Nm,
-      phaseTorques.n_motor_rpm,
-      phaseTorques.P_peak_W,
-      J_load,
-      J_total,
-      safetyFactor,
-      effectiveGearRatio
-    );
-  });
-  $: motorResults = sortMotorResults(unsortedMotorResults, { key: sortKey, descending: sortDescending });
+  const profile = $derived(
+    computeTrapezoidalProfile(strokeLength / 1000, maxVelocity / 1000, acceleration / 1000, deceleration / 1000)
+  );
+  const profileDiagram = $derived(
+    buildMotionProfileDiagram({
+      t_accel_s: profile.t_accel_s,
+      t_const_s: profile.t_const_s,
+      t_decel_s: profile.t_decel_s,
+      dwellTime_s: dwellTime,
+    })
+  );
+  const equivalentMassPerActuator_kg = $derived(
+    computeForcePerActuator(totalMass, systemType, imbalanceFactor, actuatorAngle)
+  );
+  const F_static_total = $derived(computeStaticForce(totalMass, frictionForce));
+  const F_hold_total = $derived(computeHoldingForce(totalMass));
+  const F_static_per = $derived(computeForcePerActuator(F_static_total, systemType, imbalanceFactor, actuatorAngle));
+  const F_hold_per = $derived(
+    holdingRequired ? computeForcePerActuator(F_hold_total, systemType, imbalanceFactor, actuatorAngle) : 0
+  );
+  const allMotors = $derived([...BUILTIN_SERVO_MOTORS, ...userMotors]);
+  const maxG = $derived(Math.max(acceleration, deceleration) / 1000 / 9.81);
+  const motionBasis = $derived(systemType === 'stewart' ? 'Actuator values' : 'Axis values');
+  const unsortedMotorResults = $derived.by(() =>
+    allMotors.map((motor) => {
+      const effectiveGearRatio = autoGearRatio
+        ? findOptimalGearRatio(
+            {
+              mass_kg: equivalentMassPerActuator_kg,
+              lead_m,
+              F_static_N: F_static_per,
+              F_hold_N: F_hold_per,
+              acceleration_m_s2: acceleration / 1000,
+              deceleration_m_s2: deceleration / 1000,
+              v_peak_m_s: profile.v_peak_m_s,
+              t_accel_s: profile.t_accel_s,
+              t_const_s: profile.t_const_s,
+              t_decel_s: profile.t_decel_s,
+              dwellTime_s: dwellTime,
+              J_screw_rot_kgm2: J_screw_rot,
+              J_gear_kgm2: gearInertia,
+              gearEfficiency: gearEfficiency / 100,
+              screwEfficiency: screwEfficiency / 100,
+              safetyFactor_pct: safetyFactor,
+            } satisfies GearOptimizationContext,
+            motor
+          )
+        : gearRatio;
+      const J_load = computeLoadInertia(equivalentMassPerActuator_kg, lead_m, effectiveGearRatio);
+      const J_total = computeTotalInertia(motor.inertia_kgm2, gearInertia, J_screw_rot, J_load, effectiveGearRatio);
+      const phaseTorques = computePhaseTorques(
+        F_static_per,
+        F_hold_per,
+        J_total,
+        acceleration / 1000,
+        deceleration / 1000,
+        profile.v_peak_m_s,
+        lead_m,
+        effectiveGearRatio,
+        gearEfficiency / 100,
+        screwEfficiency / 100,
+        profile.t_accel_s,
+        profile.t_const_s,
+        profile.t_decel_s,
+        dwellTime
+      );
+
+      return evaluateMotorForActuator(
+        motor,
+        phaseTorques.T_peak_Nm,
+        phaseTorques.T_rms_Nm,
+        phaseTorques.n_motor_rpm,
+        phaseTorques.P_peak_W,
+        J_load,
+        J_total,
+        safetyFactor,
+        effectiveGearRatio
+      );
+    })
+  );
+  const motorResults = $derived(sortMotorResults(unsortedMotorResults, { key: sortKey, descending: sortDescending }));
 
   function onSortHeaderClick(key: SortKey) {
     const next = toggleSortState({ key: sortKey, descending: sortDescending }, key);
@@ -376,10 +416,10 @@
     addInertia = 0.00003;
   }
 
-  let hoveredResult: MotorEvaluationV2 | null = null;
-  let popupX = 0;
-  let popupY = 0;
-  let popupFlipLeft = false;
+  let hoveredResult = $state<MotorEvaluationV2 | null>(null);
+  let popupX = $state(0);
+  let popupY = $state(0);
+  let popupFlipLeft = $state(false);
 
   function onRowEnter(event: MouseEvent, result: MotorEvaluationV2) {
     hoveredResult = result;
@@ -443,7 +483,7 @@
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-center font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                on:click={() => onSortHeaderClick('status')}
+                onclick={() => onSortHeaderClick('status')}
               >
                 <span>Status</span>
               </button>
@@ -455,7 +495,7 @@
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                on:click={() => onSortHeaderClick('score')}
+                onclick={() => onSortHeaderClick('score')}
               >
                 <span>Score</span>
               </button>
@@ -467,7 +507,7 @@
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                on:click={() => onSortHeaderClick('peak')}
+                onclick={() => onSortHeaderClick('peak')}
               >
                 <span>Peak Tq</span>
               </button>
@@ -479,7 +519,7 @@
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                on:click={() => onSortHeaderClick('rms')}
+                onclick={() => onSortHeaderClick('rms')}
               >
                 <span>RMS Tq</span>
               </button>
@@ -491,7 +531,7 @@
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                on:click={() => onSortHeaderClick('speed')}
+                onclick={() => onSortHeaderClick('speed')}
               >
                 <span>Speed</span>
               </button>
@@ -503,7 +543,7 @@
               <button
                 type="button"
                 class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                on:click={() => onSortHeaderClick('inertia')}
+                onclick={() => onSortHeaderClick('inertia')}
               >
                 <span>Inertia</span>
               </button>
@@ -523,9 +563,9 @@
             {@const badgeLabel = result.status === 'fail' ? '✗ Fail' : result.status === 'warn' ? '⚠ Warn' : '✓ Pass'}
             <tr
               class="border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-default"
-              on:mouseenter={(event) => onRowEnter(event, result)}
-              on:mousemove={updatePopupPos}
-              on:mouseleave={onRowLeave}
+              onmouseenter={(event) => onRowEnter(event, result)}
+              onmousemove={updatePopupPos}
+              onmouseleave={onRowLeave}
             >
               <td class="px-3 py-2 font-sans font-medium text-gray-800 whitespace-nowrap sticky left-0 bg-white">
                 {result.motor.name}
@@ -544,7 +584,7 @@
               <td class="px-2 py-2">
                 {#if result.motor.source === 'user'}
                   <button
-                    on:click={() => deleteUserMotor(result.motor.id)}
+                    onclick={() => deleteUserMotor(result.motor.id)}
                     class="text-gray-300 hover:text-red-500 transition-colors leading-none"
                     title="Remove motor">✕</button
                   >
@@ -557,7 +597,7 @@
             <tr>
               <td colspan="9" class="px-3 py-2">
                 <button
-                  on:click={() => (addFormOpen = true)}
+                  onclick={() => (addFormOpen = true)}
                   class="text-[10px] font-sans font-semibold uppercase tracking-wide px-2.5 py-1 rounded border border-dashed border-gray-400 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-300 transition-colors"
                   >+ Add custom motor</button
                 >
@@ -641,10 +681,10 @@
                   </label>
                 </div>
                 <div class="flex gap-2 mt-2">
-                  <button on:click={addUserMotor} class="btn-primary text-xs py-1.5 px-3 rounded font-sans">Save</button
+                  <button onclick={addUserMotor} class="btn-primary text-xs py-1.5 px-3 rounded font-sans">Save</button
                   >
                   <button
-                    on:click={() => (addFormOpen = false)}
+                    onclick={() => (addFormOpen = false)}
                     class="text-xs text-gray-500 hover:text-gray-700 py-1.5 px-3 font-sans"
                   >
                     Cancel
@@ -705,7 +745,7 @@
           step={0.1}
           format={(value) => `${value.toFixed(1)} s`}
         />
-        <Button on:click={resetMotionProfile} label="Reset" title="Reset" />
+        <Button onclick={resetMotionProfile} label="Reset" title="Reset" />
       </Pane>
 
       <Pane title="System" position="inline">
@@ -758,7 +798,7 @@
               format={(value) => `×${value.toFixed(2)}`}
             />
           {/if}
-          <Button on:click={resetLoad} label="Reset" title="Reset" />
+          <Button onclick={resetLoad} label="Reset" title="Reset" />
         </Folder>
         <Folder title="Ball Screw">
           <List bind:value={ballscrewKey} options={BALLSCREW_OPTIONS} label="Type" />
@@ -798,7 +838,7 @@
               format={(value) => `${value}%`}
             />
           {/if}
-          <Button on:click={resetBallScrew} label="Reset" title="Reset" />
+          <Button onclick={resetBallScrew} label="Reset" title="Reset" />
         </Folder>
         <Folder title="Transmission">
           <Checkbox bind:value={autoGearRatio} label="Auto Gear Ratio" />
@@ -830,7 +870,7 @@
               format={(value) => `${value.toExponential(1)} kg·m²`}
             />
           {/if}
-          <Button on:click={resetTransmission} label="Reset" title="Reset" />
+          <Button onclick={resetTransmission} label="Reset" title="Reset" />
         </Folder>
       </Pane>
 

@@ -41,9 +41,12 @@ describe('MotionProfileDiagram', () => {
     expect(body).not.toContain('Position');
   });
 
-  it('renders the actuator sizing calculator with the integrated diagram near calculated outputs', () => {
+  it('renders the actuator sizing calculator table and diagram landmarks', () => {
     const { body } = renderComponent(ActuatorSizingCalculator);
 
+    expect(body).toContain('<table');
+    expect(body).toContain('Motor');
     expect(body).toContain('aria-label="Phase timing diagram"');
+    expect(body).toContain('Peak Tq');
   });
 });

@@ -1,6 +1,8 @@
 const utf8Encoder = new TextEncoder();
 const utf8Decoder = new TextDecoder();
 
+export type QueryStateRecord = Record<string, unknown>;
+
 function bytesToBase64(bytes: Uint8Array) {
   if (typeof Buffer !== 'undefined') {
     return Buffer.from(bytes).toString('base64');
@@ -23,15 +25,15 @@ function base64ToBytes(encoded: string) {
   return Uint8Array.from(atob(encoded), (char) => char.charCodeAt(0));
 }
 
-function isQueryStateRecord(value: unknown): value is Record<string, unknown> {
+function isQueryStateRecord(value: unknown): value is QueryStateRecord {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-export function encodeQueryState(state: Record<string, unknown>) {
+export function encodeQueryState(state: QueryStateRecord) {
   return bytesToBase64(utf8Encoder.encode(JSON.stringify(state)));
 }
 
-export function decodeQueryState<T extends Record<string, unknown> = Record<string, unknown>>(encoded: string): T | null {
+export function decodeQueryState<T extends QueryStateRecord = QueryStateRecord>(encoded: string): T | null {
   try {
     const decoded = JSON.parse(utf8Decoder.decode(base64ToBytes(encoded)));
 
