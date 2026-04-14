@@ -701,52 +701,55 @@
       <Pane title="Setting mode" position="inline">
         <Checkbox bind:value={advancedMode} label="Advanced" />
       </Pane>
-      <Pane title="Motion Profile" position="inline">
-        <Element>
-          <MotionProfileDiagram diagram={profileDiagram} />
-        </Element>
-        <Slider
-          bind:value={strokeLength}
-          label="Stroke"
-          min={10}
-          max={2000}
-          step={10}
-          format={(value) => `${value} mm`}
-        />
-        <Slider
-          bind:value={maxVelocity}
-          label="Max Velocity"
-          min={1}
-          max={1000}
-          step={1}
-          format={(value) => `${value} mm/s`}
-        />
-        <Slider
-          bind:value={acceleration}
-          label="Acceleration"
-          min={100}
-          max={20000}
-          step={100}
-          format={(value) => `${value} mm/s²`}
-        />
-        <Slider
-          bind:value={deceleration}
-          label="Deceleration"
-          min={100}
-          max={20000}
-          step={100}
-          format={(value) => `${value} mm/s²`}
-        />
-        <Slider
-          bind:value={dwellTime}
-          label="Dwell Time"
-          min={0}
-          max={5}
-          step={0.1}
-          format={(value) => `${value.toFixed(1)} s`}
-        />
-        <Button onclick={resetMotionProfile} label="Reset" title="Reset" />
-      </Pane>
+      <section aria-label="Motion Profile">
+        <h2 class="sr-only">Motion Profile</h2>
+        <Pane title="Motion Profile" position="inline">
+          <Element>
+            <MotionProfileDiagram diagram={profileDiagram} />
+          </Element>
+          <Slider
+            bind:value={strokeLength}
+            label="Stroke"
+            min={10}
+            max={2000}
+            step={10}
+            format={(value) => `${value} mm`}
+          />
+          <Slider
+            bind:value={maxVelocity}
+            label="Max Velocity"
+            min={1}
+            max={1000}
+            step={1}
+            format={(value) => `${value} mm/s`}
+          />
+          <Slider
+            bind:value={acceleration}
+            label="Acceleration"
+            min={100}
+            max={20000}
+            step={100}
+            format={(value) => `${value} mm/s²`}
+          />
+          <Slider
+            bind:value={deceleration}
+            label="Deceleration"
+            min={100}
+            max={20000}
+            step={100}
+            format={(value) => `${value} mm/s²`}
+          />
+          <Slider
+            bind:value={dwellTime}
+            label="Dwell Time"
+            min={0}
+            max={5}
+            step={0.1}
+            format={(value) => `${value.toFixed(1)} s`}
+          />
+          <Button onclick={resetMotionProfile} label="Reset" title="Reset" />
+        </Pane>
+      </section>
 
       <Pane title="System" position="inline">
         <List bind:value={systemType} options={SYSTEM_OPTIONS} label="Type" />
@@ -874,19 +877,22 @@
         </Folder>
       </Pane>
 
-      <Pane title="Calculated" position="inline">
-        <Monitor value={`${screwMass_kg.toFixed(3)} kg`} label="Screw mass" />
-        <Monitor value={`${equivalentMassPerActuator_kg.toFixed(2)} kg`} label="Mass / act" />
-        <Monitor value={`${F_static_per.toFixed(1)} N`} label="F_static / act" />
-        <Monitor value={`${F_hold_per.toFixed(1)} N`} label="F_hold / act" />
-        <Monitor value={`${(profile.v_peak_m_s * 1000).toFixed(1)} mm/s`} label="v_peak" />
-        <Monitor value={`${maxG.toFixed(2)} g`} label="Max accel" />
-        <Monitor
-          value={`${(profile.t_accel_s + profile.t_const_s + profile.t_decel_s).toFixed(3)} s`}
-          label="Cycle time"
-        />
-        <Monitor value={profile.isTriangular ? 'triangular' : 'trapezoidal'} label="Profile" />
-      </Pane>
+      <section aria-label="Calculated">
+        <h2 class="sr-only">Calculated</h2>
+        <Pane title="Calculated" position="inline">
+          <Monitor value={`${screwMass_kg.toFixed(3)} kg`} label="Screw mass" />
+          <Monitor value={`${equivalentMassPerActuator_kg.toFixed(2)} kg`} label="Mass / act" />
+          <Monitor value={`${F_static_per.toFixed(1)} N`} label="F_static / act" />
+          <Monitor value={`${F_hold_per.toFixed(1)} N`} label="F_hold / act" />
+          <Monitor value={`${(profile.v_peak_m_s * 1000).toFixed(1)} mm/s`} label="v_peak" />
+          <Monitor value={`${maxG.toFixed(2)} g`} label="Max accel" />
+          <Monitor
+            value={`${(profile.t_accel_s + profile.t_const_s + profile.t_decel_s).toFixed(3)} s`}
+            label="Cycle time"
+          />
+          <Monitor value={profile.isTriangular ? 'triangular' : 'trapezoidal'} label="Profile" />
+        </Pane>
+      </section>
     </div>
   </div>
 

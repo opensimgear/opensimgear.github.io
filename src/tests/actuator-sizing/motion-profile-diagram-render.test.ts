@@ -47,6 +47,8 @@ describe('MotionProfileDiagram', () => {
     expect(body).toContain('<table');
     expect(body).toContain('Motor');
     expect(body).toContain('aria-label="Phase timing diagram"');
+    expect(body).toContain('Motion Profile');
+    expect(body).toContain('Calculated');
     expect(body).toContain('Peak Tq');
   });
 });

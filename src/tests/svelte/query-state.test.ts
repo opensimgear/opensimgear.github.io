@@ -45,4 +45,21 @@ describe('query state helpers', () => {
 
     expect(decodeQueryState(encodeQueryState(state))).toEqual(state);
   });
+
+  it('round-trips actuator sizing query state shape', () => {
+    const state = {
+      strokeLength: 100,
+      maxVelocity: 300,
+      acceleration: 5000,
+      deceleration: 5000,
+      dwellTime: 0.1,
+      systemType: 'stewart',
+      actuatorAngle: 70,
+      totalMass: 150,
+      autoGearRatio: true,
+      advancedMode: false,
+    };
+
+    expect(decodeQueryState<typeof state>(encodeQueryState(state))).toEqual(state);
+  });
 });
