@@ -2,6 +2,10 @@ import { describe, expect, it } from 'vitest';
 
 import { decodeQueryState, encodeQueryState } from '../../components/calculator/shared/query-state';
 
+function encodeUtf8Base64(value: string) {
+  return Buffer.from(value, 'utf8').toString('base64');
+}
+
 describe('query state helpers', () => {
   it('round-trips query state through base64 json encoding', () => {
     const state = {
@@ -22,6 +26,23 @@ describe('query state helpers', () => {
   });
 
   it('returns null for valid base64 payloads with invalid json', () => {
-    expect(decodeQueryState(btoa('not json'))).toBeNull();
+    expect(decodeQueryState(encodeUtf8Base64('not json'))).toBeNull();
+  });
+
+  it('returns null for decoded null json values', () => {
+    expect(decodeQueryState(encodeUtf8Base64('null'))).toBeNull();
+  });
+
+  it('returns null for decoded array json values', () => {
+    expect(decodeQueryState(encodeUtf8Base64('[]'))).toBeNull();
+  });
+
+  it('round-trips unicode content safely', () => {
+    const state = {
+      label: 'héllo 世界',
+      emoji: '🛩️',
+    };
+
+    expect(decodeQueryState(encodeQueryState(state))).toEqual(state);
   });
 });
