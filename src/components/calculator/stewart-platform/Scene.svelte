@@ -34,6 +34,7 @@
 
   let lastValidTransformedPointsP = $state<Vector3[]>([]);
   let lastValidTransformedCor = $state(new Vector3());
+  let lastPointSets = $state<{ basePoints: Vector3[]; platformPoints: Vector3[] } | null>(null);
   let legStatuses = $state<LegStatus[]>(Array(6).fill('ok'));
   let transformedPointsP = $state<Vector3[]>([]);
   let transformedCor = $state(new Vector3());
@@ -67,14 +68,6 @@
     });
 
     return { basePoints, platformPoints };
-  });
-
-  $effect(() => {
-    pointSets;
-    lastValidTransformedPointsP = [];
-    lastValidTransformedCor = centerOfRotation;
-    transformedPointsP = [];
-    transformedCor = centerOfRotation;
   });
 
   $effect(() => {
@@ -113,15 +106,15 @@
       return 'ok';
     });
 
-    const valid =
-      lastValidTransformedPointsP.length === 0 ||
-      candidateStatuses.every((s) => s === 'ok');
+    const pointSetsChanged = lastPointSets !== pointSets;
+    const valid = pointSetsChanged || lastValidTransformedPointsP.length === 0 || candidateStatuses.every((s) => s === 'ok');
 
     if (valid) {
       transformedPointsP = candidatePointsP;
       transformedCor = candidateCor;
       lastValidTransformedPointsP = candidatePointsP;
       lastValidTransformedCor = candidateCor;
+      lastPointSets = pointSets;
     } else {
       transformedPointsP = lastValidTransformedPointsP;
       transformedCor = lastValidTransformedCor;
