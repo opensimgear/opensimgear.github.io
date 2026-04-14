@@ -54,4 +54,9 @@ describe('clampPlatformMovement', () => {
       },
     });
   });
+
+  it('preserves exact asymmetric z translation bounds', () => {
+    expect(clampPlatformMovement({ x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: -5 }, spec).translation.z).toBe(-5);
+    expect(clampPlatformMovement({ x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 30 }, spec).translation.z).toBe(30);
+  });
 });

@@ -5,6 +5,7 @@
   import { onMount } from 'svelte';
   import { Pane, Button, Slider, Folder, Point, RotationEuler, IntervalSlider, Monitor } from 'svelte-tweakpane-ui';
   import Scene from './Scene.svelte';
+  import { clampPlatformMovement } from './state';
 
   const DEFAULTS = {
     baseDiameter: 1.0,
@@ -291,12 +292,9 @@
 
   // Clamp current movement values whenever the actuator limits change.
   $: {
-    platformRotation.x = Math.max(-platformSpec.pitch, Math.min(platformSpec.pitch, platformRotation.x));
-    platformRotation.y = Math.max(-platformSpec.roll, Math.min(platformSpec.roll, platformRotation.y));
-    platformRotation.z = Math.max(-platformSpec.yaw, Math.min(platformSpec.yaw, platformRotation.z));
-    platformTranslation.x = Math.max(-platformSpec.transX, Math.min(platformSpec.transX, platformTranslation.x));
-    platformTranslation.y = Math.max(-platformSpec.transY, Math.min(platformSpec.transY, platformTranslation.y));
-    platformTranslation.z = Math.max(-platformSpec.transZDown, Math.min(platformSpec.transZUp, platformTranslation.z));
+    const movement = clampPlatformMovement(platformRotation, platformTranslation, platformSpec);
+    platformRotation = movement.rotation;
+    platformTranslation = movement.translation;
   }
 
   const alphaOptions = { min: 10, max: 360 / 3 - 10, step: 1, format: formatAlpha };
