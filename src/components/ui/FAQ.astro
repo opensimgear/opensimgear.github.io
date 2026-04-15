@@ -1,0 +1,39 @@
+---
+import type { FaqItem } from '~/data/faq';
+
+export interface Props {
+  intro?: string;
+  items: FaqItem[];
+}
+
+const { intro, items } = Astro.props as Props;
+---
+
+{intro && <p>{intro}</p>}
+
+{
+  items.map((item) => (
+    <section>
+      <h2>{item.question}</h2>
+      <p>{item.answer}</p>
+
+      {item.bullets && item.bullets.length > 0 && (
+        <ul>
+          {item.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      )}
+
+      {item.links && item.links.length > 0 && (
+        <ul>
+          {item.links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  ))
+}

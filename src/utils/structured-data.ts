@@ -1,3 +1,5 @@
+import type { FaqItem } from '../data/faq';
+
 type BuildSiteSchemasOptions = {
   site: string;
   title: string;
@@ -31,6 +33,20 @@ function toJsonString(value: unknown) {
   return JSON.stringify(value);
 }
 
+function toFaqAnswerText(item: FaqItem) {
+  const parts = [item.answer];
+
+  if (item.bullets?.length) {
+    parts.push(...item.bullets.map((bullet) => `- ${bullet}`));
+  }
+
+  if (item.links?.length) {
+    parts.push('Related links:', ...item.links.map((link) => `- ${link.label}`));
+  }
+
+  return parts.join('\n');
+}
+
 export function buildSiteSchemas({ site, title }: BuildSiteSchemasOptions) {
   return [
     toJsonString({
@@ -57,6 +73,21 @@ export function buildBreadcrumbSchema({ site, items }: BuildBreadcrumbSchemaOpti
       position: index + 1,
       name: breadcrumbItem.name,
       item: toStructuredDataUrl(site, breadcrumbItem.item),
+    })),
+  });
+}
+
+export function buildFaqSchema(items: FaqItem[]) {
+  return toJsonString({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: toFaqAnswerText(item),
+      },
     })),
   });
 }
