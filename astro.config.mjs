@@ -9,6 +9,7 @@ import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 import { buildDocsSidebar } from './src/utils/docs-sidebar.ts';
+import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 
 import { fileURLToPath } from 'url';
 
@@ -87,7 +88,9 @@ export default defineConfig({
       },
       plugins: [],
     }),
-    sitemap(),
+    sitemap({
+      filter: (page) => shouldIncludeInSitemap(new URL(page).pathname),
+    }),
     icon(),
     svelte(),
     sentry({

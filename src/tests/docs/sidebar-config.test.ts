@@ -245,7 +245,7 @@ sidebar:
 
     expect(sidebar).toContainEqual({
       label: 'Overview',
-      link: '/3rdparty/overview/',
+      link: '/3rdparty/',
     });
 
     const beltTensionerGroup = sidebar.find((item) => item.label === 'Belt Tensioner');
@@ -261,6 +261,31 @@ sidebar:
     expect(beltTensionerGroup.items).not.toContainEqual({
       label: 'Flag Ghost Belt Tensioner',
       link: '/docs/belt-tensioner/flagghost/',
+    });
+  });
+
+  it('maps a top-level index file to the base path root', () => {
+    const fixtureRoot = createDocsFixture({
+      'index.md': `---
+title: Overview
+sidebar:
+  order: 0
+---
+`,
+      'belt-tensioner/index.md': `---
+title: Belt Tensioner Overview
+sidebar:
+  label: Belt Tensioner
+  order: 1
+---
+`,
+    });
+
+    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot, basePath: '/3rdparty' });
+
+    expect(sidebar).toContainEqual({
+      label: 'Overview',
+      link: '/3rdparty/',
     });
   });
 });
