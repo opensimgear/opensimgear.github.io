@@ -81,3 +81,8 @@ changing site-wide configuration.
 - ESLint: flat config, Astro + TypeScript ESLint + jsx-a11y rules
 - Unused variables prefixed with `_` are allowed; `@typescript-eslint/no-non-null-assertion` is off
 - `.editorconfig`: 2-space indent, LF line endings, UTF-8
+
+### SEO
+
+- when verifying SEO use the seo-audit skill
+- also read the google SEO article here https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=en
