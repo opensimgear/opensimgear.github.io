@@ -1,10 +1,14 @@
 # Actuator Motor Sizing Calculator Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or
+> superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build an engineering-grade motor selection calculator for ball-screw linear actuators supporting dynamic motion profiles, multi-actuator configurations, and ranked motor evaluation.
+**Goal:** Build an engineering-grade motor selection calculator for ball-screw linear actuators supporting dynamic
+motion profiles, multi-actuator configurations, and ranked motor evaluation.
 
-**Architecture:** Pure TypeScript calculation modules (profile → forces → dynamics → evaluation) with a Svelte UI component following the motor-scaling calculator pattern. All calculation logic is unit-tested independently of the UI.
+**Architecture:** Pure TypeScript calculation modules (profile → forces → dynamics → evaluation) with a Svelte UI
+component using the same split-panel calculator pattern as the current actuator-sizing widget. All calculation logic is
+unit-tested independently of the UI.
 
 **Tech Stack:** TypeScript, Svelte 5, Vitest, svelte-tweakpane-ui, Tailwind CSS, Astro
 
@@ -12,26 +16,27 @@
 
 ## File Map
 
-| File | Action | Responsibility |
-|------|--------|----------------|
-| `src/components/calculator/actuator-sizing/types.ts` | Create | All shared interfaces/types |
-| `src/components/calculator/actuator-sizing/profile.ts` | Create | Trapezoidal motion profile timing |
-| `src/components/calculator/actuator-sizing/forces.ts` | Create | Axial force + multi-actuator distribution |
-| `src/components/calculator/actuator-sizing/dynamics.ts` | Create | Inertia, torque, speed, power, RMS |
-| `src/components/calculator/actuator-sizing/evaluation.ts` | Create | Motor evaluation, scoring, ranking |
-| `src/components/calculator/actuator-sizing/motors.ts` | Create | Servo motor database |
-| `src/components/calculator/actuator-sizing/index.svelte` | Create | Main UI component |
-| `src/tests/actuator-sizing/profile.test.ts` | Create | Tests for profile.ts |
-| `src/tests/actuator-sizing/forces.test.ts` | Create | Tests for forces.ts |
-| `src/tests/actuator-sizing/dynamics.test.ts` | Create | Tests for dynamics.ts |
-| `src/tests/actuator-sizing/evaluation.test.ts` | Create | Tests for evaluation.ts |
-| `src/content/docs/calculators/actuator-sizing.mdx` | Create | Documentation page |
+| File                                                      | Action | Responsibility                            |
+| --------------------------------------------------------- | ------ | ----------------------------------------- |
+| `src/components/calculator/actuator-sizing/types.ts`      | Create | All shared interfaces/types               |
+| `src/components/calculator/actuator-sizing/profile.ts`    | Create | Trapezoidal motion profile timing         |
+| `src/components/calculator/actuator-sizing/forces.ts`     | Create | Axial force + multi-actuator distribution |
+| `src/components/calculator/actuator-sizing/dynamics.ts`   | Create | Inertia, torque, speed, power, RMS        |
+| `src/components/calculator/actuator-sizing/evaluation.ts` | Create | Motor evaluation, scoring, ranking        |
+| `src/components/calculator/actuator-sizing/motors.ts`     | Create | Servo motor database                      |
+| `src/components/calculator/actuator-sizing/index.svelte`  | Create | Main UI component                         |
+| `src/tests/actuator-sizing/profile.test.ts`               | Create | Tests for profile.ts                      |
+| `src/tests/actuator-sizing/forces.test.ts`                | Create | Tests for forces.ts                       |
+| `src/tests/actuator-sizing/dynamics.test.ts`              | Create | Tests for dynamics.ts                     |
+| `src/tests/actuator-sizing/evaluation.test.ts`            | Create | Tests for evaluation.ts                   |
+| `src/content/docs/calculators/actuator-sizing.mdx`        | Create | Documentation page                        |
 
 ---
 
 ## Task 1: Define Shared Types
 
 **Files:**
+
 - Create: `src/components/calculator/actuator-sizing/types.ts`
 
 - [ ] **Step 1: Write the types file**
@@ -100,8 +105,8 @@ export interface MotorEvaluationV2 {
 
 - [ ] **Step 2: Verify TypeScript compiles**
 
-Run: `pnpm astro check 2>&1 | head -20`
-Expected: No errors in the new file (may show pre-existing errors in other files)
+Run: `pnpm astro check 2>&1 | head -20` Expected: No errors in the new file (may show pre-existing errors in other
+files)
 
 - [ ] **Step 3: Commit**
 
@@ -115,6 +120,7 @@ git commit -m "feat(actuator-sizing): add shared types"
 ## Task 2: Motion Profile Calculations
 
 **Files:**
+
 - Create: `src/components/calculator/actuator-sizing/profile.ts`
 - Create: `src/tests/actuator-sizing/profile.test.ts`
 
@@ -167,9 +173,7 @@ describe('computeTrapezoidalProfile', () => {
   it('total motion distance equals stroke for trapezoidal', () => {
     const stroke = 0.8;
     const r = computeTrapezoidalProfile(stroke, 0.3, 5.0, 5.0);
-    const d = 0.5 * r.v_peak_m_s * r.t_accel_s
-            + r.v_peak_m_s * r.t_const_s
-            + 0.5 * r.v_peak_m_s * r.t_decel_s;
+    const d = 0.5 * r.v_peak_m_s * r.t_accel_s + r.v_peak_m_s * r.t_const_s + 0.5 * r.v_peak_m_s * r.t_decel_s;
     expect(d).toBeCloseTo(stroke, 6);
   });
 });
@@ -177,8 +181,8 @@ describe('computeTrapezoidalProfile', () => {
 
 - [ ] **Step 2: Run tests — verify they fail**
 
-Run: `pnpm vitest run src/tests/actuator-sizing/profile.test.ts`
-Expected: FAIL — "Cannot find module '../../components/calculator/actuator-sizing/profile'"
+Run: `pnpm vitest run src/tests/actuator-sizing/profile.test.ts` Expected: FAIL — "Cannot find module
+'../../components/calculator/actuator-sizing/profile'"
 
 - [ ] **Step 3: Implement profile.ts**
 
@@ -214,9 +218,7 @@ export function computeTrapezoidalProfile(
   }
 
   // Triangular fallback: stroke = 0.5 * v² * (1/a + 1/d)
-  const v_peak = Math.sqrt(
-    (2 * strokeLength_m) / (1 / acceleration_m_s2 + 1 / deceleration_m_s2)
-  );
+  const v_peak = Math.sqrt((2 * strokeLength_m) / (1 / acceleration_m_s2 + 1 / deceleration_m_s2));
   return {
     t_accel_s: v_peak / acceleration_m_s2,
     t_const_s: 0,
@@ -229,8 +231,7 @@ export function computeTrapezoidalProfile(
 
 - [ ] **Step 4: Run tests — verify they pass**
 
-Run: `pnpm vitest run src/tests/actuator-sizing/profile.test.ts`
-Expected: PASS — 5 tests pass
+Run: `pnpm vitest run src/tests/actuator-sizing/profile.test.ts` Expected: PASS — 5 tests pass
 
 - [ ] **Step 5: Commit**
 
@@ -244,6 +245,7 @@ git commit -m "feat(actuator-sizing): motion profile timing calculations"
 ## Task 3: Axial Force Calculations
 
 **Files:**
+
 - Create: `src/components/calculator/actuator-sizing/forces.ts`
 - Create: `src/tests/actuator-sizing/forces.test.ts`
 
@@ -320,12 +322,12 @@ describe('computeForcePerActuator', () => {
 
   it('divides by 6*cos(angle) for Stewart platform', () => {
     // 45 degrees: cos(45°) = sqrt(2)/2 ≈ 0.7071
-    const expected = 1000 / (6 * Math.cos(Math.PI / 4)) * 1.0;
+    const expected = (1000 / (6 * Math.cos(Math.PI / 4))) * 1.0;
     expect(computeForcePerActuator(1000, 'stewart', 1.0, 45)).toBeCloseTo(expected, 3);
   });
 
   it('applies imbalance factor for Stewart platform', () => {
-    const expected = 1000 / (6 * Math.cos(Math.PI / 4)) * 1.2;
+    const expected = (1000 / (6 * Math.cos(Math.PI / 4))) * 1.2;
     expect(computeForcePerActuator(1000, 'stewart', 1.2, 45)).toBeCloseTo(expected, 3);
   });
 });
@@ -333,8 +335,8 @@ describe('computeForcePerActuator', () => {
 
 - [ ] **Step 2: Run tests — verify they fail**
 
-Run: `pnpm vitest run src/tests/actuator-sizing/forces.test.ts`
-Expected: FAIL — "Cannot find module '../../components/calculator/actuator-sizing/forces'"
+Run: `pnpm vitest run src/tests/actuator-sizing/forces.test.ts` Expected: FAIL — "Cannot find module
+'../../components/calculator/actuator-sizing/forces'"
 
 - [ ] **Step 3: Implement forces.ts**
 
@@ -347,11 +349,7 @@ const G = 9.81; // m/s²
 /**
  * Gravity component of axial force for a given axis orientation.
  */
-export function computeGravityForce(
-  mass_kg: number,
-  orientation: AxisOrientation,
-  inclineAngle_deg: number
-): number {
+export function computeGravityForce(mass_kg: number, orientation: AxisOrientation, inclineAngle_deg: number): number {
   switch (orientation) {
     case 'horizontal':
       return 0;
@@ -420,8 +418,7 @@ export function computeForcePerActuator(
 
 - [ ] **Step 4: Run tests — verify they pass**
 
-Run: `pnpm vitest run src/tests/actuator-sizing/forces.test.ts`
-Expected: PASS — 9 tests pass
+Run: `pnpm vitest run src/tests/actuator-sizing/forces.test.ts` Expected: PASS — 9 tests pass
 
 - [ ] **Step 5: Commit**
 
@@ -435,12 +432,14 @@ git commit -m "feat(actuator-sizing): axial force and multi-actuator distributio
 ## Task 4: Dynamics Calculations
 
 **Files:**
+
 - Create: `src/components/calculator/actuator-sizing/dynamics.ts`
 - Create: `src/tests/actuator-sizing/dynamics.test.ts`
 
 - [ ] **Step 1: Write the failing tests**
 
 Reference values for this test suite (derived manually):
+
 - mass=50 kg, lead=0.01 m, gearRatio=1, screwDia=0.016 m, screwLen=0.5 m
 - screwMass = 7850 × π × 0.008² × 0.5 ≈ 0.7892 kg
 - J_screw_rot = 0.5 × 0.7892 × 0.008² = 2.525e-5 kg·m²
@@ -532,7 +531,7 @@ describe('computeMotorSpeedRPM', () => {
 describe('computeAngularAcceleration', () => {
   it('returns a * 2π * gearRatio / lead', () => {
     // a=5, lead=0.01, ratio=1 → 5 * 2π / 0.01 = 3141.59 rad/s²
-    expect(computeAngularAcceleration(5, 0.01, 1)).toBeCloseTo(5 * 2 * Math.PI / 0.01, 3);
+    expect(computeAngularAcceleration(5, 0.01, 1)).toBeCloseTo((5 * 2 * Math.PI) / 0.01, 3);
   });
 });
 
@@ -562,20 +561,20 @@ describe('computePhaseTorques', () => {
   const J_total = computeTotalInertia(3e-5, 0, J_screw_rot, J_load, 1);
 
   const result = computePhaseTorques(
-    50,   // F_static_N (friction only, horizontal)
-    0,    // F_hold_N (horizontal, no holding needed)
+    50, // F_static_N (friction only, horizontal)
+    0, // F_hold_N (horizontal, no holding needed)
     J_total,
-    5,    // acceleration_m_s2
-    5,    // deceleration_m_s2
-    0.3,  // v_peak_m_s
+    5, // acceleration_m_s2
+    5, // deceleration_m_s2
+    0.3, // v_peak_m_s
     0.01, // lead_m
-    1,    // gearRatio
-    1.0,  // gearEfficiency
-    0.9,  // screwEfficiency
+    1, // gearRatio
+    1.0, // gearEfficiency
+    0.9, // screwEfficiency
     0.06, // t_accel_s
-    1.607,// t_const_s
+    1.607, // t_const_s
     0.06, // t_decel_s
-    0.1   // dwellTime_s
+    0.1 // dwellTime_s
   );
 
   it('T_accel includes inertial torque (> T_const)', () => {
@@ -610,8 +609,8 @@ describe('computePhaseTorques', () => {
 
 - [ ] **Step 2: Run tests — verify they fail**
 
-Run: `pnpm vitest run src/tests/actuator-sizing/dynamics.test.ts`
-Expected: FAIL — "Cannot find module '../../components/calculator/actuator-sizing/dynamics'"
+Run: `pnpm vitest run src/tests/actuator-sizing/dynamics.test.ts` Expected: FAIL — "Cannot find module
+'../../components/calculator/actuator-sizing/dynamics'"
 
 - [ ] **Step 3: Implement dynamics.ts**
 
@@ -663,11 +662,7 @@ export function computeMotorSpeedRPM(velocity_m_s: number, lead_m: number, gearR
 }
 
 /** Motor shaft angular acceleration [rad/s²] for a given linear acceleration. */
-export function computeAngularAcceleration(
-  linear_accel_m_s2: number,
-  lead_m: number,
-  gearRatio: number
-): number {
+export function computeAngularAcceleration(linear_accel_m_s2: number, lead_m: number, gearRatio: number): number {
   return (linear_accel_m_s2 * 2 * Math.PI * gearRatio) / lead_m;
 }
 
@@ -721,19 +716,11 @@ export function computePhaseTorques(
 
   const t_total = t_accel_s + t_const_s + t_decel_s + dwellTime_s;
   const T_rms = Math.sqrt(
-    (T_accel ** 2 * t_accel_s +
-      T_const ** 2 * t_const_s +
-      T_decel ** 2 * t_decel_s +
-      T_hold ** 2 * dwellTime_s) /
+    (T_accel ** 2 * t_accel_s + T_const ** 2 * t_const_s + T_decel ** 2 * t_decel_s + T_hold ** 2 * dwellTime_s) /
       t_total
   );
 
-  const T_peak = Math.max(
-    Math.abs(T_accel),
-    Math.abs(T_const),
-    Math.abs(T_decel),
-    Math.abs(T_hold)
-  );
+  const T_peak = Math.max(Math.abs(T_accel), Math.abs(T_const), Math.abs(T_decel), Math.abs(T_hold));
 
   const n_motor_rpm = computeMotorSpeedRPM(v_peak_m_s, lead_m, gearRatio);
   const omega = (n_motor_rpm * 2 * Math.PI) / 60;
@@ -754,8 +741,7 @@ export function computePhaseTorques(
 
 - [ ] **Step 4: Run tests — verify they pass**
 
-Run: `pnpm vitest run src/tests/actuator-sizing/dynamics.test.ts`
-Expected: PASS — all tests pass
+Run: `pnpm vitest run src/tests/actuator-sizing/dynamics.test.ts` Expected: PASS — all tests pass
 
 - [ ] **Step 5: Commit**
 
@@ -769,6 +755,7 @@ git commit -m "feat(actuator-sizing): inertia, torque, speed, and RMS dynamics"
 ## Task 5: Motor Evaluation and Ranking
 
 **Files:**
+
 - Create: `src/components/calculator/actuator-sizing/evaluation.ts`
 - Create: `src/tests/actuator-sizing/evaluation.test.ts`
 
@@ -821,14 +808,14 @@ describe('computeScore', () => {
   });
 
   it('gives higher score for better-utilized motor (closer to limits)', () => {
-    const sBig = computeScore(0.2, 10.0, 0.8, 30.0, 2160, 10000, 4.2);  // massively oversized
-    const sFit = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4.2);     // well-matched
+    const sBig = computeScore(0.2, 10.0, 0.8, 30.0, 2160, 10000, 4.2); // massively oversized
+    const sFit = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4.2); // well-matched
     expect(sFit).toBeGreaterThan(sBig);
   });
 
   it('penalizes inertia ratio > 10', () => {
-    const sNormal = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4);   // ratio=4
-    const sBad = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 20);    // ratio=20
+    const sNormal = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 4); // ratio=4
+    const sBad = computeScore(0.2, 2.0, 0.8, 6.0, 2160, 3000, 20); // ratio=20
     expect(sBad).toBeLessThan(sNormal);
   });
 });
@@ -836,13 +823,13 @@ describe('computeScore', () => {
 describe('evaluateMotorForActuator', () => {
   const result = evaluateMotorForActuator(
     testMotor,
-    0.668,  // T_peak_Nm
+    0.668, // T_peak_Nm
     0.1716, // T_rms_Nm
-    1800,   // n_rpm
-    126,    // P_peak_W
+    1800, // n_rpm
+    126, // P_peak_W
     1.267e-4, // J_load
     1.845e-4, // J_total
-    20      // safetyFactor_pct
+    20 // safetyFactor_pct
   );
 
   it('applies safety factor to required values', () => {
@@ -880,18 +867,32 @@ describe('evaluateMotorForActuator', () => {
   it('warns when inertia ratio > 10', () => {
     // Use high J_load to force inertia ratio > 10
     const J_load_high = testMotor.inertia_kgm2 * 15;
-    const r = evaluateMotorForActuator(testMotor, 0.5, 0.2, 1000, 100, J_load_high, J_load_high + testMotor.inertia_kgm2, 0);
+    const r = evaluateMotorForActuator(
+      testMotor,
+      0.5,
+      0.2,
+      1000,
+      100,
+      J_load_high,
+      J_load_high + testMotor.inertia_kgm2,
+      0
+    );
     expect(r.status).toBe('warn');
     expect(r.inertiaRatio).toBeGreaterThan(10);
   });
 });
 
 describe('rankMotors', () => {
-  const smallMotor: ServoMotor = { ...testMotor, id: 'small', name: 'Small', ratedTorque_Nm: 0.1, peakTorque_Nm: 0.3, maxRPM: 5000, inertia_kgm2: 1e-5 };
-  const results = rankMotors(
-    [smallMotor, testMotor],
-    0.668, 0.1716, 1800, 126, 1.267e-4, 1.845e-4, 20
-  );
+  const smallMotor: ServoMotor = {
+    ...testMotor,
+    id: 'small',
+    name: 'Small',
+    ratedTorque_Nm: 0.1,
+    peakTorque_Nm: 0.3,
+    maxRPM: 5000,
+    inertia_kgm2: 1e-5,
+  };
+  const results = rankMotors([smallMotor, testMotor], 0.668, 0.1716, 1800, 126, 1.267e-4, 1.845e-4, 20);
 
   it('returns one result per motor', () => {
     expect(results).toHaveLength(2);
@@ -909,8 +910,8 @@ describe('rankMotors', () => {
 
 - [ ] **Step 2: Run tests — verify they fail**
 
-Run: `pnpm vitest run src/tests/actuator-sizing/evaluation.test.ts`
-Expected: FAIL — "Cannot find module '../../components/calculator/actuator-sizing/evaluation'"
+Run: `pnpm vitest run src/tests/actuator-sizing/evaluation.test.ts` Expected: FAIL — "Cannot find module
+'../../components/calculator/actuator-sizing/evaluation'"
 
 - [ ] **Step 3: Implement evaluation.ts**
 
@@ -969,12 +970,7 @@ export function evaluateMotorForActuator(
   let status: 'pass' | 'warn' | 'fail';
   if (peakTorqueMargin_pct < 0 || speedMargin_pct < 0 || rmsTorqueMargin_pct < 0) {
     status = 'fail';
-  } else if (
-    peakTorqueMargin_pct < 20 ||
-    rmsTorqueMargin_pct < 20 ||
-    speedMargin_pct < 20 ||
-    inertiaRatio > 10
-  ) {
+  } else if (peakTorqueMargin_pct < 20 || rmsTorqueMargin_pct < 20 || speedMargin_pct < 20 || inertiaRatio > 10) {
     status = 'warn';
   } else {
     status = 'pass';
@@ -1032,13 +1028,11 @@ export function rankMotors(
 
 - [ ] **Step 4: Run tests — verify they pass**
 
-Run: `pnpm vitest run src/tests/actuator-sizing/evaluation.test.ts`
-Expected: PASS — all tests pass
+Run: `pnpm vitest run src/tests/actuator-sizing/evaluation.test.ts` Expected: PASS — all tests pass
 
 - [ ] **Step 5: Run full test suite to check no regressions**
 
-Run: `pnpm test`
-Expected: all existing tests plus new tests pass
+Run: `pnpm test` Expected: all existing tests plus new tests pass
 
 - [ ] **Step 6: Commit**
 
@@ -1052,6 +1046,7 @@ git commit -m "feat(actuator-sizing): motor evaluation, scoring, and ranking"
 ## Task 6: Servo Motor Database
 
 **Files:**
+
 - Create: `src/components/calculator/actuator-sizing/motors.ts`
 
 - [ ] **Step 1: Write the motors file**
@@ -1250,9 +1245,11 @@ git commit -m "feat(actuator-sizing): servo motor database with 10 builtin motor
 ## Task 7: UI Component
 
 **Files:**
+
 - Create: `src/components/calculator/actuator-sizing/index.svelte`
 
-This component follows the same architecture as `src/components/calculator/motor-scaling/index.svelte`:
+This component follows the same architecture as `src/components/calculator/actuator-sizing/index.svelte`:
+
 - Left column: sortable results table
 - Right column: stacked Tweakpane settings panels
 - Hover popup with per-motor detail
@@ -1474,7 +1471,10 @@ This component follows the same architecture as `src/components/calculator/motor
 </script>
 ```
 
-> **Note for implementer:** The `rankMotors` function takes scalar torque/speed values (not per-motor). Since `J_total` is motor-specific (it includes `motor.inertia_kgm2`), the phase torques differ per motor. In the Svelte reactive block, compute phase torques per motor and call `evaluateMotorForActuator` directly, then sort the results. Replace the `rankMotors` call above with:
+> **Note for implementer:** The `rankMotors` function takes scalar torque/speed values (not per-motor). Since `J_total`
+> is motor-specific (it includes `motor.inertia_kgm2`), the phase torques differ per motor. In the Svelte reactive
+> block, compute phase torques per motor and call `evaluateMotorForActuator` directly, then sort the results. Replace
+> the `rankMotors` call above with:
 
 ```svelte
 <script lang="ts">
@@ -1508,11 +1508,12 @@ This component follows the same architecture as `src/components/calculator/motor
 </script>
 ```
 
-Continue with the template and hover popup following the exact same patterns as `src/components/calculator/motor-scaling/index.svelte`:
+Continue with the template and hover popup following the exact same patterns as
+`src/components/calculator/actuator-sizing/index.svelte`:
 
 - [ ] **Step 2: Write the template section**
 
-The template follows the motor-scaling layout exactly:
+The template follows the actuator-sizing layout exactly:
 
 ```svelte
 <div class="w-full not-content border border-black rounded overflow-hidden">
@@ -1626,7 +1627,7 @@ The template follows the motor-scaling layout exactly:
     </div>
   </div>
 
-  <!-- Hover popup (same pattern as motor-scaling) -->
+  <!-- Hover popup (same pattern as actuator-sizing) -->
   {#if hoveredResult}
     <div
       class="fixed z-50 pointer-events-none bg-white border border-gray-200 rounded shadow-xl text-xs font-mono"
@@ -1678,41 +1679,43 @@ The template follows the motor-scaling layout exactly:
 Add hover state and helper functions in the `<script>` block:
 
 ```typescript
-  // ─── Hover popup ─────────────────────────────────────────────────────────
-  let hoveredResult: MotorEvaluationV2 | null = null;
-  let popupX = 0;
-  let popupY = 0;
-  let popupFlipLeft = false;
+// ─── Hover popup ─────────────────────────────────────────────────────────
+let hoveredResult: MotorEvaluationV2 | null = null;
+let popupX = 0;
+let popupY = 0;
+let popupFlipLeft = false;
 
-  function onRowEnter(e: MouseEvent, result: MotorEvaluationV2) {
-    hoveredResult = result;
-    updatePopupPos(e);
-  }
-  function updatePopupPos(e: MouseEvent) {
-    popupX = e.clientX;
-    popupY = e.clientY;
-    popupFlipLeft = typeof window !== 'undefined' && e.clientX > window.innerWidth * 0.55;
-  }
-  function onRowLeave() { hoveredResult = null; }
+function onRowEnter(e: MouseEvent, result: MotorEvaluationV2) {
+  hoveredResult = result;
+  updatePopupPos(e);
+}
+function updatePopupPos(e: MouseEvent) {
+  popupX = e.clientX;
+  popupY = e.clientY;
+  popupFlipLeft = typeof window !== 'undefined' && e.clientX > window.innerWidth * 0.55;
+}
+function onRowLeave() {
+  hoveredResult = null;
+}
 
-  function marginColor(m: number): string {
-    if (m < 0) return '#ef4444';
-    if (m < 20) return '#f59e0b';
-    return '#22c55e';
-  }
+function marginColor(m: number): string {
+  if (m < 0) return '#ef4444';
+  if (m < 20) return '#f59e0b';
+  return '#22c55e';
+}
 
-  function marginBar(margin: number): string {
-    const fill = Math.min(100, Math.max(0, ((margin + 100) / 200) * 100));
-    const color = marginColor(margin);
-    const label = (margin >= 0 ? '+' : '') + margin.toFixed(0) + '%';
-    return `<div class="flex flex-row items-center gap-1.5 text-[11px] leading-none">
+function marginBar(margin: number): string {
+  const fill = Math.min(100, Math.max(0, ((margin + 100) / 200) * 100));
+  const color = marginColor(margin);
+  const label = (margin >= 0 ? '+' : '') + margin.toFixed(0) + '%';
+  return `<div class="flex flex-row items-center gap-1.5 text-[11px] leading-none">
       <div class="relative h-1.5 w-10 bg-gray-200 rounded overflow-visible shrink-0">
         <div class="absolute inset-y-0 left-0 rounded" style="width:${fill}%;background-color:${color}"></div>
         <div class="absolute inset-y-[-2px] w-px bg-gray-500" style="left:50%"></div>
       </div>
       <span style="color:${color}" class="whitespace-nowrap">${label}</span>
     </div>`;
-  }
+}
 ```
 
 Add the `<style>` block:
@@ -1732,6 +1735,7 @@ Add the `<style>` block:
 Run: `pnpm dev` then open `http://localhost:4321/calculators/actuator-sizing` in browser.
 
 Verify:
+
 - Left table shows all 10 motors with status badges
 - Settings panels appear on the right
 - Changing stroke/mass/velocity updates the table in real time
@@ -1752,6 +1756,7 @@ git commit -m "feat(actuator-sizing): Svelte UI with motion profile, multi-actua
 ## Task 8: Documentation Page
 
 **Files:**
+
 - Create: `src/content/docs/calculators/actuator-sizing.mdx`
 
 - [ ] **Step 1: Write the doc page**
@@ -1760,9 +1765,8 @@ git commit -m "feat(actuator-sizing): Svelte UI with motion profile, multi-actua
 ---
 title: Actuator Motor Sizing Calculator
 description:
-  Engineering-grade motor selection tool for ball-screw linear actuators. Enter
-  your motion profile, load, and screw geometry to find suitable servo motors
-  with dynamic torque (peak and RMS), speed, and inertia analysis.
+  Engineering-grade motor selection tool for ball-screw linear actuators. Enter your motion profile, load, and screw
+  geometry to find suitable servo motors with dynamic torque (peak and RMS), speed, and inertia analysis.
 tableOfContents: false
 ---
 
@@ -1772,28 +1776,45 @@ import ActuatorSizingCalc from '~/components/calculator/actuator-sizing/index.sv
 
 ## Actuator Motor Sizing
 
-Selecting a motor for a ball-screw linear actuator requires more than matching peak force — it requires matching the full dynamic load: inertia during acceleration, RMS heating over a complete motion cycle, and speed at the required stroke rate.
+Selecting a motor for a ball-screw linear actuator requires more than matching peak force — it requires matching the
+full dynamic load: inertia during acceleration, RMS heating over a complete motion cycle, and speed at the required
+stroke rate.
 
-This calculator takes a complete motion profile (stroke, velocity, acceleration, dwell), applies the screw geometry and transmission, and scores every motor in the database against peak torque, RMS torque, and speed constraints with a configurable safety factor.
+This calculator takes a complete motion profile (stroke, velocity, acceleration, dwell), applies the screw geometry and
+transmission, and scores every motor in the database against peak torque, RMS torque, and speed constraints with a
+configurable safety factor.
 
 ### How to use
 
-1. **Motion Profile** — Set the stroke length, peak velocity, and acceleration/deceleration rates. The calculator computes trapezoidal profile timing and flags triangular profiles (stroke too short to reach peak velocity).
-2. **System** — Choose Single Axis, 4-Actuator Platform, or 6-Actuator Stewart Platform. For Stewart, set the actuator angle; the calculator divides total platform force across actuators using the geometric projection.
-3. **Load** — Enter the total moving mass, friction, external forces, guide preload, and an imbalance factor for uneven loading.
-4. **Axis** — Set horizontal, vertical, or inclined orientation. The calculator adds gravity loading for non-horizontal axes.
-5. **Ball Screw** — Select a standard size (e.g. 1610 = 16mm diameter, 10mm pitch) or enter custom dimensions. Adjust efficiency for the actual screw type.
-6. **Transmission** — Set gear ratio, efficiency, and gear inertia if a belt or gearbox is used. Direct drive defaults to ratio 1:1.
-7. **Safety** — Safety factor multiplies all requirements before checking motor limits. Enable Holding Required for vertical axes that must hold position.
-8. **Results table** — Motors sorted by status (Pass → Warn → Fail) then by fit score. Margin bars show headroom above the required value. Hover a row for a full torque/speed/inertia breakdown.
+1. **Motion Profile** — Set the stroke length, peak velocity, and acceleration/deceleration rates. The calculator
+   computes trapezoidal profile timing and flags triangular profiles (stroke too short to reach peak velocity).
+2. **System** — Choose Single Axis, 4-Actuator Platform, or 6-Actuator Stewart Platform. For Stewart, set the actuator
+   angle; the calculator divides total platform force across actuators using the geometric projection.
+3. **Load** — Enter the total moving mass, friction, external forces, guide preload, and an imbalance factor for uneven
+   loading.
+4. **Axis** — Set horizontal, vertical, or inclined orientation. The calculator adds gravity loading for non-horizontal
+   axes.
+5. **Ball Screw** — Select a standard size (e.g. 1610 = 16mm diameter, 10mm pitch) or enter custom dimensions. Adjust
+   efficiency for the actual screw type.
+6. **Transmission** — Set gear ratio, efficiency, and gear inertia if a belt or gearbox is used. Direct drive defaults
+   to ratio 1:1.
+7. **Safety** — Safety factor multiplies all requirements before checking motor limits. Enable Holding Required for
+   vertical axes that must hold position.
+8. **Results table** — Motors sorted by status (Pass → Warn → Fail) then by fit score. Margin bars show headroom above
+   the required value. Hover a row for a full torque/speed/inertia breakdown.
 
 ### Engineering notes
 
-- **Peak torque** is checked against the motor's peak (instantaneous) rating. It occurs during the acceleration phase: T_peak = T_load + J_total × α_motor.
-- **RMS torque** is checked against the motor's continuous rated torque. It is the root-mean-square over the full cycle including dwell, representing the average thermal load.
-- **Inertia ratio** above 10:1 (load / motor rotor) triggers a warning; high ratios reduce responsiveness and increase settling time.
-- **Score** rewards well-matched motors (high utilization within limits). An oversized motor scores lower than a well-fitted one.
-- Deceleration torque can be negative (regenerative braking) — the motor absorbs energy. This still contributes T² to RMS heating.
+- **Peak torque** is checked against the motor's peak (instantaneous) rating. It occurs during the acceleration phase:
+  T_peak = T_load + J_total × α_motor.
+- **RMS torque** is checked against the motor's continuous rated torque. It is the root-mean-square over the full cycle
+  including dwell, representing the average thermal load.
+- **Inertia ratio** above 10:1 (load / motor rotor) triggers a warning; high ratios reduce responsiveness and increase
+  settling time.
+- **Score** rewards well-matched motors (high utilization within limits). An oversized motor scores lower than a
+  well-fitted one.
+- Deceleration torque can be negative (regenerative braking) — the motor absorbs energy. This still contributes T² to
+  RMS heating.
 
 ### Calculator
 
@@ -1802,13 +1823,12 @@ This calculator takes a complete motion profile (stroke, velocity, acceleration,
 
 - [ ] **Step 2: Verify page loads in browser**
 
-Open: `http://localhost:4321/calculators/actuator-sizing`
-Expected: Page renders with the calculator visible, sidebar shows "Actuator Motor Sizing Calculator" under Calculators
+Open: `http://localhost:4321/calculators/actuator-sizing` Expected: Page renders with the calculator visible, sidebar
+shows "Actuator Motor Sizing Calculator" under Calculators
 
 - [ ] **Step 3: Run full test suite one final time**
 
-Run: `pnpm test`
-Expected: all tests pass
+Run: `pnpm test` Expected: all tests pass
 
 - [ ] **Step 4: Final commit**
 
@@ -1823,25 +1843,27 @@ git commit -m "feat(actuator-sizing): documentation page"
 
 ### Spec Coverage
 
-| PRD Section | Covered By |
-|-------------|------------|
-| 5.1.1 Motion Profile | profile.ts (trapezoidal), index.svelte (S-curve selectable, same math) |
-| 5.1.2 Load & Mechanics | forces.ts + index.svelte |
-| 5.1.3 Axis Configuration | forces.ts (gravity by orientation) + index.svelte |
-| 5.1.4 Ball Screw | dynamics.ts (mass, inertia) + index.svelte (screw DB) |
-| 5.1.5 Transmission | dynamics.ts (gear ratio in all formulas) + index.svelte |
-| 5.1.6 Environmental | index.svelte (safetyFactor, holdingRequired) |
-| 5.2.1 4-Actuator | forces.ts `computeForcePerActuator` + index.svelte |
-| 5.2.2 Stewart Platform | forces.ts `computeForcePerActuator` + index.svelte |
-| 5.3 Motor DB | motors.ts (10 motors, extended fields) |
-| 5.4 Derived Calculations | dynamics.ts (all formulas implemented) |
-| 5.5 Constraint Checks | evaluation.ts (peak, RMS, speed, inertia) |
-| 5.6 Output & Results | index.svelte table + hover popup |
-| 5.7 Ranking | evaluation.ts `rankMotors` + score formula |
+| PRD Section              | Covered By                                                             |
+| ------------------------ | ---------------------------------------------------------------------- |
+| 5.1.1 Motion Profile     | profile.ts (trapezoidal), index.svelte (S-curve selectable, same math) |
+| 5.1.2 Load & Mechanics   | forces.ts + index.svelte                                               |
+| 5.1.3 Axis Configuration | forces.ts (gravity by orientation) + index.svelte                      |
+| 5.1.4 Ball Screw         | dynamics.ts (mass, inertia) + index.svelte (screw DB)                  |
+| 5.1.5 Transmission       | dynamics.ts (gear ratio in all formulas) + index.svelte                |
+| 5.1.6 Environmental      | index.svelte (safetyFactor, holdingRequired)                           |
+| 5.2.1 4-Actuator         | forces.ts `computeForcePerActuator` + index.svelte                     |
+| 5.2.2 Stewart Platform   | forces.ts `computeForcePerActuator` + index.svelte                     |
+| 5.3 Motor DB             | motors.ts (10 motors, extended fields)                                 |
+| 5.4 Derived Calculations | dynamics.ts (all formulas implemented)                                 |
+| 5.5 Constraint Checks    | evaluation.ts (peak, RMS, speed, inertia)                              |
+| 5.6 Output & Results     | index.svelte table + hover popup                                       |
+| 5.7 Ranking              | evaluation.ts `rankMotors` + score formula                             |
 
-**Gap:** Torque-speed curve visualization (PRD §7) — not implemented in this plan. Requires SVG/canvas work and motor curve data not in the database. Recommended follow-up task.
+**Gap:** Torque-speed curve visualization (PRD §7) — not implemented in this plan. Requires SVG/canvas work and motor
+curve data not in the database. Recommended follow-up task.
 
-**Gap:** Electrical parameters (torque constant, back-EMF, resistance) are in the PRD §5.3 Optional fields — not collected in the current motor DB but the `ServoMotor` interface is open to extension.
+**Gap:** Electrical parameters (torque constant, back-EMF, resistance) are in the PRD §5.3 Optional fields — not
+collected in the current motor DB but the `ServoMotor` interface is open to extension.
 
 ### Type Consistency Check
 

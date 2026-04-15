@@ -1,31 +1,40 @@
 # Motor Scaling Calculator Redesign — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> Historical note: this plan describes removed `motor-scaling` calculator. Current calculator lives in
+> `src/components/calculator/actuator-sizing/`.
 
-**Goal:** Replace the bare-bones motor-scaling widget with a full motor-selection tool: Tweakpane input panel + per-motor headroom analysis cards, matching the portal's Stewart platform UI style.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or
+> superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Architecture:** Pure calculation functions in `calculations.ts`; builtin + user motor database in `motors.ts`; single `MotorCard.svelte` for each motor result; `index.svelte` orchestrates layout, state, and URL persistence. No external dependencies beyond what the project already has.
+**Goal:** Replace the bare-bones motor-scaling widget with a full motor-selection tool: Tweakpane input panel +
+per-motor headroom analysis cards, matching the portal's Stewart platform UI style.
 
-**Tech Stack:** Svelte 5 (legacy syntax), svelte-tweakpane-ui 1.5.16, Tailwind CSS v4, TypeScript, Vitest (new devDep for unit tests on pure functions).
+**Architecture:** Pure calculation functions in `calculations.ts`; builtin + user motor database in `motors.ts`; single
+`MotorCard.svelte` for each motor result; `index.svelte` orchestrates layout, state, and URL persistence. No external
+dependencies beyond what the project already has.
+
+**Tech Stack:** Svelte 5 (legacy syntax), svelte-tweakpane-ui 1.5.16, Tailwind CSS v4, TypeScript, Vitest (new devDep
+for unit tests on pure functions).
 
 ---
 
 ## File Map
 
-| Action | Path | Responsibility |
-|--------|------|---------------|
-| Create | `src/components/calculator/motor-scaling/calculations.ts` | Pure math: RPM, torque, power, inertia, margin, optimal ratio search |
-| Create | `src/components/calculator/motor-scaling/motors.ts` | `Motor` type + builtin DB + localStorage helpers |
-| Create | `src/components/calculator/motor-scaling/MotorCard.svelte` | Single motor comparison card with headroom bars |
-| Replace | `src/components/calculator/motor-scaling/index.svelte` | Layout, Tweakpane inputs, reactive state, URL persistence |
-| Create | `src/tests/motor-scaling/calculations.test.ts` | Unit tests for calculations.ts |
-| Create | `vitest.config.ts` | Minimal vitest config (TS-only, no browser) |
+| Action  | Path                                                       | Responsibility                                                       |
+| ------- | ---------------------------------------------------------- | -------------------------------------------------------------------- |
+| Create  | `src/components/calculator/motor-scaling/calculations.ts`  | Pure math: RPM, torque, power, inertia, margin, optimal ratio search |
+| Create  | `src/components/calculator/motor-scaling/motors.ts`        | `Motor` type + builtin DB + localStorage helpers                     |
+| Create  | `src/components/calculator/motor-scaling/MotorCard.svelte` | Single motor comparison card with headroom bars                      |
+| Replace | `src/components/calculator/motor-scaling/index.svelte`     | Layout, Tweakpane inputs, reactive state, URL persistence            |
+| Create  | `src/tests/motor-scaling/calculations.test.ts`             | Unit tests for calculations.ts                                       |
+| Create  | `vitest.config.ts`                                         | Minimal vitest config (TS-only, no browser)                          |
 
 ---
 
 ## Task 1: Add vitest and test scaffold
 
 **Files:**
+
 - Create: `vitest.config.ts`
 - Create: `src/tests/motor-scaling/calculations.test.ts` (empty scaffold)
 
@@ -55,6 +64,7 @@ export default defineConfig({
 - [ ] **Step 3: Add test script to package.json**
 
 In `package.json`, add to `"scripts"`:
+
 ```json
 "test": "vitest run"
 ```
@@ -88,6 +98,7 @@ git commit -m "chore: add vitest for motor-scaling unit tests"
 ## Task 2: Create motors.ts
 
 **Files:**
+
 - Create: `src/components/calculator/motor-scaling/motors.ts`
 
 - [ ] **Step 1: Create motors.ts**
@@ -220,6 +231,7 @@ git commit -m "feat: add builtin motor database and localStorage helpers"
 ## Task 3: Create calculations.ts with TDD
 
 **Files:**
+
 - Create: `src/components/calculator/motor-scaling/calculations.ts`
 - Modify: `src/tests/motor-scaling/calculations.test.ts`
 
@@ -378,9 +390,9 @@ import type { Motor } from './motors';
 export interface Requirements {
   axialSpeed_mm_s: number;
   axialForce_N: number;
-  safetyFactor: number;   // percent, e.g. 20 means ×1.20
+  safetyFactor: number; // percent, e.g. 20 means ×1.20
   ballscrewPitch_mm: number;
-  efficiency: number;     // fraction 0–1, e.g. 0.9
+  efficiency: number; // fraction 0–1, e.g. 0.9
 }
 
 export interface LoadInertia {
@@ -394,18 +406,14 @@ export interface MotorEvaluation {
   requiredTorque_Nm: number;
   requiredPower_W: number;
   reflectedInertia_kgm2: number;
-  rpmMargin: number;      // percent, positive = headroom
+  rpmMargin: number; // percent, positive = headroom
   torqueMargin: number;
   powerMargin: number;
-  inertiaRatio: number;   // reflectedInertia / motor.inertia_kgm2
+  inertiaRatio: number; // reflectedInertia / motor.inertia_kgm2
   status: 'pass' | 'warn' | 'fail';
 }
 
-export function computeRequiredRPM(
-  axialSpeed_mm_s: number,
-  driveRatio: number,
-  pitch_mm: number,
-): number {
+export function computeRequiredRPM(axialSpeed_mm_s: number, driveRatio: number, pitch_mm: number): number {
   return (axialSpeed_mm_s * 60 * driveRatio) / pitch_mm;
 }
 
@@ -413,7 +421,7 @@ export function computeRequiredTorque(
   axialForce_N: number,
   pitch_mm: number,
   driveRatio: number,
-  efficiency: number,
+  efficiency: number
 ): number {
   return (axialForce_N * pitch_mm) / (1000 * 2 * Math.PI * driveRatio * efficiency);
 }
@@ -426,7 +434,7 @@ export function computeReflectedInertia(
   screwMass_kg: number,
   loadMass_kg: number,
   pitch_mm: number,
-  driveRatio: number,
+  driveRatio: number
 ): number {
   const pitch_m = pitch_mm / 1000;
   return (screwMass_kg + loadMass_kg) * Math.pow(pitch_m / (2 * Math.PI * driveRatio), 2);
@@ -436,29 +444,19 @@ export function computeMargin(rated: number, required: number): number {
   return ((rated - required) / required) * 100;
 }
 
-export function evaluateMotor(
-  motor: Motor,
-  req: Requirements,
-  load: LoadInertia,
-  driveRatio: number,
-): MotorEvaluation {
+export function evaluateMotor(motor: Motor, req: Requirements, load: LoadInertia, driveRatio: number): MotorEvaluation {
   const mult = 1 + req.safetyFactor / 100;
   const safeSpeed = req.axialSpeed_mm_s * mult;
   const safeForce = req.axialForce_N * mult;
 
   const requiredRPM = computeRequiredRPM(safeSpeed, driveRatio, req.ballscrewPitch_mm);
-  const requiredTorque_Nm = computeRequiredTorque(
-    safeForce,
-    req.ballscrewPitch_mm,
-    driveRatio,
-    req.efficiency,
-  );
+  const requiredTorque_Nm = computeRequiredTorque(safeForce, req.ballscrewPitch_mm, driveRatio, req.efficiency);
   const requiredPower_W = computeRequiredPower(requiredTorque_Nm, requiredRPM);
   const reflectedInertia_kgm2 = computeReflectedInertia(
     load.screwMass_kg,
     load.loadMass_kg,
     req.ballscrewPitch_mm,
-    driveRatio,
+    driveRatio
   );
 
   const rpmMargin = computeMargin(motor.ratedRPM, requiredRPM);
@@ -494,11 +492,7 @@ export function evaluateMotor(
  * As driveRatio increases: rpmMargin decreases, torqueMargin increases.
  * Optimal = crossover point where both are equal.
  */
-export function findOptimalDriveRatio(
-  motor: Motor,
-  req: Requirements,
-  load: LoadInertia,
-): number {
+export function findOptimalDriveRatio(motor: Motor, req: Requirements, load: LoadInertia): number {
   const mult = 1 + req.safetyFactor / 100;
   const safeSpeed = req.axialSpeed_mm_s * mult;
   const safeForce = req.axialForce_N * mult;
@@ -541,6 +535,7 @@ git commit -m "feat: add motor scaling calculation functions with tests"
 ## Task 4: Create MotorCard.svelte
 
 **Files:**
+
 - Create: `src/components/calculator/motor-scaling/MotorCard.svelte`
 
 - [ ] **Step 1: Create MotorCard.svelte**
@@ -653,6 +648,7 @@ git commit -m "feat: add MotorCard component with headroom bars"
 ## Task 5: Rewrite index.svelte — layout and Tweakpane inputs
 
 **Files:**
+
 - Replace: `src/components/calculator/motor-scaling/index.svelte`
 
 - [ ] **Step 1: Replace index.svelte**
@@ -970,6 +966,7 @@ pnpm dev
 Open: `http://localhost:4321/calculators/motor-scaling`
 
 Verify:
+
 - Widget renders with two-column layout
 - Tweakpane folders open/close
 - Ballscrew list changes pitch correctly
@@ -988,6 +985,7 @@ git commit -m "feat: rewrite motor-scaling widget with Tweakpane + motor compari
 ## Task 6: Verify, polish, and final commit
 
 **Files:**
+
 - Modify: `src/content/docs/calculators/motor-scaling.mdx` (update description)
 
 - [ ] **Step 1: Run full build check**
@@ -1001,6 +999,7 @@ Expected: builds without TypeScript errors.
 - [ ] **Step 2: Verify URL state persistence**
 
 In the browser:
+
 1. Change axial speed to 300, force to 1200
 2. Reload the page
 3. Verify sliders restore to 300 / 1200
@@ -1008,6 +1007,7 @@ In the browser:
 - [ ] **Step 3: Verify localStorage for user motors**
 
 In the browser:
+
 1. Click "+ Add custom motor"
 2. Fill in name "Test Motor", RPM 3000, Torque 1.5 Nm, Peak 4.5 Nm, Power 400W, Inertia 0.00003
 3. Click Save
@@ -1022,14 +1022,16 @@ Edit `src/content/docs/calculators/motor-scaling.mdx`:
 ```mdx
 ---
 title: Motor Scaling Calculator
-description: Motor selection tool for sim racing motion systems. Enter your axial speed and force requirements to find suitable motors from the builtin database, with per-motor headroom analysis and optimal drive ratio calculation.
+description:
+  Motor selection tool for sim racing motion systems. Enter your axial speed and force requirements to find suitable
+  motors from the builtin database, with per-motor headroom analysis and optimal drive ratio calculation.
 ---
 
-import MotorScalingCalc from '~/components/calculator/motor-scaling/index.svelte'
+import MotorScalingCalc from '~/components/calculator/motor-scaling/index.svelte';
 
 ## Motor Scaling
 
-<MotorScalingCalc client:load/>
+<MotorScalingCalc client:load />
 ```
 
 - [ ] **Step 5: Final commit**
