@@ -23,6 +23,9 @@ Shifters are mainly used in sim racing.
 
 Shifters detect gear gate position or up/down lever movement and translate it into digital or analog input events.
 
+That difference matters. An H-pattern shifter is about finding the right gate cleanly and repeatably. A sequential
+shifter is more about lever feel, return force, and whether quick up/down inputs stay crisp.
+
 ## What matters when choosing
 
 - shift feel

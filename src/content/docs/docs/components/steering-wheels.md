@@ -23,8 +23,8 @@ Steering wheels are primarily used in sim racing.
 
 ## How it works
 
-The wheel itself does not generate force feedback. It transmits input to the base and provides the shape, leverage, and
-button layout that influence control feel.
+The wheel itself does not generate force feedback. It passes input to the base and sets the shape, leverage, and button
+layout that affect control feel.
 
 ## What matters when choosing
 

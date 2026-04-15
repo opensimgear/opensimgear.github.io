@@ -42,7 +42,7 @@ low stiction matter more than raw force.
 
 ## Trade-offs and limitations
 
-Compact pedals save space, but they often sacrifice travel, leverage, and realism.
+Compact pedals save space, but they often give up travel, leverage, and realism to do it.
 
 ## Related components
 

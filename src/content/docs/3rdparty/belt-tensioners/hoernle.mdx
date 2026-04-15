@@ -1,0 +1,40 @@
+---
+title: Hoernle Belt Tensioner
+description:
+  Overview of the Hoernle belt tensioner project, a community DIY design built around a servo-driven harness cueing
+  approach.
+---
+
+import Youtube from 'svelte-youtube-embed';
+
+The Hoernle belt tensioner takes a servo-driven approach to harness cueing.
+
+That matters because servo builds often appeal to people who want a simpler mechanical package than some multi-part
+motor-and-spool systems. The trade-off is that simplicity on paper does not always mean simpler tuning once the harness
+geometry, leverage, and travel limits are involved.
+
+## What stands out
+
+- servo-based actuation
+- compact concept compared with larger rig-mounted systems
+- focused on harness cueing instead of broader motion effects
+
+## Why it is interesting
+
+This is the kind of project worth studying if you are trying to understand the lower-complexity end of belt tensioner
+design. Even if you do not build this exact version, it helps frame the question of what you can get from a smaller
+actuator approach.
+
+## What to check before building
+
+- whether the available servo torque matches the intended harness geometry
+- how the design handles mechanical stops and fail-safe behavior
+- how much travel is available before the cue turns uncomfortable
+- whether the mount location makes maintenance awkward later
+
+## Demo
+
+<Youtube client:load id="SQ-ecEq_QxE" />
+
+Watch the demo for response speed, packaging, and the overall feel of the mechanism. For a real build decision, go back
+to the original source and verify hardware details there.

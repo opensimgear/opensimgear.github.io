@@ -8,20 +8,20 @@ sidebar:
 
 ## Sim racing
 
-For many users, the strongest early upgrades are pedals, mounting rigidity, and display or seating improvements before
-premium immersion add-ons.
+For most people, the strongest early sim racing upgrades are pedals, stiffer mounting, and better seating or display
+placement. Those usually beat premium immersion add-ons.
 
-A common sequence is to stabilize the driving position first, then improve braking consistency, then add stronger force
-feedback only once the chassis and body support can use it. Expensive extras feel underwhelming when the pedal set
-slides, the seat shifts under load, or the screen position still hurts your reference points.
+A common sequence is to stabilize the driving position first, then improve braking consistency, then look at stronger
+force feedback once the chassis and your body position can actually support it. Expensive extras feel underwhelming when
+the pedal set slides, the seat moves under load, or the screen still sits in the wrong place.
 
 ## Flight simulation
 
-For many users, the strongest early upgrades are aircraft-matched controls, rudder quality, and visibility solutions
-before cockpit ornamentation.
+For most flight sim users, the strongest early upgrades are aircraft-matched controls, better rudder pedals, and better
+visibility before cockpit ornamentation.
 
 A good upgrade path usually starts by narrowing the aircraft family you care about most. A yoke, HOTAS, or
-helicopter-oriented setup will each outperform a generic compromise once your flying becomes more specific. After that,
+helicopter-oriented setup will each outperform a generic compromise once your flying gets more specific. After that,
 pedal quality, head tracking or VR, and accessible switch inputs usually do more than decorative cockpit pieces.
 
 ## A simple way to prioritize
@@ -33,9 +33,8 @@ pedal quality, head tracking or VR, and accessible switch inputs usually do more
 
 ## When to stop upgrading sideways
 
-The most common mistake is adding more categories of hardware without resolving the main bottleneck. If your pedals,
-seating position, or throttle workflow still fight you, another accessory usually spreads your budget thinner rather
-than moving the whole setup forward.
+The most common mistake is adding more categories of hardware without fixing the main bottleneck. If your pedals,
+seating position, or throttle workflow still fight you, another accessory usually just spreads the budget thinner.
 
 ## Rule of thumb
 

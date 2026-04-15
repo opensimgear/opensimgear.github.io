@@ -24,10 +24,10 @@ Motion systems are used in advanced sim racing and flight simulation setups.
 
 ## How it works
 
-Motion systems do not reproduce real sustained G-forces. They rely on motion cueing: short, timed movements that trick
+Motion systems do not reproduce real sustained G-forces. They rely on motion cueing: short, timed movements that nudge
 the body into sensing acceleration, road texture, turbulence, or attitude change. That is different from tactile
-vibration cues, which mainly add texture through transducers, and from sustained body-pressure cueing systems such as
-g-seats or belt tensioners, which push on the body without moving the whole rig the same way.
+vibration cues, which mostly add texture through transducers, and from body-pressure systems such as G-seats or belt
+tensioners, which push on the body without moving the whole rig in the same way.
 
 ## What matters when choosing
 
@@ -47,8 +47,8 @@ g-seats or belt tensioners, which push on the body without moving the whole rig 
 ## Trade-offs and limitations
 
 Motion can be highly immersive, but it is expensive, space-hungry, mechanically complex, and easy to tune badly. A
-smaller, faster system with well-managed latency can be more convincing than a larger platform with poor profiles or
-deferred maintenance.
+smaller, faster system with well-managed latency can feel more convincing than a larger platform with poor profiles or
+neglected maintenance.
 
 ## Related components
 

@@ -12,7 +12,7 @@ Wind simulation uses fans or blowers to create airflow cues tied to vehicle or a
 
 ## Where it is used
 
-It is more common in sim racing, though it can support some open-cockpit or immersion-focused flight setups.
+It is more common in sim racing, though it can also support some open-cockpit or immersion-focused flight setups.
 
 ## Main variants
 
@@ -22,8 +22,8 @@ It is more common in sim racing, though it can support some open-cockpit or imme
 
 ## How it works
 
-The system changes airflow based on telemetry or simulator data. This can enhance speed perception and comfort,
-especially in enclosed or VR-heavy setups.
+The system changes airflow from telemetry or simulator data. A good setup can make speed changes easier to feel and can
+make long sessions in an enclosed rig or a VR headset more comfortable.
 
 ## What matters when choosing
 
@@ -41,8 +41,12 @@ especially in enclosed or VR-heavy setups.
 
 ## Trade-offs and limitations
 
-Wind simulation can improve presence, but it is a finishing detail rather than a substitute for better core controls or
-displays.
+Wind simulation can add a lot of atmosphere, but it is still a finishing detail. It will not fix weak core controls or a
+bad display setup.
+
+The main differences are fan strength, control smoothness, and nozzle placement. A simple speed-linked fan setup can
+already work well. More elaborate multi-channel systems make sense when you want directional airflow cues or tighter
+telemetry integration.
 
 ## Related components
 

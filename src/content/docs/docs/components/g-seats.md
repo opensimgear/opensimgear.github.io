@@ -21,8 +21,8 @@ G-seats appear in higher-end sim racing and flight simulation setups.
 
 ## How it works
 
-Instead of moving the entire cockpit, a G-seat changes contact pressure at the body. This can represent sustained cues
-that are difficult for short-throw motion systems to hold.
+Instead of moving the entire cockpit, a G-seat changes contact pressure around the body. That can represent sustained
+cues that are hard for short-throw motion systems to hold.
 
 ## What matters when choosing
 

@@ -24,7 +24,7 @@ Joysticks are common in combat flight sims, helicopter setups, and general-purpo
 ## How it works
 
 The grip moves through a gimbal or cam-based mechanism, with sensors reading axis position. The internal mechanism
-matters more than appearance because centering feel and smoothness strongly affect precision.
+matters more than the shell because centering feel and smoothness have a huge effect on precision.
 
 ## What matters when choosing
 
@@ -42,7 +42,7 @@ matters more than appearance because centering feel and smoothness strongly affe
 
 ## Trade-offs and limitations
 
-Sticks with many controls improve hands-on access, but size, weight, and mechanism complexity can make them harder to
+Sticks with lots of controls improve hands-on access, but size, weight, and mechanism complexity can make them harder to
 mount well.
 
 ## Related components

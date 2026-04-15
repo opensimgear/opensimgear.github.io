@@ -1,11 +1,25 @@
 ---
-title: Overview
-description: 
-  Community-sourced third-party sim racing and flight simulation hardware solutions. Discover open-source belt
-  tensioners, G-seat actuators, and motion platform components compatible with OpenSimGear.
+title: Disclaimer
+description:
+  Third-party sim racing and flight simulation projects collected by OpenSimGear, including community belt tensioners
+  and other DIY hardware ideas.
 sidebar:
   order: 0
 ---
 
-Collection of open-source projects related to OpenSimGear. These projects are developed and maintained by third parties,
-not by OpenSimGear.
+This section collects community projects that sit near the OpenSimGear ecosystem but are built and maintained by other
+people.
+
+Some of these are mature enough to copy or adapt. Others are better treated as reference points: useful for ideas,
+packaging, geometry, or actuation choices, even if you would not reproduce the design exactly.
+
+## What you will find here
+
+- belt tensioner projects for braking and longitudinal cueing
+- design variations built around different motors, spools, and packaging choices
+- community examples that help you compare trade-offs before starting your own build
+
+## Important note
+
+These pages are not endorsements and they are not full build manuals. Treat them as project overviews. Always check the
+original creator's video, repository, or discussion thread before you copy dimensions, electronics, or safety decisions.

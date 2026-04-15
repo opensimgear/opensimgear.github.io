@@ -9,8 +9,7 @@ sidebar:
 
 ## What it is
 
-A yoke is a flight control interface that manages pitch and roll in many general aviation and transport aircraft
-workflows.
+A yoke is a flight control interface that manages pitch and roll in many general aviation and transport aircraft.
 
 ## Where it is used
 

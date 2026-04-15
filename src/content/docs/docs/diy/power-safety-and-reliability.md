@@ -17,12 +17,12 @@ sidebar:
 
 ## Why it matters
 
-Higher-power sim hardware can hurt users or damage equipment when mechanical, electrical, or software failures are not
-handled well.
+Higher-power sim hardware can hurt people or damage equipment when mechanical, electrical, or software failures are
+handled badly.
 
 The risk rises as projects add stronger motors, larger power supplies, enclosed electronics, or moving assemblies near
-the body. Many reliability problems also start as convenience shortcuts: inaccessible fuses, loose connectors, cables
-without strain relief, or no clear shutdown path when something behaves unexpectedly.
+the body. A lot of reliability problems also start as convenience shortcuts: inaccessible fuses, loose connectors,
+cables without strain relief, or no clear shutdown path when something behaves unexpectedly.
 
 ## Practical priorities
 
@@ -35,7 +35,7 @@ without strain relief, or no clear shutdown path when something behaves unexpect
 
 A system that works once on the bench is not automatically reliable in a rig that vibrates, moves, heats up, and gets
 adjusted over time. Reliability comes from conservative margins, secure mounting, clean cable routing, and enough access
-that inspection is realistic instead of postponed.
+that inspection is realistic instead of something you keep postponing.
 
 ## Related pages
 

@@ -26,7 +26,7 @@ brake-force simulation.
 
 The key difference is not just pedal shape but sensing method and force model. Potentiometers read position through a
 contact-based resistor track, Hall sensors read position magnetically, and load cells measure force directly.
-Hydraulic-style hardware may change resistance and damping, but it is still important to ask what sensor is actually
+Hydraulic-style hardware may change resistance and damping, but it is still worth asking what sensor is actually
 measuring the input. In sim racing, brake control often improves when the brake is force-based, while throttle and
 clutch are usually judged more by smoothness, consistency, and controllable travel.
 
@@ -48,10 +48,10 @@ clutch are usually judged more by smoothness, consistency, and controllable trav
 
 ## Trade-offs and limitations
 
-Potentiometer pedals are simple and inexpensive, Hall-sensor pedals often reduce wear and noise in the signal, and
-load-cell brakes usually improve repeatable braking once the rig can handle the force. Hydraulic-style systems can add
-damping and packaging complexity, but they do not automatically outperform a well-mounted mechanical pedal set with a
-well-chosen sensor.
+Potentiometer pedals are simple and inexpensive. Hall-sensor pedals often reduce wear and signal noise. Load-cell brakes
+usually improve repeatable braking once the rig can handle the force. Hydraulic-style systems can add damping and
+packaging complexity, but they do not automatically beat a well-mounted mechanical pedal set with the right sensor
+choice.
 
 ## Related components
 

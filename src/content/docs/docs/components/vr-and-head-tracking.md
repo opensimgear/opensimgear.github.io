@@ -25,9 +25,9 @@ workflow.
 
 ## How it works
 
-VR replaces the display view entirely, while head tracking modifies the in-game camera based on head movement. Each
-method changes visibility, depth cues, and cockpit interaction differently: VR adds stereoscopic depth and full
-head-coupled view control, while head tracking keeps a real monitor and real controls in sight.
+VR replaces the display view entirely, while head tracking changes the in-game camera from head movement. Each method
+changes visibility, depth cues, and cockpit interaction in a different way. VR adds stereoscopic depth and full
+head-coupled view control, while head tracking keeps a real monitor and your real controls in sight.
 
 ## What matters when choosing
 
@@ -45,9 +45,9 @@ head-coupled view control, while head tracking keeps a real monitor and real con
 
 ## Trade-offs and limitations
 
-Head tracking usually keeps setup simple and preserves access to real controls, but it does not deliver the same depth
-or cockpit presence as VR. VR can add unmatched presence, but it also adds performance demands, comfort limits, and more
-friction around reading checklists, finding switches, and managing heat.
+Head tracking usually keeps the setup simpler and preserves access to real controls, but it does not deliver the same
+depth or cockpit presence as VR. VR can be hard to beat for presence, but it also adds performance demands, comfort
+limits, and more friction around checklists, switches, and heat.
 
 ## Choose this when...
 

@@ -23,9 +23,9 @@ Display choice matters in both sim racing and flight simulation.
 
 ## How it works
 
-Display layout affects how much of the virtual environment is visible without camera controls. Field of view, viewing
-distance, and alignment are often more important than panel size alone, because a badly placed triple setup can feel
-less convincing than a well-positioned single screen.
+Display layout affects how much of the virtual world you can see without touching camera controls. Field of view,
+viewing distance, and alignment usually matter more than raw panel size, because a badly placed triple setup can feel
+worse than a well-positioned single screen.
 
 ## What matters when choosing
 
@@ -43,9 +43,9 @@ less convincing than a well-positioned single screen.
 
 ## Trade-offs and limitations
 
-Single screens and ultrawides are easier to place and drive, while triples and curved multi-screen layouts improve side
-visibility at a much higher space, mounting, and GPU cost. Projector systems can solve special cockpit goals, but
-alignment and calibration effort rise quickly.
+Single screens and ultrawides are easier to place and drive. Triples and curved multi-screen layouts improve side
+visibility, but they ask for far more space, better mounts, and more GPU. Projector systems can solve unusual cockpit
+goals, though alignment and calibration effort go up quickly.
 
 ## Related components
 

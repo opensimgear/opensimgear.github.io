@@ -44,7 +44,7 @@ power. That makes its ergonomics, friction, and hold position more important tha
 
 ## Trade-offs and limitations
 
-Adapted throttles can work for casual helicopter flying, but dedicated collectives usually make hover work, low-speed
+Adapted throttles can work for casual helicopter flying, but a proper collective usually makes hover work, low-speed
 handling, and muscle memory much easier.
 
 ## Related components

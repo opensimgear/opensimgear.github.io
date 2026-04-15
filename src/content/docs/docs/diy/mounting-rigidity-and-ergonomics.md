@@ -9,9 +9,9 @@ sidebar:
 
 The same hardware can feel excellent or disappointing depending on how it is mounted and how the user fits the controls.
 
-This page is the builder-focused companion to the higher-level rig and seat pages. It concentrates on practical
-placement, bracket stiffness, adjustment points, and the small fit details that determine whether a setup works in real
-use.
+This page is the builder-focused companion to the higher-level rig and seat pages. It deals with the practical stuff
+that determines whether a setup works in real use: bracket stiffness, adjustment points, clearances, and repeatable
+positioning.
 
 ## What matters
 
@@ -30,10 +30,10 @@ use.
 
 ## Common failure modes
 
-Many setups fail in subtle ways before they fail structurally. A pedal deck that twists slightly, a side mount that
-sags, or a monitor stand that shifts under force feedback can all reduce confidence and make good hardware feel
-inconsistent. Ergonomic problems show up the same way: awkward reach, overextended ankles, and unsupported posture
-create fatigue long before parts break.
+Many setups fail in subtle ways before they fail structurally. A pedal deck that twists a little, a side mount that
+sags, or a monitor stand that moves under force feedback can make good hardware feel strangely mediocre. Ergonomic
+problems show up the same way. Awkward reach, overextended ankles, and bad support create fatigue long before anything
+breaks.
 
 ## How it differs from related pages
 

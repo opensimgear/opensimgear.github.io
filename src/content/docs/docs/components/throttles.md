@@ -25,8 +25,8 @@ Throttles are used across nearly all flight simulation setups.
 ## How it works
 
 Throttle devices map lever travel to power or system functions. Their usefulness depends on travel quality, detent
-design, axis stability, and how well the layout matches the aircraft type being flown. Helicopter collectives sit beside
-this category, but they are better treated as their own control family because they use different motion, mounting, and
+design, axis stability, and how well the layout matches the aircraft being flown. Helicopter collectives sit beside this
+category, but they are better treated as their own control family because they use different motion, mounting, and
 hold-position ergonomics.
 
 ## What matters when choosing
@@ -47,7 +47,7 @@ hold-position ergonomics.
 
 General-purpose throttles are flexible, but dedicated layouts can be much better for specific aircraft families. A
 device that works well for jets or general aviation may still be a poor fit for helicopter flying, where a purpose-built
-collective usually gives more natural control.
+collective usually feels more natural.
 
 ## Related components
 

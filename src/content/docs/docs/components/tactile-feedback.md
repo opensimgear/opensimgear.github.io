@@ -22,8 +22,8 @@ They are common in advanced sim racing setups and can also support some flight s
 
 ## How it works
 
-These systems do not reproduce full motion. They provide vibration cues that can suggest engine behavior, surface
-texture, impacts, or other events when tuned well.
+These systems do not reproduce full motion. They add vibration cues that can suggest engine behavior, surface texture,
+wheel slip, curb strikes, or impacts when the signal chain is clean and the mounts are solid.
 
 ## What matters when choosing
 
@@ -41,8 +41,11 @@ texture, impacts, or other events when tuned well.
 
 ## Trade-offs and limitations
 
-Tactile systems can add useful information at lower cost than motion, but they cannot replace the body cues of a true
+Tactile systems can add useful information at lower cost than motion, but they cannot replace the body cues of a truly
 moving system.
+
+The big split is usually between audio-driven setups and telemetry-driven setups. Audio is easier to start with, but it
+is less selective. Telemetry takes more setup work, though it usually gives you cleaner cue separation.
 
 ## Related components
 

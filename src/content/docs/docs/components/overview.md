@@ -4,15 +4,13 @@ description:
   Browse the main hardware categories used in sim racing and flight simulation, from controls and cockpits to displays,
   tactile systems, and motion.
 sidebar:
-  label: Components
-  order: 2
-  collapsed: true
+  order: 0
 ---
 
-This section explains the major hardware families used across sim racing and flight simulation.
+This section maps out the main hardware families used across sim racing and flight simulation.
 
-Use these pages when you want to understand what a component does, how it works, what trade-offs matter, and what to
-watch for if you plan to build your own.
+Use these pages when you want a grounded explanation of what a part does, where it actually helps, and what tends to go
+wrong in cheap, badly mounted, or badly matched setups.
 
 ## Core controls
 
@@ -28,8 +26,8 @@ watch for if you plan to build your own.
 - [Rudder Pedals](/docs/components/rudder-pedals/)
 - [Button Boxes and Panels](/docs/components/button-boxes-and-panels/)
 
-Flight controls are grouped here from the most common sim-racing inputs through fixed-wing flight controls and then into
-rotorcraft-specific hardware, so the sidebar journey mirrors how many readers narrow their setup.
+The control pages are grouped roughly the way many people build a setup: core racing controls first, then fixed-wing
+flight gear, then more specialized rotorcraft hardware.
 
 ## Mounting and immersion
 
@@ -42,3 +40,6 @@ rotorcraft-specific hardware, so the sidebar journey mirrors how many readers na
 - [Belt Tensioners](/docs/components/belt-tensioners/)
 - [G-Seats](/docs/components/g-seats/)
 - [Motion Platforms](/docs/components/motion-platforms/)
+
+If you are not sure where to start, begin with the controls that define the task you care about most. After that, fix
+mounting, posture, and visibility before you chase immersion extras.

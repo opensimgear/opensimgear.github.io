@@ -9,7 +9,7 @@ sidebar:
 
 A rig or cockpit is the structural platform that supports controls, displays, seat position, and body ergonomics.
 
-This page is about the overall structure and layout: the frame, mounts, adjustability, and how well the platform
+This page looks at the overall structure and layout: frame type, mounts, adjustability, and how well the platform
 supports future hardware.
 
 ## Where it is used
@@ -26,8 +26,8 @@ Rigid mounting matters in both sim racing and flight simulation, though the exac
 
 ## How it works
 
-The rig does not only hold hardware in place. It controls flex, alignment, ergonomics, and how well the rest of the
-system performs under load.
+The rig does more than hold hardware in place. It controls flex, alignment, ergonomics, and how well the rest of the
+system behaves under load.
 
 ## What matters when choosing
 

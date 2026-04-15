@@ -8,7 +8,8 @@ import partytown from '@astrojs/partytown';
 import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
-import { buildDocsSidebar } from './src/utils/docs-sidebar.ts';
+import starlightLinksValidator from 'starlight-links-validator';
+import starlightAutoSidebar from 'starlight-auto-sidebar';
 import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 
 import { fileURLToPath } from 'url';
@@ -56,10 +57,7 @@ export default defineConfig({
         },
         {
           label: 'Docs',
-          items: buildDocsSidebar({
-            docsRoot: path.resolve(__dirname, './src/content/docs/docs'),
-            basePath: '/docs',
-          }),
+          autogenerate: { directory: 'docs' },
           badge: {
             text: 'WIP',
             variant: 'caution',
@@ -70,11 +68,12 @@ export default defineConfig({
           autogenerate: { directory: 'calculators' },
         },
         {
+          label: 'Gear',
+          autogenerate: { directory: 'gear' },
+        },
+        {
           label: '3rd Party',
-          items: buildDocsSidebar({
-            docsRoot: path.resolve(__dirname, './src/content/docs/3rdparty'),
-            basePath: '/3rdparty',
-          }),
+          autogenerate: { directory: '3rdparty' },
           badge: {
             text: 'WIP',
             variant: 'caution',
@@ -86,7 +85,7 @@ export default defineConfig({
         Hero: './src/components/overrides/Hero.astro',
         PageFrame: './src/components/overrides/PageFrame.astro',
       },
-      plugins: [],
+      plugins: [starlightLinksValidator(), starlightAutoSidebar()],
     }),
     sitemap({
       filter: (page) => shouldIncludeInSitemap(new URL(page).pathname),

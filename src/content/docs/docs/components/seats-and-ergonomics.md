@@ -10,7 +10,7 @@ sidebar:
 Seat choice and body positioning determine comfort, consistency, and how well you can use the controls over long
 sessions.
 
-This page focuses on the human fit of the setup: posture, support, reach, and fatigue, regardless of whether the frame
+The focus here is the human fit of the setup: posture, support, reach, and fatigue, regardless of whether the frame
 itself is simple or elaborate.
 
 ## Where it is used
@@ -27,7 +27,7 @@ This matters in both sim racing and flight simulation.
 ## How it works
 
 Ergonomics is the relationship between the seat, controls, screen position, and body support. A technically good control
-set can feel poor when the posture is wrong.
+set can still feel bad when the posture is wrong.
 
 ## What matters when choosing
 
@@ -44,7 +44,8 @@ set can feel poor when the posture is wrong.
 
 ## Trade-offs and limitations
 
-Aggressive seating positions can improve realism for one discipline while making another less comfortable or practical.
+Aggressive seating positions can improve realism for one discipline while making another less comfortable or less
+practical.
 
 ## How it differs from related pages
 

@@ -25,8 +25,8 @@ Wheel bases are a core sim racing component.
 
 The base combines motor control, steering position sensing, and force-feedback output. Gear-driven bases send torque
 through reduction gears, belt-driven bases add compliance through belts and pulleys, and direct-drive bases mount the
-wheel directly to the motor shaft. That drive path determines backlash, friction, peak torque behavior, and how
-faithfully small force-feedback details reach your hands.
+wheel directly to the motor shaft. That drive path affects backlash, friction, peak torque behavior, and how clearly
+small force-feedback details reach your hands.
 
 ## What matters when choosing
 
@@ -49,7 +49,7 @@ faithfully small force-feedback details reach your hands.
 Gear-driven bases are usually the cheapest and most compact, but gear mesh can add noise and notchiness. Belt-driven
 bases often feel smoother while still limiting peak torque and long-session thermal stability. Direct drive usually
 offers the best torque fidelity and response, but it raises cost, mounting demands, and safety expectations.
-Lower-torque systems can still be effective when matched to realistic expectations and solid pedals.
+Lower-torque systems can still work very well when paired with realistic expectations and solid pedals.
 
 ## Related components
 

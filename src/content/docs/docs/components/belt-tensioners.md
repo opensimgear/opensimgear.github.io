@@ -13,7 +13,7 @@ A belt tensioner tightens harness straps to suggest body load during braking, ac
 
 ## Where it is used
 
-It is mostly used in advanced sim racing and high-immersion motion setups.
+You mostly see belt tensioners in advanced sim racing and other high-immersion setups.
 
 ## Main variants
 
@@ -23,8 +23,8 @@ It is mostly used in advanced sim racing and high-immersion motion setups.
 
 ## How it works
 
-The system controls belt tension in response to telemetry, often focusing on braking cues. Good systems rely on timing,
-smoothness, and safe force limits rather than raw pull strength.
+The system changes belt tension from telemetry, often with a strong focus on braking cues. Good systems live or die on
+timing, smoothness, and safe force limits, not on raw pull strength.
 
 ## What matters when choosing
 
@@ -42,7 +42,8 @@ smoothness, and safe force limits rather than raw pull strength.
 
 ## Trade-offs and limitations
 
-Belt tensioners can provide convincing longitudinal cues, but they only represent a narrow slice of full body feedback.
+Belt tensioners can feel surprisingly convincing for braking and some longitudinal cues, but they still cover only a
+narrow slice of full-body feedback.
 
 ## Related components
 

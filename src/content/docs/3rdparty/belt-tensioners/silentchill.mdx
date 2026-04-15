@@ -1,0 +1,39 @@
+---
+title: SilentChill oDrive Belt Tensioner
+description:
+  Overview of the SilentChill oDrive belt tensioner project, a community DIY harness tensioner using an ODrive-based
+  control setup.
+---
+
+import Youtube from 'svelte-youtube-embed';
+
+The SilentChill project pushes the belt tensioner idea toward a more control-heavy ODrive-style setup.
+
+That usually appeals to builders who care about smoother motor behavior, more tuning flexibility, or simply want to work
+in a controller ecosystem they already know. The cost is that electronics, tuning, and safety expectations rise with it.
+
+## What stands out
+
+- ODrive-based control approach
+- aimed at smoother, more configurable motor behavior
+- still focused on harness cueing rather than full motion
+
+## Why it is useful as a reference
+
+Even if you never build this exact project, it helps show what changes when a belt tensioner moves from a simpler
+actuator concept to a more capable motor-control stack. That affects not only feel, but also wiring, setup time, and
+fault handling.
+
+## What to check before building
+
+- controller setup complexity and tuning overhead
+- motor heat, power supply sizing, and cable routing
+- emergency-stop strategy and fault behavior
+- whether the extra control flexibility is worth the added complexity for your rig
+
+## Demo
+
+<Youtube client:load id="vuurS1u4X_c" />
+
+Use the demo to judge overall packaging and response style. For real build work, confirm current controller, firmware,
+and hardware details from the original source first.

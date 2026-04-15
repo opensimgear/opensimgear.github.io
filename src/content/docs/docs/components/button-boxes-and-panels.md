@@ -13,7 +13,8 @@ These are auxiliary control interfaces that move functions off the keyboard and 
 
 ## Where it is used
 
-They are used in both sim racing and flight simulation, but flight sim usually benefits more from larger control sets.
+They are used in both sim racing and flight simulation, though flight sim usually gets more value from bigger control
+sets and more specific layouts.
 
 ## Main variants
 
@@ -24,10 +25,9 @@ They are used in both sim racing and flight simulation, but flight sim usually b
 
 ## How it works
 
-Most devices present as USB input controllers, though some rely on simulator-specific integrations or external software
-layers. The main value is physical access to repeat-use functions without reaching for the keyboard. The useful
-distinction is whether the hardware is generic, function-grouped, display-coupled, or built around one aircraft
-workflow.
+Most devices show up as USB input controllers, though some rely on simulator-specific integrations or extra software.
+The real value is quick access to repeat-use functions without hunting for the keyboard. The useful distinction is
+whether the hardware is generic, grouped around one set of tasks, tied to a display, or built for one aircraft workflow.
 
 ## What matters when choosing
 
@@ -45,9 +45,9 @@ workflow.
 
 ## Trade-offs and limitations
 
-More switches can improve immersion and efficiency, but poorly placed controls become clutter instead of help. Simple
-button boxes are flexible but easy to forget, switch panels work best for stable systems logic, MFD frames depend on
-matching screen layouts, and aircraft-specific panels pay off only when you fly that workflow often enough.
+More switches can improve immersion and workflow speed, but badly placed controls turn into clutter fast. Simple button
+boxes are flexible but easy to forget. Switch panels work best when the logic stays stable. MFD frames depend on
+matching screen layouts. Aircraft-specific panels pay off only if you fly that workflow often enough.
 
 ## Related components
 

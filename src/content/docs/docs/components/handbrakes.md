@@ -39,7 +39,7 @@ The lever travel is converted into either an on/off signal or a variable analog 
 
 ## Trade-offs and limitations
 
-Handbrakes are highly useful in specific disciplines, but they add little value in many circuit racing workflows.
+Handbrakes are very useful in the right disciplines, but they do very little for many circuit-racing workflows.
 
 ## Related components
 
