@@ -1,6 +1,5 @@
 ---
 import Default from '@astrojs/starlight/components/PageFrame.astro';
-import CookieConsent from '~/components/util/CookieConsent.astro';
 ---
 
 <Default {...Astro.props}>
@@ -9,5 +8,3 @@ import CookieConsent from '~/components/util/CookieConsent.astro';
   <slot name="right-sidebar" slot="right-sidebar" />
   <slot />
 </Default>
-
-<CookieConsent />

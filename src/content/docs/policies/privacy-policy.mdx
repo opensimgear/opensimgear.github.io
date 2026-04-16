@@ -5,10 +5,13 @@ template: splash
 ---
 
 import { config } from '~/config';
+import CookiePreferencesLink from '~/components/util/CookiePreferencesLink.svelte'
 
 # Privacy Policy
 
 **Effective date:** 12.04.2024
+
+<CookiePreferencesLink label="Edit Settings" client:load/>
 
 Your privacy is important to us. It is our policy to respect your privacy regarding any information we may collect while
 operating our website.
