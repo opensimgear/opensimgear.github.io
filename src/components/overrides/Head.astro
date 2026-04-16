@@ -15,6 +15,7 @@ import { config } from '~/config';
 const { starlightRoute } = Astro.locals;
 const pathname = Astro.url.pathname;
 const isHomepage = pathname === '/';
+const isNotFoundPage = Astro.response.status === 404;
 const seoTitle = buildSeoPageTitle({
   pageTitle: starlightRoute.entry.data.title,
   siteTitle: starlightRoute.siteTitle,
@@ -22,7 +23,7 @@ const seoTitle = buildSeoPageTitle({
   sidebar: starlightRoute.sidebar,
 });
 const description = starlightRoute.entry.data.description ?? '';
-const seoPolicy = getSeoPolicy(pathname);
+const seoPolicy = getSeoPolicy(pathname, { is404: isNotFoundPage });
 const siteSchemas = isHomepage ? buildSiteSchemas({ site: config.site, title: starlightRoute.siteTitle }) : [];
 const breadcrumbItems = isHomepage
   ? []

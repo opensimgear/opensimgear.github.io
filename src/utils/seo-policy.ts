@@ -3,6 +3,10 @@ export type SeoPolicy = {
   follow: boolean;
 };
 
+type GetSeoPolicyOptions = {
+  is404?: boolean;
+};
+
 const NOINDEX_PATHS_LIST = ['/gear', '/gear/hand-brake', '/3rdparty/belt-tensioner'] as const;
 
 const NOINDEX_PATHS = new Set<string>(NOINDEX_PATHS_LIST);
@@ -17,7 +21,14 @@ function normalizePathname(pathname: string) {
   return path.endsWith('/') ? path.slice(0, -1) : path;
 }
 
-export function getSeoPolicy(pathname: string): SeoPolicy {
+export function getSeoPolicy(pathname: string, options: GetSeoPolicyOptions = {}): SeoPolicy {
+  if (options.is404) {
+    return {
+      index: false,
+      follow: true,
+    };
+  }
+
   return {
     index: !NOINDEX_PATHS.has(normalizePathname(pathname)),
     follow: true,

@@ -10,6 +10,11 @@ import {
 } from '../../utils/seo-policy';
 
 describe('getSeoPolicy', () => {
+  it('marks 404 pages as noindex, follow', () => {
+    expect(getSeoPolicy('/404/', { is404: true })).toEqual({ index: false, follow: true });
+    expect(getSeoPolicy('/missing-page/', { is404: true })).toEqual({ index: false, follow: true });
+  });
+
   it('marks placeholder gear pages as noindex, follow', () => {
     expect(getSeoPolicy('/gear/')).toEqual({ index: false, follow: true });
     expect(getSeoPolicy('/gear/hand-brake/')).toEqual({ index: false, follow: true });
