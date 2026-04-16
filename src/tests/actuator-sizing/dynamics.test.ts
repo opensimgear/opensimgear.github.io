@@ -8,14 +8,13 @@ import {
   computeScrewRotationalInertia,
   computeScrewTorque,
   computeTotalInertia,
-  STEEL_DENSITY_KG_M3,
 } from '../../components/calculator/actuator-sizing/dynamics';
 
 describe('computeScrewMass', () => {
   it('returns rho*pi*r^2*L for steel', () => {
     const r = 0.008;
     const l = 0.5;
-    const expected = STEEL_DENSITY_KG_M3 * Math.PI * r * r * l;
+    const expected = 7850 * Math.PI * r * r * l;
     expect(computeScrewMass(16, 500)).toBeCloseTo(expected, 5);
   });
 });

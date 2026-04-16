@@ -14,8 +14,8 @@ import { config } from '~/config';
 
 <script is:inline define:vars={{ id: config.googleAnalytics.id }} data-category="analytics" data-service="ga">
   window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
+  function gtag(...args) {
+    dataLayer.push(args);
   }
   gtag('js', new Date());
   gtag('config', id);

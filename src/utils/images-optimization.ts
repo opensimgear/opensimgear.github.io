@@ -6,7 +6,7 @@ import type { HTMLAttributes } from 'astro/types';
 
 type Layout = 'fixed' | 'constrained' | 'fullWidth' | 'cover' | 'responsive' | 'contained';
 
-export interface AttributesProps extends HTMLAttributes<'img'> {}
+export type AttributesProps = HTMLAttributes<'img'>;
 
 export interface ImageProps extends Omit<HTMLAttributes<'img'>, 'src'> {
   src?: string | ImageMetadata | null;
@@ -83,7 +83,7 @@ const parseAspectRatio = (aspectRatio: number | string | null | undefined): numb
 /**
  * Gets the `sizes` attribute for an image, based on the layout and width
  */
-export const getSizes = (width?: number, layout?: Layout): string | undefined => {
+const getSizes = (width?: number, layout?: Layout): string | undefined => {
   if (!width || !layout) {
     return undefined;
   }

@@ -1,4 +1,4 @@
-export type FaqLink = {
+type FaqLink = {
   label: string;
   href: string;
 };

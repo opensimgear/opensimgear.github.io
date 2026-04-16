@@ -4,7 +4,10 @@ import ActuatorSizingCalculator from '../../components/calculator/actuator-sizin
 import MotionProfileDiagram from '../../components/calculator/actuator-sizing/MotionProfileDiagram.svelte';
 import { buildMotionProfileDiagram } from '../../components/calculator/actuator-sizing/motion-profile-diagram';
 
-const renderComponent = render as (component: any, options?: any) => { body: string };
+const renderComponent = render as (
+  component: unknown,
+  options?: { props?: Record<string, unknown> }
+) => { body: string };
 
 describe('MotionProfileDiagram', () => {
   it('renders only the allowed phase labels alongside the velocity waveform', () => {

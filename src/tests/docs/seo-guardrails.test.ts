@@ -64,9 +64,11 @@ sidebar:
 
   it('parses multiline descriptions without swallowing sibling frontmatter keys', () => {
     expect(parseDocFrontmatter(path.join(docsRoot, '3rdparty/index.md')).description).toBe(
-      'Community-sourced third-party sim racing and flight simulation hardware solutions. Discover open-source belt tensioners, G-seat actuators, and motion platform components compatible with OpenSimGear.'
+      'Third-party sim racing and flight simulation projects collected by OpenSimGear, including community belt tensioners and other DIY hardware ideas.'
     );
-    expect(parseDocFrontmatter(path.join(docsRoot, '3rdparty/belt-tensioner/index.md')).description).toBe('Hidden');
+    expect(parseDocFrontmatter(path.join(docsRoot, '3rdparty/belt-tensioners/flagghost.mdx')).description).toBe(
+      'Overview of the Flag Ghost belt tensioner project, a community DIY harness tensioner using stepper motors and printed parts for sim racing cueing.'
+    );
   });
 
   it('requires non-empty descriptions for indexable pages', () => {

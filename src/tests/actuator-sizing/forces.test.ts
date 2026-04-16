@@ -1,18 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import {
   computeForcePerActuator,
-  computeGravityForce,
   computeHoldingForce,
   computeStaticForce,
 } from '../../components/calculator/actuator-sizing/forces';
 
 const G = 9.81;
-
-describe('computeGravityForce', () => {
-  it('returns m*g', () => {
-    expect(computeGravityForce(50)).toBeCloseTo(50 * G);
-  });
-});
 
 describe('computeStaticForce', () => {
   it('sums gravity and friction', () => {

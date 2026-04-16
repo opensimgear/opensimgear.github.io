@@ -1,6 +1,6 @@
 import type { PhaseTorques } from './types';
 
-export const STEEL_DENSITY_KG_M3 = 7850;
+const STEEL_DENSITY_KG_M3 = 7850;
 
 export function computeScrewMass(diameter_mm: number, length_mm: number, density = STEEL_DENSITY_KG_M3): number {
   const radius_m = diameter_mm / 2 / 1000;

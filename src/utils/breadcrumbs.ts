@@ -1,6 +1,6 @@
 import { normalizeStructuredDataPath, type BreadcrumbItem } from './structured-data';
 
-export type BreadcrumbSidebarEntry = BreadcrumbSidebarLink | BreadcrumbSidebarGroup;
+type BreadcrumbSidebarEntry = BreadcrumbSidebarLink | BreadcrumbSidebarGroup;
 
 type BreadcrumbSidebarLink = {
   type: 'link';

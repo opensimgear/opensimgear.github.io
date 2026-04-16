@@ -2,7 +2,7 @@ import type { SystemType } from './types';
 
 const G = 9.81;
 
-export function computeGravityForce(mass_kg: number): number {
+function computeGravityForce(mass_kg: number): number {
   return mass_kg * G;
 }
 

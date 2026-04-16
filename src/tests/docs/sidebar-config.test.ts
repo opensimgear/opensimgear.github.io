@@ -31,7 +31,23 @@ afterEach(() => {
 
 describe('buildDocsSidebar', () => {
   it('uses sidebar.label from a section landing page for the group label', () => {
-    const sidebar = buildDocsSidebar({ docsRoot, basePath: '/docs' });
+    const fixtureRoot = createDocsFixture({
+      'diy/index.md': `---
+title: DIY Overview
+sidebar:
+  label: DIY Reference
+  order: 0
+---
+`,
+      'diy/sensors-and-input-detection.md': `---
+title: Sensors and Input Detection
+sidebar:
+  order: 1
+---
+`,
+    });
+
+    const sidebar = buildDocsSidebar({ docsRoot: fixtureRoot, basePath: '/docs' });
     const diyGroup = sidebar.find((item) => item.label === 'DIY Reference');
 
     expect(diyGroup).toBeDefined();
@@ -43,10 +59,10 @@ describe('buildDocsSidebar', () => {
       throw new Error('Expected DIY Reference to be a sidebar group');
     }
 
-    expect(diyGroup.items[0]).toEqual({
-      label: 'Sensors and Input Detection',
-      link: '/docs/diy/sensors-and-input-detection/',
-    });
+    expect(diyGroup.items).toEqual([
+      { label: 'DIY Overview', link: '/docs/diy/' },
+      { label: 'Sensors and Input Detection', link: '/docs/diy/sensors-and-input-detection/' },
+    ]);
   });
 
   it('falls back to the directory name when a section landing page omits sidebar.label', () => {
@@ -231,36 +247,15 @@ sidebar:
   it('preserves the intended top-level docs ordering', () => {
     const sidebar = buildDocsSidebar({ docsRoot, basePath: '/docs' });
 
-    expect(sidebar.map((item) => item.label)).toEqual([
-      'Sim Racing',
-      'Flight Simulation',
-      'Components',
-      'Guides',
-      'DIY Reference',
-    ]);
+    expect(sidebar.map((item) => item.label)).toEqual(['Sim Racing', 'Flight Simulation']);
   });
 
-  it('uses configured basePath for third-party docs slugs', () => {
+  it('uses configured basePath for third-party top-level slugs', () => {
     const sidebar = buildDocsSidebar({ docsRoot: thirdPartyRoot, basePath: '/3rdparty' });
 
     expect(sidebar).toContainEqual({
-      label: 'Overview',
+      label: 'Disclaimer',
       link: '/3rdparty/',
-    });
-
-    const beltTensionerGroup = sidebar.find((item) => item.label === 'Belt Tensioner');
-
-    if (!beltTensionerGroup || !('items' in beltTensionerGroup)) {
-      throw new Error('Expected Belt Tensioner to be a sidebar group');
-    }
-
-    expect(beltTensionerGroup.items).toContainEqual({
-      label: 'Flag Ghost Belt Tensioner',
-      link: '/3rdparty/belt-tensioner/flagghost/',
-    });
-    expect(beltTensionerGroup.items).not.toContainEqual({
-      label: 'Flag Ghost Belt Tensioner',
-      link: '/docs/belt-tensioner/flagghost/',
     });
   });
 

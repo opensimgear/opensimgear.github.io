@@ -25,7 +25,7 @@ export function normalizeStructuredDataPath(pathname: string) {
   return path.endsWith('/') ? path : `${path}/`;
 }
 
-export function toStructuredDataUrl(site: string, pathname: string) {
+function toStructuredDataUrl(site: string, pathname: string) {
   return new URL(normalizeStructuredDataPath(pathname), site).toString();
 }
 
