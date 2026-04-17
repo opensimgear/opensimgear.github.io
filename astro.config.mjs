@@ -3,25 +3,25 @@ import { defineConfig } from 'astro/config';
 import playformCompress from '@playform/compress';
 import svelte from '@astrojs/svelte';
 import sentry from '@sentry/astro';
-import spotlightjs from '@spotlightjs/astro';
 import partytown from '@astrojs/partytown';
 import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 import starlightLinksValidator from 'starlight-links-validator';
 import starlightAutoSidebar from 'starlight-auto-sidebar';
-import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
-
 import { fileURLToPath } from 'url';
-
 import tailwindcss from '@tailwindcss/vite';
-
 import jopSoftwarecookieconsent from '@jop-software/astro-cookieconsent';
+import robotsTxt from 'astro-robots-txt';
+import webmanifest from 'astro-webmanifest';
+import checks from '@nuasite/checks';
+
+import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 import { cookieConsentSettings } from './cookie-consent.mjs';
 
-import robotsTxt from 'astro-robots-txt';
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const title = 'OpenSimGear';
 
 // https://astro.build/config
 export default defineConfig({
@@ -30,11 +30,11 @@ export default defineConfig({
     svelte(),
     icon(),
     starlight({
-      title: 'OpenSimGear',
+      title,
       logo: {
-        light: '~/assets/logo.png',
-        dark: '~/assets/logo-dark.png',
-        alt: 'OpenSimGear Logo',
+        light: '~/assets/brand-light.png',
+        dark: '~/assets/brand-dark.png',
+        alt: `${title} Logo`,
         replacesTitle: true,
       },
       editLink: {
@@ -84,7 +84,6 @@ export default defineConfig({
         },
       ],
       components: {
-        Hero: './src/components/overrides/Hero.astro',
         PageFrame: './src/components/overrides/PageFrame.astro',
       },
       plugins: [starlightLinksValidator(), starlightAutoSidebar()],
@@ -93,19 +92,40 @@ export default defineConfig({
       filter: (page) => shouldIncludeInSitemap(new URL(page).pathname),
     }),
     robotsTxt(),
+    webmanifest({
+      name: title,
+      icon: 'src/assets/logo.svg',
+      lang: 'en-US',
+      description: 'Open Source Sim Racing & Flight Simulation Hardware',
+      start_url: '/',
+      theme_color: '#ABD0A5',
+      background_color: '#16181C',
+      display: 'standalone',
+      insertAppleTouchLinks: true,
+    }),
     playformCompress(),
     jopSoftwarecookieconsent(cookieConsentSettings),
     sentry({
-      enabled: process.env.NODE_ENV !== 'development',
-      dsn: 'https://8453bfdc55a4896cbb5cfbe9f8b669a6@o4511237018681344.ingest.de.sentry.io/4511237021565008',
       org: 'qantic-ntrp',
       project: 'open-sim-gear',
       authToken: process.env.SENTRY_AUTH_TOKEN,
     }),
-    spotlightjs(),
     partytown({
       config: {
         forward: ['dataLayer.push'],
+      },
+    }),
+    checks({
+      mode: 'full', // 'auto' | 'full' | 'essential'
+      seo: { titleMaxLength: 70 },
+      geo: { minContentLength: 500 },
+      performance: { maxHtmlSize: 200_000 },
+      accessibility: true,
+      failOnError: true,
+      failOnWarning: false,
+      reportJson: true,
+      overrides: {
+        'seo/noindex-detected': false, // disable entirely
       },
     }),
   ],
