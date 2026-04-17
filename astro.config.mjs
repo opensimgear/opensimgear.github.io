@@ -17,6 +17,9 @@ import { fileURLToPath } from 'url';
 import tailwindcss from '@tailwindcss/vite';
 
 import jopSoftwarecookieconsent from '@jop-software/astro-cookieconsent';
+import { cookieConsentSettings } from './cookie-consent.mjs';
+
+import robotsTxt from 'astro-robots-txt';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,6 +27,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   site: 'https://www.opensimgear.org',
   integrations: [
+    svelte(),
+    icon(),
     starlight({
       title: 'OpenSimGear',
       logo: {
@@ -70,10 +75,6 @@ export default defineConfig({
           autogenerate: { directory: 'calculators' },
         },
         {
-          label: 'Gear',
-          autogenerate: { directory: 'gear' },
-        },
-        {
           label: '3rd Party',
           autogenerate: { directory: '3rdparty' },
           badge: {
@@ -83,7 +84,6 @@ export default defineConfig({
         },
       ],
       components: {
-        Head: './src/components/overrides/Head.astro',
         Hero: './src/components/overrides/Hero.astro',
         PageFrame: './src/components/overrides/PageFrame.astro',
       },
@@ -92,103 +92,21 @@ export default defineConfig({
     sitemap({
       filter: (page) => shouldIncludeInSitemap(new URL(page).pathname),
     }),
-    icon(),
-    svelte(),
+    robotsTxt(),
+    playformCompress(),
+    jopSoftwarecookieconsent(cookieConsentSettings),
     sentry({
-      enabled: process.env.NODE_ENV === 'development',
+      enabled: process.env.NODE_ENV !== 'development',
+      dsn: 'https://8453bfdc55a4896cbb5cfbe9f8b669a6@o4511237018681344.ingest.de.sentry.io/4511237021565008',
+      org: 'qantic-ntrp',
+      project: 'open-sim-gear',
+      authToken: process.env.SENTRY_AUTH_TOKEN,
     }),
     spotlightjs(),
     partytown({
       config: {
         forward: ['dataLayer.push'],
       },
-    }),
-    playformCompress(),
-    jopSoftwarecookieconsent({
-      guiOptions: {
-        consentModal: {
-          layout: 'bar',
-          position: 'bottom',
-          equalWeightButtons: false,
-          flipButtons: true,
-        },
-        preferencesModal: {
-          layout: 'bar',
-          position: 'right',
-          equalWeightButtons: false,
-          flipButtons: true,
-        },
-      },
-      categories: {
-        necessary: {
-          readOnly: true,
-        },
-        analytics: {
-          enabled: true,
-          services: {
-            ga: {
-              label:
-                '<a href="https://marketingplatform.google.com/about/analytics/terms/us/" target="_blank">Google Analytics</a>',
-              cookies: [
-                {
-                  name: /^(_ga|_gid)/,
-                },
-              ],
-            },
-          },
-        },
-      },
-      language: {
-        default: 'en',
-        autoDetect: 'browser',
-        translations: {
-          en: {
-            consentModal: {
-              title: 'Cookie Consent',
-              revisionMessage: "Hi, we've made some changes to our cookie policy since the last time you visited!",
-              description:
-                'Welcome to our website! To ensure the best browsing experience for you, we use cookies. By clicking "Accept" you agree to the use of cookies as outlined in our Privacy Policy. Your privacy and security are paramount to us. Manage your cookie preferences or learn more by clicking "Cookie Settings". Thank you for your trust in us. <br> {{revisionMessage}}',
-              acceptAllBtn: 'Accept all',
-              acceptNecessaryBtn: 'Reject all',
-              showPreferencesBtn: 'Manage preferences',
-              footer:
-                '<a href="/policies/privacy-policy">Privacy Policy</a>\n<a href="/policies/terms-and-conditions">Terms and conditions</a>',
-            },
-            preferencesModal: {
-              title: 'Consent Preferences Center',
-              acceptAllBtn: 'Accept all',
-              acceptNecessaryBtn: 'Reject all',
-              savePreferencesBtn: 'Save preferences',
-              closeIconLabel: 'Close modal',
-              serviceCounterLabel: 'Service|Services',
-              sections: [
-                {
-                  title: 'Cookie Usage',
-                  description:
-                    'In this panel you can express some preferences related to the processing of your personal information. You may review and change expressed choices at any time by resurfacing this panel via the provided link.To deny your consent to the specific processing activities described below, switch the toggles to off or use the “Reject all” button and confirm you want to save your choices.',
-                },
-                {
-                  title: 'Strictly Necessary Cookies <span class="pm__badge">Always Enabled</span>',
-                  description:
-                    'This functions are necessary for the website to provide the service requested by you, therefore they do not require your consent.',
-                  linkedCategory: 'necessary',
-                },
-                {
-                  title: 'Analytics Cookies',
-                  description:
-                    'This cookies are used to collect information about how visitors use the website to improve the quality of the provided service. The data collected includes the number of visitors, the source where they have come from, and the pages visited in an anonymous form.',
-                  linkedCategory: 'analytics',
-                },
-                {
-                  title: 'More information',
-                  description: `For any query in relation to the cookie policy and your choices, please contact us at <a class="cc__link" href="mailto:legal@opensimgear.org">legal@opensimgear.org</a>.`,
-                },
-              ],
-            },
-          },
-        },
-      },
-      disablePageInteraction: true,
     }),
   ],
   vite: {

@@ -27,7 +27,11 @@ function normalizePathname(pathname: string) {
   return path.endsWith('/') ? path.slice(0, -1) : path;
 }
 
-function findSidebarMatch(entries: StarlightRouteData['sidebar'], pathname: string, parents: SidebarGroup[] = []): SidebarMatch | undefined {
+function findSidebarMatch(
+  entries: StarlightRouteData['sidebar'],
+  pathname: string,
+  parents: SidebarGroup[] = []
+): SidebarMatch | undefined {
   const normalizedPathname = normalizePathname(pathname);
 
   for (const entry of entries) {
@@ -99,7 +103,7 @@ function findSidebarGroupMatch(
 }
 
 function isGenericTitle(title: string) {
-  return title === 'Overview' || title === 'Hidden';
+  return title === 'Overview';
 }
 
 function dedupeTitleParts(parts: string[]) {
@@ -117,9 +121,11 @@ function dedupeTitleParts(parts: string[]) {
 }
 
 function isSeoTitleTag(entry: HeadEntry) {
-  return entry.tag === 'title'
-    || (entry.tag === 'meta' && entry.attrs?.property === 'og:title')
-    || (entry.tag === 'meta' && entry.attrs?.name === 'twitter:title');
+  return (
+    entry.tag === 'title' ||
+    (entry.tag === 'meta' && entry.attrs?.property === 'og:title') ||
+    (entry.tag === 'meta' && entry.attrs?.name === 'twitter:title')
+  );
 }
 
 export function replaceSeoTitleTags(head: StarlightRouteData['head'], seoTitle: string): StarlightRouteData['head'] {
@@ -146,7 +152,9 @@ export function replaceSeoTitleTags(head: StarlightRouteData['head'], seoTitle: 
 }
 
 export function buildSeoPageTitle({ pageTitle, siteTitle, pathname, sidebar }: BuildSeoPageTitleOptions) {
-  const match = findSidebarMatch(sidebar, pathname) ?? (isGenericTitle(pageTitle) ? findSidebarGroupMatch(sidebar, pathname) : undefined);
+  const match =
+    findSidebarMatch(sidebar, pathname) ??
+    (isGenericTitle(pageTitle) ? findSidebarGroupMatch(sidebar, pathname) : undefined);
   const topLevelParent = match?.parents[0]?.label;
   const nearestParent = match?.parents.at(-1)?.label;
 
