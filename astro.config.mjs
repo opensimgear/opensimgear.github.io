@@ -3,7 +3,6 @@ import { defineConfig } from 'astro/config';
 import playformCompress from '@playform/compress';
 import svelte from '@astrojs/svelte';
 import sentry from '@sentry/astro';
-import partytown from '@astrojs/partytown';
 import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
@@ -11,17 +10,17 @@ import starlightLinksValidator from 'starlight-links-validator';
 import starlightAutoSidebar from 'starlight-auto-sidebar';
 import { fileURLToPath } from 'url';
 import tailwindcss from '@tailwindcss/vite';
-import jopSoftwarecookieconsent from '@jop-software/astro-cookieconsent';
 import robotsTxt from 'astro-robots-txt';
 import webmanifest from 'astro-webmanifest';
 import checks from '@nuasite/checks';
+import spotlightjs from '@spotlightjs/astro';
 
 import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
-import { cookieConsentSettings } from './cookie-consent.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const title = 'OpenSimGear';
+const isProd = process.env.NODE_ENV !== 'development';
 
 // https://astro.build/config
 export default defineConfig({
@@ -84,7 +83,7 @@ export default defineConfig({
         },
       ],
       components: {
-        PageFrame: './src/components/overrides/PageFrame.astro',
+        Head: './src/components/overrides/Head.astro',
       },
       plugins: [starlightLinksValidator(), starlightAutoSidebar()],
     }),
@@ -104,17 +103,12 @@ export default defineConfig({
       insertAppleTouchLinks: true,
     }),
     playformCompress(),
-    jopSoftwarecookieconsent(cookieConsentSettings),
     sentry({
       org: 'qantic-ntrp',
       project: 'open-sim-gear',
       authToken: process.env.SENTRY_AUTH_TOKEN,
     }),
-    partytown({
-      config: {
-        forward: ['dataLayer.push'],
-      },
-    }),
+    spotlightjs(),
     checks({
       mode: 'full', // 'auto' | 'full' | 'essential'
       seo: { titleMaxLength: 70 },
@@ -141,4 +135,3 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 });
-

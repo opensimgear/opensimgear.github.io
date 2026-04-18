@@ -1,0 +1,50 @@
+---
+import 'vanilla-cookieconsent/dist/cookieconsent.css';
+import { config } from '~/config';
+---
+
+<script>
+  import * as cookieConsent from 'vanilla-cookieconsent';
+  import { cookieConsentConfig } from './cookie-consent';
+
+  cookieConsent.run({
+    onConsent: () => {
+      window.updateConsent?.();
+    },
+    onChange: () => {
+      window.updateConsent?.();
+    },
+    onFirstConsent: () => {
+      window.updateConsent?.();
+    },
+
+    ...cookieConsentConfig,
+  });
+
+  window.cookieConsent = cookieConsent;
+</script>
+
+<!-- Google Analytics -->
+<script
+  is:inline
+  async
+  src={`https://www.googletagmanager.com/gtag/js?id=${config.googleAnalytics.id}`}
+  type="text/plain"
+  data-category="analytics"></script>
+
+<script is:inline define:vars={{ id: config.googleAnalytics.id }} type="text/plain" data-category="analytics">
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    window.dataLayer.push(arguments);
+  };
+  window.updateConsent = () => {
+    window.gtag('consent', 'update', {
+      analytics_storage: window.cookieConsent.acceptedService('analytics_storage', 'analytics') ? 'granted' : 'denied',
+    });
+  };
+  updateConsent();
+  window.gtag('js', new Date());
+  window.gtag('config', id);
+</script>
+
+<!-- Google Analytics -->

@@ -45,8 +45,7 @@
     "svelte-youtube-embed": "^0.4.6",
     "tailwindcss": "^4.2.2",
     "three": "^0.183.2",
-    "typescript": "^6.0.2",
-    "vanilla-cookieconsent": "^3.1.0"
+    "typescript": "^6.0.2"
   },
   "devDependencies": {
     "@astrolib/seo": "1.0.0-beta.8",
@@ -65,6 +64,7 @@
     "tailwind-merge": "3.5.0",
     "typescript-eslint": "8.58.1",
     "unpic": "4.2.2",
+    "vanilla-cookieconsent": "^3.1.0",
     "vitest": "^4.1.4"
   },
   "packageManager": "pnpm@10.9.0"

@@ -1,4 +1,8 @@
-export const cookieConsentSettings = {
+import type { CookieConsentConfig } from 'vanilla-cookieconsent';
+
+export const cookieConsentConfig: CookieConsentConfig = {
+  revision: 2,
+  hideFromBots: false,
   guiOptions: {
     consentModal: {
       layout: 'bar',
@@ -20,7 +24,7 @@ export const cookieConsentSettings = {
     analytics: {
       enabled: true,
       services: {
-        ga: {
+        analytics_storage: {
           label:
             '<a href="https://marketingplatform.google.com/about/analytics/terms/us/" target="_blank">Google Analytics</a>',
           cookies: [
@@ -41,7 +45,7 @@ export const cookieConsentSettings = {
           title: 'Cookie Consent',
           revisionMessage: "Hi, we've made some changes to our cookie policy since the last time you visited!",
           description:
-            'Welcome to our website! To ensure the best browsing experience for you, we use cookies. By clicking "Accept" you agree to the use of cookies as outlined in our Privacy Policy. Your privacy and security are paramount to us. Manage your cookie preferences or learn more by clicking "Cookie Settings". Thank you for your trust in us. <br> {{revisionMessage}}',
+            'Welcome to our website! To ensure the best browsing experience for you, we use cookies. By clicking "Accept" you agree to the use of cookies as outlined in our Privacy Policy. Your privacy and security are paramount to us. Manage your cookie preferences or learn more by clicking "Cookie Settings". Thank you for your trust in us. <br> <br> {{revisionMessage}}',
           acceptAllBtn: 'Accept all',
           acceptNecessaryBtn: 'Reject all',
           showPreferencesBtn: 'Manage preferences',

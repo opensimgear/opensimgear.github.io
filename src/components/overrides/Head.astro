@@ -1,54 +1,7 @@
 ---
 import Default from '@astrojs/starlight/components/Head.astro';
-
-import GoogleAnalytics from '~/components/util/GoogleAnalytics.astro';
-import { buildSeoPageTitle, replaceSeoTitleTags } from '~/utils/page-title';
-import { applySeoMetadata } from '~/utils/seo-meta';
-import { buildDefaultSocialImageUrl, getSeoPolicy } from '~/utils/seo-policy';
-import { buildDocBreadcrumbItems } from '~/utils/breadcrumbs';
-import {
-  buildBreadcrumbSchema,
-  buildSiteSchemas,
-} from '~/utils/structured-data';
-import { config } from '~/config';
-
-const { starlightRoute } = Astro.locals;
-const pathname = Astro.url.pathname;
-const isHomepage = pathname === '/';
-const isNotFoundPage = Astro.response.status === 404;
-const seoTitle = buildSeoPageTitle({
-  pageTitle: starlightRoute.entry.data.title,
-  siteTitle: starlightRoute.siteTitle,
-  pathname,
-  sidebar: starlightRoute.sidebar,
-});
-const description = starlightRoute.entry.data.description ?? '';
-const seoPolicy = getSeoPolicy(pathname, { is404: isNotFoundPage });
-const siteSchemas = isHomepage ? buildSiteSchemas({ site: config.site, title: starlightRoute.siteTitle }) : [];
-const breadcrumbItems = isHomepage
-  ? []
-  : buildDocBreadcrumbItems({
-      sidebar: starlightRoute.sidebar,
-      pathname,
-      currentTitle: starlightRoute.entry.data.title,
-    });
-const breadcrumbSchema = breadcrumbItems.length > 0
-  ? buildBreadcrumbSchema({
-    site: config.site,
-    items: breadcrumbItems,
-  })
-  : undefined;
-
-starlightRoute.head = applySeoMetadata(replaceSeoTitleTags(starlightRoute.head, seoTitle), {
-  pathname,
-  siteUrl: config.site,
-  description,
-  seoPolicy,
-  defaultSocialImageUrl: buildDefaultSocialImageUrl(config.site),
-});
+import Analytics from '~/components/util/Analytics.astro';
 ---
 
+{import.meta.env.PROD && <Analytics />
 <Default {...Astro.props}><slot /></Default>
-{siteSchemas.map((schema) => <script type="application/ld+json" is:inline set:html={schema} />)}
-{breadcrumbSchema && <script type="application/ld+json" is:inline set:html={breadcrumbSchema} />}
-{import.meta.env.PROD && <GoogleAnalytics />}
