@@ -1,10 +1,12 @@
 ---
 import Analytics from '~/components/util/Analytics.astro';
 import { config } from '~/config';
-import { buildDefaultSocialImageUrl } from '~/utils/seo-policy';
+import { buildDefaultSocialImageUrl, getSeoPolicy } from '~/utils/seo-policy';
 import { buildSiteSchemas } from '~/utils/structured-data';
 
 const { head } = Astro.locals.starlightRoute;
+const pathname = Astro.url.pathname;
+const seoPolicy = getSeoPolicy(pathname);
 const siteUrl = Astro.site?.toString();
 const socialImageUrl = siteUrl ? buildDefaultSocialImageUrl(siteUrl) : undefined;
 const siteSchemas = siteUrl
@@ -25,6 +27,7 @@ const hasOgImage = filteredHead.some(
 const hasTwitterImage = filteredHead.some(
   ({ tag, attrs }) => tag === 'meta' && attrs && 'name' in attrs && attrs.name === 'twitter:image'
 );
+const hasRobots = filteredHead.some(({ tag, attrs }) => tag === 'meta' && attrs && 'name' in attrs && attrs.name === 'robots');
 
 const socialImageHead = socialImageUrl
   ? [
@@ -32,10 +35,14 @@ const socialImageHead = socialImageUrl
       ...(!hasTwitterImage ? [{ tag: 'meta', attrs: { name: 'twitter:image', content: socialImageUrl } }] : []),
     ]
   : [];
+
+const routeSpecificHead = !hasRobots && (!seoPolicy.index || !seoPolicy.follow)
+  ? [{ tag: 'meta', attrs: { name: 'robots', content: `${seoPolicy.index ? 'index' : 'noindex'}, ${seoPolicy.follow ? 'follow' : 'nofollow'}` } }]
+  : [];
 ---
 
 {import.meta.env.PROD && <Analytics />}
-{[...filteredHead, ...socialImageHead].map((entry) => {
+{[...filteredHead, ...socialImageHead, ...routeSpecificHead].map((entry) => {
   const Tag = entry.tag;
   const content = 'content' in entry ? entry.content : undefined;
 

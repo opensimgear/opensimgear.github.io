@@ -3,11 +3,7 @@ export type SeoPolicy = {
   follow: boolean;
 };
 
-type GetSeoPolicyOptions = {
-  is404?: boolean;
-};
-
-const NOINDEX_PATHS_LIST = ['/gear', '/gear/hand-brake', '/3rdparty/belt-tensioners'] as const;
+const NOINDEX_PATHS_LIST = ['/404'] as const;
 
 const NOINDEX_PATHS = new Set<string>(NOINDEX_PATHS_LIST);
 
@@ -21,7 +17,7 @@ function normalizePathname(pathname: string) {
   return path.endsWith('/') ? path.slice(0, -1) : path;
 }
 
-export function getSeoPolicy(pathname: string, options: GetSeoPolicyOptions = {}): SeoPolicy {
+export function getSeoPolicy(pathname: string): SeoPolicy {
   return {
     index: !NOINDEX_PATHS.has(normalizePathname(pathname)),
     follow: true,
@@ -37,5 +33,5 @@ export function buildCanonicalUrl(siteUrl: string, pathname: string) {
 }
 
 export function buildDefaultSocialImageUrl(siteUrl: string) {
-  return buildCanonicalUrl(siteUrl, '/social-preview-default.png');
+  return buildCanonicalUrl(siteUrl, '/social-image.png');
 }

@@ -13,8 +13,6 @@ import tailwindcss from '@tailwindcss/vite';
 import robotsTxt from 'astro-robots-txt';
 import webmanifest from 'astro-webmanifest';
 import checks from '@nuasite/checks';
-import spotlightjs from '@spotlightjs/astro';
-import starlightLlmsTxt from 'starlight-llms-txt';
 
 import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 
@@ -30,6 +28,7 @@ export default defineConfig({
     icon(),
     starlight({
       title,
+      disable404Route: true,
       logo: {
         light: '~/assets/logo-light.svg',
         dark: '~/assets/logo-dark.svg',
@@ -94,7 +93,7 @@ export default defineConfig({
     robotsTxt(),
     webmanifest({
       name: title,
-      icon: 'src/assets/logo.svg',
+      icon: 'src/assets/logo-light.svg',
       lang: 'en-US',
       description: 'Open Source Sim Racing & Flight Simulation Hardware',
       start_url: '/',

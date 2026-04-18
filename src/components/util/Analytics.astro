@@ -4,24 +4,25 @@ import { config } from '~/config';
 ---
 
 <script>
-  import * as cookieConsent from 'vanilla-cookieconsent';
   import { cookieConsentConfig } from './cookie-consent';
 
-  cookieConsent.run({
-    onConsent: () => {
-      window.updateConsent?.();
-    },
-    onChange: () => {
-      window.updateConsent?.();
-    },
-    onFirstConsent: () => {
-      window.updateConsent?.();
-    },
+  import('vanilla-cookieconsent').then((cookieConsent) => {
+    cookieConsent.run({
+      onConsent: () => {
+        window.updateConsent?.();
+      },
+      onChange: () => {
+        window.updateConsent?.();
+      },
+      onFirstConsent: () => {
+        window.updateConsent?.();
+      },
 
-    ...cookieConsentConfig,
+      ...cookieConsentConfig,
+    });
+
+    window.cookieConsent = cookieConsent;
   });
-
-  window.cookieConsent = cookieConsent;
 </script>
 
 <!-- Google Analytics -->
