@@ -3,5 +3,7 @@ import Default from '@astrojs/starlight/components/Head.astro';
 import Analytics from '~/components/util/Analytics.astro';
 ---
 
-{import.meta.env.PROD && <Analytics />
+{import.meta.env.PROD && <Analytics />}
+<!-- defaults -->
 <Default {...Astro.props}><slot /></Default>
+<!-- defaults end -->

@@ -20,7 +20,6 @@ import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const title = 'OpenSimGear';
-const isProd = process.env.NODE_ENV !== 'development';
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,10 +30,10 @@ export default defineConfig({
     starlight({
       title,
       logo: {
-        light: '~/assets/brand-light.png',
-        dark: '~/assets/brand-dark.png',
+        light: '~/assets/logo-light.svg',
+        dark: '~/assets/logo-dark.svg',
         alt: `${title} Logo`,
-        replacesTitle: true,
+        replacesTitle: false,
       },
       editLink: {
         baseUrl: 'https://github.com/opensimgear/opensimgear.github.io/edit/main/',
@@ -84,6 +83,7 @@ export default defineConfig({
       ],
       components: {
         Head: './src/components/overrides/Head.astro',
+        SiteTitle: './src/components/overrides/SiteTitle.astro',
       },
       plugins: [starlightLinksValidator(), starlightAutoSidebar()],
     }),
@@ -108,7 +108,7 @@ export default defineConfig({
       project: 'open-sim-gear',
       authToken: process.env.SENTRY_AUTH_TOKEN,
     }),
-    spotlightjs(),
+    // spotlightjs(),
     checks({
       mode: 'full', // 'auto' | 'full' | 'essential'
       seo: { titleMaxLength: 70 },

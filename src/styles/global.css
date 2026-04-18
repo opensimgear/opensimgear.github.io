@@ -56,3 +56,8 @@
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
+
+.hero > img {
+   border-radius: 12px;
+}
+

@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 # local git worktrees
 .worktrees/
+
+docs/superpowers

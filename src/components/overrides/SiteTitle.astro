@@ -1,0 +1,40 @@
+---
+import config from 'virtual:starlight/user-config';
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+import logoLight from '~/assets/logo-light.svg';
+import logoDark from '~/assets/logo-dark.svg';
+---
+
+<a href={siteTitleHref} class="site-title sl-flex">
+  <img class="light:sl-hidden print:hidden" alt={config?.logo?.alt} src={logoDark.src} width="40" />
+  <img class="dark:sl-hidden print:block" alt={config?.logo?.alt} src={logoLight.src} width="40" />
+  <span class:list={{ 'sr-only': config.logo?.replacesTitle }} translate="no">
+    <span class="dark:text-white font-black text-3xl">
+      {siteTitle.substring(0, 4).trim()}<span class="font-light">{siteTitle.substring(4, siteTitle.length)}</span>
+    </span>
+  </span>
+</a>
+
+<style>
+  @layer starlight.core {
+    .site-title {
+      align-items: center;
+      gap: var(--sl-nav-gap);
+      font-size: var(--sl-text-h4);
+      color: black;
+      text-decoration: none;
+      white-space: nowrap;
+      min-width: 0;
+    }
+    span {
+      overflow: hidden;
+    }
+    img {
+      height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: 0 50%;
+    }
+  }
+</style>
