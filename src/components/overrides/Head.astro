@@ -1,9 +1,45 @@
 ---
-import Default from '@astrojs/starlight/components/Head.astro';
 import Analytics from '~/components/util/Analytics.astro';
+import { config } from '~/config';
+import { buildDefaultSocialImageUrl } from '~/utils/seo-policy';
+import { buildSiteSchemas } from '~/utils/structured-data';
+
+const { head } = Astro.locals.starlightRoute;
+const siteUrl = Astro.site?.toString();
+const socialImageUrl = siteUrl ? buildDefaultSocialImageUrl(siteUrl) : undefined;
+const siteSchemas = siteUrl
+  ? buildSiteSchemas({
+      site: siteUrl,
+      title: config.brand.join(''),
+      sameAs: [config.social.github, config.social.discord],
+    })
+  : [];
+
+const filteredHead = head.filter(
+  ({ tag, attrs }) => !(tag === 'meta' && attrs && 'name' in attrs && attrs.name === 'generator')
+);
+
+const hasOgImage = filteredHead.some(
+  ({ tag, attrs }) => tag === 'meta' && attrs && 'property' in attrs && attrs.property === 'og:image'
+);
+const hasTwitterImage = filteredHead.some(
+  ({ tag, attrs }) => tag === 'meta' && attrs && 'name' in attrs && attrs.name === 'twitter:image'
+);
+
+const socialImageHead = socialImageUrl
+  ? [
+      ...(!hasOgImage ? [{ tag: 'meta', attrs: { property: 'og:image', content: socialImageUrl } }] : []),
+      ...(!hasTwitterImage ? [{ tag: 'meta', attrs: { name: 'twitter:image', content: socialImageUrl } }] : []),
+    ]
+  : [];
 ---
 
 {import.meta.env.PROD && <Analytics />}
-<!-- defaults -->
-<Default {...Astro.props}><slot /></Default>
-<!-- defaults end -->
+{[...filteredHead, ...socialImageHead].map((entry) => {
+  const Tag = entry.tag;
+  const content = 'content' in entry ? entry.content : undefined;
+
+  return <Tag {...entry.attrs} set:html={content} />;
+})}
+{siteSchemas.map((schema) => <script type="application/ld+json" is:inline set:html={schema} />)}
+<slot />

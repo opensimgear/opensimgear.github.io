@@ -1,8 +1,8 @@
 ---
 title: Stewart Platform
 description:
-  Interactive 6DOF Stewart platform calculator for motion simulators. Configure base and platform geometry, actuator
-  stroke, and instantly compute leg lengths, range of motion, and optimal platform height.
+  Design a 6DOF Stewart platform with geometry, actuator stroke, leg-length, travel-limit, and platform-height
+  calculations.
 tableOfContents: false
 ---
 
@@ -12,16 +12,24 @@ import StewartPlatform from '~/components/calculator/stewart-platform/index.svel
 
 ## Intro
 
-A [Stewart platform](https://en.wikipedia.org/wiki/Stewart_platform) is a 6-DOF parallel mechanism used in motion simulators. Six actuators connect a fixed base to a moving platform, allowing independent control of pitch, roll, yaw, surge, sway, and heave.
+A [Stewart platform](https://en.wikipedia.org/wiki/Stewart_platform) is a 6-DOF parallel mechanism used in motion
+simulators. Six actuators connect a fixed base to a moving platform, allowing independent control of pitch, roll, yaw,
+surge, sway, and heave.
 
-This calculator lets you configure the geometry and actuator stroke of your platform, then shows the resulting range of motion and lets you preview any pose in 3D.
+This calculator lets you configure the geometry and actuator stroke of your platform, then shows the resulting range of
+motion and lets you preview any pose in 3D.
 
 ### How to use
 
-1. **Parameters** — Set base and platform diameter. The alpha angles control how tightly the joint pairs are grouped; smaller alpha spreads the pairs further apart. The Center of Rotation offsets the pivot point relative to the platform center.
-2. **Actuator Range** — Enter your actuator's minimum and maximum extension. The platform height is automatically set to the mid-stroke position for maximum symmetric travel.
-3. **Constraints** — Shows the computed pitch/roll/yaw and surge/sway/heave limits for the current geometry. These update live as you change parameters.
-4. **Movement** — Use the rotation and translation sliders to preview any pose. Sliders are clamped to the computed limits so you can't exceed what the actuators allow.
+1. **Parameters** — Set base and platform diameter. The alpha angles control how tightly the joint pairs are grouped;
+   smaller alpha spreads the pairs further apart. The Center of Rotation offsets the pivot point relative to the
+   platform center.
+2. **Actuator Range** — Enter your actuator's minimum and maximum extension. The platform height is automatically set to
+   the mid-stroke position for maximum symmetric travel.
+3. **Constraints** — Shows the computed pitch/roll/yaw and surge/sway/heave limits for the current geometry. These
+   update live as you change parameters.
+4. **Movement** — Use the rotation and translation sliders to preview any pose. Sliders are clamped to the computed
+   limits so you can't exceed what the actuators allow.
 
 ### Calculator
 

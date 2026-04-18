@@ -37,5 +37,5 @@ export function buildCanonicalUrl(siteUrl: string, pathname: string) {
 }
 
 export function buildDefaultSocialImageUrl(siteUrl: string) {
-  return buildCanonicalUrl(siteUrl, '/social-preview-default.svg');
+  return buildCanonicalUrl(siteUrl, '/social-preview-default.png');
 }

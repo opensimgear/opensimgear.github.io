@@ -14,6 +14,7 @@ import robotsTxt from 'astro-robots-txt';
 import webmanifest from 'astro-webmanifest';
 import checks from '@nuasite/checks';
 import spotlightjs from '@spotlightjs/astro';
+import starlightLlmsTxt from 'starlight-llms-txt';
 
 import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 

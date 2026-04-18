@@ -1,8 +1,8 @@
 ---
 title: Actuator Motor Sizing
 description:
-  Engineering-grade motor selection tool for ball-screw linear actuators. Enter your motion profile, load, and screw
-  geometry to find suitable servo motors with dynamic torque, speed, and inertia analysis.
+  Size servo motors for ball-screw actuators with torque, speed, RMS load, and inertia checks for motion simulator
+  designs.
 tableOfContents: false
 ---
 
@@ -12,10 +12,10 @@ import ActuatorSizingCalc from '~/components/calculator/actuator-sizing/index.sv
 
 ## Intro
 
-:::caution
-This component is highly experimental, if you find a problem open an [issue](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=bug_report.md).
-If you have a suggestion on new features or improvements open a [feature request](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=feature_request.md).
-:::
+:::caution This component is highly experimental, if you find a problem open an
+[issue](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=bug_report.md). If you have a
+suggestion on new features or improvements open a
+[feature request](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=feature_request.md). :::
 
 Selecting a motor for a ball-screw linear actuator requires more than matching peak force. The full motion cycle
 matters: inertial torque during acceleration, RMS heating over repeated cycles, speed at the target stroke rate, and
@@ -28,7 +28,8 @@ safety factor.
 ### How to use
 
 1. **Setting mode** — Toggle `Advanced` to reveal additional parameters (friction, imbalance, screw efficiency, gear
-   efficiency, gear inertia). In simple mode these are fixed at sensible defaults so you only need to set the essentials.
+   efficiency, gear inertia). In simple mode these are fixed at sensible defaults so you only need to set the
+   essentials.
 2. **Motion Profile** — Set stroke, peak velocity, acceleration, deceleration, and dwell time. The calculator computes
    the trapezoidal timing automatically, flags short-stroke triangular moves, and renders a live velocity diagram.
 3. **System** — Choose Single Axis, 4-Actuator Platform, or 6-Actuator Stewart Platform. Multi-actuator modes distribute
@@ -37,9 +38,9 @@ safety factor.
    required values before motors are checked.
 4. **Load** — Enter moving mass. In Advanced mode, also set friction force and an imbalance factor for uneven force
    sharing between actuators. Gravity acts on the full mass and is always included.
-5. **Ball Screw** — Choose a common screw size (16 mm–32 mm, 5 mm or 10 mm lead) or enter custom pitch and diameter.
-   Set screw length so mass and rotational inertia compute correctly. In Advanced mode, adjust efficiency for the
-   screw's mechanical losses (typically 85–95 %).
+5. **Ball Screw** — Choose a common screw size (16 mm–32 mm, 5 mm or 10 mm lead) or enter custom pitch and diameter. Set
+   screw length so mass and rotational inertia compute correctly. In Advanced mode, adjust efficiency for the screw's
+   mechanical losses (typically 85–95 %).
 6. **Transmission** — Enable `Auto Gear Ratio` to let the calculator find the minimum ratio (in 0.5–5 ×) that keeps the
    load-to-motor inertia ratio ≤ 10:1 for each motor individually. Disable it to set a fixed ratio. In Advanced mode,
    add gear efficiency and drivetrain inertia for belt or gearbox reductions.
@@ -60,23 +61,23 @@ safety factor.
   `F_hold = m × g`. Friction is excluded from holding because Coulomb friction is zero with no relative motion.
 - **Force distribution** — Single axis: `F × imbalance`; 4-actuator: `F/4 × imbalance`; Stewart:
   `F / (6 × cos(angle)) × imbalance`. In simple mode the imbalance factor is fixed at 1.2.
-- **Screw torque** — `T_load = F × lead / (2π × η_screw × ratio × η_gear)`, where `η_screw` and `η_gear` are the
-  screw and transmission efficiencies respectively.
+- **Screw torque** — `T_load = F × lead / (2π × η_screw × ratio × η_gear)`, where `η_screw` and `η_gear` are the screw
+  and transmission efficiencies respectively.
 - **Peak torque** is the maximum of |T_accel|, |T_const|, |T_decel|, and |T_hold|, where
   `T_accel = T_load + J_total × α_accel` and `T_decel = T_load − J_total × α_decel`.
 - **RMS torque** represents thermal loading over the full move-and-dwell cycle:
   `T_rms = √((T_accel² × t_accel + T_const² × t_const + T_decel² × t_decel + T_hold² × t_dwell) / t_total)`.
 - **Negative deceleration torque** is valid regenerative behavior and still contributes to RMS heating through `T²`.
-- **Inertia model** — Load inertia reflected to the motor shaft: `J_load = m × (lead / (2π × ratio))²`.
-  Total inertia: `J_total = J_motor + J_gear + J_screw / ratio² + J_load`. The screw is modelled as a solid steel
-  cylinder (density 7 850 kg/m³).
+- **Inertia model** — Load inertia reflected to the motor shaft: `J_load = m × (lead / (2π × ratio))²`. Total inertia:
+  `J_total = J_motor + J_gear + J_screw / ratio² + J_load`. The screw is modelled as a solid steel cylinder (density 7
+  850 kg/m³).
 - **Auto gear ratio** uses binary search over [0.5, 5] to find the minimum ratio that satisfies `J_load / J_motor ≤ 10`.
-  Each motor is evaluated with its own optimal ratio, so a low-inertia motor can run direct drive while a
-  high-inertia motor gets geared.
+  Each motor is evaluated with its own optimal ratio, so a low-inertia motor can run direct drive while a high-inertia
+  motor gets geared.
 - **Status thresholds** — `fail` if any margin is negative; `warn` if any margin is below 20 % or the inertia ratio
   exceeds 10:1; `pass` otherwise.
-- **Fit score** (0–100) weighs RMS torque utilization (40 %), peak torque utilization (35 %), and speed utilization
-  (25 %), then subtracts a penalty for inertia ratios above 10:1. Higher scores indicate better-matched motors;
-  severely over-sized motors score lower.
+- **Fit score** (0–100) weighs RMS torque utilization (40 %), peak torque utilization (35 %), and speed utilization (25
+  %), then subtracts a penalty for inertia ratios above 10:1. Higher scores indicate better-matched motors; severely
+  over-sized motors score lower.
 - In **Stewart** mode, motion-profile inputs are actuator-axis values. The calculator applies angle-based load sharing
   but does not derive actuator travel from platform pose kinematics.

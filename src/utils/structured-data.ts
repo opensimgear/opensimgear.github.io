@@ -3,6 +3,7 @@ import type { FaqItem } from '../data/faq';
 type BuildSiteSchemasOptions = {
   site: string;
   title: string;
+  sameAs?: string[];
 };
 
 export type BreadcrumbItem = {
@@ -47,13 +48,14 @@ function toFaqAnswerText(item: FaqItem) {
   return parts.join('\n');
 }
 
-export function buildSiteSchemas({ site, title }: BuildSiteSchemasOptions) {
+export function buildSiteSchemas({ site, title, sameAs = [] }: BuildSiteSchemasOptions) {
   return [
     toJsonString({
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: title,
       url: toStructuredDataUrl(site, '/'),
+      ...(sameAs.length ? { sameAs } : {}),
     }),
     toJsonString({
       '@context': 'https://schema.org',

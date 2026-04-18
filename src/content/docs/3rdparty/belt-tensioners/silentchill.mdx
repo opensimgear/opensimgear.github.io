@@ -5,7 +5,7 @@ description:
   control setup.
 ---
 
-import Youtube from 'svelte-youtube-embed';
+import LazyYoutube from '~/components/util/LazyYoutube.svelte';
 
 The SilentChill project pushes the belt tensioner idea toward a more control-heavy ODrive-style setup.
 
@@ -33,7 +33,7 @@ fault handling.
 
 ## Demo
 
-<Youtube client:load id="vuurS1u4X_c" />
+<LazyYoutube client:load id="vuurS1u4X_c" title="SilentChill oDrive Belt Tensioner demo video" />
 
 Use the demo to judge overall packaging and response style. For real build work, confirm current controller, firmware,
 and hardware details from the original source first.

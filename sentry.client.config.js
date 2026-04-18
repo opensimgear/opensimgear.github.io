@@ -10,15 +10,15 @@ if (process.env.NODE_ENV !== 'development') {
     replaysOnErrorSampleRate: 1.0,
   });
 } else {
-  // Sentry.init({
-  //   sampleRate: 1.0, // Capture all errors in dev
-  //   tracesSampleRate: 1.0, // Capture all traces in dev
-  //   enableLogs: true,
-  //   integrations: [
-  //     Sentry.consoleLoggingIntegration({ levels: ['log', 'warn', 'error'] }),
-  //     // For frontend apps, add:
-  //     Sentry.browserTracingIntegration(),
-  //   ],
-  //   spotlight: true, // Enable Spotlight
-  // });
+  Sentry.init({
+    sampleRate: 1.0, // Capture all errors in dev
+    tracesSampleRate: 1.0, // Capture all traces in dev
+    enableLogs: true,
+    integrations: [
+      Sentry.consoleLoggingIntegration({ levels: ['log', 'warn', 'error'] }),
+      // For frontend apps, add:
+      Sentry.browserTracingIntegration(),
+    ],
+    spotlight: true, // Enable Spotlight
+  });
 }
