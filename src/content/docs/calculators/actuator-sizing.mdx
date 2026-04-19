@@ -25,7 +25,7 @@ This calculator builds that full picture from your motion profile, load, axis or
 transmission, then evaluates every motor in the database against peak torque, RMS torque, and speed with a configurable
 safety factor.
 
-### How to use
+## How to use
 
 1. **Setting mode** — Toggle `Advanced` to reveal additional parameters (friction, imbalance, screw efficiency, gear
    efficiency, gear inertia). In simple mode these are fixed at sensible defaults so you only need to set the
@@ -51,11 +51,11 @@ safety factor.
 8. **Sharing** — The full calculator state is encoded in the page URL automatically, so any configuration can be
    bookmarked or shared as a link.
 
-### Calculator
+## Calculator
 
 <ActuatorSizingCalc client:load />
 
-### Engineering notes
+## Engineering notes
 
 - **Force model** — Static force (used during motion): `F_static = m × g + F_friction`. Holding force (used at rest):
   `F_hold = m × g`. Friction is excluded from holding because Coulomb friction is zero with no relative motion.
