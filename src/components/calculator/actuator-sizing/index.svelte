@@ -688,8 +688,7 @@
                   </label>
                 </div>
                 <div class="flex gap-2 mt-2">
-                  <button onclick={addUserMotor} class="btn-primary text-xs py-1.5 px-3 rounded font-sans">Save</button
-                  >
+                  <button onclick={addUserMotor} class="btn-primary text-xs py-1.5 px-3 rounded font-sans">Save</button>
                   <button
                     onclick={() => (addFormOpen = false)}
                     class="text-xs text-gray-500 hover:text-gray-700 py-1.5 px-3 font-sans"
@@ -754,7 +753,7 @@
             step={0.1}
             format={(value) => `${value.toFixed(1)} s`}
           />
-          <Button onclick={resetMotionProfile} label="Reset" title="Reset" />
+          <Button on:click={resetMotionProfile} label="Reset" title="Reset" />
         </Pane>
       </section>
 
@@ -808,7 +807,7 @@
               format={(value) => `×${value.toFixed(2)}`}
             />
           {/if}
-          <Button onclick={resetLoad} label="Reset" title="Reset" />
+          <Button on:click={resetLoad} label="Reset" title="Reset" />
         </Folder>
         <Folder title="Ball Screw">
           <List bind:value={ballscrewKey} options={BALLSCREW_OPTIONS} label="Type" />
@@ -848,7 +847,7 @@
               format={(value) => `${value}%`}
             />
           {/if}
-          <Button onclick={resetBallScrew} label="Reset" title="Reset" />
+          <Button on:click={resetBallScrew} label="Reset" title="Reset" />
         </Folder>
         <Folder title="Transmission">
           <Checkbox bind:value={autoGearRatio} label="Auto Gear Ratio" />
@@ -880,7 +879,7 @@
               format={(value) => `${value.toExponential(1)} kg·m²`}
             />
           {/if}
-          <Button onclick={resetTransmission} label="Reset" title="Reset" />
+          <Button on:click={resetTransmission} label="Reset" title="Reset" />
         </Folder>
       </Pane>
 
