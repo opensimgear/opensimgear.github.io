@@ -8,8 +8,13 @@ on:
       - src/**
       - public/**
       - astro.config.mjs
+      - package.json
+      - playwright.config.ts
       - svelte.config.js
       - tailwind.config.mjs
+      - tsconfig.json
+      - e2e/**
+      - .github/workflows/ci.yml
       - pnpm-lock.yaml
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
@@ -31,6 +36,8 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -38,3 +45,26 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+  e2e:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.9.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run E2E smoke test
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ needs.deploy.outputs.page_url }}
+        run: pnpm e2e
