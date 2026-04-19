@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   MOBILE_STEWART_BREAKPOINT,
   getStewartGizmoSize,
+  getNextStewartPaneExpandedState,
   getStewartStatusPanelClassNames,
   getStewartSceneClassNames,
   getStewartPaneExpandedState,
@@ -40,6 +41,50 @@ describe('getStewartPaneExpandedState', () => {
   });
 });
 
+describe('getNextStewartPaneExpandedState', () => {
+  it('resets pane state when reset flag is true', () => {
+    expect(
+      getNextStewartPaneExpandedState(
+        { parameters: false, actuatorRange: false, movement: false, constraints: false },
+        false,
+        false,
+        true
+      )
+    ).toEqual(getStewartPaneExpandedState(false));
+  });
+
+  it('resets pane state to mobile defaults when viewport crosses into narrow band', () => {
+    expect(
+      getNextStewartPaneExpandedState(
+        { parameters: true, actuatorRange: true, movement: true, constraints: true },
+        false,
+        true
+      )
+    ).toEqual(getStewartPaneExpandedState(true));
+  });
+
+  it('resets pane state to desktop defaults when viewport crosses into wide band', () => {
+    expect(
+      getNextStewartPaneExpandedState(
+        { parameters: false, actuatorRange: false, movement: false, constraints: false },
+        true,
+        false
+      )
+    ).toEqual(getStewartPaneExpandedState(false));
+  });
+
+  it('keeps pane state unchanged on same-band resize without reset', () => {
+    const currentPaneExpanded = {
+      parameters: false,
+      actuatorRange: true,
+      movement: false,
+      constraints: true,
+    };
+
+    expect(getNextStewartPaneExpandedState(currentPaneExpanded, false, false)).toBe(currentPaneExpanded);
+  });
+});
+
 describe('getStewartSceneClassNames', () => {
   it('uses reduced fixed height without flex growth on narrow viewports', () => {
     expect(getStewartSceneClassNames(true)).toContain('h-[320px]');
@@ -66,7 +111,7 @@ describe('mobile scene UI helpers', () => {
     expect(classNames).toContain('right-2');
     expect(classNames).toContain('px-2');
     expect(classNames).toContain('py-1.5');
-    expect(classNames).toContain('text-[10px]');
+    expect(classNames).toContain('text-[8px]');
   });
 
   it('keeps roomier status panel styling on wide viewports', () => {

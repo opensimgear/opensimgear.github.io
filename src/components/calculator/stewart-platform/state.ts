@@ -55,6 +55,19 @@ export function getStewartPaneExpandedState(isNarrow: boolean): StewartPaneExpan
   };
 }
 
+export function getNextStewartPaneExpandedState(
+  currentPaneExpanded: StewartPaneExpandedState,
+  currentIsNarrow: boolean,
+  nextIsNarrow: boolean,
+  resetPanes = false
+): StewartPaneExpandedState {
+  if (resetPanes || currentIsNarrow !== nextIsNarrow) {
+    return getStewartPaneExpandedState(nextIsNarrow);
+  }
+
+  return currentPaneExpanded;
+}
+
 export function getStewartSceneClassNames(isNarrow: boolean) {
   if (isNarrow) {
     return 'relative h-[320px] bg-gray-50 sm:h-[420px]';

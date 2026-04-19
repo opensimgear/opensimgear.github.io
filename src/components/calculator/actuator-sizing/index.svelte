@@ -15,6 +15,7 @@
   import { findOptimalGearRatio, type GearOptimizationContext } from './gear-optimization';
   import { buildMotionProfileDiagram } from './motion-profile-diagram';
   import { computeTrapezoidalProfile } from './profile';
+  import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import { DEFAULT_SORT_STATE, getAriaSort, sortMotorResults, toggleSortState, type SortKey } from './sorting';
   import type { MotorEvaluationV2, ServoMotor, SystemType } from './types';
@@ -85,6 +86,7 @@
   ];
 
   const STATE_KEY = 'state';
+  const URL_STATE_DEBOUNCE_MS = 300;
 
   type ActuatorSizingQueryState = {
     strokeLength?: number;
@@ -193,6 +195,7 @@
   let addPeakTorque = $state(3.0);
   let addPower = $state(400);
   let addInertia = $state(0.00003);
+  const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
   onMount(() => {
     const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
@@ -207,6 +210,10 @@
 
     userMotors = loadUserServoMotors();
     mounted = true;
+
+    return () => {
+      debouncedUrlStateWriter.cancel();
+    };
   });
 
   $effect(() => {
@@ -250,7 +257,7 @@
         advancedMode,
       })
     );
-    window.history.replaceState({}, '', url.toString());
+    debouncedUrlStateWriter.schedule(url.toString());
   });
 
   const lead_mm = $derived(

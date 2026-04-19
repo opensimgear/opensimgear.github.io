@@ -4,11 +4,13 @@
   import { onMount } from 'svelte';
   import { Button, Monitor, Pane, Point, RotationEuler, Slider } from 'svelte-tweakpane-ui';
   import { Matrix3, Vector3 } from 'three';
+  import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import Scene from './Scene.svelte';
   import {
     clampPlatformMovement,
     getStewartGizmoSize,
+    getNextStewartPaneExpandedState,
     getStewartPaneExpandedState,
     getStewartSceneClassNames,
     getStewartStatusPanelClassNames,
@@ -20,6 +22,8 @@
   } from './state';
 
   const STATE_KEY = 'state';
+  const URL_STATE_DEBOUNCE_MS = 300;
+  const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
   const DEFAULTS = {
     baseDiameter: 1.0,
@@ -96,13 +100,15 @@
 
   function syncViewportState(width: number, resetPanes = false) {
     const nextIsNarrow = isNarrowStewartViewport(width);
+    const viewportChanged = nextIsNarrow !== isNarrowViewport;
+    const nextPaneExpanded = getNextStewartPaneExpandedState(paneExpanded, isNarrowViewport, nextIsNarrow, resetPanes);
 
-    if (nextIsNarrow !== isNarrowViewport) {
+    if (viewportChanged) {
       isNarrowViewport = nextIsNarrow;
     }
 
-    if (resetPanes) {
-      paneExpanded = getStewartPaneExpandedState(nextIsNarrow);
+    if (nextPaneExpanded !== paneExpanded) {
+      paneExpanded = nextPaneExpanded;
     }
   }
 
@@ -129,6 +135,7 @@
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      debouncedUrlStateWriter.cancel();
     };
   });
 
@@ -325,21 +332,25 @@
     if (!mounted || typeof window === 'undefined') return;
 
     const url = new URL(window.location.href);
-    url.searchParams.set(
-      STATE_KEY,
-      encodeQueryState({
-        baseDiameter,
-        platformDiameter,
-        alphaP,
-        alphaB,
-        cor,
-        actuatorMin,
-        actuatorMax,
-        platformRotation,
-        platformTranslation,
-      })
-    );
-    window.history.replaceState({}, '', url.toString());
+    const encodedState = encodeQueryState({
+      baseDiameter,
+      platformDiameter,
+      alphaP,
+      alphaB,
+      cor,
+      actuatorMin,
+      actuatorMax,
+      platformRotation,
+      platformTranslation,
+    });
+
+    if (url.searchParams.get(STATE_KEY) === encodedState) {
+      debouncedUrlStateWriter.cancel();
+      return;
+    }
+
+    url.searchParams.set(STATE_KEY, encodedState);
+    debouncedUrlStateWriter.schedule(url.toString());
   });
 
   const alphaOptions = { min: 10, max: 360 / 3 - 10, step: 1, format: formatAlpha };
