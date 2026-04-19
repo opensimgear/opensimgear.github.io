@@ -78,8 +78,8 @@
   ]);
   const wheelRotation = $derived<[number, number, number]>([
     0,
-    0,
-    (90 - input.wheelTiltDeg) * (Math.PI / 180),
+    Math.PI / 2,
+    input.wheelTiltDeg * (Math.PI / 180),
   ]);
 </script>
 
