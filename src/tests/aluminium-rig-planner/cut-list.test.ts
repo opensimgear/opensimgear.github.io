@@ -21,6 +21,7 @@ function createGeometryFixture(frameMembers: PlannerGeometry['frameMembers']): P
     wheelReachMm: 0,
     legExtensionMm: 0,
     frameMembers,
+    wheelSupportUprights: [],
   };
 }
 

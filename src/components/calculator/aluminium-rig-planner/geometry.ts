@@ -14,12 +14,20 @@ export type WheelMountOffsets = {
   wheelCenterOffsetYMm: number;
 };
 
+export type WheelSupportUpright = {
+  id: string;
+  x: number;
+  y: number;
+  heightMm: number;
+};
+
 export type PlannerGeometry = {
   input: PlannerInput;
   wheelMountOffsets: WheelMountOffsets;
   wheelReachMm: number;
   legExtensionMm: number;
   frameMembers: FrameMember[];
+  wheelSupportUprights: WheelSupportUpright[];
 };
 
 const MIN_SEAT_BACK_ANGLE_DEG = 10;
@@ -70,6 +78,28 @@ function createFrameMember(id: string, start: { x: number; y: number }, end: { x
   };
 }
 
+function createWheelSupportUprights(input: PlannerInput, wheelMountOffsets: WheelMountOffsets): WheelSupportUpright[] {
+  const supportX = input.wheelXMm + wheelMountOffsets.mountXMm;
+  const supportHeightMm = Math.max(input.baseHeightMm + 80, input.wheelYMm + wheelMountOffsets.mountYMm);
+  const supportCenterY = 200;
+  const supportHalfSpanMm = 80;
+
+  return [
+    {
+      id: 'wheel-support-left',
+      x: supportX,
+      y: supportCenterY - supportHalfSpanMm,
+      heightMm: supportHeightMm,
+    },
+    {
+      id: 'wheel-support-right',
+      x: supportX,
+      y: supportCenterY + supportHalfSpanMm,
+      heightMm: supportHeightMm,
+    },
+  ];
+}
+
 export function clampPlannerInput(input: PlannerInput): PlannerInput {
   return {
     ...input,
@@ -107,8 +137,8 @@ export function derivePlannerGeometry(rawInput: PlannerInput): PlannerGeometry {
     createFrameMember('seat-cross-member', { x: seatCrossMemberX, y: 0 }, { x: seatCrossMemberX, y: 400 }),
     createFrameMember('wheel-cross-member', { x: wheelCrossMemberX, y: 0 }, { x: wheelCrossMemberX, y: 400 }),
     createFrameMember('front-cross-member', { x: frontCrossMemberX, y: 0 }, { x: frontCrossMemberX, y: 400 }),
-    createFrameMember('pedal-brace', { x: seatCrossMemberX, y: baseTopY }, { x: pedalCrossMemberX, y: input.pedalYMm }),
   ];
+  const wheelSupportUprights = createWheelSupportUprights(input, wheelMountOffsets);
 
   return {
     input,
@@ -116,5 +146,6 @@ export function derivePlannerGeometry(rawInput: PlannerInput): PlannerGeometry {
     wheelReachMm,
     legExtensionMm,
     frameMembers,
+    wheelSupportUprights,
   };
 }

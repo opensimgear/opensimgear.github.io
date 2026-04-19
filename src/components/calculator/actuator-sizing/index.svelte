@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Button, Checkbox, Element, Folder, List, Monitor, Pane, Slider, WaveformMonitor } from 'svelte-tweakpane-ui';
+  import { Button, Checkbox, Element, Folder, List, Monitor, Pane, Slider } from 'svelte-tweakpane-ui';
   import MotionProfileDiagram from './MotionProfileDiagram.svelte';
   import {
     computePhaseTorques,

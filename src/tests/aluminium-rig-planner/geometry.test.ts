@@ -48,8 +48,30 @@ describe('aluminium rig planner geometry', () => {
       presetType: 'gt',
     });
 
+    const frontGeometry = derivePlannerGeometry({ ...input, wheelMountType: 'front' });
     const deckGeometry = derivePlannerGeometry(input);
     const bottomGeometry = derivePlannerGeometry({ ...input, wheelMountType: 'bottom' });
+
+    expect(frontGeometry.wheelMountOffsets).toEqual({
+      mountXMm: 0,
+      mountYMm: 150,
+      wheelCenterOffsetXMm: 60,
+      wheelCenterOffsetYMm: 90,
+    });
+    expect(frontGeometry.wheelSupportUprights).toEqual([
+      {
+        id: 'wheel-support-left',
+        x: 760,
+        y: 120,
+        heightMm: 770,
+      },
+      {
+        id: 'wheel-support-right',
+        x: 760,
+        y: 280,
+        heightMm: 770,
+      },
+    ]);
 
     expect(deckGeometry.wheelMountOffsets).toEqual({
       mountXMm: 70,
@@ -70,6 +92,20 @@ describe('aluminium rig planner geometry', () => {
       end: { x: 910, y: 120 },
       lengthMm: 556,
     });
+    expect(deckGeometry.wheelSupportUprights).toEqual([
+      {
+        id: 'wheel-support-left',
+        x: 830,
+        y: 120,
+        heightMm: 810,
+      },
+      {
+        id: 'wheel-support-right',
+        x: 830,
+        y: 280,
+        heightMm: 810,
+      },
+    ]);
 
     expect(bottomGeometry.wheelMountOffsets).toEqual({
       mountXMm: 30,
@@ -83,5 +119,19 @@ describe('aluminium rig planner geometry', () => {
       end: { x: 790, y: 400 },
       lengthMm: 400,
     });
+    expect(bottomGeometry.wheelSupportUprights).toEqual([
+      {
+        id: 'wheel-support-left',
+        x: 790,
+        y: 120,
+        heightMm: 700,
+      },
+      {
+        id: 'wheel-support-right',
+        x: 790,
+        y: 280,
+        heightMm: 700,
+      },
+    ]);
   });
 });

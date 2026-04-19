@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Monitor, Pane, Slider } from 'svelte-tweakpane-ui';
+  import { Monitor, Pane, Slider, Element } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
@@ -87,7 +87,9 @@
   const guidance = $derived(evaluatePostureGuidance(plannerInput, geometry));
   const cutListRows = $derived(deriveCutListRows(geometry));
   const wheelReachLimits = $derived.by(() => {
-    const verticalDeltaMm = Math.abs(plannerInput.wheelYMm + geometry.wheelMountOffsets.wheelCenterOffsetYMm - plannerInput.seatYMm);
+    const verticalDeltaMm = Math.abs(
+      plannerInput.wheelYMm + geometry.wheelMountOffsets.wheelCenterOffsetYMm - plannerInput.seatYMm
+    );
 
     return {
       verticalDeltaMm,
@@ -113,7 +115,9 @@
   function updateWheelReach(targetReachMm: number) {
     const clampedReachMm = Math.max(wheelReachLimits.min, Math.min(wheelReachLimits.max, targetReachMm));
     const wheelCenterDeltaXMm = Math.sqrt(Math.max(0, clampedReachMm ** 2 - wheelReachLimits.verticalDeltaMm ** 2));
-    const nextWheelXMm = Math.round(plannerInput.seatXMm + wheelCenterDeltaXMm - geometry.wheelMountOffsets.wheelCenterOffsetXMm);
+    const nextWheelXMm = Math.round(
+      plannerInput.seatXMm + wheelCenterDeltaXMm - geometry.wheelMountOffsets.wheelCenterOffsetXMm
+    );
 
     if (nextWheelXMm !== plannerInput.wheelXMm) {
       plannerInput.wheelXMm = nextWheelXMm;
@@ -142,44 +146,14 @@
   });
 </script>
 
-<div class="not-content overflow-hidden rounded-2xl border border-zinc-300 bg-white shadow-sm">
+<div class="not-content overflow-hidden rounded border border-zinc-300 bg-white shadow-sm">
   {#if mounted}
     <div class={isNarrowViewport ? 'flex flex-col' : 'grid min-h-[52rem] grid-cols-[minmax(0,1.3fr)_24rem]'}>
-      <div class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] p-4 lg:border-b-0 lg:border-r">
-        <section class="rounded-xl border border-dashed border-zinc-300 bg-white p-4 shadow-sm">
-          <div class="mb-3 flex items-center justify-between gap-3">
-            <div>
-              <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">Preview area</p>
-              <h2 class="text-sm font-semibold text-zinc-900">3D preview</h2>
-            </div>
-            <span class="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-medium text-zinc-600">Always on</span>
-          </div>
-
-          <div class="rounded-lg border border-dashed border-zinc-300 bg-zinc-50 p-3">
-            <div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_15rem]">
-              <Scene input={plannerInput} {geometry} {isNarrowViewport} />
-
-              <div class="grid content-start gap-2 rounded-lg border border-zinc-200 bg-white/90 p-3 text-xs text-zinc-700">
-                <div class="rounded-md bg-zinc-50 px-3 py-2">
-                  <div class="text-[10px] uppercase tracking-[0.18em] text-zinc-500">Frame footprint</div>
-                  <div class="mt-1 font-semibold text-zinc-900">{plannerInput.baseLengthMm} x 400 mm</div>
-                </div>
-                <div class="rounded-md bg-zinc-50 px-3 py-2">
-                  <div class="text-[10px] uppercase tracking-[0.18em] text-zinc-500">Seat height</div>
-                  <div class="mt-1 font-semibold text-zinc-900">{plannerInput.seatYMm} mm</div>
-                </div>
-                <div class="rounded-md bg-zinc-50 px-3 py-2">
-                  <div class="text-[10px] uppercase tracking-[0.18em] text-zinc-500">Wheel center</div>
-                  <div class="mt-1 font-semibold text-zinc-900">
-                    {plannerInput.wheelXMm + geometry.wheelMountOffsets.wheelCenterOffsetXMm} / {plannerInput.wheelYMm + geometry.wheelMountOffsets.wheelCenterOffsetYMm} mm
-                  </div>
-                </div>
-                <div class="rounded-md bg-zinc-50 px-3 py-2 leading-relaxed text-zinc-600">
-                  Drag scene to orbit. Scroll to zoom. Geometry stays tied to frame members and live planner inputs.
-                </div>
-              </div>
-            </div>
-          </div>
+      <div
+        class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
+      >
+        <section class="min-w-0">
+          <Scene input={plannerInput} {geometry} {isNarrowViewport} />
         </section>
       </div>
 
@@ -223,7 +197,9 @@
           />
 
           <div class="px-3 pb-3 pt-1 font-sans">
-            <div class="mb-2 flex items-center justify-between gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+            <div
+              class="mb-2 flex items-center justify-between gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500"
+            >
               <span>Wheel reach</span>
               <span>{wheelReachDisplayMm} mm</span>
             </div>
@@ -242,10 +218,9 @@
             </div>
           </div>
 
-          <div class="px-3 pb-3 pt-2">
-            <div class="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">2D side view</div>
+          <Element>
             <SideView input={plannerInput} {geometry} {guidance} />
-          </div>
+          </Element>
         </Pane>
 
         <Pane title="Posture guidance" position="inline" bind:expanded={paneExpanded.posture}>
@@ -256,7 +231,9 @@
           <div class="space-y-2 px-3 pb-3 font-sans text-xs text-zinc-700">
             {#each guidance as item (item.id)}
               <div class="rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2">
-                <div class="font-semibold text-zinc-900">{item.id === 'elbow-angle' ? 'Elbow angle' : 'Knee angle'}</div>
+                <div class="font-semibold text-zinc-900">
+                  {item.id === 'elbow-angle' ? 'Elbow angle' : 'Knee angle'}
+                </div>
                 <div class="mt-1 text-zinc-600">{item.detail}</div>
               </div>
             {/each}
@@ -290,7 +267,6 @@
             </div>
           </div>
         </Pane>
-
       </div>
     </div>
   {:else}

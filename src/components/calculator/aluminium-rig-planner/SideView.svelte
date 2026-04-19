@@ -46,20 +46,9 @@
   }
 </script>
 
-<section class="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-  <div class="mb-3 flex items-center justify-between gap-3">
-    <div>
-      <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">2D side view</p>
-      <h2 class="text-sm font-semibold text-zinc-900">Rig envelope</h2>
-    </div>
-    <div class="text-right text-[11px] text-zinc-500">
-      <div>{input.presetType.toUpperCase()} preset</div>
-      <div>{input.wheelMountType} wheel mount</div>
-    </div>
-  </div>
-
-  <div class="overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50">
-    <svg viewBox={viewBox} class="h-auto w-full" role="img" aria-label="Aluminium rig side view preview">
+<section class="">
+  <div class="overflow-hidden">
+    <svg {viewBox} class="h-auto w-full" role="img" aria-label="Aluminium rig side view preview">
       <rect x="-80" y="-40" width={input.baseLengthMm + 200} height={drawingHeightMm + 80} fill="url(#planner-grid)" />
 
       <defs>
@@ -68,7 +57,15 @@
         </pattern>
       </defs>
 
-      <line x1="0" y1={toSvgY(0)} x2={input.baseLengthMm} y2={toSvgY(0)} stroke="#3f3f46" stroke-width="18" stroke-linecap="round" />
+      <line
+        x1="0"
+        y1={toSvgY(0)}
+        x2={input.baseLengthMm}
+        y2={toSvgY(0)}
+        stroke="#3f3f46"
+        stroke-width="18"
+        stroke-linecap="round"
+      />
       <line
         x1="0"
         y1={toSvgY(input.baseHeightMm)}
@@ -126,45 +123,30 @@
         stroke-width="12"
         stroke-linecap="round"
       />
-      <circle cx={wheelCenterX} cy={toSvgY(wheelCenterY)} r={wheelRadiusMm} fill="none" stroke="#d97706" stroke-width="16" />
+      <circle
+        cx={wheelCenterX}
+        cy={toSvgY(wheelCenterY)}
+        r={wheelRadiusMm}
+        fill="none"
+        stroke="#d97706"
+        stroke-width="16"
+      />
       <circle cx={wheelCenterX} cy={toSvgY(wheelCenterY)} r="22" fill="#d97706" />
 
       <text x="16" y="32" fill="#71717a" font-size="28" font-weight="600">Base</text>
-      <text x={input.seatXMm - 20} y={toSvgY(input.seatYMm + 70)} fill="#0f766e" font-size="28" font-weight="600">Seat</text>
-      <text x={input.pedalXMm - 60} y={toSvgY(input.pedalYMm + 80)} fill="#2563eb" font-size="28" font-weight="600">Pedals</text>
-      <text x={wheelCenterX - 70} y={toSvgY(wheelCenterY + wheelRadiusMm + 70)} fill="#a16207" font-size="28" font-weight="600"
-        >Wheel</text
+      <text x={input.seatXMm - 20} y={toSvgY(input.seatYMm + 70)} fill="#0f766e" font-size="28" font-weight="600"
+        >Seat</text
+      >
+      <text x={input.pedalXMm - 60} y={toSvgY(input.pedalYMm + 80)} fill="#2563eb" font-size="28" font-weight="600"
+        >Pedals</text
+      >
+      <text
+        x={wheelCenterX - 70}
+        y={toSvgY(wheelCenterY + wheelRadiusMm + 70)}
+        fill="#a16207"
+        font-size="28"
+        font-weight="600">Wheel</text
       >
     </svg>
-  </div>
-
-  <div class="mt-4 grid gap-3 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-    <div class="grid gap-2 rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-xs text-zinc-700 sm:grid-cols-2">
-      <div class="rounded-md bg-white px-3 py-2">
-        <div class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Base length</div>
-        <div class="mt-1 font-semibold text-zinc-900">{input.baseLengthMm} mm</div>
-      </div>
-      <div class="rounded-md bg-white px-3 py-2">
-        <div class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Wheel reach</div>
-        <div class="mt-1 font-semibold text-zinc-900">{geometry.wheelReachMm} mm</div>
-      </div>
-      <div class="rounded-md bg-white px-3 py-2">
-        <div class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Leg extension</div>
-        <div class="mt-1 font-semibold text-zinc-900">{geometry.legExtensionMm} mm</div>
-      </div>
-      <div class="rounded-md bg-white px-3 py-2">
-        <div class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Seat / pedal height</div>
-        <div class="mt-1 font-semibold text-zinc-900">{input.seatYMm} / {input.pedalYMm} mm</div>
-      </div>
-    </div>
-
-    <div class="grid gap-2">
-      {#each guidance as item (item.id)}
-        <div class={`rounded-lg border px-3 py-2 text-xs ${getGuidanceClassName(item.severity)}`}>
-          <div class="font-semibold">{item.id === 'elbow-angle' ? 'Elbow angle' : 'Knee angle'}: {item.angleDeg} deg</div>
-          <div class="mt-1 leading-relaxed">{item.detail}</div>
-        </div>
-      {/each}
-    </div>
   </div>
 </section>
