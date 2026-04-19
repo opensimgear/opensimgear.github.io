@@ -16,6 +16,12 @@
   import { buildMotionProfileDiagram } from './motion-profile-diagram';
   import { computeTrapezoidalProfile } from './profile';
   import { isPointInsidePopupBounds, shouldSwallowPopupClick } from './popup-hit-test';
+  import {
+    getActuatorSizingPaneExpandedState,
+    getNextActuatorSizingPaneExpandedState,
+    isNarrowActuatorSizingViewport,
+    type ActuatorSizingPaneExpandedState,
+  } from './state';
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import { DEFAULT_SORT_STATE, getAriaSort, sortMotorResults, toggleSortState, type SortKey } from './sorting';
@@ -183,6 +189,8 @@
   let advancedMode = $state(DEFAULTS.advancedMode);
 
   let userMotors = $state<ServoMotor[]>([]);
+  let isNarrowViewport = $state(false);
+  let paneExpanded = $state<ActuatorSizingPaneExpandedState>(getActuatorSizingPaneExpandedState(false));
   let mounted = $state(false);
   let sortKey = $state<SortKey>(DEFAULT_SORT_STATE.key);
   let sortDescending = $state(DEFAULT_SORT_STATE.descending);
@@ -197,6 +205,25 @@
   let addPower = $state(400);
   let addInertia = $state(0.00003);
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
+
+  function syncViewportState(width: number, resetPanes = false) {
+    const nextIsNarrow = isNarrowActuatorSizingViewport(width);
+    const viewportChanged = nextIsNarrow !== isNarrowViewport;
+    const nextPaneExpanded = getNextActuatorSizingPaneExpandedState(
+      paneExpanded,
+      isNarrowViewport,
+      nextIsNarrow,
+      resetPanes
+    );
+
+    if (viewportChanged) {
+      isNarrowViewport = nextIsNarrow;
+    }
+
+    if (nextPaneExpanded !== paneExpanded) {
+      paneExpanded = nextPaneExpanded;
+    }
+  }
 
   onMount(() => {
     const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
@@ -243,12 +270,17 @@
 
     userMotors = loadUserServoMotors();
     syncHoverPopupSupport();
+    syncViewportState(window.innerWidth, true);
+
+    const handleResize = () => syncViewportState(window.innerWidth);
     hoverMediaQuery.addEventListener('change', syncHoverPopupSupport);
+    window.addEventListener('resize', handleResize);
     window.addEventListener('pointerdown', handlePointerDown, { capture: true });
     window.addEventListener('click', handleClick, { capture: true });
     mounted = true;
 
     return () => {
+      window.removeEventListener('resize', handleResize);
       debouncedUrlStateWriter.cancel();
       hoverMediaQuery.removeEventListener('change', syncHoverPopupSupport);
       window.removeEventListener('pointerdown', handlePointerDown, true);
@@ -905,12 +937,12 @@
     <div
       class="border-t border-black lg:border-t-0 lg:border-l flex flex-col divide-y divide-black shrink-0 lg:w-[24rem]"
     >
-      <Pane title="Setting mode" position="inline">
+      <Pane title="Setting mode" position="inline" bind:expanded={paneExpanded.settingMode}>
         <Checkbox bind:value={advancedMode} label="Advanced" />
       </Pane>
       <section aria-label="Motion Profile">
         <h2 class="sr-only">Motion Profile</h2>
-        <Pane title="Motion Profile" position="inline">
+        <Pane title="Motion Profile" position="inline" bind:expanded={paneExpanded.motionProfile}>
           <Element>
             <MotionProfileDiagram diagram={profileDiagram} />
           </Element>
@@ -958,7 +990,7 @@
         </Pane>
       </section>
 
-      <Pane title="System" position="inline">
+      <Pane title="System" position="inline" bind:expanded={paneExpanded.system}>
         <List bind:value={systemType} options={SYSTEM_OPTIONS} label="Type" />
         {#if systemType === 'stewart'}
           <Slider
@@ -1086,7 +1118,7 @@
 
       <section aria-label="Calculated">
         <h2 class="sr-only">Calculated</h2>
-        <Pane title="Calculated" position="inline">
+        <Pane title="Calculated" position="inline" bind:expanded={paneExpanded.calculated}>
           <Monitor value={`${screwMass_kg.toFixed(3)} kg`} label="Screw mass" />
           <Monitor value={`${equivalentMassPerActuator_kg.toFixed(2)} kg`} label="Mass / act" />
           <Monitor value={`${F_static_per.toFixed(1)} N`} label="F_static / act" />
