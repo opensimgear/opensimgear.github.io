@@ -2,7 +2,7 @@ import type { CookieConsentConfig } from 'vanilla-cookieconsent';
 
 export const cookieConsentConfig: CookieConsentConfig = {
   revision: 2,
-  hideFromBots: false,
+  hideFromBots: process.env.NODE_ENV !== 'development',
   guiOptions: {
     consentModal: {
       layout: 'bar',
