@@ -2,6 +2,7 @@
 import Analytics from '~/components/util/Analytics.astro';
 import { config } from '~/config';
 import { buildDefaultSocialImageUrl, getSeoPolicy } from '~/utils/seo-policy';
+import { buildTwitterMetaHead } from '~/utils/social-meta';
 import { buildSiteSchemas } from '~/utils/structured-data';
 
 const { head } = Astro.locals.starlightRoute;
@@ -35,6 +36,7 @@ const socialImageHead = socialImageUrl
       ...(!hasTwitterImage ? [{ tag: 'meta', attrs: { name: 'twitter:image', content: socialImageUrl } }] : []),
     ]
   : [];
+const twitterMetaHead = buildTwitterMetaHead(filteredHead);
 
 const routeSpecificHead = !hasRobots && (!seoPolicy.index || !seoPolicy.follow)
   ? [{ tag: 'meta', attrs: { name: 'robots', content: `${seoPolicy.index ? 'index' : 'noindex'}, ${seoPolicy.follow ? 'follow' : 'nofollow'}` } }]
@@ -42,7 +44,7 @@ const routeSpecificHead = !hasRobots && (!seoPolicy.index || !seoPolicy.follow)
 ---
 
 {import.meta.env.PROD && <Analytics />}
-{[...filteredHead, ...socialImageHead, ...routeSpecificHead].map((entry) => {
+{[...filteredHead, ...socialImageHead, ...twitterMetaHead, ...routeSpecificHead].map((entry) => {
   const Tag = entry.tag;
   const content = 'content' in entry ? entry.content : undefined;
 
