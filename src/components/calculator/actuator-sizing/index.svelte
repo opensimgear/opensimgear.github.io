@@ -15,6 +15,7 @@
   import { findOptimalGearRatio, type GearOptimizationContext } from './gear-optimization';
   import { buildMotionProfileDiagram } from './motion-profile-diagram';
   import { computeTrapezoidalProfile } from './profile';
+  import { isPointInsidePopupBounds, shouldSwallowPopupClick } from './popup-hit-test';
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import { DEFAULT_SORT_STATE, getAriaSort, sortMotorResults, toggleSortState, type SortKey } from './sorting';
@@ -199,6 +200,38 @@
 
   onMount(() => {
     const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
+    const hoverMediaQuery = window.matchMedia('(any-hover: hover) and (any-pointer: fine)');
+    let blockedPopupClickPoint: { x: number; y: number; timeStamp: number } | null = null;
+
+    const syncHoverPopupSupport = () => {
+      supportsHoverPopup = hoverMediaQuery.matches;
+
+      if (!supportsHoverPopup) {
+        hoveredResult = null;
+      }
+    };
+
+    const handlePointerDown = (e: PointerEvent) => {
+      if (isPointInsidePopupBounds(e.clientX, e.clientY, hoverPopupEl?.getBoundingClientRect())) {
+        blockedPopupClickPoint = { x: e.clientX, y: e.clientY, timeStamp: e.timeStamp };
+        e.preventDefault();
+        e.stopPropagation();
+        hoveredResult = null;
+        return;
+      }
+
+      blockedPopupClickPoint = null;
+      hoveredResult = null;
+    };
+
+    const handleClick = (e: MouseEvent) => {
+      if (shouldSwallowPopupClick(blockedPopupClickPoint, e.clientX, e.clientY, e.timeStamp)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      blockedPopupClickPoint = null;
+    };
 
     if (encoded) {
       const state = decodeQueryState<ActuatorSizingQueryState>(encoded);
@@ -209,10 +242,17 @@
     }
 
     userMotors = loadUserServoMotors();
+    syncHoverPopupSupport();
+    hoverMediaQuery.addEventListener('change', syncHoverPopupSupport);
+    window.addEventListener('pointerdown', handlePointerDown, { capture: true });
+    window.addEventListener('click', handleClick, { capture: true });
     mounted = true;
 
     return () => {
       debouncedUrlStateWriter.cancel();
+      hoverMediaQuery.removeEventListener('change', syncHoverPopupSupport);
+      window.removeEventListener('pointerdown', handlePointerDown, true);
+      window.removeEventListener('click', handleClick, true);
     };
   });
 
@@ -424,16 +464,27 @@
   }
 
   let hoveredResult = $state<MotorEvaluationV2 | null>(null);
+  let expandedResultId = $state<string | null>(null);
   let popupX = $state(0);
   let popupY = $state(0);
   let popupFlipLeft = $state(false);
+  let supportsHoverPopup = $state(false);
+  let hoverPopupEl = $state<HTMLDivElement | null>(null);
 
   function onRowEnter(event: MouseEvent, result: MotorEvaluationV2) {
+    if (!supportsHoverPopup) {
+      return;
+    }
+
     hoveredResult = result;
     updatePopupPos(event);
   }
 
   function updatePopupPos(event: MouseEvent) {
+    if (!supportsHoverPopup) {
+      return;
+    }
+
     popupX = event.clientX;
     popupY = event.clientY;
     popupFlipLeft = typeof window !== 'undefined' && event.clientX > window.innerWidth * 0.55;
@@ -441,6 +492,10 @@
 
   function onRowLeave() {
     hoveredResult = null;
+  }
+
+  function toggleRowDetails(id: string) {
+    expandedResultId = expandedResultId === id ? null : id;
   }
 
   function marginColor(margin: number): string {
@@ -474,236 +529,382 @@
   }
 </script>
 
-<div class="w-full not-content border border-black rounded overflow-hidden">
-  <div class="flex flex-row">
-    <div class="overflow-x-auto bg-white flex-1 min-w-0">
-      <table class="w-full text-xs font-mono border-collapse">
-        <thead>
-          <tr
-            class="border-b border-gray-200 bg-gray-50 text-left text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500"
-          >
-            <th class="px-3 py-2 font-sans sticky left-0 bg-gray-50 z-10">Motor</th>
-            <th
-              class="px-3 py-2 font-sans text-center"
-              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'status')}
-            >
-              <button
-                type="button"
-                class="flex w-full items-center justify-between bg-transparent p-0 text-center font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                onclick={() => onSortHeaderClick('status')}
-              >
-                <span>Status</span>
-              </button>
-            </th>
-            <th
-              class="px-3 py-2 font-sans"
-              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'score')}
-            >
-              <button
-                type="button"
-                class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                onclick={() => onSortHeaderClick('score')}
-              >
-                <span>Score</span>
-              </button>
-            </th>
-            <th
-              class="px-2 py-2 font-sans min-w-[4.5rem]"
-              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'peak')}
-            >
-              <button
-                type="button"
-                class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                onclick={() => onSortHeaderClick('peak')}
-              >
-                <span>Peak Tq</span>
-              </button>
-            </th>
-            <th
-              class="px-2 py-2 font-sans min-w-[4.5rem]"
-              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'rms')}
-            >
-              <button
-                type="button"
-                class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                onclick={() => onSortHeaderClick('rms')}
-              >
-                <span>RMS Tq</span>
-              </button>
-            </th>
-            <th
-              class="px-2 py-2 font-sans min-w-[4.5rem]"
-              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'speed')}
-            >
-              <button
-                type="button"
-                class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                onclick={() => onSortHeaderClick('speed')}
-              >
-                <span>Speed</span>
-              </button>
-            </th>
-            <th
-              class="px-3 py-2 font-sans"
-              aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'inertia')}
-            >
-              <button
-                type="button"
-                class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
-                onclick={() => onSortHeaderClick('inertia')}
-              >
-                <span>Inertia</span>
-              </button>
-            </th>
-            <th class="px-3 py-2 font-sans">Ratio</th>
-            <th class="px-3 py-2 font-sans w-6"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each motorResults as result (result.motor.id)}
-            {@const badgeClass =
-              result.status === 'fail'
-                ? 'bg-red-100 text-red-700'
-                : result.status === 'warn'
-                  ? 'bg-amber-100 text-amber-700'
-                  : 'bg-green-100 text-green-700'}
-            {@const badgeLabel = result.status === 'fail' ? '✗ Fail' : result.status === 'warn' ? '⚠ Warn' : '✓ Pass'}
-            <tr
-              class="border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-default"
-              onmouseenter={(event) => onRowEnter(event, result)}
-              onmousemove={updatePopupPos}
-              onmouseleave={onRowLeave}
-            >
-              <td class="px-3 py-2 font-sans font-medium text-gray-800 whitespace-nowrap sticky left-0 bg-white">
-                {result.motor.name}
-              </td>
-              <td class="px-3 py-2 text-center">
-                <span class="font-sans font-semibold px-1.5 py-0.5 rounded text-[10px] {badgeClass}">{badgeLabel}</span>
-              </td>
-              <td class="px-3 py-2 text-gray-600">{result.score.toFixed(0)}</td>
-              <td class="px-2 py-2">{@html marginBar(result.peakTorqueMargin_pct)}</td>
-              <td class="px-2 py-2">{@html marginBar(result.rmsTorqueMargin_pct)}</td>
-              <td class="px-2 py-2">{@html marginBar(result.speedMargin_pct)}</td>
-              <td class="px-3 py-2 whitespace-nowrap" class:text-amber-600={result.inertiaRatio > 10}>
-                {result.inertiaRatio.toFixed(1)}:1
-              </td>
-              <td class="px-3 py-2 whitespace-nowrap text-gray-500">{result.gearRatio.toFixed(1)}:1</td>
-              <td class="px-2 py-2">
-                {#if result.motor.source === 'user'}
-                  <button
-                    onclick={() => deleteUserMotor(result.motor.id)}
-                    class="text-gray-300 hover:text-red-500 transition-colors leading-none"
-                    title="Remove motor">✕</button
-                  >
-                {/if}
-              </td>
-            </tr>
-          {/each}
+{#snippet motorDetailSections(result: MotorEvaluationV2)}
+  <div class="px-3 py-2 grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-0.5">
+    <span></span>
+    <span class="text-gray-400 font-sans text-[10px] uppercase tracking-wide">Motor</span>
+    <span class="text-gray-400 font-sans text-[10px] uppercase tracking-wide">Required</span>
 
-          {#if !addFormOpen}
-            <tr>
-              <td colspan="9" class="px-3 py-2">
+    <span class="text-gray-500">Peak Tq</span>
+    <span>{result.motor.peakTorque_Nm.toFixed(2)} Nm</span>
+    <span
+      class:text-red-500={result.peakTorqueMargin_pct < 0}
+      class:text-amber-500={result.peakTorqueMargin_pct >= 0 && result.peakTorqueMargin_pct < 20}
+    >
+      {result.T_peak_required_Nm.toFixed(2)} Nm
+    </span>
+
+    <span class="text-gray-500">RMS Tq</span>
+    <span>{result.motor.ratedTorque_Nm.toFixed(2)} Nm</span>
+    <span
+      class:text-red-500={result.rmsTorqueMargin_pct < 0}
+      class:text-amber-500={result.rmsTorqueMargin_pct >= 0 && result.rmsTorqueMargin_pct < 20}
+    >
+      {result.T_rms_required_Nm.toFixed(2)} Nm
+    </span>
+
+    <span class="text-gray-500">Speed</span>
+    <span>{result.motor.maxRPM.toLocaleString()} rpm</span>
+    <span
+      class:text-red-500={result.speedMargin_pct < 0}
+      class:text-amber-500={result.speedMargin_pct >= 0 && result.speedMargin_pct < 20}
+    >
+      {result.n_required_rpm.toFixed(0)} rpm
+    </span>
+  </div>
+  <div class="px-3 py-2 border-t border-gray-100 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
+    <span class="text-gray-500">J load</span>
+    <span>{result.J_load_kgm2.toExponential(2)} kg·m²</span>
+    <span class="text-gray-500">J total</span>
+    <span>{result.J_total_kgm2.toExponential(2)} kg·m²</span>
+    <span class="text-gray-500">Peak power</span>
+    <span>{result.P_peak_required_W.toFixed(0)} W</span>
+  </div>
+  {#if result.motor.voltage_V || result.motor.encoder || result.motor.hasBrake !== undefined || result.motor.protectionRating}
+    <div class="px-3 py-2 border-t border-gray-100 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[10px]">
+      {#if result.motor.voltage_V}
+        <span class="text-gray-500">Voltage</span>
+        <span>{result.motor.voltage_V} V</span>
+      {/if}
+      {#if result.motor.encoder}
+        <span class="text-gray-500">Encoder</span>
+        <span>{result.motor.encoder}</span>
+      {/if}
+      {#if result.motor.hasBrake !== undefined}
+        <span class="text-gray-500">Brake</span>
+        <span>{result.motor.hasBrake ? 'Yes' : 'No'}</span>
+      {/if}
+      {#if result.motor.protectionRating}
+        <span class="text-gray-500">IP</span>
+        <span>{result.motor.protectionRating}</span>
+      {/if}
+    </div>
+  {/if}
+  {#if result.motor.frameSize_mm || result.motor.flange_mm || result.motor.shaftDiameter_mm || result.motor.mass_kg}
+    <div class="px-3 py-2 border-t border-gray-100 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[10px]">
+      {#if result.motor.frameSize_mm}
+        <span class="text-gray-500">Frame</span>
+        <span>{result.motor.frameSize_mm} mm</span>
+      {/if}
+      {#if result.motor.flange_mm}
+        <span class="text-gray-500">Flange</span>
+        <span>{result.motor.flange_mm} mm</span>
+      {/if}
+      {#if result.motor.shaftDiameter_mm}
+        <span class="text-gray-500">Shaft</span>
+        <span>{result.motor.shaftDiameter_mm} mm</span>
+      {/if}
+      {#if result.motor.mass_kg}
+        <span class="text-gray-500">Mass</span>
+        <span>{result.motor.mass_kg.toFixed(2)} kg</span>
+      {/if}
+    </div>
+  {/if}
+  {#if result.motor.notes || result.motor.sourceNote}
+    <div class="px-3 py-2 border-t border-gray-100 text-[10px] text-gray-500 leading-snug">
+      {#if result.motor.notes}
+        <div>{result.motor.notes}</div>
+      {/if}
+      {#if result.motor.sourceNote}
+        <div class="mt-1">Source: {result.motor.sourceNote}</div>
+      {/if}
+    </div>
+  {/if}
+{/snippet}
+
+<div class="w-full not-content border border-black rounded overflow-hidden">
+  <div class="flex flex-col lg:flex-row">
+    <div class="bg-white flex-1 min-w-0 max-h-[40vh] lg:max-h-none flex flex-col">
+      <div class="min-h-0 flex-1 overflow-x-auto overflow-y-auto">
+        <table class="min-w-max w-full text-xs font-mono border-collapse">
+          <thead>
+            <tr
+              class="border-b border-gray-200 bg-gray-50 text-left text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500"
+            >
+              <th
+                class="px-3 py-2 font-sans sticky left-0 bg-gray-50 z-20 shadow-[4px_0_6px_-4px_rgba(0,0,0,0.2)] w-[8.5rem] max-w-[8.5rem] sm:w-[12rem] sm:max-w-[12rem]"
+                >Motor</th
+              >
+              <th
+                class="px-3 py-2 font-sans text-center"
+                aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'status')}
+              >
                 <button
-                  onclick={() => (addFormOpen = true)}
-                  class="text-[10px] font-sans font-semibold uppercase tracking-wide px-2.5 py-1 rounded border border-dashed border-gray-400 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-300 transition-colors"
-                  >+ Add custom motor</button
+                  type="button"
+                  class="flex w-full items-center justify-between bg-transparent p-0 text-center font-inherit text-inherit shadow-none outline-none cursor-pointer"
+                  onclick={() => onSortHeaderClick('status')}
                 >
-              </td>
+                  <span>Status</span>
+                </button>
+              </th>
+              <th
+                class="px-3 py-2 font-sans"
+                aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'score')}
+              >
+                <button
+                  type="button"
+                  class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
+                  onclick={() => onSortHeaderClick('score')}
+                >
+                  <span>Score</span>
+                </button>
+              </th>
+              <th
+                class="px-2 py-2 font-sans min-w-[4.5rem]"
+                aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'peak')}
+              >
+                <button
+                  type="button"
+                  class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
+                  onclick={() => onSortHeaderClick('peak')}
+                >
+                  <span>Peak Tq</span>
+                </button>
+              </th>
+              <th
+                class="px-2 py-2 font-sans min-w-[4.5rem]"
+                aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'rms')}
+              >
+                <button
+                  type="button"
+                  class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
+                  onclick={() => onSortHeaderClick('rms')}
+                >
+                  <span>RMS Tq</span>
+                </button>
+              </th>
+              <th
+                class="px-2 py-2 font-sans min-w-[4.5rem]"
+                aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'speed')}
+              >
+                <button
+                  type="button"
+                  class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
+                  onclick={() => onSortHeaderClick('speed')}
+                >
+                  <span>Speed</span>
+                </button>
+              </th>
+              <th
+                class="px-3 py-2 font-sans"
+                aria-sort={getAriaSort({ key: sortKey, descending: sortDescending }, 'inertia')}
+              >
+                <button
+                  type="button"
+                  class="flex w-full items-center justify-between bg-transparent p-0 text-left font-inherit text-inherit shadow-none outline-none cursor-pointer"
+                  onclick={() => onSortHeaderClick('inertia')}
+                >
+                  <span>Inertia</span>
+                </button>
+              </th>
+              <th class="px-3 py-2 font-sans">Ratio</th>
+              <th class="px-3 py-2 font-sans w-6"></th>
             </tr>
-          {:else}
-            <tr class="bg-gray-50">
-              <td colspan="9" class="px-3 py-3">
-                <div class="font-sans text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-2">
-                  Add Motor
-                </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs font-mono">
-                  <label class="col-span-2 flex flex-col gap-0.5">
-                    <span class="text-gray-500 font-sans">Name</span>
-                    <input bind:value={addName} type="text" class="border border-gray-300 rounded px-2 py-1 text-xs" />
-                  </label>
-                  <label class="flex flex-col gap-0.5">
-                    <span class="text-gray-500 font-sans">Manufacturer</span>
-                    <input
-                      bind:value={addManufacturer}
-                      type="text"
-                      class="border border-gray-300 rounded px-2 py-1 text-xs"
-                    />
-                  </label>
-                  <label class="flex flex-col gap-0.5">
-                    <span class="text-gray-500 font-sans">Rated RPM</span>
-                    <input
-                      bind:value={addRatedRPM}
-                      type="number"
-                      min="1"
-                      class="border border-gray-300 rounded px-2 py-1 text-xs"
-                    />
-                  </label>
-                  <label class="flex flex-col gap-0.5">
-                    <span class="text-gray-500 font-sans">Max RPM</span>
-                    <input
-                      bind:value={addMaxRPM}
-                      type="number"
-                      min="1"
-                      class="border border-gray-300 rounded px-2 py-1 text-xs"
-                    />
-                  </label>
-                  <label class="flex flex-col gap-0.5">
-                    <span class="text-gray-500 font-sans">Rated Torque (Nm)</span>
-                    <input
-                      bind:value={addRatedTorque}
-                      type="number"
-                      min="0"
-                      step="0.01"
-                      class="border border-gray-300 rounded px-2 py-1 text-xs"
-                    />
-                  </label>
-                  <label class="flex flex-col gap-0.5">
-                    <span class="text-gray-500 font-sans">Peak Torque (Nm)</span>
-                    <input
-                      bind:value={addPeakTorque}
-                      type="number"
-                      min="0"
-                      step="0.01"
-                      class="border border-gray-300 rounded px-2 py-1 text-xs"
-                    />
-                  </label>
-                  <label class="flex flex-col gap-0.5">
-                    <span class="text-gray-500 font-sans">Cont. Power (W)</span>
-                    <input
-                      bind:value={addPower}
-                      type="number"
-                      min="1"
-                      class="border border-gray-300 rounded px-2 py-1 text-xs"
-                    />
-                  </label>
-                  <label class="flex flex-col gap-0.5">
-                    <span class="text-gray-500 font-sans">Inertia (kg·m²)</span>
-                    <input
-                      bind:value={addInertia}
-                      type="number"
-                      min="0"
-                      step="0.000001"
-                      class="border border-gray-300 rounded px-2 py-1 text-xs"
-                    />
-                  </label>
-                </div>
-                <div class="flex gap-2 mt-2">
-                  <button onclick={addUserMotor} class="btn-primary text-xs py-1.5 px-3 rounded font-sans">Save</button>
-                  <button
-                    onclick={() => (addFormOpen = false)}
-                    class="text-xs text-gray-500 hover:text-gray-700 py-1.5 px-3 font-sans"
+          </thead>
+          <tbody>
+            {#each motorResults as result (result.motor.id)}
+              {@const badgeClass =
+                result.status === 'fail'
+                  ? 'bg-red-100 text-red-700'
+                  : result.status === 'warn'
+                    ? 'bg-amber-100 text-amber-700'
+                    : 'bg-green-100 text-green-700'}
+              {@const badgeLabel = result.status === 'fail' ? '✗ Fail' : result.status === 'warn' ? '⚠ Warn' : '✓ Pass'}
+              <tr
+                class="border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-default"
+                onmouseenter={(event) => onRowEnter(event, result)}
+                onmousemove={updatePopupPos}
+                onmouseleave={onRowLeave}
+              >
+                <td
+                  class="px-3 py-2 font-sans font-medium text-gray-800 sticky left-0 bg-white z-10 shadow-[4px_0_6px_-4px_rgba(0,0,0,0.12)] w-[8.5rem] max-w-[8.5rem] sm:w-[12rem] sm:max-w-[12rem]"
+                >
+                  <div class="truncate" title={result.motor.name}>{result.motor.name}</div>
+                </td>
+                <td class="px-3 py-2 text-center">
+                  <span class="font-sans font-semibold px-1.5 py-0.5 rounded text-[10px] {badgeClass}"
+                    >{badgeLabel}</span
                   >
-                    Cancel
-                  </button>
-                </div>
-              </td>
-            </tr>
-          {/if}
-        </tbody>
-      </table>
+                </td>
+                <td class="px-3 py-2 text-gray-600">{result.score.toFixed(0)}</td>
+                <td class="px-2 py-2">{@html marginBar(result.peakTorqueMargin_pct)}</td>
+                <td class="px-2 py-2">{@html marginBar(result.rmsTorqueMargin_pct)}</td>
+                <td class="px-2 py-2">{@html marginBar(result.speedMargin_pct)}</td>
+                <td class="px-3 py-2 whitespace-nowrap" class:text-amber-600={result.inertiaRatio > 10}>
+                  {result.inertiaRatio.toFixed(1)}:1
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap text-gray-500">{result.gearRatio.toFixed(1)}:1</td>
+                <td class="px-2 py-2">
+                  <div class="flex items-center justify-end gap-2">
+                    {#if mounted && !supportsHoverPopup}
+                      <button
+                        type="button"
+                        class="font-sans text-[10px] font-semibold uppercase tracking-wide text-gray-500 transition-colors hover:text-gray-800"
+                        aria-expanded={expandedResultId === result.motor.id}
+                        onclick={() => toggleRowDetails(result.motor.id)}
+                      >
+                        {expandedResultId === result.motor.id ? 'Hide' : 'Info'}
+                      </button>
+                    {/if}
+                    {#if result.motor.source === 'user'}
+                      <button
+                        type="button"
+                        onclick={() => deleteUserMotor(result.motor.id)}
+                        class="text-gray-300 hover:text-red-500 transition-colors leading-none"
+                        title="Remove motor">✕</button
+                      >
+                    {/if}
+                  </div>
+                </td>
+              </tr>
+              {#if mounted && !supportsHoverPopup && expandedResultId === result.motor.id}
+                <tr class="bg-gray-50 border-b border-gray-100">
+                  <td colspan="9" class="px-0 py-0">
+                    <div class="border-t border-gray-200">
+                      <div class="px-3 py-2 border-b border-gray-100">
+                        <div class="font-sans font-semibold text-gray-800 text-[11px]">{result.motor.name}</div>
+                        <div class="text-[10px] text-gray-400 font-sans mt-0.5">
+                          score {result.score.toFixed(0)} · inertia {result.inertiaRatio.toFixed(1)}:1 · ratio {result.gearRatio.toFixed(
+                            1
+                          )}:1
+                        </div>
+                        {#if result.motor.manufacturer || result.motor.series || result.motor.model || result.motor.motorType}
+                          <div class="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[10px]">
+                            {#if result.motor.manufacturer}
+                              <span class="text-gray-400 font-sans uppercase tracking-wide">Maker</span>
+                              <span>{result.motor.manufacturer}</span>
+                            {/if}
+                            {#if result.motor.series}
+                              <span class="text-gray-400 font-sans uppercase tracking-wide">Series</span>
+                              <span>{result.motor.series}</span>
+                            {/if}
+                            {#if result.motor.model}
+                              <span class="text-gray-400 font-sans uppercase tracking-wide">Model</span>
+                              <span>{result.motor.model}</span>
+                            {/if}
+                            {#if formatMotorType(result.motor.motorType)}
+                              <span class="text-gray-400 font-sans uppercase tracking-wide">Type</span>
+                              <span>{formatMotorType(result.motor.motorType)}</span>
+                            {/if}
+                          </div>
+                        {/if}
+                      </div>
+                      {@render motorDetailSections(result)}
+                    </div>
+                  </td>
+                </tr>
+              {/if}
+            {/each}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sticky bottom-0 z-30 border-t border-gray-200 bg-white px-3 py-2 sm:px-4">
+        {#if !addFormOpen}
+          <button
+            onclick={() => (addFormOpen = true)}
+            class="text-[10px] font-sans font-semibold uppercase tracking-wide px-2.5 py-1 rounded border border-dashed border-gray-400 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-300 transition-colors"
+            >+ Add custom motor</button
+          >
+        {:else}
+          <div class="font-sans text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-2">Add Motor</div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs font-mono">
+            <label class="col-span-2 flex flex-col gap-0.5">
+              <span class="text-gray-500 font-sans">Name</span>
+              <input bind:value={addName} type="text" class="border border-gray-300 rounded px-2 py-1 text-xs" />
+            </label>
+            <label class="flex flex-col gap-0.5">
+              <span class="text-gray-500 font-sans">Manufacturer</span>
+              <input
+                bind:value={addManufacturer}
+                type="text"
+                class="border border-gray-300 rounded px-2 py-1 text-xs"
+              />
+            </label>
+            <label class="flex flex-col gap-0.5">
+              <span class="text-gray-500 font-sans">Rated RPM</span>
+              <input
+                bind:value={addRatedRPM}
+                type="number"
+                min="1"
+                class="border border-gray-300 rounded px-2 py-1 text-xs"
+              />
+            </label>
+            <label class="flex flex-col gap-0.5">
+              <span class="text-gray-500 font-sans">Max RPM</span>
+              <input
+                bind:value={addMaxRPM}
+                type="number"
+                min="1"
+                class="border border-gray-300 rounded px-2 py-1 text-xs"
+              />
+            </label>
+            <label class="flex flex-col gap-0.5">
+              <span class="text-gray-500 font-sans">Rated Torque (Nm)</span>
+              <input
+                bind:value={addRatedTorque}
+                type="number"
+                min="0"
+                step="0.01"
+                class="border border-gray-300 rounded px-2 py-1 text-xs"
+              />
+            </label>
+            <label class="flex flex-col gap-0.5">
+              <span class="text-gray-500 font-sans">Peak Torque (Nm)</span>
+              <input
+                bind:value={addPeakTorque}
+                type="number"
+                min="0"
+                step="0.01"
+                class="border border-gray-300 rounded px-2 py-1 text-xs"
+              />
+            </label>
+            <label class="flex flex-col gap-0.5">
+              <span class="text-gray-500 font-sans">Cont. Power (W)</span>
+              <input
+                bind:value={addPower}
+                type="number"
+                min="1"
+                class="border border-gray-300 rounded px-2 py-1 text-xs"
+              />
+            </label>
+            <label class="flex flex-col gap-0.5">
+              <span class="text-gray-500 font-sans">Inertia (kg·m²)</span>
+              <input
+                bind:value={addInertia}
+                type="number"
+                min="0"
+                step="0.000001"
+                class="border border-gray-300 rounded px-2 py-1 text-xs"
+              />
+            </label>
+          </div>
+          <div class="flex gap-2 mt-2">
+            <button onclick={addUserMotor} class="btn-primary text-xs py-1.5 px-3 rounded font-sans">Save</button>
+            <button
+              onclick={() => (addFormOpen = false)}
+              class="text-xs text-gray-500 hover:text-gray-700 py-1.5 px-3 font-sans"
+            >
+              Cancel
+            </button>
+          </div>
+        {/if}
+      </div>
     </div>
 
-    <div class="border-l border-black flex flex-col divide-y divide-black shrink-0">
+    <div
+      class="border-t border-black lg:border-t-0 lg:border-l flex flex-col divide-y divide-black shrink-0 lg:w-[24rem]"
+    >
       <Pane title="Setting mode" position="inline">
         <Checkbox bind:value={advancedMode} label="Advanced" />
       </Pane>
@@ -902,8 +1103,9 @@
     </div>
   </div>
 
-  {#if hoveredResult}
+  {#if supportsHoverPopup && hoveredResult}
     <div
+      bind:this={hoverPopupEl}
       class="fixed z-50 pointer-events-none bg-white border border-gray-200 rounded shadow-xl text-xs font-mono"
       style="left:{popupFlipLeft ? popupX - 16 : popupX + 16}px; top:{popupY}px; transform:{popupFlipLeft
         ? 'translate(-100%,-50%)'
@@ -937,96 +1139,7 @@
           </div>
         {/if}
       </div>
-      <div class="px-3 py-2 grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-0.5">
-        <span></span>
-        <span class="text-gray-400 font-sans text-[10px] uppercase tracking-wide">Motor</span>
-        <span class="text-gray-400 font-sans text-[10px] uppercase tracking-wide">Required</span>
-
-        <span class="text-gray-500">Peak Tq</span>
-        <span>{hoveredResult.motor.peakTorque_Nm.toFixed(2)} Nm</span>
-        <span
-          class:text-red-500={hoveredResult.peakTorqueMargin_pct < 0}
-          class:text-amber-500={hoveredResult.peakTorqueMargin_pct >= 0 && hoveredResult.peakTorqueMargin_pct < 20}
-        >
-          {hoveredResult.T_peak_required_Nm.toFixed(2)} Nm
-        </span>
-
-        <span class="text-gray-500">RMS Tq</span>
-        <span>{hoveredResult.motor.ratedTorque_Nm.toFixed(2)} Nm</span>
-        <span
-          class:text-red-500={hoveredResult.rmsTorqueMargin_pct < 0}
-          class:text-amber-500={hoveredResult.rmsTorqueMargin_pct >= 0 && hoveredResult.rmsTorqueMargin_pct < 20}
-        >
-          {hoveredResult.T_rms_required_Nm.toFixed(2)} Nm
-        </span>
-
-        <span class="text-gray-500">Speed</span>
-        <span>{hoveredResult.motor.maxRPM.toLocaleString()} rpm</span>
-        <span
-          class:text-red-500={hoveredResult.speedMargin_pct < 0}
-          class:text-amber-500={hoveredResult.speedMargin_pct >= 0 && hoveredResult.speedMargin_pct < 20}
-        >
-          {hoveredResult.n_required_rpm.toFixed(0)} rpm
-        </span>
-      </div>
-      <div class="px-3 py-2 border-t border-gray-100 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
-        <span class="text-gray-500">J load</span>
-        <span>{hoveredResult.J_load_kgm2.toExponential(2)} kg·m²</span>
-        <span class="text-gray-500">J total</span>
-        <span>{hoveredResult.J_total_kgm2.toExponential(2)} kg·m²</span>
-        <span class="text-gray-500">Peak power</span>
-        <span>{hoveredResult.P_peak_required_W.toFixed(0)} W</span>
-      </div>
-      {#if hoveredResult.motor.voltage_V || hoveredResult.motor.encoder || hoveredResult.motor.hasBrake !== undefined || hoveredResult.motor.protectionRating}
-        <div class="px-3 py-2 border-t border-gray-100 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[10px]">
-          {#if hoveredResult.motor.voltage_V}
-            <span class="text-gray-500">Voltage</span>
-            <span>{hoveredResult.motor.voltage_V} V</span>
-          {/if}
-          {#if hoveredResult.motor.encoder}
-            <span class="text-gray-500">Encoder</span>
-            <span>{hoveredResult.motor.encoder}</span>
-          {/if}
-          {#if hoveredResult.motor.hasBrake !== undefined}
-            <span class="text-gray-500">Brake</span>
-            <span>{hoveredResult.motor.hasBrake ? 'Yes' : 'No'}</span>
-          {/if}
-          {#if hoveredResult.motor.protectionRating}
-            <span class="text-gray-500">IP</span>
-            <span>{hoveredResult.motor.protectionRating}</span>
-          {/if}
-        </div>
-      {/if}
-      {#if hoveredResult.motor.frameSize_mm || hoveredResult.motor.flange_mm || hoveredResult.motor.shaftDiameter_mm || hoveredResult.motor.mass_kg}
-        <div class="px-3 py-2 border-t border-gray-100 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[10px]">
-          {#if hoveredResult.motor.frameSize_mm}
-            <span class="text-gray-500">Frame</span>
-            <span>{hoveredResult.motor.frameSize_mm} mm</span>
-          {/if}
-          {#if hoveredResult.motor.flange_mm}
-            <span class="text-gray-500">Flange</span>
-            <span>{hoveredResult.motor.flange_mm} mm</span>
-          {/if}
-          {#if hoveredResult.motor.shaftDiameter_mm}
-            <span class="text-gray-500">Shaft</span>
-            <span>{hoveredResult.motor.shaftDiameter_mm} mm</span>
-          {/if}
-          {#if hoveredResult.motor.mass_kg}
-            <span class="text-gray-500">Mass</span>
-            <span>{hoveredResult.motor.mass_kg.toFixed(2)} kg</span>
-          {/if}
-        </div>
-      {/if}
-      {#if hoveredResult.motor.notes || hoveredResult.motor.sourceNote}
-        <div class="px-3 py-2 border-t border-gray-100 text-[10px] text-gray-500 leading-snug">
-          {#if hoveredResult.motor.notes}
-            <div>{hoveredResult.motor.notes}</div>
-          {/if}
-          {#if hoveredResult.motor.sourceNote}
-            <div class="mt-1">Source: {hoveredResult.motor.sourceNote}</div>
-          {/if}
-        </div>
-      {/if}
+      {@render motorDetailSections(hoveredResult)}
     </div>
   {/if}
 </div>
