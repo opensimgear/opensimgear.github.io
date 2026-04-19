@@ -6,7 +6,18 @@
   import { Matrix3, Vector3 } from 'three';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import Scene from './Scene.svelte';
-  import { clampPlatformMovement, type PlatformSpec, type Rotation, type Translation } from './state';
+  import {
+    clampPlatformMovement,
+    getStewartGizmoSize,
+    getStewartPaneExpandedState,
+    getStewartSceneClassNames,
+    getStewartStatusPanelClassNames,
+    isNarrowStewartViewport,
+    type PlatformSpec,
+    type Rotation,
+    type StewartPaneExpandedState,
+    type Translation,
+  } from './state';
 
   const STATE_KEY = 'state';
 
@@ -79,7 +90,21 @@
   let actuatorMax = $state(DEFAULTS.actuatorMax);
   let platformRotation = $state<Rotation>({ ...DEFAULTS.platformRotation });
   let platformTranslation = $state<Translation>({ ...DEFAULTS.platformTranslation });
+  let isNarrowViewport = $state(false);
+  let paneExpanded = $state<StewartPaneExpandedState>(getStewartPaneExpandedState(false));
   let mounted = $state(false);
+
+  function syncViewportState(width: number, resetPanes = false) {
+    const nextIsNarrow = isNarrowStewartViewport(width);
+
+    if (nextIsNarrow !== isNarrowViewport) {
+      isNarrowViewport = nextIsNarrow;
+    }
+
+    if (resetPanes) {
+      paneExpanded = getStewartPaneExpandedState(nextIsNarrow);
+    }
+  }
 
   const alphaBGeom = $derived(360 / 3 - alphaB);
   const centerOfRotationRelative = $derived(new Vector3(cor.x, cor.y, cor.z));
@@ -95,7 +120,16 @@
       }
     }
 
+    syncViewportState(window.innerWidth, true);
+
+    const handleResize = () => syncViewportState(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
     mounted = true;
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   });
 
   const platformHeight = $derived.by(() => {
@@ -312,98 +346,124 @@
 </script>
 
 <div class="w-full not-content border border-black rounded">
-  <div class="flex flex-row">
-    <div class="relative h-[600px] bg-gray-50 flex-1">
-      <Canvas>
-        <Scene
-          {baseDiameter}
-          {platformDiameter}
-          {platformHeight}
-          alphaB={alphaBGeom}
-          {alphaP}
-          {platformTranslation}
-          {platformRotation}
-          {centerOfRotationRelative}
-          {actuatorMin}
-          {actuatorMax}
-        />
-        <Gizmo size={128} />
-      </Canvas>
-      <div
-        class="absolute top-3 right-3 bg-white/80 backdrop-blur-sm border border-gray-300 rounded px-3 py-2 text-xs font-mono pointer-events-none select-none"
-      >
-        <div class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Platform</div>
-        <div class="grid grid-cols-2 gap-x-3 gap-y-0.5">
-          <span class="text-gray-500">Pitch</span><span>{platformRotation.x.toFixed(1)}°</span>
-          <span class="text-gray-500">Roll</span><span>{platformRotation.y.toFixed(1)}°</span>
-          <span class="text-gray-500">Yaw</span><span>{platformRotation.z.toFixed(1)}°</span>
-          <span class="text-gray-500">X</span><span>{(platformTranslation.x * 1000).toFixed(0)} mm</span>
-          <span class="text-gray-500">Y</span><span>{(platformTranslation.y * 1000).toFixed(0)} mm</span>
-          <span class="text-gray-500">Z</span><span
-            >{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span
+  {#if mounted}
+    <div class={isNarrowViewport ? 'flex flex-col' : 'flex flex-row'}>
+      <div class={getStewartSceneClassNames(isNarrowViewport)}>
+        <Canvas>
+          <Scene
+            {baseDiameter}
+            {platformDiameter}
+            {platformHeight}
+            alphaB={alphaBGeom}
+            {alphaP}
+            {platformTranslation}
+            {platformRotation}
+            {centerOfRotationRelative}
+            {actuatorMin}
+            {actuatorMax}
+          />
+          <Gizmo size={getStewartGizmoSize(isNarrowViewport)} />
+        </Canvas>
+        <div class={getStewartStatusPanelClassNames(isNarrowViewport)}>
+          <div
+            class:is-mobile-status={isNarrowViewport}
+            class="mb-1.5 text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500"
           >
+            Platform
+          </div>
+          <div class:is-mobile-status-grid={isNarrowViewport} class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-gray-500">
+            <span>Pitch</span><span>{platformRotation.x.toFixed(1)}°</span>
+            <span>Roll</span><span>{platformRotation.y.toFixed(1)}°</span>
+            <span>Yaw</span><span>{platformRotation.z.toFixed(1)}°</span>
+            <span>Surge</span><span>{(platformTranslation.x * 1000).toFixed(0)} mm</span>
+            <span>Sway</span><span>{(platformTranslation.y * 1000).toFixed(0)} mm</span>
+            <span>Heave</span><span>{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="border-l border-black flex flex-col divide-y divide-black shrink-0">
-      <Pane title="Parameters" position="inline">
-        <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={3} />
-        <Slider bind:value={platformDiameter} label="Platform Diameter" {...configLinear} min={0} max={baseDiameter} />
-        <Slider bind:value={alphaB} label="Base Alpha" {...alphaOptions} />
-        <Slider bind:value={alphaP} label="Platform Alpha" {...alphaOptions} />
-        <Point
-          bind:value={cor}
-          label="Center of Rotation"
-          {...configLinear}
-          min={-platformDiameter}
-          max={platformDiameter}
-          optionsZ={{ ...configLinear, min: 0, max: platformDiameter }}
-        />
-        <Button on:click={resetParams} label="Reset Params" title="Reset" />
-      </Pane>
-      <Pane title="Actuator Range" position="inline">
-        <Slider bind:value={actuatorMin} label="Min Extension" {...configLinear} min={0.1} max={actuatorMax} />
-        <Slider bind:value={actuatorMax} label="Max Extension" {...configLinear} min={actuatorMin} max={2} />
-        <Button on:click={resetActuator} label="Reset Actuator" title="Reset" />
-      </Pane>
-      <Pane title="Movement" position="inline">
-        <RotationEuler
-          bind:value={platformRotation}
-          expanded={false}
-          label="Platform rotation"
-          picker={'inline'}
-          unit="deg"
-          {...movementAngle}
-        />
-        <Point
-          bind:value={platformTranslation}
-          label="Platform Translation"
-          {...configLinear}
-          min={-platformDiameter}
-          max={platformDiameter}
-        />
-        <Button on:click={resetPlatform} label="Reset Platform" title="Reset" />
-      </Pane>
-      <section aria-label="Constraints">
-        <h2 class="sr-only">Constraints</h2>
-        <Pane title="Constraints" position="inline">
-          <Monitor value={`±${platformSpec.pitch.toFixed(1)}°`} label="Pitch" />
-          <Monitor value={`±${platformSpec.roll.toFixed(1)}°`} label="Roll" />
-          <Monitor value={`±${platformSpec.yaw.toFixed(1)}°`} label="Yaw" />
-          <Monitor value={`±${(platformSpec.transX * 1000).toFixed(0)} mm`} label="Surge" />
-          <Monitor value={`±${(platformSpec.transY * 1000).toFixed(0)} mm`} label="Sway" />
-          <Monitor
-            value={`${((platformHeight - platformSpec.transZDown) * 1000).toFixed(0)} / ${((platformHeight + platformSpec.transZUp) * 1000).toFixed(0)} mm`}
-            label="Heave"
+      <div
+        class={isNarrowViewport
+          ? 'flex shrink-0 flex-col divide-y divide-black border-t border-black'
+          : 'flex shrink-0 flex-col divide-y divide-black border-l border-black'}
+      >
+        <Pane title="Parameters" position="inline" bind:expanded={paneExpanded.parameters}>
+          <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={3} />
+          <Slider
+            bind:value={platformDiameter}
+            label="Platform Diameter"
+            {...configLinear}
+            min={0}
+            max={baseDiameter}
           />
+          <Slider bind:value={alphaB} label="Base Alpha" {...alphaOptions} />
+          <Slider bind:value={alphaP} label="Platform Alpha" {...alphaOptions} />
+          <Point
+            bind:value={cor}
+            label="Center of Rotation"
+            {...configLinear}
+            min={-platformDiameter}
+            max={platformDiameter}
+            optionsZ={{ ...configLinear, min: 0, max: platformDiameter }}
+          />
+          <Button on:click={resetParams} label="Reset Params" title="Reset" />
         </Pane>
-      </section>
+        <Pane title="Actuator Range" position="inline" bind:expanded={paneExpanded.actuatorRange}>
+          <Slider bind:value={actuatorMin} label="Min Extension" {...configLinear} min={0.1} max={actuatorMax} />
+          <Slider bind:value={actuatorMax} label="Max Extension" {...configLinear} min={actuatorMin} max={2} />
+          <Button on:click={resetActuator} label="Reset Actuator" title="Reset" />
+        </Pane>
+        <Pane title="Movement" position="inline" bind:expanded={paneExpanded.movement}>
+          <RotationEuler
+            bind:value={platformRotation}
+            expanded={false}
+            label="Platform rotation"
+            picker={'inline'}
+            unit="deg"
+            {...movementAngle}
+          />
+          <Point
+            bind:value={platformTranslation}
+            label="Platform Translation"
+            {...configLinear}
+            min={-platformDiameter}
+            max={platformDiameter}
+          />
+          <Button on:click={resetPlatform} label="Reset Platform" title="Reset" />
+        </Pane>
+        <section aria-label="Constraints">
+          <h2 class="sr-only">Constraints</h2>
+          <Pane title="Constraints" position="inline" bind:expanded={paneExpanded.constraints}>
+            <Monitor value={`±${platformSpec.pitch.toFixed(1)}°`} label="Pitch" />
+            <Monitor value={`±${platformSpec.roll.toFixed(1)}°`} label="Roll" />
+            <Monitor value={`±${platformSpec.yaw.toFixed(1)}°`} label="Yaw" />
+            <Monitor value={`±${(platformSpec.transX * 1000).toFixed(0)} mm`} label="Surge" />
+            <Monitor value={`±${(platformSpec.transY * 1000).toFixed(0)} mm`} label="Sway" />
+            <Monitor
+              value={`${((platformHeight - platformSpec.transZDown) * 1000).toFixed(0)} / ${((platformHeight + platformSpec.transZUp) * 1000).toFixed(0)} mm`}
+              label="Heave"
+            />
+          </Pane>
+        </section>
+      </div>
     </div>
-  </div>
+  {:else}
+    <div class="grid h-[320px] place-items-center bg-gray-50 text-sm text-gray-500 sm:h-[420px] lg:h-[600px]">
+      Loading calculator...
+    </div>
+  {/if}
 </div>
 
 <style>
   :global(.not-content .tp-rotv_t) {
     text-align: left;
+  }
+
+  .is-mobile-status {
+    margin-bottom: 0.25rem;
+    font-size: 9px;
+  }
+
+  .is-mobile-status-grid {
+    gap: 0.125rem 0.5rem;
   }
 </style>

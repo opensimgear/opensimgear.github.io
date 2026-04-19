@@ -20,8 +20,59 @@ export type PlatformMovementControls = PlatformMovement & {
   rotationControlKey: number;
 };
 
+export const MOBILE_STEWART_BREAKPOINT = 1024;
+
+export type StewartPaneExpandedState = {
+  parameters: boolean;
+  actuatorRange: boolean;
+  movement: boolean;
+  constraints: boolean;
+};
+
 function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
+}
+
+export function isNarrowStewartViewport(width: number) {
+  return width < MOBILE_STEWART_BREAKPOINT;
+}
+
+export function getStewartPaneExpandedState(isNarrow: boolean): StewartPaneExpandedState {
+  if (isNarrow) {
+    return {
+      parameters: false,
+      actuatorRange: false,
+      movement: false,
+      constraints: false,
+    };
+  }
+
+  return {
+    parameters: true,
+    actuatorRange: true,
+    movement: true,
+    constraints: true,
+  };
+}
+
+export function getStewartSceneClassNames(isNarrow: boolean) {
+  if (isNarrow) {
+    return 'relative h-[320px] bg-gray-50 sm:h-[420px]';
+  }
+
+  return 'relative h-[600px] flex-1 bg-gray-50';
+}
+
+export function getStewartGizmoSize(isNarrow: boolean) {
+  return isNarrow ? 80 : 128;
+}
+
+export function getStewartStatusPanelClassNames(isNarrow: boolean) {
+  if (isNarrow) {
+    return 'absolute top-2 right-2 rounded border border-gray-300 bg-white/80 px-2 py-1.5 text-[8px] font-mono backdrop-blur-sm pointer-events-none select-none';
+  }
+
+  return 'absolute top-3 right-3 rounded border border-gray-300 bg-white/80 px-3 py-2 text-xs font-mono backdrop-blur-sm pointer-events-none select-none';
 }
 
 export function clampPlatformMovement(
