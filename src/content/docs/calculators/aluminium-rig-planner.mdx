@@ -1,0 +1,25 @@
+---
+title: Aluminium Rig Planner
+description:
+  Block out an aluminium profile sim-rig layout with ergonomic guidance, a grouped cut list, and shareable URL state.
+tableOfContents: false
+---
+
+import AluminiumRigPlanner from '~/components/calculator/aluminium-rig-planner/index.svelte';
+
+<style>{`:root { --sl-content-width: 90rem; }`}</style>
+
+This planner gives you a quick first-pass layout for an aluminium extrusion simulator cockpit. It starts from a GT rig
+baseline, updates posture guidance from driver dimensions, and groups the main profile lengths into a compact cut list.
+
+## How to use
+
+1. **Setup** - Set driver height, inseam, seat angle, pedal angle, and wheel reach to match your target driving posture.
+2. **2D side view** - Use the preview to check seat, wheel, and pedal relationships before building detailed mounts.
+3. **Posture guidance** - Review elbow and knee angles to see whether the current layout stays in a comfortable range.
+4. **Cut list** - Note the grouped 40x80 profile lengths for rails, cross-members, and pedal brace planning.
+5. **Sharing** - The planner writes its current state into the URL so a setup can be bookmarked or shared.
+
+## Planner
+
+<AluminiumRigPlanner client:load />
