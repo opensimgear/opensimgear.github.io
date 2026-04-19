@@ -1,10 +1,11 @@
 ---
-title: Disclaimer
+title: 3rd Party Disclaimer
 description:
   Third-party sim racing and flight simulation projects collected by OpenSimGear, including community belt tensioners
   and other DIY hardware ideas.
 sidebar:
   order: 0
+  label: Disclaimer
 ---
 
 This section collects community projects that sit near the OpenSimGear ecosystem but are built and maintained by other

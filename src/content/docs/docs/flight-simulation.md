@@ -1,10 +1,11 @@
 ---
-title: Flight Simulation
+title: Flight Simulation Overview
 description:
   Learn how flight sim hardware fits together, which controls matter for different aircraft types, and where to go
   deeper in the OpenSimGear wiki.
 sidebar:
   order: 1
+  label: Flight Simulation
 ---
 
 Flight simulation hardware should match the aircraft and procedures you care about most. A compact joystick can cover

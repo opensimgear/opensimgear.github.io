@@ -1,10 +1,11 @@
 ---
-title: Sim Racing
+title: Sim Racing Overview
 description:
   Learn how sim racing hardware fits together, what matters most when choosing gear, and where to go deeper in the
   OpenSimGear wiki.
 sidebar:
   order: 0
+  label: Sim Racing
 ---
 
 Sim racing hardware works best when the whole control chain makes sense together. Wheel base, pedals, mounting, seating,
