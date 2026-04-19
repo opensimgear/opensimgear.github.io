@@ -4,7 +4,6 @@ export type AluminiumRigPaneExpandedState = {
   setup: boolean;
   posture: boolean;
   cutList: boolean;
-  preview: boolean;
 };
 
 export function isNarrowAluminiumRigViewport(width: number) {
@@ -17,7 +16,6 @@ export function getAluminiumRigPaneExpandedState(isNarrow: boolean): AluminiumRi
       setup: false,
       posture: false,
       cutList: false,
-      preview: false,
     };
   }
 
@@ -25,7 +23,6 @@ export function getAluminiumRigPaneExpandedState(isNarrow: boolean): AluminiumRi
     setup: true,
     posture: true,
     cutList: true,
-    preview: true,
   };
 }
 

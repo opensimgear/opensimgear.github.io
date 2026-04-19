@@ -18,10 +18,6 @@ function wheelReachSlider(page: Page): Locator {
     .locator('input[type="range"]');
 }
 
-function previewToggle(page: Page): Locator {
-  return page.getByText('Enable 3D preview', { exact: true }).locator('..').getByRole('checkbox');
-}
-
 function previewArea(page: Page): Locator {
   return page
     .locator('section')
@@ -64,23 +60,10 @@ When('I change the planner wheel reach', async ({ page }: { page: Page }) => {
   await expect(slider).toHaveValue(String(max));
 });
 
-When('I enable the 3D rig preview', async ({ page }: { page: Page }) => {
-  const toggle = previewToggle(page);
-
-  await toggle.evaluate((element) => {
-    const input = element as HTMLInputElement;
-    input.checked = true;
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.dispatchEvent(new Event('change', { bubbles: true }));
-  });
-  await expect(toggle).toBeChecked();
-});
-
 Then('I should see posture guidance mentioning wheel reach', async ({ page }: { page: Page }) => {
   await expect(page.getByText(/wheel reach is too long for a relaxed elbow bend/i).first()).toBeVisible();
 });
 
 Then('I should see the 3D rig preview', async ({ page }: { page: Page }) => {
-  await expect(previewToggle(page)).toBeChecked();
   await expect(previewArea(page).locator('canvas')).toBeVisible();
 });

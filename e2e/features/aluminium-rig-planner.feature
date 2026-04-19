@@ -8,6 +8,5 @@ Feature: Aluminium rig planner
   Scenario: Planner updates guidance and preview after geometry changes
     Given I open the aluminium rig planner page
     When I change the planner wheel reach
-    And I enable the 3D rig preview
     Then I should see posture guidance mentioning wheel reach
     And I should see the 3D rig preview

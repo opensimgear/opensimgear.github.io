@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Checkbox, Monitor, Pane, Slider } from 'svelte-tweakpane-ui';
+  import { Monitor, Pane, Slider } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
@@ -34,11 +34,9 @@
     const mergedState = mergePlannerQueryState(DEFAULT_INPUT, state);
 
     Object.assign(plannerInput, mergedState.plannerInput);
-    showPreview3d = mergedState.showPreview3d;
   }
 
   let plannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
-  let showPreview3d = $state(false);
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<AluminiumRigPaneExpandedState>(getAluminiumRigPaneExpandedState(false));
   let mounted = $state(false);
@@ -132,7 +130,6 @@
     const url = new URL(window.location.href);
     const encodedState = encodeQueryState({
       ...$state.snapshot(plannerInput),
-      showPreview3d,
     });
 
     if (url.searchParams.get(STATE_KEY) === encodedState) {
@@ -149,51 +146,39 @@
   {#if mounted}
     <div class={isNarrowViewport ? 'flex flex-col' : 'grid min-h-[52rem] grid-cols-[minmax(0,1.3fr)_24rem]'}>
       <div class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] p-4 lg:border-b-0 lg:border-r">
-        <SideView input={plannerInput} {geometry} {guidance} />
-
         <section class="rounded-xl border border-dashed border-zinc-300 bg-white p-4 shadow-sm">
           <div class="mb-3 flex items-center justify-between gap-3">
             <div>
               <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">Preview area</p>
               <h2 class="text-sm font-semibold text-zinc-900">3D preview</h2>
             </div>
-            <span class="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-medium text-zinc-600">
-              {showPreview3d ? 'Enabled' : 'Disabled'}
-            </span>
+            <span class="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-medium text-zinc-600">Always on</span>
           </div>
 
           <div class="rounded-lg border border-dashed border-zinc-300 bg-zinc-50 p-3">
-            {#if showPreview3d}
-              <div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_15rem]">
-                <Scene input={plannerInput} {geometry} {isNarrowViewport} />
+            <div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_15rem]">
+              <Scene input={plannerInput} {geometry} {isNarrowViewport} />
 
-                <div class="grid content-start gap-2 rounded-lg border border-zinc-200 bg-white/90 p-3 text-xs text-zinc-700">
-                  <div class="rounded-md bg-zinc-50 px-3 py-2">
-                    <div class="text-[10px] uppercase tracking-[0.18em] text-zinc-500">Frame footprint</div>
-                    <div class="mt-1 font-semibold text-zinc-900">{plannerInput.baseLengthMm} x 400 mm</div>
-                  </div>
-                  <div class="rounded-md bg-zinc-50 px-3 py-2">
-                    <div class="text-[10px] uppercase tracking-[0.18em] text-zinc-500">Seat height</div>
-                    <div class="mt-1 font-semibold text-zinc-900">{plannerInput.seatYMm} mm</div>
-                  </div>
-                  <div class="rounded-md bg-zinc-50 px-3 py-2">
-                    <div class="text-[10px] uppercase tracking-[0.18em] text-zinc-500">Wheel center</div>
-                    <div class="mt-1 font-semibold text-zinc-900">
-                      {plannerInput.wheelXMm + geometry.wheelMountOffsets.wheelCenterOffsetXMm} / {plannerInput.wheelYMm + geometry.wheelMountOffsets.wheelCenterOffsetYMm} mm
-                    </div>
-                  </div>
-                  <div class="rounded-md bg-zinc-50 px-3 py-2 leading-relaxed text-zinc-600">
-                    Drag scene to orbit. Scroll to zoom. Geometry stays tied to frame members and live planner inputs.
+              <div class="grid content-start gap-2 rounded-lg border border-zinc-200 bg-white/90 p-3 text-xs text-zinc-700">
+                <div class="rounded-md bg-zinc-50 px-3 py-2">
+                  <div class="text-[10px] uppercase tracking-[0.18em] text-zinc-500">Frame footprint</div>
+                  <div class="mt-1 font-semibold text-zinc-900">{plannerInput.baseLengthMm} x 400 mm</div>
+                </div>
+                <div class="rounded-md bg-zinc-50 px-3 py-2">
+                  <div class="text-[10px] uppercase tracking-[0.18em] text-zinc-500">Seat height</div>
+                  <div class="mt-1 font-semibold text-zinc-900">{plannerInput.seatYMm} mm</div>
+                </div>
+                <div class="rounded-md bg-zinc-50 px-3 py-2">
+                  <div class="text-[10px] uppercase tracking-[0.18em] text-zinc-500">Wheel center</div>
+                  <div class="mt-1 font-semibold text-zinc-900">
+                    {plannerInput.wheelXMm + geometry.wheelMountOffsets.wheelCenterOffsetXMm} / {plannerInput.wheelYMm + geometry.wheelMountOffsets.wheelCenterOffsetYMm} mm
                   </div>
                 </div>
-              </div>
-            {:else}
-              <div class="grid min-h-[200px] place-items-center px-6 py-10 text-center">
-                <div class="max-w-md text-sm leading-relaxed text-zinc-600">
-                  3D preview disabled. Turn on preview pane toggle to inspect live frame layout, wheel position, and seat envelope.
+                <div class="rounded-md bg-zinc-50 px-3 py-2 leading-relaxed text-zinc-600">
+                  Drag scene to orbit. Scroll to zoom. Geometry stays tied to frame members and live planner inputs.
                 </div>
               </div>
-            {/if}
+            </div>
           </div>
         </section>
       </div>
@@ -256,6 +241,11 @@
               <span>{wheelReachLimits.max} mm</span>
             </div>
           </div>
+
+          <div class="px-3 pb-3 pt-2">
+            <div class="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">2D side view</div>
+            <SideView input={plannerInput} {geometry} {guidance} />
+          </div>
         </Pane>
 
         <Pane title="Posture guidance" position="inline" bind:expanded={paneExpanded.posture}>
@@ -301,16 +291,6 @@
           </div>
         </Pane>
 
-        <Pane title="Preview" position="inline" bind:expanded={paneExpanded.preview}>
-          <Checkbox bind:value={showPreview3d} label="Enable 3D preview" />
-          <Monitor value={`${plannerInput.baseLengthMm} mm`} label="Base" />
-          <Monitor value={`${geometry.wheelReachMm} mm`} label="Wheel reach" />
-          <Monitor value={`${geometry.legExtensionMm} mm`} label="Leg extension" />
-
-          <div class="px-3 pb-3 font-sans text-xs leading-relaxed text-zinc-600">
-            Lightweight 3D view mirrors live planner geometry. Use orbit controls for frame checks, then use side view for exact ergonomic alignment.
-          </div>
-        </Pane>
       </div>
     </div>
   {:else}
@@ -321,12 +301,6 @@
 <style>
   :global(.not-content .tp-dfwv) {
     width: 100% !important;
-  }
-
-  :global(.not-content .tp-lblv:has(.tp-ckbv) .tp-lblv_v) {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
   }
 
   input[type='range']::-webkit-slider-thumb {

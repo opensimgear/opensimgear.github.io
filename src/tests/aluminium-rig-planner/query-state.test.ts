@@ -16,12 +16,10 @@ describe('aluminium rig planner query state', () => {
       seatBackAngleDeg: -20,
       pedalAngleDeg: 65,
       wheelTiltDeg: 80,
-      showPreview3d: true,
     });
 
     expect(state.plannerInput.seatBackAngleDeg).toBe(10);
     expect(state.plannerInput.pedalAngleDeg).toBe(35);
     expect(state.plannerInput.wheelTiltDeg).toBe(35);
-    expect(state.showPreview3d).toBe(true);
   });
 });

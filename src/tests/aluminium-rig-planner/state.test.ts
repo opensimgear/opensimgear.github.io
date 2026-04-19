@@ -22,7 +22,6 @@ describe('aluminium rig planner responsive state', () => {
       setup: false,
       posture: false,
       cutList: false,
-      preview: false,
     });
   });
 
@@ -31,35 +30,25 @@ describe('aluminium rig planner responsive state', () => {
       setup: true,
       posture: true,
       cutList: true,
-      preview: true,
     });
   });
 
   it('resets pane state when reset flag is true', () => {
     expect(
-      getNextAluminiumRigPaneExpandedState(
-        { setup: false, posture: true, cutList: false, preview: true },
-        false,
-        false,
-        true
-      )
+      getNextAluminiumRigPaneExpandedState({ setup: false, posture: true, cutList: false }, false, false, true)
     ).toEqual(getAluminiumRigPaneExpandedState(false));
   });
 
   it('resets pane state to mobile defaults when viewport crosses into narrow band', () => {
-    expect(
-      getNextAluminiumRigPaneExpandedState({ setup: true, posture: true, cutList: true, preview: true }, false, true)
-    ).toEqual(getAluminiumRigPaneExpandedState(true));
+    expect(getNextAluminiumRigPaneExpandedState({ setup: true, posture: true, cutList: true }, false, true)).toEqual(
+      getAluminiumRigPaneExpandedState(true)
+    );
   });
 
   it('resets pane state to desktop defaults when viewport crosses into wide band', () => {
-    expect(
-      getNextAluminiumRigPaneExpandedState(
-        { setup: false, posture: false, cutList: false, preview: false },
-        true,
-        false
-      )
-    ).toEqual(getAluminiumRigPaneExpandedState(false));
+    expect(getNextAluminiumRigPaneExpandedState({ setup: false, posture: false, cutList: false }, true, false)).toEqual(
+      getAluminiumRigPaneExpandedState(false)
+    );
   });
 
   it('keeps pane state unchanged on same-band resize without reset', () => {
@@ -67,7 +56,6 @@ describe('aluminium rig planner responsive state', () => {
       setup: false,
       posture: true,
       cutList: false,
-      preview: true,
     };
 
     expect(getNextAluminiumRigPaneExpandedState(currentPaneExpanded, false, false)).toBe(currentPaneExpanded);

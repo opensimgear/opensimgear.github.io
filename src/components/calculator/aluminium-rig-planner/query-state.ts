@@ -1,9 +1,7 @@
 import { clampPlannerInput } from './geometry';
 import type { PlannerInput } from './types';
 
-export type PlannerQueryState = Partial<PlannerInput> & {
-  showPreview3d?: boolean;
-};
+export type PlannerQueryState = Partial<PlannerInput> & {};
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value);
@@ -11,10 +9,6 @@ function isFiniteNumber(value: unknown): value is number {
 
 function readNumber(value: unknown, fallback: number) {
   return isFiniteNumber(value) ? value : fallback;
-}
-
-function readBoolean(value: unknown, fallback: boolean) {
-  return typeof value === 'boolean' ? value : fallback;
 }
 
 export function mergePlannerQueryState(defaultInput: PlannerInput, state: PlannerQueryState) {
@@ -46,6 +40,5 @@ export function mergePlannerQueryState(defaultInput: PlannerInput, state: Planne
 
   return {
     plannerInput,
-    showPreview3d: readBoolean(state.showPreview3d, false),
   };
 }

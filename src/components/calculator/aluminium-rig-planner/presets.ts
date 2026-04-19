@@ -47,7 +47,7 @@ export function getPresetLabel(presetType: RigPresetType): string {
 }
 
 export function createInitialPlannerInput(profile: PlannerProfile): PlannerInput {
-  const presetType = profile.presetType ?? 'gt';
+  const presetType = profile.presetType ?? 'formula';
   const preset = PRESETS[presetType];
   const heightOffsetMm = profile.driverHeightMm - 1750;
   const inseamOffsetMm = profile.inseamMm - 820;
