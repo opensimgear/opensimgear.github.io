@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Folder, Pane, Slider } from 'svelte-tweakpane-ui';
+  import { Button, Folder, Pane, Slider } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
@@ -161,6 +161,10 @@
     );
   }
 
+  function resetSetup() {
+    Object.assign(plannerInput, DEFAULT_INPUT);
+  }
+
   $effect(() => {
     if (!mounted || typeof window === 'undefined') return;
 
@@ -264,6 +268,7 @@
               format={(value) => `${value} mm`}
             />
           </Folder>
+          <Button on:click={resetSetup} label="Reset" title="Reset" />
         </Pane>
       </div>
     </div>
