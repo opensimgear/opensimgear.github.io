@@ -2,6 +2,7 @@ export const ALUMINIUM_RIG_MOBILE_BREAKPOINT = 1024;
 
 export type AluminiumRigPaneExpandedState = {
   setup: boolean;
+  modules: boolean;
 };
 
 export function isNarrowAluminiumRigViewport(width: number) {
@@ -12,11 +13,13 @@ export function getAluminiumRigPaneExpandedState(isNarrow: boolean): AluminiumRi
   if (isNarrow) {
     return {
       setup: false,
+      modules: false,
     };
   }
 
   return {
     setup: true,
+    modules: true,
   };
 }
 

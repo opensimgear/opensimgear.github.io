@@ -2,6 +2,11 @@ export type RigPresetType = 'gt' | 'formula';
 export type SeatingBias = 'comfort' | 'performance';
 export type WheelMountType = 'front' | 'bottom' | 'deck';
 
+export type PlannerVisibleModules = {
+  pedalTray: boolean;
+  steeringColumn: boolean;
+};
+
 export interface DriverProfile {
   driverHeightMm: number;
   inseamMm: number;

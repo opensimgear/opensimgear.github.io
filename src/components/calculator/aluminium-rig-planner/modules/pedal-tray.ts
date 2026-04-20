@@ -5,10 +5,12 @@ export function createPedalTrayModule(input: PlannerInput): MeshSpec[] {
   const trayTopY = BASE_BEAM_HEIGHT;
   const trayBeamCenterY = trayTopY - PROFILE_SHORT / 2;
   const traySideOffsetZ = 0.19;
+  const trayInnerFaceOffsetZ = traySideOffsetZ - PROFILE_SHORT / 2;
   const trayRearCrossBeamCenterXMm = input.seatBaseDepthMm + input.pedalTrayDistanceMm + 20;
   const trayFrontCrossBeamCenterXMm = trayRearCrossBeamCenterXMm + input.pedalTrayDepthMm - 40;
+  const trayMiddleCrossBeamCenterXMm = (trayRearCrossBeamCenterXMm + trayFrontCrossBeamCenterXMm) / 2;
   const traySideBeamCenterXMm = trayRearCrossBeamCenterXMm + (input.pedalTrayDepthMm - 40) / 2;
-  const trayCrossBeamLength = 0.5;
+  const trayCrossBeamLength = trayInnerFaceOffsetZ * 2;
   const traySideBeamLength = mm(input.pedalTrayDepthMm);
 
   return [
@@ -34,6 +36,15 @@ export function createPedalTrayModule(input: PlannerInput): MeshSpec[] {
       id: 'pedal-tray-front',
       size: [PROFILE_SHORT, PROFILE_SHORT, trayCrossBeamLength] as [number, number, number],
       position: [mm(trayFrontCrossBeamCenterXMm), trayBeamCenterY, 0] as [number, number, number],
+      profileType: 'alu40x40',
+      color: PROFILE_COLOR,
+      metalness: 0.62,
+      roughness: 0.3,
+    },
+    {
+      id: 'pedal-tray-middle',
+      size: [PROFILE_SHORT, PROFILE_SHORT, trayCrossBeamLength] as [number, number, number],
+      position: [mm(trayMiddleCrossBeamCenterXMm), trayBeamCenterY, 0] as [number, number, number],
       profileType: 'alu40x40',
       color: PROFILE_COLOR,
       metalness: 0.62,

@@ -29,6 +29,6 @@ if (process.env.NODE_ENV !== 'development') {
       // For frontend apps, add:
       Sentry.browserTracingIntegration(),
     ],
-    spotlight: true, // Enable Spotlight
+    spotlight: false, // Enable Spotlight
   });
 }

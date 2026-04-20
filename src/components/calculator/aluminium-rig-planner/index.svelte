@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Button, Folder, Pane, Slider } from 'svelte-tweakpane-ui';
+  import { Button, Checkbox, Folder, Pane, Slider } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
@@ -14,7 +14,7 @@
     type AluminiumRigPaneExpandedState,
   } from './state';
   import Scene from './Scene.svelte';
-  import type { PlannerInput } from './types';
+  import type { PlannerInput, PlannerVisibleModules } from './types';
 
   const STATE_KEY = 'state';
   const URL_STATE_DEBOUNCE_MS = 300;
@@ -50,7 +50,6 @@
     wheelYMm: 620,
     wheelTiltDeg: 18,
   };
-
   function applyQueryState(state: PlannerQueryState) {
     const mergedState = mergePlannerQueryState(DEFAULT_INPUT, state);
 
@@ -58,6 +57,10 @@
   }
 
   let plannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
+  let visibleModules = $state<PlannerVisibleModules>({
+    pedalTray: true,
+    steeringColumn: true,
+  });
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<AluminiumRigPaneExpandedState>(getAluminiumRigPaneExpandedState(false));
   let mounted = $state(false);
@@ -165,6 +168,17 @@
     Object.assign(plannerInput, DEFAULT_INPUT);
   }
 
+  function resetSteeringColumnModule() {
+    setSteeringColumnBaseHeightMm(DEFAULT_INPUT.steeringColumnBaseHeightMm);
+    setSteeringColumnHeightMm(DEFAULT_INPUT.steeringColumnHeightMm);
+    plannerInput.wheelXMm = DEFAULT_INPUT.wheelXMm;
+  }
+
+  function resetPedalTrayModule() {
+    plannerInput.pedalTrayDepthMm = DEFAULT_INPUT.pedalTrayDepthMm;
+    plannerInput.pedalTrayDistanceMm = DEFAULT_INPUT.pedalTrayDistanceMm;
+  }
+
   $effect(() => {
     if (!mounted || typeof window === 'undefined') return;
 
@@ -189,7 +203,7 @@
       <div
         class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
-        <Scene input={plannerInput} {geometry} {isNarrowViewport} />
+        <Scene {geometry} {isNarrowViewport} {visibleModules} />
       </div>
 
       <div
@@ -224,51 +238,63 @@
               format={(value) => `${value} mm`}
             />
           </Folder>
-          <Folder title="Pedal tray">
-            <Slider
-              bind:value={plannerInput.pedalTrayDepthMm}
-              label="Tray depth"
-              min={300}
-              max={pedalTrayDepthMaxMm}
-              step={10}
-              format={(value) => `${value} mm`}
-            />
-            <Slider
-              bind:value={plannerInput.pedalTrayDistanceMm}
-              label="Tray distance"
-              min={0}
-              max={pedalTrayDistanceMaxMm}
-              step={10}
-              format={(value) => `${value} mm`}
-            />
+          <Button on:click={resetSetup} label="Reset" title="Reset" />
+          <Folder title="Modules">
+            <Checkbox bind:value={visibleModules.steeringColumn} label="Steering column" />
+            <Checkbox bind:value={visibleModules.pedalTray} label="Pedal tray" />
           </Folder>
-          <Folder title="Steering column">
-            <Slider
-              bind:value={() => plannerInput.steeringColumnBaseHeightMm, setSteeringColumnBaseHeightMm}
-              label="Base height"
-              min={120}
-              max={steeringColumnBaseHeightMaxMm}
-              step={10}
-              format={(value) => `${value} mm`}
-            />
-            <Slider
-              bind:value={() => plannerInput.steeringColumnHeightMm, setSteeringColumnHeightMm}
-              label="Column Height"
-              min={steeringColumnHeightMinMm}
-              max={steeringColumnHeightMaxMm}
-              step={10}
-              format={(value) => `${value} mm`}
-            />
+        </Pane>
+        <Pane title="Modules" position="inline" bind:expanded={paneExpanded.modules}>
+          {#if visibleModules.steeringColumn}
+            <Folder title="Steering column">
+              <Slider
+                bind:value={() => plannerInput.steeringColumnBaseHeightMm, setSteeringColumnBaseHeightMm}
+                label="Base height"
+                min={80}
+                max={steeringColumnBaseHeightMaxMm}
+                step={10}
+                format={(value) => `${value} mm`}
+              />
+              <Slider
+                bind:value={() => plannerInput.steeringColumnHeightMm, setSteeringColumnHeightMm}
+                label="Column Height"
+                min={steeringColumnHeightMinMm}
+                max={steeringColumnHeightMaxMm}
+                step={10}
+                format={(value) => `${value} mm`}
+              />
             <Slider
               bind:value={() => columnDistanceDisplayMm, updateColumnDistance}
               label="Column distance"
               min={columnDistanceLimits.min}
               max={columnDistanceLimits.max}
-              step={1}
+              step={10}
               format={(value) => `${value} mm`}
             />
+            <Button on:click={resetSteeringColumnModule} label="Reset" title="Reset" />
           </Folder>
-          <Button on:click={resetSetup} label="Reset" title="Reset" />
+          {/if}
+          {#if visibleModules.pedalTray}
+            <Folder title="Pedal tray">
+              <Slider
+                bind:value={plannerInput.pedalTrayDepthMm}
+                label="Tray depth"
+                min={300}
+                max={pedalTrayDepthMaxMm}
+                step={10}
+                format={(value) => `${value} mm`}
+              />
+              <Slider
+                bind:value={plannerInput.pedalTrayDistanceMm}
+                label="Tray distance"
+              min={0}
+              max={pedalTrayDistanceMaxMm}
+              step={10}
+              format={(value) => `${value} mm`}
+            />
+            <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
+          </Folder>
+          {/if}
         </Pane>
       </div>
     </div>

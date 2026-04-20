@@ -5,13 +5,15 @@
 
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
+  import type { PlannerVisibleModules } from './types';
 
   type Props = {
     geometry: PlannerGeometry;
     isNarrowViewport?: boolean;
+    visibleModules: PlannerVisibleModules;
   };
 
-  const { geometry, isNarrowViewport = false }: Props = $props();
+  const { geometry, isNarrowViewport = false, visibleModules }: Props = $props();
 
   const cameraPosition = $derived<[number, number, number]>(isNarrowViewport ? [0.98, 0.84, 1] : [0.1, 1, 1]);
   const gizmoSize = $derived(isNarrowViewport ? 48 : 64);
@@ -44,6 +46,6 @@
       fadeStrength={1.6}
     />
 
-    <RigFrame {geometry} />
+    <RigFrame {geometry} {visibleModules} />
   </Canvas>
 </div>
