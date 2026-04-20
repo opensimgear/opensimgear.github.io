@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { createPlannerCutList, mergeCutListRows } from '../../components/calculator/aluminium-rig-planner/cut-list';
-import { derivePlannerGeometry } from '../../components/calculator/aluminium-rig-planner/geometry';
-import { createInitialPlannerInput } from '../../components/calculator/aluminium-rig-planner/presets';
+import { createPlannerCutList, mergeCutListRows } from '../../components/calculator/aluminum-rig-planner/cut-list';
+import { derivePlannerGeometry } from '../../components/calculator/aluminum-rig-planner/geometry';
+import { createInitialPlannerInput } from '../../components/calculator/aluminum-rig-planner/presets';
 
-describe('aluminium rig planner cut list', () => {
+describe('aluminum rig planner cut list', () => {
   function createGeometry() {
     const input = createInitialPlannerInput({
       driverHeightMm: 1750,

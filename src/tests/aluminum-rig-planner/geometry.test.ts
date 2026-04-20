@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
-import { createInitialPlannerInput } from '../../components/calculator/aluminium-rig-planner/presets';
+import { createInitialPlannerInput } from '../../components/calculator/aluminum-rig-planner/presets';
 import {
   clampPlannerInput,
   derivePlannerGeometry,
   getWheelMountOffsets,
-} from '../../components/calculator/aluminium-rig-planner/geometry';
+} from '../../components/calculator/aluminum-rig-planner/geometry';
 
-describe('aluminium rig planner geometry', () => {
+describe('aluminum rig planner geometry', () => {
   it('clamps impossible posture angles before geometry derivation', () => {
     const clamped = clampPlannerInput({
       ...createInitialPlannerInput({

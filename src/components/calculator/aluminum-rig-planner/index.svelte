@@ -10,10 +10,10 @@
   import { createInitialPlannerInput } from './presets';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
-    getAluminiumRigPaneExpandedState,
-    getNextAluminiumRigPaneExpandedState,
-    isNarrowAluminiumRigViewport,
-    type AluminiumRigPaneExpandedState,
+    getAluminumRigPaneExpandedState,
+    getNextAluminumRigPaneExpandedState,
+    isNarrowAluminumRigViewport,
+    type AluminumRigPaneExpandedState,
   } from './state';
   import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
   import type { PlannerGeometry } from './geometry';
@@ -82,7 +82,7 @@
   let customProfileColor = $state(DEFAULT_CUSTOM_PROFILE_COLOR);
   let showEndCaps = $state(true);
   let isNarrowViewport = $state(false);
-  let paneExpanded = $state<AluminiumRigPaneExpandedState>(getAluminiumRigPaneExpandedState(false));
+  let paneExpanded = $state<AluminumRigPaneExpandedState>(getAluminumRigPaneExpandedState(false));
   let mounted = $state(false);
   let PlannerScene = $state<PlannerSceneComponent | null>(null);
   let sceneStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
@@ -102,9 +102,9 @@
   }
 
   function syncViewportState(width: number, resetPanes = false) {
-    const nextIsNarrow = isNarrowAluminiumRigViewport(width);
+    const nextIsNarrow = isNarrowAluminumRigViewport(width);
     const viewportChanged = nextIsNarrow !== isNarrowViewport;
-    const nextPaneExpanded = getNextAluminiumRigPaneExpandedState(
+    const nextPaneExpanded = getNextAluminumRigPaneExpandedState(
       paneExpanded,
       isNarrowViewport,
       nextIsNarrow,

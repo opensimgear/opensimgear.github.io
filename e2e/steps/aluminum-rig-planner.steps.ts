@@ -8,11 +8,11 @@ function previewArea(page: Page): Locator {
   return page.locator('.not-content').first();
 }
 
-Given('I open the aluminium rig planner page', async ({ page }: { page: Page }) => {
-  await page.goto('/calculators/aluminium-rig-planner');
+Given('I open the aluminum rig planner page', async ({ page }: { page: Page }) => {
+  await page.goto('/calculators/aluminum-rig-planner');
 });
 
-Then('I should see the aluminium rig planner heading', async ({ page }: { page: Page }) => {
+Then('I should see the aluminum rig planner heading', async ({ page }: { page: Page }) => {
   await expect(page).toHaveTitle(/8020 Aluminum Rig Planner/i);
   await expect(page.getByRole('heading', { level: 1, name: '8020 Aluminum Rig Planner' })).toBeVisible();
 });
@@ -61,7 +61,7 @@ Then('I should see the 3D rig preview', async ({ page }: { page: Page }) => {
       },
       {
         timeout: sceneReadyTimeoutMs,
-        message: 'Expected aluminium rig preview canvas to appear before timeout',
+        message: 'Expected aluminum rig preview canvas to appear before timeout',
       }
     )
     .toBe('ready');

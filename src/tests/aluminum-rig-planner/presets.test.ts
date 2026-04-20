@@ -5,10 +5,10 @@ import {
   FORMULA_PRESET,
   getPresetLabel,
   GT_PRESET,
-} from '../../components/calculator/aluminium-rig-planner/presets';
-import type { DriverProfile } from '../../components/calculator/aluminium-rig-planner/types';
+} from '../../components/calculator/aluminum-rig-planner/presets';
+import type { DriverProfile } from '../../components/calculator/aluminum-rig-planner/types';
 
-describe('aluminium rig planner presets', () => {
+describe('aluminum rig planner presets', () => {
   it('returns human labels for preset ids', () => {
     expect(getPresetLabel('gt')).toBe('GT');
     expect(getPresetLabel('formula')).toBe('Formula');

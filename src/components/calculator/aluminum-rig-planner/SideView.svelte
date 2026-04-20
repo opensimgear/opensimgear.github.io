@@ -33,7 +33,7 @@
 
 <section class="">
   <div class="overflow-hidden">
-    <svg {viewBox} class="h-auto w-full" role="img" aria-label="Aluminium rig side view preview">
+    <svg {viewBox} class="h-auto w-full" role="img" aria-label="Aluminum rig side view preview">
       <rect x="-80" y="-40" width={input.baseLengthMm + 200} height={drawingHeightMm + 80} fill="url(#planner-grid)" />
 
       <defs>

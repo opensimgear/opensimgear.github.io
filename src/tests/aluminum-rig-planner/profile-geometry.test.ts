@@ -4,9 +4,9 @@ import {
   getProfileGeometryCacheKey,
   getProfileMeshRotation,
   getProfileMeshScale,
-} from '../../components/calculator/aluminium-rig-planner/modules/profile-geometry';
+} from '../../components/calculator/aluminum-rig-planner/modules/profile-geometry';
 
-describe('aluminium rig planner profile geometry', () => {
+describe('aluminum rig planner profile geometry', () => {
   it('uses same 40x40 geometry cache key when only beam length changes', () => {
     const shortBeam = getProfileGeometryCacheKey([0.3, 0.04, 0.04], 'alu40x40');
     const longBeam = getProfileGeometryCacheKey([1.2, 0.04, 0.04], 'alu40x40');

@@ -10,7 +10,7 @@ import { mergeVertices, toCreasedNormals } from 'three/examples/jsm/utils/Buffer
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const modulesDir = path.resolve(__dirname, '../src/components/calculator/aluminium-rig-planner/modules');
+const modulesDir = path.resolve(__dirname, '../src/components/calculator/aluminum-rig-planner/modules');
 const generatedDir = path.join(modulesDir, 'generated');
 
 const SVG_UNITS_TO_METERS = 0.001;

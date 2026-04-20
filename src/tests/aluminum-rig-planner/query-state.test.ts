@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { createInitialPlannerInput } from '../../components/calculator/aluminium-rig-planner/presets';
-import { mergePlannerQueryState } from '../../components/calculator/aluminium-rig-planner/query-state';
+import { createInitialPlannerInput } from '../../components/calculator/aluminum-rig-planner/presets';
+import { mergePlannerQueryState } from '../../components/calculator/aluminum-rig-planner/query-state';
 
-describe('aluminium rig planner query state', () => {
+describe('aluminum rig planner query state', () => {
   it('sanitizes out-of-range shared-link values before hydration', () => {
     const defaults = createInitialPlannerInput({
       driverHeightMm: 1750,
