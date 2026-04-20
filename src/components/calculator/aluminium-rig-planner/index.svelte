@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, type Component } from 'svelte';
   import { Button, Checkbox, Color, Element, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
@@ -15,8 +15,15 @@
     type AluminiumRigPaneExpandedState,
   } from './state';
   import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
-  import Scene from './Scene.svelte';
+  import type { PlannerGeometry } from './geometry';
   import type { PlannerInput, PlannerVisibleModules } from './types';
+
+  type PlannerSceneComponent = Component<{
+    geometry: PlannerGeometry;
+    isNarrowViewport?: boolean;
+    profileColor: string;
+    visibleModules: PlannerVisibleModules;
+  }>;
 
   const STATE_KEY = 'state';
   const URL_STATE_DEBOUNCE_MS = 300;
@@ -74,6 +81,22 @@
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<AluminiumRigPaneExpandedState>(getAluminiumRigPaneExpandedState(false));
   let mounted = $state(false);
+  let PlannerScene = $state<PlannerSceneComponent | null>(null);
+  let sceneStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
+
+  async function loadScene() {
+    if (PlannerScene || sceneStatus === 'loading') return;
+
+    sceneStatus = 'loading';
+
+    try {
+      const module = await import('./Scene.svelte');
+      PlannerScene = module.default;
+      sceneStatus = 'ready';
+    } catch {
+      sceneStatus = 'error';
+    }
+  }
 
   function syncViewportState(width: number, resetPanes = false) {
     const nextIsNarrow = isNarrowAluminiumRigViewport(width);
@@ -95,6 +118,7 @@
   }
 
   onMount(() => {
+    let cancelSceneLoad = () => {};
     const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
 
     if (encoded) {
@@ -111,9 +135,24 @@
     window.addEventListener('resize', handleResize);
     mounted = true;
 
+    if ('requestIdleCallback' in window) {
+      const idleId = window.requestIdleCallback(() => {
+        void loadScene();
+      }, { timeout: 180 });
+
+      cancelSceneLoad = () => window.cancelIdleCallback(idleId);
+    } else {
+      const timeoutId = window.setTimeout(() => {
+        void loadScene();
+      }, 0);
+
+      cancelSceneLoad = () => window.clearTimeout(timeoutId);
+    }
+
     return () => {
       window.removeEventListener('resize', handleResize);
       debouncedUrlStateWriter.cancel();
+      cancelSceneLoad();
     };
   });
 
@@ -223,7 +262,17 @@
       <div
         class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
-        <Scene {geometry} {isNarrowViewport} {profileColor} {visibleModules} />
+        {#if PlannerScene}
+          <PlannerScene {geometry} {isNarrowViewport} {profileColor} {visibleModules} />
+        {:else}
+          <div class="grid aspect-[3/2] w-full place-items-center border-zinc-200 bg-zinc-50 text-sm text-zinc-500">
+            {#if sceneStatus === 'error'}
+              <span>3D scene failed to load. Refresh to retry.</span>
+            {:else}
+              <span>Loading 3D scene...</span>
+            {/if}
+          </div>
+        {/if}
       </div>
 
       <div
