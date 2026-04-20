@@ -28,6 +28,7 @@ Then('I should see the planner controls', async ({ page }: { page: Page }) => {
   await expect(root.getByText('Finish')).toBeVisible();
   await expect(root.getByText('Endcaps')).toBeVisible();
   await expect(root.getByText('Base length')).toBeVisible();
+  await expect(root.getByText('Base width')).toBeVisible();
 });
 
 Then('I should see the cut list', async ({ page }: { page: Page }) => {

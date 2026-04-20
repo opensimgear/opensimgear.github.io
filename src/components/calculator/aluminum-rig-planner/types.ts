@@ -25,6 +25,7 @@ export interface PlannerInput extends DriverProfile {
   presetType: RigPresetType;
   wheelMountType: WheelMountType;
   baseLengthMm: number;
+  baseWidthMm: number;
   seatBaseDepthMm: number;
   baseInnerBeamSpacingMm: number;
   pedalTrayDepthMm: number;

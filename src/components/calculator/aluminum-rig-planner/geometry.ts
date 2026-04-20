@@ -1,4 +1,10 @@
 import type { PlannerInput, WheelMountType } from './types';
+import {
+  PLANNER_ANGLE_LIMITS,
+  PLANNER_DIMENSION_LIMITS,
+  PLANNER_LAYOUT,
+  WHEEL_MOUNT_OFFSETS,
+} from './constants';
 
 export type FrameMember = {
   id: string;
@@ -30,48 +36,6 @@ export type PlannerGeometry = {
   wheelSupportUprights: WheelSupportUpright[];
 };
 
-const MIN_SEAT_BACK_ANGLE_DEG = 10;
-const MAX_SEAT_BACK_ANGLE_DEG = 45;
-const MIN_PEDAL_ANGLE_DEG = 0;
-const MAX_PEDAL_ANGLE_DEG = 35;
-const MIN_WHEEL_TILT_DEG = -10;
-const MAX_WHEEL_TILT_DEG = 35;
-const MIN_BASE_LENGTH_MM = 1000;
-const MAX_BASE_LENGTH_MM = 1800;
-const MIN_SEAT_BASE_DEPTH_MM = 240;
-const MAX_SEAT_BASE_DEPTH_MM = 500;
-const MIN_BASE_INNER_BEAM_SPACING_MM = 80;
-const MAX_BASE_INNER_BEAM_SPACING_MM = 320;
-const MIN_PEDAL_TRAY_DEPTH_MM = 300;
-const MAX_PEDAL_TRAY_DEPTH_MM = 500;
-const MIN_PEDAL_TRAY_DISTANCE_MM = 0;
-const MAX_PEDAL_TRAY_DISTANCE_MM = 700;
-const MIN_STEERING_COLUMN_BASE_HEIGHT_MM = 120;
-const MAX_STEERING_COLUMN_BASE_HEIGHT_MM = 500;
-const MIN_STEERING_COLUMN_HEIGHT_MM = 400;
-const MAX_STEERING_COLUMN_HEIGHT_MM = 600;
-
-const WHEEL_MOUNT_OFFSETS: Record<WheelMountType, WheelMountOffsets> = {
-  front: {
-    mountXMm: 0,
-    mountYMm: 150,
-    wheelCenterOffsetXMm: 60,
-    wheelCenterOffsetYMm: 90,
-  },
-  bottom: {
-    mountXMm: 30,
-    mountYMm: 80,
-    wheelCenterOffsetXMm: 105,
-    wheelCenterOffsetYMm: 125,
-  },
-  deck: {
-    mountXMm: 70,
-    mountYMm: 190,
-    wheelCenterOffsetXMm: 145,
-    wheelCenterOffsetYMm: 130,
-  },
-};
-
 function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
@@ -94,9 +58,12 @@ function createFrameMember(id: string, start: { x: number; y: number }, end: { x
 
 function createWheelSupportUprights(input: PlannerInput, wheelMountOffsets: WheelMountOffsets): WheelSupportUpright[] {
   const supportX = input.wheelXMm + wheelMountOffsets.mountXMm;
-  const supportHeightMm = Math.max(input.baseHeightMm + 80, input.wheelYMm + wheelMountOffsets.mountYMm);
-  const supportCenterY = 200;
-  const supportHalfSpanMm = 80;
+  const supportHeightMm = Math.max(
+    input.baseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm,
+    input.wheelYMm + wheelMountOffsets.mountYMm
+  );
+  const supportCenterY = input.baseWidthMm / 2;
+  const supportHalfSpanMm = PLANNER_LAYOUT.wheelSupportHalfSpanMm;
 
   return [
     {
@@ -115,38 +82,55 @@ function createWheelSupportUprights(input: PlannerInput, wheelMountOffsets: Whee
 }
 
 export function clampPlannerInput(input: PlannerInput): PlannerInput {
-  const baseLengthMm = clamp(input.baseLengthMm, MIN_BASE_LENGTH_MM, MAX_BASE_LENGTH_MM);
-  const seatBaseDepthMm = clamp(input.seatBaseDepthMm, MIN_SEAT_BASE_DEPTH_MM, Math.min(MAX_SEAT_BASE_DEPTH_MM, baseLengthMm));
+  const baseLengthMm = clamp(input.baseLengthMm, PLANNER_DIMENSION_LIMITS.baseLengthMinMm, PLANNER_DIMENSION_LIMITS.baseLengthMaxMm);
+  const baseWidthMm = clamp(input.baseWidthMm, PLANNER_DIMENSION_LIMITS.baseWidthMinMm, PLANNER_DIMENSION_LIMITS.baseWidthMaxMm);
+  const seatBaseDepthMm = clamp(
+    input.seatBaseDepthMm,
+    PLANNER_DIMENSION_LIMITS.seatBaseDepthMinMm,
+    Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, baseLengthMm)
+  );
   const baseInnerBeamSpacingMm = clamp(
     input.baseInnerBeamSpacingMm,
-    MIN_BASE_INNER_BEAM_SPACING_MM,
-    MAX_BASE_INNER_BEAM_SPACING_MM
+    PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMinMm,
+    PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMaxMm
   );
-  const pedalTrayDepthMm = clamp(input.pedalTrayDepthMm, MIN_PEDAL_TRAY_DEPTH_MM, MAX_PEDAL_TRAY_DEPTH_MM);
-  const pedalTrayDistanceMm = clamp(input.pedalTrayDistanceMm, MIN_PEDAL_TRAY_DISTANCE_MM, MAX_PEDAL_TRAY_DISTANCE_MM);
+  const pedalTrayDepthMm = clamp(
+    input.pedalTrayDepthMm,
+    PLANNER_DIMENSION_LIMITS.pedalTrayDepthMinMm,
+    PLANNER_DIMENSION_LIMITS.pedalTrayDepthMaxMm
+  );
+  const pedalTrayDistanceMm = clamp(
+    input.pedalTrayDistanceMm,
+    PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm,
+    PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMaxMm
+  );
   const steeringColumnBaseHeightMm = clamp(
     input.steeringColumnBaseHeightMm,
-    MIN_STEERING_COLUMN_BASE_HEIGHT_MM,
-    MAX_STEERING_COLUMN_BASE_HEIGHT_MM
+    PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
+    PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMaxMm
   );
   const steeringColumnHeightMm = clamp(
     input.steeringColumnHeightMm,
-    Math.max(MIN_STEERING_COLUMN_HEIGHT_MM, steeringColumnBaseHeightMm + 80),
-    MAX_STEERING_COLUMN_HEIGHT_MM
+    Math.max(
+      PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+      steeringColumnBaseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
+    ),
+    PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm
   );
 
   return {
     ...input,
     baseLengthMm,
+    baseWidthMm,
     seatBaseDepthMm,
     baseInnerBeamSpacingMm,
     pedalTrayDepthMm,
     pedalTrayDistanceMm,
     steeringColumnBaseHeightMm,
     steeringColumnHeightMm,
-    seatBackAngleDeg: clamp(input.seatBackAngleDeg, MIN_SEAT_BACK_ANGLE_DEG, MAX_SEAT_BACK_ANGLE_DEG),
-    pedalAngleDeg: clamp(input.pedalAngleDeg, MIN_PEDAL_ANGLE_DEG, MAX_PEDAL_ANGLE_DEG),
-    wheelTiltDeg: clamp(input.wheelTiltDeg, MIN_WHEEL_TILT_DEG, MAX_WHEEL_TILT_DEG),
+    seatBackAngleDeg: clamp(input.seatBackAngleDeg, PLANNER_ANGLE_LIMITS.seatBackMinDeg, PLANNER_ANGLE_LIMITS.seatBackMaxDeg),
+    pedalAngleDeg: clamp(input.pedalAngleDeg, PLANNER_ANGLE_LIMITS.pedalMinDeg, PLANNER_ANGLE_LIMITS.pedalMaxDeg),
+    wheelTiltDeg: clamp(input.wheelTiltDeg, PLANNER_ANGLE_LIMITS.wheelTiltMinDeg, PLANNER_ANGLE_LIMITS.wheelTiltMaxDeg),
   };
 }
 
@@ -161,21 +145,21 @@ export function derivePlannerGeometry(rawInput: PlannerInput): PlannerGeometry {
   const wheelCenterY = input.wheelYMm + wheelMountOffsets.wheelCenterOffsetYMm;
   const wheelReachMm = roundLength(Math.hypot(wheelCenterX - input.seatXMm, wheelCenterY - input.seatYMm));
   const legExtensionMm = roundLength(Math.hypot(input.pedalXMm - input.seatXMm, input.pedalYMm - input.seatYMm));
-  const frontCrossMemberX = input.baseLengthMm - 80;
+  const frontCrossMemberX = input.baseLengthMm - PLANNER_LAYOUT.frontCrossMemberInsetMm;
   const seatCrossMemberX = input.seatBaseDepthMm;
   const wheelCrossMemberX = clamp(
     input.wheelXMm + wheelMountOffsets.mountXMm,
-    seatCrossMemberX + 120,
-    input.baseLengthMm - 120
+    seatCrossMemberX + PLANNER_LAYOUT.wheelCrossMemberMinGapMm,
+    input.baseLengthMm - PLANNER_LAYOUT.wheelCrossMemberMaxInsetMm
   );
 
   const frameMembers = [
     createFrameMember('left-rail', { x: 0, y: 0 }, { x: input.baseLengthMm, y: 0 }),
-    createFrameMember('right-rail', { x: 0, y: 400 }, { x: input.baseLengthMm, y: 400 }),
-    createFrameMember('rear-cross-member', { x: 0, y: 0 }, { x: 0, y: 400 }),
-    createFrameMember('seat-cross-member', { x: seatCrossMemberX, y: 0 }, { x: seatCrossMemberX, y: 400 }),
-    createFrameMember('wheel-cross-member', { x: wheelCrossMemberX, y: 0 }, { x: wheelCrossMemberX, y: 400 }),
-    createFrameMember('front-cross-member', { x: frontCrossMemberX, y: 0 }, { x: frontCrossMemberX, y: 400 }),
+    createFrameMember('right-rail', { x: 0, y: input.baseWidthMm }, { x: input.baseLengthMm, y: input.baseWidthMm }),
+    createFrameMember('rear-cross-member', { x: 0, y: 0 }, { x: 0, y: input.baseWidthMm }),
+    createFrameMember('seat-cross-member', { x: seatCrossMemberX, y: 0 }, { x: seatCrossMemberX, y: input.baseWidthMm }),
+    createFrameMember('wheel-cross-member', { x: wheelCrossMemberX, y: 0 }, { x: wheelCrossMemberX, y: input.baseWidthMm }),
+    createFrameMember('front-cross-member', { x: frontCrossMemberX, y: 0 }, { x: frontCrossMemberX, y: input.baseWidthMm }),
   ];
   const wheelSupportUprights = createWheelSupportUprights(input, wheelMountOffsets);
 

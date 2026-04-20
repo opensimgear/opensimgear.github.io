@@ -54,10 +54,12 @@ describe('aluminum rig planner presets', () => {
 
   it('uses deck wheel mount for gt preset by default', () => {
     expect(GT_PRESET.wheelMountType).toBe('deck');
+    expect(GT_PRESET.baseWidthMm).toBe(500);
   });
 
   it('uses front wheel mount for formula preset by default', () => {
     expect(FORMULA_PRESET.wheelMountType).toBe('front');
+    expect(FORMULA_PRESET.baseWidthMm).toBe(500);
   });
 
   it('seeds pedal tray module values from preset', () => {

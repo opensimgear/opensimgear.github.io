@@ -1,29 +1,29 @@
 import type { PlannerGeometry } from '../geometry';
 import type { CutListRow, PlannerInput } from '../types';
+import { MODULE_PROFILE_MATERIAL, PLANNER_LAYOUT } from '../constants';
 import {
   BASE_BEAM_HEIGHT_MM,
   centeredZ,
   createCutListRow,
   MM_TO_METERS,
   mm,
-  metersToRoundedMm,
   PROFILE_SHORT,
   PROFILE_TALL,
-  RENDERED_RAIL_SPACING_MM,
-  SCENE_WIDTH_MM,
   UPRIGHT_BEAM_DEPTH,
   UPRIGHT_BEAM_WIDTH,
   type MeshSpec,
 } from './shared';
 
 export function createSteeringColumnModule(input: PlannerInput, geometry: PlannerGeometry, profileColor: string): MeshSpec[] {
+  const railCenterOffsetMm = UPRIGHT_BEAM_DEPTH / MM_TO_METERS / 2;
+  const baseCenterZ = centeredZ(input.baseWidthMm / 2, input.baseWidthMm);
   const uprights = geometry.wheelSupportUprights.map<MeshSpec>((upright) => {
     const uprightHeightAboveBaseMm = Math.max(
       PROFILE_SHORT / MM_TO_METERS,
       input.steeringColumnHeightMm,
-      input.steeringColumnBaseHeightMm + PROFILE_TALL / MM_TO_METERS
+      input.steeringColumnBaseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
     );
-    const uprightZMm = upright.id === 'wheel-support-left' ? 0 : SCENE_WIDTH_MM;
+    const uprightZMm = upright.id === 'wheel-support-left' ? railCenterOffsetMm : input.baseWidthMm - railCenterOffsetMm;
 
     return {
       id: upright.id,
@@ -31,19 +31,19 @@ export function createSteeringColumnModule(input: PlannerInput, geometry: Planne
       position: [
         mm(upright.x),
         mm(BASE_BEAM_HEIGHT_MM + uprightHeightAboveBaseMm / 2),
-        centeredZ(uprightZMm),
+        centeredZ(uprightZMm, input.baseWidthMm),
       ] as [number, number, number],
       profileType: 'alu80x40',
       openEnds: ['positive'],
       color: profileColor,
-      metalness: 0.62,
-      roughness: 0.3,
+      metalness: MODULE_PROFILE_MATERIAL.metalness,
+      roughness: MODULE_PROFILE_MATERIAL.roughness,
     };
   });
 
   const supportX = geometry.wheelSupportUprights[0]?.x ?? input.wheelXMm;
   const uprightRearFaceXMm = supportX - UPRIGHT_BEAM_WIDTH / MM_TO_METERS / 2;
-  const crossBeamLengthMm = RENDERED_RAIL_SPACING_MM - UPRIGHT_BEAM_DEPTH / MM_TO_METERS;
+  const crossBeamLengthMm = input.baseWidthMm - (UPRIGHT_BEAM_DEPTH / MM_TO_METERS) * 2;
 
   return [
     ...uprights,
@@ -53,19 +53,23 @@ export function createSteeringColumnModule(input: PlannerInput, geometry: Planne
       position: [
         mm(uprightRearFaceXMm + PROFILE_SHORT / MM_TO_METERS / 2),
         mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + PROFILE_TALL / MM_TO_METERS / 2),
-        0,
+        baseCenterZ,
       ] as [number, number, number],
       profileType: 'alu80x40',
       color: profileColor,
-      metalness: 0.62,
-      roughness: 0.3,
+      metalness: MODULE_PROFILE_MATERIAL.metalness,
+      roughness: MODULE_PROFILE_MATERIAL.roughness,
     },
   ];
 }
 
 export function createSteeringColumnCutList(input: PlannerInput, geometry: PlannerGeometry): CutListRow[] {
-  const uprightHeightMm = Math.max(40, input.steeringColumnHeightMm, input.steeringColumnBaseHeightMm + 80);
-  const crossBeamLengthMm = metersToRoundedMm(mm(RENDERED_RAIL_SPACING_MM - UPRIGHT_BEAM_DEPTH / MM_TO_METERS));
+  const uprightHeightMm = Math.max(
+    PROFILE_SHORT / MM_TO_METERS,
+    input.steeringColumnHeightMm,
+    input.steeringColumnBaseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
+  );
+  const crossBeamLengthMm = Math.round(input.baseWidthMm - (UPRIGHT_BEAM_DEPTH / MM_TO_METERS) * 2);
 
   return [
     createCutListRow('80x40', uprightHeightMm, geometry.wheelSupportUprights.length || 2),

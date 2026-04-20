@@ -12,6 +12,7 @@ import alu40x40BeamAssetUrl from './generated/alu40x40-beam.bin?url';
 import alu80x40BeamAssetUrl from './generated/alu80x40-beam.bin?url';
 import alu40x40EndcapAssetUrl from './generated/alu40x40-endcap.bin?url';
 import alu80x40EndcapAssetUrl from './generated/alu80x40-endcap.bin?url';
+import { PROFILE_GEOMETRY_ASSET } from '../constants';
 import {
   getAxisLength,
   getBeamAxis,
@@ -35,15 +36,13 @@ type BinaryGeometryHeader = {
     radius: number;
   };
 };
-
-const AXIS_X_ROTATION = new Quaternion().setFromEuler(new Euler(0, Math.PI / 2, 0));
-const AXIS_Y_ROTATION = new Quaternion().setFromEuler(new Euler(-Math.PI / 2, 0, 0));
+const AXIS_X_ROTATION = new Quaternion().setFromEuler(new Euler(0, PROFILE_GEOMETRY_ASSET.axisRotationRadians, 0));
+const AXIS_Y_ROTATION = new Quaternion().setFromEuler(new Euler(-PROFILE_GEOMETRY_ASSET.axisRotationRadians, 0, 0));
 const IDENTITY_ROTATION = new Quaternion();
-const PROFILE_ROLL_ROTATION = new Quaternion().setFromEuler(new Euler(0, 0, Math.PI / 2));
+const PROFILE_ROLL_ROTATION = new Quaternion().setFromEuler(
+  new Euler(0, 0, PROFILE_GEOMETRY_ASSET.axisRotationRadians)
+);
 const GEOMETRY_KEYS: GeometryAssetKey[] = ['alu40x40-beam', 'alu80x40-beam', 'alu40x40-endcap', 'alu80x40-endcap'];
-const FILE_MAGIC = 0x5247534f;
-const FILE_HEADER_BYTES = 60;
-const FLOAT_BYTES = 4;
 const geometryAssetUrls: Record<GeometryAssetKey, string> = {
   'alu40x40-beam': alu40x40BeamAssetUrl,
   'alu80x40-beam': alu80x40BeamAssetUrl,
@@ -79,7 +78,7 @@ function getBeamLength(axis: BeamAxis, size: [number, number, number]) {
 }
 
 function formatCacheDimension(value: number) {
-  return value.toFixed(6);
+  return value.toFixed(PROFILE_GEOMETRY_ASSET.cacheDimensionPrecision);
 }
 
 export function getProfileGeometryCacheKey(size: Vector3Tuple, cacheKeyPrefix: string) {
@@ -99,18 +98,18 @@ export function getProfileMeshScale(size: Vector3Tuple): Vector3Tuple {
 function restoreGeometry(arrayBuffer: ArrayBuffer, byteOffset: number, geometryHeader: BinaryGeometryHeader) {
   const geometry = new BufferGeometry();
   const positionArray = new Float32Array(arrayBuffer, byteOffset, geometryHeader.positionLength);
-  byteOffset += geometryHeader.positionLength * FLOAT_BYTES;
+  byteOffset += geometryHeader.positionLength * PROFILE_GEOMETRY_ASSET.floatBytes;
 
   const normalArray = new Float32Array(arrayBuffer, byteOffset, geometryHeader.normalLength);
-  byteOffset += geometryHeader.normalLength * FLOAT_BYTES;
+  byteOffset += geometryHeader.normalLength * PROFILE_GEOMETRY_ASSET.floatBytes;
 
-  geometry.setAttribute('position', new BufferAttribute(positionArray, 3));
-  geometry.setAttribute('normal', new BufferAttribute(normalArray, 3));
+  geometry.setAttribute('position', new BufferAttribute(positionArray, PROFILE_GEOMETRY_ASSET.vector3ComponentCount));
+  geometry.setAttribute('normal', new BufferAttribute(normalArray, PROFILE_GEOMETRY_ASSET.vector3ComponentCount));
 
   if (geometryHeader.indexLength > 0) {
     const indexArray = new Uint32Array(arrayBuffer, byteOffset, geometryHeader.indexLength);
 
-    geometry.setIndex(new BufferAttribute(indexArray, 1));
+    geometry.setIndex(new BufferAttribute(indexArray, PROFILE_GEOMETRY_ASSET.indexComponentCount));
     byteOffset += geometryHeader.indexLength * Uint32Array.BYTES_PER_ELEMENT;
   }
 
@@ -126,13 +125,13 @@ function restoreGeometry(arrayBuffer: ArrayBuffer, byteOffset: number, geometryH
 function readVector3(view: DataView, byteOffset: number): { value: Vector3Tuple; byteOffset: number } {
   const value: Vector3Tuple = [
     view.getFloat32(byteOffset, true),
-    view.getFloat32(byteOffset + FLOAT_BYTES, true),
-    view.getFloat32(byteOffset + FLOAT_BYTES * 2, true),
+    view.getFloat32(byteOffset + PROFILE_GEOMETRY_ASSET.floatBytes, true),
+    view.getFloat32(byteOffset + PROFILE_GEOMETRY_ASSET.floatBytes * 2, true),
   ];
 
   return {
     value,
-    byteOffset: byteOffset + FLOAT_BYTES * 3,
+    byteOffset: byteOffset + PROFILE_GEOMETRY_ASSET.floatBytes * PROFILE_GEOMETRY_ASSET.vector3ComponentCount,
   };
 }
 
@@ -140,11 +139,11 @@ function parseGeometryHeader(view: DataView) {
   const fileMagic = view.getUint32(0, true);
   const fileVersion = view.getUint32(4, true);
 
-  if (fileMagic !== FILE_MAGIC) {
+  if (fileMagic !== PROFILE_GEOMETRY_ASSET.fileMagic) {
     throw new Error('Invalid profile geometry asset magic');
   }
 
-  if (fileVersion !== 1) {
+  if (fileVersion !== PROFILE_GEOMETRY_ASSET.fileVersion) {
     throw new Error(`Unsupported profile geometry asset version: ${fileVersion}`);
   }
 
@@ -177,7 +176,7 @@ function parseGeometryHeader(view: DataView) {
         radius,
       },
     },
-    byteOffset: FILE_HEADER_BYTES,
+    byteOffset: PROFILE_GEOMETRY_ASSET.fileHeaderBytes,
   };
 }
 
@@ -232,7 +231,7 @@ function getGeometryAssetKey(profileType: ProfileType | undefined, shape: MeshSp
 
 function inferProfileTypeFromSize(size: Vector3Tuple, axis: BeamAxis): ProfileType {
   const { targetWidth, targetHeight } = getTargetCrossSectionSize(axis, size);
-  return Math.max(targetWidth, targetHeight) > 0.05 ? 'alu80x40' : 'alu40x40';
+  return Math.max(targetWidth, targetHeight) > PROFILE_GEOMETRY_ASSET.largeProfileThresholdMeters ? 'alu80x40' : 'alu40x40';
 }
 
 function getAxisRotation(axis: BeamAxis) {

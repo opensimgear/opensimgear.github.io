@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { DEG_TO_RAD, SIDE_VIEW } from './constants';
   import type { PlannerGeometry } from './geometry';
   import type { PlannerInput } from './types';
 
@@ -9,22 +10,28 @@
 
   const { input, geometry }: Props = $props();
 
-  const seatBaseLengthMm = 420;
-  const seatBackLengthMm = 420;
-  const wheelRadiusMm = 135;
-  const pedalLengthMm = 170;
-
   const wheelCenterX = $derived(input.wheelXMm + geometry.wheelMountOffsets.wheelCenterOffsetXMm);
   const wheelCenterY = $derived(input.wheelYMm + geometry.wheelMountOffsets.wheelCenterOffsetYMm);
-  const seatBaseEndX = $derived(input.seatXMm + seatBaseLengthMm);
-  const seatBackEndX = $derived(input.seatXMm - Math.cos((input.seatBackAngleDeg * Math.PI) / 180) * seatBackLengthMm);
-  const seatBackEndY = $derived(input.seatYMm + Math.sin((input.seatBackAngleDeg * Math.PI) / 180) * seatBackLengthMm);
-  const pedalEndX = $derived(input.pedalXMm + Math.cos((input.pedalAngleDeg * Math.PI) / 180) * pedalLengthMm);
-  const pedalEndY = $derived(input.pedalYMm + Math.sin((input.pedalAngleDeg * Math.PI) / 180) * pedalLengthMm);
-  const drawingHeightMm = $derived(
-    Math.max(input.seatYMm + 420, wheelCenterY + wheelRadiusMm + 120, input.pedalYMm + 240, input.baseHeightMm + 180)
+  const seatBaseEndX = $derived(input.seatXMm + SIDE_VIEW.seatBaseLengthMm);
+  const seatBackEndX = $derived(
+    input.seatXMm - Math.cos(input.seatBackAngleDeg * DEG_TO_RAD) * SIDE_VIEW.seatBackLengthMm
   );
-  const viewBox = $derived(`-80 -40 ${input.baseLengthMm + 200} ${drawingHeightMm + 80}`);
+  const seatBackEndY = $derived(
+    input.seatYMm + Math.sin(input.seatBackAngleDeg * DEG_TO_RAD) * SIDE_VIEW.seatBackLengthMm
+  );
+  const pedalEndX = $derived(input.pedalXMm + Math.cos(input.pedalAngleDeg * DEG_TO_RAD) * SIDE_VIEW.pedalLengthMm);
+  const pedalEndY = $derived(input.pedalYMm + Math.sin(input.pedalAngleDeg * DEG_TO_RAD) * SIDE_VIEW.pedalLengthMm);
+  const drawingHeightMm = $derived(
+    Math.max(
+      input.seatYMm + SIDE_VIEW.drawingBaseSeatClearanceMm,
+      wheelCenterY + SIDE_VIEW.wheelRadiusMm + SIDE_VIEW.drawingWheelClearanceMm,
+      input.pedalYMm + SIDE_VIEW.drawingPedalClearanceMm,
+      input.baseHeightMm + SIDE_VIEW.drawingBaseHeightClearanceMm
+    )
+  );
+  const viewBox = $derived(
+    `${-SIDE_VIEW.viewBoxPaddingX} ${-SIDE_VIEW.viewBoxPaddingTopMm} ${input.baseLengthMm + SIDE_VIEW.viewBoxExtraWidthMm} ${drawingHeightMm + SIDE_VIEW.viewBoxExtraHeightMm}`
+  );
 
   function toSvgY(value: number) {
     return drawingHeightMm - value;
@@ -34,11 +41,27 @@
 <section class="">
   <div class="overflow-hidden">
     <svg {viewBox} class="h-auto w-full" role="img" aria-label="Aluminum rig side view preview">
-      <rect x="-80" y="-40" width={input.baseLengthMm + 200} height={drawingHeightMm + 80} fill="url(#planner-grid)" />
+      <rect
+        x={-SIDE_VIEW.viewBoxPaddingX}
+        y={-SIDE_VIEW.viewBoxPaddingTopMm}
+        width={input.baseLengthMm + SIDE_VIEW.viewBoxExtraWidthMm}
+        height={drawingHeightMm + SIDE_VIEW.viewBoxExtraHeightMm}
+        fill="url(#planner-grid)"
+      />
 
       <defs>
-        <pattern id="planner-grid" width="80" height="80" patternUnits="userSpaceOnUse">
-          <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#e4e4e7" stroke-width="1" />
+        <pattern
+          id="planner-grid"
+          width={SIDE_VIEW.gridSizeMm}
+          height={SIDE_VIEW.gridSizeMm}
+          patternUnits="userSpaceOnUse"
+        >
+          <path
+            d={`M ${SIDE_VIEW.gridSizeMm} 0 L 0 0 0 ${SIDE_VIEW.gridSizeMm}`}
+            fill="none"
+            stroke={SIDE_VIEW.gridColor}
+            stroke-width={SIDE_VIEW.gridStrokeWidth}
+          />
         </pattern>
       </defs>
 
@@ -47,8 +70,8 @@
         y1={toSvgY(0)}
         x2={input.baseLengthMm}
         y2={toSvgY(0)}
-        stroke="#3f3f46"
-        stroke-width="18"
+        stroke={SIDE_VIEW.baseBottomColor}
+        stroke-width={SIDE_VIEW.baseStrokeWidth}
         stroke-linecap="round"
       />
       <line
@@ -56,27 +79,34 @@
         y1={toSvgY(input.baseHeightMm)}
         x2={input.baseLengthMm}
         y2={toSvgY(input.baseHeightMm)}
-        stroke="#71717a"
-        stroke-width="10"
+        stroke={SIDE_VIEW.baseColor}
+        stroke-width={SIDE_VIEW.upperBaseStrokeWidth}
         stroke-linecap="round"
       />
-      <line x1="20" y1={toSvgY(0)} x2="20" y2={toSvgY(input.baseHeightMm)} stroke="#71717a" stroke-width="10" />
       <line
-        x1={input.baseLengthMm - 20}
+        x1={SIDE_VIEW.supportInsetMm}
         y1={toSvgY(0)}
-        x2={input.baseLengthMm - 20}
+        x2={SIDE_VIEW.supportInsetMm}
         y2={toSvgY(input.baseHeightMm)}
-        stroke="#71717a"
-        stroke-width="10"
+        stroke={SIDE_VIEW.baseColor}
+        stroke-width={SIDE_VIEW.upperBaseStrokeWidth}
+      />
+      <line
+        x1={input.baseLengthMm - SIDE_VIEW.supportInsetMm}
+        y1={toSvgY(0)}
+        x2={input.baseLengthMm - SIDE_VIEW.supportInsetMm}
+        y2={toSvgY(input.baseHeightMm)}
+        stroke={SIDE_VIEW.baseColor}
+        stroke-width={SIDE_VIEW.upperBaseStrokeWidth}
       />
 
       <line
         x1={input.seatXMm}
         y1={toSvgY(input.seatYMm)}
         x2={seatBaseEndX}
-        y2={toSvgY(input.seatYMm + 16)}
-        stroke="#0f766e"
-        stroke-width="18"
+        y2={toSvgY(input.seatYMm + SIDE_VIEW.seatBaseRiseMm)}
+        stroke={SIDE_VIEW.seatBaseColor}
+        stroke-width={SIDE_VIEW.baseStrokeWidth}
         stroke-linecap="round"
       />
       <line
@@ -84,18 +114,18 @@
         y1={toSvgY(input.seatYMm)}
         x2={seatBackEndX}
         y2={toSvgY(seatBackEndY)}
-        stroke="#14b8a6"
-        stroke-width="18"
+        stroke={SIDE_VIEW.seatBackColor}
+        stroke-width={SIDE_VIEW.baseStrokeWidth}
         stroke-linecap="round"
       />
 
       <line
-        x1={input.pedalXMm - 20}
+        x1={input.pedalXMm - SIDE_VIEW.pedalMountInsetMm}
         y1={toSvgY(input.pedalYMm)}
         x2={pedalEndX}
         y2={toSvgY(pedalEndY)}
-        stroke="#2563eb"
-        stroke-width="16"
+        stroke={SIDE_VIEW.pedalColor}
+        stroke-width={SIDE_VIEW.pedalStrokeWidth}
         stroke-linecap="round"
       />
 
@@ -104,33 +134,49 @@
         y1={toSvgY(input.baseHeightMm)}
         x2={wheelCenterX}
         y2={toSvgY(wheelCenterY)}
-        stroke="#a16207"
-        stroke-width="12"
+        stroke={SIDE_VIEW.wheelColumnColor}
+        stroke-width={SIDE_VIEW.steeringColumnStrokeWidth}
         stroke-linecap="round"
       />
       <circle
         cx={wheelCenterX}
         cy={toSvgY(wheelCenterY)}
-        r={wheelRadiusMm}
+        r={SIDE_VIEW.wheelRadiusMm}
         fill="none"
-        stroke="#d97706"
-        stroke-width="16"
+        stroke={SIDE_VIEW.wheelColor}
+        stroke-width={SIDE_VIEW.wheelStrokeWidth}
       />
-      <circle cx={wheelCenterX} cy={toSvgY(wheelCenterY)} r="22" fill="#d97706" />
+      <circle cx={wheelCenterX} cy={toSvgY(wheelCenterY)} r={SIDE_VIEW.wheelHubRadiusMm} fill={SIDE_VIEW.wheelColor} />
 
-      <text x="16" y="32" fill="#71717a" font-size="28" font-weight="600">Base</text>
-      <text x={input.seatXMm - 20} y={toSvgY(input.seatYMm + 70)} fill="#0f766e" font-size="28" font-weight="600"
+      <text
+        x={SIDE_VIEW.baseLabelX}
+        y={SIDE_VIEW.baseLabelY}
+        fill={SIDE_VIEW.baseColor}
+        font-size={SIDE_VIEW.labelFontSizePx}
+        font-weight={SIDE_VIEW.labelFontWeight}>Base</text
+      >
+      <text
+        x={input.seatXMm - SIDE_VIEW.seatLabelXOffsetMm}
+        y={toSvgY(input.seatYMm + SIDE_VIEW.seatLabelYOffsetMm)}
+        fill={SIDE_VIEW.seatBaseColor}
+        font-size={SIDE_VIEW.labelFontSizePx}
+        font-weight={SIDE_VIEW.labelFontWeight}
         >Seat</text
       >
-      <text x={input.pedalXMm - 60} y={toSvgY(input.pedalYMm + 80)} fill="#2563eb" font-size="28" font-weight="600"
+      <text
+        x={input.pedalXMm - SIDE_VIEW.pedalLabelXOffsetMm}
+        y={toSvgY(input.pedalYMm + SIDE_VIEW.pedalLabelYOffsetMm)}
+        fill={SIDE_VIEW.pedalColor}
+        font-size={SIDE_VIEW.labelFontSizePx}
+        font-weight={SIDE_VIEW.labelFontWeight}
         >Pedals</text
       >
       <text
-        x={wheelCenterX - 70}
-        y={toSvgY(wheelCenterY + wheelRadiusMm + 70)}
-        fill="#a16207"
-        font-size="28"
-        font-weight="600">Wheel</text
+        x={wheelCenterX - SIDE_VIEW.wheelLabelXOffsetMm}
+        y={toSvgY(wheelCenterY + SIDE_VIEW.wheelRadiusMm + SIDE_VIEW.wheelLabelYOffsetMm)}
+        fill={SIDE_VIEW.wheelColumnColor}
+        font-size={SIDE_VIEW.labelFontSizePx}
+        font-weight={SIDE_VIEW.labelFontWeight}>Wheel</text
       >
     </svg>
   </div>

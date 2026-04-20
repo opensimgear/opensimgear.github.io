@@ -1,4 +1,10 @@
-export const ALUMINUM_RIG_MOBILE_BREAKPOINT = 1024;
+import {
+  ALUMINUM_RIG_MOBILE_BREAKPOINT,
+  DESKTOP_PANE_EXPANDED_STATE,
+  MOBILE_PANE_EXPANDED_STATE,
+} from './constants';
+
+export { ALUMINUM_RIG_MOBILE_BREAKPOINT };
 
 export type AluminumRigPaneExpandedState = {
   setup: boolean;
@@ -12,18 +18,10 @@ export function isNarrowAluminumRigViewport(width: number) {
 
 export function getAluminumRigPaneExpandedState(isNarrow: boolean): AluminumRigPaneExpandedState {
   if (isNarrow) {
-    return {
-      setup: false,
-      modules: false,
-      cutList: false,
-    };
+    return { ...MOBILE_PANE_EXPANDED_STATE };
   }
 
-  return {
-    setup: true,
-    modules: true,
-    cutList: true,
-  };
+  return { ...DESKTOP_PANE_EXPANDED_STATE };
 }
 
 export function getNextAluminumRigPaneExpandedState(

@@ -26,6 +26,7 @@ export function mergePlannerQueryState(defaultInput: PlannerInput, state: Planne
         ? state.wheelMountType
         : defaultInput.wheelMountType,
     baseLengthMm: readNumber(state.baseLengthMm, defaultInput.baseLengthMm),
+    baseWidthMm: readNumber(state.baseWidthMm, defaultInput.baseWidthMm),
     seatBaseDepthMm: readNumber(state.seatBaseDepthMm, defaultInput.seatBaseDepthMm),
     baseInnerBeamSpacingMm: readNumber(state.baseInnerBeamSpacingMm, defaultInput.baseInnerBeamSpacingMm),
     pedalTrayDepthMm: readNumber(state.pedalTrayDepthMm, defaultInput.pedalTrayDepthMm),

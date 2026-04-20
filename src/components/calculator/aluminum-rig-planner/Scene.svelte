@@ -3,6 +3,7 @@
   import { Gizmo, Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
 
+  import { PI_INTENSITY, SCENE_VIEW } from './constants';
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
   import type { PlannerVisibleModules } from './types';
@@ -17,45 +18,59 @@
 
   const { geometry, isNarrowViewport = false, profileColor, showEndCaps, visibleModules }: Props = $props();
 
-  const cameraPosition = $derived<[number, number, number]>(isNarrowViewport ? [0.98, 0.84, 1] : [0.1, 1, 1]);
-  const gizmoSize = $derived(isNarrowViewport ? 48 : 64);
+  const cameraPosition = $derived<[number, number, number]>(
+    isNarrowViewport ? SCENE_VIEW.narrowCameraPosition : SCENE_VIEW.wideCameraPosition
+  );
+  const gizmoSize = $derived(isNarrowViewport ? SCENE_VIEW.narrowGizmoSizePx : SCENE_VIEW.wideGizmoSizePx);
 </script>
 
 <div class="aspect-[3/2] w-full touch-none border-zinc-200 bg-[radial-gradient(circle_at_top,#ffffff_0%,#f4f4f5_60%,#e4e4e7_100%)]">
   <Canvas shadows>
-    <T.PerspectiveCamera makeDefault position={cameraPosition} up={[0, 1, 0]}>
-      <OrbitControls enableDamping dampingFactor={0.08} target={[0.7, 0.1, 0]}>
+    <T.PerspectiveCamera makeDefault position={cameraPosition} up={SCENE_VIEW.cameraUp}>
+      <OrbitControls
+        enableDamping
+        dampingFactor={SCENE_VIEW.orbitDampingFactor}
+        target={SCENE_VIEW.controlsTarget}
+      >
         <Gizmo size={gizmoSize} />
       </OrbitControls>
     </T.PerspectiveCamera>
 
-    <T.AmbientLight color="#eef2f7" intensity={1.4} />
+    <T.AmbientLight color={SCENE_VIEW.ambientLightColor} intensity={SCENE_VIEW.ambientLightIntensity} />
     <T.DirectionalLight
       castShadow
-      color="#fff9f0"
-      position={[3.6, 5.4, 2.8]}
-      intensity={Math.PI * 0.98}
-      shadow-mapSize-width={2048}
-      shadow-mapSize-height={2048}
-      shadow-bias={0.0002}
-      shadow-normalBias={0.04}
+      color={SCENE_VIEW.keyLightColor}
+      position={SCENE_VIEW.keyLightPosition}
+      intensity={PI_INTENSITY * SCENE_VIEW.keyLightIntensityMultiplier}
+      shadow-mapSize-width={SCENE_VIEW.shadowMapSizePx}
+      shadow-mapSize-height={SCENE_VIEW.shadowMapSizePx}
+      shadow-bias={SCENE_VIEW.shadowBias}
+      shadow-normalBias={SCENE_VIEW.shadowNormalBias}
     />
-    <T.DirectionalLight color="#d9e6ff" position={[-3.2, 2.4, 1.5]} intensity={Math.PI * 0.32} />
-    <T.DirectionalLight color="#f3f6fb" position={[0.6, 2.1, -3.4]} intensity={Math.PI * 0.2} />
+    <T.DirectionalLight
+      color={SCENE_VIEW.fillLightColor}
+      position={SCENE_VIEW.fillLightPosition}
+      intensity={PI_INTENSITY * SCENE_VIEW.fillLightIntensityMultiplier}
+    />
+    <T.DirectionalLight
+      color={SCENE_VIEW.rimLightColor}
+      position={SCENE_VIEW.rimLightPosition}
+      intensity={PI_INTENSITY * SCENE_VIEW.rimLightIntensityMultiplier}
+    />
 
     <Grid
       plane="xz"
-      position={[0.7, -0.002, 0]}
-      scale={2}
-      cellColor="#cbd5e1"
-      sectionColor="#94a3b8"
-      cellSize={0.1}
-      sectionSize={0.5}
-      cellThickness={0.5}
-      sectionThickness={0.8}
+      position={SCENE_VIEW.gridPosition}
+      scale={SCENE_VIEW.gridScale}
+      cellColor={SCENE_VIEW.gridCellColor}
+      sectionColor={SCENE_VIEW.gridSectionColor}
+      cellSize={SCENE_VIEW.gridCellSize}
+      sectionSize={SCENE_VIEW.gridSectionSize}
+      cellThickness={SCENE_VIEW.gridCellThickness}
+      sectionThickness={SCENE_VIEW.gridSectionThickness}
       infiniteGrid={true}
-      fadeDistance={5}
-      fadeStrength={1.6}
+      fadeDistance={SCENE_VIEW.gridFadeDistance}
+      fadeStrength={SCENE_VIEW.gridFadeStrength}
     />
 
     <RigFrame {geometry} {profileColor} {showEndCaps} {visibleModules} />

@@ -1,48 +1,14 @@
 import type { PlannerInput, PlannerPreset, PlannerProfile, RigPresetType } from './types';
+import {
+  DRIVER_DIMENSION_BASELINES,
+  FORMULA_PRESET_VALUES,
+  GT_PRESET_VALUES,
+  PRESET_FIT_ADJUSTMENTS,
+} from './constants';
 
-export const GT_PRESET: PlannerPreset = {
-  presetType: 'gt',
-  wheelMountType: 'deck',
-  baseLengthMm: 1400,
-  seatBaseDepthMm: 360,
-  baseInnerBeamSpacingMm: 280,
-  pedalTrayDepthMm: 320,
-  pedalTrayDistanceMm: 550,
-  steeringColumnBaseHeightMm: 260,
-  steeringColumnHeightMm: 620,
-  baseHeightMm: 40,
-  seatXMm: 320,
-  seatYMm: 230,
-  seatBackAngleDeg: 24,
-  pedalXMm: 980,
-  pedalYMm: 120,
-  pedalAngleDeg: 12,
-  wheelXMm: 630,
-  wheelYMm: 620,
-  wheelTiltDeg: 18,
-};
+export const GT_PRESET: PlannerPreset = GT_PRESET_VALUES;
 
-export const FORMULA_PRESET: PlannerPreset = {
-  presetType: 'formula',
-  wheelMountType: 'front',
-  baseLengthMm: 1500,
-  seatBaseDepthMm: 340,
-  baseInnerBeamSpacingMm: 280,
-  pedalTrayDepthMm: 320,
-  pedalTrayDistanceMm: 550,
-  steeringColumnBaseHeightMm: 240,
-  steeringColumnHeightMm: 560,
-  baseHeightMm: 40,
-  seatXMm: 300,
-  seatYMm: 120,
-  seatBackAngleDeg: 16,
-  pedalXMm: 1080,
-  pedalYMm: 260,
-  pedalAngleDeg: 22,
-  wheelXMm: 680,
-  wheelYMm: 540,
-  wheelTiltDeg: 8,
-};
+export const FORMULA_PRESET: PlannerPreset = FORMULA_PRESET_VALUES;
 
 const PRESET_LABELS: Record<RigPresetType, string> = {
   gt: 'GT',
@@ -61,16 +27,19 @@ export function getPresetLabel(presetType: RigPresetType): string {
 export function createInitialPlannerInput(profile: PlannerProfile): PlannerInput {
   const presetType = profile.presetType ?? 'formula';
   const preset = PRESETS[presetType];
-  const heightOffsetMm = profile.driverHeightMm - 1750;
-  const inseamOffsetMm = profile.inseamMm - 820;
-  const comfortSeatDeltaDeg = profile.seatingBias === 'comfort' ? 2 : 0;
-  const comfortWheelDeltaMm = profile.seatingBias === 'comfort' ? -15 : 0;
+  const heightOffsetMm = profile.driverHeightMm - DRIVER_DIMENSION_BASELINES.heightMm;
+  const inseamOffsetMm = profile.inseamMm - DRIVER_DIMENSION_BASELINES.inseamMm;
+  const comfortSeatDeltaDeg =
+    profile.seatingBias === 'comfort' ? PRESET_FIT_ADJUSTMENTS.comfortSeatBackDeltaDeg : 0;
+  const comfortWheelDeltaMm =
+    profile.seatingBias === 'comfort' ? PRESET_FIT_ADJUSTMENTS.comfortWheelDeltaMm : 0;
 
   return {
     ...profile,
     presetType,
     wheelMountType: preset.wheelMountType,
-    baseLengthMm: preset.baseLengthMm + Math.round(inseamOffsetMm * 0.35),
+    baseLengthMm: preset.baseLengthMm + Math.round(inseamOffsetMm * PRESET_FIT_ADJUSTMENTS.baseLengthPerInseamRatio),
+    baseWidthMm: preset.baseWidthMm,
     seatBaseDepthMm: preset.seatBaseDepthMm,
     baseInnerBeamSpacingMm: preset.baseInnerBeamSpacingMm,
     pedalTrayDepthMm: preset.pedalTrayDepthMm,
@@ -79,13 +48,13 @@ export function createInitialPlannerInput(profile: PlannerProfile): PlannerInput
     steeringColumnHeightMm: preset.steeringColumnHeightMm,
     baseHeightMm: preset.baseHeightMm,
     seatXMm: preset.seatXMm,
-    seatYMm: preset.seatYMm + Math.round(heightOffsetMm * 0.08),
+    seatYMm: preset.seatYMm + Math.round(heightOffsetMm * PRESET_FIT_ADJUSTMENTS.seatHeightPerDriverHeightRatio),
     seatBackAngleDeg: preset.seatBackAngleDeg + comfortSeatDeltaDeg,
-    pedalXMm: preset.pedalXMm + Math.round(inseamOffsetMm * 0.45),
-    pedalYMm: preset.pedalYMm + Math.round(heightOffsetMm * 0.04),
+    pedalXMm: preset.pedalXMm + Math.round(inseamOffsetMm * PRESET_FIT_ADJUSTMENTS.pedalReachPerInseamRatio),
+    pedalYMm: preset.pedalYMm + Math.round(heightOffsetMm * PRESET_FIT_ADJUSTMENTS.pedalHeightPerDriverHeightRatio),
     pedalAngleDeg: preset.pedalAngleDeg,
-    wheelXMm: preset.wheelXMm + Math.round(inseamOffsetMm * 0.3) + comfortWheelDeltaMm,
-    wheelYMm: preset.wheelYMm + Math.round(heightOffsetMm * 0.06),
+    wheelXMm: preset.wheelXMm + Math.round(inseamOffsetMm * PRESET_FIT_ADJUSTMENTS.wheelReachPerInseamRatio) + comfortWheelDeltaMm,
+    wheelYMm: preset.wheelYMm + Math.round(heightOffsetMm * PRESET_FIT_ADJUSTMENTS.wheelHeightPerDriverHeightRatio),
     wheelTiltDeg: preset.wheelTiltDeg,
   };
 }

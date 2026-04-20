@@ -61,14 +61,14 @@ describe('aluminum rig planner geometry', () => {
     expect(frontGeometry.wheelSupportUprights).toEqual([
       {
         id: 'wheel-support-left',
-        x: 760,
-        y: 120,
+        x: 630,
+        y: 170,
         heightMm: 770,
       },
       {
         id: 'wheel-support-right',
-        x: 760,
-        y: 280,
+        x: 630,
+        y: 330,
         heightMm: 770,
       },
     ]);
@@ -79,30 +79,25 @@ describe('aluminum rig planner geometry', () => {
       wheelCenterOffsetXMm: 145,
       wheelCenterOffsetYMm: 130,
     });
-    expect(deckGeometry.wheelReachMm).toBe(783);
+    expect(deckGeometry.wheelReachMm).toBe(691);
     expect(deckGeometry.legExtensionMm).toBe(669);
-    expect(deckGeometry.frameMembers).toHaveLength(7);
+    expect(deckGeometry.frameMembers).toHaveLength(6);
     expect(deckGeometry.frameMembers.find((member) => member.id === 'wheel-cross-member')).toMatchObject({
-      start: { x: 830, y: 0 },
-      end: { x: 830, y: 400 },
-      lengthMm: 400,
-    });
-    expect(deckGeometry.frameMembers.find((member) => member.id === 'pedal-brace')).toMatchObject({
-      start: { x: 360, y: 40 },
-      end: { x: 910, y: 120 },
-      lengthMm: 556,
+      start: { x: 700, y: 0 },
+      end: { x: 700, y: 500 },
+      lengthMm: 500,
     });
     expect(deckGeometry.wheelSupportUprights).toEqual([
       {
         id: 'wheel-support-left',
-        x: 830,
-        y: 120,
+        x: 700,
+        y: 170,
         heightMm: 810,
       },
       {
         id: 'wheel-support-right',
-        x: 830,
-        y: 280,
+        x: 700,
+        y: 330,
         heightMm: 810,
       },
     ]);
@@ -113,24 +108,56 @@ describe('aluminum rig planner geometry', () => {
       wheelCenterOffsetXMm: 105,
       wheelCenterOffsetYMm: 125,
     });
-    expect(bottomGeometry.wheelReachMm).toBe(750);
+    expect(bottomGeometry.wheelReachMm).toBe(661);
     expect(bottomGeometry.frameMembers.find((member) => member.id === 'wheel-cross-member')).toMatchObject({
-      start: { x: 790, y: 0 },
-      end: { x: 790, y: 400 },
-      lengthMm: 400,
+      start: { x: 660, y: 0 },
+      end: { x: 660, y: 500 },
+      lengthMm: 500,
     });
     expect(bottomGeometry.wheelSupportUprights).toEqual([
       {
         id: 'wheel-support-left',
-        x: 790,
-        y: 120,
+        x: 660,
+        y: 170,
         heightMm: 700,
       },
       {
         id: 'wheel-support-right',
-        x: 790,
-        y: 280,
+        x: 660,
+        y: 330,
         heightMm: 700,
+      },
+    ]);
+  });
+
+  it('updates frame width and steering upright spacing when base width changes', () => {
+    const geometry = derivePlannerGeometry({
+      ...createInitialPlannerInput({
+        driverHeightMm: 1750,
+        inseamMm: 820,
+        seatingBias: 'performance',
+        presetType: 'gt',
+      }),
+      baseWidthMm: 560,
+    });
+
+    expect(geometry.frameMembers.find((member) => member.id === 'seat-cross-member')).toMatchObject({
+      start: { x: 360, y: 0 },
+      end: { x: 360, y: 560 },
+      lengthMm: 560,
+    });
+    expect(geometry.wheelSupportUprights).toEqual([
+      {
+        id: 'wheel-support-left',
+        x: 700,
+        y: 200,
+        heightMm: 810,
+      },
+      {
+        id: 'wheel-support-right',
+        x: 700,
+        y: 360,
+        heightMm: 810,
       },
     ]);
   });

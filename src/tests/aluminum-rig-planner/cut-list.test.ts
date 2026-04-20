@@ -29,6 +29,50 @@ describe('aluminum rig planner cut list', () => {
     ]);
   });
 
+  it('updates base crossbeam cut lengths when base width changes', () => {
+    const input = createInitialPlannerInput({
+      driverHeightMm: 1750,
+      inseamMm: 820,
+      seatingBias: 'performance',
+      presetType: 'gt',
+    });
+    const cutList = createPlannerCutList(
+      derivePlannerGeometry({
+        ...input,
+        baseWidthMm: 600,
+      }),
+      {
+        steeringColumn: false,
+        pedalTray: false,
+      },
+      false
+    );
+
+    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 520, quantity: 2 });
+  });
+
+  it('updates pedal tray crossbeam cut lengths when base width changes', () => {
+    const input = createInitialPlannerInput({
+      driverHeightMm: 1750,
+      inseamMm: 820,
+      seatingBias: 'performance',
+      presetType: 'gt',
+    });
+    const cutList = createPlannerCutList(
+      derivePlannerGeometry({
+        ...input,
+        baseWidthMm: 600,
+      }),
+      {
+        steeringColumn: false,
+        pedalTray: true,
+      },
+      false
+    );
+
+    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 440, quantity: 3 });
+  });
+
   it('excludes deactivated modules from the combined cut list', () => {
     const cutList = createPlannerCutList(createGeometry(), {
       steeringColumn: false,

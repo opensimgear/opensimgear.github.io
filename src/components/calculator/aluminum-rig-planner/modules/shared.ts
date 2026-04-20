@@ -1,4 +1,20 @@
 import type { CutListProfileType, CutListRow } from '../types';
+import {
+  BASE_BEAM_HEIGHT_MM as BASE_BEAM_HEIGHT_MM_VALUE,
+  BASE_BEAM_WIDTH_MM,
+  BLACK_PROFILE_COLOR as BLACK_PROFILE_COLOR_VALUE,
+  ENDCAP_COLOR as ENDCAP_COLOR_VALUE,
+  ENDCAP_CORNER_RADIUS_MM as ENDCAP_CORNER_RADIUS_MM_VALUE,
+  ENDCAP_MATERIAL,
+  ENDCAP_THICKNESS_METERS,
+  ENDCAP_THICKNESS_MM as ENDCAP_THICKNESS_MM_VALUE,
+  MM_TO_METERS as MM_TO_METERS_VALUE,
+  PROFILE_SHORT_METERS,
+  PROFILE_TALL_METERS,
+  SILVER_PROFILE_COLOR as SILVER_PROFILE_COLOR_VALUE,
+  UPRIGHT_BEAM_DEPTH_MM,
+  UPRIGHT_BEAM_WIDTH_MM,
+} from '../constants';
 
 export type ProfileType = 'box' | 'alu40x40' | 'alu80x40';
 export type BeamAxis = 'x' | 'y' | 'z';
@@ -19,25 +35,21 @@ export type MeshSpec = {
   roughness?: number;
 };
 
-export const MM_TO_METERS = 0.001;
-export const PROFILE_SHORT = 0.04;
-export const PROFILE_TALL = 0.08;
-export const BASE_BEAM_HEIGHT = PROFILE_TALL;
-export const BASE_BEAM_WIDTH = PROFILE_SHORT;
-export const UPRIGHT_BEAM_WIDTH = PROFILE_TALL;
-export const UPRIGHT_BEAM_DEPTH = PROFILE_SHORT;
-export const SCENE_WIDTH_MM = 400;
-export const RENDERED_RAIL_SPACING_MM = 460;
-export const CROSS_BEAM_LENGTH_MM = 500;
-export const WHEEL_RADIUS_MM = 0.135;
-export const BASE_BEAM_HEIGHT_MM = BASE_BEAM_HEIGHT / MM_TO_METERS;
-export const ENDCAP_THICKNESS_MM = 4;
-export const ENDCAP_CORNER_RADIUS_MM = 2;
-export const ENDCAP_THICKNESS = mm(ENDCAP_THICKNESS_MM);
-export const ENDCAP_COLOR = '#141414';
+export const MM_TO_METERS = MM_TO_METERS_VALUE;
+export const PROFILE_SHORT = PROFILE_SHORT_METERS;
+export const PROFILE_TALL = PROFILE_TALL_METERS;
+export const BASE_BEAM_HEIGHT = BASE_BEAM_HEIGHT_MM_VALUE * MM_TO_METERS;
+export const BASE_BEAM_WIDTH = BASE_BEAM_WIDTH_MM * MM_TO_METERS;
+export const UPRIGHT_BEAM_WIDTH = UPRIGHT_BEAM_WIDTH_MM * MM_TO_METERS;
+export const UPRIGHT_BEAM_DEPTH = UPRIGHT_BEAM_DEPTH_MM * MM_TO_METERS;
+export const BASE_BEAM_HEIGHT_MM = BASE_BEAM_HEIGHT_MM_VALUE;
+export const ENDCAP_THICKNESS_MM = ENDCAP_THICKNESS_MM_VALUE;
+export const ENDCAP_CORNER_RADIUS_MM = ENDCAP_CORNER_RADIUS_MM_VALUE;
+export const ENDCAP_THICKNESS = ENDCAP_THICKNESS_METERS;
+export const ENDCAP_COLOR = ENDCAP_COLOR_VALUE;
 
-export const BLACK_PROFILE_COLOR = '#2b2b2b';
-export const SILVER_PROFILE_COLOR = '#b7b9b3';
+export const BLACK_PROFILE_COLOR = BLACK_PROFILE_COLOR_VALUE;
+export const SILVER_PROFILE_COLOR = SILVER_PROFILE_COLOR_VALUE;
 
 export function mm(value: number) {
   return value * MM_TO_METERS;
@@ -166,8 +178,8 @@ export function createEndCapMeshes(mesh: MeshSpec): MeshSpec[] {
       size,
       rotation: mesh.rotation,
       color: ENDCAP_COLOR,
-      metalness: 0.04,
-      roughness: 0.9,
+      metalness: ENDCAP_MATERIAL.metalness,
+      roughness: ENDCAP_MATERIAL.roughness,
     };
   });
 }
@@ -180,10 +192,6 @@ export function createCutListRow(profileType: CutListProfileType, lengthMm: numb
   };
 }
 
-export function renderFrameZ(valueMm: number) {
-  return valueMm * (RENDERED_RAIL_SPACING_MM / SCENE_WIDTH_MM);
-}
-
-export function centeredZ(zMm: number) {
-  return (renderFrameZ(zMm) - RENDERED_RAIL_SPACING_MM / 2) * MM_TO_METERS;
+export function centeredZ(zMm: number, totalWidthMm: number) {
+  return mm(zMm - totalWidthMm / 2);
 }
