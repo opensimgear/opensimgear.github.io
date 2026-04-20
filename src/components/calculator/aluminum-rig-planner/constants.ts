@@ -1,10 +1,9 @@
-import type { PlannerInput, PlannerProfile, PlannerPreset, WheelMountType } from './types';
+import type { PlannerInput } from './types';
 
 export const MM_TO_METERS = 0.001;
 export const PROFILE_SHORT_MM = 40;
 export const PROFILE_TALL_MM = 80;
 export const HALF_PROFILE_SHORT_MM = PROFILE_SHORT_MM / 2;
-export const HALF_PROFILE_TALL_MM = PROFILE_TALL_MM / 2;
 export const PROFILE_SHORT_METERS = PROFILE_SHORT_MM * MM_TO_METERS;
 export const PROFILE_TALL_METERS = PROFILE_TALL_MM * MM_TO_METERS;
 export const BASE_BEAM_HEIGHT_MM = PROFILE_TALL_MM;
@@ -61,51 +60,17 @@ export const SCENE_IDLE_LOAD_TIMEOUT_MS = 180;
 export const IMMEDIATE_SCENE_LOAD_TIMEOUT_MS = 0;
 export const DEFAULT_CUSTOM_PROFILE_COLOR = '#ff0000';
 
-export const DRIVER_DIMENSION_BASELINES = {
-  heightMm: 1750,
-  inseamMm: 820,
-} as const;
-
-export const DEFAULT_PLANNER_PROFILE: PlannerProfile = {
-  driverHeightMm: 1750,
-  inseamMm: 655,
-  seatingBias: 'performance',
-  presetType: 'gt',
-};
-
-export const DEFAULT_PLANNER_INPUT_OVERRIDES: Omit<
-  PlannerInput,
-  'driverHeightMm' | 'inseamMm' | 'seatingBias' | 'presetType'
-> = {
-  wheelMountType: 'deck',
+export const DEFAULT_PLANNER_INPUT: PlannerInput = {
   baseLengthMm: 1350,
   baseWidthMm: 500,
   seatBaseDepthMm: 500,
   baseInnerBeamSpacingMm: 420,
   pedalTrayDepthMm: 300,
   pedalTrayDistanceMm: 550,
+  steeringColumnDistanceMm: 190,
   steeringColumnBaseHeightMm: 430,
   steeringColumnHeightMm: 510,
-  baseHeightMm: 40,
-  seatXMm: 320,
-  seatYMm: 230,
-  seatBackAngleDeg: 30,
-  pedalXMm: 980,
-  pedalYMm: 120,
-  pedalAngleDeg: 8,
-  wheelXMm: 659,
-  wheelYMm: 620,
-  wheelTiltDeg: 18,
 };
-
-export const PLANNER_ANGLE_LIMITS = {
-  seatBackMinDeg: 10,
-  seatBackMaxDeg: 45,
-  pedalMinDeg: 0,
-  pedalMaxDeg: 35,
-  wheelTiltMinDeg: -10,
-  wheelTiltMaxDeg: 35,
-} as const;
 
 export const PLANNER_DIMENSION_LIMITS = {
   baseLengthMinMm: 800,
@@ -126,19 +91,11 @@ export const PLANNER_DIMENSION_LIMITS = {
   steeringColumnHeightMaxMm: 600,
 } as const;
 
-export const PLANNER_UI_LIMITS = {
-  steeringColumnBaseHeightSliderMinMm: 80,
-} as const;
-
 export const PLANNER_LAYOUT = {
   frontCrossMemberInsetMm: PROFILE_TALL_MM,
-  wheelCrossMemberMinGapMm: 120,
-  wheelCrossMemberMaxInsetMm: 120,
-  wheelSupportHalfSpanMm: PROFILE_TALL_MM,
   steeringColumnClearanceAboveBaseMm: PROFILE_TALL_MM,
-  wheelCrossMemberRearFaceInsetMm: HALF_PROFILE_SHORT_MM,
-  seatBaseDepthLinkOffsetMm: 160,
-  columnDistanceMinMm: PROFILE_TALL_MM,
+  steeringColumnDistanceMinMm: PROFILE_TALL_MM,
+  steeringColumnDistanceFrontInsetMm: 160,
 } as const;
 
 export const BASE_MODULE_LAYOUT = {
@@ -188,50 +145,6 @@ export const SCENE_VIEW = {
   gridFadeStrength: 1.6,
 } as const;
 
-export const SIDE_VIEW = {
-  seatBaseLengthMm: 420,
-  seatBackLengthMm: 420,
-  wheelRadiusMm: 135,
-  pedalLengthMm: 170,
-  drawingBaseSeatClearanceMm: 420,
-  drawingWheelClearanceMm: 120,
-  drawingPedalClearanceMm: 240,
-  drawingBaseHeightClearanceMm: 180,
-  viewBoxPaddingX: 80,
-  viewBoxPaddingTopMm: 40,
-  viewBoxExtraWidthMm: 200,
-  viewBoxExtraHeightMm: 80,
-  gridSizeMm: 80,
-  gridStrokeWidth: 1,
-  baseStrokeWidth: 18,
-  upperBaseStrokeWidth: 10,
-  supportInsetMm: HALF_PROFILE_SHORT_MM,
-  seatBaseRiseMm: 16,
-  pedalMountInsetMm: HALF_PROFILE_SHORT_MM,
-  pedalStrokeWidth: 16,
-  steeringColumnStrokeWidth: 12,
-  wheelStrokeWidth: 16,
-  wheelHubRadiusMm: 22,
-  baseLabelX: 16,
-  baseLabelY: 32,
-  seatLabelXOffsetMm: HALF_PROFILE_SHORT_MM,
-  seatLabelYOffsetMm: 70,
-  pedalLabelXOffsetMm: 60,
-  pedalLabelYOffsetMm: 80,
-  wheelLabelXOffsetMm: 70,
-  wheelLabelYOffsetMm: 70,
-  labelFontSizePx: 28,
-  labelFontWeight: '600',
-  baseColor: '#71717a',
-  baseBottomColor: '#3f3f46',
-  seatBaseColor: '#0f766e',
-  seatBackColor: '#14b8a6',
-  pedalColor: '#2563eb',
-  wheelColumnColor: '#a16207',
-  wheelColor: '#d97706',
-  gridColor: '#e4e4e7',
-} as const;
-
 export const PROFILE_GEOMETRY_ASSET = {
   axisRotationRadians: Math.PI / 2,
   fileMagic: 0x5247534f,
@@ -244,89 +157,7 @@ export const PROFILE_GEOMETRY_ASSET = {
   indexComponentCount: 1,
 } as const;
 
-export const DEG_TO_RAD = Math.PI / 180;
 export const PI_INTENSITY = Math.PI;
-
-export const PRESET_FIT_ADJUSTMENTS = {
-  comfortSeatBackDeltaDeg: 2,
-  comfortWheelDeltaMm: -15,
-  baseLengthPerInseamRatio: 0.35,
-  seatHeightPerDriverHeightRatio: 0.08,
-  pedalReachPerInseamRatio: 0.45,
-  pedalHeightPerDriverHeightRatio: 0.04,
-  wheelReachPerInseamRatio: 0.3,
-  wheelHeightPerDriverHeightRatio: 0.06,
-} as const;
-
-export const GT_PRESET_VALUES: PlannerPreset = {
-  presetType: 'gt',
-  wheelMountType: 'deck',
-  baseLengthMm: 1400,
-  baseWidthMm: 500,
-  seatBaseDepthMm: 360,
-  baseInnerBeamSpacingMm: 280,
-  pedalTrayDepthMm: 320,
-  pedalTrayDistanceMm: 550,
-  steeringColumnBaseHeightMm: 260,
-  steeringColumnHeightMm: 620,
-  baseHeightMm: 40,
-  seatXMm: 320,
-  seatYMm: 230,
-  seatBackAngleDeg: 24,
-  pedalXMm: 980,
-  pedalYMm: 120,
-  pedalAngleDeg: 12,
-  wheelXMm: 630,
-  wheelYMm: 620,
-  wheelTiltDeg: 18,
-};
-
-export const FORMULA_PRESET_VALUES: PlannerPreset = {
-  presetType: 'formula',
-  wheelMountType: 'front',
-  baseLengthMm: 1500,
-  baseWidthMm: 500,
-  seatBaseDepthMm: 340,
-  baseInnerBeamSpacingMm: 280,
-  pedalTrayDepthMm: 320,
-  pedalTrayDistanceMm: 550,
-  steeringColumnBaseHeightMm: 240,
-  steeringColumnHeightMm: 560,
-  baseHeightMm: 40,
-  seatXMm: 300,
-  seatYMm: 120,
-  seatBackAngleDeg: 16,
-  pedalXMm: 1080,
-  pedalYMm: 260,
-  pedalAngleDeg: 22,
-  wheelXMm: 680,
-  wheelYMm: 540,
-  wheelTiltDeg: 8,
-};
-
-export const WHEEL_MOUNT_OFFSETS: Record<
-  WheelMountType,
-  { mountXMm: number; mountYMm: number; wheelCenterOffsetXMm: number; wheelCenterOffsetYMm: number }
-> = {
-  front: {
-    mountXMm: 0,
-    mountYMm: 150,
-    wheelCenterOffsetXMm: 60,
-    wheelCenterOffsetYMm: 90,
-  },
-  bottom: {
-    mountXMm: 30,
-    mountYMm: 80,
-    wheelCenterOffsetXMm: 105,
-    wheelCenterOffsetYMm: 125,
-  },
-  deck: {
-    mountXMm: 70,
-    mountYMm: 190,
-    wheelCenterOffsetXMm: 145,
-    wheelCenterOffsetYMm: 130,
-  },
-};
 
 export const ALUMINUM_RIG_MOBILE_BREAKPOINT = 1024;
 export const DESKTOP_PANE_EXPANDED_STATE = {

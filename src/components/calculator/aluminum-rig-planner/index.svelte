@@ -8,20 +8,16 @@
   import {
     COLOR_MODE_OPTIONS,
     DEFAULT_CUSTOM_PROFILE_COLOR,
-    DEFAULT_PLANNER_INPUT_OVERRIDES,
-    DEFAULT_PLANNER_PROFILE,
+    DEFAULT_PLANNER_INPUT,
     IMMEDIATE_SCENE_LOAD_TIMEOUT_MS,
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
     PLANNER_LAYOUT,
-    PLANNER_UI_LIMITS,
     SCENE_IDLE_LOAD_TIMEOUT_MS,
-    UPRIGHT_BEAM_DEPTH_MM,
     URL_STATE_DEBOUNCE_MS,
   } from './constants';
-  import { derivePlannerGeometry } from './geometry';
+  import { derivePlannerGeometry, getSteeringColumnDistanceMaxMm } from './geometry';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
-  import { createInitialPlannerInput } from './presets';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
     getAluminumRigPaneExpandedState,
@@ -44,11 +40,7 @@
   const STATE_KEY = 'state';
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
-  const DEFAULT_INPUT: PlannerInput = {
-    ...createInitialPlannerInput(DEFAULT_PLANNER_PROFILE),
-    ...DEFAULT_PLANNER_PROFILE,
-    ...DEFAULT_PLANNER_INPUT_OVERRIDES,
-  };
+  const DEFAULT_INPUT: PlannerInput = { ...DEFAULT_PLANNER_INPUT };
   function applyQueryState(state: PlannerQueryState) {
     const mergedState = mergePlannerQueryState(DEFAULT_INPUT, state);
 
@@ -158,49 +150,21 @@
       ...$state.snapshot(plannerInput),
     })
   );
-  const columnDistanceLimits = $derived.by(() => ({
-    min: PLANNER_LAYOUT.columnDistanceMinMm,
-    max: Math.max(
-      PLANNER_LAYOUT.columnDistanceMinMm,
-      plannerInput.baseLengthMm - plannerInput.seatBaseDepthMm - PLANNER_LAYOUT.seatBaseDepthLinkOffsetMm
-    ),
+  const steeringColumnDistanceLimits = $derived.by(() => ({
+    min: PLANNER_LAYOUT.steeringColumnDistanceMinMm,
+    max: getSteeringColumnDistanceMaxMm(plannerInput),
   }));
-  const columnDistanceDisplayMm = $derived.by(() => {
-    const currentDistanceMm =
-      plannerInput.wheelXMm +
-      geometry.wheelMountOffsets.mountXMm -
-      UPRIGHT_BEAM_DEPTH_MM -
-      plannerInput.seatBaseDepthMm;
-
-    return Math.round(Math.max(columnDistanceLimits.min, Math.min(columnDistanceLimits.max, currentDistanceMm)));
-  });
   const seatBaseDepthMaxMm = $derived(Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, plannerInput.baseLengthMm));
-  const steeringColumnHeightMinMm = $derived(
-    Math.max(
-      PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
-      plannerInput.steeringColumnBaseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
-    )
-  );
-
-  function updateColumnDistance(targetDistanceMm: number) {
-    const clampedDistanceMm = Math.max(columnDistanceLimits.min, Math.min(columnDistanceLimits.max, targetDistanceMm));
-    const nextWheelXMm = Math.round(
-      plannerInput.seatBaseDepthMm +
-        clampedDistanceMm +
-        UPRIGHT_BEAM_DEPTH_MM -
-        geometry.wheelMountOffsets.mountXMm
-    );
-
-    if (nextWheelXMm !== plannerInput.wheelXMm) {
-      plannerInput.wheelXMm = nextWheelXMm;
-    }
-  }
 
   function setBaseLengthMm(value: number) {
     plannerInput.baseLengthMm = value;
 
     if (plannerInput.seatBaseDepthMm > Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, value)) {
       plannerInput.seatBaseDepthMm = Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, value);
+    }
+
+    if (plannerInput.steeringColumnDistanceMm > getSteeringColumnDistanceMaxMm(plannerInput)) {
+      plannerInput.steeringColumnDistanceMm = getSteeringColumnDistanceMaxMm(plannerInput);
     }
   }
 
@@ -209,6 +173,10 @@
       PLANNER_DIMENSION_LIMITS.seatBaseDepthMinMm,
       Math.min(seatBaseDepthMaxMm, value)
     );
+
+    if (plannerInput.steeringColumnDistanceMm > getSteeringColumnDistanceMaxMm(plannerInput)) {
+      plannerInput.steeringColumnDistanceMm = getSteeringColumnDistanceMaxMm(plannerInput);
+    }
   }
 
   function setSteeringColumnBaseHeightMm(value: number) {
@@ -226,10 +194,7 @@
   }
 
   function setSteeringColumnHeightMm(value: number) {
-    plannerInput.steeringColumnHeightMm = Math.max(
-      steeringColumnHeightMinMm,
-      Math.min(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm, value)
-    );
+    plannerInput.steeringColumnHeightMm = Math.max(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm, Math.min(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm, value));
   }
 
   function resetSetup() {
@@ -240,9 +205,9 @@
   }
 
   function resetSteeringColumnModule() {
+    plannerInput.steeringColumnDistanceMm = DEFAULT_INPUT.steeringColumnDistanceMm;
     setSteeringColumnBaseHeightMm(DEFAULT_INPUT.steeringColumnBaseHeightMm);
     setSteeringColumnHeightMm(DEFAULT_INPUT.steeringColumnHeightMm);
-    plannerInput.wheelXMm = DEFAULT_INPUT.wheelXMm;
   }
 
   function resetPedalTrayModule() {
@@ -343,7 +308,7 @@
               <Slider
                 bind:value={() => plannerInput.steeringColumnBaseHeightMm, setSteeringColumnBaseHeightMm}
                 label="Base height"
-                min={PLANNER_UI_LIMITS.steeringColumnBaseHeightSliderMinMm}
+                min={PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm}
                 max={PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMaxMm}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
@@ -351,16 +316,16 @@
               <Slider
                 bind:value={() => plannerInput.steeringColumnHeightMm, setSteeringColumnHeightMm}
                 label="Column Height"
-                min={steeringColumnHeightMinMm}
+                min={PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm}
                 max={PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />
               <Slider
-                bind:value={() => columnDistanceDisplayMm, updateColumnDistance}
+                bind:value={plannerInput.steeringColumnDistanceMm}
                 label="Column distance"
-                min={columnDistanceLimits.min}
-                max={columnDistanceLimits.max}
+                min={steeringColumnDistanceLimits.min}
+                max={steeringColumnDistanceLimits.max}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />

@@ -13,36 +13,15 @@ function readNumber(value: unknown, fallback: number) {
 
 export function mergePlannerQueryState(defaultInput: PlannerInput, state: PlannerQueryState) {
   const plannerInput = clampPlannerInput({
-    driverHeightMm: readNumber(state.driverHeightMm, defaultInput.driverHeightMm),
-    inseamMm: readNumber(state.inseamMm, defaultInput.inseamMm),
-    seatingBias:
-      state.seatingBias === 'comfort' || state.seatingBias === 'performance'
-        ? state.seatingBias
-        : defaultInput.seatingBias,
-    presetType:
-      state.presetType === 'formula' || state.presetType === 'gt' ? state.presetType : defaultInput.presetType,
-    wheelMountType:
-      state.wheelMountType === 'front' || state.wheelMountType === 'bottom' || state.wheelMountType === 'deck'
-        ? state.wheelMountType
-        : defaultInput.wheelMountType,
     baseLengthMm: readNumber(state.baseLengthMm, defaultInput.baseLengthMm),
     baseWidthMm: readNumber(state.baseWidthMm, defaultInput.baseWidthMm),
     seatBaseDepthMm: readNumber(state.seatBaseDepthMm, defaultInput.seatBaseDepthMm),
     baseInnerBeamSpacingMm: readNumber(state.baseInnerBeamSpacingMm, defaultInput.baseInnerBeamSpacingMm),
     pedalTrayDepthMm: readNumber(state.pedalTrayDepthMm, defaultInput.pedalTrayDepthMm),
     pedalTrayDistanceMm: readNumber(state.pedalTrayDistanceMm, defaultInput.pedalTrayDistanceMm),
+    steeringColumnDistanceMm: readNumber(state.steeringColumnDistanceMm, defaultInput.steeringColumnDistanceMm),
     steeringColumnBaseHeightMm: readNumber(state.steeringColumnBaseHeightMm, defaultInput.steeringColumnBaseHeightMm),
     steeringColumnHeightMm: readNumber(state.steeringColumnHeightMm, defaultInput.steeringColumnHeightMm),
-    baseHeightMm: readNumber(state.baseHeightMm, defaultInput.baseHeightMm),
-    seatXMm: readNumber(state.seatXMm, defaultInput.seatXMm),
-    seatYMm: readNumber(state.seatYMm, defaultInput.seatYMm),
-    seatBackAngleDeg: readNumber(state.seatBackAngleDeg, defaultInput.seatBackAngleDeg),
-    pedalXMm: readNumber(state.pedalXMm, defaultInput.pedalXMm),
-    pedalYMm: readNumber(state.pedalYMm, defaultInput.pedalYMm),
-    pedalAngleDeg: readNumber(state.pedalAngleDeg, defaultInput.pedalAngleDeg),
-    wheelXMm: readNumber(state.wheelXMm, defaultInput.wheelXMm),
-    wheelYMm: readNumber(state.wheelYMm, defaultInput.wheelYMm),
-    wheelTiltDeg: readNumber(state.wheelTiltDeg, defaultInput.wheelTiltDeg),
   });
 
   return {

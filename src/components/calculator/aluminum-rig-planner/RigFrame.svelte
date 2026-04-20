@@ -18,7 +18,7 @@
   const input = $derived(geometry.input);
 
   const baseModule = $derived(createBaseModule(input, profileColor));
-  const steeringColumnModule = $derived(createSteeringColumnModule(input, geometry, profileColor));
+  const steeringColumnModule = $derived(createSteeringColumnModule(input, profileColor));
   const pedalAssembly = $derived(createPedalTrayModule(input, profileColor));
 
   const beamMeshes = $derived([

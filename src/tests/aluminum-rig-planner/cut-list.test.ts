@@ -1,44 +1,35 @@
 import { describe, expect, it } from 'vitest';
 
+import { DEFAULT_PLANNER_INPUT } from '../../components/calculator/aluminum-rig-planner/constants';
 import { createPlannerCutList, mergeCutListRows } from '../../components/calculator/aluminum-rig-planner/cut-list';
 import { derivePlannerGeometry } from '../../components/calculator/aluminum-rig-planner/geometry';
-import { createInitialPlannerInput } from '../../components/calculator/aluminum-rig-planner/presets';
 
 describe('aluminum rig planner cut list', () => {
   function createGeometry() {
-    const input = createInitialPlannerInput({
-      driverHeightMm: 1750,
-      inseamMm: 820,
-      seatingBias: 'performance',
-      presetType: 'gt',
-    });
-
-    return derivePlannerGeometry(input);
+    return derivePlannerGeometry(DEFAULT_PLANNER_INPUT);
   }
 
-  it('always includes the base module rows', () => {
-    const cutList = createPlannerCutList(createGeometry(), {
-      steeringColumn: false,
-      pedalTray: false,
-    }, false);
+  it('always includes base module rows', () => {
+    const cutList = createPlannerCutList(
+      createGeometry(),
+      {
+        steeringColumn: false,
+        pedalTray: false,
+      },
+      false
+    );
 
     expect(cutList).toEqual([
-      { profileType: '80x40', lengthMm: 1400, quantity: 2 },
+      { profileType: '80x40', lengthMm: 1350, quantity: 2 },
       { profileType: '80x40', lengthMm: 420, quantity: 2 },
-      { profileType: '40x40', lengthMm: 360, quantity: 2 },
+      { profileType: '40x40', lengthMm: 500, quantity: 2 },
     ]);
   });
 
   it('updates base crossbeam cut lengths when base width changes', () => {
-    const input = createInitialPlannerInput({
-      driverHeightMm: 1750,
-      inseamMm: 820,
-      seatingBias: 'performance',
-      presetType: 'gt',
-    });
     const cutList = createPlannerCutList(
       derivePlannerGeometry({
-        ...input,
+        ...DEFAULT_PLANNER_INPUT,
         baseWidthMm: 600,
       }),
       {
@@ -52,15 +43,9 @@ describe('aluminum rig planner cut list', () => {
   });
 
   it('updates pedal tray crossbeam cut lengths when base width changes', () => {
-    const input = createInitialPlannerInput({
-      driverHeightMm: 1750,
-      inseamMm: 820,
-      seatingBias: 'performance',
-      presetType: 'gt',
-    });
     const cutList = createPlannerCutList(
       derivePlannerGeometry({
-        ...input,
+        ...DEFAULT_PLANNER_INPUT,
         baseWidthMm: 600,
       }),
       {
@@ -73,27 +58,36 @@ describe('aluminum rig planner cut list', () => {
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 440, quantity: 3 });
   });
 
-  it('excludes deactivated modules from the combined cut list', () => {
-    const cutList = createPlannerCutList(createGeometry(), {
-      steeringColumn: false,
-      pedalTray: true,
-    }, false);
+  it('excludes deactivated modules from combined cut list', () => {
+    const cutList = createPlannerCutList(
+      createGeometry(),
+      {
+        steeringColumn: false,
+        pedalTray: true,
+      },
+      false
+    );
 
-    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 320, quantity: 2 });
+    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 300, quantity: 2 });
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 340, quantity: 3 });
-    expect(cutList).not.toContainEqual({ profileType: '80x40', lengthMm: 620, quantity: 2 });
+    expect(cutList).not.toContainEqual({ profileType: '80x40', lengthMm: 510, quantity: 2 });
   });
 
   it('shortens cut lengths when endcaps are enabled', () => {
-    const cutList = createPlannerCutList(createGeometry(), {
-      steeringColumn: true,
-      pedalTray: true,
-    }, true);
+    const cutList = createPlannerCutList(
+      createGeometry(),
+      {
+        steeringColumn: true,
+        pedalTray: true,
+      },
+      true
+    );
 
-    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 1392, quantity: 2 });
-    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 596, quantity: 2 });
-    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 352, quantity: 2 });
-    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 312, quantity: 2 });
+    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 1342, quantity: 2 });
+    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 506, quantity: 2 });
+    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 420, quantity: 3 });
+    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 492, quantity: 2 });
+    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 292, quantity: 2 });
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 340, quantity: 3 });
   });
 

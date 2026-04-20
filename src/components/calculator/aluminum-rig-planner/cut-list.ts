@@ -39,7 +39,7 @@ export function createPlannerCutList(
   const rows: CutListRow[] = [];
   const meshes = [
     ...createBaseModule(geometry.input, BLACK_PROFILE_COLOR),
-    ...(visibleModules.steeringColumn ? createSteeringColumnModule(geometry.input, geometry, BLACK_PROFILE_COLOR) : []),
+    ...(visibleModules.steeringColumn ? createSteeringColumnModule(geometry.input, BLACK_PROFILE_COLOR) : []),
     ...(visibleModules.pedalTray ? createPedalTrayModule(geometry.input, BLACK_PROFILE_COLOR) : []),
   ];
 
