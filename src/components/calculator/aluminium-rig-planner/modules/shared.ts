@@ -27,7 +27,7 @@ export const WHEEL_RADIUS_MM = 0.135;
 export const BASE_BEAM_HEIGHT_MM = BASE_BEAM_HEIGHT / MM_TO_METERS;
 
 export const BLACK_PROFILE_COLOR = '#2b2b2b';
-export const SILVER_PROFILE_COLOR = '#aeb4ba';
+export const SILVER_PROFILE_COLOR = '#b7b9b3';
 
 export function mm(value: number) {
   return value * MM_TO_METERS;
