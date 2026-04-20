@@ -132,6 +132,9 @@ export default defineConfig({
     ssr: {
       noExternal: ['three'],
     },
+    build: {
+      sourcemap: true,
+    },
     plugins: [tailwindcss()],
   },
 });
