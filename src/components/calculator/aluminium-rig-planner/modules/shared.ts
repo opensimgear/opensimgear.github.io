@@ -1,8 +1,11 @@
+export type ProfileType = 'box' | 'alu40x40' | 'alu80x40';
+
 export type MeshSpec = {
   id: string;
   position: [number, number, number];
   size: [number, number, number];
   rotation?: [number, number, number];
+  profileType?: ProfileType;
   color: string;
   metalness?: number;
   roughness?: number;
