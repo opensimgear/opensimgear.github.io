@@ -3,7 +3,6 @@ import {
   BASE_BEAM_HEIGHT,
   BASE_BEAM_WIDTH,
   centeredZ,
-  CROSS_BEAM_LENGTH_MM,
   mm,
   PROFILE_COLOR,
   PROFILE_SHORT,
@@ -17,6 +16,7 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
   const innerBeamCenterX = mm(input.seatBaseDepthMm / 2);
   const innerBeamLength = mm(input.seatBaseDepthMm);
   const innerBeamOffsetMm = input.baseInnerBeamSpacingMm / 2;
+  const baseCrossBeamLength = centeredZ(400) - centeredZ(0) - BASE_BEAM_WIDTH;
 
   return [
     {
@@ -39,7 +39,7 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
     },
     {
       id: 'rear-cross-member',
-      size: [PROFILE_SHORT, BASE_BEAM_HEIGHT, mm(CROSS_BEAM_LENGTH_MM)] as [number, number, number],
+      size: [PROFILE_SHORT, BASE_BEAM_HEIGHT, baseCrossBeamLength] as [number, number, number],
       position: [rearCrossBeamCenterX, BASE_BEAM_HEIGHT / 2, 0] as [number, number, number],
       profileType: 'alu80x40',
       color: PROFILE_COLOR,
@@ -48,7 +48,7 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
     },
     {
       id: 'seat-cross-member',
-      size: [PROFILE_SHORT, BASE_BEAM_HEIGHT, mm(CROSS_BEAM_LENGTH_MM)] as [number, number, number],
+      size: [PROFILE_SHORT, BASE_BEAM_HEIGHT, baseCrossBeamLength] as [number, number, number],
       position: [seatCrossBeamCenterX, BASE_BEAM_HEIGHT / 2, 0] as [number, number, number],
       profileType: 'alu80x40',
       color: PROFILE_COLOR,
