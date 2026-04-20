@@ -138,9 +138,12 @@
     mounted = true;
 
     if ('requestIdleCallback' in window) {
-      const idleId = window.requestIdleCallback(() => {
-        void loadScene();
-      }, { timeout: 180 });
+      const idleId = window.requestIdleCallback(
+        () => {
+          void loadScene();
+        },
+        { timeout: 180 }
+      );
 
       cancelSceneLoad = () => window.cancelIdleCallback(idleId);
     } else {
@@ -284,7 +287,7 @@
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
         <Pane title="Setup" position="inline" bind:expanded={paneExpanded.setup}>
-          <Folder title="Color">
+          <Folder title="General">
             <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
             {#if profileColorMode === 'custom'}
               <Color bind:value={customProfileColor} label="Custom" />

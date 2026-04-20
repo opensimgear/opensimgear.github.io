@@ -132,6 +132,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.58.1
         version: 8.58.1(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
+      astro-eslint-parser:
+        specifier: ^1.4.0
+        version: 1.4.0
       astro-vtbot:
         specifier: 2.1.12
         version: 2.1.12
