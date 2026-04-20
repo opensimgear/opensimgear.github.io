@@ -41,5 +41,28 @@ Then('I should see the cut list', async ({ page }: { page: Page }) => {
 });
 
 Then('I should see the 3D rig preview', async ({ page }: { page: Page }) => {
-  await expect(previewArea(page).locator('canvas')).toBeVisible();
+  const root = previewArea(page);
+  const canvas = root.locator('canvas');
+  const loadingError = root.getByText('3D scene failed to load. Refresh to retry.');
+  const sceneReadyTimeoutMs = 20_000;
+
+  await expect
+    .poll(
+      async () => {
+        if (await canvas.isVisible()) {
+          return 'ready';
+        }
+
+        if (await loadingError.isVisible()) {
+          return 'error';
+        }
+
+        return 'loading';
+      },
+      {
+        timeout: sceneReadyTimeoutMs,
+        message: 'Expected aluminium rig preview canvas to appear before timeout',
+      }
+    )
+    .toBe('ready');
 });
