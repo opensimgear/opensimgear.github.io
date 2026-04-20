@@ -7,7 +7,6 @@ import {
   MM_TO_METERS,
   mm,
   metersToRoundedMm,
-  PROFILE_COLOR,
   PROFILE_SHORT,
   PROFILE_TALL,
   RENDERED_RAIL_SPACING_MM,
@@ -17,7 +16,7 @@ import {
   type MeshSpec,
 } from './shared';
 
-export function createSteeringColumnModule(input: PlannerInput, geometry: PlannerGeometry): MeshSpec[] {
+export function createSteeringColumnModule(input: PlannerInput, geometry: PlannerGeometry, profileColor: string): MeshSpec[] {
   const uprights = geometry.wheelSupportUprights.map<MeshSpec>((upright) => {
     const uprightHeightAboveBaseMm = Math.max(
       PROFILE_SHORT / MM_TO_METERS,
@@ -35,7 +34,7 @@ export function createSteeringColumnModule(input: PlannerInput, geometry: Planne
         centeredZ(uprightZMm),
       ] as [number, number, number],
       profileType: 'alu80x40',
-      color: PROFILE_COLOR,
+      color: profileColor,
       metalness: 0.62,
       roughness: 0.3,
     };
@@ -56,7 +55,7 @@ export function createSteeringColumnModule(input: PlannerInput, geometry: Planne
         0,
       ] as [number, number, number],
       profileType: 'alu80x40',
-      color: PROFILE_COLOR,
+      color: profileColor,
       metalness: 0.62,
       roughness: 0.3,
     },

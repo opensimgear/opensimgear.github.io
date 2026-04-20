@@ -8,15 +8,16 @@
 
   type Props = {
     geometry: PlannerGeometry;
+    profileColor: string;
     visibleModules: PlannerVisibleModules;
   };
 
-  const { geometry, visibleModules }: Props = $props();
+  const { geometry, profileColor, visibleModules }: Props = $props();
   const input = $derived(geometry.input);
 
-  const baseModule = $derived(createBaseModule(input));
-  const steeringColumnModule = $derived(createSteeringColumnModule(input, geometry));
-  const pedalAssembly = $derived(createPedalTrayModule(input));
+  const baseModule = $derived(createBaseModule(input, profileColor));
+  const steeringColumnModule = $derived(createSteeringColumnModule(input, geometry, profileColor));
+  const pedalAssembly = $derived(createPedalTrayModule(input, profileColor));
 
   const allMeshes = $derived([
     ...baseModule,

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Button, Checkbox, Element, Folder, Pane, Slider } from 'svelte-tweakpane-ui';
+  import { Button, Checkbox, Color, Element, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
@@ -14,12 +14,18 @@
     isNarrowAluminiumRigViewport,
     type AluminiumRigPaneExpandedState,
   } from './state';
+  import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
   import Scene from './Scene.svelte';
   import type { PlannerInput, PlannerVisibleModules } from './types';
 
   const STATE_KEY = 'state';
   const URL_STATE_DEBOUNCE_MS = 300;
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
+  const COLOR_MODE_OPTIONS = [
+    { text: 'Black', value: 'black' },
+    { text: 'Silver', value: 'silver' },
+    { text: 'Custom', value: 'custom' },
+  ] as const;
 
   const DEFAULT_INPUT: PlannerInput = {
     ...createInitialPlannerInput({
@@ -62,6 +68,8 @@
     pedalTray: true,
     steeringColumn: true,
   });
+  let profileColorMode = $state<(typeof COLOR_MODE_OPTIONS)[number]['value']>('black');
+  let customProfileColor = $state(BLACK_PROFILE_COLOR);
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<AluminiumRigPaneExpandedState>(getAluminiumRigPaneExpandedState(false));
   let mounted = $state(false);
@@ -109,6 +117,13 @@
   });
 
   const geometry = $derived(derivePlannerGeometry(plannerInput));
+  const profileColor = $derived(
+    profileColorMode === 'silver'
+      ? SILVER_PROFILE_COLOR
+      : profileColorMode === 'custom'
+        ? customProfileColor
+        : BLACK_PROFILE_COLOR
+  );
   const cutListRows = $derived(createPlannerCutList(geometry, visibleModules));
   const columnDistanceLimits = $derived.by(() => ({
     min: 80,
@@ -168,6 +183,8 @@
 
   function resetSetup() {
     Object.assign(plannerInput, DEFAULT_INPUT);
+    profileColorMode = 'black';
+    customProfileColor = BLACK_PROFILE_COLOR;
   }
 
   function resetSteeringColumnModule() {
@@ -205,7 +222,7 @@
       <div
         class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
-        <Scene {geometry} {isNarrowViewport} {visibleModules} />
+        <Scene {geometry} {isNarrowViewport} {profileColor} {visibleModules} />
       </div>
 
       <div
@@ -214,6 +231,12 @@
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
         <Pane title="Setup" position="inline" bind:expanded={paneExpanded.setup}>
+          <Folder title="Color">
+            <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
+            {#if profileColorMode === 'custom'}
+              <Color bind:value={customProfileColor} label="Custom" />
+            {/if}
+          </Folder>
           <Folder title="Base">
             <Slider
               bind:value={() => plannerInput.baseLengthMm, setBaseLengthMm}

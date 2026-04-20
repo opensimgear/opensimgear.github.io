@@ -6,12 +6,11 @@ import {
   createCutListRow,
   mm,
   metersToRoundedMm,
-  PROFILE_COLOR,
   PROFILE_SHORT,
   type MeshSpec,
 } from './shared';
 
-export function createBaseModule(input: PlannerInput): MeshSpec[] {
+export function createBaseModule(input: PlannerInput, profileColor: string): MeshSpec[] {
   const baseCenterX = mm(input.baseLengthMm / 2);
   const rearCrossBeamCenterX = PROFILE_SHORT / 2;
   const seatCrossBeamCenterX = mm(Math.max(20, input.seatBaseDepthMm - 20));
@@ -26,7 +25,7 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
       size: [mm(input.baseLengthMm), BASE_BEAM_HEIGHT, BASE_BEAM_WIDTH] as [number, number, number],
       position: [baseCenterX, BASE_BEAM_HEIGHT / 2, centeredZ(0)] as [number, number, number],
       profileType: 'alu80x40',
-      color: PROFILE_COLOR,
+      color: profileColor,
       metalness: 0.6,
       roughness: 0.32,
     },
@@ -35,7 +34,7 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
       size: [mm(input.baseLengthMm), BASE_BEAM_HEIGHT, BASE_BEAM_WIDTH] as [number, number, number],
       position: [baseCenterX, BASE_BEAM_HEIGHT / 2, centeredZ(400)] as [number, number, number],
       profileType: 'alu80x40',
-      color: PROFILE_COLOR,
+      color: profileColor,
       metalness: 0.6,
       roughness: 0.32,
     },
@@ -44,7 +43,7 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
       size: [PROFILE_SHORT, BASE_BEAM_HEIGHT, baseCrossBeamLength] as [number, number, number],
       position: [rearCrossBeamCenterX, BASE_BEAM_HEIGHT / 2, 0] as [number, number, number],
       profileType: 'alu80x40',
-      color: PROFILE_COLOR,
+      color: profileColor,
       metalness: 0.6,
       roughness: 0.32,
     },
@@ -53,7 +52,7 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
       size: [PROFILE_SHORT, BASE_BEAM_HEIGHT, baseCrossBeamLength] as [number, number, number],
       position: [seatCrossBeamCenterX, BASE_BEAM_HEIGHT / 2, 0] as [number, number, number],
       profileType: 'alu80x40',
-      color: PROFILE_COLOR,
+      color: profileColor,
       metalness: 0.6,
       roughness: 0.32,
     },
@@ -66,7 +65,7 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
         number,
       ],
       profileType: 'alu40x40',
-      color: PROFILE_COLOR,
+      color: profileColor,
       metalness: 0.6,
       roughness: 0.32,
     },
@@ -79,7 +78,7 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
         number,
       ],
       profileType: 'alu40x40',
-      color: PROFILE_COLOR,
+      color: profileColor,
       metalness: 0.6,
       roughness: 0.32,
     },
