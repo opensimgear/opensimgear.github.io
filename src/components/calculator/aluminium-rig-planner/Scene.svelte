@@ -36,8 +36,8 @@
       intensity={Math.PI * 0.98}
       shadow-mapSize-width={2048}
       shadow-mapSize-height={2048}
-      shadow-bias={-0.00015}
-      shadow-normalBias={0.02}
+      shadow-bias={0.0002}
+      shadow-normalBias={0.04}
     />
     <T.DirectionalLight color="#d9e6ff" position={[-3.2, 2.4, 1.5]} intensity={Math.PI * 0.32} />
     <T.DirectionalLight color="#f3f6fb" position={[0.6, 2.1, -3.4]} intensity={Math.PI * 0.2} />

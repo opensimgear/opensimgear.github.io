@@ -69,7 +69,6 @@
 {#if profileGeometry}
   <T.Mesh
     castShadow
-    receiveShadow
     geometry={profileGeometry}
     position={mesh.position}
     rotation={mesh.rotation ?? [0, 0, 0]}
