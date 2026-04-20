@@ -1,5 +1,13 @@
-import type { PlannerInput } from '../types';
-import { PROFILE_COLOR, PROFILE_SHORT, BASE_BEAM_HEIGHT, mm, type MeshSpec } from './shared';
+import type { CutListRow, PlannerInput } from '../types';
+import {
+  BASE_BEAM_HEIGHT,
+  createCutListRow,
+  metersToRoundedMm,
+  mm,
+  PROFILE_COLOR,
+  PROFILE_SHORT,
+  type MeshSpec,
+} from './shared';
 
 export function createPedalTrayModule(input: PlannerInput): MeshSpec[] {
   const trayTopY = BASE_BEAM_HEIGHT;
@@ -59,5 +67,16 @@ export function createPedalTrayModule(input: PlannerInput): MeshSpec[] {
       metalness: 0.62,
       roughness: 0.3,
     },
+  ];
+}
+
+export function createPedalTrayCutList(input: PlannerInput): CutListRow[] {
+  const traySideOffsetZ = 0.19;
+  const trayInnerFaceOffsetZ = traySideOffsetZ - PROFILE_SHORT / 2;
+  const trayCrossBeamLengthMm = metersToRoundedMm(trayInnerFaceOffsetZ * 2);
+
+  return [
+    createCutListRow('40x40', input.pedalTrayDepthMm, 2),
+    createCutListRow('40x40', trayCrossBeamLengthMm, 3),
   ];
 }

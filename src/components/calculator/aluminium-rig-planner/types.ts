@@ -7,6 +7,14 @@ export type PlannerVisibleModules = {
   steeringColumn: boolean;
 };
 
+export type CutListProfileType = '40x40' | '80x40';
+
+export type CutListRow = {
+  profileType: CutListProfileType;
+  lengthMm: number;
+  quantity: number;
+};
+
 export interface DriverProfile {
   driverHeightMm: number;
   inseamMm: number;

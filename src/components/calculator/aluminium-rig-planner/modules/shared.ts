@@ -1,3 +1,5 @@
+import type { CutListProfileType, CutListRow } from '../types';
+
 export type ProfileType = 'box' | 'alu40x40' | 'alu80x40';
 
 export type MeshSpec = {
@@ -28,6 +30,18 @@ export const PROFILE_COLOR = '#aeb4ba';
 
 export function mm(value: number) {
   return value * MM_TO_METERS;
+}
+
+export function metersToRoundedMm(value: number) {
+  return Math.round(value / MM_TO_METERS);
+}
+
+export function createCutListRow(profileType: CutListProfileType, lengthMm: number, quantity: number): CutListRow {
+  return {
+    profileType,
+    lengthMm: Math.round(lengthMm),
+    quantity,
+  };
 }
 
 export function renderFrameZ(valueMm: number) {

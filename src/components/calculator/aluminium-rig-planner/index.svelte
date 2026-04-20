@@ -1,9 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Button, Checkbox, Folder, Pane, Slider } from 'svelte-tweakpane-ui';
+  import { Button, Checkbox, Element, Folder, Pane, Slider } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
+  import { createPlannerCutList } from './cut-list';
   import { derivePlannerGeometry } from './geometry';
   import { createInitialPlannerInput } from './presets';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
@@ -108,6 +109,7 @@
   });
 
   const geometry = $derived(derivePlannerGeometry(plannerInput));
+  const cutListRows = $derived(createPlannerCutList(geometry, visibleModules));
   const columnDistanceLimits = $derived.by(() => ({
     min: 80,
     max: Math.max(80, plannerInput.baseLengthMm - plannerInput.seatBaseDepthMm - 160),
@@ -263,16 +265,16 @@
                 step={10}
                 format={(value) => `${value} mm`}
               />
-            <Slider
-              bind:value={() => columnDistanceDisplayMm, updateColumnDistance}
-              label="Column distance"
-              min={columnDistanceLimits.min}
-              max={columnDistanceLimits.max}
-              step={10}
-              format={(value) => `${value} mm`}
-            />
-            <Button on:click={resetSteeringColumnModule} label="Reset" title="Reset" />
-          </Folder>
+              <Slider
+                bind:value={() => columnDistanceDisplayMm, updateColumnDistance}
+                label="Column distance"
+                min={columnDistanceLimits.min}
+                max={columnDistanceLimits.max}
+                step={10}
+                format={(value) => `${value} mm`}
+              />
+              <Button on:click={resetSteeringColumnModule} label="Reset" title="Reset" />
+            </Folder>
           {/if}
           {#if visibleModules.pedalTray}
             <Folder title="Pedal tray">
@@ -287,14 +289,38 @@
               <Slider
                 bind:value={plannerInput.pedalTrayDistanceMm}
                 label="Tray distance"
-              min={0}
-              max={pedalTrayDistanceMaxMm}
-              step={10}
-              format={(value) => `${value} mm`}
-            />
-            <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
-          </Folder>
+                min={0}
+                max={pedalTrayDistanceMaxMm}
+                step={10}
+                format={(value) => `${value} mm`}
+              />
+              <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
+            </Folder>
           {/if}
+        </Pane>
+        <Pane title="Cut list" position="inline" bind:expanded={paneExpanded.cutList}>
+          <Element>
+            <div class="overflow-x-auto bg-white px-2 py-1 font-['Roboto_Mono',monospace] text-zinc-900">
+              <table class="min-w-full border-collapse bg-white text-left text-[12px] leading-tight">
+                <thead>
+                  <tr class="border-b border-zinc-200 bg-zinc-50 text-zinc-600">
+                    <th class="px-1.5 py-1 font-medium">Profile</th>
+                    <th class="px-1.5 py-1 font-medium">Length</th>
+                    <th class="px-1.5 py-1 font-medium">Qty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {#each cutListRows as row (`${row.profileType}-${row.lengthMm}`)}
+                    <tr class="border-b border-zinc-100 bg-white last:border-b-0">
+                      <td class="px-1.5 py-1 font-medium text-zinc-800">{row.profileType}</td>
+                      <td class="px-1.5 py-1 text-zinc-600">{row.lengthMm} mm</td>
+                      <td class="px-1.5 py-1 text-zinc-600">{row.quantity}</td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            </div>
+          </Element>
         </Pane>
       </div>
     </div>

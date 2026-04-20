@@ -1,10 +1,12 @@
 import type { PlannerGeometry } from '../geometry';
-import type { PlannerInput } from '../types';
+import type { CutListRow, PlannerInput } from '../types';
 import {
   BASE_BEAM_HEIGHT_MM,
   centeredZ,
+  createCutListRow,
   MM_TO_METERS,
   mm,
+  metersToRoundedMm,
   PROFILE_COLOR,
   PROFILE_SHORT,
   PROFILE_TALL,
@@ -58,5 +60,15 @@ export function createSteeringColumnModule(input: PlannerInput, geometry: Planne
       metalness: 0.62,
       roughness: 0.3,
     },
+  ];
+}
+
+export function createSteeringColumnCutList(input: PlannerInput, geometry: PlannerGeometry): CutListRow[] {
+  const uprightHeightMm = Math.max(40, input.steeringColumnHeightMm, input.steeringColumnBaseHeightMm + 80);
+  const crossBeamLengthMm = metersToRoundedMm(mm(RENDERED_RAIL_SPACING_MM - UPRIGHT_BEAM_DEPTH / MM_TO_METERS));
+
+  return [
+    createCutListRow('80x40', uprightHeightMm, geometry.wheelSupportUprights.length || 2),
+    createCutListRow('80x40', crossBeamLengthMm, 1),
   ];
 }

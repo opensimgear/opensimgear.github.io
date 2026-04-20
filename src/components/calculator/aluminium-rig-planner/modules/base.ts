@@ -1,9 +1,11 @@
-import type { PlannerInput } from '../types';
+import type { CutListRow, PlannerInput } from '../types';
 import {
   BASE_BEAM_HEIGHT,
   BASE_BEAM_WIDTH,
   centeredZ,
+  createCutListRow,
   mm,
+  metersToRoundedMm,
   PROFILE_COLOR,
   PROFILE_SHORT,
   type MeshSpec,
@@ -81,5 +83,15 @@ export function createBaseModule(input: PlannerInput): MeshSpec[] {
       metalness: 0.6,
       roughness: 0.32,
     },
+  ];
+}
+
+export function createBaseCutList(input: PlannerInput): CutListRow[] {
+  const baseCrossBeamLengthMm = metersToRoundedMm(centeredZ(400) - centeredZ(0) - BASE_BEAM_WIDTH);
+
+  return [
+    createCutListRow('80x40', input.baseLengthMm, 2),
+    createCutListRow('80x40', baseCrossBeamLengthMm, 2),
+    createCutListRow('40x40', input.seatBaseDepthMm, 2),
   ];
 }
