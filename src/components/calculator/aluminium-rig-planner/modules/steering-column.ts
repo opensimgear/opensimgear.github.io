@@ -34,6 +34,7 @@ export function createSteeringColumnModule(input: PlannerInput, geometry: Planne
         centeredZ(uprightZMm),
       ] as [number, number, number],
       profileType: 'alu80x40',
+      openEnds: ['positive'],
       color: profileColor,
       metalness: 0.62,
       roughness: 0.3,

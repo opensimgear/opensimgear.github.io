@@ -4,9 +4,10 @@
   import {
     createAluminium40x40Geometry,
     createAluminium80x40Geometry,
+    createRoundedEndCapGeometry,
     getProfileMeshScale,
   } from './modules/profile-geometry';
-  import type { MeshSpec } from './modules/shared';
+  import { getBeamAxis, type MeshSpec } from './modules/shared';
 
   type Props = {
     mesh: MeshSpec;
@@ -47,6 +48,14 @@
   }
 
   const materialProps = $derived.by(() => {
+    if (mesh.materialKind === 'plastic') {
+      return {
+        color: mesh.color,
+        metalness: mesh.metalness ?? 0.04,
+        roughness: mesh.roughness ?? 0.9,
+      };
+    }
+
     const luminance = hexToLuminance(mesh.color);
     const isDarkFinish = luminance < 0.3;
 
@@ -58,6 +67,10 @@
   });
 
   const profileGeometry = $derived.by(() => {
+    if (mesh.shape === 'endcap') {
+      return createRoundedEndCapGeometry(mesh.size, mesh.axis ?? getBeamAxis(mesh.size));
+    }
+
     if (mesh.profileType === 'alu40x40') {
       return createAluminium40x40Geometry(mesh.size);
     }
@@ -68,7 +81,7 @@
 
     return null;
   });
-  const profileScale = $derived(mesh.profileType ? getProfileMeshScale(mesh.size) : [1, 1, 1]);
+  const profileScale = $derived(mesh.shape === 'endcap' ? [1, 1, 1] : mesh.profileType ? getProfileMeshScale(mesh.size) : [1, 1, 1]);
 </script>
 
 {#if profileGeometry}

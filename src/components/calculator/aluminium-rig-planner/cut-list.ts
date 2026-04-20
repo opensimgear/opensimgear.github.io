@@ -1,7 +1,8 @@
 import type { PlannerGeometry } from './geometry';
-import { createBaseCutList } from './modules/base';
-import { createPedalTrayCutList } from './modules/pedal-tray';
-import { createSteeringColumnCutList } from './modules/steering-column';
+import { createBaseModule } from './modules/base';
+import { createPedalTrayModule } from './modules/pedal-tray';
+import { createSteeringColumnModule } from './modules/steering-column';
+import { BLACK_PROFILE_COLOR, getMeshCutListRow } from './modules/shared';
 import type { CutListRow, PlannerVisibleModules } from './types';
 
 function compareCutListRows(a: CutListRow, b: CutListRow) {
@@ -30,15 +31,24 @@ export function mergeCutListRows(rows: CutListRow[]): CutListRow[] {
   return [...mergedRows.values()].sort(compareCutListRows);
 }
 
-export function createPlannerCutList(geometry: PlannerGeometry, visibleModules: PlannerVisibleModules): CutListRow[] {
-  const rows: CutListRow[] = [...createBaseCutList(geometry.input)];
+export function createPlannerCutList(
+  geometry: PlannerGeometry,
+  visibleModules: PlannerVisibleModules,
+  showEndCaps: boolean
+): CutListRow[] {
+  const rows: CutListRow[] = [];
+  const meshes = [
+    ...createBaseModule(geometry.input, BLACK_PROFILE_COLOR),
+    ...(visibleModules.steeringColumn ? createSteeringColumnModule(geometry.input, geometry, BLACK_PROFILE_COLOR) : []),
+    ...(visibleModules.pedalTray ? createPedalTrayModule(geometry.input, BLACK_PROFILE_COLOR) : []),
+  ];
 
-  if (visibleModules.steeringColumn) {
-    rows.push(...createSteeringColumnCutList(geometry.input, geometry));
-  }
+  for (const mesh of meshes) {
+    const row = getMeshCutListRow(mesh, showEndCaps);
 
-  if (visibleModules.pedalTray) {
-    rows.push(...createPedalTrayCutList(geometry.input));
+    if (row) {
+      rows.push(row);
+    }
   }
 
   return mergeCutListRows(rows);

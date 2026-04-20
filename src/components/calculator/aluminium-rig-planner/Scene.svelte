@@ -11,10 +11,11 @@
     geometry: PlannerGeometry;
     isNarrowViewport?: boolean;
     profileColor: string;
+    showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   };
 
-  const { geometry, isNarrowViewport = false, profileColor, visibleModules }: Props = $props();
+  const { geometry, isNarrowViewport = false, profileColor, showEndCaps, visibleModules }: Props = $props();
 
   const cameraPosition = $derived<[number, number, number]>(isNarrowViewport ? [0.98, 0.84, 1] : [0.1, 1, 1]);
   const gizmoSize = $derived(isNarrowViewport ? 48 : 64);
@@ -57,6 +58,6 @@
       fadeStrength={1.6}
     />
 
-    <RigFrame {geometry} {profileColor} {visibleModules} />
+    <RigFrame {geometry} {profileColor} {showEndCaps} {visibleModules} />
   </Canvas>
 </div>

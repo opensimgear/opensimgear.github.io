@@ -22,6 +22,7 @@
     geometry: PlannerGeometry;
     isNarrowViewport?: boolean;
     profileColor: string;
+    showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   }>;
 
@@ -78,6 +79,7 @@
   });
   let profileColorMode = $state<(typeof COLOR_MODE_OPTIONS)[number]['value']>('black');
   let customProfileColor = $state(DEFAULT_CUSTOM_PROFILE_COLOR);
+  let showEndCaps = $state(true);
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<AluminiumRigPaneExpandedState>(getAluminiumRigPaneExpandedState(false));
   let mounted = $state(false);
@@ -164,7 +166,7 @@
         ? customProfileColor
         : BLACK_PROFILE_COLOR
   );
-  const cutListRows = $derived(createPlannerCutList(geometry, visibleModules));
+  const cutListRows = $derived(createPlannerCutList(geometry, visibleModules, showEndCaps));
   const columnDistanceLimits = $derived.by(() => ({
     min: 80,
     max: Math.max(80, plannerInput.baseLengthMm - plannerInput.seatBaseDepthMm - 160),
@@ -225,6 +227,7 @@
     Object.assign(plannerInput, DEFAULT_INPUT);
     profileColorMode = 'black';
     customProfileColor = DEFAULT_CUSTOM_PROFILE_COLOR;
+    showEndCaps = true;
   }
 
   function resetSteeringColumnModule() {
@@ -263,7 +266,7 @@
         class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
         {#if PlannerScene}
-          <PlannerScene {geometry} {isNarrowViewport} {profileColor} {visibleModules} />
+          <PlannerScene {geometry} {isNarrowViewport} {profileColor} {showEndCaps} {visibleModules} />
         {:else}
           <div class="grid aspect-[3/2] w-full place-items-center border-zinc-200 bg-zinc-50 text-sm text-zinc-500">
             {#if sceneStatus === 'error'}
@@ -286,6 +289,7 @@
             {#if profileColorMode === 'custom'}
               <Color bind:value={customProfileColor} label="Custom" />
             {/if}
+            <Checkbox bind:value={showEndCaps} label="Endcaps" />
           </Folder>
           <Folder title="Base">
             <Slider

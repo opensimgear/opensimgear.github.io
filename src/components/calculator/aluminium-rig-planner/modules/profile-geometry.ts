@@ -1,17 +1,24 @@
 import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
 import { BufferGeometry, ExtrudeGeometry } from 'three';
+import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import { mergeVertices, toCreasedNormals } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 import profile40x40Svg from './profiles/40x40.svg?raw';
 import profile80x40Svg from './profiles/80x40.svg?raw';
-
-export type BeamAxis = 'x' | 'y' | 'z';
+import {
+  ENDCAP_CORNER_RADIUS_MM,
+  ENDCAP_THICKNESS,
+  getAxisLength,
+  getBeamAxis,
+  type BeamAxis,
+} from './shared';
 type Vector3Tuple = [number, number, number];
 
 const geometryCache = new Map<string, BufferGeometry>();
 const svgLoader = new SVGLoader();
 const SVG_UNITS_TO_METERS = 0.001;
 const NORMALIZED_BEAM_LENGTH = 1;
+const ENDCAP_SEGMENTS = 4;
 
 function getTargetCrossSectionSize(axis: BeamAxis, size: [number, number, number]) {
   if (axis === 'x') {
@@ -34,20 +41,8 @@ function getTargetCrossSectionSize(axis: BeamAxis, size: [number, number, number
   };
 }
 
-export function getBeamAxis(size: [number, number, number]): BeamAxis {
-  if (size[0] >= size[1] && size[0] >= size[2]) {
-    return 'x';
-  }
-
-  if (size[1] >= size[0] && size[1] >= size[2]) {
-    return 'y';
-  }
-
-  return 'z';
-}
-
 function getBeamLength(axis: BeamAxis, size: [number, number, number]) {
-  return axis === 'x' ? size[0] : axis === 'y' ? size[1] : size[2];
+  return getAxisLength(size, axis);
 }
 
 function formatCacheDimension(value: number) {
@@ -205,4 +200,31 @@ export function createAluminium40x40Geometry(size: [number, number, number]) {
 
 export function createAluminium80x40Geometry(size: [number, number, number]) {
   return createExtrudedSvgProfileGeometry(profile80x40Svg, size, 'alu80x40');
+}
+
+export function createRoundedEndCapGeometry(size: [number, number, number], axis: BeamAxis) {
+  const { targetWidth: width, targetHeight: height } = getTargetCrossSectionSize(axis, size);
+  const cacheKey = `endcap:${axis}:${formatCacheDimension(width)}x${formatCacheDimension(height)}`;
+  const cachedGeometry = geometryCache.get(cacheKey);
+
+  if (cachedGeometry) {
+    return cachedGeometry;
+  }
+
+  const radius = Math.min(ENDCAP_CORNER_RADIUS_MM * SVG_UNITS_TO_METERS, width / 2, height / 2);
+  const geometry = new RoundedBoxGeometry(width, height, ENDCAP_THICKNESS, ENDCAP_SEGMENTS, radius);
+
+  if (axis === 'x') {
+    geometry.rotateY(Math.PI / 2);
+  } else if (axis === 'y') {
+    geometry.rotateX(Math.PI / 2);
+  }
+
+  geometry.center();
+  geometry.computeVertexNormals();
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
+
+  geometryCache.set(cacheKey, geometry);
+  return geometry;
 }
