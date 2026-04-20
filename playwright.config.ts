@@ -1,7 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig } from 'playwright-bdd';
 
-const baseURL = process.env.PLAYWRIGHT_BASE_URL;
+const defaultBaseURL = 'http://127.0.0.1:4321';
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || defaultBaseURL;
 
 const testDir = defineBddConfig({
   features: 'e2e/features/**/*.feature',
@@ -10,7 +11,6 @@ const testDir = defineBddConfig({
 
 export default defineConfig({
   testDir,
-  globalSetup: './e2e/support/global-setup.ts',
   fullyParallel: false,
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : [['list']],
@@ -20,10 +20,18 @@ export default defineConfig({
     },
   },
   use: {
+    baseURL,
     screenshot: 'only-on-failure',
-    ...(baseURL ? { baseURL } : {}),
     trace: 'retain-on-failure',
   },
+  webServer: process.env.PLAYWRIGHT_BASE_URL
+    ? undefined
+    : {
+        command: 'pnpm dev --host 127.0.0.1 --port 4321',
+        reuseExistingServer: !process.env.CI,
+        timeout: 120_000,
+        url: defaultBaseURL,
+      },
   projects: [
     {
       name: 'chromium',

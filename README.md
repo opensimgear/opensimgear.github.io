@@ -32,10 +32,16 @@ pnpm dev
 
 E2E tests use Playwright with Gherkin feature files and Cucumber-style step definitions via `playwright-bdd`.
 
-To run them locally, start site in another terminal and then run:
+To run them locally, just run:
 
 ```bash
-PLAYWRIGHT_BASE_URL=http://127.0.0.1:4321 pnpm e2e
+pnpm e2e
+```
+
+To run them against an already deployed site instead:
+
+```bash
+PLAYWRIGHT_BASE_URL=https://opensimgear.github.io pnpm e2e
 ```
 
 GitHub Actions runs smoke suite after GitHub Pages deployment using live deployed URL.
