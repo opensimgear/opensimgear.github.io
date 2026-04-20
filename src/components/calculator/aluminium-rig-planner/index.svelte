@@ -21,6 +21,7 @@
   const STATE_KEY = 'state';
   const URL_STATE_DEBOUNCE_MS = 300;
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
+  const DEFAULT_CUSTOM_PROFILE_COLOR = '#ff0000';
   const COLOR_MODE_OPTIONS = [
     { text: 'Black', value: 'black' },
     { text: 'Silver', value: 'silver' },
@@ -69,7 +70,7 @@
     steeringColumn: true,
   });
   let profileColorMode = $state<(typeof COLOR_MODE_OPTIONS)[number]['value']>('black');
-  let customProfileColor = $state(BLACK_PROFILE_COLOR);
+  let customProfileColor = $state(DEFAULT_CUSTOM_PROFILE_COLOR);
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<AluminiumRigPaneExpandedState>(getAluminiumRigPaneExpandedState(false));
   let mounted = $state(false);
@@ -184,7 +185,7 @@
   function resetSetup() {
     Object.assign(plannerInput, DEFAULT_INPUT);
     profileColorMode = 'black';
-    customProfileColor = BLACK_PROFILE_COLOR;
+    customProfileColor = DEFAULT_CUSTOM_PROFILE_COLOR;
   }
 
   function resetSteeringColumnModule() {

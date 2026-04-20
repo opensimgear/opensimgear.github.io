@@ -1,12 +1,13 @@
 import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
-import { ExtrudeGeometry } from 'three';
+import { BufferGeometry, ExtrudeGeometry } from 'three';
+import { mergeVertices, toCreasedNormals } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 import profile40x40Svg from './profiles/40x40.svg?raw';
 import profile80x40Svg from './profiles/80x40.svg?raw';
 
-type BeamAxis = 'x' | 'y' | 'z';
+export type BeamAxis = 'x' | 'y' | 'z';
 
-const geometryCache = new Map<string, ExtrudeGeometry>();
+const geometryCache = new Map<string, BufferGeometry>();
 const svgLoader = new SVGLoader();
 const SVG_UNITS_TO_METERS = 0.001;
 function getTargetCrossSectionSize(axis: BeamAxis, size: [number, number, number]) {
@@ -30,7 +31,7 @@ function getTargetCrossSectionSize(axis: BeamAxis, size: [number, number, number
   };
 }
 
-function getBeamAxis(size: [number, number, number]): BeamAxis {
+export function getBeamAxis(size: [number, number, number]): BeamAxis {
   if (size[0] >= size[1] && size[0] >= size[2]) {
     return 'x';
   }
@@ -88,9 +89,75 @@ function createExtrudedSvgProfileGeometry(svgMarkup: string, size: [number, numb
   }
 
   geometry.center();
-  geometryCache.set(cacheKey, geometry);
+  const mergedGeometry = mergeVertices(geometry);
+  const shadedGeometry = toCreasedNormals(mergedGeometry, Math.PI / 2.8);
 
-  return geometry;
+  shadedGeometry.computeVertexNormals();
+  flattenOuterLongFaceNormals(shadedGeometry, axis);
+  geometry.dispose();
+  mergedGeometry.dispose();
+
+  geometryCache.set(cacheKey, shadedGeometry);
+
+  return shadedGeometry;
+}
+
+function flattenOuterLongFaceNormals(geometry: BufferGeometry, axis: BeamAxis) {
+  geometry.computeBoundingBox();
+
+  const bounds = geometry.boundingBox;
+  const positions = geometry.getAttribute('position');
+  const normals = geometry.getAttribute('normal');
+
+  if (!bounds || !positions || !normals) {
+    return;
+  }
+
+  const axisIndex = axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
+  const crossAxisIndices = axis === 'x' ? [1, 2] : axis === 'y' ? [0, 2] : [0, 1];
+  const lengthHalf = (bounds.max.getComponent(axisIndex) - bounds.min.getComponent(axisIndex)) / 2;
+  const capEpsilon = Math.max(lengthHalf * 0.015, 0.0025);
+  const faceEpsilon = 0.0015;
+
+  for (let index = 0; index < positions.count; index += 1) {
+    const axisPosition = positions.getComponent(index, axisIndex);
+
+    if (Math.abs(axisPosition) > lengthHalf - capEpsilon) {
+      continue;
+    }
+
+    let replaced = false;
+
+    for (const crossAxisIndex of crossAxisIndices) {
+      const min = bounds.min.getComponent(crossAxisIndex);
+      const max = bounds.max.getComponent(crossAxisIndex);
+      const value = positions.getComponent(index, crossAxisIndex);
+
+      if (Math.abs(value - max) <= faceEpsilon) {
+        normals.setComponent(index, 0, 0);
+        normals.setComponent(index, 1, 0);
+        normals.setComponent(index, 2, 0);
+        normals.setComponent(index, crossAxisIndex, 1);
+        replaced = true;
+        break;
+      }
+
+      if (Math.abs(value - min) <= faceEpsilon) {
+        normals.setComponent(index, 0, 0);
+        normals.setComponent(index, 1, 0);
+        normals.setComponent(index, 2, 0);
+        normals.setComponent(index, crossAxisIndex, -1);
+        replaced = true;
+        break;
+      }
+    }
+
+    if (!replaced) {
+      continue;
+    }
+  }
+
+  normals.needsUpdate = true;
 }
 
 export function createAluminium40x40Geometry(size: [number, number, number]) {

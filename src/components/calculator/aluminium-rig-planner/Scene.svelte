@@ -21,16 +21,26 @@
 </script>
 
 <div class="aspect-[3/2] w-full touch-none border-zinc-200 bg-[radial-gradient(circle_at_top,#ffffff_0%,#f4f4f5_60%,#e4e4e7_100%)]">
-  <Canvas>
+  <Canvas shadows>
     <T.PerspectiveCamera makeDefault position={cameraPosition} up={[0, 1, 0]}>
       <OrbitControls enableDamping dampingFactor={0.08} target={[0.7, 0.1, 0]}>
         <Gizmo size={gizmoSize} />
       </OrbitControls>
     </T.PerspectiveCamera>
 
-    <T.AmbientLight intensity={1.6} />
-    <T.DirectionalLight position={[3, 4, 2]} intensity={Math.PI * 0.9} />
-    <T.DirectionalLight position={[-2, 2, -3]} intensity={Math.PI * 0.35} />
+    <T.AmbientLight color="#eef2f7" intensity={1.4} />
+    <T.DirectionalLight
+      castShadow
+      color="#fff9f0"
+      position={[3.6, 5.4, 2.8]}
+      intensity={Math.PI * 0.98}
+      shadow-mapSize-width={2048}
+      shadow-mapSize-height={2048}
+      shadow-bias={-0.00015}
+      shadow-normalBias={0.02}
+    />
+    <T.DirectionalLight color="#d9e6ff" position={[-3.2, 2.4, 1.5]} intensity={Math.PI * 0.32} />
+    <T.DirectionalLight color="#f3f6fb" position={[0.6, 2.1, -3.4]} intensity={Math.PI * 0.2} />
 
     <Grid
       plane="xz"
