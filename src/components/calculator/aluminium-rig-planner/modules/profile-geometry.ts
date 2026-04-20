@@ -1,24 +1,57 @@
-import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
-import { BufferGeometry, ExtrudeGeometry } from 'three';
-import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
-import { mergeVertices, toCreasedNormals } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
-
-import profile40x40Svg from './profiles/40x40.svg?raw';
-import profile80x40Svg from './profiles/80x40.svg?raw';
 import {
-  ENDCAP_CORNER_RADIUS_MM,
-  ENDCAP_THICKNESS,
+  Box3,
+  BufferAttribute,
+  BufferGeometry,
+  Euler,
+  Quaternion,
+  Sphere,
+  Vector3,
+} from 'three';
+
+import alu40x40BeamAssetUrl from './generated/alu40x40-beam.bin?url';
+import alu80x40BeamAssetUrl from './generated/alu80x40-beam.bin?url';
+import alu40x40EndcapAssetUrl from './generated/alu40x40-endcap.bin?url';
+import alu80x40EndcapAssetUrl from './generated/alu80x40-endcap.bin?url';
+import {
   getAxisLength,
   getBeamAxis,
+  type MeshSpec,
   type BeamAxis,
+  type ProfileType,
 } from './shared';
 type Vector3Tuple = [number, number, number];
+type RotationTuple = [number, number, number];
+type GeometryAssetKey = 'alu40x40-beam' | 'alu80x40-beam' | 'alu40x40-endcap' | 'alu80x40-endcap';
+type BinaryGeometryHeader = {
+  positionLength: number;
+  normalLength: number;
+  indexLength: number;
+  boundingBox: {
+    min: Vector3Tuple;
+    max: Vector3Tuple;
+  };
+  boundingSphere: {
+    center: Vector3Tuple;
+    radius: number;
+  };
+};
 
-const geometryCache = new Map<string, BufferGeometry>();
-const svgLoader = new SVGLoader();
-const SVG_UNITS_TO_METERS = 0.001;
-const NORMALIZED_BEAM_LENGTH = 1;
-const ENDCAP_SEGMENTS = 4;
+const AXIS_X_ROTATION = new Quaternion().setFromEuler(new Euler(0, Math.PI / 2, 0));
+const AXIS_Y_ROTATION = new Quaternion().setFromEuler(new Euler(-Math.PI / 2, 0, 0));
+const IDENTITY_ROTATION = new Quaternion();
+const PROFILE_ROLL_ROTATION = new Quaternion().setFromEuler(new Euler(0, 0, Math.PI / 2));
+const GEOMETRY_KEYS: GeometryAssetKey[] = ['alu40x40-beam', 'alu80x40-beam', 'alu40x40-endcap', 'alu80x40-endcap'];
+const FILE_MAGIC = 0x5247534f;
+const FILE_HEADER_BYTES = 60;
+const FLOAT_BYTES = 4;
+const geometryAssetUrls: Record<GeometryAssetKey, string> = {
+  'alu40x40-beam': alu40x40BeamAssetUrl,
+  'alu80x40-beam': alu80x40BeamAssetUrl,
+  'alu40x40-endcap': alu40x40EndcapAssetUrl,
+  'alu80x40-endcap': alu80x40EndcapAssetUrl,
+};
+const prebuiltGeometries = new Map<GeometryAssetKey, BufferGeometry>();
+const prebuiltGeometryLoadPromises = new Map<GeometryAssetKey, Promise<void>>();
 
 function getTargetCrossSectionSize(axis: BeamAxis, size: [number, number, number]) {
   if (axis === 'x') {
@@ -60,171 +93,191 @@ export function getProfileMeshScale(size: Vector3Tuple): Vector3Tuple {
   const axis = getBeamAxis(size);
   const length = getBeamLength(axis, size);
 
-  if (axis === 'x') {
-    return [length, 1, 1];
-  }
-
-  if (axis === 'y') {
-    return [1, length, 1];
-  }
-
   return [1, 1, length];
 }
 
-function createExtrudedSvgProfileGeometry(svgMarkup: string, size: [number, number, number], cacheKeyPrefix: string) {
-  const axis = getBeamAxis(size);
-  const { targetWidth, targetHeight } = getTargetCrossSectionSize(axis, size);
-  const cacheKey = getProfileGeometryCacheKey(size, cacheKeyPrefix);
-  const cachedGeometry = geometryCache.get(cacheKey);
+function restoreGeometry(arrayBuffer: ArrayBuffer, byteOffset: number, geometryHeader: BinaryGeometryHeader) {
+  const geometry = new BufferGeometry();
+  const positionArray = new Float32Array(arrayBuffer, byteOffset, geometryHeader.positionLength);
+  byteOffset += geometryHeader.positionLength * FLOAT_BYTES;
 
-  if (cachedGeometry) {
-    return cachedGeometry;
+  const normalArray = new Float32Array(arrayBuffer, byteOffset, geometryHeader.normalLength);
+  byteOffset += geometryHeader.normalLength * FLOAT_BYTES;
+
+  geometry.setAttribute('position', new BufferAttribute(positionArray, 3));
+  geometry.setAttribute('normal', new BufferAttribute(normalArray, 3));
+
+  if (geometryHeader.indexLength > 0) {
+    const indexArray = new Uint32Array(arrayBuffer, byteOffset, geometryHeader.indexLength);
+
+    geometry.setIndex(new BufferAttribute(indexArray, 1));
+    byteOffset += geometryHeader.indexLength * Uint32Array.BYTES_PER_ELEMENT;
   }
 
-  const svgData = svgLoader.parse(svgMarkup);
-  const shapes = svgData.paths.flatMap((path) => SVGLoader.createShapes(path));
-  const geometry = new ExtrudeGeometry(shapes, {
-    depth: NORMALIZED_BEAM_LENGTH,
-    bevelEnabled: false,
-    steps: 1,
-    curveSegments: 24,
-  });
+  geometry.boundingBox = new Box3(new Vector3(...geometryHeader.boundingBox.min), new Vector3(...geometryHeader.boundingBox.max));
+  geometry.boundingSphere = new Sphere(
+    new Vector3(...geometryHeader.boundingSphere.center),
+    geometryHeader.boundingSphere.radius
+  );
 
-  geometry.scale(SVG_UNITS_TO_METERS, SVG_UNITS_TO_METERS, 1);
-  geometry.computeBoundingBox();
-
-  const initialWidth = geometry.boundingBox ? geometry.boundingBox.max.x - geometry.boundingBox.min.x : targetWidth;
-  const initialHeight = geometry.boundingBox ? geometry.boundingBox.max.y - geometry.boundingBox.min.y : targetHeight;
-  const shouldRotateProfile = (targetWidth >= targetHeight) !== (initialWidth >= initialHeight);
-
-  if (shouldRotateProfile) {
-    geometry.rotateZ(Math.PI / 2);
-    geometry.computeBoundingBox();
-  }
-
-  const profileWidth = geometry.boundingBox ? geometry.boundingBox.max.x - geometry.boundingBox.min.x : targetWidth;
-  const profileHeight = geometry.boundingBox ? geometry.boundingBox.max.y - geometry.boundingBox.min.y : targetHeight;
-  const scaleX = profileWidth === 0 ? 1 : targetWidth / profileWidth;
-  const scaleY = profileHeight === 0 ? 1 : targetHeight / profileHeight;
-
-  geometry.scale(scaleX, scaleY, 1);
-
-  if (axis === 'x') {
-    geometry.rotateY(Math.PI / 2);
-  } else if (axis === 'y') {
-    geometry.rotateX(-Math.PI / 2);
-  }
-
-  geometry.center();
-  geometry.deleteAttribute('normal');
-  geometry.deleteAttribute('uv');
-
-  if (geometry.getAttribute('uv1')) {
-    geometry.deleteAttribute('uv1');
-  }
-
-  const mergedGeometry = mergeVertices(geometry);
-  const shadedGeometry = toCreasedNormals(mergedGeometry, Math.PI / 2.8);
-
-  shadedGeometry.computeVertexNormals();
-  flattenOuterLongFaceNormals(shadedGeometry, axis);
-  geometry.dispose();
-  mergedGeometry.dispose();
-
-  geometryCache.set(cacheKey, shadedGeometry);
-
-  return shadedGeometry;
+  return { geometry, byteOffset };
 }
 
-function flattenOuterLongFaceNormals(geometry: BufferGeometry, axis: BeamAxis) {
-  geometry.computeBoundingBox();
+function readVector3(view: DataView, byteOffset: number): { value: Vector3Tuple; byteOffset: number } {
+  const value: Vector3Tuple = [
+    view.getFloat32(byteOffset, true),
+    view.getFloat32(byteOffset + FLOAT_BYTES, true),
+    view.getFloat32(byteOffset + FLOAT_BYTES * 2, true),
+  ];
 
-  const bounds = geometry.boundingBox;
-  const positions = geometry.getAttribute('position');
-  const normals = geometry.getAttribute('normal');
+  return {
+    value,
+    byteOffset: byteOffset + FLOAT_BYTES * 3,
+  };
+}
 
-  if (!bounds || !positions || !normals) {
+function parseGeometryHeader(view: DataView) {
+  const fileMagic = view.getUint32(0, true);
+  const fileVersion = view.getUint32(4, true);
+
+  if (fileMagic !== FILE_MAGIC) {
+    throw new Error('Invalid profile geometry asset magic');
+  }
+
+  if (fileVersion !== 1) {
+    throw new Error(`Unsupported profile geometry asset version: ${fileVersion}`);
+  }
+
+  let byteOffset = 8;
+  const positionLength = view.getUint32(byteOffset, true);
+  byteOffset += 4;
+  const normalLength = view.getUint32(byteOffset, true);
+  byteOffset += 4;
+  const indexLength = view.getUint32(byteOffset, true);
+  byteOffset += 4;
+  const min = readVector3(view, byteOffset);
+  byteOffset = min.byteOffset;
+  const max = readVector3(view, byteOffset);
+  byteOffset = max.byteOffset;
+  const center = readVector3(view, byteOffset);
+  byteOffset = center.byteOffset;
+  const radius = view.getFloat32(byteOffset, true);
+
+  return {
+    header: {
+      positionLength,
+      normalLength,
+      indexLength,
+      boundingBox: {
+        min: min.value,
+        max: max.value,
+      },
+      boundingSphere: {
+        center: center.value,
+        radius,
+      },
+    },
+    byteOffset: FILE_HEADER_BYTES,
+  };
+}
+
+async function loadPrebuiltProfileGeometry(key: GeometryAssetKey) {
+  if (prebuiltGeometries.has(key)) {
     return;
   }
 
-  const axisIndex = axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
-  const crossAxisIndices = axis === 'x' ? [1, 2] : axis === 'y' ? [0, 2] : [0, 1];
-  const lengthHalf = (bounds.max.getComponent(axisIndex) - bounds.min.getComponent(axisIndex)) / 2;
-  const capEpsilon = Math.max(lengthHalf * 0.015, 0.0025);
-  const faceEpsilon = 0.0015;
+  const existingPromise = prebuiltGeometryLoadPromises.get(key);
 
-  for (let index = 0; index < positions.count; index += 1) {
-    const axisPosition = positions.getComponent(index, axisIndex);
-
-    if (Math.abs(axisPosition) > lengthHalf - capEpsilon) {
-      continue;
-    }
-
-    let replaced = false;
-
-    for (const crossAxisIndex of crossAxisIndices) {
-      const min = bounds.min.getComponent(crossAxisIndex);
-      const max = bounds.max.getComponent(crossAxisIndex);
-      const value = positions.getComponent(index, crossAxisIndex);
-
-      if (Math.abs(value - max) <= faceEpsilon) {
-        normals.setComponent(index, 0, 0);
-        normals.setComponent(index, 1, 0);
-        normals.setComponent(index, 2, 0);
-        normals.setComponent(index, crossAxisIndex, 1);
-        replaced = true;
-        break;
-      }
-
-      if (Math.abs(value - min) <= faceEpsilon) {
-        normals.setComponent(index, 0, 0);
-        normals.setComponent(index, 1, 0);
-        normals.setComponent(index, 2, 0);
-        normals.setComponent(index, crossAxisIndex, -1);
-        replaced = true;
-        break;
-      }
-    }
-
-    if (!replaced) {
-      continue;
-    }
+  if (existingPromise) {
+    return existingPromise;
   }
 
-  normals.needsUpdate = true;
+  const loadPromise = (async () => {
+    const response = await fetch(geometryAssetUrls[key]);
+
+    if (!response.ok) {
+      throw new Error(`Failed to load profile geometry "${key}": ${response.status}`);
+    }
+
+    const arrayBuffer = await response.arrayBuffer();
+    const view = new DataView(arrayBuffer);
+    const parsedHeader = parseGeometryHeader(view);
+    const restoredGeometry = restoreGeometry(arrayBuffer, parsedHeader.byteOffset, parsedHeader.header);
+
+    prebuiltGeometries.set(key, restoredGeometry.geometry);
+  })();
+
+  prebuiltGeometryLoadPromises.set(key, loadPromise);
+
+  try {
+    await loadPromise;
+  } finally {
+    prebuiltGeometryLoadPromises.delete(key);
+  }
 }
 
-export function createAluminium40x40Geometry(size: [number, number, number]) {
-  return createExtrudedSvgProfileGeometry(profile40x40Svg, size, 'alu40x40');
+export async function loadPrebuiltProfileGeometries(keys: GeometryAssetKey[] = GEOMETRY_KEYS) {
+  await Promise.all(keys.map((key) => loadPrebuiltProfileGeometry(key)));
 }
 
-export function createAluminium80x40Geometry(size: [number, number, number]) {
-  return createExtrudedSvgProfileGeometry(profile80x40Svg, size, 'alu80x40');
-}
+function getGeometryAssetKey(profileType: ProfileType | undefined, shape: MeshSpec['shape'], size: Vector3Tuple, axis: BeamAxis) {
+  const resolvedProfileType = profileType ?? inferProfileTypeFromSize(size, axis);
 
-export function createRoundedEndCapGeometry(size: [number, number, number], axis: BeamAxis) {
-  const { targetWidth: width, targetHeight: height } = getTargetCrossSectionSize(axis, size);
-  const cacheKey = `endcap:${axis}:${formatCacheDimension(width)}x${formatCacheDimension(height)}`;
-  const cachedGeometry = geometryCache.get(cacheKey);
-
-  if (cachedGeometry) {
-    return cachedGeometry;
+  if (resolvedProfileType === 'alu40x40') {
+    return shape === 'endcap' ? 'alu40x40-endcap' : 'alu40x40-beam';
   }
 
-  const radius = Math.min(ENDCAP_CORNER_RADIUS_MM * SVG_UNITS_TO_METERS, width / 2, height / 2);
-  const geometry = new RoundedBoxGeometry(width, height, ENDCAP_THICKNESS, ENDCAP_SEGMENTS, radius);
+  return shape === 'endcap' ? 'alu80x40-endcap' : 'alu80x40-beam';
+}
 
+function inferProfileTypeFromSize(size: Vector3Tuple, axis: BeamAxis): ProfileType {
+  const { targetWidth, targetHeight } = getTargetCrossSectionSize(axis, size);
+  return Math.max(targetWidth, targetHeight) > 0.05 ? 'alu80x40' : 'alu40x40';
+}
+
+function getAxisRotation(axis: BeamAxis) {
   if (axis === 'x') {
-    geometry.rotateY(Math.PI / 2);
-  } else if (axis === 'y') {
-    geometry.rotateX(Math.PI / 2);
+    return AXIS_X_ROTATION;
   }
 
-  geometry.center();
-  geometry.computeVertexNormals();
-  geometry.computeBoundingBox();
-  geometry.computeBoundingSphere();
+  if (axis === 'y') {
+    return AXIS_Y_ROTATION;
+  }
 
-  geometryCache.set(cacheKey, geometry);
-  return geometry;
+  return IDENTITY_ROTATION;
+}
+
+function needsProfileRoll(profileType: ProfileType | undefined, axis: BeamAxis) {
+  return profileType === 'alu80x40' && axis === 'y';
+}
+
+export function getProfileMeshRotation(mesh: MeshSpec): RotationTuple {
+  const axis = mesh.axis ?? getBeamAxis(mesh.size);
+  const profileType = mesh.profileType ?? inferProfileTypeFromSize(mesh.size, axis);
+  const rotation = new Quaternion();
+
+  if (mesh.rotation) {
+    rotation.copy(new Quaternion().setFromEuler(new Euler(...mesh.rotation)));
+  } else {
+    rotation.copy(IDENTITY_ROTATION);
+  }
+
+  rotation.multiply(getAxisRotation(axis));
+
+  if (needsProfileRoll(profileType, axis)) {
+    rotation.multiply(PROFILE_ROLL_ROTATION);
+  }
+
+  const euler = new Euler().setFromQuaternion(rotation, 'XYZ');
+  return [euler.x, euler.y, euler.z];
+}
+
+export function getProfileGeometry(mesh: MeshSpec) {
+  if (!mesh.profileType && mesh.shape !== 'endcap') {
+    return null;
+  }
+
+  const axis = mesh.axis ?? getBeamAxis(mesh.size);
+  const assetKey = getGeometryAssetKey(mesh.profileType, mesh.shape, mesh.size, axis);
+  return prebuiltGeometries.get(assetKey) ?? null;
 }

@@ -6,6 +6,7 @@
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import { createPlannerCutList } from './cut-list';
   import { derivePlannerGeometry } from './geometry';
+  import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
   import { createInitialPlannerInput } from './presets';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
@@ -92,7 +93,7 @@
     sceneStatus = 'loading';
 
     try {
-      const module = await import('./Scene.svelte');
+      const [module] = await Promise.all([import('./Scene.svelte'), loadPrebuiltProfileGeometries()]);
       PlannerScene = module.default;
       sceneStatus = 'ready';
     } catch {
@@ -321,12 +322,12 @@
             />
           </Folder>
           <Button on:click={resetSetup} label="Reset" title="Reset" />
-          <Folder title="Modules">
+          <Folder title="Enabled Modules">
             <Checkbox bind:value={visibleModules.steeringColumn} label="Steering column" />
             <Checkbox bind:value={visibleModules.pedalTray} label="Pedal tray" />
           </Folder>
         </Pane>
-        <Pane title="Modules" position="inline" bind:expanded={paneExpanded.modules}>
+        <Pane title="Module Settings" position="inline" bind:expanded={paneExpanded.modules}>
           {#if visibleModules.steeringColumn}
             <Folder title="Steering column">
               <Slider

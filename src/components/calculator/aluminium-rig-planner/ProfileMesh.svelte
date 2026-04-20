@@ -2,12 +2,11 @@
   import { T } from '@threlte/core';
 
   import {
-    createAluminium40x40Geometry,
-    createAluminium80x40Geometry,
-    createRoundedEndCapGeometry,
+    getProfileGeometry,
+    getProfileMeshRotation,
     getProfileMeshScale,
   } from './modules/profile-geometry';
-  import { getBeamAxis, type MeshSpec } from './modules/shared';
+  import type { MeshSpec } from './modules/shared';
 
   type Props = {
     mesh: MeshSpec;
@@ -67,21 +66,10 @@
   });
 
   const profileGeometry = $derived.by(() => {
-    if (mesh.shape === 'endcap') {
-      return createRoundedEndCapGeometry(mesh.size, mesh.axis ?? getBeamAxis(mesh.size));
-    }
-
-    if (mesh.profileType === 'alu40x40') {
-      return createAluminium40x40Geometry(mesh.size);
-    }
-
-    if (mesh.profileType === 'alu80x40') {
-      return createAluminium80x40Geometry(mesh.size);
-    }
-
-    return null;
+    return getProfileGeometry(mesh);
   });
   const profileScale = $derived(mesh.shape === 'endcap' ? [1, 1, 1] : mesh.profileType ? getProfileMeshScale(mesh.size) : [1, 1, 1]);
+  const profileRotation = $derived(profileGeometry ? getProfileMeshRotation(mesh) : mesh.rotation ?? [0, 0, 0]);
 </script>
 
 {#if profileGeometry}
@@ -89,7 +77,7 @@
     castShadow
     geometry={profileGeometry}
     position={mesh.position}
-    rotation={mesh.rotation ?? [0, 0, 0]}
+    rotation={profileRotation}
     scale={profileScale}
   >
     <T.MeshStandardMaterial

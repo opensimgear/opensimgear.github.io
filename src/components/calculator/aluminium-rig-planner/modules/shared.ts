@@ -159,6 +159,7 @@ export function createEndCapMeshes(mesh: MeshSpec): MeshSpec[] {
     return {
       id: `${mesh.id}-endcap-${end}`,
       axis,
+      profileType: mesh.profileType,
       shape: 'endcap',
       materialKind: 'plastic',
       position,

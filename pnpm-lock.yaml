@@ -132,6 +132,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 8.58.1
         version: 8.58.1(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
+      '@xmldom/xmldom':
+        specifier: ^0.9.10
+        version: 0.9.10
       astro-eslint-parser:
         specifier: ^1.4.0
         version: 1.4.0
@@ -2287,6 +2290,10 @@ packages:
 
   '@webgpu/types@0.1.69':
     resolution: {integrity: sha512-RPmm6kgRbI8e98zSD3RVACvnuktIja5+yLgDAkTmxLr90BEwdTXRQWNLF3ETTTyH/8mKhznZuN5AveXYFEsMGQ==}
+
+  '@xmldom/xmldom@0.9.10':
+    resolution: {integrity: sha512-A9gOqLdi6cV4ibazAjcQufGj0B1y/vDqYrcuP6d/6x8P27gRS8643Dj9o1dEKtB6O7fwxb2FgBmJS2mX7gpvdw==}
+    engines: {node: '>=14.6'}
 
   '@yr/monotone-cubic-spline@1.0.3':
     resolution: {integrity: sha512-FQXkOta0XBSUPHndIKON2Y9JeQz5ZeMqLYZVVK93FliNBFm7LNMIZmY6FrMEB9XPcDbE2bekMbZD6kzDkxwYjA==}
@@ -8441,6 +8448,8 @@ snapshots:
   '@vtbag/utensil-drawer@1.2.16': {}
 
   '@webgpu/types@0.1.69': {}
+
+  '@xmldom/xmldom@0.9.10': {}
 
   '@yr/monotone-cubic-spline@1.0.3': {}
 
