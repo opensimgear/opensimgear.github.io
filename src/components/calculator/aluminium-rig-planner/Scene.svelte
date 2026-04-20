@@ -15,10 +15,6 @@
 
   const cameraPosition = $derived<[number, number, number]>(isNarrowViewport ? [0.98, 0.84, 2.45] : [0.84, 0.92, 2.9]);
   const gizmoSize = $derived(isNarrowViewport ? 48 : 64);
-
-  function blockWheel(event: WheelEvent) {
-    event.preventDefault();
-  }
 </script>
 
 <div class="w-full touch-none border-zinc-200 bg-[radial-gradient(circle_at_top,#ffffff_0%,#f4f4f5_60%,#e4e4e7_100%)]">
@@ -31,7 +27,7 @@
         ref.lookAt(0.72, 0.28, 0);
       }}
     >
-      <OrbitControls enableDamping dampingFactor={0.08} target={[0.72, 0.24, 0]} enableZoom={false}>
+      <OrbitControls enableDamping dampingFactor={0.08} target={[0.72, 0.24, 0]}>
         <Gizmo size={gizmoSize} />
       </OrbitControls>
     </T.PerspectiveCamera>
