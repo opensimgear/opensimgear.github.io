@@ -1,7 +1,11 @@
 <script lang="ts">
   import { T } from '@threlte/core';
 
-  import { createAluminium40x40Geometry, createAluminium80x40Geometry } from './modules/profile-geometry';
+  import {
+    createAluminium40x40Geometry,
+    createAluminium80x40Geometry,
+    getProfileMeshScale,
+  } from './modules/profile-geometry';
   import type { MeshSpec } from './modules/shared';
 
   type Props = {
@@ -64,6 +68,7 @@
 
     return null;
   });
+  const profileScale = $derived(mesh.profileType ? getProfileMeshScale(mesh.size) : [1, 1, 1]);
 </script>
 
 {#if profileGeometry}
@@ -72,6 +77,7 @@
     geometry={profileGeometry}
     position={mesh.position}
     rotation={mesh.rotation ?? [0, 0, 0]}
+    scale={profileScale}
   >
     <T.MeshStandardMaterial
       color={materialProps.color}

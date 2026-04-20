@@ -6,10 +6,13 @@ import profile40x40Svg from './profiles/40x40.svg?raw';
 import profile80x40Svg from './profiles/80x40.svg?raw';
 
 export type BeamAxis = 'x' | 'y' | 'z';
+type Vector3Tuple = [number, number, number];
 
 const geometryCache = new Map<string, BufferGeometry>();
 const svgLoader = new SVGLoader();
 const SVG_UNITS_TO_METERS = 0.001;
+const NORMALIZED_BEAM_LENGTH = 1;
+
 function getTargetCrossSectionSize(axis: BeamAxis, size: [number, number, number]) {
   if (axis === 'x') {
     return {
@@ -43,20 +46,50 @@ export function getBeamAxis(size: [number, number, number]): BeamAxis {
   return 'z';
 }
 
+function getBeamLength(axis: BeamAxis, size: [number, number, number]) {
+  return axis === 'x' ? size[0] : axis === 'y' ? size[1] : size[2];
+}
+
+function formatCacheDimension(value: number) {
+  return value.toFixed(6);
+}
+
+export function getProfileGeometryCacheKey(size: Vector3Tuple, cacheKeyPrefix: string) {
+  const axis = getBeamAxis(size);
+  const { targetWidth, targetHeight } = getTargetCrossSectionSize(axis, size);
+
+  return `${cacheKeyPrefix}:${axis}:${formatCacheDimension(targetWidth)}x${formatCacheDimension(targetHeight)}`;
+}
+
+export function getProfileMeshScale(size: Vector3Tuple): Vector3Tuple {
+  const axis = getBeamAxis(size);
+  const length = getBeamLength(axis, size);
+
+  if (axis === 'x') {
+    return [length, 1, 1];
+  }
+
+  if (axis === 'y') {
+    return [1, length, 1];
+  }
+
+  return [1, 1, length];
+}
+
 function createExtrudedSvgProfileGeometry(svgMarkup: string, size: [number, number, number], cacheKeyPrefix: string) {
-  const cacheKey = `${cacheKeyPrefix}:${size.join('x')}`;
+  const axis = getBeamAxis(size);
+  const { targetWidth, targetHeight } = getTargetCrossSectionSize(axis, size);
+  const cacheKey = getProfileGeometryCacheKey(size, cacheKeyPrefix);
   const cachedGeometry = geometryCache.get(cacheKey);
 
   if (cachedGeometry) {
     return cachedGeometry;
   }
 
-  const axis = getBeamAxis(size);
-  const length = axis === 'x' ? size[0] : axis === 'y' ? size[1] : size[2];
   const svgData = svgLoader.parse(svgMarkup);
   const shapes = svgData.paths.flatMap((path) => SVGLoader.createShapes(path));
   const geometry = new ExtrudeGeometry(shapes, {
-    depth: length,
+    depth: NORMALIZED_BEAM_LENGTH,
     bevelEnabled: false,
     steps: 1,
     curveSegments: 24,
@@ -65,7 +98,6 @@ function createExtrudedSvgProfileGeometry(svgMarkup: string, size: [number, numb
   geometry.scale(SVG_UNITS_TO_METERS, SVG_UNITS_TO_METERS, 1);
   geometry.computeBoundingBox();
 
-  const { targetWidth, targetHeight } = getTargetCrossSectionSize(axis, size);
   const initialWidth = geometry.boundingBox ? geometry.boundingBox.max.x - geometry.boundingBox.min.x : targetWidth;
   const initialHeight = geometry.boundingBox ? geometry.boundingBox.max.y - geometry.boundingBox.min.y : targetHeight;
   const shouldRotateProfile = (targetWidth >= targetHeight) !== (initialWidth >= initialHeight);
@@ -89,6 +121,13 @@ function createExtrudedSvgProfileGeometry(svgMarkup: string, size: [number, numb
   }
 
   geometry.center();
+  geometry.deleteAttribute('normal');
+  geometry.deleteAttribute('uv');
+
+  if (geometry.getAttribute('uv1')) {
+    geometry.deleteAttribute('uv1');
+  }
+
   const mergedGeometry = mergeVertices(geometry);
   const shadedGeometry = toCreasedNormals(mergedGeometry, Math.PI / 2.8);
 
