@@ -59,4 +59,11 @@ describe('aluminium rig planner presets', () => {
   it('uses front wheel mount for formula preset by default', () => {
     expect(FORMULA_PRESET.wheelMountType).toBe('front');
   });
+
+  it('seeds pedal tray module values from preset', () => {
+    expect(GT_PRESET.pedalTrayDepthMm).toBe(320);
+    expect(GT_PRESET.pedalTrayDistanceMm).toBe(550);
+    expect(FORMULA_PRESET.pedalTrayDepthMm).toBe(320);
+    expect(FORMULA_PRESET.pedalTrayDistanceMm).toBe(550);
+  });
 });

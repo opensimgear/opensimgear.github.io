@@ -1,21 +1,18 @@
 <script lang="ts">
-  import type { GuidanceItem } from './ergonomics';
   import type { PlannerGeometry } from './geometry';
   import type { PlannerInput } from './types';
 
   type Props = {
     input: PlannerInput;
     geometry: PlannerGeometry;
-    guidance: GuidanceItem[];
   };
 
-  const { input, geometry, guidance }: Props = $props();
+  const { input, geometry }: Props = $props();
 
   const seatBaseLengthMm = 420;
   const seatBackLengthMm = 420;
   const wheelRadiusMm = 135;
   const pedalLengthMm = 170;
-  const baseDepthMm = 60;
 
   const wheelCenterX = $derived(input.wheelXMm + geometry.wheelMountOffsets.wheelCenterOffsetXMm);
   const wheelCenterY = $derived(input.wheelYMm + geometry.wheelMountOffsets.wheelCenterOffsetYMm);
@@ -31,18 +28,6 @@
 
   function toSvgY(value: number) {
     return drawingHeightMm - value;
-  }
-
-  function getGuidanceClassName(severity: GuidanceItem['severity']) {
-    if (severity === 'good') {
-      return 'border-emerald-300 bg-emerald-50 text-emerald-700';
-    }
-
-    if (severity === 'review') {
-      return 'border-amber-300 bg-amber-50 text-amber-700';
-    }
-
-    return 'border-rose-300 bg-rose-50 text-rose-700';
   }
 </script>
 

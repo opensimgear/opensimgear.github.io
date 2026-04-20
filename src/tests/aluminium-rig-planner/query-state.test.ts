@@ -16,10 +16,18 @@ describe('aluminium rig planner query state', () => {
       seatBackAngleDeg: -20,
       pedalAngleDeg: 65,
       wheelTiltDeg: 80,
+      pedalTrayDepthMm: 120,
+      pedalTrayDistanceMm: -50,
+      steeringColumnBaseHeightMm: 900,
+      steeringColumnHeightMm: 120,
     });
 
     expect(state.plannerInput.seatBackAngleDeg).toBe(10);
     expect(state.plannerInput.pedalAngleDeg).toBe(35);
     expect(state.plannerInput.wheelTiltDeg).toBe(35);
+    expect(state.plannerInput.pedalTrayDepthMm).toBe(300);
+    expect(state.plannerInput.pedalTrayDistanceMm).toBe(0);
+    expect(state.plannerInput.steeringColumnBaseHeightMm).toBe(500);
+    expect(state.plannerInput.steeringColumnHeightMm).toBe(580);
   });
 });

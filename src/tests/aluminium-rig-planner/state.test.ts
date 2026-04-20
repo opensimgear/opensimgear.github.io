@@ -20,33 +20,29 @@ describe('aluminium rig planner responsive state', () => {
   it('starts all panes collapsed on narrow viewports', () => {
     expect(getAluminiumRigPaneExpandedState(true)).toEqual({
       setup: false,
-      posture: false,
-      cutList: false,
     });
   });
 
   it('starts all panes expanded on wide viewports', () => {
     expect(getAluminiumRigPaneExpandedState(false)).toEqual({
       setup: true,
-      posture: true,
-      cutList: true,
     });
   });
 
   it('resets pane state when reset flag is true', () => {
-    expect(
-      getNextAluminiumRigPaneExpandedState({ setup: false, posture: true, cutList: false }, false, false, true)
-    ).toEqual(getAluminiumRigPaneExpandedState(false));
+    expect(getNextAluminiumRigPaneExpandedState({ setup: false }, false, false, true)).toEqual(
+      getAluminiumRigPaneExpandedState(false)
+    );
   });
 
   it('resets pane state to mobile defaults when viewport crosses into narrow band', () => {
-    expect(getNextAluminiumRigPaneExpandedState({ setup: true, posture: true, cutList: true }, false, true)).toEqual(
+    expect(getNextAluminiumRigPaneExpandedState({ setup: true }, false, true)).toEqual(
       getAluminiumRigPaneExpandedState(true)
     );
   });
 
   it('resets pane state to desktop defaults when viewport crosses into wide band', () => {
-    expect(getNextAluminiumRigPaneExpandedState({ setup: false, posture: false, cutList: false }, true, false)).toEqual(
+    expect(getNextAluminiumRigPaneExpandedState({ setup: false }, true, false)).toEqual(
       getAluminiumRigPaneExpandedState(false)
     );
   });
@@ -54,8 +50,6 @@ describe('aluminium rig planner responsive state', () => {
   it('keeps pane state unchanged on same-band resize without reset', () => {
     const currentPaneExpanded = {
       setup: false,
-      posture: true,
-      cutList: false,
     };
 
     expect(getNextAluminiumRigPaneExpandedState(currentPaneExpanded, false, false)).toBe(currentPaneExpanded);
