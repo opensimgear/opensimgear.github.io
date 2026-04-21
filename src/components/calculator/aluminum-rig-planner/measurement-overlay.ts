@@ -41,6 +41,10 @@ function verticalArrowX(input: PlannerInput) {
   return mm(input.seatBaseDepthMm + input.steeringColumnDistanceMm + UPRIGHT_BEAM_DEPTH_MM);
 }
 
+function rightSideArrowZ(input: PlannerInput, clearanceMm = VERTICAL_ARROW_CLEARANCE_MM) {
+  return centeredZ(input.baseWidthMm + clearanceMm, input.baseWidthMm);
+}
+
 function steeringColumnTopMm(input: PlannerInput) {
   return BASE_BEAM_HEIGHT_MM + Math.max(
     PROFILE_SHORT_MM,
@@ -154,12 +158,12 @@ export function createPlannerMeasurementOverlay(
         start: [
           verticalArrowX(input) + mm(VERTICAL_ARROW_CLEARANCE_MM),
           mm(BASE_BEAM_HEIGHT_MM),
-          centeredZ(input.baseWidthMm - 20, input.baseWidthMm),
+          rightSideArrowZ(input),
         ],
         end: [
           verticalArrowX(input) + mm(VERTICAL_ARROW_CLEARANCE_MM),
           mm(steeringColumnTopMm(input)),
-          centeredZ(input.baseWidthMm - 20, input.baseWidthMm),
+          rightSideArrowZ(input),
         ],
       };
   }

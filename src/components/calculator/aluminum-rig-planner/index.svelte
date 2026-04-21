@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, type Component } from 'svelte';
+  import { onMount, tick, type Component } from 'svelte';
   import { Button, Checkbox, Color, Element, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
@@ -73,6 +73,7 @@
   let sceneStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
   let hoveredCutListKey = $state<string | null>(null);
   let activeMeasurementKey = $state<PlannerMeasurementKey | null>(null);
+  let controlsReady = $state(false);
   let measurementHideTimeout: ReturnType<typeof setTimeout> | null = null;
 
   async function loadScene() {
@@ -125,6 +126,9 @@
     window.addEventListener('resize', handleResize);
     mounted = true;
     void loadScene();
+    void tick().then(() => {
+      controlsReady = true;
+    });
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -132,6 +136,7 @@
       if (measurementHideTimeout) {
         clearTimeout(measurementHideTimeout);
       }
+      controlsReady = false;
     };
   });
 
@@ -178,6 +183,10 @@
   }
 
   function scheduleMeasurementOverlay(key: PlannerMeasurementKey) {
+    if (!controlsReady) {
+      return;
+    }
+
     activeMeasurementKey = key;
 
     if (measurementHideTimeout) {
