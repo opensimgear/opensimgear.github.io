@@ -261,6 +261,14 @@
     scheduleMeasurementOverlay('baseInnerBeamSpacingMm');
   }
 
+  function setSeatLengthMm(value: number) {
+    plannerInput.seatLengthMm = Math.max(
+      PLANNER_DIMENSION_LIMITS.seatLengthMinMm,
+      Math.min(PLANNER_DIMENSION_LIMITS.seatLengthMaxMm, value)
+    );
+    syncPlannerUrlState();
+  }
+
   function setSeatHeightFromBaseInnerBeamsMm(value: number) {
     plannerInput.seatHeightFromBaseInnerBeamsMm = Math.max(
       PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMinMm,
@@ -432,6 +440,14 @@
             />
           </Folder>
           <Folder title="Seat">
+            <Slider
+              bind:value={() => plannerInput.seatLengthMm, setSeatLengthMm}
+              label="Seat Length"
+              min={PLANNER_DIMENSION_LIMITS.seatLengthMinMm}
+              max={PLANNER_DIMENSION_LIMITS.seatLengthMaxMm}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
             <Slider
               bind:value={() => plannerInput.seatHeightFromBaseInnerBeamsMm, setSeatHeightFromBaseInnerBeamsMm}
               label="Seat height"

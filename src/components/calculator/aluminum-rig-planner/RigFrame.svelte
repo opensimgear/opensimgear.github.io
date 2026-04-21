@@ -6,6 +6,7 @@
   import ProfileMesh from './ProfileMesh.svelte';
   import { createBaseModule } from './modules/base';
   import { createPedalTrayModule } from './modules/pedal-tray';
+  import { createSeatModule } from './modules/seat';
   import { createSteeringColumnModule } from './modules/steering-column';
   import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from './modules/shared';
   import type { PlannerVisibleModules } from './types';
@@ -26,6 +27,7 @@
   const baseModule = $derived(createBaseModule(input, profileColor));
   const steeringColumnModule = $derived(createSteeringColumnModule(input, profileColor));
   const pedalAssembly = $derived(createPedalTrayModule(input, profileColor));
+  const seatModule = $derived(createSeatModule(input));
 
   const beamMeshes = $derived([
     ...baseModule,
@@ -41,10 +43,10 @@
     }));
 
     if (!showEndCaps) {
-      return adjustedBeams;
+      return [...adjustedBeams, ...seatModule];
     }
 
-    return [...adjustedBeams, ...beamMeshes.flatMap((mesh) => createEndCapMeshes(mesh))];
+    return [...adjustedBeams, ...beamMeshes.flatMap((mesh) => createEndCapMeshes(mesh)), ...seatModule];
   });
 </script>
 

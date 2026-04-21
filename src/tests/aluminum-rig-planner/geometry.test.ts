@@ -76,11 +76,13 @@ describe('aluminum rig planner geometry', () => {
   it('clamps seat posture settings to supported limits', () => {
     const clamped = clampPlannerInput({
       ...DEFAULT_PLANNER_INPUT,
+      seatLengthMm: 900,
       seatHeightFromBaseInnerBeamsMm: 400,
       seatAngleDeg: -10,
       backrestAngleDeg: 200,
     });
 
+    expect(clamped.seatLengthMm).toBe(520);
     expect(clamped.seatHeightFromBaseInnerBeamsMm).toBe(300);
     expect(clamped.seatAngleDeg).toBe(0);
     expect(clamped.backrestAngleDeg).toBe(135);

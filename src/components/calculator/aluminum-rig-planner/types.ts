@@ -21,6 +21,7 @@ export interface PlannerInput {
   baseWidthMm: number;
   seatBaseDepthMm: number;
   baseInnerBeamSpacingMm: number;
+  seatLengthMm: number;
   seatHeightFromBaseInnerBeamsMm: number;
   seatAngleDeg: number;
   backrestAngleDeg: number;

@@ -17,6 +17,7 @@ export function mergePlannerQueryState(defaultInput: PlannerInput, state: Planne
     baseWidthMm: readNumber(state.baseWidthMm, defaultInput.baseWidthMm),
     seatBaseDepthMm: readNumber(state.seatBaseDepthMm, defaultInput.seatBaseDepthMm),
     baseInnerBeamSpacingMm: readNumber(state.baseInnerBeamSpacingMm, defaultInput.baseInnerBeamSpacingMm),
+    seatLengthMm: readNumber(state.seatLengthMm, defaultInput.seatLengthMm),
     seatHeightFromBaseInnerBeamsMm: readNumber(
       state.seatHeightFromBaseInnerBeamsMm,
       defaultInput.seatHeightFromBaseInnerBeamsMm
