@@ -254,8 +254,18 @@ jobs:
     if: ${{ needs.deployment-changelog.outputs.has_changelog == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Check Discord webhook configuration
+        id: discord-webhook-check
+        env:
+          DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK: ${{ secrets.DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK }}
+        run: |
+          if [ -n "${DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK}" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: GitHub release to Discord
-        if: ${{ secrets.DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK != '' }}
+        if: ${{ steps.discord-webhook-check.outputs.configured == 'true' }}
         uses: SethCohen/github-releases-to-discord@v1.19.0
         with:
           webhook_url: ${{ secrets.DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK }}
@@ -266,6 +276,6 @@ jobs:
           release_body: ${{ needs.deployment-changelog.outputs.changelog }}
           release_html_url: ${{ needs.create-release.outputs.release_url }}
       - name: Handle missing Discord webhook
-        if: ${{ secrets.DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK == '' }}
+        if: ${{ steps.discord-webhook-check.outputs.configured != 'true' }}
         run: |
           echo 'Discord webhook secret `DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK` not configured. Skipping Discord notification.' >> "$GITHUB_STEP_SUMMARY"
