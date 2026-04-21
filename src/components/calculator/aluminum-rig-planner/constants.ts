@@ -59,6 +59,7 @@ export const URL_STATE_DEBOUNCE_MS = 300;
 export const SCENE_IDLE_LOAD_TIMEOUT_MS = 180;
 export const IMMEDIATE_SCENE_LOAD_TIMEOUT_MS = 0;
 export const DEFAULT_CUSTOM_PROFILE_COLOR = '#ff0000';
+export const CUT_LIST_HIGHLIGHT_COLOR = '#22c55e';
 
 export const DEFAULT_PLANNER_INPUT: PlannerInput = {
   baseLengthMm: 1200,

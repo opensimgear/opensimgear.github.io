@@ -3,7 +3,7 @@ import { createBaseModule } from './modules/base';
 import { createPedalTrayModule } from './modules/pedal-tray';
 import { createSteeringColumnModule } from './modules/steering-column';
 import { BLACK_PROFILE_COLOR, getMeshCutListRow } from './modules/shared';
-import type { CutListRow, PlannerVisibleModules } from './types';
+import type { CutListEntry, CutListRow, PlannerVisibleModules } from './types';
 
 function compareCutListRows(a: CutListRow, b: CutListRow) {
   if (a.profileType !== b.profileType) {
@@ -31,25 +31,66 @@ export function mergeCutListRows(rows: CutListRow[]): CutListRow[] {
   return [...mergedRows.values()].sort(compareCutListRows);
 }
 
-export function createPlannerCutList(
-  geometry: PlannerGeometry,
-  visibleModules: PlannerVisibleModules,
-  showEndCaps: boolean
-): CutListRow[] {
-  const rows: CutListRow[] = [];
-  const meshes = [
+function getCutListRowKey(row: Pick<CutListRow, 'profileType' | 'lengthMm'>) {
+  return `${row.profileType}:${row.lengthMm}`;
+}
+
+export function mergeCutListEntries(rows: CutListEntry[]): CutListEntry[] {
+  const mergedRows = new Map<string, CutListEntry>();
+
+  for (const row of rows) {
+    const existing = mergedRows.get(row.key);
+
+    if (existing) {
+      existing.quantity += row.quantity;
+      existing.beamIds.push(...row.beamIds);
+      continue;
+    }
+
+    mergedRows.set(row.key, {
+      ...row,
+      beamIds: [...row.beamIds],
+    });
+  }
+
+  return [...mergedRows.values()].sort(compareCutListRows);
+}
+
+function getPlannerMeshes(geometry: PlannerGeometry, visibleModules: PlannerVisibleModules) {
+  return [
     ...createBaseModule(geometry.input, BLACK_PROFILE_COLOR),
     ...(visibleModules.steeringColumn ? createSteeringColumnModule(geometry.input, BLACK_PROFILE_COLOR) : []),
     ...(visibleModules.pedalTray ? createPedalTrayModule(geometry.input, BLACK_PROFILE_COLOR) : []),
   ];
+}
+
+export function createPlannerCutListEntries(
+  geometry: PlannerGeometry,
+  visibleModules: PlannerVisibleModules,
+  showEndCaps: boolean
+): CutListEntry[] {
+  const rows: CutListEntry[] = [];
+  const meshes = getPlannerMeshes(geometry, visibleModules);
 
   for (const mesh of meshes) {
     const row = getMeshCutListRow(mesh, showEndCaps);
 
     if (row) {
-      rows.push(row);
+      rows.push({
+        ...row,
+        key: getCutListRowKey(row),
+        beamIds: [mesh.id],
+      });
     }
   }
 
-  return mergeCutListRows(rows);
+  return mergeCutListEntries(rows);
+}
+
+export function createPlannerCutList(
+  geometry: PlannerGeometry,
+  visibleModules: PlannerVisibleModules,
+  showEndCaps: boolean
+): CutListRow[] {
+  return createPlannerCutListEntries(geometry, visibleModules, showEndCaps).map(({ key: _key, beamIds: _beamIds, ...row }) => row);
 }

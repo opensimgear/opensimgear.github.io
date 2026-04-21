@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { CUT_LIST_HIGHLIGHT_COLOR } from './constants';
   import type { PlannerGeometry } from './geometry';
   import ProfileMesh from './ProfileMesh.svelte';
   import { createBaseModule } from './modules/base';
@@ -9,13 +10,15 @@
 
   type Props = {
     geometry: PlannerGeometry;
+    highlightedBeamIds: string[];
     profileColor: string;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   };
 
-  const { geometry, profileColor, showEndCaps, visibleModules }: Props = $props();
+  const { geometry, highlightedBeamIds, profileColor, showEndCaps, visibleModules }: Props = $props();
   const input = $derived(geometry.input);
+  const highlightedBeamIdSet = $derived(new Set(highlightedBeamIds));
 
   const baseModule = $derived(createBaseModule(input, profileColor));
   const steeringColumnModule = $derived(createSteeringColumnModule(input, profileColor));
@@ -29,6 +32,7 @@
   const allMeshes = $derived.by(() => {
     const adjustedBeams = beamMeshes.map((mesh) => ({
       ...mesh,
+      color: highlightedBeamIdSet.has(mesh.id) ? CUT_LIST_HIGHLIGHT_COLOR : mesh.color,
       position: getAdjustedBeamPosition(mesh, showEndCaps),
       size: getAdjustedBeamSize(mesh, showEndCaps),
     }));

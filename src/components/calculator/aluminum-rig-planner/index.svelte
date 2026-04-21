@@ -4,16 +4,14 @@
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
-  import { createPlannerCutList } from './cut-list';
+  import { createPlannerCutListEntries } from './cut-list';
   import {
     COLOR_MODE_OPTIONS,
     DEFAULT_CUSTOM_PROFILE_COLOR,
     DEFAULT_PLANNER_INPUT,
-    IMMEDIATE_SCENE_LOAD_TIMEOUT_MS,
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
     PLANNER_LAYOUT,
-    SCENE_IDLE_LOAD_TIMEOUT_MS,
     URL_STATE_DEBOUNCE_MS,
   } from './constants';
   import {
@@ -36,6 +34,7 @@
 
   type PlannerSceneComponent = Component<{
     geometry: PlannerGeometry;
+    highlightedBeamIds: string[];
     isNarrowViewport?: boolean;
     profileColor: string;
     showEndCaps: boolean;
@@ -65,6 +64,7 @@
   let mounted = $state(false);
   let PlannerScene = $state<PlannerSceneComponent | null>(null);
   let sceneStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
+  let hoveredCutListKey = $state<string | null>(null);
 
   async function loadScene() {
     if (PlannerScene || sceneStatus === 'loading') return;
@@ -100,7 +100,6 @@
   }
 
   onMount(() => {
-    let cancelSceneLoad = () => {};
     const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
 
     if (encoded) {
@@ -116,28 +115,11 @@
     const handleResize = () => syncViewportState(window.innerWidth);
     window.addEventListener('resize', handleResize);
     mounted = true;
-
-    if ('requestIdleCallback' in window) {
-      const idleId = window.requestIdleCallback(
-        () => {
-          void loadScene();
-        },
-        { timeout: SCENE_IDLE_LOAD_TIMEOUT_MS }
-      );
-
-      cancelSceneLoad = () => window.cancelIdleCallback(idleId);
-    } else {
-      const timeoutId = window.setTimeout(() => {
-        void loadScene();
-      }, IMMEDIATE_SCENE_LOAD_TIMEOUT_MS);
-
-      cancelSceneLoad = () => window.clearTimeout(timeoutId);
-    }
+    void loadScene();
 
     return () => {
       window.removeEventListener('resize', handleResize);
       debouncedUrlStateWriter.cancel();
-      cancelSceneLoad();
     };
   });
 
@@ -149,7 +131,8 @@
         ? customProfileColor
         : BLACK_PROFILE_COLOR
   );
-  const cutListRows = $derived(createPlannerCutList(geometry, visibleModules, showEndCaps));
+  const cutListEntries = $derived(createPlannerCutListEntries(geometry, visibleModules, showEndCaps));
+  const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
   const encodedPlannerState = $derived(
     encodeQueryState({
       ...$state.snapshot(plannerInput),
@@ -270,7 +253,7 @@
         class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
         {#if PlannerScene}
-          <PlannerScene {geometry} {isNarrowViewport} {profileColor} {showEndCaps} {visibleModules} />
+          <PlannerScene {geometry} {highlightedBeamIds} {isNarrowViewport} {profileColor} {showEndCaps} {visibleModules} />
         {:else}
           <div class="grid aspect-[3/2] w-full place-items-center border-zinc-200 bg-zinc-50 text-sm text-zinc-500">
             {#if sceneStatus === 'error'}
@@ -399,11 +382,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {#each cutListRows as row (`${row.profileType}-${row.lengthMm}`)}
-                    <tr class="border-b border-zinc-100 bg-white last:border-b-0">
-                      <td class="px-1.5 py-1 font-medium text-zinc-800">{row.profileType}</td>
-                      <td class="px-1.5 py-1 text-zinc-600">{row.lengthMm} mm</td>
-                      <td class="px-1.5 py-1 text-zinc-600">{row.quantity}</td>
+                  {#each cutListEntries as entry (entry.key)}
+                    <tr
+                      class:bg-zinc-100={hoveredCutListKey === entry.key}
+                      class="cursor-pointer border-b border-zinc-100 bg-white last:border-b-0"
+                      onmouseenter={() => {
+                        hoveredCutListKey = entry.key;
+                      }}
+                      onmouseleave={() => {
+                        hoveredCutListKey = null;
+                      }}
+                    >
+                      <td class="px-1.5 py-1 font-medium text-zinc-800">{entry.profileType}</td>
+                      <td class="px-1.5 py-1 text-zinc-600">{entry.lengthMm} mm</td>
+                      <td class="px-1.5 py-1 text-zinc-600">{entry.quantity}</td>
                     </tr>
                   {/each}
                 </tbody>

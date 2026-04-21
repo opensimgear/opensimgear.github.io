@@ -11,6 +11,11 @@ export type CutListRow = {
   quantity: number;
 };
 
+export type CutListEntry = CutListRow & {
+  key: string;
+  beamIds: string[];
+};
+
 export interface PlannerInput {
   baseLengthMm: number;
   baseWidthMm: number;

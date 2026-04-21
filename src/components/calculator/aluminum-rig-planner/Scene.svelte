@@ -10,13 +10,14 @@
 
   type Props = {
     geometry: PlannerGeometry;
+    highlightedBeamIds: string[];
     isNarrowViewport?: boolean;
     profileColor: string;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   };
 
-  const { geometry, isNarrowViewport = false, profileColor, showEndCaps, visibleModules }: Props = $props();
+  const { geometry, highlightedBeamIds, isNarrowViewport = false, profileColor, showEndCaps, visibleModules }: Props = $props();
 
   const cameraPosition = $derived<[number, number, number]>(
     isNarrowViewport ? SCENE_VIEW.narrowCameraPosition : SCENE_VIEW.wideCameraPosition
@@ -73,6 +74,6 @@
       fadeStrength={SCENE_VIEW.gridFadeStrength}
     />
 
-    <RigFrame {geometry} {profileColor} {showEndCaps} {visibleModules} />
+    <RigFrame {geometry} {highlightedBeamIds} {profileColor} {showEndCaps} {visibleModules} />
   </Canvas>
 </div>

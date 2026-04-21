@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import { DEFAULT_PLANNER_INPUT } from '../../components/calculator/aluminum-rig-planner/constants';
-import { createPlannerCutList, mergeCutListRows } from '../../components/calculator/aluminum-rig-planner/cut-list';
+import {
+  createPlannerCutList,
+  createPlannerCutListEntries,
+  mergeCutListRows,
+} from '../../components/calculator/aluminum-rig-planner/cut-list';
 import { derivePlannerGeometry } from '../../components/calculator/aluminum-rig-planner/geometry';
 
 describe('aluminum rig planner cut list', () => {
@@ -20,9 +24,9 @@ describe('aluminum rig planner cut list', () => {
     );
 
     expect(cutList).toEqual([
-      { profileType: '80x40', lengthMm: 1350, quantity: 2 },
+      { profileType: '80x40', lengthMm: DEFAULT_PLANNER_INPUT.baseLengthMm, quantity: 2 },
       { profileType: '80x40', lengthMm: 420, quantity: 2 },
-      { profileType: '40x40', lengthMm: 500, quantity: 2 },
+      { profileType: '40x40', lengthMm: DEFAULT_PLANNER_INPUT.seatBaseDepthMm, quantity: 2 },
     ]);
   });
 
@@ -83,10 +87,10 @@ describe('aluminum rig planner cut list', () => {
       true
     );
 
-    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 1342, quantity: 2 });
+    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: DEFAULT_PLANNER_INPUT.baseLengthMm - 8, quantity: 2 });
     expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 506, quantity: 2 });
     expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 420, quantity: 3 });
-    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 492, quantity: 2 });
+    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: DEFAULT_PLANNER_INPUT.seatBaseDepthMm - 8, quantity: 2 });
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 292, quantity: 2 });
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 340, quantity: 3 });
   });
@@ -101,5 +105,21 @@ describe('aluminum rig planner cut list', () => {
     expect(rows).toContainEqual({ profileType: '40x40', lengthMm: 320, quantity: 5 });
     expect(rows).toContainEqual({ profileType: '80x40', lengthMm: 420, quantity: 2 });
     expect(rows).toHaveLength(2);
+  });
+
+  it('keeps beam ids for every member in merged cut-list entries', () => {
+    const entries = createPlannerCutListEntries(
+      createGeometry(),
+      {
+        steeringColumn: false,
+        pedalTray: true,
+      },
+      false
+    );
+    const pedalCrossBeams = entries.find((entry) => entry.profileType === '40x40' && entry.lengthMm === 340);
+
+    expect(pedalCrossBeams?.quantity).toBe(3);
+    expect(pedalCrossBeams?.beamIds).toHaveLength(3);
+    expect(pedalCrossBeams?.beamIds).toEqual(['pedal-tray-front', 'pedal-tray-middle', 'pedal-tray-rear']);
   });
 });

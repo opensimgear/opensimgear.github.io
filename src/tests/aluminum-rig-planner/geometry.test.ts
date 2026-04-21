@@ -77,6 +77,7 @@ describe('aluminum rig planner geometry', () => {
     const nearModule = createSteeringColumnModule(
       {
         ...DEFAULT_PLANNER_INPUT,
+        seatBaseDepthMm: 500,
         steeringColumnDistanceMm: 120,
       },
       '#000000'
@@ -84,6 +85,7 @@ describe('aluminum rig planner geometry', () => {
     const farModule = createSteeringColumnModule(
       {
         ...DEFAULT_PLANNER_INPUT,
+        seatBaseDepthMm: 500,
         steeringColumnDistanceMm: 240,
       },
       '#000000'
