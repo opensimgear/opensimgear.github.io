@@ -1,0 +1,8 @@
+3DconnexionJS vendor asset.
+Source: https://3dconnexion.com/technical_support/3dconnexion.min.js
+License notice from upstream header:
+
+Copyright (c) 2013-2022 3Dconnexion. All rights reserved.
+This file is licensed under the terms of the "3Dconnexion Software Development Kit"
+license agreement: http://www.3dconnexion.com/service/software-developer/licence-agreement.html
+All rights not expressly granted by 3Dconnexion are reserved.

@@ -1,12 +1,14 @@
 <script lang="ts">
+  import spaceMouseScriptUrl from '~/assets/vendor/3dconnexion.min.js?url';
   import { Canvas } from '@threlte/core';
   import { Gizmo, Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
-  import { tick } from 'svelte';
-  import { OrthographicCamera, PerspectiveCamera, Vector3 } from 'three';
+  import { onMount, tick } from 'svelte';
+  import { Group, OrthographicCamera, PerspectiveCamera, Vector3 } from 'three';
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
   import { PI_INTENSITY, SCENE_VIEW } from './constants';
+  import { PlannerSpaceMouseBridge } from './space-mouse';
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
@@ -36,6 +38,9 @@
   let perspectiveCameraRef = $state<PerspectiveCamera | null>(null);
   let orthographicCameraRef = $state<OrthographicCamera | null>(null);
   let orbitControlsRef = $state<ThreeOrbitControls | null>(null);
+  let rigRootRef = $state<Group | null>(null);
+  let viewportElement = $state<HTMLDivElement | null>(null);
+  let spaceMouseBridge = $state<PlannerSpaceMouseBridge | null>(null);
 
   const cameraPosition = $derived<[number, number, number]>(savedView?.position ?? defaultCameraPosition);
   const controlsTarget = $derived<[number, number, number]>(savedView?.target ?? SCENE_VIEW.controlsTarget);
@@ -88,9 +93,43 @@
     await tick();
     applySavedView();
   }
+
+  function captureViewport(node: HTMLDivElement) {
+    viewportElement = node;
+
+    return {
+      destroy() {
+        if (viewportElement === node) {
+          viewportElement = null;
+        }
+      },
+    };
+  }
+
+  onMount(() => {
+    spaceMouseBridge = new PlannerSpaceMouseBridge({
+      scriptUrl: spaceMouseScriptUrl,
+      getViewport: () => viewportElement,
+      getControls: () => orbitControlsRef,
+      getModelRoot: () => rigRootRef,
+      getActiveCamera: () => (useOrthographicCamera ? orthographicCameraRef : perspectiveCameraRef),
+    });
+    void spaceMouseBridge.connect();
+
+    return () => {
+      spaceMouseBridge?.destroy();
+      spaceMouseBridge = null;
+    };
+  });
 </script>
 
-<div class="relative aspect-[3/2] w-full border-zinc-200 bg-[radial-gradient(circle_at_top,#ffffff_0%,#f4f4f5_60%,#e4e4e7_100%)]">
+<div
+  {@attach captureViewport}
+  class="relative aspect-[3/2] w-full border-zinc-200 bg-[radial-gradient(circle_at_top,#ffffff_0%,#f4f4f5_60%,#e4e4e7_100%)] outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2"
+  tabindex="-1"
+  role="application"
+  aria-label="3D aluminum rig planner viewport"
+>
   <div class="pointer-events-none absolute right-3 top-3 z-10">
     <button
       type="button"
@@ -182,7 +221,7 @@
       fadeStrength={SCENE_VIEW.gridFadeStrength}
     />
 
-    <T.Group rotation={SCENE_VIEW.sceneRotation}>
+    <T.Group rotation={SCENE_VIEW.sceneRotation} bind:ref={rigRootRef}>
       <RigFrame {geometry} {highlightedBeamIds} {measurementOverlay} {profileColor} {showEndCaps} {visibleModules} />
     </T.Group>
   </Canvas>
