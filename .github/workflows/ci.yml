@@ -119,9 +119,12 @@ jobs:
           current_deployment_seen='false'
 
           while IFS=$'\t' read -r deployment_id deployment_sha; do
-            status="$(gh api "/repos/${GITHUB_REPOSITORY}/deployments/${deployment_id}/statuses?per_page=1" --jq '.[0].state // ""')"
+            success_count="$(
+              gh api "/repos/${GITHUB_REPOSITORY}/deployments/${deployment_id}/statuses?per_page=20" \
+                --jq 'map(select(.state == "success")) | length'
+            )"
 
-            if [ "${status}" != 'success' ]; then
+            if [ "${success_count}" = '0' ]; then
               continue
             fi
 
