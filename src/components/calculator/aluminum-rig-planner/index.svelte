@@ -20,6 +20,11 @@
     getPedalTrayDistanceMinMm,
     getSteeringColumnDistanceMaxMm,
   } from './geometry';
+  import {
+    createPlannerMeasurementOverlay,
+    type PlannerMeasurementKey,
+    type PlannerMeasurementOverlay,
+  } from './measurement-overlay';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
@@ -36,12 +41,14 @@
     geometry: PlannerGeometry;
     highlightedBeamIds: string[];
     isNarrowViewport?: boolean;
+    measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   }>;
 
   const STATE_KEY = 'state';
+  const MEASUREMENT_OVERLAY_TIMEOUT_MS = 1000;
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
   const DEFAULT_INPUT: PlannerInput = { ...DEFAULT_PLANNER_INPUT };
@@ -65,6 +72,8 @@
   let PlannerScene = $state<PlannerSceneComponent | null>(null);
   let sceneStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
   let hoveredCutListKey = $state<string | null>(null);
+  let activeMeasurementKey = $state<PlannerMeasurementKey | null>(null);
+  let measurementHideTimeout: ReturnType<typeof setTimeout> | null = null;
 
   async function loadScene() {
     if (PlannerScene || sceneStatus === 'loading') return;
@@ -120,10 +129,28 @@
     return () => {
       window.removeEventListener('resize', handleResize);
       debouncedUrlStateWriter.cancel();
+      if (measurementHideTimeout) {
+        clearTimeout(measurementHideTimeout);
+      }
     };
   });
 
   const geometry = $derived(derivePlannerGeometry(plannerInput));
+  const measurementOverlay = $derived.by(() => {
+    if (!activeMeasurementKey) {
+      return null;
+    }
+
+    if (activeMeasurementKey.startsWith('pedalTray') && !visibleModules.pedalTray) {
+      return null;
+    }
+
+    if (activeMeasurementKey.startsWith('steeringColumn') && !visibleModules.steeringColumn) {
+      return null;
+    }
+
+    return createPlannerMeasurementOverlay(geometry.input, activeMeasurementKey);
+  });
   const profileColor = $derived(
     profileColorMode === 'silver'
       ? SILVER_PROFILE_COLOR
@@ -133,11 +160,6 @@
   );
   const cutListEntries = $derived(createPlannerCutListEntries(geometry, visibleModules, showEndCaps));
   const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
-  const encodedPlannerState = $derived(
-    encodeQueryState({
-      ...$state.snapshot(plannerInput),
-    })
-  );
   const steeringColumnDistanceLimits = $derived.by(() => ({
     min: PLANNER_LAYOUT.steeringColumnDistanceMinMm,
     max: getSteeringColumnDistanceMaxMm(plannerInput),
@@ -155,6 +177,38 @@
     );
   }
 
+  function scheduleMeasurementOverlay(key: PlannerMeasurementKey) {
+    activeMeasurementKey = key;
+
+    if (measurementHideTimeout) {
+      clearTimeout(measurementHideTimeout);
+    }
+
+    measurementHideTimeout = setTimeout(() => {
+      activeMeasurementKey = null;
+      measurementHideTimeout = null;
+    }, MEASUREMENT_OVERLAY_TIMEOUT_MS);
+  }
+
+  function syncPlannerUrlState() {
+    if (!mounted || typeof window === 'undefined') {
+      return;
+    }
+
+    const encodedPlannerState = encodeQueryState({
+      ...$state.snapshot(plannerInput),
+    });
+    const url = new URL(window.location.href);
+
+    if (url.searchParams.get(STATE_KEY) === encodedPlannerState) {
+      debouncedUrlStateWriter.cancel();
+      return;
+    }
+
+    url.searchParams.set(STATE_KEY, encodedPlannerState);
+    debouncedUrlStateWriter.schedule(url.toString());
+  }
+
   function setBaseLengthMm(value: number) {
     plannerInput.baseLengthMm = value;
 
@@ -167,6 +221,14 @@
     }
 
     clampPedalTrayDistanceMm();
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('baseLengthMm');
+  }
+
+  function setBaseWidthMm(value: number) {
+    plannerInput.baseWidthMm = value;
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('baseWidthMm');
   }
 
   function setSeatBaseDepthMm(value: number) {
@@ -180,6 +242,14 @@
     }
 
     clampPedalTrayDistanceMm();
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('seatBaseDepthMm');
+  }
+
+  function setBaseInnerBeamSpacingMm(value: number) {
+    plannerInput.baseInnerBeamSpacingMm = value;
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('baseInnerBeamSpacingMm');
   }
 
   function setPedalTrayDepthMm(value: number) {
@@ -189,10 +259,14 @@
     );
 
     clampPedalTrayDistanceMm();
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('pedalTrayDepthMm');
   }
 
   function setPedalTrayDistanceMm(value: number) {
     plannerInput.pedalTrayDistanceMm = Math.max(pedalTrayDistanceLimits.min, Math.min(pedalTrayDistanceLimits.max, value));
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('pedalTrayDistanceMm');
   }
 
   function setSteeringColumnBaseHeightMm(value: number) {
@@ -207,10 +281,27 @@
         value + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
       );
     }
+
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('steeringColumnBaseHeightMm');
   }
 
   function setSteeringColumnHeightMm(value: number) {
-    plannerInput.steeringColumnHeightMm = Math.max(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm, Math.min(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm, value));
+    plannerInput.steeringColumnHeightMm = Math.max(
+      PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+      Math.min(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm, value)
+    );
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('steeringColumnHeightMm');
+  }
+
+  function setSteeringColumnDistanceMm(value: number) {
+    plannerInput.steeringColumnDistanceMm = Math.max(
+      steeringColumnDistanceLimits.min,
+      Math.min(steeringColumnDistanceLimits.max, value)
+    );
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('steeringColumnDistanceMm');
   }
 
   function resetSetup() {
@@ -218,6 +309,7 @@
     profileColorMode = 'black';
     customProfileColor = DEFAULT_CUSTOM_PROFILE_COLOR;
     showEndCaps = true;
+    syncPlannerUrlState();
   }
 
   function resetSteeringColumnModule() {
@@ -230,20 +322,6 @@
     setPedalTrayDepthMm(DEFAULT_INPUT.pedalTrayDepthMm);
     setPedalTrayDistanceMm(DEFAULT_INPUT.pedalTrayDistanceMm);
   }
-
-  $effect(() => {
-    if (!mounted || typeof window === 'undefined') return;
-
-    const url = new URL(window.location.href);
-
-    if (url.searchParams.get(STATE_KEY) === encodedPlannerState) {
-      debouncedUrlStateWriter.cancel();
-      return;
-    }
-
-    url.searchParams.set(STATE_KEY, encodedPlannerState);
-    debouncedUrlStateWriter.schedule(url.toString());
-  });
 </script>
 
 <div class="not-content overflow-hidden rounded border border-zinc-300 bg-white shadow-sm">
@@ -253,7 +331,15 @@
         class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
         {#if PlannerScene}
-          <PlannerScene {geometry} {highlightedBeamIds} {isNarrowViewport} {profileColor} {showEndCaps} {visibleModules} />
+          <PlannerScene
+            {geometry}
+            {highlightedBeamIds}
+            {isNarrowViewport}
+            {measurementOverlay}
+            {profileColor}
+            {showEndCaps}
+            {visibleModules}
+          />
         {:else}
           <div class="grid aspect-[3/2] w-full place-items-center border-zinc-200 bg-zinc-50 text-sm text-zinc-500">
             {#if sceneStatus === 'error'}
@@ -288,7 +374,7 @@
               format={(value) => `${value} mm`}
             />
             <Slider
-              bind:value={plannerInput.baseWidthMm}
+              bind:value={() => plannerInput.baseWidthMm, setBaseWidthMm}
               label="Base width"
               min={PLANNER_DIMENSION_LIMITS.baseWidthMinMm}
               max={PLANNER_DIMENSION_LIMITS.baseWidthMaxMm}
@@ -304,7 +390,7 @@
               format={(value) => `${value} mm`}
             />
             <Slider
-              bind:value={plannerInput.baseInnerBeamSpacingMm}
+              bind:value={() => plannerInput.baseInnerBeamSpacingMm, setBaseInnerBeamSpacingMm}
               label="Inner beam spacing"
               min={PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMinMm}
               max={PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMaxMm}
@@ -338,7 +424,7 @@
                 format={(value) => `${value} mm`}
               />
               <Slider
-                bind:value={plannerInput.steeringColumnDistanceMm}
+                bind:value={() => plannerInput.steeringColumnDistanceMm, setSteeringColumnDistanceMm}
                 label="Column distance"
                 min={steeringColumnDistanceLimits.min}
                 max={steeringColumnDistanceLimits.max}

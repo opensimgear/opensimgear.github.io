@@ -6,18 +6,20 @@
   import { PI_INTENSITY, SCENE_VIEW } from './constants';
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
+  import type { PlannerMeasurementOverlay } from './measurement-overlay';
   import type { PlannerVisibleModules } from './types';
 
   type Props = {
     geometry: PlannerGeometry;
     highlightedBeamIds: string[];
     isNarrowViewport?: boolean;
+    measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   };
 
-  const { geometry, highlightedBeamIds, isNarrowViewport = false, profileColor, showEndCaps, visibleModules }: Props = $props();
+  const { geometry, highlightedBeamIds, isNarrowViewport = false, measurementOverlay = null, profileColor, showEndCaps, visibleModules }: Props = $props();
 
   const cameraPosition = $derived<[number, number, number]>(
     isNarrowViewport ? SCENE_VIEW.narrowCameraPosition : SCENE_VIEW.wideCameraPosition
@@ -74,6 +76,6 @@
       fadeStrength={SCENE_VIEW.gridFadeStrength}
     />
 
-    <RigFrame {geometry} {highlightedBeamIds} {profileColor} {showEndCaps} {visibleModules} />
+    <RigFrame {geometry} {highlightedBeamIds} {measurementOverlay} {profileColor} {showEndCaps} {visibleModules} />
   </Canvas>
 </div>

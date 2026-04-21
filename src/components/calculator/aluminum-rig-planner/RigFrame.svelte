@@ -1,6 +1,8 @@
 <script lang="ts">
   import { CUT_LIST_HIGHLIGHT_COLOR } from './constants';
   import type { PlannerGeometry } from './geometry';
+  import MeasurementArrow from './MeasurementArrow.svelte';
+  import type { PlannerMeasurementOverlay } from './measurement-overlay';
   import ProfileMesh from './ProfileMesh.svelte';
   import { createBaseModule } from './modules/base';
   import { createPedalTrayModule } from './modules/pedal-tray';
@@ -11,12 +13,13 @@
   type Props = {
     geometry: PlannerGeometry;
     highlightedBeamIds: string[];
+    measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   };
 
-  const { geometry, highlightedBeamIds, profileColor, showEndCaps, visibleModules }: Props = $props();
+  const { geometry, highlightedBeamIds, measurementOverlay = null, profileColor, showEndCaps, visibleModules }: Props = $props();
   const input = $derived(geometry.input);
   const highlightedBeamIdSet = $derived(new Set(highlightedBeamIds));
 
@@ -48,3 +51,7 @@
 {#each allMeshes as mesh (mesh.id)}
   <ProfileMesh {mesh} />
 {/each}
+
+{#if measurementOverlay}
+  <MeasurementArrow color={measurementOverlay.color} start={measurementOverlay.start} end={measurementOverlay.end} />
+{/if}
