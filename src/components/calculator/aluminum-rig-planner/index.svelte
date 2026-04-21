@@ -16,7 +16,12 @@
     SCENE_IDLE_LOAD_TIMEOUT_MS,
     URL_STATE_DEBOUNCE_MS,
   } from './constants';
-  import { derivePlannerGeometry, getSteeringColumnDistanceMaxMm } from './geometry';
+  import {
+    derivePlannerGeometry,
+    getPedalTrayDistanceMaxMm,
+    getPedalTrayDistanceMinMm,
+    getSteeringColumnDistanceMaxMm,
+  } from './geometry';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
@@ -154,7 +159,18 @@
     min: PLANNER_LAYOUT.steeringColumnDistanceMinMm,
     max: getSteeringColumnDistanceMaxMm(plannerInput),
   }));
+  const pedalTrayDistanceLimits = $derived.by(() => ({
+    min: getPedalTrayDistanceMinMm(plannerInput),
+    max: getPedalTrayDistanceMaxMm(plannerInput),
+  }));
   const seatBaseDepthMaxMm = $derived(Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, plannerInput.baseLengthMm));
+
+  function clampPedalTrayDistanceMm() {
+    plannerInput.pedalTrayDistanceMm = Math.max(
+      pedalTrayDistanceLimits.min,
+      Math.min(pedalTrayDistanceLimits.max, plannerInput.pedalTrayDistanceMm)
+    );
+  }
 
   function setBaseLengthMm(value: number) {
     plannerInput.baseLengthMm = value;
@@ -166,6 +182,8 @@
     if (plannerInput.steeringColumnDistanceMm > getSteeringColumnDistanceMaxMm(plannerInput)) {
       plannerInput.steeringColumnDistanceMm = getSteeringColumnDistanceMaxMm(plannerInput);
     }
+
+    clampPedalTrayDistanceMm();
   }
 
   function setSeatBaseDepthMm(value: number) {
@@ -177,6 +195,21 @@
     if (plannerInput.steeringColumnDistanceMm > getSteeringColumnDistanceMaxMm(plannerInput)) {
       plannerInput.steeringColumnDistanceMm = getSteeringColumnDistanceMaxMm(plannerInput);
     }
+
+    clampPedalTrayDistanceMm();
+  }
+
+  function setPedalTrayDepthMm(value: number) {
+    plannerInput.pedalTrayDepthMm = Math.max(
+      PLANNER_DIMENSION_LIMITS.pedalTrayDepthMinMm,
+      Math.min(PLANNER_DIMENSION_LIMITS.pedalTrayDepthMaxMm, value)
+    );
+
+    clampPedalTrayDistanceMm();
+  }
+
+  function setPedalTrayDistanceMm(value: number) {
+    plannerInput.pedalTrayDistanceMm = Math.max(pedalTrayDistanceLimits.min, Math.min(pedalTrayDistanceLimits.max, value));
   }
 
   function setSteeringColumnBaseHeightMm(value: number) {
@@ -211,8 +244,8 @@
   }
 
   function resetPedalTrayModule() {
-    plannerInput.pedalTrayDepthMm = DEFAULT_INPUT.pedalTrayDepthMm;
-    plannerInput.pedalTrayDistanceMm = DEFAULT_INPUT.pedalTrayDistanceMm;
+    setPedalTrayDepthMm(DEFAULT_INPUT.pedalTrayDepthMm);
+    setPedalTrayDistanceMm(DEFAULT_INPUT.pedalTrayDistanceMm);
   }
 
   $effect(() => {
@@ -335,7 +368,7 @@
           {#if visibleModules.pedalTray}
             <Folder title="Pedal tray">
               <Slider
-                bind:value={plannerInput.pedalTrayDepthMm}
+                bind:value={() => plannerInput.pedalTrayDepthMm, setPedalTrayDepthMm}
                 label="Tray depth"
                 min={PLANNER_DIMENSION_LIMITS.pedalTrayDepthMinMm}
                 max={PLANNER_DIMENSION_LIMITS.pedalTrayDepthMaxMm}
@@ -343,10 +376,10 @@
                 format={(value) => `${value} mm`}
               />
               <Slider
-                bind:value={plannerInput.pedalTrayDistanceMm}
+                bind:value={() => plannerInput.pedalTrayDistanceMm, setPedalTrayDistanceMm}
                 label="Tray distance"
-                min={PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm}
-                max={PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMaxMm}
+                min={pedalTrayDistanceLimits.min}
+                max={pedalTrayDistanceLimits.max}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />

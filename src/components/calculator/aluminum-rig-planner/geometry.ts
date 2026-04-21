@@ -16,6 +16,20 @@ export function getSteeringColumnDistanceMaxMm(input: Pick<PlannerInput, 'baseLe
   );
 }
 
+export function getPedalTrayDistanceMaxMm(
+  input: Pick<PlannerInput, 'baseLengthMm' | 'seatBaseDepthMm' | 'pedalTrayDepthMm'>
+) {
+  return Math.max(0, input.baseLengthMm - input.seatBaseDepthMm - input.pedalTrayDepthMm / 2);
+}
+
+export function getPedalTrayDistanceMinMm(
+  input: Pick<PlannerInput, 'baseLengthMm' | 'seatBaseDepthMm' | 'pedalTrayDepthMm'>
+) {
+  return getPedalTrayDistanceMaxMm(input) < PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm
+    ? 0
+    : PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm;
+}
+
 export function clampPlannerInput(input: PlannerInput): PlannerInput {
   const baseLengthMm = clamp(
     input.baseLengthMm,
@@ -40,6 +54,24 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
       seatBaseDepthMm,
     })
   );
+  const pedalTrayDepthMm = clamp(
+    input.pedalTrayDepthMm,
+    PLANNER_DIMENSION_LIMITS.pedalTrayDepthMinMm,
+    PLANNER_DIMENSION_LIMITS.pedalTrayDepthMaxMm
+  );
+  const pedalTrayDistanceMm = clamp(
+    input.pedalTrayDistanceMm,
+    getPedalTrayDistanceMinMm({
+      baseLengthMm,
+      seatBaseDepthMm,
+      pedalTrayDepthMm,
+    }),
+    getPedalTrayDistanceMaxMm({
+      baseLengthMm,
+      seatBaseDepthMm,
+      pedalTrayDepthMm,
+    })
+  );
 
   return {
     ...input,
@@ -51,16 +83,8 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
       PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMinMm,
       PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMaxMm
     ),
-    pedalTrayDepthMm: clamp(
-      input.pedalTrayDepthMm,
-      PLANNER_DIMENSION_LIMITS.pedalTrayDepthMinMm,
-      PLANNER_DIMENSION_LIMITS.pedalTrayDepthMaxMm
-    ),
-    pedalTrayDistanceMm: clamp(
-      input.pedalTrayDistanceMm,
-      PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm,
-      PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMaxMm
-    ),
+    pedalTrayDepthMm,
+    pedalTrayDistanceMm,
     steeringColumnDistanceMm,
     steeringColumnBaseHeightMm: clamp(
       input.steeringColumnBaseHeightMm,

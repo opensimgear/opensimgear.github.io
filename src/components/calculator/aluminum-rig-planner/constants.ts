@@ -61,13 +61,13 @@ export const IMMEDIATE_SCENE_LOAD_TIMEOUT_MS = 0;
 export const DEFAULT_CUSTOM_PROFILE_COLOR = '#ff0000';
 
 export const DEFAULT_PLANNER_INPUT: PlannerInput = {
-  baseLengthMm: 1350,
+  baseLengthMm: 1200,
   baseWidthMm: 500,
-  seatBaseDepthMm: 500,
+  seatBaseDepthMm: 350,
   baseInnerBeamSpacingMm: 420,
   pedalTrayDepthMm: 300,
-  pedalTrayDistanceMm: 550,
-  steeringColumnDistanceMm: 190,
+  pedalTrayDistanceMm: 600,
+  steeringColumnDistanceMm: 400,
   steeringColumnBaseHeightMm: 430,
   steeringColumnHeightMm: 510,
 };
