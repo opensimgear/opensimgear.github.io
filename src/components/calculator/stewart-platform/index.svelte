@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Canvas } from '@threlte/core';
-  import { Gizmo } from '@threlte/extras';
   import { onMount } from 'svelte';
   import { Button, Monitor, Pane, Point, RotationEuler, Slider } from 'svelte-tweakpane-ui';
   import { Matrix3, Vector3 } from 'three';
@@ -391,9 +390,9 @@
             {centerOfRotationRelative}
             {actuatorMin}
             {actuatorMax}
+            gizmoSize={getStewartGizmoSize(isNarrowViewport)}
             {viewportElement}
           />
-          <Gizmo size={getStewartGizmoSize(isNarrowViewport)} />
         </Canvas>
         <div class={getStewartStatusPanelClassNames(isNarrowViewport)}>
           <div

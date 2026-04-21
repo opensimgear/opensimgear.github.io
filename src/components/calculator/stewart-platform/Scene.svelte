@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Grid, OrbitControls } from '@threlte/extras';
+  import { Gizmo, Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
   import Joint from './Joint.svelte';
   import Leg from './Leg.svelte';
@@ -22,6 +22,7 @@
   export let centerOfRotationRelative: Vector3;
   export let actuatorMin = 0.35;
   export let actuatorMax = 0.6;
+  export let gizmoSize = 128;
   export let viewportElement: HTMLDivElement | null = null;
 
   type LegStatus = 'ok' | 'over-extended' | 'over-compressed';
@@ -166,7 +167,9 @@
   }}
 />
 
-<OrbitControls bind:ref={orbitControlsRef} target={controlsTarget} />
+<OrbitControls bind:ref={orbitControlsRef} target={controlsTarget}>
+  <Gizmo size={gizmoSize} />
+</OrbitControls>
 
 <T.DirectionalLight position={[3, 10, 7]} intensity={Math.PI} />
 <T.AmbientLight intensity={2} />

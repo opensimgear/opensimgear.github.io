@@ -77,7 +77,7 @@ export function getStewartSceneClassNames(isNarrow: boolean) {
 }
 
 export function getStewartGizmoSize(isNarrow: boolean) {
-  return isNarrow ? 80 : 128;
+  return isNarrow ? 48 : 64;
 }
 
 export function getStewartStatusPanelClassNames(isNarrow: boolean) {
