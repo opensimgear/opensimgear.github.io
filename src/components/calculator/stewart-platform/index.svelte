@@ -97,6 +97,7 @@
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<StewartPaneExpandedState>(getStewartPaneExpandedState(false));
   let mounted = $state(false);
+  let viewportElement = $state<HTMLDivElement | null>(null);
 
   function syncViewportState(width: number, resetPanes = false) {
     const nextIsNarrow = isNarrowStewartViewport(width);
@@ -354,12 +355,30 @@
   });
 
   const alphaOptions = { min: 10, max: 360 / 3 - 10, step: 1, format: formatAlpha };
+
+  function captureViewport(node: HTMLDivElement) {
+    viewportElement = node;
+
+    return {
+      destroy() {
+        if (viewportElement === node) {
+          viewportElement = null;
+        }
+      },
+    };
+  }
 </script>
 
 <div class="w-full not-content border border-black rounded">
   {#if mounted}
     <div class={isNarrowViewport ? 'flex flex-col' : 'flex flex-row'}>
-      <div class={getStewartSceneClassNames(isNarrowViewport)}>
+      <div
+        {@attach captureViewport}
+        class={`${getStewartSceneClassNames(isNarrowViewport)} outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2`}
+        tabindex="-1"
+        role="application"
+        aria-label="3D Stewart platform viewport"
+      >
         <Canvas>
           <Scene
             {baseDiameter}
@@ -372,6 +391,7 @@
             {centerOfRotationRelative}
             {actuatorMin}
             {actuatorMax}
+            {viewportElement}
           />
           <Gizmo size={getStewartGizmoSize(isNarrowViewport)} />
         </Canvas>
@@ -428,7 +448,7 @@
             bind:value={platformRotation}
             expanded={false}
             label="Platform rotation"
-            picker={'inline'}
+            picker="inline"
             unit="deg"
             {...movementAngle}
           />

@@ -1,11 +1,9 @@
 import { Box3, Matrix4, Object3D, OrthographicCamera, PerspectiveCamera, Raycaster, Vector3 } from 'three';
 import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-import { SCENE_VIEW } from './constants';
-
-type Vector3Tuple = [number, number, number];
-type Vector4Tuple = [number, number, number, number];
-type Matrix4Tuple = [
+export type Vector3Tuple = [number, number, number];
+export type Vector4Tuple = [number, number, number, number];
+export type Matrix4Tuple = [
   number,
   number,
   number,
@@ -31,7 +29,7 @@ type SpaceMouseControllerInstance = {
   update3dcontroller(payload: Record<string, unknown>): void;
 };
 
-type SpaceMouseControllerCtor = new (client: PlannerSpaceMouseBridge) => SpaceMouseControllerInstance;
+type SpaceMouseControllerCtor = new (client: ThreeSpaceMouseBridge) => SpaceMouseControllerInstance;
 
 declare global {
   interface Window {
@@ -46,9 +44,8 @@ export const SPACEMOUSE_Z_UP_COORDINATE_SYSTEM: Matrix4Tuple = [
   0, 0, 0, 1,
 ];
 
-const SPACEMOUSE_APP_NAME = 'OpenSimGear Rig Planner';
-
 let spaceMouseScriptPromise: Promise<SpaceMouseControllerCtor | null> | null = null;
+const spaceMouseScriptUrl = new URL('../../../assets/vendor/3dconnexion.min.js', import.meta.url).href;
 
 export function buildPlaneEquation(point: Vector3Tuple, normal: Vector3Tuple): Vector4Tuple {
   const normalVector = new Vector3(...normal).normalize();
@@ -86,7 +83,7 @@ export function getTargetFromCameraPose(position: Vector3Tuple, direction: Vecto
   return positionVector.add(directionVector.multiplyScalar(distance)).toArray() as Vector3Tuple;
 }
 
-async function loadSpaceMouseScript(scriptUrl: string) {
+async function loadSpaceMouseScript() {
   if (typeof window === 'undefined') {
     return null;
   }
@@ -100,11 +97,7 @@ async function loadSpaceMouseScript(scriptUrl: string) {
       const existingScript = document.querySelector<HTMLScriptElement>('script[data-3dconnexion-script]');
 
       if (existingScript) {
-        existingScript.addEventListener(
-          'load',
-          () => resolve(window._3Dconnexion ?? null),
-          { once: true }
-        );
+        existingScript.addEventListener('load', () => resolve(window._3Dconnexion ?? null), { once: true });
         existingScript.addEventListener('error', () => reject(new Error('3Dconnexion script failed to load')), {
           once: true,
         });
@@ -112,7 +105,7 @@ async function loadSpaceMouseScript(scriptUrl: string) {
       }
 
       const script = document.createElement('script');
-      script.src = scriptUrl;
+      script.src = spaceMouseScriptUrl;
       script.async = true;
       script.dataset['3dconnexionScript'] = 'true';
       script.onload = () => resolve(window._3Dconnexion ?? null);
@@ -124,15 +117,25 @@ async function loadSpaceMouseScript(scriptUrl: string) {
   return spaceMouseScriptPromise;
 }
 
-export type PlannerSpaceMouseBridgeOptions = {
-  scriptUrl: string;
+export type ThreeSpaceMouseSceneConfig = {
+  appName: string;
+  cameraUp: Vector3Tuple;
+  constructionPlane: Vector4Tuple;
+  coordinateSystem?: Matrix4Tuple;
+  floorPlane?: Vector4Tuple;
+  frontView?: Matrix4Tuple;
+  unitsToMeters?: number;
+};
+
+export type ThreeSpaceMouseBridgeOptions = {
+  scene: ThreeSpaceMouseSceneConfig;
   getControls: () => ThreeOrbitControls | null;
   getModelRoot: () => Object3D | null;
   getViewport: () => HTMLElement | null;
   getActiveCamera: () => PerspectiveCamera | OrthographicCamera | null;
 };
 
-export class PlannerSpaceMouseBridge {
+export class ThreeSpaceMouseBridge {
   private controller: SpaceMouseControllerInstance | null = null;
   private animationFrameId: number | null = null;
   private animating = false;
@@ -146,13 +149,13 @@ export class PlannerSpaceMouseBridge {
   private readonly worldDirection = new Vector3();
   private lookAperture = 0.01;
 
-  constructor(private readonly options: PlannerSpaceMouseBridgeOptions) {}
+  constructor(private readonly options: ThreeSpaceMouseBridgeOptions) {}
 
   async connect() {
-    const ControllerCtor = await loadSpaceMouseScript(this.options.scriptUrl);
+    const ControllerCtor = await loadSpaceMouseScript();
     const viewport = this.options.getViewport();
 
-    if (!ControllerCtor || !viewport || this.disposed) {
+    if (!ControllerCtor || !viewport || this.disposed || this.controller) {
       return false;
     }
 
@@ -185,7 +188,7 @@ export class PlannerSpaceMouseBridge {
       return;
     }
 
-    this.controller?.create3dmouse(viewport, SPACEMOUSE_APP_NAME);
+    this.controller?.create3dmouse(viewport, this.options.scene.appName);
   }
 
   on3dmouseCreated() {
@@ -214,22 +217,19 @@ export class PlannerSpaceMouseBridge {
   }
 
   getCoordinateSystem() {
-    return [...SPACEMOUSE_Z_UP_COORDINATE_SYSTEM];
+    return [...(this.options.scene.coordinateSystem ?? SPACEMOUSE_Z_UP_COORDINATE_SYSTEM)];
   }
 
   getConstructionPlane() {
-    return buildPlaneEquation(
-      [0, 0, SCENE_VIEW.gridPosition[2]],
-      [SCENE_VIEW.cameraUp[0], SCENE_VIEW.cameraUp[1], SCENE_VIEW.cameraUp[2]]
-    );
+    return [...this.options.scene.constructionPlane];
   }
 
   getFloorPlane() {
-    return this.getConstructionPlane();
+    return [...(this.options.scene.floorPlane ?? this.options.scene.constructionPlane)];
   }
 
   getUnitsToMeters() {
-    return 1;
+    return this.options.scene.unitsToMeters ?? 1;
   }
 
   getFov() {
@@ -243,7 +243,7 @@ export class PlannerSpaceMouseBridge {
   }
 
   getFrontView() {
-    return [...SPACEMOUSE_Z_UP_COORDINATE_SYSTEM];
+    return [...(this.options.scene.frontView ?? this.getCoordinateSystem())];
   }
 
   getLookAt() {
@@ -342,7 +342,7 @@ export class PlannerSpaceMouseBridge {
     const camera = this.getCamera();
 
     if (!camera) {
-      return [...SPACEMOUSE_Z_UP_COORDINATE_SYSTEM];
+      return [...(this.options.scene.coordinateSystem ?? SPACEMOUSE_Z_UP_COORDINATE_SYSTEM)];
     }
 
     camera.updateMatrixWorld(true);
@@ -408,7 +408,7 @@ export class PlannerSpaceMouseBridge {
 
     this.scratchMatrix.fromArray(data);
     this.scratchMatrix.decompose(camera.position, camera.quaternion, camera.scale);
-    camera.up.set(...SCENE_VIEW.cameraUp);
+    camera.up.set(...this.options.scene.cameraUp);
     camera.updateMatrixWorld(true);
 
     if (controls) {
@@ -534,7 +534,7 @@ export class PlannerSpaceMouseBridge {
       return;
     }
 
-    camera.up.set(...SCENE_VIEW.cameraUp);
+    camera.up.set(...this.options.scene.cameraUp);
     camera.updateProjectionMatrix();
     camera.updateMatrixWorld(true);
 
@@ -551,7 +551,7 @@ export class PlannerSpaceMouseBridge {
       return null;
     }
 
-    camera.up.set(...SCENE_VIEW.cameraUp);
+    camera.up.set(...this.options.scene.cameraUp);
 
     return camera;
   }

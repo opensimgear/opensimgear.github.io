@@ -8,7 +8,7 @@ import {
   getTargetFromCameraPose,
   getVerticalFovDegreesFromDiagonalRadians,
   SPACEMOUSE_Z_UP_COORDINATE_SYSTEM,
-} from '../../components/calculator/aluminum-rig-planner/space-mouse';
+} from '../../components/calculator/shared/space-mouse';
 
 describe('aluminum rig planner space mouse helpers', () => {
   it('uses z-up coordinate system expected by 3Dconnexion navlib', () => {

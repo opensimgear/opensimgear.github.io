@@ -1,5 +1,4 @@
 <script lang="ts">
-  import spaceMouseScriptUrl from '~/assets/vendor/3dconnexion.min.js?url';
   import { Canvas } from '@threlte/core';
   import { Gizmo, Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
@@ -8,7 +7,7 @@
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
   import { PI_INTENSITY, SCENE_VIEW } from './constants';
-  import { PlannerSpaceMouseBridge } from './space-mouse';
+  import { buildPlaneEquation, ThreeSpaceMouseBridge } from '../shared/space-mouse';
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
@@ -40,7 +39,7 @@
   let orbitControlsRef = $state<ThreeOrbitControls | null>(null);
   let rigRootRef = $state<Group | null>(null);
   let viewportElement = $state<HTMLDivElement | null>(null);
-  let spaceMouseBridge = $state<PlannerSpaceMouseBridge | null>(null);
+  let spaceMouseBridge = $state<ThreeSpaceMouseBridge | null>(null);
 
   const cameraPosition = $derived<[number, number, number]>(savedView?.position ?? defaultCameraPosition);
   const controlsTarget = $derived<[number, number, number]>(savedView?.target ?? SCENE_VIEW.controlsTarget);
@@ -107,8 +106,12 @@
   }
 
   onMount(() => {
-    spaceMouseBridge = new PlannerSpaceMouseBridge({
-      scriptUrl: spaceMouseScriptUrl,
+    spaceMouseBridge = new ThreeSpaceMouseBridge({
+      scene: {
+        appName: 'OpenSimGear Rig Planner',
+        cameraUp: SCENE_VIEW.cameraUp,
+        constructionPlane: buildPlaneEquation([0, 0, SCENE_VIEW.gridPosition[2]], SCENE_VIEW.cameraUp),
+      },
       getViewport: () => viewportElement,
       getControls: () => orbitControlsRef,
       getModelRoot: () => rigRootRef,

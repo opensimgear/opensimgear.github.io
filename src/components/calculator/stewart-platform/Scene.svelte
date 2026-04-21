@@ -1,10 +1,16 @@
+<svelte:options runes={false} />
+
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
   import Joint from './Joint.svelte';
   import Leg from './Leg.svelte';
   import Platform from './Platform.svelte';
-  import { Matrix3, Vector3 } from 'three';
+  import { Group, Matrix3, PerspectiveCamera, Vector3 } from 'three';
+  import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+  import { buildPlaneEquation, ThreeSpaceMouseBridge } from '../shared/space-mouse';
 
   export let baseDiameter = 0.8;
   export let platformDiameter = 0.4;
@@ -16,12 +22,20 @@
   export let centerOfRotationRelative: Vector3;
   export let actuatorMin = 0.35;
   export let actuatorMax = 0.6;
+  export let viewportElement: HTMLDivElement | null = null;
 
   type LegStatus = 'ok' | 'over-extended' | 'over-compressed';
+  const STEWART_CAMERA_UP = [0, 0, 1] as const;
+  const STEWART_CONSTRUCTION_PLANE = buildPlaneEquation([0, 0, -0.01], [0, 0, 1]);
 
   let lastValidTransformedPointsP: Vector3[] = [];
   let lastValidTransformedCor: Vector3 = new Vector3();
   let legStatuses: LegStatus[] = Array(6).fill('ok');
+  let perspectiveCameraRef: PerspectiveCamera | null = null;
+  let orbitControlsRef: ThreeOrbitControls | null = null;
+  let modelRootRef: Group | null = null;
+  let spaceMouseBridge: ThreeSpaceMouseBridge | null = null;
+  let spaceMouseConnectRequested = false;
 
   let cameraX = baseDiameter * 1.2;
   let cameraY = cameraX;
@@ -31,6 +45,7 @@
   let initialPointsB: Vector3[] = [];
   let transformedPointsP: Vector3[] = [];
   let transformedCor: Vector3;
+  $: controlsTarget = [0, 0, platformHeight] as [number, number, number];
 
   $: centerOfRotation = centerOfRotationRelative.clone().add(new Vector3(0, 0, platformHeight));
 
@@ -113,20 +128,45 @@
 
     legStatuses = candidateStatuses;
   }
+
+  onMount(() => {
+    spaceMouseBridge = new ThreeSpaceMouseBridge({
+      scene: {
+        appName: 'OpenSimGear Stewart Platform',
+        cameraUp: [...STEWART_CAMERA_UP],
+        constructionPlane: STEWART_CONSTRUCTION_PLANE,
+      },
+      getViewport: () => viewportElement,
+      getControls: () => orbitControlsRef,
+      getModelRoot: () => modelRootRef,
+      getActiveCamera: () => perspectiveCameraRef,
+    });
+
+    return () => {
+      spaceMouseBridge?.destroy();
+      spaceMouseBridge = null;
+    };
+  });
+
+  $: if (!spaceMouseConnectRequested && spaceMouseBridge && viewportElement) {
+    spaceMouseConnectRequested = true;
+    void spaceMouseBridge.connect();
+  }
 </script>
 
 <T.PerspectiveCamera
+  bind:ref={perspectiveCameraRef}
   makeDefault
   position.x={cameraX}
   position.y={cameraY}
   position.z={cameraZ}
-  up={[0, 0, 1]}
+  up={STEWART_CAMERA_UP}
   on:create={({ ref }) => {
     ref.lookAt(0, 0, platformHeight);
   }}
 />
 
-<OrbitControls />
+<OrbitControls bind:ref={orbitControlsRef} target={controlsTarget} />
 
 <T.DirectionalLight position={[3, 10, 7]} intensity={Math.PI} />
 <T.AmbientLight intensity={2} />
@@ -143,19 +183,21 @@
   position={[0, 0, -0.01]}
 />
 
-{#each transformedPointsP as point}
-  <Joint position={point} />
-{/each}
+<T.Group bind:ref={modelRootRef}>
+  {#each transformedPointsP as point, i (i)}
+    <Joint position={point} />
+  {/each}
 
-{#each initialPointsB as point}
-  <Joint position={point} color="blue" />
-{/each}
+  {#each initialPointsB as point, i (i)}
+    <Joint position={point} color="blue" />
+  {/each}
 
-<Joint position={transformedCor} color="purple" />
+  <Joint position={transformedCor} color="purple" />
 
-<Platform points={transformedPointsP} color="red" />
-<Platform points={initialPointsB} color="blue" />
+  <Platform points={transformedPointsP} color="red" />
+  <Platform points={initialPointsB} color="blue" />
 
-{#each initialPointsB as point, i}
-  <Leg basePoint={point} platformPoint={transformedPointsP[i]} status={legStatuses[i]} {actuatorMin} />
-{/each}
+  {#each initialPointsB as point, i (i)}
+    <Leg basePoint={point} platformPoint={transformedPointsP[i]} status={legStatuses[i]} {actuatorMin} />
+  {/each}
+</T.Group>
