@@ -151,7 +151,7 @@ jobs:
 
           EOF
 
-          copilot -p "Review git history in range ${PREVIOUS_SHA}..${CURRENT_SHA} for this repository and write markdown to deployment-changelog.md.
+          copilot --model gpt-5-mini -p "Review git history in range ${PREVIOUS_SHA}..${CURRENT_SHA} for this repository and write markdown to deployment-changelog.md.
 
           Output format:
           ## Features
@@ -161,10 +161,10 @@ jobs:
           - bullet points
 
           Rules:
-          - Focus on user-facing features, meaningful improvements, and bugs fixed since the last github-pages deployment.
+          - Focus only on portal or website user-facing features, meaningful portal improvements, and bugs fixed since the last github-pages deployment.
           - Group related commits into higher-level bullets.
-          - Do not mention file names, implementation details, refactors, CI changes, workflow changes, tests, docs-only changes, or dependency bumps unless they changed user-visible behavior.
-          - If the deployment only contains internal or operational changes, write '- None.' for both sections.
+          - Exclude CI changes, workflow changes, build scripts, deployment plumbing, tests, docs-only changes, refactors, dependency bumps, and any internal maintenance work.
+          - If the deployment does not include a portal or website user-visible feature or fix, write '- None.' for both sections.
           - If no items fit a section, write '- None.'
           - Use git commands only for evidence." --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
 
@@ -233,14 +233,10 @@ jobs:
       release_url: ${{ steps.create-release.outputs.release_url }}
       release_name: ${{ steps.create-release.outputs.release_name }}
     steps:
-      - name: Restore changelog
-        env:
-          CHANGELOG: ${{ needs.deployment-changelog.outputs.changelog }}
-        run: |
-          printf '%s\n' "${CHANGELOG}" > deployment-changelog.md
       - name: Create or update release
         id: create-release
         env:
+          CHANGELOG: ${{ needs.deployment-changelog.outputs.changelog }}
           CURRENT_SHA: ${{ needs.deployment-changelog.outputs.current_sha }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
@@ -249,9 +245,9 @@ jobs:
           set -euo pipefail
 
           if gh release view "${RELEASE_TAG}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
-            gh release edit "${RELEASE_TAG}" --repo "${GITHUB_REPOSITORY}" --notes-file deployment-changelog.md --latest=false
+            gh release edit "${RELEASE_TAG}" --repo "${GITHUB_REPOSITORY}" --notes "${CHANGELOG}" --latest=false
           else
-            gh release create "${RELEASE_TAG}" --repo "${GITHUB_REPOSITORY}" --target "${CURRENT_SHA}" --notes-file deployment-changelog.md --latest=false
+            gh release create "${RELEASE_TAG}" --repo "${GITHUB_REPOSITORY}" --target "${CURRENT_SHA}" --notes "${CHANGELOG}" --latest=false
           fi
 
           echo "release_name=${RELEASE_TAG}" >> "$GITHUB_OUTPUT"
