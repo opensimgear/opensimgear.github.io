@@ -163,7 +163,8 @@ jobs:
           Rules:
           - Focus on user-facing features, meaningful improvements, and bugs fixed since the last github-pages deployment.
           - Group related commits into higher-level bullets.
-          - Do not mention file names, implementation details, refactors, CI changes, tests, or dependency bumps unless they changed user-visible behavior.
+          - Do not mention file names, implementation details, refactors, CI changes, workflow changes, tests, docs-only changes, or dependency bumps unless they changed user-visible behavior.
+          - If the deployment only contains internal or operational changes, write '- None.' for both sections.
           - If no items fit a section, write '- None.'
           - Use git commands only for evidence." --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
 
@@ -209,7 +210,7 @@ jobs:
               cat deployment-changelog.md
             else
               echo '## Deployment changelog'
-              echo 'No previous successful `github-pages` deployment found. Skipping changelog generation.'
+              echo 'No meaningful feature or fix entries found. Skipping release and Discord notification.'
             fi
 
             echo "${changelog_delimiter}"
@@ -276,7 +277,7 @@ jobs:
           fi
       - name: GitHub release to Discord
         if: ${{ steps.discord-webhook-check.outputs.configured == 'true' }}
-        uses: SethCohen/github-releases-to-discord@v1.19.0
+        uses: SethCohen/github-releases-to-discord@v1.20.0
         with:
           webhook_url: ${{ secrets.DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK }}
           username: OpenSimGear Releases
