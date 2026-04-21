@@ -1,5 +1,7 @@
 <script lang="ts">
   import { T } from '@threlte/core';
+  import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
+  import { BoxGeometry } from 'three';
 
   import { ENDCAP_MATERIAL, PROFILE_APPEARANCE } from './constants';
   import {
@@ -92,6 +94,18 @@
   const profileRotation = $derived(
     profileGeometry ? getProfileMeshRotation(mesh) : mesh.rotation ?? PROFILE_APPEARANCE.zeroRotation
   );
+  const fallbackGeometry = $derived.by(() => {
+    const [width, height, depth] = mesh.size;
+    const minDimension = Math.min(width, height, depth);
+    const radiusLimit = Math.max(0, minDimension / 2 - Number.EPSILON);
+    const cornerRadius = Math.min(mesh.cornerRadius ?? 0, radiusLimit);
+
+    if (cornerRadius > 0) {
+      return new RoundedBoxGeometry(width, height, depth, mesh.cornerSegments ?? 5, cornerRadius);
+    }
+
+    return new BoxGeometry(width, height, depth);
+  });
 </script>
 
 {#if profileGeometry}
@@ -109,8 +123,13 @@
     />
   </T.Mesh>
 {:else}
-  <T.Mesh castShadow receiveShadow position={mesh.position} rotation={mesh.rotation ?? PROFILE_APPEARANCE.zeroRotation}>
-    <T.BoxGeometry args={mesh.size} />
+  <T.Mesh
+    castShadow
+    receiveShadow
+    geometry={fallbackGeometry}
+    position={mesh.position}
+    rotation={mesh.rotation ?? PROFILE_APPEARANCE.zeroRotation}
+  >
     <T.MeshStandardMaterial
       color={materialProps.color}
       metalness={materialProps.metalness}

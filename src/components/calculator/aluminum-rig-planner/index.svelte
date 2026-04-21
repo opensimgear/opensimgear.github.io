@@ -269,6 +269,14 @@
     syncPlannerUrlState();
   }
 
+  function setSeatDeltaMm(value: number) {
+    plannerInput.seatDeltaMm = Math.max(
+      PLANNER_DIMENSION_LIMITS.seatDeltaMinMm,
+      Math.min(PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm, value)
+    );
+    syncPlannerUrlState();
+  }
+
   function setSeatHeightFromBaseInnerBeamsMm(value: number) {
     plannerInput.seatHeightFromBaseInnerBeamsMm = Math.max(
       PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMinMm,
@@ -445,6 +453,14 @@
               label="Seat Length"
               min={PLANNER_DIMENSION_LIMITS.seatLengthMinMm}
               max={PLANNER_DIMENSION_LIMITS.seatLengthMaxMm}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
+              bind:value={() => plannerInput.seatDeltaMm, setSeatDeltaMm}
+              label="Seat delta"
+              min={PLANNER_DIMENSION_LIMITS.seatDeltaMinMm}
+              max={PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />

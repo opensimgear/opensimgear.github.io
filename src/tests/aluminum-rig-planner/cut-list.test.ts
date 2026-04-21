@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_PLANNER_INPUT } from '../../components/calculator/aluminum-rig-planner/constants';
+import {
+  BASE_BEAM_WIDTH_MM,
+  DEFAULT_PLANNER_INPUT,
+  PEDAL_TRAY_LAYOUT,
+  UPRIGHT_BEAM_DEPTH_MM,
+} from '../../components/calculator/aluminum-rig-planner/constants';
 import {
   createPlannerCutList,
   createPlannerCutListEntries,
@@ -25,7 +30,7 @@ describe('aluminum rig planner cut list', () => {
 
     expect(cutList).toEqual([
       { profileType: '80x40', lengthMm: DEFAULT_PLANNER_INPUT.baseLengthMm, quantity: 2 },
-      { profileType: '80x40', lengthMm: 420, quantity: 2 },
+      { profileType: '80x40', lengthMm: DEFAULT_PLANNER_INPUT.baseWidthMm - BASE_BEAM_WIDTH_MM * 2, quantity: 2 },
       { profileType: '40x40', lengthMm: DEFAULT_PLANNER_INPUT.seatBaseDepthMm, quantity: 2 },
     ]);
   });
@@ -73,8 +78,16 @@ describe('aluminum rig planner cut list', () => {
     );
 
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 300, quantity: 2 });
-    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 340, quantity: 3 });
-    expect(cutList).not.toContainEqual({ profileType: '80x40', lengthMm: 510, quantity: 2 });
+    expect(cutList).toContainEqual({
+      profileType: '40x40',
+      lengthMm: DEFAULT_PLANNER_INPUT.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm,
+      quantity: 3,
+    });
+    expect(cutList).not.toContainEqual({
+      profileType: '80x40',
+      lengthMm: DEFAULT_PLANNER_INPUT.steeringColumnHeightMm,
+      quantity: 2,
+    });
   });
 
   it('shortens cut lengths when endcaps are enabled', () => {
@@ -87,12 +100,28 @@ describe('aluminum rig planner cut list', () => {
       true
     );
 
-    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: DEFAULT_PLANNER_INPUT.baseLengthMm - 8, quantity: 2 });
+    expect(cutList).toContainEqual({
+      profileType: '80x40',
+      lengthMm: DEFAULT_PLANNER_INPUT.baseLengthMm - 8,
+      quantity: 2,
+    });
     expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 506, quantity: 2 });
-    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 420, quantity: 3 });
-    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: DEFAULT_PLANNER_INPUT.seatBaseDepthMm - 8, quantity: 2 });
+    expect(cutList).toContainEqual({
+      profileType: '80x40',
+      lengthMm: DEFAULT_PLANNER_INPUT.baseWidthMm - UPRIGHT_BEAM_DEPTH_MM * 2,
+      quantity: 3,
+    });
+    expect(cutList).toContainEqual({
+      profileType: '40x40',
+      lengthMm: DEFAULT_PLANNER_INPUT.seatBaseDepthMm - 8,
+      quantity: 2,
+    });
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 292, quantity: 2 });
-    expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 340, quantity: 3 });
+    expect(cutList).toContainEqual({
+      profileType: '40x40',
+      lengthMm: DEFAULT_PLANNER_INPUT.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm,
+      quantity: 3,
+    });
   });
 
   it('merges rows with matching profile type and length', () => {
@@ -116,7 +145,11 @@ describe('aluminum rig planner cut list', () => {
       },
       false
     );
-    const pedalCrossBeams = entries.find((entry) => entry.profileType === '40x40' && entry.lengthMm === 340);
+    const pedalCrossBeams = entries.find(
+      (entry) =>
+        entry.profileType === '40x40' &&
+        entry.lengthMm === DEFAULT_PLANNER_INPUT.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm
+    );
 
     expect(pedalCrossBeams?.quantity).toBe(3);
     expect(pedalCrossBeams?.beamIds).toHaveLength(3);

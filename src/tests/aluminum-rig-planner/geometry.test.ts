@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_PLANNER_INPUT } from '../../components/calculator/aluminum-rig-planner/constants';
+import {
+  DEFAULT_PLANNER_INPUT,
+  PLANNER_DIMENSION_LIMITS,
+} from '../../components/calculator/aluminum-rig-planner/constants';
 import {
   clampPlannerInput,
   derivePlannerGeometry,
@@ -46,7 +49,7 @@ describe('aluminum rig planner geometry', () => {
       baseWidthMm: 900,
     });
 
-    expect(geometry.input.baseWidthMm).toBe(600);
+    expect(geometry.input.baseWidthMm).toBe(PLANNER_DIMENSION_LIMITS.baseWidthMaxMm);
   });
 
   it('clamps pedal tray distance so tray midpoint stays on base rail', () => {
@@ -77,12 +80,14 @@ describe('aluminum rig planner geometry', () => {
     const clamped = clampPlannerInput({
       ...DEFAULT_PLANNER_INPUT,
       seatLengthMm: 900,
+      seatDeltaMm: 400,
       seatHeightFromBaseInnerBeamsMm: 400,
       seatAngleDeg: -10,
       backrestAngleDeg: 200,
     });
 
-    expect(clamped.seatLengthMm).toBe(520);
+    expect(clamped.seatLengthMm).toBe(PLANNER_DIMENSION_LIMITS.seatLengthMaxMm);
+    expect(clamped.seatDeltaMm).toBe(PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm);
     expect(clamped.seatHeightFromBaseInnerBeamsMm).toBe(300);
     expect(clamped.seatAngleDeg).toBe(0);
     expect(clamped.backrestAngleDeg).toBe(135);

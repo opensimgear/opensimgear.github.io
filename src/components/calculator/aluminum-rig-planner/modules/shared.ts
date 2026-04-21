@@ -33,6 +33,8 @@ export type MeshSpec = {
   color: string;
   metalness?: number;
   roughness?: number;
+  cornerRadius?: number;
+  cornerSegments?: number;
 };
 
 export const MM_TO_METERS = MM_TO_METERS_VALUE;
