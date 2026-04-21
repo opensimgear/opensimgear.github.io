@@ -21,6 +21,7 @@ on:
 # Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
+  deployments: read
   pages: write
   id-token: write
 jobs:
@@ -77,3 +78,194 @@ jobs:
             playwright-report/
             test-results/
           if-no-files-found: ignore
+  deployment-changelog:
+    needs: deploy
+    runs-on: ubuntu-latest
+    outputs:
+      changelog: ${{ steps.publish-metadata.outputs.changelog }}
+      current_sha: ${{ steps.publish-metadata.outputs.current_sha }}
+      has_changelog: ${{ steps.publish-metadata.outputs.has_changelog }}
+      previous_sha: ${{ steps.publish-metadata.outputs.previous_sha }}
+      release_tag: ${{ steps.publish-metadata.outputs.release_tag }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate Copilot token
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+        run: |
+          if [ -z "${COPILOT_GITHUB_TOKEN}" ]; then
+            echo 'Missing `COPILOT_GITHUB_TOKEN` secret. Create a fine-grained PAT with `Copilot Requests` permission.' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+      - name: Resolve previous github-pages deployment
+        id: previous-deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CURRENT_SHA: ${{ github.sha }}
+          DEPLOYMENT_ENVIRONMENT: github-pages
+        run: |
+          set -euo pipefail
+
+          previous_sha=''
+          current_deployment_seen='false'
+
+          while IFS=$'\t' read -r deployment_id deployment_sha; do
+            status="$(gh api "/repos/${GITHUB_REPOSITORY}/deployments/${deployment_id}/statuses?per_page=1" --jq '.[0].state // ""')"
+
+            if [ "${status}" != 'success' ]; then
+              continue
+            fi
+
+            if [ "${current_deployment_seen}" = 'false' ] && [ "${deployment_sha}" = "${CURRENT_SHA}" ]; then
+              current_deployment_seen='true'
+              continue
+            fi
+
+            previous_sha="${deployment_sha}"
+            break
+          done < <(gh api "/repos/${GITHUB_REPOSITORY}/deployments?environment=${DEPLOYMENT_ENVIRONMENT}&per_page=20" --jq '.[] | [.id, .sha] | @tsv')
+
+          echo "previous_sha=${previous_sha}" >> "$GITHUB_OUTPUT"
+      - name: Generate deployment changelog
+        if: ${{ steps.previous-deployment.outputs.previous_sha != '' }}
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          PREVIOUS_SHA: ${{ steps.previous-deployment.outputs.previous_sha }}
+          CURRENT_SHA: ${{ github.sha }}
+        run: |
+          cat <<EOF >> "$GITHUB_STEP_SUMMARY"
+          ## Deployment changelog
+          Comparing \`${PREVIOUS_SHA}\` to \`${CURRENT_SHA}\`.
+
+          EOF
+
+          copilot -p "Review git history in range ${PREVIOUS_SHA}..${CURRENT_SHA} for this repository and write markdown to deployment-changelog.md.
+
+          Output format:
+          ## Features
+          - bullet points
+
+          ## Fixes
+          - bullet points
+
+          Rules:
+          - Focus on user-facing features, meaningful improvements, and bugs fixed since the last github-pages deployment.
+          - Group related commits into higher-level bullets.
+          - Do not mention file names, implementation details, refactors, CI changes, tests, or dependency bumps unless they changed user-visible behavior.
+          - If no items fit a section, write '- None.'
+          - Use git commands only for evidence." --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
+
+          cat deployment-changelog.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Handle missing previous deployment
+        if: ${{ steps.previous-deployment.outputs.previous_sha == '' }}
+        run: |
+          cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          ## Deployment changelog
+          No previous successful `github-pages` deployment found. Skipping changelog generation.
+          EOF
+      - name: Publish changelog outputs
+        id: publish-metadata
+        env:
+          CURRENT_SHA: ${{ github.sha }}
+          PREVIOUS_SHA: ${{ steps.previous-deployment.outputs.previous_sha }}
+        run: |
+          set -euo pipefail
+
+          release_tag="website-deploy-${CURRENT_SHA::12}"
+          has_changelog='false'
+          changelog_delimiter="CHANGELOG_EOF_$(date +%s)"
+
+          if [ -f deployment-changelog.md ]; then
+            has_changelog='true'
+          fi
+
+          echo "current_sha=${CURRENT_SHA}" >> "$GITHUB_OUTPUT"
+          echo "previous_sha=${PREVIOUS_SHA}" >> "$GITHUB_OUTPUT"
+          echo "release_tag=${release_tag}" >> "$GITHUB_OUTPUT"
+          echo "has_changelog=${has_changelog}" >> "$GITHUB_OUTPUT"
+
+          {
+            echo "changelog<<${changelog_delimiter}"
+
+            if [ "${has_changelog}" = 'true' ]; then
+              cat deployment-changelog.md
+            else
+              echo '## Deployment changelog'
+              echo 'No previous successful `github-pages` deployment found. Skipping changelog generation.'
+            fi
+
+            echo "${changelog_delimiter}"
+          } >> "$GITHUB_OUTPUT"
+      - name: Upload deployment changelog artifact
+        if: ${{ steps.previous-deployment.outputs.previous_sha != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-changelog
+          path: deployment-changelog.md
+  create-release:
+    needs:
+      - deployment-changelog
+      - e2e
+    if: ${{ needs.deployment-changelog.outputs.has_changelog == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      release_url: ${{ steps.create-release.outputs.release_url }}
+      release_name: ${{ steps.create-release.outputs.release_name }}
+    steps:
+      - name: Restore changelog
+        env:
+          CHANGELOG: ${{ needs.deployment-changelog.outputs.changelog }}
+        run: |
+          printf '%s\n' "${CHANGELOG}" > deployment-changelog.md
+      - name: Create or update release
+        id: create-release
+        env:
+          CURRENT_SHA: ${{ needs.deployment-changelog.outputs.current_sha }}
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.deployment-changelog.outputs.release_tag }}
+        run: |
+          set -euo pipefail
+
+          if gh release view "${RELEASE_TAG}" >/dev/null 2>&1; then
+            gh release edit "${RELEASE_TAG}" --notes-file deployment-changelog.md --latest=false
+          else
+            gh release create "${RELEASE_TAG}" --target "${CURRENT_SHA}" --notes-file deployment-changelog.md --latest=false
+          fi
+
+          echo "release_name=${RELEASE_TAG}" >> "$GITHUB_OUTPUT"
+          release_url="$(gh release view "${RELEASE_TAG}" --json url --jq '.url')"
+          echo "release_url=${release_url}" >> "$GITHUB_OUTPUT"
+          echo "Created or updated release: ${release_url}" >> "$GITHUB_STEP_SUMMARY"
+  notify-discord:
+    needs:
+      - deployment-changelog
+      - create-release
+    if: ${{ needs.deployment-changelog.outputs.has_changelog == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: GitHub release to Discord
+        if: ${{ secrets.DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK != '' }}
+        uses: SethCohen/github-releases-to-discord@v1.19.0
+        with:
+          webhook_url: ${{ secrets.DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK }}
+          username: OpenSimGear Releases
+          footer_title: Deployment changelog
+          reduce_headings: true
+          release_name: ${{ needs.create-release.outputs.release_name }}
+          release_body: ${{ needs.deployment-changelog.outputs.changelog }}
+          release_html_url: ${{ needs.create-release.outputs.release_url }}
+      - name: Handle missing Discord webhook
+        if: ${{ secrets.DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK == '' }}
+        run: |
+          echo 'Discord webhook secret `DISCORD_DEPLOYMENT_CHANGELOG_WEBHOOK` not configured. Skipping Discord notification.' >> "$GITHUB_STEP_SUMMARY"
