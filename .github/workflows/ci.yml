@@ -151,7 +151,7 @@ jobs:
 
           EOF
 
-          copilot --model gpt-5-mini -p "Review git history in range ${PREVIOUS_SHA}..${CURRENT_SHA} for this repository and write markdown to deployment-changelog.md.
+          copilot --model gpt-5-mini -s -p "Review git history in range ${PREVIOUS_SHA}..${CURRENT_SHA} for this repository and return only markdown for the changelog.
 
           Output format:
           ## Features
@@ -166,7 +166,8 @@ jobs:
           - Exclude CI changes, workflow changes, build scripts, deployment plumbing, tests, docs-only changes, refactors, dependency bumps, and any internal maintenance work.
           - If the deployment does not include a portal or website user-visible feature or fix, write '- None.' for both sections.
           - If no items fit a section, write '- None.'
-          - Use git commands only for evidence." --allow-tool='shell(git:*)' --allow-tool=write --no-ask-user
+          - Output only the final markdown, with no prose before or after it.
+          - Use git commands only for evidence." --allow-tool='shell(git:*)' --no-ask-user > deployment-changelog.md
 
           cat deployment-changelog.md >> "$GITHUB_STEP_SUMMARY"
       - name: Handle missing previous deployment
