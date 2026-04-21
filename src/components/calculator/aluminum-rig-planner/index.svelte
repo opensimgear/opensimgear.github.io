@@ -261,6 +261,30 @@
     scheduleMeasurementOverlay('baseInnerBeamSpacingMm');
   }
 
+  function setSeatHeightFromBaseInnerBeamsMm(value: number) {
+    plannerInput.seatHeightFromBaseInnerBeamsMm = Math.max(
+      PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMinMm,
+      Math.min(PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMaxMm, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setSeatAngleDeg(value: number) {
+    plannerInput.seatAngleDeg = Math.max(
+      PLANNER_DIMENSION_LIMITS.seatAngleDegMin,
+      Math.min(PLANNER_DIMENSION_LIMITS.seatAngleDegMax, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setBackrestAngleDeg(value: number) {
+    plannerInput.backrestAngleDeg = Math.max(
+      PLANNER_DIMENSION_LIMITS.backrestAngleDegMin,
+      Math.min(PLANNER_DIMENSION_LIMITS.backrestAngleDegMax, value)
+    );
+    syncPlannerUrlState();
+  }
+
   function setPedalTrayDepthMm(value: number) {
     plannerInput.pedalTrayDepthMm = Math.max(
       PLANNER_DIMENSION_LIMITS.pedalTrayDepthMinMm,
@@ -405,6 +429,32 @@
               max={PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
+            />
+          </Folder>
+          <Folder title="Seat">
+            <Slider
+              bind:value={() => plannerInput.seatHeightFromBaseInnerBeamsMm, setSeatHeightFromBaseInnerBeamsMm}
+              label="Seat height"
+              min={PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMinMm}
+              max={PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMaxMm}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
+              bind:value={() => plannerInput.seatAngleDeg, setSeatAngleDeg}
+              label="Seat angle"
+              min={PLANNER_DIMENSION_LIMITS.seatAngleDegMin}
+              max={PLANNER_DIMENSION_LIMITS.seatAngleDegMax}
+              step={1}
+              format={(value) => `${value}°`}
+            />
+            <Slider
+              bind:value={() => plannerInput.backrestAngleDeg, setBackrestAngleDeg}
+              label="Backrest angle"
+              min={PLANNER_DIMENSION_LIMITS.backrestAngleDegMin}
+              max={PLANNER_DIMENSION_LIMITS.backrestAngleDegMax}
+              step={1}
+              format={(value) => `${value}°`}
             />
           </Folder>
           <Button on:click={resetSetup} label="Reset" title="Reset" />

@@ -83,6 +83,17 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
       PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMinMm,
       PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMaxMm
     ),
+    seatHeightFromBaseInnerBeamsMm: clamp(
+      input.seatHeightFromBaseInnerBeamsMm,
+      PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMinMm,
+      PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMaxMm
+    ),
+    seatAngleDeg: clamp(input.seatAngleDeg, PLANNER_DIMENSION_LIMITS.seatAngleDegMin, PLANNER_DIMENSION_LIMITS.seatAngleDegMax),
+    backrestAngleDeg: clamp(
+      input.backrestAngleDeg,
+      PLANNER_DIMENSION_LIMITS.backrestAngleDegMin,
+      PLANNER_DIMENSION_LIMITS.backrestAngleDegMax
+    ),
     pedalTrayDepthMm,
     pedalTrayDistanceMm,
     steeringColumnDistanceMm,

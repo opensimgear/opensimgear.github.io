@@ -7,6 +7,9 @@ describe('aluminum rig planner query state', () => {
   it('sanitizes out-of-range shared-link values before hydration', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       baseWidthMm: 900,
+      seatHeightFromBaseInnerBeamsMm: -30,
+      seatAngleDeg: 80,
+      backrestAngleDeg: 20,
       pedalTrayDepthMm: 120,
       pedalTrayDistanceMm: -50,
       steeringColumnDistanceMm: 1200,
@@ -15,6 +18,9 @@ describe('aluminum rig planner query state', () => {
     });
 
     expect(state.plannerInput.baseWidthMm).toBe(600);
+    expect(state.plannerInput.seatHeightFromBaseInnerBeamsMm).toBe(0);
+    expect(state.plannerInput.seatAngleDeg).toBe(45);
+    expect(state.plannerInput.backrestAngleDeg).toBe(45);
     expect(state.plannerInput.pedalTrayDepthMm).toBe(300);
     expect(state.plannerInput.pedalTrayDistanceMm).toBe(150);
     expect(state.plannerInput.steeringColumnDistanceMm).toBe(690);

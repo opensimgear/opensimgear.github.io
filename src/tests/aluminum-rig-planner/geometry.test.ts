@@ -73,6 +73,19 @@ describe('aluminum rig planner geometry', () => {
     expect(clamped.pedalTrayDistanceMm).toBe(50);
   });
 
+  it('clamps seat posture settings to supported limits', () => {
+    const clamped = clampPlannerInput({
+      ...DEFAULT_PLANNER_INPUT,
+      seatHeightFromBaseInnerBeamsMm: 400,
+      seatAngleDeg: -10,
+      backrestAngleDeg: 200,
+    });
+
+    expect(clamped.seatHeightFromBaseInnerBeamsMm).toBe(300);
+    expect(clamped.seatAngleDeg).toBe(0);
+    expect(clamped.backrestAngleDeg).toBe(135);
+  });
+
   it('positions steering uprights from seat crossbeam distance only', () => {
     const nearModule = createSteeringColumnModule(
       {
