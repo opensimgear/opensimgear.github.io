@@ -1,4 +1,5 @@
 import type { PlannerInput } from './types';
+import { plannerYUpToSceneZUp, Z_UP_SCENE_ROOT_ROTATION } from './scene-space';
 
 export const MM_TO_METERS = 0.001;
 export const PROFILE_SHORT_MM = 40;
@@ -128,28 +129,30 @@ export const PEDAL_TRAY_LAYOUT = {
 } as const;
 
 export const SCENE_VIEW = {
-  narrowCameraPosition: [0.98, 0.84, 1] as [number, number, number],
-  wideCameraPosition: [0.1, 1, 1] as [number, number, number],
-  cameraUp: [0, 1, 0] as [number, number, number],
-  controlsTarget: [0.7, 0.1, 0] as [number, number, number],
+  narrowCameraPosition: plannerYUpToSceneZUp([0.98, 0.84, 1]),
+  wideCameraPosition: plannerYUpToSceneZUp([0.1, 1, 1]),
+  cameraUp: plannerYUpToSceneZUp([0, 1, 0]),
+  controlsTarget: plannerYUpToSceneZUp([0.7, 0.1, 0]),
+  sceneRotation: Z_UP_SCENE_ROOT_ROTATION,
   narrowGizmoSizePx: 48,
   wideGizmoSizePx: 64,
   orbitDampingFactor: 0.08,
   ambientLightColor: '#eef2f7',
   ambientLightIntensity: 1.4,
   keyLightColor: '#fff9f0',
-  keyLightPosition: [3.6, 5.4, 2.8] as [number, number, number],
+  keyLightPosition: plannerYUpToSceneZUp([3.6, 5.4, 2.8]),
   keyLightIntensityMultiplier: 0.98,
   shadowMapSizePx: 2048,
   shadowBias: 0.0002,
   shadowNormalBias: 0.04,
   fillLightColor: '#d9e6ff',
-  fillLightPosition: [-3.2, 2.4, 1.5] as [number, number, number],
+  fillLightPosition: plannerYUpToSceneZUp([-3.2, 2.4, 1.5]),
   fillLightIntensityMultiplier: 0.32,
   rimLightColor: '#f3f6fb',
-  rimLightPosition: [0.6, 2.1, -3.4] as [number, number, number],
+  rimLightPosition: plannerYUpToSceneZUp([0.6, 2.1, -3.4]),
   rimLightIntensityMultiplier: 0.2,
-  gridPosition: [0.7, -0.002, 0] as [number, number, number],
+  gridPlane: 'xy' as const,
+  gridPosition: plannerYUpToSceneZUp([0.7, -0.002, 0]),
   gridScale: 2,
   gridCellColor: '#cbd5e1',
   gridSectionColor: '#94a3b8',
