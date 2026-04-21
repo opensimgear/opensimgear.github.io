@@ -5,6 +5,7 @@ import {
   buildPlaneEquation,
   getDiagonalFovRadians,
   getPerspectiveFrustum,
+  getTargetFromCameraPose,
   getVerticalFovDegreesFromDiagonalRadians,
   SPACEMOUSE_Z_UP_COORDINATE_SYSTEM,
 } from '../../components/calculator/aluminum-rig-planner/space-mouse';
@@ -39,5 +40,9 @@ describe('aluminum rig planner space mouse helpers', () => {
 
   it('builds normalized plane equation from point and normal', () => {
     expect(buildPlaneEquation([0, 0, -0.002], [0, 0, 2])).toEqual([0, 0, 1, 0.002]);
+  });
+
+  it('derives orbit target from camera pose so pose-only pan survives controls sync', () => {
+    expect(getTargetFromCameraPose([2, 3, 4], [0, 1, 0], 5)).toEqual([2, 8, 4]);
   });
 });

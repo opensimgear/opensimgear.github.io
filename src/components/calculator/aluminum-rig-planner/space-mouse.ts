@@ -79,6 +79,13 @@ export function getPerspectiveFrustum(camera: PerspectiveCamera): [number, numbe
   return [left, -left, bottom, -bottom, camera.near, camera.far];
 }
 
+export function getTargetFromCameraPose(position: Vector3Tuple, direction: Vector3Tuple, distance: number): Vector3Tuple {
+  const positionVector = new Vector3(...position);
+  const directionVector = new Vector3(...direction).normalize();
+
+  return positionVector.add(directionVector.multiplyScalar(distance)).toArray() as Vector3Tuple;
+}
+
 async function loadSpaceMouseScript(scriptUrl: string) {
   if (typeof window === 'undefined') {
     return null;
@@ -136,6 +143,7 @@ export class PlannerSpaceMouseBridge {
   private readonly raycaster = new Raycaster();
   private readonly lookOrigin = new Vector3();
   private readonly lookDirection = new Vector3(0, 1, 0);
+  private readonly worldDirection = new Vector3();
   private lookAperture = 0.01;
 
   constructor(private readonly options: PlannerSpaceMouseBridgeOptions) {}
@@ -395,6 +403,9 @@ export class PlannerSpaceMouseBridge {
       return;
     }
 
+    const currentDistanceToTarget =
+      controls ? camera.position.distanceTo(controls.target) : this.getModelBoundingBox()?.getSize(new Vector3()).length() ?? 1;
+
     this.scratchMatrix.fromArray(data);
     this.scratchMatrix.decompose(camera.position, camera.quaternion, camera.scale);
     camera.up.set(...SCENE_VIEW.cameraUp);
@@ -402,6 +413,14 @@ export class PlannerSpaceMouseBridge {
 
     if (controls) {
       controls.object = camera;
+      camera.getWorldDirection(this.worldDirection);
+      controls.target.fromArray(
+        getTargetFromCameraPose(
+          camera.position.toArray() as Vector3Tuple,
+          this.worldDirection.toArray() as Vector3Tuple,
+          currentDistanceToTarget
+        )
+      );
     }
   }
 
