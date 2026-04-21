@@ -188,7 +188,13 @@ jobs:
           changelog_delimiter="CHANGELOG_EOF_$(date +%s)"
 
           if [ -f deployment-changelog.md ]; then
-            has_changelog='true'
+            meaningful_item_count="$(
+              awk '/^- / && $0 != "- None." { count++ } END { print count + 0 }' deployment-changelog.md
+            )"
+
+            if [ "${meaningful_item_count}" -gt 0 ]; then
+              has_changelog='true'
+            fi
           fi
 
           echo "current_sha=${CURRENT_SHA}" >> "$GITHUB_OUTPUT"
@@ -235,19 +241,20 @@ jobs:
         id: create-release
         env:
           CURRENT_SHA: ${{ needs.deployment-changelog.outputs.current_sha }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ needs.deployment-changelog.outputs.release_tag }}
         run: |
           set -euo pipefail
 
-          if gh release view "${RELEASE_TAG}" >/dev/null 2>&1; then
-            gh release edit "${RELEASE_TAG}" --notes-file deployment-changelog.md --latest=false
+          if gh release view "${RELEASE_TAG}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            gh release edit "${RELEASE_TAG}" --repo "${GITHUB_REPOSITORY}" --notes-file deployment-changelog.md --latest=false
           else
-            gh release create "${RELEASE_TAG}" --target "${CURRENT_SHA}" --notes-file deployment-changelog.md --latest=false
+            gh release create "${RELEASE_TAG}" --repo "${GITHUB_REPOSITORY}" --target "${CURRENT_SHA}" --notes-file deployment-changelog.md --latest=false
           fi
 
           echo "release_name=${RELEASE_TAG}" >> "$GITHUB_OUTPUT"
-          release_url="$(gh release view "${RELEASE_TAG}" --json url --jq '.url')"
+          release_url="$(gh release view "${RELEASE_TAG}" --repo "${GITHUB_REPOSITORY}" --json url --jq '.url')"
           echo "release_url=${release_url}" >> "$GITHUB_OUTPUT"
           echo "Created or updated release: ${release_url}" >> "$GITHUB_STEP_SUMMARY"
   notify-discord:
