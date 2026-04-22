@@ -122,7 +122,7 @@
   const PROFILE_TYPES: CutListProfileType[] = ['80x40', '40x40'];
   const OPTIMIZER_LIMITS = {
     bladeThicknessMaxMm: 10,
-    safetyMarginMaxMm: 50,
+    safetyMarginMaxMm: 15,
     flatShippingCostMax: 500,
     shippingRatePerKgMax: 50,
     profileWeightMaxKgPerMeter: 10,
