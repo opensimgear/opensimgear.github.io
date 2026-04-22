@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import type {
     CutListEntry,
     PlannerCurrencyCode,
@@ -20,14 +19,9 @@
     totalMassKg: number;
   };
 
-  type VisualTooltipRow = {
-    label: string;
-    value: string;
-  };
-
-  type VisualTooltip = {
-    heading: string;
-    rows: VisualTooltipRow[];
+  type VisualLayoutGroup = {
+    profileType: CutListProfileType;
+    bars: PlannerPurchasedBar[];
   };
 
   interface Props {
@@ -51,6 +45,14 @@
     profileColor,
     onHoveredCutListKeyChange,
   }: Props = $props();
+
+  function compareProfileTypes(a: CutListProfileType, b: CutListProfileType) {
+    if (a === b) {
+      return 0;
+    }
+
+    return a === '80x40' ? -1 : 1;
+  }
 
   const purchaseSummaryRows = $derived.by(() => {
     const grouped: Record<string, PurchaseSummaryRow> = {};
@@ -84,27 +86,30 @@
 
     return Object.values(grouped).sort((a, b) => {
       if (a.profileType !== b.profileType) {
-        return a.profileType === '80x40' ? -1 : 1;
+        return compareProfileTypes(a.profileType, b.profileType);
       }
 
       return a.stockLengthMm - b.stockLengthMm;
     });
   });
 
-  const visualLayoutBars = $derived.by(() =>
+  const visualLayoutGroups = $derived.by(() =>
     optimizationResult.profiles
-      .flatMap((profile) => profile.purchasedBars)
+      .slice()
       .sort((a, b) => {
-        if (a.stockLengthMm !== b.stockLengthMm) {
-          return b.stockLengthMm - a.stockLengthMm;
-        }
-
-        if (a.profileType !== b.profileType) {
-          return a.profileType.localeCompare(b.profileType);
-        }
-
-        return a.id.localeCompare(b.id);
+        return compareProfileTypes(a.profileType, b.profileType);
       })
+      .map<VisualLayoutGroup>((profile) => ({
+        profileType: profile.profileType,
+        bars: profile.purchasedBars.slice().sort((a, b) => {
+          if (a.stockLengthMm !== b.stockLengthMm) {
+            return b.stockLengthMm - a.stockLengthMm;
+          }
+
+          return a.id.localeCompare(b.id);
+        }),
+      }))
+      .filter((group) => group.bars.length > 0)
   );
 
   const maxPurchasedBarLengthMm = $derived.by(() =>
@@ -114,12 +119,7 @@
     )
   );
   const BAR_RULER_STEP_MM = 100;
-
-  let hoveredVisualTooltip = $state<VisualTooltip | null>(null);
-  let popupX = $state(0);
-  let popupY = $state(0);
-  let popupFlipLeft = $state(false);
-  let supportsHoverPopup = $state(false);
+  const WHOLE_METER_MM = 1000;
 
   function formatMoney(value: number) {
     return new Intl.NumberFormat(currencyLocale, {
@@ -161,6 +161,10 @@
     }
 
     return ticks;
+  }
+
+  function formatTickLabelMeters(tickMm: number) {
+    return `${tickMm / WHOLE_METER_MM} m`;
   }
 
   function getPieceSafetyLengthMm(piece: PlannerPurchasedBar['pieces'][number]) {
@@ -207,14 +211,6 @@
     return (optimizationSettings.bladeThicknessMm / bar.stockLengthMm) * 100;
   }
 
-  function getBarMaterialLengthMm(bar: PlannerPurchasedBar) {
-    return bar.pieces.reduce((sum, piece) => sum + piece.nominalLengthMm, 0);
-  }
-
-  function getBarSafetyLengthMm(bar: PlannerPurchasedBar) {
-    return bar.pieces.reduce((sum, piece) => sum + getPieceSafetyLengthMm(piece), 0);
-  }
-
   function getBarUnusedLengthMm(bar: PlannerPurchasedBar) {
     return Math.max(0, bar.stockLengthMm - bar.usedLengthMm);
   }
@@ -227,51 +223,8 @@
     return (getBarUnusedLengthMm(bar) / bar.stockLengthMm) * 100;
   }
 
-  function getBarTooltip(bar: PlannerPurchasedBar) {
-    return {
-      heading: `${bar.profileType} bar`,
-      rows: [
-        { label: 'Stock', value: formatStockLength(bar.stockLengthMm) },
-        { label: 'Material', value: formatLengthMm(getBarMaterialLengthMm(bar)) },
-        { label: 'Safety', value: formatLengthMm(getBarSafetyLengthMm(bar)) },
-        { label: 'Kerf', value: formatLengthMm(bar.kerfLengthMm) },
-        { label: 'Waste', value: formatLengthMm(getBarUnusedLengthMm(bar)) },
-        { label: 'Price', value: formatMoney(bar.totalCost) },
-        { label: 'Weight', value: formatWeight(bar.massKg) },
-      ],
-    };
-  }
-
-  function getPieceTooltip(piece: PlannerPurchasedBar['pieces'][number]) {
-    return {
-      heading: 'Cut piece',
-      rows: [
-        { label: 'Material', value: formatLengthMm(piece.nominalLengthMm) },
-        { label: 'Safety', value: `${formatLengthMm(getPieceSafetyLengthPerSideMm(piece))} each side` },
-        { label: 'Adjusted', value: formatLengthMm(piece.adjustedLengthMm) },
-      ],
-    };
-  }
-
-  function getKerfTooltip() {
-    return {
-      heading: 'Kerf',
-      rows: [{ label: 'Blade thickness', value: formatLengthMm(optimizationSettings.bladeThicknessMm) }],
-    };
-  }
-
   function getKerfAriaLabel() {
     return `Kerf ${formatLengthMm(optimizationSettings.bladeThicknessMm)}`;
-  }
-
-  function getWasteTooltip(bar: PlannerPurchasedBar) {
-    return {
-      heading: 'Waste',
-      rows: [
-        { label: 'Unused stock', value: formatLengthMm(getBarUnusedLengthMm(bar)) },
-        { label: 'Stock', value: formatStockLength(bar.stockLengthMm) },
-      ],
-    };
   }
 
   function getWasteAriaLabel(bar: PlannerPurchasedBar) {
@@ -287,7 +240,7 @@
   }
 
   function shouldShowTickLabel(tickMm: number, bar: PlannerPurchasedBar) {
-    return tickMm > 0 && tickMm < bar.stockLengthMm && tickMm % 500 === 0;
+    return tickMm > 0 && tickMm <= bar.stockLengthMm && tickMm % WHOLE_METER_MM === 0;
   }
 
   function isEdgeTick(tickMm: number, bar: PlannerPurchasedBar) {
@@ -305,48 +258,6 @@
   function shouldShowPieceLabel(piece: PlannerPurchasedBar['pieces'][number], bar: PlannerPurchasedBar) {
     return getPieceAdjustedWidthPercent(piece, bar) >= 12;
   }
-
-  function updateVisualTooltipPos(event: MouseEvent) {
-    if (!supportsHoverPopup) {
-      return;
-    }
-
-    popupX = event.clientX;
-    popupY = event.clientY;
-    popupFlipLeft = typeof window !== 'undefined' && event.clientX > window.innerWidth * 0.55;
-  }
-
-  function showVisualTooltip(event: MouseEvent, tooltip: VisualTooltip) {
-    if (!supportsHoverPopup) {
-      return;
-    }
-
-    hoveredVisualTooltip = tooltip;
-    updateVisualTooltipPos(event);
-  }
-
-  function hideVisualTooltip() {
-    hoveredVisualTooltip = null;
-  }
-
-  onMount(() => {
-    const hoverMediaQuery = window.matchMedia('(any-hover: hover) and (any-pointer: fine)');
-
-    const syncHoverPopupSupport = () => {
-      supportsHoverPopup = hoverMediaQuery.matches;
-
-      if (!supportsHoverPopup) {
-        hoveredVisualTooltip = null;
-      }
-    };
-
-    syncHoverPopupSupport();
-    hoverMediaQuery.addEventListener('change', syncHoverPopupSupport);
-
-    return () => {
-      hoverMediaQuery.removeEventListener('change', syncHoverPopupSupport);
-    };
-  });
 </script>
 
 <section data-testid="aluminum-rig-planner-cut-optimizer" class="border-t border-zinc-300 bg-white">
@@ -378,9 +289,6 @@
                 </span>
                 <span>Visual cut layout</span>
               </h3>
-              <p class="mt-1 text-xs text-zinc-500">
-                Bars scale to real purchased length. Empty space is unused stock.
-              </p>
             </div>
             <div class="flex flex-wrap gap-3 text-xs text-zinc-600">
               <div class="flex items-center gap-2">
@@ -404,129 +312,115 @@
           </div>
         </div>
         <div class="overflow-hidden rounded bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-          {#each visualLayoutBars as bar (bar.id)}
-            <article
-              class="blueprint-row grid grid-cols-[12rem_minmax(0,1fr)] items-end gap-2 border-b border-slate-200 px-3 py-3 last:border-b-0"
-              onmouseenter={(event) => showVisualTooltip(event, getBarTooltip(bar))}
-              onmousemove={updateVisualTooltipPos}
-              onmouseleave={hideVisualTooltip}
-            >
-              <div class="space-y-1 font-['Roboto_Mono',monospace] text-[11px] leading-tight text-slate-600">
+          {#each visualLayoutGroups as group (group.profileType)}
+            <section class="visual-layout-group border-b border-slate-200 last:border-b-0">
+              <div class="visual-layout-group__header flex items-center justify-between gap-3 px-3 py-2">
                 <div class="flex items-center gap-3">
                   <div class="profile-name">
-                    {bar.profileType}
+                    {group.profileType}
                   </div>
-                  <div class="text-[13px] font-semibold text-slate-900">{formatStockLength(bar.stockLengthMm)}</div>
+                  <div class="text-[11px] font-medium uppercase tracking-[0.16em] text-slate-500">profile bars</div>
                 </div>
-                <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <div>{formatMoney(bar.totalCost)}</div>
-                  <div>{formatWeight(bar.massKg)}</div>
+                <div class="font-['Roboto_Mono',monospace] text-[11px] text-slate-500">
+                  {group.bars.length}
+                  {group.bars.length === 1 ? 'bar' : 'bars'}
                 </div>
               </div>
-
-              <div class="min-w-0">
-                <div style={`width: ${getBarWidthPercent(bar)}%;`}>
-                  <div class="bar-ruler">
-                    {#each getBarTickMarks(bar) as tickMm (tickMm)}
-                      <span
-                        class={[
-                          'bar-ruler__tick',
-                          isEdgeTick(tickMm, bar) && 'bar-ruler__tick--edge',
-                          isMajorTick(tickMm) && 'bar-ruler__tick--major',
-                          tickMm === bar.stockLengthMm && 'bar-ruler__tick--end',
-                        ]}
-                        style={`left: ${(tickMm / bar.stockLengthMm) * 100}%;`}
-                      >
-                        {#if shouldShowTickLabel(tickMm, bar)}
-                          <span class="bar-ruler__label">{tickMm}</span>
-                        {/if}
-                      </span>
-                    {/each}
-                  </div>
-                  <div class="bar-shell">
-                    <div class="flex h-4 w-full">
-                      {#each bar.pieces as piece, pieceIndex (piece.id)}
-                        <button
-                          class="bar-piece m-0 flex h-full shrink-0 appearance-none overflow-hidden border-r border-slate-200 bg-transparent p-0"
-                          style={`width: ${getPieceAdjustedWidthPercent(piece, bar)}%;`}
-                          aria-label={`${piece.nominalLengthMm} mm material plus ${getPieceSafetyLengthPerSideMm(piece)} mm safety each side`}
-                          type="button"
-                          onmouseenter={(event) => {
-                            onHoveredCutListKeyChange(piece.cutListKey);
-                            showVisualTooltip(event, getPieceTooltip(piece));
-                          }}
-                          onmousemove={updateVisualTooltipPos}
-                          onmouseleave={() => {
-                            onHoveredCutListKeyChange(null);
-                            hideVisualTooltip();
-                          }}
-                        >
-                          {#if getPieceSafetyLengthMm(piece) > 0}
+              <div class="visual-layout-group__rows">
+                {#each group.bars as bar (bar.id)}
+                  <article class="blueprint-row border-t border-slate-200 px-3 py-3 first:border-t-0">
+                    <div class="min-w-0">
+                      <div style={`width: ${getBarWidthPercent(bar)}%;`}>
+                        <div class="bar-ruler">
+                          {#each getBarTickMarks(bar) as tickMm (tickMm)}
                             <span
-                              class="h-full shrink-0"
-                              style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
-                            ></span>
-                          {/if}
-                          <span
-                            class="bar-piece__material relative h-full shrink-0"
-                            style={`width: ${getPieceNominalWidthPercent(piece)}%; background-color: ${getPieceColor()};`}
-                          >
-                            {#if isPieceHighlighted(piece.cutListKey)}
-                              <span class="bar-piece__highlight"></span>
+                              class={[
+                                'bar-ruler__tick',
+                                isEdgeTick(tickMm, bar) && 'bar-ruler__tick--edge',
+                                isMajorTick(tickMm) && 'bar-ruler__tick--major',
+                                tickMm === bar.stockLengthMm && 'bar-ruler__tick--end',
+                              ]}
+                              style={`left: ${(tickMm / bar.stockLengthMm) * 100}%;`}
+                            >
+                              {#if shouldShowTickLabel(tickMm, bar)}
+                                <span class="bar-ruler__label">{formatTickLabelMeters(tickMm)}</span>
+                              {/if}
+                            </span>
+                          {/each}
+                        </div>
+                        <div class="bar-shell">
+                          <div class="flex h-4 w-full">
+                            {#each bar.pieces as piece, pieceIndex (piece.id)}
+                              <button
+                                class="bar-piece m-0 flex h-full shrink-0 appearance-none overflow-hidden border-r border-slate-200 bg-transparent p-0"
+                                style={`width: ${getPieceAdjustedWidthPercent(piece, bar)}%;`}
+                                aria-label={`${piece.nominalLengthMm} mm material plus ${getPieceSafetyLengthPerSideMm(piece)} mm safety each side`}
+                                type="button"
+                                onmouseenter={() => onHoveredCutListKeyChange(piece.cutListKey)}
+                                onmouseleave={() => {
+                                  onHoveredCutListKeyChange(null);
+                                }}
+                              >
+                                {#if getPieceSafetyLengthMm(piece) > 0}
+                                  <span
+                                    class="h-full shrink-0"
+                                    style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
+                                  ></span>
+                                {/if}
+                                <span
+                                  class="bar-piece__material relative h-full shrink-0"
+                                  style={`width: ${getPieceNominalWidthPercent(piece)}%; background-color: ${getPieceColor()};`}
+                                >
+                                  {#if isPieceHighlighted(piece.cutListKey)}
+                                    <span class="bar-piece__highlight"></span>
+                                  {/if}
+                                  {#if shouldShowPieceLabel(piece, bar)}
+                                    <span class="bar-piece__label">{piece.nominalLengthMm}</span>
+                                  {/if}
+                                </span>
+                                {#if getPieceSafetyLengthMm(piece) > 0}
+                                  <span
+                                    class="relative h-full shrink-0"
+                                    style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
+                                  ></span>
+                                {/if}
+                                {#if isPieceHighlighted(piece.cutListKey)}
+                                  <span class="bar-piece__highlight"></span>
+                                {/if}
+                              </button>
+                              {#if pieceIndex < bar.pieces.length - 1 && optimizationSettings.bladeThicknessMm > 0}
+                                <div
+                                  class="bar-kerf h-full shrink-0"
+                                  style={`width: ${getKerfWidthPercent(bar)}%;`}
+                                  role="img"
+                                  aria-label={getKerfAriaLabel()}
+                                ></div>
+                              {/if}
+                            {/each}
+                            {#if bar.pieces.length > 0 && optimizationSettings.bladeThicknessMm > 0}
+                              <div
+                                class="bar-kerf h-full shrink-0"
+                                style={`width: ${getKerfWidthPercent(bar)}%;`}
+                                role="img"
+                                aria-label={getKerfAriaLabel()}
+                              ></div>
                             {/if}
-                            {#if shouldShowPieceLabel(piece, bar)}
-                              <span class="bar-piece__label">{piece.nominalLengthMm}</span>
+                            {#if getBarUnusedLengthMm(bar) > 0}
+                              <div
+                                class="bar-waste h-full shrink-0"
+                                style={`width: ${getBarUnusedWidthPercent(bar)}%;`}
+                                role="img"
+                                aria-label={getWasteAriaLabel(bar)}
+                              ></div>
                             {/if}
-                          </span>
-                          {#if getPieceSafetyLengthMm(piece) > 0}
-                            <span
-                              class="relative h-full shrink-0"
-                              style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
-                            ></span>
-                          {/if}
-                          {#if isPieceHighlighted(piece.cutListKey)}
-                            <span class="bar-piece__highlight"></span>
-                          {/if}
-                        </button>
-                        {#if pieceIndex < bar.pieces.length - 1 && optimizationSettings.bladeThicknessMm > 0}
-                          <div
-                            class="bar-kerf h-full shrink-0"
-                            style={`width: ${getKerfWidthPercent(bar)}%;`}
-                            role="img"
-                            aria-label={getKerfAriaLabel()}
-                            onmouseenter={(event) => showVisualTooltip(event, getKerfTooltip())}
-                            onmousemove={updateVisualTooltipPos}
-                            onmouseleave={hideVisualTooltip}
-                          ></div>
-                        {/if}
-                      {/each}
-                      {#if bar.pieces.length > 0 && optimizationSettings.bladeThicknessMm > 0}
-                        <div
-                          class="bar-kerf h-full shrink-0"
-                          style={`width: ${getKerfWidthPercent(bar)}%;`}
-                          role="img"
-                          aria-label={getKerfAriaLabel()}
-                          onmouseenter={(event) => showVisualTooltip(event, getKerfTooltip())}
-                          onmousemove={updateVisualTooltipPos}
-                          onmouseleave={hideVisualTooltip}
-                        ></div>
-                      {/if}
-                      {#if getBarUnusedLengthMm(bar) > 0}
-                        <div
-                          class="bar-waste h-full shrink-0"
-                          style={`width: ${getBarUnusedWidthPercent(bar)}%;`}
-                          role="img"
-                          aria-label={getWasteAriaLabel(bar)}
-                          onmouseenter={(event) => showVisualTooltip(event, getWasteTooltip(bar))}
-                          onmousemove={updateVisualTooltipPos}
-                          onmouseleave={hideVisualTooltip}
-                        ></div>
-                      {/if}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  </article>
+                {/each}
               </div>
-            </article>
+            </section>
           {/each}
         </div>
       </div>
@@ -666,27 +560,6 @@
   </div>
 </section>
 
-{#if supportsHoverPopup && hoveredVisualTooltip}
-  <div
-    class="visual-tooltip fixed z-50 pointer-events-none rounded border border-slate-200 bg-white px-3 py-2 text-xs font-mono shadow-xl"
-    style={`left: ${popupFlipLeft ? popupX - 16 : popupX + 16}px; top: ${popupY}px; transform: ${
-      popupFlipLeft ? 'translate(-100%, -50%)' : 'translateY(-50%)'
-    };`}
-  >
-    <div class="visual-tooltip__heading font-sans text-[11px] font-semibold text-slate-800">
-      {hoveredVisualTooltip.heading}
-    </div>
-    <div class="mt-1 space-y-1">
-      {#each hoveredVisualTooltip.rows as row (row.label)}
-        <div class="flex items-start justify-between gap-4">
-          <span class="text-slate-500">{row.label}</span>
-          <span class="whitespace-nowrap text-slate-900">{row.value}</span>
-        </div>
-      {/each}
-    </div>
-  </div>
-{/if}
-
 <style>
   .required-cuts-card {
     background:
@@ -712,10 +585,25 @@
     letter-spacing: 0.03em;
   }
 
+  .visual-layout-group {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.96)),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      18px 18px,
+      18px 18px;
+  }
+
+  .visual-layout-group__header {
+    background: linear-gradient(90deg, rgba(226, 232, 240, 0.72), rgba(241, 245, 249, 0.3));
+  }
+
   .bar-ruler {
     position: relative;
     height: 0.95rem;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.05rem;
     border-top: 1px solid rgb(191 219 254);
   }
 
@@ -758,18 +646,6 @@
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.95),
       0 3px 10px rgba(15, 23, 42, 0.08);
-  }
-
-  .bar-shell__grid {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(90deg, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
-      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-    background-size:
-      20px 100%,
-      100% 10px;
-    pointer-events: none;
   }
 
   .bar-piece {
@@ -825,10 +701,5 @@
       rgba(253, 224, 71, 0.18) 8px,
       rgba(253, 224, 71, 0.18) 16px
     );
-  }
-
-  .visual-tooltip {
-    min-width: 14rem;
-    max-width: 18rem;
   }
 </style>
