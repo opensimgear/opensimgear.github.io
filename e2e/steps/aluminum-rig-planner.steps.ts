@@ -36,27 +36,7 @@ Then('I should see the cut list', async ({ page }: { page: Page }) => {
 });
 
 Then('I should see the 3D rig preview', async ({ page }: { page: Page }) => {
-  const canvas = page.getByTestId('aluminum-rig-planner-preview-canvas');
-  const loadingError = page.getByTestId('aluminum-rig-planner-preview-error');
-  const sceneReadyTimeoutMs = 20_000;
-
-  await expect
-    .poll(
-      async () => {
-        if (await canvas.isVisible()) {
-          return 'ready';
-        }
-
-        if (await loadingError.isVisible()) {
-          return 'error';
-        }
-
-        return 'loading';
-      },
-      {
-        timeout: sceneReadyTimeoutMs,
-        message: 'Expected aluminum rig preview canvas to appear before timeout',
-      }
-    )
-    .toBe('ready');
+  await expect(page.getByRole('application', { name: /3D aluminum rig planner viewport/i })).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-preview-error')).toBeHidden();
+  await expect(page.getByTestId('aluminum-rig-planner-preview-canvas')).toBeVisible();
 });
