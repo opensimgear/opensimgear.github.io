@@ -3,8 +3,11 @@ import { clampPlannerInput } from './geometry';
 import type { PlannerInput, PlannerOptimizationSettings, PlannerStockOption } from './types';
 
 export type PlannerQueryState = Partial<PlannerInput> & {
-  optimizer?: Partial<Omit<PlannerOptimizationSettings, 'mode' | 'shippingMode' | 'profileWeightsKgPerMeter' | 'stockOptions'>> & {
+  optimizer?: Partial<
+    Omit<PlannerOptimizationSettings, 'mode' | 'currencyMode' | 'shippingMode' | 'profileWeightsKgPerMeter' | 'stockOptions'>
+  > & {
     mode?: unknown;
+    currencyMode?: unknown;
     shippingMode?: unknown;
     profileWeightsKgPerMeter?: {
       '40x40'?: unknown;
@@ -84,6 +87,7 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
 
   return {
     mode: state?.mode === 'waste' ? 'waste' : defaults.mode,
+    currencyMode: state?.currencyMode === 'eur' || state?.currencyMode === 'usd' ? state.currencyMode : defaults.currencyMode,
     bladeThicknessMm: readMinimumNumber(state?.bladeThicknessMm, defaults.bladeThicknessMm, 1),
     safetyMarginMm: readNonNegativeNumber(state?.safetyMarginMm, defaults.safetyMarginMm),
     shippingMode: state?.shippingMode === 'per-kg' ? 'per-kg' : defaults.shippingMode,

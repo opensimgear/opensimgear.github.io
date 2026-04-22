@@ -3,6 +3,7 @@
 
   import type {
     CutListEntry,
+    PlannerCurrencyCode,
     CutListProfileType,
     PlannerOptimizationResult,
     PlannerOptimizationSettings,
@@ -22,6 +23,8 @@
 
   interface Props {
     cutListEntries: CutListEntry[];
+    currencyCode: PlannerCurrencyCode;
+    currencyLocale: string;
     hoveredCutListKey: string | null;
     optimizationResult: PlannerOptimizationResult;
     optimizationSettings: PlannerOptimizationSettings;
@@ -31,6 +34,8 @@
 
   let {
     cutListEntries,
+    currencyCode,
+    currencyLocale,
     hoveredCutListKey,
     optimizationResult,
     optimizationSettings,
@@ -102,7 +107,12 @@
   );
 
   function formatMoney(value: number) {
-    return `$${value.toFixed(2)}`;
+    return new Intl.NumberFormat(currencyLocale, {
+      style: 'currency',
+      currency: currencyCode,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(value);
   }
 
   function formatWeight(value: number) {

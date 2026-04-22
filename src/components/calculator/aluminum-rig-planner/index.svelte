@@ -2,6 +2,12 @@
   import { onMount, tick, type Component } from 'svelte';
   import { Button, Checkbox, Color, Element, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
 
+  import {
+    DEFAULT_CURRENCY_LOCALE,
+    formatPlannerMoney,
+    resolvePlannerCurrency,
+    resolvePlannerLocale,
+  } from './currency';
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import CutOptimizerPanel from './CutOptimizerPanel.svelte';
@@ -40,7 +46,13 @@
   } from './state';
   import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
   import type { PlannerGeometry } from './geometry';
-  import type { CutListProfileType, PlannerInput, PlannerOptimizationSettings, PlannerVisibleModules } from './types';
+  import type {
+    CutListProfileType,
+    PlannerCurrencyCode,
+    PlannerInput,
+    PlannerOptimizationSettings,
+    PlannerVisibleModules,
+  } from './types';
 
   type PlannerSceneComponent = Component<{
     geometry: PlannerGeometry;
@@ -97,6 +109,11 @@
   const OPTIMIZER_MODE_OPTIONS = [
     { text: 'Cost', value: 'cost' },
     { text: 'Waste', value: 'waste' },
+  ] as const;
+  const CURRENCY_MODE_OPTIONS = [
+    { text: 'Auto', value: 'auto' },
+    { text: 'Euro', value: 'eur' },
+    { text: 'Dollar', value: 'usd' },
   ] as const;
   const SHIPPING_MODE_OPTIONS = [
     { text: 'Flat', value: 'flat' },
@@ -162,6 +179,7 @@
   let hoveredCutListKey = $state<string | null>(null);
   let activeMeasurementKey = $state<PlannerMeasurementKey | null>(null);
   let controlsReady = $state(false);
+  let currencyLocale = $state(DEFAULT_CURRENCY_LOCALE);
   let measurementHideTimeout: ReturnType<typeof setTimeout> | null = null;
 
   async function loadScene() {
@@ -198,6 +216,8 @@
   }
 
   onMount(() => {
+    currencyLocale = resolvePlannerLocale();
+
     const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
 
     if (encoded) {
@@ -255,6 +275,7 @@
   const cutListEntries = $derived(createPlannerCutListEntries(geometry, visibleModules, showEndCaps));
   const optimizationResult = $derived(createPlannerOptimizationResult(cutListEntries, optimizationSettings));
   const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
+  const currencyCode = $derived<PlannerCurrencyCode>(resolvePlannerCurrency(optimizationSettings.currencyMode, currencyLocale));
   const stockOptionsByProfile = $derived.by(() => ({
     '80x40': optimizationSettings.stockOptions
       .filter((option) => option.profileType === '80x40')
@@ -503,6 +524,11 @@
     syncPlannerUrlState();
   }
 
+  function setCurrencyMode(value: PlannerOptimizationSettings['currencyMode']) {
+    optimizationSettings.currencyMode = value;
+    syncPlannerUrlState();
+  }
+
   function setBladeThicknessMm(value: number) {
     optimizationSettings.bladeThicknessMm = Math.max(1, value);
     syncPlannerUrlState();
@@ -580,6 +606,14 @@
   function formatStockLengthMeters(lengthMm: number) {
     return `${(lengthMm / 1000).toFixed(1)} m`;
   }
+
+  function formatCurrencyValue(value: number) {
+    return formatPlannerMoney(value, currencyLocale, currencyCode);
+  }
+
+  function formatCurrencyPerKg(value: number) {
+    return `${formatCurrencyValue(value)}/kg`;
+  }
 </script>
 
 <div
@@ -614,6 +648,8 @@
 
         <CutOptimizerPanel
           {cutListEntries}
+          {currencyCode}
+          {currencyLocale}
           {hoveredCutListKey}
           {optimizationResult}
           optimizationSettings={optimizationSettings}
@@ -774,6 +810,7 @@
         <Pane title="Cut optimizer" position="inline" bind:expanded={paneExpanded.optimizer}>
           <Folder title="Settings">
             <List bind:value={() => optimizationSettings.mode, setOptimizerMode} options={OPTIMIZER_MODE_OPTIONS} label="Optimize" />
+            <List bind:value={() => optimizationSettings.currencyMode, setCurrencyMode} options={CURRENCY_MODE_OPTIONS} label="Currency" />
             <Slider
               bind:value={() => optimizationSettings.bladeThicknessMm, setBladeThicknessMm}
               label="Kerf"
@@ -798,7 +835,7 @@
                 min={0}
                 max={OPTIMIZER_LIMITS.flatShippingCostMax}
                 step={1}
-                format={(value) => `$${value.toFixed(0)}`}
+                format={formatCurrencyValue}
               />
             {:else}
               <Slider
@@ -807,7 +844,7 @@
                 min={0}
                 max={OPTIMIZER_LIMITS.shippingRatePerKgMax}
                 step={0.1}
-                format={(value) => `$${value.toFixed(1)}/kg`}
+                format={formatCurrencyPerKg}
               />
             {/if}
           </Folder>
@@ -840,7 +877,7 @@
                         min={0}
                         max={getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm)}
                         step={1}
-                        format={(value) => `$${value.toFixed(0)}`}
+                        format={formatCurrencyValue}
                       />
                       <Button on:click={() => removeStockOption(stockOption.id)} label="Remove" title="Remove" />
                     </Folder>

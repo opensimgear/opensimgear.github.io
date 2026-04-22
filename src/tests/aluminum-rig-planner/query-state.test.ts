@@ -41,6 +41,7 @@ describe('aluminum rig planner query state', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       optimizer: {
         mode: 'waste',
+        currencyMode: 'eur',
         bladeThicknessMm: -3,
         safetyMarginMm: -5,
         shippingMode: 'per-kg',
@@ -77,6 +78,7 @@ describe('aluminum rig planner query state', () => {
     });
 
     expect(state.optimizationSettings.mode).toBe('waste');
+    expect(state.optimizationSettings.currencyMode).toBe('eur');
     expect(state.optimizationSettings.bladeThicknessMm).toBe(1);
     expect(state.optimizationSettings.safetyMarginMm).toBe(0);
     expect(state.optimizationSettings.shippingMode).toBe('per-kg');

@@ -6,6 +6,8 @@ export type PlannerVisibleModules = {
 export type CutListProfileType = '40x40' | '80x40';
 export type PlannerOptimizerMode = 'cost' | 'waste';
 export type ShippingMode = 'flat' | 'per-kg';
+export type PlannerCurrencyMode = 'auto' | 'eur' | 'usd';
+export type PlannerCurrencyCode = 'EUR' | 'USD';
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;
 
@@ -29,6 +31,7 @@ export type PlannerStockOption = {
 
 export type PlannerOptimizationSettings = {
   mode: PlannerOptimizerMode;
+  currencyMode: PlannerCurrencyMode;
   bladeThicknessMm: number;
   safetyMarginMm: number;
   shippingMode: ShippingMode;
