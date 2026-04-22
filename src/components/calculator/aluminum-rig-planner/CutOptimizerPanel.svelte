@@ -118,6 +118,12 @@
       0
     )
   );
+  const totalSafetyMarginWasteMm = $derived.by(() =>
+    optimizationResult.pieces.reduce(
+      (sum, piece) => sum + Math.max(0, piece.adjustedLengthMm - piece.nominalLengthMm),
+      0
+    )
+  );
   const BAR_RULER_STEP_MM = 100;
   const WHOLE_METER_MM = 1000;
 
@@ -264,30 +270,31 @@
   <div class="space-y-4 p-4">
     {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
       <div class="rounded border border-zinc-200 bg-zinc-50">
-        <div class="border-b border-zinc-200 px-3 py-2">
+        <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
           <div class="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h3 class="flex items-center gap-2 font-sans text-sm font-semibold text-zinc-900">
-                <span class="grid h-6 w-6 place-items-center rounded-sm border border-sky-200 bg-sky-50 text-sky-700">
+              <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
+                <span
+                  class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-sky-200 bg-sky-50 text-sky-700"
+                >
                   <svg
                     viewBox="0 0 24 24"
                     class="h-3.5 w-3.5"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.8"
+                    stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     aria-hidden="true"
                   >
-                    <path d="M4 6.5h16"></path>
-                    <path d="M4 12h16"></path>
-                    <path d="M4 17.5h16"></path>
-                    <path d="M8 4v5"></path>
-                    <path d="M14 9.5V14"></path>
-                    <path d="M18 14v6"></path>
+                    <path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path>
+                    <path d="M4 12h8"></path>
+                    <path d="M12 15h8"></path>
+                    <path d="M12 9h8"></path>
+                    <path d="M12 4v16"></path>
                   </svg>
                 </span>
-                <span>Visual cut layout</span>
+                <span>Visual Cut Layout</span>
               </h3>
             </div>
             <div class="flex flex-wrap gap-3 text-xs text-zinc-600">
@@ -411,7 +418,9 @@
                                 style={`width: ${getBarUnusedWidthPercent(bar)}%;`}
                                 role="img"
                                 aria-label={getWasteAriaLabel(bar)}
-                              ></div>
+                              >
+                                <span class="bar-waste__label">{getBarUnusedLengthMm(bar)}</span>
+                              </div>
                             {/if}
                           </div>
                         </div>
@@ -429,11 +438,31 @@
     <div class="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       <div class="space-y-4">
         <div class="required-cuts-card rounded border border-zinc-200">
-          <div class="border-b border-zinc-200 px-3 py-2">
-            <h3 class="font-sans text-sm font-semibold text-zinc-900">Required cuts</h3>
-            <p class="mt-1 text-xs text-zinc-500">
-              Cut lengths from current rig. Safety margin affects optimization only.
-            </p>
+          <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
+            <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
+              <span
+                class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-emerald-200 bg-emerald-50 text-emerald-700"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  class="h-3.5 w-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
+                  <path d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2"></path>
+                  <path d="M9 12h.01"></path>
+                  <path d="M13 12h2"></path>
+                  <path d="M9 16h.01"></path>
+                  <path d="M13 16h2"></path>
+                </svg>
+              </span>
+              <span>Required cuts</span>
+            </h3>
           </div>
           <div class="overflow-x-auto">
             <table
@@ -467,8 +496,60 @@
 
       <div class="space-y-4">
         <div class="rounded border border-zinc-200 bg-zinc-50">
-          <div class="border-b border-zinc-200 px-3 py-2">
-            <h3 class="font-sans text-sm font-semibold text-zinc-900">Purchase result</h3>
+          <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
+                <span
+                  class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-amber-200 bg-amber-50 text-amber-700"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="h-3.5 w-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M4 19a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                    <path d="M15 19a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                    <path d="M17 17H6V3H4"></path>
+                    <path d="m6 5l14 1l-1 7H6"></path>
+                  </svg>
+                </span>
+                <span>Purchase Summary</span>
+              </h3>
+              {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
+                <button
+                  type="button"
+                  class="waste-tooltip-trigger waste-tooltip-trigger--button flex cursor-help appearance-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
+                  aria-describedby="purchase-summary-waste-tooltip"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="h-3.5 w-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M4 7h16"></path>
+                    <path d="M10 11v6"></path>
+                    <path d="M14 11v6"></path>
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"></path>
+                    <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
+                  </svg>
+                  <span>{optimizationResult.totalWasteMm} mm</span>
+                  <span id="purchase-summary-waste-tooltip" class="waste-tooltip" role="tooltip">
+                    <span>Blade kerf: {formatLengthMm(optimizationResult.totalKerfMm)}</span>
+                    <span>Safety margin: {formatLengthMm(totalSafetyMarginWasteMm)}</span>
+                  </span>
+                </button>
+              {/if}
+            </div>
           </div>
 
           {#if optimizationResult.status === 'missing-stock-options'}
@@ -482,72 +563,66 @@
           {:else if optimizationResult.barCount === 0}
             <div class="p-3 text-sm text-zinc-500">No purchasable bars needed yet.</div>
           {:else}
-            <div class="grid gap-4 p-3">
-              <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                <div class="rounded border border-zinc-200 bg-white p-3">
-                  <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Total cost</div>
-                  <div class="mt-1 font-['Roboto_Mono',monospace] text-lg text-zinc-900">
-                    {formatMoney(optimizationResult.totalCost)}
-                  </div>
-                  <div class="mt-1 text-xs text-zinc-500">
-                    material {formatMoney(optimizationResult.materialCost)} · shipping {formatMoney(
-                      optimizationResult.shippingCost
-                    )}
-                  </div>
-                </div>
-
-                <div class="rounded border border-zinc-200 bg-white p-3">
-                  <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Waste</div>
-                  <div class="mt-1 font-['Roboto_Mono',monospace] text-lg text-zinc-900">
-                    {optimizationResult.totalWasteMm} mm
-                  </div>
-                  <div class="mt-1 text-xs text-zinc-500">
-                    blade kerf {optimizationResult.totalKerfMm} mm · bars {optimizationResult.barCount}
-                  </div>
-                </div>
-
-                <div class="rounded border border-zinc-200 bg-white p-3">
-                  <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Purchased mass</div>
-                  <div class="mt-1 font-['Roboto_Mono',monospace] text-lg text-zinc-900">
-                    {formatWeight(optimizationResult.totalMassKg)}
-                  </div>
-                  <div class="mt-1 text-xs text-zinc-500">
-                    stock {optimizationResult.totalPurchasedLengthMm} mm
-                  </div>
-                </div>
-              </div>
-
-              <div class="rounded border border-zinc-200 bg-white">
-                <div class="border-b border-zinc-200 px-3 py-2 font-sans text-sm font-semibold text-zinc-900">
-                  Purchase summary
-                </div>
-                <div class="overflow-x-auto">
-                  <table
-                    class="min-w-full border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900"
-                  >
-                    <thead>
-                      <tr class="border-b border-zinc-200 bg-zinc-50 text-zinc-600">
-                        <th class="px-2 py-1 text-left font-medium">Profile</th>
-                        <th class="px-2 py-1 text-left font-medium">Stock</th>
-                        <th class="px-2 py-1 text-left font-medium">Qty</th>
-                        <th class="px-2 py-1 text-left font-medium">Mass</th>
-                        <th class="px-2 py-1 text-left font-medium">Cost</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {#each purchaseSummaryRows as row (row.key)}
-                        <tr class="border-b border-zinc-100 last:border-b-0">
-                          <td class="px-2 py-1 font-medium text-zinc-800">{row.profileType}</td>
-                          <td class="px-2 py-1 text-zinc-600">{formatStockLength(row.stockLengthMm)}</td>
-                          <td class="px-2 py-1 text-zinc-600">{row.quantity}</td>
-                          <td class="px-2 py-1 text-zinc-600">{formatWeight(row.totalMassKg)}</td>
-                          <td class="px-2 py-1 text-zinc-600">{formatMoney(row.totalCost)}</td>
-                        </tr>
-                      {/each}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <div class="overflow-x-auto">
+              <table
+                class="w-max min-w-full table-auto border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
+              >
+                <thead>
+                  <tr class="border-b border-zinc-200 bg-white text-zinc-600">
+                    <th class="px-2 py-1 text-left font-medium">Profile</th>
+                    <th class="px-2 py-1 text-left font-medium">Stock</th>
+                    <th class="px-2 py-1 text-left font-medium">Qty</th>
+                    <th class="px-2 py-1 text-right font-medium">Mass</th>
+                    <th class="px-2 py-1 text-right font-medium">Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {#each purchaseSummaryRows as row (row.key)}
+                    <tr class="border-b border-zinc-100 last:border-b-0">
+                      <td class="px-2 py-1 font-medium text-zinc-800">{row.profileType}</td>
+                      <td class="px-2 py-1 text-zinc-600">{formatStockLength(row.stockLengthMm)}</td>
+                      <td class="px-2 py-1 text-zinc-600">{row.quantity}</td>
+                      <td class="px-2 py-1 text-right text-zinc-600">{formatWeight(row.totalMassKg)}</td>
+                      <td class="px-2 py-1 text-right text-zinc-600">{formatMoney(row.totalCost)}</td>
+                    </tr>
+                  {/each}
+                </tbody>
+                <tfoot>
+                  <tr class="border-t-2 border-zinc-300 bg-zinc-50">
+                    <td colspan="3" class="px-2 py-2 font-semibold uppercase tracking-wide text-zinc-700"> Total </td>
+                    <td class="align-top px-2 py-2 text-right font-semibold text-zinc-900">
+                      <div>{formatWeight(optimizationResult.totalMassKg)}</div>
+                      <div class="mt-0.5 text-[10px] font-normal text-zinc-500">
+                        {formatStockLength(optimizationResult.totalPurchasedLengthMm)}
+                      </div>
+                    </td>
+                    <td class="align-top px-2 py-2 text-right font-semibold text-zinc-900">
+                      <div>{formatMoney(optimizationResult.totalCost)}</div>
+                      <div class="mt-0.5 flex items-center justify-end gap-1 text-[10px] font-normal text-zinc-500">
+                        <svg
+                          viewBox="0 0 24 24"
+                          class="h-3 w-3 shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M3 17h2"></path>
+                          <path d="M7 17h8"></path>
+                          <path d="M17 17h2"></path>
+                          <path d="M5 17V7h10v10"></path>
+                          <path d="M15 10h3l3 3v4"></path>
+                          <path d="M7 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                          <path d="M17 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                        </svg>
+                        <span>{formatMoney(optimizationResult.shippingCost)}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
           {/if}
         </div>
@@ -557,6 +632,99 @@
 </section>
 
 <style>
+  .widget-card__header {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(248, 250, 252, 0.72));
+  }
+
+  .widget-card__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .widget-card__icon {
+    flex-shrink: 0;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.78),
+      0 1px 2px rgba(15, 23, 42, 0.06);
+  }
+
+  .waste-tooltip-trigger {
+    position: relative;
+    outline: none;
+  }
+
+  .waste-tooltip-trigger--button {
+    min-height: 1.5rem;
+    padding: 0 0.5rem;
+    border: 1px solid rgba(217, 119, 6, 0.22);
+    border-radius: 0.125rem;
+    background: linear-gradient(180deg, rgba(255, 251, 235, 0.98), rgba(254, 243, 199, 0.92));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.82),
+      0 1px 2px rgba(120, 53, 15, 0.08);
+  }
+
+  .waste-tooltip-trigger--button:hover {
+    border-color: rgba(217, 119, 6, 0.34);
+    background: linear-gradient(180deg, rgba(255, 247, 237, 1), rgba(253, 230, 138, 0.94));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.86),
+      0 1px 2px rgba(120, 53, 15, 0.08);
+  }
+
+  .waste-tooltip-trigger--button:focus-visible {
+    border-color: rgba(217, 119, 6, 0.45);
+    box-shadow:
+      0 0 0 3px rgba(251, 191, 36, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.86);
+  }
+
+  .waste-tooltip {
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    right: 0;
+    z-index: 20;
+    display: grid;
+    gap: 0.2rem;
+    min-width: max-content;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    border-radius: 0.4rem;
+    background: rgba(15, 23, 42, 0.96);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.24);
+    color: rgb(241 245 249);
+    font-size: 11px;
+    line-height: 1.3;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.2rem);
+    transition:
+      opacity 140ms ease,
+      transform 140ms ease;
+  }
+
+  .waste-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -0.35rem;
+    right: 0.8rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.45);
+    border-left: 1px solid rgba(148, 163, 184, 0.45);
+    background: rgba(15, 23, 42, 0.96);
+    transform: rotate(45deg);
+  }
+
+  .waste-tooltip-trigger:hover .waste-tooltip,
+  .waste-tooltip-trigger:focus-visible .waste-tooltip,
+  .waste-tooltip-trigger:focus-within .waste-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .required-cuts-card {
     background:
       linear-gradient(180deg, rgba(250, 252, 255, 0.9), rgba(244, 247, 251, 0.88)),
@@ -697,5 +865,21 @@
       rgba(253, 224, 71, 0.18) 8px,
       rgba(253, 224, 71, 0.18) 16px
     );
+  }
+
+  .bar-waste__label {
+    position: absolute;
+    top: 50%;
+    right: 0.25rem;
+    padding: 0 0.2rem;
+    color: rgb(113 63 18);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.28);
+    pointer-events: none;
   }
 </style>
