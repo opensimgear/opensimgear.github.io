@@ -530,12 +530,12 @@
   }
 
   function setBladeThicknessMm(value: number) {
-    optimizationSettings.bladeThicknessMm = Math.max(1, value);
+    optimizationSettings.bladeThicknessMm = Math.max(1, Math.round(value));
     syncPlannerUrlState();
   }
 
   function setSafetyMarginMm(value: number) {
-    optimizationSettings.safetyMarginMm = Math.max(0, value);
+    optimizationSettings.safetyMarginMm = Math.max(0, Math.round(value));
     syncPlannerUrlState();
   }
 
@@ -816,16 +816,16 @@
               label="Kerf"
               min={1}
               max={OPTIMIZER_LIMITS.bladeThicknessMaxMm}
-              step={0.1}
-              format={(value) => `${value.toFixed(1)} mm`}
+              step={1}
+              format={(value) => `${value.toFixed(0)} mm`}
             />
             <Slider
               bind:value={() => optimizationSettings.safetyMarginMm, setSafetyMarginMm}
               label="Safety Margin"
               min={0}
               max={OPTIMIZER_LIMITS.safetyMarginMaxMm}
-              step={0.5}
-              format={(value) => `${value.toFixed(1)} mm`}
+              step={1}
+              format={(value) => `${value.toFixed(0)} mm`}
             />
             <List bind:value={() => optimizationSettings.shippingMode, setShippingMode} options={SHIPPING_MODE_OPTIONS} label="Shipping" />
             {#if optimizationSettings.shippingMode === 'flat'}

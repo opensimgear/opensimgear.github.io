@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { CUT_LIST_HIGHLIGHT_COLOR } from './constants';
-
   import type {
     CutListEntry,
     PlannerCurrencyCode,
@@ -105,7 +103,7 @@
       0
     )
   );
-  const BAR_RULER_STEP_MM = 250;
+  const BAR_RULER_STEP_MM = 100;
 
   function formatMoney(value: number) {
     return new Intl.NumberFormat(currencyLocale, {
@@ -134,10 +132,13 @@
 
   function getBarTickMarks(bar: PlannerPurchasedBar) {
     const tickCount = Math.floor(bar.stockLengthMm / BAR_RULER_STEP_MM);
+    const ticks = Array.from({ length: tickCount + 1 }, (_, index) => index * BAR_RULER_STEP_MM);
 
-    return Array.from({ length: tickCount }, (_, index) => (index + 1) * BAR_RULER_STEP_MM).filter(
-      (tickMm) => tickMm < bar.stockLengthMm
-    );
+    if (ticks.at(-1) !== bar.stockLengthMm) {
+      ticks.push(bar.stockLengthMm);
+    }
+
+    return ticks;
   }
 
   function getPieceSafetyLengthMm(piece: PlannerPurchasedBar['pieces'][number]) {
@@ -216,12 +217,28 @@
     ].join('\n');
   }
 
-  function getPieceColor(cutListKey: string) {
-    return hoveredCutListKey === cutListKey ? CUT_LIST_HIGHLIGHT_COLOR : profileColor;
+  function getPieceColor() {
+    return profileColor;
   }
 
-  function getPieceSafetyColor(cutListKey: string) {
-    return hoveredCutListKey === cutListKey ? 'rgba(34, 197, 94, 0.55)' : 'rgba(96, 165, 250, 0.45)';
+  function getPieceSafetyColor() {
+    return 'rgba(96, 165, 250, 0.45)';
+  }
+
+  function shouldShowTickLabel(tickMm: number, bar: PlannerPurchasedBar) {
+    return tickMm > 0 && tickMm < bar.stockLengthMm && tickMm % 500 === 0;
+  }
+
+  function isEdgeTick(tickMm: number, bar: PlannerPurchasedBar) {
+    return tickMm === 0 || tickMm === bar.stockLengthMm;
+  }
+
+  function isMajorTick(tickMm: number) {
+    return tickMm % 500 === 0;
+  }
+
+  function isPieceHighlighted(cutListKey: string) {
+    return hoveredCutListKey === cutListKey;
   }
 
   function shouldShowPieceLabel(piece: PlannerPurchasedBar['pieces'][number], bar: PlannerPurchasedBar) {
@@ -234,9 +251,182 @@
   class="border-t border-zinc-300 bg-white"
 >
   <div class="space-y-4 p-4">
+    {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
+      <div class="rounded border border-zinc-200 bg-zinc-50">
+        <div class="border-b border-zinc-200 px-3 py-2">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h3 class="flex items-center gap-2 font-sans text-sm font-semibold text-zinc-900">
+                <span class="grid h-6 w-6 place-items-center rounded-sm border border-sky-200 bg-sky-50 text-sky-700">
+                  <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 6.5h16"></path>
+                    <path d="M4 12h16"></path>
+                    <path d="M4 17.5h16"></path>
+                    <path d="M8 4v5"></path>
+                    <path d="M14 9.5V14"></path>
+                    <path d="M18 14v6"></path>
+                  </svg>
+                </span>
+                <span>Visual cut layout</span>
+              </h3>
+              <p class="mt-1 text-xs text-zinc-500">Bars scale to real purchased length. Empty space is unused stock.</p>
+            </div>
+            <div class="flex flex-wrap gap-3 text-xs text-zinc-600">
+              <div class="flex items-center gap-2">
+                <span
+                  class="h-3 w-6 rounded-sm border border-zinc-300"
+                  style={`background-color: ${profileColor};`}
+                ></span>
+                <span>Material</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-3 w-6 rounded-sm border border-blue-300 bg-blue-400/45"></span>
+                <span>Safety margin</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-3 w-6 rounded-sm border border-red-300 bg-red-500/35"></span>
+                <span>Kerf</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-3 w-6 rounded-sm border border-yellow-300 bg-yellow-400/35"></span>
+                <span>Waste</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 pb-3">
+          <div class="overflow-hidden rounded border border-slate-200 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+            {#each visualLayoutBars as bar (bar.id)}
+              <article
+                class="blueprint-row grid grid-cols-[12rem_minmax(0,1fr)] items-center gap-3 border-b border-slate-200 px-3 py-3 last:border-b-0"
+                title={getBarTooltip(bar)}
+              >
+                <div class="space-y-1 font-['Roboto_Mono',monospace] text-[11px] leading-tight text-slate-600">
+                  <div class="flex items-center gap-2">
+                    <div class="profile-name">
+                      {bar.profileType}
+                    </div>
+                    <div class="text-[13px] font-semibold text-slate-900">{formatStockLength(bar.stockLengthMm)}</div>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <div>{formatMoney(bar.totalCost)}</div>
+                    <div>{formatWeight(bar.massKg)}</div>
+                    <div class="flex items-center gap-1">
+                      <svg
+                        viewBox="0 0 24 24"
+                        class="h-3.5 w-3.5 text-yellow-700"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M4 7h16"></path>
+                        <path d="M9 3h6"></path>
+                        <path d="M6 7l1 13h10l1-13"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                      </svg>
+                      <span>{getBarUnusedLengthMm(bar)} mm</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="min-w-0">
+                  <div style={`width: ${getBarWidthPercent(bar)}%;`}>
+                    <div class="bar-ruler">
+                      {#each getBarTickMarks(bar) as tickMm (tickMm)}
+                        <span
+                          class={[
+                            'bar-ruler__tick',
+                            isEdgeTick(tickMm, bar) && 'bar-ruler__tick--edge',
+                            isMajorTick(tickMm) && 'bar-ruler__tick--major',
+                            tickMm === bar.stockLengthMm && 'bar-ruler__tick--end',
+                          ]}
+                          style={`left: ${(tickMm / bar.stockLengthMm) * 100}%;`}
+                        >
+                          {#if shouldShowTickLabel(tickMm, bar)}
+                            <span class="bar-ruler__label">{tickMm}</span>
+                          {/if}
+                        </span>
+                      {/each}
+                    </div>
+                    <div class="bar-shell">
+                      <div class="bar-shell__grid"></div>
+                      <div class="flex h-11 w-full">
+                      {#each bar.pieces as piece, pieceIndex (piece.id)}
+                        <button
+                          class="bar-piece m-0 flex h-full shrink-0 appearance-none overflow-hidden border-r border-slate-200 bg-transparent p-0"
+                          style={`width: ${getPieceAdjustedWidthPercent(piece, bar)}%;`}
+                          title={`${piece.nominalLengthMm} mm material + ${getPieceSafetyLengthPerSideMm(piece)} mm safety each side`}
+                          type="button"
+                          onmouseenter={() => onHoveredCutListKeyChange(piece.cutListKey)}
+                          onmouseleave={() => onHoveredCutListKeyChange(null)}
+                        >
+                          {#if getPieceSafetyLengthMm(piece) > 0}
+                            <span
+                              class="h-full shrink-0"
+                              style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
+                            ></span>
+                          {/if}
+                          <span
+                            class="bar-piece__material relative h-full shrink-0"
+                            style={`width: ${getPieceNominalWidthPercent(piece)}%; background-color: ${getPieceColor()};`}
+                          >
+                            {#if isPieceHighlighted(piece.cutListKey)}
+                              <span class="bar-piece__highlight"></span>
+                            {/if}
+                            {#if shouldShowPieceLabel(piece, bar)}
+                              <span class="bar-piece__label">{piece.nominalLengthMm}</span>
+                            {/if}
+                          </span>
+                          {#if getPieceSafetyLengthMm(piece) > 0}
+                            <span
+                              class="relative h-full shrink-0"
+                              style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
+                            ></span>
+                          {/if}
+                          {#if isPieceHighlighted(piece.cutListKey)}
+                            <span class="bar-piece__highlight"></span>
+                          {/if}
+                        </button>
+                        {#if pieceIndex < bar.pieces.length - 1 && optimizationSettings.bladeThicknessMm > 0}
+                          <div
+                            class="bar-kerf h-full shrink-0"
+                            style={`width: ${getKerfWidthPercent(bar)}%;`}
+                            title={`${optimizationSettings.bladeThicknessMm} mm kerf`}
+                          ></div>
+                        {/if}
+                      {/each}
+                      {#if bar.pieces.length > 0 && optimizationSettings.bladeThicknessMm > 0}
+                        <div
+                          class="bar-kerf h-full shrink-0"
+                          style={`width: ${getKerfWidthPercent(bar)}%;`}
+                          title={`${optimizationSettings.bladeThicknessMm} mm kerf`}
+                        ></div>
+                      {/if}
+                      {#if getBarUnusedLengthMm(bar) > 0}
+                        <div
+                          class="bar-waste h-full shrink-0"
+                          style={`width: ${getBarUnusedWidthPercent(bar)}%;`}
+                          title={`${getBarUnusedLengthMm(bar)} mm waste`}
+                        ></div>
+                      {/if}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            {/each}
+          </div>
+        </div>
+      </div>
+    {/if}
+
     <div class="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       <div class="space-y-4">
-        <div class="rounded border border-zinc-200 bg-zinc-50">
+        <div class="required-cuts-card rounded border border-zinc-200">
           <div class="border-b border-zinc-200 px-3 py-2">
             <h3 class="font-sans text-sm font-semibold text-zinc-900">Required cuts</h3>
             <p class="mt-1 text-xs text-zinc-500">Nominal lengths from current rig. Adjusted adds safety margin per piece.</p>
@@ -356,129 +546,6 @@
       </div>
     </div>
 
-    {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
-      <div class="rounded border border-zinc-200 bg-zinc-50">
-        <div class="border-b border-zinc-200 px-3 py-2">
-          <div class="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <h3 class="font-sans text-sm font-semibold text-zinc-900">Visual cut layout</h3>
-              <p class="mt-1 text-xs text-zinc-500">Bars scale to real purchased length. Empty space is unused stock.</p>
-            </div>
-            <div class="flex flex-wrap gap-3 text-xs text-zinc-600">
-              <div class="flex items-center gap-2">
-                <span
-                  class="h-3 w-6 rounded-sm border border-zinc-300"
-                  style={`background-color: ${profileColor};`}
-                ></span>
-                <span>Material</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="h-3 w-6 rounded-sm border border-blue-300 bg-blue-400/45"></span>
-                <span>Safety margin</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="h-3 w-6 rounded-sm border border-red-300 bg-red-500/35"></span>
-                <span>Kerf</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="h-3 w-6 rounded-sm border border-yellow-300 bg-yellow-400/35"></span>
-                <span>Waste</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="px-3 pb-3">
-          <div class="overflow-hidden rounded border border-slate-200 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-            {#each visualLayoutBars as bar (bar.id)}
-              <article
-                class="blueprint-row grid grid-cols-[4.5rem_minmax(0,1fr)_8.25rem] items-center gap-3 border-b border-slate-200 px-3 py-3 last:border-b-0"
-                title={getBarTooltip(bar)}
-              >
-                <div class="flex justify-center">
-                  <div class="profile-chip">
-                    {bar.profileType}
-                  </div>
-                </div>
-
-                <div class="min-w-0">
-                  <div class="mx-auto" style={`width: ${getBarWidthPercent(bar)}%;`}>
-                    <div class="bar-ruler">
-                      {#each getBarTickMarks(bar) as tickMm (tickMm)}
-                        <span class="bar-ruler__tick" style={`left: ${(tickMm / bar.stockLengthMm) * 100}%;`}></span>
-                      {/each}
-                    </div>
-                    <div class="bar-shell">
-                      <div class="bar-shell__grid"></div>
-                      <div class="flex h-11 w-full">
-                      {#each bar.pieces as piece, pieceIndex (piece.id)}
-                        <button
-                          class="bar-piece m-0 flex h-full shrink-0 appearance-none overflow-hidden border-r border-slate-200 bg-transparent p-0"
-                          style={`width: ${getPieceAdjustedWidthPercent(piece, bar)}%;`}
-                          title={`${piece.nominalLengthMm} mm material + ${getPieceSafetyLengthPerSideMm(piece)} mm safety each side`}
-                          type="button"
-                          onmouseenter={() => onHoveredCutListKeyChange(piece.cutListKey)}
-                          onmouseleave={() => onHoveredCutListKeyChange(null)}
-                        >
-                          {#if getPieceSafetyLengthMm(piece) > 0}
-                            <span
-                              class="h-full shrink-0"
-                              style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor(piece.cutListKey)};`}
-                            ></span>
-                          {/if}
-                          <span
-                            class="bar-piece__material relative h-full shrink-0"
-                            style={`width: ${getPieceNominalWidthPercent(piece)}%; background-color: ${getPieceColor(piece.cutListKey)};`}
-                          >
-                            {#if shouldShowPieceLabel(piece, bar)}
-                              <span class="bar-piece__label">{piece.nominalLengthMm}</span>
-                            {/if}
-                          </span>
-                          {#if getPieceSafetyLengthMm(piece) > 0}
-                            <span
-                              class="h-full shrink-0"
-                              style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor(piece.cutListKey)};`}
-                            ></span>
-                          {/if}
-                        </button>
-                        {#if pieceIndex < bar.pieces.length - 1 && optimizationSettings.bladeThicknessMm > 0}
-                          <div
-                            class="bar-kerf h-full shrink-0"
-                            style={`width: ${getKerfWidthPercent(bar)}%;`}
-                            title={`${optimizationSettings.bladeThicknessMm} mm kerf`}
-                          ></div>
-                        {/if}
-                      {/each}
-                      {#if bar.pieces.length > 0 && optimizationSettings.bladeThicknessMm > 0}
-                        <div
-                          class="bar-kerf h-full shrink-0"
-                          style={`width: ${getKerfWidthPercent(bar)}%;`}
-                          title={`${optimizationSettings.bladeThicknessMm} mm kerf`}
-                        ></div>
-                      {/if}
-                      {#if getBarUnusedLengthMm(bar) > 0}
-                        <div
-                          class="bar-waste h-full shrink-0"
-                          style={`width: ${getBarUnusedWidthPercent(bar)}%;`}
-                          title={`${getBarUnusedLengthMm(bar)} mm waste`}
-                        ></div>
-                      {/if}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="space-y-1 text-right font-['Roboto_Mono',monospace] text-[11px] leading-tight text-slate-600">
-                  <div class="text-[13px] font-semibold text-slate-900">{formatStockLength(bar.stockLengthMm)}</div>
-                  <div>{formatMoney(bar.totalCost)}</div>
-                  <div>{formatWeight(bar.massKg)}</div>
-                  <div>{getBarUnusedLengthMm(bar)} mm waste</div>
-                </div>
-              </article>
-            {/each}
-          </div>
-        </div>
-      </div>
-    {/if}
   </div>
 </section>
 
@@ -494,25 +561,28 @@
       18px 18px;
   }
 
-  .profile-chip {
-    min-width: 3.75rem;
-    padding: 0.35rem 0.5rem;
-    border: 1px solid rgb(186 230 253);
-    background: linear-gradient(180deg, rgb(240 249 255), rgb(224 242 254));
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.95),
-      0 1px 2px rgba(15, 23, 42, 0.08);
+  .required-cuts-card {
+    background:
+      linear-gradient(180deg, rgba(250, 252, 255, 0.9), rgba(244, 247, 251, 0.88)),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      18px 18px,
+      18px 18px;
+  }
+
+  .profile-name {
     color: rgb(15 23 42);
     font-family: 'Roboto Mono', monospace;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.03em;
-    text-align: center;
   }
 
   .bar-ruler {
     position: relative;
-    height: 0.6rem;
+    height: 0.95rem;
     margin-bottom: 0.35rem;
     border-top: 1px solid rgb(191 219 254);
   }
@@ -521,9 +591,31 @@
     position: absolute;
     top: -1px;
     width: 1px;
-    height: 0.55rem;
+    height: 0.35rem;
     background: rgb(148 163 184);
     opacity: 0.6;
+  }
+
+  .bar-ruler__tick--major,
+  .bar-ruler__tick--edge {
+    height: 0.55rem;
+  }
+
+  .bar-ruler__tick--end {
+    transform: translateX(-100%);
+  }
+
+  .bar-ruler__label {
+    position: absolute;
+    top: -0.1rem;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    color: rgb(71 85 105);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
   }
 
   .bar-shell {
@@ -558,6 +650,14 @@
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.14),
       inset 0 -1px 0 rgba(15, 23, 42, 0.18);
+  }
+
+  .bar-piece__highlight {
+    position: absolute;
+    inset: 0;
+    background: rgba(34, 197, 94, 0.32);
+    box-shadow: inset 0 0 0 1px rgba(21, 128, 61, 0.35);
+    pointer-events: none;
   }
 
   .bar-piece__label {

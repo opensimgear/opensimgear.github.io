@@ -36,10 +36,6 @@ function readNonNegativeNumber(value: unknown, fallback: number) {
   return Math.max(0, readNumber(value, fallback));
 }
 
-function readMinimumNumber(value: unknown, fallback: number, minimum: number) {
-  return Math.max(minimum, readNumber(value, fallback));
-}
-
 function isStockProfileType(value: unknown): value is PlannerStockOption['profileType'] {
   return value === '40x40' || value === '80x40';
 }
@@ -88,8 +84,8 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
   return {
     mode: state?.mode === 'waste' ? 'waste' : defaults.mode,
     currencyMode: state?.currencyMode === 'eur' || state?.currencyMode === 'usd' ? state.currencyMode : defaults.currencyMode,
-    bladeThicknessMm: readMinimumNumber(state?.bladeThicknessMm, defaults.bladeThicknessMm, 1),
-    safetyMarginMm: readNonNegativeNumber(state?.safetyMarginMm, defaults.safetyMarginMm),
+    bladeThicknessMm: Math.max(1, Math.round(readNumber(state?.bladeThicknessMm, defaults.bladeThicknessMm))),
+    safetyMarginMm: Math.max(0, Math.round(readNumber(state?.safetyMarginMm, defaults.safetyMarginMm))),
     shippingMode: state?.shippingMode === 'per-kg' ? 'per-kg' : defaults.shippingMode,
     flatShippingCost: readNonNegativeNumber(state?.flatShippingCost, defaults.flatShippingCost),
     shippingRatePerKg: readNonNegativeNumber(state?.shippingRatePerKg, defaults.shippingRatePerKg),
