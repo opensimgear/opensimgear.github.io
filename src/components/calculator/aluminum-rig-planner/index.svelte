@@ -173,6 +173,7 @@
   let showEndCaps = $state(true);
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<AluminumRigPaneExpandedState>(getAluminumRigPaneExpandedState(false));
+  let stockConfigurationExpanded = $state(false);
   let mounted = $state(false);
   let PlannerScene = $state<PlannerSceneComponent | null>(null);
   let sceneStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
@@ -277,12 +278,8 @@
   const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
   const currencyCode = $derived<PlannerCurrencyCode>(resolvePlannerCurrency(optimizationSettings.currencyMode, currencyLocale));
   const stockOptionsByProfile = $derived.by(() => ({
-    '80x40': optimizationSettings.stockOptions
-      .filter((option) => option.profileType === '80x40')
-      .sort((a, b) => a.lengthMm - b.lengthMm || a.cost - b.cost),
-    '40x40': optimizationSettings.stockOptions
-      .filter((option) => option.profileType === '40x40')
-      .sort((a, b) => a.lengthMm - b.lengthMm || a.cost - b.cost),
+    '80x40': optimizationSettings.stockOptions.filter((option) => option.profileType === '80x40'),
+    '40x40': optimizationSettings.stockOptions.filter((option) => option.profileType === '40x40'),
   }));
   const steeringColumnDistanceLimits = $derived.by(() => ({
     min: PLANNER_LAYOUT.steeringColumnDistanceMinMm,
@@ -848,7 +845,7 @@
               />
             {/if}
           </Folder>
-          <Folder title="Stock configuration">
+          <Folder title="Stock configuration" bind:expanded={stockConfigurationExpanded}>
             {#each PROFILE_TYPES as profileType (profileType)}
               <Folder title={profileType}>
                 <Slider

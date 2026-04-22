@@ -224,7 +224,7 @@
   }
 
   function getKerfAriaLabel() {
-    return `Kerf ${formatLengthMm(optimizationSettings.bladeThicknessMm)}`;
+    return `Blade kerf ${formatLengthMm(optimizationSettings.bladeThicknessMm)}`;
   }
 
   function getWasteAriaLabel(bar: PlannerPurchasedBar) {
@@ -302,7 +302,7 @@
               </div>
               <div class="flex items-center gap-2">
                 <span class="h-3 w-3 rounded-sm border border-red-300 bg-red-500/35"></span>
-                <span>Kerf</span>
+                <span>Blade Kerf</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="h-3 w-3 rounded-sm border border-yellow-300 bg-yellow-400/35"></span>
@@ -506,7 +506,7 @@
                     {optimizationResult.totalWasteMm} mm
                   </div>
                   <div class="mt-1 text-xs text-zinc-500">
-                    kerf {optimizationResult.totalKerfMm} mm · bars {optimizationResult.barCount}
+                    blade kerf {optimizationResult.totalKerfMm} mm · bars {optimizationResult.barCount}
                   </div>
                 </div>
 
