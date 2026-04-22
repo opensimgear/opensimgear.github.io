@@ -25,17 +25,17 @@ permissions:
   pages: write
   id-token: write
 jobs:
-  build:
+  test-and-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - name: Install, build, and upload your site
+      - name: Test, Build, Upload
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        uses: withastro/action@063f85a3c9fc861a0a5e5a956225d9031177eff9 # v4
+        uses: ./.github/actions/astro/action.yml
   deploy:
-    needs: build
+    needs: test-and-build
     runs-on: ubuntu-latest
     outputs:
       page_url: ${{ steps.deployment.outputs.page_url }}
