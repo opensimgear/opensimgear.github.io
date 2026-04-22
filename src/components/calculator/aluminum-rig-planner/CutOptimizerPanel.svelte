@@ -4,9 +4,7 @@
     CutListProfileType,
     PlannerOptimizationResult,
     PlannerOptimizationSettings,
-    PlannerOptimizerMode,
     PlannerPurchasedBar,
-    ShippingMode,
   } from './types';
 
   type PurchaseSummaryRow = {
@@ -25,18 +23,7 @@
     hoveredCutListKey: string | null;
     optimizationResult: PlannerOptimizationResult;
     optimizationSettings: PlannerOptimizationSettings;
-    onAddStockOption: (profileType: CutListProfileType) => void;
     onHoveredCutListKeyChange: (key: string | null) => void;
-    onRemoveStockOption: (stockOptionId: string) => void;
-    onSetBladeThicknessMm: (value: number) => void;
-    onSetFlatShippingCost: (value: number) => void;
-    onSetMode: (value: PlannerOptimizerMode) => void;
-    onSetProfileWeightKgPerMeter: (profileType: CutListProfileType, value: number) => void;
-    onSetSafetyMarginMm: (value: number) => void;
-    onSetShippingMode: (value: ShippingMode) => void;
-    onSetShippingRatePerKg: (value: number) => void;
-    onUpdateStockOptionCost: (stockOptionId: string, value: number) => void;
-    onUpdateStockOptionLengthMm: (stockOptionId: string, value: number) => void;
   }
 
   let {
@@ -44,28 +31,8 @@
     hoveredCutListKey,
     optimizationResult,
     optimizationSettings,
-    onAddStockOption,
     onHoveredCutListKeyChange,
-    onRemoveStockOption,
-    onSetBladeThicknessMm,
-    onSetFlatShippingCost,
-    onSetMode,
-    onSetProfileWeightKgPerMeter,
-    onSetSafetyMarginMm,
-    onSetShippingMode,
-    onSetShippingRatePerKg,
-    onUpdateStockOptionCost,
-    onUpdateStockOptionLengthMm,
   }: Props = $props();
-
-  const stockOptionsByProfile = $derived.by(() => ({
-    '80x40': optimizationSettings.stockOptions
-      .filter((option) => option.profileType === '80x40')
-      .sort((a, b) => a.lengthMm - b.lengthMm || a.cost - b.cost),
-    '40x40': optimizationSettings.stockOptions
-      .filter((option) => option.profileType === '40x40')
-      .sort((a, b) => a.lengthMm - b.lengthMm || a.cost - b.cost),
-  }));
 
   const purchaseSummaryRows = $derived.by(() => {
     const grouped: Record<string, PurchaseSummaryRow> = {};
@@ -123,15 +90,6 @@
       )
       .join(' · ');
   }
-
-  function updateNumber(
-    event: Event,
-    onChange: (value: number) => void,
-    fallback: number
-  ) {
-    const value = Number((event.currentTarget as HTMLInputElement).value);
-    onChange(Number.isFinite(value) ? value : fallback);
-  }
 </script>
 
 <section
@@ -173,221 +131,9 @@
           </table>
         </div>
       </div>
-
-      <div class="rounded border border-zinc-200 bg-zinc-50">
-        <div class="border-b border-zinc-200 px-3 py-2">
-          <h3 class="font-sans text-sm font-semibold text-zinc-900">Optimizer settings</h3>
-        </div>
-        <div class="grid gap-4 p-3">
-          <div>
-            <div class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Optimize for</div>
-            <div class="flex flex-wrap gap-2">
-              {#each [
-                { label: 'Cost', value: 'cost' },
-                { label: 'Waste', value: 'waste' },
-              ] as option (option.value)}
-                <label class="inline-flex cursor-pointer items-center gap-2 rounded border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-800">
-                  <input
-                    checked={optimizationSettings.mode === option.value}
-                    name="planner-optimizer-mode"
-                    type="radio"
-                    value={option.value}
-                    onchange={() => onSetMode(option.value as PlannerOptimizerMode)}
-                  />
-                  <span>{option.label}</span>
-                </label>
-              {/each}
-            </div>
-          </div>
-
-          <div class="grid gap-3 sm:grid-cols-2">
-            <label class="flex flex-col gap-1 text-xs">
-              <span class="font-semibold uppercase tracking-wide text-zinc-500">Blade thickness</span>
-              <input
-                class="rounded border border-zinc-300 bg-white px-2 py-1.5 font-mono text-sm text-zinc-900"
-                min="0"
-                step="0.1"
-                type="number"
-                value={optimizationSettings.bladeThicknessMm}
-                oninput={(event) => updateNumber(event, onSetBladeThicknessMm, optimizationSettings.bladeThicknessMm)}
-              />
-              <span class="text-[11px] text-zinc-500">mm added between cuts on same stock bar.</span>
-            </label>
-
-            <label class="flex flex-col gap-1 text-xs">
-              <span class="font-semibold uppercase tracking-wide text-zinc-500">Safety margin</span>
-              <input
-                class="rounded border border-zinc-300 bg-white px-2 py-1.5 font-mono text-sm text-zinc-900"
-                min="0"
-                step="0.1"
-                type="number"
-                value={optimizationSettings.safetyMarginMm}
-                oninput={(event) => updateNumber(event, onSetSafetyMarginMm, optimizationSettings.safetyMarginMm)}
-              />
-              <span class="text-[11px] text-zinc-500">mm added to every required cut piece.</span>
-            </label>
-          </div>
-
-          <div class="space-y-3">
-            <div class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Shipping</div>
-            <div class="flex flex-wrap gap-2">
-              {#each [
-                { label: 'Flat', value: 'flat' },
-                { label: 'Per kg', value: 'per-kg' },
-              ] as option (option.value)}
-                <label class="inline-flex cursor-pointer items-center gap-2 rounded border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-800">
-                  <input
-                    checked={optimizationSettings.shippingMode === option.value}
-                    name="planner-shipping-mode"
-                    type="radio"
-                    value={option.value}
-                    onchange={() => onSetShippingMode(option.value as ShippingMode)}
-                  />
-                  <span>{option.label}</span>
-                </label>
-              {/each}
-            </div>
-
-            {#if optimizationSettings.shippingMode === 'flat'}
-              <label class="flex max-w-xs flex-col gap-1 text-xs">
-                <span class="font-semibold uppercase tracking-wide text-zinc-500">Flat shipping cost</span>
-                <input
-                  class="rounded border border-zinc-300 bg-white px-2 py-1.5 font-mono text-sm text-zinc-900"
-                  min="0"
-                  step="0.01"
-                  type="number"
-                  value={optimizationSettings.flatShippingCost}
-                  oninput={(event) => updateNumber(event, onSetFlatShippingCost, optimizationSettings.flatShippingCost)}
-                />
-              </label>
-            {:else}
-              <label class="flex max-w-xs flex-col gap-1 text-xs">
-                <span class="font-semibold uppercase tracking-wide text-zinc-500">Shipping rate</span>
-                <input
-                  class="rounded border border-zinc-300 bg-white px-2 py-1.5 font-mono text-sm text-zinc-900"
-                  min="0"
-                  step="0.01"
-                  type="number"
-                  value={optimizationSettings.shippingRatePerKg}
-                  oninput={(event) => updateNumber(event, onSetShippingRatePerKg, optimizationSettings.shippingRatePerKg)}
-                />
-                <span class="text-[11px] text-zinc-500">Cost per purchased kilogram.</span>
-              </label>
-            {/if}
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="space-y-4">
-      <div class="rounded border border-zinc-200 bg-zinc-50">
-        <div class="border-b border-zinc-200 px-3 py-2">
-          <h3 class="font-sans text-sm font-semibold text-zinc-900">Manufacturer stock lengths</h3>
-          <p class="mt-1 text-xs text-zinc-500">Set weight defaults and stock prices per profile type.</p>
-        </div>
-        <div class="grid gap-4 p-3">
-          {#each ['80x40', '40x40'] as profileType (profileType)}
-            <section class="rounded border border-zinc-200 bg-white">
-              <div class="flex flex-wrap items-end justify-between gap-3 border-b border-zinc-200 px-3 py-2">
-                <div>
-                  <h4 class="font-sans text-sm font-semibold text-zinc-900">{profileType}</h4>
-                  <p class="text-xs text-zinc-500">Purchase options for {profileType} extrusion.</p>
-                </div>
-                <label class="flex flex-col gap-1 text-xs">
-                  <span class="font-semibold uppercase tracking-wide text-zinc-500">Weight</span>
-                  <input
-                    class="w-28 rounded border border-zinc-300 bg-white px-2 py-1.5 font-mono text-sm text-zinc-900"
-                    min="0"
-                    step="0.01"
-                    type="number"
-                    value={optimizationSettings.profileWeightsKgPerMeter[profileType]}
-                    oninput={(event) =>
-                      updateNumber(
-                        event,
-                        (value) => onSetProfileWeightKgPerMeter(profileType, value),
-                        optimizationSettings.profileWeightsKgPerMeter[profileType]
-                      )}
-                  />
-                  <span class="text-[11px] text-zinc-500">kg/m</span>
-                </label>
-              </div>
-
-              {#if stockOptionsByProfile[profileType].length > 0}
-                <div class="overflow-x-auto">
-                  <table class="min-w-full border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900">
-                    <thead>
-                      <tr class="border-b border-zinc-200 bg-zinc-50 text-zinc-600">
-                        <th class="px-2 py-1 text-left font-medium">Length</th>
-                        <th class="px-2 py-1 text-left font-medium">Cost</th>
-                        <th class="px-2 py-1 text-left font-medium">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {#each stockOptionsByProfile[profileType] as stockOption (stockOption.id)}
-                        <tr class="border-b border-zinc-100 last:border-b-0">
-                          <td class="px-2 py-1">
-                            <input
-                              class="w-28 rounded border border-zinc-300 bg-white px-2 py-1 font-mono text-sm text-zinc-900"
-                              min="0"
-                              step="1"
-                              type="number"
-                              value={stockOption.lengthMm}
-                              oninput={(event) =>
-                                updateNumber(
-                                  event,
-                                  (value) => onUpdateStockOptionLengthMm(stockOption.id, value),
-                                  stockOption.lengthMm
-                                )}
-                            />
-                            <span class="ml-2 text-zinc-500">mm</span>
-                          </td>
-                          <td class="px-2 py-1">
-                            <input
-                              class="w-28 rounded border border-zinc-300 bg-white px-2 py-1 font-mono text-sm text-zinc-900"
-                              min="0"
-                              step="0.01"
-                              type="number"
-                              value={stockOption.cost}
-                              oninput={(event) =>
-                                updateNumber(
-                                  event,
-                                  (value) => onUpdateStockOptionCost(stockOption.id, value),
-                                  stockOption.cost
-                                )}
-                            />
-                          </td>
-                          <td class="px-2 py-1">
-                            <button
-                              class="rounded border border-red-200 bg-red-50 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-red-600 transition-colors hover:bg-red-100"
-                              type="button"
-                              onclick={() => onRemoveStockOption(stockOption.id)}
-                            >
-                              Remove
-                            </button>
-                          </td>
-                        </tr>
-                      {/each}
-                    </tbody>
-                  </table>
-                </div>
-              {:else}
-                <div class="px-3 py-4 text-xs text-zinc-500">No stock lengths added yet.</div>
-              {/if}
-
-              <div class="border-t border-zinc-200 px-3 py-2">
-                <button
-                  class="rounded border border-zinc-300 bg-zinc-900 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-white transition-colors hover:bg-zinc-700"
-                  type="button"
-                  onclick={() => onAddStockOption(profileType)}
-                >
-                  Add stock length
-                </button>
-              </div>
-            </section>
-          {/each}
-        </div>
-      </div>
-
       <div class="rounded border border-zinc-200 bg-zinc-50">
         <div class="border-b border-zinc-200 px-3 py-2">
           <h3 class="font-sans text-sm font-semibold text-zinc-900">Purchase result</h3>

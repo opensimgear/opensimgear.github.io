@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, tick, type Component } from 'svelte';
-  import { Button, Checkbox, Color, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
+  import { Button, Checkbox, Color, Element, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
@@ -38,7 +38,7 @@
   } from './state';
   import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
   import type { PlannerGeometry } from './geometry';
-  import type { PlannerInput, PlannerOptimizationSettings, PlannerVisibleModules } from './types';
+  import type { CutListProfileType, PlannerInput, PlannerOptimizationSettings, PlannerVisibleModules } from './types';
 
   type PlannerSceneComponent = Component<{
     geometry: PlannerGeometry;
@@ -62,7 +62,7 @@
   };
   const PLANNER_TEST_ID_TARGETS = [
     {
-      text: 'Setup',
+      text: 'Settings',
       selector: '.tp-rotv_t',
       closest: '.tp-rotv_b',
       testId: 'aluminum-rig-planner-setup-pane',
@@ -92,6 +92,25 @@
       testId: 'aluminum-rig-planner-base-width-control',
     },
   ] as const;
+  const OPTIMIZER_MODE_OPTIONS = [
+    { text: 'Cost', value: 'cost' },
+    { text: 'Waste', value: 'waste' },
+  ] as const;
+  const SHIPPING_MODE_OPTIONS = [
+    { text: 'Flat', value: 'flat' },
+    { text: 'Per kg', value: 'per-kg' },
+  ] as const;
+  const PROFILE_TYPES: CutListProfileType[] = ['80x40', '40x40'];
+  const OPTIMIZER_LIMITS = {
+    bladeThicknessMaxMm: 10,
+    safetyMarginMaxMm: 50,
+    flatShippingCostMax: 500,
+    shippingRatePerKgMax: 50,
+    profileWeightMaxKgPerMeter: 10,
+    stockLengthMinMm: 100,
+    stockLengthMaxMm: 6000,
+    stockCostMax: 1000,
+  } as const;
   let stockOptionIdSequence = 0;
 
   let plannerRoot = $state<HTMLDivElement | null>(null);
@@ -234,6 +253,14 @@
   const cutListEntries = $derived(createPlannerCutListEntries(geometry, visibleModules, showEndCaps));
   const optimizationResult = $derived(createPlannerOptimizationResult(cutListEntries, optimizationSettings));
   const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
+  const stockOptionsByProfile = $derived.by(() => ({
+    '80x40': optimizationSettings.stockOptions
+      .filter((option) => option.profileType === '80x40')
+      .sort((a, b) => a.lengthMm - b.lengthMm || a.cost - b.cost),
+    '40x40': optimizationSettings.stockOptions
+      .filter((option) => option.profileType === '40x40')
+      .sort((a, b) => a.lengthMm - b.lengthMm || a.cost - b.cost),
+  }));
   const steeringColumnDistanceLimits = $derived.by(() => ({
     min: PLANNER_LAYOUT.steeringColumnDistanceMinMm,
     max: getSteeringColumnDistanceMaxMm(plannerInput),
@@ -583,20 +610,9 @@
           {hoveredCutListKey}
           {optimizationResult}
           optimizationSettings={optimizationSettings}
-          onAddStockOption={addStockOption}
           onHoveredCutListKeyChange={(key) => {
             hoveredCutListKey = key;
           }}
-          onRemoveStockOption={removeStockOption}
-          onSetBladeThicknessMm={setBladeThicknessMm}
-          onSetFlatShippingCost={setFlatShippingCost}
-          onSetMode={setOptimizerMode}
-          onSetProfileWeightKgPerMeter={setProfileWeightKgPerMeter}
-          onSetSafetyMarginMm={setSafetyMarginMm}
-          onSetShippingMode={setShippingMode}
-          onSetShippingRatePerKg={setShippingRatePerKg}
-          onUpdateStockOptionCost={updateStockOptionCost}
-          onUpdateStockOptionLengthMm={updateStockOptionLengthMm}
         />
       </div>
 
@@ -605,7 +621,7 @@
           ? 'flex shrink-0 flex-col divide-y divide-zinc-300'
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
-        <Pane title="Setup" position="inline" bind:expanded={paneExpanded.setup}>
+        <Pane title="Settings" position="inline" bind:expanded={paneExpanded.setup}>
           <Folder title="General">
             <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
             {#if profileColorMode === 'custom'}
@@ -746,6 +762,90 @@
               <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
             </Folder>
           {/if}
+        </Pane>
+        <Pane title="Cut optimizer" position="inline" bind:expanded={paneExpanded.optimizer}>
+          <Folder title="Settings">
+            <List bind:value={() => optimizationSettings.mode, setOptimizerMode} options={OPTIMIZER_MODE_OPTIONS} label="Optimize" />
+            <Slider
+              bind:value={() => optimizationSettings.bladeThicknessMm, setBladeThicknessMm}
+              label="Blade"
+              min={0}
+              max={OPTIMIZER_LIMITS.bladeThicknessMaxMm}
+              step={0.1}
+              format={(value) => `${value.toFixed(1)} mm`}
+            />
+            <Slider
+              bind:value={() => optimizationSettings.safetyMarginMm, setSafetyMarginMm}
+              label="Margin"
+              min={0}
+              max={OPTIMIZER_LIMITS.safetyMarginMaxMm}
+              step={0.5}
+              format={(value) => `${value.toFixed(1)} mm`}
+            />
+            <List bind:value={() => optimizationSettings.shippingMode, setShippingMode} options={SHIPPING_MODE_OPTIONS} label="Shipping" />
+            {#if optimizationSettings.shippingMode === 'flat'}
+              <Slider
+                bind:value={() => optimizationSettings.flatShippingCost, setFlatShippingCost}
+                label="Ship cost"
+                min={0}
+                max={OPTIMIZER_LIMITS.flatShippingCostMax}
+                step={1}
+                format={(value) => `$${value.toFixed(0)}`}
+              />
+            {:else}
+              <Slider
+                bind:value={() => optimizationSettings.shippingRatePerKg, setShippingRatePerKg}
+                label="Ship rate"
+                min={0}
+                max={OPTIMIZER_LIMITS.shippingRatePerKgMax}
+                step={0.1}
+                format={(value) => `$${value.toFixed(1)}/kg`}
+              />
+            {/if}
+          </Folder>
+          <Folder title="Stock configuration">
+            {#each PROFILE_TYPES as profileType (profileType)}
+              <Folder title={profileType}>
+                <Slider
+                  bind:value={() => optimizationSettings.profileWeightsKgPerMeter[profileType], (value) =>
+                    setProfileWeightKgPerMeter(profileType, value)}
+                  label="Weight"
+                  min={0}
+                  max={OPTIMIZER_LIMITS.profileWeightMaxKgPerMeter}
+                  step={0.01}
+                  format={(value) => `${value.toFixed(2)} kg/m`}
+                />
+                {#if stockOptionsByProfile[profileType].length > 0}
+                  {#each stockOptionsByProfile[profileType] as stockOption (stockOption.id)}
+                    <Folder title={`${stockOption.lengthMm} mm`}>
+                      <Slider
+                        bind:value={() => stockOption.lengthMm, (value) => updateStockOptionLengthMm(stockOption.id, value)}
+                        label="Length"
+                        min={OPTIMIZER_LIMITS.stockLengthMinMm}
+                        max={OPTIMIZER_LIMITS.stockLengthMaxMm}
+                        step={10}
+                        format={(value) => `${value.toFixed(0)} mm`}
+                      />
+                      <Slider
+                        bind:value={() => stockOption.cost, (value) => updateStockOptionCost(stockOption.id, value)}
+                        label="Cost"
+                        min={0}
+                        max={OPTIMIZER_LIMITS.stockCostMax}
+                        step={1}
+                        format={(value) => `$${value.toFixed(0)}`}
+                      />
+                      <Button on:click={() => removeStockOption(stockOption.id)} label="Remove" title="Remove" />
+                    </Folder>
+                  {/each}
+                {:else}
+                  <Element>
+                    <div class="px-1 py-1 text-xs text-zinc-500">No stock lengths added yet.</div>
+                  </Element>
+                {/if}
+                <Button on:click={() => addStockOption(profileType)} label="Add stock length" title="Add stock length" />
+              </Folder>
+            {/each}
+          </Folder>
         </Pane>
       </div>
     </div>

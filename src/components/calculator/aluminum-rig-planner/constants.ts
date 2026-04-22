@@ -200,10 +200,12 @@ export const ALUMINUM_RIG_MOBILE_BREAKPOINT = 1024;
 export const DESKTOP_PANE_EXPANDED_STATE = {
   setup: true,
   modules: true,
+  optimizer: true,
 } as const;
 export const MOBILE_PANE_EXPANDED_STATE = {
   setup: false,
   modules: false,
+  optimizer: false,
 } as const;
 
 export const COLOR_MODE_OPTIONS = [
