@@ -100,8 +100,8 @@ describe('getStewartSceneClassNames', () => {
 
 describe('mobile scene UI helpers', () => {
   it('uses smaller gizmo size on narrow viewports', () => {
-    expect(getStewartGizmoSize(true)).toBe(80);
-    expect(getStewartGizmoSize(false)).toBe(128);
+    expect(getStewartGizmoSize(true)).toBe(48);
+    expect(getStewartGizmoSize(false)).toBe(64);
   });
 
   it('uses tighter status panel styling on narrow viewports', () => {
