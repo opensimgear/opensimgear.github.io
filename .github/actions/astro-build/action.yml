@@ -3,62 +3,41 @@ description: "A composite action that prepares your Astro site to be deployed to
 branding:
   icon: "arrow-up-right"
   color: "purple"
-inputs:
-  node-version:
-    description: "The node version to use"
-    required: false
-    default: "24"
-  cache-dir:
-    description: "Path to the Astro cache directory (relative to 'path' input). Defaults to 'node_modules/.astro'"
-    required: false
-    default: "node_modules/.astro"
-  out-dir:
-    description: "Path to the output build directory (relative to 'path' input). Defaults to 'dist'"
-    required: false
-    default: "dist"
 runs:
   using: composite
   steps:
-    - name: Setup PNPM
-      uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
+    - name: Checkout
+      uses: actions/checkout@v6
+    - uses: pnpm/action-setup@v6
+      name: Install pnpm
       with:
-        version: ${{ env.VERSION }}
-        package_json_file: "${{ inputs.path }}/package.json"
-    - name: Setup Node
-      uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
-      with:
-        node-version: ${{ inputs.node-version }}
-        cache: ${{ env.PACKAGE_MANAGER }}
-        cache-dependency-path: "${{ inputs.path }}/${{ env.LOCKFILE }}"
-    - name: Install
+        version: 10
+        cache: true
+    - name: Install dependencies
       shell: bash
-      working-directory: ${{ inputs.path }}
       run: pnpm install
     - name: Restore Astro cache
-      if: ${{ inputs.cache == 'true' }}
       id: astro-cache-restore
       uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
       with:
-        path: ${{ inputs.path }}/${{ inputs.cache-dir }}
+        path: ./node_modules/.astro
         key: astro-cache-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           astro-cache-${{ runner.os }}-
     - name: Test
       shell: bash
-      working-directory: ${{ inputs.path }}
       run: pnpm test
     - name: Build
       shell: bash
-      working-directory: ${{ inputs.path }}
       run: pnpm build
     - name: Save Astro cache
       if: ${{ steps.astro-cache-restore.outputs.cache-hit != 'true' }}
       uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
       with:
-        path: ${{ inputs.path }}/${{ inputs.cache-dir }}
+        path: ./node_modules/.astro
         key: ${{ steps.astro-cache-restore.outputs.cache-primary-key }}
     - name: Upload Pages Artifact
       uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
       with:
-        path: "${{ inputs.path }}/${{ inputs.out-dir }}/"
+        path: "./dist"
         include-hidden-files: true
