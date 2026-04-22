@@ -432,7 +432,7 @@
           <div class="border-b border-zinc-200 px-3 py-2">
             <h3 class="font-sans text-sm font-semibold text-zinc-900">Required cuts</h3>
             <p class="mt-1 text-xs text-zinc-500">
-              Nominal lengths from current rig. Adjusted adds safety margin per piece.
+              Cut lengths from current rig. Safety margin affects optimization only.
             </p>
           </div>
           <div class="overflow-x-auto">
@@ -442,8 +442,7 @@
               <thead>
                 <tr class="border-b border-zinc-200 bg-white text-zinc-600">
                   <th class="px-2 py-1 text-left font-medium">Profile</th>
-                  <th class="px-2 py-1 text-left font-medium">Nominal</th>
-                  <th class="px-2 py-1 text-left font-medium">Cut</th>
+                  <th class="px-2 py-1 text-left font-medium">Cut length</th>
                   <th class="px-2 py-1 text-left font-medium">Qty</th>
                 </tr>
               </thead>
@@ -457,9 +456,6 @@
                   >
                     <td class="px-2 py-1 font-medium text-zinc-800">{entry.profileType}</td>
                     <td class="px-2 py-1 text-zinc-600">{entry.lengthMm} mm</td>
-                    <td class="px-2 py-1 text-zinc-600"
-                      >{entry.lengthMm + optimizationSettings.safetyMarginMm * 2} mm</td
-                    >
                     <td class="px-2 py-1 text-zinc-600">{entry.quantity}</td>
                   </tr>
                 {/each}
