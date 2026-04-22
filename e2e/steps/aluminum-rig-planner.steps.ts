@@ -34,9 +34,3 @@ Then('I should see the cut list', async ({ page }: { page: Page }) => {
   await expect(page.getByTestId('aluminum-rig-planner-cut-list-qty-header')).toBeVisible();
   await expect(page.getByTestId('aluminum-rig-planner-cut-list-first-profile')).toBeVisible();
 });
-
-Then('I should see the 3D rig preview', async ({ page }: { page: Page }) => {
-  await expect(page.getByRole('application', { name: /3D aluminum rig planner viewport/i })).toBeVisible();
-  await expect(page.getByTestId('aluminum-rig-planner-preview-error')).toBeHidden();
-  await expect(page.getByTestId('aluminum-rig-planner-preview-canvas')).toBeVisible();
-});

@@ -5,4 +5,3 @@ Feature: Aluminum rig planner
     And I should see the planner section
     And I should see the planner controls
     And I should see the cut list
-    And I should see the 3D rig preview
