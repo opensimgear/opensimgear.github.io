@@ -120,6 +120,7 @@
     });
     void spaceMouseBridge.connect();
     void tick().then(() => {
+      viewportElement?.querySelector('canvas')?.setAttribute('data-testid', 'aluminum-rig-planner-preview-canvas');
       applySavedView();
     });
 
@@ -132,6 +133,7 @@
 
 <div
   {@attach captureViewport}
+  data-testid="aluminum-rig-planner-preview-viewport"
   class="relative aspect-[3/2] w-full border-zinc-200 bg-[radial-gradient(circle_at_top,#ffffff_0%,#f4f4f5_60%,#e4e4e7_100%)] outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2"
   tabindex="-1"
   role="application"

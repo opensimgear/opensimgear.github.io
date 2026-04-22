@@ -52,6 +52,47 @@
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
   const DEFAULT_INPUT: PlannerInput = { ...DEFAULT_PLANNER_INPUT };
+  const PLANNER_TEST_ID_TARGETS = [
+    {
+      text: 'Setup',
+      selector: '.tp-rotv_t',
+      closest: '.tp-rotv_b',
+      testId: 'aluminum-rig-planner-setup-pane',
+    },
+    {
+      text: 'Finish',
+      selector: '.tp-lblv_l',
+      closest: '.tp-lblv',
+      testId: 'aluminum-rig-planner-finish-control',
+    },
+    {
+      text: 'Endcaps',
+      selector: '.tp-lblv_l',
+      closest: '.tp-lblv',
+      testId: 'aluminum-rig-planner-endcaps-control',
+    },
+    {
+      text: 'Base length',
+      selector: '.tp-lblv_l',
+      closest: '.tp-lblv',
+      testId: 'aluminum-rig-planner-base-length-control',
+    },
+    {
+      text: 'Base width',
+      selector: '.tp-lblv_l',
+      closest: '.tp-lblv',
+      testId: 'aluminum-rig-planner-base-width-control',
+    },
+    {
+      text: 'Cut list',
+      selector: '.tp-rotv_t',
+      closest: '.tp-rotv_b',
+      testId: 'aluminum-rig-planner-cut-list-pane',
+    },
+  ] as const;
+
+  let plannerRoot = $state<HTMLDivElement | null>(null);
+
   function applyQueryState(state: PlannerQueryState) {
     const mergedState = mergePlannerQueryState(DEFAULT_INPUT, state);
 
@@ -128,6 +169,7 @@
     void loadScene();
     void tick().then(() => {
       controlsReady = true;
+      syncPlannerTestIds();
     });
 
     return () => {
@@ -174,6 +216,33 @@
     max: getPedalTrayDistanceMaxMm(plannerInput),
   }));
   const seatBaseDepthMaxMm = $derived(Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, plannerInput.baseLengthMm));
+
+  function syncPlannerTestIds() {
+    if (!plannerRoot) {
+      return;
+    }
+
+    for (const { text, selector, closest, testId } of PLANNER_TEST_ID_TARGETS) {
+      const element = Array.from(plannerRoot.querySelectorAll<HTMLElement>(selector)).find(
+        (candidate) => candidate.textContent?.trim() === text
+      );
+      const target = closest ? element?.closest<HTMLElement>(closest) : element;
+
+      target?.setAttribute('data-testid', testId);
+    }
+  }
+
+  function capturePlannerRoot(node: HTMLDivElement) {
+    plannerRoot = node;
+
+    return {
+      destroy() {
+        if (plannerRoot === node) {
+          plannerRoot = null;
+        }
+      },
+    };
+  }
 
   function clampPedalTrayDistanceMm() {
     plannerInput.pedalTrayDistanceMm = Math.max(
@@ -373,7 +442,11 @@
   }
 </script>
 
-<div class="not-content overflow-hidden rounded border border-zinc-300 bg-white shadow-sm">
+<div
+  {@attach capturePlannerRoot}
+  data-testid="aluminum-rig-planner-root"
+  class="not-content overflow-hidden rounded border border-zinc-300 bg-white shadow-sm"
+>
   {#if mounted}
     <div class={isNarrowViewport ? 'flex flex-col' : 'grid grid-cols-[minmax(0,1.3fr)_24rem]'}>
       <div
@@ -392,7 +465,7 @@
         {:else}
           <div class="grid aspect-[3/2] w-full place-items-center border-zinc-200 bg-zinc-50 text-sm text-zinc-500">
             {#if sceneStatus === 'error'}
-              <span>3D scene failed to load. Refresh to retry.</span>
+              <span data-testid="aluminum-rig-planner-preview-error">3D scene failed to load. Refresh to retry.</span>
             {:else}
               <span>Loading 3D scene...</span>
             {/if}
@@ -549,17 +622,29 @@
         </Pane>
         <Pane title="Cut list" position="inline" bind:expanded={paneExpanded.cutList}>
           <Element>
-            <div class="overflow-x-auto bg-white px-2 py-1 font-['Roboto_Mono',monospace] text-zinc-900">
-              <table class="min-w-full border-collapse bg-white text-left text-[12px] leading-tight">
+            <div
+              data-testid="aluminum-rig-planner-cut-list-table-wrapper"
+              class="overflow-x-auto bg-white px-2 py-1 font-['Roboto_Mono',monospace] text-zinc-900"
+            >
+              <table
+                data-testid="aluminum-rig-planner-cut-list-table"
+                class="min-w-full border-collapse bg-white text-left text-[12px] leading-tight"
+              >
                 <thead>
                   <tr class="border-b border-zinc-200 bg-zinc-50 text-zinc-600">
-                    <th class="px-1.5 py-1 font-medium">Profile</th>
-                    <th class="px-1.5 py-1 font-medium">Length</th>
-                    <th class="px-1.5 py-1 font-medium">Qty</th>
+                    <th data-testid="aluminum-rig-planner-cut-list-profile-header" class="px-1.5 py-1 font-medium">
+                      Profile
+                    </th>
+                    <th data-testid="aluminum-rig-planner-cut-list-length-header" class="px-1.5 py-1 font-medium">
+                      Length
+                    </th>
+                    <th data-testid="aluminum-rig-planner-cut-list-qty-header" class="px-1.5 py-1 font-medium">
+                      Qty
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {#each cutListEntries as entry (entry.key)}
+                  {#each cutListEntries as entry, index (entry.key)}
                     <tr
                       class:bg-zinc-100={hoveredCutListKey === entry.key}
                       class="cursor-pointer border-b border-zinc-100 bg-white last:border-b-0"
@@ -570,7 +655,12 @@
                         hoveredCutListKey = null;
                       }}
                     >
-                      <td class="px-1.5 py-1 font-medium text-zinc-800">{entry.profileType}</td>
+                      <td
+                        data-testid={index === 0 ? 'aluminum-rig-planner-cut-list-first-profile' : undefined}
+                        class="px-1.5 py-1 font-medium text-zinc-800"
+                      >
+                        {entry.profileType}
+                      </td>
                       <td class="px-1.5 py-1 text-zinc-600">{entry.lengthMm} mm</td>
                       <td class="px-1.5 py-1 text-zinc-600">{entry.quantity}</td>
                     </tr>

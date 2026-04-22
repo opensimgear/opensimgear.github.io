@@ -83,6 +83,8 @@ export default defineConfig({
       ],
       components: {
         Head: './src/components/overrides/Head.astro',
+        Hero: './src/components/overrides/Hero.astro',
+        PageTitle: './src/components/overrides/PageTitle.astro',
         SiteTitle: './src/components/overrides/SiteTitle.astro',
       },
       plugins: [starlightLinksValidator(), starlightAutoSidebar()],

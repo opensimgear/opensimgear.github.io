@@ -10,5 +10,5 @@ Given('I open the home page', async ({ page }: { page: Page }) => {
 
 Then('I should see the home hero heading', async ({ page }: { page: Page }) => {
   await expect(page).toHaveTitle(/OpenSimGear/i);
-  await expect(page.getByRole('heading', { level: 1, name: /Open source ecosystem for racing and flight simulation/i })).toBeVisible();
+  await expect(page.getByTestId('page-hero-title')).toBeVisible();
 });

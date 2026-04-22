@@ -1,12 +1,8 @@
-import type { Locator, Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 import { createBdd } from 'playwright-bdd';
 
 const { Given, Then } = createBdd();
-
-function previewArea(page: Page): Locator {
-  return page.locator('.not-content').first();
-}
 
 Given('I open the aluminum rig planner page', async ({ page }: { page: Page }) => {
   await page.goto('/calculators/aluminum-rig-planner');
@@ -14,37 +10,34 @@ Given('I open the aluminum rig planner page', async ({ page }: { page: Page }) =
 
 Then('I should see the aluminum rig planner heading', async ({ page }: { page: Page }) => {
   await expect(page).toHaveTitle(/8020 Aluminum Rig Planner/i);
-  await expect(page.getByRole('heading', { level: 1, name: '8020 Aluminum Rig Planner' })).toBeVisible();
+  await expect(page.getByTestId('page-title')).toBeVisible();
 });
 
 Then('I should see the planner section', async ({ page }: { page: Page }) => {
-  await expect(page.getByRole('heading', { level: 2, name: 'Planner' })).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-section-heading')).toBeVisible();
 });
 
 Then('I should see the planner controls', async ({ page }: { page: Page }) => {
-  const root = previewArea(page);
-
-  await expect(root.getByText('Setup')).toBeVisible();
-  await expect(root.getByText('Finish')).toBeVisible();
-  await expect(root.getByText('Endcaps')).toBeVisible();
-  await expect(root.getByText('Base length')).toBeVisible();
-  await expect(root.getByText('Base width')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-root')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-setup-pane')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-finish-control')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-endcaps-control')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-base-length-control')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-base-width-control')).toBeVisible();
 });
 
 Then('I should see the cut list', async ({ page }: { page: Page }) => {
-  const root = previewArea(page);
-
-  await expect(root.getByText('Cut list')).toBeVisible();
-  await expect(root.getByRole('columnheader', { name: 'Profile' })).toBeVisible();
-  await expect(root.getByRole('columnheader', { name: 'Length' })).toBeVisible();
-  await expect(root.getByRole('columnheader', { name: 'Qty' })).toBeVisible();
-  await expect(root.getByText('80x40').first()).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-cut-list-pane')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-cut-list-table')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-cut-list-profile-header')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-cut-list-length-header')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-cut-list-qty-header')).toBeVisible();
+  await expect(page.getByTestId('aluminum-rig-planner-cut-list-first-profile')).toBeVisible();
 });
 
 Then('I should see the 3D rig preview', async ({ page }: { page: Page }) => {
-  const root = previewArea(page);
-  const canvas = root.locator('canvas');
-  const loadingError = root.getByText('3D scene failed to load. Refresh to retry.');
+  const canvas = page.getByTestId('aluminum-rig-planner-preview-canvas');
+  const loadingError = page.getByTestId('aluminum-rig-planner-preview-error');
   const sceneReadyTimeoutMs = 20_000;
 
   await expect

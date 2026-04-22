@@ -19,16 +19,4 @@ if (process.env.NODE_ENV !== 'development') {
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
   });
-} else {
-  Sentry.init({
-    sampleRate: 1.0, // Capture all errors in dev
-    tracesSampleRate: 1.0, // Capture all traces in dev
-    enableLogs: true,
-    integrations: [
-      Sentry.consoleLoggingIntegration({ levels: ['log', 'warn', 'error'] }),
-      // For frontend apps, add:
-      Sentry.browserTracingIntegration(),
-    ],
-    spotlight: false, // Enable Spotlight
-  });
 }
