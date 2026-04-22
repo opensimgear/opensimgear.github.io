@@ -33,7 +33,7 @@ jobs:
       - name: Test, Build, Upload
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        uses: ./.github/actions/astro/action.yml
+        uses: ./.github/actions/astro-build
   deploy:
     needs: test-and-build
     runs-on: ubuntu-latest
