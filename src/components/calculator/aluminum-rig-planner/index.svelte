@@ -1,13 +1,15 @@
 <script lang="ts">
   import { onMount, tick, type Component } from 'svelte';
-  import { Button, Checkbox, Color, Element, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
+  import { Button, Checkbox, Color, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
 
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
+  import CutOptimizerPanel from './CutOptimizerPanel.svelte';
   import { createPlannerCutListEntries } from './cut-list';
   import {
     COLOR_MODE_OPTIONS,
     DEFAULT_CUSTOM_PROFILE_COLOR,
+    DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
     DEFAULT_PLANNER_INPUT,
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
@@ -26,6 +28,7 @@
     type PlannerMeasurementOverlay,
   } from './measurement-overlay';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
+  import { createPlannerOptimizationResult } from './optimizer';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
     getAluminumRigPaneExpandedState,
@@ -35,7 +38,7 @@
   } from './state';
   import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
   import type { PlannerGeometry } from './geometry';
-  import type { PlannerInput, PlannerVisibleModules } from './types';
+  import type { PlannerInput, PlannerOptimizationSettings, PlannerVisibleModules } from './types';
 
   type PlannerSceneComponent = Component<{
     geometry: PlannerGeometry;
@@ -52,6 +55,11 @@
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
   const DEFAULT_INPUT: PlannerInput = { ...DEFAULT_PLANNER_INPUT };
+  const DEFAULT_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings = {
+    ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
+    profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
+    stockOptions: [],
+  };
   const PLANNER_TEST_ID_TARGETS = [
     {
       text: 'Setup',
@@ -83,23 +91,41 @@
       closest: '.tp-lblv',
       testId: 'aluminum-rig-planner-base-width-control',
     },
-    {
-      text: 'Cut list',
-      selector: '.tp-rotv_t',
-      closest: '.tp-rotv_b',
-      testId: 'aluminum-rig-planner-cut-list-pane',
-    },
   ] as const;
+  let stockOptionIdSequence = 0;
 
   let plannerRoot = $state<HTMLDivElement | null>(null);
+
+  function createStockOptionId() {
+    stockOptionIdSequence += 1;
+    return `planner-stock-option-${stockOptionIdSequence}`;
+  }
+
+  function cloneOptimizationSettings(settings: PlannerOptimizationSettings): PlannerOptimizationSettings {
+    return {
+      ...settings,
+      profileWeightsKgPerMeter: { ...settings.profileWeightsKgPerMeter },
+      stockOptions: settings.stockOptions.map((option) => ({ ...option })),
+    };
+  }
 
   function applyQueryState(state: PlannerQueryState) {
     const mergedState = mergePlannerQueryState(DEFAULT_INPUT, state);
 
     Object.assign(plannerInput, mergedState.plannerInput);
+    Object.assign(optimizationSettings, cloneOptimizationSettings(mergedState.optimizationSettings));
+
+    for (const option of optimizationSettings.stockOptions) {
+      const numericSuffix = Number(option.id.replace(/\D+/g, ''));
+
+      if (Number.isFinite(numericSuffix)) {
+        stockOptionIdSequence = Math.max(stockOptionIdSequence, numericSuffix);
+      }
+    }
   }
 
   let plannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
+  let optimizationSettings = $state<PlannerOptimizationSettings>(cloneOptimizationSettings(DEFAULT_OPTIMIZATION_SETTINGS));
   let visibleModules = $state<PlannerVisibleModules>({
     pedalTray: true,
     steeringColumn: true,
@@ -206,6 +232,7 @@
         : BLACK_PROFILE_COLOR
   );
   const cutListEntries = $derived(createPlannerCutListEntries(geometry, visibleModules, showEndCaps));
+  const optimizationResult = $derived(createPlannerOptimizationResult(cutListEntries, optimizationSettings));
   const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
   const steeringColumnDistanceLimits = $derived.by(() => ({
     min: PLANNER_LAYOUT.steeringColumnDistanceMinMm,
@@ -275,6 +302,7 @@
 
     const encodedPlannerState = encodeQueryState({
       ...$state.snapshot(plannerInput),
+      optimizer: $state.snapshot(optimizationSettings),
     });
     const url = new URL(window.location.href);
 
@@ -440,6 +468,84 @@
     setPedalTrayDepthMm(DEFAULT_INPUT.pedalTrayDepthMm);
     setPedalTrayDistanceMm(DEFAULT_INPUT.pedalTrayDistanceMm);
   }
+
+  function setOptimizerMode(value: PlannerOptimizationSettings['mode']) {
+    optimizationSettings.mode = value;
+    syncPlannerUrlState();
+  }
+
+  function setBladeThicknessMm(value: number) {
+    optimizationSettings.bladeThicknessMm = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
+  function setSafetyMarginMm(value: number) {
+    optimizationSettings.safetyMarginMm = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
+  function setShippingMode(value: PlannerOptimizationSettings['shippingMode']) {
+    optimizationSettings.shippingMode = value;
+    syncPlannerUrlState();
+  }
+
+  function setFlatShippingCost(value: number) {
+    optimizationSettings.flatShippingCost = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
+  function setShippingRatePerKg(value: number) {
+    optimizationSettings.shippingRatePerKg = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
+  function setProfileWeightKgPerMeter(profileType: '40x40' | '80x40', value: number) {
+    optimizationSettings.profileWeightsKgPerMeter[profileType] = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
+  function addStockOption(profileType: '40x40' | '80x40') {
+    optimizationSettings.stockOptions.push({
+      id: createStockOptionId(),
+      profileType,
+      lengthMm: 1000,
+      cost: 0,
+    });
+    syncPlannerUrlState();
+  }
+
+  function updateStockOptionLengthMm(stockOptionId: string, value: number) {
+    const stockOption = optimizationSettings.stockOptions.find((option) => option.id === stockOptionId);
+
+    if (!stockOption) {
+      return;
+    }
+
+    stockOption.lengthMm = Math.max(0, Math.round(value));
+    syncPlannerUrlState();
+  }
+
+  function updateStockOptionCost(stockOptionId: string, value: number) {
+    const stockOption = optimizationSettings.stockOptions.find((option) => option.id === stockOptionId);
+
+    if (!stockOption) {
+      return;
+    }
+
+    stockOption.cost = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
+  function removeStockOption(stockOptionId: string) {
+    const stockOptionIndex = optimizationSettings.stockOptions.findIndex((option) => option.id === stockOptionId);
+
+    if (stockOptionIndex < 0) {
+      return;
+    }
+
+    optimizationSettings.stockOptions.splice(stockOptionIndex, 1);
+    syncPlannerUrlState();
+  }
 </script>
 
 <div
@@ -450,7 +556,7 @@
   {#if mounted}
     <div class={isNarrowViewport ? 'flex flex-col' : 'grid grid-cols-[minmax(0,1.3fr)_24rem]'}>
       <div
-        class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
+        class="flex min-w-0 flex-col border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
         {#if PlannerScene}
           <PlannerScene
@@ -471,6 +577,27 @@
             {/if}
           </div>
         {/if}
+
+        <CutOptimizerPanel
+          {cutListEntries}
+          {hoveredCutListKey}
+          {optimizationResult}
+          optimizationSettings={optimizationSettings}
+          onAddStockOption={addStockOption}
+          onHoveredCutListKeyChange={(key) => {
+            hoveredCutListKey = key;
+          }}
+          onRemoveStockOption={removeStockOption}
+          onSetBladeThicknessMm={setBladeThicknessMm}
+          onSetFlatShippingCost={setFlatShippingCost}
+          onSetMode={setOptimizerMode}
+          onSetProfileWeightKgPerMeter={setProfileWeightKgPerMeter}
+          onSetSafetyMarginMm={setSafetyMarginMm}
+          onSetShippingMode={setShippingMode}
+          onSetShippingRatePerKg={setShippingRatePerKg}
+          onUpdateStockOptionCost={updateStockOptionCost}
+          onUpdateStockOptionLengthMm={updateStockOptionLengthMm}
+        />
       </div>
 
       <div
@@ -619,56 +746,6 @@
               <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
             </Folder>
           {/if}
-        </Pane>
-        <Pane title="Cut list" position="inline" bind:expanded={paneExpanded.cutList}>
-          <Element>
-            <div
-              data-testid="aluminum-rig-planner-cut-list-table-wrapper"
-              class="overflow-x-auto bg-white px-2 py-1 font-['Roboto_Mono',monospace] text-zinc-900"
-            >
-              <table
-                data-testid="aluminum-rig-planner-cut-list-table"
-                class="min-w-full border-collapse bg-white text-left text-[12px] leading-tight"
-              >
-                <thead>
-                  <tr class="border-b border-zinc-200 bg-zinc-50 text-zinc-600">
-                    <th data-testid="aluminum-rig-planner-cut-list-profile-header" class="px-1.5 py-1 font-medium">
-                      Profile
-                    </th>
-                    <th data-testid="aluminum-rig-planner-cut-list-length-header" class="px-1.5 py-1 font-medium">
-                      Length
-                    </th>
-                    <th data-testid="aluminum-rig-planner-cut-list-qty-header" class="px-1.5 py-1 font-medium">
-                      Qty
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {#each cutListEntries as entry, index (entry.key)}
-                    <tr
-                      class:bg-zinc-100={hoveredCutListKey === entry.key}
-                      class="cursor-pointer border-b border-zinc-100 bg-white last:border-b-0"
-                      onmouseenter={() => {
-                        hoveredCutListKey = entry.key;
-                      }}
-                      onmouseleave={() => {
-                        hoveredCutListKey = null;
-                      }}
-                    >
-                      <td
-                        data-testid={index === 0 ? 'aluminum-rig-planner-cut-list-first-profile' : undefined}
-                        class="px-1.5 py-1 font-medium text-zinc-800"
-                      >
-                        {entry.profileType}
-                      </td>
-                      <td class="px-1.5 py-1 text-zinc-600">{entry.lengthMm} mm</td>
-                      <td class="px-1.5 py-1 text-zinc-600">{entry.quantity}</td>
-                    </tr>
-                  {/each}
-                </tbody>
-              </table>
-            </div>
-          </Element>
         </Pane>
       </div>
     </div>

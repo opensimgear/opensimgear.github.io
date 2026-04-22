@@ -9,7 +9,6 @@ export { ALUMINUM_RIG_MOBILE_BREAKPOINT };
 export type AluminumRigPaneExpandedState = {
   setup: boolean;
   modules: boolean;
-  cutList: boolean;
 };
 
 export function isNarrowAluminumRigViewport(width: number) {
