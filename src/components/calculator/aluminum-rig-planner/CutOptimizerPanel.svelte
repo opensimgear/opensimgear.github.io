@@ -23,6 +23,7 @@
     hoveredCutListKey: string | null;
     optimizationResult: PlannerOptimizationResult;
     optimizationSettings: PlannerOptimizationSettings;
+    profileColor: string;
     onHoveredCutListKeyChange: (key: string | null) => void;
   }
 
@@ -31,6 +32,7 @@
     hoveredCutListKey,
     optimizationResult,
     optimizationSettings,
+    profileColor,
     onHoveredCutListKeyChange,
   }: Props = $props();
 
@@ -73,6 +75,14 @@
     });
   });
 
+  const maxPurchasedBarLengthMm = $derived.by(() =>
+    optimizationResult.profiles.reduce(
+      (maximum, profile) =>
+        Math.max(maximum, ...profile.purchasedBars.map((bar) => bar.stockLengthMm)),
+      0
+    )
+  );
+
   function formatMoney(value: number) {
     return `$${value.toFixed(2)}`;
   }
@@ -81,14 +91,48 @@
     return `${value.toFixed(2)} kg`;
   }
 
-  function formatPieces(bar: PlannerPurchasedBar) {
-    return bar.pieces
-      .map((piece) =>
-        piece.adjustedLengthMm === piece.nominalLengthMm
-          ? `${piece.nominalLengthMm} mm`
-          : `${piece.nominalLengthMm} + ${piece.adjustedLengthMm - piece.nominalLengthMm} mm`
-      )
-      .join(' · ');
+  function getBarWidthPercent(bar: PlannerPurchasedBar) {
+    if (maxPurchasedBarLengthMm <= 0) {
+      return 100;
+    }
+
+    return (bar.stockLengthMm / maxPurchasedBarLengthMm) * 100;
+  }
+
+  function getPieceSafetyLengthMm(piece: PlannerPurchasedBar['pieces'][number]) {
+    return Math.max(0, piece.adjustedLengthMm - piece.nominalLengthMm);
+  }
+
+  function getPieceAdjustedWidthPercent(piece: PlannerPurchasedBar['pieces'][number], bar: PlannerPurchasedBar) {
+    if (bar.stockLengthMm <= 0) {
+      return 0;
+    }
+
+    return (piece.adjustedLengthMm / bar.stockLengthMm) * 100;
+  }
+
+  function getPieceNominalWidthPercent(piece: PlannerPurchasedBar['pieces'][number]) {
+    if (piece.adjustedLengthMm <= 0) {
+      return 0;
+    }
+
+    return (piece.nominalLengthMm / piece.adjustedLengthMm) * 100;
+  }
+
+  function getPieceSafetyWidthPercent(piece: PlannerPurchasedBar['pieces'][number]) {
+    if (piece.adjustedLengthMm <= 0) {
+      return 0;
+    }
+
+    return (getPieceSafetyLengthMm(piece) / piece.adjustedLengthMm) * 100;
+  }
+
+  function getKerfWidthPercent(bar: PlannerPurchasedBar) {
+    if (bar.stockLengthMm <= 0 || optimizationSettings.bladeThicknessMm <= 0) {
+      return 0;
+    }
+
+    return (optimizationSettings.bladeThicknessMm / bar.stockLengthMm) * 100;
   }
 </script>
 
@@ -96,176 +140,245 @@
   data-testid="aluminum-rig-planner-cut-optimizer"
   class="border-t border-zinc-300 bg-white"
 >
-  <div class="grid gap-4 p-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-    <div class="space-y-4">
-      <div class="rounded border border-zinc-200 bg-zinc-50">
-        <div class="border-b border-zinc-200 px-3 py-2">
-          <h3 class="font-sans text-sm font-semibold text-zinc-900">Required cuts</h3>
-          <p class="mt-1 text-xs text-zinc-500">Nominal lengths from current rig. Adjusted adds safety margin per piece.</p>
-        </div>
-        <div class="overflow-x-auto">
-          <table class="min-w-full border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900">
-            <thead>
-              <tr class="border-b border-zinc-200 bg-white text-zinc-600">
-                <th class="px-2 py-1 text-left font-medium">Profile</th>
-                <th class="px-2 py-1 text-left font-medium">Nominal</th>
-                <th class="px-2 py-1 text-left font-medium">Cut</th>
-                <th class="px-2 py-1 text-left font-medium">Qty</th>
-              </tr>
-            </thead>
-            <tbody>
-              {#each cutListEntries as entry (entry.key)}
-                <tr
-                  class:bg-zinc-100={hoveredCutListKey === entry.key}
-                  class="cursor-pointer border-b border-zinc-100 last:border-b-0"
-                  onmouseenter={() => onHoveredCutListKeyChange(entry.key)}
-                  onmouseleave={() => onHoveredCutListKeyChange(null)}
-                >
-                  <td class="px-2 py-1 font-medium text-zinc-800">{entry.profileType}</td>
-                  <td class="px-2 py-1 text-zinc-600">{entry.lengthMm} mm</td>
-                  <td class="px-2 py-1 text-zinc-600">{entry.lengthMm + optimizationSettings.safetyMarginMm} mm</td>
-                  <td class="px-2 py-1 text-zinc-600">{entry.quantity}</td>
+  <div class="space-y-4 p-4">
+    <div class="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+      <div class="space-y-4">
+        <div class="rounded border border-zinc-200 bg-zinc-50">
+          <div class="border-b border-zinc-200 px-3 py-2">
+            <h3 class="font-sans text-sm font-semibold text-zinc-900">Required cuts</h3>
+            <p class="mt-1 text-xs text-zinc-500">Nominal lengths from current rig. Adjusted adds safety margin per piece.</p>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900">
+              <thead>
+                <tr class="border-b border-zinc-200 bg-white text-zinc-600">
+                  <th class="px-2 py-1 text-left font-medium">Profile</th>
+                  <th class="px-2 py-1 text-left font-medium">Nominal</th>
+                  <th class="px-2 py-1 text-left font-medium">Cut</th>
+                  <th class="px-2 py-1 text-left font-medium">Qty</th>
                 </tr>
-              {/each}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {#each cutListEntries as entry (entry.key)}
+                  <tr
+                    class:bg-zinc-100={hoveredCutListKey === entry.key}
+                    class="cursor-pointer border-b border-zinc-100 last:border-b-0"
+                    onmouseenter={() => onHoveredCutListKeyChange(entry.key)}
+                    onmouseleave={() => onHoveredCutListKeyChange(null)}
+                  >
+                    <td class="px-2 py-1 font-medium text-zinc-800">{entry.profileType}</td>
+                    <td class="px-2 py-1 text-zinc-600">{entry.lengthMm} mm</td>
+                    <td class="px-2 py-1 text-zinc-600">{entry.lengthMm + optimizationSettings.safetyMarginMm} mm</td>
+                    <td class="px-2 py-1 text-zinc-600">{entry.quantity}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="rounded border border-zinc-200 bg-zinc-50">
+          <div class="border-b border-zinc-200 px-3 py-2">
+            <h3 class="font-sans text-sm font-semibold text-zinc-900">Purchase result</h3>
+          </div>
+
+          {#if optimizationResult.status === 'missing-stock-options'}
+            <div class="p-3 text-sm text-amber-700">
+              Add stock lengths for {optimizationResult.missingProfiles.join(', ')} to run optimizer.
+            </div>
+          {:else if optimizationResult.status === 'infeasible'}
+            <div class="p-3 text-sm text-red-700">
+              No stock length can fit at least one adjusted cut for {optimizationResult.infeasibleProfiles.join(', ')}.
+            </div>
+          {:else if optimizationResult.barCount === 0}
+            <div class="p-3 text-sm text-zinc-500">No purchasable bars needed yet.</div>
+          {:else}
+            <div class="grid gap-4 p-3">
+              <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                <div class="rounded border border-zinc-200 bg-white p-3">
+                  <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Total cost</div>
+                  <div class="mt-1 font-['Roboto_Mono',monospace] text-lg text-zinc-900">
+                    {formatMoney(optimizationResult.totalCost)}
+                  </div>
+                  <div class="mt-1 text-xs text-zinc-500">
+                    material {formatMoney(optimizationResult.materialCost)} · shipping {formatMoney(optimizationResult.shippingCost)}
+                  </div>
+                </div>
+
+                <div class="rounded border border-zinc-200 bg-white p-3">
+                  <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Waste</div>
+                  <div class="mt-1 font-['Roboto_Mono',monospace] text-lg text-zinc-900">
+                    {optimizationResult.totalWasteMm} mm
+                  </div>
+                  <div class="mt-1 text-xs text-zinc-500">
+                    kerf {optimizationResult.totalKerfMm} mm · bars {optimizationResult.barCount}
+                  </div>
+                </div>
+
+                <div class="rounded border border-zinc-200 bg-white p-3">
+                  <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Purchased mass</div>
+                  <div class="mt-1 font-['Roboto_Mono',monospace] text-lg text-zinc-900">
+                    {formatWeight(optimizationResult.totalMassKg)}
+                  </div>
+                  <div class="mt-1 text-xs text-zinc-500">
+                    stock {optimizationResult.totalPurchasedLengthMm} mm
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded border border-zinc-200 bg-white">
+                <div class="border-b border-zinc-200 px-3 py-2 font-sans text-sm font-semibold text-zinc-900">
+                  Purchase summary
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900">
+                    <thead>
+                      <tr class="border-b border-zinc-200 bg-zinc-50 text-zinc-600">
+                        <th class="px-2 py-1 text-left font-medium">Profile</th>
+                        <th class="px-2 py-1 text-left font-medium">Stock</th>
+                        <th class="px-2 py-1 text-left font-medium">Qty</th>
+                        <th class="px-2 py-1 text-left font-medium">Mass</th>
+                        <th class="px-2 py-1 text-left font-medium">Cost</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {#each purchaseSummaryRows as row (row.key)}
+                        <tr class="border-b border-zinc-100 last:border-b-0">
+                          <td class="px-2 py-1 font-medium text-zinc-800">{row.profileType}</td>
+                          <td class="px-2 py-1 text-zinc-600">{row.stockLengthMm} mm</td>
+                          <td class="px-2 py-1 text-zinc-600">{row.quantity}</td>
+                          <td class="px-2 py-1 text-zinc-600">{formatWeight(row.totalMassKg)}</td>
+                          <td class="px-2 py-1 text-zinc-600">{formatMoney(row.totalCost)}</td>
+                        </tr>
+                      {/each}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          {/if}
         </div>
       </div>
     </div>
 
-    <div class="space-y-4">
+    {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
       <div class="rounded border border-zinc-200 bg-zinc-50">
         <div class="border-b border-zinc-200 px-3 py-2">
-          <h3 class="font-sans text-sm font-semibold text-zinc-900">Purchase result</h3>
+          <h3 class="font-sans text-sm font-semibold text-zinc-900">Visual cut layout</h3>
+          <p class="mt-1 text-xs text-zinc-500">Bars scale to real purchased length. Empty space is unused stock.</p>
         </div>
-
-        {#if optimizationResult.status === 'missing-stock-options'}
-          <div class="p-3 text-sm text-amber-700">
-            Add stock lengths for {optimizationResult.missingProfiles.join(', ')} to run optimizer.
-          </div>
-        {:else if optimizationResult.status === 'infeasible'}
-          <div class="p-3 text-sm text-red-700">
-            No stock length can fit at least one adjusted cut for {optimizationResult.infeasibleProfiles.join(', ')}.
-          </div>
-        {:else if optimizationResult.barCount === 0}
-          <div class="p-3 text-sm text-zinc-500">No purchasable bars needed yet.</div>
-        {:else}
-          <div class="grid gap-4 p-3">
-            <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              <div class="rounded border border-zinc-200 bg-white p-3">
-                <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Total cost</div>
-                <div class="mt-1 font-['Roboto_Mono',monospace] text-lg text-zinc-900">
-                  {formatMoney(optimizationResult.totalCost)}
-                </div>
-                <div class="mt-1 text-xs text-zinc-500">
-                  material {formatMoney(optimizationResult.materialCost)} · shipping {formatMoney(optimizationResult.shippingCost)}
-                </div>
+        <div class="space-y-4 p-3">
+          <div class="rounded border border-zinc-200 bg-white p-3">
+            <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Layout legend</div>
+            <div class="mt-3 flex flex-wrap gap-3 text-xs text-zinc-600">
+              <div class="flex items-center gap-2">
+                <span
+                  class="h-3 w-6 rounded-sm border border-zinc-300"
+                  style={`background-color: ${profileColor};`}
+                ></span>
+                <span>Material</span>
               </div>
-
-              <div class="rounded border border-zinc-200 bg-white p-3">
-                <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Waste</div>
-                <div class="mt-1 font-['Roboto_Mono',monospace] text-lg text-zinc-900">
-                  {optimizationResult.totalWasteMm} mm
-                </div>
-                <div class="mt-1 text-xs text-zinc-500">
-                  kerf {optimizationResult.totalKerfMm} mm · bars {optimizationResult.barCount}
-                </div>
+              <div class="flex items-center gap-2">
+                <span class="h-3 w-6 rounded-sm border border-blue-300 bg-blue-400/45"></span>
+                <span>Safety margin</span>
               </div>
-
-              <div class="rounded border border-zinc-200 bg-white p-3">
-                <div class="text-[11px] font-semibold uppercase tracking-wide text-zinc-500">Purchased mass</div>
-                <div class="mt-1 font-['Roboto_Mono',monospace] text-lg text-zinc-900">
-                  {formatWeight(optimizationResult.totalMassKg)}
-                </div>
-                <div class="mt-1 text-xs text-zinc-500">
-                  stock {optimizationResult.totalPurchasedLengthMm} mm
-                </div>
+              <div class="flex items-center gap-2">
+                <span class="h-3 w-6 rounded-sm border border-red-300 bg-red-500/35"></span>
+                <span>Kerf</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-3 w-6 rounded-sm border border-zinc-300 bg-white"></span>
+                <span>Unused stock</span>
               </div>
             </div>
+          </div>
 
-            <div class="rounded border border-zinc-200 bg-white">
-              <div class="border-b border-zinc-200 px-3 py-2 font-sans text-sm font-semibold text-zinc-900">
-                Purchase summary
-              </div>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900">
-                  <thead>
-                    <tr class="border-b border-zinc-200 bg-zinc-50 text-zinc-600">
-                      <th class="px-2 py-1 text-left font-medium">Profile</th>
-                      <th class="px-2 py-1 text-left font-medium">Stock</th>
-                      <th class="px-2 py-1 text-left font-medium">Qty</th>
-                      <th class="px-2 py-1 text-left font-medium">Mass</th>
-                      <th class="px-2 py-1 text-left font-medium">Cost</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {#each purchaseSummaryRows as row (row.key)}
-                      <tr class="border-b border-zinc-100 last:border-b-0">
-                        <td class="px-2 py-1 font-medium text-zinc-800">{row.profileType}</td>
-                        <td class="px-2 py-1 text-zinc-600">{row.stockLengthMm} mm</td>
-                        <td class="px-2 py-1 text-zinc-600">{row.quantity}</td>
-                        <td class="px-2 py-1 text-zinc-600">{formatWeight(row.totalMassKg)}</td>
-                        <td class="px-2 py-1 text-zinc-600">{formatMoney(row.totalCost)}</td>
-                      </tr>
-                    {/each}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="space-y-3">
-              {#each optimizationResult.profiles as profile (profile.profileType)}
-                <section class="rounded border border-zinc-200 bg-white">
-                  <div class="border-b border-zinc-200 px-3 py-2">
-                    <div class="font-sans text-sm font-semibold text-zinc-900">{profile.profileType} cut layout</div>
-                    <div class="mt-1 text-xs text-zinc-500">
-                      {profile.purchasedBars.length} bars · {profile.totalWasteMm} mm waste · {formatMoney(profile.subtotalCost)}
-                    </div>
+          <div class="space-y-3">
+            {#each optimizationResult.profiles as profile (profile.profileType)}
+              <section class="rounded border border-zinc-200 bg-white">
+                <div class="border-b border-zinc-200 px-3 py-2">
+                  <div class="font-sans text-sm font-semibold text-zinc-900">{profile.profileType} cut layout</div>
+                  <div class="mt-1 text-xs text-zinc-500">
+                    {profile.purchasedBars.length} bars · {profile.totalWasteMm} mm waste · {formatMoney(profile.subtotalCost)}
                   </div>
-                  <div class="grid gap-3 p-3">
-                    {#each profile.purchasedBars as bar (bar.id)}
-                      <article class="rounded border border-zinc-200 bg-zinc-50 p-3">
-                        <div class="flex flex-wrap items-start justify-between gap-2">
-                          <div>
-                            <div class="font-['Roboto_Mono',monospace] text-sm font-semibold text-zinc-900">
-                              {bar.stockLengthMm} mm stock
-                            </div>
-                            <div class="mt-1 text-xs text-zinc-500">
-                              used {bar.usedLengthMm} mm · waste {bar.wasteLengthMm} mm · kerf {bar.kerfLengthMm} mm
-                            </div>
+                </div>
+                <div class="grid gap-3 p-3">
+                  {#each profile.purchasedBars as bar (bar.id)}
+                    <article class="rounded border border-zinc-200 bg-zinc-50 p-3">
+                      <div class="flex flex-wrap items-start justify-between gap-2">
+                        <div>
+                          <div class="font-['Roboto_Mono',monospace] text-sm font-semibold text-zinc-900">
+                            {bar.stockLengthMm} mm stock
                           </div>
-                          <div class="text-right text-xs text-zinc-500">
-                            <div>{formatMoney(bar.totalCost)}</div>
-                            <div>{formatWeight(bar.massKg)}</div>
+                          <div class="mt-1 text-xs text-zinc-500">
+                            used {bar.usedLengthMm} mm · waste {bar.wasteLengthMm} mm · kerf {bar.kerfLengthMm} mm
                           </div>
                         </div>
-                        <div class="mt-3 text-xs text-zinc-700">
-                          <span class="font-semibold text-zinc-900">Cuts:</span> {formatPieces(bar)}
+                        <div class="text-right text-xs text-zinc-500">
+                          <div>{formatMoney(bar.totalCost)}</div>
+                          <div>{formatWeight(bar.massKg)}</div>
                         </div>
-                        <div class="mt-3 flex flex-wrap gap-2">
-                          {#each bar.pieces as piece (piece.id)}
-                            <button
-                              class="rounded border border-zinc-300 bg-white px-2 py-1 font-['Roboto_Mono',monospace] text-[11px] text-zinc-700 transition-colors hover:border-zinc-400 hover:bg-zinc-100"
-                              type="button"
-                              onmouseenter={() => onHoveredCutListKeyChange(piece.cutListKey)}
-                              onmouseleave={() => onHoveredCutListKeyChange(null)}
-                            >
-                              {piece.nominalLengthMm}
-                              {#if piece.adjustedLengthMm !== piece.nominalLengthMm}
-                                <span class="text-zinc-500"> + {piece.adjustedLengthMm - piece.nominalLengthMm}</span>
-                              {/if}
-                            </button>
-                          {/each}
+                      </div>
+                      <div class="mt-3 space-y-3">
+                        <div class="w-full">
+                          <div
+                            class="overflow-hidden rounded-md border border-zinc-300 bg-white shadow-inner"
+                            style={`width: ${getBarWidthPercent(bar)}%;`}
+                          >
+                            <div class="flex h-10 w-full">
+                              {#each bar.pieces as piece, pieceIndex (piece.id)}
+                                <button
+                                  class:border-zinc-500={hoveredCutListKey === piece.cutListKey}
+                                  class:ring-2={hoveredCutListKey === piece.cutListKey}
+                                  class:ring-zinc-400={hoveredCutListKey === piece.cutListKey}
+                                  class="flex h-full shrink-0 overflow-hidden border-r border-zinc-200 bg-transparent transition-shadow"
+                                  style={`width: ${getPieceAdjustedWidthPercent(piece, bar)}%;`}
+                                  title={`${piece.nominalLengthMm} mm material + ${getPieceSafetyLengthMm(piece)} mm safety`}
+                                  type="button"
+                                  onmouseenter={() => onHoveredCutListKeyChange(piece.cutListKey)}
+                                  onmouseleave={() => onHoveredCutListKeyChange(null)}
+                                >
+                                  <span
+                                    class="h-full shrink-0"
+                                    style={`width: ${getPieceNominalWidthPercent(piece)}%; background-color: ${profileColor};`}
+                                  ></span>
+                                  {#if getPieceSafetyLengthMm(piece) > 0}
+                                    <span
+                                      class="h-full shrink-0 bg-blue-400/45"
+                                      style={`width: ${getPieceSafetyWidthPercent(piece)}%;`}
+                                    ></span>
+                                  {/if}
+                                </button>
+                                {#if pieceIndex < bar.pieces.length - 1 && optimizationSettings.bladeThicknessMm > 0}
+                                  <div
+                                    class="h-full shrink-0 bg-red-500/35"
+                                    style={`width: ${getKerfWidthPercent(bar)}%;`}
+                                    title={`${optimizationSettings.bladeThicknessMm} mm kerf`}
+                                  ></div>
+                                {/if}
+                              {/each}
+                            </div>
+                          </div>
                         </div>
-                      </article>
-                    {/each}
-                  </div>
-                </section>
-              {/each}
-            </div>
+
+                        <div class="flex flex-wrap gap-x-4 gap-y-2 font-['Roboto_Mono',monospace] text-[11px] text-zinc-500">
+                          <div>stock {bar.stockLengthMm} mm</div>
+                          <div>material {bar.pieces.reduce((sum, piece) => sum + piece.nominalLengthMm, 0)} mm</div>
+                          <div>safety {bar.pieces.reduce((sum, piece) => sum + getPieceSafetyLengthMm(piece), 0)} mm</div>
+                          <div>kerf {bar.kerfLengthMm} mm</div>
+                          <div>unused {Math.max(0, bar.stockLengthMm - bar.usedLengthMm)} mm</div>
+                        </div>
+                      </div>
+                    </article>
+                  {/each}
+                </div>
+              </section>
+            {/each}
           </div>
-        {/if}
+        </div>
       </div>
-    </div>
+    {/if}
   </div>
 </section>

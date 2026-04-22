@@ -610,6 +610,7 @@
           {hoveredCutListKey}
           {optimizationResult}
           optimizationSettings={optimizationSettings}
+          {profileColor}
           onHoveredCutListKeyChange={(key) => {
             hoveredCutListKey = key;
           }}
