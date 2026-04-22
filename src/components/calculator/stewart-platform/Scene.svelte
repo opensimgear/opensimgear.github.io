@@ -1,7 +1,7 @@
 <svelte:options runes={false} />
 
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import { Gizmo, Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
   import Joint from './Joint.svelte';
@@ -10,7 +10,7 @@
   import { Group, Matrix3, PerspectiveCamera, Vector3 } from 'three';
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-  import { buildPlaneEquation, ThreeSpaceMouseBridge } from '../shared/space-mouse';
+  import { buildPlaneEquation, syncOrbitCameraView, ThreeSpaceMouseBridge } from '../shared/space-mouse';
 
   export let baseDiameter = 0.8;
   export let platformDiameter = 0.4;
@@ -141,6 +141,19 @@
       getControls: () => orbitControlsRef,
       getModelRoot: () => modelRootRef,
       getActiveCamera: () => perspectiveCameraRef,
+    });
+
+    void tick().then(() => {
+      if (!perspectiveCameraRef || !orbitControlsRef) {
+        return;
+      }
+
+      syncOrbitCameraView({
+        camera: perspectiveCameraRef,
+        controls: orbitControlsRef,
+        cameraUp: [...STEWART_CAMERA_UP],
+        target: controlsTarget,
+      });
     });
 
     return () => {

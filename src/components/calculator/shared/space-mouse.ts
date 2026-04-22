@@ -83,6 +83,28 @@ export function getTargetFromCameraPose(position: Vector3Tuple, direction: Vecto
   return positionVector.add(directionVector.multiplyScalar(distance)).toArray() as Vector3Tuple;
 }
 
+export function syncOrbitCameraView(options: {
+  camera: PerspectiveCamera | OrthographicCamera;
+  controls: ThreeOrbitControls;
+  cameraUp: Vector3Tuple;
+  target: Vector3Tuple;
+  position?: Vector3Tuple;
+}) {
+  const { camera, controls, cameraUp, target, position } = options;
+
+  if (position) {
+    camera.position.set(...position);
+  }
+
+  camera.up.set(...cameraUp);
+  controls.object = camera;
+  controls.target.set(...target);
+  camera.lookAt(...target);
+  camera.updateProjectionMatrix();
+  camera.updateMatrixWorld(true);
+  controls.update();
+}
+
 async function loadSpaceMouseScript() {
   if (typeof window === 'undefined') {
     return null;

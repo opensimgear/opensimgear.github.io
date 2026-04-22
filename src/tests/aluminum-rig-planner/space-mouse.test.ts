@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { PerspectiveCamera } from 'three';
+import { describe, expect, it, vi } from 'vitest';
+import { PerspectiveCamera, Vector3 } from 'three';
 
 import {
   buildPlaneEquation,
@@ -7,6 +7,7 @@ import {
   getPerspectiveFrustum,
   getTargetFromCameraPose,
   getVerticalFovDegreesFromDiagonalRadians,
+  syncOrbitCameraView,
   SPACEMOUSE_Z_UP_COORDINATE_SYSTEM,
 } from '../../components/calculator/shared/space-mouse';
 
@@ -44,5 +45,35 @@ describe('aluminum rig planner space mouse helpers', () => {
 
   it('derives orbit target from camera pose so pose-only pan survives controls sync', () => {
     expect(getTargetFromCameraPose([2, 3, 4], [0, 1, 0], 5)).toEqual([2, 8, 4]);
+  });
+
+  it('syncs orbit controls target and camera pose before first interaction', () => {
+    const camera = new PerspectiveCamera(50, 1.5, 0.1, 20);
+    const update = vi.fn();
+    const controls = {
+      object: null,
+      target: new Vector3(),
+      update,
+    } as any;
+
+    syncOrbitCameraView({
+      camera,
+      controls,
+      cameraUp: [0, 0, 1],
+      position: [2, 3, 4],
+      target: [2, 8, 4],
+    });
+
+    const worldDirection = new Vector3();
+    camera.getWorldDirection(worldDirection);
+
+    expect(camera.position.toArray()).toEqual([2, 3, 4]);
+    expect(camera.up.toArray()).toEqual([0, 0, 1]);
+    expect(controls.object).toBe(camera);
+    expect(controls.target.toArray()).toEqual([2, 8, 4]);
+    expect(worldDirection.x).toBeCloseTo(0, 6);
+    expect(worldDirection.y).toBeCloseTo(1, 6);
+    expect(worldDirection.z).toBeCloseTo(0, 6);
+    expect(update).toHaveBeenCalledOnce();
   });
 });

@@ -7,7 +7,7 @@
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
   import { PI_INTENSITY, SCENE_VIEW } from './constants';
-  import { buildPlaneEquation, ThreeSpaceMouseBridge } from '../shared/space-mouse';
+  import { buildPlaneEquation, syncOrbitCameraView, ThreeSpaceMouseBridge } from '../shared/space-mouse';
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
@@ -78,12 +78,13 @@
       return;
     }
 
-    activeCamera.position.set(...cameraPosition);
-    activeCamera.up.set(...SCENE_VIEW.cameraUp);
-    controls.object = activeCamera;
-    controls.target.set(...controlsTarget);
-    activeCamera.updateProjectionMatrix();
-    controls.update();
+    syncOrbitCameraView({
+      camera: activeCamera,
+      controls,
+      cameraUp: SCENE_VIEW.cameraUp,
+      position: cameraPosition,
+      target: controlsTarget,
+    });
   }
 
   async function toggleCameraMode() {
@@ -118,6 +119,9 @@
       getActiveCamera: () => (useOrthographicCamera ? orthographicCameraRef : perspectiveCameraRef),
     });
     void spaceMouseBridge.connect();
+    void tick().then(() => {
+      applySavedView();
+    });
 
     return () => {
       spaceMouseBridge?.destroy();
