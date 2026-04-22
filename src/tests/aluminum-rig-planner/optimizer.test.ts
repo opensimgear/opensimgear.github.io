@@ -71,7 +71,7 @@ describe('aluminum rig planner optimizer', () => {
 
   it('accounts for blade thickness when packing pieces into bars', () => {
     const cutListEntries = [createEntry('40x40', 500, ['a', 'b'])];
-    const stockOptions = [{ id: 'stock', profileType: '40x40' as const, lengthMm: 1000, cost: 20 }];
+    const stockOptions = [{ id: 'stock', profileType: '40x40' as const, lengthMm: 1005, cost: 20 }];
 
     const withoutKerf = createPlannerOptimizationResult(
       cutListEntries,
@@ -92,28 +92,46 @@ describe('aluminum rig planner optimizer', () => {
 
     expect(withoutKerf.barCount).toBe(1);
     expect(withKerf.barCount).toBe(2);
-    expect(withKerf.totalWasteMm).toBe(1000);
+    expect(withKerf.totalWasteMm).toBe(1010);
   });
 
-  it('adds safety margin to every cut piece before optimization', () => {
+  it('adds safety margin to both sides of every cut piece before optimization', () => {
     const result = createPlannerOptimizationResult(
       [createEntry('40x40', 400, ['a', 'b'])],
       createSettings({
+        bladeThicknessMm: 0,
         safetyMarginMm: 10,
-        stockOptions: [{ id: 'stock', profileType: '40x40', lengthMm: 800, cost: 12 }],
+        stockOptions: [{ id: 'stock', profileType: '40x40', lengthMm: 840, cost: 12 }],
       })
     );
 
     expect(result.status).toBe('ready');
-    expect(result.totalAdjustedCutLengthMm).toBe(820);
-    expect(result.barCount).toBe(2);
-    expect(result.pieces.every((piece) => piece.adjustedLengthMm === 410)).toBe(true);
+    expect(result.totalAdjustedCutLengthMm).toBe(840);
+    expect(result.barCount).toBe(1);
+    expect(result.pieces.every((piece) => piece.adjustedLengthMm === 420)).toBe(true);
+  });
+
+  it('applies kerf between the last piece and the waste section', () => {
+    const result = createPlannerOptimizationResult(
+      [createEntry('40x40', 400, ['a'])],
+      createSettings({
+        bladeThicknessMm: 5,
+        safetyMarginMm: 0,
+        stockOptions: [{ id: 'stock', profileType: '40x40', lengthMm: 500, cost: 12 }],
+      })
+    );
+
+    expect(result.status).toBe('ready');
+    expect(result.profiles[0]?.purchasedBars[0]?.usedLengthMm).toBe(405);
+    expect(result.profiles[0]?.purchasedBars[0]?.wasteLengthMm).toBe(95);
+    expect(result.profiles[0]?.purchasedBars[0]?.kerfLengthMm).toBe(5);
   });
 
   it('applies flat shipping once per order', () => {
     const result = createPlannerOptimizationResult(
       [createEntry('40x40', 100, ['a']), createEntry('80x40', 100, ['b'])],
       createSettings({
+        bladeThicknessMm: 0,
         shippingMode: 'flat',
         safetyMarginMm: 0,
         flatShippingCost: 25,

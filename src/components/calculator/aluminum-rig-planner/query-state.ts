@@ -1,4 +1,4 @@
-import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS } from './constants';
+import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS, getPlannerStockCostMax } from './constants';
 import { clampPlannerInput } from './geometry';
 import type { PlannerInput, PlannerOptimizationSettings, PlannerStockOption } from './types';
 
@@ -33,6 +33,10 @@ function readNonNegativeNumber(value: unknown, fallback: number) {
   return Math.max(0, readNumber(value, fallback));
 }
 
+function readMinimumNumber(value: unknown, fallback: number, minimum: number) {
+  return Math.max(minimum, readNumber(value, fallback));
+}
+
 function isStockProfileType(value: unknown): value is PlannerStockOption['profileType'] {
   return value === '40x40' || value === '80x40';
 }
@@ -55,7 +59,10 @@ function sanitizeStockOptions(state: PlannerQueryState['optimizer'], defaults: P
     }
 
     const lengthMm = readNonNegativeNumber(option.lengthMm, 0);
-    const cost = readNonNegativeNumber(option.cost, 0);
+    const cost = Math.min(
+      readNonNegativeNumber(option.cost, 0),
+      getPlannerStockCostMax(option.profileType, lengthMm)
+    );
 
     if (lengthMm <= 0 || cost < 0) {
       return [];
@@ -77,7 +84,7 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
 
   return {
     mode: state?.mode === 'waste' ? 'waste' : defaults.mode,
-    bladeThicknessMm: readNonNegativeNumber(state?.bladeThicknessMm, defaults.bladeThicknessMm),
+    bladeThicknessMm: readMinimumNumber(state?.bladeThicknessMm, defaults.bladeThicknessMm, 1),
     safetyMarginMm: readNonNegativeNumber(state?.safetyMarginMm, defaults.safetyMarginMm),
     shippingMode: state?.shippingMode === 'per-kg' ? 'per-kg' : defaults.shippingMode,
     flatShippingCost: readNonNegativeNumber(state?.flatShippingCost, defaults.flatShippingCost),

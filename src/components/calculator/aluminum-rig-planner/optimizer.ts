@@ -99,7 +99,7 @@ function getEffectiveStockCost(
 }
 
 function getBarKerfLengthMm(bar: MutableBar, bladeThicknessMm: number) {
-  return Math.max(0, bar.pieces.length - 1) * bladeThicknessMm;
+  return Math.max(0, bar.pieces.length) * bladeThicknessMm;
 }
 
 function createPurchasedBar(
@@ -111,7 +111,7 @@ function createPurchasedBar(
   const totalAdjustedCutLengthMm = bar.pieces.reduce((sum, piece) => sum + piece.adjustedLengthMm, 0);
   const kerfLengthMm = getBarKerfLengthMm(bar, settings.bladeThicknessMm);
   const usedLengthMm = totalAdjustedCutLengthMm + kerfLengthMm;
-  const wasteLengthMm = Math.max(0, bar.stockOption.lengthMm - totalAdjustedCutLengthMm);
+  const wasteLengthMm = Math.max(0, bar.stockOption.lengthMm - usedLengthMm);
   const massKg = (bar.stockOption.lengthMm / 1000) * settings.profileWeightsKgPerMeter[profileType];
   const shippingCost = settings.shippingMode === 'per-kg' ? massKg * settings.shippingRatePerKg : 0;
   const totalCost = bar.stockOption.cost + shippingCost;
@@ -258,7 +258,7 @@ function solveProfile(context: SearchContext, bars: MutableBar[], index: number,
   const piece = context.pieces[index];
   const existingBarCandidates = bars
     .map((bar, barIndex) => {
-      const additionalKerf = bar.pieces.length > 0 ? context.settings.bladeThicknessMm : 0;
+      const additionalKerf = context.settings.bladeThicknessMm;
       const nextUsedLengthMm = bar.usedLengthMm + piece.adjustedLengthMm + additionalKerf;
 
       if (nextUsedLengthMm > bar.stockOption.lengthMm) {
@@ -275,7 +275,7 @@ function solveProfile(context: SearchContext, bars: MutableBar[], index: number,
 
   for (const candidate of existingBarCandidates) {
     const bar = bars[candidate.barIndex];
-    const additionalKerf = bar.pieces.length > 0 ? context.settings.bladeThicknessMm : 0;
+    const additionalKerf = context.settings.bladeThicknessMm;
 
     bar.pieces.push(piece);
     bar.usedLengthMm += piece.adjustedLengthMm + additionalKerf;
@@ -285,7 +285,9 @@ function solveProfile(context: SearchContext, bars: MutableBar[], index: number,
   }
 
   for (const stockOption of context.stockOptions) {
-    if (piece.adjustedLengthMm > stockOption.lengthMm) {
+    const initialUsedLengthMm = piece.adjustedLengthMm + context.settings.bladeThicknessMm;
+
+    if (initialUsedLengthMm > stockOption.lengthMm) {
       continue;
     }
 
@@ -293,7 +295,7 @@ function solveProfile(context: SearchContext, bars: MutableBar[], index: number,
       profileType: context.profileType,
       stockOption,
       pieces: [piece],
-      usedLengthMm: piece.adjustedLengthMm,
+      usedLengthMm: initialUsedLengthMm,
     };
 
     bars.push(bar);
@@ -343,6 +345,8 @@ function solveProfilePieces(
 }
 
 export function createPlannerCutPieces(cutListEntries: CutListEntry[], safetyMarginMm: number) {
+  const totalSafetyMarginMm = Math.max(0, safetyMarginMm) * 2;
+
   return cutListEntries.flatMap((entry) =>
     entry.beamIds.map((beamId, index) => ({
       id: `${entry.key}:${beamId}:${index}`,
@@ -350,7 +354,7 @@ export function createPlannerCutPieces(cutListEntries: CutListEntry[], safetyMar
       cutListKey: entry.key,
       profileType: entry.profileType,
       nominalLengthMm: entry.lengthMm,
-      adjustedLengthMm: entry.lengthMm + Math.max(0, safetyMarginMm),
+      adjustedLengthMm: entry.lengthMm + totalSafetyMarginMm,
     }))
   );
 }

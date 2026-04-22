@@ -11,6 +11,8 @@
     DEFAULT_CUSTOM_PROFILE_COLOR,
     DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
     DEFAULT_PLANNER_INPUT,
+    getPlannerStockCostDefault,
+    getPlannerStockCostMax,
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
     PLANNER_LAYOUT,
@@ -58,7 +60,7 @@
   const DEFAULT_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings = {
     ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
     profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
-    stockOptions: [],
+    stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({ ...option })),
   };
   const PLANNER_TEST_ID_TARGETS = [
     {
@@ -109,8 +111,8 @@
     profileWeightMaxKgPerMeter: 10,
     stockLengthMinMm: 100,
     stockLengthMaxMm: 6000,
-    stockCostMax: 1000,
   } as const;
+  const STOCK_LENGTH_STEP_MM = 500;
   let stockOptionIdSequence = 0;
 
   let plannerRoot = $state<HTMLDivElement | null>(null);
@@ -502,7 +504,7 @@
   }
 
   function setBladeThicknessMm(value: number) {
-    optimizationSettings.bladeThicknessMm = Math.max(0, value);
+    optimizationSettings.bladeThicknessMm = Math.max(1, value);
     syncPlannerUrlState();
   }
 
@@ -536,7 +538,7 @@
       id: createStockOptionId(),
       profileType,
       lengthMm: 1000,
-      cost: 0,
+      cost: getPlannerStockCostDefault(profileType, 1000),
     });
     syncPlannerUrlState();
   }
@@ -549,6 +551,7 @@
     }
 
     stockOption.lengthMm = Math.max(0, Math.round(value));
+    stockOption.cost = Math.min(stockOption.cost, getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm));
     syncPlannerUrlState();
   }
 
@@ -559,7 +562,7 @@
       return;
     }
 
-    stockOption.cost = Math.max(0, value);
+    stockOption.cost = Math.min(Math.max(0, value), getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm));
     syncPlannerUrlState();
   }
 
@@ -572,6 +575,10 @@
 
     optimizationSettings.stockOptions.splice(stockOptionIndex, 1);
     syncPlannerUrlState();
+  }
+
+  function formatStockLengthMeters(lengthMm: number) {
+    return `${(lengthMm / 1000).toFixed(1)} m`;
   }
 </script>
 
@@ -769,15 +776,15 @@
             <List bind:value={() => optimizationSettings.mode, setOptimizerMode} options={OPTIMIZER_MODE_OPTIONS} label="Optimize" />
             <Slider
               bind:value={() => optimizationSettings.bladeThicknessMm, setBladeThicknessMm}
-              label="Blade"
-              min={0}
+              label="Kerf"
+              min={1}
               max={OPTIMIZER_LIMITS.bladeThicknessMaxMm}
               step={0.1}
               format={(value) => `${value.toFixed(1)} mm`}
             />
             <Slider
               bind:value={() => optimizationSettings.safetyMarginMm, setSafetyMarginMm}
-              label="Margin"
+              label="Safety Margin"
               min={0}
               max={OPTIMIZER_LIMITS.safetyMarginMaxMm}
               step={0.5}
@@ -818,20 +825,20 @@
                 />
                 {#if stockOptionsByProfile[profileType].length > 0}
                   {#each stockOptionsByProfile[profileType] as stockOption (stockOption.id)}
-                    <Folder title={`${stockOption.lengthMm} mm`}>
+                    <Folder title={formatStockLengthMeters(stockOption.lengthMm)}>
                       <Slider
                         bind:value={() => stockOption.lengthMm, (value) => updateStockOptionLengthMm(stockOption.id, value)}
                         label="Length"
                         min={OPTIMIZER_LIMITS.stockLengthMinMm}
                         max={OPTIMIZER_LIMITS.stockLengthMaxMm}
-                        step={10}
-                        format={(value) => `${value.toFixed(0)} mm`}
+                        step={STOCK_LENGTH_STEP_MM}
+                        format={formatStockLengthMeters}
                       />
                       <Slider
                         bind:value={() => stockOption.cost, (value) => updateStockOptionCost(stockOption.id, value)}
                         label="Cost"
                         min={0}
-                        max={OPTIMIZER_LIMITS.stockCostMax}
+                        max={getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm)}
                         step={1}
                         format={(value) => `$${value.toFixed(0)}`}
                       />

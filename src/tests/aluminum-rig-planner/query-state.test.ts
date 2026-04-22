@@ -77,7 +77,7 @@ describe('aluminum rig planner query state', () => {
     });
 
     expect(state.optimizationSettings.mode).toBe('waste');
-    expect(state.optimizationSettings.bladeThicknessMm).toBe(0);
+    expect(state.optimizationSettings.bladeThicknessMm).toBe(1);
     expect(state.optimizationSettings.safetyMarginMm).toBe(0);
     expect(state.optimizationSettings.shippingMode).toBe('per-kg');
     expect(state.optimizationSettings.flatShippingCost).toBe(0);
@@ -89,7 +89,7 @@ describe('aluminum rig planner query state', () => {
       id: 'stock-1',
       profileType: '40x40',
       lengthMm: 1500,
-      cost: 49.95,
+      cost: 45,
     });
     expect(state.optimizationSettings.stockOptions[1]).toMatchObject({
       profileType: '80x40',
@@ -105,7 +105,7 @@ describe('aluminum rig planner query state', () => {
     expect(state.optimizationSettings).toEqual({
       ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
       profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
-      stockOptions: [],
+      stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({ ...option })),
     });
   });
 });
