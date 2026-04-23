@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { onMount, tick } from 'svelte';
-  import { Grid, OrbitControls } from '@threlte/extras';
+  import { OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
   import Joint from './Joint.svelte';
   import Leg from './Leg.svelte';
@@ -11,6 +11,7 @@
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
   import ViewportGizmo from '../shared/ViewportGizmo.svelte';
+  import SceneGrid from '../shared/SceneGrid.svelte';
   import type { CameraProjectionMode } from '../shared/scene-controls';
   import { buildPlaneEquation, syncOrbitCameraView, ThreeSpaceMouseBridge } from '../shared/space-mouse';
 
@@ -266,17 +267,7 @@
 <T.DirectionalLight position={[3, 10, 7]} intensity={Math.PI} />
 <T.AmbientLight intensity={2} />
 
-<Grid
-  plane="xy"
-  scale={1}
-  cellColor="#66ccff"
-  cellSize={0.1}
-  cellThickness={0.5}
-  sectionColor="#66ccff"
-  sectionSize={1}
-  sectionThickness={0.7}
-  position={[0, 0, -0.01]}
-/>
+<SceneGrid />
 
 <T.Group bind:ref={modelRootRef}>
   {#each transformedPointsP as point, i (i)}

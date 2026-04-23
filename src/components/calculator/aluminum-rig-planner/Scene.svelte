@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Canvas } from '@threlte/core';
-  import { Grid, OrbitControls } from '@threlte/extras';
+  import { OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
   import { onMount, tick } from 'svelte';
   import { Group, OrthographicCamera, PerspectiveCamera, Vector3, WebGLRenderer } from 'three';
@@ -9,6 +9,7 @@
   import { PI_INTENSITY, SCENE_VIEW } from './constants';
   import ViewportCameraControls from '../shared/ViewportCameraControls.svelte';
   import ViewportGizmo from '../shared/ViewportGizmo.svelte';
+  import SceneGrid from '../shared/SceneGrid.svelte';
   import { buildPlaneEquation, syncOrbitCameraView, ThreeSpaceMouseBridge } from '../shared/space-mouse';
   import { getSceneControlsTopOffsetPx } from '../shared/scene-controls';
   import RigFrame from './RigFrame.svelte';
@@ -237,20 +238,7 @@
       intensity={PI_INTENSITY * SCENE_VIEW.rimLightIntensityMultiplier}
     />
 
-    <Grid
-      plane={SCENE_VIEW.gridPlane}
-      position={SCENE_VIEW.gridPosition}
-      scale={SCENE_VIEW.gridScale}
-      cellColor={SCENE_VIEW.gridCellColor}
-      sectionColor={SCENE_VIEW.gridSectionColor}
-      cellSize={SCENE_VIEW.gridCellSize}
-      sectionSize={SCENE_VIEW.gridSectionSize}
-      cellThickness={SCENE_VIEW.gridCellThickness}
-      sectionThickness={SCENE_VIEW.gridSectionThickness}
-      infiniteGrid={true}
-      fadeDistance={SCENE_VIEW.gridFadeDistance}
-      fadeStrength={SCENE_VIEW.gridFadeStrength}
-    />
+    <SceneGrid plane={SCENE_VIEW.gridPlane} position={SCENE_VIEW.gridPosition} scale={SCENE_VIEW.gridScale} />
 
     <T.Group rotation={SCENE_VIEW.sceneRotation} bind:ref={rigRootRef}>
       <RigFrame {geometry} {highlightedBeamIds} {measurementOverlay} {profileColor} {showEndCaps} {visibleModules} />
