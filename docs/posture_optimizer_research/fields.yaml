@@ -1,0 +1,120 @@
+field_categories:
+  - category: Basic Info
+    fields:
+      - name: name
+        description: Research item name.
+        detail_level: brief
+        required: true
+      - name: category
+        description: Item category such as anthropometry, posture_style, or inverse_kinematics.
+        detail_level: brief
+        required: true
+      - name: description
+        description: Short restatement of scope researched.
+        detail_level: brief
+        required: true
+      - name: summary
+        description: Concise synthesis of main conclusions.
+        detail_level: moderate
+        required: true
+  - category: Evidence
+    fields:
+      - name: key_findings
+        description: Main evidence-backed findings as concise bullets or short objects.
+        detail_level: moderate
+        required: true
+      - name: sources
+        description: Source list with title, organization, url, and access notes.
+        detail_level: detailed
+        required: true
+      - name: source_quality
+        description: Notes on source strength, conflicts, and evidence quality.
+        detail_level: moderate
+        required: false
+      - name: population_scope
+        description: Population covered by the sources and any limits by sex, region, age, or stature.
+        detail_level: moderate
+        required: false
+      - name: confidence_notes
+        description: Explanation of uncertainty, assumptions, and fields marked uncertain.
+        detail_level: moderate
+        required: false
+  - category: Anthropometry
+    fields:
+      - name: stature_normalized_measurements
+        description: >
+          Body measurements expressed as ratios of stature or height where possible. Include units,
+          definitions, and representative averages relevant to seated driving ergonomics.
+        detail_level: detailed
+        required: false
+      - name: seated_measurements
+        description: Absolute or normalized seated-body measurements relevant to cockpit fitting.
+        detail_level: detailed
+        required: false
+      - name: percentile_notes
+        description: Notes on mean vs percentile coverage and design recommendations.
+        detail_level: moderate
+        required: false
+  - category: Posture Angles
+    fields:
+      - name: driving_style
+        description: Name and brief description of posture style.
+        detail_level: brief
+        required: false
+      - name: angle_ranges_deg
+        description: >
+          Recommended angle ranges in degrees for elbows, knees, wrists, neck, feet/ankle, and
+          related joints where needed. Include definitions and whether angles are flexion,
+          included angle, or relative to horizontal/vertical.
+        detail_level: detailed
+        required: false
+      - name: cockpit_layout
+        description: Seat, wheel, and pedal position guidelines that produce the target posture.
+        detail_level: detailed
+        required: false
+      - name: adjustment_priorities
+        description: Recommended order of cockpit adjustments and tradeoffs for this style.
+        detail_level: moderate
+        required: false
+  - category: IK Model
+    fields:
+      - name: ik_problem_definition
+        description: Problem statement for deriving posture from cockpit hard points.
+        detail_level: moderate
+        required: false
+      - name: inputs
+        description: Required solver inputs and parameterization.
+        detail_level: detailed
+        required: false
+      - name: outputs
+        description: Desired outputs such as joint centers, joint angles, and posture scores.
+        detail_level: detailed
+        required: false
+      - name: coordinate_frames
+        description: Coordinate systems and reference points used by the solver.
+        detail_level: detailed
+        required: false
+      - name: segment_model
+        description: Body segment chain, joint assumptions, and anthropometric scaling approach.
+        detail_level: detailed
+        required: false
+      - name: equations_or_constraints
+        description: Key equations, constraints, or optimization objectives.
+        detail_level: detailed
+        required: false
+      - name: solution_method
+        description: Recommended numerical or analytical solution approach.
+        detail_level: moderate
+        required: false
+      - name: implementation_notes
+        description: Practical engineering notes for building posture optimizer software.
+        detail_level: moderate
+        required: false
+  - category: Integration
+    fields:
+      - name: optimizer_use
+        description: How to use findings inside posture optimizer UX, defaults, or scoring.
+        detail_level: moderate
+        required: false
+uncertain:
+  description: Reserved field populated during deep research for uncertain outputs.

@@ -1,0 +1,180 @@
+{
+  "name": "GT Driving Posture",
+  "category": "posture_style",
+  "description": "Research on recommended joint angle ranges and cockpit geometry cues for GT or sports-car driving posture, covering elbows, knees, wrists, neck, feet/ankle posture, and seat, wheel, and pedal positioning rules used in sim racing and real driving ergonomics.",
+  "summary": "GT or sports-car driving posture is best modeled as an upright-to-moderately reclined cockpit posture with the pelvis, torso, shoulders, and head fully supported, the wheel relatively close to the body, and the pedals far enough forward to let the driver generate brake force with the whole leg rather than ankle-only motion. Best-supported evidence comes from automotive ergonomics literature, which shows wide inter-person variability but consistently favors slight elbow bend, slight knee bend at full pedal travel, near-neutral wrists, and neutral head/neck posture. GT-specific sources add that compared with formula cars, GT posture is more upright, with pedals more forward than high, and with wheel and seat set to keep wrists neutral and shoulders supported during long stints.",
+  "key_findings": [
+    "Automotive posture studies show comfortable driver joint-angle ranges are broad, but elbow and knee angles vary most between individuals; optimizer logic should therefore score ranges softly, not as a single target.",
+    "For sports-car or GT posture, use a more upright torso than formula-style seating: sports cars are commonly described around 22-28 degrees reclined from vertical, while FIA motorsport guidance favors the most upright posture possible with seatback around 60 degrees from horizontal.",
+    "Set seat fore-aft from pedal reach first: full pedal travel should be possible with the whole foot and without locking the knee; brake force should come mainly from hip and knee extension, not large ankle rotation.",
+    "Wheel placement should support a slight elbow bend and neutral wrists; practical cues from motorsport/sim sources align with occupational ergonomics rules that the wheel center should face the chest and sit about 25-30 cm from the sternum.",
+    "Neutral head and neck posture matters because over-reclining the seat pushes the head forward; CCOHS and driving ergonomics guidance warn that excessive recline can create forward head posture and neck fatigue.",
+    "Because GT-specific lab studies are scarce, the strongest evidence base is automotive-general ergonomics plus motorsport seat-safety geometry and experienced GT/sports-car setup guidance; GT-specific numeric angle targets should be treated as informed synthesis rather than universal standards."
+  ],
+  "sources": [
+    {
+      "title": "A literature review on optimum and preferred joint angles in automotive sitting posture",
+      "organization": "Applied Ergonomics / Elsevier",
+      "url": "https://doi.org/10.1016/j.apergo.2013.04.009",
+      "note": "High-value review of about 30 sources on automotive joint-angle recommendations; best source for conflicts, common ranges, and measurement caveats."
+    },
+    {
+      "title": "Specifying comfortable driving postures for ergonomic design and evaluation of the driver workspace using digital human models",
+      "organization": "Ergonomics / Taylor & Francis",
+      "url": "https://doi.org/10.1080/00140130902763552",
+      "note": "Primary posture study used to extract sedan comfortable ranges for neck, shoulder, elbow, wrist, torso, hip, knee, and ankle, and to support DHM/IK modeling guidance."
+    },
+    {
+      "title": "The effects of stature, age, gender, and posture preferences on preferred joint angles after real driving",
+      "organization": "Applied Ergonomics / Elsevier",
+      "url": "https://doi.org/10.1016/j.apergo.2021.103671",
+      "note": "Real-driving field study showing elbow and knee angles have high inter-individual variability and are affected by stature, age, gender, and posture preference."
+    },
+    {
+      "title": "Ergonomics in the Automotive Design Process",
+      "organization": "CRC Press / Taylor & Francis",
+      "url": "https://ftp.idu.ac.id/wp-content/uploads/ebook/ip/BUKU%20ERGONOMI/BUKU%20INGGRIS/Ergonomics%20in%20the%20Automotive%20Design%20Process.pdf",
+      "note": "Book source used for sports-car seatback angle, seat-track accommodation notes, and practical package dimensions such as seatback preferences and seat-track coverage."
+    },
+    {
+      "title": "Driving and Ergonomics",
+      "organization": "Canadian Centre for Occupational Health and Safety",
+      "url": "https://www.ccohs.ca/oshanswers/ergonomics/driving.pdf",
+      "note": "Current occupational ergonomics guidance for wheel-to-chest clearance, seat-pan gap behind the knee, head-restraint placement, and adjustment sequence."
+    },
+    {
+      "title": "Cross Country Competitor Installation Best Practice",
+      "organization": "FIA",
+      "url": "https://www.fia.com/sites/default/files/cross_country_competitor_installation_best_practice.pdf",
+      "note": "Motorsport safety guidance used for seatback geometry, seat uprightness, and harness-related driver installation cues."
+    },
+    {
+      "title": "Seat for Category 2 Hill Climb Car Categories - Educational Document",
+      "organization": "FIA",
+      "url": "https://api.fia.com/sites/default/files/c2_hill_climb_seat_safety_guidance_03.22_v1.pdf",
+      "note": "Motorsport seat-support guidance used for pelvis/shoulder/head support requirements and seatback angle around 60 degrees from horizontal."
+    },
+    {
+      "title": "The Effect of Seat Back Inclination on Spinal Alignment in Automotive Seating Postures",
+      "organization": "Frontiers in Bioengineering and Biotechnology",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8365515/",
+      "note": "Open-access study comparing 20 degree and 25 degree seatback angles; supports caution that seatback inclination changes spinal alignment and can alter neck/thoracic posture."
+    },
+    {
+      "title": "Adjusting Your Racing Simulator Cockpit: Using Body Mechanics and Muscle Leverage to Your Advantage",
+      "organization": "Ricmotech",
+      "url": "https://ricmotech.com/assets/images/driver-position/Driver-Position.pdf",
+      "note": "Lower-evidence but practical sports-car/sim source used for wheel angle to shoulders, whole-leg braking, and wrist/elbow setup cues."
+    },
+    {
+      "title": "Best seat position for GT sim racing",
+      "organization": "Fanatec",
+      "url": "https://www.fanatec.com/eu-en/explorer/products/cockpit/best-seat-position-for-gt-sim-racing/",
+      "note": "Lower-evidence GT-specific setup guide used only as a corroborating practical source that GT posture is more upright and knees remain slightly bent at full pedal travel."
+    },
+    {
+      "title": "Best sim racing pedal position for GT sim racing",
+      "organization": "Fanatec",
+      "url": "https://www.fanatec.com/us-en/explorer/products/pedals/best-sim-racing-pedal-position-for-gt-sim-racing/",
+      "note": "Lower-evidence GT-specific source used to corroborate that pedal angle should follow the natural foot angle and that GT pedals are not positioned like formula pedals."
+    },
+    {
+      "title": "GT proper seating position",
+      "organization": "Qubic System",
+      "url": "https://qubicsystem.com/2023/01/gt-proper-seating-position/",
+      "note": "Lower-evidence but directly GT-focused source used only to support the practical distinction between upright GT posture and more reclined formula posture."
+    }
+  ],
+  "source_quality": "Evidence quality is mixed but usable. Strongest sources are peer-reviewed ergonomics papers and review articles, plus CCOHS and FIA guidance. These support general driver posture, seatback geometry, and cockpit packaging very well. Weakest area is GT-specific numeric joint-angle evidence: most GT-specific sources are industry or sim-racing setup guides rather than peer-reviewed motorsport ergonomics studies. Therefore GT-specific numbers below are partly synthesized from automotive-general evidence plus motorsport practice, not from a single GT-only standard.",
+  "population_scope": "[uncertain] Most quantitative joint-angle evidence comes from passenger-car sedan/SUV studies with adult volunteers, not professional GT drivers. FIA sources are motorsport-specific but emphasize safety installation and seat support more than full-body joint-angle ranges. Practical GT setup sources reflect sports-car and sim-racing practice, but they are not population-representative studies across sex, age, or stature percentiles.",
+  "confidence_notes": "High confidence: seat support principles, wheel-to-chest clearance, seat-pan clearance behind the knee, head-restraint placement, and the need to avoid knee lock and excessive wrist/neck deviation. Moderate confidence: torso/seatback posture for sports-car or GT use. Lower confidence: exact GT-specific elbow, knee, neck, and ankle targets, because published GT-only biomechanics sources were not found. Fields tagged with [uncertain] are those where the answer is mainly a synthesis from general automotive ergonomics and practitioner guidance rather than a GT-specific primary standard.",
+  "stature_normalized_measurements": "[uncertain] No high-quality GT-specific literature was found that reports body segment ratios normalized to stature for cockpit fitting. For software, it is safer to scale from established seated-driver datasets such as SAE-based H-point, eyellipse, and seat-position models rather than invent GT-only body ratios. Practical implication: normalize the solver around H-point, eye position, shoulder position, hip-to-heel reach, and knee envelope, not around a single fixed GT ratio set.",
+  "seated_measurements": [
+    "Steering wheel center to sternum: about 25-30 cm, mainly for safe reach and airbag clearance in road-car ergonomics; useful as a baseline before GT-specific fine tuning.",
+    "Seat cushion front edge to back of knee: about 3-6 cm, or roughly 2-3 finger widths, to avoid pressure behind the knees and circulation restriction.",
+    "Visual height cue: raise seat high enough to see at least about 76 mm over the top of the steering wheel while maintaining headroom.",
+    "Head restraint height: top of restraint level with top of head, and ideally not more than about 6 cm below the top of the head.",
+    "Head restraint backset: target about 7 cm or less; do not exceed about 10 cm.",
+    "Seat-track accommodation reference: automotive packaging guidance cites about 240 mm of seat-track travel to accommodate roughly the 2.5th to 97.5th percentile driver H-point range."
+  ],
+  "percentile_notes": "Automotive packaging references commonly use 2.5th to 97.5th percentile accommodation targets. Joint-angle comfort studies also show that a broad population range contains multiple comfortable clusters rather than one universal posture. For a GT optimizer, percentile accommodation should therefore operate in two layers: first fit hard-point reach and visibility for the intended population, then score posture against soft target bands that allow multiple acceptable elbow, wrist, hip, knee, and ankle solutions.",
+  "driving_style": "GT or sports-car posture: upright-to-moderately reclined seated posture with full pelvic and back support, shoulders controlled by the seat rather than by muscular shrugging, wheel close enough for leverage at 9 and 3, pedals forward enough for strong leg-driven braking, and head/neck kept neutral for long stints.",
+  "angle_ranges_deg": {
+    "definition_note": "Angles below mix published included-angle measures from automotive ergonomics with practical GT cues. Included-angle conventions differ across sources, so software should store both raw landmark definitions and normalized semantic labels such as 'more flexed' or 'more extended'.",
+    "elbows": "Included angle at shoulder-elbow-wrist. Practical GT target: about 90-120 degrees with hands at 9 and 3, favoring slight bend for leverage and endurance. Strong academic baseline: comfortable sedan ranges were 85-120 or 133-167 degrees on the left and 85-108 or 133-167 degrees on the right; GT practice generally favors the lower, more bent band rather than the open-arm band.",
+    "knees": "Included angle at hip-knee-ankle. Practical GT target at maximum brake application: about 120-135 degrees [uncertain], with some bend retained and no lockout. Automotive baseline: comfortable sedan ranges were 84-91 or 118-129 degrees on the left and 93-110 or 123-142 degrees on the right. GT posture usually shifts toward the more extended end because pedals are farther forward than in casual road posture, but still not fully straight.",
+    "wrists": "Included angle at elbow-wrist-third metacarpal plus qualitative neutral-alignment rule. Practical target: keep wrist near neutral with forearm and hand roughly aligned; if modeled as included angle, aim roughly 170-195 degrees when the wheel is centered [uncertain]. Automotive baseline showed right wrist comfort clusters at 128-154 and 173-195 degrees, so the optimizer should penalize sustained extension/deviation rather than enforce one exact angle.",
+    "neck": "Published GT-specific neck-angle targets were not found. Use neutral head posture with minimal forward flexion or chin jutting. Practical target: about 0-15 degrees of forward neck flexion from neutral [uncertain], while ensuring the head restraint is close and the eyeline stays comfortably centered in the seat/head support envelope.",
+    "feet_ankle": "Use heel-supported pedal work with minimal ankle excursion. Automotive baseline, measured as lower-leg to shoe-plane angle, showed right-ankle comfort clusters around 68-88 and 92-113 degrees in sedans. Practical GT target is near-neutral to mild plantarflexion around 85-105 degrees [uncertain], with pedal angle matched to the driver's natural foot angle.",
+    "torso_related": "Torso posture should be more upright than formula seating. Automotive sedan torso-angle comfort clusters were 18-26 and 32-43 degrees in one study, while sports-car packaging guidance describes seatbacks about 22-28 degrees from vertical. FIA motorsport guidance recommends around 60 degrees from horizontal and as upright as possible while remaining ergonomic."
+  },
+  "cockpit_layout": [
+    "Set the seat first. All later wheel and pedal adjustments should be made from a settled seat position that fully supports pelvis, torso, shoulders, and head.",
+    "Use an upright-to-moderately reclined seatback. For sports cars, book guidance points to about 22-28 degrees from vertical; FIA safety documents describe around 60 degrees from horizontal and say to stay as upright as possible while still ergonomic.",
+    "Support the full thigh length without pushing into the back of the knee; keep about 3-6 cm clearance at the seat front edge.",
+    "Move the seat forward until the driver can fully depress brake, throttle, and clutch using the whole foot without knee lock. Bulk braking force should come from the leg, not from large ankle-only rotation.",
+    "Position pedals more forward than high. GT posture is more forward-pedal and less 'feet-up' than formula posture. Pedal faces should align with the driver's natural resting foot angle.",
+    "Place the steering wheel close enough for leverage but not so close that shoulders lift or wrists break. Occupational guidance says wheel center about 25-30 cm from the sternum; practical GT cue says with a straight arm the wrist should rest on the top of the rim.",
+    "Aim the steering column at the chest, not the head or stomach. Ricmotech's practical cue is that the wheel plane should be roughly perpendicular to the driver's shoulders, with the column line hitting the upper chest.",
+    "Keep the upper back in contact with the seatback; avoid reaching away from the seat to drive. If the seat is reclined so far that the head must crane forward, the seat is too reclined.",
+    "Use a head restraint and seat shell that actually contain the driver. FIA documents emphasize eye line within head support, shoulders inside shoulder support, and pelvis supported by side bolsters."
+  ],
+  "adjustment_priorities": [
+    "Seat height and basic vision: raise seat as high as practical while preserving headroom and a clear view.",
+    "Seat fore-aft for pedal reach: set full pedal travel first, because knee lock and ankle overuse are major failure modes.",
+    "Seat cushion tilt and length: support thighs evenly and remove pressure from behind the knees.",
+    "Seatback recline and lumbar: set torso support so the full back is supported without forward-head compensation.",
+    "Wheel reach, height, and tilt: bring the wheel to the driver so elbows stay bent and wrists stay neutral.",
+    "Pedal angle and spacing: match natural foot angle and support whole-leg braking.",
+    "Final restraint and visibility check: confirm head restraint, shoulder support, mirrors, and any display line-of-sight after posture is fixed."
+  ],
+  "ik_problem_definition": "Given cockpit hard points and a driver anthropometric model, solve for a seated GT/sports-car posture that satisfies reach, visibility, support, and safety constraints while minimizing deviation from GT target joint-angle bands and avoiding known pain or fatigue postures such as knee lock, excessive wrist break, and forward-head posture.",
+  "inputs": [
+    "Driver anthropometry: stature, sitting height, shoulder height, hip breadth, buttock-popliteal length, upper-arm length, forearm-hand length, thigh length, shank length, foot length; sex and age as optional modifiers.",
+    "Cockpit hard points: seat H-point, seatback line, seat cushion line, lumbar peak location, head-restraint plane, shoulder bolster limits, pelvis bolster limits.",
+    "Control geometry: steering-wheel center position, wheel diameter, wheel plane normal, rim thickness, pedal hinge points, pedal faces, pedal travel, heel point, footrest/dead pedal location.",
+    "Task assumptions: hands at 9 and 3, right foot on throttle and brake, optional left-foot braking mode, clutch use on or off.",
+    "Packaging constraints: helmet/head clearance, wheel-to-chest clearance, seat-to-knee clearance, visibility targets, harness or belt anchorage constraints if modeled."
+  ],
+  "outputs": [
+    "3D joint centers and segment poses for pelvis, torso, head, shoulders, elbows, wrists, hips, knees, ankles, and feet.",
+    "Joint angles with stored source-specific definitions and normalized semantic tags.",
+    "Comfort/performance/safety scores for elbows, wrists, knees, ankles, neck, torso, support containment, and control reach.",
+    "Recommended cockpit adjustments: seat fore-aft, recline, cushion tilt, wheel reach/height/tilt, pedal fore-aft/height/angle, and dead-pedal location.",
+    "Warnings such as knee lock at full brake, wrist extension at center, excessive neck flexion, chest too close to wheel, or missing thigh support."
+  ],
+  "coordinate_frames": {
+    "vehicle_frame": "Right-handed cockpit frame with X forward, Y driver-right, and Z up.",
+    "seat_frame": "Local frame with origin at H-point; seatback and cushion directions stored explicitly because seat angle definitions vary across literature.",
+    "wheel_frame": "Origin at steering-wheel center; wheel normal points rearward toward driver.",
+    "pedal_frame": "Origin at heel point or pedal box reference plane; each pedal also has a face plane and hinge axis.",
+    "body_frames": "Pelvis as root; torso, head, upper arm, forearm, hand, thigh, shank, and foot frames attached to segment centers."
+  },
+  "segment_model": "Use a pelvis-rooted linked-segment model with bilateral upper and lower limbs: pelvis -> torso -> neck -> head; pelvis -> thigh -> shank -> foot on each side; torso -> upper arm -> forearm -> hand on each side. Allow bilateral asymmetry because real driving posture studies found significant side-to-side differences at elbows, hips, knees, and sometimes ankles. Scale segment lengths from anthropometry, and model seat, wheel, and pedals as contact targets rather than fixed joint-angle presets.",
+  "equations_or_constraints": [
+    "Hand contact constraints: left and right hands placed on steering rim at 9 and 3 with optional small rotational freedom around the rim tangent.",
+    "Foot contact constraints: heel supported on floor/heel plate; right forefoot reaches throttle and brake faces through full travel; optional left foot reaches clutch or dead pedal.",
+    "Support constraints: pelvis, thorax, shoulders, and head should lie within seat support envelope; penalties if shoulders or pelvis fall outside support bolsters.",
+    "Clearance constraints: wheel-to-sternum about 250-300 mm baseline, head restraint backset no greater than about 70 mm preferred, and seat-front to popliteal gap about 30-60 mm.",
+    "Posture penalties: weighted penalties for elbow outside about 90-120, knee lock at full brake, wrist non-neutrality, excessive neck flexion, and excessive ankle excursion.",
+    "Optimization objective: minimize weighted sum of posture penalties, reach effort, unsupported-body penalties, and deviation from GT-specific geometry cues."
+  ],
+  "solution_method": "Constrained nonlinear optimization or inverse kinematics with soft penalties works well. A practical approach is two-state solving: first solve a 'cruise/centered wheel' posture, then solve a 'maximum brake' posture with the same seat and wheel hard points. Use multi-start or bounded least-squares to avoid local minima, and keep literature-specific angle definitions available for debugging.",
+  "implementation_notes": [
+    "Store both raw landmark geometry and interpreted ergonomic labels because literature angle conventions differ a lot.",
+    "Model at least two task states: wheel-centered/resting pedal state and full-brake state. Knee and ankle comfort depends strongly on the latter.",
+    "Do not hard-code a single GT target pose. Use score bands with confidence weights, because elbow and knee variability is large across drivers.",
+    "Support both real-car and sim-rig geometry. Sim rigs often allow more wheel and pedal adjustment than production cars, so optimization can use the extra degrees of freedom.",
+    "Expose visibility and head-support cues in UI, not only joint-angle numbers. Users can usually judge 'head forward' or 'unsupported shoulders' faster than a degree value.",
+    "If the user chooses a road-biased GT posture rather than a race-biased one, shift torso and knee targets slightly toward a more upright seat and slightly less pedal extension."
+  ],
+  "optimizer_use": "Use this research as a GT preset and scoring profile inside the posture optimizer. Start from seat support and pedal reach, then bring the wheel to the driver. Score elbows, knees, wrists, ankles, neck, and torso with soft green/yellow/red bands, with warnings when the knee locks at full brake, wrists break out of neutral, or the head is pushed forward by too much recline. Default recommendations should emphasize endurance, repeatability, and support rather than an exaggeratedly upright or exaggeratedly reclined 'race look'.",
+  "uncertain": [
+    "population_scope",
+    "stature_normalized_measurements",
+    "angle_ranges_deg.knees",
+    "angle_ranges_deg.wrists",
+    "angle_ranges_deg.neck",
+    "angle_ranges_deg.feet_ankle"
+  ]
+}

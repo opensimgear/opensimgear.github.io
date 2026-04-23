@@ -1,0 +1,272 @@
+{
+  "name": "Cockpit Inverse Kinematics For Driving Posture",
+  "category": "inverse_kinematics",
+  "description": "Inverse-kinematics formulations for a seated driver model that estimates body joint angles from seat position, pedal position, and steering-wheel position, with emphasis on software implementation, anthropometric scaling, coordinate frames, constraints, solver equations, and validation.",
+  "summary": "Best-supported software approach is a hybrid driver-posture model: predict key targets such as hip, eye, and sometimes shoulder positions from vehicle package geometry and anthropometry, then solve torso, arm, and leg segment chains with inverse kinematics under seat, wheel, and pedal contact constraints. UMTRI driver-posture work shows that seat height, steering-wheel fore-aft position, and seat-cushion angle independently affect posture, and that eye/hip targets plus data-guided IK can predict group-mean posture accurately. For implementation, use SAE vehicle-package hard points, ISB/Grood-Suntay-style joint coordinate definitions, anthropometric scaling from stature plus sitting-height ratio and segment-length tables, and a weighted least-squares or SQP solver with joint-limit and comfort-range penalties. Comfortable driving posture is not a single pose: several joints show bimodal comfortable ranges, so solvers should support multiple local optima or comfort clusters rather than one universal target angle.",
+  "key_findings": [
+    "UMTRI's cascade prediction model combined regression and inverse kinematics, prioritizing hip and eye location accuracy and then fitting torso and limb linkages; mean eye-location errors in real vehicles were typically under 10 mm.",
+    "Seat height, steering-wheel fore-aft position, and seat-cushion angle each have significant independent effects on selected driving posture, so they should be explicit IK inputs rather than hidden defaults.",
+    "For a nominal passenger-car driver, comfortable sagittal-plane angles are better represented as ranges or two comfort clusters than as single values. Kyung's sedan data showed bimodal comfortable ranges for shoulder, elbow, wrist, torso, hip, knee, and ankle angles.",
+    "Use vehicle-package reference points from SAE practice, especially accelerator heel point, ball-of-foot/pedal references, steering-wheel center, and H-point/SgRP-related seat references, to define reproducible cockpit geometry inputs.",
+    "Use pelvis, thorax, neck/head, upper arm, forearm/hand, thigh, shank, and foot segments, with joint centers derived from external landmarks plus predictive regressions or functional methods when direct centers are unavailable.",
+    "A practical solver objective is weighted least squares on task-space errors plus penalties for joint-limit violations and distance from comfort priors. Analytic 2-link solutions are useful inside the arm and leg subproblems, but torso and whole-body fitting usually still require nonlinear optimization.",
+    "Validation should compare predicted versus measured eye and hip locations, joint-angle errors, and comfort classification across adjustable mockups and real vehicles. Reed also reported a roughly 9 mm downward eye shift after a 15-minute drive, suggesting static and post-settling validations should be separated.",
+    "Coordinate-frame consistency matters. ISB recommendations and Grood-Suntay-style joint coordinate systems give clinically interpretable flexion/extension, abduction/adduction, and axial rotation outputs and reduce ambiguity in reporting."
+  ],
+  "sources": [
+    {
+      "title": "A Statistical Method for Predicting Automobile Driving Posture",
+      "organization": "Human Factors / University of Michigan Transportation Research Institute",
+      "url": "https://mreed.umtri.umich.edu/mreed/pubs/Reed_2002.pdf",
+      "note": "Primary source for the cascade prediction model, vehicle-package inputs, posture definitions, regression coefficients, and validation against real vehicles."
+    },
+    {
+      "title": "Statistical and biomechanical prediction of automobile driving posture",
+      "organization": "University of Michigan Deep Blue (PhD dissertation)",
+      "url": "https://deepblue.lib.umich.edu/handle/2027.42/131082?show=full",
+      "note": "Primary UMTRI dissertation summary; reports laboratory and vehicle studies, muscle-activity interpretation, and group-level eye/hip prediction accuracy."
+    },
+    {
+      "title": "Preferred Driving Posture and Driver's Physical Dimension",
+      "organization": "Human Factors and Ergonomics Society",
+      "url": "https://journals.sagepub.com/doi/abs/10.1177/154193129904301223",
+      "note": "Experimental study showing tradeoffs between steering handling and pedal operation and linking body dimensions to preferred posture and seat adjustment."
+    },
+    {
+      "title": "An integrated human factors approach to design and evaluation of the driver workspace and interface: Driver perceptions, behaviors, and objective measures",
+      "organization": "Virginia Tech",
+      "url": "https://vtechworks.lib.vt.edu/items/100fe6af-0860-420b-8b75-4f05daf8ada4",
+      "note": "Full-text dissertation containing 16-joint definitions and comfortable angle tables for sedan and SUV driving postures."
+    },
+    {
+      "title": "Ranges of the least uncomfortable joint angles for assessing automotive driving posture",
+      "organization": "Applied Ergonomics / Elsevier",
+      "url": "https://doi.org/10.1016/j.apergo.2016.12.021",
+      "note": "Peer-reviewed evidence that comfortable driving angles have inter- and intra-individual ranges and support a three-color comfort assessment model."
+    },
+    {
+      "title": "SAE J826: Devices for Use in Defining and Measuring Vehicle Seating Accommodation",
+      "organization": "SAE International / U.S. incorporated reference copy",
+      "url": "https://law.resource.org/pub/us/cfr/ibr/005/sae.j826.1995.pdf",
+      "note": "Primary standard for H-point-related seating accommodation definitions and heel/pedal positioning procedure references."
+    },
+    {
+      "title": "Motor Vehicle Dimensions (SAE J1100)",
+      "organization": "SAE International / U.S. incorporated reference copy",
+      "url": "https://law.resource.org/pub/us/cfr/ibr/005/sae.j1100.2001.html",
+      "note": "Primary source for package dimension nomenclature such as H-point and accelerator heel point relationships."
+    },
+    {
+      "title": "Standard for Hip Joint Coordinate System Recommendations from the ISB Standardization Committee",
+      "organization": "International Society of Biomechanics",
+      "url": "https://www.isbweb.org/standards/hip.pdf",
+      "note": "Primary source for pelvis/femur coordinate systems and hip center definition concepts."
+    },
+    {
+      "title": "ISB recommendation on definitions of joint coordinate systems of various joints for the reporting of human joint motion--Part II: shoulder, elbow, wrist and hand",
+      "organization": "Journal of Biomechanics / International Society of Biomechanics",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15844264/",
+      "note": "Primary source for shoulder, elbow, wrist, and hand joint coordinate-system reporting standards."
+    },
+    {
+      "title": "A Joint Coordinate System for the Clinical Description of Three-Dimensional Motions: Application to the Knee",
+      "organization": "Journal of Biomechanical Engineering",
+      "url": "https://doi.org/10.1115/1.3138397",
+      "note": "Foundational source for Grood-Suntay knee coordinates used widely in biomechanics and referenced by later ISB work."
+    },
+    {
+      "title": "Tutorial 3 - Scaling, Inverse Kinematics, and Inverse Dynamics",
+      "organization": "OpenSim",
+      "url": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53089741/www.atlassian.com",
+      "note": "Official documentation describing subject scaling and the importance of scaling/marker registration before IK."
+    },
+    {
+      "title": "How Inverse Kinematics Works - OpenSim 2.4 Documentation",
+      "organization": "OpenSim",
+      "url": "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim24/pages/54002237",
+      "note": "Official description of weighted least-squares IK and unit/weighting considerations useful for implementation."
+    },
+    {
+      "title": "Anthropometric Source Book, Volume 1: Anthropometry for Designers",
+      "organization": "NASA Technical Reports Server",
+      "url": "https://ntrs.nasa.gov/api/citations/19790005540/downloads/19790005540.pdf",
+      "note": "Credible anthropometry reference with seated-dimension definitions such as eye height sitting and buttock-knee length."
+    },
+    {
+      "title": "Anthropometric Database",
+      "organization": "Defense Centers for Public Health - Aberdeen",
+      "url": "https://ph.health.mil/topics/workplacehealth/ergo/Pages/Anthropometric-Database.aspx",
+      "note": "Official ANSUR II entry describing modern U.S. military anthropometric dataset scope and measurement coverage."
+    }
+  ],
+  "source_quality": "Strongest evidence comes from peer-reviewed UMTRI driver-posture research, Applied Ergonomics comfort-range research, ISB/SAE standards, and official OpenSim documentation. The Virginia Tech dissertation is not a journal article but is high value because it provides full joint-angle tables and definitions that are difficult to obtain from abstracts alone. Anthropometric dimensional definitions are strong from NASA and ANSUR II, but exact segment-length scaling coefficients for all body links were not directly extracted from a single primary table in this pass.",
+  "population_scope": "Main automotive-posture evidence spans multiple populations and study contexts. Reed's 2002 model used 68 men and women in 18 mockup conditions and validated on 120 men and women in five vehicles, with statures roughly from under 1500 mm to over 1900 mm. Park's Korean study used 36 adults representative of the Korean automotive driving population. Kyung's comfortable-posture work used 38 participants across sedan/SUV, lab/field, and seat conditions. ANSUR II reflects U.S. Army Active, Reserve, and National Guard personnel and is not a perfect match for civilian driver populations.",
+  "confidence_notes": "High confidence: package-reference usage, hybrid regression-plus-IK architecture, coordinate-frame recommendations, and the need to model comfort as ranges rather than a single posture. Moderate confidence: recommended nominal angle ranges because published studies differ by vehicle class, measurement definitions, and whether angles are unfiltered, preferred, or comfort-filtered. Lower confidence: exact normalized segment-length ratios for every body segment in one consolidated table; those values should be loaded from a chosen anthropometric library during implementation. Fields marked [uncertain] are either synthesis guidance or require a dataset-specific implementation decision.",
+  "stature_normalized_measurements": {
+    "sitting_height_ratio": "Use sitting-height-to-stature ratio as a torso-proportion input. Reed's regression model explicitly used sitting height divided by stature as an explanatory variable for eye and torso posture.",
+    "recommended_scaling_features": [
+      "[uncertain] Include upper-arm length/stature, forearm-hand length/stature, thigh length/stature, shank-foot length/stature, and shoulder breadth/stature from the chosen anthropometric dataset rather than assuming fixed adult averages.",
+      "[uncertain] If only stature is available, initialize segment lengths from a standard body-segment table and then refine using seated measures such as buttock-knee length and sitting eye height when available."
+    ],
+    "measurement_definitions": [
+      "NASA defines buttock-knee length as the horizontal distance from the rearmost buttock surface to the front of the kneecaps.",
+      "NASA defines buttock-popliteal length as the horizontal distance from the rearmost buttock surface to the back of the lower leg.",
+      "NASA defines eye height, sitting as the height of the inner corner of the eye above the sitting surface.",
+      "NASA defines forearm-hand length as the distance from the tip of the elbow to the tip of the longest finger."
+    ]
+  },
+  "seated_measurements": [
+    "Seat-related measurements most relevant to cockpit fitting are sitting eye height, buttock-knee length, buttock-popliteal length, knee height sitting, forearm-hand length, functional leg length, shoulder breadth, and hip breadth.",
+    "For pedal reach, buttock-knee length and lower-leg/foot dimensions matter more directly than stature alone because heel placement and pedal contact are local geometric constraints.",
+    "For wheel reach, forearm-hand length and shoulder-to-hip geometry matter more directly than stature alone because many comfortable postures differ mainly by upper-limb configuration rather than torso translation."
+  ],
+  "percentile_notes": "[uncertain] For design-space exploration, a practical default is to test at least small-female, mid, and large-male occupant cases rather than only a 50th-percentile manikin. Exact percentile cut sets should come from the target market dataset (for example ANSUR II or region-specific civilian data), because body-proportion distributions do not scale perfectly with stature.",
+  "driving_style": "[uncertain] Nominal posture style: normal comfortable passenger-car driving posture with seated pelvis, back supported, at least one foot referenced to accelerator/brake geometry, and both upper limbs referenced to the steering wheel. Literature indicates that many joints admit two comfortable subranges rather than one canonical style.",
+  "angle_ranges_deg": {
+    "definitions": {
+      "neck": "Angle of upper-neck segment relative to vertical; Kyung used lower neck joint to upper neck joint with vertical reference.",
+      "torso": "Angle of hip-to-shoulder segment relative to vertical.",
+      "elbow": "Included angle between upper arm and forearm.",
+      "knee": "Included angle between thigh and shank.",
+      "wrist": "Included angle between forearm and hand/metacarpal line.",
+      "ankle_foot_plane": "Included angle between shank and foot plane.",
+      "ankle_shoe_plane": "Included angle between shank and shoe plane."
+    },
+    "nominal_sedan_comfort_ranges": {
+      "neck": "about 1 to 27 for the comfort-filtered sedan subset",
+      "shoulder_left": "1 to 29 or 32 to 58",
+      "shoulder_right": "3 to 26 or 35 to 59",
+      "elbow_left": "85 to 120 or 146 to 165",
+      "elbow_right": "85 to 108 or 133 to 167",
+      "wrist_left": "129 to 170 or 173 to 191",
+      "wrist_right": "128 to 154 or 173 to 195",
+      "torso": "18 to 26 or 32 to 43",
+      "hip_left": "79 to 87 or 107 to 118",
+      "hip_right": "83 to 92 or 112 to 123",
+      "knee_left": "84 to 91 or 118 to 129",
+      "knee_right": "93 to 110 or 123 to 142",
+      "ankle_left_foot_plane": "82 to 88 or 92 to 123",
+      "ankle_right_foot_plane": "77 to 91 or 108 to 112",
+      "ankle_left_shoe_plane": "75 to 80 or 84 to 122",
+      "ankle_right_shoe_plane": "68 to 88 or 92 to 113"
+    },
+    "legacy_single_range_comparators": {
+      "elbow": "Rebiffe 80 to 120; Park et al. about 88 to 137; Hanson et al. 96 to 163",
+      "knee": "Rebiffe 95 to 135; Park et al. about 120 to 151; Hanson et al. 109 to 157",
+      "ankle_shoe_plane": "Rebiffe 90 to 110; Park et al. about 86 to 116; Hanson et al. 90 to 111"
+    },
+    "interpretation": "These are comfort-oriented posture ranges, not hard biomechanical limits. For optimization, use them as soft priors or scoring bands rather than strict equality constraints."
+  },
+  "cockpit_layout": "[uncertain] Layout should first permit pedal operation without forcing forward lean or near-full knee extension, then place the steering wheel so shoulder and elbow angles stay inside one of the comfort clusters while the torso remains supported by the seat. Park reported a tradeoff between steering-wheel handling and pedal operation, so wheel reach and pedal reach should be co-optimized rather than tuned independently. Reed's work shows seat height, wheel fore-aft position, and seat-cushion angle each independently influence the selected posture.",
+  "adjustment_priorities": "[uncertain] Recommended adjustment order for software or UI: 1) fix pedal/heel geometry and allowable seat fore-aft range, 2) choose seat height and cushion angle to satisfy eye and thigh-clearance requirements, 3) solve pelvis and torso to maintain back support and eye target, 4) solve steering-wheel reach and hand placement, 5) fine-tune neck, wrist, and ankle toward comfort ranges, 6) score tradeoffs when arm and leg comfort clusters conflict.",
+  "ik_problem_definition": "Estimate a biomechanically plausible seated driving posture q from cockpit hard points and occupant anthropometry. The unknowns are pelvis pose, torso/neck orientation, upper-limb and lower-limb joint angles, and optionally hand and foot contact points. The model must satisfy seat support, steering-wheel reach/orientation, pedal reach, and human joint-range constraints while staying close to empirically observed comfortable driving postures.",
+  "inputs": {
+    "occupant_anthropometry": [
+      "stature",
+      "sitting height or sitting-height/stature ratio",
+      "weight or BMI if using mass-dependent or torso-shape adjustments",
+      "segment lengths from anthropometric tables or measured subject data",
+      "optional sex, age, and population-specific percentile labels"
+    ],
+    "cockpit_geometry": [
+      "seat reference point or H-point / SgRP path",
+      "seat back angle and seat cushion angle",
+      "seat height relative to floor or package frame",
+      "steering-wheel center position, diameter, and wheel plane angle",
+      "accelerator heel point, pedal reference point, pedal plane, and brake/accelerator surfaces",
+      "optional mirror/vision targets and roof/column clearance constraints"
+    ],
+    "task_assumptions": [
+      "which foot is on which pedal and whether heel remains near AHP",
+      "hand locations on wheel, for example nominal 9-and-3 or wheel-rim closest points",
+      "whether posture is symmetric or left/right solved independently",
+      "whether static initial posture or post-settling posture is desired"
+    ]
+  },
+  "outputs": {
+    "joint_centers": [
+      "hip",
+      "shoulder",
+      "elbow",
+      "wrist",
+      "knee",
+      "ankle",
+      "upper neck",
+      "lower neck"
+    ],
+    "joint_angles": [
+      "torso",
+      "neck",
+      "shoulder flexion/elevation proxy or sagittal included angle",
+      "elbow",
+      "wrist",
+      "hip",
+      "knee",
+      "ankle"
+    ],
+    "secondary_outputs": [
+      "eye point location",
+      "hip location relative to package points",
+      "comfort score",
+      "constraint violations",
+      "left/right asymmetry measures"
+    ]
+  },
+  "coordinate_frames": {
+    "vehicle_package_frame": "Reed describes the vehicle package x axis as positive rearward, y positive to the driver's right, and z positive upward. Use accelerator heel point or package origin plus standard SAE hard points as fixed references.",
+    "pelvis_and_hip": "Use ISB right-handed pelvis axes: origin at midpoint of left/right ASIS, positive Z toward right ASIS, X anterior in the ASIS/PSIS plane, Y superior. Hip motion is femur relative to pelvis.",
+    "upper_limb": "Use ISB shoulder/elbow/wrist coordinate-system conventions for 3D outputs. For 2D sagittal approximations, preserve a mapping back to these reported angles where possible.",
+    "knee": "Use a Grood-Suntay-style joint coordinate system for clinically interpretable flexion/extension, varus-valgus, and internal-external rotation when moving beyond a simple 2D hinge.",
+    "seat_contacts": "Represent seat back, seat pan, wheel rim, and pedal as surfaces embedded in the vehicle frame so all contact residuals are solved in one consistent coordinate system."
+  },
+  "segment_model": {
+    "topology": "pelvis -> abdomen/lumbar -> thorax -> neck/head; pelvis -> left/right thigh -> shank -> foot; thorax -> left/right upper arm -> forearm -> hand",
+    "minimum_dofs_for_static_driver_model": "A useful reduced model is pelvis pose in sagittal plane plus torso angle, neck angle, shoulder angle, elbow angle, wrist angle, hip angle, knee angle, and ankle angle on each active side. A 3D model should add pelvis yaw/roll, shoulder complex rotations, forearm pronation/supination, and foot orientation degrees of freedom.",
+    "scaling": "Scale segment lengths from anthropometry before IK. Reed's posture model used internal joint locations derived from external landmarks and cadaver/regression offsets. For general software, combine a stature-based segment table with seated measures such as sitting eye height and buttock-knee length.",
+    "joint_assumptions": [
+      "hip approximated as ball-and-socket in 3D or hinge-like sagittal proxy in 2D",
+      "knee approximated as hinge for cockpit-fit optimization, with optional secondary rotations in high-fidelity models",
+      "ankle represented by shank-to-foot or shank-to-shoe angle depending on pedal-contact convention",
+      "upper-limb wheel interaction may require separate shoulder and elbow DOFs even in sagittal optimization because wheel-plane geometry couples them"
+    ]
+  },
+  "equations_or_constraints": {
+    "analytic_subproblems": [
+      "For a 2-link leg with hip point H and ankle point A, let d = ||A - H||. Knee included angle can be initialized by theta_knee = arccos((L_thigh^2 + L_shank^2 - d^2) / (2 L_thigh L_shank)).",
+      "For a 2-link arm with shoulder point S and wrist point W, elbow included angle can be initialized by theta_elbow = arccos((L_upperarm^2 + L_forearm^2 - ||W - S||^2) / (2 L_upperarm L_forearm))."
+    ],
+    "whole_body_objective": "Minimize J(q) = sum_i w_i ||p_i(q) - p_i_target||^2 + sum_j v_j (theta_j(q) - theta_j_pref)^2 + sum_k penalty_k(q), where target points include eye, hip, hands, heel, and pedal/seat contacts.",
+    "contact_constraints": [
+      "pelvis near seat pan / back surfaces",
+      "heel on or near accelerator heel point region",
+      "foot or shoe plane aligned to pedal plane within allowable tolerance",
+      "hand points constrained to steering-wheel rim or hub-relative target positions"
+    ],
+    "joint_constraints": [
+      "hard biomechanical limits",
+      "soft comfort ranges from sedan/SUV literature",
+      "left/right asymmetry only where task geometry requires it",
+      "avoid self-intersection and wheel/column interference"
+    ],
+    "torso_distribution": "Following Reed's data-guided IK idea, distribute required eye-to-hip alignment across pelvis, abdomen, thorax, and neck segments using measured average motion fractions rather than one rigid trunk segment."
+  },
+  "solution_method": "Recommended method is hybrid. First, compute pelvis/hip and eye targets from regression or geometric rules. Second, initialize arm and leg joint angles with analytic 2-link solutions. Third, refine the whole posture with constrained nonlinear least squares or SQP. Use multi-start or explicit comfort-cluster branching because several joints have two comfortable angle bands. For higher-fidelity whole-body models with many markers or contact points, a weighted least-squares IK solver in the OpenSim style is appropriate.",
+  "implementation_notes": [
+    "Keep geometry and solver layers separate: package frame, anthropometric model, contact model, and optimizer should be modular.",
+    "Solve in 2D sagittal plane first for speed and robustness, then lift to 3D only where wheel plane, asymmetry, or reach interference matters.",
+    "Use dataset-configurable anthropometry so the same solver can switch among ANSUR II, regional civilian data, or user-entered body measurements.",
+    "Store angle definitions with metadata; reported elbow, knee, ankle, neck, and torso angles are not interchangeable across studies.",
+    "Represent comfort ranges as soft score bands: green for intra-individual optimum, yellow for broader inter-individual acceptable range, red for likely discomfort, following the logic of the 2017 Applied Ergonomics work.",
+    "Branch on task modes such as cruising, full-brake reach, and high-steer-angle reach. A single static posture is often insufficient for pedal and wheel extremes.",
+    "Include a static versus settled posture option; Reed reported lower eye position after a short drive due to settling/slumping."
+  ],
+  "optimizer_use": "[uncertain] In a posture optimizer, use the IK solver to convert package geometry into predicted joint angles, then present users with both geometric outputs and comfort/risk scores. Good defaults are population presets, comfort clusters for elbows/knees/ankles, and warnings when a design forces the solver outside empirical comfort bands or creates excessive eye/hip prediction error for key body sizes.",
+  "uncertain": [
+    "stature_normalized_measurements",
+    "percentile_notes",
+    "driving_style",
+    "cockpit_layout",
+    "adjustment_priorities",
+    "optimizer_use"
+  ]
+}

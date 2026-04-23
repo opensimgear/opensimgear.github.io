@@ -1,0 +1,223 @@
+{
+  "name": "Rally Driving Posture",
+  "category": "posture_style",
+  "description": "Research on recommended joint angle ranges and cockpit geometry cues for rally driving posture, covering elbows, knees, wrists, neck, feet/ankle posture, and packaging constraints driven by visibility, rough-surface control, and rapid steering input.",
+  "summary": "Rally posture is best modeled as an upright, road-car-derived motorsport posture with the driver seated as low as practical, back firmly supported, and the steering wheel kept close to the chest for rapid corrections. Best available ergonomics evidence supports mid-range elbow bend for steering precision and velocity, slight knee bend at full pedal stroke, and near-neutral wrist and neck posture. FIA seat guidance adds hard geometry constraints: the eyeline must sit within the seat head support window, helmet-to-head-support gap in rally should stay within 50 mm laterally, and head clearance to hard structure should be at least 80 mm. Because direct rally-only joint-angle studies are scarce, final numeric targets combine automotive ergonomics literature with credible rally and FIA guidance; fields marked [uncertain] reflect this evidence gap.",
+  "key_findings": [
+    "Rally cars use an upright seating posture mainly to improve visibility of the road surface and to improve body feel over slippery or rough terrain.",
+    "For fast steering corrections, mid-range elbow postures perform better than very flexed or very extended postures; simulator evidence found best steering precision and maximum steering velocity around 95 degrees and 120 degrees elbow included angle.",
+    "Credible rally coaching guidance converges on a wheel distance where the driver can rest the wrists on the top of the rim with shoulders still against the seatback; this typically produces bent elbows at the 9-and-3 hand position.",
+    "Knees should remain slightly bent at full brake or clutch stroke; fully straight legs reduce control and worsen crash loading risk.",
+    "Ankles should not require active dorsiflexion just to stay off the pedals at rest; pedal distance and pedal face angle should allow relaxed feet between inputs.",
+    "Near-neutral wrists and neck are preferred for high-frequency steering and visual scanning; large sustained wrist deviation or forward-head posture should be avoided.",
+    "FIA seat-position rules create non-negotiable geometry constraints for rally: eyeline must be between the lower and upper edge of side head support, helmet-to-side-head-support gap must not exceed 50 mm, and top-of-helmet clearance to hard structure should be at least 80 mm.",
+    "Seat, wheel, and pedal adjustments should be solved together rather than independently, because steering-wheel reach changes elbow and wrist posture while seat fore-aft changes both knee and ankle posture and eye location."
+  ],
+  "sources": [
+    {
+      "title": "Influence of different shoulder-elbow configurations on steering precision and steering velocity in automotive context",
+      "organization": "Applied Ergonomics / PubMed",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25168195/",
+      "note": "Primary ergonomics study. Found steering precision and steering velocity were significantly better in mid-range elbow configurations, especially 95 degrees and 120 degrees."
+    },
+    {
+      "title": "An integrated human factors approach to design and evaluation of the driver workspace and interface: Driver perceptions, behaviors, and objective measures",
+      "organization": "Virginia Tech",
+      "url": "https://vtechworks.lib.vt.edu/server/api/core/bitstreams/ed9034a2-405c-44bb-b179-d0bcf7bcf5af/content",
+      "note": "Open dissertation with direct joint-angle tables for comfortable sedan and SUV driving postures, including neck, elbow, wrist, hip, knee, and ankle definitions."
+    },
+    {
+      "title": "SAE International – Motor Vehicle Drivers’ Eye Locations (SAE J941)",
+      "organization": "Engineering Cheat Sheet summarizing SAE J941",
+      "url": "https://engineeringcheatsheet.com/sae-international-surface-vehicle-recommended-practice-sae-j941/",
+      "note": "Public summary of SAE J941 eye-location and visibility method. Useful for optimizer eye-point and visibility-frame setup when official standard text is paywalled."
+    },
+    {
+      "title": "Standard Guidelines Competition and Advanced Seats Standard Guidelines",
+      "organization": "Federation Internationale de l'Automobile (FIA)",
+      "url": "https://www.fia.com/sites/default/files/fia_standard_guidelines_-_seats_0.pdf",
+      "note": "Primary motorsport safety guidance. Gives seat fit criteria, eyeline placement, helmet/head-support gap for rally, and minimum 80 mm hard-structure clearance."
+    },
+    {
+      "title": "Sitting Like a Racing Driver | Drive Like a Pro",
+      "organization": "Skoda Motorsport",
+      "url": "https://www.skoda-motorsport.com/en/drive-like-pro-sitting-like-racing-driver/",
+      "note": "Credible rally-team coaching guidance. Recommends upright posture, low seat consistent with visibility, wrist-on-top wheel reach test, about 45 degrees elbow bend, and avoiding fully stretched legs."
+    },
+    {
+      "title": "Drive like a pro: Tarmac",
+      "organization": "Skoda Motorsport",
+      "url": "https://www.skoda-motorsport.com/en/drive-like-a-pro-tarmac/",
+      "note": "Rally driver Kris Meeke guidance. Reinforces upright seatback, wrists-on-top wheel reach, 9-and-3 hand position, and visibility far ahead."
+    },
+    {
+      "title": "Seating Position",
+      "organization": "TrackAttack",
+      "url": "https://www.trackattack.racing/KnowledgeTree/Driving/seating-position",
+      "note": "High-quality racing technique reference. Explains why rally upright posture trades visibility against pedal force efficiency, recommends slight knee bend, relaxed ankles, and wheel close to chest."
+    },
+    {
+      "title": "Driving Position Field Study, Differences with the Whiplash Protocol and Biomechanics Experimental Responses",
+      "organization": "Annals of Advances in Automotive Medicine / PMC",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3256817/",
+      "note": "Field study of real driver position. Useful for headrest and seatback geometry: observed seatback angle about 24 degrees, head-vertex to head restraint top about 53 mm, and occiput-to-headrest distance about 67.9 mm."
+    }
+  ],
+  "source_quality": "Source quality is moderate overall. Strongest sources are FIA guidance, PubMed-indexed ergonomics studies, and the Virginia Tech dissertation with direct joint-angle tables and definitions. Rally-specific posture coaching from Skoda Motorsport and TrackAttack is credible but not a controlled biomechanics study. Direct rally-only joint-angle experiments were not found, so rally numeric targets are partly inferred from passenger-car ergonomics plus rally-specific control and safety constraints.",
+  "population_scope": "Most quantitative angle evidence comes from general automobile drivers in sedan/SUV mockups and simulator studies, not professional rally crews. FIA constraints apply to motorsport competitors using homologated competition seats. SAE J941 eyellipse procedures target US Class A vehicle occupants with 50/50 male/female user-population assumptions at 95th and 99th tangent cutoffs. Applicability to very small, very large, heavily armored, or highly customized rally crews may require case-by-case adjustment.",
+  "confidence_notes": "High confidence: upright posture, visibility-driven low seat, wrists-on-top wheel reach check, slight knee bend at full pedal stroke, FIA head/helmet support constraints. Moderate confidence: using 95 to 120 degrees elbow included angle as best zone for rapid steering. Lower confidence: exact rally-specific numeric wrist, knee, ankle, and neck targets because controlled rally-specific studies were not found. Fields explicitly tagged [uncertain] reflect either missing rally-specific measurements or engineering inference from adjacent evidence.",
+  "stature_normalized_measurements": "[uncertain] No high-quality rally-specific anthropometric ratios normalized to stature were found during this research pass. Use project anthropometry dataset or SAE/J826 accommodation tooling for stature-scaled hard-point synthesis instead of deriving ratios from this posture-style study alone.",
+  "seated_measurements": {
+    "eye_and_head_support": [
+      "FIA: eyeline must be below the top edge of the side head support and above the bottom edge of the side head support.",
+      "FIA rally: lateral distance between helmet and side head support, measured 150 mm from the forward face of the support, must not exceed 50 mm.",
+      "FIA: clearance between top of helmet and any hard surface should be at least 80 mm."
+    ],
+    "seat_support_contact": [
+      "FIA: shoulders must fit within side shoulder supports.",
+      "FIA: pelvis must be adequately supported by side pelvis supports."
+    ],
+    "headrest_reference_data": [
+      "Observed real-world driving position study: mean seatback angle about 24 degrees, head-vertex to restraint-top difference about 53 mm, occiput-to-headrest distance about 67.9 mm."
+    ],
+    "wheel_height_cue": [
+      "TrackAttack: wheel height usually ends up around chest to upper chest and is fine-tuned from visibility and package limits."
+    ]
+  },
+  "percentile_notes": "For visibility modeling, SAE J941 defines 95th and 99th tangent-cutoff eyellipses and associated neck pivot / eye points for Class A vehicles using a 50/50 male/female US user population. This is valuable for cockpit sight-line checks and forward-view scoring. It is not rally-specific and does not replace direct fit checks for helmeted drivers in FIA seats.",
+  "driving_style": "Rally upright posture: back supported and fairly upright, seat as low as practical without losing road visibility, steering wheel brought close to the chest, both hands fixed at 9-and-3, and legs kept bent enough to absorb impacts and modulate pedals over rough surfaces.",
+  "angle_ranges_deg": {
+    "definitions": {
+      "elbow": "Included angle between upper arm and forearm.",
+      "knee": "Included angle between thigh and shank.",
+      "wrist": "Included angle between forearm and hand in sagittal view unless otherwise noted.",
+      "neck": "Head/neck angle relative to vertical, positive or negative depending on measurement convention.",
+      "ankle": "Included angle between shank and foot or shoe plane, depending on pedal model."
+    },
+    "recommended_targets": {
+      "elbow_included_angle": {
+        "range_deg": "95-135 [uncertain]",
+        "preferred_center_deg": "95-120",
+        "reason": "Primary steering-performance study found best steering precision and maximum steering velocity in mid-range elbow positions at 95 degrees and 120 degrees. Rally coaching guidance that calls for about 45 degrees elbow bend at 9-and-3 corresponds roughly to a more open posture around 135 degrees included angle, so a practical rally envelope is mid-bent to moderately open rather than straight."
+      },
+      "knee_included_angle_full_brake": {
+        "range_deg": "110-140 [uncertain]",
+        "preferred_center_deg": "120-130",
+        "reason": "Controlled driving-posture studies and motorsport coaching agree on slight knee bend rather than lockout. Range chosen to keep brake/clutch control while avoiding fully straight legs."
+      },
+      "wrist_included_angle": {
+        "range_deg": "170-190 [uncertain]",
+        "preferred_center_deg": "175-185",
+        "reason": "Automotive comfort work shows wrist posture matters for steering-wheel location and angle. Rally control favors near-neutral wrists to preserve steering speed and reduce forearm fatigue; use the neutral subgroup rather than heavily flexed subgroup when possible."
+      },
+      "neck_relative_to_vertical": {
+        "range_deg": "-10 to +15 [uncertain]",
+        "preferred_center_deg": "0 to +10",
+        "reason": "Keep head near neutral for road reading, co-driver note processing, and helmet/head-support engagement. Wider automotive comfort ranges exist, but rally use favors the central neutral zone."
+      },
+      "ankle_included_angle": {
+        "range_deg": "75-110 [uncertain]",
+        "preferred_center_deg": "85-100",
+        "reason": "Automotive comfort data show multiple acceptable ankle strategies depending on pedal geometry, but rally posture should allow relaxed ankle at rest and controlled plantarflexion/dorsiflexion during pedal transitions without tip-toe hovering."
+      }
+    },
+    "direct_reference_ranges_from_automotive_literature": {
+      "suv_comfort_ranges_deg": {
+        "neck": "-30 to -1 or 0 to 27",
+        "left_elbow": "84-116 or 121-160",
+        "right_elbow": "84-109 or 117-157",
+        "right_wrist": "128-189",
+        "left_knee": "95-105 or 135-138",
+        "right_knee": "97-111 or 136-139",
+        "left_ankle_shoe_plane": "93-125",
+        "right_ankle_shoe_plane": "73-86 or 102-108"
+      },
+      "sedan_comfort_ranges_deg": {
+        "left_elbow": "85-120 or 146-165",
+        "right_elbow": "85-108 or 133-167",
+        "right_wrist": "128-154 or 173-195",
+        "left_knee": "84-91 or 118-129",
+        "right_knee": "93-110 or 123-142",
+        "right_ankle_shoe_plane": "68-88 or 92-113"
+      }
+    }
+  },
+  "cockpit_layout": {
+    "seat": [
+      "Use an upright seatback, as upright as practical while still ergonomic and fully supported.",
+      "Set seat height as low as possible without sacrificing road visibility or FIA helmet clearances.",
+      "Ensure pelvis, shoulders, and head are all laterally supported by the competition seat."
+    ],
+    "visibility": [
+      "Check helmeted eyeline against FIA side-head-support window first, then run sight-line checks with SAE J941 style eye points for exterior visibility.",
+      "Wheel height should not block far-road view; chest to upper-chest wheel center is a workable starting cue.",
+      "Rally posture prioritizes visibility of road surface ahead and quick scanning, so avoid excessive recline."
+    ],
+    "steering_wheel": [
+      "Set wheel distance so shoulders remain against seatback while wrists can rest on top of the rim.",
+      "Aim for both hands at 9-and-3 with bent elbows and minimal wrist break.",
+      "Bring wheel close enough that steering loads transmit through torso and seat, not through protracted shoulders alone."
+    ],
+    "pedals": [
+      "At full brake or clutch stroke, knees should still be slightly bent.",
+      "Between inputs, ankles should rest without active tibialis effort to stay off the pedals.",
+      "In upright rally packaging, raise pedals as much as feasible within comfort and safety limits to improve heavy-braking stability."
+    ],
+    "head_and_neck": [
+      "Head should sit centered within seat head support, with rally helmet gap to side head support no more than 50 mm.",
+      "Maintain at least 80 mm helmet-to-hard-structure clearance."
+    ]
+  },
+  "adjustment_priorities": [
+    "Set seat shell and insert fit first: pelvis, shoulders, head support, helmet gap, and roof/cage clearance are safety-critical.",
+    "Set seat height and backrest angle next to satisfy visibility and upright body support.",
+    "Set pedal fore-aft and angle to keep slight knee bend at full stroke and relaxed ankle posture at rest.",
+    "Then set steering wheel reach to achieve bent elbows and wrist-on-top check without shoulders leaving seat.",
+    "Finally fine-tune wheel height and tilt to minimize wrist deviation while preserving gauge and road visibility."
+  ],
+  "ik_problem_definition": "Given cockpit hard points and driver anthropometry, solve for a helmeted rally posture that satisfies FIA seat/head-support geometry, preserves forward visibility, keeps steering and pedal joints inside recommended zones, and biases the solution toward upright, control-oriented posture for rapid steering corrections on rough surfaces.",
+  "inputs": [
+    "Driver anthropometry: stature, sitting height, shoulder breadth, hip breadth, upper-arm length, forearm-hand length, thigh length, shank length, foot length, helmet dimensions.",
+    "Cockpit hard points: H-point or seat reference point, seatback plane, seat base plane, steering-wheel center and rim radius, pedal pivots and pedal-face planes, dead pedal, roof/cage envelope, head-support geometry.",
+    "Adjustment ranges: seat fore-aft, seat height, seatback recline, wheel telescoping, wheel tilt, pedal plate height/angle if available.",
+    "Constraint set: FIA eyeline window, helmet lateral gap <= 50 mm for rally, helmet hard-structure clearance >= 80 mm, hand position fixed at 9-and-3 for reference posture, full-brake and full-clutch conditions."
+  ],
+  "outputs": [
+    "3D joint centers and segment poses.",
+    "Joint angles for elbows, shoulders, wrists, hips, knees, ankles, torso, and neck.",
+    "Visibility pass/fail and margin values.",
+    "Seat/head-support fit pass/fail and clearance margins.",
+    "Composite posture score with separate control, comfort, and safety sub-scores.",
+    "Suggested adjustment actions: move seat, raise/lower seat, move wheel, tilt wheel, raise/tilt pedals, change insert thickness."
+  ],
+  "coordinate_frames": {
+    "vehicle_frame": "Origin at seat reference point or H-point projected to vehicle center plane; +X forward, +Y left, +Z up.",
+    "seat_frame": "Seat base plane and seatback plane derived from seat hardware; used for torso, pelvis, and support-contact constraints.",
+    "driver_frame": "Pelvis-centered local frame for body-chain kinematics.",
+    "visibility_frame": "Mid-eye / left-eye / right-eye points generated from helmeted head pose; align sight lines to windshield and road targets."
+  },
+  "segment_model": "Use a pelvis-torso-neck-head chain; bilateral clavicle/upper-arm/forearm-hand chains; bilateral thigh-shank-foot chains. Model elbow and knee as hinge-dominant joints, shoulder and hip as 3-DOF ball joints with sagittal-plane targets emphasized, wrist as flexion-extension plus optional deviation DOF, ankle as shank-to-foot angle relative to pedal or shoe plane. Scale segment lengths from measured anthropometry; use helmet offset and seat insert thickness as external geometry modifiers.",
+  "equations_or_constraints": [
+    "Minimize weighted posture cost J = w_control * J_control + w_comfort * J_comfort + w_safety * J_safety + w_adjust * J_adjust.",
+    "For each target joint, use soft penalties outside target band: penalty = 0 inside preferred band, quadratic growth outside preferred band, steeper growth outside hard band.",
+    "Elbow control penalty should strongly penalize extension beyond rally control limit because steering precision and velocity drop in extended postures.",
+    "Knee hard constraint: angle must remain less than full extension at maximum pedal stroke.",
+    "Wrist soft constraint: keep hand-forearm included angle near neutral when hands are on 9-and-3 reference grips.",
+    "Visibility constraints: eye point must see required road targets; eyeline must sit within FIA side-head-support window.",
+    "Safety constraints: helmet-side-support lateral gap <= 50 mm; helmet-to-hard-structure clearance >= 80 mm; shoulders and pelvis remain inside support envelopes."
+  ],
+  "solution_method": "Use constrained nonlinear optimization with a multistart local solver or sequential quadratic programming. First solve seat position for safety and visibility. Second solve pedal position for knee and ankle targets. Third solve wheel reach/tilt for elbow and wrist targets. Re-run whole-body optimization after each stage because joint targets are coupled. If multiple valid postures remain, prefer the one with lower elbow extension, lower wrist deviation, and better helmet support margins.",
+  "implementation_notes": [
+    "Treat rally as a road-car-derived upright posture class, not as formula posture.",
+    "Store angle-definition metadata with each joint because literature mixes included-angle and flexion-angle conventions.",
+    "Evaluate posture in at least three task states: neutral cruise, full-brake, and rapid-steer reference state.",
+    "Model helmet and HANS/head-support interactions explicitly; bare-head fit is insufficient for rally.",
+    "Support bilateral asymmetry because driving-posture studies found meaningful left-right differences in elbows, hips, knees, and ankles.",
+    "Expose source-backed constraints separately from inferred performance heuristics so users can tune strictness."
+  ],
+  "optimizer_use": "Use this research profile as the default rally template in the posture optimizer. Pre-load an upright seatback, low-but-visible seat height, close wheel reach, and slight knee bend. Score safety-critical FIA seat/head-support constraints as hard fails, score elbow/wrist/knee/ankle targets as graded performance heuristics, and explain when a recommendation is an inference rather than a direct rally measurement. Offer a visibility-first preset for rough/gravel rally and a slightly more open posture variant for tarmac stages if package limits demand it.",
+  "uncertain": [
+    "stature_normalized_measurements",
+    "angle_ranges_deg"
+  ]
+}

@@ -1,0 +1,99 @@
+topic: Posture Optimizer Research
+items:
+  - name: Human Anthropometry Normalized To Height
+    category: anthropometry
+    description: >
+      Collect average seated cockpit-relevant body measurements for adults and express them as
+      ratios of stature where possible. Prioritize dimensions useful for driving posture and rig
+      fitting: sitting height, eye height, shoulder height, hip breadth, shoulder breadth,
+      buttock-popliteal length, buttock-knee length, popliteal height, functional arm reach,
+      forearm-hand length, upper-arm length, thigh length, lower-leg length, and foot length.
+      Prefer reputable ergonomics/anthropometry sources and note population limits.
+    target_outputs:
+      - stature_normalized_measurements
+      - seated_measurements
+      - percentile_notes
+      - optimizer_use
+  - name: Formula Driving Posture
+    category: posture_style
+    description: >
+      Research recommended joint angle ranges and cockpit geometry cues for formula-style driving
+      posture. Cover elbows, knees, wrists, neck, feet/ankle posture, and any closely related
+      hip or shoulder constraints needed to interpret them. Include seat recline, wheel reach,
+      pedal reach, and why the style differs from GT-style posture.
+    target_outputs:
+      - driving_style
+      - angle_ranges_deg
+      - cockpit_layout
+      - adjustment_priorities
+      - optimizer_use
+  - name: GT Driving Posture
+    category: posture_style
+    description: >
+      Research recommended joint angle ranges and cockpit geometry cues for GT or sports-car
+      driving posture. Cover elbows, knees, wrists, neck, feet/ankle posture, and related seat,
+      wheel, and pedal positioning rules used in sim racing and real driving ergonomics.
+    target_outputs:
+      - driving_style
+      - angle_ranges_deg
+      - cockpit_layout
+      - adjustment_priorities
+      - optimizer_use
+  - name: Rally Driving Posture
+    category: posture_style
+    description: >
+      Research recommended joint angle ranges and cockpit geometry cues for rally driving posture.
+      Cover elbows, knees, wrists, neck, feet/ankle posture, and constraints driven by visibility,
+      control over rough surfaces, and rapid steering input.
+    target_outputs:
+      - driving_style
+      - angle_ranges_deg
+      - cockpit_layout
+      - adjustment_priorities
+      - optimizer_use
+  - name: Road And Performance Driving Posture
+    category: posture_style
+    description: >
+      Research recommended joint angle ranges and cockpit geometry cues for conventional road-car
+      or performance-road driving posture. Cover elbows, knees, wrists, neck, feet/ankle posture,
+      and seat/wheel/pedal placement rules from driver training or ergonomics guidance.
+    target_outputs:
+      - driving_style
+      - angle_ranges_deg
+      - cockpit_layout
+      - adjustment_priorities
+      - optimizer_use
+  - name: Drift Driving Posture
+    category: posture_style
+    description: >
+      Research recommended joint angle ranges and cockpit geometry cues for drift-focused driving
+      posture. Cover elbows, knees, wrists, neck, feet/ankle posture, and any adjustments made
+      for rapid countersteer and hand transitions.
+    target_outputs:
+      - driving_style
+      - angle_ranges_deg
+      - cockpit_layout
+      - adjustment_priorities
+      - optimizer_use
+  - name: Cockpit Inverse Kinematics For Driving Posture
+    category: inverse_kinematics
+    description: >
+      Research inverse-kinematics formulations for a seated driver model that estimates body joint
+      angles from seat position, pedal position, and steering-wheel position. Prioritize methods
+      usable in software: segment-chain modeling, anthropometric scaling, coordinate frames,
+      constraints, solver types, equations, validation strategies, and how to infer elbow, knee,
+      wrist, ankle, neck, and trunk angles.
+    target_outputs:
+      - ik_problem_definition
+      - inputs
+      - outputs
+      - coordinate_frames
+      - segment_model
+      - equations_or_constraints
+      - solution_method
+      - implementation_notes
+      - optimizer_use
+execution:
+  batch_size: 7
+  items_per_agent: 1
+  output_dir: ./results

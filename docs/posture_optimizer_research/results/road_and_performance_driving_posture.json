@@ -1,0 +1,204 @@
+{
+  "name": "Road And Performance Driving Posture",
+  "category": "posture_style",
+  "description": "Recommended joint-angle ranges and cockpit-geometry cues for conventional road-car and performance-road driving posture, covering elbows, knees, wrists, neck, feet/ankle posture, and seat-wheel-pedal placement rules.",
+  "summary": "Credible road-safety, ergonomics, and performance-driving guidance converges on a posture with the pelvis fully back in the seat, mild seatback recline, visible bend at elbows and knees, neutral wrists, upright neck/head support, and a steering wheel close enough for control but far enough for airbag clearance. For mixed road/performance use, the strongest recurring cues are: seat height first for vision, fore-aft seat position second for full pedal travel without knee lockout or backrest separation, backrest around upright-to-slightly-reclined, wheel distance checked by wrist-on-top reach and 9-and-3 hand placement, chest at least 10 in / 25 cm from the airbag, and head restraint high and close behind the head. A practical performance-road bias is to accept slightly more elbow bend and slightly closer wheel placement than a relaxed commuting posture, while keeping wrists straight, shoulders relaxed, and both knees still bent at maximum brake or clutch travel.",
+  "key_findings": [
+    "Seat setup should start with visibility and pelvic support, then pedal reach, then backrest/lumbar, then wheel reach/tilt, then head restraint, and only after that mirrors.",
+    "Road ergonomics guidance consistently says the driver should be able to fully depress the brake or clutch without leaning forward out of the backrest and without locking the knee.",
+    "Safety guidance consistently requires a minimum chest-to-airbag distance of 10 inches (25 cm).",
+    "Common high-credibility steering cues are both hands at 9 and 3, thumbs on the wheel face rather than hooked inside, relaxed shoulders, and a wheel distance that allows the wrist to rest on the top of the rim with the shoulders still against the seat.",
+    "Comfort-oriented automotive ergonomics data show comfortable driving posture is not a single point: several joints, especially elbow, knee, and ankle, appear in two comfortable clusters, so an optimizer should score ranges rather than one exact target.",
+    "For performance-road use, foot control guidance favors ball-of-foot braking with the heel supported or acting as the pivot, so the right foot can move smoothly between brake and throttle without over-pointing the ankle.",
+    "Head-restraint guidance is clear: the restraint should be high enough and close enough to the head to limit neck motion in a rear impact; user guidance commonly translates this to top/center of restraint around ear-top-of-head level and within about 2 in / 5 cm behind the head."
+  ],
+  "sources": [
+    {
+      "title": "Specifying comfortable driving postures for ergonomic design and evaluation of the driver workspace using digital human models",
+      "organization": "Ergonomics (Taylor & Francis); authors Gyouhyung Kyung and Maury A. Nussbaum",
+      "url": "https://doi.org/10.1080/00140130902763552",
+      "note": "Primary ergonomics study. Measured 16 joint angles in preferred driving postures and reported comfortable sedan and SUV angle ranges."
+    },
+    {
+      "title": "Safety and comfort while driving",
+      "organization": "Washington State Department of Labor & Industries / WISHA",
+      "url": "https://wisha-training.lni.wa.gov/Training/articulate/ErgoForDrivers/story_content/external_files/Driving%20safety%20and%20comfort.pdf",
+      "note": "Government ergonomics handout with actionable setup sequence for seat, backrest, wheel, pedals, and head restraint."
+    },
+    {
+      "title": "Driving Ergonomics",
+      "organization": "Centre of Research Expertise for the Prevention of Musculoskeletal Disorders (CRE-MSD), Ontario",
+      "url": "https://www.msdprevention.com/resource-library/driving-ergonomics",
+      "note": "Credible ergonomics poster giving seat-pan, backrest, steering-wheel, pedal, and head-restraint geometry cues."
+    },
+    {
+      "title": "Vehicle Air Bags and Injury Prevention",
+      "organization": "National Highway Traffic Safety Administration (NHTSA)",
+      "url": "https://www.nhtsa.gov/vehicle-safety/air-bags",
+      "note": "Primary U.S. safety guidance for minimum 10-inch driver chest-to-airbag distance."
+    },
+    {
+      "title": "Head restraints",
+      "organization": "Insurance Institute for Highway Safety (IIHS)",
+      "url": "https://www.iihs.org/ratings/about-our-tests/head-restraints",
+      "note": "Explains why head-restraint height and backset matter for neck injury prevention."
+    },
+    {
+      "title": "Vehicle Seat/Head Restraint Evaluation Protocol",
+      "organization": "Insurance Institute for Highway Safety (IIHS)",
+      "url": "https://www.iihs.org/media/dc027e6e-1e00-40e0-bfe9-df732360602e/ydLKGA/Ratings/Protocols/current/head_restraint_protocol_static.pdf",
+      "note": "Technical geometry thresholds for head-restraint backset and height zones."
+    },
+    {
+      "title": "Chapter 3 - Learning to Drive",
+      "organization": "Pennsylvania Department of Transportation (PennDOT)",
+      "url": "https://www.pa.gov/content/dam/copapwp-pagov/en/dmv/documents/driver-services/driver-licensing/chapter_3.pdf",
+      "note": "Official driver-manual guidance for 9-and-3 or 8-and-4 hand position, thumb position, and 10-inch airbag spacing."
+    },
+    {
+      "title": "Car Control and Driver Training Manual",
+      "organization": "Porsche Club of America",
+      "url": "https://www.porscheclub.com/wp-content/uploads/2016/10/DriverTrainingManual.pdf",
+      "note": "Performance-driving training guidance for 9-and-3 hands, ability to grip the top of the wheel without stretching, and ball-of-foot braking."
+    },
+    {
+      "title": "Driver Anthropometry and Mirror Aiming Characteristics",
+      "organization": "University of Michigan Transportation Research Institute (UMTRI)",
+      "url": "https://deepblue.lib.umich.edu/bitstream/handle/2027.42/49416/UMTRI-2000-23.pdf",
+      "note": "Credible driver anthropometry sample with stature and erect sitting height values useful for posture-solver scaling."
+    },
+    {
+      "title": "Driver Selected Seat Position",
+      "organization": "SAE International",
+      "url": "https://saemobilus.sae.org/standards/j1517_200902-driver-selected-seat-position",
+      "note": "Primary seat-position standard referenced by automotive ergonomics literature."
+    },
+    {
+      "title": "Motor Vehicle Drivers’ Eye Locations",
+      "organization": "SAE International",
+      "url": "https://saemobilus.sae.org/standards/j941_199206-motor-vehicle-drivers-eye-locations",
+      "note": "Primary eyellipse standard for visibility and eye-location modeling."
+    },
+    {
+      "title": "Definition: Seating reference point",
+      "organization": "49 CFR § 571.3 / Legal Information Institute",
+      "url": "https://www.law.cornell.edu/definitions/index.php?def_id=1254e3095905beaf7023598e8cada972&height=800",
+      "note": "Public regulatory definition of SgRP / design H-point tied to SAE J1100."
+    }
+  ],
+  "source_quality": "Highest-confidence sources are NHTSA, IIHS, SAE standard descriptions, UMTRI, and the peer-reviewed Kyung/Nussbaum ergonomics paper. Washington L&I and Ontario CRE-MSD are strong applied ergonomics guidance sources. Porsche Club of America is a credible performance-driving training source but not a peer-reviewed ergonomics source. Main conflict across sources is not the qualitative posture goal but the exact numeric angle conventions: some guidance uses visible-bend rules and reach tests, while the ergonomics literature reports SAE-compatible joint-angle measures that are not always intuitive to map directly into consumer-language flexion/extension terms.",
+  "population_scope": "Most evidence applies to adult licensed drivers of passenger cars and SUVs. Kyung/Nussbaum included 38 adults across age and sex groups and found posture differences by vehicle class, age, and gender. UMTRI anthropometry sample included 43 men and women in younger and older groups driving their own passenger cars. Road-safety guidance is broadly generalizable to adult road drivers. Performance-driving guidance is most relevant to enthusiastic road drivers, HPDE students, and sports-car users rather than heavy-truck, formula, or reclined single-seater postures.",
+  "confidence_notes": "Confidence is high on setup order, airbag spacing, head-restraint proximity, 9-and-3 hand placement, wrist-on-top steering reach cue, and the rule that full pedal application must not lock the knee or pull the torso off the seatback. Confidence is moderate on direct translation of the ergonomics paper's numeric neck, wrist, knee, and ankle values into everyday flexion/extension wording because the paper uses SAE-compatible angle definitions and bilateral asymmetry. Fields marked [uncertain] are mainly inference-heavy solver-design fields or anthropometric summaries that extend beyond the directly reported road/performance posture sources.",
+  "stature_normalized_measurements": "[uncertain] UMTRI driver anthropometry data provide one usable scaling anchor for cockpit fitting: mean erect sitting height was about 0.51-0.53 of stature across the published male/female, younger/older sample means (for example 904/1778, 886/1739, 866/1641, 792/1568). This is useful for estimating eye and shoulder elevation relative to H-point, but it is not a dedicated road/performance-posture dataset and should be treated as a coarse scaling prior rather than a final design target.",
+  "seated_measurements": "[uncertain] Direct seated dimensions available from accessible source text are limited. UMTRI reported erect sitting height means of 904 mm (younger men), 886 mm (older men), 866 mm (younger women), and 792 mm (older women), with corresponding stature means of 1778, 1739, 1641, and 1568 mm. These values are useful for approximate torso/head vertical scaling in a cockpit solver. Additional seat-fit dimensions that would improve fidelity, but were not directly available in the reviewed public excerpts, include buttock-popliteal length, thigh clearance, knee height, functional arm reach, and seated eye height under actual driving posture.",
+  "percentile_notes": "[uncertain] For engineering use, posture optimization should accommodate at least small-to-large adult drivers rather than a single average driver. SAE J1517 and J941 are the main packaging references for seat position and eye location across driver populations. For consumer passenger vehicles, a practical target is to keep geometry adjustable enough to cover roughly 5th-percentile female through 95th-percentile male users, while posture scoring within the optimizer should remain continuous rather than percentile-step-based.",
+  "driving_style": "Conventional road-car / performance-road posture: upright-to-slightly-reclined, both shoulders supported, hands at 9 and 3, elbows and knees visibly bent, neutral wrists, head upright with the restraint close behind, and feet placed for smooth brake/throttle modulation rather than maximum recline or maximum comfort-only cruising.",
+  "angle_ranges_deg": {
+    "summary": "[uncertain] Numeric angle definitions vary by source. Below, direct sedan comfort ranges come from Kyung/Nussbaum's SAE-compatible angle definitions, while performance-road cues translate those numbers into practical setup targets.",
+    "elbows": {
+      "recommended_range": "Practical mixed road/performance target: keep a clear bend at both elbows when hands are at 9 and 3; a useful working target is roughly 100-135 degrees included angle, with more bend acceptable for a stronger performance bias.",
+      "evidence": "Kyung/Nussbaum sedan comfortable elbow-angle clusters were L: 85-120 or 146-165 deg, R: 85-108 or 133-167 deg. Porsche Club manual says arms should be bent at about 90 degrees at 9 and 3 and the driver should be able to grip the top of the wheel without stretching. HPA coaching guidance describes about 45 degrees of bend from straight, which corresponds to about 135 degrees included angle.",
+      "cue": "Shoulders stay in the backrest; hands should not need to shuffle because the wheel is too far away."
+    },
+    "knees": {
+      "recommended_range": "Practical target: maintain visible knee bend at full brake or clutch travel and avoid lockout. Use seat distance so maximum pedal force still leaves reserve bend.",
+      "evidence": "Kyung/Nussbaum sedan comfortable knee-angle clusters were L: 84-91 or 118-129 deg, R: 93-110 or 123-142 deg, using their reported angle definition. Washington L&I and CRE-MSD both instruct adjustment so pedals can be fully depressed without extending hip and knee or leaving the backrest.",
+      "cue": "At full brake/clutch, knee must not straighten fully and the pelvis must stay back in the seat."
+    },
+    "wrists": {
+      "recommended_range": "Practical target: near-neutral wrists in normal steering grip; avoid sustained extension/flexion caused by an over-high, over-low, or over-distant wheel.",
+      "evidence": "Kyung/Nussbaum sedan comfortable wrist-angle clusters were L: 129-170 or 173-191 deg and R: 128-154 or 173-195 deg, using their angle definition. Washington L&I explicitly says the wheel tilt should allow the steering wheel to be gripped with wrists straight and arms relaxed.",
+      "cue": "Wrist-on-top steering-wheel reach test should work without shoulder protraction."
+    },
+    "neck": {
+      "recommended_range": "Practical target: upright neck, slight extension/flexion only, with the head naturally near the restraint.",
+      "evidence": "Kyung/Nussbaum sedan neck comfortable range was 1-27 deg in one cluster. CRE-MSD says the head restraint should touch or sit just behind the back of the head in an upright neck position.",
+      "cue": "If the head restraint pushes the head forward or the chin lifts/drops to meet it, posture is off."
+    },
+    "feet_ankles": {
+      "recommended_range": "Practical target: heel supported on floor or stable pivot, ankle not over-pointed to reach pedals, and ball of right foot centered on the brake for heavy braking. Left foot should not be held in a tense suspended posture when not actively using the clutch.",
+      "evidence": "Kyung/Nussbaum sedan ankle-angle clusters were, for shoe-based angle, L: 75-80 or 84-122 deg and R: 68-88 or 92-113 deg; for foot-based angle, L: 82-88 or 92-123 deg and R: 77-91 or 108-112 deg. Porsche Club manual recommends ball-of-foot braking and rolling the right foot toward the accelerator for heel-and-toe operation.",
+      "cue": "Driver should be able to pivot smoothly between brake and throttle without lifting the pelvis or excessively plantar-flexing the ankle."
+    },
+    "torso_backrest": {
+      "recommended_range": "Backrest roughly 90-110 degrees from seat pan, or about 10-20 degrees reclined from vertical.",
+      "evidence": "CRE-MSD recommends 90-110 deg from seat pan. Washington L&I recommends upright or leaning back a little, about 10-20 deg.",
+      "cue": "Road/performance posture should feel supported, not slouched and not lounge-like."
+    }
+  },
+  "cockpit_layout": {
+    "seat_height": "Set seat height first for forward visibility while preserving head clearance and an upright posture.",
+    "seat_pan": "Tilt seat pan only slightly, enough to keep hips fully back and thighs evenly supported. Leave about 2-3 finger widths between seat edge and back of knee.",
+    "seat_fore_aft": "Move the seat so the brake (and clutch if present) can be fully depressed without the hips leaving the seatback and without locking the knee.",
+    "backrest_lumbar": "Use an upright-to-slightly-reclined backrest. Support the lumbar curve without forcing excessive lordosis.",
+    "wheel_distance": "Wheel should be close enough that, with shoulders against the backrest and arm straight, the wrist can rest on the top of the rim. In normal 9-and-3 grip the elbows remain bent and shoulders relaxed.",
+    "wheel_height_tilt": "Tilt wheel to clear thighs and keep the forearms roughly horizontal to slightly downward, with wrists straight in the normal grip.",
+    "airbag_clearance": "Maintain at least 10 in / 25 cm from driver chest/sternum to wheel airbag module.",
+    "head_restraint": "Adjust so the top or center of the restraint is around ear/top-of-head level and as close as possible behind the head without pushing it forward; strong safety geometry is backset less than or equal to 7 cm, with acceptable up to 9 cm in IIHS static geometry.",
+    "mirrors": "Adjust mirrors last, after seat and wheel are finalized, so minimal head movement is needed.",
+    "performance_bias": "For performance-road posture, bias the wheel slightly closer and the torso slightly more upright than a relaxed commuting setup, but do not sacrifice airbag distance or pedal-leg reserve bend."
+  },
+  "adjustment_priorities": [
+    "1. Set seat height for visibility and headroom.",
+    "2. Set seat-pan angle/length for thigh support and pelvic placement.",
+    "3. Set seat fore-aft for full pedal travel with bent knees and back against the seat.",
+    "4. Set backrest angle and lumbar support.",
+    "5. Set wheel reach and tilt using wrist-on-top and straight-wrist checks.",
+    "6. Verify airbag clearance and thigh/knee clearance at full steering lock.",
+    "7. Set head restraint height and backset.",
+    "8. Adjust mirrors last."
+  ],
+  "ik_problem_definition": "[uncertain] Given vehicle hard points and seat adjustment ranges, estimate a driver posture that satisfies road/performance-road control cues, safety constraints, and comfort-oriented joint-angle bands, then score how close that posture is to the target style.",
+  "inputs": [
+    "[uncertain] Driver anthropometry: stature, biological sex if available, age band if available, weight optional, erect sitting height estimate, upper-arm length, forearm-hand length, thigh length, shank length, foot length.",
+    "[uncertain] Vehicle geometry: seat H-point / SgRP location and travel, seat-pan angle, seatback angle, seat height, lumbar setting, wheel center position, wheel rim radius, wheel tilt/telescope, pedal face locations and neutral angles, dead-pedal/footrest location if present, head-restraint position, roof/header clearances.",
+    "[uncertain] Style parameters: road-comfort bias versus performance-road bias, acceptable asymmetry tolerance, transmission type, preferred hand position, whether heel-and-toe compatibility is desired."
+  ],
+  "outputs": [
+    "[uncertain] 3D joint centers and contact points for hips, shoulders, elbows, wrists, knees, ankles, heels, ball-of-foot, eyes, and head-restraint proximity.",
+    "[uncertain] Joint-angle report with style-specific pass/warn/fail bands.",
+    "[uncertain] Clearance metrics: chest-to-airbag distance, knee-to-wheel clearance, head-restraint backset estimate, headroom reserve, pedal reach reserve.",
+    "[uncertain] Overall posture score plus subsystem scores for steering control, pedal control, safety geometry, and long-drive comfort."
+  ],
+  "coordinate_frames": {
+    "vehicle_frame": "[uncertain] Use a vehicle-fixed Cartesian frame. Recommended implementation: X forward, Y right, Z up, with a documented transform if imported source data use another convention.",
+    "primary_reference_points": "[uncertain] Use SgRP/H-point for pelvis anchoring, steering-wheel center for upper-limb reach, accelerator heel point (AHP) / ball-of-foot reference for lower-limb reach, and driver eye point / eyellipse conventions for visibility checks.",
+    "source_note": "[uncertain] Public SAE-linked references tie SgRP/H-point, AHP, BOFRP, and eyellipse concepts to J1100, J1517, J826/J4002, and J941."
+  },
+  "segment_model": {
+    "body_chain": "[uncertain] Pelvis -> torso -> head; pelvis -> thigh -> shank -> foot; torso -> upper arm -> forearm -> hand.",
+    "joint_assumptions": "[uncertain] Treat hips and shoulders as ball joints, knees and elbows as hinge-dominant joints, ankles as hinge-dominant with limited inversion/eversion ignored in the first pass, and permit mild left-right asymmetry because real driving posture is not perfectly symmetric.",
+    "scaling": "[uncertain] Scale segment lengths from stature plus seated-height prior; replace with user-entered inseam/arm-span or measured limb lengths when available."
+  },
+  "equations_or_constraints": [
+    "[uncertain] Forward-kinematics constraints from pelvis/H-point to steering rim contact and pedal contact.",
+    "[uncertain] Hard constraints: chest-to-airbag distance >= 25 cm; full brake/clutch reachable without pelvis leaving backrest; wheel-thigh clearance maintained through expected steering range; head-restraint not forcing the head forward.",
+    "[uncertain] Soft constraints: penalize deviation from target torso/backrest range, elbow bend target, knee reserve bend, neutral wrist target, and upright-neck target.",
+    "[uncertain] Add pedal-control objective favoring a supported heel and smooth right-foot pivot path between throttle and brake.",
+    "[uncertain] Use weighted cost rather than exact equality because Kyung/Nussbaum show comfortable postures occupy clusters/ranges, not one posture."
+  ],
+  "solution_method": "[uncertain] Use nonlinear least squares or constrained optimization with warm starts from a seat-position prior. A practical stack is: first solve seat fore-aft/backrest/wheel reach from visibility and pedal reach cues, then solve limb inverse kinematics, then optimize a weighted comfort-control-safety objective. Multiple local optima should be retained when they represent equally plausible comfort clusters.",
+  "implementation_notes": [
+    "[uncertain] Do not overpromise exact biomechanics from sparse user inputs; present results as 'good / acceptable / compromised' zones.",
+    "[uncertain] Separate commuting-road and performance-road presets mainly by wheel reach, torso uprightness, and pedal-control weighting, not by radically different knee/hip geometry.",
+    "[uncertain] Keep numeric definitions visible in the UI because user mental models of '90-degree bend' often differ from included-angle conventions.",
+    "[uncertain] Model automatic and manual cars separately when clutch reach matters.",
+    "[uncertain] Preserve asymmetry support; steering-wheel offset, pedal offset, and one-foot braking naturally create left-right differences."
+  ],
+  "optimizer_use": "[uncertain] Use this research as a style preset called 'Road / Performance Road'. Default scoring should reward: full seatback contact during pedal use, 9-and-3 controllability, wrist-on-top reach success, straight-wrist steering, 10-inch airbag spacing, head restraint near the head, and no knee lockout at maximum braking. In UX terms, show the user a short sequence of adjustments in the same order as the source guidance, then update a posture score and explain which hard-point changes would move the posture into the target zone.",
+  "uncertain": [
+    "stature_normalized_measurements",
+    "seated_measurements",
+    "percentile_notes",
+    "angle_ranges_deg",
+    "ik_problem_definition",
+    "inputs",
+    "outputs",
+    "coordinate_frames",
+    "segment_model",
+    "equations_or_constraints",
+    "solution_method",
+    "implementation_notes",
+    "optimizer_use"
+  ]
+}
