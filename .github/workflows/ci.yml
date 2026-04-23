@@ -166,7 +166,7 @@ jobs:
           - Exclude CI changes, workflow changes, build scripts, deployment plumbing, tests, docs-only changes, refactors, dependency bumps, and any internal maintenance work.
           - If the deployment does not include a portal or website user-visible feature or fix, write '- None.' for both sections.
           - If no items fit a section, write '- None.'
-          - Output only the final markdown, with no prose before or after it.
+          - Output only the final markdown like in the output format description, with no prose before or after it.
           - Use git commands only for evidence." --allow-tool='shell(git:*)' --no-ask-user > deployment-changelog.md
 
           cat deployment-changelog.md >> "$GITHUB_STEP_SUMMARY"
