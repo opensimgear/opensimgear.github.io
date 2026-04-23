@@ -644,7 +644,7 @@
   class="not-content overflow-hidden rounded border border-zinc-300 bg-white shadow-sm"
 >
   {#if mounted}
-    <div class={isNarrowViewport ? 'flex flex-col' : 'grid grid-cols-[minmax(0,1.3fr)_24rem]'}>
+    <div class={isNarrowViewport ? 'flex flex-col' : 'grid grid-cols-[minmax(0,1.3fr)_19.2rem]'}>
       <div
         class="flex min-w-0 flex-col border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >

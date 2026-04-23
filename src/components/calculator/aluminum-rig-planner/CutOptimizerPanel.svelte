@@ -659,8 +659,8 @@
               <thead>
                 <tr class="border-b border-zinc-200 bg-white text-zinc-600">
                   <th class="px-2 py-1 text-left font-medium">Profile</th>
-                  <th class="px-2 py-1 text-left font-medium">Cut length</th>
-                  <th class="px-2 py-1 text-left font-medium">Qty</th>
+                  <th class="px-2 py-1 text-right font-medium">Length</th>
+                  <th class="px-2 py-1 text-center font-medium">Qty</th>
                 </tr>
               </thead>
               <tbody>
@@ -672,8 +672,8 @@
                     onmouseleave={() => onHoveredCutListKeyChange(null)}
                   >
                     <td class="px-2 py-1 font-medium text-zinc-800">{entry.profileType}</td>
-                    <td class="px-2 py-1 text-zinc-600">{entry.lengthMm} mm</td>
-                    <td class="px-2 py-1 text-zinc-600">{entry.quantity}</td>
+                    <td class="px-2 py-1 text-right text-zinc-600">{entry.lengthMm} mm</td>
+                    <td class="px-2 py-1 text-center text-zinc-600">{entry.quantity}</td>
                   </tr>
                 {/each}
               </tbody>
@@ -759,7 +759,7 @@
                   <tr class="border-b border-zinc-200 bg-white text-zinc-600">
                     <th class="px-2 py-1 text-left font-medium">Profile</th>
                     <th class="px-2 py-1 text-left font-medium">Stock</th>
-                    <th class="px-2 py-1 text-left font-medium">Qty</th>
+                    <th class="px-2 py-1 text-center font-medium">Qty</th>
                     <th class="px-2 py-1 text-right font-medium">Mass</th>
                     <th class="px-2 py-1 text-right font-medium">Cost</th>
                   </tr>
@@ -769,7 +769,7 @@
                     <tr class="border-b border-zinc-100 last:border-b-0">
                       <td class="px-2 py-1 font-medium text-zinc-800">{row.profileType}</td>
                       <td class="px-2 py-1 text-zinc-600">{formatStockLength(row.stockLengthMm)}</td>
-                      <td class="px-2 py-1 text-zinc-600">{row.quantity}</td>
+                      <td class="px-2 py-1 text-center text-zinc-600">{row.quantity}</td>
                       <td class="px-2 py-1 text-right text-zinc-600">{formatWeight(row.totalMassKg)}</td>
                       <td class="px-2 py-1 text-right text-zinc-600">{formatMoney(row.totalCost)}</td>
                     </tr>
@@ -781,7 +781,7 @@
                     <td class="px-2 py-2 text-[10px] font-normal text-zinc-500">
                       {formatStockLength(optimizationResult.totalPurchasedLengthMm)}
                     </td>
-                    <td class="px-2 py-2 text-[10px] font-normal text-zinc-500">
+                    <td class="px-2 py-2 text-center text-[10px] font-normal text-zinc-500">
                       {optimizationResult.barCount}
                     </td>
                     <td class="px-2 py-2 text-right font-semibold text-zinc-900">
