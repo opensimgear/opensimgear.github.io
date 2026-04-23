@@ -33,8 +33,28 @@ describe('aluminum rig planner query state', () => {
     expect(state.plannerInput.pedalTrayDepthMm).toBe(300);
     expect(state.plannerInput.pedalTrayDistanceMm).toBe(150);
     expect(state.plannerInput.steeringColumnDistanceMm).toBe(getSteeringColumnDistanceMaxMm(state.plannerInput));
-    expect(state.plannerInput.steeringColumnBaseHeightMm).toBe(500);
+    expect(state.plannerInput.steeringColumnBaseHeightMm).toBe(300);
     expect(state.plannerInput.steeringColumnHeightMm).toBe(380);
+  });
+
+  it('keeps steering column base height within column height clearance', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      steeringColumnBaseHeightMm: 460,
+      steeringColumnHeightMm: 420,
+    });
+
+    expect(state.plannerInput.steeringColumnBaseHeightMm).toBe(340);
+    expect(state.plannerInput.steeringColumnHeightMm).toBe(420);
+  });
+
+  it('keeps steering column height at fixed min while lowering base to fit', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      steeringColumnBaseHeightMm: 500,
+      steeringColumnHeightMm: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+    });
+
+    expect(state.plannerInput.steeringColumnBaseHeightMm).toBe(300);
+    expect(state.plannerInput.steeringColumnHeightMm).toBe(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm);
   });
 
   it('sanitizes optimizer settings and malformed stock rows', () => {

@@ -28,6 +28,7 @@
     derivePlannerGeometry,
     getPedalTrayDistanceMaxMm,
     getPedalTrayDistanceMinMm,
+    getSteeringColumnBaseHeightMaxMm,
     getSteeringColumnDistanceMaxMm,
   } from './geometry';
   import {
@@ -165,7 +166,9 @@
   }
 
   let plannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
-  let optimizationSettings = $state<PlannerOptimizationSettings>(cloneOptimizationSettings(DEFAULT_OPTIMIZATION_SETTINGS));
+  let optimizationSettings = $state<PlannerOptimizationSettings>(
+    cloneOptimizationSettings(DEFAULT_OPTIMIZATION_SETTINGS)
+  );
   let visibleModules = $state<PlannerVisibleModules>({
     pedalTray: true,
     steeringColumn: true,
@@ -278,7 +281,9 @@
   const cutListEntries = $derived(createPlannerCutListEntries(geometry, visibleModules, showEndCaps));
   const optimizationResult = $derived(createPlannerOptimizationResult(cutListEntries, optimizationSettings));
   const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
-  const currencyCode = $derived<PlannerCurrencyCode>(resolvePlannerCurrency(optimizationSettings.currencyMode, currencyLocale));
+  const currencyCode = $derived<PlannerCurrencyCode>(
+    resolvePlannerCurrency(optimizationSettings.currencyMode, currencyLocale)
+  );
   const stockOptionsByProfile = $derived.by(() => ({
     '80x40': optimizationSettings.stockOptions.filter((option) => option.profileType === '80x40'),
     '40x40': optimizationSettings.stockOptions.filter((option) => option.profileType === '40x40'),
@@ -286,6 +291,14 @@
   const steeringColumnDistanceLimits = $derived.by(() => ({
     min: PLANNER_LAYOUT.steeringColumnDistanceMinMm,
     max: getSteeringColumnDistanceMaxMm(plannerInput),
+  }));
+  const steeringColumnBaseHeightLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
+    max: getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm),
+  }));
+  const steeringColumnHeightLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+    max: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm,
   }));
   const pedalTrayDistanceLimits = $derived.by(() => ({
     min: getPedalTrayDistanceMinMm(plannerInput),
@@ -459,23 +472,19 @@
   }
 
   function setPedalTrayDistanceMm(value: number) {
-    plannerInput.pedalTrayDistanceMm = Math.max(pedalTrayDistanceLimits.min, Math.min(pedalTrayDistanceLimits.max, value));
+    plannerInput.pedalTrayDistanceMm = Math.max(
+      pedalTrayDistanceLimits.min,
+      Math.min(pedalTrayDistanceLimits.max, value)
+    );
     syncPlannerUrlState();
     scheduleMeasurementOverlay('pedalTrayDistanceMm');
   }
 
   function setSteeringColumnBaseHeightMm(value: number) {
-    plannerInput.steeringColumnBaseHeightMm = value;
-
-    if (
-      plannerInput.steeringColumnHeightMm <
-      Math.max(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm, value + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm)
-    ) {
-      plannerInput.steeringColumnHeightMm = Math.max(
-        PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
-        value + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
-      );
-    }
+    plannerInput.steeringColumnBaseHeightMm = Math.max(
+      steeringColumnBaseHeightLimits.min,
+      Math.min(steeringColumnBaseHeightLimits.max, value)
+    );
 
     syncPlannerUrlState();
     scheduleMeasurementOverlay('steeringColumnBaseHeightMm');
@@ -483,9 +492,14 @@
 
   function setSteeringColumnHeightMm(value: number) {
     plannerInput.steeringColumnHeightMm = Math.max(
-      PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
-      Math.min(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm, value)
+      steeringColumnHeightLimits.min,
+      Math.min(steeringColumnHeightLimits.max, value)
     );
+
+    if (plannerInput.steeringColumnBaseHeightMm > getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm)) {
+      plannerInput.steeringColumnBaseHeightMm = getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm);
+    }
+
     syncPlannerUrlState();
     scheduleMeasurementOverlay('steeringColumnHeightMm');
   }
@@ -579,7 +593,10 @@
     }
 
     stockOption.lengthMm = Math.max(0, Math.round(value));
-    stockOption.cost = Math.min(stockOption.cost, getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm));
+    stockOption.cost = Math.min(
+      stockOption.cost,
+      getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm)
+    );
     syncPlannerUrlState();
   }
 
@@ -590,7 +607,10 @@
       return;
     }
 
-    stockOption.cost = Math.min(Math.max(0, value), getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm));
+    stockOption.cost = Math.min(
+      Math.max(0, value),
+      getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm)
+    );
     syncPlannerUrlState();
   }
 
@@ -654,7 +674,7 @@
           {currencyLocale}
           {hoveredCutListKey}
           {optimizationResult}
-          optimizationSettings={optimizationSettings}
+          {optimizationSettings}
           {profileColor}
           onHoveredCutListKeyChange={(key) => {
             hoveredCutListKey = key;
@@ -725,6 +745,7 @@
               max={PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
+              wide={true}
             />
             <Slider
               bind:value={() => plannerInput.seatHeightFromBaseInnerBeamsMm, setSeatHeightFromBaseInnerBeamsMm}
@@ -763,16 +784,16 @@
               <Slider
                 bind:value={() => plannerInput.steeringColumnBaseHeightMm, setSteeringColumnBaseHeightMm}
                 label="Base height"
-                min={PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm}
-                max={PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMaxMm}
+                min={steeringColumnBaseHeightLimits.min}
+                max={steeringColumnBaseHeightLimits.max}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />
               <Slider
                 bind:value={() => plannerInput.steeringColumnHeightMm, setSteeringColumnHeightMm}
                 label="Column Height"
-                min={PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm}
-                max={PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm}
+                min={steeringColumnHeightLimits.min}
+                max={steeringColumnHeightLimits.max}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />
@@ -811,8 +832,16 @@
         </Pane>
         <Pane title="Cut optimizer" position="inline" bind:expanded={paneExpanded.optimizer}>
           <Folder title="Settings">
-            <List bind:value={() => optimizationSettings.mode, setOptimizerMode} options={OPTIMIZER_MODE_OPTIONS} label="Optimize" />
-            <List bind:value={() => optimizationSettings.currencyMode, setCurrencyMode} options={CURRENCY_MODE_OPTIONS} label="Currency" />
+            <List
+              bind:value={() => optimizationSettings.mode, setOptimizerMode}
+              options={OPTIMIZER_MODE_OPTIONS}
+              label="Optimize"
+            />
+            <List
+              bind:value={() => optimizationSettings.currencyMode, setCurrencyMode}
+              options={CURRENCY_MODE_OPTIONS}
+              label="Currency"
+            />
             <Slider
               bind:value={() => optimizationSettings.bladeThicknessMm, setBladeThicknessMm}
               label="Kerf"
@@ -829,7 +858,11 @@
               step={1}
               format={(value) => `${value.toFixed(0)} mm`}
             />
-            <List bind:value={() => optimizationSettings.shippingMode, setShippingMode} options={SHIPPING_MODE_OPTIONS} label="Shipping" />
+            <List
+              bind:value={() => optimizationSettings.shippingMode, setShippingMode}
+              options={SHIPPING_MODE_OPTIONS}
+              label="Shipping"
+            />
             {#if optimizationSettings.shippingMode === 'flat'}
               <Slider
                 bind:value={() => optimizationSettings.flatShippingCost, setFlatShippingCost}
@@ -854,8 +887,10 @@
             {#each PROFILE_TYPES as profileType (profileType)}
               <Folder title={profileType}>
                 <Slider
-                  bind:value={() => optimizationSettings.profileWeightsKgPerMeter[profileType], (value) =>
-                    setProfileWeightKgPerMeter(profileType, value)}
+                  bind:value={
+                    () => optimizationSettings.profileWeightsKgPerMeter[profileType],
+                    (value) => setProfileWeightKgPerMeter(profileType, value)
+                  }
                   label="Weight"
                   min={0}
                   max={OPTIMIZER_LIMITS.profileWeightMaxKgPerMeter}
@@ -866,7 +901,9 @@
                   {#each stockOptionsByProfile[profileType] as stockOption (stockOption.id)}
                     <Folder title={formatStockLengthMeters(stockOption.lengthMm)}>
                       <Slider
-                        bind:value={() => stockOption.lengthMm, (value) => updateStockOptionLengthMm(stockOption.id, value)}
+                        bind:value={
+                          () => stockOption.lengthMm, (value) => updateStockOptionLengthMm(stockOption.id, value)
+                        }
                         label="Length"
                         min={OPTIMIZER_LIMITS.stockLengthMinMm}
                         max={OPTIMIZER_LIMITS.stockLengthMaxMm}
@@ -889,7 +926,11 @@
                     <div class="px-1 py-1 text-xs text-zinc-500">No stock lengths added yet.</div>
                   </Element>
                 {/if}
-                <Button on:click={() => addStockOption(profileType)} label="Add stock length" title="Add stock length" />
+                <Button
+                  on:click={() => addStockOption(profileType)}
+                  label="Add stock length"
+                  title="Add stock length"
+                />
               </Folder>
             {/each}
           </Folder>

@@ -149,7 +149,7 @@ export function createPlannerMeasurementOverlay(
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [seatFrontEdgeXm(input), horizontalArrowY(PROFILE_SHORT_MM + 50), baseCenterZ],
+        start: [mm(input.seatBaseDepthMm), horizontalArrowY(PROFILE_SHORT_MM + 50), baseCenterZ],
         end: [
           mm(input.seatBaseDepthMm + input.steeringColumnDistanceMm),
           horizontalArrowY(PROFILE_SHORT_MM + 50),

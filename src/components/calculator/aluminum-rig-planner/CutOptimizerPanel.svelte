@@ -271,7 +271,7 @@
     {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
       <div class="rounded border border-zinc-200 bg-zinc-50">
         <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
-          <div class="flex flex-wrap items-start justify-between gap-3">
+          <div class="flex flex-col gap-3 sm:grid sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-end">
             <div>
               <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
                 <span
@@ -297,7 +297,7 @@
                 <span>Visual Cut Layout</span>
               </h3>
             </div>
-            <div class="flex flex-wrap gap-3 text-xs text-zinc-600">
+            <div class="flex flex-wrap items-end justify-center gap-x-3 gap-y-2 text-xs text-zinc-600 sm:self-end">
               <div class="flex items-center gap-2">
                 <span class="h-3 w-3 rounded-sm border border-zinc-300" style={`background-color: ${profileColor};`}
                 ></span>
@@ -316,6 +316,7 @@
                 <span>Waste</span>
               </div>
             </div>
+            <div class="hidden sm:block" aria-hidden="true"></div>
           </div>
         </div>
         <div class="overflow-hidden rounded bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
