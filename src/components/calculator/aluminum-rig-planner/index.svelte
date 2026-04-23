@@ -26,6 +26,9 @@
   } from './constants';
   import {
     derivePlannerGeometry,
+    getPedalAcceleratorDeltaMaxMm,
+    getPedalBrakeDeltaMaxMm,
+    getPedalClutchDeltaMaxMm,
     getPedalTrayDistanceMaxMm,
     getPedalTrayDistanceMinMm,
     getSteeringColumnBaseHeightMaxMm,
@@ -320,6 +323,30 @@
     min: getPedalTrayDistanceMinMm(plannerInput),
     max: getPedalTrayDistanceMaxMm(plannerInput),
   }));
+  const pedalsHeightLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.pedalsHeightMinMm,
+    max: PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm,
+  }));
+  const pedalsDeltaLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.pedalsDeltaMinMm,
+    max: PLANNER_DIMENSION_LIMITS.pedalsDeltaMaxMm,
+  }));
+  const pedalAngleLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
+    max: PLANNER_DIMENSION_LIMITS.pedalAngleDegMax,
+  }));
+  const pedalAcceleratorDeltaLimits = $derived.by(() => ({
+    min: 0,
+    max: getPedalAcceleratorDeltaMaxMm(plannerInput),
+  }));
+  const pedalBrakeDeltaLimits = $derived.by(() => ({
+    min: 0,
+    max: getPedalBrakeDeltaMaxMm(plannerInput),
+  }));
+  const pedalClutchDeltaLimits = $derived.by(() => ({
+    min: 0,
+    max: getPedalClutchDeltaMaxMm(plannerInput),
+  }));
   const seatBaseDepthMaxMm = $derived(Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, plannerInput.baseLengthMm));
 
   function syncPlannerTestIds() {
@@ -353,6 +380,21 @@
     plannerInput.pedalTrayDistanceMm = Math.max(
       pedalTrayDistanceLimits.min,
       Math.min(pedalTrayDistanceLimits.max, plannerInput.pedalTrayDistanceMm)
+    );
+  }
+
+  function clampPedalSettings() {
+    plannerInput.pedalAcceleratorDeltaMm = Math.max(
+      pedalAcceleratorDeltaLimits.min,
+      Math.min(pedalAcceleratorDeltaLimits.max, plannerInput.pedalAcceleratorDeltaMm)
+    );
+    plannerInput.pedalBrakeDeltaMm = Math.max(
+      pedalBrakeDeltaLimits.min,
+      Math.min(pedalBrakeDeltaLimits.max, plannerInput.pedalBrakeDeltaMm)
+    );
+    plannerInput.pedalClutchDeltaMm = Math.max(
+      pedalClutchDeltaLimits.min,
+      Math.min(pedalClutchDeltaLimits.max, plannerInput.pedalClutchDeltaMm)
     );
   }
 
@@ -411,6 +453,7 @@
 
   function setBaseWidthMm(value: number) {
     plannerInput.baseWidthMm = value;
+    clampPedalSettings();
     syncPlannerUrlState();
     scheduleMeasurementOverlay('baseWidthMm');
   }
@@ -485,6 +528,42 @@
     clampPedalTrayDistanceMm();
     syncPlannerUrlState();
     scheduleMeasurementOverlay('pedalTrayDepthMm');
+  }
+
+  function setPedalsHeightMm(value: number) {
+    plannerInput.pedalsHeightMm = Math.max(pedalsHeightLimits.min, Math.min(pedalsHeightLimits.max, value));
+    syncPlannerUrlState();
+  }
+
+  function setPedalsDeltaMm(value: number) {
+    plannerInput.pedalsDeltaMm = Math.max(pedalsDeltaLimits.min, Math.min(pedalsDeltaLimits.max, value));
+    syncPlannerUrlState();
+  }
+
+  function setPedalAngleDeg(value: number) {
+    plannerInput.pedalAngleDeg = Math.max(pedalAngleLimits.min, Math.min(pedalAngleLimits.max, value));
+    syncPlannerUrlState();
+  }
+
+  function setPedalAcceleratorDeltaMm(value: number) {
+    plannerInput.pedalAcceleratorDeltaMm = Math.max(
+      pedalAcceleratorDeltaLimits.min,
+      Math.min(pedalAcceleratorDeltaLimits.max, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setPedalBrakeDeltaMm(value: number) {
+    plannerInput.pedalBrakeDeltaMm = Math.max(pedalBrakeDeltaLimits.min, Math.min(pedalBrakeDeltaLimits.max, value));
+    syncPlannerUrlState();
+  }
+
+  function setPedalClutchDeltaMm(value: number) {
+    plannerInput.pedalClutchDeltaMm = Math.max(
+      pedalClutchDeltaLimits.min,
+      Math.min(pedalClutchDeltaLimits.max, value)
+    );
+    syncPlannerUrlState();
   }
 
   function setPedalTrayDistanceMm(value: number) {
@@ -572,6 +651,15 @@
   function resetPedalTrayModule() {
     setPedalTrayDepthMm(DEFAULT_INPUT.pedalTrayDepthMm);
     setPedalTrayDistanceMm(DEFAULT_INPUT.pedalTrayDistanceMm);
+  }
+
+  function resetPedalsModule() {
+    setPedalsHeightMm(DEFAULT_INPUT.pedalsHeightMm);
+    setPedalsDeltaMm(DEFAULT_INPUT.pedalsDeltaMm);
+    setPedalAngleDeg(DEFAULT_INPUT.pedalAngleDeg);
+    setPedalAcceleratorDeltaMm(DEFAULT_INPUT.pedalAcceleratorDeltaMm);
+    setPedalBrakeDeltaMm(DEFAULT_INPUT.pedalBrakeDeltaMm);
+    setPedalClutchDeltaMm(DEFAULT_INPUT.pedalClutchDeltaMm);
   }
 
   function setOptimizerMode(value: PlannerOptimizationSettings['mode']) {
@@ -853,6 +941,59 @@
               format={(value) => `${value} mm`}
             />
           </Folder>
+          {#if visibleModules.pedalTray}
+            <Folder title="Pedals">
+              <Slider
+                bind:value={() => plannerInput.pedalsHeightMm, setPedalsHeightMm}
+                label="Height"
+                min={pedalsHeightLimits.min}
+                max={pedalsHeightLimits.max}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+              <Slider
+                bind:value={() => plannerInput.pedalsDeltaMm, setPedalsDeltaMm}
+                label="Delta X"
+                min={pedalsDeltaLimits.min}
+                max={pedalsDeltaLimits.max}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+              <Slider
+                bind:value={() => plannerInput.pedalAngleDeg, setPedalAngleDeg}
+                label="Pedal angle"
+                min={pedalAngleLimits.min}
+                max={pedalAngleLimits.max}
+                step={1}
+                format={(value) => `${value}°`}
+              />
+              <Slider
+                bind:value={() => plannerInput.pedalAcceleratorDeltaMm, setPedalAcceleratorDeltaMm}
+                label="Accelerator delta"
+                min={pedalAcceleratorDeltaLimits.min}
+                max={pedalAcceleratorDeltaLimits.max}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+              <Slider
+                bind:value={() => plannerInput.pedalBrakeDeltaMm, setPedalBrakeDeltaMm}
+                label="Brake delta"
+                min={pedalBrakeDeltaLimits.min}
+                max={pedalBrakeDeltaLimits.max}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+              <Slider
+                bind:value={() => plannerInput.pedalClutchDeltaMm, setPedalClutchDeltaMm}
+                label="Clutch delta"
+                min={pedalClutchDeltaLimits.min}
+                max={pedalClutchDeltaLimits.max}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+              <Button on:click={resetPedalsModule} label="Reset" title="Reset" />
+            </Folder>
+          {/if}
           <Button on:click={resetSetup} label="Reset" title="Reset" />
           <Folder title="Enabled Modules">
             <Checkbox bind:value={visibleModules.steeringColumn} label="Steering column" />

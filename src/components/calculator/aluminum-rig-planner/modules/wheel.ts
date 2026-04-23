@@ -29,7 +29,7 @@ const WHEEL_SPOKE_WIDTH_MM = 6;
 const WHEEL_SPOKE_THICKNESS_MM = 20;
 const WHEEL_SPOKE_LENGTH_SCALE = 1.05;
 const WHEEL_SPOKE_CORNER_RADIUS_MM = 0.75;
-const WHEEL_SPOKE_ANGLE_OFFSETS_DEG = [175, -95, 0] as const;
+const WHEEL_SPOKE_ANGLE_OFFSETS_DEG = [180, -90, 0] as const;
 const WHEEL_SPOKE_IDS = ['left', 'center', 'right'] as const;
 
 function clamp(value: number, min: number, max: number) {

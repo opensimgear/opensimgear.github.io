@@ -108,6 +108,12 @@ export interface PlannerInput {
   backrestAngleDeg: number;
   pedalTrayDepthMm: number;
   pedalTrayDistanceMm: number;
+  pedalsHeightMm: number;
+  pedalsDeltaMm: number;
+  pedalAngleDeg: number;
+  pedalAcceleratorDeltaMm: number;
+  pedalBrakeDeltaMm: number;
+  pedalClutchDeltaMm: number;
   steeringColumnDistanceMm: number;
   steeringColumnBaseHeightMm: number;
   steeringColumnHeightMm: number;

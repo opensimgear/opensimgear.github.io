@@ -3,6 +3,7 @@
   import type { PlannerGeometry } from './geometry';
   import MeasurementArrow from './MeasurementArrow.svelte';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
+  import { createPedalsModule } from './modules/pedals';
   import ProfileMesh from './ProfileMesh.svelte';
   import { createBaseModule } from './modules/base';
   import { createPedalTrayModule } from './modules/pedal-tray';
@@ -28,6 +29,7 @@
   const baseModule = $derived(createBaseModule(input, profileColor));
   const steeringColumnModule = $derived(createSteeringColumnModule(input, profileColor));
   const pedalAssembly = $derived(createPedalTrayModule(input, profileColor));
+  const pedalsModule = $derived(createPedalsModule(input));
   const seatModule = $derived(createSeatModule(input));
   const wheelModule = $derived(createWheelModule(input));
 
@@ -45,10 +47,16 @@
     }));
 
     if (!showEndCaps) {
-      return [...adjustedBeams, ...wheelModule, ...seatModule];
+      return [...adjustedBeams, ...(visibleModules.pedalTray ? pedalsModule : []), ...wheelModule, ...seatModule];
     }
 
-    return [...adjustedBeams, ...beamMeshes.flatMap((mesh) => createEndCapMeshes(mesh)), ...wheelModule, ...seatModule];
+    return [
+      ...adjustedBeams,
+      ...beamMeshes.flatMap((mesh) => createEndCapMeshes(mesh)),
+      ...(visibleModules.pedalTray ? pedalsModule : []),
+      ...wheelModule,
+      ...seatModule,
+    ];
   });
 </script>
 

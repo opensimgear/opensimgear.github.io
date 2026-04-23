@@ -1,5 +1,5 @@
 import type { PlannerInput } from './types';
-import { PLANNER_DIMENSION_LIMITS, PLANNER_LAYOUT } from './constants';
+import { PEDAL_TRAY_LAYOUT, PLANNER_DIMENSION_LIMITS, PLANNER_LAYOUT } from './constants';
 
 export type PlannerGeometry = {
   input: PlannerInput;
@@ -38,6 +38,22 @@ export function getPedalTrayDistanceMinMm(
   return getPedalTrayDistanceMaxMm(input) < PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm
     ? 0
     : PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm;
+}
+
+export function getPedalTrayUsableWidthMm(input: Pick<PlannerInput, 'baseWidthMm'>) {
+  return Math.max(0, input.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm);
+}
+
+export function getPedalAcceleratorDeltaMaxMm(input: Pick<PlannerInput, 'baseWidthMm'>) {
+  return getPedalTrayUsableWidthMm(input) / 2;
+}
+
+export function getPedalBrakeDeltaMaxMm(input: Pick<PlannerInput, 'baseWidthMm'>) {
+  return getPedalTrayUsableWidthMm(input) / 2;
+}
+
+export function getPedalClutchDeltaMaxMm(input: Pick<PlannerInput, 'baseWidthMm'>) {
+  return getPedalTrayUsableWidthMm(input) / 4;
 }
 
 export function clampPlannerInput(input: PlannerInput): PlannerInput {
@@ -130,6 +146,24 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
     ),
     pedalTrayDepthMm,
     pedalTrayDistanceMm,
+    pedalsHeightMm: clamp(
+      input.pedalsHeightMm,
+      PLANNER_DIMENSION_LIMITS.pedalsHeightMinMm,
+      PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm
+    ),
+    pedalsDeltaMm: clamp(
+      input.pedalsDeltaMm,
+      PLANNER_DIMENSION_LIMITS.pedalsDeltaMinMm,
+      PLANNER_DIMENSION_LIMITS.pedalsDeltaMaxMm
+    ),
+    pedalAngleDeg: clamp(
+      input.pedalAngleDeg,
+      PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
+      PLANNER_DIMENSION_LIMITS.pedalAngleDegMax
+    ),
+    pedalAcceleratorDeltaMm: clamp(input.pedalAcceleratorDeltaMm, 0, getPedalAcceleratorDeltaMaxMm({ baseWidthMm })),
+    pedalBrakeDeltaMm: clamp(input.pedalBrakeDeltaMm, 0, getPedalBrakeDeltaMaxMm({ baseWidthMm })),
+    pedalClutchDeltaMm: clamp(input.pedalClutchDeltaMm, 0, getPedalClutchDeltaMaxMm({ baseWidthMm })),
     steeringColumnDistanceMm,
     steeringColumnBaseHeightMm,
     steeringColumnHeightMm,

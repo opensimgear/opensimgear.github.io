@@ -1,15 +1,21 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  BASE_BEAM_HEIGHT_MM,
   DEFAULT_PLANNER_INPUT,
   PLANNER_DIMENSION_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import {
   clampPlannerInput,
+  getPedalAcceleratorDeltaMaxMm,
+  getPedalBrakeDeltaMaxMm,
+  getPedalClutchDeltaMaxMm,
   derivePlannerGeometry,
   getPedalTrayDistanceMaxMm,
   getSteeringColumnDistanceMaxMm,
 } from '../../components/calculator/aluminum-rig-planner/geometry';
+import { createPedalsModule } from '../../components/calculator/aluminum-rig-planner/modules/pedals';
+import { mm } from '../../components/calculator/aluminum-rig-planner/modules/shared';
 import { createSteeringColumnModule } from '../../components/calculator/aluminum-rig-planner/modules/steering-column';
 import { createWheelModule } from '../../components/calculator/aluminum-rig-planner/modules/wheel';
 
@@ -75,6 +81,26 @@ describe('aluminum rig planner geometry', () => {
     });
 
     expect(clamped.pedalTrayDistanceMm).toBe(50);
+  });
+
+  it('clamps pedal placement inputs against supported tray-relative limits', () => {
+    const clamped = clampPlannerInput({
+      ...DEFAULT_PLANNER_INPUT,
+      baseWidthMm: 400,
+      pedalsHeightMm: 150,
+      pedalsDeltaMm: 260,
+      pedalAngleDeg: 10,
+      pedalAcceleratorDeltaMm: 999,
+      pedalBrakeDeltaMm: 999,
+      pedalClutchDeltaMm: 999,
+    });
+
+    expect(clamped.pedalsHeightMm).toBe(PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm);
+    expect(clamped.pedalsDeltaMm).toBe(PLANNER_DIMENSION_LIMITS.pedalsDeltaMaxMm);
+    expect(clamped.pedalAngleDeg).toBe(PLANNER_DIMENSION_LIMITS.pedalAngleDegMin);
+    expect(clamped.pedalAcceleratorDeltaMm).toBe(getPedalAcceleratorDeltaMaxMm({ baseWidthMm: 400 }));
+    expect(clamped.pedalBrakeDeltaMm).toBe(getPedalBrakeDeltaMaxMm({ baseWidthMm: 400 }));
+    expect(clamped.pedalClutchDeltaMm).toBe(getPedalClutchDeltaMaxMm({ baseWidthMm: 400 }));
   });
 
   it('clamps seat posture settings to supported limits', () => {
@@ -154,5 +180,55 @@ describe('aluminum rig planner geometry', () => {
     expect(dot(spokeDirections[0], spokeDirections[1])).toBeCloseTo(0, 5);
     expect(dot(spokeDirections[1], spokeDirections[2])).toBeCloseTo(0, 5);
     expect(dot(spokeDirections[0], spokeDirections[2])).toBeCloseTo(-1, 5);
+  });
+
+  it('adds pedal plate and three pedals aligned from accelerator to clutch', () => {
+    const meshes = createPedalsModule(DEFAULT_PLANNER_INPUT);
+    const plate = meshes.find((mesh) => mesh.id === 'pedal-plate');
+    const accelerator = meshes.find((mesh) => mesh.id === 'pedal-accelerator');
+    const brake = meshes.find((mesh) => mesh.id === 'pedal-brake');
+    const clutch = meshes.find((mesh) => mesh.id === 'pedal-clutch');
+
+    expect(plate).toBeDefined();
+    expect(accelerator).toBeDefined();
+    expect(brake).toBeDefined();
+    expect(clutch).toBeDefined();
+
+    expect(accelerator?.position[0]).toBeCloseTo(brake?.position[0] ?? 0);
+    expect(brake?.position[0]).toBeCloseTo(clutch?.position[0] ?? 0);
+    expect(accelerator?.position[1]).toBeCloseTo(brake?.position[1] ?? 0);
+    expect(brake?.position[1]).toBeCloseTo(clutch?.position[1] ?? 0);
+    expect(accelerator?.position[2] ?? 0).toBeGreaterThan(brake?.position[2] ?? 0);
+    expect(brake?.position[2] ?? 0).toBeGreaterThan(clutch?.position[2] ?? 0);
+    expect(plate?.rotation ?? [0, 0, 0]).toEqual([0, 0, 0]);
+    expect(plate?.position[1]).toBeCloseTo(mm(BASE_BEAM_HEIGHT_MM + 1.5));
+
+    const leanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
+    const pedalPivotXmm =
+      DEFAULT_PLANNER_INPUT.seatBaseDepthMm +
+      DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm +
+      DEFAULT_PLANNER_INPUT.pedalsDeltaMm;
+    const pedalPivotYmm = BASE_BEAM_HEIGHT_MM + 3 + DEFAULT_PLANNER_INPUT.pedalsHeightMm;
+
+    expect(accelerator?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 90), 5);
+    expect(accelerator?.position[1]).toBeCloseTo(mm(pedalPivotYmm + Math.cos(leanRad) * 90), 5);
+    expect(accelerator?.rotation?.[2]).toBeCloseTo(leanRad, 5);
+  });
+
+  it('keeps pedal plate fixed to tray while pedal settings move only pedals', () => {
+    const basePlate = createPedalsModule(DEFAULT_PLANNER_INPUT).find((mesh) => mesh.id === 'pedal-plate');
+    const movedPlate = createPedalsModule({
+      ...DEFAULT_PLANNER_INPUT,
+      pedalsHeightMm: 80,
+      pedalsDeltaMm: 120,
+      pedalAngleDeg: 45,
+      pedalAcceleratorDeltaMm: 50,
+      pedalBrakeDeltaMm: 20,
+      pedalClutchDeltaMm: 10,
+    }).find((mesh) => mesh.id === 'pedal-plate');
+
+    expect(movedPlate?.position).toEqual(basePlate?.position);
+    expect(movedPlate?.size).toEqual(basePlate?.size);
+    expect(movedPlate?.rotation ?? [0, 0, 0]).toEqual(basePlate?.rotation ?? [0, 0, 0]);
   });
 });
