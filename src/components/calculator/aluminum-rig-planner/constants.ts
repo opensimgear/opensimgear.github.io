@@ -113,10 +113,30 @@ export const DEFAULT_PLANNER_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings 
     ...DEFAULT_PROFILE_WEIGHTS_KG_PER_METER,
   },
   stockOptions: [
-    { id: 'default-stock-80x40-1000', profileType: '80x40', lengthMm: 1000, cost: getPlannerStockCostDefault('80x40', 1000) },
-    { id: 'default-stock-80x40-2000', profileType: '80x40', lengthMm: 2000, cost: getPlannerStockCostDefault('80x40', 2000) },
-    { id: 'default-stock-40x40-1000', profileType: '40x40', lengthMm: 1000, cost: getPlannerStockCostDefault('40x40', 1000) },
-    { id: 'default-stock-40x40-2000', profileType: '40x40', lengthMm: 2000, cost: getPlannerStockCostDefault('40x40', 2000) },
+    {
+      id: 'default-stock-80x40-1000',
+      profileType: '80x40',
+      lengthMm: 1000,
+      cost: getPlannerStockCostDefault('80x40', 1000),
+    },
+    {
+      id: 'default-stock-80x40-2000',
+      profileType: '80x40',
+      lengthMm: 2000,
+      cost: getPlannerStockCostDefault('80x40', 2000),
+    },
+    {
+      id: 'default-stock-40x40-1000',
+      profileType: '40x40',
+      lengthMm: 1000,
+      cost: getPlannerStockCostDefault('40x40', 1000),
+    },
+    {
+      id: 'default-stock-40x40-2000',
+      profileType: '40x40',
+      lengthMm: 2000,
+      cost: getPlannerStockCostDefault('40x40', 2000),
+    },
   ],
 };
 

@@ -11,6 +11,7 @@ import {
   getSteeringColumnDistanceMaxMm,
 } from '../../components/calculator/aluminum-rig-planner/geometry';
 import { createSteeringColumnModule } from '../../components/calculator/aluminum-rig-planner/modules/steering-column';
+import { createWheelModule } from '../../components/calculator/aluminum-rig-planner/modules/wheel';
 
 describe('aluminum rig planner geometry', () => {
   it('clamps steering column distance against current base span', () => {
@@ -114,5 +115,44 @@ describe('aluminum rig planner geometry', () => {
     expect(nearModule[0]?.position[0]).toBeCloseTo(0.66);
     expect(farModule[0]?.position[0]).toBeCloseTo(0.78);
     expect(farModule[0]?.position[0]).toBeGreaterThan(nearModule[0]?.position[0] ?? 0);
+  });
+
+  it('adds hub and three spokes to wheel with center spoke pointing down', () => {
+    const meshes = createWheelModule(DEFAULT_PLANNER_INPUT);
+    const hub = meshes.find((mesh) => mesh.id === 'wheel-hub');
+    const rim = meshes.find((mesh) => mesh.id === 'wheel-rim');
+    const leftSpoke = meshes.find((mesh) => mesh.id === 'wheel-spoke-left');
+    const centerSpoke = meshes.find((mesh) => mesh.id === 'wheel-spoke-center');
+    const rightSpoke = meshes.find((mesh) => mesh.id === 'wheel-spoke-right');
+
+    expect(hub).toBeDefined();
+    expect(rim).toBeDefined();
+    expect(leftSpoke).toBeDefined();
+    expect(centerSpoke).toBeDefined();
+    expect(rightSpoke).toBeDefined();
+
+    expect(hub?.position).toEqual(rim?.position);
+    expect(leftSpoke?.position[0]).toBeCloseTo(hub?.position[0] ?? 0);
+    expect(leftSpoke?.position[1]).toBeCloseTo(hub?.position[1] ?? 0);
+    expect(rightSpoke?.position[0]).toBeCloseTo(hub?.position[0] ?? 0);
+    expect(rightSpoke?.position[1]).toBeCloseTo(hub?.position[1] ?? 0);
+    expect(centerSpoke?.position[2]).toBeCloseTo(hub?.position[2] ?? 0);
+    expect(centerSpoke?.position[1]).toBeLessThan(hub?.position[1] ?? 0);
+
+    const hubPosition = hub?.position ?? [0, 0, 0];
+    const spokeDirections = [leftSpoke, centerSpoke, rightSpoke].map((spoke) => {
+      const dx = (spoke?.position[0] ?? 0) - hubPosition[0];
+      const dy = (spoke?.position[1] ?? 0) - hubPosition[1];
+      const dz = (spoke?.position[2] ?? 0) - hubPosition[2];
+      const length = Math.hypot(dx, dy, dz);
+
+      return [dx / length, dy / length, dz / length] as const;
+    });
+
+    const dot = (a: readonly number[], b: readonly number[]) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+
+    expect(dot(spokeDirections[0], spokeDirections[1])).toBeCloseTo(0, 5);
+    expect(dot(spokeDirections[1], spokeDirections[2])).toBeCloseTo(0, 5);
+    expect(dot(spokeDirections[0], spokeDirections[2])).toBeCloseTo(-1, 5);
   });
 });
