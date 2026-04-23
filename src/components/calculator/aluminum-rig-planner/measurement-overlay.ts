@@ -1,7 +1,5 @@
 import {
   BASE_BEAM_HEIGHT_MM,
-  BASE_MODULE_LAYOUT,
-  HALF_PROFILE_SHORT_MM,
   PEDAL_TRAY_LAYOUT,
   PLANNER_LAYOUT,
   PROFILE_SHORT_MM,
@@ -45,15 +43,6 @@ function verticalArrowX(input: PlannerInput) {
 
 function rightSideArrowZ(input: PlannerInput, clearanceMm = VERTICAL_ARROW_CLEARANCE_MM) {
   return centeredZ(input.baseWidthMm + clearanceMm, input.baseWidthMm);
-}
-
-function seatFrontEdgeXm(input: PlannerInput) {
-  const seatCrossMemberCenterXmm = Math.max(
-    BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm,
-    input.seatBaseDepthMm - BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm
-  );
-
-  return mm(seatCrossMemberCenterXmm + HALF_PROFILE_SHORT_MM + input.seatDeltaMm);
 }
 
 function steeringColumnTopMm(input: PlannerInput) {
@@ -141,7 +130,7 @@ export function createPlannerMeasurementOverlay(
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [seatFrontEdgeXm(input), horizontalArrowY(), baseCenterZ],
+        start: [mm(input.seatBaseDepthMm), horizontalArrowY(), baseCenterZ],
         end: [mm(input.seatBaseDepthMm + input.pedalTrayDistanceMm), horizontalArrowY(), baseCenterZ],
       };
 
