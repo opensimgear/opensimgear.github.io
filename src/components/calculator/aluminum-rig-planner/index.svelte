@@ -2,13 +2,23 @@
   import { onMount, tick, type Component } from 'svelte';
   import { Button, Checkbox, Color, Element, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
 
+  import {
+    DEFAULT_CURRENCY_LOCALE,
+    formatPlannerMoney,
+    resolvePlannerCurrency,
+    resolvePlannerLocale,
+  } from './currency';
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
+  import CutOptimizerPanel from './CutOptimizerPanel.svelte';
   import { createPlannerCutListEntries } from './cut-list';
   import {
     COLOR_MODE_OPTIONS,
     DEFAULT_CUSTOM_PROFILE_COLOR,
+    DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
     DEFAULT_PLANNER_INPUT,
+    getPlannerStockCostDefault,
+    getPlannerStockCostMax,
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
     PLANNER_LAYOUT,
@@ -18,6 +28,7 @@
     derivePlannerGeometry,
     getPedalTrayDistanceMaxMm,
     getPedalTrayDistanceMinMm,
+    getSteeringColumnBaseHeightMaxMm,
     getSteeringColumnDistanceMaxMm,
   } from './geometry';
   import {
@@ -26,6 +37,7 @@
     type PlannerMeasurementOverlay,
   } from './measurement-overlay';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
+  import { createPlannerOptimizationResult } from './optimizer';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
     getAluminumRigPaneExpandedState,
@@ -35,7 +47,13 @@
   } from './state';
   import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
   import type { PlannerGeometry } from './geometry';
-  import type { PlannerInput, PlannerVisibleModules } from './types';
+  import type {
+    CutListProfileType,
+    PlannerCurrencyCode,
+    PlannerInput,
+    PlannerOptimizationSettings,
+    PlannerVisibleModules,
+  } from './types';
 
   type PlannerSceneComponent = Component<{
     geometry: PlannerGeometry;
@@ -52,9 +70,14 @@
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
   const DEFAULT_INPUT: PlannerInput = { ...DEFAULT_PLANNER_INPUT };
+  const DEFAULT_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings = {
+    ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
+    profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
+    stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({ ...option })),
+  };
   const PLANNER_TEST_ID_TARGETS = [
     {
-      text: 'Setup',
+      text: 'Settings',
       selector: '.tp-rotv_t',
       closest: '.tp-rotv_b',
       testId: 'aluminum-rig-planner-setup-pane',
@@ -83,23 +106,69 @@
       closest: '.tp-lblv',
       testId: 'aluminum-rig-planner-base-width-control',
     },
-    {
-      text: 'Cut list',
-      selector: '.tp-rotv_t',
-      closest: '.tp-rotv_b',
-      testId: 'aluminum-rig-planner-cut-list-pane',
-    },
   ] as const;
+  const OPTIMIZER_MODE_OPTIONS = [
+    { text: 'Cost', value: 'cost' },
+    { text: 'Waste', value: 'waste' },
+  ] as const;
+  const CURRENCY_MODE_OPTIONS = [
+    { text: 'Auto', value: 'auto' },
+    { text: 'Euro', value: 'eur' },
+    { text: 'Dollar', value: 'usd' },
+  ] as const;
+  const SHIPPING_MODE_OPTIONS = [
+    { text: 'Flat', value: 'flat' },
+    { text: 'Per kg', value: 'per-kg' },
+  ] as const;
+  const PROFILE_TYPES: CutListProfileType[] = ['80x40', '40x40'];
+  const BLADE_THICKNESS_MIN_MM = 0.5;
+  const BLADE_THICKNESS_MAX_MM = 5;
+  const BLADE_THICKNESS_STEP_MM = 0.1;
+  const OPTIMIZER_LIMITS = {
+    safetyMarginMaxMm: 15,
+    flatShippingCostMax: 500,
+    shippingRatePerKgMax: 50,
+    profileWeightMaxKgPerMeter: 10,
+    stockLengthMinMm: 100,
+    stockLengthMaxMm: 6000,
+  } as const;
+  const STOCK_LENGTH_STEP_MM = 500;
+  let stockOptionIdSequence = 0;
 
   let plannerRoot = $state<HTMLDivElement | null>(null);
+
+  function createStockOptionId() {
+    stockOptionIdSequence += 1;
+    return `planner-stock-option-${stockOptionIdSequence}`;
+  }
+
+  function cloneOptimizationSettings(settings: PlannerOptimizationSettings): PlannerOptimizationSettings {
+    return {
+      ...settings,
+      profileWeightsKgPerMeter: { ...settings.profileWeightsKgPerMeter },
+      stockOptions: settings.stockOptions.map((option) => ({ ...option })),
+    };
+  }
 
   function applyQueryState(state: PlannerQueryState) {
     const mergedState = mergePlannerQueryState(DEFAULT_INPUT, state);
 
     Object.assign(plannerInput, mergedState.plannerInput);
+    Object.assign(optimizationSettings, cloneOptimizationSettings(mergedState.optimizationSettings));
+
+    for (const option of optimizationSettings.stockOptions) {
+      const numericSuffix = Number(option.id.replace(/\D+/g, ''));
+
+      if (Number.isFinite(numericSuffix)) {
+        stockOptionIdSequence = Math.max(stockOptionIdSequence, numericSuffix);
+      }
+    }
   }
 
   let plannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
+  let optimizationSettings = $state<PlannerOptimizationSettings>(
+    cloneOptimizationSettings(DEFAULT_OPTIMIZATION_SETTINGS)
+  );
   let visibleModules = $state<PlannerVisibleModules>({
     pedalTray: true,
     steeringColumn: true,
@@ -109,12 +178,14 @@
   let showEndCaps = $state(true);
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<AluminumRigPaneExpandedState>(getAluminumRigPaneExpandedState(false));
+  let stockConfigurationExpanded = $state(false);
   let mounted = $state(false);
   let PlannerScene = $state<PlannerSceneComponent | null>(null);
   let sceneStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
   let hoveredCutListKey = $state<string | null>(null);
   let activeMeasurementKey = $state<PlannerMeasurementKey | null>(null);
   let controlsReady = $state(false);
+  let currencyLocale = $state(DEFAULT_CURRENCY_LOCALE);
   let measurementHideTimeout: ReturnType<typeof setTimeout> | null = null;
 
   async function loadScene() {
@@ -151,6 +222,8 @@
   }
 
   onMount(() => {
+    currencyLocale = resolvePlannerLocale();
+
     const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
 
     if (encoded) {
@@ -206,10 +279,26 @@
         : BLACK_PROFILE_COLOR
   );
   const cutListEntries = $derived(createPlannerCutListEntries(geometry, visibleModules, showEndCaps));
+  const optimizationResult = $derived(createPlannerOptimizationResult(cutListEntries, optimizationSettings));
   const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
+  const currencyCode = $derived<PlannerCurrencyCode>(
+    resolvePlannerCurrency(optimizationSettings.currencyMode, currencyLocale)
+  );
+  const stockOptionsByProfile = $derived.by(() => ({
+    '80x40': optimizationSettings.stockOptions.filter((option) => option.profileType === '80x40'),
+    '40x40': optimizationSettings.stockOptions.filter((option) => option.profileType === '40x40'),
+  }));
   const steeringColumnDistanceLimits = $derived.by(() => ({
     min: PLANNER_LAYOUT.steeringColumnDistanceMinMm,
     max: getSteeringColumnDistanceMaxMm(plannerInput),
+  }));
+  const steeringColumnBaseHeightLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
+    max: getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm),
+  }));
+  const steeringColumnHeightLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+    max: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm,
   }));
   const pedalTrayDistanceLimits = $derived.by(() => ({
     min: getPedalTrayDistanceMinMm(plannerInput),
@@ -275,6 +364,7 @@
 
     const encodedPlannerState = encodeQueryState({
       ...$state.snapshot(plannerInput),
+      optimizer: $state.snapshot(optimizationSettings),
     });
     const url = new URL(window.location.href);
 
@@ -382,23 +472,19 @@
   }
 
   function setPedalTrayDistanceMm(value: number) {
-    plannerInput.pedalTrayDistanceMm = Math.max(pedalTrayDistanceLimits.min, Math.min(pedalTrayDistanceLimits.max, value));
+    plannerInput.pedalTrayDistanceMm = Math.max(
+      pedalTrayDistanceLimits.min,
+      Math.min(pedalTrayDistanceLimits.max, value)
+    );
     syncPlannerUrlState();
     scheduleMeasurementOverlay('pedalTrayDistanceMm');
   }
 
   function setSteeringColumnBaseHeightMm(value: number) {
-    plannerInput.steeringColumnBaseHeightMm = value;
-
-    if (
-      plannerInput.steeringColumnHeightMm <
-      Math.max(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm, value + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm)
-    ) {
-      plannerInput.steeringColumnHeightMm = Math.max(
-        PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
-        value + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
-      );
-    }
+    plannerInput.steeringColumnBaseHeightMm = Math.max(
+      steeringColumnBaseHeightLimits.min,
+      Math.min(steeringColumnBaseHeightLimits.max, value)
+    );
 
     syncPlannerUrlState();
     scheduleMeasurementOverlay('steeringColumnBaseHeightMm');
@@ -406,9 +492,14 @@
 
   function setSteeringColumnHeightMm(value: number) {
     plannerInput.steeringColumnHeightMm = Math.max(
-      PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
-      Math.min(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm, value)
+      steeringColumnHeightLimits.min,
+      Math.min(steeringColumnHeightLimits.max, value)
     );
+
+    if (plannerInput.steeringColumnBaseHeightMm > getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm)) {
+      plannerInput.steeringColumnBaseHeightMm = getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm);
+    }
+
     syncPlannerUrlState();
     scheduleMeasurementOverlay('steeringColumnHeightMm');
   }
@@ -440,6 +531,111 @@
     setPedalTrayDepthMm(DEFAULT_INPUT.pedalTrayDepthMm);
     setPedalTrayDistanceMm(DEFAULT_INPUT.pedalTrayDistanceMm);
   }
+
+  function setOptimizerMode(value: PlannerOptimizationSettings['mode']) {
+    optimizationSettings.mode = value;
+    syncPlannerUrlState();
+  }
+
+  function setCurrencyMode(value: PlannerOptimizationSettings['currencyMode']) {
+    optimizationSettings.currencyMode = value;
+    syncPlannerUrlState();
+  }
+
+  function setBladeThicknessMm(value: number) {
+    const roundedValue = Math.round(value / BLADE_THICKNESS_STEP_MM) * BLADE_THICKNESS_STEP_MM;
+    optimizationSettings.bladeThicknessMm = Number(
+      Math.min(BLADE_THICKNESS_MAX_MM, Math.max(BLADE_THICKNESS_MIN_MM, roundedValue)).toFixed(1)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setSafetyMarginMm(value: number) {
+    optimizationSettings.safetyMarginMm = Math.max(0, Math.round(value));
+    syncPlannerUrlState();
+  }
+
+  function setShippingMode(value: PlannerOptimizationSettings['shippingMode']) {
+    optimizationSettings.shippingMode = value;
+    syncPlannerUrlState();
+  }
+
+  function setFlatShippingCost(value: number) {
+    optimizationSettings.flatShippingCost = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
+  function setShippingRatePerKg(value: number) {
+    optimizationSettings.shippingRatePerKg = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
+  function setProfileWeightKgPerMeter(profileType: '40x40' | '80x40', value: number) {
+    optimizationSettings.profileWeightsKgPerMeter[profileType] = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
+  function addStockOption(profileType: '40x40' | '80x40') {
+    optimizationSettings.stockOptions.push({
+      id: createStockOptionId(),
+      profileType,
+      lengthMm: 1000,
+      cost: getPlannerStockCostDefault(profileType, 1000),
+    });
+    syncPlannerUrlState();
+  }
+
+  function updateStockOptionLengthMm(stockOptionId: string, value: number) {
+    const stockOption = optimizationSettings.stockOptions.find((option) => option.id === stockOptionId);
+
+    if (!stockOption) {
+      return;
+    }
+
+    stockOption.lengthMm = Math.max(0, Math.round(value));
+    stockOption.cost = Math.min(
+      stockOption.cost,
+      getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm)
+    );
+    syncPlannerUrlState();
+  }
+
+  function updateStockOptionCost(stockOptionId: string, value: number) {
+    const stockOption = optimizationSettings.stockOptions.find((option) => option.id === stockOptionId);
+
+    if (!stockOption) {
+      return;
+    }
+
+    stockOption.cost = Math.min(
+      Math.max(0, value),
+      getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm)
+    );
+    syncPlannerUrlState();
+  }
+
+  function removeStockOption(stockOptionId: string) {
+    const stockOptionIndex = optimizationSettings.stockOptions.findIndex((option) => option.id === stockOptionId);
+
+    if (stockOptionIndex < 0) {
+      return;
+    }
+
+    optimizationSettings.stockOptions.splice(stockOptionIndex, 1);
+    syncPlannerUrlState();
+  }
+
+  function formatStockLengthMeters(lengthMm: number) {
+    return `${(lengthMm / 1000).toFixed(1)} m`;
+  }
+
+  function formatCurrencyValue(value: number) {
+    return formatPlannerMoney(value, currencyLocale, currencyCode);
+  }
+
+  function formatCurrencyPerKg(value: number) {
+    return `${formatCurrencyValue(value)}/kg`;
+  }
 </script>
 
 <div
@@ -450,7 +646,7 @@
   {#if mounted}
     <div class={isNarrowViewport ? 'flex flex-col' : 'grid grid-cols-[minmax(0,1.3fr)_24rem]'}>
       <div
-        class="flex min-w-0 flex-col gap-4 border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
+        class="flex min-w-0 flex-col border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
         {#if PlannerScene}
           <PlannerScene
@@ -471,6 +667,19 @@
             {/if}
           </div>
         {/if}
+
+        <CutOptimizerPanel
+          {cutListEntries}
+          {currencyCode}
+          {currencyLocale}
+          {hoveredCutListKey}
+          {optimizationResult}
+          {optimizationSettings}
+          {profileColor}
+          onHoveredCutListKeyChange={(key) => {
+            hoveredCutListKey = key;
+          }}
+        />
       </div>
 
       <div
@@ -478,7 +687,7 @@
           ? 'flex shrink-0 flex-col divide-y divide-zinc-300'
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
-        <Pane title="Setup" position="inline" bind:expanded={paneExpanded.setup}>
+        <Pane title="Settings" position="inline" bind:expanded={paneExpanded.setup}>
           <Folder title="General">
             <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
             {#if profileColorMode === 'custom'}
@@ -536,6 +745,7 @@
               max={PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
+              wide={true}
             />
             <Slider
               bind:value={() => plannerInput.seatHeightFromBaseInnerBeamsMm, setSeatHeightFromBaseInnerBeamsMm}
@@ -574,16 +784,16 @@
               <Slider
                 bind:value={() => plannerInput.steeringColumnBaseHeightMm, setSteeringColumnBaseHeightMm}
                 label="Base height"
-                min={PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm}
-                max={PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMaxMm}
+                min={steeringColumnBaseHeightLimits.min}
+                max={steeringColumnBaseHeightLimits.max}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />
               <Slider
                 bind:value={() => plannerInput.steeringColumnHeightMm, setSteeringColumnHeightMm}
                 label="Column Height"
-                min={PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm}
-                max={PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm}
+                min={steeringColumnHeightLimits.min}
+                max={steeringColumnHeightLimits.max}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />
@@ -620,55 +830,110 @@
             </Folder>
           {/if}
         </Pane>
-        <Pane title="Cut list" position="inline" bind:expanded={paneExpanded.cutList}>
-          <Element>
-            <div
-              data-testid="aluminum-rig-planner-cut-list-table-wrapper"
-              class="overflow-x-auto bg-white px-2 py-1 font-['Roboto_Mono',monospace] text-zinc-900"
-            >
-              <table
-                data-testid="aluminum-rig-planner-cut-list-table"
-                class="min-w-full border-collapse bg-white text-left text-[12px] leading-tight"
-              >
-                <thead>
-                  <tr class="border-b border-zinc-200 bg-zinc-50 text-zinc-600">
-                    <th data-testid="aluminum-rig-planner-cut-list-profile-header" class="px-1.5 py-1 font-medium">
-                      Profile
-                    </th>
-                    <th data-testid="aluminum-rig-planner-cut-list-length-header" class="px-1.5 py-1 font-medium">
-                      Length
-                    </th>
-                    <th data-testid="aluminum-rig-planner-cut-list-qty-header" class="px-1.5 py-1 font-medium">
-                      Qty
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {#each cutListEntries as entry, index (entry.key)}
-                    <tr
-                      class:bg-zinc-100={hoveredCutListKey === entry.key}
-                      class="cursor-pointer border-b border-zinc-100 bg-white last:border-b-0"
-                      onmouseenter={() => {
-                        hoveredCutListKey = entry.key;
-                      }}
-                      onmouseleave={() => {
-                        hoveredCutListKey = null;
-                      }}
-                    >
-                      <td
-                        data-testid={index === 0 ? 'aluminum-rig-planner-cut-list-first-profile' : undefined}
-                        class="px-1.5 py-1 font-medium text-zinc-800"
-                      >
-                        {entry.profileType}
-                      </td>
-                      <td class="px-1.5 py-1 text-zinc-600">{entry.lengthMm} mm</td>
-                      <td class="px-1.5 py-1 text-zinc-600">{entry.quantity}</td>
-                    </tr>
+        <Pane title="Cut optimizer" position="inline" bind:expanded={paneExpanded.optimizer}>
+          <Folder title="Settings">
+            <List
+              bind:value={() => optimizationSettings.mode, setOptimizerMode}
+              options={OPTIMIZER_MODE_OPTIONS}
+              label="Optimize"
+            />
+            <List
+              bind:value={() => optimizationSettings.currencyMode, setCurrencyMode}
+              options={CURRENCY_MODE_OPTIONS}
+              label="Currency"
+            />
+            <Slider
+              bind:value={() => optimizationSettings.bladeThicknessMm, setBladeThicknessMm}
+              label="Kerf"
+              min={BLADE_THICKNESS_MIN_MM}
+              max={BLADE_THICKNESS_MAX_MM}
+              step={BLADE_THICKNESS_STEP_MM}
+              format={(value) => `${value.toFixed(1)} mm`}
+            />
+            <Slider
+              bind:value={() => optimizationSettings.safetyMarginMm, setSafetyMarginMm}
+              label="Safety Margin"
+              min={0}
+              max={OPTIMIZER_LIMITS.safetyMarginMaxMm}
+              step={1}
+              format={(value) => `${value.toFixed(0)} mm`}
+            />
+            <List
+              bind:value={() => optimizationSettings.shippingMode, setShippingMode}
+              options={SHIPPING_MODE_OPTIONS}
+              label="Shipping"
+            />
+            {#if optimizationSettings.shippingMode === 'flat'}
+              <Slider
+                bind:value={() => optimizationSettings.flatShippingCost, setFlatShippingCost}
+                label="Ship cost"
+                min={0}
+                max={OPTIMIZER_LIMITS.flatShippingCostMax}
+                step={1}
+                format={formatCurrencyValue}
+              />
+            {:else}
+              <Slider
+                bind:value={() => optimizationSettings.shippingRatePerKg, setShippingRatePerKg}
+                label="Ship rate"
+                min={0}
+                max={OPTIMIZER_LIMITS.shippingRatePerKgMax}
+                step={0.1}
+                format={formatCurrencyPerKg}
+              />
+            {/if}
+          </Folder>
+          <Folder title="Stock configuration" bind:expanded={stockConfigurationExpanded}>
+            {#each PROFILE_TYPES as profileType (profileType)}
+              <Folder title={profileType}>
+                <Slider
+                  bind:value={
+                    () => optimizationSettings.profileWeightsKgPerMeter[profileType],
+                    (value) => setProfileWeightKgPerMeter(profileType, value)
+                  }
+                  label="Weight"
+                  min={0}
+                  max={OPTIMIZER_LIMITS.profileWeightMaxKgPerMeter}
+                  step={0.01}
+                  format={(value) => `${value.toFixed(2)} kg/m`}
+                />
+                {#if stockOptionsByProfile[profileType].length > 0}
+                  {#each stockOptionsByProfile[profileType] as stockOption (stockOption.id)}
+                    <Folder title={formatStockLengthMeters(stockOption.lengthMm)}>
+                      <Slider
+                        bind:value={
+                          () => stockOption.lengthMm, (value) => updateStockOptionLengthMm(stockOption.id, value)
+                        }
+                        label="Length"
+                        min={OPTIMIZER_LIMITS.stockLengthMinMm}
+                        max={OPTIMIZER_LIMITS.stockLengthMaxMm}
+                        step={STOCK_LENGTH_STEP_MM}
+                        format={formatStockLengthMeters}
+                      />
+                      <Slider
+                        bind:value={() => stockOption.cost, (value) => updateStockOptionCost(stockOption.id, value)}
+                        label="Cost"
+                        min={0}
+                        max={getPlannerStockCostMax(stockOption.profileType, stockOption.lengthMm)}
+                        step={1}
+                        format={formatCurrencyValue}
+                      />
+                      <Button on:click={() => removeStockOption(stockOption.id)} label="Remove" title="Remove" />
+                    </Folder>
                   {/each}
-                </tbody>
-              </table>
-            </div>
-          </Element>
+                {:else}
+                  <Element>
+                    <div class="px-1 py-1 text-xs text-zinc-500">No stock lengths added yet.</div>
+                  </Element>
+                {/if}
+                <Button
+                  on:click={() => addStockOption(profileType)}
+                  label="Add stock length"
+                  title="Add stock length"
+                />
+              </Folder>
+            {/each}
+          </Folder>
         </Pane>
       </div>
     </div>
