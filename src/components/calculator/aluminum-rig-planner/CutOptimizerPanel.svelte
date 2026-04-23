@@ -49,11 +49,13 @@
   let visualLayoutExportRoot = $state<HTMLDivElement | null>(null);
   let purchaseSummaryExportRoot = $state<HTMLDivElement | null>(null);
   let exportMenuOpen = $state(false);
+  let wasteWidthByBarId = $state<Record<string, number>>({});
   let exportSections = $state<PlannerExportSections>({
     image: true,
     visualLayout: true,
     purchaseSummary: true,
   });
+  const wasteLabelWidthCache: Record<string, number> = {};
 
   function compareProfileTypes(a: CutListProfileType, b: CutListProfileType) {
     if (a === b) {
@@ -155,8 +157,42 @@
     }).format(value)} mm`;
   }
 
+  function formatWholeLengthMm(value: number) {
+    return `${new Intl.NumberFormat(currencyLocale, {
+      maximumFractionDigits: 0,
+    }).format(value)} mm`;
+  }
+
   function formatStockLength(valueMm: number) {
     return `${(valueMm / 1000).toFixed(1)} m`;
+  }
+
+  function getWasteLabelText(bar: PlannerPurchasedBar) {
+    return formatWholeLengthMm(getBarUnusedLengthMm(bar));
+  }
+
+  function measureWasteLabelWidthPx(text: string) {
+    const cachedWidth = wasteLabelWidthCache[text];
+
+    if (cachedWidth !== undefined) {
+      return cachedWidth;
+    }
+
+    let width = text.length * 6.2;
+
+    if (typeof document !== 'undefined') {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      if (context) {
+        context.font = "700 9px 'Roboto Mono', monospace";
+        width = context.measureText(text).width;
+      }
+    }
+
+    wasteLabelWidthCache[text] = width;
+
+    return width;
   }
 
   function getBarWidthPercent(bar: PlannerPurchasedBar) {
@@ -243,7 +279,28 @@
   }
 
   function getWasteAriaLabel(bar: PlannerPurchasedBar) {
-    return `Waste ${formatLengthMm(getBarUnusedLengthMm(bar))}`;
+    return `Waste ${formatWholeLengthMm(getBarUnusedLengthMm(bar))}`;
+  }
+
+  function setWasteWidth(barId: string, width: number) {
+    if (wasteWidthByBarId[barId] === width) {
+      return;
+    }
+
+    wasteWidthByBarId = {
+      ...wasteWidthByBarId,
+      [barId]: width,
+    };
+  }
+
+  function shouldShowWasteLabel(bar: PlannerPurchasedBar) {
+    const wasteWidth = wasteWidthByBarId[bar.id];
+
+    if (!wasteWidth) {
+      return false;
+    }
+
+    return wasteWidth >= measureWasteLabelWidthPx(getWasteLabelText(bar)) + 8;
   }
 
   function getPieceColor() {
@@ -444,25 +501,6 @@
                 </details>
               </div>
             </div>
-            <div class="flex flex-wrap items-end gap-x-3 gap-y-2 text-xs text-zinc-600 sm:justify-center">
-              <div class="flex items-center gap-2">
-                <span class="h-3 w-3 rounded-sm border border-zinc-300" style={`background-color: ${profileColor};`}
-                ></span>
-                <span>Material</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="h-3 w-3 rounded-sm border border-blue-300 bg-blue-400/45"></span>
-                <span>Safety margin</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="h-3 w-3 rounded-sm border border-red-300 bg-red-500/35"></span>
-                <span>Blade Kerf</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="h-3 w-3 rounded-sm border border-yellow-300 bg-yellow-400/35"></span>
-                <span>Waste</span>
-              </div>
-            </div>
           </div>
         </div>
         <div class="overflow-hidden rounded bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
@@ -565,8 +603,11 @@
                                 style={`width: ${getBarUnusedWidthPercent(bar)}%;`}
                                 role="img"
                                 aria-label={getWasteAriaLabel(bar)}
+                                bind:clientWidth={null, (width) => setWasteWidth(bar.id, width)}
                               >
-                                <span class="bar-waste__label">{getBarUnusedLengthMm(bar)}</span>
+                                {#if shouldShowWasteLabel(bar)}
+                                  <span class="bar-waste__label">{getWasteLabelText(bar)}</span>
+                                {/if}
                               </div>
                             {/if}
                           </div>
@@ -582,7 +623,7 @@
       </div>
     {/if}
 
-    <div class="grid gap-4 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+    <div class="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
       <div class="space-y-4">
         <div class="required-cuts-card rounded border border-zinc-200">
           <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
@@ -644,8 +685,8 @@
       <div class="space-y-4">
         <div bind:this={purchaseSummaryExportRoot} class="rounded border border-zinc-200 bg-zinc-50">
           <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
-            <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
+            <div class="flex items-start justify-between gap-3 sm:items-center">
+              <h3 class="widget-card__title min-w-0 pr-2 font-sans text-sm font-semibold text-zinc-900">
                 <span
                   class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-amber-200 bg-amber-50 text-amber-700"
                 >
@@ -670,7 +711,7 @@
               {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
                 <button
                   type="button"
-                  class="waste-tooltip-trigger control-chip control-chip--amber flex cursor-help appearance-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
+                  class="waste-tooltip-trigger control-chip control-chip--amber ml-auto flex shrink-0 cursor-help appearance-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
                   aria-describedby="purchase-summary-waste-tooltip"
                 >
                   <svg

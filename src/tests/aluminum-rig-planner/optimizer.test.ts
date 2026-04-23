@@ -107,6 +107,7 @@ describe('aluminum rig planner optimizer', () => {
 
     expect(result.status).toBe('ready');
     expect(result.totalAdjustedCutLengthMm).toBe(840);
+    expect(result.totalWasteMm).toBe(40);
     expect(result.barCount).toBe(1);
     expect(result.pieces.every((piece) => piece.adjustedLengthMm === 420)).toBe(true);
   });

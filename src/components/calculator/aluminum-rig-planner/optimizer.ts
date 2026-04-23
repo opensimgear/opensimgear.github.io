@@ -141,7 +141,8 @@ function createProfileSummary(
   const purchasedBars = bars.map((bar, index) => createPurchasedBar(bar, index, settings, profileType));
   const totalPurchasedLengthMm = purchasedBars.reduce((sum, bar) => sum + bar.stockLengthMm, 0);
   const totalAdjustedCutLengthMm = pieces.reduce((sum, piece) => sum + piece.adjustedLengthMm, 0);
-  const totalWasteMm = totalPurchasedLengthMm - totalAdjustedCutLengthMm;
+  const totalNominalCutLengthMm = pieces.reduce((sum, piece) => sum + piece.nominalLengthMm, 0);
+  const totalWasteMm = totalPurchasedLengthMm - totalNominalCutLengthMm;
   const totalKerfMm = purchasedBars.reduce((sum, bar) => sum + bar.kerfLengthMm, 0);
   const totalMassKg = purchasedBars.reduce((sum, bar) => sum + bar.massKg, 0);
   const subtotalCost = purchasedBars.reduce((sum, bar) => sum + bar.totalCost, 0);
@@ -317,6 +318,7 @@ function solveProfilePieces(
   settings: PlannerOptimizationSettings
 ): ProfileSolveResult | null {
   const totalAdjustedLengthMm = pieces.reduce((sum, piece) => sum + piece.adjustedLengthMm, 0);
+  const totalNominalLengthMm = pieces.reduce((sum, piece) => sum + piece.nominalLengthMm, 0);
   const orderedPieces = [...pieces].sort(comparePieces);
   const orderedStockOptions = [...stockOptions].sort((a, b) => compareStockOptions(a, b, settings, profileType));
   const context: SearchContext = {
@@ -337,7 +339,7 @@ function solveProfilePieces(
     bars: context.best.bars,
     totalPurchasedLengthMm: context.best.purchasedLengthMm,
     totalAdjustedCutLengthMm: totalAdjustedLengthMm,
-    totalWasteMm: context.best.purchasedLengthMm - totalAdjustedLengthMm,
+    totalWasteMm: context.best.purchasedLengthMm - totalNominalLengthMm,
     totalKerfMm: context.best.bars.reduce((sum, bar) => sum + bar.kerfLengthMm, 0),
     totalMassKg: context.best.bars.reduce((sum, bar) => sum + bar.massKg, 0),
     subtotalCost: context.best.cost,
