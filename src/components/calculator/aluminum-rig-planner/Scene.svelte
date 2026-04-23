@@ -3,7 +3,7 @@
   import { Gizmo, Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
   import { onMount, tick } from 'svelte';
-  import { Group, OrthographicCamera, PerspectiveCamera, Vector3 } from 'three';
+  import { Group, OrthographicCamera, PerspectiveCamera, Vector3, WebGLRenderer } from 'three';
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
   import { PI_INTENSITY, SCENE_VIEW } from './constants';
@@ -40,6 +40,14 @@
   let rigRootRef = $state<Group | null>(null);
   let viewportElement = $state<HTMLDivElement | null>(null);
   let spaceMouseBridge = $state<ThreeSpaceMouseBridge | null>(null);
+  const createPlannerRenderer = (canvas: HTMLCanvasElement) =>
+    new WebGLRenderer({
+      canvas,
+      powerPreference: 'high-performance',
+      antialias: true,
+      alpha: true,
+      preserveDrawingBuffer: true,
+    });
 
   const cameraPosition = $derived<[number, number, number]>(savedView?.position ?? defaultCameraPosition);
   const controlsTarget = $derived<[number, number, number]>(savedView?.target ?? SCENE_VIEW.controlsTarget);
@@ -155,7 +163,7 @@
     </button>
   </div>
 
-  <Canvas shadows>
+  <Canvas shadows createRenderer={createPlannerRenderer}>
     {#if useOrthographicCamera}
       <T.OrthographicCamera
         args={orthographicArgs}

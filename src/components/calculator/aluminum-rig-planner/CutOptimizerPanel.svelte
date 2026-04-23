@@ -1,4 +1,9 @@
 <script lang="ts">
+  import {
+    buildPlannerPrintDocument,
+    hasSelectedPlannerExportSections,
+    type PlannerExportSections,
+  } from './export';
   import type {
     CutListEntry,
     PlannerCurrencyCode,
@@ -45,6 +50,14 @@
     profileColor,
     onHoveredCutListKeyChange,
   }: Props = $props();
+  let visualLayoutExportRoot = $state<HTMLDivElement | null>(null);
+  let purchaseSummaryExportRoot = $state<HTMLDivElement | null>(null);
+  let exportMenuOpen = $state(false);
+  let exportSections = $state<PlannerExportSections>({
+    image: true,
+    visualLayout: true,
+    purchaseSummary: true,
+  });
 
   function compareProfileTypes(a: CutListProfileType, b: CutListProfileType) {
     if (a === b) {
@@ -264,12 +277,108 @@
   function shouldShowPieceLabel(piece: PlannerPurchasedBar['pieces'][number], bar: PlannerPurchasedBar) {
     return getPieceAdjustedWidthPercent(piece, bar) >= 12;
   }
+
+  const canRunExport = $derived(hasSelectedPlannerExportSections(exportSections));
+
+  function getPrintStylesheetsHtml() {
+    if (typeof document === 'undefined') {
+      return '';
+    }
+
+    return Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
+      .map((node) => node.outerHTML)
+      .join('\n');
+  }
+
+  function capturePlannerPreviewScreenshot() {
+    if (typeof document === 'undefined') {
+      return '';
+    }
+
+    const canvas = document.querySelector<HTMLCanvasElement>('[data-testid="aluminum-rig-planner-preview-canvas"]');
+
+    if (!canvas) {
+      return '';
+    }
+
+    try {
+      return canvas.toDataURL('image/png');
+    } catch {
+      return '';
+    }
+  }
+
+  function removePrintFrame(frame: HTMLIFrameElement | null) {
+    frame?.remove();
+  }
+
+  function runPrintExport() {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+
+    const selection = $state.snapshot(exportSections);
+    const screenshot = selection.image ? capturePlannerPreviewScreenshot() : '';
+    const resolvedSections: PlannerExportSections = {
+      image: selection.image && Boolean(screenshot),
+      visualLayout: selection.visualLayout && Boolean(visualLayoutExportRoot),
+      purchaseSummary: selection.purchaseSummary && Boolean(purchaseSummaryExportRoot),
+    };
+
+    if (!hasSelectedPlannerExportSections(resolvedSections)) {
+      return;
+    }
+
+    const printDocument = buildPlannerPrintDocument({
+      title: 'OpenSimGear Rig Planner',
+      subtitle: '3D view, cut layout, and purchase summary export',
+      imageAlt: '3D rig planner view screenshot',
+      imageUrl: screenshot,
+      purchaseSummaryHtml: purchaseSummaryExportRoot?.outerHTML ?? '',
+      sections: resolvedSections,
+      stylesheetsHtml: getPrintStylesheetsHtml(),
+      visualLayoutHtml: visualLayoutExportRoot?.outerHTML ?? '',
+    });
+
+    exportMenuOpen = false;
+    const printFrame = document.createElement('iframe');
+    printFrame.setAttribute('aria-hidden', 'true');
+    printFrame.style.position = 'fixed';
+    printFrame.style.right = '0';
+    printFrame.style.bottom = '0';
+    printFrame.style.width = '0';
+    printFrame.style.height = '0';
+    printFrame.style.border = '0';
+    printFrame.style.opacity = '0';
+    printFrame.style.pointerEvents = 'none';
+    document.body.append(printFrame);
+
+    const cleanup = () => {
+      if (cleanupTimer) {
+        window.clearTimeout(cleanupTimer);
+      }
+      removePrintFrame(printFrame);
+    };
+    const cleanupTimer = window.setTimeout(cleanup, 60_000);
+    const printWindow = printFrame.contentWindow;
+
+    if (!printWindow) {
+      cleanup();
+      return;
+    }
+
+    printWindow.addEventListener('afterprint', cleanup, { once: true });
+    printWindow.addEventListener('pagehide', cleanup, { once: true });
+    printWindow.document.open();
+    printWindow.document.write(printDocument);
+    printWindow.document.close();
+  }
 </script>
 
 <section data-testid="aluminum-rig-planner-cut-optimizer" class="border-t border-zinc-300 bg-white">
   <div class="space-y-4 p-4">
     {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
-      <div class="rounded border border-zinc-200 bg-zinc-50">
+      <div bind:this={visualLayoutExportRoot} class="rounded border border-zinc-200 bg-zinc-50">
         <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
           <div class="flex flex-col gap-3 sm:grid sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-end">
             <div>
@@ -316,7 +425,53 @@
                 <span>Waste</span>
               </div>
             </div>
-            <div class="hidden sm:block" aria-hidden="true"></div>
+            <div class="planner-export-controls flex items-center justify-start sm:justify-end">
+              <details bind:open={exportMenuOpen} class="export-menu">
+                <summary
+                  class="control-chip control-chip--slate flex cursor-pointer list-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="h-3.5 w-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 3v12"></path>
+                    <path d="m7 10l5 5l5-5"></path>
+                    <path d="M5 21h14"></path>
+                  </svg>
+                  <span>Export</span>
+                </summary>
+                <div class="export-menu__panel">
+                  <div class="export-menu__eyebrow">Print export</div>
+                  <div class="export-menu__copy">Deactivate any section before opening print preview.</div>
+                  <label class="export-menu__option">
+                    <input bind:checked={exportSections.image} type="checkbox" />
+                    <span>3D view screenshot</span>
+                  </label>
+                  <label class="export-menu__option">
+                    <input bind:checked={exportSections.visualLayout} type="checkbox" />
+                    <span>Visual cut layout</span>
+                  </label>
+                  <label class="export-menu__option">
+                    <input bind:checked={exportSections.purchaseSummary} type="checkbox" />
+                    <span>Purchase summary</span>
+                  </label>
+                  <button
+                    type="button"
+                    class="export-menu__action"
+                    disabled={!canRunExport}
+                    onclick={runPrintExport}
+                  >
+                    Open print preview
+                  </button>
+                </div>
+              </details>
+            </div>
           </div>
         </div>
         <div class="overflow-hidden rounded bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
@@ -496,7 +651,7 @@
       </div>
 
       <div class="space-y-4">
-        <div class="rounded border border-zinc-200 bg-zinc-50">
+        <div bind:this={purchaseSummaryExportRoot} class="rounded border border-zinc-200 bg-zinc-50">
           <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
             <div class="flex items-center justify-between gap-3">
               <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
@@ -524,7 +679,7 @@
               {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
                 <button
                   type="button"
-                  class="waste-tooltip-trigger waste-tooltip-trigger--button flex cursor-help appearance-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
+                  class="waste-tooltip-trigger control-chip control-chip--amber flex cursor-help appearance-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
                   aria-describedby="purchase-summary-waste-tooltip"
                 >
                   <svg
@@ -655,18 +810,21 @@
     outline: none;
   }
 
-  .waste-tooltip-trigger--button {
+  .control-chip {
     min-height: 1.5rem;
     padding: 0 0.5rem;
-    border: 1px solid rgba(217, 119, 6, 0.22);
     border-radius: 0.125rem;
-    background: linear-gradient(180deg, rgba(255, 251, 235, 0.98), rgba(254, 243, 199, 0.92));
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.82),
-      0 1px 2px rgba(120, 53, 15, 0.08);
+      0 1px 2px rgba(15, 23, 42, 0.08);
   }
 
-  .waste-tooltip-trigger--button:hover {
+  .control-chip--amber {
+    border: 1px solid rgba(217, 119, 6, 0.22);
+    background: linear-gradient(180deg, rgba(255, 251, 235, 0.98), rgba(254, 243, 199, 0.92));
+  }
+
+  .control-chip--amber:hover {
     border-color: rgba(217, 119, 6, 0.34);
     background: linear-gradient(180deg, rgba(255, 247, 237, 1), rgba(253, 230, 138, 0.94));
     box-shadow:
@@ -674,11 +832,114 @@
       0 1px 2px rgba(120, 53, 15, 0.08);
   }
 
-  .waste-tooltip-trigger--button:focus-visible {
+  .control-chip--amber:focus-visible {
     border-color: rgba(217, 119, 6, 0.45);
     box-shadow:
       0 0 0 3px rgba(251, 191, 36, 0.24),
       inset 0 1px 0 rgba(255, 255, 255, 0.86);
+  }
+
+  .control-chip--slate {
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(226, 232, 240, 0.92));
+    color: rgb(51 65 85);
+  }
+
+  .control-chip--slate:hover {
+    border-color: rgba(100, 116, 139, 0.38);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(226, 232, 240, 0.98));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.86),
+      0 1px 2px rgba(15, 23, 42, 0.08);
+  }
+
+  .control-chip--slate:focus-visible {
+    border-color: rgba(100, 116, 139, 0.5);
+    box-shadow:
+      0 0 0 3px rgba(148, 163, 184, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.86);
+  }
+
+  .export-menu {
+    position: relative;
+  }
+
+  .export-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .export-menu__panel {
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    right: 0;
+    z-index: 30;
+    display: grid;
+    gap: 0.65rem;
+    min-width: 16rem;
+    padding: 0.85rem;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 0.55rem;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16);
+    backdrop-filter: blur(10px);
+  }
+
+  .export-menu__eyebrow {
+    color: rgb(15 23 42);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .export-menu__copy {
+    color: rgb(71 85 105);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .export-menu__option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgb(30 41 59);
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .export-menu__option input {
+    width: 0.9rem;
+    height: 0.9rem;
+    accent-color: rgb(71 85 105);
+  }
+
+  .export-menu__action {
+    min-height: 2.1rem;
+    border: 1px solid rgba(71, 85, 105, 0.22);
+    border-radius: 0.35rem;
+    background: linear-gradient(180deg, rgba(248, 250, 252, 1), rgba(226, 232, 240, 0.95));
+    color: rgb(15 23 42);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .export-menu__action:hover:not(:disabled) {
+    border-color: rgba(71, 85, 105, 0.34);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(226, 232, 240, 1));
+  }
+
+  .export-menu__action:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .export-menu__action:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.24);
   }
 
   .waste-tooltip {
