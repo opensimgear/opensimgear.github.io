@@ -16,8 +16,11 @@
   import { getSceneControlsTopOffsetPx } from '../shared/scene-controls';
   import Scene from './Scene.svelte';
   import {
-    clampPlatformMovement,
+    clampStewartParameterState,
+    clampStewartPlatformMovement,
     getStewartGizmoSize,
+    getStewartActuatorMaxExtension,
+    getStewartActuatorMaxExtensionMin,
     getNextStewartPaneExpandedState,
     getStewartPaneExpandedState,
     getStewartSceneClassNames,
@@ -25,6 +28,7 @@
     isNarrowStewartViewport,
     type PlatformSpec,
     type Rotation,
+    type StewartParameterState,
     type StewartPaneExpandedState,
     type Translation,
   } from './state';
@@ -84,18 +88,6 @@
 
   function readVectorState<T extends Rotation | Translation | CenterOfRotation>(value: unknown, fallback: T): T {
     return isVectorState(value) ? ({ x: value.x, y: value.y, z: value.z } as T) : ({ ...fallback } as T);
-  }
-
-  function applyQueryState(state: StewartPlatformQueryState) {
-    baseDiameter = readNumber(state.baseDiameter, DEFAULTS.baseDiameter);
-    platformDiameter = readNumber(state.platformDiameter, DEFAULTS.platformDiameter);
-    alphaP = readNumber(state.alphaP, DEFAULTS.alphaP);
-    alphaB = readNumber(state.alphaB, DEFAULTS.alphaB);
-    cor = readVectorState(state.cor, DEFAULTS.cor);
-    actuatorMin = readNumber(state.actuatorMin, DEFAULTS.actuatorMin);
-    actuatorMax = readNumber(state.actuatorMax, DEFAULTS.actuatorMax);
-    platformRotation = readVectorState(state.platformRotation, DEFAULTS.platformRotation);
-    platformTranslation = readVectorState(state.platformTranslation, DEFAULTS.platformTranslation);
   }
 
   let baseDiameter = $state(DEFAULTS.baseDiameter);
@@ -175,6 +167,45 @@
     const target = (actuatorMin + actuatorMax) / 2;
     return Math.sqrt(Math.max(0, target * target - avgD2));
   });
+
+  function assignParameterState(parameters: StewartParameterState) {
+    baseDiameter = parameters.baseDiameter;
+    platformDiameter = parameters.platformDiameter;
+    alphaP = parameters.alphaP;
+    alphaB = parameters.alphaB;
+    cor = parameters.cor;
+    actuatorMin = parameters.actuatorMin;
+    actuatorMax = parameters.actuatorMax;
+  }
+
+  function applyPlatformMovement(rotation: Rotation, translation: Translation) {
+    const movement = clampStewartPlatformMovement(rotation, translation, platformSpec, platformDiameter);
+    platformRotation = movement.rotation;
+    platformTranslation = movement.translation;
+  }
+
+  function applyParameterState(next: StewartParameterState) {
+    assignParameterState(clampStewartParameterState(next));
+    applyPlatformMovement(platformRotation, platformTranslation);
+  }
+
+  function applyQueryState(state: StewartPlatformQueryState) {
+    assignParameterState(
+      clampStewartParameterState({
+        baseDiameter: readNumber(state.baseDiameter, DEFAULTS.baseDiameter),
+        platformDiameter: readNumber(state.platformDiameter, DEFAULTS.platformDiameter),
+        alphaP: readNumber(state.alphaP, DEFAULTS.alphaP),
+        alphaB: readNumber(state.alphaB, DEFAULTS.alphaB),
+        cor: readVectorState(state.cor, DEFAULTS.cor),
+        actuatorMin: readNumber(state.actuatorMin, DEFAULTS.actuatorMin),
+        actuatorMax: readNumber(state.actuatorMax, DEFAULTS.actuatorMax),
+      })
+    );
+    applyPlatformMovement(
+      readVectorState(state.platformRotation, DEFAULTS.platformRotation),
+      readVectorState(state.platformTranslation, DEFAULTS.platformTranslation)
+    );
+  }
 
   // Replicates Scene.svelte's rotation transform to check whether all legs stay within bounds.
   function isRotationValid(
@@ -296,23 +327,31 @@
   });
 
   const resetParams = () => {
-    baseDiameter = DEFAULTS.baseDiameter;
-    platformDiameter = DEFAULTS.platformDiameter;
-    actuatorMin = DEFAULTS.actuatorMin;
-    actuatorMax = DEFAULTS.actuatorMax;
-    alphaP = DEFAULTS.alphaP;
-    alphaB = DEFAULTS.alphaB;
-    cor = { ...DEFAULTS.cor };
+    applyParameterState({
+      baseDiameter: DEFAULTS.baseDiameter,
+      platformDiameter: DEFAULTS.platformDiameter,
+      actuatorMin: DEFAULTS.actuatorMin,
+      actuatorMax: DEFAULTS.actuatorMax,
+      alphaP: DEFAULTS.alphaP,
+      alphaB: DEFAULTS.alphaB,
+      cor: { ...DEFAULTS.cor },
+    });
   };
 
   const resetActuator = () => {
-    actuatorMin = DEFAULTS.actuatorMin;
-    actuatorMax = DEFAULTS.actuatorMax;
+    applyParameterState({
+      baseDiameter,
+      platformDiameter,
+      actuatorMin: DEFAULTS.actuatorMin,
+      actuatorMax: DEFAULTS.actuatorMax,
+      alphaP,
+      alphaB,
+      cor,
+    });
   };
 
   const resetPlatform = () => {
-    platformRotation = { ...DEFAULTS.platformRotation };
-    platformTranslation = { ...DEFAULTS.platformTranslation };
+    applyPlatformMovement({ ...DEFAULTS.platformRotation }, { ...DEFAULTS.platformTranslation });
   };
 
   // let acctuatorInterval: [number, number] = [0.35, 0.6];
@@ -331,18 +370,6 @@
     optionsX: { min: -platformSpec.pitch, max: platformSpec.pitch, format: formatDeg },
     optionsY: { min: -platformSpec.roll, max: platformSpec.roll, format: formatDeg },
     optionsZ: { min: -platformSpec.yaw, max: platformSpec.yaw, format: formatDeg },
-  });
-
-  $effect(() => {
-    const movement = clampPlatformMovement(platformRotation, platformTranslation, platformSpec);
-
-    if (movement.rotation !== platformRotation) {
-      platformRotation = movement.rotation;
-    }
-
-    if (movement.translation !== platformTranslation) {
-      platformTranslation = movement.translation;
-    }
   });
 
   $effect(() => {
@@ -416,8 +443,10 @@
   }
 
   function applyPlatformPose(pose: ThreeSpaceMousePlatformPose) {
-    platformRotation = { x: pose.rotation[0], y: pose.rotation[1], z: pose.rotation[2] };
-    platformTranslation = { x: pose.translation[0], y: pose.translation[1], z: pose.translation[2] };
+    applyPlatformMovement(
+      { x: pose.rotation[0], y: pose.rotation[1], z: pose.rotation[2] },
+      { x: pose.translation[0], y: pose.translation[1], z: pose.translation[2] }
+    );
   }
 </script>
 
@@ -506,18 +535,37 @@
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
         <Pane title="Parameters" position="inline" bind:expanded={paneExpanded.parameters}>
-          <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={3} />
           <Slider
-            bind:value={platformDiameter}
+            bind:value={() => baseDiameter, (value) =>
+              applyParameterState({ baseDiameter: value, platformDiameter, alphaP, alphaB, cor, actuatorMin, actuatorMax })}
+            label="Base Diameter"
+            {...configLinear}
+            min={0}
+            max={3}
+          />
+          <Slider
+            bind:value={() => platformDiameter, (value) =>
+              applyParameterState({ baseDiameter, platformDiameter: value, alphaP, alphaB, cor, actuatorMin, actuatorMax })}
             label="Platform Diameter"
             {...configLinear}
             min={0}
             max={baseDiameter}
           />
-          <Slider bind:value={alphaB} label="Base Alpha" {...alphaOptions} />
-          <Slider bind:value={alphaP} label="Platform Alpha" {...alphaOptions} />
+          <Slider
+            bind:value={() => alphaB, (value) =>
+              applyParameterState({ baseDiameter, platformDiameter, alphaP, alphaB: value, cor, actuatorMin, actuatorMax })}
+            label="Base Alpha"
+            {...alphaOptions}
+          />
+          <Slider
+            bind:value={() => alphaP, (value) =>
+              applyParameterState({ baseDiameter, platformDiameter, alphaP: value, alphaB, cor, actuatorMin, actuatorMax })}
+            label="Platform Alpha"
+            {...alphaOptions}
+          />
           <Point
-            bind:value={cor}
+            bind:value={() => cor, (value) =>
+              applyParameterState({ baseDiameter, platformDiameter, alphaP, alphaB, cor: value, actuatorMin, actuatorMax })}
             label="Center of Rotation"
             {...configLinear}
             min={-platformDiameter}
@@ -527,13 +575,27 @@
           <Button on:click={resetParams} label="Reset Params" title="Reset" />
         </Pane>
         <Pane title="Actuator Range" position="inline" bind:expanded={paneExpanded.actuatorRange}>
-          <Slider bind:value={actuatorMin} label="Min Extension" {...configLinear} min={0.1} max={actuatorMax} />
-          <Slider bind:value={actuatorMax} label="Max Extension" {...configLinear} min={actuatorMin} max={2} />
+          <Slider
+            bind:value={() => actuatorMin, (value) =>
+              applyParameterState({ baseDiameter, platformDiameter, alphaP, alphaB, cor, actuatorMin: value, actuatorMax })}
+            label="Min Extension"
+            {...configLinear}
+            min={0.1}
+            max={2}
+          />
+          <Slider
+            bind:value={() => actuatorMax, (value) =>
+              applyParameterState({ baseDiameter, platformDiameter, alphaP, alphaB, cor, actuatorMin, actuatorMax: value })}
+            label="Max Extension"
+            {...configLinear}
+            min={getStewartActuatorMaxExtensionMin(actuatorMin)}
+            max={getStewartActuatorMaxExtension(actuatorMin)}
+          />
           <Button on:click={resetActuator} label="Reset Actuator" title="Reset" />
         </Pane>
         <Pane title="Movement" position="inline" bind:expanded={paneExpanded.movement}>
           <RotationEuler
-            bind:value={platformRotation}
+            bind:value={() => platformRotation, (value) => applyPlatformMovement(value, platformTranslation)}
             expanded={false}
             label="Platform rotation"
             picker="inline"
@@ -541,7 +603,7 @@
             {...movementAngle}
           />
           <Point
-            bind:value={platformTranslation}
+            bind:value={() => platformTranslation, (value) => applyPlatformMovement(platformRotation, value)}
             label="Platform Translation"
             {...configLinear}
             min={-platformDiameter}
