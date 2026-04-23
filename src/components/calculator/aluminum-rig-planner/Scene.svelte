@@ -15,7 +15,7 @@
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
-  import type { PlannerVisibleModules } from './types';
+  import type { PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
     geometry: PlannerGeometry;
@@ -23,11 +23,21 @@
     isNarrowViewport?: boolean;
     measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
+    postureSettings: PlannerPostureSettings;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   };
 
-  const { geometry, highlightedBeamIds, isNarrowViewport = false, measurementOverlay = null, profileColor, showEndCaps, visibleModules }: Props = $props();
+  const {
+    geometry,
+    highlightedBeamIds,
+    isNarrowViewport = false,
+    measurementOverlay = null,
+    profileColor,
+    postureSettings,
+    showEndCaps,
+    visibleModules,
+  }: Props = $props();
   const ORTHOGRAPHIC_ASPECT_RATIO = 3 / 2;
   const PERSPECTIVE_FOV_RADIANS = (50 * Math.PI) / 180;
 
@@ -241,7 +251,15 @@
     <SceneGrid plane={SCENE_VIEW.gridPlane} position={SCENE_VIEW.gridPosition} scale={SCENE_VIEW.gridScale} />
 
     <T.Group rotation={SCENE_VIEW.sceneRotation} bind:ref={rigRootRef}>
-      <RigFrame {geometry} {highlightedBeamIds} {measurementOverlay} {profileColor} {showEndCaps} {visibleModules} />
+      <RigFrame
+        {geometry}
+        {highlightedBeamIds}
+        {measurementOverlay}
+        {profileColor}
+        {postureSettings}
+        {showEndCaps}
+        {visibleModules}
+      />
     </T.Group>
   </Canvas>
 </div>

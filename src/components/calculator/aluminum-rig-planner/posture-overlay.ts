@@ -1,0 +1,1 @@
+export const POSTURE_SKELETON_OVERLAY_LAYER = 1;

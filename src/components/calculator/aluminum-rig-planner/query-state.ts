@@ -1,11 +1,26 @@
-import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS, getPlannerStockCostMax } from './constants';
+import {
+  DEFAULT_ANTHROPOMETRY_RATIOS,
+  DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
+  DEFAULT_PLANNER_POSTURE_SETTINGS,
+  PLANNER_POSTURE_LIMITS,
+  getPlannerStockCostMax,
+} from './constants';
 import { clampPlannerInput } from './geometry';
-import type { PlannerInput, PlannerOptimizationSettings, PlannerStockOption } from './types';
+import type {
+  PlannerAnthropometryRatios,
+  PlannerInput,
+  PlannerOptimizationSettings,
+  PlannerPostureSettings,
+  PlannerStockOption,
+} from './types';
 
 export type PlannerQueryState = Partial<PlannerInput> & {
   wheelRadiusMm?: unknown;
   optimizer?: Partial<
-    Omit<PlannerOptimizationSettings, 'mode' | 'currencyMode' | 'shippingMode' | 'profileWeightsKgPerMeter' | 'stockOptions'>
+    Omit<
+      PlannerOptimizationSettings,
+      'mode' | 'currencyMode' | 'shippingMode' | 'profileWeightsKgPerMeter' | 'stockOptions'
+    >
   > & {
     mode?: unknown;
     currencyMode?: unknown;
@@ -20,6 +35,10 @@ export type PlannerQueryState = Partial<PlannerInput> & {
       lengthMm?: unknown;
       cost?: unknown;
     }>;
+  };
+  posture?: Partial<Omit<PlannerPostureSettings, 'preset' | 'ratios'>> & {
+    preset?: unknown;
+    ratios?: Partial<Record<keyof PlannerAnthropometryRatios, unknown>>;
   };
 };
 
@@ -55,7 +74,10 @@ function createStockOptionId() {
   return `planner-stock-option-${stockOptionIdSequence}`;
 }
 
-function sanitizeStockOptions(state: PlannerQueryState['optimizer'], defaults: PlannerOptimizationSettings['stockOptions']) {
+function sanitizeStockOptions(
+  state: PlannerQueryState['optimizer'],
+  defaults: PlannerOptimizationSettings['stockOptions']
+) {
   const stockOptions = state?.stockOptions;
 
   if (!Array.isArray(stockOptions)) {
@@ -68,10 +90,7 @@ function sanitizeStockOptions(state: PlannerQueryState['optimizer'], defaults: P
     }
 
     const lengthMm = readNonNegativeNumber(option.lengthMm, 0);
-    const cost = Math.min(
-      readNonNegativeNumber(option.cost, 0),
-      getPlannerStockCostMax(option.profileType, lengthMm)
-    );
+    const cost = Math.min(readNonNegativeNumber(option.cost, 0), getPlannerStockCostMax(option.profileType, lengthMm));
 
     if (lengthMm <= 0 || cost < 0) {
       return [];
@@ -93,7 +112,8 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
 
   return {
     mode: state?.mode === 'waste' ? 'waste' : defaults.mode,
-    currencyMode: state?.currencyMode === 'eur' || state?.currencyMode === 'usd' ? state.currencyMode : defaults.currencyMode,
+    currencyMode:
+      state?.currencyMode === 'eur' || state?.currencyMode === 'usd' ? state.currencyMode : defaults.currencyMode,
     bladeThicknessMm: clampBladeThicknessMm(readNumber(state?.bladeThicknessMm, defaults.bladeThicknessMm)),
     safetyMarginMm: Math.max(0, Math.round(readNumber(state?.safetyMarginMm, defaults.safetyMarginMm))),
     shippingMode: state?.shippingMode === 'per-kg' ? 'per-kg' : defaults.shippingMode,
@@ -111,6 +131,50 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
     },
     stockOptions: sanitizeStockOptions(state, defaults.stockOptions),
   } satisfies PlannerOptimizationSettings;
+}
+
+function sanitizeRatio(value: unknown, fallback: number) {
+  return clampNumber(readNumber(value, fallback), PLANNER_POSTURE_LIMITS.ratioMin, PLANNER_POSTURE_LIMITS.ratioMax);
+}
+
+function clampNumber(value: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function sanitizePostureSettings(state: PlannerQueryState['posture']) {
+  const defaults = DEFAULT_PLANNER_POSTURE_SETTINGS;
+
+  return {
+    preset:
+      state?.preset === 'formula' || state?.preset === 'gt' || state?.preset === 'rally' || state?.preset === 'road'
+        ? state.preset
+        : defaults.preset,
+    heightCm: clampNumber(
+      readNumber(state?.heightCm, defaults.heightCm),
+      PLANNER_POSTURE_LIMITS.heightMinCm,
+      PLANNER_POSTURE_LIMITS.heightMaxCm
+    ),
+    advancedAnthropometry:
+      typeof state?.advancedAnthropometry === 'boolean' ? state.advancedAnthropometry : defaults.advancedAnthropometry,
+    ratios: {
+      sittingHeight: sanitizeRatio(state?.ratios?.sittingHeight, DEFAULT_ANTHROPOMETRY_RATIOS.sittingHeight),
+      seatedEyeHeight: sanitizeRatio(state?.ratios?.seatedEyeHeight, DEFAULT_ANTHROPOMETRY_RATIOS.seatedEyeHeight),
+      seatedShoulderHeight: sanitizeRatio(
+        state?.ratios?.seatedShoulderHeight,
+        DEFAULT_ANTHROPOMETRY_RATIOS.seatedShoulderHeight
+      ),
+      hipBreadth: sanitizeRatio(state?.ratios?.hipBreadth, DEFAULT_ANTHROPOMETRY_RATIOS.hipBreadth),
+      shoulderBreadth: sanitizeRatio(state?.ratios?.shoulderBreadth, DEFAULT_ANTHROPOMETRY_RATIOS.shoulderBreadth),
+      upperArmLength: sanitizeRatio(state?.ratios?.upperArmLength, DEFAULT_ANTHROPOMETRY_RATIOS.upperArmLength),
+      forearmHandLength: sanitizeRatio(
+        state?.ratios?.forearmHandLength,
+        DEFAULT_ANTHROPOMETRY_RATIOS.forearmHandLength
+      ),
+      thighLength: sanitizeRatio(state?.ratios?.thighLength, DEFAULT_ANTHROPOMETRY_RATIOS.thighLength),
+      lowerLegLength: sanitizeRatio(state?.ratios?.lowerLegLength, DEFAULT_ANTHROPOMETRY_RATIOS.lowerLegLength),
+      footLength: sanitizeRatio(state?.ratios?.footLength, DEFAULT_ANTHROPOMETRY_RATIOS.footLength),
+    },
+  } satisfies PlannerPostureSettings;
 }
 
 export function mergePlannerQueryState(defaultInput: PlannerInput, state: PlannerQueryState) {
@@ -153,5 +217,6 @@ export function mergePlannerQueryState(defaultInput: PlannerInput, state: Planne
   return {
     plannerInput,
     optimizationSettings: sanitizeOptimizationSettings(state.optimizer),
+    postureSettings: sanitizePostureSettings(state.posture),
   };
 }

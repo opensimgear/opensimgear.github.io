@@ -150,4 +150,24 @@ describe('aluminum rig planner query state', () => {
       stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({ ...option })),
     });
   });
+
+  it('sanitizes posture settings from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        preset: 'rally',
+        heightCm: 260,
+        advancedAnthropometry: true,
+        ratios: {
+          upperArmLength: 0.5,
+          footLength: -1,
+        },
+      },
+    });
+
+    expect(state.postureSettings.preset).toBe('rally');
+    expect(state.postureSettings.heightCm).toBe(220);
+    expect(state.postureSettings.advancedAnthropometry).toBe(true);
+    expect(state.postureSettings.ratios.upperArmLength).toBe(0.5);
+    expect(state.postureSettings.ratios.footLength).toBe(0.05);
+  });
 });

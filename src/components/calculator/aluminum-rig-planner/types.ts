@@ -8,6 +8,27 @@ export type PlannerOptimizerMode = 'cost' | 'waste';
 export type ShippingMode = 'flat' | 'per-kg';
 export type PlannerCurrencyMode = 'auto' | 'eur' | 'usd';
 export type PlannerCurrencyCode = 'EUR' | 'USD';
+export type PlannerPosturePreset = 'formula' | 'gt' | 'rally' | 'road';
+
+export type PlannerAnthropometryRatios = {
+  sittingHeight: number;
+  seatedEyeHeight: number;
+  seatedShoulderHeight: number;
+  hipBreadth: number;
+  shoulderBreadth: number;
+  upperArmLength: number;
+  forearmHandLength: number;
+  thighLength: number;
+  lowerLegLength: number;
+  footLength: number;
+};
+
+export type PlannerPostureSettings = {
+  preset: PlannerPosturePreset;
+  heightCm: number;
+  advancedAnthropometry: boolean;
+  ratios: PlannerAnthropometryRatios;
+};
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;
 

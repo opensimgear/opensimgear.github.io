@@ -15,13 +15,16 @@
   import {
     COLOR_MODE_OPTIONS,
     DEFAULT_CUSTOM_PROFILE_COLOR,
+    DEFAULT_PLANNER_POSTURE_SETTINGS,
     DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
     DEFAULT_PLANNER_INPUT,
     getPlannerStockCostDefault,
     getPlannerStockCostMax,
+    PLANNER_POSTURE_LIMITS,
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
     PLANNER_LAYOUT,
+    POSTURE_PRESET_OPTIONS,
     URL_STATE_DEBOUNCE_MS,
   } from './constants';
   import {
@@ -52,9 +55,12 @@
   import type { PlannerGeometry } from './geometry';
   import type {
     CutListProfileType,
+    PlannerAnthropometryRatios,
     PlannerCurrencyCode,
     PlannerInput,
     PlannerOptimizationSettings,
+    PlannerPosturePreset,
+    PlannerPostureSettings,
     PlannerVisibleModules,
   } from './types';
 
@@ -64,6 +70,7 @@
     isNarrowViewport?: boolean;
     measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
+    postureSettings: PlannerPostureSettings;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   }>;
@@ -78,6 +85,22 @@
     profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
     stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({ ...option })),
   };
+  const DEFAULT_POSTURE_SETTINGS: PlannerPostureSettings = {
+    ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+    ratios: { ...DEFAULT_PLANNER_POSTURE_SETTINGS.ratios },
+  };
+  const ANTHROPOMETRY_RATIO_CONTROLS = [
+    { key: 'sittingHeight', label: 'Sitting height' },
+    { key: 'seatedEyeHeight', label: 'Eye height' },
+    { key: 'seatedShoulderHeight', label: 'Shoulder height' },
+    { key: 'hipBreadth', label: 'Hip breadth' },
+    { key: 'shoulderBreadth', label: 'Shoulder breadth' },
+    { key: 'upperArmLength', label: 'Upper arm' },
+    { key: 'forearmHandLength', label: 'Forearm + hand' },
+    { key: 'thighLength', label: 'Thigh' },
+    { key: 'lowerLegLength', label: 'Lower leg' },
+    { key: 'footLength', label: 'Foot' },
+  ] satisfies Array<{ key: keyof PlannerAnthropometryRatios; label: string }>;
   const PLANNER_TEST_ID_TARGETS = [
     {
       text: 'Settings',
@@ -153,11 +176,19 @@
     };
   }
 
+  function clonePostureSettings(settings: PlannerPostureSettings): PlannerPostureSettings {
+    return {
+      ...settings,
+      ratios: { ...settings.ratios },
+    };
+  }
+
   function applyQueryState(state: PlannerQueryState) {
     const mergedState = mergePlannerQueryState(DEFAULT_INPUT, state);
 
     Object.assign(plannerInput, mergedState.plannerInput);
     Object.assign(optimizationSettings, cloneOptimizationSettings(mergedState.optimizationSettings));
+    Object.assign(postureSettings, clonePostureSettings(mergedState.postureSettings));
 
     for (const option of optimizationSettings.stockOptions) {
       const numericSuffix = Number(option.id.replace(/\D+/g, ''));
@@ -172,6 +203,7 @@
   let optimizationSettings = $state<PlannerOptimizationSettings>(
     cloneOptimizationSettings(DEFAULT_OPTIMIZATION_SETTINGS)
   );
+  let postureSettings = $state<PlannerPostureSettings>(clonePostureSettings(DEFAULT_POSTURE_SETTINGS));
   let visibleModules = $state<PlannerVisibleModules>({
     pedalTray: true,
     steeringColumn: true,
@@ -423,6 +455,7 @@
     const encodedPlannerState = encodeQueryState({
       ...$state.snapshot(plannerInput),
       optimizer: $state.snapshot(optimizationSettings),
+      posture: $state.snapshot(postureSettings),
     });
     const url = new URL(window.location.href);
 
@@ -636,6 +669,7 @@
 
   function resetSetup() {
     Object.assign(plannerInput, DEFAULT_INPUT);
+    Object.assign(postureSettings, clonePostureSettings(DEFAULT_POSTURE_SETTINGS));
     profileColorMode = 'black';
     customProfileColor = DEFAULT_CUSTOM_PROFILE_COLOR;
     showEndCaps = true;
@@ -660,6 +694,35 @@
     setPedalAcceleratorDeltaMm(DEFAULT_INPUT.pedalAcceleratorDeltaMm);
     setPedalBrakeDeltaMm(DEFAULT_INPUT.pedalBrakeDeltaMm);
     setPedalClutchDeltaMm(DEFAULT_INPUT.pedalClutchDeltaMm);
+  }
+
+  function setPosturePreset(value: PlannerPosturePreset) {
+    postureSettings.preset = value;
+    syncPlannerUrlState();
+  }
+
+  function setPostureHeightCm(value: number) {
+    postureSettings.heightCm = Math.max(
+      PLANNER_POSTURE_LIMITS.heightMinCm,
+      Math.min(PLANNER_POSTURE_LIMITS.heightMaxCm, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setAdvancedAnthropometry(value: boolean) {
+    postureSettings.advancedAnthropometry = value;
+    syncPlannerUrlState();
+  }
+
+  function setAnthropometryRatio(key: keyof PlannerAnthropometryRatios, value: number) {
+    postureSettings.ratios[key] = Number(
+      Math.max(PLANNER_POSTURE_LIMITS.ratioMin, Math.min(PLANNER_POSTURE_LIMITS.ratioMax, value)).toFixed(3)
+    );
+    syncPlannerUrlState();
+  }
+
+  function formatAnthropometryRatio(value: number) {
+    return value.toFixed(3);
   }
 
   function setOptimizerMode(value: PlannerOptimizationSettings['mode']) {
@@ -786,6 +849,7 @@
               {isNarrowViewport}
               {measurementOverlay}
               {profileColor}
+              {postureSettings}
               {showEndCaps}
               {visibleModules}
             />
@@ -1049,6 +1113,44 @@
                 format={(value) => `${value} mm`}
               />
               <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
+            </Folder>
+          {/if}
+        </Pane>
+        <Pane title="Posture" position="inline" bind:expanded={paneExpanded.posture}>
+          <Folder title="Driver">
+            <List
+              bind:value={() => postureSettings.preset, setPosturePreset}
+              options={POSTURE_PRESET_OPTIONS}
+              label="Preset"
+            />
+            <Slider
+              bind:value={() => postureSettings.heightCm, setPostureHeightCm}
+              label="Height"
+              min={PLANNER_POSTURE_LIMITS.heightMinCm}
+              max={PLANNER_POSTURE_LIMITS.heightMaxCm}
+              step={1}
+              format={(value) => `${value.toFixed(0)} cm`}
+            />
+            <Checkbox
+              bind:value={() => postureSettings.advancedAnthropometry, setAdvancedAnthropometry}
+              label="Advanced"
+            />
+          </Folder>
+          {#if postureSettings.advancedAnthropometry}
+            <Folder title="Anthropometry">
+              {#each ANTHROPOMETRY_RATIO_CONTROLS as control (control.key)}
+                <Slider
+                  bind:value={
+                    () => postureSettings.ratios[control.key],
+                    (value) => setAnthropometryRatio(control.key, value)
+                  }
+                  label={control.label}
+                  min={PLANNER_POSTURE_LIMITS.ratioMin}
+                  max={PLANNER_POSTURE_LIMITS.ratioMax}
+                  step={PLANNER_POSTURE_LIMITS.ratioStep}
+                  format={formatAnthropometryRatio}
+                />
+              {/each}
             </Folder>
           {/if}
         </Pane>

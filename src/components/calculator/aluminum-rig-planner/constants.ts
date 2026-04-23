@@ -1,4 +1,10 @@
-import type { CutListProfileType, PlannerInput, PlannerOptimizationSettings, PlannerProfileShipping } from './types';
+import type {
+  CutListProfileType,
+  PlannerInput,
+  PlannerOptimizationSettings,
+  PlannerPostureSettings,
+  PlannerProfileShipping,
+} from './types';
 import { plannerYUpToSceneZUp, Z_UP_SCENE_ROOT_ROTATION } from './scene-space';
 
 export const MM_TO_METERS = 0.001;
@@ -146,6 +152,43 @@ export const DEFAULT_PLANNER_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings 
   ],
 };
 
+export const POSTURE_PRESET_OPTIONS = [
+  { text: 'Formula', value: 'formula' },
+  { text: 'GT', value: 'gt' },
+  { text: 'Rally', value: 'rally' },
+  { text: 'Road', value: 'road' },
+] as const;
+
+export const DEFAULT_ANTHROPOMETRY_RATIOS: PlannerPostureSettings['ratios'] = {
+  sittingHeight: 0.526,
+  seatedEyeHeight: 0.455,
+  seatedShoulderHeight: 0.345,
+  hipBreadth: 0.216,
+  shoulderBreadth: 0.225,
+  upperArmLength: 0.222,
+  forearmHandLength: 0.269,
+  thighLength: 0.232,
+  lowerLegLength: 0.251,
+  footLength: 0.153,
+};
+
+export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
+  preset: 'gt',
+  heightCm: 175,
+  advancedAnthropometry: false,
+  ratios: {
+    ...DEFAULT_ANTHROPOMETRY_RATIOS,
+  },
+};
+
+export const PLANNER_POSTURE_LIMITS = {
+  heightMinCm: 100,
+  heightMaxCm: 220,
+  ratioMin: 0.05,
+  ratioMax: 0.7,
+  ratioStep: 0.001,
+} as const;
+
 export const PLANNER_DIMENSION_LIMITS = {
   baseLengthMinMm: 800,
   baseLengthMaxMm: 1600,
@@ -263,11 +306,13 @@ export const ALUMINUM_RIG_MOBILE_BREAKPOINT = 1024;
 export const DESKTOP_PANE_EXPANDED_STATE = {
   setup: true,
   modules: true,
+  posture: true,
   optimizer: true,
 } as const;
 export const MOBILE_PANE_EXPANDED_STATE = {
   setup: false,
   modules: false,
+  posture: false,
   optimizer: false,
 } as const;
 

@@ -11,18 +11,30 @@
   import { createSteeringColumnModule } from './modules/steering-column';
   import { createWheelModule } from './modules/wheel';
   import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from './modules/shared';
-  import type { PlannerVisibleModules } from './types';
+  import { createPlannerPostureSkeleton } from './posture';
+  import PostureOverlayPass from './PostureOverlayPass.svelte';
+  import PostureSkeleton from './PostureSkeleton.svelte';
+  import type { PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
     geometry: PlannerGeometry;
     highlightedBeamIds: string[];
     measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
+    postureSettings: PlannerPostureSettings;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   };
 
-  const { geometry, highlightedBeamIds, measurementOverlay = null, profileColor, showEndCaps, visibleModules }: Props = $props();
+  const {
+    geometry,
+    highlightedBeamIds,
+    measurementOverlay = null,
+    profileColor,
+    postureSettings,
+    showEndCaps,
+    visibleModules,
+  }: Props = $props();
   const input = $derived(geometry.input);
   const highlightedBeamIdSet = $derived(new Set(highlightedBeamIds));
 
@@ -32,6 +44,7 @@
   const pedalsModule = $derived(createPedalsModule(input));
   const seatModule = $derived(createSeatModule(input));
   const wheelModule = $derived(createWheelModule(input));
+  const postureSkeleton = $derived(createPlannerPostureSkeleton(input, postureSettings));
 
   const beamMeshes = $derived([
     ...baseModule,
@@ -67,3 +80,6 @@
 {#if measurementOverlay}
   <MeasurementArrow color={measurementOverlay.color} start={measurementOverlay.start} end={measurementOverlay.end} />
 {/if}
+
+<PostureSkeleton skeleton={postureSkeleton} />
+<PostureOverlayPass />
