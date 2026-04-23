@@ -86,15 +86,16 @@ describe('getNextStewartPaneExpandedState', () => {
 });
 
 describe('getStewartSceneClassNames', () => {
-  it('uses reduced fixed height without flex growth on narrow viewports', () => {
-    expect(getStewartSceneClassNames(true)).toContain('h-[320px]');
-    expect(getStewartSceneClassNames(true)).toContain('sm:h-[420px]');
-    expect(getStewartSceneClassNames(true)).not.toContain('flex-1');
+  it('keeps aspect-based scene sizing on narrow viewports', () => {
+    expect(getStewartSceneClassNames(true)).toContain('relative');
+    expect(getStewartSceneClassNames(true)).toContain('aspect-[3/2]');
+    expect(getStewartSceneClassNames(true)).toContain('radial-gradient');
   });
 
-  it('keeps flexible desktop scene sizing on wide viewports', () => {
-    expect(getStewartSceneClassNames(false)).toContain('h-[600px]');
-    expect(getStewartSceneClassNames(false)).toContain('flex-1');
+  it('keeps same scene sizing shell on wide viewports', () => {
+    expect(getStewartSceneClassNames(false)).toContain('relative');
+    expect(getStewartSceneClassNames(false)).toContain('aspect-[3/2]');
+    expect(getStewartSceneClassNames(false)).toContain('radial-gradient');
   });
 });
 
@@ -107,8 +108,8 @@ describe('mobile scene UI helpers', () => {
   it('uses tighter status panel styling on narrow viewports', () => {
     const classNames = getStewartStatusPanelClassNames(true);
 
-    expect(classNames).toContain('top-2');
-    expect(classNames).toContain('right-2');
+    expect(classNames).toContain('bottom-2');
+    expect(classNames).toContain('inset-x-2');
     expect(classNames).toContain('px-2');
     expect(classNames).toContain('py-1.5');
     expect(classNames).toContain('text-[8px]');
@@ -117,7 +118,7 @@ describe('mobile scene UI helpers', () => {
   it('keeps roomier status panel styling on wide viewports', () => {
     const classNames = getStewartStatusPanelClassNames(false);
 
-    expect(classNames).toContain('top-3');
+    expect(classNames).toContain('bottom-3');
     expect(classNames).toContain('right-3');
     expect(classNames).toContain('px-3');
     expect(classNames).toContain('py-2');

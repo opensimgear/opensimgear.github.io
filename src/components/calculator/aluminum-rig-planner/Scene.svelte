@@ -1,13 +1,16 @@
 <script lang="ts">
   import { Canvas } from '@threlte/core';
-  import { Gizmo, Grid, OrbitControls } from '@threlte/extras';
+  import { Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
   import { onMount, tick } from 'svelte';
   import { Group, OrthographicCamera, PerspectiveCamera, Vector3, WebGLRenderer } from 'three';
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
   import { PI_INTENSITY, SCENE_VIEW } from './constants';
+  import ViewportCameraControls from '../shared/ViewportCameraControls.svelte';
+  import ViewportGizmo from '../shared/ViewportGizmo.svelte';
   import { buildPlaneEquation, syncOrbitCameraView, ThreeSpaceMouseBridge } from '../shared/space-mouse';
+  import { getSceneControlsTopOffsetPx } from '../shared/scene-controls';
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
@@ -161,72 +164,18 @@
   role="application"
   aria-label="3D aluminum rig planner viewport"
 >
-  <div class="pointer-events-none absolute right-4 z-10" style={`top: ${gizmoSize + 28}px;`}>
-    <div class="pointer-events-auto flex flex-col items-end gap-1.5 text-zinc-700">
-      <button
-        type="button"
-        class="grid h-8 w-8 place-items-center rounded-full border border-white/30 bg-white/10 text-zinc-500 backdrop-blur-sm transition hover:border-white/60 hover:bg-white/25 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2"
-        aria-label="Reset camera view"
-        title="Reset view"
-        onclick={async () => {
-          await resetCameraView();
-          focusViewport();
-        }}
-      >
-        <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M20 11a8 8 0 1 0-2.34 5.66"></path>
-          <path d="M20 4v7h-7"></path>
-        </svg>
-        <span class="sr-only">Reset view</span>
-      </button>
-      <button
-        type="button"
-        class={[
-          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
-          !useOrthographicCamera
-            ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
-            : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
-        ]}
-        aria-pressed={!useOrthographicCamera}
-        aria-label="Use perspective camera"
-        title="Perspective"
-        onclick={async () => {
-          await setCameraMode(false);
-          focusViewport();
-        }}
-      >
-        <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M6 8h12l3 8H3z"></path>
-          <path d="M9 8l-1.5 8"></path>
-          <path d="M15 8l1.5 8"></path>
-        </svg>
-        <span class="sr-only">Perspective</span>
-      </button>
-      <button
-        type="button"
-        class={[
-          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
-          useOrthographicCamera
-            ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
-            : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
-        ]}
-        aria-pressed={useOrthographicCamera}
-        aria-label="Use orthographic camera"
-        title="Orthographic"
-        onclick={async () => {
-          await setCameraMode(true);
-          focusViewport();
-        }}
-      >
-        <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="5" y="5" width="14" height="14" rx="1.5"></rect>
-          <path d="M9 5v14"></path>
-          <path d="M15 5v14"></path>
-        </svg>
-        <span class="sr-only">Orthographic</span>
-      </button>
-    </div>
-  </div>
+  <ViewportCameraControls
+    activeCameraMode={useOrthographicCamera ? 'orthographic' : 'perspective'}
+    topOffsetPx={getSceneControlsTopOffsetPx(gizmoSize)}
+    onResetView={async () => {
+      await resetCameraView();
+      focusViewport();
+    }}
+    onSetCameraMode={async (mode) => {
+      await setCameraMode(mode === 'orthographic');
+      focusViewport();
+    }}
+  />
 
   <Canvas shadows createRenderer={createPlannerRenderer}>
     {#if useOrthographicCamera}
@@ -245,7 +194,7 @@
           dampingFactor={SCENE_VIEW.orbitDampingFactor}
           target={controlsTarget}
         >
-          <Gizmo size={gizmoSize} placement="top-right" />
+          <ViewportGizmo size={gizmoSize} placement="top-right" />
         </OrbitControls>
       </T.OrthographicCamera>
     {:else}
@@ -261,7 +210,7 @@
           dampingFactor={SCENE_VIEW.orbitDampingFactor}
           target={controlsTarget}
         >
-          <Gizmo size={gizmoSize} placement="top-right" />
+          <ViewportGizmo size={gizmoSize} placement="top-right" />
         </OrbitControls>
       </T.PerspectiveCamera>
     {/if}

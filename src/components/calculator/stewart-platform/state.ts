@@ -82,10 +82,10 @@ export function getStewartGizmoSize(isNarrow: boolean) {
 
 export function getStewartStatusPanelClassNames(isNarrow: boolean) {
   if (isNarrow) {
-    return 'absolute top-2 right-2 rounded border border-gray-300 bg-white/80 px-2 py-1.5 text-[8px] font-mono backdrop-blur-sm pointer-events-none select-none';
+    return 'absolute inset-x-2 bottom-2 rounded border border-gray-300 bg-white/80 px-2 py-1.5 text-[8px] font-mono backdrop-blur-sm pointer-events-none select-none';
   }
 
-  return 'absolute top-3 right-3 rounded border border-gray-300 bg-white/80 px-3 py-2 text-xs font-mono backdrop-blur-sm pointer-events-none select-none';
+  return 'absolute bottom-3 right-3 rounded border border-gray-300 bg-white/80 px-3 py-2 text-xs font-mono backdrop-blur-sm pointer-events-none select-none';
 }
 
 export function clampPlatformMovement(

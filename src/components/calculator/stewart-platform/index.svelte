@@ -5,6 +5,9 @@
   import { Matrix3, Vector3 } from 'three';
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
+  import ViewportCameraControls from '../shared/ViewportCameraControls.svelte';
+  import type { CameraProjectionMode } from '../shared/scene-controls';
+  import { getSceneControlsTopOffsetPx } from '../shared/scene-controls';
   import Scene from './Scene.svelte';
   import {
     clampPlatformMovement,
@@ -48,6 +51,11 @@
     actuatorMax?: number;
     platformRotation?: Rotation;
     platformTranslation?: Translation;
+  };
+
+  type StewartSceneHandle = {
+    resetCameraView: () => Promise<void>;
+    setCameraMode: (mode: CameraProjectionMode) => Promise<void>;
   };
 
   function isFiniteNumber(value: unknown): value is number {
@@ -97,6 +105,8 @@
   let paneExpanded = $state<StewartPaneExpandedState>(getStewartPaneExpandedState(false));
   let mounted = $state(false);
   let viewportElement = $state<HTMLDivElement | null>(null);
+  let sceneCameraMode = $state<CameraProjectionMode>('perspective');
+  let sceneRef = $state<StewartSceneHandle | null>(null);
 
   function syncViewportState(width: number, resetPanes = false) {
     const nextIsNarrow = isNarrowStewartViewport(width);
@@ -366,24 +376,42 @@
       },
     };
   }
+
+  function focusViewport() {
+    viewportElement?.focus({ preventScroll: true });
+  }
 </script>
 
 <div class="not-content w-full overflow-hidden rounded border border-zinc-300 bg-white shadow-sm">
   {#if mounted}
     <div class={isNarrowViewport ? 'flex flex-col' : 'grid grid-cols-[minmax(0,1.3fr)_19.2rem]'}>
       <div
-        {@attach captureViewport}
         class="flex min-w-0 flex-col border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
         <div class={isNarrowViewport ? 'mx-auto w-[clamp(18rem,84vw,42rem)] max-w-full' : 'w-full'}>
           <div
+            {@attach captureViewport}
             class={`${getStewartSceneClassNames(isNarrowViewport)} outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2`}
             tabindex="-1"
             role="application"
             aria-label="3D Stewart platform viewport"
           >
+            <ViewportCameraControls
+              activeCameraMode={sceneCameraMode}
+              topOffsetPx={getSceneControlsTopOffsetPx(getStewartGizmoSize(isNarrowViewport))}
+              onResetView={async () => {
+                await sceneRef?.resetCameraView();
+                focusViewport();
+              }}
+              onSetCameraMode={async (mode) => {
+                await sceneRef?.setCameraMode(mode);
+                sceneCameraMode = mode;
+                focusViewport();
+              }}
+            />
             <Canvas>
               <Scene
+                bind:this={sceneRef}
                 {baseDiameter}
                 {platformDiameter}
                 {platformHeight}
@@ -406,12 +434,12 @@
                 Platform
               </div>
               <div class:is-mobile-status-grid={isNarrowViewport} class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-gray-500">
-                <span>Pitch</span><span>{platformRotation.x.toFixed(1)}°</span>
-                <span>Roll</span><span>{platformRotation.y.toFixed(1)}°</span>
-                <span>Yaw</span><span>{platformRotation.z.toFixed(1)}°</span>
-                <span>Surge</span><span>{(platformTranslation.x * 1000).toFixed(0)} mm</span>
-                <span>Sway</span><span>{(platformTranslation.y * 1000).toFixed(0)} mm</span>
-                <span>Heave</span><span>{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span>
+                <span>Pitch</span><span class="text-right">{platformRotation.x.toFixed(1)}°</span>
+                <span>Roll</span><span class="text-right">{platformRotation.y.toFixed(1)}°</span>
+                <span>Yaw</span><span class="text-right">{platformRotation.z.toFixed(1)}°</span>
+                <span>Surge</span><span class="text-right">{(platformTranslation.x * 1000).toFixed(0)} mm</span>
+                <span>Sway</span><span class="text-right">{(platformTranslation.y * 1000).toFixed(0)} mm</span>
+                <span class="pr-2">Heave</span><span class="text-right">{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span>
               </div>
             </div>
           </div>

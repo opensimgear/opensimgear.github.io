@@ -2,14 +2,16 @@
 
 <script lang="ts">
   import { onMount, tick } from 'svelte';
-  import { Gizmo, Grid, OrbitControls } from '@threlte/extras';
+  import { Grid, OrbitControls } from '@threlte/extras';
   import { T } from '@threlte/core';
   import Joint from './Joint.svelte';
   import Leg from './Leg.svelte';
   import Platform from './Platform.svelte';
-  import { Group, Matrix3, PerspectiveCamera, Vector3 } from 'three';
+  import { Group, Matrix3, OrthographicCamera, PerspectiveCamera, Vector3 } from 'three';
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
+  import ViewportGizmo from '../shared/ViewportGizmo.svelte';
+  import type { CameraProjectionMode } from '../shared/scene-controls';
   import { buildPlaneEquation, syncOrbitCameraView, ThreeSpaceMouseBridge } from '../shared/space-mouse';
 
   export let baseDiameter = 0.8;
@@ -26,6 +28,8 @@
   export let viewportElement: HTMLDivElement | null = null;
 
   type LegStatus = 'ok' | 'over-extended' | 'over-compressed';
+  const ORTHOGRAPHIC_ASPECT_RATIO = 3 / 2;
+  const PERSPECTIVE_FOV_RADIANS = (50 * Math.PI) / 180;
   const STEWART_CAMERA_UP = [0, 0, 1] as const;
   const STEWART_CONSTRUCTION_PLANE = buildPlaneEquation([0, 0, -0.01], [0, 0, 1]);
 
@@ -33,22 +37,42 @@
   let lastValidTransformedCor: Vector3 = new Vector3();
   let legStatuses: LegStatus[] = Array(6).fill('ok');
   let perspectiveCameraRef: PerspectiveCamera | null = null;
+  let orthographicCameraRef: OrthographicCamera | null = null;
   let orbitControlsRef: ThreeOrbitControls | null = null;
   let modelRootRef: Group | null = null;
   let spaceMouseBridge: ThreeSpaceMouseBridge | null = null;
   let spaceMouseConnectRequested = false;
+  let savedView: {
+    position: [number, number, number];
+    target: [number, number, number];
+  } | null = null;
+  let useOrthographicCamera = false;
 
   let cameraX = baseDiameter * 1.2;
   let cameraY = cameraX;
-  const cameraZ = platformHeight * 2;
+  let cameraZ = platformHeight * 2;
+  $: cameraX = baseDiameter * 1.2;
+  $: cameraY = cameraX;
+  $: cameraZ = platformHeight * 2;
+  $: defaultCameraPosition = [cameraX, cameraY, cameraZ] as [number, number, number];
+  $: cameraPosition = savedView?.position ?? defaultCameraPosition;
 
   let initialPointsP: Vector3[] = [];
   let initialPointsB: Vector3[] = [];
   let transformedPointsP: Vector3[] = [];
   let transformedCor: Vector3;
-  $: controlsTarget = [0, 0, platformHeight] as [number, number, number];
+  $: controlsTarget = savedView?.target ?? ([0, 0, platformHeight] as [number, number, number]);
+  let orthographicArgs: [number, number, number, number, number, number] = [-1, 1, 1, -1, 0.1, 20];
 
   $: centerOfRotation = centerOfRotationRelative.clone().add(new Vector3(0, 0, platformHeight));
+  $: {
+    const top =
+      new Vector3(...cameraPosition).distanceTo(new Vector3(...controlsTarget)) *
+      Math.tan(PERSPECTIVE_FOV_RADIANS / 2);
+    const right = top * ORTHOGRAPHIC_ASPECT_RATIO;
+
+    orthographicArgs = [-right, right, top, -top, 0.1, 20];
+  }
 
   $: {
     const alphaPh = alphaP / 2;
@@ -130,6 +154,60 @@
     legStatuses = candidateStatuses;
   }
 
+  function getActiveCamera() {
+    return useOrthographicCamera ? orthographicCameraRef : perspectiveCameraRef;
+  }
+
+  function captureCurrentView() {
+    const activeCamera = getActiveCamera();
+
+    if (!activeCamera || !orbitControlsRef) {
+      return;
+    }
+
+    savedView = {
+      position: activeCamera.position.toArray() as [number, number, number],
+      target: orbitControlsRef.target.toArray() as [number, number, number],
+    };
+  }
+
+  function applySavedView() {
+    const activeCamera = getActiveCamera();
+
+    if (!activeCamera || !orbitControlsRef) {
+      return;
+    }
+
+    syncOrbitCameraView({
+      camera: activeCamera,
+      controls: orbitControlsRef,
+      cameraUp: [...STEWART_CAMERA_UP],
+      position: cameraPosition,
+      target: controlsTarget,
+    });
+  }
+
+  async function setCameraModeInternal(nextUseOrthographicCamera: boolean) {
+    if (useOrthographicCamera === nextUseOrthographicCamera) {
+      return;
+    }
+
+    captureCurrentView();
+    useOrthographicCamera = nextUseOrthographicCamera;
+    await tick();
+    applySavedView();
+  }
+
+  export async function setCameraMode(mode: CameraProjectionMode) {
+    await setCameraModeInternal(mode === 'orthographic');
+  }
+
+  export async function resetCameraView() {
+    savedView = null;
+    await tick();
+    applySavedView();
+  }
+
   onMount(() => {
     spaceMouseBridge = new ThreeSpaceMouseBridge({
       scene: {
@@ -140,20 +218,15 @@
       getViewport: () => viewportElement,
       getControls: () => orbitControlsRef,
       getModelRoot: () => modelRootRef,
-      getActiveCamera: () => perspectiveCameraRef,
+      getActiveCamera,
     });
 
     void tick().then(() => {
-      if (!perspectiveCameraRef || !orbitControlsRef) {
+      if (!orbitControlsRef) {
         return;
       }
 
-      syncOrbitCameraView({
-        camera: perspectiveCameraRef,
-        controls: orbitControlsRef,
-        cameraUp: [...STEWART_CAMERA_UP],
-        target: controlsTarget,
-      });
+      applySavedView();
     });
 
     return () => {
@@ -168,21 +241,27 @@
   }
 </script>
 
-<T.PerspectiveCamera
-  bind:ref={perspectiveCameraRef}
-  makeDefault
-  position.x={cameraX}
-  position.y={cameraY}
-  position.z={cameraZ}
-  up={STEWART_CAMERA_UP}
-  on:create={({ ref }) => {
-    ref.lookAt(0, 0, platformHeight);
-  }}
-/>
-
-<OrbitControls bind:ref={orbitControlsRef} target={controlsTarget}>
-  <Gizmo size={gizmoSize} />
-</OrbitControls>
+{#if useOrthographicCamera}
+  <T.OrthographicCamera
+    bind:ref={orthographicCameraRef}
+    args={orthographicArgs}
+    makeDefault
+    manual
+    position={cameraPosition}
+    up={STEWART_CAMERA_UP}
+    zoom={1}
+  >
+    <OrbitControls bind:ref={orbitControlsRef} enableDamping target={controlsTarget}>
+      <ViewportGizmo size={gizmoSize} placement="top-right" />
+    </OrbitControls>
+  </T.OrthographicCamera>
+{:else}
+  <T.PerspectiveCamera bind:ref={perspectiveCameraRef} makeDefault position={cameraPosition} up={STEWART_CAMERA_UP}>
+    <OrbitControls bind:ref={orbitControlsRef} enableDamping target={controlsTarget}>
+      <ViewportGizmo size={gizmoSize} placement="top-right" />
+    </OrbitControls>
+  </T.PerspectiveCamera>
+{/if}
 
 <T.DirectionalLight position={[3, 10, 7]} intensity={Math.PI} />
 <T.AmbientLight intensity={2} />
