@@ -22,6 +22,9 @@ export const PLANNER_MEASUREMENT_KEYS = [
   'steeringColumnDistanceMm',
   'steeringColumnBaseHeightMm',
   'steeringColumnHeightMm',
+  'wheelHeightOffsetMm',
+  'wheelDistanceFromSteeringColumnMm',
+  'wheelDiameterMm',
 ] as const satisfies readonly (keyof PlannerInput)[];
 
 export type PlannerMeasurementKey = (typeof PLANNER_MEASUREMENT_KEYS)[number];
@@ -54,6 +57,18 @@ function steeringColumnTopMm(input: PlannerInput) {
       input.steeringColumnBaseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
     )
   );
+}
+
+function steeringColumnCenterXmm(input: PlannerInput) {
+  return input.seatBaseDepthMm + input.steeringColumnDistanceMm + UPRIGHT_BEAM_DEPTH_MM;
+}
+
+function wheelCenterXmm(input: PlannerInput) {
+  return steeringColumnCenterXmm(input) + input.wheelDistanceFromSteeringColumnMm;
+}
+
+function wheelCenterYmm(input: PlannerInput) {
+  return BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm;
 }
 
 export function createPlannerMeasurementOverlay(
@@ -169,5 +184,41 @@ export function createPlannerMeasurementOverlay(
           rightSideArrowZ(input),
         ],
       };
+
+    case 'wheelHeightOffsetMm':
+      return {
+        key,
+        color: MEASUREMENT_OVERLAY_COLOR,
+        start: [mm(wheelCenterXmm(input)), mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm), baseCenterZ],
+        end: [
+          mm(wheelCenterXmm(input)),
+          mm(wheelCenterYmm(input)),
+          baseCenterZ,
+        ],
+      };
+
+    case 'wheelDistanceFromSteeringColumnMm':
+      return {
+        key,
+        color: MEASUREMENT_OVERLAY_COLOR,
+        start: [mm(steeringColumnCenterXmm(input)), horizontalArrowY(PROFILE_SHORT_MM + 90), baseCenterZ],
+        end: [mm(wheelCenterXmm(input)), horizontalArrowY(PROFILE_SHORT_MM + 90), baseCenterZ],
+      };
+
+    case 'wheelDiameterMm': {
+      const wheelAngleRad = (-input.wheelAngleDeg * Math.PI) / 180;
+      const wheelRadiusMm = input.wheelDiameterMm / 2;
+
+      return {
+        key,
+        color: MEASUREMENT_OVERLAY_COLOR,
+        start: [mm(wheelCenterXmm(input)), mm(wheelCenterYmm(input)), baseCenterZ],
+        end: [
+          mm(wheelCenterXmm(input) - Math.sin(wheelAngleRad) * wheelRadiusMm),
+          mm(wheelCenterYmm(input) + Math.cos(wheelAngleRad) * wheelRadiusMm),
+          baseCenterZ,
+        ],
+      };
+    }
   }
 }

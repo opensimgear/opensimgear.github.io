@@ -8,6 +8,7 @@
   import { createPedalTrayModule } from './modules/pedal-tray';
   import { createSeatModule } from './modules/seat';
   import { createSteeringColumnModule } from './modules/steering-column';
+  import { createWheelModule } from './modules/wheel';
   import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from './modules/shared';
   import type { PlannerVisibleModules } from './types';
 
@@ -28,6 +29,7 @@
   const steeringColumnModule = $derived(createSteeringColumnModule(input, profileColor));
   const pedalAssembly = $derived(createPedalTrayModule(input, profileColor));
   const seatModule = $derived(createSeatModule(input));
+  const wheelModule = $derived(createWheelModule(input));
 
   const beamMeshes = $derived([
     ...baseModule,
@@ -43,10 +45,10 @@
     }));
 
     if (!showEndCaps) {
-      return [...adjustedBeams, ...seatModule];
+      return [...adjustedBeams, ...wheelModule, ...seatModule];
     }
 
-    return [...adjustedBeams, ...beamMeshes.flatMap((mesh) => createEndCapMeshes(mesh)), ...seatModule];
+    return [...adjustedBeams, ...beamMeshes.flatMap((mesh) => createEndCapMeshes(mesh)), ...wheelModule, ...seatModule];
   });
 </script>
 

@@ -133,6 +133,26 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
     steeringColumnDistanceMm,
     steeringColumnBaseHeightMm,
     steeringColumnHeightMm,
+    wheelHeightOffsetMm: clamp(
+      input.wheelHeightOffsetMm,
+      PLANNER_DIMENSION_LIMITS.wheelHeightOffsetMinMm,
+      PLANNER_DIMENSION_LIMITS.wheelHeightOffsetMaxMm
+    ),
+    wheelAngleDeg: clamp(
+      input.wheelAngleDeg,
+      PLANNER_DIMENSION_LIMITS.wheelAngleDegMin,
+      PLANNER_DIMENSION_LIMITS.wheelAngleDegMax
+    ),
+    wheelDistanceFromSteeringColumnMm: clamp(
+      input.wheelDistanceFromSteeringColumnMm,
+      PLANNER_DIMENSION_LIMITS.wheelDistanceFromSteeringColumnMinMm,
+      PLANNER_DIMENSION_LIMITS.wheelDistanceFromSteeringColumnMaxMm
+    ),
+    wheelDiameterMm: clamp(
+      input.wheelDiameterMm,
+      PLANNER_DIMENSION_LIMITS.wheelDiameterMinMm,
+      PLANNER_DIMENSION_LIMITS.wheelDiameterMaxMm
+    ),
   };
 }
 

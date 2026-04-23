@@ -111,4 +111,8 @@ export interface PlannerInput {
   steeringColumnDistanceMm: number;
   steeringColumnBaseHeightMm: number;
   steeringColumnHeightMm: number;
+  wheelHeightOffsetMm: number;
+  wheelAngleDeg: number;
+  wheelDistanceFromSteeringColumnMm: number;
+  wheelDiameterMm: number;
 }

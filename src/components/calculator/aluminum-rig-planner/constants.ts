@@ -77,6 +77,10 @@ export const DEFAULT_PLANNER_INPUT: PlannerInput = {
   steeringColumnDistanceMm: 400,
   steeringColumnBaseHeightMm: 430,
   steeringColumnHeightMm: 510,
+  wheelHeightOffsetMm: 110,
+  wheelAngleDeg: 18,
+  wheelDistanceFromSteeringColumnMm: -100,
+  wheelDiameterMm: 320,
 };
 
 export const DEFAULT_PROFILE_WEIGHTS_KG_PER_METER: PlannerProfileShipping = {
@@ -143,6 +147,14 @@ export const PLANNER_DIMENSION_LIMITS = {
   steeringColumnBaseHeightMaxMm: 500,
   steeringColumnHeightMinMm: 380,
   steeringColumnHeightMaxMm: 600,
+  wheelHeightOffsetMinMm: -100,
+  wheelHeightOffsetMaxMm: 240,
+  wheelAngleDegMin: -30,
+  wheelAngleDegMax: 45,
+  wheelDistanceFromSteeringColumnMinMm: -220,
+  wheelDistanceFromSteeringColumnMaxMm: 220,
+  wheelDiameterMinMm: 250,
+  wheelDiameterMaxMm: 350,
 } as const;
 
 export const PLANNER_LAYOUT = {

@@ -3,6 +3,7 @@ import { clampPlannerInput } from './geometry';
 import type { PlannerInput, PlannerOptimizationSettings, PlannerStockOption } from './types';
 
 export type PlannerQueryState = Partial<PlannerInput> & {
+  wheelRadiusMm?: unknown;
   optimizer?: Partial<
     Omit<PlannerOptimizationSettings, 'mode' | 'currencyMode' | 'shippingMode' | 'profileWeightsKgPerMeter' | 'stockOptions'>
   > & {
@@ -131,6 +132,16 @@ export function mergePlannerQueryState(defaultInput: PlannerInput, state: Planne
     steeringColumnDistanceMm: readNumber(state.steeringColumnDistanceMm, defaultInput.steeringColumnDistanceMm),
     steeringColumnBaseHeightMm: readNumber(state.steeringColumnBaseHeightMm, defaultInput.steeringColumnBaseHeightMm),
     steeringColumnHeightMm: readNumber(state.steeringColumnHeightMm, defaultInput.steeringColumnHeightMm),
+    wheelHeightOffsetMm: readNumber(state.wheelHeightOffsetMm, defaultInput.wheelHeightOffsetMm),
+    wheelAngleDeg: readNumber(state.wheelAngleDeg, defaultInput.wheelAngleDeg),
+    wheelDistanceFromSteeringColumnMm: readNumber(
+      state.wheelDistanceFromSteeringColumnMm,
+      defaultInput.wheelDistanceFromSteeringColumnMm
+    ),
+    wheelDiameterMm: readNumber(
+      state.wheelDiameterMm,
+      isFiniteNumber(state.wheelRadiusMm) ? state.wheelRadiusMm * 2 : defaultInput.wheelDiameterMm
+    ),
   });
 
   return {

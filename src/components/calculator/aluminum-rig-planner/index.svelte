@@ -300,6 +300,22 @@
     min: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
     max: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm,
   }));
+  const wheelHeightOffsetLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.wheelHeightOffsetMinMm,
+    max: PLANNER_DIMENSION_LIMITS.wheelHeightOffsetMaxMm,
+  }));
+  const wheelAngleLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.wheelAngleDegMin,
+    max: PLANNER_DIMENSION_LIMITS.wheelAngleDegMax,
+  }));
+  const wheelDistanceLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.wheelDistanceFromSteeringColumnMinMm,
+    max: PLANNER_DIMENSION_LIMITS.wheelDistanceFromSteeringColumnMaxMm,
+  }));
+  const wheelDiameterLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.wheelDiameterMinMm,
+    max: PLANNER_DIMENSION_LIMITS.wheelDiameterMaxMm,
+  }));
   const pedalTrayDistanceLimits = $derived.by(() => ({
     min: getPedalTrayDistanceMinMm(plannerInput),
     max: getPedalTrayDistanceMaxMm(plannerInput),
@@ -511,6 +527,32 @@
     );
     syncPlannerUrlState();
     scheduleMeasurementOverlay('steeringColumnDistanceMm');
+  }
+
+  function setWheelHeightOffsetMm(value: number) {
+    plannerInput.wheelHeightOffsetMm = Math.max(wheelHeightOffsetLimits.min, Math.min(wheelHeightOffsetLimits.max, value));
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('wheelHeightOffsetMm');
+  }
+
+  function setWheelAngleDeg(value: number) {
+    plannerInput.wheelAngleDeg = Math.max(wheelAngleLimits.min, Math.min(wheelAngleLimits.max, value));
+    syncPlannerUrlState();
+  }
+
+  function setWheelDistanceFromSteeringColumnMm(value: number) {
+    plannerInput.wheelDistanceFromSteeringColumnMm = Math.max(
+      wheelDistanceLimits.min,
+      Math.min(wheelDistanceLimits.max, value)
+    );
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('wheelDistanceFromSteeringColumnMm');
+  }
+
+  function setWheelDiameterMm(value: number) {
+    plannerInput.wheelDiameterMm = Math.max(wheelDiameterLimits.min, Math.min(wheelDiameterLimits.max, value));
+    syncPlannerUrlState();
+    scheduleMeasurementOverlay('wheelDiameterMm');
   }
 
   function resetSetup() {
@@ -775,6 +817,40 @@
               max={PLANNER_DIMENSION_LIMITS.backrestAngleDegMax}
               step={1}
               format={(value) => `${value}°`}
+            />
+          </Folder>
+          <Folder title="Wheel">
+            <Slider
+              bind:value={() => plannerInput.wheelHeightOffsetMm, setWheelHeightOffsetMm}
+              label="Height vs column base"
+              min={wheelHeightOffsetLimits.min}
+              max={wheelHeightOffsetLimits.max}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
+              bind:value={() => plannerInput.wheelAngleDeg, setWheelAngleDeg}
+              label="Wheel angle"
+              min={wheelAngleLimits.min}
+              max={wheelAngleLimits.max}
+              step={1}
+              format={(value) => `${value}°`}
+            />
+            <Slider
+              bind:value={() => plannerInput.wheelDistanceFromSteeringColumnMm, setWheelDistanceFromSteeringColumnMm}
+              label="Wheel X vs column"
+              min={wheelDistanceLimits.min}
+              max={wheelDistanceLimits.max}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
+              bind:value={() => plannerInput.wheelDiameterMm, setWheelDiameterMm}
+              label="Wheel diameter"
+              min={wheelDiameterLimits.min}
+              max={wheelDiameterLimits.max}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
             />
           </Folder>
           <Button on:click={resetSetup} label="Reset" title="Reset" />
