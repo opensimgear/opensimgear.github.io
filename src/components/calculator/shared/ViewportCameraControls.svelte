@@ -1,10 +1,13 @@
 <script lang="ts">
   import type { CameraProjectionMode } from './scene-controls';
+  import type { ThreeSpaceMouseMotionTarget } from './space-mouse';
 
   type Props = {
     activeCameraMode?: CameraProjectionMode;
     onResetView: () => void | Promise<void>;
     onSetCameraMode?: ((mode: CameraProjectionMode) => void | Promise<void>) | null;
+    onSetSpaceMouseMotionTarget?: ((target: ThreeSpaceMouseMotionTarget) => void | Promise<void>) | null;
+    spaceMouseMotionTarget?: ThreeSpaceMouseMotionTarget | null;
     topOffsetPx?: number;
   };
 
@@ -12,6 +15,8 @@
     activeCameraMode = 'perspective',
     onResetView,
     onSetCameraMode = null,
+    onSetSpaceMouseMotionTarget = null,
+    spaceMouseMotionTarget = null,
     topOffsetPx = 0,
   }: Props = $props();
 
@@ -25,6 +30,14 @@
     }
 
     await onSetCameraMode(mode);
+  };
+
+  const setSpaceMouseMotionTarget = async (target: ThreeSpaceMouseMotionTarget) => {
+    if (!onSetSpaceMouseMotionTarget) {
+      return;
+    }
+
+    await onSetSpaceMouseMotionTarget(target);
   };
 </script>
 
@@ -52,6 +65,41 @@
       </svg>
       <span class="sr-only">Reset view</span>
     </button>
+
+    {#if onSetSpaceMouseMotionTarget && spaceMouseMotionTarget}
+      <button
+        type="button"
+        class={[
+          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
+          spaceMouseMotionTarget === 'platform'
+            ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
+            : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
+        ]}
+        aria-pressed={spaceMouseMotionTarget === 'platform'}
+        aria-label="Make SpaceMouse control platform"
+        title={spaceMouseMotionTarget === 'platform' ? 'SpaceMouse: Platform' : 'SpaceMouse: Scene'}
+        onclick={async () => {
+          await setSpaceMouseMotionTarget(spaceMouseMotionTarget === 'platform' ? 'scene' : 'platform');
+        }}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          class="h-4.5 w-4.5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="6" y="3" width="12" height="6" rx="1.5"></rect>
+          <path d="M4 13h16"></path>
+          <path d="M7 13v4.5A1.5 1.5 0 0 0 8.5 19h7a1.5 1.5 0 0 0 1.5-1.5V13"></path>
+          <path d="M10 16h4"></path>
+        </svg>
+        <span class="sr-only">Toggle SpaceMouse platform control</span>
+      </button>
+    {/if}
 
     {#if onSetCameraMode}
       <button

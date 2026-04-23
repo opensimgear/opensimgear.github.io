@@ -5,6 +5,12 @@
   import { Matrix3, Vector3 } from 'three';
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
+  import {
+    getSpaceMousePlatformAffineFromPose,
+    getSpaceMousePlatformPoseFromAffine,
+    type ThreeSpaceMouseMotionTarget,
+    type ThreeSpaceMousePlatformPose,
+  } from '../shared/space-mouse';
   import ViewportCameraControls from '../shared/ViewportCameraControls.svelte';
   import type { CameraProjectionMode } from '../shared/scene-controls';
   import { getSceneControlsTopOffsetPx } from '../shared/scene-controls';
@@ -34,7 +40,7 @@
     alphaB: 20,
     cor: { x: 0, y: 0, z: 0 },
     actuatorMin: 0.4,
-    actuatorMax: 0.6,
+    actuatorMax: 0.7,
     platformRotation: { x: 0, y: 0, z: 0 },
     platformTranslation: { x: 0, y: 0, z: 0 },
   };
@@ -106,6 +112,7 @@
   let mounted = $state(false);
   let viewportElement = $state<HTMLDivElement | null>(null);
   let sceneCameraMode = $state<CameraProjectionMode>('perspective');
+  let spaceMouseMotionTarget = $state<ThreeSpaceMouseMotionTarget>('scene');
   let sceneRef = $state<StewartSceneHandle | null>(null);
 
   function syncViewportState(width: number, resetPanes = false) {
@@ -380,6 +387,38 @@
   function focusViewport() {
     viewportElement?.focus({ preventScroll: true });
   }
+
+  function getPlatformPose(): ThreeSpaceMousePlatformPose {
+    return {
+      rotation: [platformRotation.x, platformRotation.y, platformRotation.z],
+      translation: [platformTranslation.x, platformTranslation.y, platformTranslation.z],
+    };
+  }
+
+  function getPlatformCenterOfRotation() {
+    return [
+      centerOfRotationRelative.x,
+      centerOfRotationRelative.y,
+      centerOfRotationRelative.z + platformHeight,
+    ] as [number, number, number];
+  }
+
+  function getPlatformAffine() {
+    return getSpaceMousePlatformAffineFromPose(getPlatformPose(), {
+      centerOfRotation: [...getPlatformCenterOfRotation()],
+    });
+  }
+
+  function decodePlatformPoseFromAffine(affine: number[]) {
+    return getSpaceMousePlatformPoseFromAffine(affine, {
+      centerOfRotation: [...getPlatformCenterOfRotation()],
+    });
+  }
+
+  function applyPlatformPose(pose: ThreeSpaceMousePlatformPose) {
+    platformRotation = { x: pose.rotation[0], y: pose.rotation[1], z: pose.rotation[2] };
+    platformTranslation = { x: pose.translation[0], y: pose.translation[1], z: pose.translation[2] };
+  }
 </script>
 
 <div class="not-content w-full overflow-hidden rounded border border-zinc-300 bg-white shadow-sm">
@@ -398,6 +437,7 @@
           >
             <ViewportCameraControls
               activeCameraMode={sceneCameraMode}
+              {spaceMouseMotionTarget}
               topOffsetPx={getSceneControlsTopOffsetPx(getStewartGizmoSize(isNarrowViewport))}
               onResetView={async () => {
                 await sceneRef?.resetCameraView();
@@ -406,6 +446,10 @@
               onSetCameraMode={async (mode) => {
                 await sceneRef?.setCameraMode(mode);
                 sceneCameraMode = mode;
+                focusViewport();
+              }}
+              onSetSpaceMouseMotionTarget={async (target) => {
+                spaceMouseMotionTarget = target;
                 focusViewport();
               }}
             />
@@ -420,9 +464,15 @@
                 {platformTranslation}
                 {platformRotation}
                 {centerOfRotationRelative}
+                {getPlatformAffine}
+                {getPlatformCenterOfRotation}
+                {spaceMouseMotionTarget}
                 {actuatorMin}
                 {actuatorMax}
+                {getPlatformPose}
+                getPlatformPoseFromAffine={decodePlatformPoseFromAffine}
                 gizmoSize={getStewartGizmoSize(isNarrowViewport)}
+                onPlatformPoseChange={applyPlatformPose}
                 {viewportElement}
               />
             </Canvas>
@@ -433,13 +483,18 @@
               >
                 Platform
               </div>
-              <div class:is-mobile-status-grid={isNarrowViewport} class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-gray-500">
+              <div
+                class:is-mobile-status-grid={isNarrowViewport}
+                class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-gray-500"
+              >
                 <span>Pitch</span><span class="text-right">{platformRotation.x.toFixed(1)}°</span>
                 <span>Roll</span><span class="text-right">{platformRotation.y.toFixed(1)}°</span>
                 <span>Yaw</span><span class="text-right">{platformRotation.z.toFixed(1)}°</span>
                 <span>Surge</span><span class="text-right">{(platformTranslation.x * 1000).toFixed(0)} mm</span>
                 <span>Sway</span><span class="text-right">{(platformTranslation.y * 1000).toFixed(0)} mm</span>
-                <span class="pr-2">Heave</span><span class="text-right">{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span>
+                <span class="pr-2">Heave</span><span class="text-right"
+                  >{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span
+                >
               </div>
             </div>
           </div>

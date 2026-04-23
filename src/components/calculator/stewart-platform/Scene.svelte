@@ -13,7 +13,14 @@
   import ViewportGizmo from '../shared/ViewportGizmo.svelte';
   import SceneGrid from '../shared/SceneGrid.svelte';
   import type { CameraProjectionMode } from '../shared/scene-controls';
-  import { buildPlaneEquation, syncOrbitCameraView, ThreeSpaceMouseBridge } from '../shared/space-mouse';
+  import {
+    buildPlaneEquation,
+    syncOrbitCameraView,
+    ThreeSpaceMouseBridge,
+    type ThreeSpaceMouseMotionTarget,
+    type ThreeSpaceMousePlatformPose,
+    type Vector3Tuple,
+  } from '../shared/space-mouse';
 
   export let baseDiameter = 0.8;
   export let platformDiameter = 0.4;
@@ -27,10 +34,18 @@
   export let actuatorMax = 0.6;
   export let gizmoSize = 128;
   export let viewportElement: HTMLDivElement | null = null;
+  export let spaceMouseMotionTarget: ThreeSpaceMouseMotionTarget = 'scene';
+  export let getPlatformPose: (() => ThreeSpaceMousePlatformPose) | null = null;
+  export let getPlatformAffine: (() => number[]) | null = null;
+  export let getPlatformCenterOfRotation: (() => Vector3Tuple) | null = null;
+  export let getPlatformPoseFromAffine: ((affine: number[]) => ThreeSpaceMousePlatformPose) | null = null;
+  export let onPlatformPoseChange: ((pose: ThreeSpaceMousePlatformPose) => void) | null = null;
 
   type LegStatus = 'ok' | 'over-extended' | 'over-compressed';
   const ORTHOGRAPHIC_ASPECT_RATIO = 3 / 2;
   const PERSPECTIVE_FOV_RADIANS = (50 * Math.PI) / 180;
+  const STEWART_PLATFORM_SPACEMOUSE_TRANSLATION_SCALE = 0.03;
+  const STEWART_PLATFORM_SPACEMOUSE_ROTATION_SCALE = 0.01;
   const STEWART_CAMERA_UP = [0, 0, 1] as const;
   const STEWART_CONSTRUCTION_PLANE = buildPlaneEquation([0, 0, -0.01], [0, 0, 1]);
 
@@ -68,8 +83,7 @@
   $: centerOfRotation = centerOfRotationRelative.clone().add(new Vector3(0, 0, platformHeight));
   $: {
     const top =
-      new Vector3(...cameraPosition).distanceTo(new Vector3(...controlsTarget)) *
-      Math.tan(PERSPECTIVE_FOV_RADIANS / 2);
+      new Vector3(...cameraPosition).distanceTo(new Vector3(...controlsTarget)) * Math.tan(PERSPECTIVE_FOV_RADIANS / 2);
     const right = top * ORTHOGRAPHIC_ASPECT_RATIO;
 
     orthographicArgs = [-right, right, top, -top, 0.1, 20];
@@ -138,9 +152,7 @@
       return 'ok';
     });
 
-    const valid =
-      lastValidTransformedPointsP.length === 0 ||
-      candidateStatuses.every((s) => s === 'ok');
+    const valid = lastValidTransformedPointsP.length === 0 || candidateStatuses.every((s) => s === 'ok');
 
     if (valid) {
       transformedPointsP = candidatePointsP;
@@ -186,6 +198,8 @@
       position: cameraPosition,
       target: controlsTarget,
     });
+
+    spaceMouseBridge?.syncNavigationStateFromCamera();
   }
 
   async function setCameraModeInternal(nextUseOrthographicCamera: boolean) {
@@ -220,7 +234,20 @@
       getControls: () => orbitControlsRef,
       getModelRoot: () => modelRootRef,
       getActiveCamera,
+      platformControl:
+        getPlatformPose && onPlatformPoseChange
+          ? {
+              getPose: getPlatformPose,
+              setPose: onPlatformPoseChange,
+              getAffine: getPlatformAffine ?? undefined,
+              getCenterOfRotation: getPlatformCenterOfRotation ?? undefined,
+              poseFromAffine: getPlatformPoseFromAffine ?? undefined,
+              translationScale: STEWART_PLATFORM_SPACEMOUSE_TRANSLATION_SCALE,
+              rotationScale: STEWART_PLATFORM_SPACEMOUSE_ROTATION_SCALE,
+            }
+          : undefined,
     });
+    spaceMouseBridge.setMotionTarget(spaceMouseMotionTarget);
 
     void tick().then(() => {
       if (!orbitControlsRef) {
@@ -239,6 +266,10 @@
   $: if (!spaceMouseConnectRequested && spaceMouseBridge && viewportElement) {
     spaceMouseConnectRequested = true;
     void spaceMouseBridge.connect();
+  }
+
+  $: if (spaceMouseBridge) {
+    spaceMouseBridge.setMotionTarget(spaceMouseMotionTarget);
   }
 </script>
 
