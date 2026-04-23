@@ -7,6 +7,13 @@
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
 
+@layer base {
+  html,
+  body {
+    min-width: 360px;
+  }
+}
+
 @theme {
 /* Generated accent color palettes. */
 --color-accent-200: #a0d9ab;
@@ -60,4 +67,3 @@
 .hero > img {
    border-radius: 12px;
 }
-

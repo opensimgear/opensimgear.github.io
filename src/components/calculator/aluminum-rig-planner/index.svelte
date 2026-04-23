@@ -649,22 +649,26 @@
         class="flex min-w-0 flex-col border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
         {#if PlannerScene}
-          <PlannerScene
-            {geometry}
-            {highlightedBeamIds}
-            {isNarrowViewport}
-            {measurementOverlay}
-            {profileColor}
-            {showEndCaps}
-            {visibleModules}
-          />
+          <div class={isNarrowViewport ? 'mx-auto w-[clamp(18rem,84vw,42rem)] max-w-full' : 'w-full'}>
+            <PlannerScene
+              {geometry}
+              {highlightedBeamIds}
+              {isNarrowViewport}
+              {measurementOverlay}
+              {profileColor}
+              {showEndCaps}
+              {visibleModules}
+            />
+          </div>
         {:else}
-          <div class="grid aspect-[3/2] w-full place-items-center border-zinc-200 bg-zinc-50 text-sm text-zinc-500">
-            {#if sceneStatus === 'error'}
-              <span data-testid="aluminum-rig-planner-preview-error">3D scene failed to load. Refresh to retry.</span>
-            {:else}
-              <span>Loading 3D scene...</span>
-            {/if}
+          <div class={isNarrowViewport ? 'mx-auto w-[clamp(18rem,84vw,42rem)] max-w-full' : 'w-full'}>
+            <div class="grid aspect-[3/2] w-full place-items-center border-zinc-200 bg-zinc-50 text-sm text-zinc-500">
+              {#if sceneStatus === 'error'}
+                <span data-testid="aluminum-rig-planner-preview-error">3D scene failed to load. Refresh to retry.</span>
+              {:else}
+                <span>Loading 3D scene...</span>
+              {/if}
+            </div>
           </div>
         {/if}
 
@@ -673,6 +677,7 @@
           {currencyCode}
           {currencyLocale}
           {hoveredCutListKey}
+          {isNarrowViewport}
           {optimizationResult}
           {optimizationSettings}
           {profileColor}

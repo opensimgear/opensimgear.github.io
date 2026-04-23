@@ -30,6 +30,7 @@
     currencyCode: PlannerCurrencyCode;
     currencyLocale: string;
     hoveredCutListKey: string | null;
+    isNarrowViewport?: boolean;
     optimizationResult: PlannerOptimizationResult;
     optimizationSettings: PlannerOptimizationSettings;
     profileColor: string;
@@ -41,6 +42,7 @@
     currencyCode,
     currencyLocale,
     hoveredCutListKey,
+    isNarrowViewport = false,
     optimizationResult,
     optimizationSettings,
     profileColor,
@@ -429,7 +431,7 @@
 </script>
 
 <section data-testid="aluminum-rig-planner-cut-optimizer" class="border-t border-zinc-300 bg-white">
-  <div class="space-y-4 p-4">
+  <div class={isNarrowViewport ? 'space-y-3 px-0 py-3 sm:space-y-4 sm:px-4 sm:py-4' : 'space-y-4 p-4'}>
     {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
       <div bind:this={visualLayoutExportRoot} class="rounded border border-zinc-200 bg-zinc-50">
         <div class="widget-card__header border-b border-zinc-200 px-3 py-2">

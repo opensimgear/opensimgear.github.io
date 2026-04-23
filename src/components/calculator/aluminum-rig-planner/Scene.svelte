@@ -95,9 +95,23 @@
     });
   }
 
-  async function toggleCameraMode() {
+  async function setCameraMode(nextUseOrthographicCamera: boolean) {
+    if (useOrthographicCamera === nextUseOrthographicCamera) {
+      return;
+    }
+
     captureCurrentView();
-    useOrthographicCamera = !useOrthographicCamera;
+    useOrthographicCamera = nextUseOrthographicCamera;
+    await tick();
+    applySavedView();
+  }
+
+  function focusViewport() {
+    viewportElement?.focus({ preventScroll: true });
+  }
+
+  async function resetCameraView() {
+    savedView = null;
     await tick();
     applySavedView();
   }
@@ -147,20 +161,71 @@
   role="application"
   aria-label="3D aluminum rig planner viewport"
 >
-  <div class="pointer-events-none absolute right-3 top-3 z-10">
-    <button
-      type="button"
-      class={[
-        'pointer-events-auto rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] shadow-sm transition',
-        useOrthographicCamera
-          ? 'border-blue-700 bg-blue-600 text-white'
-          : 'border-zinc-300 bg-white/88 text-zinc-700 backdrop-blur hover:border-zinc-400 hover:bg-white',
-      ]}
-      aria-pressed={useOrthographicCamera}
-      onclick={toggleCameraMode}
-    >
-      {useOrthographicCamera ? 'Orthographic' : 'Perspective'}
-    </button>
+  <div class="pointer-events-none absolute right-4 z-10" style={`top: ${gizmoSize + 28}px;`}>
+    <div class="pointer-events-auto flex flex-col items-end gap-1.5 text-zinc-700">
+      <button
+        type="button"
+        class="grid h-8 w-8 place-items-center rounded-full border border-white/30 bg-white/10 text-zinc-500 backdrop-blur-sm transition hover:border-white/60 hover:bg-white/25 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2"
+        aria-label="Reset camera view"
+        title="Reset view"
+        onclick={async () => {
+          await resetCameraView();
+          focusViewport();
+        }}
+      >
+        <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 11a8 8 0 1 0-2.34 5.66"></path>
+          <path d="M20 4v7h-7"></path>
+        </svg>
+        <span class="sr-only">Reset view</span>
+      </button>
+      <button
+        type="button"
+        class={[
+          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
+          !useOrthographicCamera
+            ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
+            : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
+        ]}
+        aria-pressed={!useOrthographicCamera}
+        aria-label="Use perspective camera"
+        title="Perspective"
+        onclick={async () => {
+          await setCameraMode(false);
+          focusViewport();
+        }}
+      >
+        <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 8h12l3 8H3z"></path>
+          <path d="M9 8l-1.5 8"></path>
+          <path d="M15 8l1.5 8"></path>
+        </svg>
+        <span class="sr-only">Perspective</span>
+      </button>
+      <button
+        type="button"
+        class={[
+          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
+          useOrthographicCamera
+            ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
+            : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
+        ]}
+        aria-pressed={useOrthographicCamera}
+        aria-label="Use orthographic camera"
+        title="Orthographic"
+        onclick={async () => {
+          await setCameraMode(true);
+          focusViewport();
+        }}
+      >
+        <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="5" y="5" width="14" height="14" rx="1.5"></rect>
+          <path d="M9 5v14"></path>
+          <path d="M15 5v14"></path>
+        </svg>
+        <span class="sr-only">Orthographic</span>
+      </button>
+    </div>
   </div>
 
   <Canvas shadows createRenderer={createPlannerRenderer}>
@@ -180,7 +245,7 @@
           dampingFactor={SCENE_VIEW.orbitDampingFactor}
           target={controlsTarget}
         >
-          <Gizmo size={gizmoSize} />
+          <Gizmo size={gizmoSize} placement="top-right" />
         </OrbitControls>
       </T.OrthographicCamera>
     {:else}
@@ -196,7 +261,7 @@
           dampingFactor={SCENE_VIEW.orbitDampingFactor}
           target={controlsTarget}
         >
-          <Gizmo size={gizmoSize} />
+          <Gizmo size={gizmoSize} placement="top-right" />
         </OrbitControls>
       </T.PerspectiveCamera>
     {/if}
