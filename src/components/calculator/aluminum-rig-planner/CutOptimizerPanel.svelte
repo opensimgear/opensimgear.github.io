@@ -1,9 +1,5 @@
 <script lang="ts">
-  import {
-    buildPlannerPrintDocument,
-    hasSelectedPlannerExportSections,
-    type PlannerExportSections,
-  } from './export';
+  import { buildPlannerPrintDocument, hasSelectedPlannerExportSections, type PlannerExportSections } from './export';
   import type {
     CutListEntry,
     PlannerCurrencyCode,
@@ -461,12 +457,7 @@
                     <input bind:checked={exportSections.purchaseSummary} type="checkbox" />
                     <span>Purchase summary</span>
                   </label>
-                  <button
-                    type="button"
-                    class="export-menu__action"
-                    disabled={!canRunExport}
-                    onclick={runPrintExport}
-                  >
+                  <button type="button" class="export-menu__action" disabled={!canRunExport} onclick={runPrintExport}>
                     Open print preview
                   </button>
                 </div>
@@ -617,7 +608,7 @@
                   <path d="M13 16h2"></path>
                 </svg>
               </span>
-              <span>Required cuts</span>
+              <span>Cut List</span>
             </h3>
           </div>
           <div class="overflow-x-auto">
@@ -743,18 +734,20 @@
                     </tr>
                   {/each}
                 </tbody>
-                <tfoot>
+                <tfoot class="align-bottom">
                   <tr class="border-t-2 border-zinc-300 bg-zinc-50">
-                    <td colspan="3" class="px-2 py-2 font-semibold uppercase tracking-wide text-zinc-700"> Total </td>
-                    <td class="align-top px-2 py-2 text-right font-semibold text-zinc-900">
-                      <div>{formatWeight(optimizationResult.totalMassKg)}</div>
-                      <div class="mt-0.5 text-[10px] font-normal text-zinc-500">
-                        {formatStockLength(optimizationResult.totalPurchasedLengthMm)}
-                      </div>
+                    <td class="px-2 py-2 font-semibold uppercase tracking-wide text-zinc-700"> Total </td>
+                    <td class="px-2 py-2 text-[10px] font-normal text-zinc-500">
+                      {formatStockLength(optimizationResult.totalPurchasedLengthMm)}
                     </td>
-                    <td class="align-top px-2 py-2 text-right font-semibold text-zinc-900">
-                      <div>{formatMoney(optimizationResult.totalCost)}</div>
-                      <div class="mt-0.5 flex items-center justify-end gap-1 text-[10px] font-normal text-zinc-500">
+                    <td class="px-2 py-2 text-[10px] font-normal text-zinc-500">
+                      {optimizationResult.barCount}
+                    </td>
+                    <td class="px-2 py-2 text-right font-semibold text-zinc-900">
+                      <div>{formatWeight(optimizationResult.totalMassKg)}</div>
+                    </td>
+                    <td class="px-2 py-2 text-right font-semibold text-zinc-900">
+                      <div class="mb-1 flex items-center justify-end gap-1 text-[10px] font-normal text-zinc-500">
                         <svg
                           viewBox="0 0 24 24"
                           class="h-3 w-3 shrink-0"
@@ -775,6 +768,7 @@
                         </svg>
                         <span>{formatMoney(optimizationResult.shippingCost)}</span>
                       </div>
+                      <div>{formatMoney(optimizationResult.totalCost)}</div>
                     </td>
                   </tr>
                 </tfoot>
