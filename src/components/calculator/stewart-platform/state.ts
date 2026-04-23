@@ -70,10 +70,10 @@ export function getNextStewartPaneExpandedState(
 
 export function getStewartSceneClassNames(isNarrow: boolean) {
   if (isNarrow) {
-    return 'relative h-[320px] bg-gray-50 sm:h-[420px]';
+    return 'relative aspect-[3/2] w-full border-zinc-200 bg-[radial-gradient(circle_at_top,#ffffff_0%,#f4f4f5_60%,#e4e4e7_100%)]';
   }
 
-  return 'relative h-[600px] flex-1 bg-gray-50';
+  return 'relative aspect-[3/2] w-full border-zinc-200 bg-[radial-gradient(circle_at_top,#ffffff_0%,#f4f4f5_60%,#e4e4e7_100%)]';
 }
 
 export function getStewartGizmoSize(isNarrow: boolean) {

@@ -368,53 +368,59 @@
   }
 </script>
 
-<div class="w-full not-content border border-black rounded">
+<div class="not-content w-full overflow-hidden rounded border border-zinc-300 bg-white shadow-sm">
   {#if mounted}
-    <div class={isNarrowViewport ? 'flex flex-col' : 'flex flex-row'}>
+    <div class={isNarrowViewport ? 'flex flex-col' : 'grid grid-cols-[minmax(0,1.3fr)_19.2rem]'}>
       <div
         {@attach captureViewport}
-        class={`${getStewartSceneClassNames(isNarrowViewport)} outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2`}
-        tabindex="-1"
-        role="application"
-        aria-label="3D Stewart platform viewport"
+        class="flex min-w-0 flex-col border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
-        <Canvas>
-          <Scene
-            {baseDiameter}
-            {platformDiameter}
-            {platformHeight}
-            alphaB={alphaBGeom}
-            {alphaP}
-            {platformTranslation}
-            {platformRotation}
-            {centerOfRotationRelative}
-            {actuatorMin}
-            {actuatorMax}
-            gizmoSize={getStewartGizmoSize(isNarrowViewport)}
-            {viewportElement}
-          />
-        </Canvas>
-        <div class={getStewartStatusPanelClassNames(isNarrowViewport)}>
+        <div class={isNarrowViewport ? 'mx-auto w-[clamp(18rem,84vw,42rem)] max-w-full' : 'w-full'}>
           <div
-            class:is-mobile-status={isNarrowViewport}
-            class="mb-1.5 text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500"
+            class={`${getStewartSceneClassNames(isNarrowViewport)} outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2`}
+            tabindex="-1"
+            role="application"
+            aria-label="3D Stewart platform viewport"
           >
-            Platform
-          </div>
-          <div class:is-mobile-status-grid={isNarrowViewport} class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-gray-500">
-            <span>Pitch</span><span>{platformRotation.x.toFixed(1)}°</span>
-            <span>Roll</span><span>{platformRotation.y.toFixed(1)}°</span>
-            <span>Yaw</span><span>{platformRotation.z.toFixed(1)}°</span>
-            <span>Surge</span><span>{(platformTranslation.x * 1000).toFixed(0)} mm</span>
-            <span>Sway</span><span>{(platformTranslation.y * 1000).toFixed(0)} mm</span>
-            <span>Heave</span><span>{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span>
+            <Canvas>
+              <Scene
+                {baseDiameter}
+                {platformDiameter}
+                {platformHeight}
+                alphaB={alphaBGeom}
+                {alphaP}
+                {platformTranslation}
+                {platformRotation}
+                {centerOfRotationRelative}
+                {actuatorMin}
+                {actuatorMax}
+                gizmoSize={getStewartGizmoSize(isNarrowViewport)}
+                {viewportElement}
+              />
+            </Canvas>
+            <div class={getStewartStatusPanelClassNames(isNarrowViewport)}>
+              <div
+                class:is-mobile-status={isNarrowViewport}
+                class="mb-1.5 text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500"
+              >
+                Platform
+              </div>
+              <div class:is-mobile-status-grid={isNarrowViewport} class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-gray-500">
+                <span>Pitch</span><span>{platformRotation.x.toFixed(1)}°</span>
+                <span>Roll</span><span>{platformRotation.y.toFixed(1)}°</span>
+                <span>Yaw</span><span>{platformRotation.z.toFixed(1)}°</span>
+                <span>Surge</span><span>{(platformTranslation.x * 1000).toFixed(0)} mm</span>
+                <span>Sway</span><span>{(platformTranslation.y * 1000).toFixed(0)} mm</span>
+                <span>Heave</span><span>{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div
         class={isNarrowViewport
-          ? 'flex shrink-0 flex-col divide-y divide-black border-t border-black'
-          : 'flex shrink-0 flex-col divide-y divide-black border-l border-black'}
+          ? 'flex shrink-0 flex-col divide-y divide-zinc-300'
+          : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
         <Pane title="Parameters" position="inline" bind:expanded={paneExpanded.parameters}>
           <Slider bind:value={baseDiameter} label="Base Diameter" {...configLinear} min={0} max={3} />
@@ -477,8 +483,10 @@
       </div>
     </div>
   {:else}
-    <div class="grid h-[320px] place-items-center bg-gray-50 text-sm text-gray-500 sm:h-[420px] lg:h-[600px]">
-      Loading calculator...
+    <div class={isNarrowViewport ? 'mx-auto w-[clamp(18rem,84vw,42rem)] max-w-full' : 'w-full'}>
+      <div class="grid aspect-[3/2] w-full place-items-center border-zinc-200 bg-zinc-50 text-sm text-zinc-500">
+        Loading calculator...
+      </div>
     </div>
   {/if}
 </div>
