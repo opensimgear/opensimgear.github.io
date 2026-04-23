@@ -376,8 +376,8 @@
     {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
       <div bind:this={visualLayoutExportRoot} class="rounded border border-zinc-200 bg-zinc-50">
         <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
-          <div class="flex flex-col gap-3 sm:grid sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-end">
-            <div>
+          <div class="flex flex-col gap-3">
+            <div class="flex items-start justify-between gap-3">
               <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
                 <span
                   class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-sky-200 bg-sky-50 text-sky-700"
@@ -401,8 +401,50 @@
                 </span>
                 <span>Visual Cut Layout</span>
               </h3>
+              <div class="planner-export-controls flex items-center justify-start">
+                <details bind:open={exportMenuOpen} class="export-menu">
+                  <summary
+                    class="control-chip control-chip--slate flex cursor-pointer list-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="h-3.5 w-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 3v12"></path>
+                      <path d="m7 10l5 5l5-5"></path>
+                      <path d="M5 21h14"></path>
+                    </svg>
+                    <span>Export</span>
+                  </summary>
+                  <div class="export-menu__panel">
+                    <div class="export-menu__eyebrow">Print export</div>
+                    <div class="export-menu__copy">Deactivate any section before opening print preview.</div>
+                    <label class="export-menu__option">
+                      <input bind:checked={exportSections.image} type="checkbox" />
+                      <span>3D view screenshot</span>
+                    </label>
+                    <label class="export-menu__option">
+                      <input bind:checked={exportSections.visualLayout} type="checkbox" />
+                      <span>Visual cut layout</span>
+                    </label>
+                    <label class="export-menu__option">
+                      <input bind:checked={exportSections.purchaseSummary} type="checkbox" />
+                      <span>Purchase summary</span>
+                    </label>
+                    <button type="button" class="export-menu__action" disabled={!canRunExport} onclick={runPrintExport}>
+                      Open print preview
+                    </button>
+                  </div>
+                </details>
+              </div>
             </div>
-            <div class="flex flex-wrap items-end justify-center gap-x-3 gap-y-2 text-xs text-zinc-600 sm:self-end">
+            <div class="flex flex-wrap items-end gap-x-3 gap-y-2 text-xs text-zinc-600 sm:justify-center">
               <div class="flex items-center gap-2">
                 <span class="h-3 w-3 rounded-sm border border-zinc-300" style={`background-color: ${profileColor};`}
                 ></span>
@@ -420,48 +462,6 @@
                 <span class="h-3 w-3 rounded-sm border border-yellow-300 bg-yellow-400/35"></span>
                 <span>Waste</span>
               </div>
-            </div>
-            <div class="planner-export-controls flex items-center justify-start sm:justify-end">
-              <details bind:open={exportMenuOpen} class="export-menu">
-                <summary
-                  class="control-chip control-chip--slate flex cursor-pointer list-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    class="h-3.5 w-3.5"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 3v12"></path>
-                    <path d="m7 10l5 5l5-5"></path>
-                    <path d="M5 21h14"></path>
-                  </svg>
-                  <span>Export</span>
-                </summary>
-                <div class="export-menu__panel">
-                  <div class="export-menu__eyebrow">Print export</div>
-                  <div class="export-menu__copy">Deactivate any section before opening print preview.</div>
-                  <label class="export-menu__option">
-                    <input bind:checked={exportSections.image} type="checkbox" />
-                    <span>3D view screenshot</span>
-                  </label>
-                  <label class="export-menu__option">
-                    <input bind:checked={exportSections.visualLayout} type="checkbox" />
-                    <span>Visual cut layout</span>
-                  </label>
-                  <label class="export-menu__option">
-                    <input bind:checked={exportSections.purchaseSummary} type="checkbox" />
-                    <span>Purchase summary</span>
-                  </label>
-                  <button type="button" class="export-menu__action" disabled={!canRunExport} onclick={runPrintExport}>
-                    Open print preview
-                  </button>
-                </div>
-              </details>
             </div>
           </div>
         </div>
@@ -582,7 +582,7 @@
       </div>
     {/if}
 
-    <div class="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+    <div class="grid gap-4 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       <div class="space-y-4">
         <div class="required-cuts-card rounded border border-zinc-200">
           <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
@@ -644,7 +644,7 @@
       <div class="space-y-4">
         <div bind:this={purchaseSummaryExportRoot} class="rounded border border-zinc-200 bg-zinc-50">
           <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
-            <div class="flex items-center justify-between gap-3">
+            <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
               <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
                 <span
                   class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-amber-200 bg-amber-50 text-amber-700"
