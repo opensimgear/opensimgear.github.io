@@ -18,6 +18,11 @@ on:
       - pnpm-lock.yaml
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
+    inputs:
+      force_previous_sha:
+        description: Optional commit SHA to use as changelog base instead of previous successful github-pages deployment
+        required: false
+        type: string
 # Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
@@ -54,8 +59,6 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10.9.0
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -106,8 +109,16 @@ jobs:
           fi
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
+      - name: Use forced previous github-pages deployment
+        id: previous-deployment-forced
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.force_previous_sha != '' }}
+        env:
+          FORCED_PREVIOUS_SHA: ${{ inputs.force_previous_sha }}
+        run: |
+          printf 'previous_sha=%s\n' "${FORCED_PREVIOUS_SHA}" >> "$GITHUB_OUTPUT"
       - name: Resolve previous github-pages deployment
-        id: previous-deployment
+        id: previous-deployment-resolved
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.force_previous_sha == '' }}
         env:
           GH_TOKEN: ${{ github.token }}
           CURRENT_SHA: ${{ github.sha }}
@@ -136,6 +147,17 @@ jobs:
             previous_sha="${deployment_sha}"
             break
           done < <(gh api "/repos/${GITHUB_REPOSITORY}/deployments?environment=${DEPLOYMENT_ENVIRONMENT}&per_page=20" --jq '.[] | [.id, .sha] | @tsv')
+
+          echo "previous_sha=${previous_sha}" >> "$GITHUB_OUTPUT"
+      - name: Normalize previous github-pages deployment
+        id: previous-deployment
+        env:
+          FORCED_PREVIOUS_SHA: ${{ steps.previous-deployment-forced.outputs.previous_sha }}
+          RESOLVED_PREVIOUS_SHA: ${{ steps.previous-deployment-resolved.outputs.previous_sha }}
+        run: |
+          set -euo pipefail
+
+          previous_sha="${FORCED_PREVIOUS_SHA:-${RESOLVED_PREVIOUS_SHA:-}}"
 
           echo "previous_sha=${previous_sha}" >> "$GITHUB_OUTPUT"
       - name: Generate deployment changelog
