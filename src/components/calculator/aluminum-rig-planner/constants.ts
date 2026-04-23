@@ -100,7 +100,7 @@ export function getPlannerStockCostDefault(profileType: CutListProfileType, leng
 export const DEFAULT_PLANNER_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings = {
   mode: 'cost',
   currencyMode: 'auto',
-  bladeThicknessMm: 3,
+  bladeThicknessMm: 2.5,
   safetyMarginMm: 1,
   shippingMode: 'flat',
   flatShippingCost: 0,

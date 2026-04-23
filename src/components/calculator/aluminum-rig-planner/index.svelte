@@ -120,8 +120,10 @@
     { text: 'Per kg', value: 'per-kg' },
   ] as const;
   const PROFILE_TYPES: CutListProfileType[] = ['80x40', '40x40'];
+  const BLADE_THICKNESS_MIN_MM = 0.5;
+  const BLADE_THICKNESS_MAX_MM = 5;
+  const BLADE_THICKNESS_STEP_MM = 0.1;
   const OPTIMIZER_LIMITS = {
-    bladeThicknessMaxMm: 10,
     safetyMarginMaxMm: 15,
     flatShippingCostMax: 500,
     shippingRatePerKgMax: 50,
@@ -527,7 +529,10 @@
   }
 
   function setBladeThicknessMm(value: number) {
-    optimizationSettings.bladeThicknessMm = Math.max(1, Math.round(value));
+    const roundedValue = Math.round(value / BLADE_THICKNESS_STEP_MM) * BLADE_THICKNESS_STEP_MM;
+    optimizationSettings.bladeThicknessMm = Number(
+      Math.min(BLADE_THICKNESS_MAX_MM, Math.max(BLADE_THICKNESS_MIN_MM, roundedValue)).toFixed(1)
+    );
     syncPlannerUrlState();
   }
 
@@ -811,10 +816,10 @@
             <Slider
               bind:value={() => optimizationSettings.bladeThicknessMm, setBladeThicknessMm}
               label="Kerf"
-              min={1}
-              max={OPTIMIZER_LIMITS.bladeThicknessMaxMm}
-              step={1}
-              format={(value) => `${value.toFixed(0)} mm`}
+              min={BLADE_THICKNESS_MIN_MM}
+              max={BLADE_THICKNESS_MAX_MM}
+              step={BLADE_THICKNESS_STEP_MM}
+              format={(value) => `${value.toFixed(1)} mm`}
             />
             <Slider
               bind:value={() => optimizationSettings.safetyMarginMm, setSafetyMarginMm}

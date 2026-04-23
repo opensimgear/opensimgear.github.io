@@ -23,6 +23,9 @@ export type PlannerQueryState = Partial<PlannerInput> & {
 };
 
 let stockOptionIdSequence = 0;
+const BLADE_THICKNESS_MIN_MM = 0.5;
+const BLADE_THICKNESS_MAX_MM = 5;
+const BLADE_THICKNESS_STEP_MM = 0.1;
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value);
@@ -34,6 +37,12 @@ function readNumber(value: unknown, fallback: number) {
 
 function readNonNegativeNumber(value: unknown, fallback: number) {
   return Math.max(0, readNumber(value, fallback));
+}
+
+function clampBladeThicknessMm(value: number) {
+  const roundedValue = Math.round(value / BLADE_THICKNESS_STEP_MM) * BLADE_THICKNESS_STEP_MM;
+
+  return Number(Math.min(BLADE_THICKNESS_MAX_MM, Math.max(BLADE_THICKNESS_MIN_MM, roundedValue)).toFixed(1));
 }
 
 function isStockProfileType(value: unknown): value is PlannerStockOption['profileType'] {
@@ -84,7 +93,7 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
   return {
     mode: state?.mode === 'waste' ? 'waste' : defaults.mode,
     currencyMode: state?.currencyMode === 'eur' || state?.currencyMode === 'usd' ? state.currencyMode : defaults.currencyMode,
-    bladeThicknessMm: Math.max(1, Math.round(readNumber(state?.bladeThicknessMm, defaults.bladeThicknessMm))),
+    bladeThicknessMm: clampBladeThicknessMm(readNumber(state?.bladeThicknessMm, defaults.bladeThicknessMm)),
     safetyMarginMm: Math.max(0, Math.round(readNumber(state?.safetyMarginMm, defaults.safetyMarginMm))),
     shippingMode: state?.shippingMode === 'per-kg' ? 'per-kg' : defaults.shippingMode,
     flatShippingCost: readNonNegativeNumber(state?.flatShippingCost, defaults.flatShippingCost),

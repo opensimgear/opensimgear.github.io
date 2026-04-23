@@ -479,7 +479,7 @@
                 {#each cutListEntries as entry (entry.key)}
                   <tr
                     class:required-cuts-row--highlight={hoveredCutListKey === entry.key}
-                    class="cursor-pointer border-b border-zinc-100 last:border-b-0"
+                    class="cursor-pointer border-b border-zinc-100 transition-colors last:border-b-0"
                     onmouseenter={() => onHoveredCutListKeyChange(entry.key)}
                     onmouseleave={() => onHoveredCutListKeyChange(null)}
                   >
@@ -736,7 +736,7 @@
       18px 18px;
   }
 
-  .required-cuts-row--highlight td {
+  .required-cuts-row--highlight {
     background: rgba(34, 197, 94, 0.32);
     box-shadow: inset 0 0 0 1px rgba(21, 128, 61, 0.35);
   }

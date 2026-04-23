@@ -79,7 +79,7 @@ describe('aluminum rig planner query state', () => {
 
     expect(state.optimizationSettings.mode).toBe('waste');
     expect(state.optimizationSettings.currencyMode).toBe('eur');
-    expect(state.optimizationSettings.bladeThicknessMm).toBe(1);
+    expect(state.optimizationSettings.bladeThicknessMm).toBe(0.5);
     expect(state.optimizationSettings.safetyMarginMm).toBe(0);
     expect(state.optimizationSettings.shippingMode).toBe('per-kg');
     expect(state.optimizationSettings.flatShippingCost).toBe(0);
@@ -99,6 +99,26 @@ describe('aluminum rig planner query state', () => {
       cost: 95,
     });
     expect(state.optimizationSettings.stockOptions[1].id).toMatch(/^planner-stock-option-/);
+  });
+
+  it('preserves decimal blade thickness values within allowed range', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      optimizer: {
+        bladeThicknessMm: 2.74,
+      },
+    });
+
+    expect(state.optimizationSettings.bladeThicknessMm).toBe(2.7);
+  });
+
+  it('caps blade thickness at 5 mm from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      optimizer: {
+        bladeThicknessMm: 8,
+      },
+    });
+
+    expect(state.optimizationSettings.bladeThicknessMm).toBe(5);
   });
 
   it('uses optimizer defaults when optimizer state is absent', () => {
