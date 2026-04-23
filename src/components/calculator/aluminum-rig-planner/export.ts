@@ -157,10 +157,15 @@ export function buildPlannerPrintDocument({
       }
 
       .planner-export .planner-export-summary,
-      .planner-export .planner-export-summary > div,
+      .planner-export .planner-export-summary > div {
+        width: auto !important;
+        min-width: 0 !important;
+      }
+
       .planner-export .planner-export-summary table {
         width: 100% !important;
-        min-width: 100% !important;
+        min-width: max-content !important;
+        white-space: nowrap !important;
       }
 
       .planner-export .planner-export-summary table {

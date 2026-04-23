@@ -623,9 +623,9 @@
       </div>
     {/if}
 
-    <div class="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-      <div class="space-y-4">
-        <div class="required-cuts-card rounded border border-zinc-200">
+    <div class="flex flex-wrap items-start gap-4">
+      <div class="min-w-max flex-[1_1_max-content] space-y-4">
+        <div class="required-cuts-card w-full rounded border border-zinc-200">
           <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
             <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
               <span
@@ -652,9 +652,9 @@
               <span>Cut List</span>
             </h3>
           </div>
-          <div class="overflow-x-auto">
+          <div>
             <table
-              class="min-w-full border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900"
+              class="min-w-full w-max border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
             >
               <thead>
                 <tr class="border-b border-zinc-200 bg-white text-zinc-600">
@@ -682,8 +682,8 @@
         </div>
       </div>
 
-      <div class="space-y-4">
-        <div bind:this={purchaseSummaryExportRoot} class="rounded border border-zinc-200 bg-zinc-50">
+      <div class="min-w-max flex-[1_1_max-content] space-y-4">
+        <div bind:this={purchaseSummaryExportRoot} class="w-full rounded border border-zinc-200 bg-zinc-50">
           <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
             <div class="flex items-start justify-between gap-3 sm:items-center">
               <h3 class="widget-card__title min-w-0 pr-2 font-sans text-sm font-semibold text-zinc-900">
@@ -751,9 +751,9 @@
           {:else if optimizationResult.barCount === 0}
             <div class="p-3 text-sm text-zinc-500">No purchasable bars needed yet.</div>
           {:else}
-            <div class="overflow-x-auto">
+            <div>
               <table
-                class="w-max min-w-full table-auto border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
+                class="min-w-full w-max table-auto border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
               >
                 <thead>
                   <tr class="border-b border-zinc-200 bg-white text-zinc-600">
