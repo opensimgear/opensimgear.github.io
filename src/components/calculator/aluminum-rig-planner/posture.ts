@@ -4,6 +4,7 @@ import {
   DEFAULT_ANTHROPOMETRY_RATIOS,
   HALF_PROFILE_SHORT_MM,
   PEDAL_TRAY_LAYOUT,
+  PLANNER_DIMENSION_LIMITS,
   PLANNER_POSTURE_LIMITS,
   PROFILE_SHORT_MM,
   UPRIGHT_BEAM_DEPTH_MM,
@@ -60,7 +61,6 @@ const PEDAL_WIDTH_MM = 60;
 const PEDAL_PLATE_THICKNESS_MM = 3;
 export const PEDAL_HEEL_FORWARD_DELTA_MM = 50;
 export const PEDAL_HEEL_UP_DELTA_MM = 12;
-const WHEEL_TUBE_RADIUS_MM = 16;
 const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
 const HIP_FORWARD_ON_SEAT_MM = 130;
 export const POSTURE_HIP_ABOVE_SEAT_MM = 140;
@@ -193,7 +193,12 @@ function getWheelTargets(input: PlannerInput, rightSign: number) {
     mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm),
     0,
   ];
-  const gripRadius = mm(input.wheelDiameterMm / 2 - WHEEL_TUBE_RADIUS_MM);
+  const wheelDiameterMm = clamp(
+    input.wheelDiameterMm,
+    PLANNER_DIMENSION_LIMITS.wheelDiameterMinMm,
+    PLANNER_DIMENSION_LIMITS.wheelDiameterMaxMm
+  );
+  const gripRadius = mm(wheelDiameterMm / 2);
 
   return {
     right: add(wheelCenter, [0, 0, rightSign * gripRadius]),

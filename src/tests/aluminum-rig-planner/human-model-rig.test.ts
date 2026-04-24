@@ -8,6 +8,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {
   calculateHumanModelBoneRigRatios,
   createRiggedHumanModelFromRoot,
+  type HumanRigTooltipData,
 } from '../../components/calculator/aluminum-rig-planner/human-model-rig';
 import {
   DEFAULT_PLANNER_INPUT,
@@ -163,6 +164,57 @@ function getBoneWorldQuaternion(bones: Map<string, Bone>, name: string) {
   return bone.getWorldQuaternion(new Quaternion());
 }
 
+function getDistance(start: PosturePoint, end: PosturePoint) {
+  return Math.hypot(end[0] - start[0], end[1] - start[1], end[2] - start[2]);
+}
+
+function getTooltipByTitle(tooltips: HumanRigTooltipData[], title: string, rowLabel: string) {
+  return tooltips.find(
+    (tooltip) => tooltip.title === title && tooltip.rows.some((row) => row.label === rowLabel)
+  );
+}
+
+function getTooltipValue(tooltip: HumanRigTooltipData, label: string) {
+  return tooltip.rows.find((row) => row.label === label)?.value;
+}
+
+function getTooltips(model: NonNullable<ReturnType<typeof createRiggedHumanModelFromRoot>>) {
+  return model
+    .getTooltipTargets()
+    .map((target) => target.userData.rigTooltip as HumanRigTooltipData | undefined)
+    .filter((tooltip): tooltip is HumanRigTooltipData => Boolean(tooltip));
+}
+
+function formatMm(value: number) {
+  return `${Math.round(value * 1000)} mm`;
+}
+
+function parseMm(value: string) {
+  return Number(value.replace(' mm', '')) / 1000;
+}
+
+function parsePosition(value: string): PosturePoint {
+  const match = value.match(/^x (-?\d+) mm, y (-?\d+) mm, z (-?\d+) mm$/);
+
+  if (!match) {
+    throw new Error(`Invalid position: ${value}`);
+  }
+
+  return [Number(match[1]) / 1000, Number(match[2]) / 1000, Number(match[3]) / 1000];
+}
+
+function formatPosition(point: PosturePoint) {
+  return `x ${formatMm(point[0])}, y ${formatMm(point[1])}, z ${formatMm(point[2])}`;
+}
+
+function scaleFromHip(point: PosturePoint, hipCenter: PosturePoint, modelScale: number): PosturePoint {
+  return [
+    hipCenter[0] + (point[0] - hipCenter[0]) * modelScale,
+    hipCenter[1] + (point[1] - hipCenter[1]) * modelScale,
+    hipCenter[2] + (point[2] - hipCenter[2]) * modelScale,
+  ];
+}
+
 describe('aluminum rig planner human model rig', () => {
   it('calculates bone rig ratios from the GLB model rest pose', async () => {
     const gltf = await loadHumanModel();
@@ -204,6 +256,45 @@ describe('aluminum rig planner human model rig', () => {
     for (const segment of MODEL_SEGMENTS) {
       expectVectorClose(bones.get(segment.boneStart)!.scale, restScales.get(segment.boneStart)!, segment.label);
     }
+
+    model!.dispose();
+  });
+
+  it('scales skeleton tooltip values with the whole model scale', async () => {
+    const gltf = await loadHumanModel();
+    const model = createRiggedHumanModelFromRoot(gltf.scene);
+    expect(model).not.toBeNull();
+
+    const postureSettings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      heightCm: 205,
+    };
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
+    const modelScale = postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM;
+
+    model!.applySkeleton(skeleton, 1);
+
+    const baselineTooltips = getTooltips(model!);
+    const baselineTorsoTooltip = getTooltipByTitle(baselineTooltips, 'Torso', 'Length');
+    const baselineHeadTooltip = getTooltipByTitle(baselineTooltips, 'Head', 'Position');
+    expect(baselineTorsoTooltip).toBeDefined();
+    expect(baselineHeadTooltip).toBeDefined();
+
+    const baselineTorsoLength = parseMm(getTooltipValue(baselineTorsoTooltip!, 'Length')!);
+    const baselineHeadPosition = parsePosition(getTooltipValue(baselineHeadTooltip!, 'Position')!);
+
+    model!.applySkeleton(skeleton, modelScale);
+
+    const scaledTooltips = getTooltips(model!);
+    const scaledTorsoTooltip = getTooltipByTitle(scaledTooltips, 'Torso', 'Length');
+    const scaledHeadTooltip = getTooltipByTitle(scaledTooltips, 'Head', 'Position');
+
+    expect(scaledTorsoTooltip).toBeDefined();
+    expect(scaledHeadTooltip).toBeDefined();
+    expect(getTooltipValue(scaledTorsoTooltip!, 'Length')).toBe(formatMm(baselineTorsoLength * modelScale));
+    expect(getTooltipValue(scaledHeadTooltip!, 'Position')).toBe(
+      formatPosition(scaleFromHip(baselineHeadPosition, skeleton.joints.hipCenter, modelScale))
+    );
 
     model!.dispose();
   });

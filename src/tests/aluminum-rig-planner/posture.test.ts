@@ -6,6 +6,7 @@ import {
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PEDAL_TRAY_LAYOUT,
+  UPRIGHT_BEAM_DEPTH_MM,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import {
   createPlannerPostureSkeleton,
@@ -76,6 +77,29 @@ describe('aluminum rig planner posture solver', () => {
     expect(getDistance(skeleton.joints.elbowRight, skeleton.joints.handRight)).toBeCloseTo(forearmHandLength, 5);
     expect(getDistance(skeleton.joints.elbowLeft, skeleton.joints.wristLeft)).toBeLessThan(forearmHandLength);
     expect(getDistance(skeleton.joints.elbowRight, skeleton.joints.wristRight)).toBeLessThan(forearmHandLength);
+  });
+
+  it('places hand anchors on the outside of the wheel torus', () => {
+    const wheelDiameterMm = 320;
+    const input = {
+      ...DEFAULT_PLANNER_INPUT,
+      wheelDiameterMm,
+    };
+    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const wheelCenterX =
+      input.seatBaseDepthMm +
+      input.steeringColumnDistanceMm +
+      UPRIGHT_BEAM_DEPTH_MM +
+      input.wheelDistanceFromSteeringColumnMm;
+    const wheelCenterY = BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm;
+    const expectedGripRadius = wheelDiameterMm / 2000;
+
+    expect(skeleton.joints.handRight[0]).toBeCloseTo(wheelCenterX / 1000, 5);
+    expect(skeleton.joints.handRight[1]).toBeCloseTo(wheelCenterY / 1000, 5);
+    expect(Math.abs(skeleton.joints.handRight[2])).toBeCloseTo(expectedGripRadius, 5);
+    expect(skeleton.joints.handLeft[0]).toBeCloseTo(wheelCenterX / 1000, 5);
+    expect(skeleton.joints.handLeft[1]).toBeCloseTo(wheelCenterY / 1000, 5);
+    expect(Math.abs(skeleton.joints.handLeft[2])).toBeCloseTo(expectedGripRadius, 5);
   });
 
   it('updates the solved skeleton when posture inputs change', () => {

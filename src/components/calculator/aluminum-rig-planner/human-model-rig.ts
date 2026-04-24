@@ -169,6 +169,7 @@ const MODEL_EYE_FROM_HEAD_TOP_RATIO = 0.42;
 const MODEL_HEAD_SKIN_WEIGHT_THRESHOLD = 0.2;
 const DEBUG_BONE_HIT_RADIUS = 0.09;
 const DEBUG_BONE_RADIUS = 0.032;
+const ZERO_VECTOR = new Vector3(0, 0, 0);
 const Y_AXIS = new Vector3(0, 1, 0);
 const scratchBoundsSize = new Vector3();
 const scratchAngleDirectionA = new Vector3();
@@ -212,8 +213,12 @@ function createJointKey(position: Vector3) {
     .join(',');
 }
 
-function formatPosition(position: Vector3) {
-  return `x ${metersToMm(position.x)}, y ${metersToMm(position.y)}, z ${metersToMm(position.z)}`;
+function formatPosition(position: Vector3, modelScale = 1, scaleOrigin: Vector3 = ZERO_VECTOR) {
+  const x = scaleOrigin.x + (position.x - scaleOrigin.x) * modelScale;
+  const y = scaleOrigin.y + (position.y - scaleOrigin.y) * modelScale;
+  const z = scaleOrigin.z + (position.z - scaleOrigin.z) * modelScale;
+
+  return `x ${metersToMm(x)}, y ${metersToMm(y)}, z ${metersToMm(z)}`;
 }
 
 function roundModelRatio(value: number) {
@@ -535,11 +540,12 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
     mesh.geometry.computeBoundingSphere();
   }
 
-  rig.root.updateWorldMatrix(true, true);
-  updateDebugOverlay(rig.debugOverlay, createDebugSegmentsFromModelBones(rig.root, rig.bones));
-
   const safeModelScale = Math.max(BONE_LENGTH_EPSILON, modelScale);
   const hipCenter = skeleton.joints.hipCenter;
+  const scaleOrigin = new Vector3(hipCenter[0], hipCenter[1], hipCenter[2]);
+  rig.root.updateWorldMatrix(true, true);
+  updateDebugOverlay(rig.debugOverlay, createDebugSegmentsFromModelBones(rig.root, rig.bones), safeModelScale, scaleOrigin);
+
   rig.root.scale.setScalar(safeModelScale);
   rig.root.position.set(
     hipCenter[0] * (1 - safeModelScale),
@@ -828,7 +834,12 @@ function getDebugSegmentJointNames(name: HumanDebugBoneName): [string, string] {
   }
 }
 
-function updateDebugOverlay(overlay: HumanRigDebugOverlay, debugSegments: Map<HumanDebugBoneName, [Vector3, Vector3]>) {
+function updateDebugOverlay(
+  overlay: HumanRigDebugOverlay,
+  debugSegments: Map<HumanDebugBoneName, [Vector3, Vector3]>,
+  modelScale = 1,
+  scaleOrigin: Vector3 = ZERO_VECTOR
+) {
   const joints = new Map<string, Vector3>();
   const connectedSegmentsByJoint = new Map<string, Array<[Vector3, Vector3]>>();
   const jointNamesByJoint = new Map<string, Set<string>>();
@@ -853,7 +864,7 @@ function updateDebugOverlay(overlay: HumanRigDebugOverlay, debugSegments: Map<Hu
     } else {
       const tooltip: HumanRigTooltipData = {
         title: toDisplayName(name),
-        rows: [{ label: 'Length', value: metersToMm(length) }],
+        rows: [{ label: 'Length', value: metersToMm(length * modelScale) }],
       };
 
       mesh.visible = true;
@@ -914,7 +925,7 @@ function updateDebugOverlay(overlay: HumanRigDebugOverlay, debugSegments: Map<Hu
               return angle === null ? 'n/a' : radiansToDegrees(angle);
             })(),
           },
-          { label: 'Position', value: formatPosition(position) },
+          { label: 'Position', value: formatPosition(position, modelScale, scaleOrigin) },
         ],
       };
 
