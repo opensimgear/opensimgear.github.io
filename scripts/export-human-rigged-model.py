@@ -10,9 +10,9 @@ TARGET_GLB = ROOT / "public" / "models" / "aluminum-rig-planner" / "human-male-r
 SOURCE_MESH_NAME = "GEO-body_male_realistic"
 TERMINAL_BONE_LENGTH = 0.015
 BONE_LENGTHS = {
-    "upperArm": 0.2250,
+    "upperArm": 0.2390,
     "forearm": 0.2600,
-    "hand": 0.0482,
+    "hand": 0.0702,
     "thigh": 0.4195,
     "shin": 0.3597,
     "foot": 0.1822,
