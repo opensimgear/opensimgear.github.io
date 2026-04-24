@@ -163,18 +163,18 @@ export const DEFAULT_ANTHROPOMETRY_RATIOS: PlannerPostureSettings['ratios'] = {
   sittingHeight: 0.526,
   seatedEyeHeight: 0.455,
   seatedShoulderHeight: 0.345,
-  hipBreadth: 0.216,
-  shoulderBreadth: 0.225,
-  upperArmLength: 0.222,
-  forearmHandLength: 0.269,
-  thighLength: 0.232,
-  lowerLegLength: 0.251,
-  footLength: 0.153,
+  hipBreadth: 0.125,
+  shoulderBreadth: 0.26,
+  upperArmLength: 0.218,
+  forearmHandLength: 0.165,
+  thighLength: 0.245,
+  lowerLegLength: 0.235,
+  footLength: 0.112,
 };
 
 export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   preset: 'gt',
-  heightCm: 175,
+  heightCm: 169,
   advancedAnthropometry: false,
   ratios: {
     ...DEFAULT_ANTHROPOMETRY_RATIOS,

@@ -45,6 +45,11 @@ export type PlannerPostureSkeleton = {
 
 type Vector = PosturePoint;
 
+type TwoLinkPose = {
+  joint: Vector;
+  end: Vector;
+};
+
 const MM_TO_METERS = 0.001;
 const EPSILON = 0.000001;
 const PEDAL_WIDTH_MM = 60;
@@ -145,6 +150,7 @@ function getPedalTarget(input: PlannerInput, centerZmm: number, footLengthM: num
 
   return {
     ankle,
+    direction: pedalDirection,
     toe,
   };
 }
@@ -164,13 +170,13 @@ function getWheelTargets(input: PlannerInput, rightSign: number) {
   };
 }
 
-function solveTwoLink(
+function solveTwoLinkPose(
   root: Vector,
   target: Vector,
   firstLength: number,
   secondLength: number,
   bendHint: Vector
-): Vector {
+): TwoLinkPose {
   const rootToTarget = subtract(target, root);
   const distance = length(rootToTarget);
   const direction = normalize(rootToTarget);
@@ -179,6 +185,7 @@ function solveTwoLink(
     Math.abs(firstLength - secondLength) + EPSILON,
     firstLength + secondLength - EPSILON
   );
+  const end = add(root, scale(direction, reachableDistance));
   const bendDirection = normalize(
     subtract(bendHint, scale(direction, dot(bendHint, direction))),
     Math.abs(direction[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0]
@@ -187,26 +194,19 @@ function solveTwoLink(
     (firstLength * firstLength - secondLength * secondLength + reachableDistance * reachableDistance) /
     (2 * reachableDistance);
   const bendDistance = Math.sqrt(Math.max(0, firstLength * firstLength - rootToJointDistance * rootToJointDistance));
+  const joint = add(add(root, scale(direction, rootToJointDistance)), scale(bendDirection, bendDistance));
 
-  return add(add(root, scale(direction, rootToJointDistance)), scale(bendDirection, bendDistance));
+  return { end, joint };
 }
 
-function solveGravityArm(
+function solveArmPose(
   shoulder: Vector,
   wrist: Vector,
   upperArmLength: number,
   forearmHandLength: number,
   sideSign: number
-): Vector {
-  const hangingElbow = add(shoulder, [0, -upperArmLength, 0]);
-
-  if (length(subtract(wrist, hangingElbow)) <= forearmHandLength) {
-    return hangingElbow;
-  }
-
-  const elbow = solveTwoLink(shoulder, wrist, upperArmLength, forearmHandLength, [0, -1, sideSign * 0.02]);
-
-  return [elbow[0], elbow[1], shoulder[2]];
+): TwoLinkPose {
+  return solveTwoLinkPose(shoulder, wrist, upperArmLength, forearmHandLength, [0, -1, sideSign * 0.02]);
 }
 
 export function getEffectiveAnthropometryRatios(settings: PlannerPostureSettings): PlannerAnthropometryRatios {
@@ -294,10 +294,12 @@ export function createPlannerPostureSkeleton(
   const thighLength = ratios.thighLength * heightM;
   const lowerLegLength = ratios.lowerLegLength * heightM;
   const kneeLift = PRESET_KNEE_LIFT[settings.preset];
-  const kneeRight = solveTwoLink(hipRight, rightPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]);
-  const kneeLeft = solveTwoLink(hipLeft, leftPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]);
-  const elbowRight = solveGravityArm(shoulderRight, wheelTargets.right, upperArmLength, forearmHandLength, rightSign);
-  const elbowLeft = solveGravityArm(shoulderLeft, wheelTargets.left, upperArmLength, forearmHandLength, -rightSign);
+  const rightLeg = solveTwoLinkPose(hipRight, rightPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]);
+  const leftLeg = solveTwoLinkPose(hipLeft, leftPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]);
+  const rightArm = solveArmPose(shoulderRight, wheelTargets.right, upperArmLength, forearmHandLength, rightSign);
+  const leftArm = solveArmPose(shoulderLeft, wheelTargets.left, upperArmLength, forearmHandLength, -rightSign);
+  const rightToe = add(rightLeg.end, scale(rightPedal.direction, Math.min(ratios.footLength * heightM * 0.62, mm(120))));
+  const leftToe = add(leftLeg.end, scale(leftPedal.direction, Math.min(ratios.footLength * heightM * 0.62, mm(120))));
   const joints: Record<PostureJointName, PosturePoint> = {
     head,
     neck,
@@ -305,19 +307,19 @@ export function createPlannerPostureSkeleton(
     shoulderCenter,
     shoulderLeft,
     shoulderRight,
-    elbowLeft,
-    elbowRight,
-    wristLeft: wheelTargets.left,
-    wristRight: wheelTargets.right,
+    elbowLeft: leftArm.joint,
+    elbowRight: rightArm.joint,
+    wristLeft: leftArm.end,
+    wristRight: rightArm.end,
     hipCenter,
     hipLeft,
     hipRight,
-    kneeLeft,
-    kneeRight,
-    ankleLeft: leftPedal.ankle,
-    ankleRight: rightPedal.ankle,
-    toeLeft: leftPedal.toe,
-    toeRight: rightPedal.toe,
+    kneeLeft: leftLeg.joint,
+    kneeRight: rightLeg.joint,
+    ankleLeft: leftLeg.end,
+    ankleRight: rightLeg.end,
+    toeLeft: leftToe,
+    toeRight: rightToe,
   };
 
   return {

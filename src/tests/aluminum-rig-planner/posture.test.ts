@@ -4,7 +4,6 @@ import {
   DEFAULT_ANTHROPOMETRY_RATIOS,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
-  PEDAL_TRAY_LAYOUT,
   PLANNER_POSTURE_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import {
@@ -27,6 +26,10 @@ function expectPointInVerticalPlane(
   const pointDz = point[2] - planeStart[2];
 
   expect(pointDx * planeDz - pointDz * planeDx).toBeCloseTo(0, 6);
+}
+
+function getDistance(start: [number, number, number], end: [number, number, number]) {
+  return Math.hypot(end[0] - start[0], end[1] - start[1], end[2] - start[2]);
 }
 
 describe('aluminum rig planner posture solver', () => {
@@ -67,14 +70,16 @@ describe('aluminum rig planner posture solver', () => {
     expect(ratios.lowerLegLength).toBe(PLANNER_POSTURE_LIMITS.ratioMax);
   });
 
-  it('anchors wrists at the two external spoke-to-rim reference points', () => {
+  it('clamps wrists to the reachable model arm length', () => {
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const gripRadiusM = (DEFAULT_PLANNER_INPUT.wheelDiameterMm / 2 - 16) / 1000;
+    const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
+    const upperArmLength = DEFAULT_ANTHROPOMETRY_RATIOS.upperArmLength * heightM;
+    const forearmLength = DEFAULT_ANTHROPOMETRY_RATIOS.forearmHandLength * heightM;
 
-    expect(Math.abs(skeleton.joints.wristRight[2])).toBeCloseTo(gripRadiusM, 6);
-    expect(skeleton.joints.wristLeft[2]).toBeCloseTo(-skeleton.joints.wristRight[2], 6);
-    expect(skeleton.joints.wristLeft[0]).toBeCloseTo(skeleton.joints.wristRight[0], 6);
-    expect(skeleton.joints.wristLeft[1]).toBeCloseTo(skeleton.joints.wristRight[1], 6);
+    expect(getDistance(skeleton.joints.shoulderLeft, skeleton.joints.elbowLeft)).toBeCloseTo(upperArmLength, 5);
+    expect(getDistance(skeleton.joints.elbowLeft, skeleton.joints.wristLeft)).toBeCloseTo(forearmLength, 5);
+    expect(getDistance(skeleton.joints.shoulderRight, skeleton.joints.elbowRight)).toBeCloseTo(upperArmLength, 5);
+    expect(getDistance(skeleton.joints.elbowRight, skeleton.joints.wristRight)).toBeCloseTo(forearmLength, 5);
   });
 
   it('updates the solved skeleton when posture inputs change', () => {
@@ -89,19 +94,16 @@ describe('aluminum rig planner posture solver', () => {
     expect(tallDriver.segments).not.toEqual(midDriver.segments);
   });
 
-  it('keeps feet on the accelerator and brake pedal centers', () => {
+  it('clamps ankles to the reachable model leg length', () => {
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const pedalWidthMm = 60;
-    const trayHalfWidthMm =
-      Math.max(0, DEFAULT_PLANNER_INPUT.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm) / 2;
-    const acceleratorCenterM =
-      (trayHalfWidthMm - DEFAULT_PLANNER_INPUT.pedalAcceleratorDeltaMm - pedalWidthMm / 2) / 1000;
-    const brakeCenterM = acceleratorCenterM - (pedalWidthMm + DEFAULT_PLANNER_INPUT.pedalBrakeDeltaMm) / 1000;
+    const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
+    const thighLength = DEFAULT_ANTHROPOMETRY_RATIOS.thighLength * heightM;
+    const lowerLegLength = DEFAULT_ANTHROPOMETRY_RATIOS.lowerLegLength * heightM;
 
-    expect(skeleton.joints.ankleRight[2]).toBeCloseTo(acceleratorCenterM, 6);
-    expect(skeleton.joints.toeRight[2]).toBeCloseTo(acceleratorCenterM, 6);
-    expect(skeleton.joints.ankleLeft[2]).toBeCloseTo(brakeCenterM, 6);
-    expect(skeleton.joints.toeLeft[2]).toBeCloseTo(brakeCenterM, 6);
+    expect(getDistance(skeleton.joints.hipLeft, skeleton.joints.kneeLeft)).toBeCloseTo(thighLength, 5);
+    expect(getDistance(skeleton.joints.kneeLeft, skeleton.joints.ankleLeft)).toBeCloseTo(lowerLegLength, 5);
+    expect(getDistance(skeleton.joints.hipRight, skeleton.joints.kneeRight)).toBeCloseTo(thighLength, 5);
+    expect(getDistance(skeleton.joints.kneeRight, skeleton.joints.ankleRight)).toBeCloseTo(lowerLegLength, 5);
   });
 
   it('keeps each leg in the vertical plane through its hip and heel', () => {
@@ -116,7 +118,7 @@ describe('aluminum rig planner posture solver', () => {
 
     expect(skeleton.joints.elbowLeft[1]).toBeLessThan(skeleton.joints.shoulderLeft[1]);
     expect(skeleton.joints.elbowRight[1]).toBeLessThan(skeleton.joints.shoulderRight[1]);
-    expect(skeleton.joints.elbowLeft[2]).toBeCloseTo(skeleton.joints.shoulderLeft[2], 6);
-    expect(skeleton.joints.elbowRight[2]).toBeCloseTo(skeleton.joints.shoulderRight[2], 6);
+    expect(Math.abs(skeleton.joints.elbowLeft[2])).toBeLessThan(Math.abs(skeleton.joints.shoulderLeft[2]));
+    expect(Math.abs(skeleton.joints.elbowRight[2])).toBeLessThan(Math.abs(skeleton.joints.shoulderRight[2]));
   });
 });

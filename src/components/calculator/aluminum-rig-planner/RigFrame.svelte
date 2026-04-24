@@ -13,7 +13,7 @@
   import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from './modules/shared';
   import { createPlannerPostureSkeleton } from './posture';
   import PostureOverlayPass from './PostureOverlayPass.svelte';
-  import PostureSkeleton from './PostureSkeleton.svelte';
+  import RiggedHumanModel from './RiggedHumanModel.svelte';
   import type { PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
@@ -81,5 +81,5 @@
   <MeasurementArrow color={measurementOverlay.color} start={measurementOverlay.start} end={measurementOverlay.end} />
 {/if}
 
-<PostureSkeleton skeleton={postureSkeleton} />
+<RiggedHumanModel skeleton={postureSkeleton} />
 <PostureOverlayPass />
