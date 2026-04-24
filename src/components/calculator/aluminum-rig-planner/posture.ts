@@ -21,6 +21,8 @@ export type PostureJointName =
   | 'elbowRight'
   | 'wristLeft'
   | 'wristRight'
+  | 'handLeft'
+  | 'handRight'
   | 'hipCenter'
   | 'hipLeft'
   | 'hipRight'
@@ -60,6 +62,10 @@ const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
 const HIP_FORWARD_ON_SEAT_MM = 120;
 const HIP_ABOVE_SEAT_MM = 70;
 const SHOULDER_ABOVE_HIP_CLEARANCE_MM = 60;
+const HAND_GRIP_LENGTH_MIN_MM = 55;
+const HAND_GRIP_LENGTH_MAX_MM = 95;
+const HAND_GRIP_HEIGHT_RATIO = 0.045;
+const HAND_MAX_FOREARM_HAND_SHARE = 0.45;
 
 const PRESET_KNEE_LIFT = {
   formula: 0.18,
@@ -201,12 +207,26 @@ function solveTwoLinkPose(
 
 function solveArmPose(
   shoulder: Vector,
-  wrist: Vector,
+  hand: Vector,
   upperArmLength: number,
   forearmHandLength: number,
   sideSign: number
 ): TwoLinkPose {
-  return solveTwoLinkPose(shoulder, wrist, upperArmLength, forearmHandLength, [0, -1, sideSign * 0.02]);
+  return solveTwoLinkPose(shoulder, hand, upperArmLength, forearmHandLength, [0, -1, sideSign * 0.02]);
+}
+
+function getHandGripLength(heightM: number, forearmHandLength: number) {
+  return Math.min(
+    clamp(heightM * HAND_GRIP_HEIGHT_RATIO, mm(HAND_GRIP_LENGTH_MIN_MM), mm(HAND_GRIP_LENGTH_MAX_MM)),
+    forearmHandLength * HAND_MAX_FOREARM_HAND_SHARE
+  );
+}
+
+function getWristFromHand(elbow: Vector, hand: Vector, handGripLength: number) {
+  const elbowToHand = subtract(hand, elbow);
+  const direction = normalize(elbowToHand, [1, 0, 0]);
+
+  return add(hand, scale(direction, -handGripLength));
 }
 
 export function getEffectiveAnthropometryRatios(settings: PlannerPostureSettings): PlannerAnthropometryRatios {
@@ -291,6 +311,7 @@ export function createPlannerPostureSkeleton(
   const leftPedal = getPedalTarget(input, pedalCentersZmm.brake, ratios.footLength * heightM);
   const upperArmLength = ratios.upperArmLength * heightM;
   const forearmHandLength = ratios.forearmHandLength * heightM;
+  const handGripLength = getHandGripLength(heightM, forearmHandLength);
   const thighLength = ratios.thighLength * heightM;
   const lowerLegLength = ratios.lowerLegLength * heightM;
   const kneeLift = PRESET_KNEE_LIFT[settings.preset];
@@ -298,6 +319,8 @@ export function createPlannerPostureSkeleton(
   const leftLeg = solveTwoLinkPose(hipLeft, leftPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]);
   const rightArm = solveArmPose(shoulderRight, wheelTargets.right, upperArmLength, forearmHandLength, rightSign);
   const leftArm = solveArmPose(shoulderLeft, wheelTargets.left, upperArmLength, forearmHandLength, -rightSign);
+  const wristRight = getWristFromHand(rightArm.joint, rightArm.end, handGripLength);
+  const wristLeft = getWristFromHand(leftArm.joint, leftArm.end, handGripLength);
   const rightToe = add(rightLeg.end, scale(rightPedal.direction, Math.min(ratios.footLength * heightM * 0.62, mm(120))));
   const leftToe = add(leftLeg.end, scale(leftPedal.direction, Math.min(ratios.footLength * heightM * 0.62, mm(120))));
   const joints: Record<PostureJointName, PosturePoint> = {
@@ -309,8 +332,10 @@ export function createPlannerPostureSkeleton(
     shoulderRight,
     elbowLeft: leftArm.joint,
     elbowRight: rightArm.joint,
-    wristLeft: leftArm.end,
-    wristRight: rightArm.end,
+    wristLeft,
+    wristRight,
+    handLeft: leftArm.end,
+    handRight: rightArm.end,
     hipCenter,
     hipLeft,
     hipRight,
@@ -333,8 +358,10 @@ export function createPlannerPostureSkeleton(
       { start: joints.hipLeft, end: joints.hipRight },
       { start: joints.shoulderLeft, end: joints.elbowLeft },
       { start: joints.elbowLeft, end: joints.wristLeft },
+      { start: joints.wristLeft, end: joints.handLeft },
       { start: joints.shoulderRight, end: joints.elbowRight },
       { start: joints.elbowRight, end: joints.wristRight },
+      { start: joints.wristRight, end: joints.handRight },
       { start: joints.hipLeft, end: joints.kneeLeft },
       { start: joints.kneeLeft, end: joints.ankleLeft },
       { start: joints.ankleLeft, end: joints.toeLeft },

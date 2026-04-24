@@ -40,7 +40,7 @@ describe('aluminum rig planner posture solver', () => {
       expectPointToBeFinite(point);
     }
 
-    expect(skeleton.segments).toHaveLength(16);
+    expect(skeleton.segments).toHaveLength(18);
     expect(skeleton.segments[0].start).toBe(skeleton.joints.head);
   });
 
@@ -70,16 +70,18 @@ describe('aluminum rig planner posture solver', () => {
     expect(ratios.lowerLegLength).toBe(PLANNER_POSTURE_LIMITS.ratioMax);
   });
 
-  it('clamps wrists to the reachable model arm length', () => {
+  it('clamps hands to the reachable model arm length', () => {
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
     const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
     const upperArmLength = DEFAULT_ANTHROPOMETRY_RATIOS.upperArmLength * heightM;
-    const forearmLength = DEFAULT_ANTHROPOMETRY_RATIOS.forearmHandLength * heightM;
+    const forearmHandLength = DEFAULT_ANTHROPOMETRY_RATIOS.forearmHandLength * heightM;
 
     expect(getDistance(skeleton.joints.shoulderLeft, skeleton.joints.elbowLeft)).toBeCloseTo(upperArmLength, 5);
-    expect(getDistance(skeleton.joints.elbowLeft, skeleton.joints.wristLeft)).toBeCloseTo(forearmLength, 5);
+    expect(getDistance(skeleton.joints.elbowLeft, skeleton.joints.handLeft)).toBeCloseTo(forearmHandLength, 5);
     expect(getDistance(skeleton.joints.shoulderRight, skeleton.joints.elbowRight)).toBeCloseTo(upperArmLength, 5);
-    expect(getDistance(skeleton.joints.elbowRight, skeleton.joints.wristRight)).toBeCloseTo(forearmLength, 5);
+    expect(getDistance(skeleton.joints.elbowRight, skeleton.joints.handRight)).toBeCloseTo(forearmHandLength, 5);
+    expect(getDistance(skeleton.joints.elbowLeft, skeleton.joints.wristLeft)).toBeLessThan(forearmHandLength);
+    expect(getDistance(skeleton.joints.elbowRight, skeleton.joints.wristRight)).toBeLessThan(forearmHandLength);
   });
 
   it('updates the solved skeleton when posture inputs change', () => {

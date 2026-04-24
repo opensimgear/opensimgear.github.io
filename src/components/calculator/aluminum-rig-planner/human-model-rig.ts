@@ -117,18 +117,6 @@ function toVector3(point: PosturePoint) {
   return new Vector3(point[0], point[1], point[2]);
 }
 
-function getExtendedEnd(start: PosturePoint, end: PosturePoint, extensionM: number) {
-  const startVector = toVector3(start);
-  const endVector = toVector3(end);
-  const direction = endVector.clone().sub(startVector);
-
-  if (direction.lengthSq() < 0.000001) {
-    return endVector;
-  }
-
-  return endVector.add(direction.normalize().multiplyScalar(extensionM));
-}
-
 function createSegment(name: HumanBoneName, start: Vector3, end: Vector3): HumanRestSegment {
   return { name, start, end };
 }
@@ -240,10 +228,10 @@ function createTargetSegments(skeleton: PlannerPostureSkeleton) {
     ['head', [toVector3(joints.neck), toVector3(joints.head)]],
     ['leftUpperArm', [toVector3(joints.shoulderLeft), toVector3(joints.elbowLeft)]],
     ['leftForearm', [toVector3(joints.elbowLeft), toVector3(joints.wristLeft)]],
-    ['leftHand', [toVector3(joints.wristLeft), getExtendedEnd(joints.elbowLeft, joints.wristLeft, 0.08)]],
+    ['leftHand', [toVector3(joints.wristLeft), toVector3(joints.handLeft)]],
     ['rightUpperArm', [toVector3(joints.shoulderRight), toVector3(joints.elbowRight)]],
     ['rightForearm', [toVector3(joints.elbowRight), toVector3(joints.wristRight)]],
-    ['rightHand', [toVector3(joints.wristRight), getExtendedEnd(joints.elbowRight, joints.wristRight, 0.08)]],
+    ['rightHand', [toVector3(joints.wristRight), toVector3(joints.handRight)]],
     ['leftThigh', [toVector3(joints.hipLeft), toVector3(joints.kneeLeft)]],
     ['leftShin', [toVector3(joints.kneeLeft), toVector3(joints.ankleLeft)]],
     ['leftFoot', [toVector3(joints.ankleLeft), toVector3(joints.toeLeft)]],
