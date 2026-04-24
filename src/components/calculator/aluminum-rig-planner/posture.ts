@@ -2,6 +2,7 @@ import {
   BASE_BEAM_HEIGHT_MM,
   BASE_MODULE_LAYOUT,
   DEFAULT_ANTHROPOMETRY_RATIOS,
+  DEFAULT_POSTURE_HEIGHT_CM,
   HALF_PROFILE_SHORT_MM,
   PEDAL_TRAY_LAYOUT,
   PLANNER_DIMENSION_LIMITS,
@@ -62,8 +63,8 @@ const PEDAL_PLATE_THICKNESS_MM = 3;
 export const PEDAL_HEEL_FORWARD_DELTA_MM = 50;
 export const PEDAL_HEEL_UP_DELTA_MM = 12;
 const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
-const HIP_FORWARD_ON_SEAT_MM = 130;
-export const POSTURE_HIP_ABOVE_SEAT_MM = 140;
+export const POSTURE_HIP_FORWARD_ON_SEAT_MM = 125;
+export const POSTURE_HIP_ABOVE_SEAT_MM = 130;
 export const POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM = 60;
 const POSTURE_HEEL_LENGTH_SHARE = 0.335;
 const POSTURE_HEEL_FOOT_ANGLE_RAD = toRad(84.4);
@@ -278,18 +279,18 @@ export function createPlannerPostureSkeleton(
   const seatNormal: Vector = [-Math.sin(seatAngleRad), Math.cos(seatAngleRad), 0];
   const backrestUp: Vector = [-Math.sin(backrestAngleRad), Math.cos(backrestAngleRad), 0];
   const seatPivot = getSeatPivot(input);
-  const hipCenter = add(
-    seatPivot,
-    add(scale(seatForward, mm(HIP_FORWARD_ON_SEAT_MM)), scale(seatNormal, mm(POSTURE_HIP_ABOVE_SEAT_MM)))
-  );
-  const shoulderToHipM = Math.max(
-    mm(250),
-    ratios.seatedShoulderHeight * heightM - mm(POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM)
-  );
+  const heightScale = heightM / (DEFAULT_POSTURE_HEIGHT_CM / 100);
+  const postureScale = 1 + (heightScale - 1);
+  const postureScaleAbove = 1 + (heightScale - 1) * 0.2;
+  const hipForwardOnSeatM = mm(POSTURE_HIP_FORWARD_ON_SEAT_MM * postureScale);
+  const hipAboveSeatM = mm(POSTURE_HIP_ABOVE_SEAT_MM * postureScaleAbove);
+  const shoulderHipClearanceM = mm(POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM * postureScale);
+  const hipCenter = add(seatPivot, add(scale(seatForward, hipForwardOnSeatM), scale(seatNormal, hipAboveSeatM)));
+  const shoulderToHipM = Math.max(mm(250), ratios.seatedShoulderHeight * heightM - shoulderHipClearanceM);
   const shoulderCenter = add(hipCenter, scale(backrestUp, shoulderToHipM));
   const neck = add(hipCenter, scale(backrestUp, Math.max(shoulderToHipM, ratios.sittingHeight * heightM * 0.84)));
   const head = add(hipCenter, scale(backrestUp, ratios.sittingHeight * heightM));
-  const eye = add(hipCenter, scale(backrestUp, ratios.seatedEyeHeight * heightM - mm(POSTURE_HIP_ABOVE_SEAT_MM * 0.5)));
+  const eye = add(hipCenter, scale(backrestUp, ratios.seatedEyeHeight * heightM - hipAboveSeatM * 0.5));
   const pedalCentersZmm = getPedalCentersZmm(input);
   const rightSign = Math.sign(pedalCentersZmm.accelerator) || 1;
   const hipHalfWidthM = (ratios.hipBreadth * heightM) / 2;

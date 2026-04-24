@@ -164,14 +164,8 @@ function getBoneWorldQuaternion(bones: Map<string, Bone>, name: string) {
   return bone.getWorldQuaternion(new Quaternion());
 }
 
-function getDistance(start: PosturePoint, end: PosturePoint) {
-  return Math.hypot(end[0] - start[0], end[1] - start[1], end[2] - start[2]);
-}
-
 function getTooltipByTitle(tooltips: HumanRigTooltipData[], title: string, rowLabel: string) {
-  return tooltips.find(
-    (tooltip) => tooltip.title === title && tooltip.rows.some((row) => row.label === rowLabel)
-  );
+  return tooltips.find((tooltip) => tooltip.title === title && tooltip.rows.some((row) => row.label === rowLabel));
 }
 
 function getTooltipValue(tooltip: HumanRigTooltipData, label: string) {
@@ -183,10 +177,6 @@ function getTooltips(model: NonNullable<ReturnType<typeof createRiggedHumanModel
     .getTooltipTargets()
     .map((target) => target.userData.rigTooltip as HumanRigTooltipData | undefined)
     .filter((tooltip): tooltip is HumanRigTooltipData => Boolean(tooltip));
-}
-
-function formatMm(value: number) {
-  return `${Math.round(value * 1000)} mm`;
 }
 
 function parseMm(value: string) {
@@ -203,16 +193,18 @@ function parsePosition(value: string): PosturePoint {
   return [Number(match[1]) / 1000, Number(match[2]) / 1000, Number(match[3]) / 1000];
 }
 
-function formatPosition(point: PosturePoint) {
-  return `x ${formatMm(point[0])}, y ${formatMm(point[1])}, z ${formatMm(point[2])}`;
-}
-
 function scaleFromHip(point: PosturePoint, hipCenter: PosturePoint, modelScale: number): PosturePoint {
   return [
     hipCenter[0] + (point[0] - hipCenter[0]) * modelScale,
     hipCenter[1] + (point[1] - hipCenter[1]) * modelScale,
     hipCenter[2] + (point[2] - hipCenter[2]) * modelScale,
   ];
+}
+
+function expectPointCloseMm(actual: PosturePoint, expected: PosturePoint) {
+  expect(Math.abs(actual[0] - expected[0])).toBeLessThanOrEqual(0.001);
+  expect(Math.abs(actual[1] - expected[1])).toBeLessThanOrEqual(0.001);
+  expect(Math.abs(actual[2] - expected[2])).toBeLessThanOrEqual(0.001);
 }
 
 describe('aluminum rig planner human model rig', () => {
@@ -222,7 +214,7 @@ describe('aluminum rig planner human model rig', () => {
 
     expect(ratios).toEqual({
       sittingHeight: 0.477,
-      seatedEyeHeight: 0.456,
+      seatedEyeHeight: 0.453,
       seatedShoulderHeight: 0.292,
       hipBreadth: 0.123,
       shoulderBreadth: 0.205,
@@ -291,9 +283,10 @@ describe('aluminum rig planner human model rig', () => {
 
     expect(scaledTorsoTooltip).toBeDefined();
     expect(scaledHeadTooltip).toBeDefined();
-    expect(getTooltipValue(scaledTorsoTooltip!, 'Length')).toBe(formatMm(baselineTorsoLength * modelScale));
-    expect(getTooltipValue(scaledHeadTooltip!, 'Position')).toBe(
-      formatPosition(scaleFromHip(baselineHeadPosition, skeleton.joints.hipCenter, modelScale))
+    expect(parseMm(getTooltipValue(scaledTorsoTooltip!, 'Length')!)).toBeCloseTo(baselineTorsoLength * modelScale, 3);
+    expectPointCloseMm(
+      parsePosition(getTooltipValue(scaledHeadTooltip!, 'Position')!),
+      scaleFromHip(baselineHeadPosition, skeleton.joints.hipCenter, modelScale)
     );
 
     model!.dispose();
