@@ -23,9 +23,13 @@ REFERENCE_PARTS = {
 }
 REFERENCE_CENTERLINE_PARTS = ("pelvis", "chest", "neck", "head")
 TOP_BAND_SHARE = 0.18
+JOINT_BAND_SHARE = 0.12
 SLICE_BAND_HEIGHT_RATIO = 0.015
 SLICE_WIDTH_MARGIN = 0.82
 SLICE_DEPTH_MARGIN = 0.7
+EXACT_FIT_LANDMARKS = {"shoulderLeft", "elbowLeft", "wristLeft", "handTipLeft", "kneeLeft", "ankleLeft"}
+SECTION_CENTER_LANDMARKS = {"elbowLeft", "wristLeft", "handTipLeft", "kneeLeft", "ankleLeft"}
+SECTION_EPSILON = 0.00001
 
 
 def planner_point(world_point, center_x, center_y, min_z):
@@ -63,6 +67,194 @@ def band_center(points, *, upper, share):
         threshold = minimum.y + (maximum.y - minimum.y) * share
         band = [point for point in points if point.y <= threshold]
     return average_point(band)
+
+
+def combine_points(*point_groups):
+    points = []
+    for point_group in point_groups:
+        points.extend(point_group)
+    return points
+
+
+def points_near_y(points, target_y, share):
+    minimum, maximum = bounds(points)
+    band_height = (maximum.y - minimum.y) * share
+    band = [point for point in points if abs(point.y - target_y) <= band_height]
+    return band if band else points
+
+
+def centered_xz_in_bounds(point, points):
+    minimum, maximum = bounds(points_near_y(points, point.y, JOINT_BAND_SHARE))
+    return Vector(
+        (
+            (minimum.x + maximum.x) * 0.5,
+            point.y,
+            (minimum.z + maximum.z) * 0.5,
+        )
+    )
+
+
+def dedupe_points(points):
+    deduped = []
+    keys = set()
+    for point in points:
+        key = (round(point.x / SECTION_EPSILON), round(point.z / SECTION_EPSILON))
+        if key in keys:
+            continue
+        keys.add(key)
+        deduped.append(point)
+    return deduped
+
+
+def section_segments_at_y(vertices, faces, target_y):
+    segments = []
+
+    for face in faces:
+        intersections = []
+
+        for index, vertex_index in enumerate(face):
+            start = vertices[vertex_index]
+            end = vertices[face[(index + 1) % len(face)]]
+
+            if abs(start.y - end.y) <= SECTION_EPSILON:
+                continue
+
+            lower_y = min(start.y, end.y)
+            upper_y = max(start.y, end.y)
+            if target_y < lower_y - SECTION_EPSILON or target_y > upper_y + SECTION_EPSILON:
+                continue
+
+            factor = (target_y - start.y) / (end.y - start.y)
+            if factor < -SECTION_EPSILON or factor > 1 + SECTION_EPSILON:
+                continue
+
+            point = start.lerp(end, clamp(factor, 0.0, 1.0))
+            intersections.append(Vector((point.x, target_y, point.z)))
+
+        intersections = dedupe_points(intersections)
+        if len(intersections) == 2:
+            segments.append((intersections[0], intersections[1]))
+        elif len(intersections) > 2:
+            center = average_point(intersections)
+            intersections.sort(key=lambda point: (point.x - center.x, point.z - center.z))
+            for index in range(0, len(intersections) - 1, 2):
+                segments.append((intersections[index], intersections[index + 1]))
+
+    return segments
+
+
+def section_components(segments):
+    points_by_key = {}
+    edges_by_key = {}
+
+    for start, end in segments:
+        start_key = (round(start.x / SECTION_EPSILON), round(start.z / SECTION_EPSILON))
+        end_key = (round(end.x / SECTION_EPSILON), round(end.z / SECTION_EPSILON))
+        if start_key == end_key:
+            continue
+
+        points_by_key[start_key] = start
+        points_by_key[end_key] = end
+        edges_by_key.setdefault(start_key, set()).add(end_key)
+        edges_by_key.setdefault(end_key, set()).add(start_key)
+
+    components = []
+    seen = set()
+
+    for start_key in points_by_key:
+        if start_key in seen:
+            continue
+
+        stack = [start_key]
+        component_keys = []
+        seen.add(start_key)
+
+        while stack:
+            key = stack.pop()
+            component_keys.append(key)
+
+            for next_key in edges_by_key.get(key, ()):
+                if next_key in seen:
+                    continue
+                seen.add(next_key)
+                stack.append(next_key)
+
+        components.append([points_by_key[key] for key in component_keys])
+
+    return components
+
+
+def section_component_from_body(seed_point, body_vertices, body_faces):
+    segments = section_segments_at_y(body_vertices, body_faces, seed_point.y)
+    components = [component for component in section_components(segments) if len(component) >= 6]
+
+    if not components:
+        return None
+
+    return min(
+        components,
+        key=lambda points: (average_point(points).x - seed_point.x) ** 2 + (average_point(points).z - seed_point.z) ** 2,
+    )
+
+
+def section_center_from_body(seed_point, body_vertices, body_faces):
+    component = section_component_from_body(seed_point, body_vertices, body_faces)
+    if component is None:
+        return seed_point
+
+    minimum, maximum = bounds(component)
+
+    return Vector(
+        (
+            (minimum.x + maximum.x) * 0.5,
+            seed_point.y,
+            (minimum.z + maximum.z) * 0.5,
+        )
+    )
+
+
+def section_external_equal_distance_point(seed_point, body_vertices, body_faces):
+    component = section_component_from_body(seed_point, body_vertices, body_faces)
+    if component is None:
+        return seed_point
+
+    minimum, maximum = bounds(component)
+    depth_distance = (maximum.x - minimum.x) * 0.5
+    is_right_side = seed_point.z >= 0
+    external_z = maximum.z if is_right_side else minimum.z
+    z = external_z - depth_distance * 0.7 if is_right_side else external_z + depth_distance * 0.7
+
+    return Vector(
+        (
+            (minimum.x + maximum.x) * 0.5,
+            seed_point.y,
+            clamp(z, minimum.z, maximum.z),
+        )
+    )
+
+
+def shoulder_point_from_bounds(points):
+    minimum, maximum = bounds(points)
+    distance = (maximum.x - minimum.x) * 0.5
+    return Vector(
+        (
+            minimum.x + distance,
+            maximum.y - distance,
+            (minimum.z + maximum.z) * 0.5,
+        )
+    )
+
+
+def ankle_point_from_bounds(points):
+    minimum, maximum = bounds(points)
+    distance = (maximum.y - minimum.y) * 0.5
+    return Vector(
+        (
+            minimum.x + distance,
+            minimum.y + distance,
+            (minimum.z + maximum.z) * 0.5,
+        )
+    )
 
 
 def extreme_point(points, axis, *, use_max):
@@ -115,12 +307,14 @@ def get_slice_points(body_vertices, target_y, band_height):
     return slice_points if slice_points else body_vertices
 
 
-def fit_point_to_body(point, body_vertices, height):
+def fit_point_to_body(point, body_vertices, height, *, use_margin=True):
     slice_points = get_slice_points(body_vertices, point.y, height * SLICE_BAND_HEIGHT_RATIO)
     slice_center = average_point(slice_points)
     minimum, maximum = bounds(slice_points)
-    half_depth = (maximum.x - minimum.x) * 0.5 * SLICE_DEPTH_MARGIN
-    half_width = (maximum.z - minimum.z) * 0.5 * SLICE_WIDTH_MARGIN
+    depth_margin = SLICE_DEPTH_MARGIN if use_margin else 1.0
+    width_margin = SLICE_WIDTH_MARGIN if use_margin else 1.0
+    half_depth = (maximum.x - minimum.x) * 0.5 * depth_margin
+    half_width = (maximum.z - minimum.z) * 0.5 * width_margin
 
     return Vector(
         (
@@ -131,17 +325,23 @@ def fit_point_to_body(point, body_vertices, height):
     )
 
 
-def build_reference_bones(reference_vertices, reference_origin, reference_min_y, scale, body_vertices, height):
+def build_reference_bones(reference_vertices, reference_origin, reference_min_y, scale, body_vertices, body_faces, height):
     pelvis_center = average_point(reference_vertices["pelvis"])
     chest_top = band_center(reference_vertices["chest"], upper=True, share=TOP_BAND_SHARE)
     neck_head_joint = closest_midpoint(reference_vertices["neck"], reference_vertices["head"])
     head_top = extreme_point(reference_vertices["head"], "y", use_max=True)
 
-    shoulder_chest_joint = closest_midpoint(reference_vertices["chest"], reference_vertices["leftShoulder"])
-    shoulder_arm_joint = closest_midpoint(reference_vertices["leftShoulder"], reference_vertices["leftUpperArm"])
-    shoulder_left = average_point((shoulder_chest_joint, shoulder_arm_joint))
-    elbow_left = closest_midpoint(reference_vertices["leftUpperArm"], reference_vertices["leftLowerArm"])
-    wrist_left = closest_midpoint(reference_vertices["leftLowerArm"], reference_vertices["leftHand"])
+    shoulder_left = shoulder_point_from_bounds(
+        combine_points(reference_vertices["leftShoulder"], reference_vertices["leftUpperArm"])
+    )
+    elbow_left = centered_xz_in_bounds(
+        closest_midpoint(reference_vertices["leftUpperArm"], reference_vertices["leftLowerArm"]),
+        combine_points(reference_vertices["leftUpperArm"], reference_vertices["leftLowerArm"]),
+    )
+    wrist_left = centered_xz_in_bounds(
+        closest_midpoint(reference_vertices["leftLowerArm"], reference_vertices["leftHand"]),
+        combine_points(reference_vertices["leftLowerArm"], reference_vertices["leftHand"]),
+    )
     hand_tip_left = extreme_point(reference_vertices["leftHand"], "x", use_max=True)
 
     left_upper_leg_center = average_point(reference_vertices["leftUpperLeg"])
@@ -153,8 +353,14 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
             left_upper_leg_center.z,
         )
     )
-    knee_left = closest_midpoint(reference_vertices["leftUpperLeg"], reference_vertices["leftLowerLeg"])
-    ankle_left = closest_midpoint(reference_vertices["leftLowerLeg"], reference_vertices["leftFoot"])
+    knee_left = centered_xz_in_bounds(
+        closest_midpoint(reference_vertices["leftUpperLeg"], reference_vertices["leftLowerLeg"]),
+        combine_points(reference_vertices["leftUpperLeg"], reference_vertices["leftLowerLeg"]),
+    )
+    ankle_left = centered_xz_in_bounds(
+        closest_midpoint(reference_vertices["leftLowerLeg"], reference_vertices["leftFoot"]),
+        combine_points(reference_vertices["leftLowerLeg"], reference_vertices["leftFoot"]),
+    )
     toe_left = extreme_point(reference_vertices["leftFoot"], "x", use_max=True)
 
     torso_tail = Vector(
@@ -183,7 +389,28 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     fitted_landmarks = {}
     for name, point in landmarks.items():
         remapped_point = remap_reference_point(point, reference_origin, reference_min_y, scale)
-        fitted_landmarks[name] = fit_point_to_body(remapped_point, body_vertices, height)
+        if name == "shoulderLeft":
+            remapped_point = section_external_equal_distance_point(remapped_point, body_vertices, body_faces)
+        if name in SECTION_CENTER_LANDMARKS:
+            remapped_point = section_center_from_body(remapped_point, body_vertices, body_faces)
+
+        fitted_landmarks[name] = fit_point_to_body(
+            remapped_point,
+            body_vertices,
+            height,
+            use_margin=name not in EXACT_FIT_LANDMARKS,
+        )
+
+    right_shoulder = section_external_equal_distance_point(
+        mirror_point(fitted_landmarks["shoulderLeft"]),
+        body_vertices,
+        body_faces,
+    )
+    right_elbow = section_center_from_body(mirror_point(fitted_landmarks["elbowLeft"]), body_vertices, body_faces)
+    right_wrist = section_center_from_body(mirror_point(fitted_landmarks["wristLeft"]), body_vertices, body_faces)
+    right_hand_tip = section_center_from_body(mirror_point(fitted_landmarks["handTipLeft"]), body_vertices, body_faces)
+    right_knee = section_center_from_body(mirror_point(fitted_landmarks["kneeLeft"]), body_vertices, body_faces)
+    right_ankle = section_center_from_body(mirror_point(fitted_landmarks["ankleLeft"]), body_vertices, body_faces)
 
     remapped_bones = {
         "torso": (fitted_landmarks["hipCenter"], fitted_landmarks["torsoTop"], None),
@@ -203,12 +430,12 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     left_shin = remapped_bones["leftShin"]
     left_foot = remapped_bones["leftFoot"]
 
-    remapped_bones["rightUpperArm"] = (mirror_point(left_arm[0]), mirror_point(left_arm[1]), "torso")
-    remapped_bones["rightForearm"] = (mirror_point(left_forearm[0]), mirror_point(left_forearm[1]), "rightUpperArm")
-    remapped_bones["rightHand"] = (mirror_point(left_hand[0]), mirror_point(left_hand[1]), "rightForearm")
-    remapped_bones["rightThigh"] = (mirror_point(left_thigh[0]), mirror_point(left_thigh[1]), "torso")
-    remapped_bones["rightShin"] = (mirror_point(left_shin[0]), mirror_point(left_shin[1]), "rightThigh")
-    remapped_bones["rightFoot"] = (mirror_point(left_foot[0]), mirror_point(left_foot[1]), "rightShin")
+    remapped_bones["rightUpperArm"] = (right_shoulder, right_elbow, "torso")
+    remapped_bones["rightForearm"] = (right_elbow, right_wrist, "rightUpperArm")
+    remapped_bones["rightHand"] = (right_wrist, right_hand_tip, "rightForearm")
+    remapped_bones["rightThigh"] = (mirror_point(left_thigh[0]), right_knee, "torso")
+    remapped_bones["rightShin"] = (right_knee, right_ankle, "rightThigh")
+    remapped_bones["rightFoot"] = (right_ankle, mirror_point(left_foot[1]), "rightShin")
 
     return remapped_bones
 
@@ -282,7 +509,7 @@ def main():
         )
     )
     scale = height / reference_height
-    bones = build_reference_bones(reference_vertices, reference_origin, reference_min.y, scale, vertices, height)
+    bones = build_reference_bones(reference_vertices, reference_origin, reference_min.y, scale, vertices, faces, height)
 
     armature_data = bpy.data.armatures.new("human_male_realistic_armature")
     armature = bpy.data.objects.new("human_male_realistic_armature", armature_data)
