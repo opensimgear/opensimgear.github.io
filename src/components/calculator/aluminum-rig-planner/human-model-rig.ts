@@ -41,13 +41,23 @@ type HumanRestSegment = {
   end: Vector3;
 };
 
+type HumanDebugBoneName =
+  | HumanBoneName
+  | 'leftClavicle'
+  | 'rightClavicle'
+  | 'leftPelvis'
+  | 'rightPelvis'
+  | 'neckConnector';
+
 type HumanRig = {
   bones: Map<HumanBoneName, Bone>;
   debugOverlay: HumanRigDebugOverlay;
   restBoneLocalPositions: Map<HumanBoneName, Vector3>;
+  restBoneLocalQuaternions: Map<HumanBoneName, Quaternion>;
   restBoneLocalScales: Map<HumanBoneName, Vector3>;
   restSegments: Map<HumanBoneName, HumanRestSegment>;
   restBoneWorldMatrices: Map<HumanBoneName, Matrix4>;
+  root: Group;
   skinnedMeshes: SkinnedMesh[];
 };
 
@@ -60,7 +70,7 @@ export type RiggedHumanModel = {
 type HumanRigDebugOverlay = {
   boneGeometry: BufferGeometry;
   boneMaterial: MeshBasicMaterial;
-  boneMeshes: Map<HumanBoneName, Mesh>;
+  boneMeshes: Map<HumanDebugBoneName, Mesh>;
   group: Group;
   jointGeometry: SphereGeometry;
   jointMaterial: MeshBasicMaterial;
@@ -83,6 +93,14 @@ const HUMAN_BONE_ORDER: HumanBoneName[] = [
   'rightShin',
   'rightFoot',
 ];
+const HUMAN_DEBUG_BONE_ORDER: HumanDebugBoneName[] = [
+  ...HUMAN_BONE_ORDER,
+  'leftClavicle',
+  'rightClavicle',
+  'leftPelvis',
+  'rightPelvis',
+  'neckConnector',
+];
 const Y_AXIS = new Vector3(0, 1, 0);
 const scratchRestDirection = new Vector3();
 const scratchTargetDirection = new Vector3();
@@ -92,6 +110,8 @@ const scratchLocalMatrix = new Matrix4();
 const scratchRestRotation = new Matrix4();
 const scratchParentRotation = new Matrix4();
 const scratchParentInverse = new Matrix4();
+const scratchRootInverse = new Matrix4();
+const scratchParentRigMatrix = new Matrix4();
 
 function toVector3(point: PosturePoint) {
   return new Vector3(point[0], point[1], point[2]);
@@ -216,7 +236,7 @@ function createTargetSegments(skeleton: PlannerPostureSkeleton) {
   const { joints } = skeleton;
 
   return new Map<HumanBoneName, [Vector3, Vector3]>([
-    ['torso', [toVector3(joints.hipCenter), toVector3(joints.shoulderCenter)]],
+    ['torso', [toVector3(joints.hipCenter), toVector3(joints.neck)]],
     ['head', [toVector3(joints.neck), toVector3(joints.head)]],
     ['leftUpperArm', [toVector3(joints.shoulderLeft), toVector3(joints.elbowLeft)]],
     ['leftForearm', [toVector3(joints.elbowLeft), toVector3(joints.wristLeft)]],
@@ -234,6 +254,7 @@ function createTargetSegments(skeleton: PlannerPostureSkeleton) {
 }
 
 function poseBone(
+  root: Group,
   bone: Bone,
   restSegment: HumanRestSegment,
   restLocalPosition: Vector3,
@@ -247,10 +268,12 @@ function poseBone(
   scratchQuaternion.setFromUnitVectors(scratchRestDirection, scratchTargetDirection);
   scratchRestRotation.extractRotation(restBoneWorldMatrix);
   scratchWorldMatrix.makeRotationFromQuaternion(scratchQuaternion).multiply(scratchRestRotation);
+  scratchRootInverse.copy(root.matrixWorld).invert();
 
   if (bone.parent instanceof Bone) {
     bone.parent.updateMatrixWorld(true);
-    scratchParentRotation.extractRotation(bone.parent.matrixWorld);
+    scratchParentRigMatrix.multiplyMatrices(scratchRootInverse, bone.parent.matrixWorld);
+    scratchParentRotation.extractRotation(scratchParentRigMatrix);
     scratchParentInverse.copy(scratchParentRotation).invert();
     scratchLocalMatrix.extractRotation(scratchWorldMatrix).premultiply(scratchParentInverse);
     bone.position.copy(restLocalPosition);
@@ -260,7 +283,8 @@ function poseBone(
     scratchWorldMatrix.setPosition(start);
 
     if (bone.parent) {
-      scratchParentInverse.copy(bone.parent.matrixWorld).invert();
+      scratchParentRigMatrix.multiplyMatrices(scratchRootInverse, bone.parent.matrixWorld);
+      scratchParentInverse.copy(scratchParentRigMatrix).invert();
       scratchLocalMatrix.multiplyMatrices(scratchParentInverse, scratchWorldMatrix);
     } else {
       scratchLocalMatrix.copy(scratchWorldMatrix);
@@ -274,6 +298,9 @@ function poseBone(
 }
 
 function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton) {
+  resetBonesToRestPose(rig);
+  rig.root.updateWorldMatrix(true, true);
+
   const targetSegments = createTargetSegments(skeleton);
 
   for (const name of HUMAN_BONE_ORDER) {
@@ -284,11 +311,19 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton) {
     const restBoneWorldMatrix = rig.restBoneWorldMatrices.get(name);
     const targetSegment = targetSegments.get(name);
 
-    if (!bone || !restLocalPosition || !restLocalScale || !restSegment || !restBoneWorldMatrix || !targetSegment) {
+    if (
+      !bone ||
+      !restLocalPosition ||
+      !restLocalScale ||
+      !restSegment ||
+      !restBoneWorldMatrix ||
+      !targetSegment
+    ) {
       continue;
     }
 
     poseBone(
+      rig.root,
       bone,
       restSegment,
       restLocalPosition,
@@ -305,6 +340,24 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton) {
   }
 
   updateDebugOverlay(rig.debugOverlay, targetSegments);
+}
+
+function resetBonesToRestPose(rig: HumanRig) {
+  for (const name of HUMAN_BONE_ORDER) {
+    const bone = rig.bones.get(name);
+    const position = rig.restBoneLocalPositions.get(name);
+    const quaternion = rig.restBoneLocalQuaternions.get(name);
+    const scale = rig.restBoneLocalScales.get(name);
+
+    if (!bone || !position || !quaternion || !scale) {
+      continue;
+    }
+
+    bone.position.copy(position);
+    bone.quaternion.copy(quaternion);
+    bone.scale.copy(scale);
+    bone.updateMatrixWorld(true);
+  }
 }
 
 function configureObject(object: Object3D) {
@@ -346,12 +399,12 @@ function createDebugOverlay() {
     depthTest: false,
     depthWrite: false,
   });
-  const boneMeshes = new Map<HumanBoneName, Mesh>();
+  const boneMeshes = new Map<HumanDebugBoneName, Mesh>();
 
   group.name = 'RiggedHumanDebugOverlay';
   group.renderOrder = 1000;
 
-  for (const name of HUMAN_BONE_ORDER) {
+  for (const name of HUMAN_DEBUG_BONE_ORDER) {
     const mesh = new Mesh(boneGeometry, boneMaterial);
     mesh.name = `${name}DebugBone`;
     mesh.frustumCulled = false;
@@ -460,9 +513,10 @@ function updateDebugOverlay(
   overlay: HumanRigDebugOverlay,
   targetSegments: Map<HumanBoneName, [Vector3, Vector3]>
 ) {
+  const debugSegments = createDebugSegments(targetSegments);
   const joints = new Map<string, Vector3>();
 
-  for (const [name, segment] of targetSegments) {
+  for (const [name, segment] of debugSegments) {
     const mesh = overlay.boneMeshes.get(name);
 
     if (!mesh) {
@@ -507,11 +561,44 @@ function updateDebugOverlay(
   });
 }
 
+function createDebugSegments(targetSegments: Map<HumanBoneName, [Vector3, Vector3]>) {
+  const debugSegments = new Map<HumanDebugBoneName, [Vector3, Vector3]>(targetSegments);
+  const torso = targetSegments.get('torso');
+  const head = targetSegments.get('head');
+  const leftUpperArm = targetSegments.get('leftUpperArm');
+  const rightUpperArm = targetSegments.get('rightUpperArm');
+  const leftThigh = targetSegments.get('leftThigh');
+  const rightThigh = targetSegments.get('rightThigh');
+
+  if (torso && head) {
+    debugSegments.set('neckConnector', [torso[1], head[0]]);
+  }
+
+  if (torso && leftUpperArm) {
+    debugSegments.set('leftClavicle', [torso[1], leftUpperArm[0]]);
+  }
+
+  if (torso && rightUpperArm) {
+    debugSegments.set('rightClavicle', [torso[1], rightUpperArm[0]]);
+  }
+
+  if (torso && leftThigh) {
+    debugSegments.set('leftPelvis', [torso[0], leftThigh[0]]);
+  }
+
+  if (torso && rightThigh) {
+    debugSegments.set('rightPelvis', [torso[0], rightThigh[0]]);
+  }
+
+  return debugSegments;
+}
+
 function collectRig(root: Group) {
   const bones = new Map<HumanBoneName, Bone>();
   const debugOverlay = createDebugOverlay();
   const skinnedMeshes: SkinnedMesh[] = [];
   const restBoneLocalPositions = new Map<HumanBoneName, Vector3>();
+  const restBoneLocalQuaternions = new Map<HumanBoneName, Quaternion>();
   const restBoneLocalScales = new Map<HumanBoneName, Vector3>();
   const restBoneWorldMatrices = new Map<HumanBoneName, Matrix4>();
   const bounds = new Box3();
@@ -541,6 +628,7 @@ function collectRig(root: Group) {
 
     if (bone) {
       restBoneLocalPositions.set(name, bone.position.clone());
+      restBoneLocalQuaternions.set(name, bone.quaternion.clone());
       restBoneLocalScales.set(name, bone.scale.clone());
       restBoneWorldMatrices.set(name, bone.matrixWorld.clone());
     }
@@ -550,9 +638,11 @@ function collectRig(root: Group) {
     bones,
     debugOverlay,
     restBoneLocalPositions,
+    restBoneLocalQuaternions,
     restBoneLocalScales,
     restSegments,
     restBoneWorldMatrices,
+    root,
     skinnedMeshes,
   };
 }
