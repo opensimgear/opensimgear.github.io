@@ -15,6 +15,7 @@
   import {
     ANTHROPOMETRY_LENGTH_LIMITS_MM,
     COLOR_MODE_OPTIONS,
+    DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
     DEFAULT_CUSTOM_PROFILE_COLOR,
     DEFAULT_PLANNER_POSTURE_SETTINGS,
     DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
@@ -731,6 +732,11 @@
     syncPlannerUrlState();
   }
 
+  function resetAnthropometryRatios() {
+    postureSettings.ratios = { ...DEFAULT_ANTHROPOMETRY_LENGTHS_MM };
+    syncPlannerUrlState();
+  }
+
   function formatAnthropometryRatio(value: number) {
     return `${value.toFixed(0)} mm`;
   }
@@ -896,6 +902,49 @@
           ? 'flex shrink-0 flex-col divide-y divide-zinc-300'
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
+        <Pane title="Posture" position="inline" bind:expanded={paneExpanded.posture}>
+          <Folder title="Driver">
+            <List
+              bind:value={() => postureSettings.preset, setPosturePreset}
+              options={POSTURE_PRESET_OPTIONS}
+              label="Preset"
+            />
+            <Slider
+              bind:value={() => postureSettings.heightCm, setPostureHeightCm}
+              label="Height"
+              min={PLANNER_POSTURE_LIMITS.heightMinCm}
+              max={PLANNER_POSTURE_LIMITS.heightMaxCm}
+              step={1}
+              format={(value) => `${value.toFixed(0)} cm`}
+            />
+            <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Model" />
+            <Checkbox
+              bind:value={() => postureSettings.advancedAnthropometry, setAdvancedAnthropometry}
+              label="Advanced"
+            />
+            {#if postureSettings.advancedAnthropometry}
+              <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Skeleton" />
+            {/if}
+          </Folder>
+          {#if postureSettings.advancedAnthropometry}
+            <Folder title="Anthropometry">
+              {#each ANTHROPOMETRY_RATIO_CONTROLS as control (control.key)}
+                <Slider
+                  bind:value={
+                    () => postureSettings.ratios[control.key],
+                    (value) => setAnthropometryRatio(control.key, value)
+                  }
+                  label={control.label}
+                  min={ANTHROPOMETRY_LENGTH_LIMITS_MM[control.key].min}
+                  max={ANTHROPOMETRY_LENGTH_LIMITS_MM[control.key].max}
+                  step={PLANNER_POSTURE_LIMITS.lengthStepMm}
+                  format={formatAnthropometryRatio}
+                />
+              {/each}
+              <Button on:click={resetAnthropometryRatios} label="Reset" title="Reset" />
+            </Folder>
+          {/if}
+        </Pane>
         <Pane title="Settings" position="inline" bind:expanded={paneExpanded.setup}>
           <Folder title="General">
             <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
@@ -1123,48 +1172,6 @@
                 format={(value) => `${value} mm`}
               />
               <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
-            </Folder>
-          {/if}
-        </Pane>
-        <Pane title="Posture" position="inline" bind:expanded={paneExpanded.posture}>
-          <Folder title="Driver">
-            <List
-              bind:value={() => postureSettings.preset, setPosturePreset}
-              options={POSTURE_PRESET_OPTIONS}
-              label="Preset"
-            />
-            <Slider
-              bind:value={() => postureSettings.heightCm, setPostureHeightCm}
-              label="Height"
-              min={PLANNER_POSTURE_LIMITS.heightMinCm}
-              max={PLANNER_POSTURE_LIMITS.heightMaxCm}
-              step={1}
-              format={(value) => `${value.toFixed(0)} cm`}
-            />
-            <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Model" />
-            <Checkbox
-              bind:value={() => postureSettings.advancedAnthropometry, setAdvancedAnthropometry}
-              label="Advanced"
-            />
-            {#if postureSettings.advancedAnthropometry}
-              <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Skeleton" />
-            {/if}
-          </Folder>
-          {#if postureSettings.advancedAnthropometry}
-            <Folder title="Anthropometry">
-              {#each ANTHROPOMETRY_RATIO_CONTROLS as control (control.key)}
-                <Slider
-                  bind:value={
-                    () => postureSettings.ratios[control.key],
-                    (value) => setAnthropometryRatio(control.key, value)
-                  }
-                  label={control.label}
-                  min={ANTHROPOMETRY_LENGTH_LIMITS_MM[control.key].min}
-                  max={ANTHROPOMETRY_LENGTH_LIMITS_MM[control.key].max}
-                  step={PLANNER_POSTURE_LIMITS.lengthStepMm}
-                  format={formatAnthropometryRatio}
-                />
-              {/each}
             </Folder>
           {/if}
         </Pane>

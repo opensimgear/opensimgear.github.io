@@ -290,10 +290,10 @@ export const PEDAL_TRAY_LAYOUT = {
 } as const;
 
 export const SCENE_VIEW = {
-  narrowCameraPosition: plannerYUpToSceneZUp([0.98, 0.84, 1]),
-  wideCameraPosition: plannerYUpToSceneZUp([0.1, 1, 1]),
+  narrowCameraPosition: plannerYUpToSceneZUp([0.8, 1, 1.6]),
+  wideCameraPosition: plannerYUpToSceneZUp([1.7, 1.5, 1.7]),
   cameraUp: plannerYUpToSceneZUp([0, 1, 0]),
-  controlsTarget: plannerYUpToSceneZUp([0.7, 0.1, 0]),
+  controlsTarget: plannerYUpToSceneZUp([0.7, 0.5, 0]),
   sceneRotation: Z_UP_SCENE_ROOT_ROTATION,
   narrowGizmoSizePx: 48,
   wideGizmoSizePx: 64,
