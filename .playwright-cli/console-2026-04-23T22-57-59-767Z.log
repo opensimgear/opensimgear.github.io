@@ -31,3 +31,6 @@
 [32276566ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
 [32276599ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
 [32276623ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[33253155ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[33253194ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[33253264ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
