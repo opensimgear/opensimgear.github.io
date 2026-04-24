@@ -243,7 +243,7 @@ export const PLANNER_DIMENSION_LIMITS = {
   seatHeightFromBaseInnerBeamsMaxMm: 300,
   seatAngleDegMin: 0,
   seatAngleDegMax: 45,
-  backrestAngleDegMin: 45,
+  backrestAngleDegMin: 95,
   backrestAngleDegMax: 135,
   pedalTrayDepthMinMm: 300,
   pedalTrayDepthMaxMm: 500,

@@ -227,7 +227,12 @@ describe('aluminum rig planner human model rig', () => {
 
       expect(Math.abs(Math.round(boneLength * 1000) - Math.round(targetLength * 1000)), segment.label).toBeLessThanOrEqual(1);
       expect(Math.abs(boneLength - targetLength), segment.label).toBeLessThanOrEqual(0.001);
-      expectVectorClose(bones.get(segment.boneStart)!.scale, restScales.get(segment.boneStart)!, segment.label);
+
+      if (segment.boneStart === 'leftFoot' || segment.boneStart === 'rightFoot') {
+        expect(bones.get(segment.boneStart)!.scale.y).toBeGreaterThan(restScales.get(segment.boneStart)!.y);
+      } else {
+        expectVectorClose(bones.get(segment.boneStart)!.scale, restScales.get(segment.boneStart)!, segment.label);
+      }
     }
 
     model!.dispose();

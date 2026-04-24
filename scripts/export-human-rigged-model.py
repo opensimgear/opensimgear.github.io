@@ -16,7 +16,7 @@ BONE_LENGTHS = {
     "forearm": 0.2600,
     "hand": 0.0702,
     "thigh": 0.4195,
-    "shin": 0.3597,
+    "shin": 0.3897,
     "foot": 0.1822,
 }
 REFERENCE_PARTS = {

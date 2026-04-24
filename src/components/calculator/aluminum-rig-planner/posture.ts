@@ -59,13 +59,14 @@ const MM_TO_METERS = 0.001;
 const EPSILON = 0.000001;
 const PEDAL_WIDTH_MM = 60;
 const PEDAL_PLATE_THICKNESS_MM = 3;
+export const PEDAL_HEEL_FORWARD_DELTA_MM = 50;
+export const PEDAL_HEEL_UP_DELTA_MM = 12;
 const WHEEL_TUBE_RADIUS_MM = 16;
 const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
 const HIP_FORWARD_ON_SEAT_MM = 130;
 export const POSTURE_HIP_ABOVE_SEAT_MM = 140;
 export const POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM = 60;
 const POSTURE_HEEL_LENGTH_SHARE = 0.335;
-const POSTURE_FOOT_BONE_LENGTH_SHARE = 1 - POSTURE_HEEL_LENGTH_SHARE;
 const POSTURE_HEEL_FOOT_ANGLE_RAD = toRad(84.4);
 const HAND_GRIP_LENGTH_MIN_MM = 55;
 const HAND_GRIP_LENGTH_MAX_MM = 140;
@@ -155,18 +156,22 @@ function getPedalCentersZmm(input: PlannerInput) {
   };
 }
 
-function getPedalTarget(input: PlannerInput, centerZmm: number, footLengthM: number) {
+function getPedalTarget(input: PlannerInput, centerZmm: number, footLengthM: number, heelLengthM: number) {
   const pedalLeanRad = toRad(input.pedalAngleDeg - 90);
   const pedalDirection: Vector = normalize([-Math.sin(pedalLeanRad), Math.cos(pedalLeanRad), 0]);
+  const pedalPlaneNormal: Vector = normalize(rotateXY(pedalDirection, Math.PI / 2), [0, 1, 0]);
   const heelDirection = normalize(rotateXY(pedalDirection, POSTURE_HEEL_FOOT_ANGLE_RAD), [0, 1, 0]);
   const pedalPivot: Vector = [
     mm(input.seatBaseDepthMm + input.pedalTrayDistanceMm + input.pedalsDeltaMm),
     mm(BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + input.pedalsHeightMm),
     mm(centerZmm),
   ];
-  const heel = pedalPivot;
-  const heelLength = footLengthM * POSTURE_HEEL_LENGTH_SHARE;
-  const footBoneLength = footLengthM * POSTURE_FOOT_BONE_LENGTH_SHARE;
+  const heel = add(
+    pedalPivot,
+    add(scale(pedalDirection, mm(PEDAL_HEEL_FORWARD_DELTA_MM)), scale(pedalPlaneNormal, mm(PEDAL_HEEL_UP_DELTA_MM)))
+  );
+  const heelLength = Math.min(heelLengthM, footLengthM - mm(20));
+  const footBoneLength = Math.max(mm(20), footLengthM - heelLength);
   const ankle = add(heel, scale(heelDirection, heelLength));
   const toe = add(heel, scale(pedalDirection, footBoneLength));
 
@@ -176,6 +181,10 @@ function getPedalTarget(input: PlannerInput, centerZmm: number, footLengthM: num
     heel,
     toe,
   };
+}
+
+function getHeelLength(heightM: number) {
+  return DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM * POSTURE_HEEL_LENGTH_SHARE;
 }
 
 function getWheelTargets(input: PlannerInput, rightSign: number) {
@@ -306,8 +315,11 @@ export function createPlannerPostureSkeleton(
   const shoulderRight = add(shoulderCenter, [0, 0, rightSign * shoulderHalfWidthM]);
   const shoulderLeft = add(shoulderCenter, [0, 0, -rightSign * shoulderHalfWidthM]);
   const wheelTargets = getWheelTargets(input, rightSign);
-  const rightPedal = getPedalTarget(input, pedalCentersZmm.accelerator, ratios.footLength * heightM);
-  const leftPedal = getPedalTarget(input, pedalCentersZmm.brake, ratios.footLength * heightM);
+  const footLength = ratios.footLength * heightM;
+  const heelLength = getHeelLength(heightM);
+  const pedalFootLength = Math.max(heelLength + mm(20), footLength);
+  const rightPedal = getPedalTarget(input, pedalCentersZmm.accelerator, pedalFootLength, heelLength);
+  const leftPedal = getPedalTarget(input, pedalCentersZmm.brake, pedalFootLength, heelLength);
   const upperArmLength = ratios.upperArmLength * heightM;
   const forearmHandLength = ratios.forearmHandLength * heightM;
   const handGripLength = getHandGripLength(heightM, forearmHandLength);

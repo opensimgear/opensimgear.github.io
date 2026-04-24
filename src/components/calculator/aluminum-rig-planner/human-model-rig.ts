@@ -163,6 +163,7 @@ const HUMAN_BONE_END_BONES = {
   rightFoot: 'rightFootTip',
 } satisfies Record<HumanBoneName, HumanModelBoneName>;
 const MODEL_RATIO_PRECISION = 3;
+const BONE_LENGTH_EPSILON = 0.000001;
 // The GLB has no eye bone, so estimate eye height from the head-weighted mesh bounds.
 const MODEL_EYE_FROM_HEAD_TOP_RATIO = 0.42;
 const MODEL_HEAD_SKIN_WEIGHT_THRESHOLD = 0.2;
@@ -231,7 +232,10 @@ function getModelBoneLocalPosition(root: Group, bones: Map<HumanModelBoneName, B
   return position ? root.worldToLocal(position) : null;
 }
 
-function getAverageDistance(bones: Map<HumanModelBoneName, Bone>, pairs: Array<[HumanModelBoneName, HumanModelBoneName]>) {
+function getAverageDistance(
+  bones: Map<HumanModelBoneName, Bone>,
+  pairs: Array<[HumanModelBoneName, HumanModelBoneName]>
+) {
   const distances = pairs
     .map(([start, end]) => {
       const startPosition = getModelBonePosition(bones, start);
@@ -503,6 +507,20 @@ function setBonePositionFromRootLocal(root: Group, bone: Bone, position: Vector3
   bone.updateMatrixWorld(true);
 }
 
+function setTerminalBoneStretch(
+  bone: Bone,
+  restLocalScale: Vector3,
+  restSegment: HumanRestSegment,
+  targetSegment: [Vector3, Vector3]
+) {
+  const restLength = restSegment.start.distanceTo(restSegment.end);
+  const targetLength = targetSegment[0].distanceTo(targetSegment[1]);
+  const stretch = restLength > BONE_LENGTH_EPSILON ? targetLength / restLength : 1;
+
+  bone.scale.set(restLocalScale.x, restLocalScale.y * stretch, restLocalScale.z);
+  bone.updateMatrixWorld(true);
+}
+
 function applyPlannerPose(
   rig: HumanRig,
   skeleton: PlannerPostureSkeleton,
@@ -538,6 +556,10 @@ function applyPlannerPose(
       scaledBones.has(name),
       name === 'head'
     );
+
+    if (scaledBones.has(name) && (name === 'leftFoot' || name === 'rightFoot')) {
+      setTerminalBoneStretch(bone, restLocalScale, restSegment, targetSegment);
+    }
   }
 
   if (scaledBones.size > 0) {
@@ -611,15 +633,15 @@ function createDebugOverlay() {
   const jointHitGeometry = new SphereGeometry(0.05, 16, 10);
   const boneMaterial = new MeshBasicMaterial({
     color: 0x2563eb,
-    depthTest: false,
+    depthTest: true,
     depthWrite: false,
     opacity: 0.72,
     transparent: true,
   });
   const jointMaterial = new MeshBasicMaterial({
     color: 0xf97316,
-    depthTest: false,
-    depthWrite: false,
+    depthTest: true,
+    depthWrite: true,
   });
   const hitMaterial = new MeshBasicMaterial({
     color: 0xffffff,
