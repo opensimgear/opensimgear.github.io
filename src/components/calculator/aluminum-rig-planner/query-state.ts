@@ -1,5 +1,7 @@
 import {
-  DEFAULT_ANTHROPOMETRY_RATIOS,
+  ANTHROPOMETRY_LENGTH_LIMITS_MM,
+  DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
+  DEFAULT_POSTURE_HEIGHT_CM,
   DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_POSTURE_LIMITS,
@@ -133,8 +135,14 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
   } satisfies PlannerOptimizationSettings;
 }
 
-function sanitizeRatio(value: unknown, fallback: number) {
-  return clampNumber(readNumber(value, fallback), PLANNER_POSTURE_LIMITS.ratioMin, PLANNER_POSTURE_LIMITS.ratioMax);
+function sanitizeAnthropometryLength(key: keyof PlannerAnthropometryRatios, value: unknown) {
+  const fallback = DEFAULT_ANTHROPOMETRY_LENGTHS_MM[key];
+  const nextValue = readNumber(value, fallback);
+  const migratedValue =
+    nextValue <= PLANNER_POSTURE_LIMITS.ratioMax ? nextValue * DEFAULT_POSTURE_HEIGHT_CM * 10 : nextValue;
+  const limits = ANTHROPOMETRY_LENGTH_LIMITS_MM[key];
+
+  return Number(clampNumber(migratedValue, limits.min, limits.max).toFixed(1));
 }
 
 function clampNumber(value: number, min: number, max: number) {
@@ -157,22 +165,16 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     advancedAnthropometry:
       typeof state?.advancedAnthropometry === 'boolean' ? state.advancedAnthropometry : defaults.advancedAnthropometry,
     ratios: {
-      sittingHeight: sanitizeRatio(state?.ratios?.sittingHeight, DEFAULT_ANTHROPOMETRY_RATIOS.sittingHeight),
-      seatedEyeHeight: sanitizeRatio(state?.ratios?.seatedEyeHeight, DEFAULT_ANTHROPOMETRY_RATIOS.seatedEyeHeight),
-      seatedShoulderHeight: sanitizeRatio(
-        state?.ratios?.seatedShoulderHeight,
-        DEFAULT_ANTHROPOMETRY_RATIOS.seatedShoulderHeight
-      ),
-      hipBreadth: sanitizeRatio(state?.ratios?.hipBreadth, DEFAULT_ANTHROPOMETRY_RATIOS.hipBreadth),
-      shoulderBreadth: sanitizeRatio(state?.ratios?.shoulderBreadth, DEFAULT_ANTHROPOMETRY_RATIOS.shoulderBreadth),
-      upperArmLength: sanitizeRatio(state?.ratios?.upperArmLength, DEFAULT_ANTHROPOMETRY_RATIOS.upperArmLength),
-      forearmHandLength: sanitizeRatio(
-        state?.ratios?.forearmHandLength,
-        DEFAULT_ANTHROPOMETRY_RATIOS.forearmHandLength
-      ),
-      thighLength: sanitizeRatio(state?.ratios?.thighLength, DEFAULT_ANTHROPOMETRY_RATIOS.thighLength),
-      lowerLegLength: sanitizeRatio(state?.ratios?.lowerLegLength, DEFAULT_ANTHROPOMETRY_RATIOS.lowerLegLength),
-      footLength: sanitizeRatio(state?.ratios?.footLength, DEFAULT_ANTHROPOMETRY_RATIOS.footLength),
+      sittingHeight: sanitizeAnthropometryLength('sittingHeight', state?.ratios?.sittingHeight),
+      seatedEyeHeight: sanitizeAnthropometryLength('seatedEyeHeight', state?.ratios?.seatedEyeHeight),
+      seatedShoulderHeight: sanitizeAnthropometryLength('seatedShoulderHeight', state?.ratios?.seatedShoulderHeight),
+      hipBreadth: sanitizeAnthropometryLength('hipBreadth', state?.ratios?.hipBreadth),
+      shoulderBreadth: sanitizeAnthropometryLength('shoulderBreadth', state?.ratios?.shoulderBreadth),
+      upperArmLength: sanitizeAnthropometryLength('upperArmLength', state?.ratios?.upperArmLength),
+      forearmHandLength: sanitizeAnthropometryLength('forearmHandLength', state?.ratios?.forearmHandLength),
+      thighLength: sanitizeAnthropometryLength('thighLength', state?.ratios?.thighLength),
+      lowerLegLength: sanitizeAnthropometryLength('lowerLegLength', state?.ratios?.lowerLegLength),
+      footLength: sanitizeAnthropometryLength('footLength', state?.ratios?.footLength),
     },
   } satisfies PlannerPostureSettings;
 }

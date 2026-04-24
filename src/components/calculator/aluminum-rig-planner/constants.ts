@@ -1,5 +1,7 @@
 import type {
   CutListProfileType,
+  PlannerAnthropometryLengthsMm,
+  PlannerAnthropometryRatios,
   PlannerInput,
   PlannerOptimizationSettings,
   PlannerPostureSettings,
@@ -159,18 +161,39 @@ export const POSTURE_PRESET_OPTIONS = [
   { text: 'Road', value: 'road' },
 ] as const;
 
-export const DEFAULT_ANTHROPOMETRY_RATIOS: PlannerPostureSettings['ratios'] = {
-  sittingHeight: 0.322,
-  seatedEyeHeight: 0.336,
-  seatedShoulderHeight: 0.287,
-  hipBreadth: 0.125,
-  shoulderBreadth: 0.26,
-  upperArmLength: 0.218,
-  forearmHandLength: 0.241,
-  thighLength: 0.245,
-  lowerLegLength: 0.235,
-  footLength: 0.112,
+export const DEFAULT_POSTURE_HEIGHT_CM = 169;
+export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM: PlannerAnthropometryLengthsMm = {
+  sittingHeight: 806.1,
+  seatedEyeHeight: 755.4,
+  seatedShoulderHeight: 493.5,
+  hipBreadth: 207.9,
+  shoulderBreadth: 346.4,
+  upperArmLength: 238.3,
+  forearmHandLength: 329.5,
+  thighLength: 419.1,
+  lowerLegLength: 360,
+  footLength: 294.1,
 };
+
+function getDefaultAnthropometryRatio(lengthMm: number) {
+  return Number((lengthMm / (DEFAULT_POSTURE_HEIGHT_CM * 10)).toFixed(3));
+}
+
+export const DEFAULT_ANTHROPOMETRY_RATIOS = Object.fromEntries(
+  Object.entries(DEFAULT_ANTHROPOMETRY_LENGTHS_MM).map(([key, value]) => [
+    key,
+    getDefaultAnthropometryRatio(value),
+  ])
+) as PlannerAnthropometryRatios;
+export const ANTHROPOMETRY_LENGTH_LIMITS_MM = Object.fromEntries(
+  Object.entries(DEFAULT_ANTHROPOMETRY_LENGTHS_MM).map(([key, value]) => [
+    key,
+    {
+      min: Number((value * 0.8).toFixed(1)),
+      max: Number((value * 1.2).toFixed(1)),
+    },
+  ])
+) as Record<keyof PlannerAnthropometryRatios, { min: number; max: number }>;
 
 // DO NOT TOUCH
 // export const DEFAULT_ANTHROPOMETRY_RATIOS: PlannerPostureSettings['ratios'] = {
@@ -188,10 +211,10 @@ export const DEFAULT_ANTHROPOMETRY_RATIOS: PlannerPostureSettings['ratios'] = {
 
 export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   preset: 'gt',
-  heightCm: 169,
+  heightCm: DEFAULT_POSTURE_HEIGHT_CM,
   advancedAnthropometry: false,
   ratios: {
-    ...DEFAULT_ANTHROPOMETRY_RATIOS,
+    ...DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
   },
 };
 
@@ -201,6 +224,7 @@ export const PLANNER_POSTURE_LIMITS = {
   ratioMin: 0.05,
   ratioMax: 0.7,
   ratioStep: 0.001,
+  lengthStepMm: 1,
 } as const;
 
 export const PLANNER_DIMENSION_LIMITS = {

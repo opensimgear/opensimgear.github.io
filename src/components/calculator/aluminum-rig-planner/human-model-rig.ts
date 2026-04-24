@@ -89,7 +89,7 @@ export type RiggedHumanModel = {
   boneRigRatios: PlannerAnthropometryRatios | null;
   getTooltipTargets: () => Mesh[];
   object: Group;
-  applySkeleton: (skeleton: PlannerPostureSkeleton) => void;
+  applySkeleton: (skeleton: PlannerPostureSkeleton, scaleToSkeleton: boolean) => void;
   dispose: () => void;
 };
 
@@ -430,7 +430,8 @@ function poseBone(
   restLocalScale: Vector3,
   restBoneWorldMatrix: Matrix4,
   start: Vector3,
-  end: Vector3
+  end: Vector3,
+  scaleToTargetLength: boolean
 ) {
   getSegmentDirection(restSegment.start, restSegment.end, scratchRestDirection);
   getSegmentDirection(start, end, scratchTargetDirection);
@@ -438,6 +439,10 @@ function poseBone(
   scratchRestRotation.extractRotation(restBoneWorldMatrix);
   scratchWorldMatrix.makeRotationFromQuaternion(scratchQuaternion).multiply(scratchRestRotation);
   scratchRootInverse.copy(root.matrixWorld).invert();
+
+  const restLength = restSegment.start.distanceTo(restSegment.end);
+  const targetLength = start.distanceTo(end);
+  const lengthScale = scaleToTargetLength && restLength > 0.0001 ? targetLength / restLength : 1;
 
   if (bone.parent instanceof Bone) {
     bone.parent.updateMatrixWorld(true);
@@ -447,7 +452,7 @@ function poseBone(
     scratchLocalMatrix.extractRotation(scratchWorldMatrix).premultiply(scratchParentInverse);
     bone.position.copy(restLocalPosition);
     bone.quaternion.setFromRotationMatrix(scratchLocalMatrix);
-    bone.scale.copy(restLocalScale);
+    bone.scale.copy(restLocalScale).multiplyScalar(lengthScale);
   } else {
     scratchWorldMatrix.setPosition(start);
 
@@ -460,13 +465,13 @@ function poseBone(
     }
 
     scratchLocalMatrix.decompose(bone.position, bone.quaternion, bone.scale);
-    bone.scale.copy(restLocalScale);
+    bone.scale.copy(restLocalScale).multiplyScalar(lengthScale);
   }
 
   bone.updateMatrixWorld(true);
 }
 
-function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton) {
+function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, scaleToSkeleton: boolean) {
   resetBonesToRestPose(rig);
   rig.root.updateWorldMatrix(true, true);
 
@@ -492,7 +497,8 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton) {
       restLocalScale,
       restBoneWorldMatrix,
       targetSegment[0],
-      targetSegment[1]
+      targetSegment[1],
+      scaleToSkeleton
     );
   }
 
@@ -992,8 +998,8 @@ export async function createRiggedHumanModel(
       return [...rig.debugOverlay.boneHitMeshes.values(), ...rig.debugOverlay.jointHitMeshes];
     },
     object: root,
-    applySkeleton(plannerSkeleton) {
-      applyPlannerPose(rig, plannerSkeleton);
+    applySkeleton(plannerSkeleton, scaleToSkeleton) {
+      applyPlannerPose(rig, plannerSkeleton, scaleToSkeleton);
     },
     dispose() {
       rig.debugOverlay.boneGeometry.dispose();

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  ANTHROPOMETRY_LENGTH_LIMITS_MM,
   DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
   DEFAULT_PLANNER_INPUT,
   PLANNER_DIMENSION_LIMITS,
@@ -167,7 +168,7 @@ describe('aluminum rig planner query state', () => {
     expect(state.postureSettings.preset).toBe('rally');
     expect(state.postureSettings.heightCm).toBe(220);
     expect(state.postureSettings.advancedAnthropometry).toBe(true);
-    expect(state.postureSettings.ratios.upperArmLength).toBe(0.5);
-    expect(state.postureSettings.ratios.footLength).toBe(0.05);
+    expect(state.postureSettings.ratios.upperArmLength).toBe(ANTHROPOMETRY_LENGTH_LIMITS_MM.upperArmLength.max);
+    expect(state.postureSettings.ratios.footLength).toBe(ANTHROPOMETRY_LENGTH_LIMITS_MM.footLength.min);
   });
 });

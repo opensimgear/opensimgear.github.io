@@ -14,11 +14,12 @@
   } from './human-model-rig';
 
   type Props = {
+    advancedAnthropometry: boolean;
     onHoverTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
     skeleton: PlannerPostureSkeleton;
   };
 
-  const { onHoverTooltipChange, skeleton }: Props = $props();
+  const { advancedAnthropometry, onHoverTooltipChange, skeleton }: Props = $props();
   const { camera, canvas, invalidate } = useThrelte();
   const pointer = new Vector2();
   const raycaster = new Raycaster();
@@ -76,7 +77,7 @@
         }
 
         riggedHuman = model;
-        model.applySkeleton(skeleton);
+        model.applySkeleton(skeleton, advancedAnthropometry);
         invalidate();
       })
       .catch((error: unknown) => {
@@ -109,7 +110,7 @@
       group.add(model.object);
     }
 
-    model.applySkeleton(skeleton);
+    model.applySkeleton(skeleton, advancedAnthropometry);
     invalidate();
   });
 </script>

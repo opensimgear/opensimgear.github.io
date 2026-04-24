@@ -1,4 +1,5 @@
 import {
+  ANTHROPOMETRY_LENGTH_LIMITS_MM,
   BASE_BEAM_HEIGHT_MM,
   BASE_MODULE_LAYOUT,
   DEFAULT_ANTHROPOMETRY_RATIOS,
@@ -235,45 +236,24 @@ export function getEffectiveAnthropometryRatios(settings: PlannerPostureSettings
     return { ...DEFAULT_ANTHROPOMETRY_RATIOS };
   }
 
+  const heightMm =
+    clamp(settings.heightCm, PLANNER_POSTURE_LIMITS.heightMinCm, PLANNER_POSTURE_LIMITS.heightMaxCm) * 10;
+  const getRatio = (key: keyof PlannerAnthropometryRatios) => {
+    const limits = ANTHROPOMETRY_LENGTH_LIMITS_MM[key];
+    return clamp(settings.ratios[key], limits.min, limits.max) / heightMm;
+  };
+
   return {
-    sittingHeight: clamp(
-      settings.ratios.sittingHeight,
-      PLANNER_POSTURE_LIMITS.ratioMin,
-      PLANNER_POSTURE_LIMITS.ratioMax
-    ),
-    seatedEyeHeight: clamp(
-      settings.ratios.seatedEyeHeight,
-      PLANNER_POSTURE_LIMITS.ratioMin,
-      PLANNER_POSTURE_LIMITS.ratioMax
-    ),
-    seatedShoulderHeight: clamp(
-      settings.ratios.seatedShoulderHeight,
-      PLANNER_POSTURE_LIMITS.ratioMin,
-      PLANNER_POSTURE_LIMITS.ratioMax
-    ),
-    hipBreadth: clamp(settings.ratios.hipBreadth, PLANNER_POSTURE_LIMITS.ratioMin, PLANNER_POSTURE_LIMITS.ratioMax),
-    shoulderBreadth: clamp(
-      settings.ratios.shoulderBreadth,
-      PLANNER_POSTURE_LIMITS.ratioMin,
-      PLANNER_POSTURE_LIMITS.ratioMax
-    ),
-    upperArmLength: clamp(
-      settings.ratios.upperArmLength,
-      PLANNER_POSTURE_LIMITS.ratioMin,
-      PLANNER_POSTURE_LIMITS.ratioMax
-    ),
-    forearmHandLength: clamp(
-      settings.ratios.forearmHandLength,
-      PLANNER_POSTURE_LIMITS.ratioMin,
-      PLANNER_POSTURE_LIMITS.ratioMax
-    ),
-    thighLength: clamp(settings.ratios.thighLength, PLANNER_POSTURE_LIMITS.ratioMin, PLANNER_POSTURE_LIMITS.ratioMax),
-    lowerLegLength: clamp(
-      settings.ratios.lowerLegLength,
-      PLANNER_POSTURE_LIMITS.ratioMin,
-      PLANNER_POSTURE_LIMITS.ratioMax
-    ),
-    footLength: clamp(settings.ratios.footLength, PLANNER_POSTURE_LIMITS.ratioMin, PLANNER_POSTURE_LIMITS.ratioMax),
+    sittingHeight: getRatio('sittingHeight'),
+    seatedEyeHeight: getRatio('seatedEyeHeight'),
+    seatedShoulderHeight: getRatio('seatedShoulderHeight'),
+    hipBreadth: getRatio('hipBreadth'),
+    shoulderBreadth: getRatio('shoulderBreadth'),
+    upperArmLength: getRatio('upperArmLength'),
+    forearmHandLength: getRatio('forearmHandLength'),
+    thighLength: getRatio('thighLength'),
+    lowerLegLength: getRatio('lowerLegLength'),
+    footLength: getRatio('footLength'),
   };
 }
 

@@ -13,6 +13,7 @@
   import CutOptimizerPanel from './CutOptimizerPanel.svelte';
   import { createPlannerCutListEntries } from './cut-list';
   import {
+    ANTHROPOMETRY_LENGTH_LIMITS_MM,
     COLOR_MODE_OPTIONS,
     DEFAULT_CUSTOM_PROFILE_COLOR,
     DEFAULT_PLANNER_POSTURE_SETTINGS,
@@ -715,14 +716,13 @@
   }
 
   function setAnthropometryRatio(key: keyof PlannerAnthropometryRatios, value: number) {
-    postureSettings.ratios[key] = Number(
-      Math.max(PLANNER_POSTURE_LIMITS.ratioMin, Math.min(PLANNER_POSTURE_LIMITS.ratioMax, value)).toFixed(3)
-    );
+    const limits = ANTHROPOMETRY_LENGTH_LIMITS_MM[key];
+    postureSettings.ratios[key] = Number(Math.max(limits.min, Math.min(limits.max, value)).toFixed(1));
     syncPlannerUrlState();
   }
 
   function formatAnthropometryRatio(value: number) {
-    return value.toFixed(3);
+    return `${value.toFixed(0)} mm`;
   }
 
   function setOptimizerMode(value: PlannerOptimizationSettings['mode']) {
@@ -1145,9 +1145,9 @@
                     (value) => setAnthropometryRatio(control.key, value)
                   }
                   label={control.label}
-                  min={PLANNER_POSTURE_LIMITS.ratioMin}
-                  max={PLANNER_POSTURE_LIMITS.ratioMax}
-                  step={PLANNER_POSTURE_LIMITS.ratioStep}
+                  min={ANTHROPOMETRY_LENGTH_LIMITS_MM[control.key].min}
+                  max={ANTHROPOMETRY_LENGTH_LIMITS_MM[control.key].max}
+                  step={PLANNER_POSTURE_LIMITS.lengthStepMm}
                   format={formatAnthropometryRatio}
                 />
               {/each}

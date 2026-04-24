@@ -23,11 +23,13 @@ export type PlannerAnthropometryRatios = {
   footLength: number;
 };
 
+export type PlannerAnthropometryLengthsMm = Record<keyof PlannerAnthropometryRatios, number>;
+
 export type PlannerPostureSettings = {
   preset: PlannerPosturePreset;
   heightCm: number;
   advancedAnthropometry: boolean;
-  ratios: PlannerAnthropometryRatios;
+  ratios: PlannerAnthropometryLengthsMm;
 };
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;

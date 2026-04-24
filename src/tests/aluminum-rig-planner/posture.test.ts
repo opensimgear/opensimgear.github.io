@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  ANTHROPOMETRY_LENGTH_LIMITS_MM,
   DEFAULT_ANTHROPOMETRY_RATIOS,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
-  PLANNER_POSTURE_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import {
   createPlannerPostureSkeleton,
@@ -50,24 +50,26 @@ describe('aluminum rig planner posture solver', () => {
       advancedAnthropometry: false,
       ratios: {
         ...DEFAULT_PLANNER_POSTURE_SETTINGS.ratios,
-        upperArmLength: 0.5,
+        upperArmLength: ANTHROPOMETRY_LENGTH_LIMITS_MM.upperArmLength.max,
       },
     });
 
     expect(ratios.upperArmLength).toBe(DEFAULT_ANTHROPOMETRY_RATIOS.upperArmLength);
   });
 
-  it('clamps edited ratios when advanced anthropometry is enabled', () => {
+  it('clamps edited lengths when advanced anthropometry is enabled', () => {
     const ratios = getEffectiveAnthropometryRatios({
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       advancedAnthropometry: true,
       ratios: {
         ...DEFAULT_PLANNER_POSTURE_SETTINGS.ratios,
-        lowerLegLength: 2,
+        lowerLegLength: ANTHROPOMETRY_LENGTH_LIMITS_MM.lowerLegLength.max + 100,
       },
     });
 
-    expect(ratios.lowerLegLength).toBe(PLANNER_POSTURE_LIMITS.ratioMax);
+    expect(ratios.lowerLegLength).toBe(
+      ANTHROPOMETRY_LENGTH_LIMITS_MM.lowerLegLength.max / (DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm * 10)
+    );
   });
 
   it('clamps hands to the reachable model arm length', () => {

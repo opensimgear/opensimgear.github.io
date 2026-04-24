@@ -84,5 +84,9 @@
   <MeasurementArrow color={measurementOverlay.color} start={measurementOverlay.start} end={measurementOverlay.end} />
 {/if}
 
-<RiggedHumanModel skeleton={postureSkeleton} onHoverTooltipChange={onHumanRigTooltipChange} />
+<RiggedHumanModel
+  advancedAnthropometry={postureSettings.advancedAnthropometry}
+  skeleton={postureSkeleton}
+  onHoverTooltipChange={onHumanRigTooltipChange}
+/>
 <PostureOverlayPass />
