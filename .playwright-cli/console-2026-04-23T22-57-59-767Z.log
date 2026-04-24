@@ -2,3 +2,32 @@
 [     422ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=3f25429f:745
 [     472ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=3f25429f:745
 [     523ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[29263585ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[29263623ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[29265727ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[29438369ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[29438439ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[29438447ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[29438473ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[29438534ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[31774721ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[31774757ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[31774782ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[31947545ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[31947575ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[31947606ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[32008367ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32008396ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32008425ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[32091475ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32091507ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32091533ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[32142380ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32142411ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32142438ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[32161878ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32161912ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32161936ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44
+[32276566ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32276599ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:4321/node_modules/.vite/deps/chunk-E3OWBQRT.js?v=7d2dd9a3:745
+[32276623ms] [ERROR] WebSocket connection to 'wss://127.51.68.120:8182/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/src/assets/vendor/3dconnexion.min.js:44

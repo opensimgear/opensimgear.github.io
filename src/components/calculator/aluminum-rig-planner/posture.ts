@@ -59,8 +59,8 @@ const PEDAL_HEIGHT_MM = 180;
 const PEDAL_PLATE_THICKNESS_MM = 3;
 const WHEEL_TUBE_RADIUS_MM = 16;
 const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
-const HIP_FORWARD_ON_SEAT_MM = 120;
-const HIP_ABOVE_SEAT_MM = 70;
+const HIP_FORWARD_ON_SEAT_MM = 130;
+const HIP_ABOVE_SEAT_MM = 140;
 const SHOULDER_ABOVE_HIP_CLEARANCE_MM = 60;
 const HAND_GRIP_LENGTH_MIN_MM = 55;
 const HAND_GRIP_LENGTH_MAX_MM = 95;
@@ -321,7 +321,10 @@ export function createPlannerPostureSkeleton(
   const leftArm = solveArmPose(shoulderLeft, wheelTargets.left, upperArmLength, forearmHandLength, -rightSign);
   const wristRight = getWristFromHand(rightArm.joint, rightArm.end, handGripLength);
   const wristLeft = getWristFromHand(leftArm.joint, leftArm.end, handGripLength);
-  const rightToe = add(rightLeg.end, scale(rightPedal.direction, Math.min(ratios.footLength * heightM * 0.62, mm(120))));
+  const rightToe = add(
+    rightLeg.end,
+    scale(rightPedal.direction, Math.min(ratios.footLength * heightM * 0.62, mm(120)))
+  );
   const leftToe = add(leftLeg.end, scale(leftPedal.direction, Math.min(ratios.footLength * heightM * 0.62, mm(120))));
   const joints: Record<PostureJointName, PosturePoint> = {
     head,
