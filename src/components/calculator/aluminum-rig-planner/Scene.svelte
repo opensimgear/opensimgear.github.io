@@ -14,6 +14,7 @@
   import { getSceneControlsTopOffsetPx } from '../shared/scene-controls';
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
+  import type { HumanRigHoverTooltip } from './human-model-rig';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
   import type { PlannerPostureSettings, PlannerVisibleModules } from './types';
 
@@ -53,6 +54,8 @@
   let orbitControlsRef = $state<ThreeOrbitControls | null>(null);
   let rigRootRef = $state<Group | null>(null);
   let viewportElement = $state<HTMLDivElement | null>(null);
+  let tooltipElement = $state<HTMLDivElement | null>(null);
+  let humanRigTooltip = $state<HumanRigHoverTooltip | null>(null);
   let spaceMouseBridge = $state<ThreeSpaceMouseBridge | null>(null);
   const createPlannerRenderer = (canvas: HTMLCanvasElement) =>
     new WebGLRenderer({
@@ -78,6 +81,21 @@
     return [-right, right, top, -top, 0.1, 20];
   });
   let useOrthographicCamera = $state(false);
+  const humanRigTooltipStyle = $derived.by(() => {
+    if (!humanRigTooltip || !tooltipElement || !viewportElement) {
+      return 'visibility: hidden;';
+    }
+
+    const offset = 6;
+    const viewportRect = viewportElement.getBoundingClientRect();
+    const tooltipRect = tooltipElement.getBoundingClientRect();
+    const maxX = Math.max(offset, viewportRect.width - tooltipRect.width - offset);
+    const maxY = Math.max(offset, viewportRect.height - tooltipRect.height - offset);
+    const nextX = Math.min(Math.max(offset, humanRigTooltip.screenPosition[0] + offset), maxX);
+    const nextY = Math.min(Math.max(offset, humanRigTooltip.screenPosition[1] + offset), maxY);
+
+    return `left: ${nextX}px; top: ${nextY}px;`;
+  });
 
   function captureCurrentView() {
     const activeCamera = useOrthographicCamera ? orthographicCameraRef : perspectiveCameraRef;
@@ -137,6 +155,18 @@
       destroy() {
         if (viewportElement === node) {
           viewportElement = null;
+        }
+      },
+    };
+  }
+
+  function captureTooltip(node: HTMLDivElement) {
+    tooltipElement = node;
+
+    return {
+      destroy() {
+        if (tooltipElement === node) {
+          tooltipElement = null;
         }
       },
     };
@@ -255,6 +285,9 @@
         {geometry}
         {highlightedBeamIds}
         {measurementOverlay}
+        onHumanRigTooltipChange={(tooltip) => {
+          humanRigTooltip = tooltip;
+        }}
         {profileColor}
         {postureSettings}
         {showEndCaps}
@@ -262,4 +295,57 @@
       />
     </T.Group>
   </Canvas>
+
+  {#if humanRigTooltip}
+    <div {@attach captureTooltip} class="rig-tooltip" role="tooltip" style={humanRigTooltipStyle}>
+      <div class="rig-tooltip__title">{humanRigTooltip.title}</div>
+      {#each humanRigTooltip.rows as row (row.label)}
+        <div class="rig-tooltip__row">
+          <span>{row.label}</span>
+          <strong>{row.value}</strong>
+        </div>
+      {/each}
+    </div>
+  {/if}
 </div>
+
+<style>
+  .rig-tooltip {
+    min-width: 168px;
+    max-width: 260px;
+    border: 1px solid rgb(39 39 42 / 0.12);
+    border-radius: 6px;
+    background: rgb(24 24 27 / 0.92);
+    box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
+    color: white;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    line-height: 1.35;
+    padding: 8px 10px;
+    pointer-events: none;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 20;
+  }
+
+  .rig-tooltip__title {
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .rig-tooltip__row {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .rig-tooltip__row span {
+    color: rgb(212 212 216);
+  }
+
+  .rig-tooltip__row strong {
+    font-weight: 600;
+    text-align: right;
+  }
+</style>

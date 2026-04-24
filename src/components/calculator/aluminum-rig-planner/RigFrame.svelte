@@ -14,12 +14,14 @@
   import { createPlannerPostureSkeleton } from './posture';
   import PostureOverlayPass from './PostureOverlayPass.svelte';
   import RiggedHumanModel from './RiggedHumanModel.svelte';
+  import type { HumanRigHoverTooltip } from './human-model-rig';
   import type { PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
     geometry: PlannerGeometry;
     highlightedBeamIds: string[];
     measurementOverlay?: PlannerMeasurementOverlay | null;
+    onHumanRigTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
     profileColor: string;
     postureSettings: PlannerPostureSettings;
     showEndCaps: boolean;
@@ -30,6 +32,7 @@
     geometry,
     highlightedBeamIds,
     measurementOverlay = null,
+    onHumanRigTooltipChange,
     profileColor,
     postureSettings,
     showEndCaps,
@@ -81,5 +84,5 @@
   <MeasurementArrow color={measurementOverlay.color} start={measurementOverlay.start} end={measurementOverlay.end} />
 {/if}
 
-<RiggedHumanModel skeleton={postureSkeleton} />
+<RiggedHumanModel skeleton={postureSkeleton} onHoverTooltipChange={onHumanRigTooltipChange} />
 <PostureOverlayPass />
