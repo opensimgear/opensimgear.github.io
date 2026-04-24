@@ -17,15 +17,31 @@
   type Props = {
     onHoverTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
     scaledModelBoneNames: PlannerModelScaledBoneName[];
+    showModel: boolean;
+    showSkeleton: boolean;
     skeleton: PlannerPostureSkeleton;
   };
 
-  const { onHoverTooltipChange, scaledModelBoneNames, skeleton }: Props = $props();
+  const { onHoverTooltipChange, scaledModelBoneNames, showModel, showSkeleton, skeleton }: Props = $props();
   const { camera, canvas, invalidate } = useThrelte();
   const pointer = new Vector2();
   const raycaster = new Raycaster();
   let groupRef = $state<Group | null>(null);
   let riggedHuman = $state<RiggedHumanModel | null>(null);
+
+  function isTooltipTargetVisible(target: Mesh) {
+    let object: Group | Mesh | null = target;
+
+    while (object) {
+      if (!object.visible) {
+        return false;
+      }
+
+      object = object.parent;
+    }
+
+    return true;
+  }
 
   function clearHoverTooltip() {
     onHoverTooltipChange(null);
@@ -47,7 +63,7 @@
 
     const intersection = raycaster
       .intersectObjects(
-        model.getTooltipTargets().filter((target) => target.visible),
+        model.getTooltipTargets().filter((target) => isTooltipTargetVisible(target)),
         false
       )
       .find((hit) => Boolean(hit.object.userData.rigTooltip));
@@ -79,6 +95,7 @@
 
         riggedHuman = model;
         model.applySkeleton(skeleton, scaledModelBoneNames);
+        model.setDisplayOptions(showModel, showSkeleton);
         invalidate();
       })
       .catch((error: unknown) => {
@@ -112,6 +129,7 @@
     }
 
     model.applySkeleton(skeleton, scaledModelBoneNames);
+    model.setDisplayOptions(showModel, showSkeleton);
     invalidate();
   });
 </script>

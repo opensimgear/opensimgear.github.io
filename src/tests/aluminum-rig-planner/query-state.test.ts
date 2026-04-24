@@ -157,6 +157,8 @@ describe('aluminum rig planner query state', () => {
       posture: {
         preset: 'rally',
         heightCm: 260,
+        showModel: false,
+        showSkeleton: true,
         advancedAnthropometry: true,
         ratios: {
           upperArmLength: 0.5,
@@ -167,6 +169,8 @@ describe('aluminum rig planner query state', () => {
 
     expect(state.postureSettings.preset).toBe('rally');
     expect(state.postureSettings.heightCm).toBe(220);
+    expect(state.postureSettings.showModel).toBe(false);
+    expect(state.postureSettings.showSkeleton).toBe(true);
     expect(state.postureSettings.advancedAnthropometry).toBe(true);
     expect(state.postureSettings.ratios.upperArmLength).toBe(ANTHROPOMETRY_LENGTH_LIMITS_MM.upperArmLength.max);
     expect(state.postureSettings.ratios.footLength).toBe(ANTHROPOMETRY_LENGTH_LIMITS_MM.footLength.min);

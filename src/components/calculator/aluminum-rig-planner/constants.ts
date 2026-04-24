@@ -209,6 +209,8 @@ export const ANTHROPOMETRY_LENGTH_LIMITS_MM = Object.fromEntries(
 export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   preset: 'gt',
   heightCm: DEFAULT_POSTURE_HEIGHT_CM,
+  showModel: true,
+  showSkeleton: false,
   advancedAnthropometry: false,
   ratios: {
     ...DEFAULT_ANTHROPOMETRY_LENGTHS_MM,

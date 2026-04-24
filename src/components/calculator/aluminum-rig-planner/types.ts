@@ -46,6 +46,8 @@ export type PlannerModelScaledBoneName =
 export type PlannerPostureSettings = {
   preset: PlannerPosturePreset;
   heightCm: number;
+  showModel: boolean;
+  showSkeleton: boolean;
   advancedAnthropometry: boolean;
   ratios: PlannerAnthropometryLengthsMm;
 };

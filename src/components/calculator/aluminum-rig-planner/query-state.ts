@@ -162,6 +162,8 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
       PLANNER_POSTURE_LIMITS.heightMinCm,
       PLANNER_POSTURE_LIMITS.heightMaxCm
     ),
+    showModel: typeof state?.showModel === 'boolean' ? state.showModel : defaults.showModel,
+    showSkeleton: typeof state?.showSkeleton === 'boolean' ? state.showSkeleton : defaults.showSkeleton,
     advancedAnthropometry:
       typeof state?.advancedAnthropometry === 'boolean' ? state.advancedAnthropometry : defaults.advancedAnthropometry,
     ratios: {

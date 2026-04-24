@@ -91,6 +91,7 @@ export type RiggedHumanModel = {
   getTooltipTargets: () => Mesh[];
   object: Group;
   applySkeleton: (skeleton: PlannerPostureSkeleton, scaledBoneNames: PlannerModelScaledBoneName[]) => void;
+  setDisplayOptions: (showModel: boolean, showSkeleton: boolean) => void;
   dispose: () => void;
 };
 
@@ -663,6 +664,16 @@ function createDebugOverlay() {
   } satisfies HumanRigDebugOverlay;
 }
 
+function setSkinnedMeshesVisible(skinnedMeshes: SkinnedMesh[], visible: boolean) {
+  for (const mesh of skinnedMeshes) {
+    mesh.visible = visible;
+  }
+}
+
+function setDebugOverlayVisible(overlay: HumanRigDebugOverlay, visible: boolean) {
+  overlay.group.visible = visible;
+}
+
 function createStartWeightedOctahedronGeometry() {
   const waistY = 0.22;
   const radius = 0.42;
@@ -1053,6 +1064,10 @@ export function createRiggedHumanModelFromRoot(root: Group): RiggedHumanModel | 
     object: root,
     applySkeleton(plannerSkeleton, scaledBoneNames) {
       applyPlannerPose(rig, plannerSkeleton, scaledBoneNames);
+    },
+    setDisplayOptions(showModel, showSkeleton) {
+      setSkinnedMeshesVisible(rig.skinnedMeshes, showModel);
+      setDebugOverlayVisible(rig.debugOverlay, showSkeleton);
     },
     dispose() {
       rig.debugOverlay.boneGeometry.dispose();

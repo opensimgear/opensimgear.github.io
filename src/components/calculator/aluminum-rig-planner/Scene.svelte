@@ -296,7 +296,7 @@
     </T.Group>
   </Canvas>
 
-  {#if humanRigTooltip}
+  {#if (postureSettings.showModel || postureSettings.showSkeleton) && humanRigTooltip}
     <div {@attach captureTooltip} class="rig-tooltip" role="tooltip" style={humanRigTooltipStyle}>
       <div class="rig-tooltip__title">{humanRigTooltip.title}</div>
       {#each humanRigTooltip.rows as row (row.label)}

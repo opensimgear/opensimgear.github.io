@@ -710,6 +710,16 @@
     syncPlannerUrlState();
   }
 
+  function setShowPostureModel(value: boolean) {
+    postureSettings.showModel = value;
+    syncPlannerUrlState();
+  }
+
+  function setShowPostureSkeleton(value: boolean) {
+    postureSettings.showSkeleton = value;
+    syncPlannerUrlState();
+  }
+
   function setAdvancedAnthropometry(value: boolean) {
     postureSettings.advancedAnthropometry = value;
     syncPlannerUrlState();
@@ -1131,10 +1141,14 @@
               step={1}
               format={(value) => `${value.toFixed(0)} cm`}
             />
+            <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Model" />
             <Checkbox
               bind:value={() => postureSettings.advancedAnthropometry, setAdvancedAnthropometry}
               label="Advanced"
             />
+            {#if postureSettings.advancedAnthropometry}
+              <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Skeleton" />
+            {/if}
           </Folder>
           {#if postureSettings.advancedAnthropometry}
             <Folder title="Anthropometry">

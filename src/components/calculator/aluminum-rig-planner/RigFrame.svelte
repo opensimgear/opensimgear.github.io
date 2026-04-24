@@ -12,7 +12,6 @@
   import { createWheelModule } from './modules/wheel';
   import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from './modules/shared';
   import { createPlannerPostureSkeleton } from './posture';
-  import PostureOverlayPass from './PostureOverlayPass.svelte';
   import RiggedHumanModel from './RiggedHumanModel.svelte';
   import type { HumanRigHoverTooltip } from './human-model-rig';
   import type {
@@ -112,6 +111,7 @@
       ...seatModule,
     ];
   });
+
 </script>
 
 {#each allMeshes as mesh (mesh.id)}
@@ -122,9 +122,12 @@
   <MeasurementArrow color={measurementOverlay.color} start={measurementOverlay.start} end={measurementOverlay.end} />
 {/if}
 
-<RiggedHumanModel
-  {scaledModelBoneNames}
-  skeleton={postureSkeleton}
-  onHoverTooltipChange={onHumanRigTooltipChange}
-/>
-<PostureOverlayPass />
+{#if postureSettings.showModel || postureSettings.showSkeleton}
+  <RiggedHumanModel
+    {scaledModelBoneNames}
+    showModel={postureSettings.showModel}
+    showSkeleton={postureSettings.advancedAnthropometry && postureSettings.showSkeleton}
+    skeleton={postureSkeleton}
+    onHoverTooltipChange={onHumanRigTooltipChange}
+  />
+{/if}
