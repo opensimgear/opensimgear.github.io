@@ -8,6 +8,15 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_BLEND = ROOT / "docs" / "human_base_meshes_bundle.blend"
 TARGET_GLB = ROOT / "public" / "models" / "aluminum-rig-planner" / "human-male-realistic.glb"
 SOURCE_MESH_NAME = "GEO-body_male_realistic"
+TERMINAL_BONE_LENGTH = 0.015
+BONE_LENGTHS = {
+    "upperArm": 0.2250,
+    "forearm": 0.2600,
+    "hand": 0.0482,
+    "thigh": 0.4195,
+    "shin": 0.3597,
+    "foot": 0.1822,
+}
 REFERENCE_PARTS = {
     "pelvis": "GEO-pelvis_male_primitive_realistic",
     "chest": "GEO-chest_male_primitive_realistic",
@@ -106,6 +115,30 @@ def dedupe_points(points):
     return deduped
 
 
+def dedupe_points_3d(points):
+    deduped = []
+    keys = set()
+    for point in points:
+        key = (
+            round(point.x / SECTION_EPSILON),
+            round(point.y / SECTION_EPSILON),
+            round(point.z / SECTION_EPSILON),
+        )
+        if key in keys:
+            continue
+        keys.add(key)
+        deduped.append(point)
+    return deduped
+
+
+def point_key_3d(point):
+    return (
+        round(point.x / SECTION_EPSILON),
+        round(point.y / SECTION_EPSILON),
+        round(point.z / SECTION_EPSILON),
+    )
+
+
 def section_segments_at_y(vertices, faces, target_y):
     segments = []
 
@@ -137,6 +170,48 @@ def section_segments_at_y(vertices, faces, target_y):
         elif len(intersections) > 2:
             center = average_point(intersections)
             intersections.sort(key=lambda point: (point.x - center.x, point.z - center.z))
+            for index in range(0, len(intersections) - 1, 2):
+                segments.append((intersections[index], intersections[index + 1]))
+
+    return segments
+
+
+def section_segments_at_plane(vertices, faces, plane_point, plane_normal):
+    normal = plane_normal.normalized()
+    segments = []
+
+    for face in faces:
+        intersections = []
+
+        for index, vertex_index in enumerate(face):
+            start = vertices[vertex_index]
+            end = vertices[face[(index + 1) % len(face)]]
+            start_distance = (start - plane_point).dot(normal)
+            end_distance = (end - plane_point).dot(normal)
+
+            if abs(start_distance) <= SECTION_EPSILON and abs(end_distance) <= SECTION_EPSILON:
+                continue
+
+            if abs(start_distance) <= SECTION_EPSILON:
+                intersections.append(start.copy())
+                continue
+
+            if abs(end_distance) <= SECTION_EPSILON:
+                intersections.append(end.copy())
+                continue
+
+            if start_distance * end_distance > 0:
+                continue
+
+            factor = start_distance / (start_distance - end_distance)
+            intersections.append(start.lerp(end, clamp(factor, 0.0, 1.0)))
+
+        intersections = dedupe_points_3d(intersections)
+        if len(intersections) == 2:
+            segments.append((intersections[0], intersections[1]))
+        elif len(intersections) > 2:
+            center = average_point(intersections)
+            intersections.sort(key=lambda point: (point - center).length_squared)
             for index in range(0, len(intersections) - 1, 2):
                 segments.append((intersections[index], intersections[index + 1]))
 
@@ -184,6 +259,47 @@ def section_components(segments):
     return components
 
 
+def section_components_3d(segments):
+    points_by_key = {}
+    edges_by_key = {}
+
+    for start, end in segments:
+        start_key = point_key_3d(start)
+        end_key = point_key_3d(end)
+        if start_key == end_key:
+            continue
+
+        points_by_key[start_key] = start
+        points_by_key[end_key] = end
+        edges_by_key.setdefault(start_key, set()).add(end_key)
+        edges_by_key.setdefault(end_key, set()).add(start_key)
+
+    components = []
+    seen = set()
+
+    for start_key in points_by_key:
+        if start_key in seen:
+            continue
+
+        stack = [start_key]
+        component_keys = []
+        seen.add(start_key)
+
+        while stack:
+            key = stack.pop()
+            component_keys.append(key)
+
+            for next_key in edges_by_key.get(key, ()):
+                if next_key in seen:
+                    continue
+                seen.add(next_key)
+                stack.append(next_key)
+
+        components.append([points_by_key[key] for key in component_keys])
+
+    return components
+
+
 def section_component_from_body(seed_point, body_vertices, body_faces):
     segments = section_segments_at_y(body_vertices, body_faces, seed_point.y)
     components = [component for component in section_components(segments) if len(component) >= 6]
@@ -195,6 +311,19 @@ def section_component_from_body(seed_point, body_vertices, body_faces):
         components,
         key=lambda points: (average_point(points).x - seed_point.x) ** 2 + (average_point(points).z - seed_point.z) ** 2,
     )
+
+
+def section_component_from_body_plane(seed_point, plane_normal, body_vertices, body_faces):
+    if plane_normal.length <= SECTION_EPSILON:
+        return None
+
+    segments = section_segments_at_plane(body_vertices, body_faces, seed_point, plane_normal)
+    components = [component for component in section_components_3d(segments) if len(component) >= 6]
+
+    if not components:
+        return None
+
+    return min(components, key=lambda points: (average_point(points) - seed_point).length_squared)
 
 
 def section_center_from_body(seed_point, body_vertices, body_faces):
@@ -211,6 +340,23 @@ def section_center_from_body(seed_point, body_vertices, body_faces):
             (minimum.z + maximum.z) * 0.5,
         )
     )
+
+
+def section_center_from_body_plane(seed_point, plane_normal, body_vertices, body_faces):
+    component = section_component_from_body_plane(seed_point, plane_normal, body_vertices, body_faces)
+    if component is None:
+        return seed_point
+
+    normal = plane_normal.normalized()
+    reference_axis = Vector((0.0, 1.0, 0.0)) if abs(normal.y) < 0.9 else Vector((1.0, 0.0, 0.0))
+    axis_u = normal.cross(reference_axis).normalized()
+    axis_v = normal.cross(axis_u).normalized()
+    local_u = [(point - seed_point).dot(axis_u) for point in component]
+    local_v = [(point - seed_point).dot(axis_v) for point in component]
+    center_u = (min(local_u) + max(local_u)) * 0.5
+    center_v = (min(local_v) + max(local_v)) * 0.5
+
+    return seed_point + axis_u * center_u + axis_v * center_v
 
 
 def section_external_equal_distance_point(seed_point, body_vertices, body_faces):
@@ -290,6 +436,27 @@ def remap_reference_point(point, reference_origin, reference_min_y, scale):
 
 def mirror_point(point):
     return Vector((point.x, point.y, -point.z))
+
+
+def terminal_tail(head, start):
+    direction = head - start
+    if direction.length <= SECTION_EPSILON:
+        return head + Vector((TERMINAL_BONE_LENGTH, 0.0, 0.0))
+
+    return head + direction.normalized() * TERMINAL_BONE_LENGTH
+
+
+def point_at_bone_length(head, guide_tail, bone_name):
+    direction = guide_tail - head
+    if direction.length <= SECTION_EPSILON:
+        return guide_tail
+
+    return head + direction.normalized() * BONE_LENGTHS[bone_name]
+
+
+def add_terminal_bone(bones, name, parent_name):
+    parent_head, parent_tail, _ = bones[parent_name]
+    bones[name] = (parent_tail, terminal_tail(parent_tail, parent_head), parent_name)
 
 
 def clamp(value, minimum, maximum):
@@ -408,19 +575,50 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     )
     right_elbow = section_center_from_body(mirror_point(fitted_landmarks["elbowLeft"]), body_vertices, body_faces)
     right_wrist = section_center_from_body(mirror_point(fitted_landmarks["wristLeft"]), body_vertices, body_faces)
-    right_hand_tip = section_center_from_body(mirror_point(fitted_landmarks["handTipLeft"]), body_vertices, body_faces)
     right_knee = section_center_from_body(mirror_point(fitted_landmarks["kneeLeft"]), body_vertices, body_faces)
     right_ankle = section_center_from_body(mirror_point(fitted_landmarks["ankleLeft"]), body_vertices, body_faces)
+    left_foot_tip = section_center_from_body_plane(
+        fitted_landmarks["toeLeft"],
+        fitted_landmarks["toeLeft"] - fitted_landmarks["ankleLeft"],
+        body_vertices,
+        body_faces,
+    )
+    right_foot_seed = mirror_point(fitted_landmarks["toeLeft"])
+    right_foot_tip = section_center_from_body_plane(
+        right_foot_seed,
+        right_foot_seed - right_ankle,
+        body_vertices,
+        body_faces,
+    )
+    left_elbow = point_at_bone_length(fitted_landmarks["shoulderLeft"], fitted_landmarks["elbowLeft"], "upperArm")
+    left_wrist = point_at_bone_length(left_elbow, fitted_landmarks["wristLeft"], "forearm")
+    left_hand_direction = left_wrist - left_elbow
+    left_hand_seed = point_at_bone_length(left_wrist, left_wrist + left_hand_direction, "hand")
+    left_hand_tip = section_center_from_body_plane(left_hand_seed, left_hand_direction, body_vertices, body_faces)
+    left_hand_tip = point_at_bone_length(left_wrist, left_hand_tip, "hand")
+    left_knee = point_at_bone_length(fitted_landmarks["hipLeft"], fitted_landmarks["kneeLeft"], "thigh")
+    left_ankle = point_at_bone_length(left_knee, fitted_landmarks["ankleLeft"], "shin")
+    left_foot_tip = point_at_bone_length(left_ankle, left_foot_tip, "foot")
+    right_elbow = point_at_bone_length(right_shoulder, right_elbow, "upperArm")
+    right_wrist = point_at_bone_length(right_elbow, right_wrist, "forearm")
+    right_hand_direction = right_wrist - right_elbow
+    right_hand_seed = point_at_bone_length(right_wrist, right_wrist + right_hand_direction, "hand")
+    right_hand_tip = section_center_from_body_plane(right_hand_seed, right_hand_direction, body_vertices, body_faces)
+    right_hand_tip = point_at_bone_length(right_wrist, right_hand_tip, "hand")
+    right_hip = mirror_point(fitted_landmarks["hipLeft"])
+    right_knee = point_at_bone_length(right_hip, right_knee, "thigh")
+    right_ankle = point_at_bone_length(right_knee, right_ankle, "shin")
+    right_foot_tip = point_at_bone_length(right_ankle, right_foot_tip, "foot")
 
     remapped_bones = {
         "torso": (fitted_landmarks["hipCenter"], fitted_landmarks["torsoTop"], None),
         "head": (fitted_landmarks["neckBase"], fitted_landmarks["headTop"], "torso"),
-        "leftUpperArm": (fitted_landmarks["shoulderLeft"], fitted_landmarks["elbowLeft"], "torso"),
-        "leftForearm": (fitted_landmarks["elbowLeft"], fitted_landmarks["wristLeft"], "leftUpperArm"),
-        "leftHand": (fitted_landmarks["wristLeft"], fitted_landmarks["handTipLeft"], "leftForearm"),
-        "leftThigh": (fitted_landmarks["hipLeft"], fitted_landmarks["kneeLeft"], "torso"),
-        "leftShin": (fitted_landmarks["kneeLeft"], fitted_landmarks["ankleLeft"], "leftThigh"),
-        "leftFoot": (fitted_landmarks["ankleLeft"], fitted_landmarks["toeLeft"], "leftShin"),
+        "leftUpperArm": (fitted_landmarks["shoulderLeft"], left_elbow, "torso"),
+        "leftForearm": (left_elbow, left_wrist, "leftUpperArm"),
+        "leftHand": (left_wrist, left_hand_tip, "leftForearm"),
+        "leftThigh": (fitted_landmarks["hipLeft"], left_knee, "torso"),
+        "leftShin": (left_knee, left_ankle, "leftThigh"),
+        "leftFoot": (left_ankle, left_foot_tip, "leftShin"),
     }
 
     left_arm = remapped_bones["leftUpperArm"]
@@ -433,9 +631,13 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     remapped_bones["rightUpperArm"] = (right_shoulder, right_elbow, "torso")
     remapped_bones["rightForearm"] = (right_elbow, right_wrist, "rightUpperArm")
     remapped_bones["rightHand"] = (right_wrist, right_hand_tip, "rightForearm")
-    remapped_bones["rightThigh"] = (mirror_point(left_thigh[0]), right_knee, "torso")
+    remapped_bones["rightThigh"] = (right_hip, right_knee, "torso")
     remapped_bones["rightShin"] = (right_knee, right_ankle, "rightThigh")
-    remapped_bones["rightFoot"] = (right_ankle, mirror_point(left_foot[1]), "rightShin")
+    remapped_bones["rightFoot"] = (right_ankle, right_foot_tip, "rightShin")
+    add_terminal_bone(remapped_bones, "leftHandTip", "leftHand")
+    add_terminal_bone(remapped_bones, "rightHandTip", "rightHand")
+    add_terminal_bone(remapped_bones, "leftFootTip", "leftFoot")
+    add_terminal_bone(remapped_bones, "rightFootTip", "rightFoot")
 
     return remapped_bones
 
@@ -525,6 +727,7 @@ def main():
         edit_bone.tail = tail
         edit_bone.roll = 0.0
         edit_bone.use_connect = False
+        edit_bone.use_deform = "Tip" not in name
         edit_bones[name] = edit_bone
 
     for name, (_, _, parent_name) in bones.items():

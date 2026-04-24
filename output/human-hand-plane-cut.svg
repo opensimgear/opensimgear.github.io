@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="470" viewBox="0 0 1040 470">
+<rect width="100%" height="100%" fill="#fff8ef"/>
+<style>text{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#1f2937}.title{font-weight:700;font-size:22px}.label{font-size:13px}</style>
+<text class="title" x="24" y="34">Left hand cut</text>
+<text class="label" x="24" y="58">orange = mesh plane cut, green = cut center, cyan = exported hand joint projection</text>
+<line x1="0" y1="78" x2="0" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="52" y1="78" x2="52" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="104" y1="78" x2="104" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="156" y1="78" x2="156" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="208" y1="78" x2="208" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="260" y1="78" x2="260" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="312" y1="78" x2="312" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="364" y1="78" x2="364" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="416" y1="78" x2="416" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="468" y1="78" x2="468" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="520" y1="78" x2="520" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="16" y1="80" x2="504" y2="80" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="16" y1="132" x2="504" y2="132" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="16" y1="184" x2="504" y2="184" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="16" y1="236" x2="504" y2="236" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="16" y1="288" x2="504" y2="288" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="16" y1="340" x2="504" y2="340" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="16" y1="392" x2="504" y2="392" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="16" y1="444" x2="504" y2="444" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<polygon points="64.6,269.6 90.0,304.4 121.6,330.0 152.6,352.6 184.2,375.0 218.7,393.3 256.3,405.1 299.0,406.0 339.0,387.3 370.6,355.1 387.4,318.0 388.0,277.9 380.3,252.0 376.4,233.4 359.0,188.9 323.2,150.1 269.7,112.7 208.6,90.5 194.1,90.6 151.2,88.0 110.8,117.8 82.5,154.3 60.9,193.6 54.0,230.2" fill="rgba(245, 158, 11, 0.28)" stroke="none"/>
+<line x1="388.0" y1="277.9" x2="387.4" y2="318.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="388.0" y1="277.9" x2="380.3" y2="252.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="370.6" y1="355.1" x2="387.4" y2="318.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="339.0" y1="387.3" x2="299.0" y2="406.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="218.7" y1="393.3" x2="256.3" y2="405.1" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="184.2" y1="375.0" x2="218.7" y2="393.3" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="90.0" y1="304.4" x2="121.6" y2="330.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="64.6" y1="269.6" x2="90.0" y2="304.4" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="60.9" y1="193.6" x2="54.0" y2="230.2" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="376.4" y1="233.4" x2="380.3" y2="252.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="82.5" y1="154.3" x2="60.9" y2="193.6" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="110.8" y1="117.8" x2="82.5" y2="154.3" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="151.2" y1="88.0" x2="110.8" y2="117.8" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="194.1" y1="90.6" x2="151.2" y2="88.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="269.7" y1="112.7" x2="323.2" y2="150.1" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="208.6" y1="90.5" x2="269.7" y2="112.7" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="194.1" y1="90.6" x2="208.6" y2="90.5" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="339.0" y1="387.3" x2="370.6" y2="355.1" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="54.0" y1="230.2" x2="64.6" y2="269.6" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="152.6" y1="352.6" x2="184.2" y2="375.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="256.3" y1="405.1" x2="299.0" y2="406.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="323.2" y1="150.1" x2="359.0" y2="188.9" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="359.0" y1="188.9" x2="376.4" y2="233.4" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="152.6" y1="352.6" x2="121.6" y2="330.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<circle cx="196.4" cy="237.5" r="5" fill="#111827" stroke="white" stroke-width="2"/>
+<text class="label" x="205.4" y="229.5">wrist</text>
+<circle cx="221.0" cy="247.0" r="7" fill="#16a34a" stroke="white" stroke-width="2"/>
+<text class="label" x="230.0" y="239.0">cut center</text>
+<circle cx="406.7" cy="319.0" r="6" fill="#06b6d4" stroke="white" stroke-width="2"/>
+<text class="label" x="415.7" y="311.0">exported hand</text>
+<text class="title" x="544" y="34">Right hand cut</text>
+<text class="label" x="544" y="58">orange = mesh plane cut, green = cut center, cyan = exported hand joint projection</text>
+<line x1="520" y1="78" x2="520" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="572" y1="78" x2="572" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="624" y1="78" x2="624" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="676" y1="78" x2="676" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="728" y1="78" x2="728" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="780" y1="78" x2="780" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="832" y1="78" x2="832" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="884" y1="78" x2="884" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="936" y1="78" x2="936" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="988" y1="78" x2="988" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="1040" y1="78" x2="1040" y2="452" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="536" y1="80" x2="1024" y2="80" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="536" y1="132" x2="1024" y2="132" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="536" y1="184" x2="1024" y2="184" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="536" y1="236" x2="1024" y2="236" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="536" y1="288" x2="1024" y2="288" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="536" y1="340" x2="1024" y2="340" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="536" y1="392" x2="1024" y2="392" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<line x1="536" y1="444" x2="1024" y2="444" stroke="#eadbc7" stroke-width="1" opacity="0.55"/>
+<polygon points="589.1,277.3 589.2,317.4 605.7,354.8 638.0,387.3 677.1,406.0 719.8,405.8 757.8,394.2 793.0,376.0 825.0,354.4 856.6,332.0 888.2,304.4 914.4,272.6 926.1,231.7 920.6,195.9 898.0,154.8 869.1,118.9 830.0,88.0 785.4,89.6 771.4,89.3 709.3,111.4 655.4,148.4 618.6,187.3 600.5,232.1 597.2,248.3" fill="rgba(245, 158, 11, 0.28)" stroke="none"/>
+<line x1="589.1" y1="277.3" x2="589.2" y2="317.4" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="597.2" y1="248.3" x2="589.1" y2="277.3" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="605.7" y1="354.8" x2="589.2" y2="317.4" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="638.0" y1="387.3" x2="677.1" y2="406.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="719.8" y1="405.8" x2="757.8" y2="394.2" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="793.0" y1="376.0" x2="757.8" y2="394.2" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="856.6" y1="332.0" x2="888.2" y2="304.4" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="914.4" y1="272.6" x2="888.2" y2="304.4" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="926.1" y1="231.7" x2="920.6" y2="195.9" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="600.5" y1="232.1" x2="597.2" y2="248.3" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="920.6" y1="195.9" x2="898.0" y2="154.8" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="898.0" y1="154.8" x2="869.1" y2="118.9" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="830.0" y1="88.0" x2="869.1" y2="118.9" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="830.0" y1="88.0" x2="785.4" y2="89.6" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="655.4" y1="148.4" x2="709.3" y2="111.4" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="709.3" y1="111.4" x2="771.4" y2="89.3" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="771.4" y1="89.3" x2="785.4" y2="89.6" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="638.0" y1="387.3" x2="605.7" y2="354.8" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="914.4" y1="272.6" x2="926.1" y2="231.7" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="825.0" y1="354.4" x2="793.0" y2="376.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="719.8" y1="405.8" x2="677.1" y2="406.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="618.6" y1="187.3" x2="655.4" y2="148.4" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="600.5" y1="232.1" x2="618.6" y2="187.3" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="825.0" y1="354.4" x2="856.6" y2="332.0" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
+<circle cx="781.2" cy="236.4" r="5" fill="#111827" stroke="white" stroke-width="2"/>
+<text class="label" x="790.2" y="228.4">wrist</text>
+<circle cx="757.6" cy="247.0" r="7" fill="#16a34a" stroke="white" stroke-width="2"/>
+<text class="label" x="766.6" y="239.0">cut center</text>
+<circle cx="574.0" cy="329.2" r="6" fill="#06b6d4" stroke="white" stroke-width="2"/>
+<text class="label" x="583.0" y="321.2">exported hand</text>
+</svg>
