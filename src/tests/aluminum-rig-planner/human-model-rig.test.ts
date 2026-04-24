@@ -23,16 +23,16 @@ describe('aluminum rig planner human model rig', () => {
     const ratios = calculateHumanModelBoneRigRatios(gltf.scene);
 
     expect(ratios).toEqual({
-      sittingHeight: 0.465,
-      seatedEyeHeight: 0.437,
-      seatedShoulderHeight: 0.321,
-      hipBreadth: 0.125,
-      shoulderBreadth: 0.26,
-      upperArmLength: 0.218,
-      forearmHandLength: 0.251,
-      thighLength: 0.245,
-      lowerLegLength: 0.235,
-      footLength: 0.095,
+      sittingHeight: 0.477,
+      seatedEyeHeight: 0.447,
+      seatedShoulderHeight: 0.292,
+      hipBreadth: 0.123,
+      shoulderBreadth: 0.205,
+      upperArmLength: 0.141,
+      forearmHandLength: 0.195,
+      thighLength: 0.248,
+      lowerLegLength: 0.213,
+      footLength: 0.174,
     });
   });
 });

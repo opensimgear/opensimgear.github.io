@@ -42,6 +42,10 @@ type HumanBoneName =
   | 'rightShin'
   | 'rightFoot';
 
+type HumanTerminalBoneName = 'torsoTip' | 'headTip' | 'leftHandTip' | 'rightHandTip' | 'leftFootTip' | 'rightFootTip';
+
+type HumanModelBoneName = HumanBoneName | HumanTerminalBoneName;
+
 type HumanRestSegment = {
   name: HumanBoneName;
   start: Vector3;
@@ -58,7 +62,7 @@ type HumanDebugBoneName =
 
 type HumanRig = {
   boneRigRatios: PlannerAnthropometryRatios | null;
-  bones: Map<HumanBoneName, Bone>;
+  bones: Map<HumanModelBoneName, Bone>;
   debugOverlay: HumanRigDebugOverlay;
   restBoneLocalPositions: Map<HumanBoneName, Vector3>;
   restBoneLocalQuaternions: Map<HumanBoneName, Quaternion>;
@@ -119,6 +123,14 @@ const HUMAN_BONE_ORDER: HumanBoneName[] = [
   'rightShin',
   'rightFoot',
 ];
+const HUMAN_TERMINAL_BONE_ORDER: HumanTerminalBoneName[] = [
+  'torsoTip',
+  'headTip',
+  'leftHandTip',
+  'rightHandTip',
+  'leftFootTip',
+  'rightFootTip',
+];
 const HUMAN_DEBUG_BONE_ORDER: HumanDebugBoneName[] = [
   ...HUMAN_BONE_ORDER,
   'leftClavicle',
@@ -127,12 +139,27 @@ const HUMAN_DEBUG_BONE_ORDER: HumanDebugBoneName[] = [
   'rightPelvis',
   'neckConnector',
 ];
+const HUMAN_MODEL_BONE_ORDER: HumanModelBoneName[] = [...HUMAN_BONE_ORDER, ...HUMAN_TERMINAL_BONE_ORDER];
+const HUMAN_BONE_END_BONES = {
+  torso: 'torsoTip',
+  head: 'headTip',
+  leftUpperArm: 'leftForearm',
+  leftForearm: 'leftHand',
+  leftHand: 'leftHandTip',
+  rightUpperArm: 'rightForearm',
+  rightForearm: 'rightHand',
+  rightHand: 'rightHandTip',
+  leftThigh: 'leftShin',
+  leftShin: 'leftFoot',
+  leftFoot: 'leftFootTip',
+  rightThigh: 'rightShin',
+  rightShin: 'rightFoot',
+  rightFoot: 'rightFootTip',
+} satisfies Record<HumanBoneName, HumanModelBoneName>;
 const MODEL_RATIO_PRECISION = 3;
 // The GLB has no eye bone, so estimate eye height from the head-weighted mesh bounds.
 const MODEL_EYE_FROM_HEAD_TOP_RATIO = 0.42;
 const MODEL_HEAD_SKIN_WEIGHT_THRESHOLD = 0.2;
-const MODEL_HAND_SKIN_WEIGHT_THRESHOLD = 0.05;
-const MODEL_FOOT_SKIN_WEIGHT_THRESHOLD = 0.05;
 const DEBUG_BONE_HIT_RADIUS = 0.09;
 const DEBUG_BONE_RADIUS = 0.032;
 const Y_AXIS = new Vector3(0, 1, 0);
@@ -185,13 +212,19 @@ function roundModelRatio(value: number) {
   return Number(value.toFixed(MODEL_RATIO_PRECISION));
 }
 
-function getModelBonePosition(bones: Map<HumanBoneName, Bone>, name: HumanBoneName) {
+function getModelBonePosition(bones: Map<HumanModelBoneName, Bone>, name: HumanModelBoneName) {
   const bone = bones.get(name);
 
   return bone ? bone.getWorldPosition(new Vector3()) : null;
 }
 
-function getAverageDistance(bones: Map<HumanBoneName, Bone>, pairs: Array<[HumanBoneName, HumanBoneName]>) {
+function getModelBoneLocalPosition(root: Group, bones: Map<HumanModelBoneName, Bone>, name: HumanModelBoneName) {
+  const position = getModelBonePosition(bones, name);
+
+  return position ? root.worldToLocal(position) : null;
+}
+
+function getAverageDistance(bones: Map<HumanModelBoneName, Bone>, pairs: Array<[HumanModelBoneName, HumanModelBoneName]>) {
   const distances = pairs
     .map(([start, end]) => {
       const startPosition = getModelBonePosition(bones, start);
@@ -257,58 +290,14 @@ function getModelEyeY(skinnedMeshes: SkinnedMesh[]) {
   return headBounds.max.y - headHeight * MODEL_EYE_FROM_HEAD_TOP_RATIO;
 }
 
-function getModelFootLengthRatio(bones: Map<HumanBoneName, Bone>, skinnedMeshes: SkinnedMesh[], height: number) {
-  const reaches = (['leftFoot', 'rightFoot'] as const)
-    .map((boneName) => {
-      const bonePosition = getModelBonePosition(bones, boneName);
-      const footBounds = getWeightedBoneBounds(skinnedMeshes, boneName, MODEL_FOOT_SKIN_WEIGHT_THRESHOLD);
-
-      if (!bonePosition || footBounds.isEmpty()) {
-        return null;
-      }
-
-      return Math.max(0, footBounds.max.x - bonePosition.x);
-    })
-    .filter((reach): reach is number => reach !== null);
-
-  if (reaches.length === 0) {
-    return null;
-  }
-
-  const toeReach = reaches.reduce((total, reach) => total + reach, 0) / reaches.length;
-
-  return toeReach / POSTURE_FOOT_TOE_LENGTH_SHARE / height;
-}
-
-function getModelHandReach(bones: Map<HumanBoneName, Bone>, skinnedMeshes: SkinnedMesh[]) {
-  const reaches = (['leftHand', 'rightHand'] as const)
-    .map((boneName) => {
-      const bonePosition = getModelBonePosition(bones, boneName);
-      const handBounds = getWeightedBoneBounds(skinnedMeshes, boneName, MODEL_HAND_SKIN_WEIGHT_THRESHOLD);
-
-      if (!bonePosition || handBounds.isEmpty()) {
-        return null;
-      }
-
-      return Math.max(0, handBounds.max.x - bonePosition.x);
-    })
-    .filter((reach): reach is number => reach !== null);
-
-  if (reaches.length === 0) {
-    return null;
-  }
-
-  return reaches.reduce((total, reach) => total + reach, 0) / reaches.length;
-}
-
 export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropometryRatios | null {
-  const bones = new Map<HumanBoneName, Bone>();
+  const bones = new Map<HumanModelBoneName, Bone>();
   const skinnedMeshes: SkinnedMesh[] = [];
   const bounds = new Box3();
 
   root.updateWorldMatrix(true, true);
   root.traverse((object) => {
-    if (object instanceof Bone && isHumanBoneName(object.name)) {
+    if (object instanceof Bone && isHumanModelBoneName(object.name)) {
       bones.set(object.name, object);
     }
 
@@ -332,10 +321,9 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     ['rightUpperArm', 'rightForearm'],
   ]);
   const forearmHandLength = getAverageDistance(bones, [
-    ['leftForearm', 'leftHand'],
-    ['rightForearm', 'rightHand'],
+    ['leftForearm', 'leftHandTip'],
+    ['rightForearm', 'rightHandTip'],
   ]);
-  const handReach = getModelHandReach(bones, skinnedMeshes);
   const thighLength = getAverageDistance(bones, [
     ['leftThigh', 'leftShin'],
     ['rightThigh', 'rightShin'],
@@ -346,7 +334,10 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
   ]);
   const hipBreadth = getAverageDistance(bones, [['leftThigh', 'rightThigh']]);
   const shoulderBreadth = getAverageDistance(bones, [['leftUpperArm', 'rightUpperArm']]);
-  const footLength = getModelFootLengthRatio(bones, skinnedMeshes, height);
+  const toeReach = getAverageDistance(bones, [
+    ['leftFoot', 'leftFootTip'],
+    ['rightFoot', 'rightFootTip'],
+  ]);
 
   if (
     height <= 0 ||
@@ -356,12 +347,11 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     eyeY === null ||
     upperArmLength === null ||
     forearmHandLength === null ||
-    handReach === null ||
     thighLength === null ||
     lowerLegLength === null ||
     hipBreadth === null ||
     shoulderBreadth === null ||
-    footLength === null
+    toeReach === null
   ) {
     return null;
   }
@@ -377,96 +367,24 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     hipBreadth: roundModelRatio(hipBreadth / height),
     shoulderBreadth: roundModelRatio(shoulderBreadth / height),
     upperArmLength: roundModelRatio(upperArmLength / height),
-    forearmHandLength: roundModelRatio((forearmHandLength + handReach) / height),
+    forearmHandLength: roundModelRatio(forearmHandLength / height),
     thighLength: roundModelRatio(thighLength / height),
     lowerLegLength: roundModelRatio(lowerLegLength / height),
-    footLength: roundModelRatio(footLength),
+    footLength: roundModelRatio(toeReach / POSTURE_FOOT_TOE_LENGTH_SHARE / height),
   };
 }
 
-function createRestSegmentsFromModel(bounds: Box3) {
-  const size = bounds.getSize(new Vector3());
-  const height = size.y;
-  const width = size.z;
-  const shoulderHalfWidth = Math.min(width * 0.26, height * 0.13);
-  const hipHalfWidth = Math.min(width * 0.12, height * 0.065);
-  const armOuterZ = Math.min(width * 0.39, height * 0.21);
-  const hipY = height * 0.535;
-  const kneeY = height * 0.29;
-  const ankleY = height * 0.055;
-  const shoulderY = height * 0.82;
-  const elbowY = height * 0.615;
-  const wristY = height * 0.45;
-  const neckY = height * 0.89;
-  const headTopY = height * 0.985;
-  const footX = height * 0.1;
-  const segments: HumanRestSegment[] = [
-    createSegment('torso', new Vector3(0, hipY, 0), new Vector3(0, shoulderY, 0)),
-    createSegment('head', new Vector3(0, neckY, 0), new Vector3(0, headTopY, 0)),
-    createSegment('leftUpperArm', new Vector3(0, shoulderY, -shoulderHalfWidth), new Vector3(0, elbowY, -armOuterZ)),
-    createSegment('leftForearm', new Vector3(0, elbowY, -armOuterZ), new Vector3(0, wristY, -armOuterZ * 0.96)),
-    createSegment(
-      'leftHand',
-      new Vector3(0, wristY, -armOuterZ * 0.96),
-      new Vector3(0.02, wristY - height * 0.075, -armOuterZ * 0.96)
-    ),
-    createSegment('rightUpperArm', new Vector3(0, shoulderY, shoulderHalfWidth), new Vector3(0, elbowY, armOuterZ)),
-    createSegment('rightForearm', new Vector3(0, elbowY, armOuterZ), new Vector3(0, wristY, armOuterZ * 0.96)),
-    createSegment(
-      'rightHand',
-      new Vector3(0, wristY, armOuterZ * 0.96),
-      new Vector3(0.02, wristY - height * 0.075, armOuterZ * 0.96)
-    ),
-    createSegment('leftThigh', new Vector3(0, hipY, -hipHalfWidth), new Vector3(0, kneeY, -hipHalfWidth * 0.78)),
-    createSegment('leftShin', new Vector3(0, kneeY, -hipHalfWidth * 0.78), new Vector3(0, ankleY, -hipHalfWidth * 0.7)),
-    createSegment(
-      'leftFoot',
-      new Vector3(0, ankleY, -hipHalfWidth * 0.7),
-      new Vector3(footX, height * 0.015, -hipHalfWidth * 0.7)
-    ),
-    createSegment('rightThigh', new Vector3(0, hipY, hipHalfWidth), new Vector3(0, kneeY, hipHalfWidth * 0.78)),
-    createSegment('rightShin', new Vector3(0, kneeY, hipHalfWidth * 0.78), new Vector3(0, ankleY, hipHalfWidth * 0.7)),
-    createSegment(
-      'rightFoot',
-      new Vector3(0, ankleY, hipHalfWidth * 0.7),
-      new Vector3(footX, height * 0.015, hipHalfWidth * 0.7)
-    ),
-  ];
+function createRestSegmentsFromBones(bones: Map<HumanModelBoneName, Bone>) {
+  const segments: HumanRestSegment[] = [];
 
-  return new Map(segments.map((segment) => [segment.name, segment]));
-}
+  for (const name of HUMAN_BONE_ORDER) {
+    const start = getModelBonePosition(bones, name);
+    const end = getModelBonePosition(bones, HUMAN_BONE_END_BONES[name]);
 
-function getBoneWorldPosition(bones: Map<HumanBoneName, Bone>, name: HumanBoneName, fallback: Vector3) {
-  const bone = bones.get(name);
-
-  if (!bone) {
-    return fallback.clone();
+    if (start && end) {
+      segments.push(createSegment(name, start, end));
+    }
   }
-
-  return bone.getWorldPosition(new Vector3());
-}
-
-function createRestSegmentsFromBones(bones: Map<HumanBoneName, Bone>, bounds: Box3) {
-  const fallbackSegments = createRestSegmentsFromModel(bounds);
-  const getFallback = (name: HumanBoneName) => fallbackSegments.get(name)!;
-  const getStart = (name: HumanBoneName) => getBoneWorldPosition(bones, name, getFallback(name).start);
-
-  const segments: HumanRestSegment[] = [
-    createSegment('torso', getStart('torso'), getFallback('torso').end.clone()),
-    createSegment('head', getStart('head'), getFallback('head').end.clone()),
-    createSegment('leftUpperArm', getStart('leftUpperArm'), getStart('leftForearm')),
-    createSegment('leftForearm', getStart('leftForearm'), getStart('leftHand')),
-    createSegment('leftHand', getStart('leftHand'), getFallback('leftHand').end.clone()),
-    createSegment('rightUpperArm', getStart('rightUpperArm'), getStart('rightForearm')),
-    createSegment('rightForearm', getStart('rightForearm'), getStart('rightHand')),
-    createSegment('rightHand', getStart('rightHand'), getFallback('rightHand').end.clone()),
-    createSegment('leftThigh', getStart('leftThigh'), getStart('leftShin')),
-    createSegment('leftShin', getStart('leftShin'), getStart('leftFoot')),
-    createSegment('leftFoot', getStart('leftFoot'), getFallback('leftFoot').end.clone()),
-    createSegment('rightThigh', getStart('rightThigh'), getStart('rightShin')),
-    createSegment('rightShin', getStart('rightShin'), getStart('rightFoot')),
-    createSegment('rightFoot', getStart('rightFoot'), getFallback('rightFoot').end.clone()),
-  ];
 
   return new Map(segments.map((segment) => [segment.name, segment]));
 }
@@ -583,7 +501,8 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton) {
     mesh.geometry.computeBoundingSphere();
   }
 
-  updateDebugOverlay(rig.debugOverlay, targetSegments);
+  rig.root.updateWorldMatrix(true, true);
+  updateDebugOverlay(rig.debugOverlay, createDebugSegmentsFromModelBones(rig.root, rig.bones));
 }
 
 function resetBonesToRestPose(rig: HumanRig) {
@@ -851,8 +770,7 @@ function getDebugSegmentJointNames(name: HumanDebugBoneName): [string, string] {
   }
 }
 
-function updateDebugOverlay(overlay: HumanRigDebugOverlay, targetSegments: Map<HumanBoneName, [Vector3, Vector3]>) {
-  const debugSegments = createDebugSegments(targetSegments);
+function updateDebugOverlay(overlay: HumanRigDebugOverlay, debugSegments: Map<HumanDebugBoneName, [Vector3, Vector3]>) {
   const joints = new Map<string, Vector3>();
   const connectedSegmentsByJoint = new Map<string, Array<[Vector3, Vector3]>>();
   const jointNamesByJoint = new Map<string, Set<string>>();
@@ -953,14 +871,24 @@ function updateDebugOverlay(overlay: HumanRigDebugOverlay, targetSegments: Map<H
   });
 }
 
-function createDebugSegments(targetSegments: Map<HumanBoneName, [Vector3, Vector3]>) {
-  const debugSegments = new Map<HumanDebugBoneName, [Vector3, Vector3]>(targetSegments);
-  const torso = targetSegments.get('torso');
-  const head = targetSegments.get('head');
-  const leftUpperArm = targetSegments.get('leftUpperArm');
-  const rightUpperArm = targetSegments.get('rightUpperArm');
-  const leftThigh = targetSegments.get('leftThigh');
-  const rightThigh = targetSegments.get('rightThigh');
+function createDebugSegmentsFromModelBones(root: Group, bones: Map<HumanModelBoneName, Bone>) {
+  const debugSegments = new Map<HumanDebugBoneName, [Vector3, Vector3]>();
+
+  for (const name of HUMAN_BONE_ORDER) {
+    const start = getModelBoneLocalPosition(root, bones, name);
+    const end = getModelBoneLocalPosition(root, bones, HUMAN_BONE_END_BONES[name]);
+
+    if (start && end) {
+      debugSegments.set(name, [start, end]);
+    }
+  }
+
+  const torso = debugSegments.get('torso');
+  const head = debugSegments.get('head');
+  const leftUpperArm = debugSegments.get('leftUpperArm');
+  const rightUpperArm = debugSegments.get('rightUpperArm');
+  const leftThigh = debugSegments.get('leftThigh');
+  const rightThigh = debugSegments.get('rightThigh');
 
   if (torso && head) {
     debugSegments.set('neckConnector', [torso[1], head[0]]);
@@ -986,35 +914,34 @@ function createDebugSegments(targetSegments: Map<HumanBoneName, [Vector3, Vector
 }
 
 function collectRig(root: Group) {
-  const bones = new Map<HumanBoneName, Bone>();
+  const bones = new Map<HumanModelBoneName, Bone>();
   const debugOverlay = createDebugOverlay();
   const skinnedMeshes: SkinnedMesh[] = [];
   const restBoneLocalPositions = new Map<HumanBoneName, Vector3>();
   const restBoneLocalQuaternions = new Map<HumanBoneName, Quaternion>();
   const restBoneLocalScales = new Map<HumanBoneName, Vector3>();
   const restBoneWorldMatrices = new Map<HumanBoneName, Matrix4>();
-  const bounds = new Box3();
 
   root.updateWorldMatrix(true, true);
   root.traverse((object) => {
     configureObject(object);
 
-    if (object instanceof Bone && isHumanBoneName(object.name)) {
+    if (object instanceof Bone && isHumanModelBoneName(object.name)) {
       bones.set(object.name, object);
     }
 
     if (object instanceof SkinnedMesh) {
       configureMesh(object);
       skinnedMeshes.push(object);
-      bounds.union(new Box3().setFromObject(object));
     }
   });
 
   root.updateWorldMatrix(true, true);
 
   const boneRigRatios = calculateHumanModelBoneRigRatios(root);
-  const restSegments = createRestSegmentsFromBones(bones, bounds);
+  const restSegments = createRestSegmentsFromBones(bones);
   root.add(debugOverlay.group);
+  updateDebugOverlay(debugOverlay, createDebugSegmentsFromModelBones(root, bones));
 
   for (const name of HUMAN_BONE_ORDER) {
     const bone = bones.get(name);
@@ -1041,23 +968,8 @@ function collectRig(root: Group) {
   };
 }
 
-function isHumanBoneName(name: string): name is HumanBoneName {
-  return [
-    'torso',
-    'head',
-    'leftUpperArm',
-    'leftForearm',
-    'leftHand',
-    'rightUpperArm',
-    'rightForearm',
-    'rightHand',
-    'leftThigh',
-    'leftShin',
-    'leftFoot',
-    'rightThigh',
-    'rightShin',
-    'rightFoot',
-  ].includes(name);
+function isHumanModelBoneName(name: string): name is HumanModelBoneName {
+  return (HUMAN_MODEL_BONE_ORDER as string[]).includes(name);
 }
 
 export async function createRiggedHumanModel(

@@ -634,6 +634,8 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     remapped_bones["rightThigh"] = (right_hip, right_knee, "torso")
     remapped_bones["rightShin"] = (right_knee, right_ankle, "rightThigh")
     remapped_bones["rightFoot"] = (right_ankle, right_foot_tip, "rightShin")
+    add_terminal_bone(remapped_bones, "torsoTip", "torso")
+    add_terminal_bone(remapped_bones, "headTip", "head")
     add_terminal_bone(remapped_bones, "leftHandTip", "leftHand")
     add_terminal_bone(remapped_bones, "rightHandTip", "rightHand")
     add_terminal_bone(remapped_bones, "leftFootTip", "leftFoot")
