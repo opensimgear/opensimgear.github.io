@@ -53,9 +53,9 @@
     shoulderBreadth: ['leftUpperArm', 'leftForearm', 'leftHand', 'rightUpperArm', 'rightForearm', 'rightHand'],
     upperArmLength: ['leftUpperArm', 'leftForearm', 'leftHand', 'rightUpperArm', 'rightForearm', 'rightHand'],
     forearmHandLength: ['leftForearm', 'leftHand', 'rightForearm', 'rightHand'],
-    thighLength: ['leftThigh', 'leftShin', 'leftFoot', 'rightThigh', 'rightShin', 'rightFoot'],
-    lowerLegLength: ['leftShin', 'leftFoot', 'rightShin', 'rightFoot'],
-    footLength: ['leftShin', 'leftFoot', 'rightShin', 'rightFoot'],
+    thighLength: ['leftThigh', 'leftShin', 'leftHeel', 'leftFoot', 'rightThigh', 'rightShin', 'rightHeel', 'rightFoot'],
+    lowerLegLength: ['leftShin', 'leftHeel', 'leftFoot', 'rightShin', 'rightHeel', 'rightFoot'],
+    footLength: ['leftShin', 'leftHeel', 'leftFoot', 'rightShin', 'rightHeel', 'rightFoot'],
   } satisfies Record<keyof PlannerAnthropometryRatios, PlannerModelScaledBoneName[]>;
 
   const baseModule = $derived(createBaseModule(input, profileColor));

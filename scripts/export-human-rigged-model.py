@@ -9,7 +9,9 @@ SOURCE_BLEND = ROOT / "docs" / "human_base_meshes_bundle.blend"
 TARGET_GLB = ROOT / "public" / "models" / "aluminum-rig-planner" / "human-male-realistic.glb"
 SOURCE_MESH_NAME = "GEO-body_male_realistic"
 TERMINAL_BONE_LENGTH = 0.015
+HEAD_TIP_BONE_LENGTH = 0.005
 BONE_LENGTHS = {
+    "neck": 0.1521,
     "upperArm": 0.2390,
     "forearm": 0.2600,
     "hand": 0.0702,
@@ -438,12 +440,12 @@ def mirror_point(point):
     return Vector((point.x, point.y, -point.z))
 
 
-def terminal_tail(head, start):
+def terminal_tail(head, start, length=TERMINAL_BONE_LENGTH):
     direction = head - start
     if direction.length <= SECTION_EPSILON:
-        return head + Vector((TERMINAL_BONE_LENGTH, 0.0, 0.0))
+        return head + Vector((length, 0.0, 0.0))
 
-    return head + direction.normalized() * TERMINAL_BONE_LENGTH
+    return head + direction.normalized() * length
 
 
 def point_at_bone_length(head, guide_tail, bone_name):
@@ -454,9 +456,20 @@ def point_at_bone_length(head, guide_tail, bone_name):
     return head + direction.normalized() * BONE_LENGTHS[bone_name]
 
 
-def add_terminal_bone(bones, name, parent_name):
+def extend_to_y(point, direction, target_y):
+    if abs(direction.y) <= SECTION_EPSILON:
+        return point.copy()
+
+    factor = (target_y - point.y) / direction.y
+    if factor <= 0.0:
+        return point.copy()
+
+    return point + direction * factor
+
+
+def add_terminal_bone(bones, name, parent_name, length=TERMINAL_BONE_LENGTH):
     parent_head, parent_tail, _ = bones[parent_name]
-    bones[name] = (parent_tail, terminal_tail(parent_tail, parent_head), parent_name)
+    bones[name] = (parent_tail, terminal_tail(parent_tail, parent_head, length), parent_name)
 
 
 def clamp(value, minimum, maximum):
@@ -494,8 +507,8 @@ def fit_point_to_body(point, body_vertices, height, *, use_margin=True):
 
 def build_reference_bones(reference_vertices, reference_origin, reference_min_y, scale, body_vertices, body_faces, height):
     pelvis_center = average_point(reference_vertices["pelvis"])
-    chest_top = band_center(reference_vertices["chest"], upper=True, share=TOP_BAND_SHARE)
     neck_head_joint = closest_midpoint(reference_vertices["neck"], reference_vertices["head"])
+    jaw_base = band_center(reference_vertices["head"], upper=False, share=TOP_BAND_SHARE)
     head_top = extreme_point(reference_vertices["head"], "y", use_max=True)
 
     shoulder_left = shoulder_point_from_bounds(
@@ -530,18 +543,10 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     )
     toe_left = extreme_point(reference_vertices["leftFoot"], "x", use_max=True)
 
-    torso_tail = Vector(
-        (
-            (chest_top.x + shoulder_left.x) * 0.5,
-            (chest_top.y + shoulder_left.y) * 0.5,
-            reference_origin.z,
-        )
-    )
-
     landmarks = {
         "hipCenter": pelvis_center,
-        "torsoTop": torso_tail,
         "neckBase": neck_head_joint,
+        "jawBase": jaw_base,
         "headTop": head_top,
         "shoulderLeft": shoulder_left,
         "elbowLeft": elbow_left,
@@ -577,6 +582,18 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     right_wrist = section_center_from_body(mirror_point(fitted_landmarks["wristLeft"]), body_vertices, body_faces)
     right_knee = section_center_from_body(mirror_point(fitted_landmarks["kneeLeft"]), body_vertices, body_faces)
     right_ankle = section_center_from_body(mirror_point(fitted_landmarks["ankleLeft"]), body_vertices, body_faces)
+    shoulder_center = (fitted_landmarks["shoulderLeft"] + right_shoulder) * 0.5
+    torso_top = section_center_from_body(shoulder_center, body_vertices, body_faces)
+    neck_plane_normal = fitted_landmarks["jawBase"] - torso_top
+    if neck_plane_normal.length <= SECTION_EPSILON:
+        neck_plane_normal = fitted_landmarks["headTop"] - torso_top
+    neck_seed = point_at_bone_length(torso_top, fitted_landmarks["jawBase"], "neck")
+    neck_base = section_center_from_body_plane(
+        neck_seed,
+        neck_plane_normal,
+        body_vertices,
+        body_faces,
+    )
     left_foot_tip = section_center_from_body_plane(
         fitted_landmarks["toeLeft"],
         fitted_landmarks["toeLeft"] - fitted_landmarks["ankleLeft"],
@@ -598,7 +615,12 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     left_hand_tip = point_at_bone_length(left_wrist, left_hand_tip, "hand")
     left_knee = point_at_bone_length(fitted_landmarks["hipLeft"], fitted_landmarks["kneeLeft"], "thigh")
     left_ankle = point_at_bone_length(left_knee, fitted_landmarks["ankleLeft"], "shin")
-    left_foot_tip = point_at_bone_length(left_ankle, left_foot_tip, "foot")
+    left_ankle = section_center_from_body_plane(left_ankle, left_ankle - left_knee, body_vertices, body_faces)
+    floor_y = min(point.y for point in body_vertices) + 0.020
+    left_heel = extend_to_y(left_ankle, left_ankle - left_knee, floor_y)
+    left_foot_tip = point_at_bone_length(left_heel, left_foot_tip, "foot")
+    left_foot_tip = section_center_from_body_plane(left_foot_tip, left_foot_tip - left_heel, body_vertices, body_faces)
+    left_foot_tip.y = floor_y
     right_elbow = point_at_bone_length(right_shoulder, right_elbow, "upperArm")
     right_wrist = point_at_bone_length(right_elbow, right_wrist, "forearm")
     right_hand_direction = right_wrist - right_elbow
@@ -608,17 +630,23 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     right_hip = mirror_point(fitted_landmarks["hipLeft"])
     right_knee = point_at_bone_length(right_hip, right_knee, "thigh")
     right_ankle = point_at_bone_length(right_knee, right_ankle, "shin")
-    right_foot_tip = point_at_bone_length(right_ankle, right_foot_tip, "foot")
+    right_ankle = section_center_from_body_plane(right_ankle, right_ankle - right_knee, body_vertices, body_faces)
+    right_heel = extend_to_y(right_ankle, right_ankle - right_knee, floor_y)
+    right_foot_tip = point_at_bone_length(right_heel, right_foot_tip, "foot")
+    right_foot_tip = section_center_from_body_plane(right_foot_tip, right_foot_tip - right_heel, body_vertices, body_faces)
+    right_foot_tip.y = floor_y
 
     remapped_bones = {
-        "torso": (fitted_landmarks["hipCenter"], fitted_landmarks["torsoTop"], None),
-        "head": (fitted_landmarks["neckBase"], fitted_landmarks["headTop"], "torso"),
+        "torso": (fitted_landmarks["hipCenter"], torso_top, None),
+        "neck": (torso_top, neck_base, "torso"),
+        "head": (neck_base, fitted_landmarks["headTop"], "neck"),
         "leftUpperArm": (fitted_landmarks["shoulderLeft"], left_elbow, "torso"),
         "leftForearm": (left_elbow, left_wrist, "leftUpperArm"),
         "leftHand": (left_wrist, left_hand_tip, "leftForearm"),
         "leftThigh": (fitted_landmarks["hipLeft"], left_knee, "torso"),
         "leftShin": (left_knee, left_ankle, "leftThigh"),
-        "leftFoot": (left_ankle, left_foot_tip, "leftShin"),
+        "leftHeel": (left_ankle, left_heel, "leftShin"),
+        "leftFoot": (left_heel, left_foot_tip, "leftHeel"),
     }
 
     left_arm = remapped_bones["leftUpperArm"]
@@ -633,9 +661,9 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     remapped_bones["rightHand"] = (right_wrist, right_hand_tip, "rightForearm")
     remapped_bones["rightThigh"] = (right_hip, right_knee, "torso")
     remapped_bones["rightShin"] = (right_knee, right_ankle, "rightThigh")
-    remapped_bones["rightFoot"] = (right_ankle, right_foot_tip, "rightShin")
-    add_terminal_bone(remapped_bones, "torsoTip", "torso")
-    add_terminal_bone(remapped_bones, "headTip", "head")
+    remapped_bones["rightHeel"] = (right_ankle, right_heel, "rightShin")
+    remapped_bones["rightFoot"] = (right_heel, right_foot_tip, "rightHeel")
+    add_terminal_bone(remapped_bones, "headTip", "head", HEAD_TIP_BONE_LENGTH)
     add_terminal_bone(remapped_bones, "leftHandTip", "leftHand")
     add_terminal_bone(remapped_bones, "rightHandTip", "rightHand")
     add_terminal_bone(remapped_bones, "leftFootTip", "leftFoot")
@@ -735,6 +763,8 @@ def main():
     for name, (_, _, parent_name) in bones.items():
         if parent_name:
             edit_bones[name].parent = edit_bones[parent_name]
+            if (edit_bones[name].head - edit_bones[parent_name].tail).length <= SECTION_EPSILON:
+                edit_bones[name].use_connect = True
 
     bpy.ops.object.mode_set(mode="OBJECT")
 

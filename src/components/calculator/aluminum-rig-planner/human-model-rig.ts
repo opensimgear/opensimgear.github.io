@@ -16,7 +16,6 @@ import {
 } from 'three';
 
 import {
-  POSTURE_FOOT_TOE_LENGTH_SHARE,
   POSTURE_HIP_ABOVE_SEAT_MM,
   POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM,
   type PlannerPostureSkeleton,
@@ -37,12 +36,14 @@ type HumanBoneName =
   | 'rightHand'
   | 'leftThigh'
   | 'leftShin'
+  | 'leftHeel'
   | 'leftFoot'
   | 'rightThigh'
   | 'rightShin'
+  | 'rightHeel'
   | 'rightFoot';
 
-type HumanTerminalBoneName = 'torsoTip' | 'headTip' | 'leftHandTip' | 'rightHandTip' | 'leftFootTip' | 'rightFootTip';
+type HumanTerminalBoneName = 'neck' | 'headTip' | 'leftHandTip' | 'rightHandTip' | 'leftFootTip' | 'rightFootTip';
 
 type HumanModelBoneName = HumanBoneName | HumanTerminalBoneName;
 
@@ -118,13 +119,15 @@ const HUMAN_BONE_ORDER: HumanBoneName[] = [
   'rightHand',
   'leftThigh',
   'leftShin',
+  'leftHeel',
   'leftFoot',
   'rightThigh',
   'rightShin',
+  'rightHeel',
   'rightFoot',
 ];
 const HUMAN_TERMINAL_BONE_ORDER: HumanTerminalBoneName[] = [
-  'torsoTip',
+  'neck',
   'headTip',
   'leftHandTip',
   'rightHandTip',
@@ -141,7 +144,7 @@ const HUMAN_DEBUG_BONE_ORDER: HumanDebugBoneName[] = [
 ];
 const HUMAN_MODEL_BONE_ORDER: HumanModelBoneName[] = [...HUMAN_BONE_ORDER, ...HUMAN_TERMINAL_BONE_ORDER];
 const HUMAN_BONE_END_BONES = {
-  torso: 'torsoTip',
+  torso: 'neck',
   head: 'headTip',
   leftUpperArm: 'leftForearm',
   leftForearm: 'leftHand',
@@ -150,10 +153,12 @@ const HUMAN_BONE_END_BONES = {
   rightForearm: 'rightHand',
   rightHand: 'rightHandTip',
   leftThigh: 'leftShin',
-  leftShin: 'leftFoot',
+  leftShin: 'leftHeel',
+  leftHeel: 'leftFoot',
   leftFoot: 'leftFootTip',
   rightThigh: 'rightShin',
-  rightShin: 'rightFoot',
+  rightShin: 'rightHeel',
+  rightHeel: 'rightFoot',
   rightFoot: 'rightFootTip',
 } satisfies Record<HumanBoneName, HumanModelBoneName>;
 const MODEL_RATIO_PRECISION = 3;
@@ -330,12 +335,16 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     ['rightThigh', 'rightShin'],
   ]);
   const lowerLegLength = getAverageDistance(bones, [
-    ['leftShin', 'leftFoot'],
-    ['rightShin', 'rightFoot'],
+    ['leftShin', 'leftHeel'],
+    ['rightShin', 'rightHeel'],
+  ]);
+  const heelLength = getAverageDistance(bones, [
+    ['leftHeel', 'leftFoot'],
+    ['rightHeel', 'rightFoot'],
   ]);
   const hipBreadth = getAverageDistance(bones, [['leftThigh', 'rightThigh']]);
   const shoulderBreadth = getAverageDistance(bones, [['leftUpperArm', 'rightUpperArm']]);
-  const toeReach = getAverageDistance(bones, [
+  const footBoneLength = getAverageDistance(bones, [
     ['leftFoot', 'leftFootTip'],
     ['rightFoot', 'rightFootTip'],
   ]);
@@ -350,9 +359,10 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     forearmHandLength === null ||
     thighLength === null ||
     lowerLegLength === null ||
+    heelLength === null ||
     hipBreadth === null ||
     shoulderBreadth === null ||
-    toeReach === null
+    footBoneLength === null
   ) {
     return null;
   }
@@ -371,7 +381,7 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     forearmHandLength: roundModelRatio(forearmHandLength / height),
     thighLength: roundModelRatio(thighLength / height),
     lowerLegLength: roundModelRatio(lowerLegLength / height),
-    footLength: roundModelRatio(toeReach / POSTURE_FOOT_TOE_LENGTH_SHARE / height),
+    footLength: roundModelRatio((heelLength + footBoneLength) / height),
   };
 }
 
@@ -406,7 +416,7 @@ function createTargetSegments(skeleton: PlannerPostureSkeleton) {
   const { joints } = skeleton;
 
   return new Map<HumanBoneName, [Vector3, Vector3]>([
-    ['torso', [toVector3(joints.hipCenter), toVector3(joints.neck)]],
+    ['torso', [toVector3(joints.hipCenter), toVector3(joints.shoulderCenter)]],
     ['head', [toVector3(joints.neck), toVector3(joints.head)]],
     ['leftUpperArm', [toVector3(joints.shoulderLeft), toVector3(joints.elbowLeft)]],
     ['leftForearm', [toVector3(joints.elbowLeft), toVector3(joints.wristLeft)]],
@@ -416,10 +426,12 @@ function createTargetSegments(skeleton: PlannerPostureSkeleton) {
     ['rightHand', [toVector3(joints.wristRight), toVector3(joints.handRight)]],
     ['leftThigh', [toVector3(joints.hipLeft), toVector3(joints.kneeLeft)]],
     ['leftShin', [toVector3(joints.kneeLeft), toVector3(joints.ankleLeft)]],
-    ['leftFoot', [toVector3(joints.ankleLeft), toVector3(joints.toeLeft)]],
+    ['leftHeel', [toVector3(joints.ankleLeft), toVector3(joints.heelLeft)]],
+    ['leftFoot', [toVector3(joints.heelLeft), toVector3(joints.toeLeft)]],
     ['rightThigh', [toVector3(joints.hipRight), toVector3(joints.kneeRight)]],
     ['rightShin', [toVector3(joints.kneeRight), toVector3(joints.ankleRight)]],
-    ['rightFoot', [toVector3(joints.ankleRight), toVector3(joints.toeRight)]],
+    ['rightHeel', [toVector3(joints.ankleRight), toVector3(joints.heelRight)]],
+    ['rightFoot', [toVector3(joints.heelRight), toVector3(joints.toeRight)]],
   ]);
 }
 
@@ -432,13 +444,18 @@ function poseBone(
   restBoneWorldMatrix: Matrix4,
   start: Vector3,
   end: Vector3,
-  scaleToTargetLength: boolean
+  scaleToTargetLength: boolean,
+  preserveWorldRotation = false
 ) {
-  getSegmentDirection(restSegment.start, restSegment.end, scratchRestDirection);
-  getSegmentDirection(start, end, scratchTargetDirection);
-  scratchQuaternion.setFromUnitVectors(scratchRestDirection, scratchTargetDirection);
-  scratchRestRotation.extractRotation(restBoneWorldMatrix);
-  scratchWorldMatrix.makeRotationFromQuaternion(scratchQuaternion).multiply(scratchRestRotation);
+  if (preserveWorldRotation) {
+    scratchWorldMatrix.extractRotation(restBoneWorldMatrix);
+  } else {
+    getSegmentDirection(restSegment.start, restSegment.end, scratchRestDirection);
+    getSegmentDirection(start, end, scratchTargetDirection);
+    scratchQuaternion.setFromUnitVectors(scratchRestDirection, scratchTargetDirection);
+    scratchRestRotation.extractRotation(restBoneWorldMatrix);
+    scratchWorldMatrix.makeRotationFromQuaternion(scratchQuaternion).multiply(scratchRestRotation);
+  }
   scratchRootInverse.copy(root.matrixWorld).invert();
 
   if (bone.parent instanceof Bone) {
@@ -517,7 +534,8 @@ function applyPlannerPose(
       restBoneWorldMatrix,
       targetSegment[0],
       targetSegment[1],
-      scaledBones.has(name)
+      scaledBones.has(name),
+      name === 'head'
     );
   }
 
@@ -769,7 +787,7 @@ function setTooltip(mesh: Mesh, tooltip: HumanRigTooltipData | null) {
 function getDebugSegmentJointNames(name: HumanDebugBoneName): [string, string] {
   switch (name) {
     case 'torso':
-      return ['hipCenter', 'neck'];
+      return ['hipCenter', 'shoulderCenter'];
     case 'head':
       return ['neck', 'head'];
     case 'leftUpperArm':
@@ -788,16 +806,20 @@ function getDebugSegmentJointNames(name: HumanDebugBoneName): [string, string] {
       return ['hipLeft', 'kneeLeft'];
     case 'leftShin':
       return ['kneeLeft', 'ankleLeft'];
+    case 'leftHeel':
+      return ['ankleLeft', 'heelLeft'];
     case 'leftFoot':
-      return ['ankleLeft', 'toeLeft'];
+      return ['heelLeft', 'toeLeft'];
     case 'rightThigh':
       return ['hipRight', 'kneeRight'];
     case 'rightShin':
       return ['kneeRight', 'ankleRight'];
+    case 'rightHeel':
+      return ['ankleRight', 'heelRight'];
     case 'rightFoot':
-      return ['ankleRight', 'toeRight'];
+      return ['heelRight', 'toeRight'];
     case 'neckConnector':
-      return ['neck', 'neck'];
+      return ['shoulderCenter', 'neck'];
     case 'leftClavicle':
       return ['neck', 'shoulderLeft'];
     case 'rightClavicle':

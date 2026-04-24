@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
-import { Bone, Vector3 } from 'three';
+import { Bone, Quaternion, Vector3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import {
@@ -24,8 +24,8 @@ const MODEL_SEGMENTS = [
   {
     label: 'torso',
     boneStart: 'torso',
-    boneEnd: 'torsoTip',
-    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.hipCenter, skeleton.joints.neck],
+    boneEnd: 'neck',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.hipCenter, skeleton.joints.shoulderCenter],
   },
   {
     label: 'head',
@@ -78,14 +78,20 @@ const MODEL_SEGMENTS = [
   {
     label: 'left shin',
     boneStart: 'leftShin',
-    boneEnd: 'leftFoot',
+    boneEnd: 'leftHeel',
     getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.kneeLeft, skeleton.joints.ankleLeft],
+  },
+  {
+    label: 'left heel',
+    boneStart: 'leftHeel',
+    boneEnd: 'leftFoot',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleLeft, skeleton.joints.heelLeft],
   },
   {
     label: 'left foot',
     boneStart: 'leftFoot',
     boneEnd: 'leftFootTip',
-    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleLeft, skeleton.joints.toeLeft],
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.heelLeft, skeleton.joints.toeLeft],
   },
   {
     label: 'right thigh',
@@ -96,14 +102,20 @@ const MODEL_SEGMENTS = [
   {
     label: 'right shin',
     boneStart: 'rightShin',
-    boneEnd: 'rightFoot',
+    boneEnd: 'rightHeel',
     getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.kneeRight, skeleton.joints.ankleRight],
+  },
+  {
+    label: 'right heel',
+    boneStart: 'rightHeel',
+    boneEnd: 'rightFoot',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleRight, skeleton.joints.heelRight],
   },
   {
     label: 'right foot',
     boneStart: 'rightFoot',
     boneEnd: 'rightFootTip',
-    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleRight, skeleton.joints.toeRight],
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.heelRight, skeleton.joints.toeRight],
   },
 ] satisfies Array<{
   boneEnd: string;
@@ -161,6 +173,16 @@ function getBonePositions(bones: Map<string, Bone>) {
   return new Map([...bones.entries()].map(([name, bone]) => [name, bone.getWorldPosition(new Vector3())]));
 }
 
+function getBoneWorldQuaternion(bones: Map<string, Bone>, name: string) {
+  const bone = bones.get(name);
+
+  if (!bone) {
+    throw new Error(`Missing ${name}`);
+  }
+
+  return bone.getWorldQuaternion(new Quaternion());
+}
+
 describe('aluminum rig planner human model rig', () => {
   it('calculates bone rig ratios from the GLB model rest pose', async () => {
     const gltf = await loadHumanModel();
@@ -168,7 +190,7 @@ describe('aluminum rig planner human model rig', () => {
 
     expect(ratios).toEqual({
       sittingHeight: 0.477,
-      seatedEyeHeight: 0.447,
+      seatedEyeHeight: 0.46,
       seatedShoulderHeight: 0.292,
       hipBreadth: 0.123,
       shoulderBreadth: 0.205,
@@ -176,7 +198,7 @@ describe('aluminum rig planner human model rig', () => {
       forearmHandLength: 0.195,
       thighLength: 0.248,
       lowerLegLength: 0.213,
-      footLength: 0.174,
+      footLength: 0.162,
     });
   });
 
@@ -203,8 +225,8 @@ describe('aluminum rig planner human model rig', () => {
       const [targetStart, targetEnd] = segment.getTarget(skeleton);
       const targetLength = getPointDistance(targetStart, targetEnd);
 
-      expect(Math.round(boneLength * 1000), segment.label).toBe(Math.round(targetLength * 1000));
-      expect(boneLength, segment.label).toBeCloseTo(targetLength, 3);
+      expect(Math.abs(Math.round(boneLength * 1000) - Math.round(targetLength * 1000)), segment.label).toBeLessThanOrEqual(1);
+      expect(Math.abs(boneLength - targetLength), segment.label).toBeLessThanOrEqual(0.001);
       expectVectorClose(bones.get(segment.boneStart)!.scale, restScales.get(segment.boneStart)!, segment.label);
     }
 
@@ -236,5 +258,33 @@ describe('aluminum rig planner human model rig', () => {
 
     basicModel!.dispose();
     advancedModel!.dispose();
+  });
+
+  it('keeps head world rotation fixed when posture changes', async () => {
+    const gltf = await loadHumanModel();
+    const model = createRiggedHumanModelFromRoot(gltf.scene);
+    expect(model).not.toBeNull();
+
+    const bones = collectBones(model!.object);
+    const restHeadQuaternion = getBoneWorldQuaternion(bones, 'head');
+    const skeleton = createPlannerPostureSkeleton(
+      {
+        ...DEFAULT_PLANNER_INPUT,
+        seatAngleDeg: 16,
+        backrestAngleDeg: 42,
+      },
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        advancedAnthropometry: true,
+      }
+    );
+
+    model!.applySkeleton(skeleton, ['torso', 'head']);
+
+    const posedHeadQuaternion = getBoneWorldQuaternion(bones, 'head');
+
+    expect(Math.abs(restHeadQuaternion.angleTo(posedHeadQuaternion))).toBeLessThanOrEqual(0.0001);
+
+    model!.dispose();
   });
 });

@@ -36,9 +36,11 @@ export type PlannerModelScaledBoneName =
   | 'rightHand'
   | 'leftThigh'
   | 'leftShin'
+  | 'leftHeel'
   | 'leftFoot'
   | 'rightThigh'
   | 'rightShin'
+  | 'rightHeel'
   | 'rightFoot';
 
 export type PlannerPostureSettings = {

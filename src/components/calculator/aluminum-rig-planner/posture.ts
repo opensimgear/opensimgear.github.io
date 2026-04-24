@@ -31,6 +31,8 @@ export type PostureJointName =
   | 'kneeRight'
   | 'ankleLeft'
   | 'ankleRight'
+  | 'heelLeft'
+  | 'heelRight'
   | 'toeLeft'
   | 'toeRight';
 
@@ -56,14 +58,15 @@ type TwoLinkPose = {
 const MM_TO_METERS = 0.001;
 const EPSILON = 0.000001;
 const PEDAL_WIDTH_MM = 60;
-const PEDAL_HEIGHT_MM = 180;
 const PEDAL_PLATE_THICKNESS_MM = 3;
 const WHEEL_TUBE_RADIUS_MM = 16;
 const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
 const HIP_FORWARD_ON_SEAT_MM = 130;
 export const POSTURE_HIP_ABOVE_SEAT_MM = 140;
 export const POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM = 60;
-export const POSTURE_FOOT_TOE_LENGTH_SHARE = 0.62;
+const POSTURE_HEEL_LENGTH_SHARE = 0.335;
+const POSTURE_FOOT_BONE_LENGTH_SHARE = 1 - POSTURE_HEEL_LENGTH_SHARE;
+const POSTURE_HEEL_FOOT_ANGLE_RAD = toRad(84.4);
 const HAND_GRIP_LENGTH_MIN_MM = 55;
 const HAND_GRIP_LENGTH_MAX_MM = 140;
 const HAND_GRIP_HEIGHT_RATIO = 0.076;
@@ -98,6 +101,13 @@ function subtract(a: Vector, b: Vector): Vector {
 
 function scale(a: Vector, value: number): Vector {
   return [a[0] * value, a[1] * value, a[2] * value];
+}
+
+function rotateXY(a: Vector, angleRad: number): Vector {
+  const cos = Math.cos(angleRad);
+  const sin = Math.sin(angleRad);
+
+  return [a[0] * cos - a[1] * sin, a[0] * sin + a[1] * cos, a[2]];
 }
 
 function dot(a: Vector, b: Vector) {
@@ -148,17 +158,22 @@ function getPedalCentersZmm(input: PlannerInput) {
 function getPedalTarget(input: PlannerInput, centerZmm: number, footLengthM: number) {
   const pedalLeanRad = toRad(input.pedalAngleDeg - 90);
   const pedalDirection: Vector = normalize([-Math.sin(pedalLeanRad), Math.cos(pedalLeanRad), 0]);
+  const heelDirection = normalize(rotateXY(pedalDirection, POSTURE_HEEL_FOOT_ANGLE_RAD), [0, 1, 0]);
   const pedalPivot: Vector = [
     mm(input.seatBaseDepthMm + input.pedalTrayDistanceMm + input.pedalsDeltaMm),
     mm(BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + input.pedalsHeightMm),
     mm(centerZmm),
   ];
-  const toe = add(pedalPivot, scale(pedalDirection, mm(PEDAL_HEIGHT_MM * 0.68)));
-  const ankle = add(toe, scale(pedalDirection, -Math.min(footLengthM * 0.62, mm(120))));
+  const heel = pedalPivot;
+  const heelLength = footLengthM * POSTURE_HEEL_LENGTH_SHARE;
+  const footBoneLength = footLengthM * POSTURE_FOOT_BONE_LENGTH_SHARE;
+  const ankle = add(heel, scale(heelDirection, heelLength));
+  const toe = add(heel, scale(pedalDirection, footBoneLength));
 
   return {
     ankle,
     direction: pedalDirection,
+    heel,
     toe,
   };
 }
@@ -305,14 +320,10 @@ export function createPlannerPostureSkeleton(
   const leftArm = solveArmPose(shoulderLeft, wheelTargets.left, upperArmLength, forearmHandLength, -rightSign);
   const wristRight = getWristFromHand(rightArm.joint, rightArm.end, handGripLength);
   const wristLeft = getWristFromHand(leftArm.joint, leftArm.end, handGripLength);
-  const rightToe = add(
-    rightLeg.end,
-    scale(rightPedal.direction, Math.min(ratios.footLength * heightM * POSTURE_FOOT_TOE_LENGTH_SHARE, mm(120)))
-  );
-  const leftToe = add(
-    leftLeg.end,
-    scale(leftPedal.direction, Math.min(ratios.footLength * heightM * POSTURE_FOOT_TOE_LENGTH_SHARE, mm(120)))
-  );
+  const rightHeel = rightPedal.heel;
+  const leftHeel = leftPedal.heel;
+  const rightToe = rightPedal.toe;
+  const leftToe = leftPedal.toe;
   const joints: Record<PostureJointName, PosturePoint> = {
     head,
     neck,
@@ -333,6 +344,8 @@ export function createPlannerPostureSkeleton(
     kneeRight: rightLeg.joint,
     ankleLeft: leftLeg.end,
     ankleRight: rightLeg.end,
+    heelLeft: leftHeel,
+    heelRight: rightHeel,
     toeLeft: leftToe,
     toeRight: rightToe,
   };
@@ -354,10 +367,12 @@ export function createPlannerPostureSkeleton(
       { start: joints.wristRight, end: joints.handRight },
       { start: joints.hipLeft, end: joints.kneeLeft },
       { start: joints.kneeLeft, end: joints.ankleLeft },
-      { start: joints.ankleLeft, end: joints.toeLeft },
+      { start: joints.ankleLeft, end: joints.heelLeft },
+      { start: joints.heelLeft, end: joints.toeLeft },
       { start: joints.hipRight, end: joints.kneeRight },
       { start: joints.kneeRight, end: joints.ankleRight },
-      { start: joints.ankleRight, end: joints.toeRight },
+      { start: joints.ankleRight, end: joints.heelRight },
+      { start: joints.heelRight, end: joints.toeRight },
     ],
   };
 }
