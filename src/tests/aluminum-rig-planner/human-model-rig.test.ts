@@ -2,19 +2,163 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
+import { Bone, Vector3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-import { calculateHumanModelBoneRigRatios } from '../../components/calculator/aluminum-rig-planner/human-model-rig';
+import {
+  calculateHumanModelBoneRigRatios,
+  createRiggedHumanModelFromRoot,
+} from '../../components/calculator/aluminum-rig-planner/human-model-rig';
+import {
+  DEFAULT_PLANNER_INPUT,
+  DEFAULT_PLANNER_POSTURE_SETTINGS,
+} from '../../components/calculator/aluminum-rig-planner/constants';
+import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
+import type { PlannerPostureSkeleton, PosturePoint } from '../../components/calculator/aluminum-rig-planner/posture';
+import type { PlannerModelScaledBoneName } from '../../components/calculator/aluminum-rig-planner/types';
 
 const MODEL_PATH = fileURLToPath(
   new URL('../../../public/models/aluminum-rig-planner/human-male-realistic.glb', import.meta.url)
 );
+const MODEL_SEGMENTS = [
+  {
+    label: 'torso',
+    boneStart: 'torso',
+    boneEnd: 'torsoTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.hipCenter, skeleton.joints.neck],
+  },
+  {
+    label: 'head',
+    boneStart: 'head',
+    boneEnd: 'headTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.neck, skeleton.joints.head],
+  },
+  {
+    label: 'left upper arm',
+    boneStart: 'leftUpperArm',
+    boneEnd: 'leftForearm',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.shoulderLeft, skeleton.joints.elbowLeft],
+  },
+  {
+    label: 'left forearm',
+    boneStart: 'leftForearm',
+    boneEnd: 'leftHand',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.elbowLeft, skeleton.joints.wristLeft],
+  },
+  {
+    label: 'left hand',
+    boneStart: 'leftHand',
+    boneEnd: 'leftHandTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.wristLeft, skeleton.joints.handLeft],
+  },
+  {
+    label: 'right upper arm',
+    boneStart: 'rightUpperArm',
+    boneEnd: 'rightForearm',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.shoulderRight, skeleton.joints.elbowRight],
+  },
+  {
+    label: 'right forearm',
+    boneStart: 'rightForearm',
+    boneEnd: 'rightHand',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.elbowRight, skeleton.joints.wristRight],
+  },
+  {
+    label: 'right hand',
+    boneStart: 'rightHand',
+    boneEnd: 'rightHandTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.wristRight, skeleton.joints.handRight],
+  },
+  {
+    label: 'left thigh',
+    boneStart: 'leftThigh',
+    boneEnd: 'leftShin',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.hipLeft, skeleton.joints.kneeLeft],
+  },
+  {
+    label: 'left shin',
+    boneStart: 'leftShin',
+    boneEnd: 'leftFoot',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.kneeLeft, skeleton.joints.ankleLeft],
+  },
+  {
+    label: 'left foot',
+    boneStart: 'leftFoot',
+    boneEnd: 'leftFootTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleLeft, skeleton.joints.toeLeft],
+  },
+  {
+    label: 'right thigh',
+    boneStart: 'rightThigh',
+    boneEnd: 'rightShin',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.hipRight, skeleton.joints.kneeRight],
+  },
+  {
+    label: 'right shin',
+    boneStart: 'rightShin',
+    boneEnd: 'rightFoot',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.kneeRight, skeleton.joints.ankleRight],
+  },
+  {
+    label: 'right foot',
+    boneStart: 'rightFoot',
+    boneEnd: 'rightFootTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleRight, skeleton.joints.toeRight],
+  },
+] satisfies Array<{
+  boneEnd: string;
+  boneStart: string;
+  getTarget: (skeleton: PlannerPostureSkeleton) => [PosturePoint, PosturePoint];
+  label: string;
+}>;
 
 async function loadHumanModel() {
   const buffer = readFileSync(MODEL_PATH);
   const arrayBuffer = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
 
   return new GLTFLoader().parseAsync(arrayBuffer, '');
+}
+
+function collectBones(root: { traverse: (callback: (object: unknown) => void) => void }) {
+  const bones = new Map<string, Bone>();
+
+  root.traverse((object) => {
+    if (object instanceof Bone) {
+      bones.set(object.name, object);
+    }
+  });
+
+  return bones;
+}
+
+function getBoneDistance(bones: Map<string, Bone>, startName: string, endName: string) {
+  const start = bones.get(startName);
+  const end = bones.get(endName);
+
+  if (!start || !end) {
+    throw new Error(`Missing ${startName} or ${endName}`);
+  }
+
+  const startPosition = new Vector3();
+  const endPosition = new Vector3();
+  start.getWorldPosition(startPosition);
+  end.getWorldPosition(endPosition);
+
+  return startPosition.distanceTo(endPosition);
+}
+
+function getPointDistance(start: PosturePoint, end: PosturePoint) {
+  return new Vector3(...start).distanceTo(new Vector3(...end));
+}
+
+function expectVectorClose(actual: Vector3, expected: Vector3, label = 'vector', precision = 6) {
+  expect(actual.x, `${label}.x`).toBeCloseTo(expected.x, precision);
+  expect(actual.y, `${label}.y`).toBeCloseTo(expected.y, precision);
+  expect(actual.z, `${label}.z`).toBeCloseTo(expected.z, precision);
+}
+
+function getBonePositions(bones: Map<string, Bone>) {
+  return new Map([...bones.entries()].map(([name, bone]) => [name, bone.getWorldPosition(new Vector3())]));
 }
 
 describe('aluminum rig planner human model rig', () => {
@@ -34,5 +178,63 @@ describe('aluminum rig planner human model rig', () => {
       lowerLegLength: 0.213,
       footLength: 0.174,
     });
+  });
+
+  it('does not compound parent scales on any bone when advanced defaults match the rest model', async () => {
+    const gltf = await loadHumanModel();
+    const model = createRiggedHumanModelFromRoot(gltf.scene);
+    expect(model).not.toBeNull();
+
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      advancedAnthropometry: true,
+    });
+
+    const bones = collectBones(model!.object);
+    const restScales = new Map([...bones.entries()].map(([name, bone]) => [name, bone.scale.clone()]));
+
+    model!.applySkeleton(
+      skeleton,
+      MODEL_SEGMENTS.map((segment) => segment.boneStart as PlannerModelScaledBoneName)
+    );
+
+    for (const segment of MODEL_SEGMENTS) {
+      const boneLength = getBoneDistance(bones, segment.boneStart, segment.boneEnd);
+      const [targetStart, targetEnd] = segment.getTarget(skeleton);
+      const targetLength = getPointDistance(targetStart, targetEnd);
+
+      expect(Math.round(boneLength * 1000), segment.label).toBe(Math.round(targetLength * 1000));
+      expect(boneLength, segment.label).toBeCloseTo(targetLength, 3);
+      expectVectorClose(bones.get(segment.boneStart)!.scale, restScales.get(segment.boneStart)!, segment.label);
+    }
+
+    model!.dispose();
+  });
+
+  it('keeps the same model pose when toggling advanced defaults on', async () => {
+    const [basicGltf, advancedGltf] = await Promise.all([loadHumanModel(), loadHumanModel()]);
+    const basicModel = createRiggedHumanModelFromRoot(basicGltf.scene);
+    const advancedModel = createRiggedHumanModelFromRoot(advancedGltf.scene);
+    expect(basicModel).not.toBeNull();
+    expect(advancedModel).not.toBeNull();
+
+    const basicSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const advancedSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      advancedAnthropometry: true,
+    });
+
+    basicModel!.applySkeleton(basicSkeleton, []);
+    advancedModel!.applySkeleton(advancedSkeleton, []);
+
+    const basicPositions = getBonePositions(collectBones(basicModel!.object));
+    const advancedPositions = getBonePositions(collectBones(advancedModel!.object));
+
+    for (const [name, basicPosition] of basicPositions) {
+      expectVectorClose(advancedPositions.get(name)!, basicPosition, name, 4);
+    }
+
+    basicModel!.dispose();
+    advancedModel!.dispose();
   });
 });

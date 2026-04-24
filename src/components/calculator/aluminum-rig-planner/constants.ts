@@ -180,10 +180,7 @@ function getDefaultAnthropometryRatio(lengthMm: number) {
 }
 
 export const DEFAULT_ANTHROPOMETRY_RATIOS = Object.fromEntries(
-  Object.entries(DEFAULT_ANTHROPOMETRY_LENGTHS_MM).map(([key, value]) => [
-    key,
-    getDefaultAnthropometryRatio(value),
-  ])
+  Object.entries(DEFAULT_ANTHROPOMETRY_LENGTHS_MM).map(([key, value]) => [key, getDefaultAnthropometryRatio(value)])
 ) as PlannerAnthropometryRatios;
 export const ANTHROPOMETRY_LENGTH_LIMITS_MM = Object.fromEntries(
   Object.entries(DEFAULT_ANTHROPOMETRY_LENGTHS_MM).map(([key, value]) => [

@@ -25,6 +25,22 @@ export type PlannerAnthropometryRatios = {
 
 export type PlannerAnthropometryLengthsMm = Record<keyof PlannerAnthropometryRatios, number>;
 
+export type PlannerModelScaledBoneName =
+  | 'torso'
+  | 'head'
+  | 'leftUpperArm'
+  | 'leftForearm'
+  | 'leftHand'
+  | 'rightUpperArm'
+  | 'rightForearm'
+  | 'rightHand'
+  | 'leftThigh'
+  | 'leftShin'
+  | 'leftFoot'
+  | 'rightThigh'
+  | 'rightShin'
+  | 'rightFoot';
+
 export type PlannerPostureSettings = {
   preset: PlannerPosturePreset;
   heightCm: number;

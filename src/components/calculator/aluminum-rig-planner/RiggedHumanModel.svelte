@@ -5,6 +5,7 @@
   import type { Group } from 'three';
 
   import type { PlannerPostureSkeleton } from './posture';
+  import type { PlannerModelScaledBoneName } from './types';
   import {
     createRiggedHumanModel,
     type HumanRigHoverTooltip,
@@ -14,12 +15,12 @@
   } from './human-model-rig';
 
   type Props = {
-    advancedAnthropometry: boolean;
     onHoverTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
+    scaledModelBoneNames: PlannerModelScaledBoneName[];
     skeleton: PlannerPostureSkeleton;
   };
 
-  const { advancedAnthropometry, onHoverTooltipChange, skeleton }: Props = $props();
+  const { onHoverTooltipChange, scaledModelBoneNames, skeleton }: Props = $props();
   const { camera, canvas, invalidate } = useThrelte();
   const pointer = new Vector2();
   const raycaster = new Raycaster();
@@ -77,7 +78,7 @@
         }
 
         riggedHuman = model;
-        model.applySkeleton(skeleton, advancedAnthropometry);
+        model.applySkeleton(skeleton, scaledModelBoneNames);
         invalidate();
       })
       .catch((error: unknown) => {
@@ -110,7 +111,7 @@
       group.add(model.object);
     }
 
-    model.applySkeleton(skeleton, advancedAnthropometry);
+    model.applySkeleton(skeleton, scaledModelBoneNames);
     invalidate();
   });
 </script>

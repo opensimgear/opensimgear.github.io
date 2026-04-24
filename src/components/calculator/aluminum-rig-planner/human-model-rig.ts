@@ -22,7 +22,7 @@ import {
   type PlannerPostureSkeleton,
   type PosturePoint,
 } from './posture';
-import type { PlannerAnthropometryRatios } from './types';
+import type { PlannerAnthropometryRatios, PlannerModelScaledBoneName } from './types';
 
 export const HUMAN_MALE_REALISTIC_MODEL_URL = '/models/aluminum-rig-planner/human-male-realistic.glb';
 
@@ -64,9 +64,9 @@ type HumanRig = {
   boneRigRatios: PlannerAnthropometryRatios | null;
   bones: Map<HumanModelBoneName, Bone>;
   debugOverlay: HumanRigDebugOverlay;
-  restBoneLocalPositions: Map<HumanBoneName, Vector3>;
-  restBoneLocalQuaternions: Map<HumanBoneName, Quaternion>;
-  restBoneLocalScales: Map<HumanBoneName, Vector3>;
+  restBoneLocalPositions: Map<HumanModelBoneName, Vector3>;
+  restBoneLocalQuaternions: Map<HumanModelBoneName, Quaternion>;
+  restBoneLocalScales: Map<HumanModelBoneName, Vector3>;
   restSegments: Map<HumanBoneName, HumanRestSegment>;
   restBoneWorldMatrices: Map<HumanBoneName, Matrix4>;
   root: Group;
@@ -89,7 +89,7 @@ export type RiggedHumanModel = {
   boneRigRatios: PlannerAnthropometryRatios | null;
   getTooltipTargets: () => Mesh[];
   object: Group;
-  applySkeleton: (skeleton: PlannerPostureSkeleton, scaleToSkeleton: boolean) => void;
+  applySkeleton: (skeleton: PlannerPostureSkeleton, scaledBoneNames: PlannerModelScaledBoneName[]) => void;
   dispose: () => void;
 };
 
@@ -168,6 +168,7 @@ const scratchAngleDirectionA = new Vector3();
 const scratchAngleDirectionB = new Vector3();
 const scratchRestDirection = new Vector3();
 const scratchTargetDirection = new Vector3();
+const scratchWorldPosition = new Vector3();
 const scratchQuaternion = new Quaternion();
 const scratchWorldMatrix = new Matrix4();
 const scratchLocalMatrix = new Matrix4();
@@ -440,19 +441,21 @@ function poseBone(
   scratchWorldMatrix.makeRotationFromQuaternion(scratchQuaternion).multiply(scratchRestRotation);
   scratchRootInverse.copy(root.matrixWorld).invert();
 
-  const restLength = restSegment.start.distanceTo(restSegment.end);
-  const targetLength = start.distanceTo(end);
-  const lengthScale = scaleToTargetLength && restLength > 0.0001 ? targetLength / restLength : 1;
-
   if (bone.parent instanceof Bone) {
     bone.parent.updateMatrixWorld(true);
     scratchParentRigMatrix.multiplyMatrices(scratchRootInverse, bone.parent.matrixWorld);
     scratchParentRotation.extractRotation(scratchParentRigMatrix);
     scratchParentInverse.copy(scratchParentRotation).invert();
     scratchLocalMatrix.extractRotation(scratchWorldMatrix).premultiply(scratchParentInverse);
-    bone.position.copy(restLocalPosition);
+    if (scaleToTargetLength) {
+      scratchWorldPosition.copy(start).applyMatrix4(root.matrixWorld);
+      bone.parent.worldToLocal(scratchWorldPosition);
+      bone.position.copy(scratchWorldPosition);
+    } else {
+      bone.position.copy(restLocalPosition);
+    }
     bone.quaternion.setFromRotationMatrix(scratchLocalMatrix);
-    bone.scale.copy(restLocalScale).multiplyScalar(lengthScale);
+    bone.scale.copy(restLocalScale);
   } else {
     scratchWorldMatrix.setPosition(start);
 
@@ -465,17 +468,33 @@ function poseBone(
     }
 
     scratchLocalMatrix.decompose(bone.position, bone.quaternion, bone.scale);
-    bone.scale.copy(restLocalScale).multiplyScalar(lengthScale);
+    bone.scale.copy(restLocalScale);
   }
 
   bone.updateMatrixWorld(true);
 }
 
-function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, scaleToSkeleton: boolean) {
+function setBonePositionFromRootLocal(root: Group, bone: Bone, position: Vector3) {
+  scratchWorldPosition.copy(position).applyMatrix4(root.matrixWorld);
+
+  if (bone.parent) {
+    bone.parent.worldToLocal(scratchWorldPosition);
+  }
+
+  bone.position.copy(scratchWorldPosition);
+  bone.updateMatrixWorld(true);
+}
+
+function applyPlannerPose(
+  rig: HumanRig,
+  skeleton: PlannerPostureSkeleton,
+  scaledBoneNames: PlannerModelScaledBoneName[]
+) {
   resetBonesToRestPose(rig);
   rig.root.updateWorldMatrix(true, true);
 
   const targetSegments = createTargetSegments(skeleton);
+  const scaledBones = new Set<HumanBoneName>(scaledBoneNames);
 
   for (const name of HUMAN_BONE_ORDER) {
     const bone = rig.bones.get(name);
@@ -498,8 +517,22 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, scale
       restBoneWorldMatrix,
       targetSegment[0],
       targetSegment[1],
-      scaleToSkeleton
+      scaledBones.has(name)
     );
+  }
+
+  if (scaledBones.size > 0) {
+    for (const name of HUMAN_BONE_ORDER) {
+      const targetSegment = targetSegments.get(name);
+      const endBoneName = HUMAN_BONE_END_BONES[name];
+      const bone = rig.bones.get(endBoneName);
+
+      if (!targetSegment || !bone || !scaledBones.has(name) || !(endBoneName as string).endsWith('Tip')) {
+        continue;
+      }
+
+      setBonePositionFromRootLocal(rig.root, bone, targetSegment[1]);
+    }
   }
 
   for (const mesh of rig.skinnedMeshes) {
@@ -512,7 +545,7 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, scale
 }
 
 function resetBonesToRestPose(rig: HumanRig) {
-  for (const name of HUMAN_BONE_ORDER) {
+  for (const name of HUMAN_MODEL_BONE_ORDER) {
     const bone = rig.bones.get(name);
     const position = rig.restBoneLocalPositions.get(name);
     const quaternion = rig.restBoneLocalQuaternions.get(name);
@@ -923,9 +956,9 @@ function collectRig(root: Group) {
   const bones = new Map<HumanModelBoneName, Bone>();
   const debugOverlay = createDebugOverlay();
   const skinnedMeshes: SkinnedMesh[] = [];
-  const restBoneLocalPositions = new Map<HumanBoneName, Vector3>();
-  const restBoneLocalQuaternions = new Map<HumanBoneName, Quaternion>();
-  const restBoneLocalScales = new Map<HumanBoneName, Vector3>();
+  const restBoneLocalPositions = new Map<HumanModelBoneName, Vector3>();
+  const restBoneLocalQuaternions = new Map<HumanModelBoneName, Quaternion>();
+  const restBoneLocalScales = new Map<HumanModelBoneName, Vector3>();
   const restBoneWorldMatrices = new Map<HumanBoneName, Matrix4>();
 
   root.updateWorldMatrix(true, true);
@@ -949,14 +982,17 @@ function collectRig(root: Group) {
   root.add(debugOverlay.group);
   updateDebugOverlay(debugOverlay, createDebugSegmentsFromModelBones(root, bones));
 
-  for (const name of HUMAN_BONE_ORDER) {
+  for (const name of HUMAN_MODEL_BONE_ORDER) {
     const bone = bones.get(name);
 
     if (bone) {
       restBoneLocalPositions.set(name, bone.position.clone());
       restBoneLocalQuaternions.set(name, bone.quaternion.clone());
       restBoneLocalScales.set(name, bone.scale.clone());
-      restBoneWorldMatrices.set(name, bone.matrixWorld.clone());
+
+      if ((HUMAN_BONE_ORDER as string[]).includes(name)) {
+        restBoneWorldMatrices.set(name as HumanBoneName, bone.matrixWorld.clone());
+      }
     }
   }
 
@@ -978,12 +1014,7 @@ function isHumanModelBoneName(name: string): name is HumanModelBoneName {
   return (HUMAN_MODEL_BONE_ORDER as string[]).includes(name);
 }
 
-export async function createRiggedHumanModel(
-  modelUrl = HUMAN_MALE_REALISTIC_MODEL_URL
-): Promise<RiggedHumanModel | null> {
-  const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
-  const gltf = await new GLTFLoader().loadAsync(modelUrl);
-  const root = gltf.scene;
+export function createRiggedHumanModelFromRoot(root: Group): RiggedHumanModel | null {
   const rig = collectRig(root);
 
   if (rig.bones.size === 0 || rig.skinnedMeshes.length === 0) {
@@ -998,8 +1029,8 @@ export async function createRiggedHumanModel(
       return [...rig.debugOverlay.boneHitMeshes.values(), ...rig.debugOverlay.jointHitMeshes];
     },
     object: root,
-    applySkeleton(plannerSkeleton, scaleToSkeleton) {
-      applyPlannerPose(rig, plannerSkeleton, scaleToSkeleton);
+    applySkeleton(plannerSkeleton, scaledBoneNames) {
+      applyPlannerPose(rig, plannerSkeleton, scaledBoneNames);
     },
     dispose() {
       rig.debugOverlay.boneGeometry.dispose();
@@ -1022,4 +1053,13 @@ export async function createRiggedHumanModel(
       }
     },
   };
+}
+
+export async function createRiggedHumanModel(
+  modelUrl = HUMAN_MALE_REALISTIC_MODEL_URL
+): Promise<RiggedHumanModel | null> {
+  const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
+  const gltf = await new GLTFLoader().loadAsync(modelUrl);
+
+  return createRiggedHumanModelFromRoot(gltf.scene);
 }
