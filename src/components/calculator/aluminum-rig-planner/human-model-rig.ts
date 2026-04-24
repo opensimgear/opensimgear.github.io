@@ -1,7 +1,9 @@
 import {
   Bone,
   Box3,
+  BufferGeometry,
   DoubleSide,
+  Float32BufferAttribute,
   Group,
   Matrix4,
   Mesh,
@@ -9,6 +11,7 @@ import {
   Object3D,
   Quaternion,
   SkinnedMesh,
+  SphereGeometry,
   Vector3,
 } from 'three';
 
@@ -40,6 +43,7 @@ type HumanRestSegment = {
 
 type HumanRig = {
   bones: Map<HumanBoneName, Bone>;
+  debugOverlay: HumanRigDebugOverlay;
   restBoneLocalPositions: Map<HumanBoneName, Vector3>;
   restBoneLocalScales: Map<HumanBoneName, Vector3>;
   restSegments: Map<HumanBoneName, HumanRestSegment>;
@@ -51,6 +55,16 @@ export type RiggedHumanModel = {
   object: Group;
   applySkeleton: (skeleton: PlannerPostureSkeleton) => void;
   dispose: () => void;
+};
+
+type HumanRigDebugOverlay = {
+  boneGeometry: BufferGeometry;
+  boneMaterial: MeshBasicMaterial;
+  boneMeshes: Map<HumanBoneName, Mesh>;
+  group: Group;
+  jointGeometry: SphereGeometry;
+  jointMaterial: MeshBasicMaterial;
+  jointMeshes: Mesh[];
 };
 
 const HUMAN_BONE_ORDER: HumanBoneName[] = [
@@ -69,6 +83,7 @@ const HUMAN_BONE_ORDER: HumanBoneName[] = [
   'rightShin',
   'rightFoot',
 ];
+const Y_AXIS = new Vector3(0, 1, 0);
 const scratchRestDirection = new Vector3();
 const scratchTargetDirection = new Vector3();
 const scratchQuaternion = new Quaternion();
@@ -288,6 +303,8 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton) {
     mesh.skeleton.update();
     mesh.geometry.computeBoundingSphere();
   }
+
+  updateDebugOverlay(rig.debugOverlay, targetSegments);
 }
 
 function configureObject(object: Object3D) {
@@ -306,14 +323,193 @@ function configureMesh(mesh: Mesh) {
   mesh.material = new MeshBasicMaterial({
     color: 0xcaa489,
     depthTest: true,
-    depthWrite: true,
+    depthWrite: false,
+    opacity: 0.34,
     side: DoubleSide,
-    transparent: false,
+    transparent: true,
+  });
+}
+
+function createDebugOverlay() {
+  const group = new Group();
+  const boneGeometry = createStartWeightedOctahedronGeometry();
+  const jointGeometry = new SphereGeometry(0.018, 16, 10);
+  const boneMaterial = new MeshBasicMaterial({
+    color: 0x2563eb,
+    depthTest: false,
+    depthWrite: false,
+    opacity: 0.72,
+    transparent: true,
+  });
+  const jointMaterial = new MeshBasicMaterial({
+    color: 0xf97316,
+    depthTest: false,
+    depthWrite: false,
+  });
+  const boneMeshes = new Map<HumanBoneName, Mesh>();
+
+  group.name = 'RiggedHumanDebugOverlay';
+  group.renderOrder = 1000;
+
+  for (const name of HUMAN_BONE_ORDER) {
+    const mesh = new Mesh(boneGeometry, boneMaterial);
+    mesh.name = `${name}DebugBone`;
+    mesh.frustumCulled = false;
+    mesh.renderOrder = 1000;
+    boneMeshes.set(name, mesh);
+    group.add(mesh);
+  }
+
+  return {
+    boneGeometry,
+    boneMaterial,
+    boneMeshes,
+    group,
+    jointGeometry,
+    jointMaterial,
+    jointMeshes: [],
+  } satisfies HumanRigDebugOverlay;
+}
+
+function createStartWeightedOctahedronGeometry() {
+  const waistY = 0.22;
+  const radius = 0.42;
+  const vertices = new Float32Array([
+    0,
+    0,
+    0,
+    radius,
+    waistY,
+    0,
+    0,
+    waistY,
+    radius,
+    0,
+    0,
+    0,
+    0,
+    waistY,
+    radius,
+    -radius,
+    waistY,
+    0,
+    0,
+    0,
+    0,
+    -radius,
+    waistY,
+    0,
+    0,
+    waistY,
+    -radius,
+    0,
+    0,
+    0,
+    0,
+    waistY,
+    -radius,
+    radius,
+    waistY,
+    0,
+    0,
+    1,
+    0,
+    0,
+    waistY,
+    radius,
+    radius,
+    waistY,
+    0,
+    0,
+    1,
+    0,
+    -radius,
+    waistY,
+    0,
+    0,
+    waistY,
+    radius,
+    0,
+    1,
+    0,
+    0,
+    waistY,
+    -radius,
+    -radius,
+    waistY,
+    0,
+    0,
+    1,
+    0,
+    radius,
+    waistY,
+    0,
+    0,
+    waistY,
+    -radius,
+  ]);
+  const geometry = new BufferGeometry();
+
+  geometry.setAttribute('position', new Float32BufferAttribute(vertices, 3));
+  geometry.computeVertexNormals();
+
+  return geometry;
+}
+
+function updateDebugOverlay(
+  overlay: HumanRigDebugOverlay,
+  targetSegments: Map<HumanBoneName, [Vector3, Vector3]>
+) {
+  const joints = new Map<string, Vector3>();
+
+  for (const [name, segment] of targetSegments) {
+    const mesh = overlay.boneMeshes.get(name);
+
+    if (!mesh) {
+      continue;
+    }
+
+    const [start, end] = segment;
+    scratchTargetDirection.copy(end).sub(start);
+    const length = scratchTargetDirection.length();
+
+    if (length <= 0.0001) {
+      mesh.visible = false;
+    } else {
+      mesh.visible = true;
+      scratchTargetDirection.normalize();
+      mesh.position.copy(start);
+      mesh.quaternion.setFromUnitVectors(Y_AXIS, scratchTargetDirection);
+      mesh.scale.set(0.032, length, 0.032);
+    }
+
+    joints.set(start.toArray().map((value) => value.toFixed(4)).join(','), start);
+    joints.set(end.toArray().map((value) => value.toFixed(4)).join(','), end);
+  }
+
+  const jointPositions = [...joints.values()];
+
+  while (overlay.jointMeshes.length < jointPositions.length) {
+    const mesh = new Mesh(overlay.jointGeometry, overlay.jointMaterial);
+    mesh.frustumCulled = false;
+    mesh.renderOrder = 1001;
+    overlay.jointMeshes.push(mesh);
+    overlay.group.add(mesh);
+  }
+
+  overlay.jointMeshes.forEach((mesh, index) => {
+    const position = jointPositions[index];
+    mesh.visible = Boolean(position);
+
+    if (position) {
+      mesh.position.copy(position);
+    }
   });
 }
 
 function collectRig(root: Group) {
   const bones = new Map<HumanBoneName, Bone>();
+  const debugOverlay = createDebugOverlay();
   const skinnedMeshes: SkinnedMesh[] = [];
   const restBoneLocalPositions = new Map<HumanBoneName, Vector3>();
   const restBoneLocalScales = new Map<HumanBoneName, Vector3>();
@@ -338,6 +534,7 @@ function collectRig(root: Group) {
   root.updateWorldMatrix(true, true);
 
   const restSegments = createRestSegmentsFromBones(bones, bounds);
+  root.add(debugOverlay.group);
 
   for (const name of HUMAN_BONE_ORDER) {
     const bone = bones.get(name);
@@ -351,6 +548,7 @@ function collectRig(root: Group) {
 
   return {
     bones,
+    debugOverlay,
     restBoneLocalPositions,
     restBoneLocalScales,
     restSegments,
@@ -398,6 +596,11 @@ export async function createRiggedHumanModel(
       applyPlannerPose(rig, plannerSkeleton);
     },
     dispose() {
+      rig.debugOverlay.boneGeometry.dispose();
+      rig.debugOverlay.jointGeometry.dispose();
+      rig.debugOverlay.boneMaterial.dispose();
+      rig.debugOverlay.jointMaterial.dispose();
+
       for (const mesh of rig.skinnedMeshes) {
         mesh.geometry.dispose();
 
