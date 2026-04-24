@@ -21,7 +21,7 @@ import {
   type PlannerPostureSkeleton,
   type PosturePoint,
 } from './posture';
-import type { PlannerAnthropometryRatios, PlannerModelScaledBoneName } from './types';
+import type { PlannerAnthropometryRatios } from './types';
 
 export const HUMAN_MALE_REALISTIC_MODEL_URL = '/models/aluminum-rig-planner/human-male-realistic.glb';
 
@@ -90,7 +90,7 @@ export type RiggedHumanModel = {
   boneRigRatios: PlannerAnthropometryRatios | null;
   getTooltipTargets: () => Mesh[];
   object: Group;
-  applySkeleton: (skeleton: PlannerPostureSkeleton, scaledBoneNames: PlannerModelScaledBoneName[]) => void;
+  applySkeleton: (skeleton: PlannerPostureSkeleton, modelScale: number) => void;
   setDisplayOptions: (showModel: boolean, showSkeleton: boolean) => void;
   dispose: () => void;
 };
@@ -496,41 +496,13 @@ function poseBone(
   bone.updateMatrixWorld(true);
 }
 
-function setBonePositionFromRootLocal(root: Group, bone: Bone, position: Vector3) {
-  scratchWorldPosition.copy(position).applyMatrix4(root.matrixWorld);
-
-  if (bone.parent) {
-    bone.parent.worldToLocal(scratchWorldPosition);
-  }
-
-  bone.position.copy(scratchWorldPosition);
-  bone.updateMatrixWorld(true);
-}
-
-function setTerminalBoneStretch(
-  bone: Bone,
-  restLocalScale: Vector3,
-  restSegment: HumanRestSegment,
-  targetSegment: [Vector3, Vector3]
-) {
-  const restLength = restSegment.start.distanceTo(restSegment.end);
-  const targetLength = targetSegment[0].distanceTo(targetSegment[1]);
-  const stretch = restLength > BONE_LENGTH_EPSILON ? targetLength / restLength : 1;
-
-  bone.scale.set(restLocalScale.x, restLocalScale.y * stretch, restLocalScale.z);
-  bone.updateMatrixWorld(true);
-}
-
-function applyPlannerPose(
-  rig: HumanRig,
-  skeleton: PlannerPostureSkeleton,
-  scaledBoneNames: PlannerModelScaledBoneName[]
-) {
+function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, modelScale: number) {
   resetBonesToRestPose(rig);
+  rig.root.position.set(0, 0, 0);
+  rig.root.scale.setScalar(1);
   rig.root.updateWorldMatrix(true, true);
 
   const targetSegments = createTargetSegments(skeleton);
-  const scaledBones = new Set<HumanBoneName>(scaledBoneNames);
 
   for (const name of HUMAN_BONE_ORDER) {
     const bone = rig.bones.get(name);
@@ -553,27 +525,9 @@ function applyPlannerPose(
       restBoneWorldMatrix,
       targetSegment[0],
       targetSegment[1],
-      scaledBones.has(name),
+      false,
       name === 'head'
     );
-
-    if (scaledBones.has(name) && (name === 'leftFoot' || name === 'rightFoot')) {
-      setTerminalBoneStretch(bone, restLocalScale, restSegment, targetSegment);
-    }
-  }
-
-  if (scaledBones.size > 0) {
-    for (const name of HUMAN_BONE_ORDER) {
-      const targetSegment = targetSegments.get(name);
-      const endBoneName = HUMAN_BONE_END_BONES[name];
-      const bone = rig.bones.get(endBoneName);
-
-      if (!targetSegment || !bone || !scaledBones.has(name) || !(endBoneName as string).endsWith('Tip')) {
-        continue;
-      }
-
-      setBonePositionFromRootLocal(rig.root, bone, targetSegment[1]);
-    }
   }
 
   for (const mesh of rig.skinnedMeshes) {
@@ -583,6 +537,16 @@ function applyPlannerPose(
 
   rig.root.updateWorldMatrix(true, true);
   updateDebugOverlay(rig.debugOverlay, createDebugSegmentsFromModelBones(rig.root, rig.bones));
+
+  const safeModelScale = Math.max(BONE_LENGTH_EPSILON, modelScale);
+  const hipCenter = skeleton.joints.hipCenter;
+  rig.root.scale.setScalar(safeModelScale);
+  rig.root.position.set(
+    hipCenter[0] * (1 - safeModelScale),
+    hipCenter[1] * (1 - safeModelScale),
+    hipCenter[2] * (1 - safeModelScale)
+  );
+  rig.root.updateWorldMatrix(true, true);
 }
 
 function resetBonesToRestPose(rig: HumanRig) {
@@ -1084,8 +1048,8 @@ export function createRiggedHumanModelFromRoot(root: Group): RiggedHumanModel | 
       return [...rig.debugOverlay.boneHitMeshes.values(), ...rig.debugOverlay.jointHitMeshes];
     },
     object: root,
-    applySkeleton(plannerSkeleton, scaledBoneNames) {
-      applyPlannerPose(rig, plannerSkeleton, scaledBoneNames);
+    applySkeleton(plannerSkeleton, modelScale) {
+      applyPlannerPose(rig, plannerSkeleton, modelScale);
     },
     setDisplayOptions(showModel, showSkeleton) {
       setSkinnedMeshesVisible(rig.skinnedMeshes, showModel);

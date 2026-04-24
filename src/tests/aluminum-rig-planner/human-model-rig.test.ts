@@ -12,10 +12,10 @@ import {
 import {
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
+  DEFAULT_POSTURE_HEIGHT_CM,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
 import type { PlannerPostureSkeleton, PosturePoint } from '../../components/calculator/aluminum-rig-planner/posture';
-import type { PlannerModelScaledBoneName } from '../../components/calculator/aluminum-rig-planner/types';
 
 const MODEL_PATH = fileURLToPath(
   new URL('../../../public/models/aluminum-rig-planner/human-male-realistic.glb', import.meta.url)
@@ -143,26 +143,6 @@ function collectBones(root: { traverse: (callback: (object: unknown) => void) =>
   return bones;
 }
 
-function getBoneDistance(bones: Map<string, Bone>, startName: string, endName: string) {
-  const start = bones.get(startName);
-  const end = bones.get(endName);
-
-  if (!start || !end) {
-    throw new Error(`Missing ${startName} or ${endName}`);
-  }
-
-  const startPosition = new Vector3();
-  const endPosition = new Vector3();
-  start.getWorldPosition(startPosition);
-  end.getWorldPosition(endPosition);
-
-  return startPosition.distanceTo(endPosition);
-}
-
-function getPointDistance(start: PosturePoint, end: PosturePoint) {
-  return new Vector3(...start).distanceTo(new Vector3(...end));
-}
-
 function expectVectorClose(actual: Vector3, expected: Vector3, label = 'vector', precision = 6) {
   expect(actual.x, `${label}.x`).toBeCloseTo(expected.x, precision);
   expect(actual.y, `${label}.y`).toBeCloseTo(expected.y, precision);
@@ -197,48 +177,38 @@ describe('aluminum rig planner human model rig', () => {
       upperArmLength: 0.141,
       forearmHandLength: 0.195,
       thighLength: 0.248,
-      lowerLegLength: 0.213,
-      footLength: 0.162,
+      lowerLegLength: 0.231,
+      footLength: 0.143,
     });
   });
 
-  it('does not compound parent scales on any bone when advanced defaults match the rest model', async () => {
+  it('scales the whole model without changing individual bone scales', async () => {
     const gltf = await loadHumanModel();
     const model = createRiggedHumanModelFromRoot(gltf.scene);
     expect(model).not.toBeNull();
 
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
+    const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      advancedAnthropometry: true,
-    });
+      heightCm: 205,
+    };
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
+    const modelScale = postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM;
 
     const bones = collectBones(model!.object);
     const restScales = new Map([...bones.entries()].map(([name, bone]) => [name, bone.scale.clone()]));
 
-    model!.applySkeleton(
-      skeleton,
-      MODEL_SEGMENTS.map((segment) => segment.boneStart as PlannerModelScaledBoneName)
-    );
+    model!.applySkeleton(skeleton, modelScale);
+
+    expectVectorClose(model!.object.scale, new Vector3(modelScale, modelScale, modelScale), 'model scale');
 
     for (const segment of MODEL_SEGMENTS) {
-      const boneLength = getBoneDistance(bones, segment.boneStart, segment.boneEnd);
-      const [targetStart, targetEnd] = segment.getTarget(skeleton);
-      const targetLength = getPointDistance(targetStart, targetEnd);
-
-      expect(Math.abs(Math.round(boneLength * 1000) - Math.round(targetLength * 1000)), segment.label).toBeLessThanOrEqual(1);
-      expect(Math.abs(boneLength - targetLength), segment.label).toBeLessThanOrEqual(0.001);
-
-      if (segment.boneStart === 'leftFoot' || segment.boneStart === 'rightFoot') {
-        expect(bones.get(segment.boneStart)!.scale.y).toBeGreaterThan(restScales.get(segment.boneStart)!.y);
-      } else {
-        expectVectorClose(bones.get(segment.boneStart)!.scale, restScales.get(segment.boneStart)!, segment.label);
-      }
+      expectVectorClose(bones.get(segment.boneStart)!.scale, restScales.get(segment.boneStart)!, segment.label);
     }
 
     model!.dispose();
   });
 
-  it('keeps the same model pose when toggling advanced defaults on', async () => {
+  it('keeps the same model pose when height stays at the 169 cm baseline', async () => {
     const [basicGltf, advancedGltf] = await Promise.all([loadHumanModel(), loadHumanModel()]);
     const basicModel = createRiggedHumanModelFromRoot(basicGltf.scene);
     const advancedModel = createRiggedHumanModelFromRoot(advancedGltf.scene);
@@ -246,13 +216,10 @@ describe('aluminum rig planner human model rig', () => {
     expect(advancedModel).not.toBeNull();
 
     const basicSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const advancedSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
-      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      advancedAnthropometry: true,
-    });
+    const advancedSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
 
-    basicModel!.applySkeleton(basicSkeleton, []);
-    advancedModel!.applySkeleton(advancedSkeleton, []);
+    basicModel!.applySkeleton(basicSkeleton, 1);
+    advancedModel!.applySkeleton(advancedSkeleton, 1);
 
     const basicPositions = getBonePositions(collectBones(basicModel!.object));
     const advancedPositions = getBonePositions(collectBones(advancedModel!.object));
@@ -278,13 +245,10 @@ describe('aluminum rig planner human model rig', () => {
         seatAngleDeg: 16,
         backrestAngleDeg: 42,
       },
-      {
-        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-        advancedAnthropometry: true,
-      }
+      DEFAULT_PLANNER_POSTURE_SETTINGS
     );
 
-    model!.applySkeleton(skeleton, ['torso', 'head']);
+    model!.applySkeleton(skeleton, 1);
 
     const posedHeadQuaternion = getBoneWorldQuaternion(bones, 'head');
 

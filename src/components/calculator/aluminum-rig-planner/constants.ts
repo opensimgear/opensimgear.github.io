@@ -211,10 +211,6 @@ export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   heightCm: DEFAULT_POSTURE_HEIGHT_CM,
   showModel: true,
   showSkeleton: false,
-  advancedAnthropometry: false,
-  ratios: {
-    ...DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
-  },
 };
 
 export const PLANNER_POSTURE_LIMITS = {

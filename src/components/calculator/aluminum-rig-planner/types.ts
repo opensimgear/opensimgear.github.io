@@ -25,31 +25,11 @@ export type PlannerAnthropometryRatios = {
 
 export type PlannerAnthropometryLengthsMm = Record<keyof PlannerAnthropometryRatios, number>;
 
-export type PlannerModelScaledBoneName =
-  | 'torso'
-  | 'head'
-  | 'leftUpperArm'
-  | 'leftForearm'
-  | 'leftHand'
-  | 'rightUpperArm'
-  | 'rightForearm'
-  | 'rightHand'
-  | 'leftThigh'
-  | 'leftShin'
-  | 'leftHeel'
-  | 'leftFoot'
-  | 'rightThigh'
-  | 'rightShin'
-  | 'rightHeel'
-  | 'rightFoot';
-
 export type PlannerPostureSettings = {
   preset: PlannerPosturePreset;
   heightCm: number;
   showModel: boolean;
   showSkeleton: boolean;
-  advancedAnthropometry: boolean;
-  ratios: PlannerAnthropometryLengthsMm;
 };
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;

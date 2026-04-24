@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CUT_LIST_HIGHLIGHT_COLOR, DEFAULT_ANTHROPOMETRY_LENGTHS_MM } from './constants';
+  import { CUT_LIST_HIGHLIGHT_COLOR, DEFAULT_POSTURE_HEIGHT_CM } from './constants';
   import type { PlannerGeometry } from './geometry';
   import MeasurementArrow from './MeasurementArrow.svelte';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
@@ -14,12 +14,7 @@
   import { createPlannerPostureSkeleton } from './posture';
   import RiggedHumanModel from './RiggedHumanModel.svelte';
   import type { HumanRigHoverTooltip } from './human-model-rig';
-  import type {
-    PlannerAnthropometryRatios,
-    PlannerModelScaledBoneName,
-    PlannerPostureSettings,
-    PlannerVisibleModules,
-  } from './types';
+  import type { PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
     geometry: PlannerGeometry;
@@ -44,18 +39,6 @@
   }: Props = $props();
   const input = $derived(geometry.input);
   const highlightedBeamIdSet = $derived(new Set(highlightedBeamIds));
-  const anthropometryModelBones = {
-    sittingHeight: ['torso', 'head'],
-    seatedEyeHeight: [],
-    seatedShoulderHeight: ['torso', 'head', 'leftUpperArm', 'rightUpperArm'],
-    hipBreadth: ['leftThigh', 'rightThigh'],
-    shoulderBreadth: ['leftUpperArm', 'leftForearm', 'leftHand', 'rightUpperArm', 'rightForearm', 'rightHand'],
-    upperArmLength: ['leftUpperArm', 'leftForearm', 'leftHand', 'rightUpperArm', 'rightForearm', 'rightHand'],
-    forearmHandLength: ['leftForearm', 'leftHand', 'rightForearm', 'rightHand'],
-    thighLength: ['leftThigh', 'leftShin', 'leftHeel', 'leftFoot', 'rightThigh', 'rightShin', 'rightHeel', 'rightFoot'],
-    lowerLegLength: ['leftShin', 'leftHeel', 'leftFoot', 'rightShin', 'rightHeel', 'rightFoot'],
-    footLength: ['leftFoot', 'rightFoot'],
-  } satisfies Record<keyof PlannerAnthropometryRatios, PlannerModelScaledBoneName[]>;
 
   const baseModule = $derived(createBaseModule(input, profileColor));
   const steeringColumnModule = $derived(createSteeringColumnModule(input, profileColor));
@@ -64,27 +47,7 @@
   const seatModule = $derived(createSeatModule(input));
   const wheelModule = $derived(createWheelModule(input));
   const postureSkeleton = $derived(createPlannerPostureSkeleton(input, postureSettings));
-  const scaledModelBoneNames = $derived.by(() => {
-    if (!postureSettings.advancedAnthropometry) {
-      return [];
-    }
-
-    const scaledBones: PlannerModelScaledBoneName[] = [];
-
-    for (const key of Object.keys(DEFAULT_ANTHROPOMETRY_LENGTHS_MM) as Array<keyof PlannerAnthropometryRatios>) {
-      if (Math.abs(postureSettings.ratios[key] - DEFAULT_ANTHROPOMETRY_LENGTHS_MM[key]) <= 0.05) {
-        continue;
-      }
-
-      for (const boneName of anthropometryModelBones[key]) {
-        if (!scaledBones.includes(boneName)) {
-          scaledBones.push(boneName);
-        }
-      }
-    }
-
-    return scaledBones;
-  });
+  const modelScale = $derived(postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM);
 
   const beamMeshes = $derived([
     ...baseModule,
@@ -124,9 +87,9 @@
 
 {#if postureSettings.showModel || postureSettings.showSkeleton}
   <RiggedHumanModel
-    {scaledModelBoneNames}
+    {modelScale}
     showModel={postureSettings.showModel}
-    showSkeleton={postureSettings.advancedAnthropometry && postureSettings.showSkeleton}
+    showSkeleton={postureSettings.showSkeleton}
     skeleton={postureSkeleton}
     onHoverTooltipChange={onHumanRigTooltipChange}
   />

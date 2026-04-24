@@ -1,7 +1,4 @@
 import {
-  ANTHROPOMETRY_LENGTH_LIMITS_MM,
-  DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
-  DEFAULT_POSTURE_HEIGHT_CM,
   DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_POSTURE_LIMITS,
@@ -9,7 +6,6 @@ import {
 } from './constants';
 import { clampPlannerInput } from './geometry';
 import type {
-  PlannerAnthropometryRatios,
   PlannerInput,
   PlannerOptimizationSettings,
   PlannerPostureSettings,
@@ -38,9 +34,8 @@ export type PlannerQueryState = Partial<PlannerInput> & {
       cost?: unknown;
     }>;
   };
-  posture?: Partial<Omit<PlannerPostureSettings, 'preset' | 'ratios'>> & {
+  posture?: Partial<Omit<PlannerPostureSettings, 'preset'>> & {
     preset?: unknown;
-    ratios?: Partial<Record<keyof PlannerAnthropometryRatios, unknown>>;
   };
 };
 
@@ -135,16 +130,6 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
   } satisfies PlannerOptimizationSettings;
 }
 
-function sanitizeAnthropometryLength(key: keyof PlannerAnthropometryRatios, value: unknown) {
-  const fallback = DEFAULT_ANTHROPOMETRY_LENGTHS_MM[key];
-  const nextValue = readNumber(value, fallback);
-  const migratedValue =
-    nextValue <= PLANNER_POSTURE_LIMITS.ratioMax ? nextValue * DEFAULT_POSTURE_HEIGHT_CM * 10 : nextValue;
-  const limits = ANTHROPOMETRY_LENGTH_LIMITS_MM[key];
-
-  return Number(clampNumber(migratedValue, limits.min, limits.max).toFixed(1));
-}
-
 function clampNumber(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
@@ -164,20 +149,6 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     ),
     showModel: typeof state?.showModel === 'boolean' ? state.showModel : defaults.showModel,
     showSkeleton: typeof state?.showSkeleton === 'boolean' ? state.showSkeleton : defaults.showSkeleton,
-    advancedAnthropometry:
-      typeof state?.advancedAnthropometry === 'boolean' ? state.advancedAnthropometry : defaults.advancedAnthropometry,
-    ratios: {
-      sittingHeight: sanitizeAnthropometryLength('sittingHeight', state?.ratios?.sittingHeight),
-      seatedEyeHeight: sanitizeAnthropometryLength('seatedEyeHeight', state?.ratios?.seatedEyeHeight),
-      seatedShoulderHeight: sanitizeAnthropometryLength('seatedShoulderHeight', state?.ratios?.seatedShoulderHeight),
-      hipBreadth: sanitizeAnthropometryLength('hipBreadth', state?.ratios?.hipBreadth),
-      shoulderBreadth: sanitizeAnthropometryLength('shoulderBreadth', state?.ratios?.shoulderBreadth),
-      upperArmLength: sanitizeAnthropometryLength('upperArmLength', state?.ratios?.upperArmLength),
-      forearmHandLength: sanitizeAnthropometryLength('forearmHandLength', state?.ratios?.forearmHandLength),
-      thighLength: sanitizeAnthropometryLength('thighLength', state?.ratios?.thighLength),
-      lowerLegLength: sanitizeAnthropometryLength('lowerLegLength', state?.ratios?.lowerLegLength),
-      footLength: sanitizeAnthropometryLength('footLength', state?.ratios?.footLength),
-    },
   } satisfies PlannerPostureSettings;
 }
 

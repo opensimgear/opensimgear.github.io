@@ -13,9 +13,7 @@
   import CutOptimizerPanel from './CutOptimizerPanel.svelte';
   import { createPlannerCutListEntries } from './cut-list';
   import {
-    ANTHROPOMETRY_LENGTH_LIMITS_MM,
     COLOR_MODE_OPTIONS,
-    DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
     DEFAULT_CUSTOM_PROFILE_COLOR,
     DEFAULT_PLANNER_POSTURE_SETTINGS,
     DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
@@ -57,7 +55,6 @@
   import type { PlannerGeometry } from './geometry';
   import type {
     CutListProfileType,
-    PlannerAnthropometryRatios,
     PlannerCurrencyCode,
     PlannerInput,
     PlannerOptimizationSettings,
@@ -89,20 +86,7 @@
   };
   const DEFAULT_POSTURE_SETTINGS: PlannerPostureSettings = {
     ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-    ratios: { ...DEFAULT_PLANNER_POSTURE_SETTINGS.ratios },
   };
-  const ANTHROPOMETRY_RATIO_CONTROLS = [
-    { key: 'sittingHeight', label: 'Sitting height' },
-    { key: 'seatedEyeHeight', label: 'Eye height' },
-    { key: 'seatedShoulderHeight', label: 'Shoulder height' },
-    { key: 'hipBreadth', label: 'Hip breadth' },
-    { key: 'shoulderBreadth', label: 'Shoulder breadth' },
-    { key: 'upperArmLength', label: 'Upper arm' },
-    { key: 'forearmHandLength', label: 'Forearm + hand' },
-    { key: 'thighLength', label: 'Thigh' },
-    { key: 'lowerLegLength', label: 'Lower leg' },
-    { key: 'footLength', label: 'Foot' },
-  ] satisfies Array<{ key: keyof PlannerAnthropometryRatios; label: string }>;
   const PLANNER_TEST_ID_TARGETS = [
     {
       text: 'Settings',
@@ -179,10 +163,7 @@
   }
 
   function clonePostureSettings(settings: PlannerPostureSettings): PlannerPostureSettings {
-    return {
-      ...settings,
-      ratios: { ...settings.ratios },
-    };
+    return { ...settings };
   }
 
   function applyQueryState(state: PlannerQueryState) {
@@ -721,26 +702,6 @@
     syncPlannerUrlState();
   }
 
-  function setAdvancedAnthropometry(value: boolean) {
-    postureSettings.advancedAnthropometry = value;
-    syncPlannerUrlState();
-  }
-
-  function setAnthropometryRatio(key: keyof PlannerAnthropometryRatios, value: number) {
-    const limits = ANTHROPOMETRY_LENGTH_LIMITS_MM[key];
-    postureSettings.ratios[key] = Number(Math.max(limits.min, Math.min(limits.max, value)).toFixed(1));
-    syncPlannerUrlState();
-  }
-
-  function resetAnthropometryRatios() {
-    postureSettings.ratios = { ...DEFAULT_ANTHROPOMETRY_LENGTHS_MM };
-    syncPlannerUrlState();
-  }
-
-  function formatAnthropometryRatio(value: number) {
-    return `${value.toFixed(0)} mm`;
-  }
-
   function setOptimizerMode(value: PlannerOptimizationSettings['mode']) {
     optimizationSettings.mode = value;
     syncPlannerUrlState();
@@ -918,32 +879,8 @@
               format={(value) => `${value.toFixed(0)} cm`}
             />
             <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Model" />
-            <Checkbox
-              bind:value={() => postureSettings.advancedAnthropometry, setAdvancedAnthropometry}
-              label="Advanced"
-            />
-            {#if postureSettings.advancedAnthropometry}
-              <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Skeleton" />
-            {/if}
+            <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Skeleton" />
           </Folder>
-          {#if postureSettings.advancedAnthropometry}
-            <Folder title="Anthropometry">
-              {#each ANTHROPOMETRY_RATIO_CONTROLS as control (control.key)}
-                <Slider
-                  bind:value={
-                    () => postureSettings.ratios[control.key],
-                    (value) => setAnthropometryRatio(control.key, value)
-                  }
-                  label={control.label}
-                  min={ANTHROPOMETRY_LENGTH_LIMITS_MM[control.key].min}
-                  max={ANTHROPOMETRY_LENGTH_LIMITS_MM[control.key].max}
-                  step={PLANNER_POSTURE_LIMITS.lengthStepMm}
-                  format={formatAnthropometryRatio}
-                />
-              {/each}
-              <Button on:click={resetAnthropometryRatios} label="Reset" title="Reset" />
-            </Folder>
-          {/if}
         </Pane>
         <Pane title="Settings" position="inline" bind:expanded={paneExpanded.setup}>
           <Folder title="General">

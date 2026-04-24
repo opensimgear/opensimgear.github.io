@@ -1,5 +1,4 @@
 import {
-  ANTHROPOMETRY_LENGTH_LIMITS_MM,
   BASE_BEAM_HEIGHT_MM,
   BASE_MODULE_LAYOUT,
   DEFAULT_ANTHROPOMETRY_RATIOS,
@@ -256,29 +255,9 @@ function getWristFromHand(elbow: Vector, hand: Vector, handGripLength: number) {
 }
 
 export function getEffectiveAnthropometryRatios(settings: PlannerPostureSettings): PlannerAnthropometryRatios {
-  if (!settings.advancedAnthropometry) {
-    return { ...DEFAULT_ANTHROPOMETRY_RATIOS };
-  }
+  void settings;
 
-  const heightMm =
-    clamp(settings.heightCm, PLANNER_POSTURE_LIMITS.heightMinCm, PLANNER_POSTURE_LIMITS.heightMaxCm) * 10;
-  const getRatio = (key: keyof PlannerAnthropometryRatios) => {
-    const limits = ANTHROPOMETRY_LENGTH_LIMITS_MM[key];
-    return clamp(settings.ratios[key], limits.min, limits.max) / heightMm;
-  };
-
-  return {
-    sittingHeight: getRatio('sittingHeight'),
-    seatedEyeHeight: getRatio('seatedEyeHeight'),
-    seatedShoulderHeight: getRatio('seatedShoulderHeight'),
-    hipBreadth: getRatio('hipBreadth'),
-    shoulderBreadth: getRatio('shoulderBreadth'),
-    upperArmLength: getRatio('upperArmLength'),
-    forearmHandLength: getRatio('forearmHandLength'),
-    thighLength: getRatio('thighLength'),
-    lowerLegLength: getRatio('lowerLegLength'),
-    footLength: getRatio('footLength'),
-  };
+  return { ...DEFAULT_ANTHROPOMETRY_RATIOS };
 }
 
 export function createPlannerPostureSkeleton(

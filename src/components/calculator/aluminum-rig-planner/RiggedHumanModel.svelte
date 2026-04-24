@@ -2,10 +2,9 @@
   import { T, useThrelte } from '@threlte/core';
   import { onMount } from 'svelte';
   import { Raycaster, Vector2 } from 'three';
-  import type { Group } from 'three';
+  import type { Group, Mesh } from 'three';
 
   import type { PlannerPostureSkeleton } from './posture';
-  import type { PlannerModelScaledBoneName } from './types';
   import {
     createRiggedHumanModel,
     type HumanRigHoverTooltip,
@@ -15,14 +14,14 @@
   } from './human-model-rig';
 
   type Props = {
+    modelScale: number;
     onHoverTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
-    scaledModelBoneNames: PlannerModelScaledBoneName[];
     showModel: boolean;
     showSkeleton: boolean;
     skeleton: PlannerPostureSkeleton;
   };
 
-  const { onHoverTooltipChange, scaledModelBoneNames, showModel, showSkeleton, skeleton }: Props = $props();
+  const { modelScale, onHoverTooltipChange, showModel, showSkeleton, skeleton }: Props = $props();
   const { camera, canvas, invalidate } = useThrelte();
   const pointer = new Vector2();
   const raycaster = new Raycaster();
@@ -94,7 +93,7 @@
         }
 
         riggedHuman = model;
-        model.applySkeleton(skeleton, scaledModelBoneNames);
+        model.applySkeleton(skeleton, modelScale);
         model.setDisplayOptions(showModel, showSkeleton);
         invalidate();
       })
@@ -128,7 +127,7 @@
       group.add(model.object);
     }
 
-    model.applySkeleton(skeleton, scaledModelBoneNames);
+    model.applySkeleton(skeleton, modelScale);
     model.setDisplayOptions(showModel, showSkeleton);
     invalidate();
   });
