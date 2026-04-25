@@ -68,7 +68,7 @@ describe('aluminum rig planner posture solver', () => {
       expectPointToBeFinite(point);
     }
 
-    expect(skeleton.segments).toHaveLength(20);
+    expect(skeleton.segments).toHaveLength(19);
     expect(skeleton.segments[0].start).toBe(skeleton.joints.head);
   });
 
@@ -114,6 +114,12 @@ describe('aluminum rig planner posture solver', () => {
     expect(skeleton.joints.handLeft[0]).toBeCloseTo(wheelCenterX / 1000, 5);
     expect(skeleton.joints.handLeft[1]).toBeCloseTo(wheelCenterY / 1000, 5);
     expect(Math.abs(skeleton.joints.handLeft[2])).toBeCloseTo(expectedGripRadius, 5);
+  });
+
+  it('keeps eye center out of the pure posture skeleton', () => {
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+
+    expect('eye' in skeleton.joints).toBe(false);
   });
 
   it('scales seat-to-hip offsets from the 169 cm baseline', () => {

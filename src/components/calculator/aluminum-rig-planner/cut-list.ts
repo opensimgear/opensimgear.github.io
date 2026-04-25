@@ -92,5 +92,7 @@ export function createPlannerCutList(
   visibleModules: PlannerVisibleModules,
   showEndCaps: boolean
 ): CutListRow[] {
-  return createPlannerCutListEntries(geometry, visibleModules, showEndCaps).map(({ key: _key, beamIds: _beamIds, ...row }) => row);
+  return createPlannerCutListEntries(geometry, visibleModules, showEndCaps).map(
+    ({ key: _key, beamIds: _beamIds, ...row }) => row
+  );
 }

@@ -15,7 +15,6 @@ import type { PlannerAnthropometryRatios, PlannerInput, PlannerPostureSettings }
 export type PostureJointName =
   | 'head'
   | 'neck'
-  | 'eye'
   | 'shoulderCenter'
   | 'shoulderLeft'
   | 'shoulderRight'
@@ -309,7 +308,6 @@ export function createPlannerPostureSkeleton(
   const shoulderCenter = add(hipCenter, scale(backrestUp, shoulderToHipM));
   const neck = add(hipCenter, scale(backrestUp, Math.max(shoulderToHipM, ratios.sittingHeight * heightM * 0.84)));
   const head = add(hipCenter, scale(backrestUp, ratios.sittingHeight * heightM));
-  const eye = add(hipCenter, scale(backrestUp, ratios.seatedEyeHeight * heightM - hipAboveSeatM * 0.5));
   const pedalCentersZmm = getPedalCentersZmm(input);
   const rightSign = Math.sign(pedalCentersZmm.accelerator) || 1;
   const hipHalfWidthM = (ratios.hipBreadth * heightM) / 2;
@@ -353,7 +351,6 @@ export function createPlannerPostureSkeleton(
   const joints: Record<PostureJointName, PosturePoint> = {
     head,
     neck,
-    eye,
     shoulderCenter,
     shoulderLeft,
     shoulderRight,
@@ -381,7 +378,6 @@ export function createPlannerPostureSkeleton(
     segments: [
       { start: joints.head, end: joints.neck },
       { start: joints.neck, end: joints.shoulderCenter },
-      { start: joints.eye, end: joints.head },
       { start: joints.shoulderLeft, end: joints.shoulderRight },
       { start: joints.shoulderCenter, end: joints.hipCenter },
       { start: joints.hipLeft, end: joints.hipRight },

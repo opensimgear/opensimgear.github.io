@@ -49,7 +49,7 @@ export const PLANNER_POSTURE_PRESETS: Record<SolvablePlannerPosturePreset, Plann
   formula: {
     seatAngleDeg: 18,
     backrestAngleDeg: 105,
-    pedalsHeightMm: 120,
+    pedalsHeightMm: 300,
     pedalAngleDeg: 58,
     wheelDiameterMm: 280,
     wheelAngleDeg: 16,
@@ -291,6 +291,10 @@ function scoreCandidate(input: PlannerInput, preset: SolvablePlannerPosturePrese
   });
 
   return report.metrics.reduce((total, metric) => {
+    if (metric.key === 'eyeToMonitor') {
+      return total;
+    }
+
     const value = metric.unit === 'mm' ? (metric.valueMm ?? 0) : (metric.valueDeg ?? 0);
     const center = (metric.range.min + metric.range.max) / 2;
     const width = Math.max(1, metric.range.max - metric.range.min);

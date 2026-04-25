@@ -4,11 +4,7 @@ import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS } from '../../components/calculat
 import { createPlannerOptimizationResult } from '../../components/calculator/aluminum-rig-planner/optimizer';
 import type { CutListEntry, PlannerOptimizationSettings } from '../../components/calculator/aluminum-rig-planner/types';
 
-function createEntry(
-  profileType: CutListEntry['profileType'],
-  lengthMm: number,
-  beamIds: string[]
-): CutListEntry {
+function createEntry(profileType: CutListEntry['profileType'], lengthMm: number, beamIds: string[]): CutListEntry {
   return {
     key: `${profileType}:${lengthMm}`,
     profileType,

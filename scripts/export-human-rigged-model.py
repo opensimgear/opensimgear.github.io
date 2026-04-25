@@ -10,8 +10,8 @@ TARGET_GLB = ROOT / "public" / "models" / "aluminum-rig-planner" / "human-male-r
 SOURCE_MESH_NAME = "GEO-body_male_realistic"
 TERMINAL_BONE_LENGTH = 0.015
 HEAD_TIP_BONE_LENGTH = 0.005
-EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO = 0.47
-EYE_CENTER_UP_HEAD_LENGTH_RATIO = 0.103
+EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO = 1
+EYE_CENTER_UP_HEAD_LENGTH_RATIO = 1
 NON_DEFORM_BONES = {"eyeCenter"}
 BONE_LENGTHS = {
     "neck": 0.1521,
@@ -455,22 +455,17 @@ def eye_center_from_head_vector(head_vector):
     if head_vector.length <= SECTION_EPSILON:
         return Vector((0.0, 0.0, 0.0))
 
-    head_direction = head_vector.normalized()
-    head_up = Vector((head_direction.x, head_direction.y, 0.0))
+    head_up = Vector((head_vector.x, head_vector.y, 0.0))
     if head_up.length <= SECTION_EPSILON:
-        head_up = Vector((0.0, 1.0, 0.0))
-    else:
-        head_up.normalize()
+        head_up = Vector((0.0, head_vector.length, 0.0))
 
     head_forward = Vector((head_up.y, -head_up.x, 0.0))
     if head_forward.length <= SECTION_EPSILON:
-        head_forward = Vector((1.0, 0.0, 0.0))
-    else:
-        head_forward.normalize()
+        head_forward = Vector((head_vector.length, 0.0, 0.0))
 
     return (
-        head_forward * head_vector.length * EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO
-        + head_up * head_vector.length * EYE_CENTER_UP_HEAD_LENGTH_RATIO
+        head_forward * EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO
+        + head_up * EYE_CENTER_UP_HEAD_LENGTH_RATIO
     )
 
 

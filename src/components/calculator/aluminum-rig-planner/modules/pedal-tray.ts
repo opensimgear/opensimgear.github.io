@@ -85,10 +85,9 @@ export function createPedalTrayModule(input: PlannerInput, profileColor: string)
 }
 
 export function createPedalTrayCutList(input: PlannerInput): CutListRow[] {
-  const trayCrossBeamLengthMm = metersToRoundedMm(mm(input.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm));
+  const trayCrossBeamLengthMm = metersToRoundedMm(
+    mm(input.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm)
+  );
 
-  return [
-    createCutListRow('40x40', input.pedalTrayDepthMm, 2),
-    createCutListRow('40x40', trayCrossBeamLengthMm, 3),
-  ];
+  return [createCutListRow('40x40', input.pedalTrayDepthMm, 2), createCutListRow('40x40', trayCrossBeamLengthMm, 3)];
 }

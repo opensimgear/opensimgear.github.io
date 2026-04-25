@@ -14,11 +14,26 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).toMatch(/if \(suppressProgrammaticPlannerInputEdit\) {\s*return;\s*}/);
     expect(plannerSource).toMatch(/pendingCustomPresetInput = null;/);
     expect(plannerSource).toMatch(
-      /assignProgrammaticPlannerInput\(applyPresetToPlannerInput\(plannerInput, value, postureSettings\.heightCm\)\)/
+      /const nextInput = applyPresetToPlannerInput\(plannerInput, value, postureSettings\.heightCm\);/
     );
+    expect(plannerSource).toContain('pendingMonitorHeightEyeSync = true;');
+    expect(plannerSource).toMatch(
+      /postureSettings\.monitorHeightFromBaseMm = getSolvedMonitorHeightFromBaseMm\(\s*geometry\.input,\s*postureSettings,\s*eyeCenter\s*\);/
+    );
+    expect(plannerSource).toMatch(/assignProgrammaticPlannerInput\(nextInput\);/);
     expect(plannerSource).toMatch(
       /assignProgrammaticPlannerInput\(\s*recomputePresetDynamicPlannerInput\(plannerInput, postureSettings\.preset, nextHeightCm\)\s*\)/
     );
+  });
+
+  it('keeps monitor vertical alignment out of rig geometry preset scoring', () => {
+    const presetsSource = readFileSync(
+      new URL('../../components/calculator/aluminum-rig-planner/presets.ts', import.meta.url),
+      'utf8'
+    );
+
+    expect(presetsSource).toContain("metric.key === 'eyeToMonitor'");
+    expect(presetsSource).toMatch(/if \(metric\.key === 'eyeToMonitor'\) {\s*return total;\s*}/);
   });
 
   it('shows target FOV editing only for flat monitors', () => {

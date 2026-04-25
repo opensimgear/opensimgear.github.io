@@ -28,7 +28,9 @@ const hasOgImage = filteredHead.some(
 const hasTwitterImage = filteredHead.some(
   ({ tag, attrs }) => tag === 'meta' && attrs && 'name' in attrs && attrs.name === 'twitter:image'
 );
-const hasRobots = filteredHead.some(({ tag, attrs }) => tag === 'meta' && attrs && 'name' in attrs && attrs.name === 'robots');
+const hasRobots = filteredHead.some(
+  ({ tag, attrs }) => tag === 'meta' && attrs && 'name' in attrs && attrs.name === 'robots'
+);
 
 const socialImageHead = socialImageUrl
   ? [
@@ -38,17 +40,28 @@ const socialImageHead = socialImageUrl
   : [];
 const twitterMetaHead = buildTwitterMetaHead(filteredHead);
 
-const routeSpecificHead = !hasRobots && (!seoPolicy.index || !seoPolicy.follow)
-  ? [{ tag: 'meta', attrs: { name: 'robots', content: `${seoPolicy.index ? 'index' : 'noindex'}, ${seoPolicy.follow ? 'follow' : 'nofollow'}` } }]
-  : [];
+const routeSpecificHead =
+  !hasRobots && (!seoPolicy.index || !seoPolicy.follow)
+    ? [
+        {
+          tag: 'meta',
+          attrs: {
+            name: 'robots',
+            content: `${seoPolicy.index ? 'index' : 'noindex'}, ${seoPolicy.follow ? 'follow' : 'nofollow'}`,
+          },
+        },
+      ]
+    : [];
 ---
 
 {import.meta.env.PROD && <Analytics />}
-{[...filteredHead, ...socialImageHead, ...twitterMetaHead, ...routeSpecificHead].map((entry) => {
-  const Tag = entry.tag;
-  const content = 'content' in entry ? entry.content : undefined;
+{
+  [...filteredHead, ...socialImageHead, ...twitterMetaHead, ...routeSpecificHead].map((entry) => {
+    const Tag = entry.tag;
+    const content = 'content' in entry ? entry.content : undefined;
 
-  return <Tag {...entry.attrs} set:html={content} />;
-})}
+    return <Tag {...entry.attrs} set:html={content} />;
+  })
+}
 {siteSchemas.map((schema) => <script type="application/ld+json" is:inline set:html={schema} />)}
 <slot />

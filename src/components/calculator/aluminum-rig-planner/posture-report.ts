@@ -2,6 +2,7 @@ import {
   BASE_BEAM_HEIGHT_MM,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_DIMENSION_LIMITS,
+  PLANNER_POSTURE_LIMITS,
   UPRIGHT_BEAM_DEPTH_MM,
 } from './constants';
 import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
@@ -29,9 +30,6 @@ export type PlannerPostureEyeDebug = {
   right: PosturePoint;
   diameterM: number;
   constants: {
-    neckOffsetXMm: number;
-    neckOffsetYMm: number;
-    neckOffsetZMm: number;
     eyeSpacingMm: number;
     ballDiameterMm: number;
   };
@@ -52,9 +50,6 @@ export type PlannerPostureReport = {
 
 const MM_TO_METERS = 0.001;
 const EPSILON = 0.000001;
-const EYE_DEBUG_NECK_OFFSET_X_MM = 142;
-const EYE_DEBUG_NECK_OFFSET_Y_MM = 31;
-const EYE_DEBUG_NECK_OFFSET_Z_MM = 0;
 const EYE_DEBUG_SPACING_MM = 70;
 const EYE_DEBUG_BALL_DIAMETER_MM = 25;
 const MONITOR_DEBUG_BALL_DIAMETER_MM = 10;
@@ -220,12 +215,24 @@ function getMonitorMidpoint(
   ];
 }
 
-function createEyeDebug(neck: PosturePoint): PlannerPostureEyeDebug {
-  const center: PosturePoint = [
-    neck[0] + EYE_DEBUG_NECK_OFFSET_X_MM * MM_TO_METERS,
-    neck[1] + EYE_DEBUG_NECK_OFFSET_Y_MM * MM_TO_METERS,
-    neck[2] + EYE_DEBUG_NECK_OFFSET_Z_MM * MM_TO_METERS,
-  ];
+export function getSolvedMonitorHeightFromBaseMm(
+  input: PlannerInput,
+  settings: PlannerPostureSettings<PlannerPosturePreset>,
+  eyeCenter?: PosturePoint | null
+) {
+  const skeleton = createPlannerPostureSkeleton(input, {
+    ...settings,
+    preset: settings.preset === 'custom' ? 'gt' : settings.preset,
+  });
+  const eyeHeightFromBaseMm = (eyeCenter ?? skeleton.joints.head)[1] / MM_TO_METERS - BASE_BEAM_HEIGHT_MM;
+
+  return Math.max(
+    PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm,
+    Math.min(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm, eyeHeightFromBaseMm)
+  );
+}
+
+function createEyeDebug(center: PosturePoint): PlannerPostureEyeDebug {
   const halfSpacingM = (EYE_DEBUG_SPACING_MM * MM_TO_METERS) / 2;
 
   return {
@@ -234,9 +241,6 @@ function createEyeDebug(neck: PosturePoint): PlannerPostureEyeDebug {
     right: [center[0], center[1], center[2] + halfSpacingM],
     diameterM: EYE_DEBUG_BALL_DIAMETER_MM * MM_TO_METERS,
     constants: {
-      neckOffsetXMm: EYE_DEBUG_NECK_OFFSET_X_MM,
-      neckOffsetYMm: EYE_DEBUG_NECK_OFFSET_Y_MM,
-      neckOffsetZMm: EYE_DEBUG_NECK_OFFSET_Z_MM,
       eyeSpacingMm: EYE_DEBUG_SPACING_MM,
       ballDiameterMm: EYE_DEBUG_BALL_DIAMETER_MM,
     },
@@ -275,7 +279,8 @@ function getClampHints(input: PlannerInput) {
 
 export function createPlannerPostureReport(
   input: PlannerInput,
-  postureSettings: PlannerPostureSettings<PlannerPosturePreset> = DEFAULT_PLANNER_POSTURE_SETTINGS
+  postureSettings: PlannerPostureSettings<PlannerPosturePreset> = DEFAULT_PLANNER_POSTURE_SETTINGS,
+  eyeCenter?: PosturePoint | null
 ): PlannerPostureReport {
   const skeleton = createPlannerPostureSkeleton(input, {
     ...postureSettings,
@@ -284,7 +289,7 @@ export function createPlannerPostureReport(
   const ranges = TARGET_RANGES[postureSettings.preset];
   const wheelCenter = getWheelCenter(input);
   const wheelTopY = wheelCenter[1] + (input.wheelDiameterMm * MM_TO_METERS) / 2;
-  const eyeDebug = createEyeDebug(skeleton.joints.neck);
+  const eyeDebug = createEyeDebug(eyeCenter ?? skeleton.joints.head);
   const monitorMidpoint = getMonitorMidpoint(eyeDebug.center, postureSettings);
   const metrics = [
     createMetric(

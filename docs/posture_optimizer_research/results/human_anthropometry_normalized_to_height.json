@@ -51,7 +51,7 @@
       "dimension": "Sitting height",
       "definition": "Vertical seat-to-head height in erect sitting posture.",
       "units": "ratio of stature",
-      "female_mean_ratio": 0.530,
+      "female_mean_ratio": 0.53,
       "male_mean_ratio": 0.522,
       "pooled_reference_ratio": 0.526,
       "absolute_means": "Female 85.0 cm; male 90.6 cm.",
@@ -101,7 +101,7 @@
       "dimension": "Buttock-popliteal length",
       "definition": "Horizontal seat reference from buttock/backboard to back of lower leg at popliteal region.",
       "units": "ratio of stature",
-      "female_mean_ratio": 0.300,
+      "female_mean_ratio": 0.3,
       "male_mean_ratio": 0.284,
       "pooled_reference_ratio": 0.292,
       "absolute_means": "Female 18.9 in (48.0 cm); male 19.4 in (49.3 cm).",
@@ -181,7 +181,7 @@
       "dimension": "Foot length",
       "definition": "Heel-to-toe foot length.",
       "units": "ratio of stature",
-      "female_mean_ratio": 0.150,
+      "female_mean_ratio": 0.15,
       "male_mean_ratio": 0.155,
       "pooled_reference_ratio": 0.153,
       "absolute_means": "Female 24.1 cm; male 26.9 cm.",
@@ -213,9 +213,5 @@
   },
   "percentile_notes": "Means above are useful for default posture seeds, but cockpit design should not target only averages. Packaging usually needs percentile ranges: clearances and widths often size to larger users, while reaches and control effort often size to smaller users. The cited VDT and CDC tables provide 5th, 50th, and 95th percentile values by sex for many dimensions; those percentiles should be retained for later optimizer bounds rather than collapsed to means only.",
   "optimizer_use": "Use pooled reference ratios as default segment-scaling priors when user stature is known but full anthropometry is not. Keep sex-specific ratios available as alternate priors. For fit scoring, compare cockpit hard points against buttock-popliteal, popliteal height, buttock-knee, seated eye height, and functional reach first; these most directly drive seat depth, seat height, pedal distance, eyepoint, and wheel/control placement. Mark lower-leg and forearm-hand calculations as weaker-prior channels until cleaner segment-length data are added.",
-  "uncertain": [
-    "stature_normalized_measurements",
-    "seated_measurements",
-    "confidence_notes"
-  ]
+  "uncertain": ["stature_normalized_measurements", "seated_measurements", "confidence_notes"]
 }

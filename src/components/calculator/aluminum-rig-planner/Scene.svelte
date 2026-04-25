@@ -17,6 +17,7 @@
   import type { HumanRigHoverTooltip } from './human-model-rig';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
   import type { PlannerPostureReport } from './posture-report';
+  import type { PosturePoint } from './posture';
   import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
@@ -24,6 +25,7 @@
     highlightedBeamIds: string[];
     isNarrowViewport?: boolean;
     measurementOverlay?: PlannerMeasurementOverlay | null;
+    onEyeCenterChange: (eyeCenter: PosturePoint | null) => void;
     profileColor: string;
     postureReport: PlannerPostureReport;
     postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
@@ -36,6 +38,7 @@
     highlightedBeamIds,
     isNarrowViewport = false,
     measurementOverlay = null,
+    onEyeCenterChange,
     profileColor,
     postureReport,
     postureSettings,
@@ -304,6 +307,7 @@
         {geometry}
         {highlightedBeamIds}
         {measurementOverlay}
+        {onEyeCenterChange}
         onHumanRigTooltipChange={(tooltip) => {
           humanRigTooltip = tooltip;
         }}
@@ -329,13 +333,26 @@
   {/if}
 
   <div class="posture-debug-panel" aria-label="Posture metrics">
-    <button class="posture-debug-panel__trigger" type="button" aria-label={posturePanelLabel}>
-      <span class="posture-debug-panel__trigger-label">P</span>
+    <div class="posture-debug-panel__surface">
+      <button class="posture-debug-panel__trigger" type="button" aria-label={posturePanelLabel}>
+        <svg class="posture-debug-panel__driver-icon" viewBox="0 0 42 42" aria-hidden="true">
+          <circle class="posture-debug-panel__driver-head" cx="12.5" cy="7.2" r="3.8" />
+          <path class="posture-debug-panel__driver-bone" d="M12.5 10.8 12.5 14" />
+          <path class="posture-debug-panel__driver-bone" d="M12.5 14 18.7 30" />
+          <path class="posture-debug-panel__driver-bone" d="M18.7 30 29.2 26.6" />
+          <path class="posture-debug-panel__driver-bone" d="M29.2 26.6 36 33.5" />
+          <path class="posture-debug-panel__driver-bone" d="M36 33.5 40 34" />
+          <path class="posture-debug-panel__driver-bone" d="M15.2 17.6 22.2 22.6" />
+          <path class="posture-debug-panel__driver-bone" d="M22.2 22.6 32 18.4" />
+        </svg>
+      </button>
       {#if postureMetricsWithErrors > 0}
         <span class="posture-debug-panel__badge" data-status="bad" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle class="posture-debug-panel__badge-shape" cx="12" cy="12" r="9" />
             <path
-              d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Zm-3.5-11.1 2.1 2.1-2.1 2.1 1.4 1.4 2.1-2.1 2.1 2.1 1.4-1.4-2.1-2.1 2.1-2.1-1.4-1.4-2.1 2.1-2.1-2.1-1.4 1.4Z"
+              class="posture-debug-panel__badge-mark"
+              d="m8.5 9.9 2.1 2.1-2.1 2.1 1.4 1.4 2.1-2.1 2.1 2.1 1.4-1.4-2.1-2.1 2.1-2.1-1.4-1.4-2.1 2.1-2.1-2.1-1.4 1.4Z"
             />
           </svg>
         </span>
@@ -359,29 +376,30 @@
           </svg>
         </span>
       {/if}
-    </button>
-    <div class="posture-debug-panel__content">
-      <div class="posture-debug-panel__header">
-        <span>Posture</span>
-        <strong>{postureMetricsWithIssues} issue{postureMetricsWithIssues === 1 ? '' : 's'}</strong>
-      </div>
-      <div class="posture-debug-panel__metrics">
-        {#each postureReport.metrics as metric (metric.key)}
-          <div class="posture-debug-panel__metric" data-status={metric.status}>
-            <span class="posture-debug-panel__label">{metric.label}</span>
-            <span class="posture-debug-panel__value">{formatPostureMetricValue(metric)}</span>
-            <span class="posture-debug-panel__range">{formatPostureMetricRange(metric)}</span>
-            <span class="posture-debug-panel__status">{metric.status}</span>
-          </div>
-        {/each}
-      </div>
-      {#if postureReport.hints.length > 0}
-        <div class="posture-debug-panel__hints">
-          {#each postureReport.hints as hint (hint)}
-            <p>{hint}</p>
+
+      <div class="posture-debug-panel__content">
+        <div class="posture-debug-panel__header">
+          <span>Posture</span>
+          <strong>{postureMetricsWithIssues} issue{postureMetricsWithIssues === 1 ? '' : 's'}</strong>
+        </div>
+        <div class="posture-debug-panel__metrics">
+          {#each postureReport.metrics as metric (metric.key)}
+            <div class="posture-debug-panel__metric" data-status={metric.status}>
+              <span class="posture-debug-panel__label">{metric.label}</span>
+              <span class="posture-debug-panel__value">{formatPostureMetricValue(metric)}</span>
+              <span class="posture-debug-panel__range">{formatPostureMetricRange(metric)}</span>
+              <span class="posture-debug-panel__status">{metric.status}</span>
+            </div>
           {/each}
         </div>
-      {/if}
+        {#if postureReport.hints.length > 0}
+          <div class="posture-debug-panel__hints">
+            {#each postureReport.hints as hint (hint)}
+              <p>{hint}</p>
+            {/each}
+          </div>
+        {/if}
+      </div>
     </div>
   </div>
 </div>
@@ -448,15 +466,38 @@
     pointer-events: auto;
     position: absolute;
     right: 6px;
+    height: 42px;
+    width: 42px;
     z-index: 10;
   }
 
-  .posture-debug-panel__trigger {
-    align-items: center;
+  .posture-debug-panel__surface {
     background: rgb(24 24 27 / 0.9);
     border: 1px solid rgb(255 255 255 / 0.14);
     border-radius: 6px;
     box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
+    bottom: 0;
+    height: 42px;
+    overflow: visible;
+    position: absolute;
+    right: 0;
+    transform-origin: bottom right;
+    transition:
+      height 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      width 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    width: 42px;
+  }
+
+  .posture-debug-panel:hover .posture-debug-panel__surface,
+  .posture-debug-panel:focus-within .posture-debug-panel__surface {
+    height: min(48vh, 260px);
+    width: min(420px, calc(100vw - 24px));
+  }
+
+  .posture-debug-panel__trigger {
+    align-items: center;
+    background: transparent;
+    border: 0;
     color: white;
     cursor: pointer;
     display: grid;
@@ -464,25 +505,49 @@
     height: 42px;
     justify-items: center;
     padding: 0;
-    position: relative;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1);
     width: 42px;
     z-index: 2;
   }
 
-  .posture-debug-panel__trigger-label {
-    font-size: 15px;
-    font-weight: 800;
+  .posture-debug-panel:hover .posture-debug-panel__trigger,
+  .posture-debug-panel:focus-within .posture-debug-panel__trigger {
+    opacity: 0;
+  }
+
+  .posture-debug-panel__driver-icon {
+    fill: none;
+    height: 30px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    width: 30px;
+  }
+
+  .posture-debug-panel__driver-bone {
+    stroke-width: 3.2;
+  }
+
+  .posture-debug-panel__driver-head {
+    fill: currentColor;
+    stroke: none;
   }
 
   .posture-debug-panel__badge {
     align-items: center;
+    box-sizing: border-box;
     display: grid;
     height: 28px;
     justify-items: center;
-    bottom: -8px;
     position: absolute;
+    top: -20px;
     right: -8px;
     width: 28px;
+    z-index: 4;
   }
 
   .posture-debug-panel__badge[data-status='bad'] {
@@ -494,8 +559,8 @@
   }
 
   .posture-debug-panel__badge--offset[data-status='warn'] {
-    bottom: 22px;
-    right: -8px;
+    right: 22px;
+    top: -20px;
   }
 
   .posture-debug-panel__badge svg {
@@ -505,35 +570,26 @@
     width: 28px;
   }
 
-  .posture-debug-panel__badge[data-status='bad'] path,
   .posture-debug-panel__badge-shape {
     fill: currentColor;
   }
 
   .posture-debug-panel__badge-mark {
-    fill: rgb(24 24 27);
+    fill: black;
   }
 
   .posture-debug-panel__content {
-    background: rgb(24 24 27 / 0.9);
-    border: 1px solid rgb(255 255 255 / 0.14);
-    border-radius: 6px;
-    bottom: 0;
-    box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
-    max-height: min(48vh, 260px);
-    max-width: min(420px, calc(100vw - 24px));
+    inset: 0;
     opacity: 0;
     overflow: auto;
-    padding: 7px 8px 52px;
+    padding: 22px 10px 10px;
     pointer-events: none;
     position: absolute;
-    right: 0;
-    transform: translateY(4px) scale(0.96);
+    transform: scale(0.98);
     transform-origin: bottom right;
     transition:
       opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
       transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
-    width: min(420px, calc(100vw - 24px));
     z-index: 1;
   }
 

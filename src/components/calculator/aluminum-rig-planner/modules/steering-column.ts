@@ -81,8 +81,5 @@ export function createSteeringColumnCutList(input: PlannerInput): CutListRow[] {
   );
   const crossBeamLengthMm = Math.round(input.baseWidthMm - (UPRIGHT_BEAM_DEPTH / MM_TO_METERS) * 2);
 
-  return [
-    createCutListRow('80x40', uprightHeightMm, 2),
-    createCutListRow('80x40', crossBeamLengthMm, 1),
-  ];
+  return [createCutListRow('80x40', uprightHeightMm, 2), createCutListRow('80x40', crossBeamLengthMm, 1)];
 }

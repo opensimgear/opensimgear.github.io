@@ -80,11 +80,7 @@ export function createPedalsModule(input: PlannerInput): MeshSpec[] {
     {
       id: 'pedal-plate',
       position: [mm(plateCenterXmm), mm(plateCenterYmm), mm(plateCenterZmm)] as [number, number, number],
-      size: [mm(plateDepthMm), mm(PEDAL_PLATE_THICKNESS_MM), mm(plateWidthMm)] as [
-        number,
-        number,
-        number,
-      ],
+      size: [mm(plateDepthMm), mm(PEDAL_PLATE_THICKNESS_MM), mm(plateWidthMm)] as [number, number, number],
       materialKind: 'metal',
       color: PEDAL_PLATE_COLOR,
       metalness: PEDAL_PLATE_MATERIAL.metalness,

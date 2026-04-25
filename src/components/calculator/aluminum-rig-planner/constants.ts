@@ -199,7 +199,6 @@ export const DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM = 770;
 export const LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;
 export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM: PlannerAnthropometryLengthsMm = {
   sittingHeight: 806.1,
-  seatedEyeHeight: 755.4,
   seatedShoulderHeight: 493.5,
   hipBreadth: 207.9,
   shoulderBreadth: 346.4,
@@ -226,20 +225,6 @@ export const ANTHROPOMETRY_LENGTH_LIMITS_MM = Object.fromEntries(
     },
   ])
 ) as Record<keyof PlannerAnthropometryRatios, { min: number; max: number }>;
-
-// DO NOT TOUCH
-// export const DEFAULT_ANTHROPOMETRY_RATIOS: PlannerPostureSettings['ratios'] = {
-//   sittingHeight: 0.526,
-//   seatedEyeHeight: 0.455,
-//   seatedShoulderHeight: 0.345,
-//   hipBreadth: 0.125,
-//   shoulderBreadth: 0.26,
-//   upperArmLength: 0.218,
-//   forearmHandLength: 0.165,
-//   thighLength: 0.245,
-//   lowerLegLength: 0.235,
-//   footLength: 0.112,
-// };
 
 export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   preset: DEFAULT_ACTIVE_POSTURE_PRESET,

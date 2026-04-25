@@ -15,7 +15,10 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
   const baseCenterX = mm(input.baseLengthMm / 2);
   const rearCrossBeamCenterX = mm(BASE_MODULE_LAYOUT.rearCrossMemberCenterXMm);
   const seatCrossBeamCenterX = mm(
-    Math.max(BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm, input.seatBaseDepthMm - BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm)
+    Math.max(
+      BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm,
+      input.seatBaseDepthMm - BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm
+    )
   );
   const innerBeamCenterX = mm(input.seatBaseDepthMm / 2);
   const innerBeamLength = mm(input.seatBaseDepthMm);
@@ -42,11 +45,11 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
     {
       id: 'right-rail',
       size: [mm(input.baseLengthMm), BASE_BEAM_HEIGHT, BASE_BEAM_WIDTH] as [number, number, number],
-      position: [baseCenterX, BASE_BEAM_HEIGHT / 2, centeredZ(input.baseWidthMm - railCenterOffsetMm, input.baseWidthMm)] as [
-        number,
-        number,
-        number,
-      ],
+      position: [
+        baseCenterX,
+        BASE_BEAM_HEIGHT / 2,
+        centeredZ(input.baseWidthMm - railCenterOffsetMm, input.baseWidthMm),
+      ] as [number, number, number],
       profileType: 'alu80x40',
       openEnds: ['negative', 'positive'],
       color: profileColor,
@@ -78,11 +81,7 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
         innerBeamCenterX,
         BASE_BEAM_HEIGHT + PROFILE_SHORT / 2,
         centeredZ(input.baseWidthMm / 2 - innerBeamOffsetMm, input.baseWidthMm),
-      ] as [
-        number,
-        number,
-        number,
-      ],
+      ] as [number, number, number],
       profileType: 'alu40x40',
       openEnds: ['negative', 'positive'],
       color: profileColor,
@@ -96,11 +95,7 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
         innerBeamCenterX,
         BASE_BEAM_HEIGHT + PROFILE_SHORT / 2,
         centeredZ(input.baseWidthMm / 2 + innerBeamOffsetMm, input.baseWidthMm),
-      ] as [
-        number,
-        number,
-        number,
-      ],
+      ] as [number, number, number],
       profileType: 'alu40x40',
       openEnds: ['negative', 'positive'],
       color: profileColor,

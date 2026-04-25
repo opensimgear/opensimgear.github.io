@@ -1,6 +1,8 @@
 ---
 title: Posture Optimizer Research
-description: Research-backed anthropometry defaults, driving-style posture targets, and inverse-kinematics notes for a cockpit posture optimizer.
+description:
+  Research-backed anthropometry defaults, driving-style posture targets, and inverse-kinematics notes for a cockpit
+  posture optimizer.
 sidebar:
   hidden: true
 ---
@@ -16,35 +18,43 @@ Use it as a starting point, not as a medical or motorsport-homologation standard
 - FIA seat and fitment constraints
 - software-oriented driver posture prediction
 
-Exact motorsport-style joint angles are less standardized in public literature than seat, wheel, pedal, and visibility rules. Where a number is partly inferred from adjacent evidence, it is marked `[uncertain]`.
+Exact motorsport-style joint angles are less standardized in public literature than seat, wheel, pedal, and visibility
+rules. Where a number is partly inferred from adjacent evidence, it is marked `[uncertain]`.
 
 ## Angle Definitions
 
 - elbow, knee, wrist, and ankle values below are included angles unless noted otherwise
 - neck values are relative to neutral or vertical, depending on the cited source
 - feet are represented through ankle posture because most sources define pedal posture at the ankle, not at the toes
-- posture scoring should use soft bands, not one exact angle, because comfortable driving posture often appears in multiple clusters rather than one single pose ([Kyung & Nussbaum, 2009](https://doi.org/10.1080/00140130902763552), [Kyung et al., 2017](https://doi.org/10.1016/j.apergo.2016.12.021))
+- posture scoring should use soft bands, not one exact angle, because comfortable driving posture often appears in
+  multiple clusters rather than one single pose ([Kyung & Nussbaum, 2009](https://doi.org/10.1080/00140130902763552),
+  [Kyung et al., 2017](https://doi.org/10.1016/j.apergo.2016.12.021))
 
 ## Anthropometry Defaults
 
-Sex-balanced reference ratios from U.S. civilian data are a good default when the user only provides height. These are best used as priors for scaling, then refined with user-entered inseam, torso height, arm length, or shoulder width when available ([CDC 1960-1962 seated anthropometry](https://www.cdc.gov/nchs/data/series/sr_11/sr11_008.pdf), [CDC biacromial breadth](https://www.cdc.gov/nchs/data/series/sr_11/sr11_035acc.pdf), [NHANES 2011-2014 anthropometry](https://www.cdc.gov/nchs/data/series/sr_03/sr03_039.pdf), [NCBI ergonomics compilation](https://www.ncbi.nlm.nih.gov/books/NBK216490/?report=printable)).
+Sex-balanced reference ratios from U.S. civilian data are a good default when the user only provides height. These are
+best used as priors for scaling, then refined with user-entered inseam, torso height, arm length, or shoulder width when
+available ([CDC 1960-1962 seated anthropometry](https://www.cdc.gov/nchs/data/series/sr_11/sr11_008.pdf),
+[CDC biacromial breadth](https://www.cdc.gov/nchs/data/series/sr_11/sr11_035acc.pdf),
+[NHANES 2011-2014 anthropometry](https://www.cdc.gov/nchs/data/series/sr_03/sr03_039.pdf),
+[NCBI ergonomics compilation](https://www.ncbi.nlm.nih.gov/books/NBK216490/?report=printable)).
 
-| Measurement | Ratio to height | Notes |
-| --- | ---: | --- |
-| Sitting height | `0.526` | Strong torso-height prior |
-| Seated eye height | `0.455` | Good for eye-point initialization |
-| Seated shoulder height | `0.345` | Useful for wheel and shoulder support |
-| Hip / seat breadth | `0.216` | Cockpit width proxy |
-| Shoulder breadth | `0.225` | Biacromial breadth proxy |
-| Buttock-popliteal length | `0.292` | Good seat-depth anchor |
-| Buttock-knee length | `0.348` | Good knee-envelope anchor |
-| Popliteal height | `0.251` | Good seat-height / pedal-height anchor |
-| Functional forward reach | `0.459` | Good wheel/control reach prior |
-| Forearm-hand length | `[uncertain] 0.269` | Based on elbow-to-fingertip proxy |
-| Upper-arm length | `0.222` | Stable NHANES segment prior |
-| Thigh length | `0.232` | Based on NHANES upper-leg length |
-| Lower-leg length | `[uncertain] 0.251` | Popliteal-height proxy, not pure shank length |
-| Foot length | `0.153` | Useful for pedal-box envelope |
+| Measurement              |     Ratio to height | Notes                                         |
+| ------------------------ | ------------------: | --------------------------------------------- |
+| Sitting height           |             `0.526` | Strong torso-height prior                     |
+| Seated eye height        |             `0.455` | Good for eye-point initialization             |
+| Seated shoulder height   |             `0.345` | Useful for wheel and shoulder support         |
+| Hip / seat breadth       |             `0.216` | Cockpit width proxy                           |
+| Shoulder breadth         |             `0.225` | Biacromial breadth proxy                      |
+| Buttock-popliteal length |             `0.292` | Good seat-depth anchor                        |
+| Buttock-knee length      |             `0.348` | Good knee-envelope anchor                     |
+| Popliteal height         |             `0.251` | Good seat-height / pedal-height anchor        |
+| Functional forward reach |             `0.459` | Good wheel/control reach prior                |
+| Forearm-hand length      | `[uncertain] 0.269` | Based on elbow-to-fingertip proxy             |
+| Upper-arm length         |             `0.222` | Stable NHANES segment prior                   |
+| Thigh length             |             `0.232` | Based on NHANES upper-leg length              |
+| Lower-leg length         | `[uncertain] 0.251` | Popliteal-height proxy, not pure shank length |
+| Foot length              |             `0.153` | Useful for pedal-box envelope                 |
 
 ### Practical Use
 
@@ -54,13 +64,15 @@ Sex-balanced reference ratios from U.S. civilian data are a good default when th
 
 ## Driving Style Targets
 
-These bands are suitable for posture scoring and optimizer presets. They are not all equally strong evidence. Formula, GT, and rally rows combine motorsport-specific geometry sources with broader automotive ergonomics; road/performance is the strongest direct ergonomics baseline.
+These bands are suitable for posture scoring and optimizer presets. They are not all equally strong evidence. Formula,
+GT, and rally rows combine motorsport-specific geometry sources with broader automotive ergonomics; road/performance is
+the strongest direct ergonomics baseline.
 
-| Style | Seat / torso posture | Elbows | Knees | Wrists | Neck | Feet / ankle |
-| --- | --- | --- | --- | --- | --- | --- |
-| Formula | Strong recline, feet elevated, body-to-leg angle about `95-105` ([Formula SAE ergonomics study](https://www.researchgate.net/publication/268061134_2000-01-3091_Formula_SAE_Race_Car_Cockpit_Design_An_Ergonomics_Study_for_the_Cockpit), [FIA F1 technical regs](https://www.fia.com/sites/default/files/formula_1_-_technical_regulations_-_2022_-_iss_7_-_2021-10-15.pdf)) | `85-110`, target about `90` | `[uncertain] 100-130` under heavy brake, never locked | `[uncertain]` near neutral; penalize `>10-15` extension/flexion | `[uncertain] 0-15` flexion from neutral | `[uncertain] 85-100` around neutral-ready zone with heel-rest support |
-| GT | Upright to moderately reclined; about `22-28` from vertical is common sports-car guidance, with strong full-back support ([GT synthesis](https://doi.org/10.1016/j.apergo.2013.04.009), [CCOHS](https://www.ccohs.ca/oshanswers/ergonomics/driving.pdf), [FIA seat guidance](https://api.fia.com/sites/default/files/c2_hill_climb_seat_safety_guidance_03.22_v1.pdf)) | `90-120` | `[uncertain] 120-135` at full brake with reserve bend | `[uncertain] 170-195` included angle, but treat as neutral-wrist rule more than exact target | `[uncertain] 0-15` forward flexion | `[uncertain] 85-105`, heel-supported |
-| Rally | Upright, low-but-visible, wheel close to chest, strong head/shoulder support ([Skoda Motorsport](https://www.skoda-motorsport.com/en/drive-like-pro-sitting-like-racing-driver/), [FIA standard seat guidelines](https://www.fia.com/sites/default/files/fia_standard_guidelines_-_seats_0.pdf)) | `[uncertain] 95-135`, preferred `95-120` | `[uncertain] 110-140` | `[uncertain] 170-190` | `[uncertain] -10 to +15` from neutral/vertical | `[uncertain] 75-110`, preferred `85-100` |
+| Style                   | Seat / torso posture                                                                                                                                                                                                                                                                                                                                                                                                                        | Elbows                                                      | Knees                                                                                                         | Wrists                                                                                       | Neck                                                              | Feet / ankle                                                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Formula                 | Strong recline, feet elevated, body-to-leg angle about `95-105` ([Formula SAE ergonomics study](https://www.researchgate.net/publication/268061134_2000-01-3091_Formula_SAE_Race_Car_Cockpit_Design_An_Ergonomics_Study_for_the_Cockpit), [FIA F1 technical regs](https://www.fia.com/sites/default/files/formula_1_-_technical_regulations_-_2022_-_iss_7_-_2021-10-15.pdf))                                                               | `85-110`, target about `90`                                 | `[uncertain] 100-130` under heavy brake, never locked                                                         | `[uncertain]` near neutral; penalize `>10-15` extension/flexion                              | `[uncertain] 0-15` flexion from neutral                           | `[uncertain] 85-100` around neutral-ready zone with heel-rest support                                             |
+| GT                      | Upright to moderately reclined; about `22-28` from vertical is common sports-car guidance, with strong full-back support ([GT synthesis](https://doi.org/10.1016/j.apergo.2013.04.009), [CCOHS](https://www.ccohs.ca/oshanswers/ergonomics/driving.pdf), [FIA seat guidance](https://api.fia.com/sites/default/files/c2_hill_climb_seat_safety_guidance_03.22_v1.pdf))                                                                      | `90-120`                                                    | `[uncertain] 120-135` at full brake with reserve bend                                                         | `[uncertain] 170-195` included angle, but treat as neutral-wrist rule more than exact target | `[uncertain] 0-15` forward flexion                                | `[uncertain] 85-105`, heel-supported                                                                              |
+| Rally                   | Upright, low-but-visible, wheel close to chest, strong head/shoulder support ([Skoda Motorsport](https://www.skoda-motorsport.com/en/drive-like-pro-sitting-like-racing-driver/), [FIA standard seat guidelines](https://www.fia.com/sites/default/files/fia_standard_guidelines_-_seats_0.pdf))                                                                                                                                            | `[uncertain] 95-135`, preferred `95-120`                    | `[uncertain] 110-140`                                                                                         | `[uncertain] 170-190`                                                                        | `[uncertain] -10 to +15` from neutral/vertical                    | `[uncertain] 75-110`, preferred `85-100`                                                                          |
 | Road / performance road | Upright to slightly reclined, about `10-20` from vertical or `90-110` from seat pan, with visible bend at elbows and knees ([Washington L&I](https://wisha-training.lni.wa.gov/Training/articulate/ErgoForDrivers/story_content/external_files/Driving%20safety%20and%20comfort.pdf), [CRE-MSD](https://www.msdprevention.com/resource-library/driving-ergonomics), [NHTSA airbag guidance](https://www.nhtsa.gov/vehicle-safety/air-bags)) | Practical target `100-135`; ergonomics clusters are broader | Keep visible bend; avoid lockout. Sedan comfort clusters often fall around `118-142` at the more extended end | Near-neutral; sedan comfort clusters include `128-154` and `173-195` depending on definition | Upright, typically within about `1-27` in the cited sedan dataset | Heel-supported; sedan ankle comfort clusters include about `68-88` and `92-113` depending on foot/shoe definition |
 
 ## Style Notes
@@ -74,7 +86,8 @@ Formula posture is defined more by geometry than by a single public angle table:
 - wheel reach should create about a `90` degree arm relationship at nominal grip
 - braking must happen with bent knees and a supported heel, not with a locked leg
 
-Best formula-specific public sources were Formula SAE / Formula Student ergonomics studies plus FIA fitment rules. Public, modern, formula-only wrist, neck, and ankle tables remain thin, so those bands should stay soft.
+Best formula-specific public sources were Formula SAE / Formula Student ergonomics studies plus FIA fitment rules.
+Public, modern, formula-only wrist, neck, and ankle tables remain thin, so those bands should stay soft.
 
 ### GT
 
@@ -84,7 +97,8 @@ GT posture should feel supported, repeatable, and endurance-friendly:
 - wheel close enough for leverage but not so close that wrists break or shoulders shrug
 - pedals forward enough for leg-driven braking, not ankle-only braking
 
-GT-specific numeric evidence is weaker than general automotive ergonomics, so the best implementation is a GT preset built from strong general posture rules plus GT-specific geometry cues.
+GT-specific numeric evidence is weaker than general automotive ergonomics, so the best implementation is a GT preset
+built from strong general posture rules plus GT-specific geometry cues.
 
 ### Rally
 
@@ -121,7 +135,9 @@ Best-supported implementation path is a hybrid approach:
 3. Solve upper limbs to steering wheel.
 4. Run a whole-body optimization with comfort and clearance penalties.
 
-This follows the general direction of UMTRI driving-posture work, which showed that seat height, steering-wheel fore-aft position, and seat-cushion angle all independently change selected posture, and that cascade-style prediction can keep eye-location error very low in real vehicles ([Reed 2002](https://mreed.umtri.umich.edu/mreed/pubs/Reed_2002.pdf)).
+This follows the general direction of UMTRI driving-posture work, which showed that seat height, steering-wheel fore-aft
+position, and seat-cushion angle all independently change selected posture, and that cascade-style prediction can keep
+eye-location error very low in real vehicles ([Reed 2002](https://mreed.umtri.umich.edu/mreed/pubs/Reed_2002.pdf)).
 
 ### Inputs
 
@@ -149,7 +165,8 @@ Use one documented cockpit frame throughout. A practical default:
 - `+Y` driver-left
 - `+Z` up
 
-Then store seat, wheel, and pedal surfaces in that same frame. For joints, use standard biomechanical conventions where possible:
+Then store seat, wheel, and pedal surfaces in that same frame. For joints, use standard biomechanical conventions where
+possible:
 
 - pelvis / hip: [ISB hip recommendations](https://www.isbweb.org/standards/hip.pdf)
 - shoulder / elbow / wrist: [ISB upper-limb definitions](https://pubmed.ncbi.nlm.nih.gov/15844264/)
@@ -182,7 +199,9 @@ Where `penalties(q)` should include:
 - excessive forward-head posture
 - wheel-thigh or helmet-structure collisions
 
-Weighted least squares or SQP is a good fit here ([OpenSim IK docs](https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim24/pages/54002237), [OpenSim scaling + IK tutorial](https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53089741/www.atlassian.com)).
+Weighted least squares or SQP is a good fit here
+([OpenSim IK docs](https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim24/pages/54002237),
+[OpenSim scaling + IK tutorial](https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim/pages/53089741/www.atlassian.com)).
 
 ### Recommended Optimizer Logic
 

@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { T } from '@threlte/core';
-
   import { CUT_LIST_HIGHLIGHT_COLOR, DEFAULT_POSTURE_HEIGHT_CM } from './constants';
   import type { PlannerGeometry } from './geometry';
   import MeasurementArrow from './MeasurementArrow.svelte';
@@ -14,7 +12,7 @@
   import { createSteeringColumnModule } from './modules/steering-column';
   import { createWheelModule } from './modules/wheel';
   import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from './modules/shared';
-  import { createPlannerPostureSkeleton } from './posture';
+  import { createPlannerPostureSkeleton, type PosturePoint } from './posture';
   import type { PlannerPostureReport } from './posture-report';
   import RiggedHumanModel from './RiggedHumanModel.svelte';
   import type { HumanRigHoverTooltip } from './human-model-rig';
@@ -24,6 +22,7 @@
     geometry: PlannerGeometry;
     highlightedBeamIds: string[];
     measurementOverlay?: PlannerMeasurementOverlay | null;
+    onEyeCenterChange: (eyeCenter: PosturePoint | null) => void;
     onHumanRigTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
     profileColor: string;
     postureReport: PlannerPostureReport;
@@ -36,6 +35,7 @@
     geometry,
     highlightedBeamIds,
     measurementOverlay = null,
+    onEyeCenterChange,
     onHumanRigTooltipChange,
     profileColor,
     postureReport,
@@ -60,10 +60,6 @@
     })
   );
   const modelScale = $derived(postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM);
-  const eyeDebugBalls = $derived([
-    { id: 'left-eye-debug', position: postureReport.eyeDebug.left },
-    { id: 'right-eye-debug', position: postureReport.eyeDebug.right },
-  ]);
 
   const beamMeshes = $derived([
     ...baseModule,
@@ -110,18 +106,10 @@
 {#if postureSettings.showModel || postureSettings.showSkeleton}
   <RiggedHumanModel
     {modelScale}
+    {onEyeCenterChange}
     showModel={postureSettings.showModel}
     showSkeleton={postureSettings.showSkeleton}
     skeleton={postureSkeleton}
     onHoverTooltipChange={onHumanRigTooltipChange}
   />
-{/if}
-
-{#if postureSettings.showSkeleton}
-  {#each eyeDebugBalls as eyeBall (eyeBall.id)}
-    <T.Mesh position={eyeBall.position}>
-      <T.SphereGeometry args={[postureReport.eyeDebug.diameterM / 2, 16, 12]} />
-      <T.MeshStandardMaterial color="#22c55e" emissive="#16a34a" emissiveIntensity={0.4} />
-    </T.Mesh>
-  {/each}
 {/if}

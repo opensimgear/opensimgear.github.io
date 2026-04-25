@@ -26,7 +26,6 @@ export type PlannerMonitorCurvature =
 
 export type PlannerAnthropometryRatios = {
   sittingHeight: number;
-  seatedEyeHeight: number;
   seatedShoulderHeight: number;
   hipBreadth: number;
   shoulderBreadth: number;

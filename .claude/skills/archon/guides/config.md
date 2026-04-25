@@ -1,6 +1,7 @@
 # Archon Configuration Guide
 
-Interactive guide for viewing and modifying Archon configuration. Use this when the user wants to change, view, or understand their config — at any point, not just during initial setup.
+Interactive guide for viewing and modifying Archon configuration. Use this when the user wants to change, view, or
+understand their config — at any point, not just during initial setup.
 
 ## Step 1: Determine Scope
 
@@ -20,6 +21,7 @@ Options:
 ### For Global Config (~/.archon/config.yaml)
 
 Read the file:
+
 ```bash
 cat ~/.archon/config.yaml
 ```
@@ -28,7 +30,8 @@ If it doesn't exist, tell the user it will be auto-created on first Archon run w
 
 ### For Repo Config (<repo>/.archon/config.yaml)
 
-First determine the target repo. If the current working directory is a git repo (and not the Archon source repo), use it. Otherwise ask:
+First determine the target repo. If the current working directory is a git repo (and not the Archon source repo), use
+it. Otherwise ask:
 
 ```
 Header: "Target repo"
@@ -39,17 +42,21 @@ Options:
 ```
 
 Then read the file:
+
 ```bash
 cat <target-repo>/.archon/config.yaml
 ```
 
-If it doesn't exist, tell the user: "No repo config found. I can create one — or Archon will use defaults." Offer to create it.
+If it doesn't exist, tell the user: "No repo config found. I can create one — or Archon will use defaults." Offer to
+create it.
 
 ## Step 3: Show Current State
 
-Display the current configuration in a clear format. Show both the current values and what the defaults are, so the user knows what's customized vs default.
+Display the current configuration in a clear format. Show both the current values and what the defaults are, so the user
+knows what's customized vs default.
 
 Format example:
+
 ```
 Current repo config (.archon/config.yaml):
   assistant: codex (default: claude)
@@ -76,6 +83,7 @@ Options:
 ```
 
 If "Streaming modes" is selected, follow up with:
+
 ```
 Header: "Platform"
 Question: "Which platform's streaming mode do you want to change?"
@@ -87,6 +95,7 @@ Options:
 ```
 
 Then for the selected platform:
+
 ```
 Header: "Mode"
 Question: "Which streaming mode for {platform}?"
@@ -108,6 +117,7 @@ Options:
 ```
 
 If "Worktree settings" is selected:
+
 ```
 Header: "Worktree"
 Question: "Which worktree setting?"
@@ -117,6 +127,7 @@ Options:
 ```
 
 For "Copy files", let the user add/remove entries. Show current list and ask:
+
 ```
 Header: "Copy files"
 Question: "Current copyFiles: {list}. What do you want to do?"
@@ -129,6 +140,7 @@ Options:
 Remind the user about the `"source -> destination"` syntax for renaming (e.g., `".env.example -> .env"`).
 
 If "Default loading" is selected:
+
 ```
 Header: "Defaults"
 Question: "Which default loading option?"
@@ -139,9 +151,11 @@ Options:
 
 ## Step 5: Apply Changes
 
-After gathering changes, update the YAML file. Use the Edit tool to modify existing values or Write to create the file if it doesn't exist.
+After gathering changes, update the YAML file. Use the Edit tool to modify existing values or Write to create the file
+if it doesn't exist.
 
 **Rules:**
+
 - Only include non-default values in the file (keep it clean)
 - Preserve existing comments
 - Preserve any values the user didn't change
@@ -149,7 +163,8 @@ After gathering changes, update the YAML file. Use the Edit tool to modify exist
 
 After writing, confirm: "Updated {path}. Changes take effect on the next Archon invocation (no restart needed for CLI)."
 
-If the server is running for non-CLI platforms, note: "Server platforms (Telegram, Slack, GitHub, Discord) require a server restart to pick up config changes."
+If the server is running for non-CLI platforms, note: "Server platforms (Telegram, Slack, GitHub, Discord) require a
+server restart to pick up config changes."
 
 ## Step 6: Offer Further Changes
 
@@ -172,28 +187,28 @@ Loop back to Step 4 if they want more changes.
 
 ### Global Config (~/.archon/config.yaml)
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `botName` | string | `Archon` | Bot display name shown in messages |
-| `defaultAssistant` | `claude` \| `codex` | `claude` | Default AI assistant for new repos |
-| `streaming.telegram` | `stream` \| `batch` | `stream` | Telegram response delivery mode |
-| `streaming.discord` | `stream` \| `batch` | `batch` | Discord response delivery mode |
-| `streaming.slack` | `stream` \| `batch` | `batch` | Slack response delivery mode |
-| `paths.workspaces` | string | `~/.archon/workspaces` | Directory for cloned repositories |
-| `paths.worktrees` | string | `~/.archon/worktrees` | Directory for git worktrees |
-| `concurrency.maxConversations` | number | `10` | Maximum concurrent AI conversations |
+| Option                         | Type                | Default                | Description                         |
+| ------------------------------ | ------------------- | ---------------------- | ----------------------------------- |
+| `botName`                      | string              | `Archon`               | Bot display name shown in messages  |
+| `defaultAssistant`             | `claude` \| `codex` | `claude`               | Default AI assistant for new repos  |
+| `streaming.telegram`           | `stream` \| `batch` | `stream`               | Telegram response delivery mode     |
+| `streaming.discord`            | `stream` \| `batch` | `batch`                | Discord response delivery mode      |
+| `streaming.slack`              | `stream` \| `batch` | `batch`                | Slack response delivery mode        |
+| `paths.workspaces`             | string              | `~/.archon/workspaces` | Directory for cloned repositories   |
+| `paths.worktrees`              | string              | `~/.archon/worktrees`  | Directory for git worktrees         |
+| `concurrency.maxConversations` | number              | `10`                   | Maximum concurrent AI conversations |
 
 ### Repo Config (<repo>/.archon/config.yaml)
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `assistant` | `claude` \| `codex` | `claude` | AI assistant for this repo (overrides global) |
-| `commands.folder` | string | `.archon/commands` | Custom command folder path (relative to repo root) |
-| `commands.autoLoad` | boolean | `true` | Auto-load commands on clone |
-| `worktree.baseBranch` | string | auto-detected | Base branch for worktree creation |
-| `worktree.copyFiles` | string[] | `[]` | Files to copy into new worktrees (supports `"source -> dest"` renaming) |
-| `defaults.loadDefaultCommands` | boolean | `true` | Load bundled default commands at runtime |
-| `defaults.loadDefaultWorkflows` | boolean | `true` | Load bundled default workflows at runtime |
+| Option                          | Type                | Default            | Description                                                             |
+| ------------------------------- | ------------------- | ------------------ | ----------------------------------------------------------------------- |
+| `assistant`                     | `claude` \| `codex` | `claude`           | AI assistant for this repo (overrides global)                           |
+| `commands.folder`               | string              | `.archon/commands` | Custom command folder path (relative to repo root)                      |
+| `commands.autoLoad`             | boolean             | `true`             | Auto-load commands on clone                                             |
+| `worktree.baseBranch`           | string              | auto-detected      | Base branch for worktree creation                                       |
+| `worktree.copyFiles`            | string[]            | `[]`               | Files to copy into new worktrees (supports `"source -> dest"` renaming) |
+| `defaults.loadDefaultCommands`  | boolean             | `true`             | Load bundled default commands at runtime                                |
+| `defaults.loadDefaultWorkflows` | boolean             | `true`             | Load bundled default workflows at runtime                               |
 
 ### Precedence Order (highest wins)
 
@@ -206,12 +221,12 @@ Loop back to Step 4 if they want more changes.
 
 These env vars override any config file setting:
 
-| Env Var | Overrides |
-|---------|-----------|
-| `BOT_DISPLAY_NAME` | `botName` |
-| `DEFAULT_AI_ASSISTANT` | `defaultAssistant` / `assistant` |
-| `TELEGRAM_STREAMING_MODE` | `streaming.telegram` |
-| `DISCORD_STREAMING_MODE` | `streaming.discord` |
-| `SLACK_STREAMING_MODE` | `streaming.slack` |
-| `MAX_CONCURRENT_CONVERSATIONS` | `concurrency.maxConversations` |
-| `ARCHON_HOME` | Base directory for all Archon paths |
+| Env Var                        | Overrides                           |
+| ------------------------------ | ----------------------------------- |
+| `BOT_DISPLAY_NAME`             | `botName`                           |
+| `DEFAULT_AI_ASSISTANT`         | `defaultAssistant` / `assistant`    |
+| `TELEGRAM_STREAMING_MODE`      | `streaming.telegram`                |
+| `DISCORD_STREAMING_MODE`       | `streaming.discord`                 |
+| `SLACK_STREAMING_MODE`         | `streaming.slack`                   |
+| `MAX_CONCURRENT_CONVERSATIONS` | `concurrency.maxConversations`      |
+| `ARCHON_HOME`                  | Base directory for all Archon paths |

@@ -4,7 +4,7 @@
   import { Raycaster, Vector2 } from 'three';
   import type { Group, Mesh } from 'three';
 
-  import type { PlannerPostureSkeleton } from './posture';
+  import type { PlannerPostureSkeleton, PosturePoint } from './posture';
   import {
     createRiggedHumanModel,
     type HumanRigHoverTooltip,
@@ -15,13 +15,15 @@
 
   type Props = {
     modelScale: number;
+    onEyeCenterChange?: (eyeCenter: PosturePoint | null) => void;
     onHoverTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
     showModel: boolean;
     showSkeleton: boolean;
     skeleton: PlannerPostureSkeleton;
   };
 
-  const { modelScale, onHoverTooltipChange, showModel, showSkeleton, skeleton }: Props = $props();
+  const { modelScale, onEyeCenterChange = () => {}, onHoverTooltipChange, showModel, showSkeleton, skeleton }: Props =
+    $props();
   const { camera, canvas, invalidate } = useThrelte();
   const pointer = new Vector2();
   const raycaster = new Raycaster();
@@ -94,6 +96,7 @@
 
         riggedHuman = model;
         model.applySkeleton(skeleton, modelScale);
+        onEyeCenterChange(model.getEyeCenter());
         model.setDisplayOptions(showModel, showSkeleton);
         invalidate();
       })
@@ -128,6 +131,7 @@
     }
 
     model.applySkeleton(skeleton, modelScale);
+    onEyeCenterChange(model.getEyeCenter());
     model.setDisplayOptions(showModel, showSkeleton);
     invalidate();
   });

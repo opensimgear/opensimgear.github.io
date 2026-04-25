@@ -184,16 +184,7 @@
     ]
   },
   "outputs": {
-    "joint_centers": [
-      "hip",
-      "shoulder",
-      "elbow",
-      "wrist",
-      "knee",
-      "ankle",
-      "upper neck",
-      "lower neck"
-    ],
+    "joint_centers": ["hip", "shoulder", "elbow", "wrist", "knee", "ankle", "upper neck", "lower neck"],
     "joint_angles": [
       "torso",
       "neck",

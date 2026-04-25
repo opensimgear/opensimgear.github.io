@@ -167,10 +167,5 @@
   "solution_method": "Use constrained nonlinear optimization or sequential least squares. Solve large geometry in stages: place pelvis/torso/head from seat surfaces first, solve lower limbs to pedals and heel rest second, solve upper limbs to wheel third, then run a final whole-body optimization with collision and comfort penalties.",
   "implementation_notes": "Store both exact source-backed ranges and optimizer target bands separately. Formula mode should bias toward recline/elevated feet but still allow a softer sim-rig version when hardware cannot achieve true formula geometry. Treat wheel reach and pedal reach as the highest-sensitivity variables. Use asymmetric right/left lower-limb modeling if brake and throttle geometry differ. Keep uncertainty metadata so UI can show which cues are hard evidence versus inferred defaults.",
   "optimizer_use": "In the posture optimizer, use formula style as a preset that shifts the search space toward a reclined torso, elevated pedal plane, compact elbow geometry, and strong support/contact requirements. Score harshly for knee lockout at full brake, unsupported shoulders, forward-head compensation for visibility, and large wrist extension caused by wheel placement. Present the user with actionable cockpit moves in this order: pedals and heel rest, seat recline/thigh support, wheel reach, wheel height, then padding/fine support.",
-  "uncertain": [
-    "stature_normalized_measurements",
-    "seated_measurements",
-    "percentile_notes",
-    "angle_ranges_deg"
-  ]
+  "uncertain": ["stature_normalized_measurements", "seated_measurements", "percentile_notes", "angle_ranges_deg"]
 }

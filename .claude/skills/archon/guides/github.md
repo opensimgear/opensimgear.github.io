@@ -2,7 +2,9 @@
 
 GitHub integration lets Archon respond to issue comments, PR comments, and @mentions via webhooks.
 
-**IMPORTANT — Freeform input rule**: This guide collects URLs, tokens, and usernames. **Never use AskUserQuestion for freeform text input** (URLs, tokens, usernames, paths). Ask the user directly in plain text — e.g., "Paste the ngrok URL here." Use AskUserQuestion **only** for multiple-choice decisions.
+**IMPORTANT — Freeform input rule**: This guide collects URLs, tokens, and usernames. **Never use AskUserQuestion for
+freeform text input** (URLs, tokens, usernames, paths). Ask the user directly in plain text — e.g., "Paste the ngrok URL
+here." Use AskUserQuestion **only** for multiple-choice decisions.
 
 ## 0. Check Existing .env Values
 
@@ -14,9 +16,11 @@ cat <archon-repo>/.env
 
 Check these keys: `WEBHOOK_SECRET`, `GITHUB_TOKEN`, `GH_TOKEN`, `GITHUB_ALLOWED_USERS`.
 
-**If all are already filled in**: Tell the user "GitHub tokens are already configured in `.env`. Skipping to webhook setup." Jump to Step 5 (configure the repo webhook).
+**If all are already filled in**: Tell the user "GitHub tokens are already configured in `.env`. Skipping to webhook
+setup." Jump to Step 5 (configure the repo webhook).
 
-**If some are filled in**: Tell the user which values are already set and which are missing. Only collect the missing ones in the steps below.
+**If some are filled in**: Tell the user which values are already set and which are missing. Only collect the missing
+ones in the steps below.
 
 **If none are filled in**: Proceed with all steps.
 
@@ -39,18 +43,22 @@ Options:
 ```
 
 If yes, run:
+
 ```bash
 brew install ngrok
 ```
 
 **If ngrok is not authenticated**, check and guide:
+
 ```bash
 ngrok config check 2>&1
 ```
 
 If it needs auth:
+
 1. Tell the user: "Sign up at https://ngrok.com (free tier works), then copy your auth token from the dashboard."
 2. Ask the user in plain text to paste the token, then run:
+
 ```bash
 ngrok config add-authtoken <token>
 ```
@@ -67,7 +75,8 @@ Then ask in **plain text** (NOT AskUserQuestion):
 
 > "Paste the ngrok HTTPS URL here (e.g., `https://abc123.ngrok-free.app`)."
 
-If the user pastes the full ngrok terminal output, parse the URL from the `Forwarding` line (the `https://...` URL before the `->` arrow).
+If the user pastes the full ngrok terminal output, parse the URL from the `Forwarding` line (the `https://...` URL
+before the `->` arrow).
 
 Store the URL as `<ngrok-url>`.
 
@@ -90,18 +99,22 @@ Present all missing items together in a single message, then let the user respon
 For example, if both token and username are missing:
 
 > "I need two things from you:
-> 1. **GitHub token** — Go to github.com/settings/tokens and create a fine-grained token with repository access for `<target-repo>` and permissions: Issues (R/W), Pull Requests (R/W), Contents (Read).
+>
+> 1. **GitHub token** — Go to github.com/settings/tokens and create a fine-grained token with repository access for
+>    `<target-repo>` and permissions: Issues (R/W), Pull Requests (R/W), Contents (Read).
 > 2. **GitHub username** — Your GitHub username (used for authorization).
 >
 > Paste them here when ready (token first, then username), or tell me you've added them to `.env` directly."
 
-If the user says they've already added values to `.env`, read the file to confirm and skip to the next step. Do not ask again for values the user says are already there.
+If the user says they've already added values to `.env`, read the file to confirm and skip to the next step. Do not ask
+again for values the user says are already there.
 
 ## 5. Write to `.env`
 
 Write only the **missing** values to `.env`. Do not overwrite existing values.
 
 Values to set (if missing):
+
 ```env
 WEBHOOK_SECRET=<webhook-secret>
 GITHUB_TOKEN=<token>
@@ -120,6 +133,7 @@ Tell the user to go to their **target repo** on GitHub > **Settings** > **Webhoo
 - Click **Add webhook**
 
 Use **AskUserQuestion** to confirm when done:
+
 ```
 Header: "Webhook"
 Question: "Have you added the webhook to your GitHub repo?"
@@ -147,6 +161,7 @@ curl -s <ngrok-url>/health
 Both should return `{"status":"ok"}`. If the ngrok check fails, make sure the ngrok terminal is still running.
 
 Stop the background server when done verifying:
+
 ```bash
 kill %1 2>/dev/null
 ```

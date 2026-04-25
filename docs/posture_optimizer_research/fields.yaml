@@ -43,8 +43,8 @@ field_categories:
     fields:
       - name: stature_normalized_measurements
         description: >
-          Body measurements expressed as ratios of stature or height where possible. Include units,
-          definitions, and representative averages relevant to seated driving ergonomics.
+          Body measurements expressed as ratios of stature or height where possible. Include units, definitions, and
+          representative averages relevant to seated driving ergonomics.
         detail_level: detailed
         required: false
       - name: seated_measurements
@@ -63,9 +63,9 @@ field_categories:
         required: false
       - name: angle_ranges_deg
         description: >
-          Recommended angle ranges in degrees for elbows, knees, wrists, neck, feet/ankle, and
-          related joints where needed. Include definitions and whether angles are flexion,
-          included angle, or relative to horizontal/vertical.
+          Recommended angle ranges in degrees for elbows, knees, wrists, neck, feet/ankle, and related joints where
+          needed. Include definitions and whether angles are flexion, included angle, or relative to
+          horizontal/vertical.
         detail_level: detailed
         required: false
       - name: cockpit_layout

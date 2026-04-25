@@ -216,8 +216,5 @@
     "Expose source-backed constraints separately from inferred performance heuristics so users can tune strictness."
   ],
   "optimizer_use": "Use this research profile as the default rally template in the posture optimizer. Pre-load an upright seatback, low-but-visible seat height, close wheel reach, and slight knee bend. Score safety-critical FIA seat/head-support constraints as hard fails, score elbow/wrist/knee/ankle targets as graded performance heuristics, and explain when a recommendation is an inference rather than a direct rally measurement. Offer a visibility-first preset for rough/gravel rally and a slightly more open posture variant for tarmac stages if package limits demand it.",
-  "uncertain": [
-    "stature_normalized_measurements",
-    "angle_ranges_deg"
-  ]
+  "uncertain": ["stature_normalized_measurements", "angle_ranges_deg"]
 }

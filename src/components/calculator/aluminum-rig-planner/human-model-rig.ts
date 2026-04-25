@@ -15,12 +15,7 @@ import {
   Vector3,
 } from 'three';
 
-import {
-  POSTURE_HIP_ABOVE_SEAT_MM,
-  POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM,
-  type PlannerPostureSkeleton,
-  type PosturePoint,
-} from './posture';
+import { POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM, type PlannerPostureSkeleton, type PosturePoint } from './posture';
 import type { PlannerAnthropometryRatios } from './types';
 
 export const HUMAN_MALE_REALISTIC_MODEL_URL = '/models/aluminum-rig-planner/human-male-realistic.glb';
@@ -43,7 +38,14 @@ type HumanBoneName =
   | 'rightHeel'
   | 'rightFoot';
 
-type HumanTerminalBoneName = 'neck' | 'headTip' | 'leftHandTip' | 'rightHandTip' | 'leftFootTip' | 'rightFootTip';
+type HumanTerminalBoneName =
+  | 'neck'
+  | 'headTip'
+  | 'eyeCenter'
+  | 'leftHandTip'
+  | 'rightHandTip'
+  | 'leftFootTip'
+  | 'rightFootTip';
 
 type HumanModelBoneName = HumanBoneName | HumanTerminalBoneName;
 
@@ -55,6 +57,7 @@ type HumanRestSegment = {
 
 type HumanDebugBoneName =
   | HumanBoneName
+  | 'eyeCenter'
   | 'leftClavicle'
   | 'rightClavicle'
   | 'leftPelvis'
@@ -68,6 +71,7 @@ type HumanRig = {
   restBoneLocalPositions: Map<HumanModelBoneName, Vector3>;
   restBoneLocalQuaternions: Map<HumanModelBoneName, Quaternion>;
   restBoneLocalScales: Map<HumanModelBoneName, Vector3>;
+  restEyeCenterLocalDeltaFromHead: Vector3 | null;
   restSegments: Map<HumanBoneName, HumanRestSegment>;
   restBoneWorldMatrices: Map<HumanBoneName, Matrix4>;
   root: Group;
@@ -88,6 +92,7 @@ export type HumanRigHoverTooltip = HumanRigTooltipData & {
 
 export type RiggedHumanModel = {
   boneRigRatios: PlannerAnthropometryRatios | null;
+  getEyeCenter: () => PosturePoint | null;
   getTooltipTargets: () => Mesh[];
   object: Group;
   applySkeleton: (skeleton: PlannerPostureSkeleton, modelScale: number) => void;
@@ -100,6 +105,9 @@ type HumanRigDebugOverlay = {
   boneHitMeshes: Map<HumanDebugBoneName, Mesh>;
   boneMaterial: MeshBasicMaterial;
   boneMeshes: Map<HumanDebugBoneName, Mesh>;
+  eyeDebugGeometry: SphereGeometry;
+  eyeDebugMaterial: MeshBasicMaterial;
+  eyeDebugMeshes: [Mesh, Mesh];
   group: Group;
   hitMaterial: MeshBasicMaterial;
   jointHitGeometry: SphereGeometry;
@@ -130,6 +138,7 @@ const HUMAN_BONE_ORDER: HumanBoneName[] = [
 const HUMAN_TERMINAL_BONE_ORDER: HumanTerminalBoneName[] = [
   'neck',
   'headTip',
+  'eyeCenter',
   'leftHandTip',
   'rightHandTip',
   'leftFootTip',
@@ -137,6 +146,7 @@ const HUMAN_TERMINAL_BONE_ORDER: HumanTerminalBoneName[] = [
 ];
 const HUMAN_DEBUG_BONE_ORDER: HumanDebugBoneName[] = [
   ...HUMAN_BONE_ORDER,
+  'eyeCenter',
   'leftClavicle',
   'rightClavicle',
   'leftPelvis',
@@ -164,11 +174,16 @@ const HUMAN_BONE_END_BONES = {
 } satisfies Record<HumanBoneName, HumanModelBoneName>;
 const MODEL_RATIO_PRECISION = 3;
 const BONE_LENGTH_EPSILON = 0.000001;
-// The GLB has no eye bone, so estimate eye height from the head-weighted mesh bounds.
-const MODEL_EYE_FROM_HEAD_TOP_RATIO = 0.32;
-const MODEL_HEAD_SKIN_WEIGHT_THRESHOLD = 0.2;
 const DEBUG_BONE_HIT_RADIUS = 0.09;
 const DEBUG_BONE_RADIUS = 0.032;
+const EYE_DEBUG_BALL_DIAMETER_M = 0.025;
+const EYE_DEBUG_SPACING_M = 0.07;
+const EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO = 0.5;
+const EYE_CENTER_UP_HEAD_LENGTH_RATIO = 0.5;
+const EYE_CENTER_BONE_LENGTH_FROM_HEAD_LENGTH_RATIO = Math.hypot(
+  EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO,
+  EYE_CENTER_UP_HEAD_LENGTH_RATIO
+);
 const ZERO_VECTOR = new Vector3(0, 0, 0);
 const Y_AXIS = new Vector3(0, 1, 0);
 const scratchBoundsSize = new Vector3();
@@ -178,6 +193,7 @@ const scratchRestDirection = new Vector3();
 const scratchTargetDirection = new Vector3();
 const scratchWorldPosition = new Vector3();
 const scratchQuaternion = new Quaternion();
+const scratchWorldQuaternion = new Quaternion();
 const scratchWorldMatrix = new Matrix4();
 const scratchLocalMatrix = new Matrix4();
 const scratchRestRotation = new Matrix4();
@@ -237,6 +253,55 @@ function getModelBoneLocalPosition(root: Group, bones: Map<HumanModelBoneName, B
   return position ? root.worldToLocal(position) : null;
 }
 
+function getEyeCenterLocalPosition(rig: HumanRig) {
+  const headBone = rig.bones.get('head');
+
+  if (!headBone || !rig.restEyeCenterLocalDeltaFromHead) {
+    return getModelBoneLocalPosition(rig.root, rig.bones, 'eyeCenter');
+  }
+
+  const position = getModelBoneLocalPosition(rig.root, rig.bones, 'head');
+
+  if (!position) {
+    return getModelBoneLocalPosition(rig.root, rig.bones, 'eyeCenter');
+  }
+
+  headBone.getWorldQuaternion(scratchWorldQuaternion);
+  rig.root.getWorldQuaternion(scratchQuaternion).invert().multiply(scratchWorldQuaternion);
+  scratchTargetDirection.copy(rig.restEyeCenterLocalDeltaFromHead).applyQuaternion(scratchQuaternion);
+
+  return position.add(scratchTargetDirection);
+}
+
+function createRestEyeCenterLocalDeltaFromHead(
+  bones: Map<HumanModelBoneName, Bone>,
+  restSegments: Map<HumanBoneName, HumanRestSegment>
+) {
+  const headBone = bones.get('head');
+  const eyeCenterBone = bones.get('eyeCenter');
+  const headRestSegment = restSegments.get('head');
+
+  if (!headBone || !eyeCenterBone || !headRestSegment) {
+    return null;
+  }
+
+  const headLength = headRestSegment.start.distanceTo(headRestSegment.end);
+
+  if (headLength <= BONE_LENGTH_EPSILON) {
+    return null;
+  }
+
+  const restEyeDelta = scratchTargetDirection
+    .copy(Y_AXIS)
+    .multiplyScalar(headLength * EYE_CENTER_BONE_LENGTH_FROM_HEAD_LENGTH_RATIO);
+  eyeCenterBone.getWorldQuaternion(scratchWorldQuaternion);
+  restEyeDelta.applyQuaternion(scratchWorldQuaternion);
+
+  headBone.getWorldQuaternion(scratchQuaternion).invert();
+
+  return restEyeDelta.applyQuaternion(scratchQuaternion).clone();
+}
+
 function getAverageDistance(
   bones: Map<HumanModelBoneName, Bone>,
   pairs: Array<[HumanModelBoneName, HumanModelBoneName]>
@@ -257,58 +322,8 @@ function getAverageDistance(
   return distances.reduce((total, distance) => total + distance, 0) / distances.length;
 }
 
-function getWeightedBoneBounds(skinnedMeshes: SkinnedMesh[], boneName: HumanBoneName, minWeight: number) {
-  const bounds = new Box3();
-  const vertex = new Vector3();
-
-  for (const mesh of skinnedMeshes) {
-    const boneIndex = mesh.skeleton.bones.findIndex((bone) => bone.name === boneName);
-    const positions = mesh.geometry.attributes.position;
-    const skinIndices = mesh.geometry.attributes.skinIndex;
-    const skinWeights = mesh.geometry.attributes.skinWeight;
-
-    if (boneIndex < 0 || !positions || !skinIndices || !skinWeights) {
-      continue;
-    }
-
-    for (let vertexIndex = 0; vertexIndex < positions.count; vertexIndex += 1) {
-      let isWeightedToBone = false;
-
-      for (let skinSlot = 0; skinSlot < skinIndices.itemSize; skinSlot += 1) {
-        if (
-          skinIndices.getComponent(vertexIndex, skinSlot) === boneIndex &&
-          skinWeights.getComponent(vertexIndex, skinSlot) > minWeight
-        ) {
-          isWeightedToBone = true;
-          break;
-        }
-      }
-
-      if (isWeightedToBone) {
-        vertex.fromBufferAttribute(positions, vertexIndex).applyMatrix4(mesh.matrixWorld);
-        bounds.expandByPoint(vertex);
-      }
-    }
-  }
-
-  return bounds;
-}
-
-function getModelEyeY(skinnedMeshes: SkinnedMesh[]) {
-  const headBounds = getWeightedBoneBounds(skinnedMeshes, 'head', MODEL_HEAD_SKIN_WEIGHT_THRESHOLD);
-
-  if (headBounds.isEmpty()) {
-    return null;
-  }
-
-  const headHeight = headBounds.getSize(new Vector3()).y;
-
-  return headBounds.max.y - headHeight * MODEL_EYE_FROM_HEAD_TOP_RATIO;
-}
-
 export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropometryRatios | null {
   const bones = new Map<HumanModelBoneName, Bone>();
-  const skinnedMeshes: SkinnedMesh[] = [];
   const bounds = new Box3();
 
   root.updateWorldMatrix(true, true);
@@ -318,7 +333,6 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     }
 
     if (object instanceof SkinnedMesh) {
-      skinnedMeshes.push(object);
       bounds.union(new Box3().setFromObject(object));
     }
   });
@@ -331,7 +345,6 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
   const hip = getModelBonePosition(bones, 'torso');
   const leftShoulder = getModelBonePosition(bones, 'leftUpperArm');
   const rightShoulder = getModelBonePosition(bones, 'rightUpperArm');
-  const eyeY = getModelEyeY(skinnedMeshes);
   const upperArmLength = getAverageDistance(bones, [
     ['leftUpperArm', 'leftForearm'],
     ['rightUpperArm', 'rightForearm'],
@@ -364,7 +377,6 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     !hip ||
     !leftShoulder ||
     !rightShoulder ||
-    eyeY === null ||
     upperArmLength === null ||
     forearmHandLength === null ||
     thighLength === null ||
@@ -381,7 +393,6 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
 
   return {
     sittingHeight: roundModelRatio((bounds.max.y - hip.y) / height),
-    seatedEyeHeight: roundModelRatio((eyeY - hip.y + (POSTURE_HIP_ABOVE_SEAT_MM * 0.001) / 2) / height),
     seatedShoulderHeight: roundModelRatio(
       (shoulderY - hip.y + POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM * 0.001) / height
     ),
@@ -544,12 +555,16 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
   const hipCenter = skeleton.joints.hipCenter;
   const scaleOrigin = new Vector3(hipCenter[0], hipCenter[1], hipCenter[2]);
   rig.root.updateWorldMatrix(true, true);
-  updateDebugOverlay(
-    rig.debugOverlay,
-    createDebugSegmentsFromModelBones(rig.root, rig.bones),
-    safeModelScale,
-    scaleOrigin
-  );
+  const debugSegments = createDebugSegmentsFromModelBones(rig.root, rig.bones);
+  const eyeCenterStart = getModelBoneLocalPosition(rig.root, rig.bones, 'head');
+  const eyeCenter = getEyeCenterLocalPosition(rig);
+
+  if (eyeCenterStart && eyeCenter) {
+    debugSegments.set('eyeCenter', [eyeCenterStart, eyeCenter]);
+  }
+
+  updateDebugOverlay(rig.debugOverlay, debugSegments, safeModelScale, scaleOrigin);
+  updateEyeDebugOverlay(rig.debugOverlay, eyeCenter, safeModelScale);
 
   rig.root.scale.setScalar(safeModelScale);
   rig.root.position.set(
@@ -606,6 +621,7 @@ function createDebugOverlay() {
   const boneGeometry = createStartWeightedOctahedronGeometry();
   const jointGeometry = new SphereGeometry(0.018, 16, 10);
   const jointHitGeometry = new SphereGeometry(0.05, 16, 10);
+  const eyeDebugGeometry = new SphereGeometry(1, 16, 12);
   const boneMaterial = new MeshBasicMaterial({
     color: 0x2563eb,
     depthTest: true,
@@ -618,6 +634,11 @@ function createDebugOverlay() {
     depthTest: true,
     depthWrite: true,
   });
+  const eyeDebugMaterial = new MeshBasicMaterial({
+    color: 0x22c55e,
+    depthTest: true,
+    depthWrite: true,
+  });
   const hitMaterial = new MeshBasicMaterial({
     color: 0xffffff,
     depthTest: false,
@@ -627,6 +648,10 @@ function createDebugOverlay() {
   });
   const boneMeshes = new Map<HumanDebugBoneName, Mesh>();
   const boneHitMeshes = new Map<HumanDebugBoneName, Mesh>();
+  const eyeDebugMeshes = [
+    new Mesh(eyeDebugGeometry, eyeDebugMaterial),
+    new Mesh(eyeDebugGeometry, eyeDebugMaterial),
+  ] satisfies [Mesh, Mesh];
 
   group.name = 'RiggedHumanDebugOverlay';
   group.renderOrder = 1000;
@@ -646,11 +671,22 @@ function createDebugOverlay() {
     group.add(hitMesh);
   }
 
+  eyeDebugMeshes.forEach((mesh, index) => {
+    mesh.name = index === 0 ? 'leftEyeDebugBall' : 'rightEyeDebugBall';
+    mesh.frustumCulled = false;
+    mesh.renderOrder = 1001;
+    mesh.visible = false;
+    group.add(mesh);
+  });
+
   return {
     boneGeometry,
     boneHitMeshes,
     boneMaterial,
     boneMeshes,
+    eyeDebugGeometry,
+    eyeDebugMaterial,
+    eyeDebugMeshes,
     group,
     hitMaterial,
     jointHitGeometry,
@@ -659,6 +695,24 @@ function createDebugOverlay() {
     jointMaterial,
     jointMeshes: [],
   } satisfies HumanRigDebugOverlay;
+}
+
+function updateEyeDebugOverlay(overlay: HumanRigDebugOverlay, center: Vector3 | null, modelScale: number) {
+  const safeModelScale = Math.max(BONE_LENGTH_EPSILON, modelScale);
+  const halfSpacing = EYE_DEBUG_SPACING_M / (2 * safeModelScale);
+  const radius = EYE_DEBUG_BALL_DIAMETER_M / (2 * safeModelScale);
+
+  overlay.eyeDebugMeshes.forEach((mesh, index) => {
+    mesh.visible = Boolean(center);
+
+    if (!center) {
+      return;
+    }
+
+    mesh.position.copy(center);
+    mesh.position.z += index === 0 ? -halfSpacing : halfSpacing;
+    mesh.scale.setScalar(radius);
+  });
 }
 
 function setSkinnedMeshesVisible(skinnedMeshes: SkinnedMesh[], visible: boolean) {
@@ -798,6 +852,8 @@ function getDebugSegmentJointNames(name: HumanDebugBoneName): [string, string] {
       return ['hipCenter', 'shoulderCenter'];
     case 'head':
       return ['neck', 'head'];
+    case 'eyeCenter':
+      return ['neck', 'eye'];
     case 'leftUpperArm':
       return ['shoulderLeft', 'elbowLeft'];
     case 'leftForearm':
@@ -829,9 +885,9 @@ function getDebugSegmentJointNames(name: HumanDebugBoneName): [string, string] {
     case 'neckConnector':
       return ['shoulderCenter', 'neck'];
     case 'leftClavicle':
-      return ['neck', 'shoulderLeft'];
+      return ['shoulderCenter', 'shoulderLeft'];
     case 'rightClavicle':
-      return ['neck', 'shoulderRight'];
+      return ['shoulderCenter', 'shoulderRight'];
     case 'leftPelvis':
       return ['hipCenter', 'hipLeft'];
     case 'rightPelvis':
@@ -987,7 +1043,7 @@ function createDebugSegmentsFromModelBones(root: Group, bones: Map<HumanModelBon
   return debugSegments;
 }
 
-function collectRig(root: Group) {
+function collectRig(root: Group): HumanRig {
   const bones = new Map<HumanModelBoneName, Bone>();
   const debugOverlay = createDebugOverlay();
   const skinnedMeshes: SkinnedMesh[] = [];
@@ -1014,6 +1070,7 @@ function collectRig(root: Group) {
 
   const boneRigRatios = calculateHumanModelBoneRigRatios(root);
   const restSegments = createRestSegmentsFromBones(bones);
+  const restEyeCenterLocalDeltaFromHead = createRestEyeCenterLocalDeltaFromHead(bones, restSegments);
   root.add(debugOverlay.group);
   updateDebugOverlay(debugOverlay, createDebugSegmentsFromModelBones(root, bones));
 
@@ -1038,6 +1095,7 @@ function collectRig(root: Group) {
     restBoneLocalPositions,
     restBoneLocalQuaternions,
     restBoneLocalScales,
+    restEyeCenterLocalDeltaFromHead,
     restSegments,
     restBoneWorldMatrices,
     root,
@@ -1060,6 +1118,22 @@ export function createRiggedHumanModelFromRoot(root: Group): RiggedHumanModel | 
 
   return {
     boneRigRatios: rig.boneRigRatios,
+    getEyeCenter() {
+      rig.root.updateWorldMatrix(true, true);
+      const eyeCenter = getEyeCenterLocalPosition(rig);
+
+      if (!eyeCenter) {
+        return null;
+      }
+
+      const position = rig.root.localToWorld(eyeCenter.clone());
+
+      if (rig.root.parent) {
+        rig.root.parent.worldToLocal(position);
+      }
+
+      return position.toArray() as PosturePoint;
+    },
     getTooltipTargets() {
       return [...rig.debugOverlay.boneHitMeshes.values(), ...rig.debugOverlay.jointHitMeshes];
     },
@@ -1075,7 +1149,9 @@ export function createRiggedHumanModelFromRoot(root: Group): RiggedHumanModel | 
       rig.debugOverlay.boneGeometry.dispose();
       rig.debugOverlay.jointHitGeometry.dispose();
       rig.debugOverlay.jointGeometry.dispose();
+      rig.debugOverlay.eyeDebugGeometry.dispose();
       rig.debugOverlay.boneMaterial.dispose();
+      rig.debugOverlay.eyeDebugMaterial.dispose();
       rig.debugOverlay.hitMaterial.dispose();
       rig.debugOverlay.jointMaterial.dispose();
 

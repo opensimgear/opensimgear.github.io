@@ -190,11 +190,7 @@ export function createPlannerMeasurementOverlay(
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
         start: [mm(wheelCenterXmm(input)), mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm), baseCenterZ],
-        end: [
-          mm(wheelCenterXmm(input)),
-          mm(wheelCenterYmm(input)),
-          baseCenterZ,
-        ],
+        end: [mm(wheelCenterXmm(input)), mm(wheelCenterYmm(input)), baseCenterZ],
       };
 
     case 'wheelDistanceFromSteeringColumnMm':

@@ -1,13 +1,9 @@
-import {
-  DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
-  DEFAULT_POSTURE_HEIGHT_CM,
-  PLANNER_POSTURE_LIMITS,
-} from './constants';
+import { DEFAULT_ANTHROPOMETRY_LENGTHS_MM, DEFAULT_POSTURE_HEIGHT_CM, PLANNER_POSTURE_LIMITS } from './constants';
 import type { PlannerAnthropometryLengthsMm, PlannerAnthropometryRatios } from './types';
 
-export const PLANNER_ANTHROPOMETRY_KEYS = Object.keys(
-  DEFAULT_ANTHROPOMETRY_LENGTHS_MM
-) as Array<keyof PlannerAnthropometryRatios>;
+export const PLANNER_ANTHROPOMETRY_KEYS = Object.keys(DEFAULT_ANTHROPOMETRY_LENGTHS_MM) as Array<
+  keyof PlannerAnthropometryRatios
+>;
 
 function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
@@ -46,11 +42,7 @@ export function getAnthropometryLengthLimitsMm(heightCm: number) {
   ) as Record<keyof PlannerAnthropometryRatios, { min: number; max: number }>;
 }
 
-export function clampAnthropometryLengthMm(
-  key: keyof PlannerAnthropometryRatios,
-  value: number,
-  heightCm: number
-) {
+export function clampAnthropometryLengthMm(key: keyof PlannerAnthropometryRatios, value: number, heightCm: number) {
   const limits = getAnthropometryLengthLimitsMm(heightCm)[key];
 
   return roundAnthropometryLengthMm(clamp(value, limits.min, limits.max));
