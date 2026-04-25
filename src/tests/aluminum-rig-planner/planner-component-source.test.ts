@@ -20,4 +20,10 @@ describe('aluminum rig planner component wiring', () => {
       /assignProgrammaticPlannerInput\(\s*recomputePresetDynamicPlannerInput\(plannerInput, postureSettings\.preset, nextHeightCm\)\s*\)/
     );
   });
+
+  it('shows target FOV editing only for flat monitors', () => {
+    expect(plannerSource).toMatch(/\{#if postureSettings\.monitorCurvature === 'disabled'\}/);
+    expect(plannerSource).toMatch(/label="Target FOV"/);
+    expect(plannerSource).not.toMatch(/label="Distance"/);
+  });
 });

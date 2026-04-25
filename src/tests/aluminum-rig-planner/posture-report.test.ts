@@ -2,11 +2,12 @@ import { describe, expect, it } from 'vitest';
 
 import {
   BASE_BEAM_HEIGHT_MM,
-  DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
+  CURVED_MONITOR_RECOMMENDED_FOV_DEG,
   DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
+import { getMonitorDimensionsMm } from '../../components/calculator/aluminum-rig-planner/modules/monitor';
 import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
 
 describe('aluminum rig planner posture report', () => {
@@ -47,23 +48,38 @@ describe('aluminum rig planner posture report', () => {
     expect(Math.abs(report.eyeDebug.left[2] - report.eyeDebug.right[2])).toBeCloseTo(0.07, 6);
   });
 
-  it('returns a 10 mm monitor midpoint debug ball relative to eye center and base height', () => {
+  it('solves flat monitor midpoint distance from target horizontal FOV', () => {
     const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      monitorDistanceFromEyesMm: DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM + 100,
+      monitorCurvature: 'disabled' as const,
+      monitorDistanceFromEyesMm: 1234,
+      monitorTargetFovDeg: 60,
       monitorHeightFromBaseMm: DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM + 50,
     };
+    const dimensions = getMonitorDimensionsMm(postureSettings);
+    const expectedDistanceMm = dimensions.widthMm / 2 / Math.tan((postureSettings.monitorTargetFovDeg * Math.PI) / 360);
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
 
     expect(report.monitorDebug.diameterM).toBeCloseTo(0.01, 6);
-    expect(report.monitorDebug.position[0]).toBeCloseTo(
-      report.eyeDebug.center[0] + postureSettings.monitorDistanceFromEyesMm * 0.001,
-      6
-    );
+    expect(report.monitorDebug.position[0]).toBeCloseTo(report.eyeDebug.center[0] + expectedDistanceMm * 0.001, 6);
     expect(report.monitorDebug.position[1]).toBeCloseTo(
       (BASE_BEAM_HEIGHT_MM + postureSettings.monitorHeightFromBaseMm) * 0.001,
       6
     );
     expect(report.monitorDebug.position[2]).toBe(0);
+  });
+
+  it('places curved monitor midpoint at the recommended curved viewing distance', () => {
+    const postureSettings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '1000r' as const,
+      monitorDistanceFromEyesMm: 333,
+      monitorTargetFovDeg: 30,
+    };
+    const dimensions = getMonitorDimensionsMm(postureSettings);
+    const expectedDistanceMm = dimensions.widthMm / 2 / Math.tan((CURVED_MONITOR_RECOMMENDED_FOV_DEG * Math.PI) / 360);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
+
+    expect(report.monitorDebug.position[0]).toBeCloseTo(report.eyeDebug.center[0] + expectedDistanceMm * 0.001, 6);
   });
 });

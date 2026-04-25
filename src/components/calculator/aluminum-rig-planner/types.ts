@@ -12,6 +12,17 @@ export type PlannerCurrencyCode = 'EUR' | 'USD';
 export type PlannerPosturePreset = 'formula' | 'gt' | 'rally' | 'road' | 'custom';
 export type PlannerSolvablePosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
 export type PlannerMonitorAspectRatio = '16:10' | '16:9' | '21:9' | '32:9' | '4:3' | '5:4' | '3:2';
+export type PlannerMonitorCurvature =
+  | 'disabled'
+  | '5000r'
+  | '4000r'
+  | '3000r'
+  | '2500r'
+  | '2300r'
+  | '1800r'
+  | '1500r'
+  | '1000r'
+  | '800r';
 
 export type PlannerAnthropometryRatios = {
   sittingHeight: number;
@@ -35,6 +46,9 @@ export type PlannerPostureSettings<Preset extends PlannerPosturePreset = Planner
   showSkeleton: boolean;
   monitorSizeIn: number;
   monitorAspectRatio: PlannerMonitorAspectRatio;
+  monitorCurvature: PlannerMonitorCurvature;
+  monitorTiltDeg: number;
+  monitorTargetFovDeg: number;
   monitorDistanceFromEyesMm: number;
   monitorHeightFromBaseMm: number;
 };

@@ -27,6 +27,7 @@
     PLANNER_DIMENSION_LIMITS,
     PLANNER_LAYOUT,
     MONITOR_ASPECT_RATIO_OPTIONS,
+    MONITOR_CURVATURE_OPTIONS,
     POSTURE_PRESET_OPTIONS,
     URL_STATE_DEBOUNCE_MS,
   } from './constants';
@@ -45,6 +46,7 @@
     type PlannerMeasurementKey,
     type PlannerMeasurementOverlay,
   } from './measurement-overlay';
+  import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
   import { createPlannerOptimizationResult } from './optimizer';
   import { createPlannerPostureReport, type PlannerPostureReport } from './posture-report';
@@ -69,6 +71,7 @@
     PlannerCurrencyCode,
     PlannerInput,
     PlannerMonitorAspectRatio,
+    PlannerMonitorCurvature,
     PlannerOptimizationSettings,
     PlannerPosturePreset,
     PlannerPostureSettings,
@@ -797,20 +800,41 @@
     postureSettings.monitorSizeIn = Math.round(
       Math.max(PLANNER_POSTURE_LIMITS.monitorSizeMinIn, Math.min(PLANNER_POSTURE_LIMITS.monitorSizeMaxIn, value))
     );
+    syncSolvedMonitorDistanceFromEyesMm();
     syncPlannerUrlState();
   }
 
   function setMonitorAspectRatio(value: PlannerMonitorAspectRatio) {
     postureSettings.monitorAspectRatio = value;
+    syncSolvedMonitorDistanceFromEyesMm();
     syncPlannerUrlState();
   }
 
-  function setMonitorDistanceFromEyesMm(value: number) {
-    postureSettings.monitorDistanceFromEyesMm = Math.max(
-      PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm,
-      Math.min(PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm, value)
+  function setMonitorCurvature(value: PlannerMonitorCurvature) {
+    postureSettings.monitorCurvature = value;
+    syncSolvedMonitorDistanceFromEyesMm();
+    syncPlannerUrlState();
+  }
+
+  function setMonitorTiltDeg(value: number) {
+    postureSettings.monitorTiltDeg = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorTiltMinDeg,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorTiltMaxDeg, value)
     );
     syncPlannerUrlState();
+  }
+
+  function setMonitorTargetFovDeg(value: number) {
+    postureSettings.monitorTargetFovDeg = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg, value)
+    );
+    syncSolvedMonitorDistanceFromEyesMm();
+    syncPlannerUrlState();
+  }
+
+  function syncSolvedMonitorDistanceFromEyesMm() {
+    postureSettings.monitorDistanceFromEyesMm = Math.round(getSolvedMonitorDistanceFromEyesMm(postureSettings));
   }
 
   function setMonitorHeightFromBaseMm(value: number) {
@@ -1025,14 +1049,29 @@
               options={MONITOR_ASPECT_RATIO_OPTIONS}
               label="Aspect"
             />
-            <Slider
-              bind:value={() => postureSettings.monitorDistanceFromEyesMm, setMonitorDistanceFromEyesMm}
-              label="Distance"
-              min={PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm}
-              max={PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm}
-              step={PLANNER_CONTROL_STEP_MM}
-              format={(value) => `${value} mm`}
+            <List
+              bind:value={() => postureSettings.monitorCurvature, setMonitorCurvature}
+              options={MONITOR_CURVATURE_OPTIONS}
+              label="Curvature"
             />
+            <Slider
+              bind:value={() => postureSettings.monitorTiltDeg, setMonitorTiltDeg}
+              label="Tilt"
+              min={PLANNER_POSTURE_LIMITS.monitorTiltMinDeg}
+              max={PLANNER_POSTURE_LIMITS.monitorTiltMaxDeg}
+              step={PLANNER_POSTURE_LIMITS.monitorTiltStepDeg}
+              format={(value) => `${value}°`}
+            />
+            {#if postureSettings.monitorCurvature === 'disabled'}
+              <Slider
+                bind:value={() => postureSettings.monitorTargetFovDeg, setMonitorTargetFovDeg}
+                label="Target FOV"
+                min={PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg}
+                max={PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg}
+                step={PLANNER_POSTURE_LIMITS.monitorTargetFovStepDeg}
+                format={(value) => `${value}°`}
+              />
+            {/if}
             <Slider
               bind:value={() => postureSettings.monitorHeightFromBaseMm, setMonitorHeightFromBaseMm}
               label="Height"

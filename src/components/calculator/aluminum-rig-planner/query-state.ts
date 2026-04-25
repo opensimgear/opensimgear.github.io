@@ -5,13 +5,16 @@ import {
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM,
   MONITOR_ASPECT_RATIO_OPTIONS,
+  MONITOR_CURVATURE_OPTIONS,
   PLANNER_POSTURE_LIMITS,
   getPlannerStockCostMax,
 } from './constants';
 import { clampPlannerInput } from './geometry';
+import { getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
 import type {
   PlannerInput,
   PlannerMonitorAspectRatio,
+  PlannerMonitorCurvature,
   PlannerOptimizationSettings,
   PlannerPosturePreset,
   PlannerPostureSettings,
@@ -40,8 +43,11 @@ export type PlannerQueryState = Partial<PlannerInput> & {
       cost?: unknown;
     }>;
   };
-  posture?: Partial<Omit<PlannerPostureSettings<PlannerPosturePreset>, 'preset' | 'monitorAspectRatio'>> & {
+  posture?: Partial<
+    Omit<PlannerPostureSettings<PlannerPosturePreset>, 'preset' | 'monitorAspectRatio' | 'monitorCurvature'>
+  > & {
     monitorAspectRatio?: unknown;
+    monitorCurvature?: unknown;
     monitorMidpointXMm?: unknown;
     monitorMidpointYMm?: unknown;
     monitorMidpointZMm?: unknown;
@@ -148,6 +154,10 @@ function isMonitorAspectRatio(value: unknown): value is PlannerMonitorAspectRati
   return MONITOR_ASPECT_RATIO_OPTIONS.some((option) => option.value === value);
 }
 
+function isMonitorCurvature(value: unknown): value is PlannerMonitorCurvature {
+  return MONITOR_CURVATURE_OPTIONS.some((option) => option.value === value);
+}
+
 function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const defaults = DEFAULT_PLANNER_POSTURE_SETTINGS;
   const preset =
@@ -158,12 +168,50 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     state?.preset === 'custom'
       ? state.preset
       : defaults.preset;
+  const monitorSizeIn = Math.round(
+    clampNumber(
+      readNumber(state?.monitorSizeIn, defaults.monitorSizeIn),
+      PLANNER_POSTURE_LIMITS.monitorSizeMinIn,
+      PLANNER_POSTURE_LIMITS.monitorSizeMaxIn
+    )
+  );
+  const monitorAspectRatio = isMonitorAspectRatio(state?.monitorAspectRatio)
+    ? state.monitorAspectRatio
+    : defaults.monitorAspectRatio;
+  const monitorCurvature = isMonitorCurvature(state?.monitorCurvature)
+    ? state.monitorCurvature
+    : defaults.monitorCurvature;
   const legacyEyeCenterXMm = LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM - DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM;
-  const monitorDistanceFromEyesMm = isFiniteNumber(state?.monitorDistanceFromEyesMm)
-    ? state.monitorDistanceFromEyesMm
-    : isFiniteNumber(state?.monitorMidpointXMm)
-      ? state.monitorMidpointXMm - legacyEyeCenterXMm
+  const stateMonitorDistanceFromEyesMm = state?.monitorDistanceFromEyesMm;
+  const stateMonitorMidpointXMm = state?.monitorMidpointXMm;
+  const hasLegacyMonitorDistance =
+    isFiniteNumber(stateMonitorDistanceFromEyesMm) || isFiniteNumber(stateMonitorMidpointXMm);
+  const rawMonitorDistanceFromEyesMm = isFiniteNumber(stateMonitorDistanceFromEyesMm)
+    ? stateMonitorDistanceFromEyesMm
+    : isFiniteNumber(stateMonitorMidpointXMm)
+      ? stateMonitorMidpointXMm - legacyEyeCenterXMm
       : defaults.monitorDistanceFromEyesMm;
+  const monitorDistanceFromEyesMm = clampNumber(
+    rawMonitorDistanceFromEyesMm,
+    PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm,
+    PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm
+  );
+  const rawMonitorTargetFovDeg = isFiniteNumber(state?.monitorTargetFovDeg)
+    ? state.monitorTargetFovDeg
+    : hasLegacyMonitorDistance
+      ? getMonitorTargetFovFromDistanceMm(monitorDistanceFromEyesMm, { monitorAspectRatio, monitorSizeIn })
+      : defaults.monitorTargetFovDeg;
+  const monitorTargetFovDeg = clampNumber(
+    rawMonitorTargetFovDeg,
+    PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
+    PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg
+  );
+  const solvedMonitorDistanceFromEyesMm = getSolvedMonitorDistanceFromEyesMm({
+    monitorAspectRatio,
+    monitorCurvature,
+    monitorSizeIn,
+    monitorTargetFovDeg,
+  });
   const monitorHeightFromBaseMm = isFiniteNumber(state?.monitorHeightFromBaseMm)
     ? state.monitorHeightFromBaseMm
     : isFiniteNumber(state?.monitorMidpointYMm)
@@ -179,18 +227,17 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     ),
     showModel: typeof state?.showModel === 'boolean' ? state.showModel : defaults.showModel,
     showSkeleton: typeof state?.showSkeleton === 'boolean' ? state.showSkeleton : defaults.showSkeleton,
-    monitorSizeIn: Math.round(
-      clampNumber(
-        readNumber(state?.monitorSizeIn, defaults.monitorSizeIn),
-        PLANNER_POSTURE_LIMITS.monitorSizeMinIn,
-        PLANNER_POSTURE_LIMITS.monitorSizeMaxIn
-      )
+    monitorSizeIn,
+    monitorAspectRatio,
+    monitorCurvature,
+    monitorTiltDeg: clampNumber(
+      readNumber(state?.monitorTiltDeg, defaults.monitorTiltDeg),
+      PLANNER_POSTURE_LIMITS.monitorTiltMinDeg,
+      PLANNER_POSTURE_LIMITS.monitorTiltMaxDeg
     ),
-    monitorAspectRatio: isMonitorAspectRatio(state?.monitorAspectRatio)
-      ? state.monitorAspectRatio
-      : defaults.monitorAspectRatio,
+    monitorTargetFovDeg,
     monitorDistanceFromEyesMm: clampNumber(
-      monitorDistanceFromEyesMm,
+      solvedMonitorDistanceFromEyesMm,
       PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm,
       PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm
     ),
