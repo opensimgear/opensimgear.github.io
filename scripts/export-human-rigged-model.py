@@ -10,6 +10,8 @@ TARGET_GLB = ROOT / "public" / "models" / "aluminum-rig-planner" / "human-male-r
 SOURCE_MESH_NAME = "GEO-body_male_realistic"
 TERMINAL_BONE_LENGTH = 0.015
 HEAD_TIP_BONE_LENGTH = 0.005
+EYE_CENTER_FROM_NECK = Vector((0.142, 0.031, 0.000))
+NON_DEFORM_BONES = {"eyeCenter"}
 BONE_LENGTHS = {
     "neck": 0.1521,
     "upperArm": 0.2390,
@@ -663,6 +665,7 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     remapped_bones["rightShin"] = (right_knee, right_ankle, "rightThigh")
     remapped_bones["rightHeel"] = (right_ankle, right_heel, "rightShin")
     remapped_bones["rightFoot"] = (right_heel, right_foot_tip, "rightHeel")
+    remapped_bones["eyeCenter"] = (neck_base, neck_base + EYE_CENTER_FROM_NECK, "neck")
     add_terminal_bone(remapped_bones, "headTip", "head", HEAD_TIP_BONE_LENGTH)
     add_terminal_bone(remapped_bones, "leftHandTip", "leftHand")
     add_terminal_bone(remapped_bones, "rightHandTip", "rightHand")
@@ -757,7 +760,7 @@ def main():
         edit_bone.tail = tail
         edit_bone.roll = 0.0
         edit_bone.use_connect = False
-        edit_bone.use_deform = "Tip" not in name
+        edit_bone.use_deform = name not in NON_DEFORM_BONES and "Tip" not in name
         edit_bones[name] = edit_bone
 
     for name, (_, _, parent_name) in bones.items():

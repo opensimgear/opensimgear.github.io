@@ -1,12 +1,17 @@
 import {
+  BASE_BEAM_HEIGHT_MM,
+  DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
   DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
+  LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM,
+  MONITOR_ASPECT_RATIO_OPTIONS,
   PLANNER_POSTURE_LIMITS,
   getPlannerStockCostMax,
 } from './constants';
 import { clampPlannerInput } from './geometry';
 import type {
   PlannerInput,
+  PlannerMonitorAspectRatio,
   PlannerOptimizationSettings,
   PlannerPosturePreset,
   PlannerPostureSettings,
@@ -35,7 +40,11 @@ export type PlannerQueryState = Partial<PlannerInput> & {
       cost?: unknown;
     }>;
   };
-  posture?: Partial<Omit<PlannerPostureSettings<PlannerPosturePreset>, 'preset'>> & {
+  posture?: Partial<Omit<PlannerPostureSettings<PlannerPosturePreset>, 'preset' | 'monitorAspectRatio'>> & {
+    monitorAspectRatio?: unknown;
+    monitorMidpointXMm?: unknown;
+    monitorMidpointYMm?: unknown;
+    monitorMidpointZMm?: unknown;
     preset?: unknown;
   };
 };
@@ -135,6 +144,10 @@ function clampNumber(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
 
+function isMonitorAspectRatio(value: unknown): value is PlannerMonitorAspectRatio {
+  return MONITOR_ASPECT_RATIO_OPTIONS.some((option) => option.value === value);
+}
+
 function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const defaults = DEFAULT_PLANNER_POSTURE_SETTINGS;
   const preset =
@@ -145,6 +158,17 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     state?.preset === 'custom'
       ? state.preset
       : defaults.preset;
+  const legacyEyeCenterXMm = LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM - DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM;
+  const monitorDistanceFromEyesMm = isFiniteNumber(state?.monitorDistanceFromEyesMm)
+    ? state.monitorDistanceFromEyesMm
+    : isFiniteNumber(state?.monitorMidpointXMm)
+      ? state.monitorMidpointXMm - legacyEyeCenterXMm
+      : defaults.monitorDistanceFromEyesMm;
+  const monitorHeightFromBaseMm = isFiniteNumber(state?.monitorHeightFromBaseMm)
+    ? state.monitorHeightFromBaseMm
+    : isFiniteNumber(state?.monitorMidpointYMm)
+      ? state.monitorMidpointYMm - BASE_BEAM_HEIGHT_MM
+      : defaults.monitorHeightFromBaseMm;
 
   return {
     preset,
@@ -155,20 +179,25 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     ),
     showModel: typeof state?.showModel === 'boolean' ? state.showModel : defaults.showModel,
     showSkeleton: typeof state?.showSkeleton === 'boolean' ? state.showSkeleton : defaults.showSkeleton,
-    monitorMidpointXMm: clampNumber(
-      readNumber(state?.monitorMidpointXMm, defaults.monitorMidpointXMm),
-      PLANNER_POSTURE_LIMITS.monitorMidpointXMinMm,
-      PLANNER_POSTURE_LIMITS.monitorMidpointXMaxMm
+    monitorSizeIn: Math.round(
+      clampNumber(
+        readNumber(state?.monitorSizeIn, defaults.monitorSizeIn),
+        PLANNER_POSTURE_LIMITS.monitorSizeMinIn,
+        PLANNER_POSTURE_LIMITS.monitorSizeMaxIn
+      )
     ),
-    monitorMidpointYMm: clampNumber(
-      readNumber(state?.monitorMidpointYMm, defaults.monitorMidpointYMm),
-      PLANNER_POSTURE_LIMITS.monitorMidpointYMinMm,
-      PLANNER_POSTURE_LIMITS.monitorMidpointYMaxMm
+    monitorAspectRatio: isMonitorAspectRatio(state?.monitorAspectRatio)
+      ? state.monitorAspectRatio
+      : defaults.monitorAspectRatio,
+    monitorDistanceFromEyesMm: clampNumber(
+      monitorDistanceFromEyesMm,
+      PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm,
+      PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm
     ),
-    monitorMidpointZMm: clampNumber(
-      readNumber(state?.monitorMidpointZMm, defaults.monitorMidpointZMm),
-      PLANNER_POSTURE_LIMITS.monitorMidpointZMinMm,
-      PLANNER_POSTURE_LIMITS.monitorMidpointZMaxMm
+    monitorHeightFromBaseMm: clampNumber(
+      monitorHeightFromBaseMm,
+      PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm,
+      PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm
     ),
   } satisfies PlannerPostureSettings<PlannerPosturePreset>;
 }

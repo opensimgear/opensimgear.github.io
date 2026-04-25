@@ -26,6 +26,7 @@
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
     PLANNER_LAYOUT,
+    MONITOR_ASPECT_RATIO_OPTIONS,
     POSTURE_PRESET_OPTIONS,
     URL_STATE_DEBOUNCE_MS,
   } from './constants';
@@ -67,6 +68,7 @@
     CutListProfileType,
     PlannerCurrencyCode,
     PlannerInput,
+    PlannerMonitorAspectRatio,
     PlannerOptimizationSettings,
     PlannerPosturePreset,
     PlannerPostureSettings,
@@ -207,6 +209,7 @@
     clonePostureSettings(DEFAULT_POSTURE_SETTINGS)
   );
   let visibleModules = $state<PlannerVisibleModules>({
+    monitor: true,
     pedalTray: true,
     steeringColumn: true,
   });
@@ -777,26 +780,30 @@
     syncPlannerUrlState();
   }
 
-  function setMonitorMidpointXMm(value: number) {
-    postureSettings.monitorMidpointXMm = Math.max(
-      PLANNER_POSTURE_LIMITS.monitorMidpointXMinMm,
-      Math.min(PLANNER_POSTURE_LIMITS.monitorMidpointXMaxMm, value)
+  function setMonitorSizeIn(value: number) {
+    postureSettings.monitorSizeIn = Math.round(
+      Math.max(PLANNER_POSTURE_LIMITS.monitorSizeMinIn, Math.min(PLANNER_POSTURE_LIMITS.monitorSizeMaxIn, value))
     );
     syncPlannerUrlState();
   }
 
-  function setMonitorMidpointYMm(value: number) {
-    postureSettings.monitorMidpointYMm = Math.max(
-      PLANNER_POSTURE_LIMITS.monitorMidpointYMinMm,
-      Math.min(PLANNER_POSTURE_LIMITS.monitorMidpointYMaxMm, value)
+  function setMonitorAspectRatio(value: PlannerMonitorAspectRatio) {
+    postureSettings.monitorAspectRatio = value;
+    syncPlannerUrlState();
+  }
+
+  function setMonitorDistanceFromEyesMm(value: number) {
+    postureSettings.monitorDistanceFromEyesMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm, value)
     );
     syncPlannerUrlState();
   }
 
-  function setMonitorMidpointZMm(value: number) {
-    postureSettings.monitorMidpointZMm = Math.max(
-      PLANNER_POSTURE_LIMITS.monitorMidpointZMinMm,
-      Math.min(PLANNER_POSTURE_LIMITS.monitorMidpointZMaxMm, value)
+  function setMonitorHeightFromBaseMm(value: number) {
+    postureSettings.monitorHeightFromBaseMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm, value)
     );
     syncPlannerUrlState();
   }
@@ -993,26 +1000,31 @@
           </Folder>
           <Folder title="Monitor">
             <Slider
-              bind:value={() => postureSettings.monitorMidpointXMm, setMonitorMidpointXMm}
-              label="Midpoint X"
-              min={PLANNER_POSTURE_LIMITS.monitorMidpointXMinMm}
-              max={PLANNER_POSTURE_LIMITS.monitorMidpointXMaxMm}
+              bind:value={() => postureSettings.monitorSizeIn, setMonitorSizeIn}
+              label="Size"
+              min={PLANNER_POSTURE_LIMITS.monitorSizeMinIn}
+              max={PLANNER_POSTURE_LIMITS.monitorSizeMaxIn}
+              step={PLANNER_POSTURE_LIMITS.monitorSizeStepIn}
+              format={(value) => `${value.toFixed(0)} in`}
+            />
+            <List
+              bind:value={() => postureSettings.monitorAspectRatio, setMonitorAspectRatio}
+              options={MONITOR_ASPECT_RATIO_OPTIONS}
+              label="Aspect"
+            />
+            <Slider
+              bind:value={() => postureSettings.monitorDistanceFromEyesMm, setMonitorDistanceFromEyesMm}
+              label="Distance"
+              min={PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm}
+              max={PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
             <Slider
-              bind:value={() => postureSettings.monitorMidpointYMm, setMonitorMidpointYMm}
-              label="Midpoint Y"
-              min={PLANNER_POSTURE_LIMITS.monitorMidpointYMinMm}
-              max={PLANNER_POSTURE_LIMITS.monitorMidpointYMaxMm}
-              step={PLANNER_CONTROL_STEP_MM}
-              format={(value) => `${value} mm`}
-            />
-            <Slider
-              bind:value={() => postureSettings.monitorMidpointZMm, setMonitorMidpointZMm}
-              label="Midpoint Z"
-              min={PLANNER_POSTURE_LIMITS.monitorMidpointZMinMm}
-              max={PLANNER_POSTURE_LIMITS.monitorMidpointZMaxMm}
+              bind:value={() => postureSettings.monitorHeightFromBaseMm, setMonitorHeightFromBaseMm}
+              label="Height"
+              min={PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm}
+              max={PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
@@ -1192,6 +1204,7 @@
           {/if}
           <Button on:click={resetSetup} label="Reset" title="Reset" />
           <Folder title="Enabled Modules">
+            <Checkbox bind:value={visibleModules.monitor} label="Monitor" />
             <Checkbox bind:value={visibleModules.steeringColumn} label="Steering column" />
             <Checkbox bind:value={visibleModules.pedalTray} label="Pedal tray" />
           </Folder>

@@ -1,10 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
   DEFAULT_PLANNER_INPUT,
+  MONITOR_ASPECT_RATIO_OPTIONS,
   PLANNER_DIMENSION_LIMITS,
+  PLANNER_POSTURE_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { getSteeringColumnDistanceMaxMm } from '../../components/calculator/aluminum-rig-planner/geometry';
 import { mergePlannerQueryState } from '../../components/calculator/aluminum-rig-planner/query-state';
@@ -178,19 +181,40 @@ describe('aluminum rig planner query state', () => {
     expect(state.postureSettings.showSkeleton).toBe(true);
   });
 
-  it('sanitizes custom preset and monitor midpoint from shared-link state', () => {
+  it('sanitizes custom preset and monitor module values from shared-link state', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       posture: {
         preset: 'custom',
-        monitorMidpointXMm: Number.POSITIVE_INFINITY,
-        monitorMidpointYMm: -100,
-        monitorMidpointZMm: 9999,
+        monitorSizeIn: 999,
+        monitorAspectRatio: 'bogus',
+        monitorDistanceFromEyesMm: Number.POSITIVE_INFINITY,
+        monitorHeightFromBaseMm: -100,
       },
     });
 
     expect(state.postureSettings.preset).toBe('custom');
-    expect(state.postureSettings.monitorMidpointXMm).toBe(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorMidpointXMm);
-    expect(state.postureSettings.monitorMidpointYMm).toBe(0);
-    expect(state.postureSettings.monitorMidpointZMm).toBe(1000);
+    expect(state.postureSettings.monitorSizeIn).toBe(PLANNER_POSTURE_LIMITS.monitorSizeMaxIn);
+    expect(state.postureSettings.monitorAspectRatio).toBe(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorAspectRatio);
+    expect(state.postureSettings.monitorDistanceFromEyesMm).toBe(DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM);
+    expect(state.postureSettings.monitorHeightFromBaseMm).toBe(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm);
+    expect(
+      MONITOR_ASPECT_RATIO_OPTIONS.some((option) => option.value === state.postureSettings.monitorAspectRatio)
+    ).toBe(true);
+  });
+
+  it('migrates old monitor midpoint shared-link fields to the new monitor module shape', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorMidpointXMm: 1400,
+        monitorMidpointYMm: 900,
+        monitorMidpointZMm: 9999,
+      },
+    });
+
+    expect(state.postureSettings.monitorDistanceFromEyesMm).toBeGreaterThan(0);
+    expect(state.postureSettings.monitorDistanceFromEyesMm).not.toBe(
+      DEFAULT_PLANNER_POSTURE_SETTINGS.monitorDistanceFromEyesMm
+    );
+    expect(state.postureSettings.monitorHeightFromBaseMm).toBe(820);
   });
 });

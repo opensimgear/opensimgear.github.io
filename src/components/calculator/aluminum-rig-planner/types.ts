@@ -1,4 +1,5 @@
 export type PlannerVisibleModules = {
+  monitor: boolean;
   pedalTray: boolean;
   steeringColumn: boolean;
 };
@@ -10,6 +11,7 @@ export type PlannerCurrencyMode = 'auto' | 'eur' | 'usd';
 export type PlannerCurrencyCode = 'EUR' | 'USD';
 export type PlannerPosturePreset = 'formula' | 'gt' | 'rally' | 'road' | 'custom';
 export type PlannerSolvablePosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
+export type PlannerMonitorAspectRatio = '16:10' | '16:9' | '21:9' | '32:9' | '4:3' | '5:4' | '3:2';
 
 export type PlannerAnthropometryRatios = {
   sittingHeight: number;
@@ -31,9 +33,10 @@ export type PlannerPostureSettings<Preset extends PlannerPosturePreset = Planner
   heightCm: number;
   showModel: boolean;
   showSkeleton: boolean;
-  monitorMidpointXMm: number;
-  monitorMidpointYMm: number;
-  monitorMidpointZMm: number;
+  monitorSizeIn: number;
+  monitorAspectRatio: PlannerMonitorAspectRatio;
+  monitorDistanceFromEyesMm: number;
+  monitorHeightFromBaseMm: number;
 };
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;

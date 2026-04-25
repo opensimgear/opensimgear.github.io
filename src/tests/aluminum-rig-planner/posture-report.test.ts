@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  BASE_BEAM_HEIGHT_MM,
+  DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
+  DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
@@ -44,16 +47,23 @@ describe('aluminum rig planner posture report', () => {
     expect(Math.abs(report.eyeDebug.left[2] - report.eyeDebug.right[2])).toBeCloseTo(0.07, 6);
   });
 
-  it('returns a 10 mm monitor midpoint debug ball', () => {
+  it('returns a 10 mm monitor midpoint debug ball relative to eye center and base height', () => {
     const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      monitorMidpointXMm: 1234,
-      monitorMidpointYMm: 876,
-      monitorMidpointZMm: -55,
+      monitorDistanceFromEyesMm: DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM + 100,
+      monitorHeightFromBaseMm: DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM + 50,
     };
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
 
     expect(report.monitorDebug.diameterM).toBeCloseTo(0.01, 6);
-    expect(report.monitorDebug.position).toEqual([1.234, 0.876, -0.055]);
+    expect(report.monitorDebug.position[0]).toBeCloseTo(
+      report.eyeDebug.center[0] + postureSettings.monitorDistanceFromEyesMm * 0.001,
+      6
+    );
+    expect(report.monitorDebug.position[1]).toBeCloseTo(
+      (BASE_BEAM_HEIGHT_MM + postureSettings.monitorHeightFromBaseMm) * 0.001,
+      6
+    );
+    expect(report.monitorDebug.position[2]).toBe(0);
   });
 });

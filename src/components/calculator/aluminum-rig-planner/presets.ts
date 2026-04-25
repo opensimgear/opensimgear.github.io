@@ -1,4 +1,9 @@
-import { DEFAULT_PLANNER_INPUT, DEFAULT_POSTURE_HEIGHT_CM, PLANNER_DIMENSION_LIMITS } from './constants';
+import {
+  DEFAULT_PLANNER_INPUT,
+  DEFAULT_PLANNER_POSTURE_SETTINGS,
+  DEFAULT_POSTURE_HEIGHT_CM,
+  PLANNER_DIMENSION_LIMITS,
+} from './constants';
 import {
   clampPlannerInput,
   getPedalTrayDistanceMaxMm,
@@ -278,13 +283,11 @@ function createCandidateInput(input: PlannerInput, seed: PlannerPosturePresetSee
 
 function scoreCandidate(input: PlannerInput, preset: SolvablePlannerPosturePreset, heightCm: number) {
   const report = createPlannerPostureReport(input, {
+    ...DEFAULT_PLANNER_POSTURE_SETTINGS,
     preset,
     heightCm,
     showModel: true,
     showSkeleton: false,
-    monitorMidpointXMm: 1200,
-    monitorMidpointYMm: 850,
-    monitorMidpointZMm: 0,
   });
 
   return report.metrics.reduce((total, metric) => {

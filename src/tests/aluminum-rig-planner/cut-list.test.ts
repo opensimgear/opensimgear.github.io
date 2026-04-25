@@ -22,6 +22,7 @@ describe('aluminum rig planner cut list', () => {
     const cutList = createPlannerCutList(
       createGeometry(),
       {
+        monitor: false,
         steeringColumn: false,
         pedalTray: false,
       },
@@ -42,6 +43,7 @@ describe('aluminum rig planner cut list', () => {
         baseWidthMm: 600,
       }),
       {
+        monitor: false,
         steeringColumn: false,
         pedalTray: false,
       },
@@ -58,6 +60,7 @@ describe('aluminum rig planner cut list', () => {
         baseWidthMm: 600,
       }),
       {
+        monitor: false,
         steeringColumn: false,
         pedalTray: true,
       },
@@ -71,6 +74,7 @@ describe('aluminum rig planner cut list', () => {
     const cutList = createPlannerCutList(
       createGeometry(),
       {
+        monitor: false,
         steeringColumn: false,
         pedalTray: true,
       },
@@ -94,6 +98,7 @@ describe('aluminum rig planner cut list', () => {
     const cutList = createPlannerCutList(
       createGeometry(),
       {
+        monitor: true,
         steeringColumn: true,
         pedalTray: true,
       },
@@ -140,6 +145,7 @@ describe('aluminum rig planner cut list', () => {
     const entries = createPlannerCutListEntries(
       createGeometry(),
       {
+        monitor: false,
         steeringColumn: false,
         pedalTray: true,
       },

@@ -8,6 +8,7 @@
   import { createPedalsModule } from './modules/pedals';
   import ProfileMesh from './ProfileMesh.svelte';
   import { createBaseModule } from './modules/base';
+  import { createMonitorModule } from './modules/monitor';
   import { createPedalTrayModule } from './modules/pedal-tray';
   import { createSeatModule } from './modules/seat';
   import { createSteeringColumnModule } from './modules/steering-column';
@@ -51,6 +52,7 @@
   const pedalsModule = $derived(createPedalsModule(input));
   const seatModule = $derived(createSeatModule(input));
   const wheelModule = $derived(createWheelModule(input));
+  const monitorModule = $derived(createMonitorModule(postureReport, postureSettings));
   const postureSkeleton = $derived(
     createPlannerPostureSkeleton(input, {
       ...postureSettings,
@@ -77,7 +79,13 @@
     }));
 
     if (!showEndCaps) {
-      return [...adjustedBeams, ...(visibleModules.pedalTray ? pedalsModule : []), ...wheelModule, ...seatModule];
+      return [
+        ...adjustedBeams,
+        ...(visibleModules.pedalTray ? pedalsModule : []),
+        ...wheelModule,
+        ...seatModule,
+        ...(visibleModules.monitor ? monitorModule : []),
+      ];
     }
 
     return [
@@ -86,6 +94,7 @@
       ...(visibleModules.pedalTray ? pedalsModule : []),
       ...wheelModule,
       ...seatModule,
+      ...(visibleModules.monitor ? monitorModule : []),
     ];
   });
 </script>
@@ -108,14 +117,18 @@
   />
 {/if}
 
-{#each eyeDebugBalls as eyeBall (eyeBall.id)}
-  <T.Mesh position={eyeBall.position}>
-    <T.SphereGeometry args={[postureReport.eyeDebug.diameterM / 2, 16, 12]} />
-    <T.MeshStandardMaterial color="#22c55e" emissive="#16a34a" emissiveIntensity={0.4} />
-  </T.Mesh>
-{/each}
+{#if postureSettings.showSkeleton}
+  {#each eyeDebugBalls as eyeBall (eyeBall.id)}
+    <T.Mesh position={eyeBall.position}>
+      <T.SphereGeometry args={[postureReport.eyeDebug.diameterM / 2, 16, 12]} />
+      <T.MeshStandardMaterial color="#22c55e" emissive="#16a34a" emissiveIntensity={0.4} />
+    </T.Mesh>
+  {/each}
+{/if}
 
-<T.Mesh position={postureReport.monitorDebug.position}>
-  <T.SphereGeometry args={[postureReport.monitorDebug.diameterM / 2, 16, 12]} />
-  <T.MeshStandardMaterial color="#050505" />
-</T.Mesh>
+{#if visibleModules.monitor}
+  <T.Mesh position={postureReport.monitorDebug.position}>
+    <T.SphereGeometry args={[postureReport.monitorDebug.diameterM / 2, 16, 12]} />
+    <T.MeshStandardMaterial color="#050505" />
+  </T.Mesh>
+{/if}

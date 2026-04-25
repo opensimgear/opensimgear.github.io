@@ -3,6 +3,7 @@ import type {
   PlannerAnthropometryLengthsMm,
   PlannerAnthropometryRatios,
   PlannerInput,
+  PlannerMonitorAspectRatio,
   PlannerOptimizationSettings,
   PlannerPostureSettings,
   PlannerPosturePreset,
@@ -162,12 +163,23 @@ export const POSTURE_PRESET_OPTIONS = [
   { text: 'Road', value: 'road' },
   { text: 'Custom', value: 'custom' },
 ] as const;
+export const MONITOR_ASPECT_RATIO_OPTIONS = [
+  { text: '16:10', value: '16:10' },
+  { text: '16:9', value: '16:9' },
+  { text: '21:9', value: '21:9' },
+  { text: '32:9', value: '32:9' },
+  { text: '3:2', value: '3:2' },
+  { text: '4:3', value: '4:3' },
+  { text: '5:4', value: '5:4' },
+] as const satisfies ReadonlyArray<{ text: string; value: PlannerMonitorAspectRatio }>;
 
 export const DEFAULT_POSTURE_HEIGHT_CM = 169;
 export const DEFAULT_ACTIVE_POSTURE_PRESET: PlannerPosturePreset = 'gt';
-export const DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;
-export const DEFAULT_MONITOR_MIDPOINT_Y_MM = 850;
-export const DEFAULT_MONITOR_MIDPOINT_Z_MM = 0;
+export const DEFAULT_MONITOR_SIZE_IN = 32;
+export const DEFAULT_MONITOR_ASPECT_RATIO: PlannerMonitorAspectRatio = '16:10';
+export const DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM = 900;
+export const DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM = 770;
+export const LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;
 export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM: PlannerAnthropometryLengthsMm = {
   sittingHeight: 806.1,
   seatedEyeHeight: 755.4,
@@ -217,9 +229,10 @@ export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   heightCm: DEFAULT_POSTURE_HEIGHT_CM,
   showModel: true,
   showSkeleton: false,
-  monitorMidpointXMm: DEFAULT_MONITOR_MIDPOINT_X_MM,
-  monitorMidpointYMm: DEFAULT_MONITOR_MIDPOINT_Y_MM,
-  monitorMidpointZMm: DEFAULT_MONITOR_MIDPOINT_Z_MM,
+  monitorSizeIn: DEFAULT_MONITOR_SIZE_IN,
+  monitorAspectRatio: DEFAULT_MONITOR_ASPECT_RATIO,
+  monitorDistanceFromEyesMm: DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
+  monitorHeightFromBaseMm: DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM,
 };
 
 export const PLANNER_POSTURE_LIMITS = {
@@ -229,12 +242,13 @@ export const PLANNER_POSTURE_LIMITS = {
   ratioMax: 0.7,
   ratioStep: 0.001,
   lengthStepMm: 1,
-  monitorMidpointXMinMm: 0,
-  monitorMidpointXMaxMm: 2500,
-  monitorMidpointYMinMm: 0,
-  monitorMidpointYMaxMm: 2000,
-  monitorMidpointZMinMm: -1000,
-  monitorMidpointZMaxMm: 1000,
+  monitorSizeMinIn: 24,
+  monitorSizeMaxIn: 80,
+  monitorSizeStepIn: 1,
+  monitorDistanceFromEyesMinMm: 250,
+  monitorDistanceFromEyesMaxMm: 2500,
+  monitorHeightFromBaseMinMm: 0,
+  monitorHeightFromBaseMaxMm: 1600,
 } as const;
 
 export const PLANNER_DIMENSION_LIMITS = {

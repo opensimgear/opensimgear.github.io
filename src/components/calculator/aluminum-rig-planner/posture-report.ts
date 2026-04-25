@@ -23,11 +23,13 @@ export type PlannerPostureMetric = {
   hint?: string;
 };
 export type PlannerPostureEyeDebug = {
+  center: PosturePoint;
   left: PosturePoint;
   right: PosturePoint;
   diameterM: number;
   constants: {
     neckOffsetXMm: number;
+    neckOffsetYMm: number;
     neckOffsetZMm: number;
     eyeSpacingMm: number;
     ballDiameterMm: number;
@@ -52,7 +54,7 @@ const EPSILON = 0.000001;
 const EYE_DEBUG_NECK_OFFSET_X_MM = 142;
 const EYE_DEBUG_NECK_OFFSET_Y_MM = 31;
 const EYE_DEBUG_NECK_OFFSET_Z_MM = 0;
-const EYE_DEBUG_SPACING_MM = 64;
+const EYE_DEBUG_SPACING_MM = 70;
 const EYE_DEBUG_BALL_DIAMETER_MM = 25;
 const MONITOR_DEBUG_BALL_DIAMETER_MM = 10;
 
@@ -204,11 +206,14 @@ function getWheelCenter(input: PlannerInput): PosturePoint {
   ];
 }
 
-function getMonitorMidpoint(settings: PlannerPostureSettings<PlannerPosturePreset>): PosturePoint {
+function getMonitorMidpoint(
+  eyeCenter: PosturePoint,
+  settings: PlannerPostureSettings<PlannerPosturePreset>
+): PosturePoint {
   return [
-    settings.monitorMidpointXMm * MM_TO_METERS,
-    settings.monitorMidpointYMm * MM_TO_METERS,
-    settings.monitorMidpointZMm * MM_TO_METERS,
+    eyeCenter[0] + settings.monitorDistanceFromEyesMm * MM_TO_METERS,
+    (BASE_BEAM_HEIGHT_MM + settings.monitorHeightFromBaseMm) * MM_TO_METERS,
+    0,
   ];
 }
 
@@ -221,11 +226,13 @@ function createEyeDebug(neck: PosturePoint): PlannerPostureEyeDebug {
   const halfSpacingM = (EYE_DEBUG_SPACING_MM * MM_TO_METERS) / 2;
 
   return {
+    center,
     left: [center[0], center[1], center[2] - halfSpacingM],
     right: [center[0], center[1], center[2] + halfSpacingM],
     diameterM: EYE_DEBUG_BALL_DIAMETER_MM * MM_TO_METERS,
     constants: {
       neckOffsetXMm: EYE_DEBUG_NECK_OFFSET_X_MM,
+      neckOffsetYMm: EYE_DEBUG_NECK_OFFSET_Y_MM,
       neckOffsetZMm: EYE_DEBUG_NECK_OFFSET_Z_MM,
       eyeSpacingMm: EYE_DEBUG_SPACING_MM,
       ballDiameterMm: EYE_DEBUG_BALL_DIAMETER_MM,
@@ -233,9 +240,9 @@ function createEyeDebug(neck: PosturePoint): PlannerPostureEyeDebug {
   };
 }
 
-function createMonitorDebug(settings: PlannerPostureSettings<PlannerPosturePreset>): PlannerPostureMonitorDebug {
+function createMonitorDebug(position: PosturePoint): PlannerPostureMonitorDebug {
   return {
-    position: getMonitorMidpoint(settings),
+    position,
     diameterM: MONITOR_DEBUG_BALL_DIAMETER_MM * MM_TO_METERS,
     constants: {
       ballDiameterMm: MONITOR_DEBUG_BALL_DIAMETER_MM,
@@ -274,7 +281,8 @@ export function createPlannerPostureReport(
   const ranges = TARGET_RANGES[postureSettings.preset];
   const wheelCenter = getWheelCenter(input);
   const wheelTopY = wheelCenter[1] + (input.wheelDiameterMm * MM_TO_METERS) / 2;
-  const monitorMidpoint = getMonitorMidpoint(postureSettings);
+  const eyeDebug = createEyeDebug(skeleton.joints.neck);
+  const monitorMidpoint = getMonitorMidpoint(eyeDebug.center, postureSettings);
   const metrics = [
     createMetric(
       'wristBend',
@@ -333,12 +341,12 @@ export function createPlannerPostureReport(
       projectedAngleDeg(skeleton.joints.hipLeft, skeleton.joints.kneeLeft),
       ranges
     ),
-    createMetric('eyeToWheel', 'Eye over wheel', 'mm', (skeleton.joints.eye[1] - wheelTopY) / MM_TO_METERS, ranges),
+    createMetric('eyeToWheel', 'Eye over wheel', 'mm', (eyeDebug.center[1] - wheelTopY) / MM_TO_METERS, ranges),
     createMetric(
       'eyeToMonitor',
       'Eye vs monitor midpoint',
       'mm',
-      (skeleton.joints.eye[1] - monitorMidpoint[1]) / MM_TO_METERS,
+      (eyeDebug.center[1] - monitorMidpoint[1]) / MM_TO_METERS,
       ranges
     ),
   ];
@@ -347,8 +355,8 @@ export function createPlannerPostureReport(
   return {
     metrics,
     hints,
-    eyeDebug: createEyeDebug(skeleton.joints.neck),
-    monitorDebug: createMonitorDebug(postureSettings),
+    eyeDebug,
+    monitorDebug: createMonitorDebug(monitorMidpoint),
   };
 }
 

@@ -100,6 +100,11 @@
     return `left: ${nextX}px; top: ${nextY}px;`;
   });
   const postureMetricsWithIssues = $derived(postureReport.metrics.filter((metric) => metric.status !== 'ok').length);
+  const postureMetricsWithWarnings = $derived(postureReport.metrics.filter((metric) => metric.status === 'warn').length);
+  const postureMetricsWithErrors = $derived(postureReport.metrics.filter((metric) => metric.status === 'bad').length);
+  const posturePanelLabel = $derived(
+    `Posture metrics: ${postureMetricsWithWarnings} warning${postureMetricsWithWarnings === 1 ? '' : 's'}, ${postureMetricsWithErrors} error${postureMetricsWithErrors === 1 ? '' : 's'}`
+  );
 
   function formatPostureMetricValue(metric: PlannerPostureReport['metrics'][number]) {
     const value = metric.unit === 'mm' ? metric.valueMm : metric.valueDeg;
@@ -324,27 +329,38 @@
   {/if}
 
   <div class="posture-debug-panel" aria-label="Posture metrics">
-    <div class="posture-debug-panel__header">
-      <span>Posture</span>
-      <strong>{postureMetricsWithIssues} issue{postureMetricsWithIssues === 1 ? '' : 's'}</strong>
-    </div>
-    <div class="posture-debug-panel__metrics">
-      {#each postureReport.metrics as metric (metric.key)}
-        <div class="posture-debug-panel__metric" data-status={metric.status}>
-          <span class="posture-debug-panel__label">{metric.label}</span>
-          <span class="posture-debug-panel__value">{formatPostureMetricValue(metric)}</span>
-          <span class="posture-debug-panel__range">{formatPostureMetricRange(metric)}</span>
-          <span class="posture-debug-panel__status">{metric.status}</span>
-        </div>
-      {/each}
-    </div>
-    {#if postureReport.hints.length > 0}
-      <div class="posture-debug-panel__hints">
-        {#each postureReport.hints as hint (hint)}
-          <p>{hint}</p>
+    <button class="posture-debug-panel__trigger" type="button" aria-label={posturePanelLabel}>
+      <span class="posture-debug-panel__trigger-label">P</span>
+      {#if postureMetricsWithErrors > 0}
+        <span class="posture-debug-panel__badge" data-status="bad">x</span>
+      {/if}
+      {#if postureMetricsWithWarnings > 0}
+        <span class="posture-debug-panel__badge" data-status="warn">!</span>
+      {/if}
+    </button>
+    <div class="posture-debug-panel__content">
+      <div class="posture-debug-panel__header">
+        <span>Posture</span>
+        <strong>{postureMetricsWithIssues} issue{postureMetricsWithIssues === 1 ? '' : 's'}</strong>
+      </div>
+      <div class="posture-debug-panel__metrics">
+        {#each postureReport.metrics as metric (metric.key)}
+          <div class="posture-debug-panel__metric" data-status={metric.status}>
+            <span class="posture-debug-panel__label">{metric.label}</span>
+            <span class="posture-debug-panel__value">{formatPostureMetricValue(metric)}</span>
+            <span class="posture-debug-panel__range">{formatPostureMetricRange(metric)}</span>
+            <span class="posture-debug-panel__status">{metric.status}</span>
+          </div>
         {/each}
       </div>
-    {/if}
+      {#if postureReport.hints.length > 0}
+        <div class="posture-debug-panel__hints">
+          {#each postureReport.hints as hint (hint)}
+            <p>{hint}</p>
+          {/each}
+        </div>
+      {/if}
+    </div>
   </div>
 </div>
 
@@ -395,11 +411,7 @@
   }
 
   .posture-debug-panel {
-    background: rgb(24 24 27 / 0.9);
-    border: 1px solid rgb(255 255 255 / 0.14);
-    border-radius: 6px;
     bottom: 6px;
-    box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
     color: white;
     font-family:
       Inter,
@@ -411,15 +423,86 @@
       sans-serif;
     font-size: 10px;
     line-height: 1.25;
-    max-height: min(48%, 260px);
-    max-width: min(420px, calc(100% - 12px));
+    pointer-events: auto;
+    position: absolute;
+    right: 6px;
+    z-index: 10;
+  }
+
+  .posture-debug-panel__trigger {
+    align-items: center;
+    background: rgb(24 24 27 / 0.9);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 6px;
+    box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
+    color: white;
+    cursor: pointer;
+    display: grid;
+    font: inherit;
+    height: 42px;
+    justify-items: center;
+    padding: 0;
+    position: relative;
+    width: 42px;
+  }
+
+  .posture-debug-panel__trigger-label {
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .posture-debug-panel__badge {
+    align-items: center;
+    border-radius: 2px;
+    color: rgb(24 24 27);
+    display: grid;
+    font-size: 9px;
+    font-weight: 800;
+    height: 14px;
+    justify-items: center;
+    line-height: 1;
+    position: absolute;
+    width: 14px;
+  }
+
+  .posture-debug-panel__badge[data-status='bad'] {
+    background: rgb(248 113 113);
+    right: -4px;
+    top: -4px;
+  }
+
+  .posture-debug-panel__badge[data-status='warn'] {
+    background: rgb(250 204 21);
+    bottom: -4px;
+    right: -4px;
+  }
+
+  .posture-debug-panel__content {
+    background: rgb(24 24 27 / 0.9);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 6px;
+    bottom: calc(100% + 6px);
+    box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
+    max-height: min(48vh, 260px);
+    max-width: min(420px, calc(100vw - 24px));
+    opacity: 0;
     overflow: auto;
     padding: 7px 8px;
     pointer-events: none;
     position: absolute;
-    right: 6px;
-    width: min(420px, calc(100% - 12px));
-    z-index: 10;
+    right: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease;
+    width: min(420px, calc(100vw - 24px));
+  }
+
+  .posture-debug-panel:hover .posture-debug-panel__content,
+  .posture-debug-panel:focus-within .posture-debug-panel__content {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .posture-debug-panel__header,
