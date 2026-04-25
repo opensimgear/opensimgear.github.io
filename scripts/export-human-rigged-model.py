@@ -505,6 +505,17 @@ def calculate_average_distance(bones, pairs):
     return sum(distances) / len(distances)
 
 
+def calculate_heel_length_share(bones):
+    shares = []
+
+    for side in ("left", "right"):
+        heel_length = (bones[f"{side}Heel"][0] - bones[f"{side}Foot"][0]).length
+        foot_bone_length = (bones[f"{side}Foot"][0] - bones[f"{side}FootTip"][0]).length
+        shares.append(heel_length / (heel_length + foot_bone_length))
+
+    return rounded(sum(shares) / len(shares), MODEL_RATIO_PRECISION)
+
+
 def calculate_anthropometry_ratios(bones, min_planner, max_planner):
     height = max_planner.y - min_planner.y
     hip = bones["torso"][0]
@@ -575,7 +586,7 @@ def format_ts_number(value):
     return f"{value:.1f}".rstrip("0").rstrip(".")
 
 
-def format_generated_anthropometry_defaults(ratios):
+def format_generated_anthropometry_defaults(ratios, heel_length_share):
     lengths = {
         key: rounded(ratios[key] * DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM * 10, MODEL_LENGTH_PRECISION)
         for key in ANTHROPOMETRY_KEYS
@@ -590,6 +601,8 @@ const DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM = {DEFAULT_ANTHROPOMETRY_REFEREN
 export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM = {{
 {length_lines}
 }} satisfies PlannerAnthropometryLengthsMm;
+
+export const DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE = {heel_length_share};
 
 function getDefaultAnthropometryRatio(lengthMm: number) {{
   return Number((lengthMm / (DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM * 10)).toFixed(3));
@@ -613,7 +626,10 @@ export const ANTHROPOMETRY_LENGTH_LIMITS_MM = Object.fromEntries(
 
 def write_anthropometry_defaults(bones, min_planner, max_planner):
     ratios = calculate_anthropometry_ratios(bones, min_planner, max_planner)
-    TARGET_ANTHROPOMETRY_DEFAULTS.write_text(format_generated_anthropometry_defaults(ratios), encoding="utf-8")
+    heel_length_share = calculate_heel_length_share(bones)
+    TARGET_ANTHROPOMETRY_DEFAULTS.write_text(
+        format_generated_anthropometry_defaults(ratios, heel_length_share), encoding="utf-8"
+    )
 
 
 def get_slice_points(body_vertices, target_y, band_height):

@@ -15,6 +15,8 @@ export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM = {
   footLength: 241.7,
 } satisfies PlannerAnthropometryLengthsMm;
 
+export const DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE = 0.246;
+
 function getDefaultAnthropometryRatio(lengthMm: number) {
   return Number((lengthMm / (DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM * 10)).toFixed(3));
 }

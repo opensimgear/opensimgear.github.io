@@ -210,6 +210,13 @@ function expectPointCloseMm(actual: PosturePoint, expected: PosturePoint) {
   expect(Math.abs(actual[2] - expected[2])).toBeLessThanOrEqual(0.001);
 }
 
+function expectBoneWorldPositionOnTarget(bone: Bone, target: PosturePoint, label: string) {
+  const actual = bone.getWorldPosition(new Vector3());
+  const expected = new Vector3(...target);
+
+  expect(actual.distanceTo(expected), label).toBeLessThanOrEqual(0.003);
+}
+
 describe('aluminum rig planner human model rig', () => {
   it('calculates bone rig ratios from the GLB model rest pose', async () => {
     const gltf = await loadHumanModel();
@@ -336,6 +343,32 @@ describe('aluminum rig planner human model rig', () => {
 
     basicModel!.dispose();
     advancedModel!.dispose();
+  });
+
+  it('places rigged feet on the solved pedal targets', async () => {
+    const gltf = await loadHumanModel();
+    const model = createRiggedHumanModelFromRoot(gltf.scene);
+    expect(model).not.toBeNull();
+
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const bones = collectBones(model!.object);
+
+    model!.applySkeleton(skeleton, 1);
+
+    expectBoneWorldPositionOnTarget(bones.get('leftFoot')!, skeleton.joints.heelLeft, 'left foot bone at heel target');
+    expectBoneWorldPositionOnTarget(bones.get('leftFootTip')!, skeleton.joints.toeLeft, 'left foot tip at toe target');
+    expectBoneWorldPositionOnTarget(
+      bones.get('rightFoot')!,
+      skeleton.joints.heelRight,
+      'right foot bone at heel target'
+    );
+    expectBoneWorldPositionOnTarget(
+      bones.get('rightFootTip')!,
+      skeleton.joints.toeRight,
+      'right foot tip at toe target'
+    );
+
+    model!.dispose();
   });
 
   it('keeps head world rotation fixed when posture changes', async () => {

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   BASE_BEAM_HEIGHT_MM,
+  DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE,
   DEFAULT_ANTHROPOMETRY_RATIOS,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
@@ -202,6 +203,10 @@ describe('aluminum rig planner posture solver', () => {
     const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
     const footLength = DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM;
     const tallerFootLength = DEFAULT_ANTHROPOMETRY_RATIOS.footLength * (205 / 100);
+    const heelLength = footLength * DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE;
+    const toeLength = footLength - heelLength;
+    const tallerHeelLength = tallerFootLength * DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE;
+    const tallerToeLength = tallerFootLength - tallerHeelLength;
     const trayHalfWidthMm =
       Math.max(0, DEFAULT_PLANNER_INPUT.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm) / 2;
     const acceleratorCenterLegacyZmm =
@@ -253,6 +258,10 @@ describe('aluminum rig planner posture solver', () => {
       getDistance(skeleton.joints.ankleRight, skeleton.joints.heelRight) +
         getDistance(skeleton.joints.heelRight, skeleton.joints.toeRight)
     ).toBeCloseTo(footLength, 5);
+    expect(getDistance(skeleton.joints.ankleLeft, skeleton.joints.heelLeft)).toBeCloseTo(heelLength, 5);
+    expect(getDistance(skeleton.joints.heelLeft, skeleton.joints.toeLeft)).toBeCloseTo(toeLength, 5);
+    expect(getDistance(skeleton.joints.ankleRight, skeleton.joints.heelRight)).toBeCloseTo(heelLength, 5);
+    expect(getDistance(skeleton.joints.heelRight, skeleton.joints.toeRight)).toBeCloseTo(toeLength, 5);
     expect(getDistance(tallerSkeleton.joints.ankleLeft, tallerSkeleton.joints.heelLeft)).toBeGreaterThan(
       getDistance(skeleton.joints.ankleLeft, skeleton.joints.heelLeft)
     );
@@ -273,6 +282,19 @@ describe('aluminum rig planner posture solver', () => {
       getDistance(tallerSkeleton.joints.ankleRight, tallerSkeleton.joints.heelRight) +
         getDistance(tallerSkeleton.joints.heelRight, tallerSkeleton.joints.toeRight)
     ).toBeCloseTo(tallerFootLength, 5);
+    expect(getDistance(tallerSkeleton.joints.ankleLeft, tallerSkeleton.joints.heelLeft)).toBeCloseTo(
+      tallerHeelLength,
+      5
+    );
+    expect(getDistance(tallerSkeleton.joints.heelLeft, tallerSkeleton.joints.toeLeft)).toBeCloseTo(tallerToeLength, 5);
+    expect(getDistance(tallerSkeleton.joints.ankleRight, tallerSkeleton.joints.heelRight)).toBeCloseTo(
+      tallerHeelLength,
+      5
+    );
+    expect(getDistance(tallerSkeleton.joints.heelRight, tallerSkeleton.joints.toeRight)).toBeCloseTo(
+      tallerToeLength,
+      5
+    );
     expect(baseHeelAngle).toBeCloseTo(tallerHeelAngle, 6);
     expect(baseHeelAngle).toBeCloseTo(
       getAngleAtJoint(skeleton.joints.ankleRight, skeleton.joints.heelRight, skeleton.joints.toeRight),

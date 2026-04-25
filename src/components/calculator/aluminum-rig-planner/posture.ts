@@ -1,6 +1,7 @@
 import {
   BASE_BEAM_HEIGHT_MM,
   BASE_MODULE_LAYOUT,
+  DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE,
   DEFAULT_ANTHROPOMETRY_RATIOS,
   DEFAULT_POSTURE_HEIGHT_CM,
   HALF_PROFILE_SHORT_MM,
@@ -65,7 +66,6 @@ const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
 export const POSTURE_HIP_FORWARD_ON_SEAT_MM = 125;
 export const POSTURE_HIP_ABOVE_SEAT_MM = 130;
 export const POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM = 60;
-const POSTURE_HEEL_LENGTH_SHARE = 0.335;
 const POSTURE_HEEL_FOOT_ANGLE_RAD = toRad(84.4);
 const HAND_GRIP_LENGTH_MIN_MM = 55;
 const HAND_GRIP_LENGTH_MAX_MM = 140;
@@ -183,7 +183,7 @@ function getPedalTarget(input: PlannerInput, centerYmm: number, footLengthM: num
 }
 
 function getHeelLength(heightM: number) {
-  return DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM * POSTURE_HEEL_LENGTH_SHARE;
+  return DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM * DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE;
 }
 
 function getWheelTargets(input: PlannerInput, rightSign: number) {

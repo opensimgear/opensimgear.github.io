@@ -40,8 +40,11 @@ describe('human rig export script', () => {
     expect(exportScriptSource).toContain('DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM = 169');
     expect(exportScriptSource).toContain('POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_M = 0.06');
     expect(exportScriptSource).toMatch(/def calculate_anthropometry_ratios\(bones, min_planner, max_planner\):/);
-    expect(exportScriptSource).toMatch(/def format_generated_anthropometry_defaults\(ratios\):/);
+    expect(exportScriptSource).toMatch(/def calculate_heel_length_share\(bones\):/);
+    expect(exportScriptSource).toMatch(/def format_generated_anthropometry_defaults\(ratios, heel_length_share\):/);
     expect(exportScriptSource).toMatch(/write_anthropometry_defaults\(bones, min_planner, max_planner\)/);
+    expect(exportScriptSource).toContain('export const DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE = {heel_length_share};');
+    expect(exportScriptSource).toContain('heel_length_share = calculate_heel_length_share(bones)');
     expect(exportScriptSource).toContain('satisfies PlannerAnthropometryLengthsMm');
     expect(exportScriptSource).toContain('Record<keyof PlannerAnthropometryRatios');
   });
