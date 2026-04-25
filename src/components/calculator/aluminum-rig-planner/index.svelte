@@ -18,6 +18,8 @@
     DEFAULT_PLANNER_POSTURE_SETTINGS,
     DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
     DEFAULT_PLANNER_INPUT,
+    DEFAULT_ACTIVE_POSTURE_PRESET,
+    DEFAULT_POSTURE_HEIGHT_CM,
     getPlannerStockCostDefault,
     getPlannerStockCostMax,
     PLANNER_POSTURE_LIMITS,
@@ -44,6 +46,14 @@
   } from './measurement-overlay';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
   import { createPlannerOptimizationResult } from './optimizer';
+  import { createPlannerPostureReport, type PlannerPostureReport } from './posture-report';
+  import {
+    applyPresetToPlannerInput,
+    createPresetPlannerInput,
+    getPresetAfterPlannerInputEdit,
+    isPresetSolvablePreset,
+    recomputePresetDynamicPlannerInput,
+  } from './presets';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
     getAluminumRigPaneExpandedState,
@@ -69,7 +79,8 @@
     isNarrowViewport?: boolean;
     measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
-    postureSettings: PlannerPostureSettings;
+    postureReport: PlannerPostureReport;
+    postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   }>;
@@ -78,13 +89,17 @@
   const MEASUREMENT_OVERLAY_TIMEOUT_MS = 1000;
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
-  const DEFAULT_INPUT: PlannerInput = { ...DEFAULT_PLANNER_INPUT };
+  const DEFAULT_INPUT: PlannerInput = createPresetPlannerInput(
+    DEFAULT_ACTIVE_POSTURE_PRESET,
+    DEFAULT_POSTURE_HEIGHT_CM,
+    DEFAULT_PLANNER_INPUT
+  );
   const DEFAULT_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings = {
     ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
     profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
     stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({ ...option })),
   };
-  const DEFAULT_POSTURE_SETTINGS: PlannerPostureSettings = {
+  const DEFAULT_POSTURE_SETTINGS: PlannerPostureSettings<PlannerPosturePreset> = {
     ...DEFAULT_PLANNER_POSTURE_SETTINGS,
   };
   const PLANNER_TEST_ID_TARGETS = [
@@ -162,7 +177,9 @@
     };
   }
 
-  function clonePostureSettings(settings: PlannerPostureSettings): PlannerPostureSettings {
+  function clonePostureSettings(
+    settings: PlannerPostureSettings<PlannerPosturePreset>
+  ): PlannerPostureSettings<PlannerPosturePreset> {
     return { ...settings };
   }
 
@@ -186,7 +203,9 @@
   let optimizationSettings = $state<PlannerOptimizationSettings>(
     cloneOptimizationSettings(DEFAULT_OPTIMIZATION_SETTINGS)
   );
-  let postureSettings = $state<PlannerPostureSettings>(clonePostureSettings(DEFAULT_POSTURE_SETTINGS));
+  let postureSettings = $state<PlannerPostureSettings<PlannerPosturePreset>>(
+    clonePostureSettings(DEFAULT_POSTURE_SETTINGS)
+  );
   let visibleModules = $state<PlannerVisibleModules>({
     pedalTray: true,
     steeringColumn: true,
@@ -205,6 +224,7 @@
   let controlsReady = $state(false);
   let currencyLocale = $state(DEFAULT_CURRENCY_LOCALE);
   let measurementHideTimeout: ReturnType<typeof setTimeout> | null = null;
+  let pendingCustomPresetInput: PlannerInput | null = null;
 
   async function loadScene() {
     if (PlannerScene || sceneStatus === 'loading') return;
@@ -274,6 +294,7 @@
   });
 
   const geometry = $derived(derivePlannerGeometry(plannerInput));
+  const postureReport = $derived(createPlannerPostureReport(geometry.input, postureSettings));
   const measurementOverlay = $derived.by(() => {
     if (!activeMeasurementKey) {
       return null;
@@ -431,6 +452,8 @@
   }
 
   function syncPlannerUrlState() {
+    flushPosturePresetCustomMark();
+
     if (!mounted || typeof window === 'undefined') {
       return;
     }
@@ -451,7 +474,29 @@
     debouncedUrlStateWriter.schedule(url.toString());
   }
 
+  function markPosturePresetCustom() {
+    pendingCustomPresetInput = { ...$state.snapshot(plannerInput) };
+  }
+
+  function flushPosturePresetCustomMark() {
+    if (!pendingCustomPresetInput) {
+      return;
+    }
+
+    const previousInput = pendingCustomPresetInput;
+    const nextPreset = getPresetAfterPlannerInputEdit(postureSettings.preset, previousInput, plannerInput);
+
+    pendingCustomPresetInput = null;
+
+    if (nextPreset === postureSettings.preset) {
+      return;
+    }
+
+    postureSettings.preset = nextPreset;
+  }
+
   function setBaseLengthMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.baseLengthMm = value;
 
     if (plannerInput.seatBaseDepthMm > Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, value)) {
@@ -468,6 +513,7 @@
   }
 
   function setBaseWidthMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.baseWidthMm = value;
     clampPedalSettings();
     syncPlannerUrlState();
@@ -475,6 +521,7 @@
   }
 
   function setSeatBaseDepthMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.seatBaseDepthMm = Math.max(
       PLANNER_DIMENSION_LIMITS.seatBaseDepthMinMm,
       Math.min(seatBaseDepthMaxMm, value)
@@ -490,12 +537,14 @@
   }
 
   function setBaseInnerBeamSpacingMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.baseInnerBeamSpacingMm = value;
     syncPlannerUrlState();
     scheduleMeasurementOverlay('baseInnerBeamSpacingMm');
   }
 
   function setSeatLengthMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.seatLengthMm = Math.max(
       PLANNER_DIMENSION_LIMITS.seatLengthMinMm,
       Math.min(PLANNER_DIMENSION_LIMITS.seatLengthMaxMm, value)
@@ -504,6 +553,7 @@
   }
 
   function setSeatDeltaMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.seatDeltaMm = Math.max(
       PLANNER_DIMENSION_LIMITS.seatDeltaMinMm,
       Math.min(PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm, value)
@@ -512,6 +562,7 @@
   }
 
   function setSeatHeightFromBaseInnerBeamsMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.seatHeightFromBaseInnerBeamsMm = Math.max(
       PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMinMm,
       Math.min(PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMaxMm, value)
@@ -520,6 +571,7 @@
   }
 
   function setSeatAngleDeg(value: number) {
+    markPosturePresetCustom();
     plannerInput.seatAngleDeg = Math.max(
       PLANNER_DIMENSION_LIMITS.seatAngleDegMin,
       Math.min(PLANNER_DIMENSION_LIMITS.seatAngleDegMax, value)
@@ -528,6 +580,7 @@
   }
 
   function setBackrestAngleDeg(value: number) {
+    markPosturePresetCustom();
     plannerInput.backrestAngleDeg = Math.max(
       PLANNER_DIMENSION_LIMITS.backrestAngleDegMin,
       Math.min(PLANNER_DIMENSION_LIMITS.backrestAngleDegMax, value)
@@ -536,6 +589,7 @@
   }
 
   function setPedalTrayDepthMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.pedalTrayDepthMm = Math.max(
       PLANNER_DIMENSION_LIMITS.pedalTrayDepthMinMm,
       Math.min(PLANNER_DIMENSION_LIMITS.pedalTrayDepthMaxMm, value)
@@ -547,21 +601,25 @@
   }
 
   function setPedalsHeightMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.pedalsHeightMm = Math.max(pedalsHeightLimits.min, Math.min(pedalsHeightLimits.max, value));
     syncPlannerUrlState();
   }
 
   function setPedalsDeltaMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.pedalsDeltaMm = Math.max(pedalsDeltaLimits.min, Math.min(pedalsDeltaLimits.max, value));
     syncPlannerUrlState();
   }
 
   function setPedalAngleDeg(value: number) {
+    markPosturePresetCustom();
     plannerInput.pedalAngleDeg = Math.max(pedalAngleLimits.min, Math.min(pedalAngleLimits.max, value));
     syncPlannerUrlState();
   }
 
   function setPedalAcceleratorDeltaMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.pedalAcceleratorDeltaMm = Math.max(
       pedalAcceleratorDeltaLimits.min,
       Math.min(pedalAcceleratorDeltaLimits.max, value)
@@ -570,19 +628,19 @@
   }
 
   function setPedalBrakeDeltaMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.pedalBrakeDeltaMm = Math.max(pedalBrakeDeltaLimits.min, Math.min(pedalBrakeDeltaLimits.max, value));
     syncPlannerUrlState();
   }
 
   function setPedalClutchDeltaMm(value: number) {
-    plannerInput.pedalClutchDeltaMm = Math.max(
-      pedalClutchDeltaLimits.min,
-      Math.min(pedalClutchDeltaLimits.max, value)
-    );
+    markPosturePresetCustom();
+    plannerInput.pedalClutchDeltaMm = Math.max(pedalClutchDeltaLimits.min, Math.min(pedalClutchDeltaLimits.max, value));
     syncPlannerUrlState();
   }
 
   function setPedalTrayDistanceMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.pedalTrayDistanceMm = Math.max(
       pedalTrayDistanceLimits.min,
       Math.min(pedalTrayDistanceLimits.max, value)
@@ -592,6 +650,7 @@
   }
 
   function setSteeringColumnBaseHeightMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.steeringColumnBaseHeightMm = Math.max(
       steeringColumnBaseHeightLimits.min,
       Math.min(steeringColumnBaseHeightLimits.max, value)
@@ -602,12 +661,15 @@
   }
 
   function setSteeringColumnHeightMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.steeringColumnHeightMm = Math.max(
       steeringColumnHeightLimits.min,
       Math.min(steeringColumnHeightLimits.max, value)
     );
 
-    if (plannerInput.steeringColumnBaseHeightMm > getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm)) {
+    if (
+      plannerInput.steeringColumnBaseHeightMm > getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm)
+    ) {
       plannerInput.steeringColumnBaseHeightMm = getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm);
     }
 
@@ -616,6 +678,7 @@
   }
 
   function setSteeringColumnDistanceMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.steeringColumnDistanceMm = Math.max(
       steeringColumnDistanceLimits.min,
       Math.min(steeringColumnDistanceLimits.max, value)
@@ -625,17 +688,23 @@
   }
 
   function setWheelHeightOffsetMm(value: number) {
-    plannerInput.wheelHeightOffsetMm = Math.max(wheelHeightOffsetLimits.min, Math.min(wheelHeightOffsetLimits.max, value));
+    markPosturePresetCustom();
+    plannerInput.wheelHeightOffsetMm = Math.max(
+      wheelHeightOffsetLimits.min,
+      Math.min(wheelHeightOffsetLimits.max, value)
+    );
     syncPlannerUrlState();
     scheduleMeasurementOverlay('wheelHeightOffsetMm');
   }
 
   function setWheelAngleDeg(value: number) {
+    markPosturePresetCustom();
     plannerInput.wheelAngleDeg = Math.max(wheelAngleLimits.min, Math.min(wheelAngleLimits.max, value));
     syncPlannerUrlState();
   }
 
   function setWheelDistanceFromSteeringColumnMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.wheelDistanceFromSteeringColumnMm = Math.max(
       wheelDistanceLimits.min,
       Math.min(wheelDistanceLimits.max, value)
@@ -645,6 +714,7 @@
   }
 
   function setWheelDiameterMm(value: number) {
+    markPosturePresetCustom();
     plannerInput.wheelDiameterMm = Math.max(wheelDiameterLimits.min, Math.min(wheelDiameterLimits.max, value));
     syncPlannerUrlState();
     scheduleMeasurementOverlay('wheelDiameterMm');
@@ -660,7 +730,7 @@
   }
 
   function resetSteeringColumnModule() {
-    plannerInput.steeringColumnDistanceMm = DEFAULT_INPUT.steeringColumnDistanceMm;
+    setSteeringColumnDistanceMm(DEFAULT_INPUT.steeringColumnDistanceMm);
     setSteeringColumnBaseHeightMm(DEFAULT_INPUT.steeringColumnBaseHeightMm);
     setSteeringColumnHeightMm(DEFAULT_INPUT.steeringColumnHeightMm);
   }
@@ -681,13 +751,52 @@
 
   function setPosturePreset(value: PlannerPosturePreset) {
     postureSettings.preset = value;
+
+    if (isPresetSolvablePreset(value)) {
+      Object.assign(plannerInput, applyPresetToPlannerInput(plannerInput, value, postureSettings.heightCm));
+    }
+
     syncPlannerUrlState();
   }
 
   function setPostureHeightCm(value: number) {
-    postureSettings.heightCm = Math.max(
+    const nextHeightCm = Math.max(
       PLANNER_POSTURE_LIMITS.heightMinCm,
       Math.min(PLANNER_POSTURE_LIMITS.heightMaxCm, value)
+    );
+
+    postureSettings.heightCm = nextHeightCm;
+
+    if (isPresetSolvablePreset(postureSettings.preset)) {
+      Object.assign(
+        plannerInput,
+        recomputePresetDynamicPlannerInput(plannerInput, postureSettings.preset, nextHeightCm)
+      );
+    }
+
+    syncPlannerUrlState();
+  }
+
+  function setMonitorMidpointXMm(value: number) {
+    postureSettings.monitorMidpointXMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorMidpointXMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorMidpointXMaxMm, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setMonitorMidpointYMm(value: number) {
+    postureSettings.monitorMidpointYMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorMidpointYMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorMidpointYMaxMm, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setMonitorMidpointZMm(value: number) {
+    postureSettings.monitorMidpointZMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorMidpointZMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorMidpointZMaxMm, value)
     );
     syncPlannerUrlState();
   }
@@ -826,6 +935,7 @@
               {isNarrowViewport}
               {measurementOverlay}
               {profileColor}
+              {postureReport}
               {postureSettings}
               {showEndCaps}
               {visibleModules}
@@ -880,6 +990,32 @@
             />
             <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Model" />
             <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Skeleton" />
+          </Folder>
+          <Folder title="Monitor">
+            <Slider
+              bind:value={() => postureSettings.monitorMidpointXMm, setMonitorMidpointXMm}
+              label="Midpoint X"
+              min={PLANNER_POSTURE_LIMITS.monitorMidpointXMinMm}
+              max={PLANNER_POSTURE_LIMITS.monitorMidpointXMaxMm}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
+              bind:value={() => postureSettings.monitorMidpointYMm, setMonitorMidpointYMm}
+              label="Midpoint Y"
+              min={PLANNER_POSTURE_LIMITS.monitorMidpointYMinMm}
+              max={PLANNER_POSTURE_LIMITS.monitorMidpointYMaxMm}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
+              bind:value={() => postureSettings.monitorMidpointZMm, setMonitorMidpointZMm}
+              label="Midpoint Z"
+              min={PLANNER_POSTURE_LIMITS.monitorMidpointZMinMm}
+              max={PLANNER_POSTURE_LIMITS.monitorMidpointZMaxMm}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
           </Folder>
         </Pane>
         <Pane title="Settings" position="inline" bind:expanded={paneExpanded.setup}>

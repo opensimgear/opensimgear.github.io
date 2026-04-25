@@ -8,7 +8,8 @@ export type PlannerOptimizerMode = 'cost' | 'waste';
 export type ShippingMode = 'flat' | 'per-kg';
 export type PlannerCurrencyMode = 'auto' | 'eur' | 'usd';
 export type PlannerCurrencyCode = 'EUR' | 'USD';
-export type PlannerPosturePreset = 'formula' | 'gt' | 'rally' | 'road';
+export type PlannerPosturePreset = 'formula' | 'gt' | 'rally' | 'road' | 'custom';
+export type PlannerSolvablePosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
 
 export type PlannerAnthropometryRatios = {
   sittingHeight: number;
@@ -25,11 +26,14 @@ export type PlannerAnthropometryRatios = {
 
 export type PlannerAnthropometryLengthsMm = Record<keyof PlannerAnthropometryRatios, number>;
 
-export type PlannerPostureSettings = {
-  preset: PlannerPosturePreset;
+export type PlannerPostureSettings<Preset extends PlannerPosturePreset = PlannerSolvablePosturePreset> = {
+  preset: Preset;
   heightCm: number;
   showModel: boolean;
   showSkeleton: boolean;
+  monitorMidpointXMm: number;
+  monitorMidpointYMm: number;
+  monitorMidpointZMm: number;
 };
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;

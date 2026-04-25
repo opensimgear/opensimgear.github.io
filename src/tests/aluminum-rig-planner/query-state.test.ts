@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
   DEFAULT_PLANNER_INPUT,
   PLANNER_DIMENSION_LIMITS,
@@ -29,7 +30,7 @@ describe('aluminum rig planner query state', () => {
     expect(state.plannerInput.seatDeltaMm).toBe(PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm);
     expect(state.plannerInput.seatHeightFromBaseInnerBeamsMm).toBe(0);
     expect(state.plannerInput.seatAngleDeg).toBe(45);
-    expect(state.plannerInput.backrestAngleDeg).toBe(45);
+    expect(state.plannerInput.backrestAngleDeg).toBe(PLANNER_DIMENSION_LIMITS.backrestAngleDegMin);
     expect(state.plannerInput.pedalTrayDepthMm).toBe(300);
     expect(state.plannerInput.pedalTrayDistanceMm).toBe(150);
     expect(state.plannerInput.steeringColumnDistanceMm).toBe(getSteeringColumnDistanceMaxMm(state.plannerInput));
@@ -121,6 +122,16 @@ describe('aluminum rig planner query state', () => {
     expect(state.optimizationSettings.stockOptions[1].id).toMatch(/^planner-stock-option-/);
   });
 
+  it.each(['cost', 'waste'] as const)('preserves %s optimizer mode from shared-link state', (mode) => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      optimizer: {
+        mode,
+      },
+    });
+
+    expect(state.optimizationSettings.mode).toBe(mode);
+  });
+
   it('preserves decimal blade thickness values within allowed range', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       optimizer: {
@@ -165,5 +176,21 @@ describe('aluminum rig planner query state', () => {
     expect(state.postureSettings.heightCm).toBe(220);
     expect(state.postureSettings.showModel).toBe(false);
     expect(state.postureSettings.showSkeleton).toBe(true);
+  });
+
+  it('sanitizes custom preset and monitor midpoint from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        preset: 'custom',
+        monitorMidpointXMm: Number.POSITIVE_INFINITY,
+        monitorMidpointYMm: -100,
+        monitorMidpointZMm: 9999,
+      },
+    });
+
+    expect(state.postureSettings.preset).toBe('custom');
+    expect(state.postureSettings.monitorMidpointXMm).toBe(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorMidpointXMm);
+    expect(state.postureSettings.monitorMidpointYMm).toBe(0);
+    expect(state.postureSettings.monitorMidpointZMm).toBe(1000);
   });
 });

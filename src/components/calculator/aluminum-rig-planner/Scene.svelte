@@ -16,7 +16,8 @@
   import type { PlannerGeometry } from './geometry';
   import type { HumanRigHoverTooltip } from './human-model-rig';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
-  import type { PlannerPostureSettings, PlannerVisibleModules } from './types';
+  import type { PlannerPostureReport } from './posture-report';
+  import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
     geometry: PlannerGeometry;
@@ -24,7 +25,8 @@
     isNarrowViewport?: boolean;
     measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
-    postureSettings: PlannerPostureSettings;
+    postureReport: PlannerPostureReport;
+    postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   };
@@ -35,6 +37,7 @@
     isNarrowViewport = false,
     measurementOverlay = null,
     profileColor,
+    postureReport,
     postureSettings,
     showEndCaps,
     visibleModules,
@@ -96,6 +99,17 @@
 
     return `left: ${nextX}px; top: ${nextY}px;`;
   });
+  const postureMetricsWithIssues = $derived(postureReport.metrics.filter((metric) => metric.status !== 'ok').length);
+
+  function formatPostureMetricValue(metric: PlannerPostureReport['metrics'][number]) {
+    const value = metric.unit === 'mm' ? metric.valueMm : metric.valueDeg;
+
+    return `${(value ?? 0).toFixed(metric.unit === 'mm' ? 0 : 1)} ${metric.unit}`;
+  }
+
+  function formatPostureMetricRange(metric: PlannerPostureReport['metrics'][number]) {
+    return `${metric.range.min}-${metric.range.max} ${metric.unit}`;
+  }
 
   function captureCurrentView() {
     const activeCamera = useOrthographicCamera ? orthographicCameraRef : perspectiveCameraRef;
@@ -289,6 +303,7 @@
           humanRigTooltip = tooltip;
         }}
         {profileColor}
+        {postureReport}
         {postureSettings}
         {showEndCaps}
         {visibleModules}
@@ -307,6 +322,30 @@
       {/each}
     </div>
   {/if}
+
+  <div class="posture-debug-panel" aria-label="Posture metrics">
+    <div class="posture-debug-panel__header">
+      <span>Posture</span>
+      <strong>{postureMetricsWithIssues} issue{postureMetricsWithIssues === 1 ? '' : 's'}</strong>
+    </div>
+    <div class="posture-debug-panel__metrics">
+      {#each postureReport.metrics as metric (metric.key)}
+        <div class="posture-debug-panel__metric" data-status={metric.status}>
+          <span class="posture-debug-panel__label">{metric.label}</span>
+          <span class="posture-debug-panel__value">{formatPostureMetricValue(metric)}</span>
+          <span class="posture-debug-panel__range">{formatPostureMetricRange(metric)}</span>
+          <span class="posture-debug-panel__status">{metric.status}</span>
+        </div>
+      {/each}
+    </div>
+    {#if postureReport.hints.length > 0}
+      <div class="posture-debug-panel__hints">
+        {#each postureReport.hints as hint (hint)}
+          <p>{hint}</p>
+        {/each}
+      </div>
+    {/if}
+  </div>
 </div>
 
 <style>
@@ -319,7 +358,13 @@
     box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
     color: white;
     font-family:
-      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
     font-size: 11px;
     line-height: 1.35;
     padding: 8px 10px;
@@ -347,5 +392,104 @@
   .rig-tooltip__row strong {
     font-weight: 600;
     text-align: right;
+  }
+
+  .posture-debug-panel {
+    background: rgb(24 24 27 / 0.9);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 6px;
+    bottom: 6px;
+    box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
+    color: white;
+    font-family:
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
+    font-size: 10px;
+    line-height: 1.25;
+    max-height: min(48%, 260px);
+    max-width: min(420px, calc(100% - 12px));
+    overflow: auto;
+    padding: 7px 8px;
+    pointer-events: none;
+    position: absolute;
+    right: 6px;
+    width: min(420px, calc(100% - 12px));
+    z-index: 10;
+  }
+
+  .posture-debug-panel__header,
+  .posture-debug-panel__metric {
+    align-items: center;
+    display: grid;
+    gap: 6px;
+  }
+
+  .posture-debug-panel__header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin-bottom: 5px;
+  }
+
+  .posture-debug-panel__header span {
+    font-weight: 700;
+  }
+
+  .posture-debug-panel__header strong {
+    color: rgb(212 212 216);
+    font-weight: 600;
+  }
+
+  .posture-debug-panel__metrics {
+    display: grid;
+    gap: 3px;
+  }
+
+  .posture-debug-panel__metric {
+    grid-template-columns: minmax(7rem, 1fr) 4.5rem 5.5rem 2.2rem;
+  }
+
+  .posture-debug-panel__label {
+    color: rgb(244 244 245);
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .posture-debug-panel__value,
+  .posture-debug-panel__range,
+  .posture-debug-panel__status {
+    color: rgb(212 212 216);
+    min-width: 0;
+    overflow-wrap: anywhere;
+    text-align: right;
+  }
+
+  .posture-debug-panel__metric[data-status='ok'] .posture-debug-panel__status {
+    color: rgb(134 239 172);
+  }
+
+  .posture-debug-panel__metric[data-status='warn'] .posture-debug-panel__status {
+    color: rgb(253 224 71);
+  }
+
+  .posture-debug-panel__metric[data-status='bad'] .posture-debug-panel__status {
+    color: rgb(252 165 165);
+  }
+
+  .posture-debug-panel__hints {
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    color: rgb(212 212 216);
+    display: grid;
+    gap: 3px;
+    margin-top: 6px;
+    padding-top: 5px;
+  }
+
+  .posture-debug-panel__hints p {
+    margin: 0;
+    overflow-wrap: anywhere;
   }
 </style>

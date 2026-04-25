@@ -8,6 +8,7 @@ import { clampPlannerInput } from './geometry';
 import type {
   PlannerInput,
   PlannerOptimizationSettings,
+  PlannerPosturePreset,
   PlannerPostureSettings,
   PlannerStockOption,
 } from './types';
@@ -34,7 +35,7 @@ export type PlannerQueryState = Partial<PlannerInput> & {
       cost?: unknown;
     }>;
   };
-  posture?: Partial<Omit<PlannerPostureSettings, 'preset'>> & {
+  posture?: Partial<Omit<PlannerPostureSettings<PlannerPosturePreset>, 'preset'>> & {
     preset?: unknown;
   };
 };
@@ -108,7 +109,7 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
   const defaults = DEFAULT_PLANNER_OPTIMIZATION_SETTINGS;
 
   return {
-    mode: state?.mode === 'waste' ? 'waste' : defaults.mode,
+    mode: state?.mode === 'cost' || state?.mode === 'waste' ? state.mode : defaults.mode,
     currencyMode:
       state?.currencyMode === 'eur' || state?.currencyMode === 'usd' ? state.currencyMode : defaults.currencyMode,
     bladeThicknessMm: clampBladeThicknessMm(readNumber(state?.bladeThicknessMm, defaults.bladeThicknessMm)),
@@ -136,12 +137,17 @@ function clampNumber(value: number, min: number, max: number) {
 
 function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const defaults = DEFAULT_PLANNER_POSTURE_SETTINGS;
+  const preset =
+    state?.preset === 'formula' ||
+    state?.preset === 'gt' ||
+    state?.preset === 'rally' ||
+    state?.preset === 'road' ||
+    state?.preset === 'custom'
+      ? state.preset
+      : defaults.preset;
 
   return {
-    preset:
-      state?.preset === 'formula' || state?.preset === 'gt' || state?.preset === 'rally' || state?.preset === 'road'
-        ? state.preset
-        : defaults.preset,
+    preset,
     heightCm: clampNumber(
       readNumber(state?.heightCm, defaults.heightCm),
       PLANNER_POSTURE_LIMITS.heightMinCm,
@@ -149,7 +155,22 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     ),
     showModel: typeof state?.showModel === 'boolean' ? state.showModel : defaults.showModel,
     showSkeleton: typeof state?.showSkeleton === 'boolean' ? state.showSkeleton : defaults.showSkeleton,
-  } satisfies PlannerPostureSettings;
+    monitorMidpointXMm: clampNumber(
+      readNumber(state?.monitorMidpointXMm, defaults.monitorMidpointXMm),
+      PLANNER_POSTURE_LIMITS.monitorMidpointXMinMm,
+      PLANNER_POSTURE_LIMITS.monitorMidpointXMaxMm
+    ),
+    monitorMidpointYMm: clampNumber(
+      readNumber(state?.monitorMidpointYMm, defaults.monitorMidpointYMm),
+      PLANNER_POSTURE_LIMITS.monitorMidpointYMinMm,
+      PLANNER_POSTURE_LIMITS.monitorMidpointYMaxMm
+    ),
+    monitorMidpointZMm: clampNumber(
+      readNumber(state?.monitorMidpointZMm, defaults.monitorMidpointZMm),
+      PLANNER_POSTURE_LIMITS.monitorMidpointZMinMm,
+      PLANNER_POSTURE_LIMITS.monitorMidpointZMaxMm
+    ),
+  } satisfies PlannerPostureSettings<PlannerPosturePreset>;
 }
 
 export function mergePlannerQueryState(defaultInput: PlannerInput, state: PlannerQueryState) {

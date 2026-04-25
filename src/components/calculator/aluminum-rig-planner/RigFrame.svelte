@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { T } from '@threlte/core';
+
   import { CUT_LIST_HIGHLIGHT_COLOR, DEFAULT_POSTURE_HEIGHT_CM } from './constants';
   import type { PlannerGeometry } from './geometry';
   import MeasurementArrow from './MeasurementArrow.svelte';
@@ -12,9 +14,10 @@
   import { createWheelModule } from './modules/wheel';
   import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from './modules/shared';
   import { createPlannerPostureSkeleton } from './posture';
+  import type { PlannerPostureReport } from './posture-report';
   import RiggedHumanModel from './RiggedHumanModel.svelte';
   import type { HumanRigHoverTooltip } from './human-model-rig';
-  import type { PlannerPostureSettings, PlannerVisibleModules } from './types';
+  import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
     geometry: PlannerGeometry;
@@ -22,7 +25,8 @@
     measurementOverlay?: PlannerMeasurementOverlay | null;
     onHumanRigTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
     profileColor: string;
-    postureSettings: PlannerPostureSettings;
+    postureReport: PlannerPostureReport;
+    postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
   };
@@ -33,6 +37,7 @@
     measurementOverlay = null,
     onHumanRigTooltipChange,
     profileColor,
+    postureReport,
     postureSettings,
     showEndCaps,
     visibleModules,
@@ -46,8 +51,17 @@
   const pedalsModule = $derived(createPedalsModule(input));
   const seatModule = $derived(createSeatModule(input));
   const wheelModule = $derived(createWheelModule(input));
-  const postureSkeleton = $derived(createPlannerPostureSkeleton(input, postureSettings));
+  const postureSkeleton = $derived(
+    createPlannerPostureSkeleton(input, {
+      ...postureSettings,
+      preset: postureSettings.preset === 'custom' ? 'gt' : postureSettings.preset,
+    })
+  );
   const modelScale = $derived(postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM);
+  const eyeDebugBalls = $derived([
+    { id: 'left-eye-debug', position: postureReport.eyeDebug.left },
+    { id: 'right-eye-debug', position: postureReport.eyeDebug.right },
+  ]);
 
   const beamMeshes = $derived([
     ...baseModule,
@@ -74,7 +88,6 @@
       ...seatModule,
     ];
   });
-
 </script>
 
 {#each allMeshes as mesh (mesh.id)}
@@ -94,3 +107,10 @@
     onHoverTooltipChange={onHumanRigTooltipChange}
   />
 {/if}
+
+{#each eyeDebugBalls as eyeBall (eyeBall.id)}
+  <T.Mesh position={eyeBall.position}>
+    <T.SphereGeometry args={[postureReport.eyeDebug.diameterM / 2, 16, 12]} />
+    <T.MeshStandardMaterial color="#22c55e" emissive="#16a34a" emissiveIntensity={0.4} />
+  </T.Mesh>
+{/each}

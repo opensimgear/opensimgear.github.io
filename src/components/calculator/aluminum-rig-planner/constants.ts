@@ -5,6 +5,7 @@ import type {
   PlannerInput,
   PlannerOptimizationSettings,
   PlannerPostureSettings,
+  PlannerPosturePreset,
   PlannerProfileShipping,
 } from './types';
 import { plannerYUpToSceneZUp, Z_UP_SCENE_ROOT_ROTATION } from './scene-space';
@@ -159,9 +160,14 @@ export const POSTURE_PRESET_OPTIONS = [
   { text: 'GT', value: 'gt' },
   { text: 'Rally', value: 'rally' },
   { text: 'Road', value: 'road' },
+  { text: 'Custom', value: 'custom' },
 ] as const;
 
 export const DEFAULT_POSTURE_HEIGHT_CM = 169;
+export const DEFAULT_ACTIVE_POSTURE_PRESET: PlannerPosturePreset = 'gt';
+export const DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;
+export const DEFAULT_MONITOR_MIDPOINT_Y_MM = 850;
+export const DEFAULT_MONITOR_MIDPOINT_Z_MM = 0;
 export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM: PlannerAnthropometryLengthsMm = {
   sittingHeight: 806.1,
   seatedEyeHeight: 755.4,
@@ -207,10 +213,13 @@ export const ANTHROPOMETRY_LENGTH_LIMITS_MM = Object.fromEntries(
 // };
 
 export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
-  preset: 'gt',
+  preset: DEFAULT_ACTIVE_POSTURE_PRESET,
   heightCm: DEFAULT_POSTURE_HEIGHT_CM,
   showModel: true,
   showSkeleton: false,
+  monitorMidpointXMm: DEFAULT_MONITOR_MIDPOINT_X_MM,
+  monitorMidpointYMm: DEFAULT_MONITOR_MIDPOINT_Y_MM,
+  monitorMidpointZMm: DEFAULT_MONITOR_MIDPOINT_Z_MM,
 };
 
 export const PLANNER_POSTURE_LIMITS = {
@@ -220,6 +229,12 @@ export const PLANNER_POSTURE_LIMITS = {
   ratioMax: 0.7,
   ratioStep: 0.001,
   lengthStepMm: 1,
+  monitorMidpointXMinMm: 0,
+  monitorMidpointXMaxMm: 2500,
+  monitorMidpointYMinMm: 0,
+  monitorMidpointYMaxMm: 2000,
+  monitorMidpointZMinMm: -1000,
+  monitorMidpointZMaxMm: 1000,
 } as const;
 
 export const PLANNER_DIMENSION_LIMITS = {
