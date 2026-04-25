@@ -165,7 +165,7 @@ const HUMAN_BONE_END_BONES = {
 const MODEL_RATIO_PRECISION = 3;
 const BONE_LENGTH_EPSILON = 0.000001;
 // The GLB has no eye bone, so estimate eye height from the head-weighted mesh bounds.
-const MODEL_EYE_FROM_HEAD_TOP_RATIO = 0.42;
+const MODEL_EYE_FROM_HEAD_TOP_RATIO = 0.32;
 const MODEL_HEAD_SKIN_WEIGHT_THRESHOLD = 0.2;
 const DEBUG_BONE_HIT_RADIUS = 0.09;
 const DEBUG_BONE_RADIUS = 0.032;
@@ -544,7 +544,12 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
   const hipCenter = skeleton.joints.hipCenter;
   const scaleOrigin = new Vector3(hipCenter[0], hipCenter[1], hipCenter[2]);
   rig.root.updateWorldMatrix(true, true);
-  updateDebugOverlay(rig.debugOverlay, createDebugSegmentsFromModelBones(rig.root, rig.bones), safeModelScale, scaleOrigin);
+  updateDebugOverlay(
+    rig.debugOverlay,
+    createDebugSegmentsFromModelBones(rig.root, rig.bones),
+    safeModelScale,
+    scaleOrigin
+  );
 
   rig.root.scale.setScalar(safeModelScale);
   rig.root.position.set(

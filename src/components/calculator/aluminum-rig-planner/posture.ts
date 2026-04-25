@@ -236,6 +236,25 @@ function solveTwoLinkPose(
   return { end, joint };
 }
 
+function constrainThighAngleToSeat(root: Vector, pose: TwoLinkPose, thighLength: number, seatAngleRad: number) {
+  const thigh = subtract(pose.joint, root);
+  const thighAngleRad = Math.atan2(thigh[1], thigh[0]);
+
+  if (thighAngleRad >= seatAngleRad - EPSILON) {
+    return pose;
+  }
+
+  const zOffset = thigh[2];
+  const planarLength = Math.sqrt(Math.max(0, thighLength * thighLength - zOffset * zOffset));
+  const joint: Vector = [
+    root[0] + Math.cos(seatAngleRad) * planarLength,
+    root[1] + Math.sin(seatAngleRad) * planarLength,
+    pose.joint[2],
+  ];
+
+  return { ...pose, joint };
+}
+
 function solveArmPose(
   shoulder: Vector,
   hand: Vector,
@@ -311,8 +330,18 @@ export function createPlannerPostureSkeleton(
   const thighLength = ratios.thighLength * heightM;
   const lowerLegLength = ratios.lowerLegLength * heightM;
   const kneeLift = PRESET_KNEE_LIFT[settings.preset];
-  const rightLeg = solveTwoLinkPose(hipRight, rightPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]);
-  const leftLeg = solveTwoLinkPose(hipLeft, leftPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]);
+  const rightLeg = constrainThighAngleToSeat(
+    hipRight,
+    solveTwoLinkPose(hipRight, rightPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]),
+    thighLength,
+    seatAngleRad
+  );
+  const leftLeg = constrainThighAngleToSeat(
+    hipLeft,
+    solveTwoLinkPose(hipLeft, leftPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]),
+    thighLength,
+    seatAngleRad
+  );
   const rightArm = solveArmPose(shoulderRight, wheelTargets.right, upperArmLength, forearmHandLength, rightSign);
   const leftArm = solveArmPose(shoulderLeft, wheelTargets.left, upperArmLength, forearmHandLength, -rightSign);
   const wristRight = getWristFromHand(rightArm.joint, rightArm.end, handGripLength);

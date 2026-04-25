@@ -114,3 +114,8 @@
     <T.MeshStandardMaterial color="#22c55e" emissive="#16a34a" emissiveIntensity={0.4} />
   </T.Mesh>
 {/each}
+
+<T.Mesh position={postureReport.monitorDebug.position}>
+  <T.SphereGeometry args={[postureReport.monitorDebug.diameterM / 2, 16, 12]} />
+  <T.MeshStandardMaterial color="#050505" />
+</T.Mesh>

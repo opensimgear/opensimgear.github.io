@@ -33,18 +33,28 @@ export type PlannerPostureEyeDebug = {
     ballDiameterMm: number;
   };
 };
+export type PlannerPostureMonitorDebug = {
+  position: PosturePoint;
+  diameterM: number;
+  constants: {
+    ballDiameterMm: number;
+  };
+};
 export type PlannerPostureReport = {
   metrics: PlannerPostureMetric[];
   hints: string[];
   eyeDebug: PlannerPostureEyeDebug;
+  monitorDebug: PlannerPostureMonitorDebug;
 };
 
 const MM_TO_METERS = 0.001;
 const EPSILON = 0.000001;
-const EYE_DEBUG_NECK_OFFSET_X_MM = 28;
+const EYE_DEBUG_NECK_OFFSET_X_MM = 142;
+const EYE_DEBUG_NECK_OFFSET_Y_MM = 31;
 const EYE_DEBUG_NECK_OFFSET_Z_MM = 0;
-const EYE_DEBUG_SPACING_MM = 70;
+const EYE_DEBUG_SPACING_MM = 64;
 const EYE_DEBUG_BALL_DIAMETER_MM = 25;
+const MONITOR_DEBUG_BALL_DIAMETER_MM = 10;
 
 const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureMetricRange>> = {
   formula: {
@@ -205,7 +215,7 @@ function getMonitorMidpoint(settings: PlannerPostureSettings<PlannerPosturePrese
 function createEyeDebug(neck: PosturePoint): PlannerPostureEyeDebug {
   const center: PosturePoint = [
     neck[0] + EYE_DEBUG_NECK_OFFSET_X_MM * MM_TO_METERS,
-    neck[1],
+    neck[1] + EYE_DEBUG_NECK_OFFSET_Y_MM * MM_TO_METERS,
     neck[2] + EYE_DEBUG_NECK_OFFSET_Z_MM * MM_TO_METERS,
   ];
   const halfSpacingM = (EYE_DEBUG_SPACING_MM * MM_TO_METERS) / 2;
@@ -219,6 +229,16 @@ function createEyeDebug(neck: PosturePoint): PlannerPostureEyeDebug {
       neckOffsetZMm: EYE_DEBUG_NECK_OFFSET_Z_MM,
       eyeSpacingMm: EYE_DEBUG_SPACING_MM,
       ballDiameterMm: EYE_DEBUG_BALL_DIAMETER_MM,
+    },
+  };
+}
+
+function createMonitorDebug(settings: PlannerPostureSettings<PlannerPosturePreset>): PlannerPostureMonitorDebug {
+  return {
+    position: getMonitorMidpoint(settings),
+    diameterM: MONITOR_DEBUG_BALL_DIAMETER_MM * MM_TO_METERS,
+    constants: {
+      ballDiameterMm: MONITOR_DEBUG_BALL_DIAMETER_MM,
     },
   };
 }
@@ -328,6 +348,7 @@ export function createPlannerPostureReport(
     metrics,
     hints,
     eyeDebug: createEyeDebug(skeleton.joints.neck),
+    monitorDebug: createMonitorDebug(postureSettings),
   };
 }
 

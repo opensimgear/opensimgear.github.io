@@ -46,6 +46,17 @@ function getAngleAtJoint(
   return Math.acos(Math.max(-1, Math.min(1, dot)));
 }
 
+function getSignedThighAngleRelativeToSeat(
+  hip: [number, number, number],
+  knee: [number, number, number],
+  seatAngleDeg: number
+) {
+  const thighAngleRad = Math.atan2(knee[1] - hip[1], knee[0] - hip[0]);
+  const seatAngleRad = (seatAngleDeg * Math.PI) / 180;
+
+  return thighAngleRad - seatAngleRad;
+}
+
 const PEDAL_WIDTH_MM = 60;
 const PEDAL_PLATE_THICKNESS_MM = 3;
 
@@ -151,6 +162,25 @@ describe('aluminum rig planner posture solver', () => {
     expect(getDistance(skeleton.joints.kneeLeft, skeleton.joints.ankleLeft)).toBeCloseTo(lowerLegLength, 5);
     expect(getDistance(skeleton.joints.hipRight, skeleton.joints.kneeRight)).toBeCloseTo(thighLength, 5);
     expect(getDistance(skeleton.joints.kneeRight, skeleton.joints.ankleRight)).toBeCloseTo(lowerLegLength, 5);
+  });
+
+  it('keeps thighs at or above the seat angle for low pedal targets', () => {
+    const input = {
+      ...DEFAULT_PLANNER_INPUT,
+      seatAngleDeg: 12,
+      pedalTrayDistanceMm: 700,
+      pedalsDeltaMm: 260,
+      pedalsHeightMm: 0,
+      pedalAngleDeg: 45,
+    };
+    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS);
+
+    expect(
+      getSignedThighAngleRelativeToSeat(skeleton.joints.hipLeft, skeleton.joints.kneeLeft, input.seatAngleDeg)
+    ).toBeGreaterThanOrEqual(-0.000001);
+    expect(
+      getSignedThighAngleRelativeToSeat(skeleton.joints.hipRight, skeleton.joints.kneeRight, input.seatAngleDeg)
+    ).toBeGreaterThanOrEqual(-0.000001);
   });
 
   it('keeps heel pivots on the pedal axis and preserves the foot linkage', () => {

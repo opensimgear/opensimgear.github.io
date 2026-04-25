@@ -43,4 +43,17 @@ describe('aluminum rig planner posture report', () => {
     expect(report.eyeDebug.left[1]).toBeCloseTo(report.eyeDebug.right[1], 6);
     expect(Math.abs(report.eyeDebug.left[2] - report.eyeDebug.right[2])).toBeCloseTo(0.07, 6);
   });
+
+  it('returns a 10 mm monitor midpoint debug ball', () => {
+    const postureSettings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorMidpointXMm: 1234,
+      monitorMidpointYMm: 876,
+      monitorMidpointZMm: -55,
+    };
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
+
+    expect(report.monitorDebug.diameterM).toBeCloseTo(0.01, 6);
+    expect(report.monitorDebug.position).toEqual([1.234, 0.876, -0.055]);
+  });
 });
