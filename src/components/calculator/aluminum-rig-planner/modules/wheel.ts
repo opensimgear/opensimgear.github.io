@@ -18,7 +18,8 @@ const WHEEL_METAL_MATERIAL = {
 const CYLINDER_SEGMENTS = 24;
 const TORUS_RADIAL_SEGMENTS = 18;
 const TORUS_TUBULAR_SEGMENTS = 36;
-const WORLD_Z_AXIS = new Vector3(0, 0, 1);
+const WORLD_Y_AXIS = new Vector3(0, -1, 0);
+const CYLINDER_AXIS = new Vector3(0, 1, 0);
 const WHEEL_TUBE_RADIUS_MM = 16;
 const WHEEL_BASE_EDGE_MM = 115;
 const WHEEL_BASE_FRONT_FACE_OFFSET_MM = 67;
@@ -40,11 +41,11 @@ function toRad(value: number) {
   return (value * Math.PI) / 180;
 }
 
-function rotateLocalOffset([x, y, z]: [number, number, number], angleRad: number): [number, number, number] {
+function rotateVerticalOffset([x, y, z]: [number, number, number], angleRad: number): [number, number, number] {
   const cos = Math.cos(angleRad);
   const sin = Math.sin(angleRad);
 
-  return [x * cos - y * sin, x * sin + y * cos, z];
+  return [x * cos - z * sin, y, x * sin + z * cos];
 }
 
 function createRotationFromBasis(xAxis: Vector3, yAxis: Vector3, zAxis: Vector3): [number, number, number] {
@@ -57,20 +58,26 @@ function createRotationFromBasis(xAxis: Vector3, yAxis: Vector3, zAxis: Vector3)
   return [rotation.x, rotation.y, rotation.z];
 }
 
+function createRotationFromDirection(from: Vector3, to: Vector3): [number, number, number] {
+  const rotation = new Euler().setFromQuaternion(new Quaternion().setFromUnitVectors(from, to.clone().normalize()));
+
+  return [rotation.x, rotation.y, rotation.z];
+}
+
 function createWheelPlaneDirection(wheelSide: Vector3, angleRad: number) {
   return wheelSide
     .clone()
     .multiplyScalar(Math.sin(angleRad))
-    .add(WORLD_Z_AXIS.clone().multiplyScalar(-Math.cos(angleRad)))
+    .add(WORLD_Y_AXIS.clone().multiplyScalar(-Math.cos(angleRad)))
     .normalize();
 }
 
 function createWheelCenter(input: PlannerInput): [number, number, number] {
   const steeringColumnCenterXmm = input.seatBaseDepthMm + input.steeringColumnDistanceMm + UPRIGHT_BEAM_DEPTH_MM;
   const wheelCenterXmm = steeringColumnCenterXmm + input.wheelDistanceFromSteeringColumnMm;
-  const wheelCenterYmm = BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm;
+  const wheelCenterZmm = BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm;
 
-  return [mm(wheelCenterXmm), mm(wheelCenterYmm), 0];
+  return [mm(wheelCenterXmm), 0, mm(wheelCenterZmm)];
 }
 
 export function createWheelModule(input: PlannerInput): MeshSpec[] {
@@ -94,12 +101,12 @@ export function createWheelModule(input: PlannerInput): MeshSpec[] {
   const spokeOuterRadiusMm = rimInnerRadiusMm + tubeRadiusMm * 0.4;
   const spokeSpanMm = Math.max(tubeRadiusMm, spokeOuterRadiusMm - hubRadiusMm);
   const spokeLengthMm = spokeSpanMm * WHEEL_SPOKE_LENGTH_SCALE;
-  const baseCenterOffset = rotateLocalOffset([mm(baseFrontFaceOffsetMm + baseEdgeMm / 2), 0, 0], wheelAngleRad);
-  const connectorCenterOffset = rotateLocalOffset([mm(connectorLengthMm / 2), 0, 0], wheelAngleRad);
-  const wheelAxis = new Vector3(Math.cos(wheelAngleRad), Math.sin(wheelAngleRad), 0).normalize();
-  const wheelSide = new Vector3(-wheelAxis.y, wheelAxis.x, 0).normalize();
-  const torusRotation = createRotationFromBasis(wheelSide, WORLD_Z_AXIS, wheelAxis);
-  const hubRotation = [0, 0, wheelAngleRad + Math.PI / 2] as [number, number, number];
+  const baseCenterOffset = rotateVerticalOffset([mm(baseFrontFaceOffsetMm + baseEdgeMm / 2), 0, 0], wheelAngleRad);
+  const connectorCenterOffset = rotateVerticalOffset([mm(connectorLengthMm / 2), 0, 0], wheelAngleRad);
+  const wheelAxis = new Vector3(Math.cos(wheelAngleRad), 0, Math.sin(wheelAngleRad)).normalize();
+  const wheelSide = new Vector3(-wheelAxis.z, 0, wheelAxis.x).normalize();
+  const torusRotation = createRotationFromBasis(wheelSide, WORLD_Y_AXIS, wheelAxis);
+  const hubRotation = createRotationFromDirection(CYLINDER_AXIS, wheelAxis);
   const spokes: MeshSpec[] = WHEEL_SPOKE_ANGLE_OFFSETS_DEG.map((angleDeg, index) => {
     const radialDirection = createWheelPlaneDirection(wheelSide, toRad(angleDeg));
     const spokeCenterDistanceMeters = mm(hubRadiusMm + spokeSpanMm / 2);
@@ -161,7 +168,7 @@ export function createWheelModule(input: PlannerInput): MeshSpec[] {
         wheelCenter[2] + baseCenterOffset[2],
       ] as [number, number, number],
       size: [mm(baseEdgeMm), mm(baseEdgeMm), mm(baseEdgeMm)] as [number, number, number],
-      rotation: [0, 0, wheelAngleRad] as [number, number, number],
+      rotation: [0, -wheelAngleRad, 0] as [number, number, number],
       materialKind: 'plastic',
       color: WHEEL_BASE_COLOR,
       metalness: WHEEL_PLASTIC_MATERIAL.metalness,
@@ -177,7 +184,7 @@ export function createWheelModule(input: PlannerInput): MeshSpec[] {
         wheelCenter[2] + connectorCenterOffset[2],
       ] as [number, number, number],
       size: [mm(connectorLengthMm), mm(connectorRadiusMm * 2), mm(connectorRadiusMm * 2)] as [number, number, number],
-      rotation: [0, 0, wheelAngleRad + Math.PI / 2] as [number, number, number],
+      rotation: hubRotation,
       shape: 'cylinder',
       cylinderRadiusTop: mm(connectorRadiusMm),
       cylinderRadiusBottom: mm(connectorRadiusMm),

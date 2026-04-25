@@ -5,7 +5,7 @@ import {
   PROFILE_SHORT_MM,
   UPRIGHT_BEAM_DEPTH_MM,
 } from './constants';
-import { centeredZ, mm } from './modules/shared';
+import { centeredY, mm } from './modules/shared';
 import type { PlannerInput } from './types';
 
 export const MEASUREMENT_OVERLAY_COLOR = '#2563eb';
@@ -36,7 +36,7 @@ export type PlannerMeasurementOverlay = {
   color: string;
 };
 
-function horizontalArrowY(clearanceMm = HORIZONTAL_ARROW_CLEARANCE_MM) {
+function horizontalArrowZ(clearanceMm = HORIZONTAL_ARROW_CLEARANCE_MM) {
   return mm(BASE_BEAM_HEIGHT_MM + clearanceMm);
 }
 
@@ -44,8 +44,8 @@ function verticalArrowX(input: PlannerInput) {
   return mm(input.seatBaseDepthMm + input.steeringColumnDistanceMm + UPRIGHT_BEAM_DEPTH_MM);
 }
 
-function rightSideArrowZ(input: PlannerInput, clearanceMm = VERTICAL_ARROW_CLEARANCE_MM) {
-  return centeredZ(input.baseWidthMm + clearanceMm, input.baseWidthMm);
+function rightSideArrowY(input: PlannerInput, clearanceMm = VERTICAL_ARROW_CLEARANCE_MM) {
+  return centeredY(input.baseWidthMm + clearanceMm, input.baseWidthMm);
 }
 
 function steeringColumnTopMm(input: PlannerInput) {
@@ -67,7 +67,7 @@ function wheelCenterXmm(input: PlannerInput) {
   return steeringColumnCenterXmm(input) + input.wheelDistanceFromSteeringColumnMm;
 }
 
-function wheelCenterYmm(input: PlannerInput) {
+function wheelCenterZmm(input: PlannerInput) {
   return BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm;
 }
 
@@ -75,34 +75,34 @@ export function createPlannerMeasurementOverlay(
   input: PlannerInput,
   key: PlannerMeasurementKey
 ): PlannerMeasurementOverlay {
-  const baseCenterZ = centeredZ(input.baseWidthMm / 2, input.baseWidthMm);
+  const baseCenterY = centeredY(input.baseWidthMm / 2, input.baseWidthMm);
 
   switch (key) {
     case 'baseLengthMm':
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [0, horizontalArrowY(), centeredZ(10, input.baseWidthMm)],
-        end: [mm(input.baseLengthMm), horizontalArrowY(), centeredZ(10, input.baseWidthMm)],
+        start: [0, centeredY(10, input.baseWidthMm), horizontalArrowZ()],
+        end: [mm(input.baseLengthMm), centeredY(10, input.baseWidthMm), horizontalArrowZ()],
       };
 
     case 'baseWidthMm':
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [mm(40), horizontalArrowY(), centeredZ(0, input.baseWidthMm)],
-        end: [mm(40), horizontalArrowY(), centeredZ(input.baseWidthMm, input.baseWidthMm)],
+        start: [mm(40), centeredY(0, input.baseWidthMm), horizontalArrowZ()],
+        end: [mm(40), centeredY(input.baseWidthMm, input.baseWidthMm), horizontalArrowZ()],
       };
 
     case 'seatBaseDepthMm':
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [0, horizontalArrowY(), centeredZ(input.baseInnerBeamSpacingMm / 2, input.baseWidthMm)],
+        start: [0, centeredY(input.baseInnerBeamSpacingMm / 2, input.baseWidthMm), horizontalArrowZ()],
         end: [
           mm(input.seatBaseDepthMm),
-          horizontalArrowY(),
-          centeredZ(input.baseInnerBeamSpacingMm / 2, input.baseWidthMm),
+          centeredY(input.baseInnerBeamSpacingMm / 2, input.baseWidthMm),
+          horizontalArrowZ(),
         ],
       };
 
@@ -112,13 +112,13 @@ export function createPlannerMeasurementOverlay(
         color: MEASUREMENT_OVERLAY_COLOR,
         start: [
           mm(input.seatBaseDepthMm / 2),
-          horizontalArrowY(PROFILE_SHORT_MM + 30),
-          centeredZ(input.baseWidthMm / 2 - input.baseInnerBeamSpacingMm / 2, input.baseWidthMm),
+          centeredY(input.baseWidthMm / 2 - input.baseInnerBeamSpacingMm / 2, input.baseWidthMm),
+          horizontalArrowZ(PROFILE_SHORT_MM + 30),
         ],
         end: [
           mm(input.seatBaseDepthMm / 2),
-          horizontalArrowY(PROFILE_SHORT_MM + 30),
-          centeredZ(input.baseWidthMm / 2 + input.baseInnerBeamSpacingMm / 2, input.baseWidthMm),
+          centeredY(input.baseWidthMm / 2 + input.baseInnerBeamSpacingMm / 2, input.baseWidthMm),
+          horizontalArrowZ(PROFILE_SHORT_MM + 30),
         ],
       };
 
@@ -130,13 +130,13 @@ export function createPlannerMeasurementOverlay(
         color: MEASUREMENT_OVERLAY_COLOR,
         start: [
           pedalTrayRearFaceXm,
-          horizontalArrowY(),
-          centeredZ(PEDAL_TRAY_LAYOUT.sideBeamCenterOffsetMm, input.baseWidthMm),
+          centeredY(PEDAL_TRAY_LAYOUT.sideBeamCenterOffsetMm, input.baseWidthMm),
+          horizontalArrowZ(),
         ],
         end: [
           pedalTrayRearFaceXm + mm(input.pedalTrayDepthMm),
-          horizontalArrowY(),
-          centeredZ(PEDAL_TRAY_LAYOUT.sideBeamCenterOffsetMm, input.baseWidthMm),
+          centeredY(PEDAL_TRAY_LAYOUT.sideBeamCenterOffsetMm, input.baseWidthMm),
+          horizontalArrowZ(),
         ],
       };
     }
@@ -145,19 +145,19 @@ export function createPlannerMeasurementOverlay(
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [mm(input.seatBaseDepthMm), horizontalArrowY(), baseCenterZ],
-        end: [mm(input.seatBaseDepthMm + input.pedalTrayDistanceMm), horizontalArrowY(), baseCenterZ],
+        start: [mm(input.seatBaseDepthMm), baseCenterY, horizontalArrowZ()],
+        end: [mm(input.seatBaseDepthMm + input.pedalTrayDistanceMm), baseCenterY, horizontalArrowZ()],
       };
 
     case 'steeringColumnDistanceMm':
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [mm(input.seatBaseDepthMm), horizontalArrowY(PROFILE_SHORT_MM + 50), baseCenterZ],
+        start: [mm(input.seatBaseDepthMm), baseCenterY, horizontalArrowZ(PROFILE_SHORT_MM + 50)],
         end: [
           mm(input.seatBaseDepthMm + input.steeringColumnDistanceMm),
-          horizontalArrowY(PROFILE_SHORT_MM + 50),
-          baseCenterZ,
+          baseCenterY,
+          horizontalArrowZ(PROFILE_SHORT_MM + 50),
         ],
       };
 
@@ -165,8 +165,8 @@ export function createPlannerMeasurementOverlay(
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [verticalArrowX(input), mm(BASE_BEAM_HEIGHT_MM), baseCenterZ],
-        end: [verticalArrowX(input), mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm), baseCenterZ],
+        start: [verticalArrowX(input), baseCenterY, mm(BASE_BEAM_HEIGHT_MM)],
+        end: [verticalArrowX(input), baseCenterY, mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm)],
       };
 
     case 'steeringColumnHeightMm':
@@ -175,13 +175,13 @@ export function createPlannerMeasurementOverlay(
         color: MEASUREMENT_OVERLAY_COLOR,
         start: [
           verticalArrowX(input) + mm(VERTICAL_ARROW_CLEARANCE_MM),
+          rightSideArrowY(input),
           mm(BASE_BEAM_HEIGHT_MM),
-          rightSideArrowZ(input),
         ],
         end: [
           verticalArrowX(input) + mm(VERTICAL_ARROW_CLEARANCE_MM),
+          rightSideArrowY(input),
           mm(steeringColumnTopMm(input)),
-          rightSideArrowZ(input),
         ],
       };
 
@@ -189,16 +189,16 @@ export function createPlannerMeasurementOverlay(
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [mm(wheelCenterXmm(input)), mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm), baseCenterZ],
-        end: [mm(wheelCenterXmm(input)), mm(wheelCenterYmm(input)), baseCenterZ],
+        start: [mm(wheelCenterXmm(input)), baseCenterY, mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm)],
+        end: [mm(wheelCenterXmm(input)), baseCenterY, mm(wheelCenterZmm(input))],
       };
 
     case 'wheelDistanceFromSteeringColumnMm':
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [mm(steeringColumnCenterXmm(input)), horizontalArrowY(PROFILE_SHORT_MM + 90), baseCenterZ],
-        end: [mm(wheelCenterXmm(input)), horizontalArrowY(PROFILE_SHORT_MM + 90), baseCenterZ],
+        start: [mm(steeringColumnCenterXmm(input)), baseCenterY, horizontalArrowZ(PROFILE_SHORT_MM + 90)],
+        end: [mm(wheelCenterXmm(input)), baseCenterY, horizontalArrowZ(PROFILE_SHORT_MM + 90)],
       };
 
     case 'wheelDiameterMm': {
@@ -208,11 +208,11 @@ export function createPlannerMeasurementOverlay(
       return {
         key,
         color: MEASUREMENT_OVERLAY_COLOR,
-        start: [mm(wheelCenterXmm(input)), mm(wheelCenterYmm(input)), baseCenterZ],
+        start: [mm(wheelCenterXmm(input)), baseCenterY, mm(wheelCenterZmm(input))],
         end: [
           mm(wheelCenterXmm(input) - Math.sin(wheelAngleRad) * wheelRadiusMm),
-          mm(wheelCenterYmm(input) + Math.cos(wheelAngleRad) * wheelRadiusMm),
-          baseCenterZ,
+          baseCenterY,
+          mm(wheelCenterZmm(input) + Math.cos(wheelAngleRad) * wheelRadiusMm),
         ],
       };
     }

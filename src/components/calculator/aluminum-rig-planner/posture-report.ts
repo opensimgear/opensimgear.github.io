@@ -135,9 +135,9 @@ function angleDeg(a: PosturePoint, joint: PosturePoint, b: PosturePoint) {
 
 function projectedAngleDeg(from: PosturePoint, to: PosturePoint) {
   const deltaX = to[0] - from[0];
-  const deltaY = to[1] - from[1];
+  const deltaZ = to[2] - from[2];
 
-  return Math.abs((Math.atan2(deltaY, deltaX) * 180) / Math.PI);
+  return Math.abs((Math.atan2(deltaZ, deltaX) * 180) / Math.PI);
 }
 
 function mean(values: number[]) {
@@ -197,8 +197,8 @@ function getWheelCenter(input: PlannerInput): PosturePoint {
       UPRIGHT_BEAM_DEPTH_MM +
       input.wheelDistanceFromSteeringColumnMm) *
       MM_TO_METERS,
-    (BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm) * MM_TO_METERS,
     0,
+    (BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm) * MM_TO_METERS,
   ];
 }
 
@@ -210,8 +210,8 @@ function getMonitorMidpoint(
 
   return [
     eyeCenter[0] + distanceFromEyesMm * MM_TO_METERS,
-    (BASE_BEAM_HEIGHT_MM + settings.monitorHeightFromBaseMm) * MM_TO_METERS,
     0,
+    (BASE_BEAM_HEIGHT_MM + settings.monitorHeightFromBaseMm) * MM_TO_METERS,
   ];
 }
 
@@ -224,7 +224,7 @@ export function getSolvedMonitorHeightFromBaseMm(
     ...settings,
     preset: settings.preset === 'custom' ? 'gt' : settings.preset,
   });
-  const eyeHeightFromBaseMm = (eyeCenter ?? skeleton.joints.head)[1] / MM_TO_METERS - BASE_BEAM_HEIGHT_MM;
+  const eyeHeightFromBaseMm = (eyeCenter ?? skeleton.joints.head)[2] / MM_TO_METERS - BASE_BEAM_HEIGHT_MM;
 
   return Math.max(
     PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm,
@@ -237,8 +237,8 @@ function createEyeDebug(center: PosturePoint): PlannerPostureEyeDebug {
 
   return {
     center,
-    left: [center[0], center[1], center[2] - halfSpacingM],
-    right: [center[0], center[1], center[2] + halfSpacingM],
+    left: [center[0], center[1] + halfSpacingM, center[2]],
+    right: [center[0], center[1] - halfSpacingM, center[2]],
     diameterM: EYE_DEBUG_BALL_DIAMETER_MM * MM_TO_METERS,
     constants: {
       eyeSpacingMm: EYE_DEBUG_SPACING_MM,
@@ -288,7 +288,7 @@ export function createPlannerPostureReport(
   });
   const ranges = TARGET_RANGES[postureSettings.preset];
   const wheelCenter = getWheelCenter(input);
-  const wheelTopY = wheelCenter[1] + (input.wheelDiameterMm * MM_TO_METERS) / 2;
+  const wheelTopZ = wheelCenter[2] + (input.wheelDiameterMm * MM_TO_METERS) / 2;
   const eyeDebug = createEyeDebug(eyeCenter ?? skeleton.joints.head);
   const monitorMidpoint = getMonitorMidpoint(eyeDebug.center, postureSettings);
   const metrics = [
@@ -349,12 +349,12 @@ export function createPlannerPostureReport(
       projectedAngleDeg(skeleton.joints.hipLeft, skeleton.joints.kneeLeft),
       ranges
     ),
-    createMetric('eyeToWheel', 'Eye over wheel', 'mm', (eyeDebug.center[1] - wheelTopY) / MM_TO_METERS, ranges),
+    createMetric('eyeToWheel', 'Eye over wheel', 'mm', (eyeDebug.center[2] - wheelTopZ) / MM_TO_METERS, ranges),
     createMetric(
       'eyeToMonitor',
       'Eye vs monitor midpoint',
       'mm',
-      (eyeDebug.center[1] - monitorMidpoint[1]) / MM_TO_METERS,
+      (eyeDebug.center[2] - monitorMidpoint[2]) / MM_TO_METERS,
       ranges
     ),
   ];

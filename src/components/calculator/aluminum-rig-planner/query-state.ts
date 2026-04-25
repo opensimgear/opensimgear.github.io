@@ -212,10 +212,13 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     monitorSizeIn,
     monitorTargetFovDeg,
   });
+  const legacyMonitorMidpointHeightMm = isFiniteNumber(state?.monitorMidpointZMm)
+    ? state.monitorMidpointZMm
+    : state?.monitorMidpointYMm;
   const monitorHeightFromBaseMm = isFiniteNumber(state?.monitorHeightFromBaseMm)
     ? state.monitorHeightFromBaseMm
-    : isFiniteNumber(state?.monitorMidpointYMm)
-      ? state.monitorMidpointYMm - BASE_BEAM_HEIGHT_MM
+    : isFiniteNumber(legacyMonitorMidpointHeightMm)
+      ? legacyMonitorMidpointHeightMm - BASE_BEAM_HEIGHT_MM
       : defaults.monitorHeightFromBaseMm;
 
   return {

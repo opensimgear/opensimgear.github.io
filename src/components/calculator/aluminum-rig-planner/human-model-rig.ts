@@ -206,6 +206,18 @@ function toVector3(point: PosturePoint) {
   return new Vector3(point[0], point[1], point[2]);
 }
 
+function plannerZUpToModelYUp(point: PosturePoint): PosturePoint {
+  return [point[0], point[2], -point[1]];
+}
+
+function modelYUpToPlannerZUp(point: Vector3): PosturePoint {
+  return [point.x, -point.z, point.y];
+}
+
+function toModelVector3(point: PosturePoint) {
+  return toVector3(plannerZUpToModelYUp(point));
+}
+
 function createSegment(name: HumanBoneName, start: Vector3, end: Vector3): HumanRestSegment {
   return { name, start, end };
 }
@@ -233,8 +245,9 @@ function formatPosition(position: Vector3, modelScale = 1, scaleOrigin: Vector3 
   const x = scaleOrigin.x + (position.x - scaleOrigin.x) * modelScale;
   const y = scaleOrigin.y + (position.y - scaleOrigin.y) * modelScale;
   const z = scaleOrigin.z + (position.z - scaleOrigin.z) * modelScale;
+  const plannerPosition = modelYUpToPlannerZUp(new Vector3(x, y, z));
 
-  return `x ${metersToMm(x)}, y ${metersToMm(y)}, z ${metersToMm(z)}`;
+  return `x ${metersToMm(plannerPosition[0])}, y ${metersToMm(plannerPosition[1])}, z ${metersToMm(plannerPosition[2])}`;
 }
 
 function roundModelRatio(value: number) {
@@ -437,22 +450,22 @@ function createTargetSegments(skeleton: PlannerPostureSkeleton) {
   const { joints } = skeleton;
 
   return new Map<HumanBoneName, [Vector3, Vector3]>([
-    ['torso', [toVector3(joints.hipCenter), toVector3(joints.shoulderCenter)]],
-    ['head', [toVector3(joints.neck), toVector3(joints.head)]],
-    ['leftUpperArm', [toVector3(joints.shoulderLeft), toVector3(joints.elbowLeft)]],
-    ['leftForearm', [toVector3(joints.elbowLeft), toVector3(joints.wristLeft)]],
-    ['leftHand', [toVector3(joints.wristLeft), toVector3(joints.handLeft)]],
-    ['rightUpperArm', [toVector3(joints.shoulderRight), toVector3(joints.elbowRight)]],
-    ['rightForearm', [toVector3(joints.elbowRight), toVector3(joints.wristRight)]],
-    ['rightHand', [toVector3(joints.wristRight), toVector3(joints.handRight)]],
-    ['leftThigh', [toVector3(joints.hipLeft), toVector3(joints.kneeLeft)]],
-    ['leftShin', [toVector3(joints.kneeLeft), toVector3(joints.ankleLeft)]],
-    ['leftHeel', [toVector3(joints.ankleLeft), toVector3(joints.heelLeft)]],
-    ['leftFoot', [toVector3(joints.heelLeft), toVector3(joints.toeLeft)]],
-    ['rightThigh', [toVector3(joints.hipRight), toVector3(joints.kneeRight)]],
-    ['rightShin', [toVector3(joints.kneeRight), toVector3(joints.ankleRight)]],
-    ['rightHeel', [toVector3(joints.ankleRight), toVector3(joints.heelRight)]],
-    ['rightFoot', [toVector3(joints.heelRight), toVector3(joints.toeRight)]],
+    ['torso', [toModelVector3(joints.hipCenter), toModelVector3(joints.shoulderCenter)]],
+    ['head', [toModelVector3(joints.neck), toModelVector3(joints.head)]],
+    ['leftUpperArm', [toModelVector3(joints.shoulderLeft), toModelVector3(joints.elbowLeft)]],
+    ['leftForearm', [toModelVector3(joints.elbowLeft), toModelVector3(joints.wristLeft)]],
+    ['leftHand', [toModelVector3(joints.wristLeft), toModelVector3(joints.handLeft)]],
+    ['rightUpperArm', [toModelVector3(joints.shoulderRight), toModelVector3(joints.elbowRight)]],
+    ['rightForearm', [toModelVector3(joints.elbowRight), toModelVector3(joints.wristRight)]],
+    ['rightHand', [toModelVector3(joints.wristRight), toModelVector3(joints.handRight)]],
+    ['leftThigh', [toModelVector3(joints.hipLeft), toModelVector3(joints.kneeLeft)]],
+    ['leftShin', [toModelVector3(joints.kneeLeft), toModelVector3(joints.ankleLeft)]],
+    ['leftHeel', [toModelVector3(joints.ankleLeft), toModelVector3(joints.heelLeft)]],
+    ['leftFoot', [toModelVector3(joints.heelLeft), toModelVector3(joints.toeLeft)]],
+    ['rightThigh', [toModelVector3(joints.hipRight), toModelVector3(joints.kneeRight)]],
+    ['rightShin', [toModelVector3(joints.kneeRight), toModelVector3(joints.ankleRight)]],
+    ['rightHeel', [toModelVector3(joints.ankleRight), toModelVector3(joints.heelRight)]],
+    ['rightFoot', [toModelVector3(joints.heelRight), toModelVector3(joints.toeRight)]],
   ]);
 }
 
@@ -552,8 +565,8 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
   }
 
   const safeModelScale = Math.max(BONE_LENGTH_EPSILON, modelScale);
-  const hipCenter = skeleton.joints.hipCenter;
-  const scaleOrigin = new Vector3(hipCenter[0], hipCenter[1], hipCenter[2]);
+  const modelHipCenter = plannerZUpToModelYUp(skeleton.joints.hipCenter);
+  const scaleOrigin = new Vector3(modelHipCenter[0], modelHipCenter[1], modelHipCenter[2]);
   rig.root.updateWorldMatrix(true, true);
   const debugSegments = createDebugSegmentsFromModelBones(rig.root, rig.bones);
   const eyeCenterStart = getModelBoneLocalPosition(rig.root, rig.bones, 'head');
@@ -568,9 +581,9 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
 
   rig.root.scale.setScalar(safeModelScale);
   rig.root.position.set(
-    hipCenter[0] * (1 - safeModelScale),
-    hipCenter[1] * (1 - safeModelScale),
-    hipCenter[2] * (1 - safeModelScale)
+    skeleton.joints.hipCenter[0] * (1 - safeModelScale),
+    skeleton.joints.hipCenter[1] * (1 - safeModelScale),
+    skeleton.joints.hipCenter[2] * (1 - safeModelScale)
   );
   rig.root.updateWorldMatrix(true, true);
 }
@@ -1115,6 +1128,7 @@ export function createRiggedHumanModelFromRoot(root: Group): RiggedHumanModel | 
   }
 
   root.name = 'RiggedHumanMaleRealistic';
+  root.rotation.x = Math.PI / 2;
 
   return {
     boneRigRatios: rig.boneRigRatios,

@@ -132,28 +132,28 @@ export function createMonitorModule(
     const thetaStepRadians = (maxThetaRadians * 2) / MONITOR_CURVED_SEGMENT_COUNT;
     const getArcPoint = (thetaRadians: number) => ({
       xMm: -(curvatureRadiusMm - curvatureRadiusMm * Math.cos(thetaRadians)),
-      zMm: curvatureRadiusMm * Math.sin(thetaRadians),
+      yMm: -curvatureRadiusMm * Math.sin(thetaRadians),
     });
 
     return Array.from({ length: MONITOR_CURVED_SEGMENT_COUNT }, (_, index) => {
       const start = getArcPoint(-maxThetaRadians + thetaStepRadians * index);
       const end = getArcPoint(-maxThetaRadians + thetaStepRadians * (index + 1));
       const centerXMm = (start.xMm + end.xMm) / 2;
-      const centerZMm = (start.zMm + end.zMm) / 2;
+      const centerYMm = (start.yMm + end.yMm) / 2;
       const deltaXMm = end.xMm - start.xMm;
-      const deltaZMm = end.zMm - start.zMm;
-      const segmentWidthMm = Math.sqrt(deltaXMm * deltaXMm + deltaZMm * deltaZMm);
-      const yawRadians = Math.atan2(deltaXMm, deltaZMm);
+      const deltaYMm = end.yMm - start.yMm;
+      const segmentWidthMm = Math.sqrt(deltaXMm * deltaXMm + deltaYMm * deltaYMm);
+      const yawRadians = Math.atan2(-deltaXMm, deltaYMm);
 
       return createMonitorMeshSpec(
         `monitor-plate-${index.toString().padStart(2, '0')}`,
         [
           report.monitorDebug.position[0] + mm(centerXMm),
-          report.monitorDebug.position[1],
-          report.monitorDebug.position[2] + mm(centerZMm),
+          report.monitorDebug.position[1] + mm(centerYMm),
+          report.monitorDebug.position[2],
         ],
-        [mm(dimensions.thicknessMm), mm(dimensions.heightMm), mm(segmentWidthMm)],
-        [0, yawRadians, tiltRadians]
+        [mm(dimensions.thicknessMm), mm(segmentWidthMm), mm(dimensions.heightMm)],
+        [0, -tiltRadians, yawRadians]
       );
     });
   }
@@ -162,8 +162,8 @@ export function createMonitorModule(
     createMonitorMeshSpec(
       'monitor-plate',
       report.monitorDebug.position,
-      [mm(dimensions.thicknessMm), mm(dimensions.heightMm), mm(dimensions.widthMm)],
-      [0, 0, tiltRadians]
+      [mm(dimensions.thicknessMm), mm(dimensions.widthMm), mm(dimensions.heightMm)],
+      [0, -tiltRadians, 0]
     ),
   ];
 }

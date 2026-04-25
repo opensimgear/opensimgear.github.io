@@ -2,7 +2,7 @@ import type { CutListRow, PlannerInput } from '../types';
 import { MODULE_PROFILE_MATERIAL, PEDAL_TRAY_LAYOUT } from '../constants';
 import {
   BASE_BEAM_HEIGHT,
-  centeredZ,
+  centeredY,
   createCutListRow,
   metersToRoundedMm,
   mm,
@@ -11,10 +11,10 @@ import {
 } from './shared';
 
 export function createPedalTrayModule(input: PlannerInput, profileColor: string): MeshSpec[] {
-  const trayTopY = BASE_BEAM_HEIGHT;
-  const trayBeamCenterY = trayTopY - PROFILE_SHORT / 2;
+  const trayTopZ = BASE_BEAM_HEIGHT;
+  const trayBeamCenterZ = trayTopZ - PROFILE_SHORT / 2;
   const traySideCenterOffsetMm = PEDAL_TRAY_LAYOUT.sideBeamCenterOffsetMm;
-  const trayCenterZ = centeredZ(input.baseWidthMm / 2, input.baseWidthMm);
+  const trayCenterY = centeredY(input.baseWidthMm / 2, input.baseWidthMm);
   const trayRearCrossBeamCenterXMm =
     input.seatBaseDepthMm + input.pedalTrayDistanceMm + PEDAL_TRAY_LAYOUT.rearCrossMemberCenterInsetMm;
   const trayFrontCrossBeamCenterXMm =
@@ -29,7 +29,7 @@ export function createPedalTrayModule(input: PlannerInput, profileColor: string)
     {
       id: 'pedal-tray-left',
       size: [traySideBeamLength, PROFILE_SHORT, PROFILE_SHORT] as [number, number, number],
-      position: [mm(traySideBeamCenterXMm), trayBeamCenterY, centeredZ(traySideCenterOffsetMm, input.baseWidthMm)] as [
+      position: [mm(traySideBeamCenterXMm), centeredY(traySideCenterOffsetMm, input.baseWidthMm), trayBeamCenterZ] as [
         number,
         number,
         number,
@@ -45,8 +45,8 @@ export function createPedalTrayModule(input: PlannerInput, profileColor: string)
       size: [traySideBeamLength, PROFILE_SHORT, PROFILE_SHORT] as [number, number, number],
       position: [
         mm(traySideBeamCenterXMm),
-        trayBeamCenterY,
-        centeredZ(input.baseWidthMm - traySideCenterOffsetMm, input.baseWidthMm),
+        centeredY(input.baseWidthMm - traySideCenterOffsetMm, input.baseWidthMm),
+        trayBeamCenterZ,
       ] as [number, number, number],
       profileType: 'alu40x40',
       openEnds: ['negative', 'positive'],
@@ -56,8 +56,8 @@ export function createPedalTrayModule(input: PlannerInput, profileColor: string)
     },
     {
       id: 'pedal-tray-front',
-      size: [PROFILE_SHORT, PROFILE_SHORT, trayCrossBeamLength] as [number, number, number],
-      position: [mm(trayFrontCrossBeamCenterXMm), trayBeamCenterY, trayCenterZ] as [number, number, number],
+      size: [PROFILE_SHORT, trayCrossBeamLength, PROFILE_SHORT] as [number, number, number],
+      position: [mm(trayFrontCrossBeamCenterXMm), trayCenterY, trayBeamCenterZ] as [number, number, number],
       profileType: 'alu40x40',
       color: profileColor,
       metalness: MODULE_PROFILE_MATERIAL.metalness,
@@ -65,8 +65,8 @@ export function createPedalTrayModule(input: PlannerInput, profileColor: string)
     },
     {
       id: 'pedal-tray-middle',
-      size: [PROFILE_SHORT, PROFILE_SHORT, trayCrossBeamLength] as [number, number, number],
-      position: [mm(trayMiddleCrossBeamCenterXMm), trayBeamCenterY, trayCenterZ] as [number, number, number],
+      size: [PROFILE_SHORT, trayCrossBeamLength, PROFILE_SHORT] as [number, number, number],
+      position: [mm(trayMiddleCrossBeamCenterXMm), trayCenterY, trayBeamCenterZ] as [number, number, number],
       profileType: 'alu40x40',
       color: profileColor,
       metalness: MODULE_PROFILE_MATERIAL.metalness,
@@ -74,8 +74,8 @@ export function createPedalTrayModule(input: PlannerInput, profileColor: string)
     },
     {
       id: 'pedal-tray-rear',
-      size: [PROFILE_SHORT, PROFILE_SHORT, trayCrossBeamLength] as [number, number, number],
-      position: [mm(trayRearCrossBeamCenterXMm), trayBeamCenterY, trayCenterZ] as [number, number, number],
+      size: [PROFILE_SHORT, trayCrossBeamLength, PROFILE_SHORT] as [number, number, number],
+      position: [mm(trayRearCrossBeamCenterXMm), trayCenterY, trayBeamCenterZ] as [number, number, number],
       profileType: 'alu40x40',
       color: profileColor,
       metalness: MODULE_PROFILE_MATERIAL.metalness,

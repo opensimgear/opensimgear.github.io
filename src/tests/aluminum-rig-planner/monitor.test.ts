@@ -27,7 +27,7 @@ describe('aluminum rig planner monitor module', () => {
   it('draws a flat tilted monitor as one plate', () => {
     const report = {
       monitorDebug: {
-        position: [1, 0.8, 0] as [number, number, number],
+        position: [1, 0, 0.8] as [number, number, number],
       },
     } as PlannerPostureReport;
     const meshes = createMonitorModule(report, {
@@ -38,13 +38,13 @@ describe('aluminum rig planner monitor module', () => {
 
     expect(meshes).toHaveLength(1);
     expect(meshes[0].id).toBe('monitor-plate');
-    expect(meshes[0].rotation?.[2]).toBeCloseTo((10 * Math.PI) / 180, 6);
+    expect(meshes[0].rotation?.[1]).toBeCloseTo((-10 * Math.PI) / 180, 6);
   });
 
   it('approximates curved monitor panels with consumer radius segments', () => {
     const report = {
       monitorDebug: {
-        position: [1, 0.8, 0] as [number, number, number],
+        position: [1, 0, 0.8] as [number, number, number],
       },
     } as PlannerPostureReport;
     const meshes = createMonitorModule(report, {
@@ -58,19 +58,19 @@ describe('aluminum rig planner monitor module', () => {
 
     expect(meshes).toHaveLength(25);
     expect(centerMesh.position[0]).toBeCloseTo(report.monitorDebug.position[0], 3);
-    expect(centerMesh.position[1]).toBe(report.monitorDebug.position[1]);
-    expect(centerMesh.position[2]).toBeCloseTo(report.monitorDebug.position[2], 6);
+    expect(centerMesh.position[1]).toBeCloseTo(report.monitorDebug.position[1], 6);
+    expect(centerMesh.position[2]).toBe(report.monitorDebug.position[2]);
     expect(leftEdge.position[0]).toBeLessThan(centerMesh.position[0]);
     expect(rightEdge?.position[0]).toBeLessThan(centerMesh.position[0]);
-    expect(leftEdge.rotation?.[1]).toBeGreaterThan(0);
-    expect(rightEdge?.rotation?.[1]).toBeLessThan(0);
-    expect(centerMesh.rotation?.[2]).toBeCloseTo((-5 * Math.PI) / 180, 6);
+    expect(leftEdge.rotation?.[2]).toBeLessThan(0);
+    expect(rightEdge?.rotation?.[2]).toBeGreaterThan(0);
+    expect(centerMesh.rotation?.[1]).toBeCloseTo((5 * Math.PI) / 180, 6);
   });
 
   it('keeps curved monitor segment edges contiguous', () => {
     const report = {
       monitorDebug: {
-        position: [1, 0.8, 0] as [number, number, number],
+        position: [1, 0, 0.8] as [number, number, number],
       },
     } as PlannerPostureReport;
     const meshes = createMonitorModule(report, {
@@ -81,17 +81,17 @@ describe('aluminum rig planner monitor module', () => {
     for (let index = 0; index < meshes.length - 1; index += 1) {
       const current = meshes[index];
       const next = meshes[index + 1];
-      const currentHalfWidthM = current.size[2] / 2;
-      const nextHalfWidthM = next.size[2] / 2;
-      const currentYaw = current.rotation?.[1] ?? 0;
-      const nextYaw = next.rotation?.[1] ?? 0;
+      const currentHalfWidthM = current.size[1] / 2;
+      const nextHalfWidthM = next.size[1] / 2;
+      const currentYaw = current.rotation?.[2] ?? 0;
+      const nextYaw = next.rotation?.[2] ?? 0;
       const currentEnd = [
-        current.position[0] + Math.sin(currentYaw) * currentHalfWidthM,
-        current.position[2] + Math.cos(currentYaw) * currentHalfWidthM,
+        current.position[0] - Math.sin(currentYaw) * currentHalfWidthM,
+        current.position[1] + Math.cos(currentYaw) * currentHalfWidthM,
       ];
       const nextStart = [
-        next.position[0] - Math.sin(nextYaw) * nextHalfWidthM,
-        next.position[2] - Math.cos(nextYaw) * nextHalfWidthM,
+        next.position[0] + Math.sin(nextYaw) * nextHalfWidthM,
+        next.position[1] - Math.cos(nextYaw) * nextHalfWidthM,
       ];
 
       expect(currentEnd[0]).toBeCloseTo(nextStart[0], 6);

@@ -201,6 +201,6 @@ export function createCutListRow(profileType: CutListProfileType, lengthMm: numb
   };
 }
 
-export function centeredZ(zMm: number, totalWidthMm: number) {
-  return mm(zMm - totalWidthMm / 2);
+export function centeredY(distanceFromLeftMm: number, totalWidthMm: number) {
+  return mm(totalWidthMm / 2 - distanceFromLeftMm);
 }

@@ -44,14 +44,14 @@ describe('aluminum rig planner posture report', () => {
   });
 
   it('returns eye debug balls spaced 70 mm apart with 25 mm diameter', () => {
-    const eyeCenter: [number, number, number] = [1.1, 0.82, 0.03];
+    const eyeCenter: [number, number, number] = [1.1, 0.03, 0.82];
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, eyeCenter);
 
     expect(report.eyeDebug.center).toEqual(eyeCenter);
     expect(report.eyeDebug.diameterM).toBeCloseTo(0.025, 6);
     expect(report.eyeDebug.left[0]).toBeCloseTo(report.eyeDebug.right[0], 6);
-    expect(report.eyeDebug.left[1]).toBeCloseTo(report.eyeDebug.right[1], 6);
-    expect(Math.abs(report.eyeDebug.left[2] - report.eyeDebug.right[2])).toBeCloseTo(0.07, 6);
+    expect(Math.abs(report.eyeDebug.left[1] - report.eyeDebug.right[1])).toBeCloseTo(0.07, 6);
+    expect(report.eyeDebug.left[2]).toBeCloseTo(report.eyeDebug.right[2], 6);
   });
 
   it('solves flat monitor midpoint distance from target horizontal FOV', () => {
@@ -68,11 +68,11 @@ describe('aluminum rig planner posture report', () => {
 
     expect(report.monitorDebug.diameterM).toBeCloseTo(0.01, 6);
     expect(report.monitorDebug.position[0]).toBeCloseTo(report.eyeDebug.center[0] + expectedDistanceMm * 0.001, 6);
-    expect(report.monitorDebug.position[1]).toBeCloseTo(
+    expect(report.monitorDebug.position[1]).toBe(0);
+    expect(report.monitorDebug.position[2]).toBeCloseTo(
       (BASE_BEAM_HEIGHT_MM + postureSettings.monitorHeightFromBaseMm) * 0.001,
       6
     );
-    expect(report.monitorDebug.position[2]).toBe(0);
   });
 
   it('places curved monitor midpoint at the recommended curved viewing distance', () => {
@@ -90,18 +90,18 @@ describe('aluminum rig planner posture report', () => {
   });
 
   it('solves monitor height from base to match computed eye height', () => {
-    const eyeCenter: [number, number, number] = [0.9, 0.86, 0];
+    const eyeCenter: [number, number, number] = [0.9, 0, 0.86];
     const solvedHeightFromBaseMm = getSolvedMonitorHeightFromBaseMm(
       DEFAULT_PLANNER_INPUT,
       DEFAULT_PLANNER_POSTURE_SETTINGS,
       eyeCenter
     );
 
-    expect(solvedHeightFromBaseMm).toBeCloseTo(eyeCenter[1] / 0.001 - BASE_BEAM_HEIGHT_MM, 6);
+    expect(solvedHeightFromBaseMm).toBeCloseTo(eyeCenter[2] / 0.001 - BASE_BEAM_HEIGHT_MM, 6);
   });
 
   it('reports monitor midpoint near eye center after solving monitor height from eye center', () => {
-    const eyeCenter: [number, number, number] = [0.9, 0.86, 0];
+    const eyeCenter: [number, number, number] = [0.9, 0, 0.86];
     const monitorHeightFromBaseMm = getSolvedMonitorHeightFromBaseMm(
       DEFAULT_PLANNER_INPUT,
       DEFAULT_PLANNER_POSTURE_SETTINGS,

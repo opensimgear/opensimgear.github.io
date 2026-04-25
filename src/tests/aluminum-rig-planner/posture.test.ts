@@ -51,7 +51,7 @@ function getSignedThighAngleRelativeToSeat(
   knee: [number, number, number],
   seatAngleDeg: number
 ) {
-  const thighAngleRad = Math.atan2(knee[1] - hip[1], knee[0] - hip[0]);
+  const thighAngleRad = Math.atan2(knee[2] - hip[2], knee[0] - hip[0]);
   const seatAngleRad = (seatAngleDeg * Math.PI) / 180;
 
   return thighAngleRad - seatAngleRad;
@@ -105,15 +105,15 @@ describe('aluminum rig planner posture solver', () => {
       input.steeringColumnDistanceMm +
       UPRIGHT_BEAM_DEPTH_MM +
       input.wheelDistanceFromSteeringColumnMm;
-    const wheelCenterY = BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm;
+    const wheelCenterZ = BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm;
     const expectedGripRadius = wheelDiameterMm / 2000;
 
     expect(skeleton.joints.handRight[0]).toBeCloseTo(wheelCenterX / 1000, 5);
-    expect(skeleton.joints.handRight[1]).toBeCloseTo(wheelCenterY / 1000, 5);
-    expect(Math.abs(skeleton.joints.handRight[2])).toBeCloseTo(expectedGripRadius, 5);
+    expect(skeleton.joints.handRight[2]).toBeCloseTo(wheelCenterZ / 1000, 5);
+    expect(Math.abs(skeleton.joints.handRight[1])).toBeCloseTo(expectedGripRadius, 5);
     expect(skeleton.joints.handLeft[0]).toBeCloseTo(wheelCenterX / 1000, 5);
-    expect(skeleton.joints.handLeft[1]).toBeCloseTo(wheelCenterY / 1000, 5);
-    expect(Math.abs(skeleton.joints.handLeft[2])).toBeCloseTo(expectedGripRadius, 5);
+    expect(skeleton.joints.handLeft[2]).toBeCloseTo(wheelCenterZ / 1000, 5);
+    expect(Math.abs(skeleton.joints.handLeft[1])).toBeCloseTo(expectedGripRadius, 5);
   });
 
   it('keeps eye center out of the pure posture skeleton', () => {
@@ -130,8 +130,8 @@ describe('aluminum rig planner posture solver', () => {
       heightCm: tallHeightCm,
     });
     const seatAngleRad = (DEFAULT_PLANNER_INPUT.seatAngleDeg * Math.PI) / 180;
-    const seatForward = [Math.cos(seatAngleRad), Math.sin(seatAngleRad), 0] as const;
-    const seatNormal = [-Math.sin(seatAngleRad), Math.cos(seatAngleRad), 0] as const;
+    const seatForward = [Math.cos(seatAngleRad), 0, Math.sin(seatAngleRad)] as const;
+    const seatNormal = [-Math.sin(seatAngleRad), 0, Math.cos(seatAngleRad)] as const;
     const heightDelta = tallHeightCm / DEFAULT_POSTURE_HEIGHT_CM - 1;
     const expectedHipDelta = [
       (seatForward[0] * POSTURE_HIP_FORWARD_ON_SEAT_MM * heightDelta +
@@ -140,7 +140,9 @@ describe('aluminum rig planner posture solver', () => {
       (seatForward[1] * POSTURE_HIP_FORWARD_ON_SEAT_MM * heightDelta +
         seatNormal[1] * POSTURE_HIP_ABOVE_SEAT_MM * heightDelta * 0.2) /
         1000,
-      0,
+      (seatForward[2] * POSTURE_HIP_FORWARD_ON_SEAT_MM * heightDelta +
+        seatNormal[2] * POSTURE_HIP_ABOVE_SEAT_MM * heightDelta * 0.2) /
+        1000,
     ] as const;
 
     expect(tallDriver.joints.hipCenter[0] - midDriver.joints.hipCenter[0]).toBeCloseTo(expectedHipDelta[0], 6);
@@ -155,7 +157,7 @@ describe('aluminum rig planner posture solver', () => {
       heightCm: 205,
     });
 
-    expect(tallDriver.joints.head[1]).toBeGreaterThan(midDriver.joints.head[1]);
+    expect(tallDriver.joints.head[2]).toBeGreaterThan(midDriver.joints.head[2]);
     expect(tallDriver.joints.elbowLeft).not.toEqual(midDriver.joints.elbowLeft);
     expect(tallDriver.segments).not.toEqual(midDriver.segments);
   });
@@ -202,28 +204,26 @@ describe('aluminum rig planner posture solver', () => {
     const tallerFootLength = DEFAULT_ANTHROPOMETRY_RATIOS.footLength * (205 / 100);
     const trayHalfWidthMm =
       Math.max(0, DEFAULT_PLANNER_INPUT.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm) / 2;
-    const acceleratorCenterZmm = trayHalfWidthMm - DEFAULT_PLANNER_INPUT.pedalAcceleratorDeltaMm - PEDAL_WIDTH_MM / 2;
-    const brakeCenterZmm = acceleratorCenterZmm - PEDAL_WIDTH_MM - DEFAULT_PLANNER_INPUT.pedalBrakeDeltaMm;
+    const acceleratorCenterLegacyZmm =
+      trayHalfWidthMm - DEFAULT_PLANNER_INPUT.pedalAcceleratorDeltaMm - PEDAL_WIDTH_MM / 2;
+    const acceleratorCenterYmm = -acceleratorCenterLegacyZmm;
+    const brakeCenterYmm = -(acceleratorCenterLegacyZmm - PEDAL_WIDTH_MM - DEFAULT_PLANNER_INPUT.pedalBrakeDeltaMm);
     const pedalPivotX =
       DEFAULT_PLANNER_INPUT.seatBaseDepthMm +
       DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm +
       DEFAULT_PLANNER_INPUT.pedalsDeltaMm;
-    const pedalPivotY = BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + DEFAULT_PLANNER_INPUT.pedalsHeightMm;
+    const pedalPivotZ = BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + DEFAULT_PLANNER_INPUT.pedalsHeightMm;
     const pedalLeanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
-    const pedalDirection = [-Math.sin(pedalLeanRad), Math.cos(pedalLeanRad), 0] as const;
-    const pedalPlaneNormal = [
-      pedalDirection[0] * 0 - pedalDirection[1] * 1,
-      pedalDirection[0] * 1 + pedalDirection[1] * 0,
-      0,
-    ] as const;
+    const pedalDirection = [-Math.sin(pedalLeanRad), 0, Math.cos(pedalLeanRad)] as const;
+    const pedalPlaneNormal = [-pedalDirection[2], 0, pedalDirection[0]] as const;
     const heelExpectedX =
       pedalPivotX / 1000 +
       pedalDirection[0] * (PEDAL_HEEL_FORWARD_DELTA_MM / 1000) +
       pedalPlaneNormal[0] * (PEDAL_HEEL_UP_DELTA_MM / 1000);
-    const heelExpectedY =
-      pedalPivotY / 1000 +
-      pedalDirection[1] * (PEDAL_HEEL_FORWARD_DELTA_MM / 1000) +
-      pedalPlaneNormal[1] * (PEDAL_HEEL_UP_DELTA_MM / 1000);
+    const heelExpectedZ =
+      pedalPivotZ / 1000 +
+      pedalDirection[2] * (PEDAL_HEEL_FORWARD_DELTA_MM / 1000) +
+      pedalPlaneNormal[2] * (PEDAL_HEEL_UP_DELTA_MM / 1000);
     const leftFootDirection = getDirection(skeleton.joints.heelLeft, skeleton.joints.toeLeft);
     const rightFootDirection = getDirection(skeleton.joints.heelRight, skeleton.joints.toeRight);
     const baseHeelAngle = getAngleAtJoint(skeleton.joints.ankleLeft, skeleton.joints.heelLeft, skeleton.joints.toeLeft);
@@ -234,11 +234,11 @@ describe('aluminum rig planner posture solver', () => {
     );
 
     expect(skeleton.joints.heelLeft[0]).toBeCloseTo(heelExpectedX, 5);
-    expect(skeleton.joints.heelLeft[1]).toBeCloseTo(heelExpectedY, 5);
-    expect(skeleton.joints.heelLeft[2]).toBeCloseTo(brakeCenterZmm / 1000, 5);
+    expect(skeleton.joints.heelLeft[1]).toBeCloseTo(brakeCenterYmm / 1000, 5);
+    expect(skeleton.joints.heelLeft[2]).toBeCloseTo(heelExpectedZ, 5);
     expect(skeleton.joints.heelRight[0]).toBeCloseTo(heelExpectedX, 5);
-    expect(skeleton.joints.heelRight[1]).toBeCloseTo(heelExpectedY, 5);
-    expect(skeleton.joints.heelRight[2]).toBeCloseTo(acceleratorCenterZmm / 1000, 5);
+    expect(skeleton.joints.heelRight[1]).toBeCloseTo(acceleratorCenterYmm / 1000, 5);
+    expect(skeleton.joints.heelRight[2]).toBeCloseTo(heelExpectedZ, 5);
     expect(leftFootDirection[0]).toBeCloseTo(pedalDirection[0], 6);
     expect(leftFootDirection[1]).toBeCloseTo(pedalDirection[1], 6);
     expect(leftFootDirection[2]).toBeCloseTo(pedalDirection[2], 6);
@@ -295,23 +295,15 @@ describe('aluminum rig planner posture solver', () => {
         DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm +
         DEFAULT_PLANNER_INPUT.pedalsDeltaMm) /
         1000,
-      (BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + DEFAULT_PLANNER_INPUT.pedalsHeightMm) / 1000,
       0,
+      (BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + DEFAULT_PLANNER_INPUT.pedalsHeightMm) / 1000,
     ] as const;
     const basePedalLeanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
     const steeperPedalLeanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg + 15 - 90) * Math.PI) / 180;
-    const basePedalDirection = [-Math.sin(basePedalLeanRad), Math.cos(basePedalLeanRad), 0] as const;
-    const steeperPedalDirection = [-Math.sin(steeperPedalLeanRad), Math.cos(steeperPedalLeanRad), 0] as const;
-    const basePedalPlaneNormal = [
-      basePedalDirection[0] * 0 - basePedalDirection[1] * 1,
-      basePedalDirection[0] * 1 + basePedalDirection[1] * 0,
-      0,
-    ] as const;
-    const steeperPedalPlaneNormal = [
-      steeperPedalDirection[0] * 0 - steeperPedalDirection[1] * 1,
-      steeperPedalDirection[0] * 1 + steeperPedalDirection[1] * 0,
-      0,
-    ] as const;
+    const basePedalDirection = [-Math.sin(basePedalLeanRad), 0, Math.cos(basePedalLeanRad)] as const;
+    const steeperPedalDirection = [-Math.sin(steeperPedalLeanRad), 0, Math.cos(steeperPedalLeanRad)] as const;
+    const basePedalPlaneNormal = [-basePedalDirection[2], 0, basePedalDirection[0]] as const;
+    const steeperPedalPlaneNormal = [-steeperPedalDirection[2], 0, steeperPedalDirection[0]] as const;
     const projectOffset = (
       point: [number, number, number],
       pedalDirection: readonly [number, number, number],
@@ -340,18 +332,18 @@ describe('aluminum rig planner posture solver', () => {
   it('keeps each leg on its assigned pedal side', () => {
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
 
-    expect(skeleton.joints.kneeLeft[2]).toBeLessThan(0);
-    expect(skeleton.joints.ankleLeft[2]).toBeCloseTo(skeleton.joints.heelLeft[2], 6);
-    expect(skeleton.joints.kneeRight[2]).toBeGreaterThan(0);
-    expect(skeleton.joints.ankleRight[2]).toBeCloseTo(skeleton.joints.heelRight[2], 6);
+    expect(skeleton.joints.kneeLeft[1]).toBeGreaterThan(0);
+    expect(skeleton.joints.ankleLeft[1]).toBeCloseTo(skeleton.joints.heelLeft[1], 6);
+    expect(skeleton.joints.kneeRight[1]).toBeLessThan(0);
+    expect(skeleton.joints.ankleRight[1]).toBeCloseTo(skeleton.joints.heelRight[1], 6);
   });
 
   it('lets upper arms hang downward under gravity before reaching the wheel', () => {
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
 
-    expect(skeleton.joints.elbowLeft[1]).toBeLessThan(skeleton.joints.shoulderLeft[1]);
-    expect(skeleton.joints.elbowRight[1]).toBeLessThan(skeleton.joints.shoulderRight[1]);
-    expect(Math.abs(skeleton.joints.elbowLeft[2])).toBeLessThan(Math.abs(skeleton.joints.shoulderLeft[2]));
-    expect(Math.abs(skeleton.joints.elbowRight[2])).toBeLessThan(Math.abs(skeleton.joints.shoulderRight[2]));
+    expect(skeleton.joints.elbowLeft[2]).toBeLessThan(skeleton.joints.shoulderLeft[2]);
+    expect(skeleton.joints.elbowRight[2]).toBeLessThan(skeleton.joints.shoulderRight[2]);
+    expect(Math.abs(skeleton.joints.elbowLeft[1])).toBeLessThan(Math.abs(skeleton.joints.shoulderLeft[1]));
+    expect(Math.abs(skeleton.joints.elbowRight[1])).toBeLessThan(Math.abs(skeleton.joints.shoulderRight[1]));
   });
 });

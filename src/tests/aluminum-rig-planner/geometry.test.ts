@@ -159,11 +159,11 @@ describe('aluminum rig planner geometry', () => {
 
     expect(hub?.position).toEqual(rim?.position);
     expect(leftSpoke?.position[0]).toBeCloseTo(hub?.position[0] ?? 0);
-    expect(leftSpoke?.position[1]).toBeCloseTo(hub?.position[1] ?? 0);
+    expect(leftSpoke?.position[2]).toBeCloseTo(hub?.position[2] ?? 0);
     expect(rightSpoke?.position[0]).toBeCloseTo(hub?.position[0] ?? 0);
-    expect(rightSpoke?.position[1]).toBeCloseTo(hub?.position[1] ?? 0);
-    expect(centerSpoke?.position[2]).toBeCloseTo(hub?.position[2] ?? 0);
-    expect(centerSpoke?.position[1]).toBeLessThan(hub?.position[1] ?? 0);
+    expect(rightSpoke?.position[2]).toBeCloseTo(hub?.position[2] ?? 0);
+    expect(centerSpoke?.position[1]).toBeCloseTo(hub?.position[1] ?? 0);
+    expect(centerSpoke?.position[2]).toBeLessThan(hub?.position[2] ?? 0);
 
     const hubPosition = hub?.position ?? [0, 0, 0];
     const spokeDirections = [leftSpoke, centerSpoke, rightSpoke].map((spoke) => {
@@ -196,23 +196,23 @@ describe('aluminum rig planner geometry', () => {
 
     expect(accelerator?.position[0]).toBeCloseTo(brake?.position[0] ?? 0);
     expect(brake?.position[0]).toBeCloseTo(clutch?.position[0] ?? 0);
-    expect(accelerator?.position[1]).toBeCloseTo(brake?.position[1] ?? 0);
-    expect(brake?.position[1]).toBeCloseTo(clutch?.position[1] ?? 0);
-    expect(accelerator?.position[2] ?? 0).toBeGreaterThan(brake?.position[2] ?? 0);
-    expect(brake?.position[2] ?? 0).toBeGreaterThan(clutch?.position[2] ?? 0);
+    expect(accelerator?.position[2]).toBeCloseTo(brake?.position[2] ?? 0);
+    expect(brake?.position[2]).toBeCloseTo(clutch?.position[2] ?? 0);
+    expect(accelerator?.position[1] ?? 0).toBeLessThan(brake?.position[1] ?? 0);
+    expect(brake?.position[1] ?? 0).toBeLessThan(clutch?.position[1] ?? 0);
     expect(plate?.rotation ?? [0, 0, 0]).toEqual([0, 0, 0]);
-    expect(plate?.position[1]).toBeCloseTo(mm(BASE_BEAM_HEIGHT_MM + 1.5));
+    expect(plate?.position[2]).toBeCloseTo(mm(BASE_BEAM_HEIGHT_MM + 1.5));
 
     const leanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
     const pedalPivotXmm =
       DEFAULT_PLANNER_INPUT.seatBaseDepthMm +
       DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm +
       DEFAULT_PLANNER_INPUT.pedalsDeltaMm;
-    const pedalPivotYmm = BASE_BEAM_HEIGHT_MM + 3 + DEFAULT_PLANNER_INPUT.pedalsHeightMm;
+    const pedalPivotZmm = BASE_BEAM_HEIGHT_MM + 3 + DEFAULT_PLANNER_INPUT.pedalsHeightMm;
 
     expect(accelerator?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 90), 5);
-    expect(accelerator?.position[1]).toBeCloseTo(mm(pedalPivotYmm + Math.cos(leanRad) * 90), 5);
-    expect(accelerator?.rotation?.[2]).toBeCloseTo(leanRad, 5);
+    expect(accelerator?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 90), 5);
+    expect(accelerator?.rotation?.[1]).toBeCloseTo(-leanRad, 5);
   });
 
   it('keeps pedal plate fixed to tray while pedal settings move only pedals', () => {

@@ -103,11 +103,11 @@ function scale(a: Vector, value: number): Vector {
   return [a[0] * value, a[1] * value, a[2] * value];
 }
 
-function rotateXY(a: Vector, angleRad: number): Vector {
+function rotateXZ(a: Vector, angleRad: number): Vector {
   const cos = Math.cos(angleRad);
   const sin = Math.sin(angleRad);
 
-  return [a[0] * cos - a[1] * sin, a[0] * sin + a[1] * cos, a[2]];
+  return [a[0] * cos - a[2] * sin, a[1], a[0] * sin + a[2] * cos];
 }
 
 function dot(a: Vector, b: Vector) {
@@ -137,33 +137,33 @@ function getSeatPivot(input: PlannerInput): Vector {
   );
   const seatFrontAnchorXmm = seatCrossMemberCenterXmm + HALF_PROFILE_SHORT_MM + input.seatDeltaMm;
   const seatRearPivotXmm = seatFrontAnchorXmm - Math.cos(seatAngleRad) * seatFrontAnchorLocalXmm;
-  const seatRearPivotYmm = BASE_BEAM_HEIGHT_MM + PROFILE_SHORT_MM + input.seatHeightFromBaseInnerBeamsMm;
+  const seatRearPivotZmm = BASE_BEAM_HEIGHT_MM + PROFILE_SHORT_MM + input.seatHeightFromBaseInnerBeamsMm;
 
-  return [mm(seatRearPivotXmm), mm(seatRearPivotYmm), 0];
+  return [mm(seatRearPivotXmm), 0, mm(seatRearPivotZmm)];
 }
 
-function getPedalCentersZmm(input: PlannerInput) {
+function getPedalCentersYmm(input: PlannerInput) {
   const trayHalfWidthMm = Math.max(0, input.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm) / 2;
   const acceleratorCenterZmm = trayHalfWidthMm - input.pedalAcceleratorDeltaMm - PEDAL_WIDTH_MM / 2;
   const brakeCenterZmm = acceleratorCenterZmm - PEDAL_WIDTH_MM - input.pedalBrakeDeltaMm;
   const clutchCenterZmm = brakeCenterZmm - PEDAL_WIDTH_MM - input.pedalClutchDeltaMm;
 
   return {
-    accelerator: acceleratorCenterZmm,
-    brake: brakeCenterZmm,
-    clutch: clutchCenterZmm,
+    accelerator: -acceleratorCenterZmm,
+    brake: -brakeCenterZmm,
+    clutch: -clutchCenterZmm,
   };
 }
 
-function getPedalTarget(input: PlannerInput, centerZmm: number, footLengthM: number, heelLengthM: number) {
+function getPedalTarget(input: PlannerInput, centerYmm: number, footLengthM: number, heelLengthM: number) {
   const pedalLeanRad = toRad(input.pedalAngleDeg - 90);
-  const pedalDirection: Vector = normalize([-Math.sin(pedalLeanRad), Math.cos(pedalLeanRad), 0]);
-  const pedalPlaneNormal: Vector = normalize(rotateXY(pedalDirection, Math.PI / 2), [0, 1, 0]);
-  const heelDirection = normalize(rotateXY(pedalDirection, POSTURE_HEEL_FOOT_ANGLE_RAD), [0, 1, 0]);
+  const pedalDirection: Vector = normalize([-Math.sin(pedalLeanRad), 0, Math.cos(pedalLeanRad)]);
+  const pedalPlaneNormal: Vector = normalize(rotateXZ(pedalDirection, Math.PI / 2), [0, 0, 1]);
+  const heelDirection = normalize(rotateXZ(pedalDirection, POSTURE_HEEL_FOOT_ANGLE_RAD), [0, 0, 1]);
   const pedalPivot: Vector = [
     mm(input.seatBaseDepthMm + input.pedalTrayDistanceMm + input.pedalsDeltaMm),
+    mm(centerYmm),
     mm(BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + input.pedalsHeightMm),
-    mm(centerZmm),
   ];
   const heel = add(
     pedalPivot,
@@ -190,8 +190,8 @@ function getWheelTargets(input: PlannerInput, rightSign: number) {
   const steeringColumnCenterXmm = input.seatBaseDepthMm + input.steeringColumnDistanceMm + UPRIGHT_BEAM_DEPTH_MM;
   const wheelCenter: Vector = [
     mm(steeringColumnCenterXmm + input.wheelDistanceFromSteeringColumnMm),
-    mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm),
     0,
+    mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + input.wheelHeightOffsetMm),
   ];
   const wheelDiameterMm = clamp(
     input.wheelDiameterMm,
@@ -201,8 +201,8 @@ function getWheelTargets(input: PlannerInput, rightSign: number) {
   const gripRadius = mm(wheelDiameterMm / 2);
 
   return {
-    right: add(wheelCenter, [0, 0, rightSign * gripRadius]),
-    left: add(wheelCenter, [0, 0, -rightSign * gripRadius]),
+    right: add(wheelCenter, [0, rightSign * gripRadius, 0]),
+    left: add(wheelCenter, [0, -rightSign * gripRadius, 0]),
   };
 }
 
@@ -224,7 +224,7 @@ function solveTwoLinkPose(
   const end = add(root, scale(direction, reachableDistance));
   const bendDirection = normalize(
     subtract(bendHint, scale(direction, dot(bendHint, direction))),
-    Math.abs(direction[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0]
+    Math.abs(direction[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0]
   );
   const rootToJointDistance =
     (firstLength * firstLength - secondLength * secondLength + reachableDistance * reachableDistance) /
@@ -237,18 +237,18 @@ function solveTwoLinkPose(
 
 function constrainThighAngleToSeat(root: Vector, pose: TwoLinkPose, thighLength: number, seatAngleRad: number) {
   const thigh = subtract(pose.joint, root);
-  const thighAngleRad = Math.atan2(thigh[1], thigh[0]);
+  const thighAngleRad = Math.atan2(thigh[2], thigh[0]);
 
   if (thighAngleRad >= seatAngleRad - EPSILON) {
     return pose;
   }
 
-  const zOffset = thigh[2];
-  const planarLength = Math.sqrt(Math.max(0, thighLength * thighLength - zOffset * zOffset));
+  const lateralOffset = thigh[1];
+  const planarLength = Math.sqrt(Math.max(0, thighLength * thighLength - lateralOffset * lateralOffset));
   const joint: Vector = [
     root[0] + Math.cos(seatAngleRad) * planarLength,
-    root[1] + Math.sin(seatAngleRad) * planarLength,
-    pose.joint[2],
+    pose.joint[1],
+    root[2] + Math.sin(seatAngleRad) * planarLength,
   ];
 
   return { ...pose, joint };
@@ -261,7 +261,7 @@ function solveArmPose(
   forearmHandLength: number,
   sideSign: number
 ): TwoLinkPose {
-  return solveTwoLinkPose(shoulder, hand, upperArmLength, forearmHandLength, [0, -1, sideSign * 0.02]);
+  return solveTwoLinkPose(shoulder, hand, upperArmLength, forearmHandLength, [0, sideSign * 0.02, -1]);
 }
 
 function getHandGripLength(heightM: number, forearmHandLength: number) {
@@ -293,9 +293,9 @@ export function createPlannerPostureSkeleton(
   const ratios = getEffectiveAnthropometryRatios(settings);
   const seatAngleRad = toRad(input.seatAngleDeg);
   const backrestAngleRad = toRad(input.seatAngleDeg + input.backrestAngleDeg - 90);
-  const seatForward: Vector = [Math.cos(seatAngleRad), Math.sin(seatAngleRad), 0];
-  const seatNormal: Vector = [-Math.sin(seatAngleRad), Math.cos(seatAngleRad), 0];
-  const backrestUp: Vector = [-Math.sin(backrestAngleRad), Math.cos(backrestAngleRad), 0];
+  const seatForward: Vector = [Math.cos(seatAngleRad), 0, Math.sin(seatAngleRad)];
+  const seatNormal: Vector = [-Math.sin(seatAngleRad), 0, Math.cos(seatAngleRad)];
+  const backrestUp: Vector = [-Math.sin(backrestAngleRad), 0, Math.cos(backrestAngleRad)];
   const seatPivot = getSeatPivot(input);
   const heightScale = heightM / (DEFAULT_POSTURE_HEIGHT_CM / 100);
   const postureScale = 1 + (heightScale - 1);
@@ -308,20 +308,20 @@ export function createPlannerPostureSkeleton(
   const shoulderCenter = add(hipCenter, scale(backrestUp, shoulderToHipM));
   const neck = add(hipCenter, scale(backrestUp, Math.max(shoulderToHipM, ratios.sittingHeight * heightM * 0.84)));
   const head = add(hipCenter, scale(backrestUp, ratios.sittingHeight * heightM));
-  const pedalCentersZmm = getPedalCentersZmm(input);
-  const rightSign = Math.sign(pedalCentersZmm.accelerator) || 1;
+  const pedalCentersYmm = getPedalCentersYmm(input);
+  const rightSign = Math.sign(pedalCentersYmm.accelerator) || -1;
   const hipHalfWidthM = (ratios.hipBreadth * heightM) / 2;
   const shoulderHalfWidthM = (ratios.shoulderBreadth * heightM) / 2;
-  const hipRight = add(hipCenter, [0, 0, rightSign * hipHalfWidthM]);
-  const hipLeft = add(hipCenter, [0, 0, -rightSign * hipHalfWidthM]);
-  const shoulderRight = add(shoulderCenter, [0, 0, rightSign * shoulderHalfWidthM]);
-  const shoulderLeft = add(shoulderCenter, [0, 0, -rightSign * shoulderHalfWidthM]);
+  const hipRight = add(hipCenter, [0, rightSign * hipHalfWidthM, 0]);
+  const hipLeft = add(hipCenter, [0, -rightSign * hipHalfWidthM, 0]);
+  const shoulderRight = add(shoulderCenter, [0, rightSign * shoulderHalfWidthM, 0]);
+  const shoulderLeft = add(shoulderCenter, [0, -rightSign * shoulderHalfWidthM, 0]);
   const wheelTargets = getWheelTargets(input, rightSign);
   const footLength = ratios.footLength * heightM;
   const heelLength = getHeelLength(heightM);
   const pedalFootLength = Math.max(heelLength + mm(20), footLength);
-  const rightPedal = getPedalTarget(input, pedalCentersZmm.accelerator, pedalFootLength, heelLength);
-  const leftPedal = getPedalTarget(input, pedalCentersZmm.brake, pedalFootLength, heelLength);
+  const rightPedal = getPedalTarget(input, pedalCentersYmm.accelerator, pedalFootLength, heelLength);
+  const leftPedal = getPedalTarget(input, pedalCentersYmm.brake, pedalFootLength, heelLength);
   const upperArmLength = ratios.upperArmLength * heightM;
   const forearmHandLength = ratios.forearmHandLength * heightM;
   const handGripLength = getHandGripLength(heightM, forearmHandLength);
@@ -330,13 +330,13 @@ export function createPlannerPostureSkeleton(
   const kneeLift = PRESET_KNEE_LIFT[settings.preset];
   const rightLeg = constrainThighAngleToSeat(
     hipRight,
-    solveTwoLinkPose(hipRight, rightPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]),
+    solveTwoLinkPose(hipRight, rightPedal.ankle, thighLength, lowerLegLength, [0, 0, kneeLift]),
     thighLength,
     seatAngleRad
   );
   const leftLeg = constrainThighAngleToSeat(
     hipLeft,
-    solveTwoLinkPose(hipLeft, leftPedal.ankle, thighLength, lowerLegLength, [0, kneeLift, 0]),
+    solveTwoLinkPose(hipLeft, leftPedal.ankle, thighLength, lowerLegLength, [0, 0, kneeLift]),
     thighLength,
     seatAngleRad
   );

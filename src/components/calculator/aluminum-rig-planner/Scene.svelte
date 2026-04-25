@@ -302,7 +302,7 @@
 
     <SceneGrid plane={SCENE_VIEW.gridPlane} position={SCENE_VIEW.gridPosition} scale={SCENE_VIEW.gridScale} />
 
-    <T.Group rotation={SCENE_VIEW.sceneRotation} bind:ref={rigRootRef}>
+    <T.Group bind:ref={rigRootRef}>
       <RigFrame
         {geometry}
         {highlightedBeamIds}

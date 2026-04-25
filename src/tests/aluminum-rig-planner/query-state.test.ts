@@ -220,7 +220,6 @@ describe('aluminum rig planner query state', () => {
       posture: {
         monitorMidpointXMm: 1400,
         monitorMidpointYMm: 900,
-        monitorMidpointZMm: 9999,
       },
     });
 
@@ -228,6 +227,18 @@ describe('aluminum rig planner query state', () => {
     expect(state.postureSettings.monitorDistanceFromEyesMm).not.toBe(
       DEFAULT_PLANNER_POSTURE_SETTINGS.monitorDistanceFromEyesMm
     );
+    expect(state.postureSettings.monitorHeightFromBaseMm).toBe(820);
+  });
+
+  it('uses z-up monitor midpoint height when present in shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorMidpointXMm: 1400,
+        monitorMidpointYMm: 9999,
+        monitorMidpointZMm: 900,
+      },
+    });
+
     expect(state.postureSettings.monitorHeightFromBaseMm).toBe(820);
   });
 });

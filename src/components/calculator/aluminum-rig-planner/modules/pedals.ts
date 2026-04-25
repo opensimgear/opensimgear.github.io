@@ -34,34 +34,34 @@ function getPedalBottomXmm(input: PlannerInput) {
   return input.seatBaseDepthMm + input.pedalTrayDistanceMm + input.pedalsDeltaMm;
 }
 
-function getPedalBottomYmm(input: PlannerInput) {
+function getPedalBottomZmm(input: PlannerInput) {
   return BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + input.pedalsHeightMm;
 }
 
-function getPedalCentersZmm(input: PlannerInput) {
+function getPedalCentersYmm(input: PlannerInput) {
   const trayHalfWidthMm = getPedalTrayUsableWidthMm(input) / 2;
   const acceleratorCenterZmm = trayHalfWidthMm - input.pedalAcceleratorDeltaMm - PEDAL_WIDTH_MM / 2;
   const brakeCenterZmm = acceleratorCenterZmm - PEDAL_WIDTH_MM - input.pedalBrakeDeltaMm;
   const clutchCenterZmm = brakeCenterZmm - PEDAL_WIDTH_MM - input.pedalClutchDeltaMm;
 
-  return [acceleratorCenterZmm, brakeCenterZmm, clutchCenterZmm] as const;
+  return [-acceleratorCenterZmm, -brakeCenterZmm, -clutchCenterZmm] as const;
 }
 
 export function createPedalsModule(input: PlannerInput): MeshSpec[] {
   const pedalLeanRad = toRad(input.pedalAngleDeg - 90);
-  const pedalDirection = new Vector3(-Math.sin(pedalLeanRad), Math.cos(pedalLeanRad), 0).normalize();
+  const pedalDirection = new Vector3(-Math.sin(pedalLeanRad), 0, Math.cos(pedalLeanRad)).normalize();
   const pedalPivotXmm = getPedalBottomXmm(input);
-  const pedalPivotYmm = getPedalBottomYmm(input);
+  const pedalPivotZmm = getPedalBottomZmm(input);
   const pedalCenterXmm = pedalPivotXmm + pedalDirection.x * (PEDAL_HEIGHT_MM / 2);
-  const pedalCenterYmm = pedalPivotYmm + pedalDirection.y * (PEDAL_HEIGHT_MM / 2);
-  const pedalCentersZmm = getPedalCentersZmm(input);
+  const pedalCenterZmm = pedalPivotZmm + pedalDirection.z * (PEDAL_HEIGHT_MM / 2);
+  const pedalCentersYmm = getPedalCentersYmm(input);
   const trayRearFaceXmm = input.seatBaseDepthMm + input.pedalTrayDistanceMm;
 
-  const pedals = pedalCentersZmm.map((pedalCenterZmm, index) => ({
+  const pedals = pedalCentersYmm.map((pedalCenterYmm, index) => ({
     id: `pedal-${PEDAL_IDS[index]}`,
     position: [mm(pedalCenterXmm), mm(pedalCenterYmm), mm(pedalCenterZmm)] as [number, number, number],
-    size: [mm(PEDAL_THICKNESS_MM), mm(PEDAL_HEIGHT_MM), mm(PEDAL_WIDTH_MM)] as [number, number, number],
-    rotation: [0, 0, pedalLeanRad] as [number, number, number],
+    size: [mm(PEDAL_THICKNESS_MM), mm(PEDAL_WIDTH_MM), mm(PEDAL_HEIGHT_MM)] as [number, number, number],
+    rotation: [0, -pedalLeanRad, 0] as [number, number, number],
     materialKind: 'plastic' as const,
     color: PEDAL_COLOR,
     metalness: PEDAL_PLASTIC_MATERIAL.metalness,
@@ -71,16 +71,16 @@ export function createPedalsModule(input: PlannerInput): MeshSpec[] {
   }));
 
   const plateWidthMm = getPedalTrayUsableWidthMm(input);
-  const plateCenterZmm = 0;
+  const plateCenterYmm = 0;
   const plateDepthMm = input.pedalTrayDepthMm;
   const plateCenterXmm = trayRearFaceXmm + input.pedalTrayDepthMm / 2;
-  const plateCenterYmm = BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM / 2;
+  const plateCenterZmm = BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM / 2;
 
   return [
     {
       id: 'pedal-plate',
       position: [mm(plateCenterXmm), mm(plateCenterYmm), mm(plateCenterZmm)] as [number, number, number],
-      size: [mm(plateDepthMm), mm(PEDAL_PLATE_THICKNESS_MM), mm(plateWidthMm)] as [number, number, number],
+      size: [mm(plateDepthMm), mm(plateWidthMm), mm(PEDAL_PLATE_THICKNESS_MM)] as [number, number, number],
       materialKind: 'metal',
       color: PEDAL_PLATE_COLOR,
       metalness: PEDAL_PLATE_MATERIAL.metalness,

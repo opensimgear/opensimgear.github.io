@@ -324,7 +324,7 @@ describe('aluminum rig planner human model rig', () => {
       .get('head')!
       .getWorldPosition(new Vector3())
       .distanceTo(bones.get('headTip')!.getWorldPosition(new Vector3()));
-    const expectedEyeCenterLength = headLength * Math.hypot(0.05, 0.05);
+    const expectedEyeCenterLength = headLength * Math.hypot(0.5, 0.5);
 
     expect(modelEye.distanceTo(armatureNeck)).toBeGreaterThan(0.01);
     expect(modelEye.distanceTo(armatureNeck)).toBeCloseTo(expectedEyeCenterLength, 3);
@@ -351,7 +351,7 @@ describe('aluminum rig planner human model rig', () => {
     model!.dispose();
   });
 
-  it('returns the eye center in planner space when the scene root is rotated', async () => {
+  it('returns the eye center in planner space when the scene root is transformed', async () => {
     const gltf = await loadHumanModel();
     const model = createRiggedHumanModelFromRoot(gltf.scene);
     expect(model).not.toBeNull();
@@ -371,11 +371,10 @@ describe('aluminum rig planner human model rig', () => {
     sceneRoot.worldToLocal(armatureNeckInPlannerSpace);
     sceneRoot.worldToLocal(headTipInPlannerSpace);
     const modelEye = new Vector3(...model!.getEyeCenter()!);
-    const expectedEyeCenterLength =
-      armatureNeckInPlannerSpace.distanceTo(headTipInPlannerSpace) * Math.hypot(0.05, 0.05);
+    const expectedEyeCenterLength = armatureNeckInPlannerSpace.distanceTo(headTipInPlannerSpace) * Math.hypot(0.5, 0.5);
 
     expect(modelEye.distanceTo(armatureNeckInPlannerSpace)).toBeCloseTo(expectedEyeCenterLength, 3);
-    expect(modelEye.y).toBeGreaterThan(0);
+    expect(modelEye.z).toBeGreaterThan(0);
 
     model!.dispose();
   });
