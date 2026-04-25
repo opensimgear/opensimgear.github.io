@@ -6,6 +6,17 @@ import tseslint from 'typescript-eslint';
 import typescriptParser from '@typescript-eslint/parser';
 
 export default [
+  {
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      '.github/**',
+      '.astro/**',
+      '.features-gen/**',
+      'src/assets/vendor/**',
+      'types.generated.d.ts',
+    ],
+  },
   // add more generic rule sets here, such as:
   js.configs.recommended,
   ...eslintPluginAstro.configs['flat/recommended'],
@@ -54,8 +65,5 @@ export default [
       ],
       '@typescript-eslint/no-non-null-assertion': 'off',
     },
-  },
-  {
-    ignores: ['dist', 'node_modules', '.github', 'types.generated.d.ts'],
   },
 ];

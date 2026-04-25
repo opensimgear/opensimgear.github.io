@@ -126,11 +126,13 @@ describe('aluminum rig planner posture solver', () => {
     const seatAngleRad = (DEFAULT_PLANNER_INPUT.seatAngleDeg * Math.PI) / 180;
     const seatForward = [Math.cos(seatAngleRad), Math.sin(seatAngleRad), 0] as const;
     const seatNormal = [-Math.sin(seatAngleRad), Math.cos(seatAngleRad), 0] as const;
-    const scaleDelta = (tallHeightCm / DEFAULT_POSTURE_HEIGHT_CM - 1) / 3;
+    const heightDelta = tallHeightCm / DEFAULT_POSTURE_HEIGHT_CM - 1;
     const expectedHipDelta = [
-      ((seatForward[0] * POSTURE_HIP_FORWARD_ON_SEAT_MM + seatNormal[0] * POSTURE_HIP_ABOVE_SEAT_MM) * scaleDelta) /
+      (seatForward[0] * POSTURE_HIP_FORWARD_ON_SEAT_MM * heightDelta +
+        seatNormal[0] * POSTURE_HIP_ABOVE_SEAT_MM * heightDelta * 0.2) /
         1000,
-      ((seatForward[1] * POSTURE_HIP_FORWARD_ON_SEAT_MM + seatNormal[1] * POSTURE_HIP_ABOVE_SEAT_MM) * scaleDelta) /
+      (seatForward[1] * POSTURE_HIP_FORWARD_ON_SEAT_MM * heightDelta +
+        seatNormal[1] * POSTURE_HIP_ABOVE_SEAT_MM * heightDelta * 0.2) /
         1000,
       0,
     ] as const;

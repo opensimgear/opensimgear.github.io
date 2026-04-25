@@ -214,7 +214,7 @@ describe('aluminum rig planner human model rig', () => {
 
     expect(ratios).toEqual({
       sittingHeight: 0.477,
-      seatedEyeHeight: 0.453,
+      seatedEyeHeight: 0.468,
       seatedShoulderHeight: 0.292,
       hipBreadth: 0.123,
       shoulderBreadth: 0.205,

@@ -32,7 +32,7 @@ const GEOMETRY_ASSETS = {
 const profile40x40Svg = await readFile(path.join(modulesDir, 'profiles/40x40.svg'), 'utf8');
 const profile80x40Svg = await readFile(path.join(modulesDir, 'profiles/80x40.svg'), 'utf8');
 
-(globalThis).DOMParser = DOMParser;
+globalThis.DOMParser = DOMParser;
 
 const svgLoader = new SVGLoader();
 
@@ -96,7 +96,7 @@ function buildExtrudedProfileGeometry(svgMarkup, targetWidth, targetHeight) {
 
   const initialWidth = geometry.boundingBox ? geometry.boundingBox.max.x - geometry.boundingBox.min.x : targetWidth;
   const initialHeight = geometry.boundingBox ? geometry.boundingBox.max.y - geometry.boundingBox.min.y : targetHeight;
-  const shouldRotateProfile = (targetWidth >= targetHeight) !== (initialWidth >= initialHeight);
+  const shouldRotateProfile = targetWidth >= targetHeight !== initialWidth >= initialHeight;
 
   if (shouldRotateProfile) {
     geometry.rotateZ(Math.PI / 2);
@@ -215,7 +215,6 @@ function createGeometryFileBuffer(geometryData) {
       fileBuffer,
       offset
     );
-    offset += geometryData.index.byteLength;
   }
 
   return fileBuffer;

@@ -53,7 +53,7 @@ describe('aluminum rig planner space mouse helpers', () => {
       object: null,
       target: new Vector3(),
       update,
-    } as any;
+    } as unknown as Parameters<typeof syncOrbitCameraView>[0]['controls'];
 
     syncOrbitCameraView({
       camera,

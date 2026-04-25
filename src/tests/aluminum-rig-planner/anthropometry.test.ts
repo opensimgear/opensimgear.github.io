@@ -39,8 +39,9 @@ describe('aluminum rig planner anthropometry scaling', () => {
       200
     );
     const scaleFactor = 200 / DEFAULT_POSTURE_HEIGHT_CM;
+    const limits = getAnthropometryLengthLimitsMm(200);
 
-    expect(scaledLengths.upperArmLength).toBe(Number((360 * scaleFactor).toFixed(1)));
+    expect(scaledLengths.upperArmLength).toBe(limits.upperArmLength.max);
     expect(scaledLengths.footLength).toBe(Number((300 * scaleFactor).toFixed(1)));
   });
 

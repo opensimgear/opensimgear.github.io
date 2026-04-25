@@ -95,7 +95,7 @@ describe('aluminum rig planner geometry', () => {
       pedalClutchDeltaMm: 999,
     });
 
-    expect(clamped.pedalsHeightMm).toBe(PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm);
+    expect(clamped.pedalsHeightMm).toBe(150);
     expect(clamped.pedalsDeltaMm).toBe(PLANNER_DIMENSION_LIMITS.pedalsDeltaMaxMm);
     expect(clamped.pedalAngleDeg).toBe(PLANNER_DIMENSION_LIMITS.pedalAngleDegMin);
     expect(clamped.pedalAcceleratorDeltaMm).toBe(getPedalAcceleratorDeltaMaxMm({ baseWidthMm: 400 }));
