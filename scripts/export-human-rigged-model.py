@@ -10,7 +10,8 @@ TARGET_GLB = ROOT / "public" / "models" / "aluminum-rig-planner" / "human-male-r
 SOURCE_MESH_NAME = "GEO-body_male_realistic"
 TERMINAL_BONE_LENGTH = 0.015
 HEAD_TIP_BONE_LENGTH = 0.005
-EYE_CENTER_FROM_NECK = Vector((0.142, 0.031, 0.000))
+EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO = 0.47
+EYE_CENTER_UP_HEAD_LENGTH_RATIO = 0.103
 NON_DEFORM_BONES = {"eyeCenter"}
 BONE_LENGTHS = {
     "neck": 0.1521,
@@ -450,6 +451,29 @@ def terminal_tail(head, start, length=TERMINAL_BONE_LENGTH):
     return head + direction.normalized() * length
 
 
+def eye_center_from_head_vector(head_vector):
+    if head_vector.length <= SECTION_EPSILON:
+        return Vector((0.0, 0.0, 0.0))
+
+    head_direction = head_vector.normalized()
+    head_up = Vector((head_direction.x, head_direction.y, 0.0))
+    if head_up.length <= SECTION_EPSILON:
+        head_up = Vector((0.0, 1.0, 0.0))
+    else:
+        head_up.normalize()
+
+    head_forward = Vector((head_up.y, -head_up.x, 0.0))
+    if head_forward.length <= SECTION_EPSILON:
+        head_forward = Vector((1.0, 0.0, 0.0))
+    else:
+        head_forward.normalize()
+
+    return (
+        head_forward * head_vector.length * EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO
+        + head_up * head_vector.length * EYE_CENTER_UP_HEAD_LENGTH_RATIO
+    )
+
+
 def point_at_bone_length(head, guide_tail, bone_name):
     direction = guide_tail - head
     if direction.length <= SECTION_EPSILON:
@@ -637,6 +661,7 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     right_foot_tip = point_at_bone_length(right_heel, right_foot_tip, "foot")
     right_foot_tip = section_center_from_body_plane(right_foot_tip, right_foot_tip - right_heel, body_vertices, body_faces)
     right_foot_tip.y = floor_y
+    head_vector = fitted_landmarks["headTop"] - neck_base
 
     remapped_bones = {
         "torso": (fitted_landmarks["hipCenter"], torso_top, None),
@@ -665,7 +690,7 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     remapped_bones["rightShin"] = (right_knee, right_ankle, "rightThigh")
     remapped_bones["rightHeel"] = (right_ankle, right_heel, "rightShin")
     remapped_bones["rightFoot"] = (right_heel, right_foot_tip, "rightHeel")
-    remapped_bones["eyeCenter"] = (neck_base, neck_base + EYE_CENTER_FROM_NECK, "neck")
+    remapped_bones["eyeCenter"] = (neck_base, neck_base + eye_center_from_head_vector(head_vector), "neck")
     add_terminal_bone(remapped_bones, "headTip", "head", HEAD_TIP_BONE_LENGTH)
     add_terminal_bone(remapped_bones, "leftHandTip", "leftHand")
     add_terminal_bone(remapped_bones, "rightHandTip", "rightHand")

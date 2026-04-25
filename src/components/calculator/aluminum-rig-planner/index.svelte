@@ -228,6 +228,7 @@
   let currencyLocale = $state(DEFAULT_CURRENCY_LOCALE);
   let measurementHideTimeout: ReturnType<typeof setTimeout> | null = null;
   let pendingCustomPresetInput: PlannerInput | null = null;
+  let suppressProgrammaticPlannerInputEdit = false;
 
   async function loadScene() {
     if (PlannerScene || sceneStatus === 'loading') return;
@@ -478,7 +479,20 @@
   }
 
   function markPosturePresetCustom() {
+    if (suppressProgrammaticPlannerInputEdit) {
+      return;
+    }
+
     pendingCustomPresetInput = { ...$state.snapshot(plannerInput) };
+  }
+
+  function assignProgrammaticPlannerInput(input: PlannerInput) {
+    suppressProgrammaticPlannerInputEdit = true;
+    pendingCustomPresetInput = null;
+    Object.assign(plannerInput, input);
+    void tick().then(() => {
+      suppressProgrammaticPlannerInputEdit = false;
+    });
   }
 
   function flushPosturePresetCustomMark() {
@@ -756,7 +770,7 @@
     postureSettings.preset = value;
 
     if (isPresetSolvablePreset(value)) {
-      Object.assign(plannerInput, applyPresetToPlannerInput(plannerInput, value, postureSettings.heightCm));
+      assignProgrammaticPlannerInput(applyPresetToPlannerInput(plannerInput, value, postureSettings.heightCm));
     }
 
     syncPlannerUrlState();
@@ -771,8 +785,7 @@
     postureSettings.heightCm = nextHeightCm;
 
     if (isPresetSolvablePreset(postureSettings.preset)) {
-      Object.assign(
-        plannerInput,
+      assignProgrammaticPlannerInput(
         recomputePresetDynamicPlannerInput(plannerInput, postureSettings.preset, nextHeightCm)
       );
     }

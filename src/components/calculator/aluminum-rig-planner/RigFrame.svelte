@@ -125,10 +125,3 @@
     </T.Mesh>
   {/each}
 {/if}
-
-{#if visibleModules.monitor}
-  <T.Mesh position={postureReport.monitorDebug.position}>
-    <T.SphereGeometry args={[postureReport.monitorDebug.diameterM / 2, 16, 12]} />
-    <T.MeshStandardMaterial color="#050505" />
-  </T.Mesh>
-{/if}

@@ -83,6 +83,27 @@ describe('aluminum rig planner posture presets', () => {
     expect(result.pedalAngleDeg).toBe(solvedInput.pedalAngleDeg);
   });
 
+  it.each(NON_CUSTOM_PRESETS)('recomputes dynamic fields when activating %s from stale geometry', (preset) => {
+    const heightCm = 182;
+    const staleInput = {
+      ...DEFAULT_PLANNER_INPUT,
+      steeringColumnBaseHeightMm: PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMaxMm,
+      steeringColumnHeightMm: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+      steeringColumnDistanceMm: 80,
+      pedalTrayDistanceMm: PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm,
+      pedalsHeightMm: PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm,
+      pedalAngleDeg: PLANNER_DIMENSION_LIMITS.pedalAngleDegMax,
+    };
+    const seededInput = clampPlannerInput({ ...staleInput, ...PLANNER_POSTURE_PRESETS[preset] });
+    const solvedInput = recomputePresetDynamicPlannerInput(seededInput, preset, heightCm);
+    const result = applyPresetToPlannerInput(staleInput, preset, heightCm);
+
+    for (const key of DYNAMIC_KEYS) {
+      expect(result[key]).toBe(solvedInput[key]);
+    }
+    expect(DYNAMIC_KEYS.some((key) => result[key] !== staleInput[key])).toBe(true);
+  });
+
   it('recomputes dynamic geometry for height while preserving fixed wheel preset intent', () => {
     const base = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, 'gt', 169);
     const tall = recomputePresetDynamicPlannerInput(base, 'gt', 205);

@@ -332,10 +332,32 @@
     <button class="posture-debug-panel__trigger" type="button" aria-label={posturePanelLabel}>
       <span class="posture-debug-panel__trigger-label">P</span>
       {#if postureMetricsWithErrors > 0}
-        <span class="posture-debug-panel__badge" data-status="bad">x</span>
+        <span class="posture-debug-panel__badge" data-status="bad" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Zm-3.5-11.1 2.1 2.1-2.1 2.1 1.4 1.4 2.1-2.1 2.1 2.1 1.4-1.4-2.1-2.1 2.1-2.1-1.4-1.4-2.1 2.1-2.1-2.1-1.4 1.4Z"
+            />
+          </svg>
+        </span>
       {/if}
       {#if postureMetricsWithWarnings > 0}
-        <span class="posture-debug-panel__badge" data-status="warn">!</span>
+        <span
+          class="posture-debug-panel__badge"
+          class:posture-debug-panel__badge--offset={postureMetricsWithErrors > 0}
+          data-status="warn"
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path
+              d="M8 1.7c.7 0 1.2.3 1.5.9l5.1 8.9c.3.6.3 1.3 0 1.9s-.9.9-1.6.9H3c-.7 0-1.3-.3-1.6-.9s-.3-1.3 0-1.9l5.1-8.9c.3-.6.8-.9 1.5-.9Z"
+              class="posture-debug-panel__badge-shape"
+            />
+            <path
+              d="M7.2 5.3h1.6l-.2 4.5H7.4l-.2-4.5Zm.1 6h1.4v1.4H7.3v-1.4Z"
+              class="posture-debug-panel__badge-mark"
+            />
+          </svg>
+        </span>
       {/if}
     </button>
     <div class="posture-debug-panel__content">
@@ -444,6 +466,7 @@
     padding: 0;
     position: relative;
     width: 42px;
+    z-index: 2;
   }
 
   .posture-debug-panel__trigger-label {
@@ -453,49 +476,65 @@
 
   .posture-debug-panel__badge {
     align-items: center;
-    border-radius: 2px;
-    color: rgb(24 24 27);
     display: grid;
-    font-size: 9px;
-    font-weight: 800;
-    height: 14px;
+    height: 28px;
     justify-items: center;
-    line-height: 1;
+    bottom: -8px;
     position: absolute;
-    width: 14px;
+    right: -8px;
+    width: 28px;
   }
 
   .posture-debug-panel__badge[data-status='bad'] {
-    background: rgb(248 113 113);
-    right: -4px;
-    top: -4px;
+    color: rgb(248 113 113);
   }
 
   .posture-debug-panel__badge[data-status='warn'] {
-    background: rgb(250 204 21);
-    bottom: -4px;
-    right: -4px;
+    color: rgb(250 204 21);
+  }
+
+  .posture-debug-panel__badge--offset[data-status='warn'] {
+    bottom: 22px;
+    right: -8px;
+  }
+
+  .posture-debug-panel__badge svg {
+    height: 28px;
+    inset: 0;
+    position: absolute;
+    width: 28px;
+  }
+
+  .posture-debug-panel__badge[data-status='bad'] path,
+  .posture-debug-panel__badge-shape {
+    fill: currentColor;
+  }
+
+  .posture-debug-panel__badge-mark {
+    fill: rgb(24 24 27);
   }
 
   .posture-debug-panel__content {
     background: rgb(24 24 27 / 0.9);
     border: 1px solid rgb(255 255 255 / 0.14);
     border-radius: 6px;
-    bottom: calc(100% + 6px);
+    bottom: 0;
     box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
     max-height: min(48vh, 260px);
     max-width: min(420px, calc(100vw - 24px));
     opacity: 0;
     overflow: auto;
-    padding: 7px 8px;
+    padding: 7px 8px 52px;
     pointer-events: none;
     position: absolute;
     right: 0;
-    transform: translateY(4px);
+    transform: translateY(4px) scale(0.96);
+    transform-origin: bottom right;
     transition:
-      opacity 120ms ease,
-      transform 120ms ease;
+      opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
     width: min(420px, calc(100vw - 24px));
+    z-index: 1;
   }
 
   .posture-debug-panel:hover .posture-debug-panel__content,
