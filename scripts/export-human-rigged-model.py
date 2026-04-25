@@ -7,11 +7,17 @@ from mathutils import Vector
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_BLEND = ROOT / "docs" / "human_base_meshes_bundle.blend"
 TARGET_GLB = ROOT / "public" / "models" / "aluminum-rig-planner" / "human-male-realistic.glb"
+TARGET_ANTHROPOMETRY_DEFAULTS = ROOT / "src" / "components" / "calculator" / "aluminum-rig-planner" / "anthropometry-defaults.ts"
 SOURCE_MESH_NAME = "GEO-body_male_realistic"
-TERMINAL_BONE_LENGTH = 0.015
+TERMINAL_BONE_LENGTH = 0.005
 HEAD_TIP_BONE_LENGTH = 0.005
-EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO = 1
-EYE_CENTER_UP_HEAD_LENGTH_RATIO = 1
+EYE_CENTER_X_OFFSET_M = 0.090
+EYE_CENTER_Y_OFFSET_M = 0.095
+EYE_CENTER_TAIL_LENGTH_M = TERMINAL_BONE_LENGTH
+DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM = 169
+POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_M = 0.06
+MODEL_RATIO_PRECISION = 3
+MODEL_LENGTH_PRECISION = 1
 NON_DEFORM_BONES = {"eyeCenter"}
 BONE_LENGTHS = {
     "neck": 0.1521,
@@ -44,6 +50,17 @@ SLICE_DEPTH_MARGIN = 0.7
 EXACT_FIT_LANDMARKS = {"shoulderLeft", "elbowLeft", "wristLeft", "handTipLeft", "kneeLeft", "ankleLeft"}
 SECTION_CENTER_LANDMARKS = {"elbowLeft", "wristLeft", "handTipLeft", "kneeLeft", "ankleLeft"}
 SECTION_EPSILON = 0.00001
+ANTHROPOMETRY_KEYS = (
+    "sittingHeight",
+    "seatedShoulderHeight",
+    "hipBreadth",
+    "shoulderBreadth",
+    "upperArmLength",
+    "forearmHandLength",
+    "thighLength",
+    "lowerLegLength",
+    "footLength",
+)
 
 
 def planner_point(world_point, center_x, center_y, min_z):
@@ -451,24 +468,6 @@ def terminal_tail(head, start, length=TERMINAL_BONE_LENGTH):
     return head + direction.normalized() * length
 
 
-def eye_center_from_head_vector(head_vector):
-    if head_vector.length <= SECTION_EPSILON:
-        return Vector((0.0, 0.0, 0.0))
-
-    head_up = Vector((head_vector.x, head_vector.y, 0.0))
-    if head_up.length <= SECTION_EPSILON:
-        head_up = Vector((0.0, head_vector.length, 0.0))
-
-    head_forward = Vector((head_up.y, -head_up.x, 0.0))
-    if head_forward.length <= SECTION_EPSILON:
-        head_forward = Vector((head_vector.length, 0.0, 0.0))
-
-    return (
-        head_forward * EYE_CENTER_FORWARD_HEAD_LENGTH_RATIO
-        + head_up * EYE_CENTER_UP_HEAD_LENGTH_RATIO
-    )
-
-
 def point_at_bone_length(head, guide_tail, bone_name):
     direction = guide_tail - head
     if direction.length <= SECTION_EPSILON:
@@ -495,6 +494,126 @@ def add_terminal_bone(bones, name, parent_name, length=TERMINAL_BONE_LENGTH):
 
 def clamp(value, minimum, maximum):
     return max(minimum, min(value, maximum))
+
+
+def rounded(value, precision):
+    return round(value + 0.0, precision)
+
+
+def calculate_average_distance(bones, pairs):
+    distances = [(bones[start][0] - bones[end][0]).length for start, end in pairs]
+    return sum(distances) / len(distances)
+
+
+def calculate_anthropometry_ratios(bones, min_planner, max_planner):
+    height = max_planner.y - min_planner.y
+    hip = bones["torso"][0]
+    left_shoulder = bones["leftUpperArm"][0]
+    right_shoulder = bones["rightUpperArm"][0]
+    shoulder_y = (left_shoulder.y + right_shoulder.y) * 0.5
+
+    ratios = {
+        "sittingHeight": (max_planner.y - hip.y) / height,
+        "seatedShoulderHeight": (shoulder_y - hip.y + POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_M) / height,
+        "hipBreadth": calculate_average_distance(bones, (("leftThigh", "rightThigh"),)) / height,
+        "shoulderBreadth": calculate_average_distance(bones, (("leftUpperArm", "rightUpperArm"),)) / height,
+        "upperArmLength": calculate_average_distance(
+            bones,
+            (
+                ("leftUpperArm", "leftForearm"),
+                ("rightUpperArm", "rightForearm"),
+            ),
+        )
+        / height,
+        "forearmHandLength": calculate_average_distance(
+            bones,
+            (
+                ("leftForearm", "leftHandTip"),
+                ("rightForearm", "rightHandTip"),
+            ),
+        )
+        / height,
+        "thighLength": calculate_average_distance(
+            bones,
+            (
+                ("leftThigh", "leftShin"),
+                ("rightThigh", "rightShin"),
+            ),
+        )
+        / height,
+        "lowerLegLength": calculate_average_distance(
+            bones,
+            (
+                ("leftShin", "leftHeel"),
+                ("rightShin", "rightHeel"),
+            ),
+        )
+        / height,
+        "footLength": (
+            calculate_average_distance(
+                bones,
+                (
+                    ("leftHeel", "leftFoot"),
+                    ("rightHeel", "rightFoot"),
+                ),
+            )
+            + calculate_average_distance(
+                bones,
+                (
+                    ("leftFoot", "leftFootTip"),
+                    ("rightFoot", "rightFootTip"),
+                ),
+            )
+        )
+        / height,
+    }
+
+    return {key: rounded(ratios[key], MODEL_RATIO_PRECISION) for key in ANTHROPOMETRY_KEYS}
+
+
+def format_ts_number(value):
+    return f"{value:.1f}".rstrip("0").rstrip(".")
+
+
+def format_generated_anthropometry_defaults(ratios):
+    lengths = {
+        key: rounded(ratios[key] * DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM * 10, MODEL_LENGTH_PRECISION)
+        for key in ANTHROPOMETRY_KEYS
+    }
+    length_lines = "\n".join(f"  {key}: {format_ts_number(lengths[key])}," for key in ANTHROPOMETRY_KEYS)
+
+    return f"""// Generated by scripts/export-human-rigged-model.py.
+import type {{ PlannerAnthropometryLengthsMm, PlannerAnthropometryRatios }} from './types';
+
+const DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM = {DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM};
+
+export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM = {{
+{length_lines}
+}} satisfies PlannerAnthropometryLengthsMm;
+
+function getDefaultAnthropometryRatio(lengthMm: number) {{
+  return Number((lengthMm / (DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM * 10)).toFixed(3));
+}}
+
+export const DEFAULT_ANTHROPOMETRY_RATIOS = Object.fromEntries(
+  Object.entries(DEFAULT_ANTHROPOMETRY_LENGTHS_MM).map(([key, value]) => [key, getDefaultAnthropometryRatio(value)])
+) as PlannerAnthropometryRatios;
+
+export const ANTHROPOMETRY_LENGTH_LIMITS_MM = Object.fromEntries(
+  Object.entries(DEFAULT_ANTHROPOMETRY_LENGTHS_MM).map(([key, value]) => [
+    key,
+    {{
+      min: Number((value * 0.8).toFixed(1)),
+      max: Number((value * 1.2).toFixed(1)),
+    }},
+  ])
+) as Record<keyof PlannerAnthropometryRatios, {{ min: number; max: number }}>;
+"""
+
+
+def write_anthropometry_defaults(bones, min_planner, max_planner):
+    ratios = calculate_anthropometry_ratios(bones, min_planner, max_planner)
+    TARGET_ANTHROPOMETRY_DEFAULTS.write_text(format_generated_anthropometry_defaults(ratios), encoding="utf-8")
 
 
 def get_slice_points(body_vertices, target_y, band_height):
@@ -656,7 +775,7 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     right_foot_tip = point_at_bone_length(right_heel, right_foot_tip, "foot")
     right_foot_tip = section_center_from_body_plane(right_foot_tip, right_foot_tip - right_heel, body_vertices, body_faces)
     right_foot_tip.y = floor_y
-    head_vector = fitted_landmarks["headTop"] - neck_base
+    eye_center = neck_base + Vector((EYE_CENTER_X_OFFSET_M, EYE_CENTER_Y_OFFSET_M, 0.0 ))
 
     remapped_bones = {
         "torso": (fitted_landmarks["hipCenter"], torso_top, None),
@@ -685,7 +804,7 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     remapped_bones["rightShin"] = (right_knee, right_ankle, "rightThigh")
     remapped_bones["rightHeel"] = (right_ankle, right_heel, "rightShin")
     remapped_bones["rightFoot"] = (right_heel, right_foot_tip, "rightHeel")
-    remapped_bones["eyeCenter"] = (neck_base, neck_base + eye_center_from_head_vector(head_vector), "neck")
+    remapped_bones["eyeCenter"] = (eye_center, eye_center + Vector((EYE_CENTER_TAIL_LENGTH_M, 0.0, 0.0)), "head")
     add_terminal_bone(remapped_bones, "headTip", "head", HEAD_TIP_BONE_LENGTH)
     add_terminal_bone(remapped_bones, "leftHandTip", "leftHand")
     add_terminal_bone(remapped_bones, "rightHandTip", "rightHand")
@@ -808,6 +927,7 @@ def main():
         export_animations=False,
         export_materials="EXPORT",
     )
+    write_anthropometry_defaults(bones, min_planner, max_planner)
 
 
 if __name__ == "__main__":

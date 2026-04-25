@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
 
 import {
   getAnthropometryLengthLimitsMm,
@@ -10,8 +11,29 @@ import {
   DEFAULT_ANTHROPOMETRY_RATIOS,
   DEFAULT_POSTURE_HEIGHT_CM,
 } from '../../components/calculator/aluminum-rig-planner/constants';
+import {
+  DEFAULT_ANTHROPOMETRY_LENGTHS_MM as GENERATED_DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
+  DEFAULT_ANTHROPOMETRY_RATIOS as GENERATED_DEFAULT_ANTHROPOMETRY_RATIOS,
+} from '../../components/calculator/aluminum-rig-planner/anthropometry-defaults';
+
+const constantsSource = readFileSync(
+  new URL('../../components/calculator/aluminum-rig-planner/constants.ts', import.meta.url),
+  'utf8'
+);
+const anthropometryDefaultsSource = readFileSync(
+  new URL('../../components/calculator/aluminum-rig-planner/anthropometry-defaults.ts', import.meta.url),
+  'utf8'
+);
 
 describe('aluminum rig planner anthropometry scaling', () => {
+  it('keeps generated anthropometry defaults outside the main constants module', () => {
+    expect(constantsSource).toContain("from './anthropometry-defaults'");
+    expect(constantsSource).not.toMatch(/export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM\s*[:=]/);
+    expect(anthropometryDefaultsSource).toContain('satisfies PlannerAnthropometryLengthsMm');
+    expect(GENERATED_DEFAULT_ANTHROPOMETRY_LENGTHS_MM).toBe(DEFAULT_ANTHROPOMETRY_LENGTHS_MM);
+    expect(GENERATED_DEFAULT_ANTHROPOMETRY_RATIOS).toBe(DEFAULT_ANTHROPOMETRY_RATIOS);
+  });
+
   it('derives default anthropometry lengths from height ratios', () => {
     expect(DEFAULT_ANTHROPOMETRY_LENGTHS_MM.upperArmLength).toBe(
       Number((DEFAULT_ANTHROPOMETRY_RATIOS.upperArmLength * DEFAULT_POSTURE_HEIGHT_CM * 10).toFixed(1))
@@ -33,7 +55,7 @@ describe('aluminum rig planner anthropometry scaling', () => {
       {
         ...DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
         upperArmLength: 360,
-        footLength: 300,
+        footLength: 250,
       },
       DEFAULT_POSTURE_HEIGHT_CM,
       200
@@ -42,7 +64,7 @@ describe('aluminum rig planner anthropometry scaling', () => {
     const limits = getAnthropometryLengthLimitsMm(200);
 
     expect(scaledLengths.upperArmLength).toBe(limits.upperArmLength.max);
-    expect(scaledLengths.footLength).toBe(Number((300 * scaleFactor).toFixed(1)));
+    expect(scaledLengths.footLength).toBe(Number((250 * scaleFactor).toFixed(1)));
   });
 
   it('scales anthropometry limits with height', () => {

@@ -41,8 +41,8 @@ const prebuiltGeometryLoadPromises = new Map<GeometryAssetKey, Promise<void>>();
 function getTargetCrossSectionSize(axis: BeamAxis, size: [number, number, number]) {
   if (axis === 'x') {
     return {
-      targetWidth: size[2],
-      targetHeight: size[1],
+      targetWidth: size[1],
+      targetHeight: size[2],
     };
   }
 
@@ -243,7 +243,7 @@ function getAxisRotation(axis: BeamAxis) {
 }
 
 function needsProfileRoll(profileType: ProfileType | undefined, axis: BeamAxis) {
-  return profileType === 'alu80x40' && axis === 'y';
+  return profileType === 'alu80x40' && axis !== 'y';
 }
 
 export function getProfileMeshRotation(mesh: MeshSpec): RotationTuple {

@@ -12,7 +12,7 @@
   import { createSteeringColumnModule } from './modules/steering-column';
   import { createWheelModule } from './modules/wheel';
   import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from './modules/shared';
-  import { createPlannerPostureSkeleton, type PosturePoint } from './posture';
+  import { createPlannerPostureSkeleton } from './posture';
   import type { PlannerPostureReport } from './posture-report';
   import RiggedHumanModel from './RiggedHumanModel.svelte';
   import type { HumanRigHoverTooltip } from './human-model-rig';
@@ -22,7 +22,6 @@
     geometry: PlannerGeometry;
     highlightedBeamIds: string[];
     measurementOverlay?: PlannerMeasurementOverlay | null;
-    onEyeCenterChange: (eyeCenter: PosturePoint | null) => void;
     onHumanRigTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
     profileColor: string;
     postureReport: PlannerPostureReport;
@@ -35,7 +34,6 @@
     geometry,
     highlightedBeamIds,
     measurementOverlay = null,
-    onEyeCenterChange,
     onHumanRigTooltipChange,
     profileColor,
     postureReport,
@@ -106,7 +104,6 @@
 {#if postureSettings.showModel || postureSettings.showSkeleton}
   <RiggedHumanModel
     {modelScale}
-    {onEyeCenterChange}
     showModel={postureSettings.showModel}
     showSkeleton={postureSettings.showSkeleton}
     skeleton={postureSkeleton}

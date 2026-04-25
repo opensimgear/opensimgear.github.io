@@ -291,7 +291,7 @@ function scoreCandidate(input: PlannerInput, preset: SolvablePlannerPosturePrese
   });
 
   return report.metrics.reduce((total, metric) => {
-    if (metric.key === 'eyeToMonitor') {
+    if (metric.key === 'headToMonitor') {
       return total;
     }
 

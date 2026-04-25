@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
-import { Bone, Group, Quaternion, Vector3 } from 'three';
+import { Bone, Quaternion, Vector3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import {
@@ -171,12 +171,6 @@ function getTooltipByTitle(tooltips: HumanRigTooltipData[], title: string, rowLa
   return tooltips.find((tooltip) => tooltip.title === title && tooltip.rows.some((row) => row.label === rowLabel));
 }
 
-function getTooltipContainingTitle(tooltips: HumanRigTooltipData[], title: string, rowLabel: string) {
-  return tooltips.find(
-    (tooltip) => tooltip.title.split(' / ').includes(title) && tooltip.rows.some((row) => row.label === rowLabel)
-  );
-}
-
 function getTooltipValue(tooltip: HumanRigTooltipData, label: string) {
   return tooltip.rows.find((row) => row.label === label)?.value;
 }
@@ -300,7 +294,7 @@ describe('aluminum rig planner human model rig', () => {
     model!.dispose();
   });
 
-  it('draws the eye center overlay from the eyeCenter bone', async () => {
+  it('ignores the generated eye center bone in the app overlay', async () => {
     const gltf = await loadHumanModel();
     const model = createRiggedHumanModelFromRoot(gltf.scene);
     expect(model).not.toBeNull();
@@ -311,70 +305,11 @@ describe('aluminum rig planner human model rig', () => {
     model!.applySkeleton(skeleton, modelScale);
 
     const tooltips = getTooltips(model!);
-    const bones = collectBones(model!.object);
-    const eyeCenterTooltip = getTooltipByTitle(tooltips, 'Eye Center', 'Length');
-    const eyeJointTooltip = getTooltipContainingTitle(tooltips, 'Eye', 'Position');
 
-    expect(eyeCenterTooltip).toBeDefined();
-    expect(eyeJointTooltip).toBeDefined();
-    model!.object.updateWorldMatrix(true, true);
-    const armatureNeck = bones.get('head')!.getWorldPosition(new Vector3());
-    const modelEye = new Vector3(...model!.getEyeCenter()!);
-    const headLength = bones
-      .get('head')!
-      .getWorldPosition(new Vector3())
-      .distanceTo(bones.get('headTip')!.getWorldPosition(new Vector3()));
-    const expectedEyeCenterLength = headLength * Math.hypot(0.5, 0.5);
-
-    expect(modelEye.distanceTo(armatureNeck)).toBeGreaterThan(0.01);
-    expect(modelEye.distanceTo(armatureNeck)).toBeCloseTo(expectedEyeCenterLength, 3);
-    expect(parseMm(getTooltipValue(eyeCenterTooltip!, 'Length')!)).toBeCloseTo(armatureNeck.distanceTo(modelEye), 2);
-    expectPointCloseMm(
-      parsePosition(getTooltipValue(eyeJointTooltip!, 'Position')!),
-      modelEye.toArray() as PosturePoint
-    );
-
-    const leftEyeBall = model!.object.getObjectByName('leftEyeDebugBall');
-    const rightEyeBall = model!.object.getObjectByName('rightEyeDebugBall');
-    expect(leftEyeBall).toBeDefined();
-    expect(rightEyeBall).toBeDefined();
-    const leftEyePosition = leftEyeBall!.getWorldPosition(new Vector3());
-    const rightEyePosition = rightEyeBall!.getWorldPosition(new Vector3());
-    const eyeBallCenter: PosturePoint = [
-      (leftEyePosition.x + rightEyePosition.x) / 2,
-      (leftEyePosition.y + rightEyePosition.y) / 2,
-      (leftEyePosition.z + rightEyePosition.z) / 2,
-    ];
-    expectPointCloseMm(eyeBallCenter, modelEye.toArray() as PosturePoint);
-    expect(leftEyePosition.distanceTo(rightEyePosition)).toBeCloseTo(0.07, 3);
-
-    model!.dispose();
-  });
-
-  it('returns the eye center in planner space when the scene root is transformed', async () => {
-    const gltf = await loadHumanModel();
-    const model = createRiggedHumanModelFromRoot(gltf.scene);
-    expect(model).not.toBeNull();
-
-    const sceneRoot = new Group();
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const modelScale = 1.08;
-
-    sceneRoot.rotation.set(Math.PI / 2, 0, 0);
-    sceneRoot.add(model!.object);
-    model!.applySkeleton(skeleton, modelScale);
-    sceneRoot.updateWorldMatrix(true, true);
-
-    const bones = collectBones(model!.object);
-    const armatureNeckInPlannerSpace = bones.get('head')!.getWorldPosition(new Vector3());
-    const headTipInPlannerSpace = bones.get('headTip')!.getWorldPosition(new Vector3());
-    sceneRoot.worldToLocal(armatureNeckInPlannerSpace);
-    sceneRoot.worldToLocal(headTipInPlannerSpace);
-    const modelEye = new Vector3(...model!.getEyeCenter()!);
-    const expectedEyeCenterLength = armatureNeckInPlannerSpace.distanceTo(headTipInPlannerSpace) * Math.hypot(0.5, 0.5);
-
-    expect(modelEye.distanceTo(armatureNeckInPlannerSpace)).toBeCloseTo(expectedEyeCenterLength, 3);
-    expect(modelEye.z).toBeGreaterThan(0);
+    expect(getTooltipByTitle(tooltips, 'Eye Center', 'Length')).toBeUndefined();
+    expect(model!.object.getObjectByName('leftEyeDebugBall')).toBeUndefined();
+    expect(model!.object.getObjectByName('rightEyeDebugBall')).toBeUndefined();
+    expect('getEyeCenter' in model!).toBe(false);
 
     model!.dispose();
   });

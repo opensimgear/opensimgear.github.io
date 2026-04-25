@@ -17,7 +17,6 @@
   import type { HumanRigHoverTooltip } from './human-model-rig';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
   import type { PlannerPostureReport } from './posture-report';
-  import type { PosturePoint } from './posture';
   import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
@@ -25,7 +24,6 @@
     highlightedBeamIds: string[];
     isNarrowViewport?: boolean;
     measurementOverlay?: PlannerMeasurementOverlay | null;
-    onEyeCenterChange: (eyeCenter: PosturePoint | null) => void;
     profileColor: string;
     postureReport: PlannerPostureReport;
     postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
@@ -38,7 +36,6 @@
     highlightedBeamIds,
     isNarrowViewport = false,
     measurementOverlay = null,
-    onEyeCenterChange,
     profileColor,
     postureReport,
     postureSettings,
@@ -103,7 +100,9 @@
     return `left: ${nextX}px; top: ${nextY}px;`;
   });
   const postureMetricsWithIssues = $derived(postureReport.metrics.filter((metric) => metric.status !== 'ok').length);
-  const postureMetricsWithWarnings = $derived(postureReport.metrics.filter((metric) => metric.status === 'warn').length);
+  const postureMetricsWithWarnings = $derived(
+    postureReport.metrics.filter((metric) => metric.status === 'warn').length
+  );
   const postureMetricsWithErrors = $derived(postureReport.metrics.filter((metric) => metric.status === 'bad').length);
   const posturePanelLabel = $derived(
     `Posture metrics: ${postureMetricsWithWarnings} warning${postureMetricsWithWarnings === 1 ? '' : 's'}, ${postureMetricsWithErrors} error${postureMetricsWithErrors === 1 ? '' : 's'}`
@@ -307,7 +306,6 @@
         {geometry}
         {highlightedBeamIds}
         {measurementOverlay}
-        {onEyeCenterChange}
         onHumanRigTooltipChange={(tooltip) => {
           humanRigTooltip = tooltip;
         }}

@@ -181,7 +181,7 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const monitorCurvature = isMonitorCurvature(state?.monitorCurvature)
     ? state.monitorCurvature
     : defaults.monitorCurvature;
-  const legacyEyeCenterXMm = LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM - DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM;
+  const legacyViewpointXMm = LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM - DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM;
   const stateMonitorDistanceFromEyesMm = state?.monitorDistanceFromEyesMm;
   const stateMonitorMidpointXMm = state?.monitorMidpointXMm;
   const hasLegacyMonitorDistance =
@@ -189,7 +189,7 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const rawMonitorDistanceFromEyesMm = isFiniteNumber(stateMonitorDistanceFromEyesMm)
     ? stateMonitorDistanceFromEyesMm
     : isFiniteNumber(stateMonitorMidpointXMm)
-      ? stateMonitorMidpointXMm - legacyEyeCenterXMm
+      ? stateMonitorMidpointXMm - legacyViewpointXMm
       : defaults.monitorDistanceFromEyesMm;
   const monitorDistanceFromEyesMm = clampNumber(
     rawMonitorDistanceFromEyesMm,

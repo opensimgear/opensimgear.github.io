@@ -6,13 +6,10 @@ import {
   DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
-  PLANNER_POSTURE_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { getMonitorDimensionsMm } from '../../components/calculator/aluminum-rig-planner/modules/monitor';
-import {
-  createPlannerPostureReport,
-  getSolvedMonitorHeightFromBaseMm,
-} from '../../components/calculator/aluminum-rig-planner/posture-report';
+import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
+import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
 
 describe('aluminum rig planner posture report', () => {
   it('creates finite default posture metrics', () => {
@@ -43,15 +40,12 @@ describe('aluminum rig planner posture report', () => {
     expect(report.metrics.some((metric) => metric.status !== 'ok' && metric.hint)).toBe(true);
   });
 
-  it('returns eye debug balls spaced 70 mm apart with 25 mm diameter', () => {
-    const eyeCenter: [number, number, number] = [1.1, 0.03, 0.82];
-    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, eyeCenter);
+  it('reports head-based posture metrics without debug eye payload', () => {
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
 
-    expect(report.eyeDebug.center).toEqual(eyeCenter);
-    expect(report.eyeDebug.diameterM).toBeCloseTo(0.025, 6);
-    expect(report.eyeDebug.left[0]).toBeCloseTo(report.eyeDebug.right[0], 6);
-    expect(Math.abs(report.eyeDebug.left[1] - report.eyeDebug.right[1])).toBeCloseTo(0.07, 6);
-    expect(report.eyeDebug.left[2]).toBeCloseTo(report.eyeDebug.right[2], 6);
+    expect(report.metrics.some((metric) => metric.key === 'headToWheel')).toBe(true);
+    expect(report.metrics.some((metric) => metric.key === 'headToMonitor')).toBe(true);
+    expect('eyeDebug' in report).toBe(false);
   });
 
   it('solves flat monitor midpoint distance from target horizontal FOV', () => {
@@ -64,10 +58,11 @@ describe('aluminum rig planner posture report', () => {
     };
     const dimensions = getMonitorDimensionsMm(postureSettings);
     const expectedDistanceMm = dimensions.widthMm / 2 / Math.tan((postureSettings.monitorTargetFovDeg * Math.PI) / 360);
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
 
     expect(report.monitorDebug.diameterM).toBeCloseTo(0.01, 6);
-    expect(report.monitorDebug.position[0]).toBeCloseTo(report.eyeDebug.center[0] + expectedDistanceMm * 0.001, 6);
+    expect(report.monitorDebug.position[0]).toBeCloseTo(skeleton.joints.head[0] + expectedDistanceMm * 0.001, 6);
     expect(report.monitorDebug.position[1]).toBe(0);
     expect(report.monitorDebug.position[2]).toBeCloseTo(
       (BASE_BEAM_HEIGHT_MM + postureSettings.monitorHeightFromBaseMm) * 0.001,
@@ -84,52 +79,9 @@ describe('aluminum rig planner posture report', () => {
     };
     const dimensions = getMonitorDimensionsMm(postureSettings);
     const expectedDistanceMm = dimensions.widthMm / 2 / Math.tan((CURVED_MONITOR_RECOMMENDED_FOV_DEG * Math.PI) / 360);
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
 
-    expect(report.monitorDebug.position[0]).toBeCloseTo(report.eyeDebug.center[0] + expectedDistanceMm * 0.001, 6);
-  });
-
-  it('solves monitor height from base to match computed eye height', () => {
-    const eyeCenter: [number, number, number] = [0.9, 0, 0.86];
-    const solvedHeightFromBaseMm = getSolvedMonitorHeightFromBaseMm(
-      DEFAULT_PLANNER_INPUT,
-      DEFAULT_PLANNER_POSTURE_SETTINGS,
-      eyeCenter
-    );
-
-    expect(solvedHeightFromBaseMm).toBeCloseTo(eyeCenter[2] / 0.001 - BASE_BEAM_HEIGHT_MM, 6);
-  });
-
-  it('reports monitor midpoint near eye center after solving monitor height from eye center', () => {
-    const eyeCenter: [number, number, number] = [0.9, 0, 0.86];
-    const monitorHeightFromBaseMm = getSolvedMonitorHeightFromBaseMm(
-      DEFAULT_PLANNER_INPUT,
-      DEFAULT_PLANNER_POSTURE_SETTINGS,
-      eyeCenter
-    );
-    const report = createPlannerPostureReport(
-      DEFAULT_PLANNER_INPUT,
-      {
-        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-        monitorHeightFromBaseMm,
-      },
-      eyeCenter
-    );
-    const eyeToMonitor = report.metrics.find((metric) => metric.key === 'eyeToMonitor');
-
-    expect(eyeToMonitor?.valueMm).toBeCloseTo(0, 6);
-  });
-
-  it('clamps solved monitor height to posture limits', () => {
-    const solvedHeightFromBaseMm = getSolvedMonitorHeightFromBaseMm(
-      { ...DEFAULT_PLANNER_INPUT, seatHeightFromBaseInnerBeamsMm: 5000 },
-      {
-        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-        heightCm: PLANNER_POSTURE_LIMITS.heightMaxCm,
-      }
-    );
-
-    expect(solvedHeightFromBaseMm).toBeLessThanOrEqual(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm);
-    expect(solvedHeightFromBaseMm).toBeGreaterThanOrEqual(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm);
+    expect(report.monitorDebug.position[0]).toBeCloseTo(skeleton.joints.head[0] + expectedDistanceMm * 0.001, 6);
   });
 });

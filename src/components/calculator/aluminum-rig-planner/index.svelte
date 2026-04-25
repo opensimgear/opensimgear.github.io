@@ -49,12 +49,7 @@
   import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
   import { createPlannerOptimizationResult } from './optimizer';
-  import {
-    createPlannerPostureReport,
-    getSolvedMonitorHeightFromBaseMm,
-    type PlannerPostureReport,
-  } from './posture-report';
-  import type { PosturePoint } from './posture';
+  import { createPlannerPostureReport, type PlannerPostureReport } from './posture-report';
   import {
     applyPresetToPlannerInput,
     createPresetPlannerInput,
@@ -88,7 +83,6 @@
     highlightedBeamIds: string[];
     isNarrowViewport?: boolean;
     measurementOverlay?: PlannerMeasurementOverlay | null;
-    onEyeCenterChange: (eyeCenter: PosturePoint | null) => void;
     profileColor: string;
     postureReport: PlannerPostureReport;
     postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
@@ -200,7 +194,6 @@
     Object.assign(plannerInput, mergedState.plannerInput);
     Object.assign(optimizationSettings, cloneOptimizationSettings(mergedState.optimizationSettings));
     Object.assign(postureSettings, clonePostureSettings(mergedState.postureSettings));
-    pendingMonitorHeightEyeSync = false;
 
     for (const option of optimizationSettings.stockOptions) {
       const numericSuffix = Number(option.id.replace(/\D+/g, ''));
@@ -237,8 +230,6 @@
   let controlsReady = $state(false);
   let currencyLocale = $state(DEFAULT_CURRENCY_LOCALE);
   let measurementHideTimeout: ReturnType<typeof setTimeout> | null = null;
-  let modelEyeCenter = $state<PosturePoint | null>(null);
-  let pendingMonitorHeightEyeSync = $state(true);
   let pendingCustomPresetInput: PlannerInput | null = null;
   let suppressProgrammaticPlannerInputEdit = false;
 
@@ -310,7 +301,7 @@
   });
 
   const geometry = $derived(derivePlannerGeometry(plannerInput));
-  const postureReport = $derived(createPlannerPostureReport(geometry.input, postureSettings, modelEyeCenter));
+  const postureReport = $derived(createPlannerPostureReport(geometry.input, postureSettings));
   const measurementOverlay = $derived.by(() => {
     if (!activeMeasurementKey) {
       return null;
@@ -752,7 +743,6 @@
   function resetSetup() {
     Object.assign(plannerInput, DEFAULT_INPUT);
     Object.assign(postureSettings, clonePostureSettings(DEFAULT_POSTURE_SETTINGS));
-    pendingMonitorHeightEyeSync = true;
     profileColorMode = 'black';
     customProfileColor = DEFAULT_CUSTOM_PROFILE_COLOR;
     showEndCaps = true;
@@ -785,7 +775,6 @@
     if (isPresetSolvablePreset(value)) {
       const nextInput = applyPresetToPlannerInput(plannerInput, value, postureSettings.heightCm);
 
-      pendingMonitorHeightEyeSync = true;
       assignProgrammaticPlannerInput(nextInput);
     }
 
@@ -801,7 +790,6 @@
     postureSettings.heightCm = nextHeightCm;
 
     if (isPresetSolvablePreset(postureSettings.preset)) {
-      pendingMonitorHeightEyeSync = true;
       assignProgrammaticPlannerInput(
         recomputePresetDynamicPlannerInput(plannerInput, postureSettings.preset, nextHeightCm)
       );
@@ -852,27 +840,10 @@
   }
 
   function setMonitorHeightFromBaseMm(value: number) {
-    pendingMonitorHeightEyeSync = false;
     postureSettings.monitorHeightFromBaseMm = Math.max(
       PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm,
       Math.min(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm, value)
     );
-    syncPlannerUrlState();
-  }
-
-  function handleEyeCenterChange(eyeCenter: PosturePoint | null) {
-    modelEyeCenter = eyeCenter;
-
-    if (!pendingMonitorHeightEyeSync || !eyeCenter) {
-      return;
-    }
-
-    postureSettings.monitorHeightFromBaseMm = getSolvedMonitorHeightFromBaseMm(
-      geometry.input,
-      postureSettings,
-      eyeCenter
-    );
-    pendingMonitorHeightEyeSync = false;
     syncPlannerUrlState();
   }
 
@@ -1009,7 +980,6 @@
               {highlightedBeamIds}
               {isNarrowViewport}
               {measurementOverlay}
-              onEyeCenterChange={handleEyeCenterChange}
               {profileColor}
               {postureReport}
               {postureSettings}

@@ -1,7 +1,5 @@
 import type {
   CutListProfileType,
-  PlannerAnthropometryLengthsMm,
-  PlannerAnthropometryRatios,
   PlannerInput,
   PlannerMonitorAspectRatio,
   PlannerMonitorCurvature,
@@ -10,6 +8,12 @@ import type {
   PlannerPosturePreset,
   PlannerProfileShipping,
 } from './types';
+
+export {
+  ANTHROPOMETRY_LENGTH_LIMITS_MM,
+  DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
+  DEFAULT_ANTHROPOMETRY_RATIOS,
+} from './anthropometry-defaults';
 
 export const MM_TO_METERS = 0.001;
 export const PROFILE_SHORT_MM = 40;
@@ -196,34 +200,6 @@ export const CURVED_MONITOR_RECOMMENDED_FOV_DEG = 40;
 export const DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM = 900;
 export const DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM = 770;
 export const LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;
-export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM: PlannerAnthropometryLengthsMm = {
-  sittingHeight: 806.1,
-  seatedShoulderHeight: 493.5,
-  hipBreadth: 207.9,
-  shoulderBreadth: 346.4,
-  upperArmLength: 238.3,
-  forearmHandLength: 329.5,
-  thighLength: 419.1,
-  lowerLegLength: 360,
-  footLength: 294.1,
-};
-
-function getDefaultAnthropometryRatio(lengthMm: number) {
-  return Number((lengthMm / (DEFAULT_POSTURE_HEIGHT_CM * 10)).toFixed(3));
-}
-
-export const DEFAULT_ANTHROPOMETRY_RATIOS = Object.fromEntries(
-  Object.entries(DEFAULT_ANTHROPOMETRY_LENGTHS_MM).map(([key, value]) => [key, getDefaultAnthropometryRatio(value)])
-) as PlannerAnthropometryRatios;
-export const ANTHROPOMETRY_LENGTH_LIMITS_MM = Object.fromEntries(
-  Object.entries(DEFAULT_ANTHROPOMETRY_LENGTHS_MM).map(([key, value]) => [
-    key,
-    {
-      min: Number((value * 0.8).toFixed(1)),
-      max: Number((value * 1.2).toFixed(1)),
-    },
-  ])
-) as Record<keyof PlannerAnthropometryRatios, { min: number; max: number }>;
 
 export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   preset: DEFAULT_ACTIVE_POSTURE_PRESET,

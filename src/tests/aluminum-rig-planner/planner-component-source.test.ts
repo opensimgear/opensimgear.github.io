@@ -16,10 +16,8 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).toMatch(
       /const nextInput = applyPresetToPlannerInput\(plannerInput, value, postureSettings\.heightCm\);/
     );
-    expect(plannerSource).toContain('pendingMonitorHeightEyeSync = true;');
-    expect(plannerSource).toMatch(
-      /postureSettings\.monitorHeightFromBaseMm = getSolvedMonitorHeightFromBaseMm\(\s*geometry\.input,\s*postureSettings,\s*eyeCenter\s*\);/
-    );
+    expect(plannerSource).not.toContain('pendingMonitorHeightEyeSync');
+    expect(plannerSource).not.toContain('handleEyeCenterChange');
     expect(plannerSource).toMatch(/assignProgrammaticPlannerInput\(nextInput\);/);
     expect(plannerSource).toMatch(
       /assignProgrammaticPlannerInput\(\s*recomputePresetDynamicPlannerInput\(plannerInput, postureSettings\.preset, nextHeightCm\)\s*\)/
@@ -32,8 +30,8 @@ describe('aluminum rig planner component wiring', () => {
       'utf8'
     );
 
-    expect(presetsSource).toContain("metric.key === 'eyeToMonitor'");
-    expect(presetsSource).toMatch(/if \(metric\.key === 'eyeToMonitor'\) {\s*return total;\s*}/);
+    expect(presetsSource).toContain("metric.key === 'headToMonitor'");
+    expect(presetsSource).toMatch(/if \(metric\.key === 'headToMonitor'\) {\s*return total;\s*}/);
   });
 
   it('shows target FOV editing only for flat monitors', () => {
