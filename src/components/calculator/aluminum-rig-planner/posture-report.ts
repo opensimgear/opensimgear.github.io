@@ -6,7 +6,7 @@ import {
 } from './constants';
 import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
 import { createPlannerPostureSkeleton, type PosturePoint } from './posture';
-import type { PlannerInput, PlannerPosturePreset, PlannerPostureSettings } from './types';
+import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset, PlannerPostureSettings } from './types';
 
 export type PlannerPostureMetricStatus = 'ok' | 'warn' | 'bad';
 export type PlannerPostureMetricRange = {
@@ -48,8 +48,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     torsoToThigh: { min: 70, max: 105 },
     ankleRange: { min: 85, max: 100 },
     brakeHipToThighProjectedAngle: { min: 0, max: 35 },
-    headToWheel: { min: -50, max: 180 },
-    headToMonitor: { min: -50, max: 50 },
+    eyeToWheelTop: { min: -50, max: 180 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   gt: {
     wristBend: { min: 170, max: 195 },
@@ -58,8 +58,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     torsoToThigh: { min: 85, max: 120 },
     ankleRange: { min: 85, max: 105 },
     brakeHipToThighProjectedAngle: { min: 5, max: 45 },
-    headToWheel: { min: 75, max: 250 },
-    headToMonitor: { min: -50, max: 50 },
+    eyeToWheelTop: { min: 75, max: 250 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   rally: {
     wristBend: { min: 170, max: 190 },
@@ -68,8 +68,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     torsoToThigh: { min: 80, max: 125 },
     ankleRange: { min: 75, max: 110 },
     brakeHipToThighProjectedAngle: { min: 5, max: 50 },
-    headToWheel: { min: 75, max: 250 },
-    headToMonitor: { min: -50, max: 50 },
+    eyeToWheelTop: { min: 75, max: 250 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   road: {
     wristBend: { min: 173, max: 195 },
@@ -78,8 +78,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     torsoToThigh: { min: 90, max: 130 },
     ankleRange: { min: 68, max: 113 },
     brakeHipToThighProjectedAngle: { min: 10, max: 55 },
-    headToWheel: { min: 75, max: 260 },
-    headToMonitor: { min: -50, max: 50 },
+    eyeToWheelTop: { min: 75, max: 260 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   custom: {
     wristBend: { min: 170, max: 195 },
@@ -88,8 +88,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     torsoToThigh: { min: 85, max: 120 },
     ankleRange: { min: 85, max: 105 },
     brakeHipToThighProjectedAngle: { min: 5, max: 45 },
-    headToWheel: { min: 75, max: 250 },
-    headToMonitor: { min: -50, max: 50 },
+    eyeToWheelTop: { min: 75, max: 250 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
 };
 
@@ -233,17 +233,22 @@ function getClampHints(input: PlannerInput) {
 
 export function createPlannerPostureReport(
   input: PlannerInput,
-  postureSettings: PlannerPostureSettings<PlannerPosturePreset> = DEFAULT_PLANNER_POSTURE_SETTINGS
+  postureSettings: PlannerPostureSettings<PlannerPosturePreset> = DEFAULT_PLANNER_POSTURE_SETTINGS,
+  postureModel: PlannerPostureModelMetrics | null = null
 ): PlannerPostureReport {
-  const skeleton = createPlannerPostureSkeleton(input, {
-    ...postureSettings,
-    preset: postureSettings.preset === 'custom' ? 'gt' : postureSettings.preset,
-  });
+  const skeleton = createPlannerPostureSkeleton(
+    input,
+    {
+      ...postureSettings,
+      preset: postureSettings.preset === 'custom' ? 'gt' : postureSettings.preset,
+    },
+    postureModel
+  );
   const ranges = TARGET_RANGES[postureSettings.preset];
   const wheelCenter = getWheelCenter(input);
   const wheelTopZ = wheelCenter[2] + (input.wheelDiameterMm * MM_TO_METERS) / 2;
-  const postureReferencePoint = skeleton.joints.head;
-  const monitorMidpoint = getMonitorMidpoint(postureReferencePoint, postureSettings);
+  const eyeCenter = skeleton.joints.eyeCenter;
+  const monitorMidpoint = getMonitorMidpoint(eyeCenter, postureSettings);
   const metrics = [
     createMetric(
       'wristBend',
@@ -302,12 +307,12 @@ export function createPlannerPostureReport(
       projectedAngleDeg(skeleton.joints.hipLeft, skeleton.joints.kneeLeft),
       ranges
     ),
-    createMetric('headToWheel', 'Head over wheel', 'mm', (postureReferencePoint[2] - wheelTopZ) / MM_TO_METERS, ranges),
+    createMetric('eyeToWheelTop', 'Eye to wheel top', 'mm', (eyeCenter[2] - wheelTopZ) / MM_TO_METERS, ranges),
     createMetric(
-      'headToMonitor',
-      'Head vs monitor midpoint',
+      'eyeToMonitorMidpoint',
+      'Eye to monitor midpoint',
       'mm',
-      (postureReferencePoint[2] - monitorMidpoint[2]) / MM_TO_METERS,
+      (eyeCenter[2] - monitorMidpoint[2]) / MM_TO_METERS,
       ranges
     ),
   ];

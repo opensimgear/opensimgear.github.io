@@ -16,9 +16,10 @@ import {
 } from 'three';
 
 import { POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM, type PlannerPostureSkeleton, type PosturePoint } from './posture';
-import type { PlannerAnthropometryRatios } from './types';
+import type { PlannerAnthropometryRatios, PlannerPostureModelMetrics } from './types';
 
 export const HUMAN_MALE_REALISTIC_MODEL_URL = '/models/aluminum-rig-planner/human-male-realistic.glb';
+export type HumanModelPostureModel = PlannerPostureModelMetrics;
 
 type HumanBoneName =
   | 'torso'
@@ -40,7 +41,9 @@ type HumanBoneName =
 
 type HumanTerminalBoneName = 'neck' | 'headTip' | 'leftHandTip' | 'rightHandTip' | 'leftFootTip' | 'rightFootTip';
 
-type HumanModelBoneName = HumanBoneName | HumanTerminalBoneName;
+type HumanModelAuxiliaryBoneName = 'eyeCenter';
+
+type HumanModelBoneName = HumanBoneName | HumanTerminalBoneName | HumanModelAuxiliaryBoneName;
 
 type HumanRestSegment = {
   name: HumanBoneName;
@@ -57,7 +60,6 @@ type HumanDebugBoneName =
   | 'neckConnector';
 
 type HumanRig = {
-  boneRigRatios: PlannerAnthropometryRatios | null;
   bones: Map<HumanModelBoneName, Bone>;
   debugOverlay: HumanRigDebugOverlay;
   restBoneLocalPositions: Map<HumanModelBoneName, Vector3>;
@@ -65,6 +67,7 @@ type HumanRig = {
   restBoneLocalScales: Map<HumanModelBoneName, Vector3>;
   restSegments: Map<HumanBoneName, HumanRestSegment>;
   restBoneWorldMatrices: Map<HumanBoneName, Matrix4>;
+  postureModelMetrics: PlannerPostureModelMetrics | null;
   root: Group;
   skinnedMeshes: SkinnedMesh[];
 };
@@ -82,9 +85,9 @@ export type HumanRigHoverTooltip = HumanRigTooltipData & {
 };
 
 export type RiggedHumanModel = {
-  boneRigRatios: PlannerAnthropometryRatios | null;
   getTooltipTargets: () => Mesh[];
   object: Group;
+  postureModelMetrics: PlannerPostureModelMetrics | null;
   applySkeleton: (skeleton: PlannerPostureSkeleton, modelScale: number) => void;
   setDisplayOptions: (showModel: boolean, showSkeleton: boolean) => void;
   dispose: () => void;
@@ -130,6 +133,7 @@ const HUMAN_TERMINAL_BONE_ORDER: HumanTerminalBoneName[] = [
   'leftFootTip',
   'rightFootTip',
 ];
+const HUMAN_MODEL_AUXILIARY_BONE_ORDER: HumanModelAuxiliaryBoneName[] = ['eyeCenter'];
 const HUMAN_DEBUG_BONE_ORDER: HumanDebugBoneName[] = [
   ...HUMAN_BONE_ORDER,
   'leftClavicle',
@@ -138,7 +142,11 @@ const HUMAN_DEBUG_BONE_ORDER: HumanDebugBoneName[] = [
   'rightPelvis',
   'neckConnector',
 ];
-const HUMAN_MODEL_BONE_ORDER: HumanModelBoneName[] = [...HUMAN_BONE_ORDER, ...HUMAN_TERMINAL_BONE_ORDER];
+const HUMAN_MODEL_BONE_ORDER: HumanModelBoneName[] = [
+  ...HUMAN_BONE_ORDER,
+  ...HUMAN_TERMINAL_BONE_ORDER,
+  ...HUMAN_MODEL_AUXILIARY_BONE_ORDER,
+];
 const HUMAN_BONE_END_BONES = {
   torso: 'neck',
   head: 'headTip',
@@ -262,7 +270,7 @@ function getAverageDistance(
   return distances.reduce((total, distance) => total + distance, 0) / distances.length;
 }
 
-export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropometryRatios | null {
+function collectHumanModelBonesAndBounds(root: Group) {
   const bones = new Map<HumanModelBoneName, Bone>();
   const bounds = new Box3();
 
@@ -277,6 +285,12 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     }
   });
 
+  return { bones, bounds };
+}
+
+export function calculateHumanModelPostureModel(root: Group): HumanModelPostureModel | null {
+  const { bones, bounds } = collectHumanModelBonesAndBounds(root);
+
   if (bounds.isEmpty()) {
     return null;
   }
@@ -285,6 +299,7 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
   const hip = getModelBonePosition(bones, 'torso');
   const leftShoulder = getModelBonePosition(bones, 'leftUpperArm');
   const rightShoulder = getModelBonePosition(bones, 'rightUpperArm');
+  const eyeCenter = getModelBonePosition(bones, 'eyeCenter');
   const upperArmLength = getAverageDistance(bones, [
     ['leftUpperArm', 'leftForearm'],
     ['rightUpperArm', 'rightForearm'],
@@ -317,6 +332,7 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     !hip ||
     !leftShoulder ||
     !rightShoulder ||
+    !eyeCenter ||
     upperArmLength === null ||
     forearmHandLength === null ||
     thighLength === null ||
@@ -330,8 +346,8 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
   }
 
   const shoulderY = (leftShoulder.y + rightShoulder.y) / 2;
-
-  return {
+  const footLength = heelLength + footBoneLength;
+  const anthropometryRatios = {
     sittingHeight: roundModelRatio((bounds.max.y - hip.y) / height),
     seatedShoulderHeight: roundModelRatio(
       (shoulderY - hip.y + POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM * 0.001) / height
@@ -342,8 +358,20 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
     forearmHandLength: roundModelRatio(forearmHandLength / height),
     thighLength: roundModelRatio(thighLength / height),
     lowerLegLength: roundModelRatio(lowerLegLength / height),
-    footLength: roundModelRatio((heelLength + footBoneLength) / height),
+    footLength: roundModelRatio(footLength / height),
   };
+
+  return {
+    anthropometryRatios,
+    eyeCenterForwardFromHip: roundModelRatio((eyeCenter.x - hip.x) / height),
+    eyeCenterHeightFromHip: roundModelRatio((eyeCenter.y - hip.y) / height),
+    eyeCenterSittingHeight: roundModelRatio((eyeCenter.y - hip.y) / height),
+    heelLengthShare: roundModelRatio(heelLength / footLength),
+  };
+}
+
+export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropometryRatios | null {
+  return calculateHumanModelPostureModel(root)?.anthropometryRatios ?? null;
 }
 
 function createRestSegmentsFromBones(bones: Map<HumanModelBoneName, Bone>) {
@@ -960,7 +988,7 @@ function collectRig(root: Group): HumanRig {
 
   root.updateWorldMatrix(true, true);
 
-  const boneRigRatios = calculateHumanModelBoneRigRatios(root);
+  const postureModelMetrics = calculateHumanModelPostureModel(root);
   const restSegments = createRestSegmentsFromBones(bones);
   root.add(debugOverlay.group);
   updateDebugOverlay(debugOverlay, createDebugSegmentsFromModelBones(root, bones));
@@ -980,7 +1008,6 @@ function collectRig(root: Group): HumanRig {
   }
 
   return {
-    boneRigRatios,
     bones,
     debugOverlay,
     restBoneLocalPositions,
@@ -988,6 +1015,7 @@ function collectRig(root: Group): HumanRig {
     restBoneLocalScales,
     restSegments,
     restBoneWorldMatrices,
+    postureModelMetrics,
     root,
     skinnedMeshes,
   };
@@ -1008,11 +1036,11 @@ export function createRiggedHumanModelFromRoot(root: Group): RiggedHumanModel | 
   root.rotation.x = Math.PI / 2;
 
   return {
-    boneRigRatios: rig.boneRigRatios,
     getTooltipTargets() {
       return [...rig.debugOverlay.boneHitMeshes.values(), ...rig.debugOverlay.jointHitMeshes];
     },
     object: root,
+    postureModelMetrics: rig.postureModelMetrics,
     applySkeleton(plannerSkeleton, modelScale) {
       applyPlannerPose(rig, plannerSkeleton, modelScale);
     },

@@ -117,10 +117,45 @@ describe('aluminum rig planner posture solver', () => {
     expect(Math.abs(skeleton.joints.handLeft[1])).toBeCloseTo(expectedGripRadius, 5);
   });
 
-  it('keeps eye center out of the pure posture skeleton', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+  it('adds eye center joint and uses posture-model eye and heel ratios', () => {
+    const postureModel = {
+      anthropometryRatios: { ...DEFAULT_ANTHROPOMETRY_RATIOS },
+      eyeCenterSittingHeight: 0.2,
+      eyeCenterForwardFromHip: 0.11,
+      eyeCenterHeightFromHip: 0.34,
+      heelLengthShare: 0.4,
+    };
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      postureModel
+    );
+    const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
+    const backrestAngleRad =
+      ((DEFAULT_PLANNER_INPUT.seatAngleDeg + DEFAULT_PLANNER_INPUT.backrestAngleDeg - 90) * Math.PI) / 180;
+    const backrestUp = [-Math.sin(backrestAngleRad), 0, Math.cos(backrestAngleRad)] as const;
+    const bodyForward = [backrestUp[2], 0, -backrestUp[0]] as const;
+    const expectedEyeCenter = [
+      skeleton.joints.hipCenter[0] +
+        (backrestUp[0] * postureModel.eyeCenterHeightFromHip + bodyForward[0] * postureModel.eyeCenterForwardFromHip) *
+          heightM,
+      skeleton.joints.hipCenter[1],
+      skeleton.joints.hipCenter[2] +
+        (backrestUp[2] * postureModel.eyeCenterHeightFromHip + bodyForward[2] * postureModel.eyeCenterForwardFromHip) *
+          heightM,
+    ] as const;
 
-    expect('eye' in skeleton.joints).toBe(false);
+    expect(skeleton.joints.eyeCenter[0]).toBeCloseTo(expectedEyeCenter[0], 6);
+    expect(skeleton.joints.eyeCenter[1]).toBeCloseTo(expectedEyeCenter[1], 6);
+    expect(skeleton.joints.eyeCenter[2]).toBeCloseTo(expectedEyeCenter[2], 6);
+    expect(getDistance(skeleton.joints.ankleLeft, skeleton.joints.heelLeft)).toBeCloseTo(
+      DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM * postureModel.heelLengthShare,
+      5
+    );
+    expect(getDistance(skeleton.joints.heelLeft, skeleton.joints.toeLeft)).toBeCloseTo(
+      DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM * (1 - postureModel.heelLengthShare),
+      5
+    );
   });
 
   it('scales seat-to-hip offsets from the 169 cm baseline', () => {

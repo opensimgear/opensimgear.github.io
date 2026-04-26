@@ -40,15 +40,21 @@ describe('aluminum rig planner posture report', () => {
     expect(report.metrics.some((metric) => metric.status !== 'ok' && metric.hint)).toBe(true);
   });
 
-  it('reports head-based posture metrics without debug eye payload', () => {
+  it('reports eye-based posture metrics without extra eye debug payload', () => {
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
 
-    expect(report.metrics.some((metric) => metric.key === 'headToWheel')).toBe(true);
-    expect(report.metrics.some((metric) => metric.key === 'headToMonitor')).toBe(true);
+    expect(report.metrics.some((metric) => metric.key === 'eyeToWheelTop' && metric.label === 'Eye to wheel top')).toBe(
+      true
+    );
+    expect(
+      report.metrics.some(
+        (metric) => metric.key === 'eyeToMonitorMidpoint' && metric.label === 'Eye to monitor midpoint'
+      )
+    ).toBe(true);
     expect('eyeDebug' in report).toBe(false);
   });
 
-  it('solves flat monitor midpoint distance from target horizontal FOV', () => {
+  it('solves flat monitor midpoint distance from target horizontal FOV using eye center anchor', () => {
     const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: 'disabled' as const,
@@ -56,13 +62,30 @@ describe('aluminum rig planner posture report', () => {
       monitorTargetFovDeg: 60,
       monitorHeightFromBaseMm: DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM + 50,
     };
+    const postureModel = {
+      anthropometryRatios: {
+        sittingHeight: 0.477,
+        seatedShoulderHeight: 0.292,
+        hipBreadth: 0.123,
+        shoulderBreadth: 0.205,
+        upperArmLength: 0.141,
+        forearmHandLength: 0.195,
+        thighLength: 0.248,
+        lowerLegLength: 0.231,
+        footLength: 0.143,
+      },
+      eyeCenterSittingHeight: 0.33,
+      eyeCenterForwardFromHip: 0.11,
+      eyeCenterHeightFromHip: 0.36,
+      heelLengthShare: 0.3,
+    };
     const dimensions = getMonitorDimensionsMm(postureSettings);
     const expectedDistanceMm = dimensions.widthMm / 2 / Math.tan((postureSettings.monitorTargetFovDeg * Math.PI) / 360);
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
-    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, postureModel);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings, postureModel);
 
     expect(report.monitorDebug.diameterM).toBeCloseTo(0.01, 6);
-    expect(report.monitorDebug.position[0]).toBeCloseTo(skeleton.joints.head[0] + expectedDistanceMm * 0.001, 6);
+    expect(report.monitorDebug.position[0]).toBeCloseTo(skeleton.joints.eyeCenter[0] + expectedDistanceMm * 0.001, 6);
     expect(report.monitorDebug.position[1]).toBe(0);
     expect(report.monitorDebug.position[2]).toBeCloseTo(
       (BASE_BEAM_HEIGHT_MM + postureSettings.monitorHeightFromBaseMm) * 0.001,
@@ -82,6 +105,6 @@ describe('aluminum rig planner posture report', () => {
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
 
-    expect(report.monitorDebug.position[0]).toBeCloseTo(skeleton.joints.head[0] + expectedDistanceMm * 0.001, 6);
+    expect(report.monitorDebug.position[0]).toBeCloseTo(skeleton.joints.eyeCenter[0] + expectedDistanceMm * 0.001, 6);
   });
 });

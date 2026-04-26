@@ -65,6 +65,7 @@
     type AluminumRigPaneExpandedState,
   } from './state';
   import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
+  import { createRiggedHumanModel, type RiggedHumanModel } from './human-model-rig';
   import type { PlannerGeometry } from './geometry';
   import type {
     CutListProfileType,
@@ -84,6 +85,7 @@
     isNarrowViewport?: boolean;
     measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
+    humanModel: RiggedHumanModel;
     postureReport: PlannerPostureReport;
     postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
     showEndCaps: boolean;
@@ -225,6 +227,8 @@
   let mounted = $state(false);
   let PlannerScene = $state<PlannerSceneComponent | null>(null);
   let sceneStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
+  let humanModel = $state<RiggedHumanModel | null>(null);
+  let humanModelStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
   let hoveredCutListKey = $state<string | null>(null);
   let activeMeasurementKey = $state<PlannerMeasurementKey | null>(null);
   let controlsReady = $state(false);
@@ -232,6 +236,7 @@
   let measurementHideTimeout: ReturnType<typeof setTimeout> | null = null;
   let pendingCustomPresetInput: PlannerInput | null = null;
   let suppressProgrammaticPlannerInputEdit = false;
+  let plannerUnmounted = false;
 
   async function loadScene() {
     if (PlannerScene || sceneStatus === 'loading') return;
@@ -244,6 +249,42 @@
       sceneStatus = 'ready';
     } catch {
       sceneStatus = 'error';
+    }
+  }
+
+  async function loadHumanModel() {
+    if (humanModel || humanModelStatus === 'loading') return;
+
+    humanModelStatus = 'loading';
+
+    try {
+      const model = await createRiggedHumanModel();
+
+      if (plannerUnmounted) {
+        model?.dispose();
+        return;
+      }
+
+      if (!model) {
+        humanModelStatus = 'error';
+        return;
+      }
+
+      humanModel = model;
+      humanModelStatus = 'ready';
+
+      if (model.postureModelMetrics && isPresetSolvablePreset(postureSettings.preset)) {
+        assignProgrammaticPlannerInput(
+          applyPresetToPlannerInput(
+            plannerInput,
+            postureSettings.preset,
+            postureSettings.heightCm,
+            model.postureModelMetrics
+          )
+        );
+      }
+    } catch {
+      humanModelStatus = 'error';
     }
   }
 
@@ -267,6 +308,7 @@
   }
 
   onMount(() => {
+    plannerUnmounted = false;
     currencyLocale = resolvePlannerLocale();
 
     const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
@@ -285,6 +327,7 @@
     window.addEventListener('resize', handleResize);
     mounted = true;
     void loadScene();
+    void loadHumanModel();
     void tick().then(() => {
       controlsReady = true;
       syncPlannerTestIds();
@@ -293,6 +336,9 @@
     return () => {
       window.removeEventListener('resize', handleResize);
       debouncedUrlStateWriter.cancel();
+      plannerUnmounted = true;
+      humanModel?.dispose();
+      humanModel = null;
       if (measurementHideTimeout) {
         clearTimeout(measurementHideTimeout);
       }
@@ -301,7 +347,8 @@
   });
 
   const geometry = $derived(derivePlannerGeometry(plannerInput));
-  const postureReport = $derived(createPlannerPostureReport(geometry.input, postureSettings));
+  const postureModelMetrics = $derived(humanModel?.postureModelMetrics ?? null);
+  const postureReport = $derived(createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics));
   const measurementOverlay = $derived.by(() => {
     if (!activeMeasurementKey) {
       return null;
@@ -741,8 +788,16 @@
   }
 
   function resetSetup() {
-    Object.assign(plannerInput, DEFAULT_INPUT);
     Object.assign(postureSettings, clonePostureSettings(DEFAULT_POSTURE_SETTINGS));
+    Object.assign(
+      plannerInput,
+      createPresetPlannerInput(
+        DEFAULT_ACTIVE_POSTURE_PRESET,
+        DEFAULT_POSTURE_HEIGHT_CM,
+        DEFAULT_PLANNER_INPUT,
+        postureModelMetrics
+      )
+    );
     profileColorMode = 'black';
     customProfileColor = DEFAULT_CUSTOM_PROFILE_COLOR;
     showEndCaps = true;
@@ -773,7 +828,7 @@
     postureSettings.preset = value;
 
     if (isPresetSolvablePreset(value)) {
-      const nextInput = applyPresetToPlannerInput(plannerInput, value, postureSettings.heightCm);
+      const nextInput = applyPresetToPlannerInput(plannerInput, value, postureSettings.heightCm, postureModelMetrics);
 
       assignProgrammaticPlannerInput(nextInput);
     }
@@ -791,7 +846,7 @@
 
     if (isPresetSolvablePreset(postureSettings.preset)) {
       assignProgrammaticPlannerInput(
-        recomputePresetDynamicPlannerInput(plannerInput, postureSettings.preset, nextHeightCm)
+        recomputePresetDynamicPlannerInput(plannerInput, postureSettings.preset, nextHeightCm, postureModelMetrics)
       );
     }
 
@@ -973,7 +1028,7 @@
       <div
         class="flex min-w-0 flex-col border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
-        {#if PlannerScene}
+        {#if PlannerScene && humanModel}
           <div class={isNarrowViewport ? 'mx-auto w-[clamp(18rem,84vw,42rem)] max-w-full' : 'w-full'}>
             <PlannerScene
               {geometry}
@@ -981,6 +1036,7 @@
               {isNarrowViewport}
               {measurementOverlay}
               {profileColor}
+              {humanModel}
               {postureReport}
               {postureSettings}
               {showEndCaps}
@@ -990,7 +1046,7 @@
         {:else}
           <div class={isNarrowViewport ? 'mx-auto w-[clamp(18rem,84vw,42rem)] max-w-full' : 'w-full'}>
             <div class="grid aspect-[3/2] w-full place-items-center border-zinc-200 bg-zinc-50 text-sm text-zinc-500">
-              {#if sceneStatus === 'error'}
+              {#if sceneStatus === 'error' || humanModelStatus === 'error'}
                 <span data-testid="aluminum-rig-planner-preview-error">3D scene failed to load. Refresh to retry.</span>
               {:else}
                 <span>Loading 3D scene...</span>

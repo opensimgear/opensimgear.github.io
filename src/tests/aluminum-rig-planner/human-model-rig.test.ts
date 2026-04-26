@@ -7,6 +7,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import {
   calculateHumanModelBoneRigRatios,
+  calculateHumanModelPostureModel,
   createRiggedHumanModelFromRoot,
   type HumanRigTooltipData,
 } from '../../components/calculator/aluminum-rig-planner/human-model-rig';
@@ -232,6 +233,29 @@ describe('aluminum rig planner human model rig', () => {
       thighLength: 0.248,
       lowerLegLength: 0.231,
       footLength: 0.143,
+    });
+  });
+
+  it('extracts full posture-model data from the GLB rest pose', async () => {
+    const gltf = await loadHumanModel();
+    const postureModel = calculateHumanModelPostureModel(gltf.scene);
+
+    expect(postureModel).toEqual({
+      anthropometryRatios: {
+        sittingHeight: 0.477,
+        seatedShoulderHeight: 0.292,
+        hipBreadth: 0.123,
+        shoulderBreadth: 0.205,
+        upperArmLength: 0.141,
+        forearmHandLength: 0.195,
+        thighLength: 0.248,
+        lowerLegLength: 0.231,
+        footLength: 0.143,
+      },
+      eyeCenterForwardFromHip: 0.064,
+      eyeCenterHeightFromHip: 0.407,
+      eyeCenterSittingHeight: 0.407,
+      heelLengthShare: 0.246,
     });
   });
 

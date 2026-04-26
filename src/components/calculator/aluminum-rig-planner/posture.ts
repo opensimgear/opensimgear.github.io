@@ -11,10 +11,16 @@ import {
   PROFILE_SHORT_MM,
   UPRIGHT_BEAM_DEPTH_MM,
 } from './constants';
-import type { PlannerAnthropometryRatios, PlannerInput, PlannerPostureSettings } from './types';
+import type {
+  PlannerAnthropometryRatios,
+  PlannerInput,
+  PlannerPostureModelMetrics,
+  PlannerPostureSettings,
+} from './types';
 
 export type PostureJointName =
   | 'head'
+  | 'eyeCenter'
   | 'neck'
   | 'shoulderCenter'
   | 'shoulderLeft'
@@ -71,6 +77,8 @@ const HAND_GRIP_LENGTH_MIN_MM = 55;
 const HAND_GRIP_LENGTH_MAX_MM = 140;
 const HAND_GRIP_HEIGHT_RATIO = 0.076;
 const HAND_MAX_FOREARM_HAND_SHARE = 0.45;
+const DEFAULT_EYE_CENTER_FORWARD_FROM_HIP = 0.064;
+const DEFAULT_EYE_CENTER_HEIGHT_FROM_HIP = 0.407;
 
 const PRESET_KNEE_LIFT = {
   formula: 0.18,
@@ -182,8 +190,8 @@ function getPedalTarget(input: PlannerInput, centerYmm: number, footLengthM: num
   };
 }
 
-function getHeelLength(heightM: number) {
-  return DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM * DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE;
+function getHeelLength(heightM: number, footLengthRatio: number, postureModel: PlannerPostureModelMetrics | null) {
+  return footLengthRatio * heightM * (postureModel?.heelLengthShare ?? DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE);
 }
 
 function getWheelTargets(input: PlannerInput, rightSign: number) {
@@ -278,24 +286,39 @@ function getWristFromHand(elbow: Vector, hand: Vector, handGripLength: number) {
   return add(hand, scale(direction, -handGripLength));
 }
 
-export function getEffectiveAnthropometryRatios(settings: PlannerPostureSettings): PlannerAnthropometryRatios {
+export function getEffectiveAnthropometryRatios(
+  settings: PlannerPostureSettings,
+  postureModel: PlannerPostureModelMetrics | null = null
+): PlannerAnthropometryRatios {
   void settings;
 
-  return { ...DEFAULT_ANTHROPOMETRY_RATIOS };
+  return { ...(postureModel?.anthropometryRatios ?? DEFAULT_ANTHROPOMETRY_RATIOS) };
+}
+
+function getEffectiveEyeCenterRatios(postureModel: PlannerPostureModelMetrics | null) {
+  return {
+    forwardFromHip: postureModel?.eyeCenterForwardFromHip ?? DEFAULT_EYE_CENTER_FORWARD_FROM_HIP,
+    heightFromHip:
+      postureModel?.eyeCenterHeightFromHip ??
+      postureModel?.eyeCenterSittingHeight ??
+      DEFAULT_EYE_CENTER_HEIGHT_FROM_HIP,
+  };
 }
 
 export function createPlannerPostureSkeleton(
   input: PlannerInput,
-  settings: PlannerPostureSettings
+  settings: PlannerPostureSettings,
+  postureModel: PlannerPostureModelMetrics | null = null
 ): PlannerPostureSkeleton {
   const heightM =
     clamp(settings.heightCm, PLANNER_POSTURE_LIMITS.heightMinCm, PLANNER_POSTURE_LIMITS.heightMaxCm) / 100;
-  const ratios = getEffectiveAnthropometryRatios(settings);
+  const ratios = getEffectiveAnthropometryRatios(settings, postureModel);
   const seatAngleRad = toRad(input.seatAngleDeg);
   const backrestAngleRad = toRad(input.seatAngleDeg + input.backrestAngleDeg - 90);
   const seatForward: Vector = [Math.cos(seatAngleRad), 0, Math.sin(seatAngleRad)];
   const seatNormal: Vector = [-Math.sin(seatAngleRad), 0, Math.cos(seatAngleRad)];
   const backrestUp: Vector = [-Math.sin(backrestAngleRad), 0, Math.cos(backrestAngleRad)];
+  const bodyForward: Vector = normalize(rotateXZ(backrestUp, -Math.PI / 2), seatForward);
   const seatPivot = getSeatPivot(input);
   const heightScale = heightM / (DEFAULT_POSTURE_HEIGHT_CM / 100);
   const postureScale = 1 + (heightScale - 1);
@@ -308,6 +331,14 @@ export function createPlannerPostureSkeleton(
   const shoulderCenter = add(hipCenter, scale(backrestUp, shoulderToHipM));
   const neck = add(hipCenter, scale(backrestUp, Math.max(shoulderToHipM, ratios.sittingHeight * heightM * 0.84)));
   const head = add(hipCenter, scale(backrestUp, ratios.sittingHeight * heightM));
+  const eyeCenterRatios = getEffectiveEyeCenterRatios(postureModel);
+  const eyeCenter = add(
+    hipCenter,
+    add(
+      scale(backrestUp, eyeCenterRatios.heightFromHip * heightM),
+      scale(bodyForward, eyeCenterRatios.forwardFromHip * heightM)
+    )
+  );
   const pedalCentersYmm = getPedalCentersYmm(input);
   const rightSign = Math.sign(pedalCentersYmm.accelerator) || -1;
   const hipHalfWidthM = (ratios.hipBreadth * heightM) / 2;
@@ -318,7 +349,7 @@ export function createPlannerPostureSkeleton(
   const shoulderLeft = add(shoulderCenter, [0, -rightSign * shoulderHalfWidthM, 0]);
   const wheelTargets = getWheelTargets(input, rightSign);
   const footLength = ratios.footLength * heightM;
-  const heelLength = getHeelLength(heightM);
+  const heelLength = getHeelLength(heightM, ratios.footLength, postureModel);
   const pedalFootLength = Math.max(heelLength + mm(20), footLength);
   const rightPedal = getPedalTarget(input, pedalCentersYmm.accelerator, pedalFootLength, heelLength);
   const leftPedal = getPedalTarget(input, pedalCentersYmm.brake, pedalFootLength, heelLength);
@@ -350,6 +381,7 @@ export function createPlannerPostureSkeleton(
   const leftToe = leftPedal.toe;
   const joints: Record<PostureJointName, PosturePoint> = {
     head,
+    eyeCenter,
     neck,
     shoulderCenter,
     shoulderLeft,

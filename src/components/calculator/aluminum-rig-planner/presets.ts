@@ -12,7 +12,7 @@ import {
   getSteeringColumnDistanceMaxMm,
 } from './geometry';
 import { createPlannerPostureReport } from './posture-report';
-import type { PlannerInput, PlannerPosturePreset } from './types';
+import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset } from './types';
 
 type SolvablePlannerPosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
 type PlannerPosturePresetFixedValues = Pick<
@@ -281,20 +281,25 @@ function createCandidateInput(input: PlannerInput, seed: PlannerPosturePresetSee
   );
 }
 
-function scoreCandidate(input: PlannerInput, preset: SolvablePlannerPosturePreset, heightCm: number) {
-  const report = createPlannerPostureReport(input, {
-    ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-    preset,
-    heightCm,
-    showModel: true,
-    showSkeleton: false,
-  });
+function scoreCandidate(
+  input: PlannerInput,
+  preset: SolvablePlannerPosturePreset,
+  heightCm: number,
+  modelMetrics: PlannerPostureModelMetrics | null = null
+) {
+  const report = createPlannerPostureReport(
+    input,
+    {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      preset,
+      heightCm,
+      showModel: true,
+      showSkeleton: false,
+    },
+    modelMetrics
+  );
 
   return report.metrics.reduce((total, metric) => {
-    if (metric.key === 'headToMonitor') {
-      return total;
-    }
-
     const value = metric.unit === 'mm' ? (metric.valueMm ?? 0) : (metric.valueDeg ?? 0);
     const center = (metric.range.min + metric.range.max) / 2;
     const width = Math.max(1, metric.range.max - metric.range.min);
@@ -307,7 +312,8 @@ function scoreCandidate(input: PlannerInput, preset: SolvablePlannerPosturePrese
 function solveDynamicPlannerInput(
   input: PlannerInput,
   preset: SolvablePlannerPosturePreset,
-  heightCm: number
+  heightCm: number,
+  modelMetrics: PlannerPostureModelMetrics | null = null
 ): PlannerInput {
   const seed = getPresetSeed(preset, heightCm);
   const baseCandidate = createCandidateInput(input, seed);
@@ -356,7 +362,7 @@ function solveDynamicPlannerInput(
     ),
   };
   let bestInput = baseCandidate;
-  let bestScore = scoreCandidate(bestInput, preset, heightCm);
+  let bestScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics);
 
   for (const steeringColumnBaseHeightMm of seeds.steeringColumnBaseHeightMm) {
     for (const steeringColumnHeightMm of seeds.steeringColumnHeightMm) {
@@ -372,7 +378,7 @@ function solveDynamicPlannerInput(
                 pedalsHeightMm,
                 pedalAngleDeg,
               });
-              const score = scoreCandidate(candidate, preset, heightCm);
+              const score = scoreCandidate(candidate, preset, heightCm, modelMetrics);
 
               if (score < bestScore) {
                 bestInput = candidate;
@@ -391,19 +397,21 @@ function solveDynamicPlannerInput(
 export function recomputePresetDynamicPlannerInput(
   input: PlannerInput,
   preset: PlannerPosturePreset,
-  heightCm: number
+  heightCm: number,
+  modelMetrics: PlannerPostureModelMetrics | null = null
 ): PlannerInput {
   if (!isPresetSolvablePreset(preset)) {
     return { ...input };
   }
 
-  return solveDynamicPlannerInput(input, preset, heightCm);
+  return solveDynamicPlannerInput(input, preset, heightCm, modelMetrics);
 }
 
 export function applyPresetToPlannerInput(
   input: PlannerInput,
   preset: PlannerPosturePreset,
-  heightCm: number
+  heightCm: number,
+  modelMetrics: PlannerPostureModelMetrics | null = null
 ): PlannerInput {
   if (!isPresetSolvablePreset(preset)) {
     return { ...input };
@@ -413,7 +421,8 @@ export function applyPresetToPlannerInput(
     ...recomputePresetDynamicPlannerInput(
       clampPlannerInput({ ...input, ...PLANNER_POSTURE_PRESETS[preset] }),
       preset,
-      heightCm
+      heightCm,
+      modelMetrics
     ),
     ...getPresetFixedFinalValues(preset),
   };
@@ -422,7 +431,8 @@ export function applyPresetToPlannerInput(
 export function createPresetPlannerInput(
   preset: PlannerPosturePreset,
   heightCm: number,
-  currentInput: PlannerInput = DEFAULT_PLANNER_INPUT
+  currentInput: PlannerInput = DEFAULT_PLANNER_INPUT,
+  modelMetrics: PlannerPostureModelMetrics | null = null
 ): PlannerInput {
-  return applyPresetToPlannerInput(currentInput, preset, heightCm);
+  return applyPresetToPlannerInput(currentInput, preset, heightCm, modelMetrics);
 }

@@ -15,12 +15,13 @@
   import { createPlannerPostureSkeleton } from './posture';
   import type { PlannerPostureReport } from './posture-report';
   import RiggedHumanModel from './RiggedHumanModel.svelte';
-  import type { HumanRigHoverTooltip } from './human-model-rig';
+  import type { HumanRigHoverTooltip, RiggedHumanModel as RiggedHumanModelData } from './human-model-rig';
   import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from './types';
 
   type Props = {
     geometry: PlannerGeometry;
     highlightedBeamIds: string[];
+    humanModel: RiggedHumanModelData;
     measurementOverlay?: PlannerMeasurementOverlay | null;
     onHumanRigTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
     profileColor: string;
@@ -33,6 +34,7 @@
   const {
     geometry,
     highlightedBeamIds,
+    humanModel,
     measurementOverlay = null,
     onHumanRigTooltipChange,
     profileColor,
@@ -52,10 +54,14 @@
   const wheelModule = $derived(createWheelModule(input));
   const monitorModule = $derived(createMonitorModule(postureReport, postureSettings));
   const postureSkeleton = $derived(
-    createPlannerPostureSkeleton(input, {
-      ...postureSettings,
-      preset: postureSettings.preset === 'custom' ? 'gt' : postureSettings.preset,
-    })
+    createPlannerPostureSkeleton(
+      input,
+      {
+        ...postureSettings,
+        preset: postureSettings.preset === 'custom' ? 'gt' : postureSettings.preset,
+      },
+      humanModel.postureModelMetrics
+    )
   );
   const modelScale = $derived(postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM);
 
@@ -103,6 +109,7 @@
 
 {#if postureSettings.showModel || postureSettings.showSkeleton}
   <RiggedHumanModel
+    {humanModel}
     {modelScale}
     showModel={postureSettings.showModel}
     showSkeleton={postureSettings.showSkeleton}

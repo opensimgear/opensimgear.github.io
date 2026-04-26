@@ -38,6 +38,14 @@ export type PlannerAnthropometryRatios = {
 
 export type PlannerAnthropometryLengthsMm = Record<keyof PlannerAnthropometryRatios, number>;
 
+export type PlannerPostureModelMetrics = {
+  anthropometryRatios: PlannerAnthropometryRatios;
+  eyeCenterForwardFromHip: number;
+  eyeCenterHeightFromHip: number;
+  eyeCenterSittingHeight: number;
+  heelLengthShare: number;
+};
+
 export type PlannerPostureSettings<Preset extends PlannerPosturePreset = PlannerSolvablePosturePreset> = {
   preset: Preset;
   heightCm: number;

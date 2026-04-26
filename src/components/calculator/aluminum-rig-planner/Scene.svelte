@@ -14,7 +14,7 @@
   import { getSceneControlsTopOffsetPx } from '../shared/scene-controls';
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
-  import type { HumanRigHoverTooltip } from './human-model-rig';
+  import type { HumanRigHoverTooltip, RiggedHumanModel } from './human-model-rig';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
   import type { PlannerPostureReport } from './posture-report';
   import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from './types';
@@ -22,6 +22,7 @@
   type Props = {
     geometry: PlannerGeometry;
     highlightedBeamIds: string[];
+    humanModel: RiggedHumanModel;
     isNarrowViewport?: boolean;
     measurementOverlay?: PlannerMeasurementOverlay | null;
     profileColor: string;
@@ -34,6 +35,7 @@
   const {
     geometry,
     highlightedBeamIds,
+    humanModel,
     isNarrowViewport = false,
     measurementOverlay = null,
     profileColor,
@@ -305,6 +307,7 @@
       <RigFrame
         {geometry}
         {highlightedBeamIds}
+        {humanModel}
         {measurementOverlay}
         onHumanRigTooltipChange={(tooltip) => {
           humanRigTooltip = tooltip;
