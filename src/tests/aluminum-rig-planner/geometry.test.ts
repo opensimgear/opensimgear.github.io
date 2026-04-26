@@ -220,7 +220,7 @@ describe('aluminum rig planner geometry', () => {
     expect(dot(spokeDirections[0], spokeDirections[2])).toBeCloseTo(-1, 5);
   });
 
-  it('adds pedal plate and three pedals aligned from accelerator to clutch', () => {
+  it('adds pedal plate with full accelerator and floating brake/clutch pedals', () => {
     const meshes = createPedalsModule(DEFAULT_PLANNER_INPUT);
     const plate = meshes.find((mesh) => mesh.id === 'pedal-plate');
     const accelerator = meshes.find((mesh) => mesh.id === 'pedal-accelerator');
@@ -232,14 +232,14 @@ describe('aluminum rig planner geometry', () => {
     expect(brake).toBeDefined();
     expect(clutch).toBeDefined();
 
-    expect(accelerator?.position[0]).toBeCloseTo(brake?.position[0] ?? 0);
     expect(brake?.position[0]).toBeCloseTo(clutch?.position[0] ?? 0);
-    expect(accelerator?.position[2]).toBeCloseTo(brake?.position[2] ?? 0);
     expect(brake?.position[2]).toBeCloseTo(clutch?.position[2] ?? 0);
     expect(accelerator?.position[1] ?? 0).toBeLessThan(brake?.position[1] ?? 0);
     expect(brake?.position[1] ?? 0).toBeLessThan(clutch?.position[1] ?? 0);
     expect(plate?.rotation ?? [0, 0, 0]).toEqual([0, 0, 0]);
-    expect(plate?.position[2]).toBeCloseTo(mm(BASE_BEAM_HEIGHT_MM + 1.5));
+    expect(accelerator?.size[2]).toBeCloseTo(mm(180));
+    expect(brake?.size[2]).toBeCloseTo(mm(90));
+    expect(clutch?.size[2]).toBeCloseTo(mm(90));
 
     const leanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
     const pedalPivotXmm =
@@ -248,14 +248,28 @@ describe('aluminum rig planner geometry', () => {
       DEFAULT_PLANNER_INPUT.pedalsDeltaMm;
     const pedalPivotZmm = BASE_BEAM_HEIGHT_MM + 3 + DEFAULT_PLANNER_INPUT.pedalsHeightMm;
 
+    expect(plate?.position[0]).toBeCloseTo(
+      mm(
+        DEFAULT_PLANNER_INPUT.seatBaseDepthMm +
+          DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm +
+          DEFAULT_PLANNER_INPUT.pedalTrayDepthMm / 2
+      )
+    );
+    expect(plate?.position[2]).toBeCloseTo(mm(pedalPivotZmm - 1.5));
     expect(accelerator?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 90), 5);
     expect(accelerator?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 90), 5);
+    expect(brake?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 135), 5);
+    expect(brake?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 135), 5);
+    expect(clutch?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 135), 5);
+    expect(clutch?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 135), 5);
     expect(accelerator?.rotation?.[1]).toBeCloseTo(-leanRad, 5);
+    expect(brake?.rotation?.[1]).toBeCloseTo(-leanRad, 5);
+    expect(clutch?.rotation?.[1]).toBeCloseTo(-leanRad, 5);
   });
 
-  it('keeps pedal plate fixed to tray while pedal settings move only pedals', () => {
+  it('keeps pedal plate linked to tray face while height follows pedal pivot', () => {
     const basePlate = createPedalsModule(DEFAULT_PLANNER_INPUT).find((mesh) => mesh.id === 'pedal-plate');
-    const movedPlate = createPedalsModule({
+    const movedInput = {
       ...DEFAULT_PLANNER_INPUT,
       pedalsHeightMm: 80,
       pedalsDeltaMm: 120,
@@ -263,9 +277,13 @@ describe('aluminum rig planner geometry', () => {
       pedalAcceleratorDeltaMm: 50,
       pedalBrakeDeltaMm: 20,
       pedalClutchDeltaMm: 10,
-    }).find((mesh) => mesh.id === 'pedal-plate');
+    };
+    const movedPlate = createPedalsModule(movedInput).find((mesh) => mesh.id === 'pedal-plate');
+    const movedPedalPivotZmm = BASE_BEAM_HEIGHT_MM + 3 + movedInput.pedalsHeightMm;
 
-    expect(movedPlate?.position).toEqual(basePlate?.position);
+    expect(movedPlate?.position[0]).toBeCloseTo(basePlate?.position[0] ?? 0);
+    expect(movedPlate?.position[2]).toBeCloseTo(mm(movedPedalPivotZmm - 1.5));
+    expect(movedPlate?.position[1]).toBeCloseTo(basePlate?.position[1] ?? 0);
     expect(movedPlate?.size).toEqual(basePlate?.size);
     expect(movedPlate?.rotation ?? [0, 0, 0]).toEqual(basePlate?.rotation ?? [0, 0, 0]);
   });

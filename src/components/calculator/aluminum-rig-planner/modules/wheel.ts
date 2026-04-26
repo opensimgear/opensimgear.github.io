@@ -183,7 +183,7 @@ export function createWheelModule(input: PlannerInput): MeshSpec[] {
         wheelCenter[1] + connectorCenterOffset[1],
         wheelCenter[2] + connectorCenterOffset[2],
       ] as [number, number, number],
-      size: [mm(connectorLengthMm), mm(connectorRadiusMm * 2), mm(connectorRadiusMm * 2)] as [number, number, number],
+      size: [mm(connectorLengthMm), mm(connectorRadiusMm * 5), mm(connectorRadiusMm * 5)] as [number, number, number],
       rotation: hubRotation,
       shape: 'cylinder',
       cylinderRadiusTop: mm(connectorRadiusMm),
