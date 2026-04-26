@@ -16,14 +16,22 @@ import {
 export function createSteeringColumnModule(input: PlannerInput, profileColor: string): MeshSpec[] {
   const railCenterOffsetMm = UPRIGHT_BEAM_DEPTH / MM_TO_METERS / 2;
   const baseCenterY = centeredY(input.baseWidthMm / 2, input.baseWidthMm);
+  const wheelBaseRotationRad = (input.wheelAngleDeg * Math.PI) / 180;
+  const crossBeamRotationRad = wheelBaseRotationRad + Math.PI / 2;
   const uprightHeightAboveBaseMm = Math.max(
     PROFILE_SHORT / MM_TO_METERS,
     input.steeringColumnHeightMm,
     input.steeringColumnBaseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
   );
   const supportX = input.seatBaseDepthMm + input.steeringColumnDistanceMm + UPRIGHT_BEAM_DEPTH / MM_TO_METERS;
-  const uprightRearFaceXMm = supportX - UPRIGHT_BEAM_WIDTH / MM_TO_METERS / 2;
   const crossBeamLengthMm = input.baseWidthMm - (UPRIGHT_BEAM_DEPTH / MM_TO_METERS) * 2;
+  const crossBeamWideFaceMidpointZMm =
+    BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + PROFILE_TALL / MM_TO_METERS;
+  const crossBeamWideFaceNormalX = Math.sin(wheelBaseRotationRad);
+  const crossBeamWideFaceNormalZ = Math.cos(wheelBaseRotationRad);
+  const crossBeamCenterXmm = supportX - crossBeamWideFaceNormalX * (PROFILE_SHORT / MM_TO_METERS / 2);
+  const crossBeamCenterZmm =
+    crossBeamWideFaceMidpointZMm - crossBeamWideFaceNormalZ * (PROFILE_SHORT / MM_TO_METERS / 2);
   const uprights: MeshSpec[] = [
     {
       id: 'steering-column-left',
@@ -60,11 +68,8 @@ export function createSteeringColumnModule(input: PlannerInput, profileColor: st
     {
       id: 'steering-column-crossbeam',
       size: [PROFILE_SHORT, mm(crossBeamLengthMm), PROFILE_TALL] as [number, number, number],
-      position: [
-        mm(uprightRearFaceXMm + PROFILE_SHORT / MM_TO_METERS / 2),
-        baseCenterY,
-        mm(BASE_BEAM_HEIGHT_MM + input.steeringColumnBaseHeightMm + PROFILE_TALL / MM_TO_METERS / 2),
-      ] as [number, number, number],
+      position: [mm(crossBeamCenterXmm), baseCenterY, mm(crossBeamCenterZmm)] as [number, number, number],
+      rotation: [0, crossBeamRotationRad, 0] as [number, number, number],
       profileType: 'alu80x40',
       color: profileColor,
       metalness: MODULE_PROFILE_MATERIAL.metalness,

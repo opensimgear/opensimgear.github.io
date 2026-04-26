@@ -279,7 +279,7 @@ export const PLANNER_DIMENSION_LIMITS = {
   wheelAngleDegMin: 0,
   wheelAngleDegMax: 30,
   wheelDistanceFromSteeringColumnMinMm: -320,
-  wheelDistanceFromSteeringColumnMaxMm: -210,
+  wheelDistanceFromSteeringColumnMaxMm: -110,
   wheelDiameterMinMm: 250,
   wheelDiameterMaxMm: 350,
 } as const;

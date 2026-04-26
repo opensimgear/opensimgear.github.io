@@ -93,7 +93,7 @@ export function createWheelModule(input: PlannerInput): MeshSpec[] {
   const torusRadiusMm = wheelOuterRadiusMm - tubeRadiusMm;
   const baseEdgeMm = WHEEL_BASE_EDGE_MM;
   const baseFrontFaceOffsetMm = WHEEL_BASE_FRONT_FACE_OFFSET_MM;
-  const connectorLengthMm = baseFrontFaceOffsetMm;
+  const connectorLengthMm = baseFrontFaceOffsetMm * 2;
   const connectorRadiusMm = WHEEL_CONNECTOR_RADIUS_MM;
   const hubRadiusMm = Math.min(WHEEL_HUB_RADIUS_MM, torusRadiusMm - tubeRadiusMm * 1.75);
   const hubThicknessMm = WHEEL_HUB_THICKNESS_MM;
@@ -101,8 +101,8 @@ export function createWheelModule(input: PlannerInput): MeshSpec[] {
   const spokeOuterRadiusMm = rimInnerRadiusMm + tubeRadiusMm * 0.4;
   const spokeSpanMm = Math.max(tubeRadiusMm, spokeOuterRadiusMm - hubRadiusMm);
   const spokeLengthMm = spokeSpanMm * WHEEL_SPOKE_LENGTH_SCALE;
-  const baseCenterOffset = rotateVerticalOffset([mm(baseFrontFaceOffsetMm + baseEdgeMm / 2), 0, 0], wheelAngleRad);
   const connectorCenterOffset = rotateVerticalOffset([mm(connectorLengthMm / 2), 0, 0], wheelAngleRad);
+  const baseCenterOffset = rotateVerticalOffset([mm(connectorLengthMm + baseEdgeMm / 2), 0, 0], wheelAngleRad);
   const wheelAxis = new Vector3(Math.cos(wheelAngleRad), 0, Math.sin(wheelAngleRad)).normalize();
   const wheelSide = new Vector3(-wheelAxis.z, 0, wheelAxis.x).normalize();
   const torusRotation = createRotationFromBasis(wheelSide, WORLD_Y_AXIS, wheelAxis);

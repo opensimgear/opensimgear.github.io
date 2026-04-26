@@ -1,10 +1,14 @@
 import { describe, expect, it } from 'vitest';
+import { Euler, Quaternion, Vector3 } from 'three';
 
 import {
   BASE_BEAM_HEIGHT_MM,
   DEFAULT_PLANNER_INPUT,
   PLANNER_LAYOUT,
   PLANNER_DIMENSION_LIMITS,
+  PROFILE_SHORT_MM,
+  PROFILE_TALL_MM,
+  UPRIGHT_BEAM_DEPTH_MM,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import {
   clampSteeringColumnHeights,
@@ -18,6 +22,7 @@ import {
   getSteeringColumnDistanceMaxMm,
 } from '../../components/calculator/aluminum-rig-planner/geometry';
 import { createPedalsModule } from '../../components/calculator/aluminum-rig-planner/modules/pedals';
+import { getProfileMeshRotation } from '../../components/calculator/aluminum-rig-planner/modules/profile-geometry';
 import { mm } from '../../components/calculator/aluminum-rig-planner/modules/shared';
 import { createSteeringColumnModule } from '../../components/calculator/aluminum-rig-planner/modules/steering-column';
 import { createWheelModule } from '../../components/calculator/aluminum-rig-planner/modules/wheel';
@@ -183,6 +188,35 @@ describe('aluminum rig planner geometry', () => {
     expect(farModule[0]?.position[0]).toBeGreaterThan(nearModule[0]?.position[0] ?? 0);
   });
 
+  it('orients steering column crossbeam with the wide attachment face centered on the upright plane', () => {
+    const meshes = createSteeringColumnModule(DEFAULT_PLANNER_INPUT, '#000000');
+    const upright = meshes.find((mesh) => mesh.id === 'steering-column-left');
+    const crossbeam = meshes.find((mesh) => mesh.id === 'steering-column-crossbeam');
+    const wheelBase = createWheelModule(DEFAULT_PLANNER_INPUT).find((mesh) => mesh.id === 'wheel-base');
+    const expectedCrossbeamTopZMm =
+      BASE_BEAM_HEIGHT_MM + DEFAULT_PLANNER_INPUT.steeringColumnBaseHeightMm + PROFILE_TALL_MM;
+
+    if (!crossbeam || !upright || !wheelBase) {
+      throw new Error('Missing steering crossbeam, upright, or wheel base mesh');
+    }
+
+    const crossbeamRotation = new Quaternion().setFromEuler(new Euler(...getProfileMeshRotation(crossbeam)));
+    const wheelBaseRotation = new Quaternion().setFromEuler(new Euler(...(wheelBase.rotation ?? [0, 0, 0])));
+    const crossbeamWideFaceNormal = new Vector3(1, 0, 0).applyQuaternion(crossbeamRotation).normalize();
+    const crossbeamAttachmentFaceNormal = crossbeamWideFaceNormal.clone().negate();
+    const wheelBaseBottomNormal = new Vector3(0, 0, -1).applyQuaternion(wheelBaseRotation).normalize();
+    const crossbeamWideFaceMidpoint = new Vector3(...crossbeam.position).add(
+      crossbeamAttachmentFaceNormal.clone().multiplyScalar(crossbeam.size[0] / 2)
+    );
+
+    expect(crossbeam.size[0]).toBeCloseTo(mm(PROFILE_SHORT_MM));
+    expect(crossbeam.size[1]).toBeCloseTo(mm(DEFAULT_PLANNER_INPUT.baseWidthMm - UPRIGHT_BEAM_DEPTH_MM * 2));
+    expect(crossbeam.size[2]).toBeCloseTo(mm(PROFILE_TALL_MM));
+    expect(Math.abs(crossbeamAttachmentFaceNormal.dot(wheelBaseBottomNormal))).toBeCloseTo(1);
+    expect(crossbeamWideFaceMidpoint.x).toBeCloseTo(upright.position[0]);
+    expect(crossbeamWideFaceMidpoint.z).toBeCloseTo(mm(expectedCrossbeamTopZMm));
+  });
+
   it('adds hub and three spokes to wheel with center spoke pointing down', () => {
     const meshes = createWheelModule(DEFAULT_PLANNER_INPUT);
     const hub = meshes.find((mesh) => mesh.id === 'wheel-hub');
@@ -220,6 +254,26 @@ describe('aluminum rig planner geometry', () => {
     expect(dot(spokeDirections[0], spokeDirections[1])).toBeCloseTo(0, 5);
     expect(dot(spokeDirections[1], spokeDirections[2])).toBeCloseTo(0, 5);
     expect(dot(spokeDirections[0], spokeDirections[2])).toBeCloseTo(-1, 5);
+  });
+
+  it('uses a doubled wheel connector cylinder length', () => {
+    const meshes = createWheelModule(DEFAULT_PLANNER_INPUT);
+    const rim = meshes.find((mesh) => mesh.id === 'wheel-rim');
+    const base = meshes.find((mesh) => mesh.id === 'wheel-base');
+    const connector = meshes.find((mesh) => mesh.id === 'wheel-connector');
+    const wheelAngleRad = (-DEFAULT_PLANNER_INPUT.wheelAngleDeg * Math.PI) / 180;
+    const wheelAxis = [Math.cos(wheelAngleRad), 0, Math.sin(wheelAngleRad)] as const;
+    const projectFromRim = (position: [number, number, number]) =>
+      (position[0] - (rim?.position[0] ?? 0)) * wheelAxis[0] +
+      (position[1] - (rim?.position[1] ?? 0)) * wheelAxis[1] +
+      (position[2] - (rim?.position[2] ?? 0)) * wheelAxis[2];
+
+    expect(connector).toBeDefined();
+    expect(base).toBeDefined();
+    expect(connector?.size[0]).toBeCloseTo(mm(134));
+    expect(projectFromRim(base?.position ?? [0, 0, 0])).toBeCloseTo(
+      (connector?.size[0] ?? 0) + (base?.size[0] ?? 0) / 2
+    );
   });
 
   it('adds pedal plate with shortened accelerator and floating brake/clutch pedals', () => {
