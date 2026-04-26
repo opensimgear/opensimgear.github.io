@@ -195,6 +195,11 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
       PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
       PLANNER_DIMENSION_LIMITS.pedalAngleDegMax
     ),
+    pedalLengthMm: clamp(
+      input.pedalLengthMm,
+      PLANNER_DIMENSION_LIMITS.pedalLengthMinMm,
+      PLANNER_DIMENSION_LIMITS.pedalLengthMaxMm
+    ),
     pedalAcceleratorDeltaMm: clamp(input.pedalAcceleratorDeltaMm, 0, getPedalAcceleratorDeltaMaxMm({ baseWidthMm })),
     pedalBrakeDeltaMm: clamp(input.pedalBrakeDeltaMm, 0, getPedalBrakeDeltaMaxMm({ baseWidthMm })),
     pedalClutchDeltaMm: clamp(input.pedalClutchDeltaMm, 0, getPedalClutchDeltaMaxMm({ baseWidthMm })),

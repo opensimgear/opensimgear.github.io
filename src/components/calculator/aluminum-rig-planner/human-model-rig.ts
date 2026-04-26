@@ -32,14 +32,24 @@ type HumanBoneName =
   | 'rightHand'
   | 'leftThigh'
   | 'leftShin'
-  | 'leftHeel'
+  | 'leftTalon'
   | 'leftFoot'
+  | 'leftToe'
   | 'rightThigh'
   | 'rightShin'
-  | 'rightHeel'
-  | 'rightFoot';
+  | 'rightTalon'
+  | 'rightFoot'
+  | 'rightToe';
 
-type HumanTerminalBoneName = 'neck' | 'headTip' | 'leftHandTip' | 'rightHandTip' | 'leftFootTip' | 'rightFootTip';
+type HumanTerminalBoneName =
+  | 'neck'
+  | 'headTip'
+  | 'leftHandTip'
+  | 'rightHandTip'
+  | 'leftTalonTip'
+  | 'rightTalonTip'
+  | 'leftToeTip'
+  | 'rightToeTip';
 
 type HumanModelAuxiliaryBoneName = 'eyeCenter';
 
@@ -118,20 +128,24 @@ const HUMAN_BONE_ORDER: HumanBoneName[] = [
   'rightHand',
   'leftThigh',
   'leftShin',
-  'leftHeel',
+  'leftTalon',
   'leftFoot',
+  'leftToe',
   'rightThigh',
   'rightShin',
-  'rightHeel',
+  'rightTalon',
   'rightFoot',
+  'rightToe',
 ];
 const HUMAN_TERMINAL_BONE_ORDER: HumanTerminalBoneName[] = [
   'neck',
   'headTip',
   'leftHandTip',
   'rightHandTip',
-  'leftFootTip',
-  'rightFootTip',
+  'leftTalonTip',
+  'rightTalonTip',
+  'leftToeTip',
+  'rightToeTip',
 ];
 const HUMAN_MODEL_AUXILIARY_BONE_ORDER: HumanModelAuxiliaryBoneName[] = ['eyeCenter'];
 const HUMAN_DEBUG_BONE_ORDER: HumanDebugBoneName[] = [
@@ -147,6 +161,14 @@ const HUMAN_MODEL_BONE_ORDER: HumanModelBoneName[] = [
   ...HUMAN_TERMINAL_BONE_ORDER,
   ...HUMAN_MODEL_AUXILIARY_BONE_ORDER,
 ];
+const HUMAN_TARGET_START_BONE_NAMES = new Set<HumanBoneName>([
+  'leftTalon',
+  'leftFoot',
+  'leftToe',
+  'rightTalon',
+  'rightFoot',
+  'rightToe',
+]);
 const HUMAN_BONE_END_BONES = {
   torso: 'neck',
   head: 'headTip',
@@ -157,13 +179,15 @@ const HUMAN_BONE_END_BONES = {
   rightForearm: 'rightHand',
   rightHand: 'rightHandTip',
   leftThigh: 'leftShin',
-  leftShin: 'leftHeel',
-  leftHeel: 'leftFoot',
-  leftFoot: 'leftFootTip',
+  leftShin: 'leftTalon',
+  leftTalon: 'leftTalonTip',
+  leftFoot: 'leftToe',
+  leftToe: 'leftToeTip',
   rightThigh: 'rightShin',
-  rightShin: 'rightHeel',
-  rightHeel: 'rightFoot',
-  rightFoot: 'rightFootTip',
+  rightShin: 'rightTalon',
+  rightTalon: 'rightTalonTip',
+  rightFoot: 'rightToe',
+  rightToe: 'rightToeTip',
 } satisfies Record<HumanBoneName, HumanModelBoneName>;
 const MODEL_RATIO_PRECISION = 3;
 const BONE_LENGTH_EPSILON = 0.000001;
@@ -270,6 +294,30 @@ function getAverageDistance(
   return distances.reduce((total, distance) => total + distance, 0) / distances.length;
 }
 
+function getAverageVerticalDistance(
+  bones: Map<HumanModelBoneName, Bone>,
+  pairs: Array<[HumanModelBoneName, HumanModelBoneName]>
+) {
+  const distances = pairs
+    .map(([start, end]) => {
+      const startPosition = getModelBonePosition(bones, start);
+      const endPosition = getModelBonePosition(bones, end);
+
+      return startPosition && endPosition ? Math.abs(startPosition.y - endPosition.y) : null;
+    })
+    .filter((distance): distance is number => distance !== null);
+
+  if (distances.length === 0) {
+    return null;
+  }
+
+  return distances.reduce((total, distance) => total + distance, 0) / distances.length;
+}
+
+function getTalonPoint(_ankle: PosturePoint, heel: PosturePoint, _toe: PosturePoint) {
+  return [...heel] satisfies PosturePoint;
+}
+
 function collectHumanModelBonesAndBounds(root: Group) {
   const bones = new Map<HumanModelBoneName, Bone>();
   const bounds = new Box3();
@@ -313,18 +361,18 @@ export function calculateHumanModelPostureModel(root: Group): HumanModelPostureM
     ['rightThigh', 'rightShin'],
   ]);
   const lowerLegLength = getAverageDistance(bones, [
-    ['leftShin', 'leftHeel'],
-    ['rightShin', 'rightHeel'],
+    ['leftShin', 'leftTalon'],
+    ['rightShin', 'rightTalon'],
   ]);
-  const heelLength = getAverageDistance(bones, [
-    ['leftHeel', 'leftFoot'],
-    ['rightHeel', 'rightFoot'],
+  const heelLength = getAverageVerticalDistance(bones, [
+    ['leftTalon', 'leftTalonTip'],
+    ['rightTalon', 'rightTalonTip'],
   ]);
   const hipBreadth = getAverageDistance(bones, [['leftThigh', 'rightThigh']]);
   const shoulderBreadth = getAverageDistance(bones, [['leftUpperArm', 'rightUpperArm']]);
-  const footBoneLength = getAverageDistance(bones, [
-    ['leftFoot', 'leftFootTip'],
-    ['rightFoot', 'rightFootTip'],
+  const toeLength = getAverageDistance(bones, [
+    ['leftTalonTip', 'leftToeTip'],
+    ['rightTalonTip', 'rightToeTip'],
   ]);
 
   if (
@@ -340,13 +388,13 @@ export function calculateHumanModelPostureModel(root: Group): HumanModelPostureM
     heelLength === null ||
     hipBreadth === null ||
     shoulderBreadth === null ||
-    footBoneLength === null
+    toeLength === null
   ) {
     return null;
   }
 
   const shoulderY = (leftShoulder.y + rightShoulder.y) / 2;
-  const footLength = heelLength + footBoneLength;
+  const footLength = heelLength + toeLength;
   const anthropometryRatios = {
     sittingHeight: roundModelRatio((bounds.max.y - hip.y) / height),
     seatedShoulderHeight: roundModelRatio(
@@ -403,6 +451,8 @@ function getSegmentDirection(start: Vector3, end: Vector3, target: Vector3) {
 
 function createTargetSegments(skeleton: PlannerPostureSkeleton) {
   const { joints } = skeleton;
+  const leftTalon = getTalonPoint(joints.ankleLeft, joints.heelLeft, joints.toeLeft);
+  const rightTalon = getTalonPoint(joints.ankleRight, joints.heelRight, joints.toeRight);
 
   return new Map<HumanBoneName, [Vector3, Vector3]>([
     ['torso', [toModelVector3(joints.hipCenter), toModelVector3(joints.shoulderCenter)]],
@@ -415,12 +465,14 @@ function createTargetSegments(skeleton: PlannerPostureSkeleton) {
     ['rightHand', [toModelVector3(joints.wristRight), toModelVector3(joints.handRight)]],
     ['leftThigh', [toModelVector3(joints.hipLeft), toModelVector3(joints.kneeLeft)]],
     ['leftShin', [toModelVector3(joints.kneeLeft), toModelVector3(joints.ankleLeft)]],
-    ['leftHeel', [toModelVector3(joints.ankleLeft), toModelVector3(joints.heelLeft)]],
-    ['leftFoot', [toModelVector3(joints.heelLeft), toModelVector3(joints.toeLeft)]],
+    ['leftTalon', [toModelVector3(joints.ankleLeft), toModelVector3(leftTalon)]],
+    ['leftFoot', [toModelVector3(joints.ankleLeft), toModelVector3(joints.toeStartLeft)]],
+    ['leftToe', [toModelVector3(joints.toeStartLeft), toModelVector3(joints.toeLeft)]],
     ['rightThigh', [toModelVector3(joints.hipRight), toModelVector3(joints.kneeRight)]],
     ['rightShin', [toModelVector3(joints.kneeRight), toModelVector3(joints.ankleRight)]],
-    ['rightHeel', [toModelVector3(joints.ankleRight), toModelVector3(joints.heelRight)]],
-    ['rightFoot', [toModelVector3(joints.heelRight), toModelVector3(joints.toeRight)]],
+    ['rightTalon', [toModelVector3(joints.ankleRight), toModelVector3(rightTalon)]],
+    ['rightFoot', [toModelVector3(joints.ankleRight), toModelVector3(joints.toeStartRight)]],
+    ['rightToe', [toModelVector3(joints.toeStartRight), toModelVector3(joints.toeRight)]],
   ]);
 }
 
@@ -480,6 +532,17 @@ function poseBone(
   bone.updateMatrixWorld(true);
 }
 
+function placeBoneAtTarget(root: Group, bone: Bone, target: Vector3) {
+  if (!(bone.parent instanceof Bone)) {
+    return;
+  }
+
+  scratchWorldPosition.copy(target).applyMatrix4(root.matrixWorld);
+  bone.parent.worldToLocal(scratchWorldPosition);
+  bone.position.copy(scratchWorldPosition);
+  bone.updateMatrixWorld(true);
+}
+
 function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, modelScale: number) {
   resetBonesToRestPose(rig);
   rig.root.position.set(0, 0, 0);
@@ -509,9 +572,27 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
       restBoneWorldMatrix,
       targetSegment[0],
       targetSegment[1],
-      false,
+      HUMAN_TARGET_START_BONE_NAMES.has(name),
       name === 'head'
     );
+  }
+
+  const { joints } = skeleton;
+  const leftTalon = getTalonPoint(joints.ankleLeft, joints.heelLeft, joints.toeLeft);
+  const rightTalon = getTalonPoint(joints.ankleRight, joints.heelRight, joints.toeRight);
+  const terminalTargets: Array<[HumanModelBoneName, Vector3]> = [
+    ['leftTalonTip', toModelVector3(leftTalon)],
+    ['rightTalonTip', toModelVector3(rightTalon)],
+    ['leftToeTip', toModelVector3(joints.toeLeft)],
+    ['rightToeTip', toModelVector3(joints.toeRight)],
+  ];
+
+  for (const [name, target] of terminalTargets) {
+    const bone = rig.bones.get(name);
+
+    if (bone) {
+      placeBoneAtTarget(rig.root, bone, target);
+    }
   }
 
   for (const mesh of rig.skinnedMeshes) {
@@ -790,18 +871,22 @@ function getDebugSegmentJointNames(name: HumanDebugBoneName): [string, string] {
       return ['hipLeft', 'kneeLeft'];
     case 'leftShin':
       return ['kneeLeft', 'ankleLeft'];
-    case 'leftHeel':
-      return ['ankleLeft', 'heelLeft'];
+    case 'leftTalon':
+      return ['ankleLeft', 'talonLeft'];
     case 'leftFoot':
-      return ['heelLeft', 'toeLeft'];
+      return ['ankleLeft', 'toeStartLeft'];
+    case 'leftToe':
+      return ['toeStartLeft', 'toeLeft'];
     case 'rightThigh':
       return ['hipRight', 'kneeRight'];
     case 'rightShin':
       return ['kneeRight', 'ankleRight'];
-    case 'rightHeel':
-      return ['ankleRight', 'heelRight'];
+    case 'rightTalon':
+      return ['ankleRight', 'talonRight'];
     case 'rightFoot':
-      return ['heelRight', 'toeRight'];
+      return ['ankleRight', 'toeStartRight'];
+    case 'rightToe':
+      return ['toeStartRight', 'toeRight'];
     case 'neckConnector':
       return ['shoulderCenter', 'neck'];
     case 'leftClavicle':

@@ -271,6 +271,7 @@ export function mergePlannerQueryState(defaultInput: PlannerInput, state: Planne
     pedalsHeightMm: readNumber(state.pedalsHeightMm, defaultInput.pedalsHeightMm),
     pedalsDeltaMm: readNumber(state.pedalsDeltaMm, defaultInput.pedalsDeltaMm),
     pedalAngleDeg: readNumber(state.pedalAngleDeg, defaultInput.pedalAngleDeg),
+    pedalLengthMm: readNumber(state.pedalLengthMm, defaultInput.pedalLengthMm),
     pedalAcceleratorDeltaMm: readNumber(state.pedalAcceleratorDeltaMm, defaultInput.pedalAcceleratorDeltaMm),
     pedalBrakeDeltaMm: readNumber(state.pedalBrakeDeltaMm, defaultInput.pedalBrakeDeltaMm),
     pedalClutchDeltaMm: readNumber(state.pedalClutchDeltaMm, defaultInput.pedalClutchDeltaMm),

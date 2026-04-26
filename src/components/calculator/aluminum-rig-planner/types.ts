@@ -162,6 +162,7 @@ export interface PlannerInput {
   pedalsHeightMm: number;
   pedalsDeltaMm: number;
   pedalAngleDeg: number;
+  pedalLengthMm: number;
   pedalAcceleratorDeltaMm: number;
   pedalBrakeDeltaMm: number;
   pedalClutchDeltaMm: number;

@@ -1,4 +1,5 @@
 from pathlib import Path
+from math import radians, tan
 
 import bpy
 from mathutils import Vector
@@ -11,6 +12,8 @@ TARGET_ANTHROPOMETRY_DEFAULTS = ROOT / "src" / "components" / "calculator" / "al
 SOURCE_MESH_NAME = "GEO-body_male_realistic"
 TERMINAL_BONE_LENGTH = 0.005
 HEAD_TIP_BONE_LENGTH = 0.005
+TOE_BONE_START_SHARE = 0.75
+TALON_BACKWARD_ANGLE_DEG = 40
 EYE_CENTER_X_OFFSET_M = 0.090
 EYE_CENTER_Y_OFFSET_M = 0.095
 EYE_CENTER_TAIL_LENGTH_M = TERMINAL_BONE_LENGTH
@@ -26,7 +29,7 @@ BONE_LENGTHS = {
     "hand": 0.0702,
     "thigh": 0.4195,
     "shin": 0.3897,
-    "foot": 0.1822,
+    "foot": 0.2122,
 }
 REFERENCE_PARTS = {
     "pelvis": "GEO-pelvis_male_primitive_realistic",
@@ -487,6 +490,25 @@ def extend_to_y(point, direction, target_y):
     return point + direction * factor
 
 
+def talon_tail_from_ankle(ankle, toe, floor_y):
+    forward = Vector((toe.x - ankle.x, 0.0, toe.z - ankle.z))
+    if forward.length <= SECTION_EPSILON:
+        forward = Vector((1.0, 0.0, 0.0))
+    else:
+        forward.normalize()
+
+    drop = max(0.0, ankle.y - floor_y)
+    backward_offset = drop * tan(radians(TALON_BACKWARD_ANGLE_DEG))
+
+    return Vector(
+        (
+            ankle.x - forward.x * backward_offset,
+            floor_y,
+            ankle.z - forward.z * backward_offset,
+        )
+    ) * 1.3
+
+
 def add_terminal_bone(bones, name, parent_name, length=TERMINAL_BONE_LENGTH):
     parent_head, parent_tail, _ = bones[parent_name]
     bones[name] = (parent_tail, terminal_tail(parent_tail, parent_head, length), parent_name)
@@ -509,11 +531,22 @@ def calculate_heel_length_share(bones):
     shares = []
 
     for side in ("left", "right"):
-        heel_length = (bones[f"{side}Heel"][0] - bones[f"{side}Foot"][0]).length
-        foot_bone_length = (bones[f"{side}Foot"][0] - bones[f"{side}FootTip"][0]).length
-        shares.append(heel_length / (heel_length + foot_bone_length))
+        heel_length = abs(bones[f"{side}Talon"][0].y - bones[f"{side}Talon"][1].y)
+        toe_length = (bones[f"{side}Talon"][1] - bones[f"{side}Toe"][1]).length
+        shares.append(heel_length / (heel_length + toe_length))
 
     return rounded(sum(shares) / len(shares), MODEL_RATIO_PRECISION)
+
+
+def calculate_average_foot_length(bones):
+    lengths = []
+
+    for side in ("left", "right"):
+        heel_length = abs(bones[f"{side}Talon"][0].y - bones[f"{side}Talon"][1].y)
+        toe_length = (bones[f"{side}Talon"][1] - bones[f"{side}Toe"][1]).length
+        lengths.append(heel_length + toe_length)
+
+    return sum(lengths) / len(lengths)
 
 
 def calculate_anthropometry_ratios(bones, min_planner, max_planner):
@@ -555,28 +588,12 @@ def calculate_anthropometry_ratios(bones, min_planner, max_planner):
         "lowerLegLength": calculate_average_distance(
             bones,
             (
-                ("leftShin", "leftHeel"),
-                ("rightShin", "rightHeel"),
+                ("leftShin", "leftTalon"),
+                ("rightShin", "rightTalon"),
             ),
         )
         / height,
-        "footLength": (
-            calculate_average_distance(
-                bones,
-                (
-                    ("leftHeel", "leftFoot"),
-                    ("rightHeel", "rightFoot"),
-                ),
-            )
-            + calculate_average_distance(
-                bones,
-                (
-                    ("leftFoot", "leftFootTip"),
-                    ("rightFoot", "rightFootTip"),
-                ),
-            )
-        )
-        / height,
+        "footLength": calculate_average_foot_length(bones) / height,
     }
 
     return {key: rounded(ratios[key], MODEL_RATIO_PRECISION) for key in ANTHROPOMETRY_KEYS}
@@ -772,11 +789,13 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     left_knee = point_at_bone_length(fitted_landmarks["hipLeft"], fitted_landmarks["kneeLeft"], "thigh")
     left_ankle = point_at_bone_length(left_knee, fitted_landmarks["ankleLeft"], "shin")
     left_ankle = section_center_from_body_plane(left_ankle, left_ankle - left_knee, body_vertices, body_faces)
-    floor_y = min(point.y for point in body_vertices) + 0.020
-    left_heel = extend_to_y(left_ankle, left_ankle - left_knee, floor_y)
-    left_foot_tip = point_at_bone_length(left_heel, left_foot_tip, "foot")
-    left_foot_tip = section_center_from_body_plane(left_foot_tip, left_foot_tip - left_heel, body_vertices, body_faces)
+    floor_y = 0
+    left_talon = talon_tail_from_ankle(left_ankle, left_foot_tip, floor_y)
+    left_foot_tip = point_at_bone_length(left_talon, left_foot_tip, "foot")
+    left_foot_tip = section_center_from_body_plane(left_foot_tip, left_foot_tip - left_talon, body_vertices, body_faces)
     left_foot_tip.y = floor_y
+    left_foot = left_talon.lerp(left_foot_tip, TOE_BONE_START_SHARE)
+    left_foot.y = floor_y
     right_elbow = point_at_bone_length(right_shoulder, right_elbow, "upperArm")
     right_wrist = point_at_bone_length(right_elbow, right_wrist, "forearm")
     right_hand_direction = right_wrist - right_elbow
@@ -787,10 +806,12 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
     right_knee = point_at_bone_length(right_hip, right_knee, "thigh")
     right_ankle = point_at_bone_length(right_knee, right_ankle, "shin")
     right_ankle = section_center_from_body_plane(right_ankle, right_ankle - right_knee, body_vertices, body_faces)
-    right_heel = extend_to_y(right_ankle, right_ankle - right_knee, floor_y)
-    right_foot_tip = point_at_bone_length(right_heel, right_foot_tip, "foot")
-    right_foot_tip = section_center_from_body_plane(right_foot_tip, right_foot_tip - right_heel, body_vertices, body_faces)
+    right_talon = talon_tail_from_ankle(right_ankle, right_foot_tip, floor_y)
+    right_foot_tip = point_at_bone_length(right_talon, right_foot_tip, "foot")
+    right_foot_tip = section_center_from_body_plane(right_foot_tip, right_foot_tip - right_talon, body_vertices, body_faces)
     right_foot_tip.y = floor_y
+    right_foot = right_talon.lerp(right_foot_tip, TOE_BONE_START_SHARE)
+    right_foot.y = floor_y
     eye_center = neck_base + Vector((EYE_CENTER_X_OFFSET_M, EYE_CENTER_Y_OFFSET_M, 0.0 ))
 
     remapped_bones = {
@@ -802,30 +823,27 @@ def build_reference_bones(reference_vertices, reference_origin, reference_min_y,
         "leftHand": (left_wrist, left_hand_tip, "leftForearm"),
         "leftThigh": (fitted_landmarks["hipLeft"], left_knee, "torso"),
         "leftShin": (left_knee, left_ankle, "leftThigh"),
-        "leftHeel": (left_ankle, left_heel, "leftShin"),
-        "leftFoot": (left_heel, left_foot_tip, "leftHeel"),
+        "leftTalon": (left_ankle, left_talon, "leftShin"),
+        "leftFoot": (left_ankle, left_foot, "leftShin"),
+        "leftToe": (left_foot, left_foot_tip, "leftFoot"),
     }
-
-    left_arm = remapped_bones["leftUpperArm"]
-    left_forearm = remapped_bones["leftForearm"]
-    left_hand = remapped_bones["leftHand"]
-    left_thigh = remapped_bones["leftThigh"]
-    left_shin = remapped_bones["leftShin"]
-    left_foot = remapped_bones["leftFoot"]
 
     remapped_bones["rightUpperArm"] = (right_shoulder, right_elbow, "torso")
     remapped_bones["rightForearm"] = (right_elbow, right_wrist, "rightUpperArm")
     remapped_bones["rightHand"] = (right_wrist, right_hand_tip, "rightForearm")
     remapped_bones["rightThigh"] = (right_hip, right_knee, "torso")
     remapped_bones["rightShin"] = (right_knee, right_ankle, "rightThigh")
-    remapped_bones["rightHeel"] = (right_ankle, right_heel, "rightShin")
-    remapped_bones["rightFoot"] = (right_heel, right_foot_tip, "rightHeel")
+    remapped_bones["rightTalon"] = (right_ankle, right_talon, "rightShin")
+    remapped_bones["rightFoot"] = (right_ankle, right_foot, "rightShin")
+    remapped_bones["rightToe"] = (right_foot, right_foot_tip, "rightFoot")
     remapped_bones["eyeCenter"] = (eye_center, eye_center + Vector((EYE_CENTER_TAIL_LENGTH_M, 0.0, 0.0)), "head")
     add_terminal_bone(remapped_bones, "headTip", "head", HEAD_TIP_BONE_LENGTH)
     add_terminal_bone(remapped_bones, "leftHandTip", "leftHand")
     add_terminal_bone(remapped_bones, "rightHandTip", "rightHand")
-    add_terminal_bone(remapped_bones, "leftFootTip", "leftFoot")
-    add_terminal_bone(remapped_bones, "rightFootTip", "rightFoot")
+    add_terminal_bone(remapped_bones, "leftTalonTip", "leftTalon")
+    add_terminal_bone(remapped_bones, "rightTalonTip", "rightTalon")
+    add_terminal_bone(remapped_bones, "leftToeTip", "leftToe")
+    add_terminal_bone(remapped_bones, "rightToeTip", "rightToe")
 
     return remapped_bones
 

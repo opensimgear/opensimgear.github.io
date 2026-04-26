@@ -24,6 +24,7 @@ describe('aluminum rig planner query state', () => {
       backrestAngleDeg: 20,
       pedalTrayDepthMm: 120,
       pedalTrayDistanceMm: -50,
+      pedalLengthMm: 999,
       steeringColumnDistanceMm: 1200,
       steeringColumnBaseHeightMm: 900,
       steeringColumnHeightMm: 120,
@@ -37,6 +38,7 @@ describe('aluminum rig planner query state', () => {
     expect(state.plannerInput.backrestAngleDeg).toBe(PLANNER_DIMENSION_LIMITS.backrestAngleDegMin);
     expect(state.plannerInput.pedalTrayDepthMm).toBe(300);
     expect(state.plannerInput.pedalTrayDistanceMm).toBe(150);
+    expect(state.plannerInput.pedalLengthMm).toBe(PLANNER_DIMENSION_LIMITS.pedalLengthMaxMm);
     expect(state.plannerInput.steeringColumnDistanceMm).toBe(getSteeringColumnDistanceMaxMm(state.plannerInput));
     expect(state.plannerInput.steeringColumnBaseHeightMm).toBe(300);
     expect(state.plannerInput.steeringColumnHeightMm).toBe(380);

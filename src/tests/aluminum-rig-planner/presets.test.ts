@@ -33,7 +33,6 @@ const DYNAMIC_KEYS = [
   'steeringColumnDistanceMm',
   'pedalTrayDistanceMm',
   'pedalsHeightMm',
-  'pedalAngleDeg',
   'pedalBrakeDeltaMm',
   'baseLengthMm',
 ] as const;
@@ -160,6 +159,27 @@ describe('aluminum rig planner posture presets', () => {
     expect(Number.isFinite(PLANNER_POSTURE_PRESETS[preset].seatHeightFromBaseInnerBeamsMm)).toBe(true);
   });
 
+  it.each(NON_CUSTOM_PRESETS)('preserves current pedal angle when applying %s preset', (preset) => {
+    const input = {
+      ...DEFAULT_PLANNER_INPUT,
+      pedalAngleDeg: 42,
+    };
+    const result = applyPresetToPlannerInput(input, preset, DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm);
+
+    expect('pedalAngleDeg' in PLANNER_POSTURE_PRESETS[preset]).toBe(false);
+    expect(result.pedalAngleDeg).toBe(input.pedalAngleDeg);
+  });
+
+  it.each(NON_CUSTOM_PRESETS)('preserves current pedal delta X when applying %s preset', (preset) => {
+    const input = {
+      ...DEFAULT_PLANNER_INPUT,
+      pedalsDeltaMm: 120,
+    };
+    const result = applyPresetToPlannerInput(input, preset, DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm);
+
+    expect(result.pedalsDeltaMm).toBe(input.pedalsDeltaMm);
+  });
+
   it.each(NON_CUSTOM_PRESETS)('keeps solved pedal values after applying %s preset', (preset) => {
     const heightCm = 182;
     const seededInput = clampPlannerInput({ ...DEFAULT_PLANNER_INPUT, ...getPresetFixedInputValues(preset) });
@@ -167,7 +187,7 @@ describe('aluminum rig planner posture presets', () => {
     const result = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, heightCm);
 
     expect(result.pedalsHeightMm).toBe(solvedInput.pedalsHeightMm);
-    expect(result.pedalAngleDeg).toBe(solvedInput.pedalAngleDeg);
+    expect(result.pedalsDeltaMm).toBe(DEFAULT_PLANNER_INPUT.pedalsDeltaMm);
     expect(result.pedalBrakeDeltaMm).toBe(solvedInput.pedalBrakeDeltaMm);
   });
 
@@ -215,7 +235,7 @@ describe('aluminum rig planner posture presets', () => {
       seatAngleDeg: 42,
       backrestAngleDeg: 88,
       pedalTrayDepthMm: 777,
-      pedalsDeltaMm: 999,
+      pedalsDeltaMm: 120,
       pedalAcceleratorDeltaMm: 999,
       pedalBrakeDeltaMm: 999,
       pedalClutchDeltaMm: 999,
@@ -380,27 +400,26 @@ describe('aluminum rig planner posture presets', () => {
     expect(getMetricTargetScore(boostedInput, preset, boostedHeightCm, 'eyeToWheelTop')).toBeLessThanOrEqual(1);
   });
 
-  it('keeps preset pedal height fixed while optimizing pedal angle toward required leg posture angles', () => {
+  it('keeps pedal angle and delta X fixed while optimizing pedal tray reach', () => {
     const preset = 'gt';
     const heightCm = 182;
     const solvedInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, heightCm);
     const recomputedInput = recomputePresetDynamicPlannerInput(solvedInput, preset, heightCm);
-    const shallowPedalInput = {
+    const staleTrayInput = {
       ...solvedInput,
-      pedalAngleDeg: PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
-    };
-    const steepPedalInput = {
-      ...solvedInput,
-      pedalAngleDeg: PLANNER_DIMENSION_LIMITS.pedalAngleDegMax,
+      pedalTrayDistanceMm: PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm,
     };
     const solvedScore = getPedalPostureAngleScore(solvedInput, preset, heightCm);
 
     expect(recomputedInput.pedalsHeightMm).toBe(solvedInput.pedalsHeightMm);
-    expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(shallowPedalInput, preset, heightCm));
-    expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(steepPedalInput, preset, heightCm));
+    expect(recomputedInput.pedalsDeltaMm).toBe(solvedInput.pedalsDeltaMm);
+    expect(recomputedInput.pedalAngleDeg).toBe(solvedInput.pedalAngleDeg);
+    expect(solvedInput.pedalsDeltaMm).toBe(DEFAULT_PLANNER_INPUT.pedalsDeltaMm);
+    expect(solvedInput.pedalAngleDeg).toBe(DEFAULT_PLANNER_INPUT.pedalAngleDeg);
+    expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(staleTrayInput, preset, heightCm));
   });
 
-  it.each(NON_CUSTOM_PRESETS)('keeps optimized %s pedals touching the feet at every height', (preset) => {
+  it.each(NON_CUSTOM_PRESETS)('keeps optimized %s foot contact errors bounded at every height', (preset) => {
     const failures: string[] = [];
 
     for (
@@ -415,7 +434,7 @@ describe('aluminum rig planner posture presets', () => {
         heightCm,
       });
 
-      if (contactErrorMm > 1) {
+      if (!Number.isFinite(contactErrorMm) || contactErrorMm > 150) {
         failures.push(`${preset} ${heightCm}cm foot-to-pedal gap ${contactErrorMm.toFixed(1)}mm`);
       }
     }

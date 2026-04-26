@@ -42,7 +42,7 @@ const MONITOR_DEBUG_BALL_DIAMETER_MM = 10;
 
 const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureMetricRange>> = {
   gt: {
-    wristBend: { min: 170, max: 195 },
+    wristBend: { min: 110, max: 155 },
     elbowBend: { min: 90, max: 120 },
     kneeBend: { min: 120, max: 135 },
     torsoToThigh: { min: 60, max: 120 },
@@ -52,7 +52,7 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   rally: {
-    wristBend: { min: 170, max: 190 },
+    wristBend: { min: 110, max: 155 },
     elbowBend: { min: 95, max: 135 },
     kneeBend: { min: 110, max: 140 },
     torsoToThigh: { min: 60, max: 125 },
@@ -62,7 +62,7 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   drift: {
-    wristBend: { min: 170, max: 190 },
+    wristBend: { min: 110, max: 155 },
     elbowBend: { min: 95, max: 135 },
     kneeBend: { min: 110, max: 140 },
     torsoToThigh: { min: 60, max: 125 },
@@ -72,7 +72,7 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   road: {
-    wristBend: { min: 173, max: 195 },
+    wristBend: { min: 110, max: 155 },
     elbowBend: { min: 100, max: 135 },
     kneeBend: { min: 118, max: 142 },
     torsoToThigh: { min: 80, max: 130 },
@@ -82,7 +82,7 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   custom: {
-    wristBend: { min: 170, max: 195 },
+    wristBend: { min: 110, max: 155 },
     elbowBend: { min: 90, max: 120 },
     kneeBend: { min: 120, max: 135 },
     torsoToThigh: { min: 85, max: 120 },
@@ -295,8 +295,8 @@ export function createPlannerPostureReport(
       'Ankle range',
       'deg',
       mean([
-        angleDeg(skeleton.joints.kneeLeft, skeleton.joints.ankleLeft, skeleton.joints.toeLeft),
-        angleDeg(skeleton.joints.kneeRight, skeleton.joints.ankleRight, skeleton.joints.toeRight),
+        angleDeg(skeleton.joints.kneeLeft, skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft),
+        angleDeg(skeleton.joints.kneeRight, skeleton.joints.ankleRight, skeleton.joints.toeStartRight),
       ]),
       ranges
     ),

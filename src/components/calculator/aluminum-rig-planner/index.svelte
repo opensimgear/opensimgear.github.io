@@ -462,6 +462,10 @@
     min: PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
     max: PLANNER_DIMENSION_LIMITS.pedalAngleDegMax,
   }));
+  const pedalLengthLimits = $derived.by(() => ({
+    min: PLANNER_DIMENSION_LIMITS.pedalLengthMinMm,
+    max: PLANNER_DIMENSION_LIMITS.pedalLengthMaxMm,
+  }));
   const pedalAcceleratorDeltaLimits = $derived.by(() => ({
     min: 0,
     max: getPedalAcceleratorDeltaMaxMm(plannerInput),
@@ -683,6 +687,10 @@
   }
 
   function clampPedalSettings() {
+    plannerInput.pedalLengthMm = Math.max(
+      pedalLengthLimits.min,
+      Math.min(pedalLengthLimits.max, plannerInput.pedalLengthMm)
+    );
     plannerInput.pedalAcceleratorDeltaMm = Math.max(
       pedalAcceleratorDeltaLimits.min,
       Math.min(pedalAcceleratorDeltaLimits.max, plannerInput.pedalAcceleratorDeltaMm)
@@ -902,6 +910,12 @@
     syncPlannerUrlState();
   }
 
+  function setPedalLengthMm(value: number) {
+    markPosturePresetCustom();
+    plannerInput.pedalLengthMm = Math.max(pedalLengthLimits.min, Math.min(pedalLengthLimits.max, value));
+    syncPlannerUrlState();
+  }
+
   function setPedalAcceleratorDeltaMm(value: number) {
     markPosturePresetCustom();
     plannerInput.pedalAcceleratorDeltaMm = Math.max(
@@ -1051,6 +1065,7 @@
     setPedalsHeightMm(DEFAULT_INPUT.pedalsHeightMm);
     setPedalsDeltaMm(DEFAULT_INPUT.pedalsDeltaMm);
     setPedalAngleDeg(DEFAULT_INPUT.pedalAngleDeg);
+    setPedalLengthMm(DEFAULT_INPUT.pedalLengthMm);
     setPedalAcceleratorDeltaMm(DEFAULT_INPUT.pedalAcceleratorDeltaMm);
     setPedalBrakeDeltaMm(DEFAULT_INPUT.pedalBrakeDeltaMm);
     setPedalClutchDeltaMm(DEFAULT_INPUT.pedalClutchDeltaMm);
@@ -1594,6 +1609,14 @@
                 max={pedalAngleLimits.max}
                 step={1}
                 format={(value) => `${value}°`}
+              />
+              <Slider
+                bind:value={() => plannerInput.pedalLengthMm, setPedalLengthMm}
+                label="Pedal length"
+                min={pedalLengthLimits.min}
+                max={pedalLengthLimits.max}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
               />
               <Slider
                 bind:value={() => plannerInput.pedalAcceleratorDeltaMm, setPedalAcceleratorDeltaMm}

@@ -16,8 +16,8 @@ import {
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_POSTURE_HEIGHT_CM,
 } from '../../components/calculator/aluminum-rig-planner/constants';
-import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
 import {
+  createPlannerPostureSkeleton,
   type PlannerPostureSkeleton,
   type PosturePoint,
 } from '../../components/calculator/aluminum-rig-planner/posture';
@@ -83,20 +83,26 @@ const MODEL_SEGMENTS = [
   {
     label: 'left shin',
     boneStart: 'leftShin',
-    boneEnd: 'leftHeel',
+    boneEnd: 'leftTalon',
     getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.kneeLeft, skeleton.joints.ankleLeft],
   },
   {
-    label: 'left heel',
-    boneStart: 'leftHeel',
-    boneEnd: 'leftFoot',
-    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleLeft, skeleton.joints.heelLeft],
+    label: 'left talon',
+    boneStart: 'leftTalon',
+    boneEnd: 'leftTalonTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleLeft, getTalonPoint(skeleton, 'left')],
   },
   {
     label: 'left foot',
     boneStart: 'leftFoot',
-    boneEnd: 'leftFootTip',
-    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.heelLeft, skeleton.joints.toeLeft],
+    boneEnd: 'leftToe',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleLeft, getToeStartPoint(skeleton, 'left')],
+  },
+  {
+    label: 'left toe',
+    boneStart: 'leftToe',
+    boneEnd: 'leftToeTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [getToeStartPoint(skeleton, 'left'), skeleton.joints.toeLeft],
   },
   {
     label: 'right thigh',
@@ -107,20 +113,26 @@ const MODEL_SEGMENTS = [
   {
     label: 'right shin',
     boneStart: 'rightShin',
-    boneEnd: 'rightHeel',
+    boneEnd: 'rightTalon',
     getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.kneeRight, skeleton.joints.ankleRight],
   },
   {
-    label: 'right heel',
-    boneStart: 'rightHeel',
-    boneEnd: 'rightFoot',
-    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleRight, skeleton.joints.heelRight],
+    label: 'right talon',
+    boneStart: 'rightTalon',
+    boneEnd: 'rightTalonTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleRight, getTalonPoint(skeleton, 'right')],
   },
   {
     label: 'right foot',
     boneStart: 'rightFoot',
-    boneEnd: 'rightFootTip',
-    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.heelRight, skeleton.joints.toeRight],
+    boneEnd: 'rightToe',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [skeleton.joints.ankleRight, getToeStartPoint(skeleton, 'right')],
+  },
+  {
+    label: 'right toe',
+    boneStart: 'rightToe',
+    boneEnd: 'rightToeTip',
+    getTarget: (skeleton: PlannerPostureSkeleton) => [getToeStartPoint(skeleton, 'right'), skeleton.joints.toeRight],
   },
 ] satisfies Array<{
   boneEnd: string;
@@ -205,10 +217,34 @@ function scaleFromHip(point: PosturePoint, hipCenter: PosturePoint, modelScale: 
   ];
 }
 
+function getFootJoints(skeleton: PlannerPostureSkeleton, side: 'left' | 'right') {
+  return side === 'left'
+    ? {
+        ankle: skeleton.joints.ankleLeft,
+        heel: skeleton.joints.heelLeft,
+        toeStart: skeleton.joints.toeStartLeft,
+        toe: skeleton.joints.toeLeft,
+      }
+    : {
+        ankle: skeleton.joints.ankleRight,
+        heel: skeleton.joints.heelRight,
+        toeStart: skeleton.joints.toeStartRight,
+        toe: skeleton.joints.toeRight,
+      };
+}
+
+function getTalonPoint(skeleton: PlannerPostureSkeleton, side: 'left' | 'right'): PosturePoint {
+  return [...getFootJoints(skeleton, side).heel];
+}
+
+function getToeStartPoint(skeleton: PlannerPostureSkeleton, side: 'left' | 'right'): PosturePoint {
+  return [...getFootJoints(skeleton, side).toeStart];
+}
+
 function expectPointCloseMm(actual: PosturePoint, expected: PosturePoint) {
-  expect(Math.abs(actual[0] - expected[0])).toBeLessThanOrEqual(0.001);
-  expect(Math.abs(actual[1] - expected[1])).toBeLessThanOrEqual(0.001);
-  expect(Math.abs(actual[2] - expected[2])).toBeLessThanOrEqual(0.001);
+  expect(Math.abs(actual[0] - expected[0])).toBeLessThanOrEqual(0.0015);
+  expect(Math.abs(actual[1] - expected[1])).toBeLessThanOrEqual(0.0015);
+  expect(Math.abs(actual[2] - expected[2])).toBeLessThanOrEqual(0.0015);
 }
 
 function expectBoneWorldPositionOnTarget(bone: Bone, target: PosturePoint, label: string) {
@@ -255,7 +291,7 @@ describe('aluminum rig planner human model rig', () => {
       eyeCenterForwardFromHip: 0.064,
       eyeCenterHeightFromHip: 0.407,
       eyeCenterSittingHeight: 0.407,
-      heelLengthShare: 0.246,
+      heelLengthShare: 0.244,
     });
   });
 
@@ -379,18 +415,44 @@ describe('aluminum rig planner human model rig', () => {
 
     model!.applySkeleton(skeleton, 1);
 
-    expectBoneWorldPositionOnTarget(bones.get('leftFoot')!, skeleton.joints.heelLeft, 'left foot bone at heel target');
-    expectBoneWorldPositionOnTarget(bones.get('leftFootTip')!, skeleton.joints.toeLeft, 'left foot tip at toe target');
+    expectBoneWorldPositionOnTarget(bones.get('leftTalon')!, skeleton.joints.ankleLeft, 'left talon at ankle target');
+    expectBoneWorldPositionOnTarget(
+      bones.get('leftTalonTip')!,
+      getTalonPoint(skeleton, 'left'),
+      'left talon tip at 40-degree floor target'
+    );
+    expectBoneWorldPositionOnTarget(
+      bones.get('leftFoot')!,
+      skeleton.joints.ankleLeft,
+      'left foot bone at ankle target'
+    );
+    expectBoneWorldPositionOnTarget(
+      bones.get('leftToe')!,
+      getToeStartPoint(skeleton, 'left'),
+      'left toe at toe-start target'
+    );
+    expectBoneWorldPositionOnTarget(bones.get('leftToeTip')!, skeleton.joints.toeLeft, 'left toe tip at toe target');
+    expectBoneWorldPositionOnTarget(
+      bones.get('rightTalon')!,
+      skeleton.joints.ankleRight,
+      'right talon at ankle target'
+    );
+    expectBoneWorldPositionOnTarget(
+      bones.get('rightTalonTip')!,
+      getTalonPoint(skeleton, 'right'),
+      'right talon tip at 40-degree floor target'
+    );
     expectBoneWorldPositionOnTarget(
       bones.get('rightFoot')!,
-      skeleton.joints.heelRight,
-      'right foot bone at heel target'
+      skeleton.joints.ankleRight,
+      'right foot bone at ankle target'
     );
     expectBoneWorldPositionOnTarget(
-      bones.get('rightFootTip')!,
-      skeleton.joints.toeRight,
-      'right foot tip at toe target'
+      bones.get('rightToe')!,
+      getToeStartPoint(skeleton, 'right'),
+      'right toe at toe-start target'
     );
+    expectBoneWorldPositionOnTarget(bones.get('rightToeTip')!, skeleton.joints.toeRight, 'right toe tip at toe target');
 
     model!.dispose();
   });

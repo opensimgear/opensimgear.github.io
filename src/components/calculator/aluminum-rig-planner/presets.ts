@@ -33,10 +33,14 @@ type PlannerPosturePresetSeed = Pick<
   | 'steeringColumnDistanceMm'
   | 'pedalTrayDistanceMm'
   | 'pedalsHeightMm'
+  | 'pedalsDeltaMm'
   | 'pedalAngleDeg'
   | 'pedalBrakeDeltaMm'
 >;
-type PlannerPosturePresetSearchKey = Exclude<keyof PlannerPosturePresetSeed, 'pedalsHeightMm'>;
+type PlannerPosturePresetSearchKey = Exclude<
+  keyof PlannerPosturePresetSeed,
+  'pedalsHeightMm' | 'pedalsDeltaMm' | 'pedalAngleDeg'
+>;
 
 const METERS_TO_MM = 1000;
 const PRESET_SCORE_WEIGHTS: Record<string, number> = {
@@ -57,27 +61,21 @@ const PRESET_FOOT_CONTACT_SCORE_WEIGHT = 1_000_000;
 const PRESET_FOOT_CONTACT_STEP_LEVELS = [
   {
     pedalTrayDistanceMm: 120,
-    pedalAngleDeg: 16,
   },
   {
     pedalTrayDistanceMm: 60,
-    pedalAngleDeg: 8,
   },
   {
     pedalTrayDistanceMm: 30,
-    pedalAngleDeg: 4,
   },
   {
     pedalTrayDistanceMm: 10,
-    pedalAngleDeg: 2,
   },
   {
     pedalTrayDistanceMm: 5,
-    pedalAngleDeg: 1,
   },
   {
     pedalTrayDistanceMm: 1,
-    pedalAngleDeg: 1,
   },
 ];
 const PRESET_SEARCH_STEP_LEVELS: Array<Record<PlannerPosturePresetSearchKey, number>> = [
@@ -85,35 +83,30 @@ const PRESET_SEARCH_STEP_LEVELS: Array<Record<PlannerPosturePresetSearchKey, num
     steeringColumnBaseHeightMm: 160,
     steeringColumnDistanceMm: 240,
     pedalTrayDistanceMm: 120,
-    pedalAngleDeg: 16,
     pedalBrakeDeltaMm: 120,
   },
   {
     steeringColumnBaseHeightMm: 80,
     steeringColumnDistanceMm: 120,
     pedalTrayDistanceMm: 60,
-    pedalAngleDeg: 8,
     pedalBrakeDeltaMm: 60,
   },
   {
     steeringColumnBaseHeightMm: 40,
     steeringColumnDistanceMm: 60,
     pedalTrayDistanceMm: 30,
-    pedalAngleDeg: 4,
     pedalBrakeDeltaMm: 30,
   },
   {
     steeringColumnBaseHeightMm: 20,
     steeringColumnDistanceMm: 30,
     pedalTrayDistanceMm: 10,
-    pedalAngleDeg: 2,
     pedalBrakeDeltaMm: 10,
   },
   {
     steeringColumnBaseHeightMm: 10,
     steeringColumnDistanceMm: 10,
     pedalTrayDistanceMm: 10,
-    pedalAngleDeg: 1,
     pedalBrakeDeltaMm: 5,
   },
 ];
@@ -121,7 +114,6 @@ const PRESET_SEARCH_KEYS: PlannerPosturePresetSearchKey[] = [
   'steeringColumnBaseHeightMm',
   'steeringColumnDistanceMm',
   'pedalTrayDistanceMm',
-  'pedalAngleDeg',
   'pedalBrakeDeltaMm',
 ];
 const PRESET_SEARCH_MAX_PASSES_PER_LEVEL = 8;
@@ -255,7 +247,8 @@ function getPresetSeed(
       steeringColumnDistanceMm: 330 + heightDeltaCm * 1.1 + boosterSeedAdjustment.xMm,
       pedalTrayDistanceMm: 430 + heightDeltaCm * 3 + boosterSeedAdjustment.xMm,
       pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
-      pedalAngleDeg: 70,
+      pedalsDeltaMm: input.pedalsDeltaMm,
+      pedalAngleDeg: input.pedalAngleDeg,
       pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
     };
   }
@@ -268,7 +261,8 @@ function getPresetSeed(
       steeringColumnDistanceMm: 330 + heightDeltaCm * 1.1 + boosterSeedAdjustment.xMm,
       pedalTrayDistanceMm: 440 + heightDeltaCm * 3 + boosterSeedAdjustment.xMm,
       pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
-      pedalAngleDeg: 68,
+      pedalsDeltaMm: input.pedalsDeltaMm,
+      pedalAngleDeg: input.pedalAngleDeg,
       pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
     };
   }
@@ -281,7 +275,8 @@ function getPresetSeed(
       steeringColumnDistanceMm: 430 + heightDeltaCm * 1.8 + boosterSeedAdjustment.xMm,
       pedalTrayDistanceMm: 560 + heightDeltaCm * 3.4 + boosterSeedAdjustment.xMm,
       pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
-      pedalAngleDeg: 55,
+      pedalsDeltaMm: input.pedalsDeltaMm,
+      pedalAngleDeg: input.pedalAngleDeg,
       pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
     };
   }
@@ -293,7 +288,8 @@ function getPresetSeed(
     steeringColumnDistanceMm: 380 + heightDeltaCm * 1.5 + boosterSeedAdjustment.xMm,
     pedalTrayDistanceMm: 470 + heightDeltaCm * 3.2 + boosterSeedAdjustment.xMm,
     pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
-    pedalAngleDeg: 60,
+    pedalsDeltaMm: input.pedalsDeltaMm,
+    pedalAngleDeg: input.pedalAngleDeg,
     pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
   };
 }
@@ -304,6 +300,7 @@ function getCurrentPlannerInputSeed(input: PlannerInput): PlannerPosturePresetSe
     steeringColumnDistanceMm: input.steeringColumnDistanceMm,
     pedalTrayDistanceMm: input.pedalTrayDistanceMm,
     pedalsHeightMm: input.pedalsHeightMm,
+    pedalsDeltaMm: input.pedalsDeltaMm,
     pedalAngleDeg: input.pedalAngleDeg,
     pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
   };
@@ -370,6 +367,11 @@ function clampDynamicPlannerInput(input: PlannerInput): PlannerInput {
       PLANNER_DIMENSION_LIMITS.pedalsHeightMinMm,
       PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm
     ),
+    pedalsDeltaMm: clamp(
+      input.pedalsDeltaMm,
+      PLANNER_DIMENSION_LIMITS.pedalsDeltaMinMm,
+      PLANNER_DIMENSION_LIMITS.pedalsDeltaMaxMm
+    ),
     pedalAngleDeg: clamp(
       input.pedalAngleDeg,
       PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
@@ -391,6 +393,7 @@ function createCandidateInput(input: PlannerInput, seed: PlannerPosturePresetSee
       steeringColumnDistanceMm: seed.steeringColumnDistanceMm,
       pedalTrayDistanceMm: seed.pedalTrayDistanceMm,
       pedalsHeightMm: seed.pedalsHeightMm,
+      pedalsDeltaMm: seed.pedalsDeltaMm,
       pedalAngleDeg: seed.pedalAngleDeg,
       pedalBrakeDeltaMm: seed.pedalBrakeDeltaMm,
     })
@@ -434,7 +437,7 @@ function scoreCandidate(
 }
 
 function clampPedalContactSeedValue(
-  key: 'pedalTrayDistanceMm' | 'pedalAngleDeg',
+  key: 'pedalTrayDistanceMm',
   value: number,
   limits: Record<PlannerPosturePresetSearchKey, { min: number; max: number; step: number }>
 ) {
@@ -483,39 +486,32 @@ function refinePedalsToFootContact(
       let didImprove = false;
 
       for (const pedalTrayDirection of [-1, 0, 1]) {
-        for (const pedalAngleDirection of [-1, 0, 1]) {
-          const candidateSeed = {
-            ...bestSeed,
-            pedalTrayDistanceMm: clampPedalContactSeedValue(
-              'pedalTrayDistanceMm',
-              bestSeed.pedalTrayDistanceMm + pedalTrayDirection * stepLevel.pedalTrayDistanceMm,
-              limits
-            ),
-            pedalAngleDeg: clampPedalContactSeedValue(
-              'pedalAngleDeg',
-              bestSeed.pedalAngleDeg + pedalAngleDirection * stepLevel.pedalAngleDeg,
-              limits
-            ),
-          };
-          const candidateInput = createCandidateInput(input, candidateSeed);
-          const candidateScore =
-            getPedalContactErrorScore(candidateInput, preset, heightCm, modelMetrics) +
-            scoreCandidate(candidateInput, preset, heightCm, modelMetrics, [
-              'kneeBend',
-              'ankleRange',
-              'brakeAlignment',
-              'torsoToThigh',
-            ]);
+        const candidateSeed = {
+          ...bestSeed,
+          pedalTrayDistanceMm: clampPedalContactSeedValue(
+            'pedalTrayDistanceMm',
+            bestSeed.pedalTrayDistanceMm + pedalTrayDirection * stepLevel.pedalTrayDistanceMm,
+            limits
+          ),
+        };
+        const candidateInput = createCandidateInput(input, candidateSeed);
+        const candidateScore =
+          getPedalContactErrorScore(candidateInput, preset, heightCm, modelMetrics) +
+          scoreCandidate(candidateInput, preset, heightCm, modelMetrics, [
+            'kneeBend',
+            'ankleRange',
+            'brakeAlignment',
+            'torsoToThigh',
+          ]);
 
-          if (candidateScore + SCORE_EPSILON >= bestScore) {
-            continue;
-          }
-
-          bestSeed = candidateSeed;
-          bestInput = candidateInput;
-          bestScore = candidateScore;
-          didImprove = true;
+        if (candidateScore + SCORE_EPSILON >= bestScore) {
+          continue;
         }
+
+        bestSeed = candidateSeed;
+        bestInput = candidateInput;
+        bestScore = candidateScore;
+        didImprove = true;
       }
 
       if (!didImprove) {
@@ -548,11 +544,6 @@ function getPresetSearchLimits(
       min: PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm,
       max: PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMaxMm,
       step: 10,
-    },
-    pedalAngleDeg: {
-      min: PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
-      max: PLANNER_DIMENSION_LIMITS.pedalAngleDegMax,
-      step: 1,
     },
     pedalBrakeDeltaMm: {
       min: 0,
@@ -616,7 +607,16 @@ function clampPresetSearchSeed(
       PLANNER_DIMENSION_LIMITS.pedalsHeightMinMm,
       PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm
     ),
-    pedalAngleDeg: clampPresetSearchSeedValue('pedalAngleDeg', seed.pedalAngleDeg, limits),
+    pedalsDeltaMm: clamp(
+      roundToStep(seed.pedalsDeltaMm, PLANNER_CONTROL_STEP_MM),
+      PLANNER_DIMENSION_LIMITS.pedalsDeltaMinMm,
+      PLANNER_DIMENSION_LIMITS.pedalsDeltaMaxMm
+    ),
+    pedalAngleDeg: clamp(
+      roundToStep(seed.pedalAngleDeg, 1),
+      PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
+      PLANNER_DIMENSION_LIMITS.pedalAngleDegMax
+    ),
     pedalBrakeDeltaMm: clampPresetSearchSeedValue('pedalBrakeDeltaMm', seed.pedalBrakeDeltaMm, limits),
   };
 }
@@ -731,12 +731,7 @@ function solveDynamicPlannerInput(
       }
 
       for (const key of PRESET_SEARCH_KEYS) {
-        if (
-          key === 'steeringColumnBaseHeightMm' ||
-          key === 'steeringColumnDistanceMm' ||
-          key === 'pedalAngleDeg' ||
-          key === 'pedalBrakeDeltaMm'
-        ) {
+        if (key === 'steeringColumnBaseHeightMm' || key === 'steeringColumnDistanceMm' || key === 'pedalBrakeDeltaMm') {
           continue;
         }
 
@@ -767,22 +762,6 @@ function solveDynamicPlannerInput(
             ['brakeAlignment']
           )
         ) {
-          didImprove = true;
-        }
-      }
-
-      for (const pedalAngleDeg of getPresetSearchNeighborValues(
-        'pedalAngleDeg',
-        bestSeed.pedalAngleDeg,
-        stepLevel.pedalAngleDeg,
-        limits
-      )) {
-        const candidateSeed: PlannerPosturePresetSeed = {
-          ...bestSeed,
-          pedalAngleDeg,
-        };
-
-        if (maybeAdoptCandidate(candidateSeed, ['kneeBend', 'ankleRange', 'brakeAlignment', 'torsoToThigh'])) {
           didImprove = true;
         }
       }

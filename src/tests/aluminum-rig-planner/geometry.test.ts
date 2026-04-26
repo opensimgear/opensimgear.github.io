@@ -128,6 +128,7 @@ describe('aluminum rig planner geometry', () => {
       pedalsHeightMm: 150,
       pedalsDeltaMm: 260,
       pedalAngleDeg: 10,
+      pedalLengthMm: -10,
       pedalAcceleratorDeltaMm: 999,
       pedalBrakeDeltaMm: 999,
       pedalClutchDeltaMm: 999,
@@ -136,6 +137,7 @@ describe('aluminum rig planner geometry', () => {
     expect(clamped.pedalsHeightMm).toBe(150);
     expect(clamped.pedalsDeltaMm).toBe(PLANNER_DIMENSION_LIMITS.pedalsDeltaMaxMm);
     expect(clamped.pedalAngleDeg).toBe(PLANNER_DIMENSION_LIMITS.pedalAngleDegMin);
+    expect(clamped.pedalLengthMm).toBe(PLANNER_DIMENSION_LIMITS.pedalLengthMinMm);
     expect(clamped.pedalAcceleratorDeltaMm).toBe(getPedalAcceleratorDeltaMaxMm({ baseWidthMm: 400 }));
     expect(clamped.pedalBrakeDeltaMm).toBe(getPedalBrakeDeltaMaxMm({ baseWidthMm: 400 }));
     expect(clamped.pedalClutchDeltaMm).toBe(getPedalClutchDeltaMaxMm({ baseWidthMm: 400 }));
@@ -220,7 +222,7 @@ describe('aluminum rig planner geometry', () => {
     expect(dot(spokeDirections[0], spokeDirections[2])).toBeCloseTo(-1, 5);
   });
 
-  it('adds pedal plate with full accelerator and floating brake/clutch pedals', () => {
+  it('adds pedal plate with shortened accelerator and floating brake/clutch pedals', () => {
     const meshes = createPedalsModule(DEFAULT_PLANNER_INPUT);
     const plate = meshes.find((mesh) => mesh.id === 'pedal-plate');
     const accelerator = meshes.find((mesh) => mesh.id === 'pedal-accelerator');
@@ -237,7 +239,7 @@ describe('aluminum rig planner geometry', () => {
     expect(accelerator?.position[1] ?? 0).toBeLessThan(brake?.position[1] ?? 0);
     expect(brake?.position[1] ?? 0).toBeLessThan(clutch?.position[1] ?? 0);
     expect(plate?.rotation ?? [0, 0, 0]).toEqual([0, 0, 0]);
-    expect(accelerator?.size[2]).toBeCloseTo(mm(180));
+    expect(accelerator?.size[2]).toBeCloseTo(mm(135));
     expect(brake?.size[2]).toBeCloseTo(mm(90));
     expect(clutch?.size[2]).toBeCloseTo(mm(90));
 
@@ -256,8 +258,8 @@ describe('aluminum rig planner geometry', () => {
       )
     );
     expect(plate?.position[2]).toBeCloseTo(mm(pedalPivotZmm - 1.5));
-    expect(accelerator?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 90), 5);
-    expect(accelerator?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 90), 5);
+    expect(accelerator?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 112.5), 5);
+    expect(accelerator?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 112.5), 5);
     expect(brake?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 135), 5);
     expect(brake?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 135), 5);
     expect(clutch?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 135), 5);
@@ -265,6 +267,29 @@ describe('aluminum rig planner geometry', () => {
     expect(accelerator?.rotation?.[1]).toBeCloseTo(-leanRad, 5);
     expect(brake?.rotation?.[1]).toBeCloseTo(-leanRad, 5);
     expect(clutch?.rotation?.[1]).toBeCloseTo(-leanRad, 5);
+  });
+
+  it('scales pedal faces from the pedal length input', () => {
+    const pedalLengthMm = 240;
+    const meshes = createPedalsModule({
+      ...DEFAULT_PLANNER_INPUT,
+      pedalLengthMm,
+    });
+    const accelerator = meshes.find((mesh) => mesh.id === 'pedal-accelerator');
+    const brake = meshes.find((mesh) => mesh.id === 'pedal-brake');
+    const leanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
+    const pedalPivotXmm =
+      DEFAULT_PLANNER_INPUT.seatBaseDepthMm +
+      DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm +
+      DEFAULT_PLANNER_INPUT.pedalsDeltaMm;
+    const pedalPivotZmm = BASE_BEAM_HEIGHT_MM + 3 + DEFAULT_PLANNER_INPUT.pedalsHeightMm;
+
+    expect(accelerator?.size[2]).toBeCloseTo(mm(pedalLengthMm * 0.75));
+    expect(brake?.size[2]).toBeCloseTo(mm(pedalLengthMm * 0.5));
+    expect(accelerator?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 150), 5);
+    expect(accelerator?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 150), 5);
+    expect(brake?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 180), 5);
+    expect(brake?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 180), 5);
   });
 
   it('keeps pedal plate linked to tray face while height follows pedal pivot', () => {

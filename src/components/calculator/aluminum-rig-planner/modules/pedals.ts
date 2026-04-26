@@ -15,11 +15,11 @@ const PEDAL_PLATE_MATERIAL = {
   roughness: 0.4,
 } as const;
 const PEDAL_WIDTH_MM = 60;
-const PEDAL_HEIGHT_MM = 180;
 const PEDAL_THICKNESS_MM = 8;
 const PEDAL_PLATE_THICKNESS_MM = 3;
 const PEDAL_CORNER_RADIUS_MM = 5;
 const PEDAL_PLATE_CORNER_RADIUS_MM = 3;
+const ACCELERATOR_PEDAL_LENGTH_RATIO = 3 / 4;
 const FLOATING_PEDAL_START_RATIO = 1 / 2;
 const PEDAL_IDS = ['accelerator', 'brake', 'clutch'] as const;
 
@@ -57,8 +57,11 @@ export function createPedalsModule(input: PlannerInput): MeshSpec[] {
   const trayRearFaceXmm = input.seatBaseDepthMm + input.pedalTrayDistanceMm;
 
   const pedals = pedalCentersYmm.map((pedalCenterYmm, index) => {
-    const visibleStartMm = index === 0 ? 0 : PEDAL_HEIGHT_MM * FLOATING_PEDAL_START_RATIO;
-    const visibleHeightMm = PEDAL_HEIGHT_MM - visibleStartMm;
+    const visibleStartMm =
+      index === 0
+        ? input.pedalLengthMm * (1 - ACCELERATOR_PEDAL_LENGTH_RATIO)
+        : input.pedalLengthMm * FLOATING_PEDAL_START_RATIO;
+    const visibleHeightMm = input.pedalLengthMm - visibleStartMm;
     const visibleCenterOffsetMm = visibleStartMm + visibleHeightMm / 2;
     const pedalCenterXmm = pedalPivotXmm + pedalDirection.x * visibleCenterOffsetMm;
     const pedalCenterZmm = pedalPivotZmm + pedalDirection.z * visibleCenterOffsetMm;

@@ -12,10 +12,10 @@ export const DEFAULT_ANTHROPOMETRY_LENGTHS_MM = {
   forearmHandLength: 329.5,
   thighLength: 419.1,
   lowerLegLength: 390.4,
-  footLength: 241.7,
+  footLength: 290.7,
 } satisfies PlannerAnthropometryLengthsMm;
 
-export const DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE = 0.246;
+export const DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE = 0.272;
 
 function getDefaultAnthropometryRatio(lengthMm: number) {
   return Number((lengthMm / (DEFAULT_ANTHROPOMETRY_REFERENCE_HEIGHT_CM * 10)).toFixed(3));
