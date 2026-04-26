@@ -6,6 +6,7 @@ import {
 } from './constants';
 import {
   clampPlannerInput,
+  clampSteeringColumnHeights,
   getPedalTrayDistanceMaxMm,
   getPedalTrayDistanceMinMm,
   getSteeringColumnBaseHeightMaxMm,
@@ -231,16 +232,7 @@ function clampDynamicPlannerInput(input: PlannerInput): PlannerInput {
     getPedalTrayDistanceMinMm({ ...input, baseLengthMm }),
     getPedalTrayDistanceMaxMm({ ...input, baseLengthMm })
   );
-  const steeringColumnHeightMm = clamp(
-    input.steeringColumnHeightMm,
-    PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
-    PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm
-  );
-  const steeringColumnBaseHeightMm = clamp(
-    input.steeringColumnBaseHeightMm,
-    PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
-    getSteeringColumnBaseHeightMaxMm(steeringColumnHeightMm)
-  );
+  const { steeringColumnBaseHeightMm, steeringColumnHeightMm } = clampSteeringColumnHeights(input, 'base-height');
   const steeringColumnDistanceMm = clamp(
     input.steeringColumnDistanceMm,
     80,
@@ -322,7 +314,7 @@ function solveDynamicPlannerInput(
       seed.steeringColumnBaseHeightMm,
       DYNAMIC_SEARCH_STEPS.steeringColumnBaseHeightMm,
       PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
-      PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMaxMm,
+      getSteeringColumnBaseHeightMaxMm(),
       10
     ),
     steeringColumnHeightMm: getCandidateValues(

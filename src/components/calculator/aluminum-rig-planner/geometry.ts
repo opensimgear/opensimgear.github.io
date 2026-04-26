@@ -5,18 +5,61 @@ export type PlannerGeometry = {
   input: PlannerInput;
 };
 
+export type SteeringColumnHeightClampMode = 'base-height' | 'column-height';
+
 function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
 
-export function getSteeringColumnBaseHeightMaxMm(columnHeightMm: number) {
+export function getSteeringColumnBaseHeightMaxMm() {
   return Math.max(
     PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
     Math.min(
       PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMaxMm,
-      columnHeightMm - PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
+      PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm - PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
     )
   );
+}
+
+export function clampSteeringColumnHeights(
+  input: Pick<PlannerInput, 'steeringColumnBaseHeightMm' | 'steeringColumnHeightMm'>,
+  mode: SteeringColumnHeightClampMode = 'column-height'
+) {
+  const baseHeightMaxMm = getSteeringColumnBaseHeightMaxMm();
+  const steeringColumnHeightMm = clamp(
+    input.steeringColumnHeightMm,
+    PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+    PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm
+  );
+
+  if (mode === 'base-height') {
+    const steeringColumnBaseHeightMm = clamp(
+      input.steeringColumnBaseHeightMm,
+      PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
+      baseHeightMaxMm
+    );
+
+    return {
+      steeringColumnBaseHeightMm,
+      steeringColumnHeightMm: clamp(
+        Math.max(
+          steeringColumnHeightMm,
+          steeringColumnBaseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
+        ),
+        PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+        PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm
+      ),
+    };
+  }
+
+  return {
+    steeringColumnBaseHeightMm: clamp(
+      input.steeringColumnBaseHeightMm,
+      PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
+      Math.min(baseHeightMaxMm, steeringColumnHeightMm - PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm)
+    ),
+    steeringColumnHeightMm,
+  };
 }
 
 export function getSteeringColumnDistanceMaxMm(input: Pick<PlannerInput, 'baseLengthMm' | 'seatBaseDepthMm'>) {
@@ -98,16 +141,7 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
       pedalTrayDepthMm,
     })
   );
-  const steeringColumnHeightMm = clamp(
-    input.steeringColumnHeightMm,
-    PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
-    PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm
-  );
-  const steeringColumnBaseHeightMm = clamp(
-    input.steeringColumnBaseHeightMm,
-    PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
-    getSteeringColumnBaseHeightMaxMm(steeringColumnHeightMm)
-  );
+  const { steeringColumnBaseHeightMm, steeringColumnHeightMm } = clampSteeringColumnHeights(input, 'column-height');
 
   return {
     ...input,

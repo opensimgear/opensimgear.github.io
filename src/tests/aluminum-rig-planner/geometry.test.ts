@@ -3,15 +3,18 @@ import { describe, expect, it } from 'vitest';
 import {
   BASE_BEAM_HEIGHT_MM,
   DEFAULT_PLANNER_INPUT,
+  PLANNER_LAYOUT,
   PLANNER_DIMENSION_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import {
+  clampSteeringColumnHeights,
   clampPlannerInput,
   getPedalAcceleratorDeltaMaxMm,
   getPedalBrakeDeltaMaxMm,
   getPedalClutchDeltaMaxMm,
   derivePlannerGeometry,
   getPedalTrayDistanceMaxMm,
+  getSteeringColumnBaseHeightMaxMm,
   getSteeringColumnDistanceMaxMm,
 } from '../../components/calculator/aluminum-rig-planner/geometry';
 import { createPedalsModule } from '../../components/calculator/aluminum-rig-planner/modules/pedals';
@@ -38,6 +41,41 @@ describe('aluminum rig planner geometry', () => {
         seatBaseDepthMm: 500,
       })
     ).toBe(690);
+  });
+
+  it('caps steering column base height against the column global max', () => {
+    expect(getSteeringColumnBaseHeightMaxMm()).toBe(
+      Math.min(
+        PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMaxMm,
+        PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm - PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
+      )
+    );
+  });
+
+  it('raises steering column height when base height is the edited value', () => {
+    const clamped = clampSteeringColumnHeights(
+      {
+        steeringColumnBaseHeightMm: 500,
+        steeringColumnHeightMm: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+      },
+      'base-height'
+    );
+
+    expect(clamped.steeringColumnBaseHeightMm).toBe(500);
+    expect(clamped.steeringColumnHeightMm).toBe(580);
+  });
+
+  it('lowers steering column base height when column height is the edited value', () => {
+    const clamped = clampSteeringColumnHeights(
+      {
+        steeringColumnBaseHeightMm: 500,
+        steeringColumnHeightMm: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
+      },
+      'column-height'
+    );
+
+    expect(clamped.steeringColumnBaseHeightMm).toBe(300);
+    expect(clamped.steeringColumnHeightMm).toBe(PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm);
   });
 
   it('computes pedal tray distance max from tray midpoint and base end', () => {

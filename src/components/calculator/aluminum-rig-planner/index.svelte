@@ -32,6 +32,7 @@
     URL_STATE_DEBOUNCE_MS,
   } from './constants';
   import {
+    clampSteeringColumnHeights,
     derivePlannerGeometry,
     getPedalAcceleratorDeltaMaxMm,
     getPedalBrakeDeltaMaxMm,
@@ -387,7 +388,7 @@
   }));
   const steeringColumnBaseHeightLimits = $derived.by(() => ({
     min: PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
-    max: getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm),
+    max: getSteeringColumnBaseHeightMaxMm(),
   }));
   const steeringColumnHeightLimits = $derived.by(() => ({
     min: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
@@ -718,10 +719,16 @@
 
   function setSteeringColumnBaseHeightMm(value: number) {
     markPosturePresetCustom();
-    plannerInput.steeringColumnBaseHeightMm = Math.max(
-      steeringColumnBaseHeightLimits.min,
-      Math.min(steeringColumnBaseHeightLimits.max, value)
+    const heights = clampSteeringColumnHeights(
+      {
+        steeringColumnBaseHeightMm: value,
+        steeringColumnHeightMm: plannerInput.steeringColumnHeightMm,
+      },
+      'base-height'
     );
+
+    plannerInput.steeringColumnBaseHeightMm = heights.steeringColumnBaseHeightMm;
+    plannerInput.steeringColumnHeightMm = heights.steeringColumnHeightMm;
 
     syncPlannerUrlState();
     scheduleMeasurementOverlay('steeringColumnBaseHeightMm');
@@ -729,16 +736,16 @@
 
   function setSteeringColumnHeightMm(value: number) {
     markPosturePresetCustom();
-    plannerInput.steeringColumnHeightMm = Math.max(
-      steeringColumnHeightLimits.min,
-      Math.min(steeringColumnHeightLimits.max, value)
+    const heights = clampSteeringColumnHeights(
+      {
+        steeringColumnBaseHeightMm: plannerInput.steeringColumnBaseHeightMm,
+        steeringColumnHeightMm: value,
+      },
+      'column-height'
     );
 
-    if (
-      plannerInput.steeringColumnBaseHeightMm > getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm)
-    ) {
-      plannerInput.steeringColumnBaseHeightMm = getSteeringColumnBaseHeightMaxMm(plannerInput.steeringColumnHeightMm);
-    }
+    plannerInput.steeringColumnBaseHeightMm = heights.steeringColumnBaseHeightMm;
+    plannerInput.steeringColumnHeightMm = heights.steeringColumnHeightMm;
 
     syncPlannerUrlState();
     scheduleMeasurementOverlay('steeringColumnHeightMm');
