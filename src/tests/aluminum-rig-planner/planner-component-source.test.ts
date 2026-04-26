@@ -34,18 +34,33 @@ describe('aluminum rig planner component wiring', () => {
     );
 
     expect(presetsSource).toContain('createPlannerPostureReport');
-    expect(presetsSource).toContain("metric.key === 'eyeToWheelTop' ? metric.range.min");
+    expect(presetsSource).toContain('(metric.range.min + metric.range.max) / 2');
+    expect(presetsSource).not.toContain("metric.key === 'eyeToWheelTop' ? metric.range.min");
     expect(presetsSource).not.toContain("metric.key === 'eyeToMonitorMidpoint'");
     expect(presetsSource).not.toContain("metric.key === 'headToMonitor'");
   });
 
-  it('searches steering column base height as a full preset axis', () => {
+  it('weights elbow bend and uses decreasing-step preset search', () => {
     const presetsSource = readFileSync(
       new URL('../../components/calculator/aluminum-rig-planner/presets.ts', import.meta.url),
       'utf8'
     );
 
-    expect(presetsSource).toContain('getCandidateRangeValues');
+    expect(presetsSource).toContain('elbowBend: 4');
+    expect(presetsSource).toContain('PRESET_SEARCH_STEP_LEVELS');
+    expect(presetsSource).toContain('SCORE_EPSILON');
+    expect(presetsSource).not.toContain('getCandidateRangeValues');
+    expect(presetsSource).not.toContain('DYNAMIC_SEARCH_STEPS.steeringColumnDistanceMm');
+  });
+
+  it('keeps steering column base height in decreasing-step preset search', () => {
+    const presetsSource = readFileSync(
+      new URL('../../components/calculator/aluminum-rig-planner/presets.ts', import.meta.url),
+      'utf8'
+    );
+
+    expect(presetsSource).toContain('steeringColumnBaseHeightMm: 160');
+    expect(presetsSource).toContain('steeringColumnBaseHeightMm: 10');
     expect(presetsSource).toContain('getSteeringColumnBaseHeightMaxMm()');
     expect(presetsSource).not.toContain('DYNAMIC_SEARCH_STEPS.steeringColumnBaseHeightMm');
   });

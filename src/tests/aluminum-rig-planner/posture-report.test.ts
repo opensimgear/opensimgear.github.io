@@ -6,10 +6,22 @@ import {
   DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
+  PLANNER_POSTURE_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { getMonitorDimensionsMm } from '../../components/calculator/aluminum-rig-planner/modules/monitor';
 import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
 import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
+import {
+  applyPresetToPlannerInput,
+  applyPresetToPostureSettings,
+} from '../../components/calculator/aluminum-rig-planner/presets';
+import type { PlannerPosturePreset } from '../../components/calculator/aluminum-rig-planner/types';
+
+const SOLVABLE_PRESETS = ['formula', 'gt', 'rally', 'road'] satisfies PlannerPosturePreset[];
+
+function formatMetricValue(metric: ReturnType<typeof createPlannerPostureReport>['metrics'][number]) {
+  return metric.unit === 'mm' ? `${metric.valueMm}mm` : `${metric.valueDeg}deg`;
+}
 
 describe('aluminum rig planner posture report', () => {
   it('creates finite default posture metrics', () => {
@@ -52,6 +64,41 @@ describe('aluminum rig planner posture report', () => {
       )
     ).toBe(true);
     expect('eyeDebug' in report).toBe(false);
+  });
+
+  it('keeps preset posture reports out of bad status for every supported height', () => {
+    const failures: string[] = [];
+
+    for (const preset of SOLVABLE_PRESETS) {
+      for (
+        let heightCm = PLANNER_POSTURE_LIMITS.heightMinCm;
+        heightCm <= PLANNER_POSTURE_LIMITS.heightMaxCm;
+        heightCm += 1
+      ) {
+        const input = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, heightCm);
+        const settings = applyPresetToPostureSettings(
+          {
+            ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+            preset,
+            heightCm,
+          },
+          input
+        );
+        const report = createPlannerPostureReport(input, settings);
+
+        for (const metric of report.metrics) {
+          const value = metric.unit === 'mm' ? metric.valueMm : metric.valueDeg;
+
+          if (!Number.isFinite(value) || metric.status === 'bad') {
+            failures.push(
+              `${preset} ${heightCm}cm ${metric.key}: ${formatMetricValue(metric)} failed ${metric.range.min}-${metric.range.max}${metric.unit}; status ${metric.status}${metric.hint ? `; ${metric.hint}` : ''}`
+            );
+          }
+        }
+      }
+    }
+
+    expect(failures, failures.slice(0, 30).join('\n')).toEqual([]);
   });
 
   it('solves flat monitor midpoint distance from target horizontal FOV using eye center anchor', () => {

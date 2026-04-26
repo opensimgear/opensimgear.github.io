@@ -36,14 +36,64 @@ type PlannerPosturePresetSeed = Pick<
   PlannerInput,
   'steeringColumnBaseHeightMm' | 'steeringColumnDistanceMm' | 'pedalTrayDistanceMm' | 'pedalsHeightMm' | 'pedalAngleDeg'
 >;
+type PlannerPosturePresetSearchKey = keyof PlannerPosturePresetSeed;
 
-const DYNAMIC_SEARCH_STEPS = {
-  steeringColumnDistanceMm: [-50, 0, 50],
-  pedalTrayDistanceMm: [-60, 0, 60],
-  pedalsHeightMm: [-35, 0, 35],
-  pedalAngleDeg: [-8, 0, 8],
-} as const;
 const METERS_TO_MM = 1000;
+const PRESET_SCORE_WEIGHTS: Record<string, number> = {
+  elbowBend: 4,
+};
+const PRESET_SCORE_STATUS_PENALTY = {
+  bad: 10000,
+  warn: 1000,
+  ok: 0,
+} as const;
+const PRESET_SEARCH_STEP_LEVELS: Array<Record<PlannerPosturePresetSearchKey, number>> = [
+  {
+    steeringColumnBaseHeightMm: 160,
+    steeringColumnDistanceMm: 240,
+    pedalTrayDistanceMm: 120,
+    pedalsHeightMm: 80,
+    pedalAngleDeg: 16,
+  },
+  {
+    steeringColumnBaseHeightMm: 80,
+    steeringColumnDistanceMm: 120,
+    pedalTrayDistanceMm: 60,
+    pedalsHeightMm: 40,
+    pedalAngleDeg: 8,
+  },
+  {
+    steeringColumnBaseHeightMm: 40,
+    steeringColumnDistanceMm: 60,
+    pedalTrayDistanceMm: 30,
+    pedalsHeightMm: 20,
+    pedalAngleDeg: 4,
+  },
+  {
+    steeringColumnBaseHeightMm: 20,
+    steeringColumnDistanceMm: 30,
+    pedalTrayDistanceMm: 10,
+    pedalsHeightMm: 10,
+    pedalAngleDeg: 2,
+  },
+  {
+    steeringColumnBaseHeightMm: 10,
+    steeringColumnDistanceMm: 10,
+    pedalTrayDistanceMm: 10,
+    pedalsHeightMm: 10,
+    pedalAngleDeg: 1,
+  },
+];
+const PRESET_SEARCH_KEYS: PlannerPosturePresetSearchKey[] = [
+  'steeringColumnBaseHeightMm',
+  'steeringColumnDistanceMm',
+  'pedalTrayDistanceMm',
+  'pedalsHeightMm',
+  'pedalAngleDeg',
+];
+const PRESET_SEARCH_MAX_PASSES_PER_LEVEL = 8;
+const PRESET_SEARCH_NEIGHBOR_RADIUS = 3;
+const SCORE_EPSILON = 0.000001;
 
 export const PLANNER_POSTURE_PRESETS: Record<SolvablePlannerPosturePreset, PlannerPosturePresetFixedValues> = {
   formula: {
@@ -196,20 +246,6 @@ function getPresetSeed(preset: SolvablePlannerPosturePreset, heightCm: number): 
   };
 }
 
-function getCandidateValues(value: number, offsets: readonly number[], min: number, max: number, step: number) {
-  return [...new Set(offsets.map((offset) => clamp(roundToStep(value + offset, step), min, max)))];
-}
-
-function getCandidateRangeValues(min: number, max: number, step: number) {
-  const values: number[] = [];
-
-  for (let value = roundToStep(min, step); value <= max; value += step) {
-    values.push(clamp(value, min, max));
-  }
-
-  return [...new Set(values)];
-}
-
 function placeBaseAroundPedalTray(input: PlannerInput) {
   const wantedBaseLengthMm = input.seatBaseDepthMm + input.pedalTrayDistanceMm + input.pedalTrayDepthMm;
   const baseLengthMm = clamp(
@@ -307,12 +343,94 @@ function scoreCandidate(
 
   return report.metrics.reduce((total, metric) => {
     const value = metric.unit === 'mm' ? (metric.valueMm ?? 0) : (metric.valueDeg ?? 0);
-    const target = metric.key === 'eyeToWheelTop' ? metric.range.min : (metric.range.min + metric.range.max) / 2;
+    const target = (metric.range.min + metric.range.max) / 2;
     const width = Math.max(1, metric.range.max - metric.range.min);
-    const statusPenalty = metric.status === 'bad' ? 100 : metric.status === 'warn' ? 20 : 0;
+    const statusPenalty = PRESET_SCORE_STATUS_PENALTY[metric.status];
+    const weight = PRESET_SCORE_WEIGHTS[metric.key] ?? 1;
 
-    return total + statusPenalty + Math.abs(value - target) / width;
+    return total + (statusPenalty + Math.abs(value - target) / width) * weight;
   }, 0);
+}
+
+function getPresetSearchLimits(
+  input: PlannerInput
+): Record<PlannerPosturePresetSearchKey, { min: number; max: number; step: number }> {
+  return {
+    steeringColumnBaseHeightMm: {
+      min: PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
+      max: getSteeringColumnBaseHeightMaxMm(),
+      step: 10,
+    },
+    steeringColumnDistanceMm: {
+      min: PLANNER_LAYOUT.steeringColumnDistanceMinMm,
+      max: getSteeringColumnDistanceMaxMm({
+        ...input,
+        baseLengthMm: PLANNER_DIMENSION_LIMITS.baseLengthMaxMm,
+      }),
+      step: 10,
+    },
+    pedalTrayDistanceMm: {
+      min: PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm,
+      max: PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMaxMm,
+      step: 10,
+    },
+    pedalsHeightMm: {
+      min: PLANNER_DIMENSION_LIMITS.pedalsHeightMinMm,
+      max: PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm,
+      step: 10,
+    },
+    pedalAngleDeg: {
+      min: PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
+      max: PLANNER_DIMENSION_LIMITS.pedalAngleDegMax,
+      step: 1,
+    },
+  };
+}
+
+function clampPresetSearchSeedValue(
+  key: PlannerPosturePresetSearchKey,
+  value: number,
+  limits: Record<PlannerPosturePresetSearchKey, { min: number; max: number; step: number }>
+) {
+  const limit = limits[key];
+
+  return clamp(roundToStep(value, limit.step), limit.min, limit.max);
+}
+
+function clampPresetSearchSeed(
+  seed: PlannerPosturePresetSeed,
+  limits: Record<PlannerPosturePresetSearchKey, { min: number; max: number; step: number }>
+): PlannerPosturePresetSeed {
+  return {
+    steeringColumnBaseHeightMm: clampPresetSearchSeedValue(
+      'steeringColumnBaseHeightMm',
+      seed.steeringColumnBaseHeightMm,
+      limits
+    ),
+    steeringColumnDistanceMm: clampPresetSearchSeedValue(
+      'steeringColumnDistanceMm',
+      seed.steeringColumnDistanceMm,
+      limits
+    ),
+    pedalTrayDistanceMm: clampPresetSearchSeedValue('pedalTrayDistanceMm', seed.pedalTrayDistanceMm, limits),
+    pedalsHeightMm: clampPresetSearchSeedValue('pedalsHeightMm', seed.pedalsHeightMm, limits),
+    pedalAngleDeg: clampPresetSearchSeedValue('pedalAngleDeg', seed.pedalAngleDeg, limits),
+  };
+}
+
+function getPresetSearchNeighborValues(
+  key: PlannerPosturePresetSearchKey,
+  value: number,
+  step: number,
+  limits: Record<PlannerPosturePresetSearchKey, { min: number; max: number; step: number }>
+) {
+  const values: number[] = [];
+
+  for (let offset = -PRESET_SEARCH_NEIGHBOR_RADIUS; offset <= PRESET_SEARCH_NEIGHBOR_RADIUS; offset += 1) {
+    values.push(clampPresetSearchSeedValue(key, value + offset * step, limits));
+  }
+
+  return [...new Set(values)];
 }
 
 function solveDynamicPlannerInput(
@@ -321,66 +439,68 @@ function solveDynamicPlannerInput(
   heightCm: number,
   modelMetrics: PlannerPostureModelMetrics | null = null
 ): PlannerInput {
-  const seed = getPresetSeed(preset, heightCm);
-  const baseCandidate = createCandidateInput(input, seed);
-  const seeds = {
-    steeringColumnBaseHeightMm: getCandidateRangeValues(
-      PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
-      getSteeringColumnBaseHeightMaxMm(),
-      10
-    ),
-    steeringColumnDistanceMm: getCandidateValues(
-      seed.steeringColumnDistanceMm,
-      DYNAMIC_SEARCH_STEPS.steeringColumnDistanceMm,
-      80,
-      baseCandidate.baseLengthMm,
-      10
-    ),
-    pedalTrayDistanceMm: getCandidateValues(
-      seed.pedalTrayDistanceMm,
-      DYNAMIC_SEARCH_STEPS.pedalTrayDistanceMm,
-      PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm,
-      PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMaxMm,
-      10
-    ),
-    pedalsHeightMm: getCandidateValues(
-      seed.pedalsHeightMm,
-      DYNAMIC_SEARCH_STEPS.pedalsHeightMm,
-      PLANNER_DIMENSION_LIMITS.pedalsHeightMinMm,
-      PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm,
-      10
-    ),
-    pedalAngleDeg: getCandidateValues(
-      seed.pedalAngleDeg,
-      DYNAMIC_SEARCH_STEPS.pedalAngleDeg,
-      PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
-      PLANNER_DIMENSION_LIMITS.pedalAngleDegMax,
-      1
-    ),
-  };
-  let bestInput = baseCandidate;
+  const limits = getPresetSearchLimits(input);
+  let bestSeed = clampPresetSearchSeed(getPresetSeed(preset, heightCm), limits);
+  let bestInput = createCandidateInput(input, bestSeed);
   let bestScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics);
 
-  for (const steeringColumnBaseHeightMm of seeds.steeringColumnBaseHeightMm) {
-    for (const steeringColumnDistanceMm of seeds.steeringColumnDistanceMm) {
-      for (const pedalTrayDistanceMm of seeds.pedalTrayDistanceMm) {
-        for (const pedalsHeightMm of seeds.pedalsHeightMm) {
-          for (const pedalAngleDeg of seeds.pedalAngleDeg) {
-            const candidate = createCandidateInput(input, {
-              steeringColumnBaseHeightMm,
-              steeringColumnDistanceMm,
-              pedalTrayDistanceMm,
-              pedalsHeightMm,
-              pedalAngleDeg,
-            });
-            const score = scoreCandidate(candidate, preset, heightCm, modelMetrics);
+  for (const stepLevel of PRESET_SEARCH_STEP_LEVELS) {
+    for (let pass = 0; pass < PRESET_SEARCH_MAX_PASSES_PER_LEVEL; pass += 1) {
+      let didImprove = false;
 
-            if (score < bestScore) {
-              bestInput = candidate;
-              bestScore = score;
-            }
+      for (const steeringColumnBaseHeightMm of getPresetSearchNeighborValues(
+        'steeringColumnBaseHeightMm',
+        bestSeed.steeringColumnBaseHeightMm,
+        stepLevel.steeringColumnBaseHeightMm,
+        limits
+      )) {
+        for (const steeringColumnDistanceMm of getPresetSearchNeighborValues(
+          'steeringColumnDistanceMm',
+          bestSeed.steeringColumnDistanceMm,
+          stepLevel.steeringColumnDistanceMm,
+          limits
+        )) {
+          const candidateSeed: PlannerPosturePresetSeed = {
+            ...bestSeed,
+            steeringColumnBaseHeightMm,
+            steeringColumnDistanceMm,
+          };
+          const candidateInput = createCandidateInput(input, candidateSeed);
+          const score = scoreCandidate(candidateInput, preset, heightCm, modelMetrics);
+
+          if (score + SCORE_EPSILON < bestScore) {
+            bestSeed = candidateSeed;
+            bestInput = candidateInput;
+            bestScore = score;
+            didImprove = true;
           }
         }
+      }
+
+      for (const key of PRESET_SEARCH_KEYS) {
+        if (key === 'steeringColumnBaseHeightMm' || key === 'steeringColumnDistanceMm') {
+          continue;
+        }
+
+        for (const direction of [-1, 1]) {
+          const candidateSeed: PlannerPosturePresetSeed = {
+            ...bestSeed,
+            [key]: clampPresetSearchSeedValue(key, bestSeed[key] + direction * stepLevel[key], limits),
+          };
+          const candidateInput = createCandidateInput(input, candidateSeed);
+          const score = scoreCandidate(candidateInput, preset, heightCm, modelMetrics);
+
+          if (score + SCORE_EPSILON < bestScore) {
+            bestSeed = candidateSeed;
+            bestInput = candidateInput;
+            bestScore = score;
+            didImprove = true;
+          }
+        }
+      }
+
+      if (!didImprove) {
+        break;
       }
     }
   }
