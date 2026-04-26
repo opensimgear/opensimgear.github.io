@@ -64,7 +64,7 @@ function getPedalPostureAngleScore(input: PlannerInput, preset: PlannerPosturePr
   });
 
   return report.metrics
-    .filter((metric) => ['kneeBend', 'ankleRange', 'brakeAlignment'].includes(metric.key))
+    .filter((metric) => ['kneeBend', 'ankleBend', 'footToToeBend', 'brakeAlignment'].includes(metric.key))
     .reduce((total, metric) => {
       const value = metric.valueDeg ?? 0;
       const target = (metric.range.min + metric.range.max) / 2;

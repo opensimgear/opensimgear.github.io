@@ -46,7 +46,8 @@ const METERS_TO_MM = 1000;
 const PRESET_SCORE_WEIGHTS: Record<string, number> = {
   elbowBend: 4,
   kneeBend: 4,
-  ankleRange: 4,
+  ankleBend: 4,
+  footToToeBend: 3,
   eyeToWheelTop: 4,
   brakeAlignment: 3,
   torsoToThigh: 2,
@@ -476,7 +477,8 @@ function refinePedalsToFootContact(
     getPedalContactErrorScore(bestInput, preset, heightCm, modelMetrics) +
     scoreCandidate(bestInput, preset, heightCm, modelMetrics, [
       'kneeBend',
-      'ankleRange',
+      'ankleBend',
+      'footToToeBend',
       'brakeAlignment',
       'torsoToThigh',
     ]);
@@ -499,7 +501,8 @@ function refinePedalsToFootContact(
           getPedalContactErrorScore(candidateInput, preset, heightCm, modelMetrics) +
           scoreCandidate(candidateInput, preset, heightCm, modelMetrics, [
             'kneeBend',
-            'ankleRange',
+            'ankleBend',
+            'footToToeBend',
             'brakeAlignment',
             'torsoToThigh',
           ]);

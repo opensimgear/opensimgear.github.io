@@ -39,6 +39,8 @@ export type PlannerPostureReport = {
 const MM_TO_METERS = 0.001;
 const EPSILON = 0.000001;
 const MONITOR_DEBUG_BALL_DIAMETER_MM = 10;
+const ANKLE_ORIGINAL_POSTURE_ANGLE_DEG = 180;
+const FOOT_TO_TOE_ORIGINAL_POSTURE_ANGLE_DEG = 180;
 
 const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureMetricRange>> = {
   gt: {
@@ -46,7 +48,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     elbowBend: { min: 90, max: 120 },
     kneeBend: { min: 120, max: 135 },
     torsoToThigh: { min: 60, max: 120 },
-    ankleRange: { min: 85, max: 105 },
+    ankleBend: { min: 75, max: 95 },
+    footToToeBend: { min: 35, max: 65 },
     brakeAlignment: { min: -3, max: 3 },
     eyeToWheelTop: { min: 50, max: 100 },
     eyeToMonitorMidpoint: { min: -50, max: 50 },
@@ -56,7 +59,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     elbowBend: { min: 95, max: 135 },
     kneeBend: { min: 110, max: 140 },
     torsoToThigh: { min: 60, max: 125 },
-    ankleRange: { min: 75, max: 110 },
+    ankleBend: { min: 70, max: 105 },
+    footToToeBend: { min: 25, max: 75 },
     brakeAlignment: { min: -3, max: 3 },
     eyeToWheelTop: { min: 50, max: 150 },
     eyeToMonitorMidpoint: { min: -50, max: 50 },
@@ -66,7 +70,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     elbowBend: { min: 95, max: 135 },
     kneeBend: { min: 110, max: 140 },
     torsoToThigh: { min: 60, max: 125 },
-    ankleRange: { min: 75, max: 110 },
+    ankleBend: { min: 70, max: 105 },
+    footToToeBend: { min: 25, max: 75 },
     brakeAlignment: { min: -3, max: 3 },
     eyeToWheelTop: { min: 50, max: 100 },
     eyeToMonitorMidpoint: { min: -50, max: 50 },
@@ -76,7 +81,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     elbowBend: { min: 100, max: 135 },
     kneeBend: { min: 118, max: 142 },
     torsoToThigh: { min: 80, max: 130 },
-    ankleRange: { min: 68, max: 113 },
+    ankleBend: { min: 67, max: 112 },
+    footToToeBend: { min: 20, max: 80 },
     brakeAlignment: { min: -3, max: 3 },
     eyeToWheelTop: { min: 50, max: 100 },
     eyeToMonitorMidpoint: { min: -50, max: 50 },
@@ -86,7 +92,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     elbowBend: { min: 90, max: 120 },
     kneeBend: { min: 120, max: 135 },
     torsoToThigh: { min: 85, max: 120 },
-    ankleRange: { min: 85, max: 105 },
+    ankleBend: { min: 75, max: 95 },
+    footToToeBend: { min: 35, max: 65 },
     brakeAlignment: { min: -3, max: 3 },
     eyeToWheelTop: { min: 50, max: 100 },
     eyeToMonitorMidpoint: { min: -50, max: 50 },
@@ -117,6 +124,10 @@ function angleDeg(a: PosturePoint, joint: PosturePoint, b: PosturePoint) {
   const cosine = Math.max(-1, Math.min(1, dot(jointToA, jointToB) / denominator));
 
   return (Math.acos(cosine) * 180) / Math.PI;
+}
+
+function angleDecreaseFromOriginalDeg(originalAngleDeg: number, a: PosturePoint, joint: PosturePoint, b: PosturePoint) {
+  return Math.max(0, originalAngleDeg - angleDeg(a, joint, b));
 }
 
 function projectedXyAngleDeg(from: PosturePoint, to: PosturePoint) {
@@ -291,12 +302,42 @@ export function createPlannerPostureReport(
       ranges
     ),
     createMetric(
-      'ankleRange',
-      'Ankle range',
+      'ankleBend',
+      'Ankle bend',
       'deg',
       mean([
-        angleDeg(skeleton.joints.kneeLeft, skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft),
-        angleDeg(skeleton.joints.kneeRight, skeleton.joints.ankleRight, skeleton.joints.toeStartRight),
+        angleDecreaseFromOriginalDeg(
+          ANKLE_ORIGINAL_POSTURE_ANGLE_DEG,
+          skeleton.joints.kneeLeft,
+          skeleton.joints.ankleLeft,
+          skeleton.joints.toeStartLeft
+        ),
+        angleDecreaseFromOriginalDeg(
+          ANKLE_ORIGINAL_POSTURE_ANGLE_DEG,
+          skeleton.joints.kneeRight,
+          skeleton.joints.ankleRight,
+          skeleton.joints.toeStartRight
+        ),
+      ]),
+      ranges
+    ),
+    createMetric(
+      'footToToeBend',
+      'Foot to toe bend',
+      'deg',
+      mean([
+        angleDecreaseFromOriginalDeg(
+          FOOT_TO_TOE_ORIGINAL_POSTURE_ANGLE_DEG,
+          skeleton.joints.ankleLeft,
+          skeleton.joints.toeStartLeft,
+          skeleton.joints.toeLeft
+        ),
+        angleDecreaseFromOriginalDeg(
+          FOOT_TO_TOE_ORIGINAL_POSTURE_ANGLE_DEG,
+          skeleton.joints.ankleRight,
+          skeleton.joints.toeStartRight,
+          skeleton.joints.toeRight
+        ),
       ]),
       ranges
     ),

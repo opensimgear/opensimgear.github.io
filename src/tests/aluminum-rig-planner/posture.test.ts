@@ -26,6 +26,8 @@ import {
   POSTURE_TALON_PEDAL_PLANE_OFFSET_MM,
   POSTURE_TOE_BONE_START_SHARE,
 } from '../../components/calculator/aluminum-rig-planner/posture';
+import { createHumanModelPoseSkeleton } from '../../components/calculator/aluminum-rig-planner/human-model-rig';
+import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
 
 function expectPointToBeFinite(point: [number, number, number]) {
   expect(point.every((value) => Number.isFinite(value))).toBe(true);
@@ -33,6 +35,18 @@ function expectPointToBeFinite(point: [number, number, number]) {
 
 function getDistance(start: [number, number, number], end: [number, number, number]) {
   return Math.hypot(end[0] - start[0], end[1] - start[1], end[2] - start[2]);
+}
+
+function scalePointFromOrigin(
+  point: [number, number, number],
+  origin: [number, number, number],
+  scale: number
+): [number, number, number] {
+  return [
+    origin[0] + (point[0] - origin[0]) * scale,
+    origin[1] + (point[1] - origin[1]) * scale,
+    origin[2] + (point[2] - origin[2]) * scale,
+  ];
 }
 
 function getDirection(start: [number, number, number], end: [number, number, number]): [number, number, number] {
@@ -57,6 +71,10 @@ function getAngleAtJoint(
   const dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 
   return Math.acos(Math.max(-1, Math.min(1, dot)));
+}
+
+function radToDeg(angleRad: number) {
+  return (angleRad * 180) / Math.PI;
 }
 
 function getSignedThighAngleRelativeToSeat(
@@ -89,6 +107,55 @@ describe('aluminum rig planner posture solver', () => {
 
     expect(skeleton.segments).toHaveLength(21);
     expect(skeleton.segments[0].start).toBe(skeleton.joints.head);
+  });
+
+  it('reports ankle bend and foot-to-toe bend from the original straight posture', () => {
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const ankleMetric = report.metrics.find((metric) => metric.key === 'ankleBend');
+    const footToToeMetric = report.metrics.find((metric) => metric.key === 'footToToeBend');
+    const oldAnkleRangeMetric = report.metrics.find((metric) => metric.key === 'ankleRange');
+    const expectedAnkleBend =
+      180 -
+      radToDeg(getAngleAtJoint(skeleton.joints.kneeLeft, skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft));
+    const expectedFootToToeBend =
+      180 - radToDeg(getAngleAtJoint(skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft, skeleton.joints.toeLeft));
+
+    expect(oldAnkleRangeMetric).toBeUndefined();
+    expect(ankleMetric?.label).toBe('Ankle bend');
+    expect(ankleMetric?.valueDeg).toBeCloseTo(expectedAnkleBend, 1);
+    expect(footToToeMetric?.label).toBe('Foot to toe bend');
+    expect(footToToeMetric?.valueDeg).toBeCloseTo(expectedFootToToeBend, 1);
+    expect(footToToeMetric?.valueDeg).toBeGreaterThanOrEqual(0);
+  });
+
+  it('pre-scales human model pose targets so height scaling does not lengthen or shorten IK bones', () => {
+    for (const heightCm of [130, 200]) {
+      const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        heightCm,
+      });
+      const modelScale = heightCm / DEFAULT_POSTURE_HEIGHT_CM;
+      const poseSkeleton = createHumanModelPoseSkeleton(skeleton, modelScale);
+      const hipCenter = skeleton.joints.hipCenter;
+
+      for (const jointName of ['kneeLeft', 'ankleLeft', 'toeStartLeft', 'toeLeft', 'handRight'] as const) {
+        const finalPoint = scalePointFromOrigin(poseSkeleton.joints[jointName], hipCenter, modelScale);
+
+        expect(finalPoint[0]).toBeCloseTo(skeleton.joints[jointName][0], 6);
+        expect(finalPoint[1]).toBeCloseTo(skeleton.joints[jointName][1], 6);
+        expect(finalPoint[2]).toBeCloseTo(skeleton.joints[jointName][2], 6);
+      }
+
+      expect(getDistance(poseSkeleton.joints.hipLeft, poseSkeleton.joints.kneeLeft) * modelScale).toBeCloseTo(
+        getDistance(skeleton.joints.hipLeft, skeleton.joints.kneeLeft),
+        6
+      );
+      expect(getDistance(poseSkeleton.joints.kneeLeft, poseSkeleton.joints.ankleLeft) * modelScale).toBeCloseTo(
+        getDistance(skeleton.joints.kneeLeft, skeleton.joints.ankleLeft),
+        6
+      );
+    }
   });
 
   it('uses the default ratios for height-based posture solving', () => {

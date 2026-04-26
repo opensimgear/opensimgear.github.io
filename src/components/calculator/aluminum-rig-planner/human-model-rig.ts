@@ -15,7 +15,12 @@ import {
   Vector3,
 } from 'three';
 
-import { POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM, type PlannerPostureSkeleton, type PosturePoint } from './posture';
+import {
+  POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM,
+  type PlannerPostureSkeleton,
+  type PostureJointName,
+  type PosturePoint,
+} from './posture';
 import type { PlannerAnthropometryRatios, PlannerPostureModelMetrics } from './types';
 
 export const HUMAN_MALE_REALISTIC_MODEL_URL = '/models/aluminum-rig-planner/human-male-realistic.glb';
@@ -476,6 +481,39 @@ function createTargetSegments(skeleton: PlannerPostureSkeleton) {
   ]);
 }
 
+function inverseScalePosturePoint(point: PosturePoint, origin: PosturePoint, modelScale: number): PosturePoint {
+  return [
+    origin[0] + (point[0] - origin[0]) / modelScale,
+    origin[1] + (point[1] - origin[1]) / modelScale,
+    origin[2] + (point[2] - origin[2]) / modelScale,
+  ];
+}
+
+export function createHumanModelPoseSkeleton(
+  skeleton: PlannerPostureSkeleton,
+  modelScale: number
+): PlannerPostureSkeleton {
+  const safeModelScale = Math.max(BONE_LENGTH_EPSILON, modelScale);
+
+  if (Math.abs(safeModelScale - 1) <= BONE_LENGTH_EPSILON) {
+    return skeleton;
+  }
+
+  const origin = skeleton.joints.hipCenter;
+  const joints = Object.fromEntries(
+    Object.entries(skeleton.joints).map(([name, point]) => [
+      name,
+      inverseScalePosturePoint(point, origin, safeModelScale),
+    ])
+  ) as Record<PostureJointName, PosturePoint>;
+  const segments = skeleton.segments.map((segment) => ({
+    start: inverseScalePosturePoint(segment.start, origin, safeModelScale),
+    end: inverseScalePosturePoint(segment.end, origin, safeModelScale),
+  }));
+
+  return { joints, segments };
+}
+
 function poseBone(
   root: Group,
   bone: Bone,
@@ -544,12 +582,15 @@ function placeBoneAtTarget(root: Group, bone: Bone, target: Vector3) {
 }
 
 function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, modelScale: number) {
+  const safeModelScale = Math.max(BONE_LENGTH_EPSILON, modelScale);
+  const poseSkeleton = createHumanModelPoseSkeleton(skeleton, safeModelScale);
+
   resetBonesToRestPose(rig);
   rig.root.position.set(0, 0, 0);
   rig.root.scale.setScalar(1);
   rig.root.updateWorldMatrix(true, true);
 
-  const targetSegments = createTargetSegments(skeleton);
+  const targetSegments = createTargetSegments(poseSkeleton);
 
   for (const name of HUMAN_BONE_ORDER) {
     const bone = rig.bones.get(name);
@@ -577,7 +618,7 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
     );
   }
 
-  const { joints } = skeleton;
+  const { joints } = poseSkeleton;
   const leftTalon = getTalonPoint(joints.ankleLeft, joints.heelLeft, joints.toeLeft);
   const rightTalon = getTalonPoint(joints.ankleRight, joints.heelRight, joints.toeRight);
   const terminalTargets: Array<[HumanModelBoneName, Vector3]> = [
@@ -600,7 +641,6 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
     mesh.geometry.computeBoundingSphere();
   }
 
-  const safeModelScale = Math.max(BONE_LENGTH_EPSILON, modelScale);
   const modelHipCenter = plannerZUpToModelYUp(skeleton.joints.hipCenter);
   const scaleOrigin = new Vector3(modelHipCenter[0], modelHipCenter[1], modelHipCenter[2]);
   rig.root.updateWorldMatrix(true, true);
