@@ -9,16 +9,7 @@ export type PlannerOptimizerMode = 'cost' | 'waste';
 export type ShippingMode = 'flat' | 'per-kg';
 export type PlannerCurrencyMode = 'auto' | 'eur' | 'usd';
 export type PlannerCurrencyCode = 'EUR' | 'USD';
-export type PlannerPosturePreset =
-  | 'gt'
-  | 'formula'
-  | 'prototype'
-  | 'rally'
-  | 'drift'
-  | 'road'
-  | 'oval'
-  | 'karting'
-  | 'custom';
+export type PlannerPosturePreset = 'gt' | 'rally' | 'drift' | 'road' | 'custom';
 export type PlannerSolvablePosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
 export type PlannerMonitorAspectRatio = '16:10' | '16:9' | '21:9' | '32:9' | '4:3' | '5:4' | '3:2';
 export type PlannerMonitorCurvature =

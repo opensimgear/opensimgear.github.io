@@ -161,14 +161,10 @@ function isMonitorCurvature(value: unknown): value is PlannerMonitorCurvature {
 function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const defaults = DEFAULT_PLANNER_POSTURE_SETTINGS;
   const preset =
-    state?.preset === 'formula' ||
-    state?.preset === 'prototype' ||
     state?.preset === 'gt' ||
     state?.preset === 'rally' ||
     state?.preset === 'drift' ||
     state?.preset === 'road' ||
-    state?.preset === 'oval' ||
-    state?.preset === 'karting' ||
     state?.preset === 'custom'
       ? state.preset
       : defaults.preset;

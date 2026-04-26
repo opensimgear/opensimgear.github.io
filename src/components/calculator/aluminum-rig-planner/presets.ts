@@ -131,14 +131,19 @@ const SCORE_EPSILON = 0.000001;
 export { PLANNER_POSTURE_PRESETS };
 
 function getPresetFixedFinalValues(preset: SolvablePlannerPosturePreset) {
-  const { seatAngleDeg, backrestAngleDeg, wheelDiameterMm, wheelAngleDeg } = PLANNER_POSTURE_PRESETS[preset];
+  const { seatHeightFromBaseInnerBeamsMm, seatAngleDeg, backrestAngleDeg, wheelDiameterMm, wheelAngleDeg } =
+    PLANNER_POSTURE_PRESETS[preset];
 
   return {
+    seatHeightFromBaseInnerBeamsMm,
     seatAngleDeg,
     backrestAngleDeg,
     wheelDiameterMm,
     wheelAngleDeg,
-  } satisfies Pick<PlannerInput, 'seatAngleDeg' | 'backrestAngleDeg' | 'wheelDiameterMm' | 'wheelAngleDeg'>;
+  } satisfies Pick<
+    PlannerInput,
+    'seatHeightFromBaseInnerBeamsMm' | 'seatAngleDeg' | 'backrestAngleDeg' | 'wheelDiameterMm' | 'wheelAngleDeg'
+  >;
 }
 
 function clamp(value: number, min: number, max: number) {
@@ -162,30 +167,11 @@ function clampMonitorHeightFromBaseMm(value: number) {
 }
 
 export function isPlannerPosturePreset(value: unknown): value is PlannerPosturePreset {
-  return (
-    value === 'gt' ||
-    value === 'formula' ||
-    value === 'prototype' ||
-    value === 'rally' ||
-    value === 'drift' ||
-    value === 'road' ||
-    value === 'oval' ||
-    value === 'karting' ||
-    value === 'custom'
-  );
+  return value === 'gt' || value === 'rally' || value === 'drift' || value === 'road' || value === 'custom';
 }
 
 export function isPresetSolvablePreset(value: unknown): value is SolvablePlannerPosturePreset {
-  return (
-    value === 'gt' ||
-    value === 'formula' ||
-    value === 'prototype' ||
-    value === 'rally' ||
-    value === 'drift' ||
-    value === 'road' ||
-    value === 'oval' ||
-    value === 'karting'
-  );
+  return value === 'gt' || value === 'rally' || value === 'drift' || value === 'road';
 }
 
 export function getPresetAfterPlannerInputEdit(
@@ -261,32 +247,6 @@ function getPresetSeed(
   const heightDeltaCm = clamp(heightCm, 100, 220) - DEFAULT_POSTURE_HEIGHT_CM;
   const boosterSeedAdjustment = getPresetBoosterSeedAdjustment(preset, heightCm);
 
-  if (preset === 'formula') {
-    const fallbackPedalsHeightMm = 300 + heightDeltaCm * 0.4 + boosterSeedAdjustment.zMm;
-
-    return {
-      steeringColumnBaseHeightMm: 390 + heightDeltaCm * 0.5 + boosterSeedAdjustment.zMm,
-      steeringColumnDistanceMm: 335 + heightDeltaCm * 1.2 + boosterSeedAdjustment.xMm,
-      pedalTrayDistanceMm: 520 + heightDeltaCm * 3.1 + boosterSeedAdjustment.xMm,
-      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
-      pedalAngleDeg: 58,
-      pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
-    };
-  }
-
-  if (preset === 'prototype') {
-    const fallbackPedalsHeightMm = 235 + heightDeltaCm * 0.35 + boosterSeedAdjustment.zMm;
-
-    return {
-      steeringColumnBaseHeightMm: 370 + heightDeltaCm * 0.45 + boosterSeedAdjustment.zMm,
-      steeringColumnDistanceMm: 350 + heightDeltaCm * 1.3 + boosterSeedAdjustment.xMm,
-      pedalTrayDistanceMm: 500 + heightDeltaCm * 3.1 + boosterSeedAdjustment.xMm,
-      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
-      pedalAngleDeg: 58,
-      pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
-    };
-  }
-
   if (preset === 'rally') {
     const fallbackPedalsHeightMm = 55 + heightDeltaCm * 0.3 + boosterSeedAdjustment.zMm;
 
@@ -322,32 +282,6 @@ function getPresetSeed(
       pedalTrayDistanceMm: 560 + heightDeltaCm * 3.4 + boosterSeedAdjustment.xMm,
       pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
       pedalAngleDeg: 55,
-      pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
-    };
-  }
-
-  if (preset === 'oval') {
-    const fallbackPedalsHeightMm = 70 + heightDeltaCm * 0.3 + boosterSeedAdjustment.zMm;
-
-    return {
-      steeringColumnBaseHeightMm: 410 + heightDeltaCm * 0.45 + boosterSeedAdjustment.zMm,
-      steeringColumnDistanceMm: 390 + heightDeltaCm * 1.6 + boosterSeedAdjustment.xMm,
-      pedalTrayDistanceMm: 510 + heightDeltaCm * 3.2 + boosterSeedAdjustment.xMm,
-      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
-      pedalAngleDeg: 58,
-      pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
-    };
-  }
-
-  if (preset === 'karting') {
-    const fallbackPedalsHeightMm = 225 + heightDeltaCm * 0.35 + boosterSeedAdjustment.zMm;
-
-    return {
-      steeringColumnBaseHeightMm: 370 + heightDeltaCm * 0.45 + boosterSeedAdjustment.zMm,
-      steeringColumnDistanceMm: 340 + heightDeltaCm * 1.3 + boosterSeedAdjustment.xMm,
-      pedalTrayDistanceMm: 500 + heightDeltaCm * 3.1 + boosterSeedAdjustment.xMm,
-      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
-      pedalAngleDeg: 58,
       pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
     };
   }

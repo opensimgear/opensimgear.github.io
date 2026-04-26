@@ -85,14 +85,10 @@ const DEFAULT_EYE_CENTER_FORWARD_FROM_HIP = 0.064;
 const DEFAULT_EYE_CENTER_HEIGHT_FROM_HIP = 0.407;
 
 const PRESET_KNEE_LIFT = {
-  formula: 0.18,
   gt: 0.24,
-  prototype: 0.2,
   rally: 0.28,
   drift: 0.28,
   road: 0.24,
-  oval: 0.24,
-  karting: 0.2,
   custom: 0.24,
 } as const;
 

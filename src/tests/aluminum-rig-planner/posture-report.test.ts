@@ -17,16 +17,7 @@ import {
 } from '../../components/calculator/aluminum-rig-planner/presets';
 import type { PlannerPosturePreset } from '../../components/calculator/aluminum-rig-planner/types';
 
-const SOLVABLE_PRESETS = [
-  'gt',
-  'formula',
-  'prototype',
-  'rally',
-  'drift',
-  'road',
-  'oval',
-  'karting',
-] satisfies PlannerPosturePreset[];
+const SOLVABLE_PRESETS = ['gt', 'rally', 'drift', 'road'] satisfies PlannerPosturePreset[];
 
 function formatMetricValue(metric: ReturnType<typeof createPlannerPostureReport>['metrics'][number]) {
   return metric.unit === 'mm' ? `${metric.valueMm}mm` : `${metric.valueDeg}deg`;

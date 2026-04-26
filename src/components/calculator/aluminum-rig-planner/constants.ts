@@ -163,13 +163,9 @@ export const DEFAULT_PLANNER_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings 
 
 export const POSTURE_PRESET_OPTIONS = [
   { text: 'GT / GT3 / Touring', value: 'gt' },
-  { text: 'Formula / F1', value: 'formula' },
-  { text: 'Prototype / LMP', value: 'prototype' },
   { text: 'Rally', value: 'rally' },
   { text: 'Drift', value: 'drift' },
   { text: 'Sports car / road', value: 'road' },
-  { text: 'Oval / NASCAR-style', value: 'oval' },
-  { text: 'Karting', value: 'karting' },
   { text: 'Custom', value: 'custom' },
 ] as const;
 export const MONITOR_ASPECT_RATIO_OPTIONS = [

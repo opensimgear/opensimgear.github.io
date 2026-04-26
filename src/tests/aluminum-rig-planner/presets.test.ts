@@ -26,16 +26,7 @@ import {
 } from '../../components/calculator/aluminum-rig-planner/presets';
 import type { PlannerInput, PlannerPosturePreset } from '../../components/calculator/aluminum-rig-planner/types';
 
-const NON_CUSTOM_PRESETS = [
-  'gt',
-  'formula',
-  'prototype',
-  'rally',
-  'drift',
-  'road',
-  'oval',
-  'karting',
-] satisfies PlannerPosturePreset[];
+const NON_CUSTOM_PRESETS = ['gt', 'rally', 'drift', 'road'] satisfies PlannerPosturePreset[];
 const DYNAMIC_KEYS = [
   'steeringColumnBaseHeightMm',
   'steeringColumnHeightMm',
@@ -46,7 +37,13 @@ const DYNAMIC_KEYS = [
   'pedalBrakeDeltaMm',
   'baseLengthMm',
 ] as const;
-const FIXED_FINAL_PRESET_KEYS = ['seatAngleDeg', 'backrestAngleDeg', 'wheelDiameterMm', 'wheelAngleDeg'] as const;
+const FIXED_FINAL_PRESET_KEYS = [
+  'seatHeightFromBaseInnerBeamsMm',
+  'seatAngleDeg',
+  'backrestAngleDeg',
+  'wheelDiameterMm',
+  'wheelAngleDeg',
+] as const;
 const DYNAMIC_KEY_SET = new Set<keyof PlannerInput>(DYNAMIC_KEYS);
 
 function expectOnlyDynamicFieldsToChange(before: PlannerInput, after: PlannerInput) {
@@ -99,9 +96,11 @@ function getMetricTargetScore(input: PlannerInput, preset: PlannerPosturePreset,
 }
 
 function getPresetFixedInputValues(preset: (typeof NON_CUSTOM_PRESETS)[number]) {
-  const { seatAngleDeg, backrestAngleDeg, wheelDiameterMm, wheelAngleDeg } = PLANNER_POSTURE_PRESETS[preset];
+  const { seatHeightFromBaseInnerBeamsMm, seatAngleDeg, backrestAngleDeg, wheelDiameterMm, wheelAngleDeg } =
+    PLANNER_POSTURE_PRESETS[preset];
 
   return {
+    seatHeightFromBaseInnerBeamsMm,
     seatAngleDeg,
     backrestAngleDeg,
     wheelDiameterMm,
@@ -119,6 +118,7 @@ describe('aluminum rig planner posture presets', () => {
     const result = applyPresetToPlannerInput(
       {
         ...DEFAULT_PLANNER_INPUT,
+        seatHeightFromBaseInnerBeamsMm: 222,
         seatAngleDeg: 42,
         backrestAngleDeg: 135,
         pedalsHeightMm: 13,
@@ -151,20 +151,13 @@ describe('aluminum rig planner posture presets', () => {
     expect(result.wheelDistanceFromSteeringColumnMm).toBe(current.wheelDistanceFromSteeringColumnMm);
   });
 
-  it('sets formula wheel angle flat', () => {
-    const result = applyPresetToPlannerInput(
-      DEFAULT_PLANNER_INPUT,
-      'formula',
-      DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm
-    );
-
-    expect(result.wheelAngleDeg).toBe(0);
-    expect(PLANNER_POSTURE_PRESETS.formula.wheelAngleDeg).toBe(0);
-  });
-
   it.each(NON_CUSTOM_PRESETS)('stores %s pedal height as a hip-relative preset value', (preset) => {
     expect('pedalsHeightMm' in PLANNER_POSTURE_PRESETS[preset]).toBe(false);
     expect(Number.isFinite(PLANNER_POSTURE_PRESETS[preset].pedalHeightVsHipsMm)).toBe(true);
+  });
+
+  it.each(NON_CUSTOM_PRESETS)('stores %s seat height as a preset fixed value', (preset) => {
+    expect(Number.isFinite(PLANNER_POSTURE_PRESETS[preset].seatHeightFromBaseInnerBeamsMm)).toBe(true);
   });
 
   it.each(NON_CUSTOM_PRESETS)('keeps solved pedal values after applying %s preset', (preset) => {
