@@ -34,8 +34,20 @@ describe('aluminum rig planner component wiring', () => {
     );
 
     expect(presetsSource).toContain('createPlannerPostureReport');
+    expect(presetsSource).toContain("metric.key === 'eyeToWheelTop' ? metric.range.min");
     expect(presetsSource).not.toContain("metric.key === 'eyeToMonitorMidpoint'");
     expect(presetsSource).not.toContain("metric.key === 'headToMonitor'");
+  });
+
+  it('searches steering column base height as a full preset axis', () => {
+    const presetsSource = readFileSync(
+      new URL('../../components/calculator/aluminum-rig-planner/presets.ts', import.meta.url),
+      'utf8'
+    );
+
+    expect(presetsSource).toContain('getCandidateRangeValues');
+    expect(presetsSource).toContain('getSteeringColumnBaseHeightMaxMm()');
+    expect(presetsSource).not.toContain('DYNAMIC_SEARCH_STEPS.steeringColumnBaseHeightMm');
   });
 
   it('shows target FOV editing only for flat monitors', () => {

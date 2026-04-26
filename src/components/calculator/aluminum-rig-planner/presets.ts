@@ -5,6 +5,7 @@ import {
   DEFAULT_POSTURE_HEIGHT_CM,
   PLANNER_CONTROL_STEP_MM,
   PLANNER_DIMENSION_LIMITS,
+  PLANNER_LAYOUT,
   PLANNER_POSTURE_LIMITS,
 } from './constants';
 import {
@@ -33,17 +34,10 @@ type PlannerPosturePresetFixedValues = Pick<
 >;
 type PlannerPosturePresetSeed = Pick<
   PlannerInput,
-  | 'steeringColumnBaseHeightMm'
-  | 'steeringColumnHeightMm'
-  | 'steeringColumnDistanceMm'
-  | 'pedalTrayDistanceMm'
-  | 'pedalsHeightMm'
-  | 'pedalAngleDeg'
+  'steeringColumnBaseHeightMm' | 'steeringColumnDistanceMm' | 'pedalTrayDistanceMm' | 'pedalsHeightMm' | 'pedalAngleDeg'
 >;
 
 const DYNAMIC_SEARCH_STEPS = {
-  steeringColumnBaseHeightMm: [-30, 0, 30],
-  steeringColumnHeightMm: [-20, 0, 20],
   steeringColumnDistanceMm: [-50, 0, 50],
   pedalTrayDistanceMm: [-60, 0, 60],
   pedalsHeightMm: [-35, 0, 35],
@@ -166,7 +160,6 @@ function getPresetSeed(preset: SolvablePlannerPosturePreset, heightCm: number): 
   if (preset === 'formula') {
     return {
       steeringColumnBaseHeightMm: 390 + heightDeltaCm * 0.5,
-      steeringColumnHeightMm: 515 + heightDeltaCm * 0.2,
       steeringColumnDistanceMm: 335 + heightDeltaCm * 1.2,
       pedalTrayDistanceMm: 520 + heightDeltaCm * 3.1,
       pedalsHeightMm: 120 + heightDeltaCm * 0.4,
@@ -177,7 +170,6 @@ function getPresetSeed(preset: SolvablePlannerPosturePreset, heightCm: number): 
   if (preset === 'rally') {
     return {
       steeringColumnBaseHeightMm: 450 + heightDeltaCm * 0.35,
-      steeringColumnHeightMm: 560 + heightDeltaCm * 0.15,
       steeringColumnDistanceMm: 330 + heightDeltaCm * 1.1,
       pedalTrayDistanceMm: 430 + heightDeltaCm * 3,
       pedalsHeightMm: 145 + heightDeltaCm * 0.3,
@@ -188,7 +180,6 @@ function getPresetSeed(preset: SolvablePlannerPosturePreset, heightCm: number): 
   if (preset === 'road') {
     return {
       steeringColumnBaseHeightMm: 400 + heightDeltaCm * 0.45,
-      steeringColumnHeightMm: 510 + heightDeltaCm * 0.15,
       steeringColumnDistanceMm: 430 + heightDeltaCm * 1.8,
       pedalTrayDistanceMm: 560 + heightDeltaCm * 3.4,
       pedalsHeightMm: 70 + heightDeltaCm * 0.3,
@@ -198,7 +189,6 @@ function getPresetSeed(preset: SolvablePlannerPosturePreset, heightCm: number): 
 
   return {
     steeringColumnBaseHeightMm: 420 + heightDeltaCm * 0.4,
-    steeringColumnHeightMm: 520 + heightDeltaCm * 0.15,
     steeringColumnDistanceMm: 380 + heightDeltaCm * 1.5,
     pedalTrayDistanceMm: 470 + heightDeltaCm * 3.2,
     pedalsHeightMm: 95 + heightDeltaCm * 0.35,
@@ -208,6 +198,16 @@ function getPresetSeed(preset: SolvablePlannerPosturePreset, heightCm: number): 
 
 function getCandidateValues(value: number, offsets: readonly number[], min: number, max: number, step: number) {
   return [...new Set(offsets.map((offset) => clamp(roundToStep(value + offset, step), min, max)))];
+}
+
+function getCandidateRangeValues(min: number, max: number, step: number) {
+  const values: number[] = [];
+
+  for (let value = roundToStep(min, step); value <= max; value += step) {
+    values.push(clamp(value, min, max));
+  }
+
+  return [...new Set(values)];
 }
 
 function placeBaseAroundPedalTray(input: PlannerInput) {
@@ -277,7 +277,7 @@ function createCandidateInput(input: PlannerInput, seed: PlannerPosturePresetSee
     placeBaseAroundPedalTray({
       ...input,
       steeringColumnBaseHeightMm: seed.steeringColumnBaseHeightMm,
-      steeringColumnHeightMm: seed.steeringColumnHeightMm,
+      steeringColumnHeightMm: seed.steeringColumnBaseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm,
       steeringColumnDistanceMm: seed.steeringColumnDistanceMm,
       pedalTrayDistanceMm: seed.pedalTrayDistanceMm,
       pedalsHeightMm: seed.pedalsHeightMm,
@@ -307,11 +307,11 @@ function scoreCandidate(
 
   return report.metrics.reduce((total, metric) => {
     const value = metric.unit === 'mm' ? (metric.valueMm ?? 0) : (metric.valueDeg ?? 0);
-    const center = (metric.range.min + metric.range.max) / 2;
+    const target = metric.key === 'eyeToWheelTop' ? metric.range.min : (metric.range.min + metric.range.max) / 2;
     const width = Math.max(1, metric.range.max - metric.range.min);
     const statusPenalty = metric.status === 'bad' ? 100 : metric.status === 'warn' ? 20 : 0;
 
-    return total + statusPenalty + Math.abs(value - center) / width;
+    return total + statusPenalty + Math.abs(value - target) / width;
   }, 0);
 }
 
@@ -324,18 +324,9 @@ function solveDynamicPlannerInput(
   const seed = getPresetSeed(preset, heightCm);
   const baseCandidate = createCandidateInput(input, seed);
   const seeds = {
-    steeringColumnBaseHeightMm: getCandidateValues(
-      seed.steeringColumnBaseHeightMm,
-      DYNAMIC_SEARCH_STEPS.steeringColumnBaseHeightMm,
+    steeringColumnBaseHeightMm: getCandidateRangeValues(
       PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMinMm,
       getSteeringColumnBaseHeightMaxMm(),
-      10
-    ),
-    steeringColumnHeightMm: getCandidateValues(
-      seed.steeringColumnHeightMm,
-      DYNAMIC_SEARCH_STEPS.steeringColumnHeightMm,
-      PLANNER_DIMENSION_LIMITS.steeringColumnHeightMinMm,
-      PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm,
       10
     ),
     steeringColumnDistanceMm: getCandidateValues(
@@ -371,25 +362,22 @@ function solveDynamicPlannerInput(
   let bestScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics);
 
   for (const steeringColumnBaseHeightMm of seeds.steeringColumnBaseHeightMm) {
-    for (const steeringColumnHeightMm of seeds.steeringColumnHeightMm) {
-      for (const steeringColumnDistanceMm of seeds.steeringColumnDistanceMm) {
-        for (const pedalTrayDistanceMm of seeds.pedalTrayDistanceMm) {
-          for (const pedalsHeightMm of seeds.pedalsHeightMm) {
-            for (const pedalAngleDeg of seeds.pedalAngleDeg) {
-              const candidate = createCandidateInput(input, {
-                steeringColumnBaseHeightMm,
-                steeringColumnHeightMm,
-                steeringColumnDistanceMm,
-                pedalTrayDistanceMm,
-                pedalsHeightMm,
-                pedalAngleDeg,
-              });
-              const score = scoreCandidate(candidate, preset, heightCm, modelMetrics);
+    for (const steeringColumnDistanceMm of seeds.steeringColumnDistanceMm) {
+      for (const pedalTrayDistanceMm of seeds.pedalTrayDistanceMm) {
+        for (const pedalsHeightMm of seeds.pedalsHeightMm) {
+          for (const pedalAngleDeg of seeds.pedalAngleDeg) {
+            const candidate = createCandidateInput(input, {
+              steeringColumnBaseHeightMm,
+              steeringColumnDistanceMm,
+              pedalTrayDistanceMm,
+              pedalsHeightMm,
+              pedalAngleDeg,
+            });
+            const score = scoreCandidate(candidate, preset, heightCm, modelMetrics);
 
-              if (score < bestScore) {
-                bestInput = candidate;
-                bestScore = score;
-              }
+            if (score < bestScore) {
+              bestInput = candidate;
+              bestScore = score;
             }
           }
         }

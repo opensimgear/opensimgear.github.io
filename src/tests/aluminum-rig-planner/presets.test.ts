@@ -7,6 +7,7 @@ import {
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_CONTROL_STEP_MM,
   PLANNER_DIMENSION_LIMITS,
+  PLANNER_LAYOUT,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { clampPlannerInput } from '../../components/calculator/aluminum-rig-planner/geometry';
 import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
@@ -179,6 +180,14 @@ describe('aluminum rig planner posture presets', () => {
     const result = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, 182);
 
     expect(result.baseLengthMm).toBe(result.seatBaseDepthMm + result.pedalTrayDistanceMm + result.pedalTrayDepthMm);
+  });
+
+  it.each(NON_CUSTOM_PRESETS)('derives steering column height from base height for %s', (preset) => {
+    const result = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, 182);
+
+    expect(result.steeringColumnHeightMm).toBe(
+      result.steeringColumnBaseHeightMm + PLANNER_LAYOUT.steeringColumnClearanceAboveBaseMm
+    );
   });
 
   it.each(NON_CUSTOM_PRESETS)('optimizes monitor height to eye center when applying %s preset', (preset) => {
