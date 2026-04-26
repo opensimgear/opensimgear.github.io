@@ -17,7 +17,16 @@ import {
 } from '../../components/calculator/aluminum-rig-planner/presets';
 import type { PlannerPosturePreset } from '../../components/calculator/aluminum-rig-planner/types';
 
-const SOLVABLE_PRESETS = ['formula', 'gt', 'rally', 'road'] satisfies PlannerPosturePreset[];
+const SOLVABLE_PRESETS = [
+  'gt',
+  'formula',
+  'prototype',
+  'rally',
+  'drift',
+  'road',
+  'oval',
+  'karting',
+] satisfies PlannerPosturePreset[];
 
 function formatMetricValue(metric: ReturnType<typeof createPlannerPostureReport>['metrics'][number]) {
   return metric.unit === 'mm' ? `${metric.valueMm}mm` : `${metric.valueDeg}deg`;
@@ -66,6 +75,26 @@ describe('aluminum rig planner posture report', () => {
     expect('eyeDebug' in report).toBe(false);
   });
 
+  it('does not report fixed preset pedal height versus hips', () => {
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+
+    expect(
+      report.metrics.some((metric) => metric.key === 'pedalHeightVsHips' || metric.label === 'Pedals vs hips')
+    ).toBe(false);
+  });
+
+  it('reports brake alignment from left hip to toe on the XY plane', () => {
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const metric = report.metrics.find((candidate) => candidate.key === 'brakeAlignment');
+    const deltaX = skeleton.joints.toeLeft[0] - skeleton.joints.hipLeft[0];
+    const deltaY = skeleton.joints.toeLeft[1] - skeleton.joints.hipLeft[1];
+    const expectedAngleDeg = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
+
+    expect(metric?.label).toBe('Brake alignment');
+    expect(metric?.valueDeg).toBeCloseTo(Number(expectedAngleDeg.toFixed(1)), 6);
+  });
+
   it('keeps preset posture reports out of bad status for every supported height', () => {
     const failures: string[] = [];
 
@@ -99,7 +128,7 @@ describe('aluminum rig planner posture report', () => {
     }
 
     expect(failures, failures.slice(0, 30).join('\n')).toEqual([]);
-  });
+  }, 20000);
 
   it('solves flat monitor midpoint distance from target horizontal FOV using eye center anchor', () => {
     const postureSettings = {

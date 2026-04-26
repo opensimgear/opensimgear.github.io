@@ -162,10 +162,14 @@ export const DEFAULT_PLANNER_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings 
 };
 
 export const POSTURE_PRESET_OPTIONS = [
-  { text: 'Formula', value: 'formula' },
-  { text: 'GT', value: 'gt' },
+  { text: 'GT / GT3 / Touring', value: 'gt' },
+  { text: 'Formula / F1', value: 'formula' },
+  { text: 'Prototype / LMP', value: 'prototype' },
   { text: 'Rally', value: 'rally' },
-  { text: 'Road', value: 'road' },
+  { text: 'Drift', value: 'drift' },
+  { text: 'Sports car / road', value: 'road' },
+  { text: 'Oval / NASCAR-style', value: 'oval' },
+  { text: 'Karting', value: 'karting' },
   { text: 'Custom', value: 'custom' },
 ] as const;
 export const MONITOR_ASPECT_RATIO_OPTIONS = [
@@ -253,7 +257,7 @@ export const PLANNER_DIMENSION_LIMITS = {
   seatDeltaMaxMm: 100,
   seatHeightFromBaseInnerBeamsMinMm: 0,
   seatHeightFromBaseInnerBeamsMaxMm: 300,
-  seatAngleDegMin: 0,
+  seatAngleDegMin: -20,
   seatAngleDegMax: 45,
   backrestAngleDegMin: 95,
   backrestAngleDegMax: 135,

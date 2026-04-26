@@ -237,7 +237,7 @@ describe('aluminum rig planner posture solver', () => {
     expect(getDistance(skeleton.joints.kneeRight, skeleton.joints.ankleRight)).toBeCloseTo(lowerLegLength, 5);
   });
 
-  it('keeps thighs at or above the seat angle for low pedal targets', () => {
+  it('allows thighs to solve below the seat angle for low pedal targets', () => {
     const input = {
       ...DEFAULT_PLANNER_INPUT,
       seatAngleDeg: 12,
@@ -250,10 +250,10 @@ describe('aluminum rig planner posture solver', () => {
 
     expect(
       getSignedThighAngleRelativeToSeat(skeleton.joints.hipLeft, skeleton.joints.kneeLeft, input.seatAngleDeg)
-    ).toBeGreaterThanOrEqual(-0.000001);
+    ).toBeLessThan(0);
     expect(
       getSignedThighAngleRelativeToSeat(skeleton.joints.hipRight, skeleton.joints.kneeRight, input.seatAngleDeg)
-    ).toBeGreaterThanOrEqual(-0.000001);
+    ).toBeLessThan(0);
   });
 
   it('keeps heel pivots on the pedal axis and preserves the foot linkage', () => {

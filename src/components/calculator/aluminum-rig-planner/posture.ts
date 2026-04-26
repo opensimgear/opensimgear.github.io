@@ -87,8 +87,12 @@ const DEFAULT_EYE_CENTER_HEIGHT_FROM_HIP = 0.407;
 const PRESET_KNEE_LIFT = {
   formula: 0.18,
   gt: 0.24,
+  prototype: 0.2,
   rally: 0.28,
+  drift: 0.28,
   road: 0.24,
+  oval: 0.24,
+  karting: 0.2,
   custom: 0.24,
 } as const;
 
@@ -248,25 +252,6 @@ function solveTwoLinkPose(
   return { end, joint };
 }
 
-function constrainThighAngleToSeat(root: Vector, pose: TwoLinkPose, thighLength: number, seatAngleRad: number) {
-  const thigh = subtract(pose.joint, root);
-  const thighAngleRad = Math.atan2(thigh[2], thigh[0]);
-
-  if (thighAngleRad >= seatAngleRad - EPSILON) {
-    return pose;
-  }
-
-  const lateralOffset = thigh[1];
-  const planarLength = Math.sqrt(Math.max(0, thighLength * thighLength - lateralOffset * lateralOffset));
-  const joint: Vector = [
-    root[0] + Math.cos(seatAngleRad) * planarLength,
-    pose.joint[1],
-    root[2] + Math.sin(seatAngleRad) * planarLength,
-  ];
-
-  return { ...pose, joint };
-}
-
 function solveArmPose(
   shoulder: Vector,
   hand: Vector,
@@ -413,18 +398,8 @@ export function createPlannerPostureSkeleton(
   const thighLength = ratios.thighLength * heightM;
   const lowerLegLength = ratios.lowerLegLength * heightM;
   const kneeLift = PRESET_KNEE_LIFT[settings.preset];
-  const rightLeg = constrainThighAngleToSeat(
-    hipRight,
-    solveTwoLinkPose(hipRight, rightPedal.ankle, thighLength, lowerLegLength, [0, 0, kneeLift]),
-    thighLength,
-    seatAngleRad
-  );
-  const leftLeg = constrainThighAngleToSeat(
-    hipLeft,
-    solveTwoLinkPose(hipLeft, leftPedal.ankle, thighLength, lowerLegLength, [0, 0, kneeLift]),
-    thighLength,
-    seatAngleRad
-  );
+  const rightLeg = solveTwoLinkPose(hipRight, rightPedal.ankle, thighLength, lowerLegLength, [0, 0, kneeLift]);
+  const leftLeg = solveTwoLinkPose(hipLeft, leftPedal.ankle, thighLength, lowerLegLength, [0, 0, kneeLift]);
   const rightArm = solveArmPose(shoulderRight, wheelTargets.right, upperArmLength, forearmHandLength, rightSign);
   const leftArm = solveArmPose(shoulderLeft, wheelTargets.left, upperArmLength, forearmHandLength, -rightSign);
   const wristRight = getWristFromHand(rightArm.joint, rightArm.end, handGripLength);

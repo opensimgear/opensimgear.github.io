@@ -41,44 +41,84 @@ const EPSILON = 0.000001;
 const MONITOR_DEBUG_BALL_DIAMETER_MM = 10;
 
 const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureMetricRange>> = {
-  formula: {
-    wristBend: { min: 170, max: 195 },
-    elbowBend: { min: 85, max: 110 },
-    kneeBend: { min: 100, max: 130 },
-    torsoToThigh: { min: 70, max: 105 },
-    ankleRange: { min: 85, max: 100 },
-    brakeHipToThighProjectedAngle: { min: 0, max: 35 },
-    eyeToWheelTop: { min: -50, max: 180 },
-    eyeToMonitorMidpoint: { min: -50, max: 50 },
-  },
   gt: {
     wristBend: { min: 170, max: 195 },
     elbowBend: { min: 90, max: 120 },
     kneeBend: { min: 120, max: 135 },
-    torsoToThigh: { min: 85, max: 120 },
+    torsoToThigh: { min: 60, max: 120 },
     ankleRange: { min: 85, max: 105 },
-    brakeHipToThighProjectedAngle: { min: 5, max: 45 },
-    eyeToWheelTop: { min: 75, max: 250 },
+    brakeAlignment: { min: -3, max: 3 },
+    eyeToWheelTop: { min: 50, max: 100 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
+  },
+  formula: {
+    wristBend: { min: 170, max: 195 },
+    elbowBend: { min: 85, max: 120 },
+    kneeBend: { min: 100, max: 130 },
+    torsoToThigh: { min: 55, max: 105 },
+    ankleRange: { min: 85, max: 100 },
+    brakeAlignment: { min: -3, max: 3 },
+    eyeToWheelTop: { min: 0, max: 50 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
+  },
+  prototype: {
+    wristBend: { min: 170, max: 195 },
+    elbowBend: { min: 85, max: 115 },
+    kneeBend: { min: 105, max: 132 },
+    torsoToThigh: { min: 55, max: 110 },
+    ankleRange: { min: 85, max: 103 },
+    brakeAlignment: { min: -3, max: 3 },
+    eyeToWheelTop: { min: 0, max: 50 },
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   rally: {
     wristBend: { min: 170, max: 190 },
     elbowBend: { min: 95, max: 135 },
     kneeBend: { min: 110, max: 140 },
-    torsoToThigh: { min: 80, max: 125 },
+    torsoToThigh: { min: 60, max: 125 },
     ankleRange: { min: 75, max: 110 },
-    brakeHipToThighProjectedAngle: { min: 5, max: 50 },
-    eyeToWheelTop: { min: 75, max: 250 },
+    brakeAlignment: { min: -3, max: 3 },
+    eyeToWheelTop: { min: 50, max: 150 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
+  },
+  drift: {
+    wristBend: { min: 170, max: 190 },
+    elbowBend: { min: 95, max: 135 },
+    kneeBend: { min: 110, max: 140 },
+    torsoToThigh: { min: 60, max: 125 },
+    ankleRange: { min: 75, max: 110 },
+    brakeAlignment: { min: -3, max: 3 },
+    eyeToWheelTop: { min: 50, max: 100 },
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   road: {
     wristBend: { min: 173, max: 195 },
     elbowBend: { min: 100, max: 135 },
     kneeBend: { min: 118, max: 142 },
-    torsoToThigh: { min: 90, max: 130 },
+    torsoToThigh: { min: 80, max: 130 },
     ankleRange: { min: 68, max: 113 },
-    brakeHipToThighProjectedAngle: { min: 10, max: 55 },
-    eyeToWheelTop: { min: 75, max: 260 },
+    brakeAlignment: { min: -3, max: 3 },
+    eyeToWheelTop: { min: 50, max: 100 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
+  },
+  oval: {
+    wristBend: { min: 173, max: 195 },
+    elbowBend: { min: 95, max: 130 },
+    kneeBend: { min: 115, max: 140 },
+    torsoToThigh: { min: 60, max: 125 },
+    ankleRange: { min: 75, max: 110 },
+    brakeAlignment: { min: -3, max: 3 },
+    eyeToWheelTop: { min: 50, max: 100 },
+    eyeToMonitorMidpoint: { min: -50, max: 50 },
+  },
+  karting: {
+    wristBend: { min: 170, max: 195 },
+    elbowBend: { min: 85, max: 115 },
+    kneeBend: { min: 105, max: 132 },
+    torsoToThigh: { min: 55, max: 110 },
+    ankleRange: { min: 85, max: 155 },
+    brakeAlignment: { min: -3, max: 3 },
+    eyeToWheelTop: { min: 0, max: 50 },
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   custom: {
@@ -87,8 +127,8 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     kneeBend: { min: 120, max: 135 },
     torsoToThigh: { min: 85, max: 120 },
     ankleRange: { min: 85, max: 105 },
-    brakeHipToThighProjectedAngle: { min: 5, max: 45 },
-    eyeToWheelTop: { min: 75, max: 250 },
+    brakeAlignment: { min: -3, max: 3 },
+    eyeToWheelTop: { min: 50, max: 100 },
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
 };
@@ -119,11 +159,11 @@ function angleDeg(a: PosturePoint, joint: PosturePoint, b: PosturePoint) {
   return (Math.acos(cosine) * 180) / Math.PI;
 }
 
-function projectedAngleDeg(from: PosturePoint, to: PosturePoint) {
+function projectedXyAngleDeg(from: PosturePoint, to: PosturePoint) {
   const deltaX = to[0] - from[0];
-  const deltaZ = to[2] - from[2];
+  const deltaY = to[1] - from[1];
 
-  return Math.abs((Math.atan2(deltaZ, deltaX) * 180) / Math.PI);
+  return (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
 }
 
 function mean(values: number[]) {
@@ -301,10 +341,10 @@ export function createPlannerPostureReport(
       ranges
     ),
     createMetric(
-      'brakeHipToThighProjectedAngle',
-      'Brake hip-to-thigh projected angle',
+      'brakeAlignment',
+      'Brake alignment',
       'deg',
-      projectedAngleDeg(skeleton.joints.hipLeft, skeleton.joints.kneeLeft),
+      projectedXyAngleDeg(skeleton.joints.hipLeft, skeleton.joints.toeLeft),
       ranges
     ),
     createMetric('eyeToWheelTop', 'Eye to wheel top', 'mm', (eyeCenter[2] - wheelTopZ) / MM_TO_METERS, ranges),

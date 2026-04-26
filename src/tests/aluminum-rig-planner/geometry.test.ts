@@ -147,14 +147,14 @@ describe('aluminum rig planner geometry', () => {
       seatLengthMm: 900,
       seatDeltaMm: 400,
       seatHeightFromBaseInnerBeamsMm: 400,
-      seatAngleDeg: -10,
+      seatAngleDeg: -999,
       backrestAngleDeg: 200,
     });
 
     expect(clamped.seatLengthMm).toBe(PLANNER_DIMENSION_LIMITS.seatLengthMaxMm);
     expect(clamped.seatDeltaMm).toBe(PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm);
     expect(clamped.seatHeightFromBaseInnerBeamsMm).toBe(300);
-    expect(clamped.seatAngleDeg).toBe(0);
+    expect(clamped.seatAngleDeg).toBe(PLANNER_DIMENSION_LIMITS.seatAngleDegMin);
     expect(clamped.backrestAngleDeg).toBe(135);
   });
 
