@@ -662,7 +662,7 @@ function createDebugOverlay() {
   const group = new Group();
   const boneGeometry = createStartWeightedOctahedronGeometry();
   const jointGeometry = new SphereGeometry(0.018, 16, 10);
-  const jointHitGeometry = new SphereGeometry(0.05, 16, 10);
+  const jointHitGeometry = new SphereGeometry(0.025, 16, 10);
   const boneMaterial = new MeshBasicMaterial({
     color: 0x2563eb,
     depthTest: true,

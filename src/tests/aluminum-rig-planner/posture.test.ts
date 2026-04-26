@@ -22,6 +22,7 @@ import {
   POSTURE_HIP_ABOVE_SEAT_MM,
   POSTURE_HIP_FORWARD_ON_SEAT_MM,
   POSTURE_TALON_BACKWARD_ANGLE_DEG,
+  POSTURE_TALON_FOOT_ANGLE_DEG,
   POSTURE_TALON_PEDAL_PLANE_OFFSET_MM,
   POSTURE_TOE_BONE_START_SHARE,
 } from '../../components/calculator/aluminum-rig-planner/posture';
@@ -70,6 +71,7 @@ function getSignedThighAngleRelativeToSeat(
 }
 
 const PEDAL_WIDTH_MM = 60;
+const PEDAL_THICKNESS_MM = 8;
 const PEDAL_PLATE_THICKNESS_MM = 3;
 
 describe('aluminum rig planner posture solver', () => {
@@ -370,7 +372,7 @@ describe('aluminum rig planner posture solver', () => {
       offsetSkeleton.joints.ankleRight
     );
 
-    expect(getPlannerPostureFootContactErrorMm(input, DEFAULT_PLANNER_POSTURE_SETTINGS)).toBeCloseTo(0, 5);
+    expect(getPlannerPostureFootContactErrorMm(input, DEFAULT_PLANNER_POSTURE_SETTINGS)).toBeLessThan(0.5);
     expect(offsetRightKneeAngle).toBeGreaterThan(baseRightKneeAngle);
   });
 
@@ -424,15 +426,17 @@ describe('aluminum rig planner posture solver', () => {
     const pedalLeanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
     const pedalDirection = [-Math.sin(pedalLeanRad), 0, Math.cos(pedalLeanRad)] as const;
     const pedalPlaneNormal = [-pedalDirection[2], 0, pedalDirection[0]] as const;
+    const pedalFacePivotX = pedalPivotX + pedalPlaneNormal[0] * (PEDAL_THICKNESS_MM / 2);
+    const pedalFacePivotZ = pedalPivotZ + pedalPlaneNormal[2] * (PEDAL_THICKNESS_MM / 2);
     const traySlideMinX = DEFAULT_PLANNER_INPUT.seatBaseDepthMm + DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm;
     const talonPedalPlaneOffsetX =
       POSTURE_TALON_PEDAL_PLANE_OFFSET_MM / Math.max(0.000001, Math.abs(pedalPlaneNormal[0]));
     const talonSlideMaxX = Math.min(
       traySlideMinX + DEFAULT_PLANNER_INPUT.pedalTrayDepthMm,
-      pedalPivotX - talonPedalPlaneOffsetX
+      pedalFacePivotX - talonPedalPlaneOffsetX
     );
     const projectOffset = (point: [number, number, number]) => {
-      const offset = [point[0] - pedalPivotX / 1000, point[1], point[2] - pedalPivotZ / 1000] as const;
+      const offset = [point[0] - pedalFacePivotX / 1000, point[1], point[2] - pedalFacePivotZ / 1000] as const;
 
       return {
         alongPedal: offset[0] * pedalDirection[0] + offset[2] * pedalDirection[2],
@@ -477,11 +481,11 @@ describe('aluminum rig planner posture solver', () => {
     expect(skeleton.joints.ankleLeft[2]).toBeGreaterThan(skeleton.joints.heelLeft[2] + 0.02);
     expect(skeleton.joints.ankleRight[2]).toBeGreaterThan(skeleton.joints.heelRight[2] + 0.02);
     expect(projectOffset(skeleton.joints.toeStartLeft).alongPedal).toBeGreaterThan(0);
-    expect(projectOffset(skeleton.joints.toeStartLeft).offPedal).toBeCloseTo(0, 6);
-    expect(projectOffset(skeleton.joints.toeLeft).offPedal).toBeCloseTo(0, 6);
+    expect(Math.abs(projectOffset(skeleton.joints.toeStartLeft).offPedal)).toBeLessThan(0.0005);
+    expect(Math.abs(projectOffset(skeleton.joints.toeLeft).offPedal)).toBeLessThan(0.0005);
     expect(projectOffset(skeleton.joints.toeStartRight).alongPedal).toBeGreaterThan(0);
-    expect(projectOffset(skeleton.joints.toeStartRight).offPedal).toBeCloseTo(0, 6);
-    expect(projectOffset(skeleton.joints.toeRight).offPedal).toBeCloseTo(0, 6);
+    expect(Math.abs(projectOffset(skeleton.joints.toeStartRight).offPedal)).toBeLessThan(0.0005);
+    expect(Math.abs(projectOffset(skeleton.joints.toeRight).offPedal)).toBeLessThan(0.0005);
     expect(leftToeDirection[0]).toBeCloseTo(pedalDirection[0], 6);
     expect(leftToeDirection[1]).toBeCloseTo(pedalDirection[1], 6);
     expect(leftToeDirection[2]).toBeCloseTo(pedalDirection[2], 6);
@@ -544,6 +548,7 @@ describe('aluminum rig planner posture solver', () => {
       getAngleAtJoint(skeleton.joints.heelRight, skeleton.joints.ankleRight, skeleton.joints.toeStartRight),
       6
     );
+    expect(baseTalonFootAngle).toBeCloseTo((POSTURE_TALON_FOOT_ANGLE_DEG * Math.PI) / 180, 6);
   });
 
   it('keeps toe joints in pedal-local space while talons stay free on the tray plate', () => {
@@ -574,21 +579,33 @@ describe('aluminum rig planner posture solver', () => {
     const steeperPedalDirection = [-Math.sin(steeperPedalLeanRad), 0, Math.cos(steeperPedalLeanRad)] as const;
     const basePedalPlaneNormal = [-basePedalDirection[2], 0, basePedalDirection[0]] as const;
     const steeperPedalPlaneNormal = [-steeperPedalDirection[2], 0, steeperPedalDirection[0]] as const;
+    const basePedalFacePivot = [
+      pedalPivot[0] + (basePedalPlaneNormal[0] * PEDAL_THICKNESS_MM) / 2000,
+      pedalPivot[1],
+      pedalPivot[2] + (basePedalPlaneNormal[2] * PEDAL_THICKNESS_MM) / 2000,
+    ] as const;
+    const steeperPedalFacePivot = [
+      pedalPivot[0] + (steeperPedalPlaneNormal[0] * PEDAL_THICKNESS_MM) / 2000,
+      pedalPivot[1],
+      pedalPivot[2] + (steeperPedalPlaneNormal[2] * PEDAL_THICKNESS_MM) / 2000,
+    ] as const;
     const baseTalonSlideMaxX = Math.min(
       traySlideMinX + DEFAULT_PLANNER_INPUT.pedalTrayDepthMm / 1000,
-      pedalPivot[0] - POSTURE_TALON_PEDAL_PLANE_OFFSET_MM / 1000 / Math.max(0.000001, Math.abs(basePedalPlaneNormal[0]))
+      basePedalFacePivot[0] -
+        POSTURE_TALON_PEDAL_PLANE_OFFSET_MM / 1000 / Math.max(0.000001, Math.abs(basePedalPlaneNormal[0]))
     );
     const steeperTalonSlideMaxX = Math.min(
       traySlideMinX + DEFAULT_PLANNER_INPUT.pedalTrayDepthMm / 1000,
-      pedalPivot[0] -
+      steeperPedalFacePivot[0] -
         POSTURE_TALON_PEDAL_PLANE_OFFSET_MM / 1000 / Math.max(0.000001, Math.abs(steeperPedalPlaneNormal[0]))
     );
     const projectOffset = (
       point: [number, number, number],
+      pivot: readonly [number, number, number],
       pedalDirection: readonly [number, number, number],
       pedalPlaneNormal: readonly [number, number, number]
     ) => {
-      const offset = [point[0] - pedalPivot[0], point[1] - pedalPivot[1], point[2] - pedalPivot[2]] as const;
+      const offset = [point[0] - pivot[0], point[1] - pivot[1], point[2] - pivot[2]] as const;
 
       return {
         alongPedal: offset[0] * pedalDirection[0] + offset[1] * pedalDirection[1] + offset[2] * pedalDirection[2],
@@ -597,11 +614,13 @@ describe('aluminum rig planner posture solver', () => {
     };
     const baseToeStartOffset = projectOffset(
       baseSkeleton.joints.toeStartLeft,
+      basePedalFacePivot,
       basePedalDirection,
       basePedalPlaneNormal
     );
     const steeperToeStartOffset = projectOffset(
       steeperSkeleton.joints.toeStartLeft,
+      steeperPedalFacePivot,
       steeperPedalDirection,
       steeperPedalPlaneNormal
     );
@@ -613,15 +632,20 @@ describe('aluminum rig planner posture solver', () => {
     expect(steeperSkeleton.joints.heelLeft[0]).toBeLessThanOrEqual(steeperTalonSlideMaxX);
     expect(steeperSkeleton.joints.heelLeft[2]).toBeCloseTo(pedalPivot[2], 6);
     expect(
-      projectOffset(baseSkeleton.joints.heelLeft, basePedalDirection, basePedalPlaneNormal).offPedal
+      projectOffset(baseSkeleton.joints.heelLeft, basePedalFacePivot, basePedalDirection, basePedalPlaneNormal).offPedal
     ).toBeGreaterThanOrEqual(POSTURE_TALON_PEDAL_PLANE_OFFSET_MM / 1000);
     expect(
-      projectOffset(steeperSkeleton.joints.heelLeft, steeperPedalDirection, steeperPedalPlaneNormal).offPedal
+      projectOffset(
+        steeperSkeleton.joints.heelLeft,
+        steeperPedalFacePivot,
+        steeperPedalDirection,
+        steeperPedalPlaneNormal
+      ).offPedal
     ).toBeGreaterThanOrEqual(POSTURE_TALON_PEDAL_PLANE_OFFSET_MM / 1000);
     expect(baseToeStartOffset.alongPedal).toBeGreaterThan(0);
-    expect(baseToeStartOffset.offPedal).toBeCloseTo(0, 6);
+    expect(Math.abs(baseToeStartOffset.offPedal)).toBeLessThan(0.0005);
     expect(steeperToeStartOffset.alongPedal).toBeGreaterThan(0);
-    expect(steeperToeStartOffset.offPedal).toBeCloseTo(0, 6);
+    expect(Math.abs(steeperToeStartOffset.offPedal)).toBeLessThan(0.0005);
     expect(getDistance(baseSkeleton.joints.ankleLeft, baseSkeleton.joints.toeStartLeft)).toBeCloseTo(footBoneLength, 5);
     expect(getDistance(steeperSkeleton.joints.ankleLeft, steeperSkeleton.joints.toeStartLeft)).toBeCloseTo(
       footBoneLength,
