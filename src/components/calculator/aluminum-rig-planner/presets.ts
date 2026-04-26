@@ -1,8 +1,11 @@
 import {
+  BASE_BEAM_HEIGHT_MM,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_POSTURE_HEIGHT_CM,
+  PLANNER_CONTROL_STEP_MM,
   PLANNER_DIMENSION_LIMITS,
+  PLANNER_POSTURE_LIMITS,
 } from './constants';
 import {
   clampPlannerInput,
@@ -12,8 +15,9 @@ import {
   getSteeringColumnBaseHeightMaxMm,
   getSteeringColumnDistanceMaxMm,
 } from './geometry';
+import { createPlannerPostureSkeleton } from './posture';
 import { createPlannerPostureReport } from './posture-report';
-import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset } from './types';
+import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset, PlannerPostureSettings } from './types';
 
 type SolvablePlannerPosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
 type PlannerPosturePresetFixedValues = Pick<
@@ -45,6 +49,7 @@ const DYNAMIC_SEARCH_STEPS = {
   pedalsHeightMm: [-35, 0, 35],
   pedalAngleDeg: [-8, 0, 8],
 } as const;
+const METERS_TO_MM = 1000;
 
 export const PLANNER_POSTURE_PRESETS: Record<SolvablePlannerPosturePreset, PlannerPosturePresetFixedValues> = {
   formula: {
@@ -123,6 +128,14 @@ function clamp(value: number, min: number, max: number) {
 
 function roundToStep(value: number, step: number) {
   return Math.round(value / step) * step;
+}
+
+function clampMonitorHeightFromBaseMm(value: number) {
+  return clamp(
+    roundToStep(value, PLANNER_CONTROL_STEP_MM),
+    PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm,
+    PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm
+  );
 }
 
 export function isPlannerPosturePreset(value: unknown): value is PlannerPosturePreset {
@@ -287,6 +300,7 @@ function scoreCandidate(
       heightCm,
       showModel: true,
       showSkeleton: false,
+      monitorHeightFromBaseMm: getOptimizedPresetMonitorHeightFromBaseMm(input, preset, heightCm, modelMetrics),
     },
     modelMetrics
   );
@@ -397,6 +411,49 @@ export function recomputePresetDynamicPlannerInput(
   }
 
   return solveDynamicPlannerInput(input, preset, heightCm, modelMetrics);
+}
+
+export function getOptimizedPresetMonitorHeightFromBaseMm(
+  input: PlannerInput,
+  preset: PlannerPosturePreset,
+  heightCm: number,
+  modelMetrics: PlannerPostureModelMetrics | null = null
+) {
+  if (!isPresetSolvablePreset(preset)) {
+    return DEFAULT_PLANNER_POSTURE_SETTINGS.monitorHeightFromBaseMm;
+  }
+
+  const skeleton = createPlannerPostureSkeleton(
+    input,
+    {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      preset,
+      heightCm,
+    },
+    modelMetrics
+  );
+
+  return clampMonitorHeightFromBaseMm(skeleton.joints.eyeCenter[2] * METERS_TO_MM - BASE_BEAM_HEIGHT_MM);
+}
+
+export function applyPresetToPostureSettings(
+  settings: PlannerPostureSettings<PlannerPosturePreset>,
+  input: PlannerInput,
+  modelMetrics: PlannerPostureModelMetrics | null = null
+): PlannerPostureSettings<PlannerPosturePreset> {
+  if (!isPresetSolvablePreset(settings.preset)) {
+    return { ...settings };
+  }
+
+  return {
+    ...settings,
+    monitorHeightFromBaseMm: getOptimizedPresetMonitorHeightFromBaseMm(
+      input,
+      settings.preset,
+      settings.heightCm,
+      modelMetrics
+    ),
+  };
 }
 
 export function applyPresetToPlannerInput(

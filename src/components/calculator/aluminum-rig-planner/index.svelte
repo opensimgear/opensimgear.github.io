@@ -53,6 +53,7 @@
   import { createPlannerPostureReport, type PlannerPostureReport } from './posture-report';
   import {
     applyPresetToPlannerInput,
+    applyPresetToPostureSettings,
     createPresetPlannerInput,
     getPresetAfterPlannerInputEdit,
     isPresetSolvablePreset,
@@ -275,14 +276,19 @@
       humanModelStatus = 'ready';
 
       if (model.postureModelMetrics && isPresetSolvablePreset(postureSettings.preset)) {
-        assignProgrammaticPlannerInput(
-          applyPresetToPlannerInput(
-            plannerInput,
-            postureSettings.preset,
-            postureSettings.heightCm,
-            model.postureModelMetrics
-          )
+        const nextInput = applyPresetToPlannerInput(
+          plannerInput,
+          postureSettings.preset,
+          postureSettings.heightCm,
+          model.postureModelMetrics
         );
+
+        assignProgrammaticPlannerInput(nextInput);
+        postureSettings.monitorHeightFromBaseMm = applyPresetToPostureSettings(
+          postureSettings,
+          nextInput,
+          model.postureModelMetrics
+        ).monitorHeightFromBaseMm;
       }
     } catch {
       humanModelStatus = 'error';
@@ -796,15 +802,19 @@
 
   function resetSetup() {
     Object.assign(postureSettings, clonePostureSettings(DEFAULT_POSTURE_SETTINGS));
-    Object.assign(
-      plannerInput,
-      createPresetPlannerInput(
-        DEFAULT_ACTIVE_POSTURE_PRESET,
-        DEFAULT_POSTURE_HEIGHT_CM,
-        DEFAULT_PLANNER_INPUT,
-        postureModelMetrics
-      )
+    const nextInput = createPresetPlannerInput(
+      DEFAULT_ACTIVE_POSTURE_PRESET,
+      DEFAULT_POSTURE_HEIGHT_CM,
+      DEFAULT_PLANNER_INPUT,
+      postureModelMetrics
     );
+
+    Object.assign(plannerInput, nextInput);
+    postureSettings.monitorHeightFromBaseMm = applyPresetToPostureSettings(
+      postureSettings,
+      nextInput,
+      postureModelMetrics
+    ).monitorHeightFromBaseMm;
     profileColorMode = 'black';
     customProfileColor = DEFAULT_CUSTOM_PROFILE_COLOR;
     showEndCaps = true;
@@ -838,6 +848,11 @@
       const nextInput = applyPresetToPlannerInput(plannerInput, value, postureSettings.heightCm, postureModelMetrics);
 
       assignProgrammaticPlannerInput(nextInput);
+      postureSettings.monitorHeightFromBaseMm = applyPresetToPostureSettings(
+        postureSettings,
+        nextInput,
+        postureModelMetrics
+      ).monitorHeightFromBaseMm;
     }
 
     syncPlannerUrlState();
@@ -852,9 +867,19 @@
     postureSettings.heightCm = nextHeightCm;
 
     if (isPresetSolvablePreset(postureSettings.preset)) {
-      assignProgrammaticPlannerInput(
-        recomputePresetDynamicPlannerInput(plannerInput, postureSettings.preset, nextHeightCm, postureModelMetrics)
+      const nextInput = recomputePresetDynamicPlannerInput(
+        plannerInput,
+        postureSettings.preset,
+        nextHeightCm,
+        postureModelMetrics
       );
+
+      assignProgrammaticPlannerInput(nextInput);
+      postureSettings.monitorHeightFromBaseMm = applyPresetToPostureSettings(
+        postureSettings,
+        nextInput,
+        postureModelMetrics
+      ).monitorHeightFromBaseMm;
     }
 
     syncPlannerUrlState();

@@ -1,14 +1,19 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  BASE_BEAM_HEIGHT_MM,
   DEFAULT_ACTIVE_POSTURE_PRESET,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
+  PLANNER_CONTROL_STEP_MM,
   PLANNER_DIMENSION_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { clampPlannerInput } from '../../components/calculator/aluminum-rig-planner/geometry';
+import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
 import {
   applyPresetToPlannerInput,
+  applyPresetToPostureSettings,
+  getOptimizedPresetMonitorHeightFromBaseMm,
   getPresetAfterPlannerInputEdit,
   PLANNER_POSTURE_PRESETS,
   recomputePresetDynamicPlannerInput,
@@ -174,6 +179,37 @@ describe('aluminum rig planner posture presets', () => {
     const result = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, 182);
 
     expect(result.baseLengthMm).toBe(result.seatBaseDepthMm + result.pedalTrayDistanceMm + result.pedalTrayDepthMm);
+  });
+
+  it.each(NON_CUSTOM_PRESETS)('optimizes monitor height to eye center when applying %s preset', (preset) => {
+    const heightCm = 182;
+    const input = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, heightCm);
+    const settings = applyPresetToPostureSettings(
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        preset,
+        heightCm,
+        monitorHeightFromBaseMm: 0,
+      },
+      input
+    );
+    const skeleton = createPlannerPostureSkeleton(input, settings);
+    const expectedHeightFromBaseMm =
+      Math.round((skeleton.joints.eyeCenter[2] * 1000 - BASE_BEAM_HEIGHT_MM) / PLANNER_CONTROL_STEP_MM) *
+      PLANNER_CONTROL_STEP_MM;
+
+    expect(settings.monitorHeightFromBaseMm).toBe(expectedHeightFromBaseMm);
+    expect(getOptimizedPresetMonitorHeightFromBaseMm(input, preset, heightCm)).toBe(expectedHeightFromBaseMm);
+  });
+
+  it('preserves monitor height for custom preset posture settings', () => {
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      preset: 'custom' as const,
+      monitorHeightFromBaseMm: 123,
+    };
+
+    expect(applyPresetToPostureSettings(settings, DEFAULT_PLANNER_INPUT).monitorHeightFromBaseMm).toBe(123);
   });
 
   it.each(NON_CUSTOM_PRESETS)(

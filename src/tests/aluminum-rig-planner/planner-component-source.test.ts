@@ -20,7 +20,10 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).not.toContain('handleEyeCenterChange');
     expect(plannerSource).toMatch(/assignProgrammaticPlannerInput\(nextInput\);/);
     expect(plannerSource).toMatch(
-      /assignProgrammaticPlannerInput\(\s*recomputePresetDynamicPlannerInput\(plannerInput, postureSettings\.preset, nextHeightCm, postureModelMetrics\)\s*\)/
+      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*nextHeightCm,\s*postureModelMetrics\s*\);/
+    );
+    expect(plannerSource).toMatch(
+      /postureSettings\.monitorHeightFromBaseMm = applyPresetToPostureSettings\(\s*postureSettings,\s*nextInput,\s*postureModelMetrics\s*\)\.monitorHeightFromBaseMm;/
     );
   });
 

@@ -15,6 +15,7 @@ import type {
   PlannerAnthropometryRatios,
   PlannerInput,
   PlannerPostureModelMetrics,
+  PlannerPosturePreset,
   PlannerPostureSettings,
 } from './types';
 
@@ -85,6 +86,7 @@ const PRESET_KNEE_LIFT = {
   gt: 0.24,
   rally: 0.28,
   road: 0.24,
+  custom: 0.24,
 } as const;
 
 function mm(value: number) {
@@ -287,7 +289,7 @@ function getWristFromHand(elbow: Vector, hand: Vector, handGripLength: number) {
 }
 
 export function getEffectiveAnthropometryRatios(
-  settings: PlannerPostureSettings,
+  settings: PlannerPostureSettings<PlannerPosturePreset>,
   postureModel: PlannerPostureModelMetrics | null = null
 ): PlannerAnthropometryRatios {
   void settings;
@@ -307,7 +309,7 @@ function getEffectiveEyeCenterRatios(postureModel: PlannerPostureModelMetrics | 
 
 export function createPlannerPostureSkeleton(
   input: PlannerInput,
-  settings: PlannerPostureSettings,
+  settings: PlannerPostureSettings<PlannerPosturePreset>,
   postureModel: PlannerPostureModelMetrics | null = null
 ): PlannerPostureSkeleton {
   const heightM =
