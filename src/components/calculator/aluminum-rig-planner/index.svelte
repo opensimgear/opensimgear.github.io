@@ -55,6 +55,7 @@
     applyPresetToPlannerInput,
     applyPresetToPostureSettings,
     createPresetPlannerInput,
+    getOptimizedPresetMonitorHeightFromBaseMm,
     getPresetAfterPlannerInputEdit,
     isPresetSolvablePreset,
     recomputePresetDynamicPlannerInput,
@@ -92,6 +93,7 @@
     postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
+    onOptimizePosture: () => void;
   }>;
 
   const STATE_KEY = 'state';
@@ -1071,6 +1073,28 @@
     syncPlannerUrlState();
   }
 
+  function optimizeCurrentPosturePreset() {
+    if (postureSettings.preset !== 'custom') {
+      return;
+    }
+
+    const nextInput = recomputePresetDynamicPlannerInput(
+      plannerInput,
+      postureSettings.preset,
+      postureSettings.heightCm,
+      postureModelMetrics
+    );
+
+    assignProgrammaticPlannerInput(nextInput, { animate: true });
+    postureSettings.monitorHeightFromBaseMm = getOptimizedPresetMonitorHeightFromBaseMm(
+      nextInput,
+      postureSettings.preset,
+      postureSettings.heightCm,
+      postureModelMetrics
+    );
+    syncPlannerUrlState();
+  }
+
   function clampPostureHeightCm(value: number) {
     return Math.max(PLANNER_POSTURE_LIMITS.heightMinCm, Math.min(PLANNER_POSTURE_LIMITS.heightMaxCm, value));
   }
@@ -1324,6 +1348,7 @@
               postureSettings={scenePostureSettings}
               {showEndCaps}
               {visibleModules}
+              onOptimizePosture={optimizeCurrentPosturePreset}
             />
           </div>
         {:else}

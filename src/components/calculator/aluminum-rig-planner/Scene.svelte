@@ -30,6 +30,7 @@
     postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
     showEndCaps: boolean;
     visibleModules: PlannerVisibleModules;
+    onOptimizePosture: () => void;
   };
 
   const {
@@ -43,6 +44,7 @@
     postureSettings,
     showEndCaps,
     visibleModules,
+    onOptimizePosture,
   }: Props = $props();
   const ORTHOGRAPHIC_ASPECT_RATIO = 3 / 2;
   const PERSPECTIVE_FOV_RADIANS = (50 * Math.PI) / 180;
@@ -401,6 +403,9 @@
           </div>
         {/if}
       </div>
+      {#if postureSettings.preset === 'custom'}
+        <button class="posture-debug-panel__optimize" type="button" onclick={onOptimizePosture}>Optimize</button>
+      {/if}
     </div>
   </div>
 </div>
@@ -478,20 +483,22 @@
     border-radius: 6px;
     box-shadow: 0 14px 30px rgb(24 24 27 / 0.18);
     bottom: 0;
-    height: 42px;
+    height: auto;
+    max-height: 42px;
+    min-height: 42px;
     overflow: visible;
     position: absolute;
     right: 0;
     transform-origin: bottom right;
     transition:
-      height 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      max-height 220ms cubic-bezier(0.16, 1, 0.3, 1),
       width 220ms cubic-bezier(0.16, 1, 0.3, 1);
     width: 42px;
   }
 
   .posture-debug-panel:hover .posture-debug-panel__surface,
   .posture-debug-panel:focus-within .posture-debug-panel__surface {
-    height: min(48vh, 260px);
+    max-height: min(86vh, 560px);
     width: min(420px, calc(100vw - 24px));
   }
 
@@ -580,12 +587,11 @@
   }
 
   .posture-debug-panel__content {
-    inset: 0;
     opacity: 0;
-    overflow: auto;
-    padding: 22px 10px 10px;
+    overflow: visible;
+    padding: 22px 10px 46px;
     pointer-events: none;
-    position: absolute;
+    position: relative;
     transform: scale(0.98);
     transform-origin: bottom right;
     transition:
@@ -620,6 +626,41 @@
   .posture-debug-panel__header strong {
     color: rgb(212 212 216);
     font-weight: 600;
+  }
+
+  .posture-debug-panel__optimize {
+    background: rgb(255 255 255 / 0.1);
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    line-height: 1;
+    padding: 5px 7px;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    transform: translateY(4px);
+    transition:
+      background 160ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 3;
+  }
+
+  .posture-debug-panel:hover .posture-debug-panel__optimize,
+  .posture-debug-panel:focus-within .posture-debug-panel__optimize {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .posture-debug-panel__optimize:hover,
+  .posture-debug-panel__optimize:focus-visible {
+    background: rgb(255 255 255 / 0.18);
   }
 
   .posture-debug-panel__metrics {

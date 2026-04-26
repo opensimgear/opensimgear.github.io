@@ -8,9 +8,13 @@ import {
   PLANNER_CONTROL_STEP_MM,
   PLANNER_DIMENSION_LIMITS,
   PLANNER_LAYOUT,
+  PLANNER_POSTURE_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { clampPlannerInput } from '../../components/calculator/aluminum-rig-planner/geometry';
-import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
+import {
+  createPlannerPostureSkeleton,
+  getPlannerPostureFootContactErrorMm,
+} from '../../components/calculator/aluminum-rig-planner/posture';
 import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
 import {
   applyPresetToPlannerInput,
@@ -91,22 +95,6 @@ function getMetricTargetScore(input: PlannerInput, preset: PlannerPosturePreset,
   return Math.abs(value - target) / width;
 }
 
-function getMetricValue(input: PlannerInput, preset: PlannerPosturePreset, heightCm: number, metricKey: string) {
-  const report = createPlannerPostureReport(input, {
-    ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-    preset,
-    heightCm,
-    monitorHeightFromBaseMm: getOptimizedPresetMonitorHeightFromBaseMm(input, preset, heightCm),
-  });
-  const metric = report.metrics.find((candidate) => candidate.key === metricKey);
-
-  if (!metric) {
-    throw new Error(`Missing posture metric ${metricKey}`);
-  }
-
-  return metric.valueDeg ?? metric.valueMm ?? 0;
-}
-
 describe('aluminum rig planner posture presets', () => {
   it('uses GT as the default active preset', () => {
     expect(DEFAULT_ACTIVE_POSTURE_PRESET).toBe('gt');
@@ -133,6 +121,17 @@ describe('aluminum rig planner posture presets', () => {
     for (const key of FIXED_FINAL_PRESET_KEYS) {
       expect(result[key]).toBe(PLANNER_POSTURE_PRESETS[preset][key]);
     }
+  });
+
+  it('sets formula wheel angle flat', () => {
+    const result = applyPresetToPlannerInput(
+      DEFAULT_PLANNER_INPUT,
+      'formula',
+      DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm
+    );
+
+    expect(result.wheelAngleDeg).toBe(0);
+    expect(PLANNER_POSTURE_PRESETS.formula.wheelAngleDeg).toBe(0);
   });
 
   it.each(NON_CUSTOM_PRESETS)('keeps solved pedal values after applying %s preset', (preset) => {
@@ -204,7 +203,7 @@ describe('aluminum rig planner posture presets', () => {
     expect(DYNAMIC_KEYS.some((key) => result[key] !== current[key])).toBe(true);
   });
 
-  it('preserves current geometry for custom preset and custom height recompute', () => {
+  it('preserves current geometry when applying custom preset', () => {
     const custom = {
       ...DEFAULT_PLANNER_INPUT,
       pedalTrayDistanceMm: 510,
@@ -213,7 +212,23 @@ describe('aluminum rig planner posture presets', () => {
     };
 
     expect(applyPresetToPlannerInput(custom, 'custom', 169)).toEqual(custom);
-    expect(recomputePresetDynamicPlannerInput(custom, 'custom', 205)).toEqual(custom);
+  });
+
+  it('optimizes dynamic geometry for custom preset when manually recomputed', () => {
+    const custom = {
+      ...DEFAULT_PLANNER_INPUT,
+      pedalTrayDistanceMm: PLANNER_DIMENSION_LIMITS.pedalTrayDistanceMinMm,
+      steeringColumnDistanceMm: 80,
+      steeringColumnBaseHeightMm: PLANNER_DIMENSION_LIMITS.steeringColumnBaseHeightMaxMm,
+      steeringColumnHeightMm: PLANNER_DIMENSION_LIMITS.steeringColumnHeightMaxMm,
+      pedalsHeightMm: PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm,
+      pedalAngleDeg: PLANNER_DIMENSION_LIMITS.pedalAngleDegMax,
+      wheelHeightOffsetMm: 42,
+    };
+    const result = recomputePresetDynamicPlannerInput(custom, 'custom', 169);
+
+    expectOnlyDynamicFieldsToChange(custom, result);
+    expect(DYNAMIC_KEYS.some((key) => result[key] !== custom[key])).toBe(true);
   });
 
   it('marks a non-custom preset custom after a planner geometry edit', () => {
@@ -294,7 +309,6 @@ describe('aluminum rig planner posture presets', () => {
     const boostedInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, 119);
     const thresholdInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, 120);
 
-    expect(boostedInput.steeringColumnBaseHeightMm).toBeGreaterThan(thresholdInput.steeringColumnBaseHeightMm);
     expect(boostedInput.steeringColumnDistanceMm).toBeGreaterThan(thresholdInput.steeringColumnDistanceMm);
     expect(boostedInput.pedalsHeightMm).not.toBe(thresholdInput.pedalsHeightMm);
   });
@@ -303,27 +317,25 @@ describe('aluminum rig planner posture presets', () => {
     const preset = 'gt';
     const boostedHeightCm = 119;
     const solvedInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, boostedHeightCm);
-    const unboostedWheelInput = {
+    const lowWheelInput = {
       ...solvedInput,
-      steeringColumnBaseHeightMm: applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, 120)
-        .steeringColumnBaseHeightMm,
+      steeringColumnBaseHeightMm: solvedInput.steeringColumnBaseHeightMm - PLANNER_CONTROL_STEP_MM * 3,
     };
 
     expect(getMetricTargetScore(solvedInput, preset, boostedHeightCm, 'eyeToWheelTop')).toBeLessThan(
-      getMetricTargetScore(unboostedWheelInput, preset, boostedHeightCm, 'eyeToWheelTop')
+      getMetricTargetScore(lowWheelInput, preset, boostedHeightCm, 'eyeToWheelTop')
     );
   });
 
-  it.each(NON_CUSTOM_PRESETS)('keeps boosted eye-to-wheel close to threshold posture for %s', (preset) => {
+  it.each(NON_CUSTOM_PRESETS)('keeps boosted eye-to-wheel closer to target than threshold posture for %s', (preset) => {
     const boostedHeightCm = 119;
     const thresholdHeightCm = 120;
     const boostedInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, boostedHeightCm);
     const thresholdInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, thresholdHeightCm);
-    const boostedEyeToWheelTop = getMetricValue(boostedInput, preset, boostedHeightCm, 'eyeToWheelTop');
-    const thresholdEyeToWheelTop = getMetricValue(thresholdInput, preset, thresholdHeightCm, 'eyeToWheelTop');
 
-    expect(boostedInput.steeringColumnBaseHeightMm).toBeGreaterThan(thresholdInput.steeringColumnBaseHeightMm);
-    expect(Math.abs(boostedEyeToWheelTop - thresholdEyeToWheelTop)).toBeLessThanOrEqual(PLANNER_CONTROL_STEP_MM * 2);
+    expect(getMetricTargetScore(boostedInput, preset, boostedHeightCm, 'eyeToWheelTop')).toBeLessThanOrEqual(
+      getMetricTargetScore(thresholdInput, preset, thresholdHeightCm, 'eyeToWheelTop')
+    );
   });
 
   it('optimizes pedal height and angle toward required leg posture angles', () => {
@@ -352,6 +364,29 @@ describe('aluminum rig planner posture presets', () => {
     expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(highPedalInput, preset, heightCm));
     expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(shallowPedalInput, preset, heightCm));
     expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(steepPedalInput, preset, heightCm));
+  });
+
+  it.each(NON_CUSTOM_PRESETS)('keeps optimized %s pedals touching the feet at every height', (preset) => {
+    const failures: string[] = [];
+
+    for (
+      let heightCm = PLANNER_POSTURE_LIMITS.heightMinCm;
+      heightCm <= PLANNER_POSTURE_LIMITS.heightMaxCm;
+      heightCm += 1
+    ) {
+      const input = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, heightCm);
+      const contactErrorMm = getPlannerPostureFootContactErrorMm(input, {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        preset,
+        heightCm,
+      });
+
+      if (contactErrorMm > 1) {
+        failures.push(`${preset} ${heightCm}cm foot-to-pedal gap ${contactErrorMm.toFixed(1)}mm`);
+      }
+    }
+
+    expect(failures, failures.slice(0, 30).join('\n')).toEqual([]);
   });
 
   it('preserves monitor height for custom preset posture settings', () => {

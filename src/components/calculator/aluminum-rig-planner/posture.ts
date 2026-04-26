@@ -74,8 +74,8 @@ export const POSTURE_HIP_FORWARD_ON_SEAT_MM = 125;
 export const POSTURE_HIP_ABOVE_SEAT_MM = 130;
 export const POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM = 60;
 export const POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM = 120;
-export const POSTURE_BOOSTER_BOTTOM_OFFSET_MAX_MM = 90;
-export const POSTURE_BOOSTER_BACK_OFFSET_MAX_MM = 70;
+export const POSTURE_BOOSTER_BOTTOM_OFFSET_MAX_MM = 10;
+export const POSTURE_BOOSTER_BACK_OFFSET_MAX_MM = 90;
 const POSTURE_HEEL_FOOT_ANGLE_RAD = toRad(84.4);
 const HAND_GRIP_LENGTH_MIN_MM = 55;
 const HAND_GRIP_LENGTH_MAX_MM = 140;
@@ -326,6 +326,30 @@ function getBoosterSeatOffset(settings: PlannerPostureSettings<PlannerPosturePre
     backM: mm(offset.backMm),
     bottomM: mm(offset.bottomMm),
   };
+}
+
+export function getPlannerPostureFootContactErrorMm(
+  input: PlannerInput,
+  settings: PlannerPostureSettings<PlannerPosturePreset>,
+  postureModel: PlannerPostureModelMetrics | null = null
+) {
+  const heightM =
+    clamp(settings.heightCm, PLANNER_POSTURE_LIMITS.heightMinCm, PLANNER_POSTURE_LIMITS.heightMaxCm) / 100;
+  const ratios = getEffectiveAnthropometryRatios(settings, postureModel);
+  const pedalCentersYmm = getPedalCentersYmm(input);
+  const footLength = ratios.footLength * heightM;
+  const heelLength = getHeelLength(heightM, ratios.footLength, postureModel);
+  const pedalFootLength = Math.max(heelLength + mm(20), footLength);
+  const rightPedal = getPedalTarget(input, pedalCentersYmm.accelerator, pedalFootLength, heelLength);
+  const leftPedal = getPedalTarget(input, pedalCentersYmm.brake, pedalFootLength, heelLength);
+  const skeleton = createPlannerPostureSkeleton(input, settings, postureModel);
+
+  return (
+    Math.max(
+      length(subtract(skeleton.joints.ankleLeft, leftPedal.ankle)),
+      length(subtract(skeleton.joints.ankleRight, rightPedal.ankle))
+    ) / MM_TO_METERS
+  );
 }
 
 export function createPlannerPostureSkeleton(

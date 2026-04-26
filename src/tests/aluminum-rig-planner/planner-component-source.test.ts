@@ -6,6 +6,10 @@ const plannerSource = readFileSync(
   new URL('../../components/calculator/aluminum-rig-planner/index.svelte', import.meta.url),
   'utf8'
 );
+const sceneSource = readFileSync(
+  new URL('../../components/calculator/aluminum-rig-planner/Scene.svelte', import.meta.url),
+  'utf8'
+);
 
 describe('aluminum rig planner component wiring', () => {
   it('does not mark presets custom from programmatic solver updates', () => {
@@ -49,6 +53,28 @@ describe('aluminum rig planner component wiring', () => {
     );
     expect(plannerSource).toContain('geometry={sceneGeometry}');
     expect(plannerSource).toContain('postureSettings={scenePostureSettings}');
+  });
+
+  it('has an explicit preset optimization button', () => {
+    expect(plannerSource).toContain('function optimizeCurrentPosturePreset()');
+    expect(plannerSource).toMatch(/if \(postureSettings\.preset !== 'custom'\)/);
+    expect(plannerSource).toMatch(
+      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*postureSettings\.heightCm,\s*postureModelMetrics\s*\);/
+    );
+    expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, { animate: true });');
+    expect(plannerSource).toContain('getOptimizedPresetMonitorHeightFromBaseMm');
+    expect(plannerSource).toContain('onOptimizePosture={optimizeCurrentPosturePreset}');
+    expect(plannerSource).not.toMatch(/<Button\s+on:click=\{optimizeCurrentPosturePreset\}/);
+    expect(sceneSource).toContain('onOptimizePosture: () => void;');
+    expect(sceneSource).toMatch(/\{#if postureSettings\.preset === 'custom'\}/);
+    expect(sceneSource).toContain('class="posture-debug-panel__optimize"');
+    expect(sceneSource).toContain('onclick={onOptimizePosture}');
+    expect(sceneSource).toContain('bottom: 8px;');
+    expect(sceneSource).toContain('.posture-debug-panel:hover .posture-debug-panel__optimize');
+    expect(sceneSource).toContain('max-height: min(86vh, 560px);');
+    expect(sceneSource).toContain('overflow: visible;');
+    expect(sceneSource).not.toContain('overflow: auto;');
+    expect(plannerSource).not.toMatch(/disabled=\{!isPresetSolvablePreset\(postureSettings\.preset\)\}/);
   });
 
   it('includes eye alignment in rig geometry preset scoring', () => {
