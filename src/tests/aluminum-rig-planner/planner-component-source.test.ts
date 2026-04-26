@@ -10,7 +10,9 @@ const plannerSource = readFileSync(
 describe('aluminum rig planner component wiring', () => {
   it('does not mark presets custom from programmatic solver updates', () => {
     expect(plannerSource).toContain('suppressProgrammaticPlannerInputEdit');
-    expect(plannerSource).toMatch(/function assignProgrammaticPlannerInput\(input: PlannerInput\)/);
+    expect(plannerSource).toMatch(
+      /function assignProgrammaticPlannerInput\(input: PlannerInput, options: \{ animate\?: boolean \} = \{\}\)/
+    );
     expect(plannerSource).toMatch(/if \(suppressProgrammaticPlannerInputEdit\) {\s*return;\s*}/);
     expect(plannerSource).toMatch(/pendingCustomPresetInput = null;/);
     expect(plannerSource).toMatch(
@@ -19,12 +21,34 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).not.toContain('pendingMonitorHeightEyeSync');
     expect(plannerSource).not.toContain('handleEyeCenterChange');
     expect(plannerSource).toMatch(/assignProgrammaticPlannerInput\(nextInput\);/);
+  });
+
+  it('defers height preset optimization and posture report updates until release', () => {
+    expect(plannerSource).toContain('postureHeightControlValue');
+    expect(plannerSource).toContain('capturePostureHeightControl');
+    expect(plannerSource).toContain("node.addEventListener('change', endInteraction, true);");
+    expect(plannerSource).toContain("window.addEventListener('mouseup', endInteraction, true);");
+    expect(plannerSource).toContain("window.addEventListener('touchend', endInteraction, true);");
+    expect(plannerSource).toMatch(
+      /if \(!postureHeightControlActive && postureHeightControlValue === postureSettings\.heightCm\)/
+    );
+    expect(plannerSource).toMatch(/bind:value=\{\(\) => postureHeightControlValue, setPostureHeightCm\}/);
+    expect(plannerSource).toMatch(
+      /function setPostureHeightCm\(value: number\) \{\s*postureHeightControlValue = clampPostureHeightCm\(value\);/
+    );
     expect(plannerSource).toMatch(
       /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*nextHeightCm,\s*postureModelMetrics\s*\);/
     );
+    expect(plannerSource).toMatch(/function commitPostureHeightCm\(value: number, animateTransition = false\)/);
+    expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, { animate: animateTransition });');
     expect(plannerSource).toMatch(
       /postureSettings\.monitorHeightFromBaseMm = applyPresetToPostureSettings\(\s*postureSettings,\s*nextInput,\s*postureModelMetrics\s*\)\.monitorHeightFromBaseMm;/
     );
+    expect(plannerSource).toContain(
+      'const postureReport = $derived(createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics));'
+    );
+    expect(plannerSource).toContain('geometry={sceneGeometry}');
+    expect(plannerSource).toContain('postureSettings={scenePostureSettings}');
   });
 
   it('includes eye alignment in rig geometry preset scoring', () => {

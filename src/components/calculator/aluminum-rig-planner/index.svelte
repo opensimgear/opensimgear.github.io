@@ -96,6 +96,8 @@
 
   const STATE_KEY = 'state';
   const MEASUREMENT_OVERLAY_TIMEOUT_MS = 1000;
+  const POSTURE_HEIGHT_COMMIT_DEBOUNCE_MS = 180;
+  const POSTURE_TRANSITION_DURATION_MS = 320;
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
   const DEFAULT_INPUT: PlannerInput = createPresetPlannerInput(
@@ -196,8 +198,11 @@
     const mergedState = mergePlannerQueryState(DEFAULT_INPUT, state);
 
     Object.assign(plannerInput, mergedState.plannerInput);
+    Object.assign(animatedPlannerInput, mergedState.plannerInput);
     Object.assign(optimizationSettings, cloneOptimizationSettings(mergedState.optimizationSettings));
     Object.assign(postureSettings, clonePostureSettings(mergedState.postureSettings));
+    postureHeightControlValue = postureSettings.heightCm;
+    animatedPostureHeightCm = postureSettings.heightCm;
 
     for (const option of optimizationSettings.stockOptions) {
       const numericSuffix = Number(option.id.replace(/\D+/g, ''));
@@ -209,12 +214,15 @@
   }
 
   let plannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
+  let animatedPlannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
   let optimizationSettings = $state<PlannerOptimizationSettings>(
     cloneOptimizationSettings(DEFAULT_OPTIMIZATION_SETTINGS)
   );
   let postureSettings = $state<PlannerPostureSettings<PlannerPosturePreset>>(
     clonePostureSettings(DEFAULT_POSTURE_SETTINGS)
   );
+  let postureHeightControlValue = $state(DEFAULT_POSTURE_SETTINGS.heightCm);
+  let animatedPostureHeightCm = $state(DEFAULT_POSTURE_SETTINGS.heightCm);
   let visibleModules = $state<PlannerVisibleModules>({
     monitor: true,
     pedalTray: true,
@@ -238,6 +246,13 @@
   let measurementHideTimeout: ReturnType<typeof setTimeout> | null = null;
   let pendingCustomPresetInput: PlannerInput | null = null;
   let suppressProgrammaticPlannerInputEdit = false;
+  let postureHeightControlActive = false;
+  let postureHeightCommitTimeout: ReturnType<typeof setTimeout> | null = null;
+  let postureHeightReleaseTimeout: ReturnType<typeof setTimeout> | null = null;
+  let plannerInputAnimationFrame: number | null = null;
+  let postureHeightAnimationFrame: number | null = null;
+  let isAnimatingPlannerInput = false;
+  let isAnimatingPostureHeight = false;
   let plannerUnmounted = false;
 
   async function loadScene() {
@@ -349,13 +364,26 @@
       if (measurementHideTimeout) {
         clearTimeout(measurementHideTimeout);
       }
+      if (postureHeightCommitTimeout) {
+        clearTimeout(postureHeightCommitTimeout);
+      }
+      if (postureHeightReleaseTimeout) {
+        clearTimeout(postureHeightReleaseTimeout);
+      }
+      cancelPlannerInputAnimation();
+      cancelPostureHeightAnimation();
       controlsReady = false;
     };
   });
 
   const geometry = $derived(derivePlannerGeometry(plannerInput));
+  const sceneGeometry = $derived(derivePlannerGeometry(animatedPlannerInput));
   const postureModelMetrics = $derived(humanModel?.postureModelMetrics ?? null);
   const postureReport = $derived(createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics));
+  const scenePostureSettings = $derived<PlannerPostureSettings<PlannerPosturePreset>>({
+    ...postureSettings,
+    heightCm: animatedPostureHeightCm,
+  });
   const measurementOverlay = $derived.by(() => {
     if (!activeMeasurementKey) {
       return null;
@@ -446,6 +474,22 @@
   }));
   const seatBaseDepthMaxMm = $derived(Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, plannerInput.baseLengthMm));
 
+  $effect(() => {
+    const nextInput = { ...plannerInput };
+
+    if (!isAnimatingPlannerInput) {
+      Object.assign(animatedPlannerInput, nextInput);
+    }
+  });
+
+  $effect(() => {
+    const nextHeightCm = postureSettings.heightCm;
+
+    if (!isAnimatingPostureHeight) {
+      animatedPostureHeightCm = nextHeightCm;
+    }
+  });
+
   function syncPlannerTestIds() {
     if (!plannerRoot) {
       return;
@@ -469,6 +513,162 @@
         if (plannerRoot === node) {
           plannerRoot = null;
         }
+      },
+    };
+  }
+
+  function cancelPlannerInputAnimation() {
+    if (plannerInputAnimationFrame !== null) {
+      cancelAnimationFrame(plannerInputAnimationFrame);
+      plannerInputAnimationFrame = null;
+    }
+
+    isAnimatingPlannerInput = false;
+  }
+
+  function cancelPostureHeightAnimation() {
+    if (postureHeightAnimationFrame !== null) {
+      cancelAnimationFrame(postureHeightAnimationFrame);
+      postureHeightAnimationFrame = null;
+    }
+
+    isAnimatingPostureHeight = false;
+  }
+
+  function animatePlannerInputTo(targetInput: PlannerInput) {
+    cancelPlannerInputAnimation();
+
+    const fromInput = $state.snapshot(animatedPlannerInput);
+    const startTime = performance.now();
+    isAnimatingPlannerInput = true;
+
+    const step = (now: number) => {
+      const progress = Math.min(1, (now - startTime) / POSTURE_TRANSITION_DURATION_MS);
+      const easedProgress = 1 - (1 - progress) ** 3;
+
+      for (const key of Object.keys(targetInput) as Array<keyof PlannerInput>) {
+        animatedPlannerInput[key] = fromInput[key] + (targetInput[key] - fromInput[key]) * easedProgress;
+      }
+
+      if (progress < 1) {
+        plannerInputAnimationFrame = requestAnimationFrame(step);
+        return;
+      }
+
+      Object.assign(animatedPlannerInput, targetInput);
+      plannerInputAnimationFrame = null;
+      isAnimatingPlannerInput = false;
+    };
+
+    plannerInputAnimationFrame = requestAnimationFrame(step);
+  }
+
+  function animatePostureHeightTo(targetHeightCm: number) {
+    cancelPostureHeightAnimation();
+
+    const fromHeightCm = animatedPostureHeightCm;
+    const startTime = performance.now();
+    isAnimatingPostureHeight = true;
+
+    const step = (now: number) => {
+      const progress = Math.min(1, (now - startTime) / POSTURE_TRANSITION_DURATION_MS);
+      const easedProgress = 1 - (1 - progress) ** 3;
+
+      animatedPostureHeightCm = fromHeightCm + (targetHeightCm - fromHeightCm) * easedProgress;
+
+      if (progress < 1) {
+        postureHeightAnimationFrame = requestAnimationFrame(step);
+        return;
+      }
+
+      animatedPostureHeightCm = targetHeightCm;
+      postureHeightAnimationFrame = null;
+      isAnimatingPostureHeight = false;
+    };
+
+    postureHeightAnimationFrame = requestAnimationFrame(step);
+  }
+
+  function capturePostureHeightControl(node: HTMLDivElement) {
+    const scheduleReleaseCommit = () => {
+      if (postureHeightReleaseTimeout) {
+        clearTimeout(postureHeightReleaseTimeout);
+      }
+
+      postureHeightReleaseTimeout = setTimeout(() => {
+        postureHeightReleaseTimeout = null;
+        commitPostureHeightCm(postureHeightControlValue, true);
+      }, 0);
+    };
+    const beginInteraction = () => {
+      postureHeightControlActive = true;
+
+      if (postureHeightCommitTimeout) {
+        clearTimeout(postureHeightCommitTimeout);
+        postureHeightCommitTimeout = null;
+      }
+
+      if (postureHeightReleaseTimeout) {
+        clearTimeout(postureHeightReleaseTimeout);
+        postureHeightReleaseTimeout = null;
+      }
+    };
+    const endInteraction = () => {
+      if (!postureHeightControlActive && postureHeightControlValue === postureSettings.heightCm) {
+        return;
+      }
+
+      postureHeightControlActive = false;
+      scheduleReleaseCommit();
+    };
+    const beginKeyInteraction = (event: KeyboardEvent) => {
+      if (
+        event.key === 'ArrowLeft' ||
+        event.key === 'ArrowRight' ||
+        event.key === 'ArrowDown' ||
+        event.key === 'ArrowUp'
+      ) {
+        beginInteraction();
+      }
+    };
+    const endKeyInteraction = (event: KeyboardEvent) => {
+      if (
+        event.key === 'ArrowLeft' ||
+        event.key === 'ArrowRight' ||
+        event.key === 'ArrowDown' ||
+        event.key === 'ArrowUp'
+      ) {
+        endInteraction();
+      }
+    };
+
+    node.addEventListener('pointerdown', beginInteraction, true);
+    node.addEventListener('mousedown', beginInteraction, true);
+    node.addEventListener('touchstart', beginInteraction, { capture: true, passive: true });
+    node.addEventListener('keydown', beginKeyInteraction, true);
+    node.addEventListener('focusout', endInteraction, true);
+    node.addEventListener('change', endInteraction, true);
+    window.addEventListener('pointerup', endInteraction, true);
+    window.addEventListener('pointercancel', endInteraction, true);
+    window.addEventListener('mouseup', endInteraction, true);
+    window.addEventListener('touchend', endInteraction, true);
+    window.addEventListener('touchcancel', endInteraction, true);
+    window.addEventListener('keyup', endKeyInteraction, true);
+
+    return {
+      destroy() {
+        node.removeEventListener('pointerdown', beginInteraction, true);
+        node.removeEventListener('mousedown', beginInteraction, true);
+        node.removeEventListener('touchstart', beginInteraction, true);
+        node.removeEventListener('keydown', beginKeyInteraction, true);
+        node.removeEventListener('focusout', endInteraction, true);
+        node.removeEventListener('change', endInteraction, true);
+        window.removeEventListener('pointerup', endInteraction, true);
+        window.removeEventListener('pointercancel', endInteraction, true);
+        window.removeEventListener('mouseup', endInteraction, true);
+        window.removeEventListener('touchend', endInteraction, true);
+        window.removeEventListener('touchcancel', endInteraction, true);
+        window.removeEventListener('keyup', endKeyInteraction, true);
       },
     };
   }
@@ -543,10 +743,18 @@
     pendingCustomPresetInput = { ...$state.snapshot(plannerInput) };
   }
 
-  function assignProgrammaticPlannerInput(input: PlannerInput) {
+  function assignProgrammaticPlannerInput(input: PlannerInput, options: { animate?: boolean } = {}) {
     suppressProgrammaticPlannerInputEdit = true;
     pendingCustomPresetInput = null;
     Object.assign(plannerInput, input);
+
+    if (options.animate) {
+      animatePlannerInputTo(input);
+    } else {
+      cancelPlannerInputAnimation();
+      Object.assign(animatedPlannerInput, input);
+    }
+
     void tick().then(() => {
       suppressProgrammaticPlannerInputEdit = false;
     });
@@ -802,6 +1010,9 @@
 
   function resetSetup() {
     Object.assign(postureSettings, clonePostureSettings(DEFAULT_POSTURE_SETTINGS));
+    postureHeightControlValue = postureSettings.heightCm;
+    cancelPostureHeightAnimation();
+    animatedPostureHeightCm = postureSettings.heightCm;
     const nextInput = createPresetPlannerInput(
       DEFAULT_ACTIVE_POSTURE_PRESET,
       DEFAULT_POSTURE_HEIGHT_CM,
@@ -810,6 +1021,8 @@
     );
 
     Object.assign(plannerInput, nextInput);
+    cancelPlannerInputAnimation();
+    Object.assign(animatedPlannerInput, nextInput);
     postureSettings.monitorHeightFromBaseMm = applyPresetToPostureSettings(
       postureSettings,
       nextInput,
@@ -858,11 +1071,49 @@
     syncPlannerUrlState();
   }
 
+  function clampPostureHeightCm(value: number) {
+    return Math.max(PLANNER_POSTURE_LIMITS.heightMinCm, Math.min(PLANNER_POSTURE_LIMITS.heightMaxCm, value));
+  }
+
+  function schedulePostureHeightCommit() {
+    if (postureHeightCommitTimeout) {
+      clearTimeout(postureHeightCommitTimeout);
+    }
+
+    postureHeightCommitTimeout = setTimeout(() => {
+      postureHeightCommitTimeout = null;
+      commitPostureHeightCm(postureHeightControlValue, true);
+    }, POSTURE_HEIGHT_COMMIT_DEBOUNCE_MS);
+  }
+
   function setPostureHeightCm(value: number) {
-    const nextHeightCm = Math.max(
-      PLANNER_POSTURE_LIMITS.heightMinCm,
-      Math.min(PLANNER_POSTURE_LIMITS.heightMaxCm, value)
-    );
+    postureHeightControlValue = clampPostureHeightCm(value);
+
+    if (!postureHeightControlActive) {
+      schedulePostureHeightCommit();
+    }
+  }
+
+  function commitPostureHeightCm(value: number, animateTransition = false) {
+    const nextHeightCm = clampPostureHeightCm(value);
+
+    postureHeightControlValue = nextHeightCm;
+
+    if (postureHeightCommitTimeout) {
+      clearTimeout(postureHeightCommitTimeout);
+      postureHeightCommitTimeout = null;
+    }
+
+    if (nextHeightCm === postureSettings.heightCm) {
+      return;
+    }
+
+    if (animateTransition) {
+      animatePostureHeightTo(nextHeightCm);
+    } else {
+      cancelPostureHeightAnimation();
+      animatedPostureHeightCm = nextHeightCm;
+    }
 
     postureSettings.heightCm = nextHeightCm;
 
@@ -874,7 +1125,7 @@
         postureModelMetrics
       );
 
-      assignProgrammaticPlannerInput(nextInput);
+      assignProgrammaticPlannerInput(nextInput, { animate: animateTransition });
       postureSettings.monitorHeightFromBaseMm = applyPresetToPostureSettings(
         postureSettings,
         nextInput,
@@ -1063,14 +1314,14 @@
         {#if PlannerScene && humanModel}
           <div class={isNarrowViewport ? 'mx-auto w-[clamp(18rem,84vw,42rem)] max-w-full' : 'w-full'}>
             <PlannerScene
-              {geometry}
+              geometry={sceneGeometry}
               {highlightedBeamIds}
               {isNarrowViewport}
               {measurementOverlay}
               {profileColor}
               {humanModel}
               {postureReport}
-              {postureSettings}
+              postureSettings={scenePostureSettings}
               {showEndCaps}
               {visibleModules}
             />
@@ -1114,14 +1365,16 @@
               options={POSTURE_PRESET_OPTIONS}
               label="Preset"
             />
-            <Slider
-              bind:value={() => postureSettings.heightCm, setPostureHeightCm}
-              label="Height"
-              min={PLANNER_POSTURE_LIMITS.heightMinCm}
-              max={PLANNER_POSTURE_LIMITS.heightMaxCm}
-              step={1}
-              format={(value) => `${value.toFixed(0)} cm`}
-            />
+            <div {@attach capturePostureHeightControl}>
+              <Slider
+                bind:value={() => postureHeightControlValue, setPostureHeightCm}
+                label="Height"
+                min={PLANNER_POSTURE_LIMITS.heightMinCm}
+                max={PLANNER_POSTURE_LIMITS.heightMaxCm}
+                step={1}
+                format={(value) => `${value.toFixed(0)} cm`}
+              />
+            </div>
             <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Model" />
             <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Skeleton" />
           </Folder>
