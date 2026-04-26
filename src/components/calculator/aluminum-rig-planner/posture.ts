@@ -73,6 +73,9 @@ const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
 export const POSTURE_HIP_FORWARD_ON_SEAT_MM = 125;
 export const POSTURE_HIP_ABOVE_SEAT_MM = 130;
 export const POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM = 60;
+export const POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM = 120;
+export const POSTURE_BOOSTER_BOTTOM_OFFSET_MAX_MM = 90;
+export const POSTURE_BOOSTER_BACK_OFFSET_MAX_MM = 70;
 const POSTURE_HEEL_FOOT_ANGLE_RAD = toRad(84.4);
 const HAND_GRIP_LENGTH_MIN_MM = 55;
 const HAND_GRIP_LENGTH_MAX_MM = 140;
@@ -307,6 +310,24 @@ function getEffectiveEyeCenterRatios(postureModel: PlannerPostureModelMetrics | 
   };
 }
 
+export function getPostureBoosterSeatOffsetMm(heightCm: number) {
+  const clampedHeightCm = clamp(heightCm, PLANNER_POSTURE_LIMITS.heightMinCm, PLANNER_POSTURE_LIMITS.heightMaxCm);
+
+  return {
+    backMm: clampedHeightCm < POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM ? POSTURE_BOOSTER_BACK_OFFSET_MAX_MM : 0,
+    bottomMm: clampedHeightCm < POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM ? POSTURE_BOOSTER_BOTTOM_OFFSET_MAX_MM : 0,
+  };
+}
+
+function getBoosterSeatOffset(settings: PlannerPostureSettings<PlannerPosturePreset>) {
+  const offset = getPostureBoosterSeatOffsetMm(settings.heightCm);
+
+  return {
+    backM: mm(offset.backMm),
+    bottomM: mm(offset.bottomMm),
+  };
+}
+
 export function createPlannerPostureSkeleton(
   input: PlannerInput,
   settings: PlannerPostureSettings<PlannerPosturePreset>,
@@ -328,7 +349,14 @@ export function createPlannerPostureSkeleton(
   const hipForwardOnSeatM = mm(POSTURE_HIP_FORWARD_ON_SEAT_MM * postureScale);
   const hipAboveSeatM = mm(POSTURE_HIP_ABOVE_SEAT_MM * postureScaleAbove);
   const shoulderHipClearanceM = mm(POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM * postureScale);
-  const hipCenter = add(seatPivot, add(scale(seatForward, hipForwardOnSeatM), scale(seatNormal, hipAboveSeatM)));
+  const boosterSeatOffset = getBoosterSeatOffset(settings);
+  const hipCenter = add(
+    seatPivot,
+    add(
+      add(scale(seatForward, hipForwardOnSeatM), scale(seatNormal, hipAboveSeatM + boosterSeatOffset.bottomM)),
+      scale(bodyForward, boosterSeatOffset.backM)
+    )
+  );
   const shoulderToHipM = Math.max(mm(250), ratios.seatedShoulderHeight * heightM - shoulderHipClearanceM);
   const shoulderCenter = add(hipCenter, scale(backrestUp, shoulderToHipM));
   const neck = add(hipCenter, scale(backrestUp, Math.max(shoulderToHipM, ratios.sittingHeight * heightM * 0.84)));

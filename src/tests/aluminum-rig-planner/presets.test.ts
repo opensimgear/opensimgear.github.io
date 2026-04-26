@@ -11,6 +11,7 @@ import {
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { clampPlannerInput } from '../../components/calculator/aluminum-rig-planner/geometry';
 import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
+import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
 import {
   applyPresetToPlannerInput,
   applyPresetToPostureSettings,
@@ -49,6 +50,61 @@ function expectOnlyDynamicFieldsToChange(before: PlannerInput, after: PlannerInp
 
     expect(after[key]).toBe(before[key]);
   }
+}
+
+function getPedalPostureAngleScore(input: PlannerInput, preset: PlannerPosturePreset, heightCm: number) {
+  const report = createPlannerPostureReport(input, {
+    ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+    preset,
+    heightCm,
+    monitorHeightFromBaseMm: getOptimizedPresetMonitorHeightFromBaseMm(input, preset, heightCm),
+  });
+
+  return report.metrics
+    .filter((metric) => ['kneeBend', 'ankleRange', 'brakeHipToThighProjectedAngle'].includes(metric.key))
+    .reduce((total, metric) => {
+      const value = metric.valueDeg ?? 0;
+      const target = (metric.range.min + metric.range.max) / 2;
+      const width = Math.max(1, metric.range.max - metric.range.min);
+
+      return total + Math.abs(value - target) / width;
+    }, 0);
+}
+
+function getMetricTargetScore(input: PlannerInput, preset: PlannerPosturePreset, heightCm: number, metricKey: string) {
+  const report = createPlannerPostureReport(input, {
+    ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+    preset,
+    heightCm,
+    monitorHeightFromBaseMm: getOptimizedPresetMonitorHeightFromBaseMm(input, preset, heightCm),
+  });
+  const metric = report.metrics.find((candidate) => candidate.key === metricKey);
+
+  if (!metric) {
+    throw new Error(`Missing posture metric ${metricKey}`);
+  }
+
+  const value = metric.valueDeg ?? metric.valueMm ?? 0;
+  const target = (metric.range.min + metric.range.max) / 2;
+  const width = Math.max(1, metric.range.max - metric.range.min);
+
+  return Math.abs(value - target) / width;
+}
+
+function getMetricValue(input: PlannerInput, preset: PlannerPosturePreset, heightCm: number, metricKey: string) {
+  const report = createPlannerPostureReport(input, {
+    ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+    preset,
+    heightCm,
+    monitorHeightFromBaseMm: getOptimizedPresetMonitorHeightFromBaseMm(input, preset, heightCm),
+  });
+  const metric = report.metrics.find((candidate) => candidate.key === metricKey);
+
+  if (!metric) {
+    throw new Error(`Missing posture metric ${metricKey}`);
+  }
+
+  return metric.valueDeg ?? metric.valueMm ?? 0;
 }
 
 describe('aluminum rig planner posture presets', () => {
@@ -209,6 +265,93 @@ describe('aluminum rig planner posture presets', () => {
 
     expect(settings.monitorHeightFromBaseMm).toBe(expectedHeightFromBaseMm);
     expect(getOptimizedPresetMonitorHeightFromBaseMm(input, preset, heightCm)).toBe(expectedHeightFromBaseMm);
+  });
+
+  it('uses boosted low-height eye center for preset monitor optimization', () => {
+    const preset = 'gt';
+    const boostedHeightCm = 119;
+    const thresholdHeightCm = 120;
+    const boostedInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, boostedHeightCm);
+    const thresholdInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, thresholdHeightCm);
+    const boostedMonitorHeight = getOptimizedPresetMonitorHeightFromBaseMm(boostedInput, preset, boostedHeightCm);
+    const thresholdMonitorHeight = getOptimizedPresetMonitorHeightFromBaseMm(thresholdInput, preset, thresholdHeightCm);
+    const boostedSkeleton = createPlannerPostureSkeleton(boostedInput, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      preset,
+      heightCm: boostedHeightCm,
+      monitorHeightFromBaseMm: 0,
+    });
+    const expectedBoostedHeight =
+      Math.round((boostedSkeleton.joints.eyeCenter[2] * 1000 - BASE_BEAM_HEIGHT_MM) / PLANNER_CONTROL_STEP_MM) *
+      PLANNER_CONTROL_STEP_MM;
+
+    expect(boostedMonitorHeight).toBe(expectedBoostedHeight);
+    expect(boostedMonitorHeight).toBeGreaterThan(thresholdMonitorHeight);
+  });
+
+  it('uses boosted low-height body position for preset dynamic optimization', () => {
+    const preset = 'gt';
+    const boostedInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, 119);
+    const thresholdInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, 120);
+
+    expect(boostedInput.steeringColumnBaseHeightMm).toBeGreaterThan(thresholdInput.steeringColumnBaseHeightMm);
+    expect(boostedInput.steeringColumnDistanceMm).toBeGreaterThan(thresholdInput.steeringColumnDistanceMm);
+    expect(boostedInput.pedalsHeightMm).not.toBe(thresholdInput.pedalsHeightMm);
+  });
+
+  it('uses boosted eye center for eye-to-wheel preset optimization', () => {
+    const preset = 'gt';
+    const boostedHeightCm = 119;
+    const solvedInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, boostedHeightCm);
+    const unboostedWheelInput = {
+      ...solvedInput,
+      steeringColumnBaseHeightMm: applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, 120)
+        .steeringColumnBaseHeightMm,
+    };
+
+    expect(getMetricTargetScore(solvedInput, preset, boostedHeightCm, 'eyeToWheelTop')).toBeLessThan(
+      getMetricTargetScore(unboostedWheelInput, preset, boostedHeightCm, 'eyeToWheelTop')
+    );
+  });
+
+  it.each(NON_CUSTOM_PRESETS)('keeps boosted eye-to-wheel close to threshold posture for %s', (preset) => {
+    const boostedHeightCm = 119;
+    const thresholdHeightCm = 120;
+    const boostedInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, boostedHeightCm);
+    const thresholdInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, thresholdHeightCm);
+    const boostedEyeToWheelTop = getMetricValue(boostedInput, preset, boostedHeightCm, 'eyeToWheelTop');
+    const thresholdEyeToWheelTop = getMetricValue(thresholdInput, preset, thresholdHeightCm, 'eyeToWheelTop');
+
+    expect(boostedInput.steeringColumnBaseHeightMm).toBeGreaterThan(thresholdInput.steeringColumnBaseHeightMm);
+    expect(Math.abs(boostedEyeToWheelTop - thresholdEyeToWheelTop)).toBeLessThanOrEqual(PLANNER_CONTROL_STEP_MM * 2);
+  });
+
+  it('optimizes pedal height and angle toward required leg posture angles', () => {
+    const preset = 'gt';
+    const heightCm = 182;
+    const solvedInput = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, heightCm);
+    const lowPedalInput = {
+      ...solvedInput,
+      pedalsHeightMm: PLANNER_DIMENSION_LIMITS.pedalsHeightMinMm,
+    };
+    const highPedalInput = {
+      ...solvedInput,
+      pedalsHeightMm: PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm,
+    };
+    const shallowPedalInput = {
+      ...solvedInput,
+      pedalAngleDeg: PLANNER_DIMENSION_LIMITS.pedalAngleDegMin,
+    };
+    const steepPedalInput = {
+      ...solvedInput,
+      pedalAngleDeg: PLANNER_DIMENSION_LIMITS.pedalAngleDegMax,
+    };
+    const solvedScore = getPedalPostureAngleScore(solvedInput, preset, heightCm);
+
+    expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(lowPedalInput, preset, heightCm));
+    expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(highPedalInput, preset, heightCm));
+    expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(shallowPedalInput, preset, heightCm));
+    expect(solvedScore).toBeLessThan(getPedalPostureAngleScore(steepPedalInput, preset, heightCm));
   });
 
   it('preserves monitor height for custom preset posture settings', () => {

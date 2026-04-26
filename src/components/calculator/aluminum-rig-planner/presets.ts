@@ -16,7 +16,11 @@ import {
   getSteeringColumnBaseHeightMaxMm,
   getSteeringColumnDistanceMaxMm,
 } from './geometry';
-import { createPlannerPostureSkeleton } from './posture';
+import {
+  createPlannerPostureSkeleton,
+  getPostureBoosterSeatOffsetMm,
+  POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM,
+} from './posture';
 import { createPlannerPostureReport } from './posture-report';
 import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset, PlannerPostureSettings } from './types';
 
@@ -41,6 +45,11 @@ type PlannerPosturePresetSearchKey = keyof PlannerPosturePresetSeed;
 const METERS_TO_MM = 1000;
 const PRESET_SCORE_WEIGHTS: Record<string, number> = {
   elbowBend: 4,
+  kneeBend: 4,
+  ankleRange: 4,
+  eyeToWheelTop: 4,
+  brakeHipToThighProjectedAngle: 3,
+  torsoToThigh: 2,
 };
 const PRESET_SCORE_STATUS_PENALTY = {
   bad: 10000,
@@ -174,6 +183,10 @@ function roundToStep(value: number, step: number) {
   return Math.round(value / step) * step;
 }
 
+function toRad(value: number) {
+  return (value * Math.PI) / 180;
+}
+
 function clampMonitorHeightFromBaseMm(value: number) {
   return clamp(
     roundToStep(value, PLANNER_CONTROL_STEP_MM),
@@ -204,44 +217,63 @@ export function getPresetAfterPlannerInputEdit(
   return didInputChange ? 'custom' : currentPreset;
 }
 
+function getPresetBoosterSeedAdjustment(preset: SolvablePlannerPosturePreset, heightCm: number) {
+  const { backMm, bottomMm } = getPostureBoosterSeatOffsetMm(heightCm);
+  const presetValues = PLANNER_POSTURE_PRESETS[preset];
+  const seatAngleRad = toRad(presetValues.seatAngleDeg);
+  const backrestAngleRad = toRad(presetValues.seatAngleDeg + presetValues.backrestAngleDeg - 90);
+  const seatNormalX = -Math.sin(seatAngleRad);
+  const seatNormalZ = Math.cos(seatAngleRad);
+  const backrestUpX = -Math.sin(backrestAngleRad);
+  const backrestUpZ = Math.cos(backrestAngleRad);
+  const bodyForwardX = backrestUpZ;
+  const bodyForwardZ = -backrestUpX;
+
+  return {
+    xMm: seatNormalX * bottomMm + bodyForwardX * backMm,
+    zMm: seatNormalZ * bottomMm + bodyForwardZ * backMm,
+  };
+}
+
 function getPresetSeed(preset: SolvablePlannerPosturePreset, heightCm: number): PlannerPosturePresetSeed {
   const heightDeltaCm = clamp(heightCm, 100, 220) - DEFAULT_POSTURE_HEIGHT_CM;
+  const boosterSeedAdjustment = getPresetBoosterSeedAdjustment(preset, heightCm);
 
   if (preset === 'formula') {
     return {
-      steeringColumnBaseHeightMm: 390 + heightDeltaCm * 0.5,
-      steeringColumnDistanceMm: 335 + heightDeltaCm * 1.2,
-      pedalTrayDistanceMm: 520 + heightDeltaCm * 3.1,
-      pedalsHeightMm: 120 + heightDeltaCm * 0.4,
+      steeringColumnBaseHeightMm: 390 + heightDeltaCm * 0.5 + boosterSeedAdjustment.zMm,
+      steeringColumnDistanceMm: 335 + heightDeltaCm * 1.2 + boosterSeedAdjustment.xMm,
+      pedalTrayDistanceMm: 520 + heightDeltaCm * 3.1 + boosterSeedAdjustment.xMm,
+      pedalsHeightMm: 120 + heightDeltaCm * 0.4 + boosterSeedAdjustment.zMm,
       pedalAngleDeg: 58,
     };
   }
 
   if (preset === 'rally') {
     return {
-      steeringColumnBaseHeightMm: 450 + heightDeltaCm * 0.35,
-      steeringColumnDistanceMm: 330 + heightDeltaCm * 1.1,
-      pedalTrayDistanceMm: 430 + heightDeltaCm * 3,
-      pedalsHeightMm: 145 + heightDeltaCm * 0.3,
+      steeringColumnBaseHeightMm: 450 + heightDeltaCm * 0.35 + boosterSeedAdjustment.zMm,
+      steeringColumnDistanceMm: 330 + heightDeltaCm * 1.1 + boosterSeedAdjustment.xMm,
+      pedalTrayDistanceMm: 430 + heightDeltaCm * 3 + boosterSeedAdjustment.xMm,
+      pedalsHeightMm: 145 + heightDeltaCm * 0.3 + boosterSeedAdjustment.zMm,
       pedalAngleDeg: 70,
     };
   }
 
   if (preset === 'road') {
     return {
-      steeringColumnBaseHeightMm: 400 + heightDeltaCm * 0.45,
-      steeringColumnDistanceMm: 430 + heightDeltaCm * 1.8,
-      pedalTrayDistanceMm: 560 + heightDeltaCm * 3.4,
-      pedalsHeightMm: 70 + heightDeltaCm * 0.3,
+      steeringColumnBaseHeightMm: 400 + heightDeltaCm * 0.45 + boosterSeedAdjustment.zMm,
+      steeringColumnDistanceMm: 430 + heightDeltaCm * 1.8 + boosterSeedAdjustment.xMm,
+      pedalTrayDistanceMm: 560 + heightDeltaCm * 3.4 + boosterSeedAdjustment.xMm,
+      pedalsHeightMm: 70 + heightDeltaCm * 0.3 + boosterSeedAdjustment.zMm,
       pedalAngleDeg: 55,
     };
   }
 
   return {
-    steeringColumnBaseHeightMm: 420 + heightDeltaCm * 0.4,
-    steeringColumnDistanceMm: 380 + heightDeltaCm * 1.5,
-    pedalTrayDistanceMm: 470 + heightDeltaCm * 3.2,
-    pedalsHeightMm: 95 + heightDeltaCm * 0.35,
+    steeringColumnBaseHeightMm: 420 + heightDeltaCm * 0.4 + boosterSeedAdjustment.zMm,
+    steeringColumnDistanceMm: 380 + heightDeltaCm * 1.5 + boosterSeedAdjustment.xMm,
+    pedalTrayDistanceMm: 470 + heightDeltaCm * 3.2 + boosterSeedAdjustment.xMm,
+    pedalsHeightMm: 95 + heightDeltaCm * 0.35 + boosterSeedAdjustment.zMm,
     pedalAngleDeg: 60,
   };
 }
@@ -326,7 +358,8 @@ function scoreCandidate(
   input: PlannerInput,
   preset: SolvablePlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null
+  modelMetrics: PlannerPostureModelMetrics | null = null,
+  metricKeys: string[] | null = null
 ) {
   const report = createPlannerPostureReport(
     input,
@@ -340,8 +373,13 @@ function scoreCandidate(
     },
     modelMetrics
   );
+  const metricKeySet = metricKeys ? new Set(metricKeys) : null;
 
   return report.metrics.reduce((total, metric) => {
+    if (metricKeySet && !metricKeySet.has(metric.key)) {
+      return total;
+    }
+
     const value = metric.unit === 'mm' ? (metric.valueMm ?? 0) : (metric.valueDeg ?? 0);
     const target = (metric.range.min + metric.range.max) / 2;
     const width = Math.max(1, metric.range.max - metric.range.min);
@@ -385,6 +423,29 @@ function getPresetSearchLimits(
       step: 1,
     },
   };
+}
+
+function getBoostedSteeringBaseHeightFloorMm(
+  input: PlannerInput,
+  preset: SolvablePlannerPosturePreset,
+  heightCm: number,
+  modelMetrics: PlannerPostureModelMetrics | null
+) {
+  const boosterSeedAdjustment = getPresetBoosterSeedAdjustment(preset, heightCm);
+
+  if (Math.abs(boosterSeedAdjustment.zMm) <= SCORE_EPSILON) {
+    return null;
+  }
+
+  const thresholdInput = solveDynamicPlannerInput(
+    input,
+    preset,
+    POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM,
+    modelMetrics,
+    false
+  );
+
+  return thresholdInput.steeringColumnBaseHeightMm + boosterSeedAdjustment.zMm;
 }
 
 function clampPresetSearchSeedValue(
@@ -437,12 +498,53 @@ function solveDynamicPlannerInput(
   input: PlannerInput,
   preset: SolvablePlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null
+  modelMetrics: PlannerPostureModelMetrics | null = null,
+  useBoostedSteeringBaseFloor = true
 ): PlannerInput {
   const limits = getPresetSearchLimits(input);
+  const boostedSteeringBaseHeightFloorMm = useBoostedSteeringBaseFloor
+    ? getBoostedSteeringBaseHeightFloorMm(input, preset, heightCm, modelMetrics)
+    : null;
+
+  if (boostedSteeringBaseHeightFloorMm !== null) {
+    limits.steeringColumnBaseHeightMm.min = Math.max(
+      limits.steeringColumnBaseHeightMm.min,
+      clampPresetSearchSeedValue('steeringColumnBaseHeightMm', boostedSteeringBaseHeightFloorMm, limits)
+    );
+  }
+
   let bestSeed = clampPresetSearchSeed(getPresetSeed(preset, heightCm), limits);
   let bestInput = createCandidateInput(input, bestSeed);
   let bestScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics);
+  const maybeAdoptCandidate = (candidateSeed: PlannerPosturePresetSeed, metricKeys: string[]) => {
+    const candidateInput = createCandidateInput(input, candidateSeed);
+    const currentScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics, metricKeys);
+    const candidateScore = scoreCandidate(candidateInput, preset, heightCm, modelMetrics, metricKeys);
+
+    if (candidateScore + SCORE_EPSILON >= currentScore) {
+      return false;
+    }
+
+    bestSeed = candidateSeed;
+    bestInput = candidateInput;
+    bestScore = scoreCandidate(candidateInput, preset, heightCm, modelMetrics);
+
+    return true;
+  };
+  const maybeAdoptFullCandidate = (candidateSeed: PlannerPosturePresetSeed) => {
+    const candidateInput = createCandidateInput(input, candidateSeed);
+    const score = scoreCandidate(candidateInput, preset, heightCm, modelMetrics);
+
+    if (score + SCORE_EPSILON >= bestScore) {
+      return false;
+    }
+
+    bestSeed = candidateSeed;
+    bestInput = candidateInput;
+    bestScore = score;
+
+    return true;
+  };
 
   for (const stepLevel of PRESET_SEARCH_STEP_LEVELS) {
     for (let pass = 0; pass < PRESET_SEARCH_MAX_PASSES_PER_LEVEL; pass += 1) {
@@ -454,31 +556,45 @@ function solveDynamicPlannerInput(
         stepLevel.steeringColumnBaseHeightMm,
         limits
       )) {
-        for (const steeringColumnDistanceMm of getPresetSearchNeighborValues(
-          'steeringColumnDistanceMm',
-          bestSeed.steeringColumnDistanceMm,
-          stepLevel.steeringColumnDistanceMm,
-          limits
-        )) {
-          const candidateSeed: PlannerPosturePresetSeed = {
-            ...bestSeed,
-            steeringColumnBaseHeightMm,
-            steeringColumnDistanceMm,
-          };
-          const candidateInput = createCandidateInput(input, candidateSeed);
-          const score = scoreCandidate(candidateInput, preset, heightCm, modelMetrics);
+        if (
+          maybeAdoptCandidate(
+            {
+              ...bestSeed,
+              steeringColumnBaseHeightMm,
+            },
+            ['eyeToWheelTop']
+          )
+        ) {
+          didImprove = true;
+        }
+      }
 
-          if (score + SCORE_EPSILON < bestScore) {
-            bestSeed = candidateSeed;
-            bestInput = candidateInput;
-            bestScore = score;
-            didImprove = true;
-          }
+      for (const steeringColumnDistanceMm of getPresetSearchNeighborValues(
+        'steeringColumnDistanceMm',
+        bestSeed.steeringColumnDistanceMm,
+        stepLevel.steeringColumnDistanceMm,
+        limits
+      )) {
+        if (
+          maybeAdoptCandidate(
+            {
+              ...bestSeed,
+              steeringColumnDistanceMm,
+            },
+            ['elbowBend']
+          )
+        ) {
+          didImprove = true;
         }
       }
 
       for (const key of PRESET_SEARCH_KEYS) {
-        if (key === 'steeringColumnBaseHeightMm' || key === 'steeringColumnDistanceMm') {
+        if (
+          key === 'steeringColumnBaseHeightMm' ||
+          key === 'steeringColumnDistanceMm' ||
+          key === 'pedalsHeightMm' ||
+          key === 'pedalAngleDeg'
+        ) {
           continue;
         }
 
@@ -487,13 +603,39 @@ function solveDynamicPlannerInput(
             ...bestSeed,
             [key]: clampPresetSearchSeedValue(key, bestSeed[key] + direction * stepLevel[key], limits),
           };
-          const candidateInput = createCandidateInput(input, candidateSeed);
-          const score = scoreCandidate(candidateInput, preset, heightCm, modelMetrics);
 
-          if (score + SCORE_EPSILON < bestScore) {
-            bestSeed = candidateSeed;
-            bestInput = candidateInput;
-            bestScore = score;
+          if (maybeAdoptFullCandidate(candidateSeed)) {
+            didImprove = true;
+          }
+        }
+      }
+
+      for (const pedalsHeightMm of getPresetSearchNeighborValues(
+        'pedalsHeightMm',
+        bestSeed.pedalsHeightMm,
+        stepLevel.pedalsHeightMm,
+        limits
+      )) {
+        for (const pedalAngleDeg of getPresetSearchNeighborValues(
+          'pedalAngleDeg',
+          bestSeed.pedalAngleDeg,
+          stepLevel.pedalAngleDeg,
+          limits
+        )) {
+          const candidateSeed: PlannerPosturePresetSeed = {
+            ...bestSeed,
+            pedalsHeightMm,
+            pedalAngleDeg,
+          };
+
+          if (
+            maybeAdoptCandidate(candidateSeed, [
+              'kneeBend',
+              'ankleRange',
+              'brakeHipToThighProjectedAngle',
+              'torsoToThigh',
+            ])
+          ) {
             didImprove = true;
           }
         }

@@ -13,8 +13,12 @@ import {
 import {
   createPlannerPostureSkeleton,
   getEffectiveAnthropometryRatios,
+  getPostureBoosterSeatOffsetMm,
   PEDAL_HEEL_FORWARD_DELTA_MM,
   PEDAL_HEEL_UP_DELTA_MM,
+  POSTURE_BOOSTER_BACK_OFFSET_MAX_MM,
+  POSTURE_BOOSTER_BOTTOM_OFFSET_MAX_MM,
+  POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM,
   POSTURE_HIP_ABOVE_SEAT_MM,
   POSTURE_HIP_FORWARD_ON_SEAT_MM,
 } from '../../components/calculator/aluminum-rig-planner/posture';
@@ -184,6 +188,29 @@ describe('aluminum rig planner posture solver', () => {
     expect(tallDriver.joints.hipCenter[0] - midDriver.joints.hipCenter[0]).toBeCloseTo(expectedHipDelta[0], 6);
     expect(tallDriver.joints.hipCenter[1] - midDriver.joints.hipCenter[1]).toBeCloseTo(expectedHipDelta[1], 6);
     expect(tallDriver.joints.hipCenter[2] - midDriver.joints.hipCenter[2]).toBeCloseTo(expectedHipDelta[2], 6);
+  });
+
+  it('adds a static booster bottom and back offset below 120 cm', () => {
+    const minHeightOffset = getPostureBoosterSeatOffsetMm(100);
+    const belowThresholdOffset = getPostureBoosterSeatOffsetMm(119);
+    const thresholdOffset = getPostureBoosterSeatOffsetMm(POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM);
+    const belowThresholdSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      heightCm: 119,
+    });
+    const thresholdSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      heightCm: POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM,
+    });
+
+    expect(minHeightOffset.bottomMm).toBe(POSTURE_BOOSTER_BOTTOM_OFFSET_MAX_MM);
+    expect(minHeightOffset.backMm).toBe(POSTURE_BOOSTER_BACK_OFFSET_MAX_MM);
+    expect(belowThresholdOffset.bottomMm).toBe(POSTURE_BOOSTER_BOTTOM_OFFSET_MAX_MM);
+    expect(belowThresholdOffset.backMm).toBe(POSTURE_BOOSTER_BACK_OFFSET_MAX_MM);
+    expect(thresholdOffset.bottomMm).toBe(0);
+    expect(thresholdOffset.backMm).toBe(0);
+    expect(belowThresholdSkeleton.joints.hipCenter[2]).toBeGreaterThan(thresholdSkeleton.joints.hipCenter[2] - 0.002);
+    expect(belowThresholdSkeleton.joints.hipCenter[0]).toBeGreaterThan(thresholdSkeleton.joints.hipCenter[0] - 0.01);
   });
 
   it('updates the solved skeleton when posture inputs change', () => {
