@@ -281,7 +281,7 @@ describe('aluminum rig planner posture solver', () => {
     );
     const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
     const backrestAngleRad =
-      ((DEFAULT_PLANNER_INPUT.seatAngleDeg + DEFAULT_PLANNER_INPUT.backrestAngleDeg - 90) * Math.PI) / 180;
+      ((DEFAULT_PLANNER_INPUT.seatAngleDeg + DEFAULT_PLANNER_INPUT.backrestAngleDeg - 95) * Math.PI) / 180;
     const backrestUp = [-Math.sin(backrestAngleRad), 0, Math.cos(backrestAngleRad)] as const;
     const bodyForward = [backrestUp[2], 0, -backrestUp[0]] as const;
     const expectedEyeCenter = [

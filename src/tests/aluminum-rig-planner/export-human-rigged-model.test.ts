@@ -51,7 +51,7 @@ describe('human rig export script', () => {
   });
 
   it('forks each foot armature from the ankle into talon, foot, and toe bones', () => {
-    expect(exportScriptSource).toContain('TOE_BONE_START_SHARE = 0.6');
+    expect(exportScriptSource).toContain('TOE_BONE_START_SHARE = 0.75');
     expect(exportScriptSource).toContain('TALON_BACKWARD_ANGLE_DEG = 40');
     expect(exportScriptSource).toMatch(/def talon_tail_from_ankle\(ankle, toe, floor_y\):/);
     expect(exportScriptSource).not.toMatch(/talon_tail_from_ankle[\s\S]*?\) \* 1\.2/);

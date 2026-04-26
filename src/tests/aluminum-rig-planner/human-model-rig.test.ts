@@ -268,7 +268,7 @@ describe('aluminum rig planner human model rig', () => {
       forearmHandLength: 0.195,
       thighLength: 0.248,
       lowerLegLength: 0.231,
-      footLength: 0.143,
+      footLength: 0.156,
     });
   });
 
@@ -286,12 +286,12 @@ describe('aluminum rig planner human model rig', () => {
         forearmHandLength: 0.195,
         thighLength: 0.248,
         lowerLegLength: 0.231,
-        footLength: 0.143,
+        footLength: 0.156,
       },
-      eyeCenterForwardFromHip: 0.064,
-      eyeCenterHeightFromHip: 0.407,
-      eyeCenterSittingHeight: 0.407,
-      heelLengthShare: 0.244,
+      eyeCenterForwardFromHip: 0.054,
+      eyeCenterHeightFromHip: 0.411,
+      eyeCenterSittingHeight: 0.411,
+      heelLengthShare: 0.333,
     });
   });
 

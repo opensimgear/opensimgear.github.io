@@ -37,7 +37,7 @@ describe('aluminum rig planner query state', () => {
     expect(state.plannerInput.seatAngleDeg).toBe(45);
     expect(state.plannerInput.backrestAngleDeg).toBe(PLANNER_DIMENSION_LIMITS.backrestAngleDegMin);
     expect(state.plannerInput.pedalTrayDepthMm).toBe(300);
-    expect(state.plannerInput.pedalTrayDistanceMm).toBe(150);
+    expect(state.plannerInput.pedalTrayDistanceMm).toBe(0);
     expect(state.plannerInput.pedalLengthMm).toBe(PLANNER_DIMENSION_LIMITS.pedalLengthMaxMm);
     expect(state.plannerInput.steeringColumnDistanceMm).toBe(getSteeringColumnDistanceMaxMm(state.plannerInput));
     expect(state.plannerInput.steeringColumnBaseHeightMm).toBe(300);
