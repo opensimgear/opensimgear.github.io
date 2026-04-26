@@ -19,6 +19,30 @@ import type { PlannerPosturePreset } from '../../components/calculator/aluminum-
 
 const SOLVABLE_PRESETS = ['gt', 'rally', 'drift', 'road'] satisfies PlannerPosturePreset[];
 
+function subtract(a: [number, number, number], b: [number, number, number]): [number, number, number] {
+  return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+}
+
+function dot(a: [number, number, number], b: [number, number, number]) {
+  return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+
+function length(a: [number, number, number]) {
+  return Math.sqrt(dot(a, a));
+}
+
+function angleDeg(a: [number, number, number], joint: [number, number, number], b: [number, number, number]) {
+  const jointToA = subtract(a, joint);
+  const jointToB = subtract(b, joint);
+  const denominator = length(jointToA) * length(jointToB);
+
+  if (denominator <= 0) {
+    return 0;
+  }
+
+  return (Math.acos(Math.max(-1, Math.min(1, dot(jointToA, jointToB) / denominator))) * 180) / Math.PI;
+}
+
 function formatMetricValue(metric: ReturnType<typeof createPlannerPostureReport>['metrics'][number]) {
   return metric.unit === 'mm' ? `${metric.valueMm}mm` : `${metric.valueDeg}deg`;
 }
@@ -84,6 +108,21 @@ describe('aluminum rig planner posture report', () => {
 
     expect(metric?.label).toBe('Brake alignment');
     expect(metric?.valueDeg).toBeCloseTo(Number(expectedAngleDeg.toFixed(1)), 6);
+  });
+
+  it('reports wrist bend as deviation from the forearm direction', () => {
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const metric = report.metrics.find((candidate) => candidate.key === 'wristBend');
+    const leftWristBend =
+      180 - angleDeg(skeleton.joints.elbowLeft, skeleton.joints.wristLeft, skeleton.joints.handLeft);
+    const rightWristBend =
+      180 - angleDeg(skeleton.joints.elbowRight, skeleton.joints.wristRight, skeleton.joints.handRight);
+    const expectedWristBend = Number(((leftWristBend + rightWristBend) / 2).toFixed(1));
+
+    expect(metric?.label).toBe('Wrist bend');
+    expect(metric?.range).toEqual({ min: 0, max: 40 });
+    expect(metric?.valueDeg).toBeCloseTo(expectedWristBend, 6);
   });
 
   it('keeps preset posture reports out of bad status for every supported height', () => {

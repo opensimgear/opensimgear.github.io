@@ -90,7 +90,7 @@ export const POSTURE_TALON_BACKWARD_ANGLE_DEG = 40;
 export const POSTURE_TALON_FOOT_ANGLE_DEG = 90;
 export const POSTURE_TALON_PEDAL_PLANE_OFFSET_MM = 0;
 const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
-export const POSTURE_HIP_FORWARD_ON_SEAT_MM = 125;
+export const POSTURE_HIP_FORWARD_ON_SEAT_MM = 70;
 export const POSTURE_HIP_ABOVE_SEAT_MM = 130;
 export const POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM = 60;
 export const POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM = 120;
@@ -506,7 +506,7 @@ export function createPlannerPostureSkeleton(
     clamp(settings.heightCm, PLANNER_POSTURE_LIMITS.heightMinCm, PLANNER_POSTURE_LIMITS.heightMaxCm) / 100;
   const ratios = getEffectiveAnthropometryRatios(settings, postureModel);
   const seatAngleRad = toRad(input.seatAngleDeg);
-  const backrestAngleRad = toRad(input.seatAngleDeg + input.backrestAngleDeg - 90);
+  const backrestAngleRad = toRad(input.seatAngleDeg + input.backrestAngleDeg - 95);
   const seatForward: Vector = [Math.cos(seatAngleRad), 0, Math.sin(seatAngleRad)];
   const seatNormal: Vector = [-Math.sin(seatAngleRad), 0, Math.cos(seatAngleRad)];
   const backrestUp: Vector = [-Math.sin(backrestAngleRad), 0, Math.cos(backrestAngleRad)];

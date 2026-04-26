@@ -39,12 +39,13 @@ export type PlannerPostureReport = {
 const MM_TO_METERS = 0.001;
 const EPSILON = 0.000001;
 const MONITOR_DEBUG_BALL_DIAMETER_MM = 10;
+const WRIST_ORIGINAL_FOREARM_ANGLE_DEG = 180;
 const ANKLE_ORIGINAL_POSTURE_ANGLE_DEG = 180;
 const FOOT_TO_TOE_ORIGINAL_POSTURE_ANGLE_DEG = 180;
 
 const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureMetricRange>> = {
   gt: {
-    wristBend: { min: 110, max: 155 },
+    wristBend: { min: 0, max: 40 },
     elbowBend: { min: 90, max: 120 },
     kneeBend: { min: 120, max: 135 },
     torsoToThigh: { min: 60, max: 120 },
@@ -55,7 +56,7 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   rally: {
-    wristBend: { min: 110, max: 155 },
+    wristBend: { min: 0, max: 40 },
     elbowBend: { min: 95, max: 135 },
     kneeBend: { min: 110, max: 140 },
     torsoToThigh: { min: 60, max: 125 },
@@ -66,7 +67,7 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   drift: {
-    wristBend: { min: 110, max: 155 },
+    wristBend: { min: 0, max: 40 },
     elbowBend: { min: 95, max: 135 },
     kneeBend: { min: 110, max: 140 },
     torsoToThigh: { min: 60, max: 125 },
@@ -77,7 +78,7 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   road: {
-    wristBend: { min: 110, max: 155 },
+    wristBend: { min: 0, max: 40 },
     elbowBend: { min: 100, max: 135 },
     kneeBend: { min: 118, max: 142 },
     torsoToThigh: { min: 80, max: 130 },
@@ -88,7 +89,7 @@ const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureM
     eyeToMonitorMidpoint: { min: -50, max: 50 },
   },
   custom: {
-    wristBend: { min: 110, max: 155 },
+    wristBend: { min: 0, max: 40 },
     elbowBend: { min: 90, max: 120 },
     kneeBend: { min: 120, max: 135 },
     torsoToThigh: { min: 85, max: 120 },
@@ -266,8 +267,18 @@ export function createPlannerPostureReport(
       'Wrist bend',
       'deg',
       mean([
-        angleDeg(skeleton.joints.elbowLeft, skeleton.joints.wristLeft, skeleton.joints.handLeft),
-        angleDeg(skeleton.joints.elbowRight, skeleton.joints.wristRight, skeleton.joints.handRight),
+        angleDecreaseFromOriginalDeg(
+          WRIST_ORIGINAL_FOREARM_ANGLE_DEG,
+          skeleton.joints.elbowLeft,
+          skeleton.joints.wristLeft,
+          skeleton.joints.handLeft
+        ),
+        angleDecreaseFromOriginalDeg(
+          WRIST_ORIGINAL_FOREARM_ANGLE_DEG,
+          skeleton.joints.elbowRight,
+          skeleton.joints.wristRight,
+          skeleton.joints.handRight
+        ),
       ]),
       ranges
     ),
