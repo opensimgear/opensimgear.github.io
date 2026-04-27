@@ -90,13 +90,11 @@ describe('aluminum rig planner posture report', () => {
   it('reports eye-based posture metrics without extra eye debug payload', () => {
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
 
-    expect(report.metrics.some((metric) => metric.key === 'eyeToWheelTop' && metric.label === 'Eye to wheel top')).toBe(
+    expect(report.metrics.some((metric) => metric.key === 'eyeToWheelTop' && metric.label === 'Eye to Wheel Top')).toBe(
       true
     );
     expect(
-      report.metrics.some(
-        (metric) => metric.key === 'eyeToMonitorMidpoint' && metric.label === 'Eye to monitor midpoint'
-      )
+      report.metrics.some((metric) => metric.key === 'eyeToMonitorMidpoint' && metric.label === 'Eye to Monitor Mid')
     ).toBe(true);
     expect('eyeDebug' in report).toBe(false);
   });
@@ -133,7 +131,7 @@ describe('aluminum rig planner posture report', () => {
     const deltaY = skeleton.joints.toeLeft[1] - skeleton.joints.hipLeft[1];
     const expectedAngleDeg = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
 
-    expect(metric?.label).toBe('Brake alignment');
+    expect(metric?.label).toBe('Brake Alignment');
     expect(metric?.valueDeg).toBeCloseTo(Number(expectedAngleDeg.toFixed(1)), 6);
   });
 
@@ -151,7 +149,7 @@ describe('aluminum rig planner posture report', () => {
       180 - angleDeg(skeleton.joints.elbowRight, skeleton.joints.wristRight, skeleton.joints.handRight);
     const expectedWristBend = Number(((leftWristBend + rightWristBend) / 2).toFixed(1));
 
-    expect(metric?.label).toBe('Wrist bend');
+    expect(metric?.label).toBe('Wrist Bend');
     expect(metric?.range).toEqual(getPlannerPostureTargetRanges('gt').wristBend);
     expect(metric?.valueDeg).toBeCloseTo(expectedWristBend, 6);
   });

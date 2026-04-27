@@ -167,9 +167,9 @@ describe('aluminum rig planner posture solver', () => {
       180 - radToDeg(getAngleAtJoint(skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft, skeleton.joints.toeLeft));
 
     expect(oldAnkleRangeMetric).toBeUndefined();
-    expect(ankleMetric?.label).toBe('Ankle bend');
+    expect(ankleMetric?.label).toBe('Ankle Bend');
     expect(ankleMetric?.valueDeg).toBeCloseTo(expectedAnkleBend, 1);
-    expect(footToToeMetric?.label).toBe('Foot to toe bend');
+    expect(footToToeMetric?.label).toBe('Toe Bend');
     expect(footToToeMetric?.valueDeg).toBeCloseTo(expectedFootToToeBend, 1);
     expect(footToToeMetric?.valueDeg).toBeGreaterThanOrEqual(0);
   });

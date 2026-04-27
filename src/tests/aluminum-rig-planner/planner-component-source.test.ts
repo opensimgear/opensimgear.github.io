@@ -44,7 +44,7 @@ describe('aluminum rig planner component wiring', () => {
       /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*nextHeightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset,\s*getPresetSolveOptions\(\)\s*\);/
     );
     expect(plannerSource).toMatch(/function commitPostureHeightCm\(value: number, animateTransition = false\)/);
-    expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, { animate: animateTransition });');
+    expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, {animate: animateTransition});');
     expect(plannerSource).toContain('syncPresetMonitorHeightFromInput(nextInput);');
     expect(plannerSource).toContain(
       'createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics, {'
@@ -61,7 +61,7 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).toMatch(
       /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*postureSettings\.heightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset,\s*getPresetSolveOptions\(\)\s*\);/
     );
-    expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, { animate: true });');
+    expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, {animate: true});');
     expect(plannerSource).toContain('syncPresetMonitorHeightFromInput(nextInput);');
     expect(plannerSource).toContain('onOptimizePosture={optimizeCurrentPosturePreset}');
     expect(plannerSource).not.toMatch(/<Button\s+on:click=\{optimizeCurrentPosturePreset\}/);
@@ -120,7 +120,7 @@ describe('aluminum rig planner component wiring', () => {
   it('promotes general controls to a top panel with the advanced toggle', () => {
     const generalPaneIndex = plannerSource.indexOf('<Pane title="General"');
     const posturePaneIndex = plannerSource.indexOf('<Pane title="Posture"');
-    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Settings"');
+    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Rig Settings"');
     const generalPaneSource = plannerSource.slice(generalPaneIndex, posturePaneIndex);
     const posturePaneSource = plannerSource.slice(posturePaneIndex, settingsPaneIndex);
 
@@ -136,7 +136,7 @@ describe('aluminum rig planner component wiring', () => {
 
   it('shows target FOV and distance editing for flat and curved monitors', () => {
     const posturePaneIndex = plannerSource.indexOf('<Pane title="Posture"');
-    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Settings"');
+    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Rig Settings"');
     const monitorFolderIndex = plannerSource.indexOf('<Folder title="Monitor" expanded={false}>');
     const baseFolderIndex = plannerSource.indexOf('<Folder title="Base"', settingsPaneIndex);
     const monitorSource = plannerSource.slice(monitorFolderIndex, baseFolderIndex);
@@ -152,8 +152,8 @@ describe('aluminum rig planner component wiring', () => {
     expect(monitorFolderIndex).toBeGreaterThan(-1);
     expect(monitorFolderIndex).toBeGreaterThan(settingsPaneIndex);
     expect(plannerSource.slice(posturePaneIndex, settingsPaneIndex)).not.toContain('<Folder title="Monitor"');
-    expect(monitorSource).toContain('label="Target FOV"');
-    expect(monitorSource).toContain('label="Distance"');
+    expect(monitorSource).toContain('label="FOV"');
+    expect(monitorSource).toContain('label="Distance from Eyes"');
     expect(monitorSource).not.toContain("postureSettings.monitorCurvature === 'disabled'");
     expect(plannerSource).toContain('getMonitorTargetFovFromDistanceMm');
     expect(plannerSource).toMatch(/function setMonitorDistanceFromEyesMm\(value: number\)/);
@@ -175,10 +175,10 @@ describe('aluminum rig planner component wiring', () => {
   });
 
   it('keeps module toggles and module folders in the settings pane', () => {
-    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Settings"');
-    const optimizerPaneIndex = plannerSource.indexOf('<Pane title="Cut optimizer"', settingsPaneIndex);
+    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Rig Settings"');
+    const optimizerPaneIndex = plannerSource.indexOf('<Pane title="Cutlist Optimizer"', settingsPaneIndex);
     const settingsPaneSource = plannerSource.slice(settingsPaneIndex, optimizerPaneIndex);
-    const enabledModulesIndex = settingsPaneSource.indexOf('<Folder title="Enabled Modules" expanded={false}>');
+    const enabledModulesIndex = settingsPaneSource.indexOf('<Folder title="Enabled Modules">');
     const monitorIndex = settingsPaneSource.indexOf('<Folder title="Monitor" expanded={false}>');
     const baseIndex = settingsPaneSource.indexOf('<Folder title="Base" expanded={false}>');
     const enabledModulesSource = settingsPaneSource.slice(
@@ -194,8 +194,8 @@ describe('aluminum rig planner component wiring', () => {
     expect(enabledModulesSource).not.toContain('label="Steering column"');
     expect(enabledModulesSource).not.toContain('label="Pedal tray"');
     expect(monitorIndex).toBeLessThan(baseIndex);
-    expect(settingsPaneSource).toContain('<Folder title="Steering column" expanded={false}>');
-    expect(settingsPaneSource).toContain('<Folder title="Pedal tray" expanded={false}>');
+    expect(settingsPaneSource).toContain('<Folder title="Steering Column" expanded={false}>');
+    expect(settingsPaneSource).toContain('<Folder title="Pedal Tray" expanded={false}>');
     expect(settingsPaneSource).toContain('<Folder title="Pedals" expanded={false}>');
   });
 
