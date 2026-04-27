@@ -1,5 +1,5 @@
-import type { PlannerInput } from './types';
-import { PEDAL_TRAY_LAYOUT, PLANNER_DIMENSION_LIMITS, PLANNER_LAYOUT } from './constants';
+import type { PlannerInput } from '../types';
+import { PEDAL_TRAY_LAYOUT, PLANNER_DIMENSION_LIMITS, PLANNER_LAYOUT } from '../constants/planner';
 
 export type PlannerGeometry = {
   input: PlannerInput;

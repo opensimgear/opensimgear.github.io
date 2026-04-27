@@ -3,10 +3,10 @@ import { describe, expect, it } from 'vitest';
 import {
   BASE_MODULE_LAYOUT,
   DEFAULT_PLANNER_INPUT,
-  HALF_PROFILE_SHORT_MM,
-} from '../../components/calculator/aluminum-rig-planner/constants';
-import { createSeatModule } from '../../components/calculator/aluminum-rig-planner/modules/seat';
-import type { MeshSpec } from '../../components/calculator/aluminum-rig-planner/modules/shared';
+} from '~/components/calculator/aluminum-rig-planner/constants/planner';
+import { HALF_PROFILE_SHORT_MM } from '~/components/calculator/aluminum-rig-planner/constants/profile';
+import { createSeatModule } from '~/components/calculator/aluminum-rig-planner/modules/seat';
+import type { MeshSpec } from '~/components/calculator/aluminum-rig-planner/modules/shared';
 
 describe('aluminum rig planner seat module', () => {
   function getMesh(id: string, input = DEFAULT_PLANNER_INPUT): MeshSpec {

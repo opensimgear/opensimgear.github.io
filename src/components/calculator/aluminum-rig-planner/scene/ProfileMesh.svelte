@@ -3,13 +3,13 @@
   import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
   import { BoxGeometry, CylinderGeometry, TorusGeometry } from 'three';
 
-  import { ENDCAP_MATERIAL, PROFILE_APPEARANCE } from './constants';
+  import { ENDCAP_MATERIAL, PROFILE_APPEARANCE } from '../constants/profile';
   import {
     getProfileGeometry,
     getProfileMeshRotation,
     getProfileMeshScale,
-  } from './modules/profile-geometry';
-  import type { MeshSpec } from './modules/shared';
+  } from '../modules/profile-geometry';
+  import type { MeshSpec } from '../modules/shared';
 
   type Props = {
     mesh: MeshSpec;

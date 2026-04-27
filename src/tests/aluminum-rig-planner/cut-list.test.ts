@@ -1,17 +1,19 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  BASE_BEAM_WIDTH_MM,
   DEFAULT_PLANNER_INPUT,
   PEDAL_TRAY_LAYOUT,
+} from '~/components/calculator/aluminum-rig-planner/constants/planner';
+import {
+  BASE_BEAM_WIDTH_MM,
   UPRIGHT_BEAM_DEPTH_MM,
-} from '../../components/calculator/aluminum-rig-planner/constants';
+} from '~/components/calculator/aluminum-rig-planner/constants/profile';
 import {
   createPlannerCutList,
   createPlannerCutListEntries,
   mergeCutListRows,
-} from '../../components/calculator/aluminum-rig-planner/cut-list';
-import { derivePlannerGeometry } from '../../components/calculator/aluminum-rig-planner/geometry';
+} from '~/components/calculator/aluminum-rig-planner/cut-list/cut-list';
+import { derivePlannerGeometry } from '~/components/calculator/aluminum-rig-planner/scene/geometry';
 
 describe('aluminum rig planner cut list', () => {
   function createGeometry() {

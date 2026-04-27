@@ -1,12 +1,7 @@
-import {
-  BASE_BEAM_HEIGHT_MM,
-  PEDAL_TRAY_LAYOUT,
-  PLANNER_LAYOUT,
-  PROFILE_SHORT_MM,
-  UPRIGHT_BEAM_DEPTH_MM,
-} from './constants';
-import { centeredY, mm } from './modules/shared';
-import type { PlannerInput } from './types';
+import { PEDAL_TRAY_LAYOUT, PLANNER_LAYOUT } from '../constants/planner';
+import { BASE_BEAM_HEIGHT_MM, PROFILE_SHORT_MM, UPRIGHT_BEAM_DEPTH_MM } from '../constants/profile';
+import { centeredY, mm } from '../modules/shared';
+import type { PlannerInput } from '../types';
 
 export const MEASUREMENT_OVERLAY_COLOR = '#2563eb';
 const HORIZONTAL_ARROW_CLEARANCE_MM = 70;

@@ -1,4 +1,4 @@
-import type { PlannerInput, PlannerPosturePreset } from './types';
+import type { PlannerInput, PlannerPosturePreset } from '../types';
 
 export type SolvablePlannerPosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
 export type PlannerPosturePresetValues = Pick<

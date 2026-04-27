@@ -1,31 +1,36 @@
 import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 import { Bone, Box3, Object3D, Quaternion, SkinnedMesh, Vector3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+import humanMaleGlbUrl from '~/assets/models/human-male.glb';
+
 import {
   calculateHumanModelBoneRigRatios,
   calculateHumanModelPostureModel,
   createRiggedHumanModelFromRoot,
   type HumanRigTooltipData,
-} from '../../components/calculator/aluminum-rig-planner/human-model-rig';
+} from '~/components/calculator/aluminum-rig-planner/posture/human-model-rig';
+import { DEFAULT_PLANNER_INPUT } from '~/components/calculator/aluminum-rig-planner/constants/planner';
 import {
-  DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_POSTURE_HEIGHT_CM,
-} from '../../components/calculator/aluminum-rig-planner/constants';
+} from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import {
   createPlannerPostureSkeleton,
   POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM,
   type PlannerPostureSkeleton,
   type PosturePoint,
-} from '../../components/calculator/aluminum-rig-planner/posture';
+} from '~/components/calculator/aluminum-rig-planner/posture/posture';
 
-const MODEL_PATH = fileURLToPath(new URL('../../assets/models/human-male.glb', import.meta.url));
+const MODEL_PATH = humanMaleGlbUrl.startsWith('file:')
+  ? fileURLToPath(humanMaleGlbUrl)
+  : path.join(process.cwd(), humanMaleGlbUrl);
 const HUMAN_MODEL_RIG_SOURCE = readFileSync(
-  new URL('../../components/calculator/aluminum-rig-planner/human-model-rig.ts', import.meta.url),
+  new URL('../../components/calculator/aluminum-rig-planner/posture/human-model-rig.ts', import.meta.url),
   'utf8'
 );
 const MODEL_RATIO_PRECISION = 3;

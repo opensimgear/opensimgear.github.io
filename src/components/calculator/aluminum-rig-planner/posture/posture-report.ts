@@ -1,5 +1,6 @@
-import { BASE_BEAM_HEIGHT_MM, PLANNER_DIMENSION_LIMITS, UPRIGHT_BEAM_DEPTH_MM } from './constants';
-import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
+import { PLANNER_DIMENSION_LIMITS } from '../constants/planner';
+import { BASE_BEAM_HEIGHT_MM, UPRIGHT_BEAM_DEPTH_MM } from '../constants/profile';
+import { getSolvedMonitorDistanceFromEyesMm } from '../modules/monitor';
 import { createPlannerPostureSkeleton, type PosturePoint } from './posture';
 import {
   getPlannerPostureTargetRanges as getSharedPlannerPostureTargetRanges,
@@ -11,7 +12,7 @@ import type {
   PlannerPosturePreset,
   PlannerPostureSettings,
   PlannerPostureTargetKey,
-} from './types';
+} from '../types';
 
 export type PlannerPostureMetricStatus = 'ok' | 'warn' | 'bad';
 export type PlannerPostureMetricRange = PlannerPostureTargetRange;

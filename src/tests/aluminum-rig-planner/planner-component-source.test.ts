@@ -7,7 +7,7 @@ const plannerSource = readFileSync(
   'utf8'
 );
 const sceneSource = readFileSync(
-  new URL('../../components/calculator/aluminum-rig-planner/Scene.svelte', import.meta.url),
+  new URL('../../components/calculator/aluminum-rig-planner/scene/Scene.svelte', import.meta.url),
   'utf8'
 );
 
@@ -79,7 +79,7 @@ describe('aluminum rig planner component wiring', () => {
 
   it('includes eye alignment in rig geometry preset scoring', () => {
     const presetsSource = readFileSync(
-      new URL('../../components/calculator/aluminum-rig-planner/presets.ts', import.meta.url),
+      new URL('../../components/calculator/aluminum-rig-planner/posture/presets.ts', import.meta.url),
       'utf8'
     );
 
@@ -94,7 +94,7 @@ describe('aluminum rig planner component wiring', () => {
 
   it('weights elbow bend and uses decreasing-step preset search', () => {
     const presetsSource = readFileSync(
-      new URL('../../components/calculator/aluminum-rig-planner/presets.ts', import.meta.url),
+      new URL('../../components/calculator/aluminum-rig-planner/posture/presets.ts', import.meta.url),
       'utf8'
     );
 
@@ -107,7 +107,7 @@ describe('aluminum rig planner component wiring', () => {
 
   it('keeps steering column base height in decreasing-step preset search', () => {
     const presetsSource = readFileSync(
-      new URL('../../components/calculator/aluminum-rig-planner/presets.ts', import.meta.url),
+      new URL('../../components/calculator/aluminum-rig-planner/posture/presets.ts', import.meta.url),
       'utf8'
     );
 

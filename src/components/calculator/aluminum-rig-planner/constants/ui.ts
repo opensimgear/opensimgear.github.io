@@ -1,6 +1,18 @@
-import { ALUMINUM_RIG_MOBILE_BREAKPOINT, DESKTOP_PANE_EXPANDED_STATE, MOBILE_PANE_EXPANDED_STATE } from './constants';
+export const ALUMINUM_RIG_MOBILE_BREAKPOINT = 1024;
 
-export { ALUMINUM_RIG_MOBILE_BREAKPOINT };
+export const DESKTOP_PANE_EXPANDED_STATE = {
+  general: true,
+  setup: true,
+  posture: true,
+  optimizer: true,
+} as const;
+
+export const MOBILE_PANE_EXPANDED_STATE = {
+  general: false,
+  setup: false,
+  posture: false,
+  optimizer: false,
+} as const;
 
 export type AluminumRigPaneExpandedState = {
   general: boolean;

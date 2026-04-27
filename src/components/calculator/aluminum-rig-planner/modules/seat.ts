@@ -1,4 +1,5 @@
-import { BASE_BEAM_HEIGHT_MM, BASE_MODULE_LAYOUT, HALF_PROFILE_SHORT_MM, PROFILE_SHORT_MM } from '../constants';
+import { BASE_MODULE_LAYOUT } from '../constants/planner';
+import { BASE_BEAM_HEIGHT_MM, HALF_PROFILE_SHORT_MM, PROFILE_SHORT_MM } from '../constants/profile';
 import type { PlannerInput } from '../types';
 import { mm, type MeshSpec } from './shared';
 

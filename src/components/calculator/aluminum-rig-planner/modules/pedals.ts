@@ -1,6 +1,7 @@
 import { Vector3 } from 'three';
 
-import { BASE_BEAM_HEIGHT_MM, PEDAL_TRAY_LAYOUT } from '../constants';
+import { PEDAL_TRAY_LAYOUT } from '../constants/planner';
+import { BASE_BEAM_HEIGHT_MM } from '../constants/profile';
 import type { PlannerInput } from '../types';
 import { mm, type MeshSpec } from './shared';
 

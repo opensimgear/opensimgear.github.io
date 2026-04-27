@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS } from '../../components/calculator/aluminum-rig-planner/constants';
-import { createPlannerOptimizationResult } from '../../components/calculator/aluminum-rig-planner/optimizer';
-import type { CutListEntry, PlannerOptimizationSettings } from '../../components/calculator/aluminum-rig-planner/types';
+import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS } from '~/components/calculator/aluminum-rig-planner/constants/optimizer';
+import { createPlannerOptimizationResult } from '~/components/calculator/aluminum-rig-planner/cut-list/optimizer';
+import type { CutListEntry, PlannerOptimizationSettings } from '~/components/calculator/aluminum-rig-planner/types';
 
 function createEntry(profileType: CutListEntry['profileType'], lengthMm: number, beamIds: string[]): CutListEntry {
   return {

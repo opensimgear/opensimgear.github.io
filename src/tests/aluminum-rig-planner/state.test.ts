@@ -5,7 +5,7 @@ import {
   getNextAluminumRigPaneExpandedState,
   getAluminumRigPaneExpandedState,
   isNarrowAluminumRigViewport,
-} from '../../components/calculator/aluminum-rig-planner/state';
+} from '~/components/calculator/aluminum-rig-planner/constants/ui';
 
 describe('aluminum rig planner responsive state', () => {
   it('treats widths below mobile breakpoint as narrow', () => {

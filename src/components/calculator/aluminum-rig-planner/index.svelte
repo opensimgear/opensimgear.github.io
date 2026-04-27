@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {type Component, onMount, tick} from 'svelte';
+  import { type Component, onMount, tick } from 'svelte';
   import {
     Button,
     Checkbox,
@@ -13,31 +13,39 @@
     Slider,
   } from 'svelte-tweakpane-ui';
 
-  import {DEFAULT_CURRENCY_LOCALE, formatPlannerMoney, resolvePlannerCurrency, resolvePlannerLocale,} from './currency';
-  import {createDebouncedUrlStateWriter} from '../shared/debounced-url-state';
-  import {decodeQueryState, encodeQueryState} from '../shared/query-state';
-  import CutOptimizerPanel from './CutOptimizerPanel.svelte';
-  import {createPlannerCutListEntries} from './cut-list';
   import {
-    COLOR_MODE_OPTIONS,
+    DEFAULT_CURRENCY_LOCALE,
+    formatPlannerMoney,
+    resolvePlannerCurrency,
+    resolvePlannerLocale,
+  } from './cut-list/currency';
+  import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
+  import { decodeQueryState, encodeQueryState } from '../shared/query-state';
+  import CutOptimizerPanel from './cut-list/CutOptimizerPanel.svelte';
+  import { createPlannerCutListEntries } from './cut-list/cut-list';
+  import { COLOR_MODE_OPTIONS, DEFAULT_CUSTOM_PROFILE_COLOR } from './constants/scene';
+  import {
     DEFAULT_ACTIVE_POSTURE_PRESET,
-    DEFAULT_CUSTOM_PROFILE_COLOR,
-    DEFAULT_PLANNER_INPUT,
-    DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
     DEFAULT_PLANNER_POSTURE_SETTINGS,
     DEFAULT_POSTURE_HEIGHT_CM,
-    getPlannerStockCostDefault,
-    getPlannerStockCostMax,
     MONITOR_ASPECT_RATIO_OPTIONS,
     MONITOR_CURVATURE_OPTIONS,
+    PLANNER_POSTURE_LIMITS,
+    POSTURE_PRESET_OPTIONS,
+  } from './constants/posture';
+  import {
+    DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
+    getPlannerStockCostDefault,
+    getPlannerStockCostMax,
+  } from './constants/optimizer';
+  import {
+    DEFAULT_PLANNER_INPUT,
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
     PLANNER_LAYOUT,
-    PLANNER_POSTURE_LIMITS,
-    POSTURE_PRESET_OPTIONS,
     URL_STATE_DEBOUNCE_MS,
-  } from './constants';
-  import type {PlannerGeometry} from './geometry';
+  } from './constants/planner';
+  import type { PlannerGeometry } from './scene/geometry';
   import {
     clampSteeringColumnHeights,
     derivePlannerGeometry,
@@ -48,17 +56,24 @@
     getPedalTrayDistanceMinMm,
     getSteeringColumnBaseHeightMaxMm,
     getSteeringColumnDistanceMaxMm,
-  } from './geometry';
+  } from './scene/geometry';
   import {
     createPlannerMeasurementOverlay,
     type PlannerMeasurementKey,
     type PlannerMeasurementOverlay,
-  } from './measurement-overlay';
-  import {getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm} from './modules/monitor';
-  import {loadPrebuiltProfileGeometries} from './modules/profile-geometry';
-  import {createPlannerOptimizationResult} from './optimizer';
-  import {createPlannerPostureReport, type PlannerPostureMetric, type PlannerPostureReport} from './posture-report';
-  import {clonePlannerPostureTargetRangesByPreset, getPlannerPostureTargetRangeControlLimits,} from './posture-targets';
+  } from './scene/measurement-overlay';
+  import { getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
+  import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
+  import { createPlannerOptimizationResult } from './cut-list/optimizer';
+  import {
+    createPlannerPostureReport,
+    type PlannerPostureMetric,
+    type PlannerPostureReport,
+  } from './posture/posture-report';
+  import {
+    clonePlannerPostureTargetRangesByPreset,
+    getPlannerPostureTargetRangeControlLimits,
+  } from './posture/posture-targets';
   import {
     applyPresetToPlannerInput,
     applyPresetToPostureSettings,
@@ -66,16 +81,16 @@
     getPresetAfterPlannerInputEdit,
     isPresetSolvablePreset,
     recomputePresetDynamicPlannerInput,
-  } from './presets';
-  import {mergePlannerQueryState, type PlannerQueryState} from './query-state';
+  } from './posture/presets';
+  import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
     type AluminumRigPaneExpandedState,
     getAluminumRigPaneExpandedState,
     getNextAluminumRigPaneExpandedState,
     isNarrowAluminumRigViewport,
-  } from './state';
-  import {BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR} from './modules/shared';
-  import {createRiggedHumanModel, type RiggedHumanModel} from './human-model-rig';
+  } from './constants/ui';
+  import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
+  import { createRiggedHumanModel, type RiggedHumanModel } from './posture/human-model-rig';
   import type {
     CutListProfileType,
     PlannerCurrencyCode,
@@ -110,11 +125,11 @@
   const POSTURE_TRANSITION_DURATION_MS = 320;
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
-  const DEFAULT_INPUT: PlannerInput = {...DEFAULT_PLANNER_INPUT};
+  const DEFAULT_INPUT: PlannerInput = { ...DEFAULT_PLANNER_INPUT };
   const DEFAULT_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings = {
     ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
-    profileWeightsKgPerMeter: {...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter},
-    stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({...option})),
+    profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
+    stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({ ...option })),
   };
   const DEFAULT_POSTURE_SETTINGS: PlannerPostureSettings<PlannerPosturePreset> = {
     ...DEFAULT_PLANNER_POSTURE_SETTINGS,
@@ -155,17 +170,17 @@
     },
   ] as const;
   const OPTIMIZER_MODE_OPTIONS = [
-    {text: 'Cost', value: 'cost'},
-    {text: 'Waste', value: 'waste'},
+    { text: 'Cost', value: 'cost' },
+    { text: 'Waste', value: 'waste' },
   ] as const;
   const CURRENCY_MODE_OPTIONS = [
-    {text: 'Auto', value: 'auto'},
-    {text: 'Euro', value: 'eur'},
-    {text: 'Dollar', value: 'usd'},
+    { text: 'Auto', value: 'auto' },
+    { text: 'Euro', value: 'eur' },
+    { text: 'Dollar', value: 'usd' },
   ] as const;
   const SHIPPING_MODE_OPTIONS = [
-    {text: 'Flat', value: 'flat'},
-    {text: 'Per kg', value: 'per-kg'},
+    { text: 'Flat', value: 'flat' },
+    { text: 'Per kg', value: 'per-kg' },
   ] as const;
   const PROFILE_TYPES: CutListProfileType[] = ['80x40', '40x40'];
   const BLADE_THICKNESS_MIN_MM = 0.5;
@@ -192,8 +207,8 @@
   function cloneOptimizationSettings(settings: PlannerOptimizationSettings): PlannerOptimizationSettings {
     return {
       ...settings,
-      profileWeightsKgPerMeter: {...settings.profileWeightsKgPerMeter},
-      stockOptions: settings.stockOptions.map((option) => ({...option})),
+      profileWeightsKgPerMeter: { ...settings.profileWeightsKgPerMeter },
+      stockOptions: settings.stockOptions.map((option) => ({ ...option })),
     };
   }
 
@@ -225,8 +240,8 @@
     }
   }
 
-  let plannerInput = $state<PlannerInput>({...DEFAULT_INPUT});
-  let animatedPlannerInput = $state<PlannerInput>({...DEFAULT_INPUT});
+  let plannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
+  let animatedPlannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
   let optimizationSettings = $state<PlannerOptimizationSettings>(
     cloneOptimizationSettings(DEFAULT_OPTIMIZATION_SETTINGS)
   );
@@ -271,7 +286,7 @@
     sceneStatus = 'loading';
 
     try {
-      const [module] = await Promise.all([import('./Scene.svelte'), loadPrebuiltProfileGeometries()]);
+      const [module] = await Promise.all([import('./scene/Scene.svelte'), loadPrebuiltProfileGeometries()]);
       PlannerScene = module.default;
       sceneStatus = 'ready';
     } catch {
@@ -280,7 +295,7 @@
   }
 
   function getPresetSolveOptions() {
-    return {includeMonitor: visibleModules.monitor};
+    return { includeMonitor: visibleModules.monitor };
   }
 
   function syncPresetMonitorHeightFromInput(input: PlannerInput, modelMetrics = postureModelMetrics) {
@@ -407,19 +422,19 @@
   const defaultModelInput = $derived(
     postureModelMetrics
       ? createPresetPlannerInput(
-        DEFAULT_ACTIVE_POSTURE_PRESET,
-        DEFAULT_POSTURE_HEIGHT_CM,
-        DEFAULT_PLANNER_INPUT,
-        postureModelMetrics,
-        getPresetSolveOptions()
-      )
+          DEFAULT_ACTIVE_POSTURE_PRESET,
+          DEFAULT_POSTURE_HEIGHT_CM,
+          DEFAULT_PLANNER_INPUT,
+          postureModelMetrics,
+          getPresetSolveOptions()
+        )
       : DEFAULT_INPUT
   );
   const postureReport = $derived(
     postureModelMetrics
       ? createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics, {
-        includeMonitor: visibleModules.monitor,
-      })
+          includeMonitor: visibleModules.monitor,
+        })
       : null
   );
   const scenePostureSettings = $derived<PlannerPostureSettings<PlannerPosturePreset>>({
@@ -549,7 +564,7 @@
   const seatBaseDepthMaxMm = $derived(Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, plannerInput.baseLengthMm));
 
   $effect(() => {
-    const nextInput = {...plannerInput};
+    const nextInput = { ...plannerInput };
 
     if (!isAnimatingPlannerInput) {
       Object.assign(animatedPlannerInput, nextInput);
@@ -569,7 +584,7 @@
       return;
     }
 
-    for (const {text, selector, closest, testId} of PLANNER_TEST_ID_TARGETS) {
+    for (const { text, selector, closest, testId } of PLANNER_TEST_ID_TARGETS) {
       const element = Array.from(plannerRoot.querySelectorAll<HTMLElement>(selector)).find(
         (candidate) => candidate.textContent?.trim() === text
       );
@@ -716,7 +731,7 @@
 
     node.addEventListener('pointerdown', beginInteraction, true);
     node.addEventListener('mousedown', beginInteraction, true);
-    node.addEventListener('touchstart', beginInteraction, {capture: true, passive: true});
+    node.addEventListener('touchstart', beginInteraction, { capture: true, passive: true });
     node.addEventListener('keydown', beginKeyInteraction, true);
     node.addEventListener('focusout', endInteraction, true);
     node.addEventListener('change', endInteraction, true);
@@ -814,7 +829,7 @@
       return;
     }
 
-    pendingCustomPresetInput = {...$state.snapshot(plannerInput)};
+    pendingCustomPresetInput = { ...$state.snapshot(plannerInput) };
   }
 
   function assignProgrammaticPlannerInput(input: PlannerInput, options: { animate?: boolean } = {}) {
@@ -1185,7 +1200,7 @@
       getPresetSolveOptions()
     );
 
-    assignProgrammaticPlannerInput(nextInput, {animate: true});
+    assignProgrammaticPlannerInput(nextInput, { animate: true });
     syncPresetMonitorHeightFromInput(nextInput);
     syncPlannerUrlState();
   }
@@ -1251,7 +1266,7 @@
         getPresetSolveOptions()
       );
 
-      assignProgrammaticPlannerInput(nextInput, {animate: animateTransition});
+      assignProgrammaticPlannerInput(nextInput, { animate: animateTransition });
       syncPresetMonitorHeightFromInput(nextInput);
     }
 
@@ -1361,7 +1376,7 @@
   }
 
   function normalizePostureTargetRangeValue(value: IntervalSliderValue): PlannerPostureTargetRange {
-    return Array.isArray(value) ? {min: value[0], max: value[1]} : value;
+    return Array.isArray(value) ? { min: value[0], max: value[1] } : value;
   }
 
   function clampPostureTargetRangeValue(value: number, key: PlannerPostureTargetKey) {
@@ -1550,12 +1565,12 @@
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
         <Pane title="General" position="inline" bind:expanded={paneExpanded.general}>
-          <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish"/>
+          <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
           {#if profileColorMode === 'custom'}
-            <Color bind:value={customProfileColor} label="Custom"/>
+            <Color bind:value={customProfileColor} label="Custom" />
           {/if}
-          <Checkbox bind:value={showEndCaps} label="Endcaps"/>
-          <Checkbox bind:value={() => postureSettings.advanced, setPostureAdvanced} label="Advanced"/>
+          <Checkbox bind:value={showEndCaps} label="Endcaps" />
+          <Checkbox bind:value={() => postureSettings.advanced, setPostureAdvanced} label="Advanced" />
         </Pane>
         <Pane title="Posture" position="inline" bind:expanded={paneExpanded.posture}>
           <Folder title="Driver">
@@ -1574,8 +1589,8 @@
                 format={(value) => `${value.toFixed(0)} cm`}
               />
             </div>
-            <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Show Model"/>
-            <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Show Skeleton"/>
+            <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Show Model" />
+            <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Show Skeleton" />
           </Folder>
           {#if postureSettings.advanced}
             <Folder title="Posture Target">
@@ -1599,7 +1614,7 @@
         </Pane>
         <Pane title="Rig Settings" position="inline" bind:expanded={paneExpanded.setup}>
           <Folder title="Enabled Modules">
-            <Checkbox bind:value={() => visibleModules.monitor, setMonitorVisible} label="Monitor"/>
+            <Checkbox bind:value={() => visibleModules.monitor, setMonitorVisible} label="Monitor" />
           </Folder>
           {#if visibleModules.monitor}
             <Folder title="Monitor" expanded={false}>
@@ -1653,7 +1668,7 @@
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />
-              <Button on:click={resetMonitorModule} label="" title="Reset"/>
+              <Button on:click={resetMonitorModule} label="" title="Reset" />
             </Folder>
           {/if}
           <Folder title="Base" expanded={false}>
@@ -1689,7 +1704,7 @@
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Button on:click={resetBaseModule} label="" title="Reset"/>
+            <Button on:click={resetBaseModule} label="" title="Reset" />
           </Folder>
           <Folder title="Seat" expanded={false}>
             <Slider
@@ -1733,7 +1748,7 @@
               step={1}
               format={(value) => `${value}°`}
             />
-            <Button on:click={resetSeatModule} label="" title="Reset"/>
+            <Button on:click={resetSeatModule} label="" title="Reset" />
           </Folder>
           <Folder title="Wheel" expanded={false}>
             <Slider
@@ -1768,7 +1783,7 @@
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Button on:click={resetWheelModule} label="" title="Reset"/>
+            <Button on:click={resetWheelModule} label="" title="Reset" />
           </Folder>
           <Folder title="Steering Column" expanded={false}>
             <Slider
@@ -1795,7 +1810,7 @@
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Button on:click={resetSteeringColumnModule} label="" title="Reset"/>
+            <Button on:click={resetSteeringColumnModule} label="" title="Reset" />
           </Folder>
           <Folder title="Pedal Tray" expanded={false}>
             <Slider
@@ -1814,7 +1829,7 @@
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Button on:click={resetPedalTrayModule} label="Reset" title="Reset"/>
+            <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
           </Folder>
           <Folder title="Pedals" expanded={false}>
             <Slider
@@ -1873,7 +1888,7 @@
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Button on:click={resetPedalsModule} label="" title="Reset"/>
+            <Button on:click={resetPedalsModule} label="" title="Reset" />
           </Folder>
         </Pane>
         <Pane title="Cutlist Optimizer" position="inline" bind:expanded={paneExpanded.optimizer}>
@@ -1964,7 +1979,7 @@
                         step={1}
                         format={formatCurrencyValue}
                       />
-                      <Button on:click={() => removeStockOption(stockOption.id)} label="" title="Remove"/>
+                      <Button on:click={() => removeStockOption(stockOption.id)} label="" title="Remove" />
                     </Folder>
                   {/each}
                 {:else}
@@ -1972,11 +1987,7 @@
                     <div class="px-1 py-1 text-xs text-zinc-500">No stock lengths added yet.</div>
                   </Element>
                 {/if}
-                <Button
-                  on:click={() => addStockOption(profileType)}
-                  label=""
-                  title="Add stock length"
-                />
+                <Button on:click={() => addStockOption(profileType)} label="" title="Add stock length" />
               </Folder>
             {/each}
           </Folder>

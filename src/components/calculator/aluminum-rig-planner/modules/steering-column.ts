@@ -1,5 +1,6 @@
 import type { CutListRow, PlannerInput } from '../types';
-import { MODULE_PROFILE_MATERIAL, PLANNER_LAYOUT } from '../constants';
+import { PLANNER_LAYOUT } from '../constants/planner';
+import { MODULE_PROFILE_MATERIAL } from '../constants/profile';
 import {
   BASE_BEAM_HEIGHT_MM,
   centeredY,

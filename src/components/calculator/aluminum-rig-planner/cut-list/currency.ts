@@ -1,4 +1,4 @@
-import type { PlannerCurrencyCode, PlannerCurrencyMode } from './types';
+import type { PlannerCurrencyCode, PlannerCurrencyMode } from '../types';
 
 export const DEFAULT_CURRENCY_LOCALE = 'en-US';
 

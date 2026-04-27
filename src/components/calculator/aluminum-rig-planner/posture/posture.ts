@@ -1,14 +1,11 @@
+import { BASE_MODULE_LAYOUT, PEDAL_TRAY_LAYOUT, PLANNER_DIMENSION_LIMITS } from '../constants/planner';
+import { DEFAULT_POSTURE_HEIGHT_CM, PLANNER_POSTURE_LIMITS } from '../constants/posture';
 import {
   BASE_BEAM_HEIGHT_MM,
-  BASE_MODULE_LAYOUT,
-  DEFAULT_POSTURE_HEIGHT_CM,
   HALF_PROFILE_SHORT_MM,
-  PEDAL_TRAY_LAYOUT,
-  PLANNER_DIMENSION_LIMITS,
-  PLANNER_POSTURE_LIMITS,
   PROFILE_SHORT_MM,
   UPRIGHT_BEAM_DEPTH_MM,
-} from './constants';
+} from '../constants/profile';
 import { getPlannerPostureTargetRanges, type PlannerPostureTargetRange } from './posture-targets';
 import type {
   PlannerAnthropometryRatios,
@@ -17,7 +14,7 @@ import type {
   PlannerPosturePreset,
   PlannerPostureSettings,
   PlannerPostureTargetRangesByPreset,
-} from './types';
+} from '../types';
 
 export type PostureJointName =
   | 'head'

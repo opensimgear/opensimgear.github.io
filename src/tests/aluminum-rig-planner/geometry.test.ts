@@ -2,14 +2,16 @@ import { describe, expect, it } from 'vitest';
 import { Euler, Quaternion, Vector3 } from 'three';
 
 import {
-  BASE_BEAM_HEIGHT_MM,
   DEFAULT_PLANNER_INPUT,
   PLANNER_LAYOUT,
   PLANNER_DIMENSION_LIMITS,
+} from '~/components/calculator/aluminum-rig-planner/constants/planner';
+import {
+  BASE_BEAM_HEIGHT_MM,
   PROFILE_SHORT_MM,
   PROFILE_TALL_MM,
   UPRIGHT_BEAM_DEPTH_MM,
-} from '../../components/calculator/aluminum-rig-planner/constants';
+} from '~/components/calculator/aluminum-rig-planner/constants/profile';
 import {
   clampSteeringColumnHeights,
   clampPlannerInput,
@@ -20,12 +22,12 @@ import {
   getPedalTrayDistanceMaxMm,
   getSteeringColumnBaseHeightMaxMm,
   getSteeringColumnDistanceMaxMm,
-} from '../../components/calculator/aluminum-rig-planner/geometry';
-import { createPedalsModule } from '../../components/calculator/aluminum-rig-planner/modules/pedals';
-import { getProfileMeshRotation } from '../../components/calculator/aluminum-rig-planner/modules/profile-geometry';
-import { mm } from '../../components/calculator/aluminum-rig-planner/modules/shared';
-import { createSteeringColumnModule } from '../../components/calculator/aluminum-rig-planner/modules/steering-column';
-import { createWheelModule } from '../../components/calculator/aluminum-rig-planner/modules/wheel';
+} from '~/components/calculator/aluminum-rig-planner/scene/geometry';
+import { createPedalsModule } from '~/components/calculator/aluminum-rig-planner/modules/pedals';
+import { getProfileMeshRotation } from '~/components/calculator/aluminum-rig-planner/modules/profile-geometry';
+import { mm } from '~/components/calculator/aluminum-rig-planner/modules/shared';
+import { createSteeringColumnModule } from '~/components/calculator/aluminum-rig-planner/modules/steering-column';
+import { createWheelModule } from '~/components/calculator/aluminum-rig-planner/modules/wheel';
 
 describe('aluminum rig planner geometry', () => {
   it('clamps steering column distance against current base span', () => {

@@ -1,24 +1,25 @@
 <script lang="ts">
-  import { CUT_LIST_HIGHLIGHT_COLOR, DEFAULT_POSTURE_HEIGHT_CM } from './constants';
-  import FovOverlay from './FovOverlay.svelte';
-  import type { PlannerFovOverlay } from './fov-overlay';
+  import { CUT_LIST_HIGHLIGHT_COLOR } from '../constants/scene';
+  import { DEFAULT_POSTURE_HEIGHT_CM } from '../constants/posture';
+  import FovOverlay from '../posture/FovOverlay.svelte';
+  import type { PlannerFovOverlay } from '../posture/fov-overlay';
   import type { PlannerGeometry } from './geometry';
   import MeasurementArrow from './MeasurementArrow.svelte';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
-  import { createPedalsModule } from './modules/pedals';
+  import { createPedalsModule } from '../modules/pedals';
   import ProfileMesh from './ProfileMesh.svelte';
-  import { createBaseModule } from './modules/base';
-  import { createMonitorModule } from './modules/monitor';
-  import { createPedalTrayModule } from './modules/pedal-tray';
-  import { createSeatModule } from './modules/seat';
-  import { createSteeringColumnModule } from './modules/steering-column';
-  import { createWheelModule } from './modules/wheel';
-  import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from './modules/shared';
-  import { createPlannerPostureSkeleton } from './posture';
-  import type { PlannerPostureReport } from './posture-report';
-  import RiggedHumanModel from './RiggedHumanModel.svelte';
-  import type { HumanRigHoverTooltip, RiggedHumanModel as RiggedHumanModelData } from './human-model-rig';
-  import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from './types';
+  import { createBaseModule } from '../modules/base';
+  import { createMonitorModule } from '../modules/monitor';
+  import { createPedalTrayModule } from '../modules/pedal-tray';
+  import { createSeatModule } from '../modules/seat';
+  import { createSteeringColumnModule } from '../modules/steering-column';
+  import { createWheelModule } from '../modules/wheel';
+  import { createEndCapMeshes, getAdjustedBeamPosition, getAdjustedBeamSize } from '../modules/shared';
+  import { createPlannerPostureSkeleton } from '../posture/posture';
+  import type { PlannerPostureReport } from '../posture/posture-report';
+  import RiggedHumanModel from '../posture/RiggedHumanModel.svelte';
+  import type { HumanRigHoverTooltip, RiggedHumanModel as RiggedHumanModelData } from '../posture/human-model-rig';
+  import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from '../types';
 
   type Props = {
     geometry: PlannerGeometry;

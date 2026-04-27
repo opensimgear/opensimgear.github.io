@@ -1,7 +1,7 @@
-import { getMonitorScreenEdgePoints } from './modules/monitor';
+import { getMonitorScreenEdgePoints } from '../modules/monitor';
 import { createPlannerPostureSkeleton, type PosturePoint } from './posture';
 import type { PlannerPostureReport } from './posture-report';
-import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset, PlannerPostureSettings } from './types';
+import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset, PlannerPostureSettings } from '../types';
 
 export type PlannerFovOverlay = {
   bounds: {

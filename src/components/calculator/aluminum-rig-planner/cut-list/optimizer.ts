@@ -7,7 +7,7 @@ import type {
   PlannerOptimizationSettings,
   PlannerPurchasedBar,
   PlannerStockOption,
-} from './types';
+} from '../types';
 
 type MutableBar = {
   profileType: CutListProfileType;

@@ -1,12 +1,10 @@
+import { PLANNER_CONTROL_STEP_MM, PLANNER_DIMENSION_LIMITS, PLANNER_LAYOUT } from '../constants/planner';
 import {
-  BASE_BEAM_HEIGHT_MM,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_POSTURE_HEIGHT_CM,
-  PLANNER_CONTROL_STEP_MM,
-  PLANNER_DIMENSION_LIMITS,
-  PLANNER_LAYOUT,
   PLANNER_POSTURE_LIMITS,
-} from './constants';
+} from '../constants/posture';
+import { BASE_BEAM_HEIGHT_MM } from '../constants/profile';
 import {
   clampPlannerInput,
   clampSteeringColumnHeights,
@@ -15,7 +13,7 @@ import {
   getPedalTrayDistanceMinMm,
   getSteeringColumnBaseHeightMaxMm,
   getSteeringColumnDistanceMaxMm,
-} from './geometry';
+} from '../scene/geometry';
 import {
   createPlannerPostureSkeleton,
   getPlannerPostureFootContactErrorMm,
@@ -30,7 +28,7 @@ import type {
   PlannerPosturePreset,
   PlannerPostureSettings,
   PlannerPostureTargetRangesByPreset,
-} from './types';
+} from '../types';
 
 type PlannerPosturePresetSeed = Pick<
   PlannerInput,

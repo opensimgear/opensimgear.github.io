@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { SCENE_VIEW } from '../../components/calculator/aluminum-rig-planner/constants';
+import { SCENE_VIEW } from '~/components/calculator/aluminum-rig-planner/constants/scene';
 
 describe('aluminum rig planner scene space', () => {
   it('uses native z-up world settings without a planner-to-scene bridge', () => {

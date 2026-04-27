@@ -1,9 +1,9 @@
-import type { PlannerGeometry } from './geometry';
-import { createBaseModule } from './modules/base';
-import { createPedalTrayModule } from './modules/pedal-tray';
-import { createSteeringColumnModule } from './modules/steering-column';
-import { BLACK_PROFILE_COLOR, getMeshCutListRow } from './modules/shared';
-import type { CutListEntry, CutListRow, PlannerVisibleModules } from './types';
+import type { PlannerGeometry } from '../scene/geometry';
+import { createBaseModule } from '../modules/base';
+import { createPedalTrayModule } from '../modules/pedal-tray';
+import { createSteeringColumnModule } from '../modules/steering-column';
+import { BLACK_PROFILE_COLOR, getMeshCutListRow } from '../modules/shared';
+import type { CutListEntry, CutListRow, PlannerVisibleModules } from '../types';
 
 function compareCutListRows(a: CutListRow, b: CutListRow) {
   if (a.profileType !== b.profileType) {

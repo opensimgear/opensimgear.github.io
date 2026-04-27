@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buildPlannerPrintDocument,
   hasSelectedPlannerExportSections,
-} from '../../components/calculator/aluminum-rig-planner/export';
+} from '~/components/calculator/aluminum-rig-planner/cut-list/export';
 
 describe('aluminum rig planner export', () => {
   it('detects when at least one export section is selected', () => {

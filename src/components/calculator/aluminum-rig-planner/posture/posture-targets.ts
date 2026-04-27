@@ -4,7 +4,7 @@ import type {
   PlannerPostureTargetRange,
   PlannerPostureTargetRanges,
   PlannerPostureTargetRangesByPreset,
-} from './types';
+} from '../types';
 
 export type {
   PlannerPostureTargetKey,

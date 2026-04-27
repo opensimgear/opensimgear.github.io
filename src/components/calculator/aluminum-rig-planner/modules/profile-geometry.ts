@@ -4,7 +4,7 @@ import alu40x40BeamAssetUrl from './generated/alu40x40-beam.bin?url';
 import alu80x40BeamAssetUrl from './generated/alu80x40-beam.bin?url';
 import alu40x40EndcapAssetUrl from './generated/alu40x40-endcap.bin?url';
 import alu80x40EndcapAssetUrl from './generated/alu80x40-endcap.bin?url';
-import { PROFILE_GEOMETRY_ASSET } from '../constants';
+import { PROFILE_GEOMETRY_ASSET } from '../constants/profile';
 import { getAxisLength, getBeamAxis, type MeshSpec, type BeamAxis, type ProfileType } from './shared';
 type Vector3Tuple = [number, number, number];
 type RotationTuple = [number, number, number];

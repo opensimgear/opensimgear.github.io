@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_PLANNER_INPUT } from '../../components/calculator/aluminum-rig-planner/constants';
-import { createPlannerMeasurementOverlay } from '../../components/calculator/aluminum-rig-planner/measurement-overlay';
+import { DEFAULT_PLANNER_INPUT } from '~/components/calculator/aluminum-rig-planner/constants/planner';
+import { createPlannerMeasurementOverlay } from '~/components/calculator/aluminum-rig-planner/scene/measurement-overlay';
 
 describe('aluminum rig planner measurement overlay', () => {
   it('places pedal tray distance arrow between inner cross beam and tray rear edge', () => {

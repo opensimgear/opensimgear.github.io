@@ -6,19 +6,19 @@
   import { Group, OrthographicCamera, PerspectiveCamera, Vector3, WebGLRenderer } from 'three';
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-  import { PI_INTENSITY, SCENE_VIEW } from './constants';
-  import { createPlannerFovOverlay, type PlannerFovOverlay } from './fov-overlay';
-  import ViewportCameraControls from '../shared/ViewportCameraControls.svelte';
-  import ViewportGizmo from '../shared/ViewportGizmo.svelte';
-  import SceneGrid from '../shared/SceneGrid.svelte';
-  import { buildPlaneEquation, syncOrbitCameraView, ThreeSpaceMouseBridge } from '../shared/space-mouse';
-  import { getSceneControlsTopOffsetPx } from '../shared/scene-controls';
+  import { PI_INTENSITY, SCENE_VIEW } from '../constants/scene';
+  import { createPlannerFovOverlay, type PlannerFovOverlay } from '../posture/fov-overlay';
+  import ViewportCameraControls from '../../shared/ViewportCameraControls.svelte';
+  import ViewportGizmo from '../../shared/ViewportGizmo.svelte';
+  import SceneGrid from '../../shared/SceneGrid.svelte';
+  import { buildPlaneEquation, syncOrbitCameraView, ThreeSpaceMouseBridge } from '../../shared/space-mouse';
+  import { getSceneControlsTopOffsetPx } from '../../shared/scene-controls';
   import RigFrame from './RigFrame.svelte';
   import type { PlannerGeometry } from './geometry';
-  import type { HumanRigHoverTooltip, RiggedHumanModel } from './human-model-rig';
+  import type { HumanRigHoverTooltip, RiggedHumanModel } from '../posture/human-model-rig';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
-  import type { PlannerPostureReport } from './posture-report';
-  import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from './types';
+  import type { PlannerPostureReport } from '../posture/posture-report';
+  import type { PlannerPosturePreset, PlannerPostureSettings, PlannerVisibleModules } from '../types';
 
   type Props = {
     geometry: PlannerGeometry;

@@ -1,21 +1,23 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  DEFAULT_PLANNER_POSTURE_SETTINGS,
-  DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
   DEFAULT_PLANNER_INPUT,
+  PLANNER_DIMENSION_LIMITS,
+} from '~/components/calculator/aluminum-rig-planner/constants/planner';
+import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS } from '~/components/calculator/aluminum-rig-planner/constants/optimizer';
+import {
+  DEFAULT_PLANNER_POSTURE_SETTINGS,
   MONITOR_ASPECT_RATIO_OPTIONS,
   MONITOR_CURVATURE_OPTIONS,
-  PLANNER_DIMENSION_LIMITS,
   PLANNER_POSTURE_LIMITS,
-} from '../../components/calculator/aluminum-rig-planner/constants';
-import { getSteeringColumnDistanceMaxMm } from '../../components/calculator/aluminum-rig-planner/geometry';
+} from '~/components/calculator/aluminum-rig-planner/constants/posture';
+import { getSteeringColumnDistanceMaxMm } from '~/components/calculator/aluminum-rig-planner/scene/geometry';
 import {
   getMonitorTargetFovFromDistanceMm,
   getSolvedMonitorDistanceFromEyesMm,
-} from '../../components/calculator/aluminum-rig-planner/modules/monitor';
-import { getPlannerPostureTargetRangeControlLimits } from '../../components/calculator/aluminum-rig-planner/posture-targets';
-import { mergePlannerQueryState } from '../../components/calculator/aluminum-rig-planner/query-state';
+} from '~/components/calculator/aluminum-rig-planner/modules/monitor';
+import { getPlannerPostureTargetRangeControlLimits } from '~/components/calculator/aluminum-rig-planner/posture/posture-targets';
+import { mergePlannerQueryState } from '~/components/calculator/aluminum-rig-planner/query-state';
 
 describe('aluminum rig planner query state', () => {
   it('sanitizes out-of-range shared-link values before hydration', () => {

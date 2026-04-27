@@ -1,13 +1,17 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 
 import {
-  BASE_BEAM_HEIGHT_MM,
   DEFAULT_PLANNER_INPUT,
+  PEDAL_TRAY_LAYOUT,
+} from '~/components/calculator/aluminum-rig-planner/constants/planner';
+import {
+  BASE_BEAM_HEIGHT_MM,
+  UPRIGHT_BEAM_DEPTH_MM,
+} from '~/components/calculator/aluminum-rig-planner/constants/profile';
+import {
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_POSTURE_HEIGHT_CM,
-  PEDAL_TRAY_LAYOUT,
-  UPRIGHT_BEAM_DEPTH_MM,
-} from '../../components/calculator/aluminum-rig-planner/constants';
+} from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import {
   createPlannerPostureSkeleton,
   getEffectiveAnthropometryRatios,
@@ -23,14 +27,14 @@ import {
   POSTURE_TALON_PEDAL_PLANE_OFFSET_MM,
   POSTURE_TOE_BONE_START_SHARE,
   POSTURE_TOE_PEDAL_PLANE_OFFSET_MM,
-} from '../../components/calculator/aluminum-rig-planner/posture';
-import { createHumanModelPoseSkeleton } from '../../components/calculator/aluminum-rig-planner/human-model-rig';
-import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
+} from '~/components/calculator/aluminum-rig-planner/posture/posture';
+import { createHumanModelPoseSkeleton } from '~/components/calculator/aluminum-rig-planner/posture/human-model-rig';
+import { createPlannerPostureReport } from '~/components/calculator/aluminum-rig-planner/posture/posture-report';
 import {
   getPlannerPostureTargetRangeControlLimits,
   getPlannerPostureTargetRanges,
-} from '../../components/calculator/aluminum-rig-planner/posture-targets';
-import type { PlannerPostureModelMetrics } from '../../components/calculator/aluminum-rig-planner/types';
+} from '~/components/calculator/aluminum-rig-planner/posture/posture-targets';
+import type { PlannerPostureModelMetrics } from '~/components/calculator/aluminum-rig-planner/types';
 import { loadHumanModelPostureModelFixture } from './human-model-fixture';
 
 function expectPointToBeFinite(point: [number, number, number]) {

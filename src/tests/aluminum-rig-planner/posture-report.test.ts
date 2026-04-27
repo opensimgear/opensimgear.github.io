@@ -1,26 +1,26 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 
+import { DEFAULT_PLANNER_INPUT } from '~/components/calculator/aluminum-rig-planner/constants/planner';
+import { BASE_BEAM_HEIGHT_MM } from '~/components/calculator/aluminum-rig-planner/constants/profile';
 import {
-  BASE_BEAM_HEIGHT_MM,
   DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM,
-  DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_POSTURE_LIMITS,
-} from '../../components/calculator/aluminum-rig-planner/constants';
+} from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import {
   getMonitorDimensionsMm,
   getSolvedMonitorDistanceFromEyesMm,
-} from '../../components/calculator/aluminum-rig-planner/modules/monitor';
-import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
+} from '~/components/calculator/aluminum-rig-planner/modules/monitor';
+import { createPlannerPostureSkeleton } from '~/components/calculator/aluminum-rig-planner/posture/posture';
 import {
   createPlannerPostureReport,
   getPlannerPostureTargetRanges,
-} from '../../components/calculator/aluminum-rig-planner/posture-report';
+} from '~/components/calculator/aluminum-rig-planner/posture/posture-report';
 import {
   applyPresetToPlannerInput,
   applyPresetToPostureSettings,
-} from '../../components/calculator/aluminum-rig-planner/presets';
-import type { PlannerPostureModelMetrics } from '../../components/calculator/aluminum-rig-planner/types';
+} from '~/components/calculator/aluminum-rig-planner/posture/presets';
+import type { PlannerPostureModelMetrics } from '~/components/calculator/aluminum-rig-planner/types';
 import { loadHumanModelPostureModelFixture } from './human-model-fixture';
 
 function subtract(a: [number, number, number], b: [number, number, number]): [number, number, number] {

@@ -14,7 +14,7 @@ import {
   SILVER_PROFILE_COLOR as SILVER_PROFILE_COLOR_VALUE,
   UPRIGHT_BEAM_DEPTH_MM,
   UPRIGHT_BEAM_WIDTH_MM,
-} from '../constants';
+} from '../constants/profile';
 
 export type ProfileType = 'box' | 'alu40x40' | 'alu80x40';
 export type BeamAxis = 'x' | 'y' | 'z';

@@ -1,5 +1,6 @@
 import { Euler, Matrix4, Quaternion, Vector3 } from 'three';
-import { BASE_BEAM_HEIGHT_MM, PLANNER_DIMENSION_LIMITS, UPRIGHT_BEAM_DEPTH_MM } from '../constants';
+import { PLANNER_DIMENSION_LIMITS } from '../constants/planner';
+import { BASE_BEAM_HEIGHT_MM, UPRIGHT_BEAM_DEPTH_MM } from '../constants/profile';
 import type { PlannerInput } from '../types';
 import { mm, type MeshSpec } from './shared';
 

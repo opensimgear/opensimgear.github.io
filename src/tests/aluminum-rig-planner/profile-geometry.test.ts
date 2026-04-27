@@ -5,7 +5,7 @@ import {
   getProfileGeometryCacheKey,
   getProfileMeshRotation,
   getProfileMeshScale,
-} from '../../components/calculator/aluminum-rig-planner/modules/profile-geometry';
+} from '~/components/calculator/aluminum-rig-planner/modules/profile-geometry';
 
 function getProfileMeshQuaternion(size: [number, number, number], profileType: 'alu40x40' | 'alu80x40' = 'alu80x40') {
   return new Quaternion().setFromEuler(

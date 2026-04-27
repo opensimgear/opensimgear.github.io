@@ -6,6 +6,8 @@
 - Do not use worktrees unless explicitly instructed
 - Do use the superpowers:subagent-driven-development skill to implement
 - **use the caveman skill always!**
+- tests can only test inputs, outputs and side effects of functions, never implementation details or constants
+- always check if the application is running locally and verify changes in the browser when working on frontend code
 
 ## Commands
 
@@ -84,7 +86,7 @@ sending it to the user. Keep calling it until no issues or suggestions are retur
 Generates a Svelte Playground link with the provided code. After completing the code, ask the user if they want a
 playground link. Only call this tool after user confirmation and NEVER if code was written to files in their project.
 
-### SEO
+## SEO
 
 - when verifying SEO use the seo-audit skill
 - also read the google SEO article here https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=en

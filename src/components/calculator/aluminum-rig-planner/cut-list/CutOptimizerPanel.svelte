@@ -7,7 +7,7 @@
     PlannerOptimizationResult,
     PlannerOptimizationSettings,
     PlannerPurchasedBar,
-  } from './types';
+  } from '../types';
 
   type PurchaseSummaryRow = {
     key: string;

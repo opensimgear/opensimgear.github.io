@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_PLANNER_POSTURE_SETTINGS } from '../../components/calculator/aluminum-rig-planner/constants';
+import { DEFAULT_PLANNER_POSTURE_SETTINGS } from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import {
   createMonitorModule,
   getMonitorDimensionsMm,
   getMonitorScreenEdgePoints,
   getMonitorTargetFovFromDistanceMm,
   getSolvedMonitorDistanceFromEyesMm,
-} from '../../components/calculator/aluminum-rig-planner/modules/monitor';
-import type { PlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
+} from '~/components/calculator/aluminum-rig-planner/modules/monitor';
+import type { PlannerPostureReport } from '~/components/calculator/aluminum-rig-planner/posture/posture-report';
 
 describe('aluminum rig planner monitor module', () => {
   it('computes monitor plate dimensions from diagonal size and aspect ratio', () => {

@@ -1,4 +1,4 @@
-import type { PlannerPostureReport } from '../posture-report';
+import type { PlannerPostureReport } from '../posture/posture-report';
 import type {
   PlannerMonitorAspectRatio,
   PlannerMonitorCurvature,

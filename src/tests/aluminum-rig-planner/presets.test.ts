@@ -1,21 +1,26 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 
 import {
-  BASE_BEAM_HEIGHT_MM,
-  DEFAULT_ACTIVE_POSTURE_PRESET,
   DEFAULT_PLANNER_INPUT,
-  DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_CONTROL_STEP_MM,
   PLANNER_DIMENSION_LIMITS,
   PLANNER_LAYOUT,
+} from '~/components/calculator/aluminum-rig-planner/constants/planner';
+import { BASE_BEAM_HEIGHT_MM } from '~/components/calculator/aluminum-rig-planner/constants/profile';
+import {
+  DEFAULT_ACTIVE_POSTURE_PRESET,
+  DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_POSTURE_LIMITS,
-} from '../../components/calculator/aluminum-rig-planner/constants';
-import { clampPlannerInput, getPedalBrakeDeltaMaxMm } from '../../components/calculator/aluminum-rig-planner/geometry';
+} from '~/components/calculator/aluminum-rig-planner/constants/posture';
+import {
+  clampPlannerInput,
+  getPedalBrakeDeltaMaxMm,
+} from '~/components/calculator/aluminum-rig-planner/scene/geometry';
 import {
   createPlannerPostureSkeleton as createPlannerPostureSkeletonWithModel,
   getPlannerPostureFootContactErrorMm,
-} from '../../components/calculator/aluminum-rig-planner/posture';
-import { createPlannerPostureReport as createPlannerPostureReportWithModel } from '../../components/calculator/aluminum-rig-planner/posture-report';
+} from '~/components/calculator/aluminum-rig-planner/posture/posture';
+import { createPlannerPostureReport as createPlannerPostureReportWithModel } from '~/components/calculator/aluminum-rig-planner/posture/posture-report';
 import {
   applyPresetToPlannerInput as applyPresetToPlannerInputWithModel,
   applyPresetToPostureSettings as applyPresetToPostureSettingsWithModel,
@@ -23,13 +28,13 @@ import {
   getPresetAfterPlannerInputEdit,
   PLANNER_POSTURE_PRESETS,
   recomputePresetDynamicPlannerInput as recomputePresetDynamicPlannerInputWithModel,
-} from '../../components/calculator/aluminum-rig-planner/presets';
+} from '~/components/calculator/aluminum-rig-planner/posture/presets';
 import type {
   PlannerInput,
   PlannerPostureModelMetrics,
   PlannerPosturePreset,
   PlannerPostureSettings,
-} from '../../components/calculator/aluminum-rig-planner/types';
+} from '~/components/calculator/aluminum-rig-planner/types';
 import { loadHumanModelPostureModelFixture } from './human-model-fixture';
 
 const NON_CUSTOM_PRESETS = ['gt', 'rally', 'drift', 'road'] satisfies PlannerPosturePreset[];

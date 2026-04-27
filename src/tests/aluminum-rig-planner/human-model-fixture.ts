@@ -1,12 +1,16 @@
 import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-import { calculateHumanModelPostureModel } from '../../components/calculator/aluminum-rig-planner/human-model-rig';
-import type { PlannerPostureModelMetrics } from '../../components/calculator/aluminum-rig-planner/types';
+import humanMaleGlbUrl from '~/assets/models/human-male.glb';
+import { calculateHumanModelPostureModel } from '~/components/calculator/aluminum-rig-planner/posture/human-model-rig';
+import type { PlannerPostureModelMetrics } from '~/components/calculator/aluminum-rig-planner/types';
 
-const MODEL_PATH = fileURLToPath(new URL('../../assets/models/human-male.glb', import.meta.url));
+const MODEL_PATH = humanMaleGlbUrl.startsWith('file:')
+  ? fileURLToPath(humanMaleGlbUrl)
+  : path.join(process.cwd(), humanMaleGlbUrl);
 
 let postureModelPromise: Promise<PlannerPostureModelMetrics> | null = null;
 

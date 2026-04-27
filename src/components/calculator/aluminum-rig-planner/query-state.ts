@@ -1,21 +1,20 @@
+import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS, getPlannerStockCostMax } from './constants/optimizer';
 import {
-  BASE_BEAM_HEIGHT_MM,
   DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
-  DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM,
   MONITOR_ASPECT_RATIO_OPTIONS,
   MONITOR_CURVATURE_OPTIONS,
   PLANNER_POSTURE_LIMITS,
-  getPlannerStockCostMax,
-} from './constants';
-import { clampPlannerInput } from './geometry';
+} from './constants/posture';
+import { BASE_BEAM_HEIGHT_MM } from './constants/profile';
+import { clampPlannerInput } from './scene/geometry';
 import { getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
 import {
   clonePlannerPostureTargetRangesByPreset,
   getPlannerPostureTargetRangeControlLimits,
   PLANNER_POSTURE_TARGET_KEYS,
-} from './posture-targets';
+} from './posture/posture-targets';
 import type {
   PlannerInput,
   PlannerMonitorAspectRatio,
