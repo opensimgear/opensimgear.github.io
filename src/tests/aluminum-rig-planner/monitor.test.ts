@@ -7,6 +7,7 @@ import {
 import {
   createMonitorModule,
   getMonitorDimensionsMm,
+  getMonitorTargetFovFromDistanceMm,
   getSolvedMonitorDistanceFromEyesMm,
 } from '../../components/calculator/aluminum-rig-planner/modules/monitor';
 import type { PlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
@@ -110,5 +111,17 @@ describe('aluminum rig planner monitor module', () => {
 
     expect(getSolvedMonitorDistanceFromEyesMm(settings)).toBeCloseTo(recommendedDistanceMm, 6);
     expect(getSolvedMonitorDistanceFromEyesMm(settings)).toBeLessThan(1800);
+  });
+
+  it('converts flat monitor distance back into matching horizontal FOV', () => {
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: 'disabled' as const,
+      monitorTargetFovDeg: 60,
+    };
+    const distanceMm = getSolvedMonitorDistanceFromEyesMm(settings);
+    const targetFovDeg = getMonitorTargetFovFromDistanceMm(distanceMm, settings);
+
+    expect(targetFovDeg).toBeCloseTo(settings.monitorTargetFovDeg, 6);
   });
 });

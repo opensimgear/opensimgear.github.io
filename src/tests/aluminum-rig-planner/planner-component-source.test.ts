@@ -115,9 +115,31 @@ describe('aluminum rig planner component wiring', () => {
     expect(presetsSource).not.toContain('DYNAMIC_SEARCH_STEPS.steeringColumnBaseHeightMm');
   });
 
-  it('shows target FOV editing only for flat monitors', () => {
+  it('promotes general controls to a top panel with the advanced toggle', () => {
+    const generalPaneIndex = plannerSource.indexOf('<Pane title="General"');
+    const posturePaneIndex = plannerSource.indexOf('<Pane title="Posture"');
+    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Settings"');
+    const generalPaneSource = plannerSource.slice(generalPaneIndex, posturePaneIndex);
+    const posturePaneSource = plannerSource.slice(posturePaneIndex, settingsPaneIndex);
+
+    expect(generalPaneIndex).toBeGreaterThan(-1);
+    expect(generalPaneIndex).toBeLessThan(posturePaneIndex);
+    expect(plannerSource).toContain('bind:expanded={paneExpanded.general}');
+    expect(plannerSource).not.toContain('<Folder title="General">');
+    expect(generalPaneSource).toContain('label="Finish"');
+    expect(generalPaneSource).toContain('label="Endcaps"');
+    expect(generalPaneSource).toContain('label="Advanced"');
+    expect(posturePaneSource).not.toContain('label="Advanced"');
+  });
+
+  it('shows target FOV and distance editing only for flat monitors', () => {
     expect(plannerSource).toMatch(/\{#if postureSettings\.monitorCurvature === 'disabled'\}/);
     expect(plannerSource).toMatch(/label="Target FOV"/);
-    expect(plannerSource).not.toMatch(/label="Distance"/);
+    expect(plannerSource).toMatch(/label="Distance"/);
+    expect(plannerSource).toContain('getMonitorTargetFovFromDistanceMm');
+    expect(plannerSource).toMatch(/function setMonitorDistanceFromEyesMm\(value: number\)/);
+    expect(plannerSource).toMatch(
+      /bind:value=\{\(\) => postureSettings\.monitorDistanceFromEyesMm, setMonitorDistanceFromEyesMm\}/
+    );
   });
 });

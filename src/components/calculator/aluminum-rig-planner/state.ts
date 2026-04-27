@@ -3,6 +3,7 @@ import { ALUMINUM_RIG_MOBILE_BREAKPOINT, DESKTOP_PANE_EXPANDED_STATE, MOBILE_PAN
 export { ALUMINUM_RIG_MOBILE_BREAKPOINT };
 
 export type AluminumRigPaneExpandedState = {
+  general: boolean;
   setup: boolean;
   modules: boolean;
   posture: boolean;

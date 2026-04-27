@@ -358,12 +358,14 @@ export const PI_INTENSITY = Math.PI;
 
 export const ALUMINUM_RIG_MOBILE_BREAKPOINT = 1024;
 export const DESKTOP_PANE_EXPANDED_STATE = {
+  general: true,
   setup: true,
   modules: true,
   posture: true,
   optimizer: true,
 } as const;
 export const MOBILE_PANE_EXPANDED_STATE = {
+  general: false,
   setup: false,
   modules: false,
   posture: false,

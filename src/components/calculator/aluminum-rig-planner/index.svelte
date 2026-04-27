@@ -58,7 +58,7 @@
     type PlannerMeasurementKey,
     type PlannerMeasurementOverlay,
   } from './measurement-overlay';
-  import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
+  import { getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
   import { createPlannerOptimizationResult } from './optimizer';
   import { createPlannerPostureReport, type PlannerPostureMetric, type PlannerPostureReport } from './posture-report';
@@ -474,6 +474,35 @@
     min: getPedalTrayDistanceMinMm(plannerInput),
     max: getPedalTrayDistanceMaxMm(plannerInput),
   }));
+  const monitorDistanceLimits = $derived.by(() => {
+    const min = Math.round(
+      Math.max(
+        PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm,
+        getSolvedMonitorDistanceFromEyesMm({
+          monitorAspectRatio: postureSettings.monitorAspectRatio,
+          monitorCurvature: 'disabled',
+          monitorSizeIn: postureSettings.monitorSizeIn,
+          monitorTargetFovDeg: PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg,
+        })
+      )
+    );
+    const max = Math.round(
+      Math.min(
+        PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm,
+        getSolvedMonitorDistanceFromEyesMm({
+          monitorAspectRatio: postureSettings.monitorAspectRatio,
+          monitorCurvature: 'disabled',
+          monitorSizeIn: postureSettings.monitorSizeIn,
+          monitorTargetFovDeg: PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
+        })
+      )
+    );
+
+    return {
+      min,
+      max: Math.max(min, max),
+    };
+  });
   const pedalsHeightLimits = $derived.by(() => ({
     min: PLANNER_DIMENSION_LIMITS.pedalsHeightMinMm,
     max: PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm,
@@ -1232,11 +1261,19 @@
     syncPlannerUrlState();
   }
 
-  function setMonitorTargetFovDeg(value: number) {
-    postureSettings.monitorTargetFovDeg = Math.max(
-      PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
-      Math.min(PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg, value)
+  function clampMonitorTargetFovDeg(value: number) {
+    return (
+      Math.round(
+        Math.max(
+          PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
+          Math.min(PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg, value)
+        ) * 10
+      ) / 10
     );
+  }
+
+  function setMonitorTargetFovDeg(value: number) {
+    postureSettings.monitorTargetFovDeg = clampMonitorTargetFovDeg(value);
     syncSolvedMonitorDistanceFromEyesMm();
     syncPlannerUrlState();
   }
@@ -1250,6 +1287,19 @@
       PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm,
       Math.min(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm, value)
     );
+    syncPlannerUrlState();
+  }
+
+  function setMonitorDistanceFromEyesMm(value: number) {
+    const monitorDistanceFromEyesMm = Math.round(
+      Math.max(monitorDistanceLimits.min, Math.min(monitorDistanceLimits.max, value))
+    );
+
+    postureSettings.monitorDistanceFromEyesMm = monitorDistanceFromEyesMm;
+    postureSettings.monitorTargetFovDeg = clampMonitorTargetFovDeg(
+      getMonitorTargetFovFromDistanceMm(monitorDistanceFromEyesMm, postureSettings)
+    );
+    syncSolvedMonitorDistanceFromEyesMm();
     syncPlannerUrlState();
   }
 
@@ -1461,8 +1511,15 @@
           ? 'flex shrink-0 flex-col divide-y divide-zinc-300'
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
-        <Pane title="Posture" position="inline" bind:expanded={paneExpanded.posture}>
+        <Pane title="General" position="inline" bind:expanded={paneExpanded.general}>
+          <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
+          {#if profileColorMode === 'custom'}
+            <Color bind:value={customProfileColor} label="Custom" />
+          {/if}
+          <Checkbox bind:value={showEndCaps} label="Endcaps" />
           <Checkbox bind:value={() => postureSettings.advanced, setPostureAdvanced} label="Advanced" />
+        </Pane>
+        <Pane title="Posture" position="inline" bind:expanded={paneExpanded.posture}>
           <Folder title="Driver">
             <List
               bind:value={() => postureSettings.preset, setPosturePreset}
@@ -1487,7 +1544,9 @@
               {#each postureReport.metrics as metric (metric.key)}
                 {@const sliderLimits = getPlannerPostureTargetRangeControlLimits(postureSettings.preset, metric.key)}
                 <IntervalSlider
-                  bind:value={() => getPostureTargetRange(metric.key), (value) => setPostureTargetRange(metric.key, value)}
+                  bind:value={
+                    () => getPostureTargetRange(metric.key), (value) => setPostureTargetRange(metric.key, value)
+                  }
                   label={metric.label}
                   min={sliderLimits.min}
                   max={sliderLimits.max}
@@ -1542,16 +1601,19 @@
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
+            {#if postureSettings.monitorCurvature === 'disabled'}
+              <Slider
+                bind:value={() => postureSettings.monitorDistanceFromEyesMm, setMonitorDistanceFromEyesMm}
+                label="Distance"
+                min={monitorDistanceLimits.min}
+                max={monitorDistanceLimits.max}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+            {/if}
           </Folder>
         </Pane>
         <Pane title="Settings" position="inline" bind:expanded={paneExpanded.setup}>
-          <Folder title="General">
-            <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
-            {#if profileColorMode === 'custom'}
-              <Color bind:value={customProfileColor} label="Custom" />
-            {/if}
-            <Checkbox bind:value={showEndCaps} label="Endcaps" />
-          </Folder>
           <Folder title="Base">
             <Slider
               bind:value={() => plannerInput.baseLengthMm, setBaseLengthMm}
