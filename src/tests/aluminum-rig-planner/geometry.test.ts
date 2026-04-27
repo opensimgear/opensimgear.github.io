@@ -293,9 +293,9 @@ describe('aluminum rig planner geometry', () => {
     expect(accelerator?.position[1] ?? 0).toBeLessThan(brake?.position[1] ?? 0);
     expect(brake?.position[1] ?? 0).toBeLessThan(clutch?.position[1] ?? 0);
     expect(plate?.rotation ?? [0, 0, 0]).toEqual([0, 0, 0]);
-    expect(accelerator?.size[2]).toBeCloseTo(mm(135));
-    expect(brake?.size[2]).toBeCloseTo(mm(90));
-    expect(clutch?.size[2]).toBeCloseTo(mm(90));
+    expect(accelerator?.size[2]).toBeCloseTo(mm(DEFAULT_PLANNER_INPUT.pedalLengthMm * 0.75));
+    expect(brake?.size[2]).toBeCloseTo(mm(DEFAULT_PLANNER_INPUT.pedalLengthMm * 0.5));
+    expect(clutch?.size[2]).toBeCloseTo(mm(DEFAULT_PLANNER_INPUT.pedalLengthMm * 0.5));
 
     const leanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
     const pedalPivotXmm =
@@ -303,6 +303,8 @@ describe('aluminum rig planner geometry', () => {
       DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm +
       DEFAULT_PLANNER_INPUT.pedalsDeltaMm;
     const pedalPivotZmm = BASE_BEAM_HEIGHT_MM + 3 + DEFAULT_PLANNER_INPUT.pedalsHeightMm;
+    const acceleratorCenterOffsetMm = DEFAULT_PLANNER_INPUT.pedalLengthMm * 0.625;
+    const floatingPedalCenterOffsetMm = DEFAULT_PLANNER_INPUT.pedalLengthMm * 0.75;
 
     expect(plate?.position[0]).toBeCloseTo(
       mm(
@@ -312,12 +314,12 @@ describe('aluminum rig planner geometry', () => {
       )
     );
     expect(plate?.position[2]).toBeCloseTo(mm(pedalPivotZmm - 1.5));
-    expect(accelerator?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 112.5), 5);
-    expect(accelerator?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 112.5), 5);
-    expect(brake?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 135), 5);
-    expect(brake?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 135), 5);
-    expect(clutch?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * 135), 5);
-    expect(clutch?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * 135), 5);
+    expect(accelerator?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * acceleratorCenterOffsetMm), 5);
+    expect(accelerator?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * acceleratorCenterOffsetMm), 5);
+    expect(brake?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * floatingPedalCenterOffsetMm), 5);
+    expect(brake?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * floatingPedalCenterOffsetMm), 5);
+    expect(clutch?.position[0]).toBeCloseTo(mm(pedalPivotXmm - Math.sin(leanRad) * floatingPedalCenterOffsetMm), 5);
+    expect(clutch?.position[2]).toBeCloseTo(mm(pedalPivotZmm + Math.cos(leanRad) * floatingPedalCenterOffsetMm), 5);
     expect(accelerator?.rotation?.[1]).toBeCloseTo(-leanRad, 5);
     expect(brake?.rotation?.[1]).toBeCloseTo(-leanRad, 5);
     expect(clutch?.rotation?.[1]).toBeCloseTo(-leanRad, 5);

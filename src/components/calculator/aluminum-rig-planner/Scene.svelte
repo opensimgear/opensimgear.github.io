@@ -176,24 +176,20 @@
   function captureViewport(node: HTMLDivElement) {
     viewportElement = node;
 
-    return {
-      destroy() {
-        if (viewportElement === node) {
-          viewportElement = null;
-        }
-      },
+    return () => {
+      if (viewportElement === node) {
+        viewportElement = null;
+      }
     };
   }
 
   function captureTooltip(node: HTMLDivElement) {
     tooltipElement = node;
 
-    return {
-      destroy() {
-        if (tooltipElement === node) {
-          tooltipElement = null;
-        }
-      },
+    return () => {
+      if (tooltipElement === node) {
+        tooltipElement = null;
+      }
     };
   }
 

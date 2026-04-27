@@ -514,12 +514,10 @@
   function capturePlannerRoot(node: HTMLDivElement) {
     plannerRoot = node;
 
-    return {
-      destroy() {
-        if (plannerRoot === node) {
-          plannerRoot = null;
-        }
-      },
+    return () => {
+      if (plannerRoot === node) {
+        plannerRoot = null;
+      }
     };
   }
 
@@ -661,21 +659,19 @@
     window.addEventListener('touchcancel', endInteraction, true);
     window.addEventListener('keyup', endKeyInteraction, true);
 
-    return {
-      destroy() {
-        node.removeEventListener('pointerdown', beginInteraction, true);
-        node.removeEventListener('mousedown', beginInteraction, true);
-        node.removeEventListener('touchstart', beginInteraction, true);
-        node.removeEventListener('keydown', beginKeyInteraction, true);
-        node.removeEventListener('focusout', endInteraction, true);
-        node.removeEventListener('change', endInteraction, true);
-        window.removeEventListener('pointerup', endInteraction, true);
-        window.removeEventListener('pointercancel', endInteraction, true);
-        window.removeEventListener('mouseup', endInteraction, true);
-        window.removeEventListener('touchend', endInteraction, true);
-        window.removeEventListener('touchcancel', endInteraction, true);
-        window.removeEventListener('keyup', endKeyInteraction, true);
-      },
+    return () => {
+      node.removeEventListener('pointerdown', beginInteraction, true);
+      node.removeEventListener('mousedown', beginInteraction, true);
+      node.removeEventListener('touchstart', beginInteraction, true);
+      node.removeEventListener('keydown', beginKeyInteraction, true);
+      node.removeEventListener('focusout', endInteraction, true);
+      node.removeEventListener('change', endInteraction, true);
+      window.removeEventListener('pointerup', endInteraction, true);
+      window.removeEventListener('pointercancel', endInteraction, true);
+      window.removeEventListener('mouseup', endInteraction, true);
+      window.removeEventListener('touchend', endInteraction, true);
+      window.removeEventListener('touchcancel', endInteraction, true);
+      window.removeEventListener('keyup', endKeyInteraction, true);
     };
   }
 

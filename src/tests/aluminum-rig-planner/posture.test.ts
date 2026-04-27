@@ -73,6 +73,19 @@ function getAngleAtJoint(
   return Math.acos(Math.max(-1, Math.min(1, dot)));
 }
 
+function getAngleBetweenSegments(
+  aStart: [number, number, number],
+  aEnd: [number, number, number],
+  bStart: [number, number, number],
+  bEnd: [number, number, number]
+) {
+  const a = getDirection(aStart, aEnd);
+  const b = getDirection(bStart, bEnd);
+  const dot = getDot(a, b);
+
+  return Math.acos(Math.max(-1, Math.min(1, dot)));
+}
+
 function radToDeg(angleRad: number) {
   return (angleRad * 180) / Math.PI;
 }
@@ -115,9 +128,23 @@ describe('aluminum rig planner posture solver', () => {
     const ankleMetric = report.metrics.find((metric) => metric.key === 'ankleBend');
     const footToToeMetric = report.metrics.find((metric) => metric.key === 'footToToeBend');
     const oldAnkleRangeMetric = report.metrics.find((metric) => metric.key === 'ankleRange');
-    const expectedAnkleBend =
-      180 -
-      radToDeg(getAngleAtJoint(skeleton.joints.kneeLeft, skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft));
+    const expectedLeftAnkleBend = radToDeg(
+      getAngleBetweenSegments(
+        skeleton.joints.kneeLeft,
+        skeleton.joints.ankleLeft,
+        skeleton.joints.toeStartLeft,
+        skeleton.joints.heelLeft
+      )
+    );
+    const expectedRightAnkleBend = radToDeg(
+      getAngleBetweenSegments(
+        skeleton.joints.kneeRight,
+        skeleton.joints.ankleRight,
+        skeleton.joints.toeStartRight,
+        skeleton.joints.heelRight
+      )
+    );
+    const expectedAnkleBend = (expectedLeftAnkleBend + expectedRightAnkleBend) / 2;
     const expectedFootToToeBend =
       180 - radToDeg(getAngleAtJoint(skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft, skeleton.joints.toeLeft));
 

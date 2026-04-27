@@ -402,12 +402,10 @@
   function captureViewport(node: HTMLDivElement) {
     viewportElement = node;
 
-    return {
-      destroy() {
-        if (viewportElement === node) {
-          viewportElement = null;
-        }
-      },
+    return () => {
+      if (viewportElement === node) {
+        viewportElement = null;
+      }
     };
   }
 
