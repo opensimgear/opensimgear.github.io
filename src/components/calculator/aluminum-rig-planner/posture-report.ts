@@ -35,7 +35,10 @@ export type PlannerPostureMonitorDebug = {
 export type PlannerPostureReport = {
   metrics: PlannerPostureMetric[];
   hints: string[];
-  monitorDebug: PlannerPostureMonitorDebug;
+  monitorDebug?: PlannerPostureMonitorDebug;
+};
+export type PlannerPostureReportOptions = {
+  includeMonitor?: boolean;
 };
 
 const MM_TO_METERS = 0.001;
@@ -203,7 +206,8 @@ function getClampHints(input: PlannerInput) {
 export function createPlannerPostureReport(
   input: PlannerInput,
   postureSettings: PlannerPostureSettings<PlannerPosturePreset>,
-  postureModel: PlannerPostureModelMetrics
+  postureModel: PlannerPostureModelMetrics,
+  options: PlannerPostureReportOptions = {}
 ): PlannerPostureReport {
   const skeleton = createPlannerPostureSkeleton(
     input,
@@ -214,10 +218,10 @@ export function createPlannerPostureReport(
     postureModel
   );
   const ranges = getSharedPlannerPostureTargetRanges(postureSettings.preset, postureSettings.targetRangesByPreset);
-  const wheelCenter = getWheelCenter(input);
-  const wheelTopZ = wheelCenter[2] + (input.wheelDiameterMm * MM_TO_METERS) / 2;
   const eyeCenter = skeleton.joints.eyeCenter;
-  const monitorMidpoint = getMonitorMidpoint(eyeCenter, postureSettings);
+  const includeMonitor = options.includeMonitor ?? true;
+  const wheelTopZ = includeMonitor ? getWheelCenter(input)[2] + (input.wheelDiameterMm * MM_TO_METERS) / 2 : null;
+  const monitorMidpoint = includeMonitor ? getMonitorMidpoint(eyeCenter, postureSettings) : null;
   const metrics = [
     createMetric(
       'wristBend',
@@ -316,21 +320,25 @@ export function createPlannerPostureReport(
       projectedXyAngleDeg(skeleton.joints.hipLeft, skeleton.joints.toeLeft),
       ranges
     ),
-    createMetric('eyeToWheelTop', 'Eye to wheel top', 'mm', (eyeCenter[2] - wheelTopZ) / MM_TO_METERS, ranges),
-    createMetric(
-      'eyeToMonitorMidpoint',
-      'Eye to monitor midpoint',
-      'mm',
-      (eyeCenter[2] - monitorMidpoint[2]) / MM_TO_METERS,
-      ranges
-    ),
+    ...(wheelTopZ !== null && monitorMidpoint
+      ? [
+          createMetric('eyeToWheelTop', 'Eye to wheel top', 'mm', (eyeCenter[2] - wheelTopZ) / MM_TO_METERS, ranges),
+          createMetric(
+            'eyeToMonitorMidpoint',
+            'Eye to monitor midpoint',
+            'mm',
+            (eyeCenter[2] - monitorMidpoint[2]) / MM_TO_METERS,
+            ranges
+          ),
+        ]
+      : []),
   ];
   const hints = metrics.flatMap((metric) => (metric.hint ? [metric.hint] : [])).concat(getClampHints(input));
 
   return {
     metrics,
     hints,
-    monitorDebug: createMonitorDebug(monitorMidpoint),
+    ...(monitorMidpoint ? { monitorDebug: createMonitorDebug(monitorMidpoint) } : {}),
   };
 }
 

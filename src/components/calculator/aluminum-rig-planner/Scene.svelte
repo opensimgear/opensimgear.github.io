@@ -96,10 +96,13 @@
     return [-right, right, top, -top, 0.1, 20];
   });
   let useOrthographicCamera = $state(false);
-  const fovOverlay = $derived.by<PlannerFovOverlay>(() =>
-    createPlannerFovOverlay(geometry.input, postureSettings, postureReport, humanModel.postureModelMetrics)
+  const fovOverlay = $derived.by<PlannerFovOverlay | null>(() =>
+    visibleModules.monitor
+      ? createPlannerFovOverlay(geometry.input, postureSettings, postureReport, humanModel.postureModelMetrics)
+      : null
   );
-  const activeFovOverlay = $derived(fovOverlayVisible ? fovOverlay : null);
+  const canShowTopFovOverlay = $derived(Boolean(visibleModules.monitor && fovOverlay));
+  const activeFovOverlay = $derived(canShowTopFovOverlay && fovOverlayVisible ? fovOverlay : null);
   const humanRigTooltipStyle = $derived.by(() => {
     if (!humanRigTooltip || !tooltipElement || !viewportElement) {
       return 'visibility: hidden;';
@@ -209,7 +212,11 @@
   function getTopFovCameraView(): {
     position: [number, number, number];
     target: [number, number, number];
-  } {
+  } | null {
+    if (!fovOverlay) {
+      return null;
+    }
+
     const centerX = (fovOverlay.bounds.minX + fovOverlay.bounds.maxX) / 2;
     const centerY = (fovOverlay.bounds.minY + fovOverlay.bounds.maxY) / 2;
     const width = Math.max(0.1, fovOverlay.bounds.maxX - fovOverlay.bounds.minX);
@@ -248,6 +255,11 @@
 
   async function showTopFovOverlay() {
     const nextView = getTopFovCameraView();
+
+    if (!nextView) {
+      fovOverlayVisible = false;
+      return;
+    }
 
     useOrthographicCamera = true;
     savedView = {
@@ -315,16 +327,18 @@
 >
   <ViewportCameraControls
     activeCameraMode={useOrthographicCamera ? 'orthographic' : 'perspective'}
-    topFovOverlayActive={fovOverlayVisible}
+    topFovOverlayActive={canShowTopFovOverlay && fovOverlayVisible}
     topOffsetPx={getSceneControlsTopOffsetPx(gizmoSize)}
     onResetView={async () => {
       await resetCameraView();
       focusViewport();
     }}
-    onShowTopFovOverlay={async () => {
-      await showTopFovOverlay();
-      focusViewport();
-    }}
+    onShowTopFovOverlay={canShowTopFovOverlay
+      ? async () => {
+          await showTopFovOverlay();
+          focusViewport();
+        }
+      : null}
     onSetCameraMode={async (mode) => {
       await setCameraMode(mode === 'orthographic');
       focusViewport();

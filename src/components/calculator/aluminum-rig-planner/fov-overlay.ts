@@ -37,7 +37,13 @@ export function createPlannerFovOverlay(
   postureSettings: PlannerPostureSettings<PlannerPosturePreset>,
   postureReport: PlannerPostureReport,
   postureModelMetrics: PlannerPostureModelMetrics
-): PlannerFovOverlay {
+): PlannerFovOverlay | null {
+  const monitorDebug = postureReport.monitorDebug;
+
+  if (!monitorDebug) {
+    return null;
+  }
+
   const skeleton = createPlannerPostureSkeleton(
     input,
     {
@@ -46,7 +52,7 @@ export function createPlannerFovOverlay(
     },
     postureModelMetrics
   );
-  const screenEdges = getMonitorScreenEdgePoints(postureReport.monitorDebug.position, postureSettings);
+  const screenEdges = getMonitorScreenEdgePoints(monitorDebug.position, postureSettings);
   const points = [skeleton.joints.eyeCenter, screenEdges.left, screenEdges.right];
 
   return {

@@ -51,14 +51,15 @@ describe('aluminum rig planner monitor module', () => {
       monitorCurvature: '1000r',
       monitorTiltDeg: -5,
     });
+    const monitorDebug = report.monitorDebug!;
     const centerMesh = meshes[Math.floor(meshes.length / 2)];
     const leftEdge = meshes[0];
     const rightEdge = meshes.at(-1);
 
     expect(meshes).toHaveLength(25);
-    expect(centerMesh.position[0]).toBeCloseTo(report.monitorDebug.position[0], 3);
-    expect(centerMesh.position[1]).toBeCloseTo(report.monitorDebug.position[1], 6);
-    expect(centerMesh.position[2]).toBe(report.monitorDebug.position[2]);
+    expect(centerMesh.position[0]).toBeCloseTo(monitorDebug.position[0], 3);
+    expect(centerMesh.position[1]).toBeCloseTo(monitorDebug.position[1], 6);
+    expect(centerMesh.position[2]).toBe(monitorDebug.position[2]);
     expect(leftEdge.position[0]).toBeLessThan(centerMesh.position[0]);
     expect(rightEdge?.position[0]).toBeLessThan(centerMesh.position[0]);
     expect(leftEdge.rotation?.[2]).toBeLessThan(0);
@@ -96,6 +97,10 @@ describe('aluminum rig planner monitor module', () => {
       expect(currentEnd[0]).toBeCloseTo(nextStart[0], 6);
       expect(currentEnd[1]).toBeCloseTo(nextStart[1], 6);
     }
+  });
+
+  it('returns no monitor meshes without monitor debug', () => {
+    expect(createMonitorModule({ metrics: [], hints: [] }, DEFAULT_PLANNER_POSTURE_SETTINGS)).toEqual([]);
   });
 
   it('solves curved monitor apex distance from target horizontal FOV against the chord line', () => {

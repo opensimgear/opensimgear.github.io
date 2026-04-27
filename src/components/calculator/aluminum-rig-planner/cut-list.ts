@@ -57,10 +57,12 @@ export function mergeCutListEntries(rows: CutListEntry[]): CutListEntry[] {
 }
 
 function getPlannerMeshes(geometry: PlannerGeometry, visibleModules: PlannerVisibleModules) {
+  void visibleModules;
+
   return [
     ...createBaseModule(geometry.input, BLACK_PROFILE_COLOR),
-    ...(visibleModules.steeringColumn ? createSteeringColumnModule(geometry.input, BLACK_PROFILE_COLOR) : []),
-    ...(visibleModules.pedalTray ? createPedalTrayModule(geometry.input, BLACK_PROFILE_COLOR) : []),
+    ...createSteeringColumnModule(geometry.input, BLACK_PROFILE_COLOR),
+    ...createPedalTrayModule(geometry.input, BLACK_PROFILE_COLOR),
   ];
 }
 

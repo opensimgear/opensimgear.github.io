@@ -637,14 +637,15 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
   const { joints } = poseSkeleton;
   const leftTalon = getTalonPoint(joints.ankleLeft, joints.heelLeft, joints.toeLeft);
   const rightTalon = getTalonPoint(joints.ankleRight, joints.heelRight, joints.toeRight);
-  const terminalTargets: Array<[HumanModelBoneName, Vector3]> = [
+  const pointTargets: Array<[HumanModelBoneName, Vector3]> = [
+    ['eyeCenter', toModelVector3(joints.eyeCenter)],
     ['leftTalonTip', toModelVector3(leftTalon)],
     ['rightTalonTip', toModelVector3(rightTalon)],
     ['leftToeTip', toModelVector3(joints.toeLeft)],
     ['rightToeTip', toModelVector3(joints.toeRight)],
   ];
 
-  for (const [name, target] of terminalTargets) {
+  for (const [name, target] of pointTargets) {
     const bone = rig.bones.get(name);
 
     if (bone) {

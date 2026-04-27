@@ -101,6 +101,16 @@ describe('aluminum rig planner posture report', () => {
     expect('eyeDebug' in report).toBe(false);
   });
 
+  it('omits eye-based metrics and monitor debug when monitor is disabled', () => {
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics, {
+      includeMonitor: false,
+    });
+
+    expect(report.metrics.some((metric) => metric.key === 'eyeToWheelTop')).toBe(false);
+    expect(report.metrics.some((metric) => metric.key === 'eyeToMonitorMidpoint')).toBe(false);
+    expect(report.monitorDebug).toBeUndefined();
+  });
+
   it('does not report fixed preset pedal height versus hips', () => {
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
 
@@ -209,11 +219,12 @@ describe('aluminum rig planner posture report', () => {
     const expectedDistanceMm = dimensions.widthMm / 2 / Math.tan((postureSettings.monitorTargetFovDeg * Math.PI) / 360);
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, postureModel);
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings, postureModel);
+    const monitorDebug = report.monitorDebug!;
 
-    expect(report.monitorDebug.diameterM).toBeCloseTo(0.01, 6);
-    expect(report.monitorDebug.position[0]).toBeCloseTo(skeleton.joints.eyeCenter[0] + expectedDistanceMm * 0.001, 6);
-    expect(report.monitorDebug.position[1]).toBe(0);
-    expect(report.monitorDebug.position[2]).toBeCloseTo(
+    expect(monitorDebug.diameterM).toBeCloseTo(0.01, 6);
+    expect(monitorDebug.position[0]).toBeCloseTo(skeleton.joints.eyeCenter[0] + expectedDistanceMm * 0.001, 6);
+    expect(monitorDebug.position[1]).toBe(0);
+    expect(monitorDebug.position[2]).toBeCloseTo(
       (BASE_BEAM_HEIGHT_MM + postureSettings.monitorHeightFromBaseMm) * 0.001,
       6
     );
@@ -229,7 +240,8 @@ describe('aluminum rig planner posture report', () => {
     const expectedDistanceMm = getSolvedMonitorDistanceFromEyesMm(postureSettings);
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, modelMetrics);
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings, modelMetrics);
+    const monitorDebug = report.monitorDebug!;
 
-    expect(report.monitorDebug.position[0]).toBeCloseTo(skeleton.joints.eyeCenter[0] + expectedDistanceMm * 0.001, 6);
+    expect(monitorDebug.position[0]).toBeCloseTo(skeleton.joints.eyeCenter[0] + expectedDistanceMm * 0.001, 6);
   });
 });

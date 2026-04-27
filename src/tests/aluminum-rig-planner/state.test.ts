@@ -21,7 +21,6 @@ describe('aluminum rig planner responsive state', () => {
     expect(getAluminumRigPaneExpandedState(true)).toEqual({
       general: false,
       setup: false,
-      modules: false,
       posture: false,
       optimizer: false,
     });
@@ -31,7 +30,6 @@ describe('aluminum rig planner responsive state', () => {
     expect(getAluminumRigPaneExpandedState(false)).toEqual({
       general: true,
       setup: true,
-      modules: true,
       posture: true,
       optimizer: true,
     });
@@ -40,7 +38,7 @@ describe('aluminum rig planner responsive state', () => {
   it('resets pane state when reset flag is true', () => {
     expect(
       getNextAluminumRigPaneExpandedState(
-        { general: false, setup: false, modules: false, posture: false, optimizer: false },
+        { general: false, setup: false, posture: false, optimizer: false },
         false,
         false,
         true
@@ -50,18 +48,14 @@ describe('aluminum rig planner responsive state', () => {
 
   it('resets pane state to mobile defaults when viewport crosses into narrow band', () => {
     expect(
-      getNextAluminumRigPaneExpandedState(
-        { general: true, setup: true, modules: true, posture: true, optimizer: true },
-        false,
-        true
-      )
+      getNextAluminumRigPaneExpandedState({ general: true, setup: true, posture: true, optimizer: true }, false, true)
     ).toEqual(getAluminumRigPaneExpandedState(true));
   });
 
   it('resets pane state to desktop defaults when viewport crosses into wide band', () => {
     expect(
       getNextAluminumRigPaneExpandedState(
-        { general: false, setup: false, modules: false, posture: false, optimizer: false },
+        { general: false, setup: false, posture: false, optimizer: false },
         true,
         false
       )
@@ -72,7 +66,6 @@ describe('aluminum rig planner responsive state', () => {
     const currentPaneExpanded = {
       general: true,
       setup: false,
-      modules: true,
       posture: false,
       optimizer: false,
     };

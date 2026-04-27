@@ -20,7 +20,7 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).toMatch(/if \(suppressProgrammaticPlannerInputEdit\) {\s*return;\s*}/);
     expect(plannerSource).toMatch(/pendingCustomPresetInput = null;/);
     expect(plannerSource).toMatch(
-      /const nextInput = applyPresetToPlannerInput\(\s*plannerInput,\s*value,\s*postureSettings\.heightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset\s*\);/
+      /const nextInput = applyPresetToPlannerInput\(\s*plannerInput,\s*value,\s*postureSettings\.heightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset,\s*getPresetSolveOptions\(\)\s*\);/
     );
     expect(plannerSource).not.toContain('pendingMonitorHeightEyeSync');
     expect(plannerSource).not.toContain('handleEyeCenterChange');
@@ -41,16 +41,15 @@ describe('aluminum rig planner component wiring', () => {
       /function setPostureHeightCm\(value: number\) \{\s*postureHeightControlValue = clampPostureHeightCm\(value\);/
     );
     expect(plannerSource).toMatch(
-      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*nextHeightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset\s*\);/
+      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*nextHeightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset,\s*getPresetSolveOptions\(\)\s*\);/
     );
     expect(plannerSource).toMatch(/function commitPostureHeightCm\(value: number, animateTransition = false\)/);
     expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, { animate: animateTransition });');
-    expect(plannerSource).toMatch(
-      /postureSettings\.monitorHeightFromBaseMm = applyPresetToPostureSettings\(\s*postureSettings,\s*nextInput,\s*postureModelMetrics\s*\)\.monitorHeightFromBaseMm;/
-    );
+    expect(plannerSource).toContain('syncPresetMonitorHeightFromInput(nextInput);');
     expect(plannerSource).toContain(
-      'postureModelMetrics ? createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics) : null'
+      'createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics, {'
     );
+    expect(plannerSource).toContain('includeMonitor: visibleModules.monitor');
     expect(plannerSource).toContain('if (!model || !model.postureModelMetrics)');
     expect(plannerSource).toContain('geometry={sceneGeometry}');
     expect(plannerSource).toContain('postureSettings={scenePostureSettings}');
@@ -60,10 +59,10 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).toContain('function optimizeCurrentPosturePreset()');
     expect(plannerSource).toMatch(/if \(postureSettings\.preset !== 'custom'\)/);
     expect(plannerSource).toMatch(
-      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*postureSettings\.heightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset\s*\);/
+      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*postureSettings\.heightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset,\s*getPresetSolveOptions\(\)\s*\);/
     );
     expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, { animate: true });');
-    expect(plannerSource).toContain('getOptimizedPresetMonitorHeightFromBaseMm');
+    expect(plannerSource).toContain('syncPresetMonitorHeightFromInput(nextInput);');
     expect(plannerSource).toContain('onOptimizePosture={optimizeCurrentPosturePreset}');
     expect(plannerSource).not.toMatch(/<Button\s+on:click=\{optimizeCurrentPosturePreset\}/);
     expect(sceneSource).toContain('onOptimizePosture: () => void;');
@@ -86,6 +85,8 @@ describe('aluminum rig planner component wiring', () => {
 
     expect(presetsSource).toContain('createPlannerPostureReport');
     expect(presetsSource).toContain('(metric.range.min + metric.range.max) / 2');
+    expect(presetsSource).toContain('const includeMonitor = shouldIncludeMonitor(options);');
+    expect(presetsSource).toContain('if (includeMonitor) {');
     expect(presetsSource).not.toContain("metric.key === 'eyeToWheelTop' ? metric.range.min");
     expect(presetsSource).not.toContain("metric.key === 'eyeToMonitorMidpoint'");
     expect(presetsSource).not.toContain("metric.key === 'headToMonitor'");
@@ -134,9 +135,11 @@ describe('aluminum rig planner component wiring', () => {
   });
 
   it('shows target FOV and distance editing for flat and curved monitors', () => {
-    const monitorFolderIndex = plannerSource.indexOf('<Folder title="Monitor">');
-    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Settings"', monitorFolderIndex);
-    const monitorSource = plannerSource.slice(monitorFolderIndex, settingsPaneIndex);
+    const posturePaneIndex = plannerSource.indexOf('<Pane title="Posture"');
+    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Settings"');
+    const monitorFolderIndex = plannerSource.indexOf('<Folder title="Monitor" expanded={false}>');
+    const baseFolderIndex = plannerSource.indexOf('<Folder title="Base"', settingsPaneIndex);
+    const monitorSource = plannerSource.slice(monitorFolderIndex, baseFolderIndex);
     const monitorModuleSource = readFileSync(
       new URL('../../components/calculator/aluminum-rig-planner/modules/monitor.ts', import.meta.url),
       'utf8'
@@ -147,6 +150,8 @@ describe('aluminum rig planner component wiring', () => {
     );
 
     expect(monitorFolderIndex).toBeGreaterThan(-1);
+    expect(monitorFolderIndex).toBeGreaterThan(settingsPaneIndex);
+    expect(plannerSource.slice(posturePaneIndex, settingsPaneIndex)).not.toContain('<Folder title="Monitor"');
     expect(monitorSource).toContain('label="Target FOV"');
     expect(monitorSource).toContain('label="Distance"');
     expect(monitorSource).not.toContain("postureSettings.monitorCurvature === 'disabled'");
@@ -158,11 +163,40 @@ describe('aluminum rig planner component wiring', () => {
     expect(monitorModuleSource).toContain('getMonitorScreenEdgePoints');
     expect(sceneSource).toContain('showTopFovOverlay');
     expect(sceneSource).toContain('fovOverlayVisible');
+    expect(sceneSource).toContain(
+      'const canShowTopFovOverlay = $derived(Boolean(visibleModules.monitor && fovOverlay));'
+    );
+    expect(sceneSource).toContain('onShowTopFovOverlay={canShowTopFovOverlay');
     expect(cameraControlsSource).toContain('aria-label="Show top FOV overlay"');
     expect(cameraControlsSource).toContain('title="Top FOV"');
     expect(cameraControlsSource.indexOf('aria-label="Use orthographic camera"')).toBeLessThan(
       cameraControlsSource.indexOf('aria-label="Show top FOV overlay"')
     );
+  });
+
+  it('keeps module toggles and module folders in the settings pane', () => {
+    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Settings"');
+    const optimizerPaneIndex = plannerSource.indexOf('<Pane title="Cut optimizer"', settingsPaneIndex);
+    const settingsPaneSource = plannerSource.slice(settingsPaneIndex, optimizerPaneIndex);
+    const enabledModulesIndex = settingsPaneSource.indexOf('<Folder title="Enabled Modules" expanded={false}>');
+    const monitorIndex = settingsPaneSource.indexOf('<Folder title="Monitor" expanded={false}>');
+    const baseIndex = settingsPaneSource.indexOf('<Folder title="Base" expanded={false}>');
+    const enabledModulesSource = settingsPaneSource.slice(
+      enabledModulesIndex,
+      settingsPaneSource.indexOf('{#if visibleModules.monitor}')
+    );
+
+    expect(settingsPaneIndex).toBeGreaterThan(-1);
+    expect(plannerSource).not.toContain('<Pane title="Module Settings"');
+    expect(enabledModulesIndex).toBeGreaterThan(-1);
+    expect(enabledModulesIndex).toBeLessThan(monitorIndex);
+    expect(enabledModulesSource).toContain('label="Monitor"');
+    expect(enabledModulesSource).not.toContain('label="Steering column"');
+    expect(enabledModulesSource).not.toContain('label="Pedal tray"');
+    expect(monitorIndex).toBeLessThan(baseIndex);
+    expect(settingsPaneSource).toContain('<Folder title="Steering column" expanded={false}>');
+    expect(settingsPaneSource).toContain('<Folder title="Pedal tray" expanded={false}>');
+    expect(settingsPaneSource).toContain('<Folder title="Pedals" expanded={false}>');
   });
 
   it('resets the scene camera back to perspective mode', () => {

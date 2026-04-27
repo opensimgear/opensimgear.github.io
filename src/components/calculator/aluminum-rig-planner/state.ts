@@ -5,7 +5,6 @@ export { ALUMINUM_RIG_MOBILE_BREAKPOINT };
 export type AluminumRigPaneExpandedState = {
   general: boolean;
   setup: boolean;
-  modules: boolean;
   posture: boolean;
   optimizer: boolean;
 };

@@ -483,6 +483,26 @@ describe('aluminum rig planner human model rig', () => {
     model!.dispose();
   });
 
+  it('places the GLB eye center bone on the solved eye center point', async () => {
+    const gltf = await loadHumanModel();
+    const model = createRiggedHumanModelFromRoot(gltf.scene);
+    expect(model).not.toBeNull();
+
+    const postureSettings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      heightCm: 205,
+    };
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, model!.postureModelMetrics);
+    const modelScale = postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM;
+    const bones = collectBones(model!.object);
+
+    model!.applySkeleton(skeleton, modelScale);
+
+    expectBoneWorldPositionOnTarget(bones.get('eyeCenter')!, skeleton.joints.eyeCenter, 'eye center at eye target');
+
+    model!.dispose();
+  });
+
   it('keeps the same model pose when height stays at the 169 cm baseline', async () => {
     const [basicGltf, advancedGltf] = await Promise.all([loadHumanModel(), loadHumanModel()]);
     const basicModel = createRiggedHumanModelFromRoot(basicGltf.scene);

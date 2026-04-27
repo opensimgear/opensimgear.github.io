@@ -56,7 +56,7 @@
   const pedalsModule = $derived(createPedalsModule(input));
   const seatModule = $derived(createSeatModule(input));
   const wheelModule = $derived(createWheelModule(input));
-  const monitorModule = $derived(createMonitorModule(postureReport, postureSettings));
+  const monitorModule = $derived(visibleModules.monitor ? createMonitorModule(postureReport, postureSettings) : []);
   const postureSkeleton = $derived(
     createPlannerPostureSkeleton(
       input,
@@ -69,11 +69,7 @@
   );
   const modelScale = $derived(postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM);
 
-  const beamMeshes = $derived([
-    ...baseModule,
-    ...(visibleModules.steeringColumn ? steeringColumnModule : []),
-    ...(visibleModules.pedalTray ? pedalAssembly : []),
-  ]);
+  const beamMeshes = $derived([...baseModule, ...steeringColumnModule, ...pedalAssembly]);
   const allMeshes = $derived.by(() => {
     const adjustedBeams = beamMeshes.map((mesh) => ({
       ...mesh,
@@ -83,22 +79,16 @@
     }));
 
     if (!showEndCaps) {
-      return [
-        ...adjustedBeams,
-        ...(visibleModules.pedalTray ? pedalsModule : []),
-        ...wheelModule,
-        ...seatModule,
-        ...(visibleModules.monitor ? monitorModule : []),
-      ];
+      return [...adjustedBeams, ...pedalsModule, ...wheelModule, ...seatModule, ...monitorModule];
     }
 
     return [
       ...adjustedBeams,
       ...beamMeshes.flatMap((mesh) => createEndCapMeshes(mesh)),
-      ...(visibleModules.pedalTray ? pedalsModule : []),
+      ...pedalsModule,
       ...wheelModule,
       ...seatModule,
-      ...(visibleModules.monitor ? monitorModule : []),
+      ...monitorModule,
     ];
   });
 </script>

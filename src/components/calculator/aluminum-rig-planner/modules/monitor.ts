@@ -169,6 +169,12 @@ export function createMonitorModule(
   report: PlannerPostureReport,
   settings: PlannerPostureSettings<PlannerPosturePreset>
 ): MeshSpec[] {
+  const monitorDebug = report.monitorDebug;
+
+  if (!monitorDebug) {
+    return [];
+  }
+
   const dimensions = getMonitorDimensionsMm(settings);
   const tiltRadians = (settings.monitorTiltDeg * Math.PI) / 180;
   const curvatureRadiusMm = getCurvatureRadiusMm(settings.monitorCurvature, dimensions.widthMm);
@@ -194,11 +200,7 @@ export function createMonitorModule(
 
       return createMonitorMeshSpec(
         `monitor-plate-${index.toString().padStart(2, '0')}`,
-        [
-          report.monitorDebug.position[0] + mm(centerXMm),
-          report.monitorDebug.position[1] + mm(centerYMm),
-          report.monitorDebug.position[2],
-        ],
+        [monitorDebug.position[0] + mm(centerXMm), monitorDebug.position[1] + mm(centerYMm), monitorDebug.position[2]],
         [mm(dimensions.thicknessMm), mm(segmentWidthMm), mm(dimensions.heightMm)],
         [0, -tiltRadians, yawRadians]
       );
@@ -208,7 +210,7 @@ export function createMonitorModule(
   return [
     createMonitorMeshSpec(
       'monitor-plate',
-      report.monitorDebug.position,
+      monitorDebug.position,
       [mm(dimensions.thicknessMm), mm(dimensions.widthMm), mm(dimensions.heightMm)],
       [0, -tiltRadians, 0]
     ),

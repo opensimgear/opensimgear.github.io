@@ -1,7 +1,5 @@
 export type PlannerVisibleModules = {
   monitor: boolean;
-  pedalTray: boolean;
-  steeringColumn: boolean;
 };
 
 export type CutListProfileType = '40x40' | '80x40';

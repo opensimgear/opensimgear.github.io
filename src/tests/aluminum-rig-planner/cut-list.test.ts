@@ -18,22 +18,24 @@ describe('aluminum rig planner cut list', () => {
     return derivePlannerGeometry(DEFAULT_PLANNER_INPUT);
   }
 
-  it('always includes base module rows', () => {
-    const cutList = createPlannerCutList(
-      createGeometry(),
-      {
-        monitor: false,
-        steeringColumn: false,
-        pedalTray: false,
-      },
-      false
-    );
+  it('always includes base and fixed module rows', () => {
+    const cutList = createPlannerCutList(createGeometry(), { monitor: false }, false);
+    const entries = createPlannerCutListEntries(createGeometry(), { monitor: false }, false);
 
-    expect(cutList).toEqual([
-      { profileType: '80x40', lengthMm: DEFAULT_PLANNER_INPUT.baseLengthMm, quantity: 2 },
-      { profileType: '80x40', lengthMm: DEFAULT_PLANNER_INPUT.baseWidthMm - BASE_BEAM_WIDTH_MM * 2, quantity: 2 },
-      { profileType: '40x40', lengthMm: DEFAULT_PLANNER_INPUT.seatBaseDepthMm, quantity: 2 },
-    ]);
+    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: DEFAULT_PLANNER_INPUT.baseLengthMm, quantity: 2 });
+    expect(cutList).toContainEqual({
+      profileType: '80x40',
+      lengthMm: DEFAULT_PLANNER_INPUT.baseWidthMm - BASE_BEAM_WIDTH_MM * 2,
+      quantity: 3,
+    });
+    expect(cutList).toContainEqual({
+      profileType: '40x40',
+      lengthMm: DEFAULT_PLANNER_INPUT.seatBaseDepthMm,
+      quantity: 2,
+    });
+    expect(entries.flatMap((entry) => entry.beamIds)).toEqual(
+      expect.arrayContaining(['steering-column-left', 'steering-column-right', 'pedal-tray-left', 'pedal-tray-right'])
+    );
   });
 
   it('updates base crossbeam cut lengths when base width changes', () => {
@@ -42,15 +44,11 @@ describe('aluminum rig planner cut list', () => {
         ...DEFAULT_PLANNER_INPUT,
         baseWidthMm: 600,
       }),
-      {
-        monitor: false,
-        steeringColumn: false,
-        pedalTray: false,
-      },
+      { monitor: false },
       false
     );
 
-    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 520, quantity: 2 });
+    expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: 520, quantity: 3 });
   });
 
   it('updates pedal tray crossbeam cut lengths when base width changes', () => {
@@ -59,35 +57,25 @@ describe('aluminum rig planner cut list', () => {
         ...DEFAULT_PLANNER_INPUT,
         baseWidthMm: 600,
       }),
-      {
-        monitor: false,
-        steeringColumn: false,
-        pedalTray: true,
-      },
+      { monitor: false },
       false
     );
 
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 440, quantity: 3 });
   });
 
-  it('excludes deactivated modules from combined cut list', () => {
-    const cutList = createPlannerCutList(
-      createGeometry(),
-      {
-        monitor: false,
-        steeringColumn: false,
-        pedalTray: true,
-      },
-      false
-    );
+  it('keeps fixed modules in the combined cut list when monitor is hidden', () => {
+    const cutList = createPlannerCutList(createGeometry(), { monitor: false }, false);
+    const cutListWithMonitor = createPlannerCutList(createGeometry(), { monitor: true }, false);
 
+    expect(cutList).toEqual(cutListWithMonitor);
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 300, quantity: 2 });
     expect(cutList).toContainEqual({
       profileType: '40x40',
       lengthMm: DEFAULT_PLANNER_INPUT.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm,
       quantity: 3,
     });
-    expect(cutList).not.toContainEqual({
+    expect(cutList).toContainEqual({
       profileType: '80x40',
       lengthMm: DEFAULT_PLANNER_INPUT.steeringColumnHeightMm,
       quantity: 2,
@@ -95,15 +83,7 @@ describe('aluminum rig planner cut list', () => {
   });
 
   it('shortens cut lengths when endcaps are enabled', () => {
-    const cutList = createPlannerCutList(
-      createGeometry(),
-      {
-        monitor: true,
-        steeringColumn: true,
-        pedalTray: true,
-      },
-      true
-    );
+    const cutList = createPlannerCutList(createGeometry(), { monitor: true }, true);
 
     expect(cutList).toContainEqual({
       profileType: '80x40',
@@ -142,15 +122,7 @@ describe('aluminum rig planner cut list', () => {
   });
 
   it('keeps beam ids for every member in merged cut-list entries', () => {
-    const entries = createPlannerCutListEntries(
-      createGeometry(),
-      {
-        monitor: false,
-        steeringColumn: false,
-        pedalTray: true,
-      },
-      false
-    );
+    const entries = createPlannerCutListEntries(createGeometry(), { monitor: false }, false);
     const pedalCrossBeams = entries.find(
       (entry) =>
         entry.profileType === '40x40' &&
