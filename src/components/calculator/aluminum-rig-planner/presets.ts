@@ -896,7 +896,7 @@ export function applyPresetToPostureSettings(
   modelMetrics: PlannerPostureModelMetrics,
   options: PlannerPresetSolveOptions = {}
 ): PlannerPostureSettings<PlannerPosturePreset> {
-  if (!isPresetSolvablePreset(settings.preset) || !shouldIncludeMonitor(options)) {
+  if (!shouldIncludeMonitor(options)) {
     return { ...settings };
   }
 

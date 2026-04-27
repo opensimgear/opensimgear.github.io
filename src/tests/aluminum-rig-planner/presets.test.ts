@@ -495,14 +495,28 @@ describe('aluminum rig planner posture presets', () => {
     expect(failures, failures.slice(0, 30).join('\n')).toEqual([]);
   });
 
-  it('preserves monitor height for custom preset posture settings', () => {
+  it('optimizes monitor height for custom preset when monitor is enabled', () => {
     const settings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       preset: 'custom' as const,
       monitorHeightFromBaseMm: 123,
     };
 
-    expect(applyPresetToPostureSettings(settings, DEFAULT_PLANNER_INPUT).monitorHeightFromBaseMm).toBe(123);
+    expect(applyPresetToPostureSettings(settings, DEFAULT_PLANNER_INPUT).monitorHeightFromBaseMm).not.toBe(123);
+  });
+
+  it('preserves monitor height for custom preset when monitor is disabled', () => {
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      preset: 'custom' as const,
+      monitorHeightFromBaseMm: 123,
+    };
+
+    expect(
+      applyPresetToPostureSettingsWithModel(settings, DEFAULT_PLANNER_INPUT, modelMetrics, {
+        includeMonitor: false,
+      }).monitorHeightFromBaseMm
+    ).toBe(123);
   });
 
   it.each(NON_CUSTOM_PRESETS)(
