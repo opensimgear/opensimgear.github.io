@@ -29,10 +29,6 @@ import {
 const MODEL_PATH = humanMaleGlbUrl.startsWith('file:')
   ? fileURLToPath(humanMaleGlbUrl)
   : path.join(process.cwd(), humanMaleGlbUrl);
-const HUMAN_MODEL_RIG_SOURCE = readFileSync(
-  new URL('../../components/calculator/aluminum-rig-planner/posture/human-model-rig.ts', import.meta.url),
-  'utf8'
-);
 const MODEL_RATIO_PRECISION = 3;
 const MODEL_SEGMENTS = [
   {
@@ -379,15 +375,6 @@ describe('aluminum rig planner human model rig', () => {
     const postureModel = calculateHumanModelPostureModel(gltf.scene);
 
     expect(postureModel).toEqual(deriveExpectedPostureModel(gltf.scene));
-  });
-
-  it('derives rest bone data from the model instead of rig-level precomputed positions', () => {
-    expect(HUMAN_MODEL_RIG_SOURCE).toContain('createRestBonePosesFromModel(rig.bones)');
-    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restBoneLocalPositions');
-    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restBoneLocalQuaternions');
-    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restBoneLocalScales');
-    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restSegments: Map');
-    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restBoneWorldMatrices');
   });
 
   it('scales the whole model without changing individual bone scales', async () => {

@@ -1,7 +1,48 @@
+/**
+ * Seat module – generates 3D mesh specs for the racing seat (cushion + backrest).
+ * Uses bounding-box templates rotated around the seat pivot.
+ */
+
 import { BASE_MODULE_LAYOUT } from '../constants/planner';
 import { BASE_BEAM_HEIGHT_MM, HALF_PROFILE_SHORT_MM, PROFILE_SHORT_MM } from '../constants/profile';
+import {
+  BACKREST_HEADREST_BOTTOM_MM,
+  BACKREST_HEADREST_WIDTH_DELTA_MM,
+  BACKREST_HEADREST_WIDTH_LIMITS_MM,
+  BACKREST_HEIGHT_MM,
+  BACKREST_LOWER_PANEL_TOP_MM,
+  BACKREST_LOWER_WIDTH_DELTA_MM,
+  BACKREST_LOWER_WIDTH_LIMITS_MM,
+  BACKREST_THICKNESS_MM,
+  BACKREST_UPPER_PANEL_BOTTOM_MM,
+  BACKREST_UPPER_PANEL_TOP_MM,
+  BACKREST_UPPER_WIDTH_DELTA_MM,
+  BACKREST_UPPER_WIDTH_LIMITS_MM,
+  SEAT_BASE_THICKNESS_MM,
+  SEAT_CORNER_RADIUS_MM,
+  SEAT_CORNER_SEGMENTS,
+  SEAT_FRONT_ANCHOR_REAR_OFFSET_MM,
+  SEAT_INNER_WIDTH_MARGIN_MM,
+  SEAT_INNER_WIDTH_MIN_MM,
+  SEAT_OUTER_WIDTH_BASE_INSET_MM,
+  SEAT_OUTER_WIDTH_INNER_BEAM_PAD_MM,
+  SEAT_OUTER_WIDTH_MAX_MM,
+  SEAT_OUTER_WIDTH_MIN_MM,
+  SEAT_SIDE_BOLSTER_END_INSET_MM,
+  SEAT_SIDE_BOLSTER_HEIGHT_MM,
+  SEAT_SIDE_BOLSTER_START_MM,
+  SEAT_SIDE_BOLSTER_WIDTH_MM,
+  SEAT_SOLID_OVERLAP_MM,
+  SHOULDER_WING_HEIGHT_MM,
+  SHOULDER_WING_INSET_MM,
+  SHOULDER_WING_WIDTH_MM,
+  SHOULDER_WING_Z_START_MM,
+  UPHOLSTERY_COLOR,
+  UPHOLSTERY_MATERIAL,
+} from '../constants/seat';
 import type { PlannerInput } from '../types';
-import { mm, type MeshSpec } from './shared';
+import { clamp, mm, toRad } from './math';
+import type { MeshSpec } from './shared';
 
 type SeatTemplate = {
   id: string;
@@ -22,20 +63,7 @@ type SeatBoundsTemplate = Omit<SeatTemplate, 'localPosition' | 'size'> & {
   cornerRadiusMm?: number;
 };
 
-const UPHOLSTERY_COLOR = '#141414';
-const UPHOLSTERY_MATERIAL = {
-  metalness: 0.02,
-  roughness: 0.94,
-} as const;
-
-function clamp(value: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, value));
-}
-
-function toRad(value: number) {
-  return (value * Math.PI) / 180;
-}
-
+/** Convert axis-aligned bounds into a centered position + size template. */
 function createBoundsTemplate(template: SeatBoundsTemplate): SeatTemplate {
   return {
     id: template.id,
@@ -58,10 +86,12 @@ function createBoundsTemplate(template: SeatBoundsTemplate): SeatTemplate {
   };
 }
 
+/** Create symmetric Y bounds centered on zero. */
 function createCenteredBounds(widthMm: number): [number, number] {
   return [-widthMm / 2, widthMm / 2];
 }
 
+/** Rotate a local-space point around the Y axis (XZ rotation). */
 function rotateLocalPoint([x, y, z]: [number, number, number], angleRad: number): [number, number, number] {
   const cos = Math.cos(angleRad);
   const sin = Math.sin(angleRad);
@@ -69,6 +99,7 @@ function rotateLocalPoint([x, y, z]: [number, number, number], angleRad: number)
   return [x * cos - z * sin, y, x * sin + z * cos];
 }
 
+/** Transform an array of seat templates into world-space MeshSpecs around a pivot. */
 function createSeatParts(
   prefix: string,
   pivot: [number, number, number],
@@ -97,24 +128,26 @@ function createSeatParts(
   });
 }
 
+/** Build the full set of seat + backrest meshes from planner input. */
 export function createSeatModule(input: PlannerInput): MeshSpec[] {
   const seatAngleRad = toRad(input.seatAngleDeg);
   const backrestAngleRad = toRad(input.seatAngleDeg + input.backrestAngleDeg - 90);
 
-  const outerSeatWidthMm = clamp(Math.max(input.baseInnerBeamSpacingMm + 120, input.baseWidthMm - 30), 430, 530);
-  const solidOverlapMm = 6;
-  const seatDepthMm = input.seatLengthMm;
-  const seatBaseThicknessMm = 46;
-  const seatSideBolsterWidthMm = 52;
-  const seatSideBolsterHeightMm = 118;
-  const seatCornerRadiusMm = 14;
-  const seatCornerSegments = 5;
-  const innerSeatWidthMm = clamp(
-    outerSeatWidthMm - seatSideBolsterWidthMm * 2 + solidOverlapMm * 2,
-    300,
-    outerSeatWidthMm - 40
+  const outerSeatWidthMm = clamp(
+    Math.max(
+      input.baseInnerBeamSpacingMm + SEAT_OUTER_WIDTH_INNER_BEAM_PAD_MM,
+      input.baseWidthMm - SEAT_OUTER_WIDTH_BASE_INSET_MM
+    ),
+    SEAT_OUTER_WIDTH_MIN_MM,
+    SEAT_OUTER_WIDTH_MAX_MM
   );
-  const seatFrontAnchorLocalXmm = seatDepthMm - 38;
+  const seatDepthMm = input.seatLengthMm;
+  const innerSeatWidthMm = clamp(
+    outerSeatWidthMm - SEAT_SIDE_BOLSTER_WIDTH_MM * 2 + SEAT_SOLID_OVERLAP_MM * 2,
+    SEAT_INNER_WIDTH_MIN_MM,
+    outerSeatWidthMm - SEAT_INNER_WIDTH_MARGIN_MM
+  );
+  const seatFrontAnchorLocalXmm = seatDepthMm - SEAT_FRONT_ANCHOR_REAR_OFFSET_MM;
   const seatCrossMemberCenterXmm = Math.max(
     BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm,
     input.seatBaseDepthMm - BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm
@@ -124,50 +157,57 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
   const seatRearPivotZmm = BASE_BEAM_HEIGHT_MM + PROFILE_SHORT_MM + input.seatHeightFromBaseInnerBeamsMm;
   const seatPivot: [number, number, number] = [mm(seatRearPivotXmm), 0, mm(seatRearPivotZmm)];
 
-  const backrestThicknessMm = 54;
-  const backrestHeightMm = 760;
-  const lowerBackWidthMm = clamp(innerSeatWidthMm + 46, 306, 390);
-  const upperBackWidthMm = clamp(innerSeatWidthMm - 12, 248, 312);
-  const headrestWidthMm = clamp(innerSeatWidthMm + 26, 268, 328);
-  const shoulderWingWidthMm = 96;
-  const shoulderWingHeightMm = 176;
-  const backrestXBoundsMm: [number, number] = [-backrestThicknessMm / 2, backrestThicknessMm / 2];
+  const lowerBackWidthMm = clamp(
+    innerSeatWidthMm + BACKREST_LOWER_WIDTH_DELTA_MM,
+    BACKREST_LOWER_WIDTH_LIMITS_MM.min,
+    BACKREST_LOWER_WIDTH_LIMITS_MM.max
+  );
+  const upperBackWidthMm = clamp(
+    innerSeatWidthMm - BACKREST_UPPER_WIDTH_DELTA_MM,
+    BACKREST_UPPER_WIDTH_LIMITS_MM.min,
+    BACKREST_UPPER_WIDTH_LIMITS_MM.max
+  );
+  const headrestWidthMm = clamp(
+    innerSeatWidthMm + BACKREST_HEADREST_WIDTH_DELTA_MM,
+    BACKREST_HEADREST_WIDTH_LIMITS_MM.min,
+    BACKREST_HEADREST_WIDTH_LIMITS_MM.max
+  );
+  const backrestXBoundsMm: [number, number] = [-BACKREST_THICKNESS_MM / 2, BACKREST_THICKNESS_MM / 2];
   const seatBaseEndMm = seatFrontAnchorLocalXmm;
-  const seatSideBolsterStartMm = 30;
-  const seatSideBolsterEndMm = seatDepthMm - 70 + solidOverlapMm;
+  const seatSideBolsterEndMm = seatDepthMm - SEAT_SIDE_BOLSTER_END_INSET_MM + SEAT_SOLID_OVERLAP_MM;
   const seatTemplates: SeatTemplate[] = [
     createBoundsTemplate({
       id: 'base-main',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: [0, seatBaseEndMm],
       yBoundsMm: createCenteredBounds(innerSeatWidthMm),
-      zBoundsMm: [0, seatBaseThicknessMm],
+      zBoundsMm: [0, SEAT_BASE_THICKNESS_MM],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
-      cornerRadiusMm: seatCornerRadiusMm,
-      cornerSegments: seatCornerSegments,
+      cornerRadiusMm: SEAT_CORNER_RADIUS_MM,
+      cornerSegments: SEAT_CORNER_SEGMENTS,
     }),
     createBoundsTemplate({
       id: 'left-bolster',
       color: UPHOLSTERY_COLOR,
-      xBoundsMm: [seatSideBolsterStartMm, seatSideBolsterEndMm],
-      yBoundsMm: [outerSeatWidthMm / 2 - seatSideBolsterWidthMm, outerSeatWidthMm / 2],
-      zBoundsMm: [0, seatSideBolsterHeightMm],
+      xBoundsMm: [SEAT_SIDE_BOLSTER_START_MM, seatSideBolsterEndMm],
+      yBoundsMm: [outerSeatWidthMm / 2 - SEAT_SIDE_BOLSTER_WIDTH_MM, outerSeatWidthMm / 2],
+      zBoundsMm: [0, SEAT_SIDE_BOLSTER_HEIGHT_MM],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
-      cornerRadiusMm: seatCornerRadiusMm,
-      cornerSegments: seatCornerSegments,
+      cornerRadiusMm: SEAT_CORNER_RADIUS_MM,
+      cornerSegments: SEAT_CORNER_SEGMENTS,
     }),
     createBoundsTemplate({
       id: 'right-bolster',
       color: UPHOLSTERY_COLOR,
-      xBoundsMm: [seatSideBolsterStartMm, seatSideBolsterEndMm],
-      yBoundsMm: [-outerSeatWidthMm / 2, -outerSeatWidthMm / 2 + seatSideBolsterWidthMm],
-      zBoundsMm: [0, seatSideBolsterHeightMm],
+      xBoundsMm: [SEAT_SIDE_BOLSTER_START_MM, seatSideBolsterEndMm],
+      yBoundsMm: [-outerSeatWidthMm / 2, -outerSeatWidthMm / 2 + SEAT_SIDE_BOLSTER_WIDTH_MM],
+      zBoundsMm: [0, SEAT_SIDE_BOLSTER_HEIGHT_MM],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
-      cornerRadiusMm: seatCornerRadiusMm,
-      cornerSegments: seatCornerSegments,
+      cornerRadiusMm: SEAT_CORNER_RADIUS_MM,
+      cornerSegments: SEAT_CORNER_SEGMENTS,
     }),
   ];
 
@@ -177,55 +217,61 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
       yBoundsMm: createCenteredBounds(lowerBackWidthMm),
-      zBoundsMm: [0, 486],
+      zBoundsMm: [0, BACKREST_LOWER_PANEL_TOP_MM],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
-      cornerRadiusMm: seatCornerRadiusMm,
-      cornerSegments: seatCornerSegments,
+      cornerRadiusMm: SEAT_CORNER_RADIUS_MM,
+      cornerSegments: SEAT_CORNER_SEGMENTS,
     }),
     createBoundsTemplate({
       id: 'upper-panel',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
       yBoundsMm: createCenteredBounds(upperBackWidthMm),
-      zBoundsMm: [480, 652],
+      zBoundsMm: [BACKREST_UPPER_PANEL_BOTTOM_MM, BACKREST_UPPER_PANEL_TOP_MM],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
-      cornerRadiusMm: seatCornerRadiusMm,
-      cornerSegments: seatCornerSegments,
+      cornerRadiusMm: SEAT_CORNER_RADIUS_MM,
+      cornerSegments: SEAT_CORNER_SEGMENTS,
     }),
     createBoundsTemplate({
       id: 'headrest',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
       yBoundsMm: createCenteredBounds(headrestWidthMm),
-      zBoundsMm: [646, backrestHeightMm],
+      zBoundsMm: [BACKREST_HEADREST_BOTTOM_MM, BACKREST_HEIGHT_MM],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
-      cornerRadiusMm: seatCornerRadiusMm,
-      cornerSegments: seatCornerSegments,
+      cornerRadiusMm: SEAT_CORNER_RADIUS_MM,
+      cornerSegments: SEAT_CORNER_SEGMENTS,
     }),
     createBoundsTemplate({
       id: 'left-shoulder-wing',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
-      yBoundsMm: [upperBackWidthMm / 2 - 24, upperBackWidthMm / 2 + shoulderWingWidthMm - 24],
-      zBoundsMm: [432, 432 + shoulderWingHeightMm],
+      yBoundsMm: [
+        upperBackWidthMm / 2 - SHOULDER_WING_INSET_MM,
+        upperBackWidthMm / 2 + SHOULDER_WING_WIDTH_MM - SHOULDER_WING_INSET_MM,
+      ],
+      zBoundsMm: [SHOULDER_WING_Z_START_MM, SHOULDER_WING_Z_START_MM + SHOULDER_WING_HEIGHT_MM],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
-      cornerRadiusMm: seatCornerRadiusMm,
-      cornerSegments: seatCornerSegments,
+      cornerRadiusMm: SEAT_CORNER_RADIUS_MM,
+      cornerSegments: SEAT_CORNER_SEGMENTS,
     }),
     createBoundsTemplate({
       id: 'right-shoulder-wing',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
-      yBoundsMm: [-upperBackWidthMm / 2 - shoulderWingWidthMm + 24, -upperBackWidthMm / 2 + 24],
-      zBoundsMm: [432, 432 + shoulderWingHeightMm],
+      yBoundsMm: [
+        -upperBackWidthMm / 2 - SHOULDER_WING_WIDTH_MM + SHOULDER_WING_INSET_MM,
+        -upperBackWidthMm / 2 + SHOULDER_WING_INSET_MM,
+      ],
+      zBoundsMm: [SHOULDER_WING_Z_START_MM, SHOULDER_WING_Z_START_MM + SHOULDER_WING_HEIGHT_MM],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
-      cornerRadiusMm: seatCornerRadiusMm,
-      cornerSegments: seatCornerSegments,
+      cornerRadiusMm: SEAT_CORNER_RADIUS_MM,
+      cornerSegments: SEAT_CORNER_SEGMENTS,
     }),
   ];
 

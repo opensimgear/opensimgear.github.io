@@ -1,45 +1,47 @@
+/**
+ * Pedals module – generates 3D mesh specs for the three pedals and the base plate.
+ */
+
 import { Vector3 } from 'three';
 
 import { PEDAL_TRAY_LAYOUT } from '../constants/planner';
 import { BASE_BEAM_HEIGHT_MM } from '../constants/profile';
+import {
+  ACCELERATOR_PEDAL_LENGTH_RATIO,
+  FLOATING_PEDAL_START_RATIO,
+  PEDAL_COLOR,
+  PEDAL_CORNER_RADIUS_MM,
+  PEDAL_CORNER_SEGMENTS,
+  PEDAL_IDS,
+  PEDAL_PLATE_COLOR,
+  PEDAL_PLATE_CORNER_RADIUS_MM,
+  PEDAL_PLATE_CORNER_SEGMENTS,
+  PEDAL_PLATE_MATERIAL,
+  PEDAL_PLATE_THICKNESS_MM,
+  PEDAL_PLASTIC_MATERIAL,
+  PEDAL_THICKNESS_MM,
+  PEDAL_WIDTH_MM,
+} from '../constants/pedals';
 import type { PlannerInput } from '../types';
-import { mm, type MeshSpec } from './shared';
+import { mm, toRad } from './math';
+import type { MeshSpec } from './shared';
 
-const PEDAL_COLOR = '#151a20';
-const PEDAL_PLATE_COLOR = '#404650';
-const PEDAL_PLASTIC_MATERIAL = {
-  metalness: 0.1,
-  roughness: 0.74,
-} as const;
-const PEDAL_PLATE_MATERIAL = {
-  metalness: 0.52,
-  roughness: 0.4,
-} as const;
-const PEDAL_WIDTH_MM = 60;
-const PEDAL_THICKNESS_MM = 8;
-const PEDAL_PLATE_THICKNESS_MM = 3;
-const PEDAL_CORNER_RADIUS_MM = 5;
-const PEDAL_PLATE_CORNER_RADIUS_MM = 3;
-const ACCELERATOR_PEDAL_LENGTH_RATIO = 3 / 4;
-const FLOATING_PEDAL_START_RATIO = 1 / 2;
-const PEDAL_IDS = ['accelerator', 'brake', 'clutch'] as const;
-
-function toRad(value: number) {
-  return (value * Math.PI) / 180;
-}
-
+/** Compute the usable width of the pedal tray after subtracting side-beam spans. */
 function getPedalTrayUsableWidthMm(input: PlannerInput) {
   return Math.max(0, input.baseWidthMm - PEDAL_TRAY_LAYOUT.sideBeamInnerSpanReductionMm);
 }
 
+/** Get the X position of the pedal contact point (bottom of pedal arc). */
 function getPedalBottomXmm(input: PlannerInput) {
   return input.seatBaseDepthMm + input.pedalTrayDistanceMm + input.pedalsDeltaMm;
 }
 
+/** Get the Z position of the pedal contact point (top of the plate + pedal height). */
 function getPedalBottomZmm(input: PlannerInput) {
   return BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + input.pedalsHeightMm;
 }
 
+/** Compute Y center of each pedal from accelerator/brake/clutch deltas. */
 function getPedalCentersYmm(input: PlannerInput) {
   const trayHalfWidthMm = getPedalTrayUsableWidthMm(input) / 2;
   const acceleratorCenterZmm = trayHalfWidthMm - input.pedalAcceleratorDeltaMm - PEDAL_WIDTH_MM / 2;
@@ -49,6 +51,7 @@ function getPedalCentersYmm(input: PlannerInput) {
   return [-acceleratorCenterZmm, -brakeCenterZmm, -clutchCenterZmm] as const;
 }
 
+/** Build mesh specs for all three pedals and the metal base plate. */
 export function createPedalsModule(input: PlannerInput): MeshSpec[] {
   const pedalLeanRad = toRad(input.pedalAngleDeg - 90);
   const pedalDirection = new Vector3(-Math.sin(pedalLeanRad), 0, Math.cos(pedalLeanRad)).normalize();
@@ -77,7 +80,7 @@ export function createPedalsModule(input: PlannerInput): MeshSpec[] {
       metalness: PEDAL_PLASTIC_MATERIAL.metalness,
       roughness: PEDAL_PLASTIC_MATERIAL.roughness,
       cornerRadius: mm(PEDAL_CORNER_RADIUS_MM),
-      cornerSegments: 4,
+      cornerSegments: PEDAL_CORNER_SEGMENTS,
     };
   });
 
@@ -97,7 +100,7 @@ export function createPedalsModule(input: PlannerInput): MeshSpec[] {
       metalness: PEDAL_PLATE_MATERIAL.metalness,
       roughness: PEDAL_PLATE_MATERIAL.roughness,
       cornerRadius: mm(PEDAL_PLATE_CORNER_RADIUS_MM),
-      cornerSegments: 3,
+      cornerSegments: PEDAL_PLATE_CORNER_SEGMENTS,
     },
     ...pedals,
   ];

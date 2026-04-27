@@ -1,3 +1,7 @@
+/**
+ * Monitor module – computes monitor dimensions, FOV geometry, and generates 3D mesh specs.
+ */
+
 import type { PlannerPostureReport } from '../posture/posture-report';
 import type {
   PlannerMonitorAspectRatio,
@@ -5,38 +9,21 @@ import type {
   PlannerPosturePreset,
   PlannerPostureSettings,
 } from '../types';
-import { mm, type MeshSpec } from './shared';
-
-const INCH_TO_MM = 25.4;
-const MONITOR_PLATE_THICKNESS_MM = 3;
-const MONITOR_COLOR = '#050505';
-const MONITOR_CORNER_RADIUS_MM = 4;
-const MONITOR_CURVED_SEGMENT_COUNT = 25;
-const MONITOR_MATERIAL = {
-  metalness: 0.02,
-  roughness: 0.7,
-} as const;
-
-const ASPECT_RATIO_PARTS: Record<PlannerMonitorAspectRatio, readonly [number, number]> = {
-  '16:10': [16, 10],
-  '16:9': [16, 9],
-  '21:9': [21, 9],
-  '32:9': [32, 9],
-  '4:3': [4, 3],
-  '5:4': [5, 4],
-  '3:2': [3, 2],
-};
-const CURVATURE_RADIUS_MM: Record<Exclude<PlannerMonitorCurvature, 'disabled'>, number> = {
-  '5000r': 5000,
-  '4000r': 4000,
-  '3000r': 3000,
-  '2500r': 2500,
-  '2300r': 2300,
-  '1800r': 1800,
-  '1500r': 1500,
-  '1000r': 1000,
-  '800r': 800,
-};
+import {
+  ASPECT_RATIO_PARTS,
+  CURVATURE_RADIUS_MM,
+  INCH_TO_MM,
+  MONITOR_COLOR,
+  MONITOR_CORNER_RADIUS_MM,
+  MONITOR_CORNER_SEGMENTS,
+  MONITOR_CURVED_SEGMENT_COUNT,
+  MONITOR_FOV_MAX_DEG,
+  MONITOR_FOV_MIN_DEG,
+  MONITOR_MATERIAL,
+  MONITOR_PLATE_THICKNESS_MM,
+} from '../constants/monitor';
+import { mm, toRad } from './math';
+import type { MeshSpec } from './shared';
 
 export type MonitorDimensionsMm = {
   widthMm: number;
@@ -48,6 +35,7 @@ export type MonitorScreenEdgePoints = {
   right: [number, number, number];
 };
 
+/** Compute monitor width/height/thickness from screen size and aspect ratio. */
 export function getMonitorDimensionsMm(
   settings: Pick<PlannerPostureSettings<PlannerPosturePreset>, 'monitorAspectRatio' | 'monitorSizeIn'>
 ): MonitorDimensionsMm {
@@ -62,6 +50,7 @@ export function getMonitorDimensionsMm(
   };
 }
 
+/** Resolve the curvature radius in mm, clamped so the arc fits the monitor width. */
 function getCurvatureRadiusMm(curvature: PlannerMonitorCurvature, widthMm: number) {
   if (curvature === 'disabled') {
     return null;
@@ -70,6 +59,7 @@ function getCurvatureRadiusMm(curvature: PlannerMonitorCurvature, widthMm: numbe
   return Math.max(CURVATURE_RADIUS_MM[curvature], widthMm / 2 + MONITOR_PLATE_THICKNESS_MM);
 }
 
+/** Compute the chord geometry needed for FOV calculations. */
 function getMonitorFovGeometryMm(
   settings: Pick<
     PlannerPostureSettings<PlannerPosturePreset>,
@@ -96,6 +86,7 @@ function getMonitorFovGeometryMm(
   };
 }
 
+/** Derive the horizontal FOV (degrees) for a given eye-to-monitor distance. */
 export function getMonitorTargetFovFromDistanceMm(
   distanceMm: number,
   settings: Pick<
@@ -109,6 +100,7 @@ export function getMonitorTargetFovFromDistanceMm(
   return (2 * Math.atan(fovGeometry.chordWidthMm / 2 / safeDistanceMm) * 180) / Math.PI;
 }
 
+/** Solve for the eye-to-monitor distance that yields the target FOV. */
 export function getSolvedMonitorDistanceFromEyesMm(
   settings: Pick<
     PlannerPostureSettings<PlannerPosturePreset>,
@@ -116,12 +108,13 @@ export function getSolvedMonitorDistanceFromEyesMm(
   >
 ) {
   const fovGeometry = getMonitorFovGeometryMm(settings);
-  const targetFovDeg = Math.max(1, Math.min(170, settings.monitorTargetFovDeg));
-  const chordLineDistanceMm = fovGeometry.chordWidthMm / 2 / Math.tan((targetFovDeg * Math.PI) / 360);
+  const targetFovDeg = Math.max(MONITOR_FOV_MIN_DEG, Math.min(MONITOR_FOV_MAX_DEG, settings.monitorTargetFovDeg));
+  const chordLineDistanceMm = fovGeometry.chordWidthMm / 2 / Math.tan(toRad(targetFovDeg / 2));
 
   return chordLineDistanceMm + fovGeometry.chordLineOffsetFromApexMm;
 }
 
+/** Get the left/right screen-edge points in 3D, accounting for curvature. */
 export function getMonitorScreenEdgePoints(
   midpoint: [number, number, number],
   settings: Pick<
@@ -145,6 +138,7 @@ export function getMonitorScreenEdgePoints(
   };
 }
 
+/** Create a single monitor panel mesh spec with standard material. */
 function createMonitorMeshSpec(
   id: string,
   position: [number, number, number],
@@ -161,10 +155,11 @@ function createMonitorMeshSpec(
     metalness: MONITOR_MATERIAL.metalness,
     roughness: MONITOR_MATERIAL.roughness,
     cornerRadius: mm(MONITOR_CORNER_RADIUS_MM),
-    cornerSegments: 3,
+    cornerSegments: MONITOR_CORNER_SEGMENTS,
   };
 }
 
+/** Build monitor mesh specs – flat or curved arc segments depending on curvature. */
 export function createMonitorModule(
   report: PlannerPostureReport,
   settings: PlannerPostureSettings<PlannerPosturePreset>
@@ -176,7 +171,7 @@ export function createMonitorModule(
   }
 
   const dimensions = getMonitorDimensionsMm(settings);
-  const tiltRadians = (settings.monitorTiltDeg * Math.PI) / 180;
+  const tiltRadians = toRad(settings.monitorTiltDeg);
   const curvatureRadiusMm = getCurvatureRadiusMm(settings.monitorCurvature, dimensions.widthMm);
 
   if (curvatureRadiusMm) {

@@ -1,9 +1,16 @@
+/**
+ * Planner dimension defaults, limits, and structural layout constants.
+ */
+
 import type { PlannerInput } from '../types';
 import { HALF_PROFILE_SHORT_MM, PROFILE_SHORT_MM, PROFILE_TALL_MM } from './profile';
 
+/** Step size for planner dimension sliders (mm). */
 export const PLANNER_CONTROL_STEP_MM = 10;
+/** Debounce delay before syncing planner state to URL (ms). */
 export const URL_STATE_DEBOUNCE_MS = 300;
 
+/** Default planner input values representing a typical GT rig. */
 export const DEFAULT_PLANNER_INPUT: PlannerInput = {
   baseLengthMm: 1350,
   baseWidthMm: 580,
@@ -32,6 +39,7 @@ export const DEFAULT_PLANNER_INPUT: PlannerInput = {
   wheelDiameterMm: 320,
 };
 
+/** Hard min/max limits for every planner dimension slider. */
 export const PLANNER_DIMENSION_LIMITS = {
   baseLengthMinMm: 600,
   baseLengthMaxMm: 1400,
@@ -77,22 +85,36 @@ export const PLANNER_DIMENSION_LIMITS = {
   wheelDiameterMaxMm: 350,
 } as const;
 
+/** Derived layout constants for the overall rig frame. */
 export const PLANNER_LAYOUT = {
+  /** Inset from base front for the front cross member (mm). */
   frontCrossMemberInsetMm: PROFILE_TALL_MM,
+  /** Minimum clearance above the base for the steering column crossbeam (mm). */
   steeringColumnClearanceAboveBaseMm: PROFILE_TALL_MM,
+  /** Minimum steering column distance from seat base (mm). */
   steeringColumnDistanceMinMm: PROFILE_TALL_MM,
+  /** Front inset distance for the steering column limit (mm). */
   steeringColumnDistanceFrontInsetMm: 160,
 } as const;
 
+/** Layout offsets for the base module beams. */
 export const BASE_MODULE_LAYOUT = {
+  /** Center offset of each base rail from the outer edge (mm). */
   railCenterOffsetMm: HALF_PROFILE_SHORT_MM,
+  /** X position of the rear cross member center (mm). */
   rearCrossMemberCenterXMm: HALF_PROFILE_SHORT_MM,
+  /** Inset from each end for the seat cross member (mm). */
   seatCrossMemberEndInsetMm: HALF_PROFILE_SHORT_MM,
 } as const;
 
+/** Layout constants for the pedal tray sub-frame. */
 export const PEDAL_TRAY_LAYOUT = {
+  /** Side beam center offset from the outer edge (mm). */
   sideBeamCenterOffsetMm: 60,
+  /** Rear cross member inset from tray edges (mm). */
   rearCrossMemberCenterInsetMm: HALF_PROFILE_SHORT_MM,
+  /** Total inset of cross beams from the tray depth (mm). */
   crossBeamInsetTotalMm: PROFILE_SHORT_MM,
+  /** Total reduction of usable inner span of the tray (mm). */
   sideBeamInnerSpanReductionMm: (60 + HALF_PROFILE_SHORT_MM) * 2,
 } as const;
