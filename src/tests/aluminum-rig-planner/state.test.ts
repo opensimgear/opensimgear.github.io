@@ -19,46 +19,54 @@ describe('aluminum rig planner responsive state', () => {
 
   it('starts all panes collapsed on narrow viewports', () => {
     expect(getAluminumRigPaneExpandedState(true)).toEqual({
+      general: false,
       setup: false,
-      modules: false,
+      posture: false,
       optimizer: false,
     });
   });
 
   it('starts all panes expanded on wide viewports', () => {
     expect(getAluminumRigPaneExpandedState(false)).toEqual({
+      general: true,
       setup: true,
-      modules: true,
+      posture: true,
       optimizer: true,
     });
   });
 
   it('resets pane state when reset flag is true', () => {
     expect(
-      getNextAluminumRigPaneExpandedState({ setup: false, modules: false, optimizer: false }, false, false, true)
-    ).toEqual(
-      getAluminumRigPaneExpandedState(false)
-    );
+      getNextAluminumRigPaneExpandedState(
+        { general: false, setup: false, posture: false, optimizer: false },
+        false,
+        false,
+        true
+      )
+    ).toEqual(getAluminumRigPaneExpandedState(false));
   });
 
   it('resets pane state to mobile defaults when viewport crosses into narrow band', () => {
-    expect(getNextAluminumRigPaneExpandedState({ setup: true, modules: true, optimizer: true }, false, true)).toEqual(
-      getAluminumRigPaneExpandedState(true)
-    );
+    expect(
+      getNextAluminumRigPaneExpandedState({ general: true, setup: true, posture: true, optimizer: true }, false, true)
+    ).toEqual(getAluminumRigPaneExpandedState(true));
   });
 
   it('resets pane state to desktop defaults when viewport crosses into wide band', () => {
     expect(
-      getNextAluminumRigPaneExpandedState({ setup: false, modules: false, optimizer: false }, true, false)
-    ).toEqual(
-      getAluminumRigPaneExpandedState(false)
-    );
+      getNextAluminumRigPaneExpandedState(
+        { general: false, setup: false, posture: false, optimizer: false },
+        true,
+        false
+      )
+    ).toEqual(getAluminumRigPaneExpandedState(false));
   });
 
   it('keeps pane state unchanged on same-band resize without reset', () => {
     const currentPaneExpanded = {
+      general: true,
       setup: false,
-      modules: true,
+      posture: false,
       optimizer: false,
     };
 

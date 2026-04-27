@@ -35,8 +35,8 @@ import { config } from '~/config';
 
 <script is:inline define:vars={{ id: config.googleAnalytics.id }} type="text/plain" data-category="analytics">
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function () {
-    window.dataLayer.push(arguments);
+  window.gtag = function (...args) {
+    window.dataLayer.push(args);
   };
   window.updateConsent = () => {
     window.gtag('consent', 'update', {

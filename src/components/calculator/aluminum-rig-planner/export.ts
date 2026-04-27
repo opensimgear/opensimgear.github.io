@@ -56,9 +56,7 @@ export function buildPlannerPrintDocument({
       `
       : '',
     sections.visualLayout ? renderSection('Visual Cut Layout', 'planner-export-layout', visualLayoutHtml) : '',
-    sections.purchaseSummary
-      ? renderSection('Purchase Summary', 'planner-export-summary', purchaseSummaryHtml)
-      : '',
+    sections.purchaseSummary ? renderSection('Purchase Summary', 'planner-export-summary', purchaseSummaryHtml) : '',
   ].join('');
 
   return `<!doctype html>
@@ -227,7 +225,7 @@ export function buildPlannerPrintDocument({
           window.print();
         });
       });
-    <\/script>
+    </script>
   </body>
 </html>`;
 }

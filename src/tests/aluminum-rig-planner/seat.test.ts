@@ -22,12 +22,12 @@ describe('aluminum rig planner seat module', () => {
 
   function projectOnSeatXAxis(position: [number, number, number], angleDeg: number) {
     const angleRad = (angleDeg * Math.PI) / 180;
-    return position[0] * Math.cos(angleRad) + position[1] * Math.sin(angleRad);
+    return position[0] * Math.cos(angleRad) + position[2] * Math.sin(angleRad);
   }
 
-  function projectOnSeatYAxis(position: [number, number, number], angleDeg: number) {
+  function projectOnSeatZAxis(position: [number, number, number], angleDeg: number) {
     const angleRad = (angleDeg * Math.PI) / 180;
-    return -position[0] * Math.sin(angleRad) + position[1] * Math.cos(angleRad);
+    return -position[0] * Math.sin(angleRad) + position[2] * Math.cos(angleRad);
   }
 
   function getMeshFrontEdge(mesh: MeshSpec, angleDeg: number) {
@@ -41,7 +41,7 @@ describe('aluminum rig planner seat module', () => {
 
   function getMeshTopFrontCornerHeight(mesh: MeshSpec, angleDeg: number) {
     const angleRad = (angleDeg * Math.PI) / 180;
-    return mesh.position[1] + (mesh.size[0] / 2) * Math.sin(angleRad) + (mesh.size[1] / 2) * Math.cos(angleRad);
+    return mesh.position[2] + (mesh.size[0] / 2) * Math.sin(angleRad) + (mesh.size[2] / 2) * Math.cos(angleRad);
   }
 
   it('raises seat geometry by the configured seat height', () => {
@@ -54,7 +54,7 @@ describe('aluminum rig planner seat module', () => {
       seatHeightFromBaseInnerBeamsMm: 100,
     });
 
-    expect(highSeat[1] - lowSeat[1]).toBeCloseTo(0.1);
+    expect(highSeat[2] - lowSeat[2]).toBeCloseTo(0.1);
   });
 
   it('tilts the backrest independently from the seat angle', () => {
@@ -70,7 +70,7 @@ describe('aluminum rig planner seat module', () => {
     });
 
     expect(reclinedHeadrest[0]).toBeLessThan(uprightHeadrest[0]);
-    expect(reclinedHeadrest[1]).toBeLessThan(uprightHeadrest[1]);
+    expect(reclinedHeadrest[2]).toBeLessThan(uprightHeadrest[2]);
   });
 
   it('keeps the seat front anchor fixed in x when seat length changes', () => {
@@ -142,13 +142,13 @@ describe('aluminum rig planner seat module', () => {
     const leftBolster = getMesh('seat-left-bolster');
     const rightBolster = getMesh('seat-right-bolster');
 
-    const baseLeftEdge = baseMain.position[2] - baseMain.size[2] / 2;
-    const baseRightEdge = baseMain.position[2] + baseMain.size[2] / 2;
-    const leftInnerEdge = leftBolster.position[2] + leftBolster.size[2] / 2;
-    const rightInnerEdge = rightBolster.position[2] - rightBolster.size[2] / 2;
+    const baseLeftEdge = baseMain.position[1] + baseMain.size[1] / 2;
+    const baseRightEdge = baseMain.position[1] - baseMain.size[1] / 2;
+    const leftInnerEdge = leftBolster.position[1] - leftBolster.size[1] / 2;
+    const rightInnerEdge = rightBolster.position[1] + rightBolster.size[1] / 2;
 
-    expect(leftInnerEdge).toBeGreaterThanOrEqual(baseLeftEdge);
-    expect(rightInnerEdge).toBeLessThanOrEqual(baseRightEdge);
+    expect(leftInnerEdge).toBeLessThanOrEqual(baseLeftEdge);
+    expect(rightInnerEdge).toBeGreaterThanOrEqual(baseRightEdge);
   });
 
   it('keeps backrest pieces at same thickness', () => {
@@ -184,10 +184,10 @@ describe('aluminum rig planner seat module', () => {
     const upperPanel = getMesh('backrest-upper-panel', input);
     const headrest = getMesh('backrest-headrest', input);
 
-    const lowerTopEdge = projectOnSeatYAxis(lowerPanel.position, backrestAxisDeg) + lowerPanel.size[1] / 2;
-    const upperBottomEdge = projectOnSeatYAxis(upperPanel.position, backrestAxisDeg) - upperPanel.size[1] / 2;
-    const upperTopEdge = projectOnSeatYAxis(upperPanel.position, backrestAxisDeg) + upperPanel.size[1] / 2;
-    const headrestBottomEdge = projectOnSeatYAxis(headrest.position, backrestAxisDeg) - headrest.size[1] / 2;
+    const lowerTopEdge = projectOnSeatZAxis(lowerPanel.position, backrestAxisDeg) + lowerPanel.size[2] / 2;
+    const upperBottomEdge = projectOnSeatZAxis(upperPanel.position, backrestAxisDeg) - upperPanel.size[2] / 2;
+    const upperTopEdge = projectOnSeatZAxis(upperPanel.position, backrestAxisDeg) + upperPanel.size[2] / 2;
+    const headrestBottomEdge = projectOnSeatZAxis(headrest.position, backrestAxisDeg) - headrest.size[2] / 2;
 
     expect(upperBottomEdge).toBeLessThanOrEqual(lowerTopEdge);
     expect(headrestBottomEdge).toBeLessThanOrEqual(upperTopEdge);

@@ -18,6 +18,7 @@ Gather context and inputs for this command.
 - Base branch: $BASE_BRANCH
 
 ### PHASE_1_CHECKPOINT
+
 - [ ] User request understood
 - [ ] Prior artifacts loaded (if any)
 - [ ] Codebase context gathered
@@ -26,11 +27,11 @@ Gather context and inputs for this command.
 
 Do the main work of this command.
 
-[Replace this section with specific instructions for what the AI should do.
-Be precise about which tools to use, what files to examine, and what
-actions to take.]
+[Replace this section with specific instructions for what the AI should do. Be precise about which tools to use, what
+files to examine, and what actions to take.]
 
 ### PHASE_2_CHECKPOINT
+
 - [ ] Main work completed
 - [ ] Changes validated (type-check, lint, tests as appropriate)
 
@@ -39,11 +40,13 @@ actions to take.]
 Write artifacts for downstream steps.
 
 Write your output to `$ARTIFACTS_DIR/output.md` with:
+
 - Summary of what was done
 - Key decisions made
 - Any issues encountered
 
 ### PHASE_3_CHECKPOINT
+
 - [ ] Artifact written to `$ARTIFACTS_DIR/output.md`
 - [ ] Artifact contains actionable information for the next step
 

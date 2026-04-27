@@ -1,14 +1,11 @@
-import {
-  ALUMINUM_RIG_MOBILE_BREAKPOINT,
-  DESKTOP_PANE_EXPANDED_STATE,
-  MOBILE_PANE_EXPANDED_STATE,
-} from './constants';
+import { ALUMINUM_RIG_MOBILE_BREAKPOINT, DESKTOP_PANE_EXPANDED_STATE, MOBILE_PANE_EXPANDED_STATE } from './constants';
 
 export { ALUMINUM_RIG_MOBILE_BREAKPOINT };
 
 export type AluminumRigPaneExpandedState = {
+  general: boolean;
   setup: boolean;
-  modules: boolean;
+  posture: boolean;
   optimizer: boolean;
 };
 

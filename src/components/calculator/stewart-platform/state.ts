@@ -29,8 +29,30 @@ export type StewartPaneExpandedState = {
   constraints: boolean;
 };
 
+export type StewartParameterState = {
+  baseDiameter: number;
+  platformDiameter: number;
+  alphaP: number;
+  alphaB: number;
+  cor: Translation;
+  actuatorMin: number;
+  actuatorMax: number;
+};
+
+const STEWART_LIMITS = {
+  baseDiameter: { min: 0, max: 3 },
+  alpha: { min: 10, max: 360 / 3 - 10 },
+  actuator: { min: 0.1, max: 2 },
+} as const;
+const ACTUATOR_MAX_EXTENSION_MIN_FACTOR = 1.05;
+const ACTUATOR_MAX_EXTENSION_FACTOR = 2 - 0.15;
+
 function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
+}
+
+function hasTranslationChange(current: Translation, next: Translation) {
+  return current.x !== next.x || current.y !== next.y || current.z !== next.z;
 }
 
 export function isNarrowStewartViewport(width: number) {
@@ -80,12 +102,55 @@ export function getStewartGizmoSize(isNarrow: boolean) {
   return isNarrow ? 48 : 64;
 }
 
-export function getStewartStatusPanelClassNames(isNarrow: boolean) {
+export function getStewartStatusPanelClassNames(isNarrow: boolean, isOpen: boolean) {
   if (isNarrow) {
-    return 'absolute inset-x-2 bottom-2 rounded border border-gray-300 bg-white/80 px-2 py-1.5 text-[8px] font-mono backdrop-blur-sm pointer-events-none select-none';
+    const base =
+      'absolute bottom-2 right-2 rounded border border-gray-300 bg-white/80 font-mono backdrop-blur-sm select-none transition-all duration-200';
+
+    if (isOpen) {
+      return `${base} px-2 py-1.5 text-[8px] max-w-[calc(100%-52px)]`;
+    }
+
+    return `${base} px-2 py-1 text-[8px] cursor-pointer`;
   }
 
   return 'absolute bottom-3 right-3 rounded border border-gray-300 bg-white/80 px-3 py-2 text-xs font-mono backdrop-blur-sm pointer-events-none select-none';
+}
+
+export function clampStewartParameterState(state: StewartParameterState): StewartParameterState {
+  const baseDiameter = clamp(state.baseDiameter, STEWART_LIMITS.baseDiameter.min, STEWART_LIMITS.baseDiameter.max);
+  const platformDiameter = clamp(state.platformDiameter, 0, baseDiameter);
+  const alphaP = clamp(state.alphaP, STEWART_LIMITS.alpha.min, STEWART_LIMITS.alpha.max);
+  const alphaB = clamp(state.alphaB, STEWART_LIMITS.alpha.min, STEWART_LIMITS.alpha.max);
+  const actuatorMin = clamp(state.actuatorMin, STEWART_LIMITS.actuator.min, STEWART_LIMITS.actuator.max);
+  const actuatorMax = clamp(
+    state.actuatorMax,
+    getStewartActuatorMaxExtensionMin(actuatorMin),
+    getStewartActuatorMaxExtension(actuatorMin)
+  );
+  const nextCor = {
+    x: clamp(state.cor.x, -platformDiameter, platformDiameter),
+    y: clamp(state.cor.y, -platformDiameter, platformDiameter),
+    z: clamp(state.cor.z, 0, platformDiameter),
+  };
+
+  return {
+    baseDiameter,
+    platformDiameter,
+    alphaP,
+    alphaB,
+    cor: hasTranslationChange(state.cor, nextCor) ? nextCor : state.cor,
+    actuatorMin,
+    actuatorMax,
+  };
+}
+
+export function getStewartActuatorMaxExtensionMin(actuatorMin: number) {
+  return actuatorMin * ACTUATOR_MAX_EXTENSION_MIN_FACTOR;
+}
+
+export function getStewartActuatorMaxExtension(actuatorMin: number) {
+  return actuatorMin * ACTUATOR_MAX_EXTENSION_FACTOR;
 }
 
 export function clampPlatformMovement(
@@ -112,6 +177,25 @@ export function clampPlatformMovement(
     translation: hasPlatformMovementChange(rotation, translation, { rotation, translation: nextTranslation })
       ? nextTranslation
       : translation,
+  };
+}
+
+export function clampStewartPlatformMovement(
+  rotation: Rotation,
+  translation: Translation,
+  spec: PlatformSpec,
+  translationLimit: number
+): PlatformMovement {
+  const movement = clampPlatformMovement(rotation, translation, spec);
+  const nextTranslation = {
+    x: clamp(movement.translation.x, -translationLimit, translationLimit),
+    y: clamp(movement.translation.y, -translationLimit, translationLimit),
+    z: clamp(movement.translation.z, -translationLimit, translationLimit),
+  };
+
+  return {
+    rotation: movement.rotation,
+    translation: hasTranslationChange(movement.translation, nextTranslation) ? nextTranslation : movement.translation,
   };
 }
 

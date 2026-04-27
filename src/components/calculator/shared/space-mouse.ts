@@ -199,17 +199,18 @@ function quaternionToEulerDegrees(quaternion: Quaternion) {
   const euler = new Euler().setFromQuaternion(quaternion, 'XYZ');
   const radiansToDegrees = 180 / Math.PI;
 
-  return [
-    euler.x * radiansToDegrees,
-    euler.y * radiansToDegrees,
-    euler.z * radiansToDegrees,
-  ] as Vector3Tuple;
+  return [euler.x * radiansToDegrees, euler.y * radiansToDegrees, euler.z * radiansToDegrees] as Vector3Tuple;
 }
 
 function poseToMatrix(pose: ThreeSpaceMousePlatformPose, options?: ThreeSpaceMousePlatformAffineOptions) {
   const centerOfRotation = new Vector3(...(options?.centerOfRotation ?? [0, 0, 0]));
   const matrix = new Matrix4().makeRotationFromEuler(
-    new Euler((pose.rotation[0] * Math.PI) / 180, (pose.rotation[1] * Math.PI) / 180, (pose.rotation[2] * Math.PI) / 180, 'XYZ')
+    new Euler(
+      (pose.rotation[0] * Math.PI) / 180,
+      (pose.rotation[1] * Math.PI) / 180,
+      (pose.rotation[2] * Math.PI) / 180,
+      'XYZ'
+    )
   );
   const rotatedCenter = centerOfRotation.clone().applyMatrix4(matrix);
   const position = new Vector3(...pose.translation).add(centerOfRotation).sub(rotatedCenter);
@@ -714,8 +715,7 @@ export class ThreeSpaceMouseBridge {
     }
 
     this.hasSelectionAffineUpdates = true;
-    const nextPose =
-      this.options.platformControl.poseFromAffine?.(data) ?? getSpaceMousePlatformPoseFromAffine(data);
+    const nextPose = this.options.platformControl.poseFromAffine?.(data) ?? getSpaceMousePlatformPoseFromAffine(data);
 
     this.options.platformControl.setPose(nextPose);
   }

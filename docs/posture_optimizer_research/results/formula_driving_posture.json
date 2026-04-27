@@ -1,0 +1,171 @@
+{
+  "name": "Formula Driving Posture",
+  "category": "posture_style",
+  "description": "Research recommended joint angle ranges and cockpit geometry cues for formula-style driving posture. Cover elbows, knees, wrists, neck, feet/ankle posture, and any closely related hip or shoulder constraints needed to interpret them. Include seat recline, wheel reach, pedal reach, and why the style differs from GT-style posture.",
+  "summary": "Formula-style posture is defined by a strongly reclined seat, elevated feet, and a compact control envelope that keeps the driver low for packaging, aerodynamics, and center-of-gravity reasons while preserving precise steering and pedal modulation. The strongest formula-specific evidence comes from Formula SAE cockpit studies and FIA/F1 fitment rules: seat back is typically much more reclined than GT or rally positions, thigh support is elevated, the body-to-leg angle stays around 95-105 degrees, the steering wheel is placed so the upper arm and forearm are about 90 degrees at the static grip, and pedals/heel rest are positioned so the driver can brake with bent knees rather than locked legs. Compared with GT posture, formula posture trades upright visibility and easier ingress for lower H-point, feet above the hip point, tighter shoulder/elbow packaging, and a more 'worn' cockpit fit around pelvis, shoulders, head, knees, and heels.",
+  "key_findings": [
+    "Formula-style seating is much more reclined than GT-style seating. Formula SAE sources place seat back around 25-35 degrees from vertical, with one classic FSAE ergonomics study fixing seat back at 50 degrees from horizontal to lower center of gravity while remaining driveable.",
+    "Lower-body geometry matters as much as upper-body geometry. Formula SAE work recommends a 95-105 degree body-to-leg angle, elevated thigh support around 20-25 degrees, and bent knees for leverage; multiple motorsport and driving ergonomics sources warn against full knee lock at full pedal stroke.",
+    "Steering reach should create an approximately 90 degree upper-arm/forearm relationship at the nominal hand position. One FSAE steering design paper also reports a common wheel-center distance of about 300-450 mm from the driver's chest.",
+    "Formula cockpits require more explicit support surfaces than GT cockpits. FIA seat-fit guidance requires comfortable pelvis, shoulder, and head support, while F1 fitment practice also tunes elbow clearance, knee clearance, pedal-pad geometry, and heel-rest geometry.",
+    "Formula posture differs from GT posture mainly because the driver's feet sit above the H-point and the whole package is constrained by aerodynamics, safety structures, and yaw-center placement rather than cabin comfort alone.",
+    "Primary evidence for exact elbow, wrist, knee, neck, and ankle angle bands in true formula cars is limited. The most defensible approach is to combine formula-specific cockpit geometry sources with broader driving-posture ergonomics literature and mark the most inferred angle bands as uncertain."
+  ],
+  "sources": [
+    {
+      "title": "Formula SAE Race Car Cockpit Design: An Ergonomics Study for the Cockpit (SAE 2000-01-3091)",
+      "organization": "SAE / Lawrence Technological University",
+      "url": "https://www.researchgate.net/publication/268061134_2000-01-3091_Formula_SAE_Race_Car_Cockpit_Design_An_Ergonomics_Study_for_the_Cockpit",
+      "note": "Most useful formula-specific source for seat-back angle, body-to-leg angle, steering-arm relationship, and cockpit hard-point goals."
+    },
+    {
+      "title": "Cockpit Design of a Formula Student Race Car: An Ergonomics Study",
+      "organization": "Springer / ResearchGate mirror",
+      "url": "https://www.researchgate.net/publication/350319123_Cockpit_Design_of_a_Formula_Student_Race_Car_An_Ergonomics_Study",
+      "note": "Provides subject-tested back-seat and thigh-angle findings and confirms approximate 90 degree steering-arm geometry."
+    },
+    {
+      "title": "Designing an Upper Stage Steering System for a Formula FSAE Car",
+      "organization": "Scientific Journal of Silesian University of Technology",
+      "url": "https://www.researchgate.net/publication/356967408_DESIGNING_AN_UPPER_STAGE_STEERING_SYSTEM_FOR_A_FORMULA_FSAE_CAR",
+      "note": "Useful for steering wheel distance from chest and formula-style back-angle references."
+    },
+    {
+      "title": "2022 Formula 1 Technical Regulations - Article 12.8 Driver Fit Information",
+      "organization": "FIA",
+      "url": "https://www.fia.com/sites/default/files/formula_1_-_technical_regulations_-_2022_-_iss_7_-_2021-10-15.pdf",
+      "note": "Shows what F1 treats as key fitment variables: seat geometry, helmet position, steering wheel position, elbow/knee clearance, pedal position, pedal-pad geometry, and heel-rest geometry."
+    },
+    {
+      "title": "FIA Requirements for Driver Fitment in an FIA-Approved Seat",
+      "organization": "FIA",
+      "url": "https://www.fia.com/sites/default/files/racing_nets_installation_specification_v6_0.pdf",
+      "note": "Confirms racing seat must support pelvis, shoulders, and head in the normal racing position."
+    },
+    {
+      "title": "Fitting in - how F1 teams prepare drivers for a new car",
+      "organization": "Motorsport Technology",
+      "url": "https://motorsport.tech/formula-1/how-teams-prepare-new-drivers-for-a-new-car",
+      "note": "High-credibility motorsport engineering source on practical F1 seat-fit workflow, pedal/heel-rest tuning, and cockpit clearance tradeoffs."
+    },
+    {
+      "title": "The positional factors involved in optimising F1 driver performance",
+      "organization": "Autosport",
+      "url": "https://www.autosport.com/f1/news/the-positional-factors-involved-in-optimising-f1-driver-performance/10504370/",
+      "note": "Explains why F1 feet sit above the H-point, why H-point placement relative to yaw center matters, and why pedal travel affects control."
+    },
+    {
+      "title": "Specifying comfortable driving postures for ergonomic design and evaluation of the driver workspace using digital human models",
+      "organization": "Ergonomics journal / ResearchGate mirror",
+      "url": "https://www.researchgate.net/publication/26693016_Specifying_comfortable_driving_postures_for_ergonomic_design_and_evaluation_of_the_driver_workspace_using_digital_human_models",
+      "note": "Best broad driving-ergonomics source for joint-angle definitions and comfort ranges for elbow, wrist, torso, hip, knee, neck, and ankle."
+    },
+    {
+      "title": "Driving and Ergonomics",
+      "organization": "Canadian Centre for Occupational Health and Safety",
+      "url": "https://www.ccohs.ca/oshanswers/ergonomics/driving.pdf",
+      "note": "Credible general driving-ergonomics guidance for steering-wheel distance, head restraint position, and pedal reach."
+    },
+    {
+      "title": "Driving Ergonomics",
+      "organization": "CRE-MSD, University of Waterloo / Ontario MSD Prevention Guideline",
+      "url": "https://www.msdprevention.com/resource-library/driving-ergonomics",
+      "note": "Useful for backrest, steering-wheel, pedal, and head-restraint setup cues."
+    },
+    {
+      "title": "Sitting Like a Racing Driver | Drive Like a Pro",
+      "organization": "Skoda Motorsport",
+      "url": "https://www.skoda-motorsport.com/en/drive-like-pro-sitting-like-racing-driver/",
+      "note": "Useful contrast source explaining why non-formula race cars stay upright and why formula-like lying-down posture is mainly a packaging constraint."
+    }
+  ],
+  "source_quality": "Source quality is mixed but defensible. Strongest sources are FIA regulations/fitment guidance and the SAE/Formula Student ergonomics papers, which are directly relevant to formula-style cockpit packaging. Broader joint-angle ranges come from peer-reviewed driving-ergonomics literature focused on sedans/SUVs rather than formula cars, so those ranges were used as interpretation support rather than copied as direct formula prescriptions. Motorsport Technology and Autosport add high-value engineering context but are secondary journalism rather than standards documents.",
+  "population_scope": "Formula-specific studies mainly cover Formula SAE / Formula Student drivers and design envelopes sized from 5th percentile female to 95th percentile male. Broader joint-angle studies mostly use adult passenger-car drivers in sedan or SUV packages. That means formula-specific geometry cues are credible, but some exact joint-angle ranges need cautious transfer from general driving studies into formula posture interpretation.",
+  "confidence_notes": "Highest confidence: seat recline is much greater than GT; formula feet are elevated relative to the H-point; body-to-leg angle should stay near 95-105 degrees; wheel reach should create about a 90 degree upper-arm/forearm relationship; pedals need bent-knee leverage and a heel rest. Lower confidence: precise static knee, wrist, neck, shoulder, and ankle angle bands for modern formula cockpits, because publicly available formula-specific sources focus more on packaging and fitment than on full joint-angle tables. Fields marked with [uncertain] contain either inferred ranges, sample-specific hard points, or non-formula baseline data adapted for optimizer use.",
+  "stature_normalized_measurements": "[uncertain] Formula-specific sources found here do not provide a robust stature-normalized body-dimension table. For this posture style, it is safer to drive sizing from external anthropometry datasets plus cockpit hard points than to claim formula-specific body ratios from the available literature.",
+  "seated_measurements": {
+    "formula_specific_hard_points": [
+      "A Formula Student mock-up study fixed hip-bottom-center to pedal-height distance at 915 mm and pedal height at 280 mm for its tested package. [uncertain]",
+      "An older FSAE ergonomics study reported an optimal package around 12.5 in (318 mm) from dash to driver H-point, 23 in (584 mm) dash height, 17.5 in (445 mm) steering wheel height, and 25 degrees thigh angle. [uncertain]",
+      "A Formula FSAE steering paper reports the steering wheel is commonly positioned about 300-450 mm from the driver's chest."
+    ],
+    "fitment_references": [
+      "FIA F1 driver-fit information explicitly tracks seat geometry, helmet position, steering wheel position, pedal position, pedal-pad geometry, and heel-rest geometry.",
+      "FIA-approved racing seats must support pelvis, shoulders, and head when the driver is in the normal racing position."
+    ]
+  },
+  "percentile_notes": "[uncertain] Formula SAE and Formula Student sources repeatedly size the cockpit to accommodate approximately 5th percentile female through 95th percentile male drivers. For optimizer defaults, percentile handling should therefore be done by anthropometric scaling around cockpit hard points, not by assuming one fixed 'formula posture' fits all statures.",
+  "driving_style": "Formula-style driving posture is a low, reclined, feet-up posture used in open-wheel and closely related prototype-like cockpits. The driver is effectively packaged into the car: pelvis low, torso reclined, thighs supported, feet elevated, elbows kept compact, and the seat closely moulded around pelvis, shoulders, head, knees, and heels. It differs from GT posture because the car architecture prioritizes low frontal area, aero packaging, and tight safety-cell geometry over the more upright visibility and ingress/egress typical of GT cabins.",
+  "angle_ranges_deg": {
+    "definitions": {
+      "elbow_knee_hip_wrist_ankle": "Included joint angles unless noted otherwise.",
+      "neck_torso": "Relative to vertical unless noted otherwise.",
+      "seat_back": "Reported both from vertical and from horizontal because sources use both conventions.",
+      "thigh_angle": "Seat pan or thigh support angle relative to horizontal / floor reference used by the cited cockpit studies."
+    },
+    "formula_targets": {
+      "seat_back_recline": "Preferred formula-style band: 25-35 degrees from vertical, equivalent to about 55-65 degrees from horizontal. One classic FSAE study fixed seat back at 50 degrees from horizontal.",
+      "thigh_support": "About 20-25 degrees is the strongest subject-supported range in the Formula Student literature; one older FSAE package used 25 degrees and another dataset includes 35 degrees for some packages.",
+      "body_to_leg_or_hip_angle": "95-105 degrees between torso and legs is the clearest formula-specific target from SAE 2000-01-3091.",
+      "elbows": "Target approximately 90 degrees at nominal hand position; practical formula setup band about 85-110 degrees so the shoulders stay supported and steering can be applied without lockout. This is narrower than broad passenger-car comfort ranges because formula steering usually uses smaller steering excursions and a tighter wheel-to-body package.",
+      "knees": "[uncertain] Keep knees bent at full brake and never locked out. A practical formula target is roughly 100-130 degrees at heavy pedal application, with more flexion at rest, derived from formula body-to-leg guidance plus general driving-ergonomics evidence.",
+      "wrists": "[uncertain] Keep wrists near neutral with minimal sustained extension and minimal radial/ulnar deviation. For optimizer scoring, treat more than about 10-15 degrees of extension/flexion as a penalty unless the wheel shape forces brief deviation.",
+      "neck": "[uncertain] Keep neck close to neutral relative to the torso, typically around 0-15 degrees flexion, while the head remains supported by seat/head restraint geometry. Avoid setups that force the chin forward to see over the wheel or dash.",
+      "ankles_and_feet": "[uncertain] At rest and initial modulation, keep the ankle near neutral and heel braced on the heel rest. SAE-compatible reference values are about 80.5-87 degrees depending on foot/shoe definition; for formula scoring, an 85-100 degree included-angle neighborhood is a reasonable neutral-to-ready zone, with controlled plantarflexion added during pedal travel.",
+      "shoulder_constraints": "[uncertain] Shoulders should remain in contact with the seat/back support without shrugging. Use wheel height and reach that keep the humerus close to the torso and preserve elbow clearance to cockpit sides and knees.",
+      "head_support_constraint": "Seat/head restraint should keep the eye line within the head-support bounds and the back of the head very near the restraint surface."
+    },
+    "gt_style_difference": "GT and rally positions are more upright because the cabin allows it and drivers benefit from easier outward visibility and larger steering excursions. Formula posture accepts greater recline and elevated pedals to lower the driver, reduce frontal area, package the monocoque, and keep the hips near the car's yaw-center region."
+  },
+  "cockpit_layout": {
+    "seat_recline_and_support": "Start with helmet/head position and H-point, then build seat shape around pelvis, shoulders, and head. Use seat-back recline around 25-35 degrees from vertical, elevated thigh support around 20-25 degrees, and enough contour/padding that the driver feels 'held' rather than propped up.",
+    "wheel_reach": "Set wheel reach so the nominal driving grip yields about a 90 degree upper-arm/forearm relationship. As a hard-point cue, one Formula FSAE source places wheel center roughly 300-450 mm from the chest. Wheel reach should not require the driver to peel shoulder blades off the seat.",
+    "wheel_height_and_clearance": "Set wheel height so the driver clears knees and cockpit edges at steering lock while keeping the shoulders low and supported. F1 fitment practice treats elbow and knuckle clearance as explicit design variables. If wheel is too low, knees interfere; if too high/far, shoulders shrug and wrists extend.",
+    "pedal_reach": "Set pedals so full brake can be achieved with the whole foot and a still-bent knee, not by toe-pointing with a locked leg. Formula setups tune fore-aft pedal position, pedal-face spacing, and pedal faces/fences for sole placement.",
+    "pedal_height_and_heel_rest": "Formula posture expects elevated pedals and a heel rest. Heel-rest geometry is explicit in FIA F1 fitment rules and F1 seat-fit practice. Use the heel rest to stabilize both feet so ankle motion remains controlled instead of unsupported.",
+    "visibility_and_head_position": "Do not chase extreme recline if it forces the head and neck forward to recover sightlines. Formula Student studies note that changing seat and thigh angle also changes dash-height and forward-visibility tradeoffs.",
+    "why_formula_differs_from_gt": "Formula cars place feet above the H-point, keep the driver lower for aerodynamics and center-of-gravity reasons, and use much tighter safety-cell packaging. GT cars can keep the driver more upright because roofline, cabin volume, and ingress constraints are different."
+  },
+  "adjustment_priorities": [
+    "1. Fix the driver reference frame first: helmet/head position, H-point, and required seat support at pelvis, shoulders, and head.",
+    "2. Set pedal box fore-aft and heel-rest position so the driver can generate maximum brake force with bent knees and a stable heel contact.",
+    "3. Set seat-back recline and thigh support together; do not tune one without rechecking knee clearance, dash visibility, and pedal leverage.",
+    "4. Bring the wheel to the driver: set reach for about 90 degree elbow geometry, then tune height for knee/elbow/knuckle clearance and neutral wrists.",
+    "5. Recheck neck and sightline after wheel changes; if the driver has to crane forward to see, the cockpit is too reclined or the wheel/dash is too high.",
+    "6. Finalize pedal-pad geometry, wheel grips, and padding only after the large geometry is correct."
+  ],
+  "ik_problem_definition": "Estimate a formula-style driving posture from cockpit hard points and anthropometry by solving for a reclined seated human whose pelvis, torso, head, upper limbs, and lower limbs satisfy cockpit contacts, control reach, safety clearances, and posture-style comfort targets.",
+  "inputs": [
+    "Driver anthropometry: stature, sitting height, shoulder breadth, hip breadth, buttock-popliteal length, upper-arm length, forearm-hand length, thigh length, lower-leg length, foot length.",
+    "Cockpit hard points: H-point, seat pan plane, seat-back plane, head support bounds, shoulder support bounds, wheel center and wheel plane, pedal hinge/pad positions, heel-rest geometry, dash and footwell clearance surfaces.",
+    "Style targets: formula recline band, thigh-support band, hip/body-to-leg angle target, elbow target, knee no-lockout rule, neutral-wrist penalty, neck-neutral penalty.",
+    "Vehicle constraints: required sightline, steering-lock clearance, pedal stroke lengths, footwell boundaries, harness anchor envelope if modeled."
+  ],
+  "outputs": [
+    "Joint centers for hips, knees, ankles, shoulders, elbows, wrists, neck, and head.",
+    "Joint angles with explicit definitions and a style-compliance score.",
+    "Clearance metrics for knees, elbows, hands, helmet/head, and feet.",
+    "Contact/support metrics for pelvis, shoulders, head, and heel-rest usage.",
+    "Adjustment suggestions such as move pedals forward, bring wheel closer, increase thigh support, or reduce recline."
+  ],
+  "coordinate_frames": {
+    "vehicle_frame": "Use a right-handed cockpit frame with +X forward, +Y upward, +Z to driver right or left as long as it is consistent.",
+    "seat_reference": "Use H-point / hip joint midpoint as the primary body placement datum.",
+    "control_reference": "Represent wheel center, pedal pad centers, and heel-rest reference points in the same vehicle frame.",
+    "angle_reference": "Store whether each angle is included, relative to vertical, relative to horizontal, or relative to a support plane."
+  },
+  "segment_model": "Use a seated kinematic chain with pelvis -> torso -> neck/head, bilateral shoulder -> elbow -> wrist/hand, and bilateral hip -> knee -> ankle -> foot. Scale segment lengths from anthropometry. Include seat/back/head support contacts and a pedal-foot contact model that can switch between throttle, brake, and clutch if needed.",
+  "equations_or_constraints": [
+    "Forward kinematics from pelvis/H-point to all joint centers using anthropometric segment lengths.",
+    "Equality or soft constraints for hand-to-wheel grip points and foot-to-pedal/heel-rest contacts.",
+    "Soft objective keeping body-to-leg angle near 95-105 degrees for formula mode.",
+    "Soft objective keeping elbow angle near 90 degrees and knees away from lockout.",
+    "Penalty for shoulder lift off the backrest, neck protrusion, large wrist deviation, knee/elbow collisions, and missing heel-rest contact.",
+    "Visibility constraint from eye point to target forward sightline over wheel/dash.",
+    "Optional objective to keep H-point near vehicle yaw-center target if available."
+  ],
+  "solution_method": "Use constrained nonlinear optimization or sequential least squares. Solve large geometry in stages: place pelvis/torso/head from seat surfaces first, solve lower limbs to pedals and heel rest second, solve upper limbs to wheel third, then run a final whole-body optimization with collision and comfort penalties.",
+  "implementation_notes": "Store both exact source-backed ranges and optimizer target bands separately. Formula mode should bias toward recline/elevated feet but still allow a softer sim-rig version when hardware cannot achieve true formula geometry. Treat wheel reach and pedal reach as the highest-sensitivity variables. Use asymmetric right/left lower-limb modeling if brake and throttle geometry differ. Keep uncertainty metadata so UI can show which cues are hard evidence versus inferred defaults.",
+  "optimizer_use": "In the posture optimizer, use formula style as a preset that shifts the search space toward a reclined torso, elevated pedal plane, compact elbow geometry, and strong support/contact requirements. Score harshly for knee lockout at full brake, unsupported shoulders, forward-head compensation for visibility, and large wrist extension caused by wheel placement. Present the user with actionable cockpit moves in this order: pedals and heel rest, seat recline/thigh support, wheel reach, wheel height, then padding/fine support.",
+  "uncertain": ["stature_normalized_measurements", "seated_measurements", "percentile_notes", "angle_ranges_deg"]
+}

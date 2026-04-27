@@ -10,11 +10,11 @@ tableOfContents: false
 
 import ActuatorSizingCalc from '~/components/calculator/actuator-sizing/index.svelte';
 
-:::caution 
-This component is work in progress, if you find a problem open an
-[issue](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=bug_report.md). If you have a
-suggestion on new features or improvements open a
-[feature request](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=feature_request.md).
+:::caution
+This component is experimental, always double check the result!
+
+If you find a problem open an [issue](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=bug_report.md), 
+if you have a suggestion or new ideas open a [feature request](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=feature_request.md). 
 :::
 
 Selecting a motor for a ball-screw linear actuator requires more than matching peak force. The full motion cycle
@@ -24,6 +24,10 @@ whether the rotor inertia is a sensible match for the load.
 This calculator builds that full picture from your motion profile, load, axis orientation, screw geometry, and
 transmission, then evaluates every motor in the database against peak torque, RMS torque, and speed with a configurable
 safety factor.
+
+## Calculator
+
+<ActuatorSizingCalc client:load />
 
 ## How to use
 
@@ -50,10 +54,6 @@ safety factor.
    built-in database — custom entries are saved to browser local storage.
 8. **Sharing** — The full calculator state is encoded in the page URL automatically, so any configuration can be
    bookmarked or shared as a link.
-
-## Calculator
-
-<ActuatorSizingCalc client:load />
 
 ## Engineering notes
 

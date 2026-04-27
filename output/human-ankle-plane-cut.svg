@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="55" font-family="monospace" font-size="30" font-weight="700" fill="#111827">Ankle horizontal plane cut, y=0.1107m</text>
+<text x="40" y="90" font-family="monospace" font-size="20" fill="#374151">Orange = mesh intersection line. Green = exported ankle joint centered in closed area.</text>
+<line x1="249.59" y1="282.85" x2="238.17" y2="286.03" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="238.17" y1="286.03" x2="233.85" y2="285.93" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="206.47" y1="282.14" x2="210.37" y2="282.94" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="210.37" y1="282.94" x2="219.71" y2="284.36" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="210.85" y1="213.74" x2="201.28" y2="220.19" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="201.28" y1="220.19" x2="197.84" y2="222.09" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="210.85" y1="213.74" x2="214.67" y2="213.07" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="271.15" y1="269.43" x2="270.38" y2="270.19" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="270.38" y1="270.19" x2="269.14" y2="271.22" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="283.82" y1="238.82" x2="283.83" y2="238.74" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="269.14" y1="271.22" x2="255.70" y2="280.64" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="185.80" y1="248.74" x2="183.57" y2="252.93" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="183.57" y1="252.93" x2="180.87" y2="260.45" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="180.87" y1="260.45" x2="181.82" y2="263.99" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="181.82" y1="263.99" x2="184.15" y2="271.77" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="259.93" y1="217.07" x2="272.74" y2="225.50" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="272.74" y1="225.50" x2="273.75" y2="226.15" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="244.23" y1="211.86" x2="255.00" y2="215.43" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="255.00" y1="215.43" x2="259.93" y2="217.07" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="283.82" y1="238.82" x2="281.12" y2="255.02" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="197.84" y1="222.09" x2="194.52" y2="230.09" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="194.52" y1="230.09" x2="191.38" y2="235.73" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="249.59" y1="282.85" x2="255.70" y2="280.64" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="219.71" y1="284.36" x2="229.29" y2="284.96" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="229.29" y1="284.96" x2="233.85" y2="285.93" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="227.23" y1="210.63" x2="214.67" y2="213.07" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="185.80" y1="248.74" x2="189.00" y2="241.68" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="189.00" y1="241.68" x2="191.38" y2="235.73" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="283.83" y1="238.74" x2="283.58" y2="238.44" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="273.75" y1="226.15" x2="283.58" y2="238.44" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="281.12" y1="255.02" x2="277.19" y2="260.99" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="277.19" y1="260.99" x2="271.15" y2="269.43" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="244.23" y1="211.86" x2="237.69" y2="211.36" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="237.69" y1="211.36" x2="227.23" y2="210.63" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="184.15" y1="271.77" x2="191.29" y2="277.02" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="191.29" y1="277.02" x2="194.07" y2="278.84" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="194.07" y1="278.84" x2="197.52" y2="279.71" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="197.52" y1="279.71" x2="206.47" y2="282.14" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="249.72" y1="647.31" x2="238.23" y2="644.28" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="238.23" y1="644.28" x2="233.88" y2="644.29" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="219.70" y1="645.71" x2="210.39" y2="647.19" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="210.39" y1="647.19" x2="206.48" y2="647.97" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="197.94" y1="707.95" x2="209.79" y2="715.67" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="209.79" y1="715.67" x2="210.89" y2="716.29" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="210.89" y1="716.29" x2="211.76" y2="716.39" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="211.76" y1="716.39" x2="215.01" y2="717.00" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="271.11" y1="660.66" x2="269.21" y2="658.99" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="255.78" y1="649.51" x2="269.21" y2="658.99" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="180.63" y1="669.62" x2="183.45" y2="677.13" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="183.45" y1="677.13" x2="185.72" y2="681.32" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="184.15" y1="658.51" x2="181.65" y2="666.16" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="181.65" y1="666.16" x2="180.63" y2="669.62" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="273.63" y1="703.88" x2="272.57" y2="704.61" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="272.57" y1="704.61" x2="260.05" y2="713.29" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="260.05" y1="713.29" x2="255.23" y2="714.91" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="255.23" y1="714.91" x2="244.27" y2="718.47" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="281.44" y1="675.00" x2="282.18" y2="679.18" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="282.18" y1="679.18" x2="283.03" y2="691.10" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="191.48" y1="694.34" x2="195.24" y2="702.96" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="195.24" y1="702.96" x2="197.94" y2="707.95" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="255.78" y1="649.51" x2="249.72" y2="647.31" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="233.88" y1="644.29" x2="224.12" y2="644.75" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="224.12" y1="644.75" x2="219.70" y2="645.71" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="227.21" y1="719.37" x2="224.55" y2="718.81" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="224.55" y1="718.81" x2="215.01" y2="717.00" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="185.72" y1="681.32" x2="188.19" y2="687.07" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="188.19" y1="687.07" x2="191.48" y2="694.34" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="283.03" y1="691.10" x2="274.20" y2="703.03" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="274.20" y1="703.03" x2="273.63" y2="703.88" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="271.11" y1="660.66" x2="277.33" y2="668.98" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="277.33" y1="668.98" x2="281.44" y2="675.00" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="244.27" y1="718.47" x2="232.63" y2="719.02" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="232.63" y1="719.02" x2="227.21" y2="719.37" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="194.12" y1="651.37" x2="191.34" y2="653.22" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="191.34" y1="653.22" x2="184.15" y2="658.51" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="206.48" y1="647.97" x2="197.57" y2="650.44" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<line x1="197.57" y1="650.44" x2="194.12" y2="651.37" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+<g><circle cx="231.83" cy="681.83" r="13" fill="#16a34a" stroke="#052e16" stroke-width="3"/><text x="231.83" y="659.83" text-anchor="middle" font-family="monospace" font-size="22" fill="#111827">left ankle</text></g>
+<g><circle cx="232.35" cy="248.28" r="13" fill="#16a34a" stroke="#052e16" stroke-width="3"/><text x="232.35" y="226.28" text-anchor="middle" font-family="monospace" font-size="22" fill="#111827">right ankle</text></g>
+<line x1="80" y1="820" x2="220" y2="820" stroke="#111827" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="80" y1="820" x2="80" y2="680" stroke="#111827" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="230" y="828" font-family="monospace" font-size="20" fill="#111827">+x front</text>
+<text x="45" y="670" font-family="monospace" font-size="20" fill="#111827">+z right</text>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L6,3 z" fill="#111827" /></marker></defs>
+</svg>

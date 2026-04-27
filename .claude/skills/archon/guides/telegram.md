@@ -29,7 +29,8 @@ TELEGRAM_STREAMING_MODE=stream
 
 ## 4. Start the Server
 
-Follow the [Server Setup Guide](server.md) to start the server. The Telegram adapter auto-starts when `TELEGRAM_BOT_TOKEN` is set.
+Follow the [Server Setup Guide](server.md) to start the server. The Telegram adapter auto-starts when
+`TELEGRAM_BOT_TOKEN` is set.
 
 ## 5. Test
 

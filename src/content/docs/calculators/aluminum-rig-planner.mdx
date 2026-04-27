@@ -2,7 +2,9 @@
 title: 8020 Aluminum Rig Planner
 description:
   Plan a 8020 aluminum sim racing rig layout, beam lengths, and module spacing before you buy or cut extrusion.
-tableOfContents: false
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 3
 sidebar:
   order: 0
   label: Aluminum Rig Planner
@@ -12,13 +14,138 @@ import AluminumRigPlanner from '~/components/calculator/aluminum-rig-planner/ind
 
 <style>{`:root { --sl-content-width: 90rem; }`}</style>
 
-:::caution 
-This component is work in progress, if you find a problem open an
-[issue](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=bug_report.md). If you have a
-suggestion on new features or improvements open a
-[feature request](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=feature_request.md).
+:::caution
+This component is experimental, always double check the result!
+
+If you find a problem open an [issue](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=bug_report.md), 
+if you have a suggestion or new ideas open a [feature request](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=feature_request.md). 
 :::
+
+Design your 8020 (or 4040) aluminum sim racing rig right in the browser. Enter your height, pick a driving posture, and
+the planner generates a complete frame layout with an optimized cut list — so you know exactly which extrusion lengths
+to buy and cut before spending a cent.
+
+
 
 ## Planner
 
 <AluminumRigPlanner client:load />
+
+## How to use
+
+The planner is split into a **3D preview** on the left and a **settings panel** on the right (stacked on mobile). Below
+the 3D preview sits the **cut-list optimizer** panel showing the visual bar layout and purchase summary.
+
+Every change you make is saved into the page URL automatically, so you can bookmark or share your current design at any
+time.
+
+### General settings
+
+The **General** pane at the top of the settings panel controls visual options that do not affect the rig geometry
+itself:
+
+- **Finish** — choose between _Black_, _Silver_, or a _Custom_ color for the extrusion profiles shown in the 3D view.
+- **Endcaps** — toggle end-cap rendering on or off. End caps are included in the cut list when visible.
+- **Advanced** — when enabled, a _Posture Target_ folder appears in the Posture pane showing the ergonomic target ranges
+  used by the solver. You can tweak these ranges to fine-tune how the optimizer places your pedals, steering column, and
+  monitor.
+
+### Presets
+
+The **Posture** pane contains a **Preset** dropdown and a **Height** slider.
+
+Presets are pre-configured driving postures based on real motorsport seating positions:
+
+| Preset                 | Description                                                                                                                       |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **GT / GT3 / Touring** | Mid-recline position typical of GT-class cars. The seat tilts ~15 ° with a 105 ° backrest angle. Default preset.                  |
+| **Rally**              | Upright position close to the wheel, with a steep backrest (100 °) and elevated seat. Pedals sit much lower relative to the hips. |
+| **Drift**              | Similar to Rally but slightly more relaxed, matching typical drift-car bucket seats.                                              |
+| **Sports car / Road**  | Road-car driving position with a moderate backrest and lower seat height, longer pedal distance.                                  |
+| **Custom**             | Full manual control — the solver stops overriding rig dimensions so you can set every value by hand.                              |
+
+When you pick one of the four named presets the planner **automatically solves** the steering column distance, base
+length, pedal tray position, and pedal heights to hit the target ergonomic ranges for that posture at your specified
+height. Changing the **Height** slider re-solves the entire layout, so all beams scale proportionally to your body
+measurements.
+
+### Posture optimization
+
+Behind every named preset is a multi-pass numerical solver that:
+
+1. **Seeds** an initial rig layout from anthropometric ratios derived from your height.
+2. **Iterates** through progressively finer step sizes, testing neighbour positions for the steering column base height,
+   steering column distance, pedal tray distance, and brake offset.
+3. **Scores** each candidate against a posture report that measures joint angles (elbow bend, knee bend, ankle bend,
+   foot angle, torso-to-thigh angle) and sight lines (eye to wheel top, eye to monitor midpoint). Each metric has a
+   target range; deviations and out-of-range values are penalized.
+4. **Refines** pedal tray distance to minimize foot-contact error, ensuring the driver's feet properly reach the pedal
+   faces.
+5. **Places** the base frame around the solved pedal tray position, clamping everything to feasible dimension limits.
+
+The result is a layout where joint angles fall within ergonomically comfortable ranges and the driver's body posture
+correctly matches the chosen motorsport discipline.
+
+If you enable the **Advanced** toggle in the General pane, a **Posture Target** folder appears where you can adjust the
+acceptable min/max ranges for each metric (elbow bend, knee bend, etc.). Narrowing or widening these ranges changes the
+solver's search targets; clicking the **Optimize** button on the 3D view re-runs the solver with your custom ranges.
+
+### Custom mode
+
+Selecting the _Custom_ preset — or manually editing any rig dimension while a named preset is active — switches the
+planner to **Custom** mode. In this mode:
+
+- The solver **stops overriding** dimensions. Every slider is fully unlocked.
+- You can modify each module independently via the **Rig Settings** pane, which is organized into folders:
+  - **Base** — overall frame length, width, seat base depth, and inner beam spacing (the two longitudinal rails the seat
+    mounts to).
+  - **Seat** — seat pan height, forward/backward position offset, seat pan length, seat angle, and backrest angle.
+  - **Steering Column** — column height, distance from the seat, and base height.
+  - **Wheel** — steering wheel diameter, tilt angle, vertical offset, and horizontal offset from the column top.
+  - **Pedal Tray** — tray depth and distance from the seat.
+  - **Pedals** — individual pedal length, angle, height, horizontal offset, and per-pedal side offsets (accelerator,
+    brake, clutch).
+  - **Monitor** — display size, aspect ratio, curvature, tilt, target FOV, and resulting distance from the driver's
+    eyes. The monitor height from the rig base can also be set manually.
+- Each folder has a **Reset** button that restores those values to the solver's defaults for the current height.
+- Switching back to a named preset re-runs the solver and overwrites Custom values.
+
+### Cut list & optimizer
+
+Below the 3D preview the **Cut Optimizer Panel** shows two views:
+
+1. **Visual Cut Layout** — a bar diagram showing exactly which pieces are cut from each purchased stock bar. Hovering a
+   row in the cut list highlights the corresponding beams in the 3D view (and vice versa). Each bar displays its profile
+   type (80×40 or 40×40), pieces with labelled lengths, kerf gaps, and any leftover waste.
+
+2. **Purchase Summary** — a table listing how many bars of each stock length to buy, their material cost, shipping cost,
+   total weight, and grand total.
+
+The **Cutlist Optimizer** pane in the settings panel controls how the optimizer assigns pieces to stock bars:
+
+| Setting           | Description                                                                                                                                  |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Optimize Mode** | _Waste_ minimizes total leftover material. _Cost_ minimizes the purchase price (useful when stock lengths have different per-meter pricing). |
+| **Currency**      | _Auto_ (detects from your browser locale), _Euro_, or _Dollar_.                                                                              |
+| **Blade Kerf**    | Width of material removed by each saw cut (defaults to 2.5 mm).                                                                              |
+| **Safety Margin** | Extra length added to every piece as a cutting tolerance buffer.                                                                             |
+| **Shipping**      | Choose between a _Flat_ shipping fee or a _Per kg_ rate.                                                                                     |
+
+Inside the **Stock Configuration** folder you define the available stock lengths and their prices — separately for 80×40
+and 40×40 profiles. By default, 1 m and 2 m options are provided for each profile. Use the **Add stock length** button
+to add more options, or remove lengths you cannot source. The optimizer considers all defined stock options and picks
+the combination that best matches your chosen optimization mode.
+
+### Exporting the plan
+
+The Cut Optimizer Panel contains an **Export** button. Clicking it opens a menu where you can select which sections to
+include:
+
+- **3D Image** — a snapshot of the current 3D view.
+- **Visual Cut Layout** — the bar diagram.
+- **Purchase Summary** — the cost table.
+
+Selecting at least one section and confirming opens a new browser tab with a print-ready HTML document. Use your
+browser's **Print → Save as PDF** (or Ctrl/Cmd+P) to save or print the plan. The exported document includes your current
+rig dimensions, cut assignments, and cost breakdown — everything a metal supplier or workshop needs to prepare your
+order.

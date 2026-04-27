@@ -1,6 +1,5 @@
 export type PlannerVisibleModules = {
-  pedalTray: boolean;
-  steeringColumn: boolean;
+  monitor: boolean;
 };
 
 export type CutListProfileType = '40x40' | '80x40';
@@ -8,6 +7,74 @@ export type PlannerOptimizerMode = 'cost' | 'waste';
 export type ShippingMode = 'flat' | 'per-kg';
 export type PlannerCurrencyMode = 'auto' | 'eur' | 'usd';
 export type PlannerCurrencyCode = 'EUR' | 'USD';
+export type PlannerPosturePreset = 'gt' | 'rally' | 'drift' | 'road' | 'custom';
+export type PlannerSolvablePosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
+export type PlannerPostureTargetKey =
+  | 'wristBend'
+  | 'elbowBend'
+  | 'kneeBend'
+  | 'torsoToThigh'
+  | 'ankleBend'
+  | 'footToToeBend'
+  | 'brakeAlignment'
+  | 'eyeToWheelTop'
+  | 'eyeToMonitorMidpoint';
+export type PlannerPostureTargetRange = {
+  min: number;
+  max: number;
+};
+export type PlannerPostureTargetRanges = Record<PlannerPostureTargetKey, PlannerPostureTargetRange>;
+export type PlannerPostureTargetRangesByPreset = Record<PlannerPosturePreset, PlannerPostureTargetRanges>;
+export type PlannerMonitorAspectRatio = '16:10' | '16:9' | '21:9' | '32:9' | '4:3' | '5:4' | '3:2';
+export type PlannerMonitorCurvature =
+  | 'disabled'
+  | '5000r'
+  | '4000r'
+  | '3000r'
+  | '2500r'
+  | '2300r'
+  | '1800r'
+  | '1500r'
+  | '1000r'
+  | '800r';
+
+export type PlannerAnthropometryRatios = {
+  sittingHeight: number;
+  seatedShoulderHeight: number;
+  hipBreadth: number;
+  shoulderBreadth: number;
+  upperArmLength: number;
+  forearmHandLength: number;
+  thighLength: number;
+  lowerLegLength: number;
+  footLength: number;
+};
+
+export type PlannerAnthropometryLengthsMm = Record<keyof PlannerAnthropometryRatios, number>;
+
+export type PlannerPostureModelMetrics = {
+  anthropometryRatios: PlannerAnthropometryRatios;
+  eyeCenterForwardFromHip: number;
+  eyeCenterHeightFromHip: number;
+  eyeCenterSittingHeight: number;
+  heelLengthShare: number;
+};
+
+export type PlannerPostureSettings<Preset extends PlannerPosturePreset = PlannerSolvablePosturePreset> = {
+  preset: Preset;
+  advanced: boolean;
+  heightCm: number;
+  showModel: boolean;
+  showSkeleton: boolean;
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset;
+  monitorSizeIn: number;
+  monitorAspectRatio: PlannerMonitorAspectRatio;
+  monitorCurvature: PlannerMonitorCurvature;
+  monitorTiltDeg: number;
+  monitorTargetFovDeg: number;
+  monitorDistanceFromEyesMm: number;
+  monitorHeightFromBaseMm: number;
+};
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;
 
@@ -108,7 +175,18 @@ export interface PlannerInput {
   backrestAngleDeg: number;
   pedalTrayDepthMm: number;
   pedalTrayDistanceMm: number;
+  pedalsHeightMm: number;
+  pedalsDeltaMm: number;
+  pedalAngleDeg: number;
+  pedalLengthMm: number;
+  pedalAcceleratorDeltaMm: number;
+  pedalBrakeDeltaMm: number;
+  pedalClutchDeltaMm: number;
   steeringColumnDistanceMm: number;
   steeringColumnBaseHeightMm: number;
   steeringColumnHeightMm: number;
+  wheelHeightOffsetMm: number;
+  wheelAngleDeg: number;
+  wheelDistanceFromSteeringColumnMm: number;
+  wheelDiameterMm: number;
 }

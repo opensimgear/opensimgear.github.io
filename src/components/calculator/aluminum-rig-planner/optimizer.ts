@@ -31,14 +31,12 @@ type SearchContext = {
   stockOptions: PlannerStockOption[];
   settings: PlannerOptimizationSettings;
   profileType: CutListProfileType;
-  best:
-    | {
-        purchasedLengthMm: number;
-        cost: number;
-        barCount: number;
-        bars: PlannerPurchasedBar[];
-      }
-    | null;
+  best: {
+    purchasedLengthMm: number;
+    cost: number;
+    barCount: number;
+    bars: PlannerPurchasedBar[];
+  } | null;
 };
 
 function comparePieces(a: PlannerCutPiece, b: PlannerCutPiece) {
@@ -200,7 +198,10 @@ function shouldPrune(
     mode === 'cost'
       ? [candidate.cost, candidate.purchasedLengthMm, candidate.barCount]
       : [candidate.purchasedLengthMm, candidate.cost, candidate.barCount];
-  const bestTuple = mode === 'cost' ? [best.cost, best.purchasedLengthMm, best.barCount] : [best.purchasedLengthMm, best.cost, best.barCount];
+  const bestTuple =
+    mode === 'cost'
+      ? [best.cost, best.purchasedLengthMm, best.barCount]
+      : [best.purchasedLengthMm, best.cost, best.barCount];
 
   for (let index = 0; index < candidateTuple.length; index += 1) {
     if (candidateTuple[index] < bestTuple[index]) {
@@ -215,7 +216,13 @@ function shouldPrune(
   return true;
 }
 
-function solveProfile(context: SearchContext, bars: MutableBar[], index: number, purchasedLengthMm: number, cost: number) {
+function solveProfile(
+  context: SearchContext,
+  bars: MutableBar[],
+  index: number,
+  purchasedLengthMm: number,
+  cost: number
+) {
   if (
     shouldPrune(
       context.settings.mode,
@@ -415,9 +422,7 @@ export function createPlannerOptimizationResult(
   const totalKerfMm = profiles.reduce((sum, profile) => sum + profile.totalKerfMm, 0);
   const totalMassKg = profiles.reduce((sum, profile) => sum + profile.totalMassKg, 0);
   const materialCost = profiles.reduce((sum, profile) => {
-    return (
-      sum + profile.purchasedBars.reduce((barSum, bar) => barSum + bar.stockCost, 0)
-    );
+    return sum + profile.purchasedBars.reduce((barSum, bar) => barSum + bar.stockCost, 0);
   }, 0);
   const shippingCostFromBars = profiles.reduce(
     (sum, profile) => sum + profile.purchasedBars.reduce((barSum, bar) => barSum + bar.shippingCost, 0),
@@ -431,7 +436,8 @@ export function createPlannerOptimizationResult(
       : shippingCostFromBars;
   const totalCost = materialCost + shippingCost;
   const barCount = profiles.reduce((sum, profile) => sum + profile.purchasedBars.length, 0);
-  const status = missingProfiles.length > 0 ? 'missing-stock-options' : infeasibleProfiles.length > 0 ? 'infeasible' : 'ready';
+  const status =
+    missingProfiles.length > 0 ? 'missing-stock-options' : infeasibleProfiles.length > 0 ? 'infeasible' : 'ready';
 
   return {
     status,

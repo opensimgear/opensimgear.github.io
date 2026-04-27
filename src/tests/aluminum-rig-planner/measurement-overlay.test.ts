@@ -8,13 +8,13 @@ describe('aluminum rig planner measurement overlay', () => {
     const overlay = createPlannerMeasurementOverlay(DEFAULT_PLANNER_INPUT, 'pedalTrayDistanceMm');
 
     expect(overlay.start[0]).toBeCloseTo(DEFAULT_PLANNER_INPUT.seatBaseDepthMm / 1000);
-    expect(overlay.start[1]).toBeCloseTo(0.15);
-    expect(overlay.start[2]).toBeCloseTo(0);
+    expect(overlay.start[1]).toBeCloseTo(0);
+    expect(overlay.start[2]).toBeCloseTo(0.15);
     expect(overlay.end[0]).toBeCloseTo(
       (DEFAULT_PLANNER_INPUT.seatBaseDepthMm + DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm) / 1000
     );
-    expect(overlay.end[1]).toBeCloseTo(0.15);
-    expect(overlay.end[2]).toBeCloseTo(0);
+    expect(overlay.end[1]).toBeCloseTo(0);
+    expect(overlay.end[2]).toBeCloseTo(0.15);
   });
 
   it('keeps pedal tray distance arrow anchored to inner cross beam when seat moves', () => {
@@ -33,13 +33,13 @@ describe('aluminum rig planner measurement overlay', () => {
     const overlay = createPlannerMeasurementOverlay(DEFAULT_PLANNER_INPUT, 'steeringColumnDistanceMm');
 
     expect(overlay.start[0]).toBeCloseTo(DEFAULT_PLANNER_INPUT.seatBaseDepthMm / 1000);
-    expect(overlay.start[1]).toBeCloseTo(0.17);
-    expect(overlay.start[2]).toBeCloseTo(0);
+    expect(overlay.start[1]).toBeCloseTo(0);
+    expect(overlay.start[2]).toBeCloseTo(0.17);
     expect(overlay.end[0]).toBeCloseTo(
       (DEFAULT_PLANNER_INPUT.seatBaseDepthMm + DEFAULT_PLANNER_INPUT.steeringColumnDistanceMm) / 1000
     );
-    expect(overlay.end[1]).toBeCloseTo(0.17);
-    expect(overlay.end[2]).toBeCloseTo(0);
+    expect(overlay.end[1]).toBeCloseTo(0);
+    expect(overlay.end[2]).toBeCloseTo(0.17);
   });
 
   it('keeps steering column distance arrow anchored to inner cross beam when seat moves', () => {

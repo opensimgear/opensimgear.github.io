@@ -10,12 +10,23 @@ import StewartPlatform from '~/components/calculator/stewart-platform/index.svel
 
 <style>{`:root { --sl-content-width: 90rem; }`}</style>
 
+:::caution
+This component is experimental, always double check the result!
+
+If you find a problem open an [issue](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=bug_report.md), 
+if you have a suggestion or new ideas open a [feature request](https://github.com/opensimgear/opensimgear.github.io/issues/new?template=feature_request.md). 
+:::
+
 A [Stewart platform](https://en.wikipedia.org/wiki/Stewart_platform) is a 6-DOF parallel mechanism used in motion
 simulators. Six actuators connect a fixed base to a moving platform, allowing independent control of pitch, roll, yaw,
 surge, sway, and heave.
 
 This calculator lets you configure the geometry and actuator stroke of your platform, then shows the resulting range of
 motion and lets you preview any pose in 3D.
+
+## Calculator
+
+<StewartPlatform client:load />
 
 ## How to use
 
@@ -28,7 +39,3 @@ motion and lets you preview any pose in 3D.
    update live as you change parameters.
 4. **Movement** — Use the rotation and translation sliders to preview any pose. Sliders are clamped to the computed
    limits so you can't exceed what the actuators allow.
-
-## Calculator
-
-<StewartPlatform client:load />

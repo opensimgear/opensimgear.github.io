@@ -2,7 +2,8 @@
 
 Shared setup for all non-CLI platforms (Telegram, Slack, Discord, GitHub). Run the CLI setup first.
 
-**Important**: The server runs from the **archon repo root** — not the target repo. The `.env` file should already exist there (created in Step 4 of the setup wizard).
+**Important**: The server runs from the **archon repo root** — not the target repo. The `.env` file should already exist
+there (created in Step 4 of the setup wizard).
 
 ## 1. Verify `.env`
 
@@ -13,6 +14,7 @@ ls -la <archon-repo>/.env
 ```
 
 If it doesn't exist yet:
+
 ```bash
 cd <archon-repo> && cp .env.example .env
 ```
@@ -50,6 +52,7 @@ psql $DATABASE_URL < migrations/001_initial_schema.sql
 For persistent operation, choose one:
 
 **tmux/screen:**
+
 ```bash
 tmux new -s archon
 cd <archon-repo> && bun run dev
@@ -57,16 +60,17 @@ cd <archon-repo> && bun run dev
 ```
 
 **Docker (production):**
+
 ```bash
 cd <archon-repo> && docker-compose --profile with-db up -d --build
 ```
 
-**systemd (Linux):**
-Create a service file at `/etc/systemd/system/archon.service` pointing to `bun run start`.
+**systemd (Linux):** Create a service file at `/etc/systemd/system/archon.service` pointing to `bun run start`.
 
 ## Important Notes
 
 - Only use **one instance** at a time per set of platform tokens — running multiple instances causes token conflicts.
 - The server must be running for Telegram, Slack, Discord, and GitHub platforms to work.
 - CLI workflows work independently and do not require the server.
-- **Configuration**: `~/.archon/config.yaml` is auto-created on first run with sensible defaults. Environment variables in `.env` override matching config values (e.g., `TELEGRAM_STREAMING_MODE` overrides `streaming.telegram`).
+- **Configuration**: `~/.archon/config.yaml` is auto-created on first run with sensible defaults. Environment variables
+  in `.env` override matching config values (e.g., `TELEGRAM_STREAMING_MODE` overrides `streaming.telegram`).

@@ -1,11 +1,20 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
   DEFAULT_PLANNER_INPUT,
+  MONITOR_ASPECT_RATIO_OPTIONS,
+  MONITOR_CURVATURE_OPTIONS,
   PLANNER_DIMENSION_LIMITS,
+  PLANNER_POSTURE_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { getSteeringColumnDistanceMaxMm } from '../../components/calculator/aluminum-rig-planner/geometry';
+import {
+  getMonitorTargetFovFromDistanceMm,
+  getSolvedMonitorDistanceFromEyesMm,
+} from '../../components/calculator/aluminum-rig-planner/modules/monitor';
+import { getPlannerPostureTargetRangeControlLimits } from '../../components/calculator/aluminum-rig-planner/posture-targets';
 import { mergePlannerQueryState } from '../../components/calculator/aluminum-rig-planner/query-state';
 
 describe('aluminum rig planner query state', () => {
@@ -19,6 +28,7 @@ describe('aluminum rig planner query state', () => {
       backrestAngleDeg: 20,
       pedalTrayDepthMm: 120,
       pedalTrayDistanceMm: -50,
+      pedalLengthMm: 999,
       steeringColumnDistanceMm: 1200,
       steeringColumnBaseHeightMm: 900,
       steeringColumnHeightMm: 120,
@@ -29,9 +39,10 @@ describe('aluminum rig planner query state', () => {
     expect(state.plannerInput.seatDeltaMm).toBe(PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm);
     expect(state.plannerInput.seatHeightFromBaseInnerBeamsMm).toBe(0);
     expect(state.plannerInput.seatAngleDeg).toBe(45);
-    expect(state.plannerInput.backrestAngleDeg).toBe(45);
+    expect(state.plannerInput.backrestAngleDeg).toBe(PLANNER_DIMENSION_LIMITS.backrestAngleDegMin);
     expect(state.plannerInput.pedalTrayDepthMm).toBe(300);
-    expect(state.plannerInput.pedalTrayDistanceMm).toBe(150);
+    expect(state.plannerInput.pedalTrayDistanceMm).toBe(0);
+    expect(state.plannerInput.pedalLengthMm).toBe(PLANNER_DIMENSION_LIMITS.pedalLengthMaxMm);
     expect(state.plannerInput.steeringColumnDistanceMm).toBe(getSteeringColumnDistanceMaxMm(state.plannerInput));
     expect(state.plannerInput.steeringColumnBaseHeightMm).toBe(300);
     expect(state.plannerInput.steeringColumnHeightMm).toBe(380);
@@ -121,6 +132,16 @@ describe('aluminum rig planner query state', () => {
     expect(state.optimizationSettings.stockOptions[1].id).toMatch(/^planner-stock-option-/);
   });
 
+  it.each(['cost', 'waste'] as const)('preserves %s optimizer mode from shared-link state', (mode) => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      optimizer: {
+        mode,
+      },
+    });
+
+    expect(state.optimizationSettings.mode).toBe(mode);
+  });
+
   it('preserves decimal blade thickness values within allowed range', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       optimizer: {
@@ -149,5 +170,116 @@ describe('aluminum rig planner query state', () => {
       profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
       stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({ ...option })),
     });
+  });
+
+  it('sanitizes posture settings from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        preset: 'rally',
+        advanced: true,
+        heightCm: 260,
+        showModel: false,
+        showSkeleton: true,
+      },
+    });
+
+    expect(state.postureSettings.preset).toBe('rally');
+    expect(state.postureSettings.advanced).toBe(true);
+    expect(state.postureSettings.heightCm).toBe(220);
+    expect(state.postureSettings.showModel).toBe(false);
+    expect(state.postureSettings.showSkeleton).toBe(true);
+  });
+
+  it('sanitizes posture target ranges per preset from shared-link state', () => {
+    const wristLimits = getPlannerPostureTargetRangeControlLimits('rally', 'wristBend');
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        targetRangesByPreset: {
+          rally: {
+            wristBend: { min: 999, max: -999 },
+          },
+        },
+      },
+    });
+
+    expect(state.postureSettings.targetRangesByPreset.rally.wristBend).toEqual(wristLimits);
+    expect(state.postureSettings.targetRangesByPreset.gt.wristBend).toEqual(
+      DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset.gt.wristBend
+    );
+    expect(state.postureSettings.targetRangesByPreset.rally).not.toBe(state.postureSettings.targetRangesByPreset.gt);
+  });
+
+  it('sanitizes custom preset and monitor module values from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        preset: 'custom',
+        monitorSizeIn: 999,
+        monitorAspectRatio: 'bogus',
+        monitorCurvature: 'banana',
+        monitorTiltDeg: 99,
+        monitorTargetFovDeg: 999,
+        monitorDistanceFromEyesMm: Number.POSITIVE_INFINITY,
+        monitorHeightFromBaseMm: -100,
+      },
+    });
+
+    expect(state.postureSettings.preset).toBe('custom');
+    expect(state.postureSettings.monitorSizeIn).toBe(PLANNER_POSTURE_LIMITS.monitorSizeMaxIn);
+    expect(state.postureSettings.monitorAspectRatio).toBe(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorAspectRatio);
+    expect(state.postureSettings.monitorCurvature).toBe(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorCurvature);
+    expect(state.postureSettings.monitorTiltDeg).toBe(PLANNER_POSTURE_LIMITS.monitorTiltMaxDeg);
+    expect(state.postureSettings.monitorTargetFovDeg).toBe(PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg);
+    expect(state.postureSettings.monitorDistanceFromEyesMm).toBeCloseTo(
+      getSolvedMonitorDistanceFromEyesMm(state.postureSettings),
+      6
+    );
+    expect(state.postureSettings.monitorHeightFromBaseMm).toBe(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm);
+    expect(
+      MONITOR_ASPECT_RATIO_OPTIONS.some((option) => option.value === state.postureSettings.monitorAspectRatio)
+    ).toBe(true);
+    expect(MONITOR_CURVATURE_OPTIONS.some((option) => option.value === state.postureSettings.monitorCurvature)).toBe(
+      true
+    );
+  });
+
+  it('migrates old monitor midpoint shared-link fields to the new monitor module shape', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorMidpointXMm: 1400,
+        monitorMidpointYMm: 900,
+      },
+    });
+
+    expect(state.postureSettings.monitorDistanceFromEyesMm).toBeGreaterThan(0);
+    expect(state.postureSettings.monitorDistanceFromEyesMm).not.toBe(
+      DEFAULT_PLANNER_POSTURE_SETTINGS.monitorDistanceFromEyesMm
+    );
+    expect(state.postureSettings.monitorHeightFromBaseMm).toBe(820);
+  });
+
+  it('migrates legacy curved monitor distance using chord-line FOV geometry', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorCurvature: '5000r',
+        monitorDistanceFromEyesMm: 600,
+      },
+    });
+
+    expect(state.postureSettings.monitorTargetFovDeg).toBeCloseTo(
+      getMonitorTargetFovFromDistanceMm(600, state.postureSettings),
+      6
+    );
+  });
+
+  it('uses z-up monitor midpoint height when present in shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorMidpointXMm: 1400,
+        monitorMidpointYMm: 9999,
+        monitorMidpointZMm: 900,
+      },
+    });
+
+    expect(state.postureSettings.monitorHeightFromBaseMm).toBe(820);
   });
 });

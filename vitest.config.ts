@@ -20,6 +20,12 @@ const { svelte } = await import(pathToFileURL(sveltePluginModulePath).href);
 
 export default defineConfig({
   plugins: [svelte()],
+  assetsInclude: ['**/*.glb'],
+  resolve: {
+    alias: {
+      '~': path.resolve(import.meta.dirname ?? '.', 'src'),
+    },
+  },
   test: {
     include: ['src/tests/**/*.test.ts'],
     environment: 'node',

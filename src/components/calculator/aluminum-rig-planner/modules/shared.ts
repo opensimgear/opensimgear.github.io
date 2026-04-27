@@ -27,7 +27,7 @@ export type MeshSpec = {
   rotation?: [number, number, number];
   axis?: BeamAxis;
   profileType?: ProfileType;
-  shape?: 'beam' | 'endcap';
+  shape?: 'beam' | 'endcap' | 'torus' | 'cylinder';
   openEnds?: OpenBeamEnd[];
   materialKind?: 'metal' | 'plastic';
   color: string;
@@ -35,6 +35,13 @@ export type MeshSpec = {
   roughness?: number;
   cornerRadius?: number;
   cornerSegments?: number;
+  torusRadius?: number;
+  torusTubeRadius?: number;
+  torusRadialSegments?: number;
+  torusTubularSegments?: number;
+  cylinderRadiusTop?: number;
+  cylinderRadiusBottom?: number;
+  cylinderRadialSegments?: number;
 };
 
 export const MM_TO_METERS = MM_TO_METERS_VALUE;
@@ -194,6 +201,6 @@ export function createCutListRow(profileType: CutListProfileType, lengthMm: numb
   };
 }
 
-export function centeredZ(zMm: number, totalWidthMm: number) {
-  return mm(zMm - totalWidthMm / 2);
+export function centeredY(distanceFromLeftMm: number, totalWidthMm: number) {
+  return mm(totalWidthMm / 2 - distanceFromLeftMm);
 }

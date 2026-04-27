@@ -3,7 +3,7 @@ import { BASE_MODULE_LAYOUT, BASE_PROFILE_MATERIAL } from '../constants';
 import {
   BASE_BEAM_HEIGHT,
   BASE_BEAM_WIDTH,
-  centeredZ,
+  centeredY,
   createCutListRow,
   mm,
   metersToRoundedMm,
@@ -15,20 +15,23 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
   const baseCenterX = mm(input.baseLengthMm / 2);
   const rearCrossBeamCenterX = mm(BASE_MODULE_LAYOUT.rearCrossMemberCenterXMm);
   const seatCrossBeamCenterX = mm(
-    Math.max(BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm, input.seatBaseDepthMm - BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm)
+    Math.max(
+      BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm,
+      input.seatBaseDepthMm - BASE_MODULE_LAYOUT.seatCrossMemberEndInsetMm
+    )
   );
   const innerBeamCenterX = mm(input.seatBaseDepthMm / 2);
   const innerBeamLength = mm(input.seatBaseDepthMm);
   const railCenterOffsetMm = BASE_MODULE_LAYOUT.railCenterOffsetMm;
-  const baseCenterZ = centeredZ(input.baseWidthMm / 2, input.baseWidthMm);
+  const baseCenterY = centeredY(input.baseWidthMm / 2, input.baseWidthMm);
   const innerBeamOffsetMm = input.baseInnerBeamSpacingMm / 2;
   const baseCrossBeamLength = mm(input.baseWidthMm) - BASE_BEAM_WIDTH * 2;
 
   return [
     {
       id: 'left-rail',
-      size: [mm(input.baseLengthMm), BASE_BEAM_HEIGHT, BASE_BEAM_WIDTH] as [number, number, number],
-      position: [baseCenterX, BASE_BEAM_HEIGHT / 2, centeredZ(railCenterOffsetMm, input.baseWidthMm)] as [
+      size: [mm(input.baseLengthMm), BASE_BEAM_WIDTH, BASE_BEAM_HEIGHT] as [number, number, number],
+      position: [baseCenterX, centeredY(railCenterOffsetMm, input.baseWidthMm), BASE_BEAM_HEIGHT / 2] as [
         number,
         number,
         number,
@@ -41,12 +44,12 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
     },
     {
       id: 'right-rail',
-      size: [mm(input.baseLengthMm), BASE_BEAM_HEIGHT, BASE_BEAM_WIDTH] as [number, number, number],
-      position: [baseCenterX, BASE_BEAM_HEIGHT / 2, centeredZ(input.baseWidthMm - railCenterOffsetMm, input.baseWidthMm)] as [
-        number,
-        number,
-        number,
-      ],
+      size: [mm(input.baseLengthMm), BASE_BEAM_WIDTH, BASE_BEAM_HEIGHT] as [number, number, number],
+      position: [
+        baseCenterX,
+        centeredY(input.baseWidthMm - railCenterOffsetMm, input.baseWidthMm),
+        BASE_BEAM_HEIGHT / 2,
+      ] as [number, number, number],
       profileType: 'alu80x40',
       openEnds: ['negative', 'positive'],
       color: profileColor,
@@ -55,8 +58,8 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
     },
     {
       id: 'rear-cross-member',
-      size: [PROFILE_SHORT, BASE_BEAM_HEIGHT, baseCrossBeamLength] as [number, number, number],
-      position: [rearCrossBeamCenterX, BASE_BEAM_HEIGHT / 2, baseCenterZ] as [number, number, number],
+      size: [PROFILE_SHORT, baseCrossBeamLength, BASE_BEAM_HEIGHT] as [number, number, number],
+      position: [rearCrossBeamCenterX, baseCenterY, BASE_BEAM_HEIGHT / 2] as [number, number, number],
       profileType: 'alu80x40',
       color: profileColor,
       metalness: BASE_PROFILE_MATERIAL.metalness,
@@ -64,8 +67,8 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
     },
     {
       id: 'seat-cross-member',
-      size: [PROFILE_SHORT, BASE_BEAM_HEIGHT, baseCrossBeamLength] as [number, number, number],
-      position: [seatCrossBeamCenterX, BASE_BEAM_HEIGHT / 2, baseCenterZ] as [number, number, number],
+      size: [PROFILE_SHORT, baseCrossBeamLength, BASE_BEAM_HEIGHT] as [number, number, number],
+      position: [seatCrossBeamCenterX, baseCenterY, BASE_BEAM_HEIGHT / 2] as [number, number, number],
       profileType: 'alu80x40',
       color: profileColor,
       metalness: BASE_PROFILE_MATERIAL.metalness,
@@ -76,13 +79,9 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
       size: [innerBeamLength, PROFILE_SHORT, PROFILE_SHORT] as [number, number, number],
       position: [
         innerBeamCenterX,
+        centeredY(input.baseWidthMm / 2 - innerBeamOffsetMm, input.baseWidthMm),
         BASE_BEAM_HEIGHT + PROFILE_SHORT / 2,
-        centeredZ(input.baseWidthMm / 2 - innerBeamOffsetMm, input.baseWidthMm),
-      ] as [
-        number,
-        number,
-        number,
-      ],
+      ] as [number, number, number],
       profileType: 'alu40x40',
       openEnds: ['negative', 'positive'],
       color: profileColor,
@@ -94,13 +93,9 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
       size: [innerBeamLength, PROFILE_SHORT, PROFILE_SHORT] as [number, number, number],
       position: [
         innerBeamCenterX,
+        centeredY(input.baseWidthMm / 2 + innerBeamOffsetMm, input.baseWidthMm),
         BASE_BEAM_HEIGHT + PROFILE_SHORT / 2,
-        centeredZ(input.baseWidthMm / 2 + innerBeamOffsetMm, input.baseWidthMm),
-      ] as [
-        number,
-        number,
-        number,
-      ],
+      ] as [number, number, number],
       profileType: 'alu40x40',
       openEnds: ['negative', 'positive'],
       color: profileColor,

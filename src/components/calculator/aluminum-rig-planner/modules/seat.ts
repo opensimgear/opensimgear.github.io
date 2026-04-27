@@ -65,7 +65,7 @@ function rotateLocalPoint([x, y, z]: [number, number, number], angleRad: number)
   const cos = Math.cos(angleRad);
   const sin = Math.sin(angleRad);
 
-  return [x * cos - y * sin, x * sin + y * cos, z];
+  return [x * cos - z * sin, y, x * sin + z * cos];
 }
 
 function createSeatParts(
@@ -85,7 +85,7 @@ function createSeatParts(
         number,
       ],
       size: template.size,
-      rotation: [0, 0, baseRotationRad + toRad(template.localRotationZDeg ?? 0)] as [number, number, number],
+      rotation: [0, -(baseRotationRad + toRad(template.localRotationZDeg ?? 0)), 0] as [number, number, number],
       materialKind: 'plastic',
       color: template.color,
       metalness: template.metalness,
@@ -120,8 +120,8 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
   );
   const seatFrontAnchorXmm = seatCrossMemberCenterXmm + HALF_PROFILE_SHORT_MM + input.seatDeltaMm;
   const seatRearPivotXmm = seatFrontAnchorXmm - Math.cos(seatAngleRad) * seatFrontAnchorLocalXmm;
-  const seatRearPivotYmm = BASE_BEAM_HEIGHT_MM + PROFILE_SHORT_MM + input.seatHeightFromBaseInnerBeamsMm;
-  const seatPivot: [number, number, number] = [mm(seatRearPivotXmm), mm(seatRearPivotYmm), 0];
+  const seatRearPivotZmm = BASE_BEAM_HEIGHT_MM + PROFILE_SHORT_MM + input.seatHeightFromBaseInnerBeamsMm;
+  const seatPivot: [number, number, number] = [mm(seatRearPivotXmm), 0, mm(seatRearPivotZmm)];
 
   const backrestThicknessMm = 54;
   const backrestHeightMm = 760;
@@ -139,8 +139,8 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
       id: 'base-main',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: [0, seatBaseEndMm],
-      yBoundsMm: [0, seatBaseThicknessMm],
-      zBoundsMm: createCenteredBounds(innerSeatWidthMm),
+      yBoundsMm: createCenteredBounds(innerSeatWidthMm),
+      zBoundsMm: [0, seatBaseThicknessMm],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
       cornerRadiusMm: seatCornerRadiusMm,
@@ -150,8 +150,8 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
       id: 'left-bolster',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: [seatSideBolsterStartMm, seatSideBolsterEndMm],
-      yBoundsMm: [0, seatSideBolsterHeightMm],
-      zBoundsMm: [-outerSeatWidthMm / 2, -outerSeatWidthMm / 2 + seatSideBolsterWidthMm],
+      yBoundsMm: [outerSeatWidthMm / 2 - seatSideBolsterWidthMm, outerSeatWidthMm / 2],
+      zBoundsMm: [0, seatSideBolsterHeightMm],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
       cornerRadiusMm: seatCornerRadiusMm,
@@ -161,8 +161,8 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
       id: 'right-bolster',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: [seatSideBolsterStartMm, seatSideBolsterEndMm],
-      yBoundsMm: [0, seatSideBolsterHeightMm],
-      zBoundsMm: [outerSeatWidthMm / 2 - seatSideBolsterWidthMm, outerSeatWidthMm / 2],
+      yBoundsMm: [-outerSeatWidthMm / 2, -outerSeatWidthMm / 2 + seatSideBolsterWidthMm],
+      zBoundsMm: [0, seatSideBolsterHeightMm],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
       cornerRadiusMm: seatCornerRadiusMm,
@@ -175,8 +175,8 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
       id: 'lower-panel',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
-      yBoundsMm: [0, 486],
-      zBoundsMm: createCenteredBounds(lowerBackWidthMm),
+      yBoundsMm: createCenteredBounds(lowerBackWidthMm),
+      zBoundsMm: [0, 486],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
       cornerRadiusMm: seatCornerRadiusMm,
@@ -186,8 +186,8 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
       id: 'upper-panel',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
-      yBoundsMm: [480, 652],
-      zBoundsMm: createCenteredBounds(upperBackWidthMm),
+      yBoundsMm: createCenteredBounds(upperBackWidthMm),
+      zBoundsMm: [480, 652],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
       cornerRadiusMm: seatCornerRadiusMm,
@@ -197,8 +197,8 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
       id: 'headrest',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
-      yBoundsMm: [646, backrestHeightMm],
-      zBoundsMm: createCenteredBounds(headrestWidthMm),
+      yBoundsMm: createCenteredBounds(headrestWidthMm),
+      zBoundsMm: [646, backrestHeightMm],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
       cornerRadiusMm: seatCornerRadiusMm,
@@ -208,8 +208,8 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
       id: 'left-shoulder-wing',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
-      yBoundsMm: [432, 432 + shoulderWingHeightMm],
-      zBoundsMm: [-upperBackWidthMm / 2 - shoulderWingWidthMm + 24, -upperBackWidthMm / 2 + 24],
+      yBoundsMm: [upperBackWidthMm / 2 - 24, upperBackWidthMm / 2 + shoulderWingWidthMm - 24],
+      zBoundsMm: [432, 432 + shoulderWingHeightMm],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
       cornerRadiusMm: seatCornerRadiusMm,
@@ -219,8 +219,8 @@ export function createSeatModule(input: PlannerInput): MeshSpec[] {
       id: 'right-shoulder-wing',
       color: UPHOLSTERY_COLOR,
       xBoundsMm: backrestXBoundsMm,
-      yBoundsMm: [432, 432 + shoulderWingHeightMm],
-      zBoundsMm: [upperBackWidthMm / 2 - 24, upperBackWidthMm / 2 + shoulderWingWidthMm - 24],
+      yBoundsMm: [-upperBackWidthMm / 2 - shoulderWingWidthMm + 24, -upperBackWidthMm / 2 + 24],
+      zBoundsMm: [432, 432 + shoulderWingHeightMm],
       metalness: UPHOLSTERY_MATERIAL.metalness,
       roughness: UPHOLSTERY_MATERIAL.roughness,
       cornerRadiusMm: seatCornerRadiusMm,

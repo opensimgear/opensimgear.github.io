@@ -46,7 +46,8 @@ DISCORD_STREAMING_MODE=batch
 
 ## 6. Start the Server
 
-Follow the [Server Setup Guide](server.md) to start the server. The Discord adapter auto-starts when `DISCORD_BOT_TOKEN` is set.
+Follow the [Server Setup Guide](server.md) to start the server. The Discord adapter auto-starts when `DISCORD_BOT_TOKEN`
+is set.
 
 ## 7. Test
 

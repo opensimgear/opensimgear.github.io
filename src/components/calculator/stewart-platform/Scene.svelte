@@ -51,6 +51,8 @@
 
   let lastValidTransformedPointsP: Vector3[] = [];
   let lastValidTransformedCor: Vector3 = new Vector3();
+  let lastValidPose: ThreeSpaceMousePlatformPose | null = null;
+  let invalidPoseSyncScheduled = false;
   let legStatuses: LegStatus[] = Array(6).fill('ok');
   let perspectiveCameraRef: PerspectiveCamera | null = null;
   let orthographicCameraRef: OrthographicCamera | null = null;
@@ -79,6 +81,31 @@
   let transformedCor: Vector3;
   $: controlsTarget = savedView?.target ?? ([0, 0, platformHeight] as [number, number, number]);
   let orthographicArgs: [number, number, number, number, number, number] = [-1, 1, 1, -1, 0.1, 20];
+
+  function getCurrentPlatformPose(): ThreeSpaceMousePlatformPose {
+    return {
+      rotation: [platformRotation.x, platformRotation.y, platformRotation.z],
+      translation: [platformTranslation.x, platformTranslation.y, platformTranslation.z],
+    };
+  }
+
+  function clonePlatformPose(pose: ThreeSpaceMousePlatformPose): ThreeSpaceMousePlatformPose {
+    return {
+      rotation: [...pose.rotation] as [number, number, number],
+      translation: [...pose.translation] as [number, number, number],
+    };
+  }
+
+  function arePlatformPosesEqual(a: ThreeSpaceMousePlatformPose, b: ThreeSpaceMousePlatformPose) {
+    return (
+      a.rotation[0] === b.rotation[0] &&
+      a.rotation[1] === b.rotation[1] &&
+      a.rotation[2] === b.rotation[2] &&
+      a.translation[0] === b.translation[0] &&
+      a.translation[1] === b.translation[1] &&
+      a.translation[2] === b.translation[2]
+    );
+  }
 
   $: centerOfRotation = centerOfRotationRelative.clone().add(new Vector3(0, 0, platformHeight));
   $: {
@@ -152,6 +179,7 @@
       return 'ok';
     });
 
+    const currentPose = getCurrentPlatformPose();
     const valid = lastValidTransformedPointsP.length === 0 || candidateStatuses.every((s) => s === 'ok');
 
     if (valid) {
@@ -159,9 +187,20 @@
       transformedCor = candidateCor;
       lastValidTransformedPointsP = candidatePointsP;
       lastValidTransformedCor = candidateCor;
+      lastValidPose = clonePlatformPose(currentPose);
     } else {
       transformedPointsP = lastValidTransformedPointsP;
       transformedCor = lastValidTransformedCor;
+
+      if (lastValidPose && onPlatformPoseChange && !invalidPoseSyncScheduled && !arePlatformPosesEqual(currentPose, lastValidPose)) {
+        invalidPoseSyncScheduled = true;
+        const poseToRestore = clonePlatformPose(lastValidPose);
+
+        queueMicrotask(() => {
+          invalidPoseSyncScheduled = false;
+          onPlatformPoseChange?.(poseToRestore);
+        });
+      }
     }
 
     legStatuses = candidateStatuses;

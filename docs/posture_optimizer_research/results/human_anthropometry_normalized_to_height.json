@@ -1,0 +1,217 @@
+{
+  "name": "Human Anthropometry Normalized To Height",
+  "category": "anthropometry",
+  "description": "Collect average seated cockpit-relevant adult body measurements and express them as stature ratios where possible, prioritizing seated driving posture and rig-fitting dimensions.",
+  "summary": "Best-supported cockpit-fit ratios for a sex-balanced U.S.-adult reference cluster around: sitting height 0.53 stature, seated eye height 0.46, seated shoulder height 0.35, hip/seat breadth 0.22, shoulder breadth 0.23, buttock-popliteal length 0.29, buttock-knee length 0.35, popliteal height 0.25, functional reach 0.46, forearm-hand length about 0.27, upper-arm length 0.22, thigh length 0.23, and foot length 0.15. Evidence is strongest for U.S. civilian anthropometry, but several needed cockpit dimensions come from older surveys or secondary ergonomics compilations, so cross-source harmonization matters.",
+  "key_findings": [
+    "Seated torso stack is stable across cited U.S. sources: sitting height is about 0.526 of stature, seated eye height about 0.455, and seated shoulder height about 0.345.",
+    "Lower-body driving-fit anchors are also fairly stable: popliteal height is about 0.251 of stature, buttock-knee length about 0.348, buttock-popliteal length about 0.292, and thigh/upper-leg length about 0.232.",
+    "Breadth dimensions relevant to cockpit width cluster near 0.22 of stature: hip breadth/seat breadth about 0.215 to 0.217 and shoulder breadth (biacromial) about 0.225.",
+    "Reach chain values useful for wheel and control placement are about 0.459 of stature for functional forward reach, about 0.269 for elbow-to-fingertip forearm-hand length, and about 0.222 for upper-arm length.",
+    "Foot length averages about 0.153 of stature in the U.S. civilian reference table used here, useful for pedal box envelope checks.",
+    "Population limits matter: most seated dimensions come from older U.S. civilian samples or an ergonomics compilation for adults age 20-60; newer NHANES data improve arm and thigh segment estimates but do not supply all seated cockpit dimensions."
+  ],
+  "sources": [
+    {
+      "title": "Weight, Height, and Selected Body Dimensions of Adults: United States, 1960-1962",
+      "organization": "National Center for Health Statistics, Centers for Disease Control and Prevention",
+      "url": "https://www.cdc.gov/nchs/data/series/sr_11/sr11_008.pdf",
+      "note": "Primary U.S. civilian adult anthropometry. Used for sitting height, popliteal height, buttock-knee length, buttock-popliteal length, elbow-to-elbow breadth, and seat breadth."
+    },
+    {
+      "title": "Skinfolds, Body Girths, Biacromial Diameter, and Selected Anthropometric Indices of Adults, United States, 1960-1962",
+      "organization": "National Center for Health Statistics, Centers for Disease Control and Prevention",
+      "url": "https://www.cdc.gov/nchs/data/series/sr_11/sr11_035acc.pdf",
+      "note": "Primary U.S. civilian adult anthropometry. Used for shoulder breadth (biacromial diameter) and direct sitting-height-to-stature and biacromial-to-stature ratios."
+    },
+    {
+      "title": "Anthropometric Reference Data for Children and Adults: United States, 2011-2014",
+      "organization": "National Center for Health Statistics, Centers for Disease Control and Prevention",
+      "url": "https://www.cdc.gov/nchs/data/series/sr_03/sr03_039.pdf",
+      "note": "Primary NHANES reference. Used for current adult stature, upper-arm length, and upper-leg length means by sex. Pregnant females excluded from female adult tables."
+    },
+    {
+      "title": "Anthropometry and Biomechanics in VDT Applications",
+      "organization": "National Academies Press / NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK216490/?report=printable",
+      "note": "Credible ergonomics compilation of U.S. civilian adult body dimensions for ages 20-60, reprinting Kroemer (1981). Used for seated eye height, seated shoulder height, functional reach, elbow-fingertip length, hip breadth, buttock-knee length, popliteal height, and foot length."
+    },
+    {
+      "title": "Anthropometric Reference Data for Children and Adults: United States, August 2021-August 2023",
+      "organization": "National Center for Health Statistics, Centers for Disease Control and Prevention",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK620758/?report=printable",
+      "note": "Recent NHANES appendix used as a recency check for upper-leg-length continuity; confirms female and male upper-leg means remain close to 2011-2014 values."
+    }
+  ],
+  "source_quality": "Source quality strong overall for U.S. civilian anthropometry because core values come from NCHS/CDC primary surveys. Weakest area is seated cockpit-specific measurements not retained in recent NHANES releases, forcing use of older 1960-1962 NCHS tables and one respected ergonomics compilation for ages 20-60. Cross-source consistency is reasonably good for overlapping dimensions such as stature, sitting height ratio, popliteal height, and breadth ratios.",
+  "population_scope": "Primary population is U.S. civilian, noninstitutionalized adults. CDC 1960-1962 seated-dimension tables cover ages 18-79; NHANES 2011-2014 segment-length tables cover adults age 20 and over; the VDT ergonomics table covers U.S. civilians ages 20-60 and reports female and male 5th, 50th, and 95th percentiles. Results are not global norms, not motorsport-driver-specific, and not directly representative of children, adolescents, or highly trained athletic populations.",
+  "confidence_notes": "Most top-level ratios are medium-to-high confidence. Marked [uncertain] values reflect one of three issues: older-source dependence, proxy definitions, or cross-source harmonization. Lower-leg length is especially [uncertain] because available seated surveys give popliteal or knee height rather than a clean tibia/fibula segment length. Forearm-hand length uses elbow-to-fingertip as the nearest ergonomics measure. Hip breadth and shoulder breadth come from different source eras and measurement labels (hip breadth sitting, seat breadth, biacromial breadth), so pooled ratios are useful for packaging but not exact anatomical equivalence.",
+  "stature_normalized_measurements": [
+    {
+      "dimension": "Sitting height",
+      "definition": "Vertical seat-to-head height in erect sitting posture.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.53,
+      "male_mean_ratio": 0.522,
+      "pooled_reference_ratio": 0.526,
+      "absolute_means": "Female 85.0 cm; male 90.6 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications"
+    },
+    {
+      "dimension": "Seated eye height",
+      "definition": "Vertical seat-to-eye height in sitting posture.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.457,
+      "male_mean_ratio": 0.453,
+      "pooled_reference_ratio": 0.455,
+      "absolute_means": "Female 73.3 cm; male 78.6 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications"
+    },
+    {
+      "dimension": "Seated shoulder height",
+      "definition": "Vertical seat-to-acromion height in sitting posture.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.347,
+      "male_mean_ratio": 0.342,
+      "pooled_reference_ratio": 0.345,
+      "absolute_means": "Female 55.7 cm; male 59.4 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications"
+    },
+    {
+      "dimension": "Hip breadth / seat breadth [uncertain]",
+      "definition": "Transverse seated width at hips or buttocks; harmonized from hip breadth sitting and seat breadth.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.227,
+      "male_mean_ratio": 0.204,
+      "pooled_reference_ratio": 0.216,
+      "absolute_means": "Hip breadth sitting: female 36.4 cm, male 35.4 cm. Seat breadth: female 36.6 cm, male 35.6 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications; Weight, Height, and Selected Body Dimensions of Adults"
+    },
+    {
+      "dimension": "Shoulder breadth (biacromial)",
+      "definition": "Skeletal shoulder breadth across acromial landmarks.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.221,
+      "male_mean_ratio": 0.229,
+      "pooled_reference_ratio": 0.225,
+      "absolute_means": "Female 13.9 in (35.3 cm); male 15.6 in (39.6 cm).",
+      "source_ref": "Skinfolds, Body Girths, Biacromial Diameter, and Selected Anthropometric Indices of Adults"
+    },
+    {
+      "dimension": "Buttock-popliteal length",
+      "definition": "Horizontal seat reference from buttock/backboard to back of lower leg at popliteal region.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.3,
+      "male_mean_ratio": 0.284,
+      "pooled_reference_ratio": 0.292,
+      "absolute_means": "Female 18.9 in (48.0 cm); male 19.4 in (49.3 cm).",
+      "source_ref": "Weight, Height, and Selected Body Dimensions of Adults"
+    },
+    {
+      "dimension": "Buttock-knee length",
+      "definition": "Horizontal buttock-to-patella length in sitting.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.355,
+      "male_mean_ratio": 0.342,
+      "pooled_reference_ratio": 0.348,
+      "absolute_means": "Female 56.9 cm; male 59.4 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications"
+    },
+    {
+      "dimension": "Popliteal height",
+      "definition": "Vertical seat-to-popliteal underside height in sitting; key seat-height proxy.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.248,
+      "male_mean_ratio": 0.255,
+      "pooled_reference_ratio": 0.251,
+      "absolute_means": "Female 39.8 cm; male 44.2 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications"
+    },
+    {
+      "dimension": "Functional arm reach",
+      "definition": "Forward functional reach from seated/working posture reference, used for control placement.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.442,
+      "male_mean_ratio": 0.475,
+      "pooled_reference_ratio": 0.459,
+      "absolute_means": "Female 71.0 cm; male 82.5 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications"
+    },
+    {
+      "dimension": "Forearm-hand length [uncertain]",
+      "definition": "Approximated with elbow-to-fingertip length, the closest reported ergonomics measure.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.262,
+      "male_mean_ratio": 0.276,
+      "pooled_reference_ratio": 0.269,
+      "absolute_means": "Female 42.1 cm; male 47.9 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications"
+    },
+    {
+      "dimension": "Upper-arm length",
+      "definition": "Acromion to elbow segment length.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.222,
+      "male_mean_ratio": 0.223,
+      "pooled_reference_ratio": 0.222,
+      "absolute_means": "Female 35.9 cm; male 39.1 cm.",
+      "source_ref": "Anthropometric Reference Data for Children and Adults: United States, 2011-2014"
+    },
+    {
+      "dimension": "Thigh length",
+      "definition": "Approximated with NHANES upper-leg length.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.229,
+      "male_mean_ratio": 0.234,
+      "pooled_reference_ratio": 0.232,
+      "absolute_means": "Female 37.1 cm; male 41.2 cm.",
+      "source_ref": "Anthropometric Reference Data for Children and Adults: United States, 2011-2014"
+    },
+    {
+      "dimension": "Lower-leg length [uncertain]",
+      "definition": "No clean primary-segment tibial length found in the cited adult U.S. sources; popliteal height is the nearest seated packaging proxy.",
+      "units": "ratio of stature",
+      "female_mean_ratio": "[uncertain] 0.248",
+      "male_mean_ratio": "[uncertain] 0.255",
+      "pooled_reference_ratio": "[uncertain] 0.251",
+      "absolute_means": "[uncertain] Proxy uses popliteal height: female 39.8 cm; male 44.2 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications"
+    },
+    {
+      "dimension": "Foot length",
+      "definition": "Heel-to-toe foot length.",
+      "units": "ratio of stature",
+      "female_mean_ratio": 0.15,
+      "male_mean_ratio": 0.155,
+      "pooled_reference_ratio": 0.153,
+      "absolute_means": "Female 24.1 cm; male 26.9 cm.",
+      "source_ref": "Anthropometry and Biomechanics in VDT Applications"
+    }
+  ],
+  "seated_measurements": {
+    "recommended_sex_balanced_reference_set": {
+      "sitting_height_ratio": 0.526,
+      "seated_eye_height_ratio": 0.455,
+      "seated_shoulder_height_ratio": 0.345,
+      "hip_or_seat_breadth_ratio": 0.216,
+      "shoulder_breadth_ratio": 0.225,
+      "buttock_popliteal_length_ratio": 0.292,
+      "buttock_knee_length_ratio": 0.348,
+      "popliteal_height_ratio": 0.251,
+      "functional_arm_reach_ratio": 0.459,
+      "forearm_hand_length_ratio": "[uncertain] 0.269",
+      "upper_arm_length_ratio": 0.222,
+      "thigh_length_ratio": 0.232,
+      "lower_leg_length_ratio": "[uncertain] 0.251",
+      "foot_length_ratio": 0.153
+    },
+    "seat_and_pedal_packaging_notes": [
+      "Seat pan depth should usually key off buttock-popliteal length, not buttock-knee length, to avoid front-edge pressure behind the knee.",
+      "Seat height and pedal vertical relationship should key off popliteal height plus shoe and pedal geometry, not raw lower-leg proxy alone.",
+      "Wheel and side-console reach should start from functional reach, then be reduced for comfortable sustained driving posture rather than maximum reach."
+    ]
+  },
+  "percentile_notes": "Means above are useful for default posture seeds, but cockpit design should not target only averages. Packaging usually needs percentile ranges: clearances and widths often size to larger users, while reaches and control effort often size to smaller users. The cited VDT and CDC tables provide 5th, 50th, and 95th percentile values by sex for many dimensions; those percentiles should be retained for later optimizer bounds rather than collapsed to means only.",
+  "optimizer_use": "Use pooled reference ratios as default segment-scaling priors when user stature is known but full anthropometry is not. Keep sex-specific ratios available as alternate priors. For fit scoring, compare cockpit hard points against buttock-popliteal, popliteal height, buttock-knee, seated eye height, and functional reach first; these most directly drive seat depth, seat height, pedal distance, eyepoint, and wheel/control placement. Mark lower-leg and forearm-hand calculations as weaker-prior channels until cleaner segment-length data are added.",
+  "uncertain": ["stature_normalized_measurements", "seated_measurements", "confidence_notes"]
+}

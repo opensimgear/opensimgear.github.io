@@ -1,25 +1,11 @@
-import {
-  Box3,
-  BufferAttribute,
-  BufferGeometry,
-  Euler,
-  Quaternion,
-  Sphere,
-  Vector3,
-} from 'three';
+import { Box3, BufferAttribute, BufferGeometry, Euler, Quaternion, Sphere, Vector3 } from 'three';
 
 import alu40x40BeamAssetUrl from './generated/alu40x40-beam.bin?url';
 import alu80x40BeamAssetUrl from './generated/alu80x40-beam.bin?url';
 import alu40x40EndcapAssetUrl from './generated/alu40x40-endcap.bin?url';
 import alu80x40EndcapAssetUrl from './generated/alu80x40-endcap.bin?url';
 import { PROFILE_GEOMETRY_ASSET } from '../constants';
-import {
-  getAxisLength,
-  getBeamAxis,
-  type MeshSpec,
-  type BeamAxis,
-  type ProfileType,
-} from './shared';
+import { getAxisLength, getBeamAxis, type MeshSpec, type BeamAxis, type ProfileType } from './shared';
 type Vector3Tuple = [number, number, number];
 type RotationTuple = [number, number, number];
 type GeometryAssetKey = 'alu40x40-beam' | 'alu80x40-beam' | 'alu40x40-endcap' | 'alu80x40-endcap';
@@ -55,8 +41,8 @@ const prebuiltGeometryLoadPromises = new Map<GeometryAssetKey, Promise<void>>();
 function getTargetCrossSectionSize(axis: BeamAxis, size: [number, number, number]) {
   if (axis === 'x') {
     return {
-      targetWidth: size[2],
-      targetHeight: size[1],
+      targetWidth: size[1],
+      targetHeight: size[2],
     };
   }
 
@@ -113,7 +99,10 @@ function restoreGeometry(arrayBuffer: ArrayBuffer, byteOffset: number, geometryH
     byteOffset += geometryHeader.indexLength * Uint32Array.BYTES_PER_ELEMENT;
   }
 
-  geometry.boundingBox = new Box3(new Vector3(...geometryHeader.boundingBox.min), new Vector3(...geometryHeader.boundingBox.max));
+  geometry.boundingBox = new Box3(
+    new Vector3(...geometryHeader.boundingBox.min),
+    new Vector3(...geometryHeader.boundingBox.max)
+  );
   geometry.boundingSphere = new Sphere(
     new Vector3(...geometryHeader.boundingSphere.center),
     geometryHeader.boundingSphere.radius
@@ -219,7 +208,12 @@ export async function loadPrebuiltProfileGeometries(keys: GeometryAssetKey[] = G
   await Promise.all(keys.map((key) => loadPrebuiltProfileGeometry(key)));
 }
 
-function getGeometryAssetKey(profileType: ProfileType | undefined, shape: MeshSpec['shape'], size: Vector3Tuple, axis: BeamAxis) {
+function getGeometryAssetKey(
+  profileType: ProfileType | undefined,
+  shape: MeshSpec['shape'],
+  size: Vector3Tuple,
+  axis: BeamAxis
+) {
   const resolvedProfileType = profileType ?? inferProfileTypeFromSize(size, axis);
 
   if (resolvedProfileType === 'alu40x40') {
@@ -231,7 +225,9 @@ function getGeometryAssetKey(profileType: ProfileType | undefined, shape: MeshSp
 
 function inferProfileTypeFromSize(size: Vector3Tuple, axis: BeamAxis): ProfileType {
   const { targetWidth, targetHeight } = getTargetCrossSectionSize(axis, size);
-  return Math.max(targetWidth, targetHeight) > PROFILE_GEOMETRY_ASSET.largeProfileThresholdMeters ? 'alu80x40' : 'alu40x40';
+  return Math.max(targetWidth, targetHeight) > PROFILE_GEOMETRY_ASSET.largeProfileThresholdMeters
+    ? 'alu80x40'
+    : 'alu40x40';
 }
 
 function getAxisRotation(axis: BeamAxis) {
@@ -247,7 +243,7 @@ function getAxisRotation(axis: BeamAxis) {
 }
 
 function needsProfileRoll(profileType: ProfileType | undefined, axis: BeamAxis) {
-  return profileType === 'alu80x40' && axis === 'y';
+  return profileType === 'alu80x40' && axis !== 'y';
 }
 
 export function getProfileMeshRotation(mesh: MeshSpec): RotationTuple {

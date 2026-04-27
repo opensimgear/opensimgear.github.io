@@ -30,3 +30,6 @@ pnpm-debug.log*
 .worktrees/
 
 docs/superpowers
+
+__pycache__
+.playwright-cli

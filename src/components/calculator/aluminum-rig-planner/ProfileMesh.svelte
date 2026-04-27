@@ -1,7 +1,7 @@
 <script lang="ts">
   import { T } from '@threlte/core';
   import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
-  import { BoxGeometry } from 'three';
+  import { BoxGeometry, CylinderGeometry, TorusGeometry } from 'three';
 
   import { ENDCAP_MATERIAL, PROFILE_APPEARANCE } from './constants';
   import {
@@ -95,6 +95,24 @@
     profileGeometry ? getProfileMeshRotation(mesh) : mesh.rotation ?? PROFILE_APPEARANCE.zeroRotation
   );
   const fallbackGeometry = $derived.by(() => {
+    if (mesh.shape === 'torus') {
+      return new TorusGeometry(
+        mesh.torusRadius ?? 0,
+        mesh.torusTubeRadius ?? 0,
+        mesh.torusRadialSegments ?? 12,
+        mesh.torusTubularSegments ?? 24
+      );
+    }
+
+    if (mesh.shape === 'cylinder') {
+      return new CylinderGeometry(
+        mesh.cylinderRadiusTop ?? 0,
+        mesh.cylinderRadiusBottom ?? 0,
+        mesh.size[0],
+        mesh.cylinderRadialSegments ?? 20
+      );
+    }
+
     const [width, height, depth] = mesh.size;
     const minDimension = Math.min(width, height, depth);
     const radiusLimit = Math.max(0, minDimension / 2 - Number.EPSILON);

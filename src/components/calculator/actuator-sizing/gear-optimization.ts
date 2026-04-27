@@ -44,13 +44,7 @@ function computeObjective(ratio: number, ctx: GearOptimizationContext, motor: Se
   const multiplier = 1 + ctx.safetyFactor_pct / 100;
 
   const J_load = computeLoadInertia(ctx.mass_kg, ctx.lead_m, ratio);
-  const J_total = computeTotalInertia(
-    motor.inertia_kgm2,
-    ctx.J_gear_kgm2,
-    ctx.J_screw_rot_kgm2,
-    J_load,
-    ratio,
-  );
+  const J_total = computeTotalInertia(motor.inertia_kgm2, ctx.J_gear_kgm2, ctx.J_screw_rot_kgm2, J_load, ratio);
 
   const phases = computePhaseTorques(
     ctx.F_static_N,
@@ -66,7 +60,7 @@ function computeObjective(ratio: number, ctx: GearOptimizationContext, motor: Se
     ctx.t_accel_s,
     ctx.t_const_s,
     ctx.t_decel_s,
-    ctx.dwellTime_s,
+    ctx.dwellTime_s
   );
 
   const n_req = phases.n_motor_rpm * multiplier;
@@ -74,10 +68,7 @@ function computeObjective(ratio: number, ctx: GearOptimizationContext, motor: Se
   const T_rms_req = phases.T_rms_Nm * multiplier;
 
   const rpmDeficit = deficit(n_req, motor.maxRPM);
-  const torqueDeficit = Math.max(
-    deficit(T_peak_req, motor.peakTorque_Nm),
-    deficit(T_rms_req, motor.ratedTorque_Nm),
-  );
+  const torqueDeficit = Math.max(deficit(T_peak_req, motor.peakTorque_Nm), deficit(T_rms_req, motor.ratedTorque_Nm));
 
   return rpmDeficit - torqueDeficit;
 }

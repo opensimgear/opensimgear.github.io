@@ -1,4 +1,3 @@
-
 @import 'https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css';
 
 @layer base, starlight, theme, components, utilities;
@@ -15,23 +14,23 @@
 }
 
 @theme {
-/* Generated accent color palettes. */
---color-accent-200: #a0d9ab;
---color-accent-500: #00a449;
---color-accent-600: #00823a;
---color-accent-700: #007132;
---color-accent-800: #00602b;
---color-accent-900: #003e18;
---color-accent-950: #002d0f;
-/* Generated gray color palettes. */
---color-gray-100: #f4f6fa;
---color-gray-200: #e8eef6;
---color-gray-300: #bcc3cc;
---color-gray-400: #808d9e;
---color-gray-500: #4d5969;
---color-gray-700: #2e3948;
---color-gray-800: #1d2835;
---color-gray-900: #14191f;
+  /* Generated accent color palettes. */
+  --color-accent-200: #a0d9ab;
+  --color-accent-500: #00a449;
+  --color-accent-600: #00823a;
+  --color-accent-700: #007132;
+  --color-accent-800: #00602b;
+  --color-accent-900: #003e18;
+  --color-accent-950: #002d0f;
+  /* Generated gray color palettes. */
+  --color-gray-100: #f4f6fa;
+  --color-gray-200: #e8eef6;
+  --color-gray-300: #bcc3cc;
+  --color-gray-400: #808d9e;
+  --color-gray-500: #4d5969;
+  --color-gray-700: #2e3948;
+  --color-gray-800: #1d2835;
+  --color-gray-900: #14191f;
 }
 
 @utility btn {
@@ -42,11 +41,10 @@
 }
 
 @layer components {
-
   .btn-primary {
     @apply btn bg-accent-600 text-white hover:bg-accent-500 dark:text-black dark:bg-accent-200 dark:hover:bg-accent-500;
   }
-  
+
   .btn-secondary {
     @apply btn text-black dark:text-white hover:underline;
   }
@@ -56,7 +54,6 @@
   }
 }
 
-
 [data-has-hero] header {
   border-bottom: 1px solid transparent;
   background-color: transparent;
@@ -65,5 +62,5 @@
 }
 
 .hero > img {
-   border-radius: 12px;
+  border-radius: 12px;
 }

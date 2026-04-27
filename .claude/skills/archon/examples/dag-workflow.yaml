@@ -15,7 +15,6 @@ description: |
   Classify a GitHub issue, then route to the appropriate handler.
   Bugs get investigated; features get planned. Both paths merge at implementation.
 provider: claude
-
 nodes:
   # ── BASH NODE: Shell script, no AI, stdout captured as output ──
   - id: fetch-issue
