@@ -25,7 +25,13 @@ import {
 } from './posture';
 import { createPlannerPostureReport } from './posture-report';
 import { PLANNER_POSTURE_PRESETS, type SolvablePlannerPosturePreset } from './preset-metadata';
-import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset, PlannerPostureSettings } from './types';
+import type {
+  PlannerInput,
+  PlannerPostureModelMetrics,
+  PlannerPosturePreset,
+  PlannerPostureSettings,
+  PlannerPostureTargetRangesByPreset,
+} from './types';
 
 type PlannerPosturePresetSeed = Pick<
   PlannerInput,
@@ -406,7 +412,8 @@ function scoreCandidate(
   preset: PlannerPosturePreset,
   heightCm: number,
   modelMetrics: PlannerPostureModelMetrics | null = null,
-  metricKeys: string[] | null = null
+  metricKeys: string[] | null = null,
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
   const report = createPlannerPostureReport(
     input,
@@ -416,7 +423,14 @@ function scoreCandidate(
       heightCm,
       showModel: true,
       showSkeleton: false,
-      monitorHeightFromBaseMm: getOptimizedPresetMonitorHeightFromBaseMm(input, preset, heightCm, modelMetrics),
+      targetRangesByPreset,
+      monitorHeightFromBaseMm: getOptimizedPresetMonitorHeightFromBaseMm(
+        input,
+        preset,
+        heightCm,
+        modelMetrics,
+        targetRangesByPreset
+      ),
     },
     modelMetrics
   );
@@ -449,7 +463,8 @@ function getPedalContactErrorScore(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null
+  modelMetrics: PlannerPostureModelMetrics | null,
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
   const contactErrorMm = getPlannerPostureFootContactErrorMm(
     input,
@@ -457,6 +472,7 @@ function getPedalContactErrorScore(
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       preset,
       heightCm,
+      targetRangesByPreset,
     },
     modelMetrics
   );
@@ -468,20 +484,22 @@ function refinePedalsToFootContact(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null
+  modelMetrics: PlannerPostureModelMetrics | null,
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
   const limits = getPresetSearchLimits(input);
   let bestInput = input;
   let bestSeed = getCurrentPlannerInputSeed(input);
   let bestScore =
-    getPedalContactErrorScore(bestInput, preset, heightCm, modelMetrics) +
-    scoreCandidate(bestInput, preset, heightCm, modelMetrics, [
-      'kneeBend',
-      'ankleBend',
-      'footToToeBend',
-      'brakeAlignment',
-      'torsoToThigh',
-    ]);
+    getPedalContactErrorScore(bestInput, preset, heightCm, modelMetrics, targetRangesByPreset) +
+    scoreCandidate(
+      bestInput,
+      preset,
+      heightCm,
+      modelMetrics,
+      ['kneeBend', 'ankleBend', 'footToToeBend', 'brakeAlignment', 'torsoToThigh'],
+      targetRangesByPreset
+    );
 
   for (const stepLevel of PRESET_FOOT_CONTACT_STEP_LEVELS) {
     for (let pass = 0; pass < PRESET_SEARCH_MAX_PASSES_PER_LEVEL; pass += 1) {
@@ -498,14 +516,15 @@ function refinePedalsToFootContact(
         };
         const candidateInput = createCandidateInput(input, candidateSeed);
         const candidateScore =
-          getPedalContactErrorScore(candidateInput, preset, heightCm, modelMetrics) +
-          scoreCandidate(candidateInput, preset, heightCm, modelMetrics, [
-            'kneeBend',
-            'ankleBend',
-            'footToToeBend',
-            'brakeAlignment',
-            'torsoToThigh',
-          ]);
+          getPedalContactErrorScore(candidateInput, preset, heightCm, modelMetrics, targetRangesByPreset) +
+          scoreCandidate(
+            candidateInput,
+            preset,
+            heightCm,
+            modelMetrics,
+            ['kneeBend', 'ankleBend', 'footToToeBend', 'brakeAlignment', 'torsoToThigh'],
+            targetRangesByPreset
+          );
 
         if (candidateScore + SCORE_EPSILON >= bestScore) {
           continue;
@@ -560,7 +579,8 @@ function getBoostedSteeringBaseHeightFloorMm(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null
+  modelMetrics: PlannerPostureModelMetrics | null,
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
   const boosterSeedAdjustment = getSolverBoosterSeedAdjustment(input, preset, heightCm);
 
@@ -573,7 +593,8 @@ function getBoostedSteeringBaseHeightFloorMm(
     preset,
     POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM,
     modelMetrics,
-    false
+    false,
+    targetRangesByPreset
   );
 
   return thresholdInput.steeringColumnBaseHeightMm;
@@ -644,11 +665,12 @@ function solveDynamicPlannerInput(
   preset: PlannerPosturePreset,
   heightCm: number,
   modelMetrics: PlannerPostureModelMetrics | null = null,
-  useBoostedSteeringBaseFloor = true
+  useBoostedSteeringBaseFloor = true,
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ): PlannerInput {
   const limits = getPresetSearchLimits(input);
   const boostedSteeringBaseHeightFloorMm = useBoostedSteeringBaseFloor
-    ? getBoostedSteeringBaseHeightFloorMm(input, preset, heightCm, modelMetrics)
+    ? getBoostedSteeringBaseHeightFloorMm(input, preset, heightCm, modelMetrics, targetRangesByPreset)
     : null;
 
   if (boostedSteeringBaseHeightFloorMm !== null) {
@@ -660,11 +682,18 @@ function solveDynamicPlannerInput(
 
   let bestSeed = clampPresetSearchSeed(getSolverSeed(input, preset, heightCm), limits);
   let bestInput = createCandidateInput(input, bestSeed);
-  let bestScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics);
+  let bestScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics, null, targetRangesByPreset);
   const maybeAdoptCandidate = (candidateSeed: PlannerPosturePresetSeed, metricKeys: string[]) => {
     const candidateInput = createCandidateInput(input, candidateSeed);
-    const currentScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics, metricKeys);
-    const candidateScore = scoreCandidate(candidateInput, preset, heightCm, modelMetrics, metricKeys);
+    const currentScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics, metricKeys, targetRangesByPreset);
+    const candidateScore = scoreCandidate(
+      candidateInput,
+      preset,
+      heightCm,
+      modelMetrics,
+      metricKeys,
+      targetRangesByPreset
+    );
 
     if (candidateScore + SCORE_EPSILON >= currentScore) {
       return false;
@@ -672,13 +701,13 @@ function solveDynamicPlannerInput(
 
     bestSeed = candidateSeed;
     bestInput = candidateInput;
-    bestScore = scoreCandidate(candidateInput, preset, heightCm, modelMetrics);
+    bestScore = scoreCandidate(candidateInput, preset, heightCm, modelMetrics, null, targetRangesByPreset);
 
     return true;
   };
   const maybeAdoptFullCandidate = (candidateSeed: PlannerPosturePresetSeed) => {
     const candidateInput = createCandidateInput(input, candidateSeed);
-    const score = scoreCandidate(candidateInput, preset, heightCm, modelMetrics);
+    const score = scoreCandidate(candidateInput, preset, heightCm, modelMetrics, null, targetRangesByPreset);
 
     if (score + SCORE_EPSILON >= bestScore) {
       return false;
@@ -775,23 +804,27 @@ function solveDynamicPlannerInput(
     }
   }
 
-  return placeBaseAroundPedalTray(refinePedalsToFootContact(bestInput, preset, heightCm, modelMetrics));
+  return placeBaseAroundPedalTray(
+    refinePedalsToFootContact(bestInput, preset, heightCm, modelMetrics, targetRangesByPreset)
+  );
 }
 
 export function recomputePresetDynamicPlannerInput(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null
+  modelMetrics: PlannerPostureModelMetrics | null = null,
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ): PlannerInput {
-  return solveDynamicPlannerInput(input, preset, heightCm, modelMetrics);
+  return solveDynamicPlannerInput(input, preset, heightCm, modelMetrics, true, targetRangesByPreset);
 }
 
 export function getOptimizedPresetMonitorHeightFromBaseMm(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null
+  modelMetrics: PlannerPostureModelMetrics | null = null,
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
   const skeleton = createPlannerPostureSkeleton(
     input,
@@ -799,6 +832,7 @@ export function getOptimizedPresetMonitorHeightFromBaseMm(
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       preset,
       heightCm,
+      targetRangesByPreset,
     },
     modelMetrics
   );
@@ -821,7 +855,8 @@ export function applyPresetToPostureSettings(
       input,
       settings.preset,
       settings.heightCm,
-      modelMetrics
+      modelMetrics,
+      settings.targetRangesByPreset
     ),
   };
 }
@@ -830,7 +865,8 @@ export function applyPresetToPlannerInput(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null
+  modelMetrics: PlannerPostureModelMetrics | null = null,
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ): PlannerInput {
   if (!isPresetSolvablePreset(preset)) {
     return { ...input };
@@ -841,7 +877,8 @@ export function applyPresetToPlannerInput(
       clampPlannerInput({ ...input, ...getPresetFixedFinalValues(preset) }),
       preset,
       heightCm,
-      modelMetrics
+      modelMetrics,
+      targetRangesByPreset
     ),
     ...getPresetFixedFinalValues(preset),
   };

@@ -24,10 +24,14 @@ import {
   POSTURE_TALON_FOOT_ANGLE_DEG,
   POSTURE_TALON_PEDAL_PLANE_OFFSET_MM,
   POSTURE_TOE_BONE_START_SHARE,
+  POSTURE_TOE_PEDAL_PLANE_OFFSET_MM,
 } from '../../components/calculator/aluminum-rig-planner/posture';
 import { createHumanModelPoseSkeleton } from '../../components/calculator/aluminum-rig-planner/human-model-rig';
 import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
-import { getPlannerPostureTargetRanges } from '../../components/calculator/aluminum-rig-planner/posture-targets';
+import {
+  getPlannerPostureTargetRangeControlLimits,
+  getPlannerPostureTargetRanges,
+} from '../../components/calculator/aluminum-rig-planner/posture-targets';
 
 function expectPointToBeFinite(point: [number, number, number]) {
   expect(point.every((value) => Number.isFinite(value))).toBe(true);
@@ -127,7 +131,7 @@ describe('aluminum rig planner posture solver', () => {
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
     const ankleMetric = report.metrics.find((metric) => metric.key === 'ankleBend');
     const footToToeMetric = report.metrics.find((metric) => metric.key === 'footToToeBend');
-    const oldAnkleRangeMetric = report.metrics.find((metric) => metric.key === 'ankleRange');
+    const oldAnkleRangeMetric = report.metrics.find((metric) => (metric.key as string) === 'ankleRange');
     const expectedLeftAnkleBend = radToDeg(
       getAngleBetweenSegments(
         skeleton.joints.kneeLeft,
@@ -156,12 +160,18 @@ describe('aluminum rig planner posture solver', () => {
     expect(footToToeMetric?.valueDeg).toBeGreaterThanOrEqual(0);
   });
 
-  it('uses the same posture targets for every preset', () => {
+  it('copies the current posture targets into separate ranges for every preset', () => {
     const gtRanges = getPlannerPostureTargetRanges('gt');
 
     for (const preset of ['rally', 'drift', 'road', 'custom'] as const) {
-      expect(getPlannerPostureTargetRanges(preset)).toBe(gtRanges);
+      expect(getPlannerPostureTargetRanges(preset)).toEqual(gtRanges);
+      expect(getPlannerPostureTargetRanges(preset)).not.toBe(gtRanges);
     }
+  });
+
+  it('pads posture target slider limits by 50 percent of target range', () => {
+    expect(getPlannerPostureTargetRangeControlLimits('gt', 'wristBend')).toEqual({ min: -25, max: 35 });
+    expect(getPlannerPostureTargetRangeControlLimits('gt', 'elbowBend')).toEqual({ min: 85, max: 145 });
   });
 
   it('pre-scales human model pose targets so height scaling does not lengthen or shorten IK bones', () => {
@@ -497,7 +507,7 @@ describe('aluminum rig planner posture solver', () => {
     ).toBeLessThan(0);
   });
 
-  it('lets talon joints slide on the pedal tray plate while toe joints stay on the pedal face', () => {
+  it('lets talon joints slide on the pedal tray plate while toe joints stay offset from the pedal face', () => {
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
     const tallerSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
@@ -528,6 +538,7 @@ describe('aluminum rig planner posture solver', () => {
     const pedalLeanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
     const pedalDirection = [-Math.sin(pedalLeanRad), 0, Math.cos(pedalLeanRad)] as const;
     const pedalPlaneNormal = [-pedalDirection[2], 0, pedalDirection[0]] as const;
+    const toePedalPlaneOffsetM = POSTURE_TOE_PEDAL_PLANE_OFFSET_MM / 1000;
     const pedalFacePivotX = pedalPivotX + pedalPlaneNormal[0] * (PEDAL_THICKNESS_MM / 2);
     const pedalFacePivotZ = pedalPivotZ + pedalPlaneNormal[2] * (PEDAL_THICKNESS_MM / 2);
     const traySlideMinX = DEFAULT_PLANNER_INPUT.seatBaseDepthMm + DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm;
@@ -574,11 +585,11 @@ describe('aluminum rig planner posture solver', () => {
     expect(skeleton.joints.ankleLeft[2]).toBeGreaterThan(skeleton.joints.heelLeft[2] + 0.02);
     expect(skeleton.joints.ankleRight[2]).toBeGreaterThan(skeleton.joints.heelRight[2] + 0.02);
     expect(projectOffset(skeleton.joints.toeStartLeft).alongPedal).toBeGreaterThan(0);
-    expect(Math.abs(projectOffset(skeleton.joints.toeStartLeft).offPedal)).toBeLessThan(0.0005);
-    expect(Math.abs(projectOffset(skeleton.joints.toeLeft).offPedal)).toBeLessThan(0.0005);
+    expect(projectOffset(skeleton.joints.toeStartLeft).offPedal).toBeCloseTo(toePedalPlaneOffsetM, 5);
+    expect(projectOffset(skeleton.joints.toeLeft).offPedal).toBeCloseTo(toePedalPlaneOffsetM, 5);
     expect(projectOffset(skeleton.joints.toeStartRight).alongPedal).toBeGreaterThan(0);
-    expect(Math.abs(projectOffset(skeleton.joints.toeStartRight).offPedal)).toBeLessThan(0.0005);
-    expect(Math.abs(projectOffset(skeleton.joints.toeRight).offPedal)).toBeLessThan(0.0005);
+    expect(projectOffset(skeleton.joints.toeStartRight).offPedal).toBeCloseTo(toePedalPlaneOffsetM, 5);
+    expect(projectOffset(skeleton.joints.toeRight).offPedal).toBeCloseTo(toePedalPlaneOffsetM, 5);
     expect(leftToeDirection[0]).toBeCloseTo(pedalDirection[0], 6);
     expect(leftToeDirection[1]).toBeCloseTo(pedalDirection[1], 6);
     expect(leftToeDirection[2]).toBeCloseTo(pedalDirection[2], 6);
@@ -666,6 +677,7 @@ describe('aluminum rig planner posture solver', () => {
     const steeperPedalDirection = [-Math.sin(steeperPedalLeanRad), 0, Math.cos(steeperPedalLeanRad)] as const;
     const basePedalPlaneNormal = [-basePedalDirection[2], 0, basePedalDirection[0]] as const;
     const steeperPedalPlaneNormal = [-steeperPedalDirection[2], 0, steeperPedalDirection[0]] as const;
+    const toePedalPlaneOffsetM = POSTURE_TOE_PEDAL_PLANE_OFFSET_MM / 1000;
     const basePedalFacePivot = [
       pedalPivot[0] + (basePedalPlaneNormal[0] * PEDAL_THICKNESS_MM) / 2000,
       pedalPivot[1],
@@ -730,9 +742,9 @@ describe('aluminum rig planner posture solver', () => {
       ).offPedal
     ).toBeGreaterThanOrEqual(POSTURE_TALON_PEDAL_PLANE_OFFSET_MM / 1000);
     expect(baseToeStartOffset.alongPedal).toBeGreaterThan(0);
-    expect(Math.abs(baseToeStartOffset.offPedal)).toBeLessThan(0.0005);
+    expect(baseToeStartOffset.offPedal).toBeCloseTo(toePedalPlaneOffsetM, 5);
     expect(steeperToeStartOffset.alongPedal).toBeGreaterThan(0);
-    expect(Math.abs(steeperToeStartOffset.offPedal)).toBeLessThan(0.0005);
+    expect(steeperToeStartOffset.offPedal).toBeCloseTo(toePedalPlaneOffsetM, 5);
     expect(getDistance(baseSkeleton.joints.ankleLeft, baseSkeleton.joints.toeStartLeft)).toBeCloseTo(footBoneLength, 5);
     expect(getDistance(steeperSkeleton.joints.ankleLeft, steeperSkeleton.joints.toeStartLeft)).toBeCloseTo(
       footBoneLength,

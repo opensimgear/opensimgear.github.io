@@ -11,6 +11,11 @@ import {
 } from './constants';
 import { clampPlannerInput } from './geometry';
 import { getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
+import {
+  clonePlannerPostureTargetRangesByPreset,
+  getPlannerPostureTargetRangeControlLimits,
+  PLANNER_POSTURE_TARGET_KEYS,
+} from './posture-targets';
 import type {
   PlannerInput,
   PlannerMonitorAspectRatio,
@@ -18,6 +23,10 @@ import type {
   PlannerOptimizationSettings,
   PlannerPosturePreset,
   PlannerPostureSettings,
+  PlannerPostureTargetKey,
+  PlannerPostureTargetRange,
+  PlannerPostureTargetRanges,
+  PlannerPostureTargetRangesByPreset,
   PlannerStockOption,
 } from './types';
 
@@ -44,7 +53,10 @@ export type PlannerQueryState = Partial<PlannerInput> & {
     }>;
   };
   posture?: Partial<
-    Omit<PlannerPostureSettings<PlannerPosturePreset>, 'preset' | 'monitorAspectRatio' | 'monitorCurvature'>
+    Omit<
+      PlannerPostureSettings<PlannerPosturePreset>,
+      'preset' | 'monitorAspectRatio' | 'monitorCurvature' | 'targetRangesByPreset'
+    >
   > & {
     monitorAspectRatio?: unknown;
     monitorCurvature?: unknown;
@@ -52,6 +64,7 @@ export type PlannerQueryState = Partial<PlannerInput> & {
     monitorMidpointYMm?: unknown;
     monitorMidpointZMm?: unknown;
     preset?: unknown;
+    targetRangesByPreset?: unknown;
   };
 };
 
@@ -62,6 +75,10 @@ const BLADE_THICKNESS_STEP_MM = 0.1;
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value);
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 function readNumber(value: unknown, fallback: number) {
@@ -150,6 +167,46 @@ function clampNumber(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
 
+function sanitizePostureTargetRange(
+  value: unknown,
+  fallback: PlannerPostureTargetRange,
+  preset: PlannerPosturePreset,
+  key: PlannerPostureTargetKey
+): PlannerPostureTargetRange {
+  const sourceMin = Array.isArray(value) ? value[0] : isRecord(value) ? value.min : undefined;
+  const sourceMax = Array.isArray(value) ? value[1] : isRecord(value) ? value.max : undefined;
+  const limits = getPlannerPostureTargetRangeControlLimits(preset, key);
+  const rawMin = readNumber(sourceMin, fallback.min);
+  const rawMax = readNumber(sourceMax, fallback.max);
+
+  return {
+    min: clampNumber(Math.min(rawMin, rawMax), limits.min, limits.max),
+    max: clampNumber(Math.max(rawMin, rawMax), limits.min, limits.max),
+  };
+}
+
+function sanitizePostureTargetRanges(
+  value: unknown,
+  fallback: PlannerPostureTargetRanges,
+  preset: PlannerPosturePreset
+): PlannerPostureTargetRanges {
+  const source = isRecord(value) ? value : {};
+
+  return Object.fromEntries(
+    PLANNER_POSTURE_TARGET_KEYS.map((key) => [key, sanitizePostureTargetRange(source[key], fallback[key], preset, key)])
+  ) as PlannerPostureTargetRanges;
+}
+
+function sanitizePostureTargetRangesByPreset(value: unknown): PlannerPostureTargetRangesByPreset {
+  const defaults = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset;
+  const source = isRecord(value) ? value : {};
+  const presets = ['gt', 'rally', 'drift', 'road', 'custom'] as const satisfies PlannerPosturePreset[];
+
+  return Object.fromEntries(
+    presets.map((preset) => [preset, sanitizePostureTargetRanges(source[preset], defaults[preset], preset)])
+  ) as PlannerPostureTargetRangesByPreset;
+}
+
 function isMonitorAspectRatio(value: unknown): value is PlannerMonitorAspectRatio {
   return MONITOR_ASPECT_RATIO_OPTIONS.some((option) => option.value === value);
 }
@@ -223,6 +280,7 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
 
   return {
     preset,
+    advanced: typeof state?.advanced === 'boolean' ? state.advanced : defaults.advanced,
     heightCm: clampNumber(
       readNumber(state?.heightCm, defaults.heightCm),
       PLANNER_POSTURE_LIMITS.heightMinCm,
@@ -230,6 +288,9 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     ),
     showModel: typeof state?.showModel === 'boolean' ? state.showModel : defaults.showModel,
     showSkeleton: typeof state?.showSkeleton === 'boolean' ? state.showSkeleton : defaults.showSkeleton,
+    targetRangesByPreset: isRecord(state)
+      ? sanitizePostureTargetRangesByPreset(state.targetRangesByPreset)
+      : clonePlannerPostureTargetRangesByPreset(defaults.targetRangesByPreset),
     monitorSizeIn,
     monitorAspectRatio,
     monitorCurvature,

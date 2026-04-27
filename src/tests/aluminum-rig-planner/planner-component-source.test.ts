@@ -20,7 +20,7 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).toMatch(/if \(suppressProgrammaticPlannerInputEdit\) {\s*return;\s*}/);
     expect(plannerSource).toMatch(/pendingCustomPresetInput = null;/);
     expect(plannerSource).toMatch(
-      /const nextInput = applyPresetToPlannerInput\(plannerInput, value, postureSettings\.heightCm, postureModelMetrics\);/
+      /const nextInput = applyPresetToPlannerInput\(\s*plannerInput,\s*value,\s*postureSettings\.heightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset\s*\);/
     );
     expect(plannerSource).not.toContain('pendingMonitorHeightEyeSync');
     expect(plannerSource).not.toContain('handleEyeCenterChange');
@@ -41,7 +41,7 @@ describe('aluminum rig planner component wiring', () => {
       /function setPostureHeightCm\(value: number\) \{\s*postureHeightControlValue = clampPostureHeightCm\(value\);/
     );
     expect(plannerSource).toMatch(
-      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*nextHeightCm,\s*postureModelMetrics\s*\);/
+      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*nextHeightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset\s*\);/
     );
     expect(plannerSource).toMatch(/function commitPostureHeightCm\(value: number, animateTransition = false\)/);
     expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, { animate: animateTransition });');
@@ -59,7 +59,7 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).toContain('function optimizeCurrentPosturePreset()');
     expect(plannerSource).toMatch(/if \(postureSettings\.preset !== 'custom'\)/);
     expect(plannerSource).toMatch(
-      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*postureSettings\.heightCm,\s*postureModelMetrics\s*\);/
+      /const nextInput = recomputePresetDynamicPlannerInput\(\s*plannerInput,\s*postureSettings\.preset,\s*postureSettings\.heightCm,\s*postureModelMetrics,\s*postureSettings\.targetRangesByPreset\s*\);/
     );
     expect(plannerSource).toContain('assignProgrammaticPlannerInput(nextInput, { animate: true });');
     expect(plannerSource).toContain('getOptimizedPresetMonitorHeightFromBaseMm');

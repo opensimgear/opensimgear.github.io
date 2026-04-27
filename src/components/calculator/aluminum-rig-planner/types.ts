@@ -11,6 +11,22 @@ export type PlannerCurrencyMode = 'auto' | 'eur' | 'usd';
 export type PlannerCurrencyCode = 'EUR' | 'USD';
 export type PlannerPosturePreset = 'gt' | 'rally' | 'drift' | 'road' | 'custom';
 export type PlannerSolvablePosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
+export type PlannerPostureTargetKey =
+  | 'wristBend'
+  | 'elbowBend'
+  | 'kneeBend'
+  | 'torsoToThigh'
+  | 'ankleBend'
+  | 'footToToeBend'
+  | 'brakeAlignment'
+  | 'eyeToWheelTop'
+  | 'eyeToMonitorMidpoint';
+export type PlannerPostureTargetRange = {
+  min: number;
+  max: number;
+};
+export type PlannerPostureTargetRanges = Record<PlannerPostureTargetKey, PlannerPostureTargetRange>;
+export type PlannerPostureTargetRangesByPreset = Record<PlannerPosturePreset, PlannerPostureTargetRanges>;
 export type PlannerMonitorAspectRatio = '16:10' | '16:9' | '21:9' | '32:9' | '4:3' | '5:4' | '3:2';
 export type PlannerMonitorCurvature =
   | 'disabled'
@@ -48,9 +64,11 @@ export type PlannerPostureModelMetrics = {
 
 export type PlannerPostureSettings<Preset extends PlannerPosturePreset = PlannerSolvablePosturePreset> = {
   preset: Preset;
+  advanced: boolean;
   heightCm: number;
   showModel: boolean;
   showSkeleton: boolean;
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset;
   monitorSizeIn: number;
   monitorAspectRatio: PlannerMonitorAspectRatio;
   monitorCurvature: PlannerMonitorCurvature;

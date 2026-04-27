@@ -8,6 +8,7 @@ import type {
   PlannerPosturePreset,
   PlannerProfileShipping,
 } from './types';
+import { createDefaultPlannerPostureTargetRangesByPreset } from './posture-targets';
 
 export {
   ANTHROPOMETRY_LENGTH_LIMITS_MM,
@@ -205,9 +206,11 @@ export const LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;
 
 export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   preset: DEFAULT_ACTIVE_POSTURE_PRESET,
+  advanced: false,
   heightCm: DEFAULT_POSTURE_HEIGHT_CM,
   showModel: true,
   showSkeleton: false,
+  targetRangesByPreset: createDefaultPlannerPostureTargetRangesByPreset(),
   monitorSizeIn: DEFAULT_MONITOR_SIZE_IN,
   monitorAspectRatio: DEFAULT_MONITOR_ASPECT_RATIO,
   monitorCurvature: DEFAULT_MONITOR_CURVATURE,

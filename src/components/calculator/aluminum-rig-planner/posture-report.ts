@@ -8,15 +8,20 @@ import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
 import { createPlannerPostureSkeleton, type PosturePoint } from './posture';
 import {
   getPlannerPostureTargetRanges as getSharedPlannerPostureTargetRanges,
-  PLANNER_POSTURE_TARGET_RANGES,
   type PlannerPostureTargetRange,
 } from './posture-targets';
-import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset, PlannerPostureSettings } from './types';
+import type {
+  PlannerInput,
+  PlannerPostureModelMetrics,
+  PlannerPosturePreset,
+  PlannerPostureSettings,
+  PlannerPostureTargetKey,
+} from './types';
 
 export type PlannerPostureMetricStatus = 'ok' | 'warn' | 'bad';
 export type PlannerPostureMetricRange = PlannerPostureTargetRange;
 export type PlannerPostureMetric = {
-  key: string;
+  key: PlannerPostureTargetKey;
   label: string;
   unit: 'deg' | 'mm';
   range: PlannerPostureMetricRange;
@@ -124,7 +129,7 @@ function getHint(label: string, value: number, range: PlannerPostureMetricRange,
 }
 
 function createMetric(
-  key: string,
+  key: PlannerPostureTargetKey,
   label: string,
   unit: PlannerPostureMetric['unit'],
   rawValue: number,
@@ -213,7 +218,7 @@ export function createPlannerPostureReport(
     },
     postureModel
   );
-  const ranges = PLANNER_POSTURE_TARGET_RANGES[postureSettings.preset];
+  const ranges = getSharedPlannerPostureTargetRanges(postureSettings.preset, postureSettings.targetRangesByPreset);
   const wheelCenter = getWheelCenter(input);
   const wheelTopZ = wheelCenter[2] + (input.wheelDiameterMm * MM_TO_METERS) / 2;
   const eyeCenter = skeleton.joints.eyeCenter;

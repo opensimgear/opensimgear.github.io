@@ -11,6 +11,7 @@ import {
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { getSteeringColumnDistanceMaxMm } from '../../components/calculator/aluminum-rig-planner/geometry';
 import { getSolvedMonitorDistanceFromEyesMm } from '../../components/calculator/aluminum-rig-planner/modules/monitor';
+import { getPlannerPostureTargetRangeControlLimits } from '../../components/calculator/aluminum-rig-planner/posture-targets';
 import { mergePlannerQueryState } from '../../components/calculator/aluminum-rig-planner/query-state';
 
 describe('aluminum rig planner query state', () => {
@@ -172,6 +173,7 @@ describe('aluminum rig planner query state', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       posture: {
         preset: 'rally',
+        advanced: true,
         heightCm: 260,
         showModel: false,
         showSkeleton: true,
@@ -179,9 +181,29 @@ describe('aluminum rig planner query state', () => {
     });
 
     expect(state.postureSettings.preset).toBe('rally');
+    expect(state.postureSettings.advanced).toBe(true);
     expect(state.postureSettings.heightCm).toBe(220);
     expect(state.postureSettings.showModel).toBe(false);
     expect(state.postureSettings.showSkeleton).toBe(true);
+  });
+
+  it('sanitizes posture target ranges per preset from shared-link state', () => {
+    const wristLimits = getPlannerPostureTargetRangeControlLimits('rally', 'wristBend');
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        targetRangesByPreset: {
+          rally: {
+            wristBend: { min: 999, max: -999 },
+          },
+        },
+      },
+    });
+
+    expect(state.postureSettings.targetRangesByPreset.rally.wristBend).toEqual(wristLimits);
+    expect(state.postureSettings.targetRangesByPreset.gt.wristBend).toEqual(
+      DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset.gt.wristBend
+    );
+    expect(state.postureSettings.targetRangesByPreset.rally).not.toBe(state.postureSettings.targetRangesByPreset.gt);
   });
 
   it('sanitizes custom preset and monitor module values from shared-link state', () => {

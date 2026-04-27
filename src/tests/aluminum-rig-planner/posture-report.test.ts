@@ -94,7 +94,9 @@ describe('aluminum rig planner posture report', () => {
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
 
     expect(
-      report.metrics.some((metric) => metric.key === 'pedalHeightVsHips' || metric.label === 'Pedals vs hips')
+      report.metrics.some(
+        (metric) => (metric.key as string) === 'pedalHeightVsHips' || metric.label === 'Pedals vs hips'
+      )
     ).toBe(false);
   });
 

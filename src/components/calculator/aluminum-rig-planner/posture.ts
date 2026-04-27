@@ -18,6 +18,7 @@ import type {
   PlannerPostureModelMetrics,
   PlannerPosturePreset,
   PlannerPostureSettings,
+  PlannerPostureTargetRangesByPreset,
 } from './types';
 
 export type PostureJointName =
@@ -85,6 +86,7 @@ type PedalFootSolveContext = {
   kneeLift: number;
   lowerLegLength: number;
   preset: PlannerPosturePreset;
+  targetRangesByPreset: PlannerPostureTargetRangesByPreset;
   thighLength: number;
 };
 
@@ -98,6 +100,7 @@ export const HAND_BONE_TORUS_PLANE_ANGLE_DEG = 60;
 export const POSTURE_TALON_BACKWARD_ANGLE_DEG = 40;
 export const POSTURE_TALON_FOOT_ANGLE_DEG = 90;
 export const POSTURE_TALON_PEDAL_PLANE_OFFSET_MM = 0;
+export const POSTURE_TOE_PEDAL_PLANE_OFFSET_MM = 15;
 const SEAT_BASE_FRONT_ANCHOR_REAR_OFFSET_MM = 38;
 export const POSTURE_HIP_FORWARD_ON_SEAT_MM = 70;
 export const POSTURE_HIP_ABOVE_SEAT_MM = 130;
@@ -336,6 +339,8 @@ function solvePedalFootCandidate(
   toeBoneLength: number
 ): PedalFootTarget | null {
   const heel: Vector = [heelX, pedalPlatePivot[1], pedalPlatePivot[2]];
+  const pedalPlaneNormal = getPedalPlaneNormal(pedalDirection);
+  const toePlanePivot = add(pedalFacePivot, scale(pedalPlaneNormal, mm(POSTURE_TOE_PEDAL_PLANE_OFFSET_MM)));
   const talonToToeStartLength = Math.sqrt(
     Math.max(
       0,
@@ -344,7 +349,7 @@ function solvePedalFootCandidate(
         2 * heelLength * footStartLength * Math.cos(POSTURE_TALON_FOOT_ANGLE_RAD)
     )
   );
-  const facePivotToHeel = subtract(pedalFacePivot, heel);
+  const facePivotToHeel = subtract(toePlanePivot, heel);
   const faceQuadraticB = dot(facePivotToHeel, pedalDirection);
   const faceQuadraticC = dot(facePivotToHeel, facePivotToHeel) - talonToToeStartLength * talonToToeStartLength;
   const discriminant = faceQuadraticB * faceQuadraticB - faceQuadraticC;
@@ -356,8 +361,8 @@ function solvePedalFootCandidate(
   const sqrtDiscriminant = Math.sqrt(Math.max(0, discriminant));
   const toeStartOffsets = [-faceQuadraticB - sqrtDiscriminant, -faceQuadraticB + sqrtDiscriminant];
   const toeStarts = toeStartOffsets
-    .map((offset) => add(pedalFacePivot, scale(pedalDirection, offset)))
-    .filter((toeStart) => dot(subtract(toeStart, pedalFacePivot), pedalDirection) >= -EPSILON);
+    .map((offset) => add(toePlanePivot, scale(pedalDirection, offset)))
+    .filter((toeStart) => dot(subtract(toeStart, toePlanePivot), pedalDirection) >= -EPSILON);
 
   if (toeStarts.length === 0) {
     return null;
@@ -393,7 +398,7 @@ function scorePedalFootCandidate(candidate: PedalFootTarget, context: PedalFootS
     0,
     context.kneeLift,
   ]);
-  const ranges = getPlannerPostureTargetRanges(context.preset);
+  const ranges = getPlannerPostureTargetRanges(context.preset, context.targetRangesByPreset);
   const ankleBend = angleBetweenSegmentsDeg(leg.joint, candidate.ankle, candidate.toeStart, candidate.heel);
   const footToToeBend = angleDecreaseFromOriginalDeg(
     FOOT_TO_TOE_ORIGINAL_POSTURE_ANGLE_DEG,
@@ -434,6 +439,7 @@ function getPedalTarget(
   const slideMinM = mm(input.seatBaseDepthMm + input.pedalTrayDistanceMm);
   const pivotXM = pedalFacePivot[0];
   const pedalPlaneNormal = getPedalPlaneNormal(pedalDirection);
+  const toePlaneOffsetM = mm(POSTURE_TOE_PEDAL_PLANE_OFFSET_MM);
   const talonPedalPlaneOffsetXM =
     mm(POSTURE_TALON_PEDAL_PLANE_OFFSET_MM) / Math.max(EPSILON, Math.abs(pedalPlaneNormal[0]));
   const slideMaxM = Math.max(
@@ -446,7 +452,11 @@ function getPedalTarget(
   );
   const slideContactXM =
     Math.abs(pedalPlaneNormal[0]) > EPSILON
-      ? pedalFacePivot[0] - dot(footContactOffset, pedalPlaneNormal) / pedalPlaneNormal[0]
+      ? (toePlaneOffsetM +
+          dot(pedalFacePivot, pedalPlaneNormal) -
+          pedalPlatePivot[2] * pedalPlaneNormal[2] -
+          dot(footContactOffset, pedalPlaneNormal)) /
+        pedalPlaneNormal[0]
       : pivotXM;
   const fallbackHeel: Vector = [clamp(slideContactXM, slideMinM, slideMaxM), pedalPlatePivot[1], pedalPlatePivot[2]];
   const fallbackAnkle = add(fallbackHeel, scale(talonTailToAnkleDirection, heelLength));
@@ -668,6 +678,7 @@ export function getPlannerPostureFootContactErrorMm(
   const pedalPlaneNormal = getPedalPlaneNormal(pedalDirection);
   const pedalCentersYmm = getPedalCentersYmm(input);
   const talonPlaneOffsetM = mm(POSTURE_TALON_PEDAL_PLANE_OFFSET_MM);
+  const toePlaneOffsetM = mm(POSTURE_TOE_PEDAL_PLANE_OFFSET_MM);
   const getFootError = (
     platePivot: Vector,
     facePivot: Vector,
@@ -683,9 +694,9 @@ export function getPlannerPostureFootContactErrorMm(
       Math.abs(heel[2] - platePivot[2]),
       Math.max(0, talonPlaneOffsetM - getPedalPlaneOffset(heel)),
       Math.abs(toeStart[1] - facePivot[1]),
-      Math.abs(getPedalPlaneOffset(toeStart)),
+      Math.abs(getPedalPlaneOffset(toeStart) - toePlaneOffsetM),
       Math.abs(toe[1] - facePivot[1]),
-      Math.abs(getPedalPlaneOffset(toe)),
+      Math.abs(getPedalPlaneOffset(toe) - toePlaneOffsetM),
       Math.abs(length(subtract(heel, ankle)) - heelLength),
       Math.abs(length(subtract(toeStart, ankle)) - footStartLength),
       Math.abs(length(subtract(toe, toeStart)) - toeBoneLength)
@@ -775,6 +786,7 @@ export function createPlannerPostureSkeleton(
     kneeLift,
     lowerLegLength,
     preset: settings.preset,
+    targetRangesByPreset: settings.targetRangesByPreset,
     thighLength,
   });
   const leftPedal = getPedalTarget(input, pedalCentersYmm.brake, pedalFootLength, heelLength, {
@@ -782,6 +794,7 @@ export function createPlannerPostureSkeleton(
     kneeLift,
     lowerLegLength,
     preset: settings.preset,
+    targetRangesByPreset: settings.targetRangesByPreset,
     thighLength,
   });
   const upperArmLength = ratios.upperArmLength * heightM;

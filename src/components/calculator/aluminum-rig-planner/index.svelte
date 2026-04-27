@@ -1,6 +1,17 @@
 <script lang="ts">
   import { onMount, tick, type Component } from 'svelte';
-  import { Button, Checkbox, Color, Element, Folder, List, Pane, Slider } from 'svelte-tweakpane-ui';
+  import {
+    Button,
+    Checkbox,
+    Color,
+    Element,
+    Folder,
+    IntervalSlider,
+    List,
+    Pane,
+    Slider,
+    type IntervalSliderValue,
+  } from 'svelte-tweakpane-ui';
 
   import {
     DEFAULT_CURRENCY_LOCALE,
@@ -50,7 +61,11 @@
   import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
   import { createPlannerOptimizationResult } from './optimizer';
-  import { createPlannerPostureReport, type PlannerPostureReport } from './posture-report';
+  import { createPlannerPostureReport, type PlannerPostureMetric, type PlannerPostureReport } from './posture-report';
+  import {
+    clonePlannerPostureTargetRangesByPreset,
+    getPlannerPostureTargetRangeControlLimits,
+  } from './posture-targets';
   import {
     applyPresetToPlannerInput,
     applyPresetToPostureSettings,
@@ -79,6 +94,8 @@
     PlannerOptimizationSettings,
     PlannerPosturePreset,
     PlannerPostureSettings,
+    PlannerPostureTargetKey,
+    PlannerPostureTargetRange,
     PlannerVisibleModules,
   } from './types';
 
@@ -114,6 +131,9 @@
   };
   const DEFAULT_POSTURE_SETTINGS: PlannerPostureSettings<PlannerPosturePreset> = {
     ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+    targetRangesByPreset: clonePlannerPostureTargetRangesByPreset(
+      DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
+    ),
   };
   const PLANNER_TEST_ID_TARGETS = [
     {
@@ -193,7 +213,10 @@
   function clonePostureSettings(
     settings: PlannerPostureSettings<PlannerPosturePreset>
   ): PlannerPostureSettings<PlannerPosturePreset> {
-    return { ...settings };
+    return {
+      ...settings,
+      targetRangesByPreset: clonePlannerPostureTargetRangesByPreset(settings.targetRangesByPreset),
+    };
   }
 
   function applyQueryState(state: PlannerQueryState) {
@@ -297,7 +320,8 @@
           plannerInput,
           postureSettings.preset,
           postureSettings.heightCm,
-          model.postureModelMetrics
+          model.postureModelMetrics,
+          postureSettings.targetRangesByPreset
         );
 
         assignProgrammaticPlannerInput(nextInput);
@@ -1071,7 +1095,13 @@
     postureSettings.preset = value;
 
     if (isPresetSolvablePreset(value)) {
-      const nextInput = applyPresetToPlannerInput(plannerInput, value, postureSettings.heightCm, postureModelMetrics);
+      const nextInput = applyPresetToPlannerInput(
+        plannerInput,
+        value,
+        postureSettings.heightCm,
+        postureModelMetrics,
+        postureSettings.targetRangesByPreset
+      );
 
       assignProgrammaticPlannerInput(nextInput);
       postureSettings.monitorHeightFromBaseMm = applyPresetToPostureSettings(
@@ -1093,7 +1123,8 @@
       plannerInput,
       postureSettings.preset,
       postureSettings.heightCm,
-      postureModelMetrics
+      postureModelMetrics,
+      postureSettings.targetRangesByPreset
     );
 
     assignProgrammaticPlannerInput(nextInput, { animate: true });
@@ -1101,7 +1132,8 @@
       nextInput,
       postureSettings.preset,
       postureSettings.heightCm,
-      postureModelMetrics
+      postureModelMetrics,
+      postureSettings.targetRangesByPreset
     );
     syncPlannerUrlState();
   }
@@ -1157,7 +1189,8 @@
         plannerInput,
         postureSettings.preset,
         nextHeightCm,
-        postureModelMetrics
+        postureModelMetrics,
+        postureSettings.targetRangesByPreset
       );
 
       assignProgrammaticPlannerInput(nextInput, { animate: animateTransition });
@@ -1228,6 +1261,40 @@
   function setShowPostureSkeleton(value: boolean) {
     postureSettings.showSkeleton = value;
     syncPlannerUrlState();
+  }
+
+  function setPostureAdvanced(value: boolean) {
+    postureSettings.advanced = value;
+    syncPlannerUrlState();
+  }
+
+  function getPostureTargetRange(key: PlannerPostureTargetKey) {
+    return postureSettings.targetRangesByPreset[postureSettings.preset][key];
+  }
+
+  function normalizePostureTargetRangeValue(value: IntervalSliderValue): PlannerPostureTargetRange {
+    return Array.isArray(value) ? { min: value[0], max: value[1] } : value;
+  }
+
+  function clampPostureTargetRangeValue(value: number, key: PlannerPostureTargetKey) {
+    const limits = getPlannerPostureTargetRangeControlLimits(postureSettings.preset, key);
+
+    return Math.max(limits.min, Math.min(limits.max, value));
+  }
+
+  function setPostureTargetRange(key: PlannerPostureTargetKey, value: IntervalSliderValue) {
+    const range = getPostureTargetRange(key);
+    const nextRange = normalizePostureTargetRangeValue(value);
+    const nextMin = clampPostureTargetRangeValue(Math.min(nextRange.min, nextRange.max), key);
+    const nextMax = clampPostureTargetRangeValue(Math.max(nextRange.min, nextRange.max), key);
+
+    range.min = nextMin;
+    range.max = nextMax;
+    syncPlannerUrlState();
+  }
+
+  function formatPostureTargetValue(value: number, unit: PlannerPostureMetric['unit']) {
+    return unit === 'deg' ? `${value.toFixed(0)}°` : `${value.toFixed(0)} mm`;
   }
 
   function setOptimizerMode(value: PlannerOptimizationSettings['mode']) {
@@ -1395,6 +1462,7 @@
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
         <Pane title="Posture" position="inline" bind:expanded={paneExpanded.posture}>
+          <Checkbox bind:value={() => postureSettings.advanced, setPostureAdvanced} label="Advanced" />
           <Folder title="Driver">
             <List
               bind:value={() => postureSettings.preset, setPosturePreset}
@@ -1414,6 +1482,21 @@
             <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Model" />
             <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Skeleton" />
           </Folder>
+          {#if postureSettings.advanced}
+            <Folder title="Posture target">
+              {#each postureReport.metrics as metric (metric.key)}
+                {@const sliderLimits = getPlannerPostureTargetRangeControlLimits(postureSettings.preset, metric.key)}
+                <IntervalSlider
+                  bind:value={() => getPostureTargetRange(metric.key), (value) => setPostureTargetRange(metric.key, value)}
+                  label={metric.label}
+                  min={sliderLimits.min}
+                  max={sliderLimits.max}
+                  step={1}
+                  format={(value) => formatPostureTargetValue(value, metric.unit)}
+                />
+              {/each}
+            </Folder>
+          {/if}
           <Folder title="Monitor">
             <Slider
               bind:value={() => postureSettings.monitorSizeIn, setMonitorSizeIn}
