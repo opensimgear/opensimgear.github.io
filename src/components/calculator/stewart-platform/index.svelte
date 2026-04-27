@@ -106,6 +106,7 @@
   let sceneCameraMode = $state<CameraProjectionMode>('perspective');
   let spaceMouseMotionTarget = $state<ThreeSpaceMouseMotionTarget>('scene');
   let sceneRef = $state<StewartSceneHandle | null>(null);
+  let statusPanelOpen = $state(false);
 
   function syncViewportState(width: number, resetPanes = false) {
     const nextIsNarrow = isNarrowStewartViewport(width);
@@ -114,6 +115,10 @@
 
     if (viewportChanged) {
       isNarrowViewport = nextIsNarrow;
+
+      if (nextIsNarrow && spaceMouseMotionTarget === 'platform') {
+        spaceMouseMotionTarget = 'scene';
+      }
     }
 
     if (nextPaneExpanded !== paneExpanded) {
@@ -421,11 +426,11 @@
   }
 
   function getPlatformCenterOfRotation() {
-    return [
-      centerOfRotationRelative.x,
-      centerOfRotationRelative.y,
-      centerOfRotationRelative.z + platformHeight,
-    ] as [number, number, number];
+    return [centerOfRotationRelative.x, centerOfRotationRelative.y, centerOfRotationRelative.z + platformHeight] as [
+      number,
+      number,
+      number,
+    ];
   }
 
   function getPlatformAffine() {
@@ -464,7 +469,7 @@
           >
             <ViewportCameraControls
               activeCameraMode={sceneCameraMode}
-              {spaceMouseMotionTarget}
+              spaceMouseMotionTarget={isNarrowViewport ? null : spaceMouseMotionTarget}
               topOffsetPx={getSceneControlsTopOffsetPx(getStewartGizmoSize(isNarrowViewport))}
               onResetView={async () => {
                 await sceneRef?.resetCameraView();
@@ -475,10 +480,12 @@
                 sceneCameraMode = mode;
                 focusViewport();
               }}
-              onSetSpaceMouseMotionTarget={async (target) => {
-                spaceMouseMotionTarget = target;
-                focusViewport();
-              }}
+              onSetSpaceMouseMotionTarget={isNarrowViewport
+                ? null
+                : async (target) => {
+                    spaceMouseMotionTarget = target;
+                    focusViewport();
+                  }}
             />
             <Canvas>
               <Scene
@@ -503,26 +510,84 @@
                 {viewportElement}
               />
             </Canvas>
-            <div class={getStewartStatusPanelClassNames(isNarrowViewport)}>
-              <div
-                class:is-mobile-status={isNarrowViewport}
-                class="mb-1.5 text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500"
-              >
-                Platform
-              </div>
-              <div
-                class:is-mobile-status-grid={isNarrowViewport}
-                class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-gray-500"
-              >
-                <span>Pitch</span><span class="text-right">{platformRotation.x.toFixed(1)}°</span>
-                <span>Roll</span><span class="text-right">{platformRotation.y.toFixed(1)}°</span>
-                <span>Yaw</span><span class="text-right">{platformRotation.z.toFixed(1)}°</span>
-                <span>Surge</span><span class="text-right">{(platformTranslation.x * 1000).toFixed(0)} mm</span>
-                <span>Sway</span><span class="text-right">{(platformTranslation.y * 1000).toFixed(0)} mm</span>
-                <span class="pr-2">Heave</span><span class="text-right"
-                  >{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span
+            <div
+              class={getStewartStatusPanelClassNames(isNarrowViewport, statusPanelOpen)}
+              role={isNarrowViewport ? 'button' : undefined}
+              tabindex={isNarrowViewport ? 0 : undefined}
+              aria-label={isNarrowViewport
+                ? statusPanelOpen
+                  ? 'Collapse platform status'
+                  : 'Expand platform status'
+                : undefined}
+              aria-expanded={isNarrowViewport ? statusPanelOpen : undefined}
+              onclick={isNarrowViewport
+                ? () => {
+                    statusPanelOpen = !statusPanelOpen;
+                  }
+                : undefined}
+              onkeydown={isNarrowViewport
+                ? (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      statusPanelOpen = !statusPanelOpen;
+                    }
+                  }
+                : undefined}
+            >
+              {#if isNarrowViewport && !statusPanelOpen}
+                <div class="flex items-center gap-2 text-gray-600">
+                  <span class="font-semibold">Platform</span>
+                  <span>P {platformRotation.x.toFixed(1)}°</span>
+                  <span>R {platformRotation.y.toFixed(1)}°</span>
+                  <span>H {((platformHeight + platformTranslation.z) * 1000).toFixed(0)}</span>
+                  <svg
+                    viewBox="0 0 12 12"
+                    class="ml-auto h-2.5 w-2.5 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"
+                  >
+                    <path d="M3 5l3 3 3-3" />
+                  </svg>
+                </div>
+              {:else}
+                <div
+                  class:is-mobile-status={isNarrowViewport}
+                  class="mb-1.5 text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500"
                 >
-              </div>
+                  {#if isNarrowViewport}
+                    <div class="flex items-center justify-between">
+                      <span>Platform</span>
+                      <svg
+                        viewBox="0 0 12 12"
+                        class="h-2.5 w-2.5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        aria-hidden="true"
+                      >
+                        <path d="M3 7l3-3 3 3" />
+                      </svg>
+                    </div>
+                  {:else}
+                    Platform
+                  {/if}
+                </div>
+                <div
+                  class:is-mobile-status-grid={isNarrowViewport}
+                  class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-gray-500"
+                >
+                  <span>Pitch</span><span class="text-right">{platformRotation.x.toFixed(1)}°</span>
+                  <span>Roll</span><span class="text-right">{platformRotation.y.toFixed(1)}°</span>
+                  <span>Yaw</span><span class="text-right">{platformRotation.z.toFixed(1)}°</span>
+                  <span>Surge</span><span class="text-right">{(platformTranslation.x * 1000).toFixed(0)} mm</span>
+                  <span>Sway</span><span class="text-right">{(platformTranslation.y * 1000).toFixed(0)} mm</span>
+                  <span class="pr-2">Heave</span><span class="text-right"
+                    >{((platformHeight + platformTranslation.z) * 1000).toFixed(0)} mm</span
+                  >
+                </div>
+              {/if}
             </div>
           </div>
         </div>
@@ -534,36 +599,91 @@
       >
         <Pane title="Parameters" position="inline" bind:expanded={paneExpanded.parameters}>
           <Slider
-            bind:value={() => baseDiameter, (value) =>
-              applyParameterState({ baseDiameter: value, platformDiameter, alphaP, alphaB, cor, actuatorMin, actuatorMax })}
+            bind:value={
+              () => baseDiameter,
+              (value) =>
+                applyParameterState({
+                  baseDiameter: value,
+                  platformDiameter,
+                  alphaP,
+                  alphaB,
+                  cor,
+                  actuatorMin,
+                  actuatorMax,
+                })
+            }
             label="Base Diameter"
             {...configLinear}
             min={0}
             max={3}
           />
           <Slider
-            bind:value={() => platformDiameter, (value) =>
-              applyParameterState({ baseDiameter, platformDiameter: value, alphaP, alphaB, cor, actuatorMin, actuatorMax })}
+            bind:value={
+              () => platformDiameter,
+              (value) =>
+                applyParameterState({
+                  baseDiameter,
+                  platformDiameter: value,
+                  alphaP,
+                  alphaB,
+                  cor,
+                  actuatorMin,
+                  actuatorMax,
+                })
+            }
             label="Platform Diameter"
             {...configLinear}
             min={0}
             max={baseDiameter}
           />
           <Slider
-            bind:value={() => alphaB, (value) =>
-              applyParameterState({ baseDiameter, platformDiameter, alphaP, alphaB: value, cor, actuatorMin, actuatorMax })}
+            bind:value={
+              () => alphaB,
+              (value) =>
+                applyParameterState({
+                  baseDiameter,
+                  platformDiameter,
+                  alphaP,
+                  alphaB: value,
+                  cor,
+                  actuatorMin,
+                  actuatorMax,
+                })
+            }
             label="Base Alpha"
             {...alphaOptions}
           />
           <Slider
-            bind:value={() => alphaP, (value) =>
-              applyParameterState({ baseDiameter, platformDiameter, alphaP: value, alphaB, cor, actuatorMin, actuatorMax })}
+            bind:value={
+              () => alphaP,
+              (value) =>
+                applyParameterState({
+                  baseDiameter,
+                  platformDiameter,
+                  alphaP: value,
+                  alphaB,
+                  cor,
+                  actuatorMin,
+                  actuatorMax,
+                })
+            }
             label="Platform Alpha"
             {...alphaOptions}
           />
           <Point
-            bind:value={() => cor, (value) =>
-              applyParameterState({ baseDiameter, platformDiameter, alphaP, alphaB, cor: value, actuatorMin, actuatorMax })}
+            bind:value={
+              () => cor,
+              (value) =>
+                applyParameterState({
+                  baseDiameter,
+                  platformDiameter,
+                  alphaP,
+                  alphaB,
+                  cor: value,
+                  actuatorMin,
+                  actuatorMax,
+                })
+            }
             label="Center of Rotation"
             {...configLinear}
             min={-platformDiameter}
@@ -574,16 +694,38 @@
         </Pane>
         <Pane title="Actuator Range" position="inline" bind:expanded={paneExpanded.actuatorRange}>
           <Slider
-            bind:value={() => actuatorMin, (value) =>
-              applyParameterState({ baseDiameter, platformDiameter, alphaP, alphaB, cor, actuatorMin: value, actuatorMax })}
+            bind:value={
+              () => actuatorMin,
+              (value) =>
+                applyParameterState({
+                  baseDiameter,
+                  platformDiameter,
+                  alphaP,
+                  alphaB,
+                  cor,
+                  actuatorMin: value,
+                  actuatorMax,
+                })
+            }
             label="Min Extension"
             {...configLinear}
             min={0.1}
             max={2}
           />
           <Slider
-            bind:value={() => actuatorMax, (value) =>
-              applyParameterState({ baseDiameter, platformDiameter, alphaP, alphaB, cor, actuatorMin, actuatorMax: value })}
+            bind:value={
+              () => actuatorMax,
+              (value) =>
+                applyParameterState({
+                  baseDiameter,
+                  platformDiameter,
+                  alphaP,
+                  alphaB,
+                  cor,
+                  actuatorMin,
+                  actuatorMax: value,
+                })
+            }
             label="Max Extension"
             {...configLinear}
             min={getStewartActuatorMaxExtensionMin(actuatorMin)}

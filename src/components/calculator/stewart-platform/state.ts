@@ -102,9 +102,16 @@ export function getStewartGizmoSize(isNarrow: boolean) {
   return isNarrow ? 48 : 64;
 }
 
-export function getStewartStatusPanelClassNames(isNarrow: boolean) {
+export function getStewartStatusPanelClassNames(isNarrow: boolean, isOpen: boolean) {
   if (isNarrow) {
-    return 'absolute inset-x-2 bottom-2 rounded border border-gray-300 bg-white/80 px-2 py-1.5 text-[8px] font-mono backdrop-blur-sm pointer-events-none select-none';
+    const base =
+      'absolute bottom-2 right-2 rounded border border-gray-300 bg-white/80 font-mono backdrop-blur-sm select-none transition-all duration-200';
+
+    if (isOpen) {
+      return `${base} px-2 py-1.5 text-[8px] max-w-[calc(100%-52px)]`;
+    }
+
+    return `${base} px-2 py-1 text-[8px] cursor-pointer`;
   }
 
   return 'absolute bottom-3 right-3 rounded border border-gray-300 bg-white/80 px-3 py-2 text-xs font-mono backdrop-blur-sm pointer-events-none select-none';

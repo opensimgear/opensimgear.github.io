@@ -53,18 +53,18 @@
   };
 </script>
 
-<div class="pointer-events-none absolute right-4 z-10" style={`top: ${topOffsetPx}px;`}>
-  <div class="pointer-events-auto flex flex-col items-end gap-1.5 text-zinc-700">
+<div class="scene-controls-wrapper pointer-events-none absolute right-4 z-10" style={`top: ${topOffsetPx}px;`}>
+  <div class="pointer-events-auto scene-controls-group flex flex-col items-end gap-1.5 text-zinc-700">
     <button
       type="button"
-      class="grid h-8 w-8 place-items-center rounded-full border border-white/30 bg-white/10 text-zinc-500 backdrop-blur-sm transition hover:border-white/60 hover:bg-white/25 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2"
+      class="scene-control-btn grid h-8 w-8 place-items-center rounded-full border border-white/30 bg-white/10 text-zinc-500 backdrop-blur-sm transition hover:border-white/60 hover:bg-white/25 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2"
       aria-label="Reset camera view"
       title="Reset view"
       onclick={resetView}
     >
       <svg
         viewBox="0 0 24 24"
-        class="h-4.5 w-4.5"
+        class="scene-control-icon h-4.5 w-4.5"
         fill="none"
         stroke="currentColor"
         stroke-width="1.8"
@@ -82,7 +82,7 @@
       <button
         type="button"
         class={[
-          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
+          'scene-control-btn grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
           spaceMouseMotionTarget === 'platform'
             ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
             : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
@@ -96,7 +96,7 @@
       >
         <svg
           viewBox="0 0 24 24"
-          class="h-4.5 w-4.5"
+          class="scene-control-icon h-4.5 w-4.5"
           fill="none"
           stroke="currentColor"
           stroke-width="1.8"
@@ -117,7 +117,7 @@
       <button
         type="button"
         class={[
-          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
+          'scene-control-btn grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
           activeCameraMode === 'perspective'
             ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
             : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
@@ -131,7 +131,7 @@
       >
         <svg
           viewBox="0 0 24 24"
-          class="h-4.5 w-4.5"
+          class="scene-control-icon h-4.5 w-4.5"
           fill="none"
           stroke="currentColor"
           stroke-width="1.8"
@@ -149,7 +149,7 @@
       <button
         type="button"
         class={[
-          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
+          'scene-control-btn grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
           activeCameraMode === 'orthographic'
             ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
             : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
@@ -163,7 +163,7 @@
       >
         <svg
           viewBox="0 0 24 24"
-          class="h-4.5 w-4.5"
+          class="scene-control-icon h-4.5 w-4.5"
           fill="none"
           stroke="currentColor"
           stroke-width="1.8"
@@ -183,7 +183,7 @@
       <button
         type="button"
         class={[
-          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
+          'scene-control-btn grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
           topFovOverlayActive
             ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
             : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
@@ -195,7 +195,7 @@
       >
         <svg
           viewBox="0 0 24 24"
-          class="h-4.5 w-4.5"
+          class="scene-control-icon h-4.5 w-4.5"
           fill="none"
           stroke="currentColor"
           stroke-width="1.8"
@@ -212,3 +212,33 @@
     {/if}
   </div>
 </div>
+
+<style>
+  @media (max-width: 1023px) {
+    .scene-controls-wrapper {
+      right: auto !important;
+      left: 1rem;
+      top: 0.75rem !important;
+    }
+
+    .scene-controls-group {
+      align-items: flex-start !important;
+    }
+  }
+
+  @media (pointer: coarse) {
+    .scene-controls-group {
+      gap: 0.5rem;
+    }
+
+    :global(.scene-control-btn) {
+      width: 2.5rem !important;
+      height: 2.5rem !important;
+    }
+
+    :global(.scene-control-icon) {
+      width: 1.25rem !important;
+      height: 1.25rem !important;
+    }
+  }
+</style>

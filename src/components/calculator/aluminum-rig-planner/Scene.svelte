@@ -47,6 +47,7 @@
     visibleModules,
     onOptimizePosture,
   }: Props = $props();
+  let posturePanelOpen = $state(false);
   const ORTHOGRAPHIC_ASPECT_RATIO = 3 / 2;
   const PERSPECTIVE_FOV_RADIANS = (50 * Math.PI) / 180;
   const TOP_FOV_CAMERA_UP: [number, number, number] = [0, 1, 0];
@@ -292,6 +293,24 @@
     };
   }
 
+  function togglePosturePanel() {
+    posturePanelOpen = !posturePanelOpen;
+  }
+
+  function handleViewportClick(event: MouseEvent) {
+    if (!posturePanelOpen || !isNarrowViewport) {
+      return;
+    }
+
+    const target = event.target as HTMLElement;
+
+    if (target.closest('.posture-debug-panel')) {
+      return;
+    }
+
+    posturePanelOpen = false;
+  }
+
   onMount(() => {
     spaceMouseBridge = new ThreeSpaceMouseBridge({
       scene: {
@@ -324,6 +343,7 @@
   tabindex="-1"
   role="application"
   aria-label="3D aluminum rig planner viewport"
+  onclick={handleViewportClick}
 >
   <ViewportCameraControls
     activeCameraMode={useOrthographicCamera ? 'orthographic' : 'perspective'}
@@ -435,9 +455,15 @@
     </div>
   {/if}
 
-  <div class="posture-debug-panel" aria-label="Posture metrics">
+  <div class="posture-debug-panel" class:is-open={posturePanelOpen} aria-label="Posture metrics">
     <div class="posture-debug-panel__surface">
-      <button class="posture-debug-panel__trigger" type="button" aria-label={posturePanelLabel}>
+      <button
+        class="posture-debug-panel__trigger"
+        type="button"
+        aria-label={posturePanelLabel}
+        aria-expanded={posturePanelOpen}
+        onclick={togglePosturePanel}
+      >
         <svg class="posture-debug-panel__driver-icon" viewBox="0 0 42 42" aria-hidden="true">
           <circle class="posture-debug-panel__driver-head" cx="12.5" cy="7.2" r="3.8" />
           <path class="posture-debug-panel__driver-bone" d="M12.5 10.8 12.5 14" />
@@ -597,7 +623,8 @@
   }
 
   .posture-debug-panel:hover .posture-debug-panel__surface,
-  .posture-debug-panel:focus-within .posture-debug-panel__surface {
+  .posture-debug-panel:focus-within .posture-debug-panel__surface,
+  .posture-debug-panel.is-open .posture-debug-panel__surface {
     max-height: min(86vh, 560px);
     width: min(420px, calc(100vw - 24px));
   }
@@ -622,8 +649,10 @@
   }
 
   .posture-debug-panel:hover .posture-debug-panel__trigger,
-  .posture-debug-panel:focus-within .posture-debug-panel__trigger {
+  .posture-debug-panel:focus-within .posture-debug-panel__trigger,
+  .posture-debug-panel.is-open .posture-debug-panel__trigger {
     opacity: 0;
+    pointer-events: none;
   }
 
   .posture-debug-panel__driver-icon {
@@ -701,7 +730,8 @@
   }
 
   .posture-debug-panel:hover .posture-debug-panel__content,
-  .posture-debug-panel:focus-within .posture-debug-panel__content {
+  .posture-debug-panel:focus-within .posture-debug-panel__content,
+  .posture-debug-panel.is-open .posture-debug-panel__content {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
@@ -752,7 +782,8 @@
   }
 
   .posture-debug-panel:hover .posture-debug-panel__optimize,
-  .posture-debug-panel:focus-within .posture-debug-panel__optimize {
+  .posture-debug-panel:focus-within .posture-debug-panel__optimize,
+  .posture-debug-panel.is-open .posture-debug-panel__optimize {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
@@ -811,5 +842,37 @@
   .posture-debug-panel__hints p {
     margin: 0;
     overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 1023px) {
+    .posture-debug-panel__metric {
+      grid-template-columns: minmax(0, 1fr) auto auto auto;
+      font-size: 9px;
+    }
+
+    .posture-debug-panel__content {
+      padding: 14px 8px 40px;
+    }
+
+    .posture-debug-panel__header {
+      margin-bottom: 4px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .posture-debug-panel__metric {
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 4px;
+    }
+
+    .posture-debug-panel__range {
+      display: none;
+    }
+
+    .posture-debug-panel:hover .posture-debug-panel__surface,
+    .posture-debug-panel:focus-within .posture-debug-panel__surface,
+    .posture-debug-panel.is-open .posture-debug-panel__surface {
+      width: min(280px, calc(100vw - 24px));
+    }
   }
 </style>

@@ -48,6 +48,7 @@
     profileColor,
     onHoveredCutListKeyChange,
   }: Props = $props();
+  let cutListCollapsed = $state(true);
   let visualLayoutExportRoot = $state<HTMLDivElement | null>(null);
   let purchaseSummaryExportRoot = $state<HTMLDivElement | null>(null);
   let exportMenuOpen = $state(false);
@@ -431,39 +432,55 @@
 </script>
 
 <section data-testid="aluminum-rig-planner-cut-optimizer" class="border-t border-zinc-300 bg-white">
-  <div class={isNarrowViewport ? 'space-y-3 px-0 py-3 sm:space-y-4 sm:px-4 sm:py-4' : 'space-y-4 p-4'}>
-    {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
-      <div bind:this={visualLayoutExportRoot} class="rounded border border-zinc-200 bg-zinc-50">
-        <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
-          <div class="flex flex-col gap-3">
-            <div class="flex items-start justify-between gap-3">
-              <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
-                <span
-                  class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-sky-200 bg-sky-50 text-sky-700"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    class="h-3.5 w-3.5"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path>
-                    <path d="M4 12h8"></path>
-                    <path d="M12 15h8"></path>
-                    <path d="M12 9h8"></path>
-                    <path d="M12 4v16"></path>
-                  </svg>
-                </span>
-                <span>Visual Cut Layout</span>
-              </h3>
-              <div class="planner-export-controls flex items-center justify-start">
-                <details bind:open={exportMenuOpen} class="export-menu">
-                  <summary
-                    class="control-chip control-chip--slate flex cursor-pointer list-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
+  {#if isNarrowViewport}
+    <button
+      type="button"
+      class="cut-list-toggle flex w-full items-center justify-between border-b border-zinc-200 bg-zinc-50/80 px-4 py-2.5 text-left text-sm font-semibold text-zinc-800 transition-colors hover:bg-zinc-100/80"
+      aria-expanded={!cutListCollapsed}
+      onclick={() => {
+        cutListCollapsed = !cutListCollapsed;
+      }}
+    >
+      <span class="flex items-center gap-2">
+        <svg
+          viewBox="0 0 24 24"
+          class="h-4 w-4 text-zinc-500"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path>
+          <path d="M4 12h8"></path>
+          <path d="M12 4v16"></path>
+        </svg>
+        Cut List & Optimizer
+      </span>
+      <svg
+        viewBox="0 0 12 12"
+        class="h-3 w-3 text-zinc-400 transition-transform duration-200"
+        class:rotate-180={!cutListCollapsed}
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M3 5l3 3 3-3" />
+      </svg>
+    </button>
+  {/if}
+  {#if !isNarrowViewport || !cutListCollapsed}
+    <div class={isNarrowViewport ? 'space-y-3 px-0 py-3 sm:space-y-4 sm:px-4 sm:py-4' : 'space-y-4 p-4'}>
+      {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
+        <div bind:this={visualLayoutExportRoot} class="rounded border border-zinc-200 bg-zinc-50">
+          <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
+                  <span
+                    class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-sky-200 bg-sky-50 text-sky-700"
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -475,114 +492,152 @@
                       stroke-linejoin="round"
                       aria-hidden="true"
                     >
-                      <path d="M12 3v12"></path>
-                      <path d="m7 10l5 5l5-5"></path>
-                      <path d="M5 21h14"></path>
+                      <path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path>
+                      <path d="M4 12h8"></path>
+                      <path d="M12 15h8"></path>
+                      <path d="M12 9h8"></path>
+                      <path d="M12 4v16"></path>
                     </svg>
-                    <span>Export</span>
-                  </summary>
-                  <div class="export-menu__panel">
-                    <div class="export-menu__eyebrow">Print export</div>
-                    <div class="export-menu__copy">Deactivate any section before opening print preview.</div>
-                    <label class="export-menu__option">
-                      <input bind:checked={exportSections.image} type="checkbox" />
-                      <span>3D view screenshot</span>
-                    </label>
-                    <label class="export-menu__option">
-                      <input bind:checked={exportSections.visualLayout} type="checkbox" />
-                      <span>Visual cut layout</span>
-                    </label>
-                    <label class="export-menu__option">
-                      <input bind:checked={exportSections.purchaseSummary} type="checkbox" />
-                      <span>Purchase summary</span>
-                    </label>
-                    <button type="button" class="export-menu__action" disabled={!canRunExport} onclick={runPrintExport}>
-                      Open print preview
-                    </button>
-                  </div>
-                </details>
+                  </span>
+                  <span>Visual Cut Layout</span>
+                </h3>
+                <div class="planner-export-controls flex items-center justify-start">
+                  <details bind:open={exportMenuOpen} class="export-menu">
+                    <summary
+                      class="control-chip control-chip--slate flex cursor-pointer list-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        class="h-3.5 w-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 3v12"></path>
+                        <path d="m7 10l5 5l5-5"></path>
+                        <path d="M5 21h14"></path>
+                      </svg>
+                      <span>Export</span>
+                    </summary>
+                    <div class="export-menu__panel">
+                      <div class="export-menu__eyebrow">Print export</div>
+                      <div class="export-menu__copy">Deactivate any section before opening print preview.</div>
+                      <label class="export-menu__option">
+                        <input bind:checked={exportSections.image} type="checkbox" />
+                        <span>3D view screenshot</span>
+                      </label>
+                      <label class="export-menu__option">
+                        <input bind:checked={exportSections.visualLayout} type="checkbox" />
+                        <span>Visual cut layout</span>
+                      </label>
+                      <label class="export-menu__option">
+                        <input bind:checked={exportSections.purchaseSummary} type="checkbox" />
+                        <span>Purchase summary</span>
+                      </label>
+                      <button
+                        type="button"
+                        class="export-menu__action"
+                        disabled={!canRunExport}
+                        onclick={runPrintExport}
+                      >
+                        Open print preview
+                      </button>
+                    </div>
+                  </details>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="overflow-hidden rounded bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-          {#each visualLayoutGroups as group (group.profileType)}
-            <section class="visual-layout-group border-b border-slate-200 last:border-b-0">
-              <div class="visual-layout-group__header flex items-center justify-between gap-3 px-3 py-2">
-                <div class="flex items-center gap-3">
-                  <div class="profile-name">
-                    {group.profileType}
+          <div class="overflow-hidden rounded bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+            {#each visualLayoutGroups as group (group.profileType)}
+              <section class="visual-layout-group border-b border-slate-200 last:border-b-0">
+                <div class="visual-layout-group__header flex items-center justify-between gap-3 px-3 py-2">
+                  <div class="flex items-center gap-3">
+                    <div class="profile-name">
+                      {group.profileType}
+                    </div>
+                    <div class="text-[11px] font-medium uppercase tracking-[0.16em] text-slate-500">profile bars</div>
                   </div>
-                  <div class="text-[11px] font-medium uppercase tracking-[0.16em] text-slate-500">profile bars</div>
+                  <div class="font-['Roboto_Mono',monospace] text-[11px] text-slate-500">
+                    {group.bars.length}
+                    {group.bars.length === 1 ? 'bar' : 'bars'}
+                  </div>
                 </div>
-                <div class="font-['Roboto_Mono',monospace] text-[11px] text-slate-500">
-                  {group.bars.length}
-                  {group.bars.length === 1 ? 'bar' : 'bars'}
-                </div>
-              </div>
-              <div class="visual-layout-group__rows">
-                {#each group.bars as bar (bar.id)}
-                  <article class="blueprint-row border-t border-slate-200 px-3 py-3 first:border-t-0">
-                    <div class="min-w-0">
-                      <div style={`width: ${getBarWidthPercent(bar)}%;`}>
-                        <div class="bar-ruler">
-                          {#each getBarTickMarks(bar) as tickMm (tickMm)}
-                            <span
-                              class={[
-                                'bar-ruler__tick',
-                                isEdgeTick(tickMm, bar) && 'bar-ruler__tick--edge',
-                                isMajorTick(tickMm) && 'bar-ruler__tick--major',
-                                tickMm === bar.stockLengthMm && 'bar-ruler__tick--end',
-                              ]}
-                              style={`left: ${(tickMm / bar.stockLengthMm) * 100}%;`}
-                            >
-                              {#if shouldShowTickLabel(tickMm, bar)}
-                                <span class="bar-ruler__label">{formatTickLabelMeters(tickMm)}</span>
-                              {/if}
-                            </span>
-                          {/each}
-                        </div>
-                        <div class="bar-shell">
-                          <div class="flex h-4 w-full">
-                            {#each bar.pieces as piece, pieceIndex (piece.id)}
-                              <button
-                                class="bar-piece m-0 flex h-full shrink-0 appearance-none overflow-hidden border-r border-slate-200 bg-transparent p-0"
-                                style={`width: ${getPieceAdjustedWidthPercent(piece, bar)}%;`}
-                                aria-label={`${piece.nominalLengthMm} mm material plus ${getPieceSafetyLengthPerSideMm(piece)} mm safety each side`}
-                                type="button"
-                                onmouseenter={() => onHoveredCutListKeyChange(piece.cutListKey)}
-                                onmouseleave={() => {
-                                  onHoveredCutListKeyChange(null);
-                                }}
+                <div class="visual-layout-group__rows">
+                  {#each group.bars as bar (bar.id)}
+                    <article class="blueprint-row border-t border-slate-200 px-3 py-3 first:border-t-0">
+                      <div class="min-w-0">
+                        <div style={`width: ${getBarWidthPercent(bar)}%;`}>
+                          <div class="bar-ruler">
+                            {#each getBarTickMarks(bar) as tickMm (tickMm)}
+                              <span
+                                class={[
+                                  'bar-ruler__tick',
+                                  isEdgeTick(tickMm, bar) && 'bar-ruler__tick--edge',
+                                  isMajorTick(tickMm) && 'bar-ruler__tick--major',
+                                  tickMm === bar.stockLengthMm && 'bar-ruler__tick--end',
+                                ]}
+                                style={`left: ${(tickMm / bar.stockLengthMm) * 100}%;`}
                               >
-                                {#if getPieceSafetyLengthMm(piece) > 0}
-                                  <span
-                                    class="h-full shrink-0"
-                                    style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
-                                  ></span>
+                                {#if shouldShowTickLabel(tickMm, bar)}
+                                  <span class="bar-ruler__label">{formatTickLabelMeters(tickMm)}</span>
                                 {/if}
-                                <span
-                                  class="bar-piece__material relative h-full shrink-0"
-                                  style={`width: ${getPieceNominalWidthPercent(piece)}%; background-color: ${getPieceColor()};`}
+                              </span>
+                            {/each}
+                          </div>
+                          <div class="bar-shell">
+                            <div class="flex h-4 w-full">
+                              {#each bar.pieces as piece, pieceIndex (piece.id)}
+                                <button
+                                  class="bar-piece m-0 flex h-full shrink-0 appearance-none overflow-hidden border-r border-slate-200 bg-transparent p-0"
+                                  style={`width: ${getPieceAdjustedWidthPercent(piece, bar)}%;`}
+                                  aria-label={`${piece.nominalLengthMm} mm material plus ${getPieceSafetyLengthPerSideMm(piece)} mm safety each side`}
+                                  type="button"
+                                  onmouseenter={() => onHoveredCutListKeyChange(piece.cutListKey)}
+                                  onmouseleave={() => {
+                                    onHoveredCutListKeyChange(null);
+                                  }}
                                 >
+                                  {#if getPieceSafetyLengthMm(piece) > 0}
+                                    <span
+                                      class="h-full shrink-0"
+                                      style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
+                                    ></span>
+                                  {/if}
+                                  <span
+                                    class="bar-piece__material relative h-full shrink-0"
+                                    style={`width: ${getPieceNominalWidthPercent(piece)}%; background-color: ${getPieceColor()};`}
+                                  >
+                                    {#if isPieceHighlighted(piece.cutListKey)}
+                                      <span class="bar-piece__highlight"></span>
+                                    {/if}
+                                    {#if shouldShowPieceLabel(piece, bar)}
+                                      <span class="bar-piece__label">{piece.nominalLengthMm}</span>
+                                    {/if}
+                                  </span>
+                                  {#if getPieceSafetyLengthMm(piece) > 0}
+                                    <span
+                                      class="relative h-full shrink-0"
+                                      style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
+                                    ></span>
+                                  {/if}
                                   {#if isPieceHighlighted(piece.cutListKey)}
                                     <span class="bar-piece__highlight"></span>
                                   {/if}
-                                  {#if shouldShowPieceLabel(piece, bar)}
-                                    <span class="bar-piece__label">{piece.nominalLengthMm}</span>
-                                  {/if}
-                                </span>
-                                {#if getPieceSafetyLengthMm(piece) > 0}
-                                  <span
-                                    class="relative h-full shrink-0"
-                                    style={`width: ${getPieceSafetyWidthPercentPerSide(piece)}%; background-color: ${getPieceSafetyColor()};`}
-                                  ></span>
+                                </button>
+                                {#if pieceIndex < bar.pieces.length - 1 && optimizationSettings.bladeThicknessMm > 0}
+                                  <div
+                                    class="bar-kerf h-full shrink-0"
+                                    style={`width: ${getKerfWidthPercent(bar)}%;`}
+                                    role="img"
+                                    aria-label={getKerfAriaLabel()}
+                                  ></div>
                                 {/if}
-                                {#if isPieceHighlighted(piece.cutListKey)}
-                                  <span class="bar-piece__highlight"></span>
-                                {/if}
-                              </button>
-                              {#if pieceIndex < bar.pieces.length - 1 && optimizationSettings.bladeThicknessMm > 0}
+                              {/each}
+                              {#if bar.pieces.length > 0 && optimizationSettings.bladeThicknessMm > 0}
                                 <div
                                   class="bar-kerf h-full shrink-0"
                                   style={`width: ${getKerfWidthPercent(bar)}%;`}
@@ -590,107 +645,39 @@
                                   aria-label={getKerfAriaLabel()}
                                 ></div>
                               {/if}
-                            {/each}
-                            {#if bar.pieces.length > 0 && optimizationSettings.bladeThicknessMm > 0}
-                              <div
-                                class="bar-kerf h-full shrink-0"
-                                style={`width: ${getKerfWidthPercent(bar)}%;`}
-                                role="img"
-                                aria-label={getKerfAriaLabel()}
-                              ></div>
-                            {/if}
-                            {#if getBarUnusedLengthMm(bar) > 0}
-                              <div
-                                class="bar-waste h-full shrink-0"
-                                style={`width: ${getBarUnusedWidthPercent(bar)}%;`}
-                                role="img"
-                                aria-label={getWasteAriaLabel(bar)}
-                                bind:clientWidth={null, (width) => setWasteWidth(bar.id, width)}
-                              >
-                                {#if shouldShowWasteLabel(bar)}
-                                  <span class="bar-waste__label">{getWasteLabelText(bar)}</span>
-                                {/if}
-                              </div>
-                            {/if}
+                              {#if getBarUnusedLengthMm(bar) > 0}
+                                <div
+                                  class="bar-waste h-full shrink-0"
+                                  style={`width: ${getBarUnusedWidthPercent(bar)}%;`}
+                                  role="img"
+                                  aria-label={getWasteAriaLabel(bar)}
+                                  bind:clientWidth={null, (width) => setWasteWidth(bar.id, width)}
+                                >
+                                  {#if shouldShowWasteLabel(bar)}
+                                    <span class="bar-waste__label">{getWasteLabelText(bar)}</span>
+                                  {/if}
+                                </div>
+                              {/if}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </article>
-                {/each}
-              </div>
-            </section>
-          {/each}
-        </div>
-      </div>
-    {/if}
-
-    <div class="flex flex-wrap items-start gap-4">
-      <div class="min-w-max flex-[1_1_max-content] space-y-4">
-        <div class="required-cuts-card w-full rounded border border-zinc-200">
-          <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
-            <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
-              <span
-                class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-emerald-200 bg-emerald-50 text-emerald-700"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  class="h-3.5 w-3.5"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
-                  <path d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2"></path>
-                  <path d="M9 12h.01"></path>
-                  <path d="M13 12h2"></path>
-                  <path d="M9 16h.01"></path>
-                  <path d="M13 16h2"></path>
-                </svg>
-              </span>
-              <span>Cut List</span>
-            </h3>
-          </div>
-          <div>
-            <table
-              class="min-w-full w-max border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
-            >
-              <thead>
-                <tr class="border-b border-zinc-200 bg-white text-zinc-600">
-                  <th class="px-2 py-1 text-left font-medium">Profile</th>
-                  <th class="px-2 py-1 text-right font-medium">Length</th>
-                  <th class="px-2 py-1 text-center font-medium">Qty</th>
-                </tr>
-              </thead>
-              <tbody>
-                {#each cutListEntries as entry (entry.key)}
-                  <tr
-                    class:required-cuts-row--highlight={hoveredCutListKey === entry.key}
-                    class="cursor-pointer border-b border-zinc-100 transition-colors last:border-b-0"
-                    onmouseenter={() => onHoveredCutListKeyChange(entry.key)}
-                    onmouseleave={() => onHoveredCutListKeyChange(null)}
-                  >
-                    <td class="px-2 py-1 font-medium text-zinc-800">{entry.profileType}</td>
-                    <td class="px-2 py-1 text-right text-zinc-600">{entry.lengthMm} mm</td>
-                    <td class="px-2 py-1 text-center text-zinc-600">{entry.quantity}</td>
-                  </tr>
-                {/each}
-              </tbody>
-            </table>
+                    </article>
+                  {/each}
+                </div>
+              </section>
+            {/each}
           </div>
         </div>
-      </div>
+      {/if}
 
-      <div class="min-w-max flex-[1_1_max-content] space-y-4">
-        <div bind:this={purchaseSummaryExportRoot} class="w-full rounded border border-zinc-200 bg-zinc-50">
-          <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
-            <div class="flex items-start justify-between gap-3 sm:items-center">
-              <h3 class="widget-card__title min-w-0 pr-2 font-sans text-sm font-semibold text-zinc-900">
+      <div class="flex flex-wrap items-start gap-4">
+        <div class="min-w-max flex-[1_1_max-content] space-y-4">
+          <div class="required-cuts-card w-full rounded border border-zinc-200">
+            <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
+              <h3 class="widget-card__title font-sans text-sm font-semibold text-zinc-900">
                 <span
-                  class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-amber-200 bg-amber-50 text-amber-700"
+                  class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-emerald-200 bg-emerald-50 text-emerald-700"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -702,126 +689,188 @@
                     stroke-linejoin="round"
                     aria-hidden="true"
                   >
-                    <path d="M4 19a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
-                    <path d="M15 19a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
-                    <path d="M17 17H6V3H4"></path>
-                    <path d="m6 5l14 1l-1 7H6"></path>
+                    <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
+                    <path d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2"></path>
+                    <path d="M9 12h.01"></path>
+                    <path d="M13 12h2"></path>
+                    <path d="M9 16h.01"></path>
+                    <path d="M13 16h2"></path>
                   </svg>
                 </span>
-                <span>Purchase Summary</span>
+                <span>Cut List</span>
               </h3>
-              {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
-                <button
-                  type="button"
-                  class="waste-tooltip-trigger control-chip control-chip--amber ml-auto flex shrink-0 cursor-help appearance-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
-                  aria-describedby="purchase-summary-waste-tooltip"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    class="h-3.5 w-3.5"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M4 7h16"></path>
-                    <path d="M10 11v6"></path>
-                    <path d="M14 11v6"></path>
-                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"></path>
-                    <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
-                  </svg>
-                  <span>{optimizationResult.totalWasteMm} mm</span>
-                  <span id="purchase-summary-waste-tooltip" class="waste-tooltip" role="tooltip">
-                    <span>Blade kerf: {formatLengthMm(optimizationResult.totalKerfMm)}</span>
-                    <span>Safety margin: {formatLengthMm(totalSafetyMarginWasteMm)}</span>
-                  </span>
-                </button>
-              {/if}
             </div>
-          </div>
-
-          {#if optimizationResult.status === 'missing-stock-options'}
-            <div class="p-3 text-sm text-amber-700">
-              Add stock lengths for {optimizationResult.missingProfiles.join(', ')} to run optimizer.
-            </div>
-          {:else if optimizationResult.status === 'infeasible'}
-            <div class="p-3 text-sm text-red-700">
-              No stock length can fit at least one adjusted cut for {optimizationResult.infeasibleProfiles.join(', ')}.
-            </div>
-          {:else if optimizationResult.barCount === 0}
-            <div class="p-3 text-sm text-zinc-500">No purchasable bars needed yet.</div>
-          {:else}
             <div>
               <table
-                class="min-w-full w-max table-auto border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
+                class="min-w-full w-max border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
               >
                 <thead>
                   <tr class="border-b border-zinc-200 bg-white text-zinc-600">
                     <th class="px-2 py-1 text-left font-medium">Profile</th>
-                    <th class="px-2 py-1 text-left font-medium">Stock</th>
+                    <th class="px-2 py-1 text-right font-medium">Length</th>
                     <th class="px-2 py-1 text-center font-medium">Qty</th>
-                    <th class="px-2 py-1 text-right font-medium">Mass</th>
-                    <th class="px-2 py-1 text-right font-medium">Cost</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {#each purchaseSummaryRows as row (row.key)}
-                    <tr class="border-b border-zinc-100 last:border-b-0">
-                      <td class="px-2 py-1 font-medium text-zinc-800">{row.profileType}</td>
-                      <td class="px-2 py-1 text-zinc-600">{formatStockLength(row.stockLengthMm)}</td>
-                      <td class="px-2 py-1 text-center text-zinc-600">{row.quantity}</td>
-                      <td class="px-2 py-1 text-right text-zinc-600">{formatWeight(row.totalMassKg)}</td>
-                      <td class="px-2 py-1 text-right text-zinc-600">{formatMoney(row.totalCost)}</td>
+                  {#each cutListEntries as entry (entry.key)}
+                    <tr
+                      class:required-cuts-row--highlight={hoveredCutListKey === entry.key}
+                      class="cursor-pointer border-b border-zinc-100 transition-colors last:border-b-0"
+                      onmouseenter={() => onHoveredCutListKeyChange(entry.key)}
+                      onmouseleave={() => onHoveredCutListKeyChange(null)}
+                    >
+                      <td class="px-2 py-1 font-medium text-zinc-800">{entry.profileType}</td>
+                      <td class="px-2 py-1 text-right text-zinc-600">{entry.lengthMm} mm</td>
+                      <td class="px-2 py-1 text-center text-zinc-600">{entry.quantity}</td>
                     </tr>
                   {/each}
                 </tbody>
-                <tfoot class="align-bottom">
-                  <tr class="border-t-2 border-zinc-300 bg-zinc-50">
-                    <td class="px-2 py-2 font-semibold uppercase tracking-wide text-zinc-700"> Total </td>
-                    <td class="px-2 py-2 text-[10px] font-normal text-zinc-500">
-                      {formatStockLength(optimizationResult.totalPurchasedLengthMm)}
-                    </td>
-                    <td class="px-2 py-2 text-center text-[10px] font-normal text-zinc-500">
-                      {optimizationResult.barCount}
-                    </td>
-                    <td class="px-2 py-2 text-right font-semibold text-zinc-900">
-                      <div>{formatWeight(optimizationResult.totalMassKg)}</div>
-                    </td>
-                    <td class="px-2 py-2 text-right font-semibold text-zinc-900">
-                      <div class="mb-1 flex items-center justify-end gap-1 text-[10px] font-normal text-zinc-500">
-                        <svg
-                          viewBox="0 0 24 24"
-                          class="h-3 w-3 shrink-0"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          aria-hidden="true"
-                        >
-                          <path d="M3 17h2"></path>
-                          <path d="M7 17h8"></path>
-                          <path d="M17 17h2"></path>
-                          <path d="M5 17V7h10v10"></path>
-                          <path d="M15 10h3l3 3v4"></path>
-                          <path d="M7 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
-                          <path d="M17 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
-                        </svg>
-                        <span>{formatMoney(optimizationResult.shippingCost)}</span>
-                      </div>
-                      <div>{formatMoney(optimizationResult.totalCost)}</div>
-                    </td>
-                  </tr>
-                </tfoot>
               </table>
             </div>
-          {/if}
+          </div>
+        </div>
+
+        <div class="min-w-max flex-[1_1_max-content] space-y-4">
+          <div bind:this={purchaseSummaryExportRoot} class="w-full rounded border border-zinc-200 bg-zinc-50">
+            <div class="widget-card__header border-b border-zinc-200 px-3 py-2">
+              <div class="flex items-start justify-between gap-3 sm:items-center">
+                <h3 class="widget-card__title min-w-0 pr-2 font-sans text-sm font-semibold text-zinc-900">
+                  <span
+                    class="widget-card__icon grid h-6 w-6 place-items-center rounded-sm border border-amber-200 bg-amber-50 text-amber-700"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="h-3.5 w-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 19a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                      <path d="M15 19a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                      <path d="M17 17H6V3H4"></path>
+                      <path d="m6 5l14 1l-1 7H6"></path>
+                    </svg>
+                  </span>
+                  <span>Purchase Summary</span>
+                </h3>
+                {#if optimizationResult.status === 'ready' && optimizationResult.barCount > 0}
+                  <button
+                    type="button"
+                    class="waste-tooltip-trigger control-chip control-chip--amber ml-auto flex shrink-0 cursor-help appearance-none items-center gap-1.5 border-0 p-0 text-left font-['Roboto_Mono',monospace] text-[10px] text-zinc-700"
+                    aria-describedby="purchase-summary-waste-tooltip"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="h-3.5 w-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 7h16"></path>
+                      <path d="M10 11v6"></path>
+                      <path d="M14 11v6"></path>
+                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"></path>
+                      <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
+                    </svg>
+                    <span>{optimizationResult.totalWasteMm} mm</span>
+                    <span id="purchase-summary-waste-tooltip" class="waste-tooltip" role="tooltip">
+                      <span>Blade kerf: {formatLengthMm(optimizationResult.totalKerfMm)}</span>
+                      <span>Safety margin: {formatLengthMm(totalSafetyMarginWasteMm)}</span>
+                    </span>
+                  </button>
+                {/if}
+              </div>
+            </div>
+
+            {#if optimizationResult.status === 'missing-stock-options'}
+              <div class="p-3 text-sm text-amber-700">
+                Add stock lengths for {optimizationResult.missingProfiles.join(', ')} to run optimizer.
+              </div>
+            {:else if optimizationResult.status === 'infeasible'}
+              <div class="p-3 text-sm text-red-700">
+                No stock length can fit at least one adjusted cut for {optimizationResult.infeasibleProfiles.join(
+                  ', '
+                )}.
+              </div>
+            {:else if optimizationResult.barCount === 0}
+              <div class="p-3 text-sm text-zinc-500">No purchasable bars needed yet.</div>
+            {:else}
+              <div>
+                <table
+                  class="min-w-full w-max table-auto border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
+                >
+                  <thead>
+                    <tr class="border-b border-zinc-200 bg-white text-zinc-600">
+                      <th class="px-2 py-1 text-left font-medium">Profile</th>
+                      <th class="px-2 py-1 text-left font-medium">Stock</th>
+                      <th class="px-2 py-1 text-center font-medium">Qty</th>
+                      <th class="px-2 py-1 text-right font-medium">Mass</th>
+                      <th class="px-2 py-1 text-right font-medium">Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {#each purchaseSummaryRows as row (row.key)}
+                      <tr class="border-b border-zinc-100 last:border-b-0">
+                        <td class="px-2 py-1 font-medium text-zinc-800">{row.profileType}</td>
+                        <td class="px-2 py-1 text-zinc-600">{formatStockLength(row.stockLengthMm)}</td>
+                        <td class="px-2 py-1 text-center text-zinc-600">{row.quantity}</td>
+                        <td class="px-2 py-1 text-right text-zinc-600">{formatWeight(row.totalMassKg)}</td>
+                        <td class="px-2 py-1 text-right text-zinc-600">{formatMoney(row.totalCost)}</td>
+                      </tr>
+                    {/each}
+                  </tbody>
+                  <tfoot class="align-bottom">
+                    <tr class="border-t-2 border-zinc-300 bg-zinc-50">
+                      <td class="px-2 py-2 font-semibold uppercase tracking-wide text-zinc-700"> Total </td>
+                      <td class="px-2 py-2 text-[10px] font-normal text-zinc-500">
+                        {formatStockLength(optimizationResult.totalPurchasedLengthMm)}
+                      </td>
+                      <td class="px-2 py-2 text-center text-[10px] font-normal text-zinc-500">
+                        {optimizationResult.barCount}
+                      </td>
+                      <td class="px-2 py-2 text-right font-semibold text-zinc-900">
+                        <div>{formatWeight(optimizationResult.totalMassKg)}</div>
+                      </td>
+                      <td class="px-2 py-2 text-right font-semibold text-zinc-900">
+                        <div class="mb-1 flex items-center justify-end gap-1 text-[10px] font-normal text-zinc-500">
+                          <svg
+                            viewBox="0 0 24 24"
+                            class="h-3 w-3 shrink-0"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M3 17h2"></path>
+                            <path d="M7 17h8"></path>
+                            <path d="M17 17h2"></path>
+                            <path d="M5 17V7h10v10"></path>
+                            <path d="M15 10h3l3 3v4"></path>
+                            <path d="M7 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                            <path d="M17 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                          </svg>
+                          <span>{formatMoney(optimizationResult.shippingCost)}</span>
+                        </div>
+                        <div>{formatMoney(optimizationResult.totalCost)}</div>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            {/if}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  {/if}
 </section>
 
 <style>
