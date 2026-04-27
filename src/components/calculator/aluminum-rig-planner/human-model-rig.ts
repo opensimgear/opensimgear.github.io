@@ -22,8 +22,9 @@ import {
   type PosturePoint,
 } from './posture';
 import type { PlannerAnthropometryRatios, PlannerPostureModelMetrics } from './types';
+import humanMaleRealisticModelUrl from '~/assets/models/human-male.glb';
 
-export const HUMAN_MALE_REALISTIC_MODEL_URL = '/models/aluminum-rig-planner/human-male-realistic.glb';
+export const HUMAN_MALE_REALISTIC_MODEL_URL = humanMaleRealisticModelUrl;
 export type HumanModelPostureModel = PlannerPostureModelMetrics;
 
 type HumanBoneName =

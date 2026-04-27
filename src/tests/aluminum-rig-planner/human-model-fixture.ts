@@ -6,9 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { calculateHumanModelPostureModel } from '../../components/calculator/aluminum-rig-planner/human-model-rig';
 import type { PlannerPostureModelMetrics } from '../../components/calculator/aluminum-rig-planner/types';
 
-const MODEL_PATH = fileURLToPath(
-  new URL('../../../public/models/aluminum-rig-planner/human-male-realistic.glb', import.meta.url)
-);
+const MODEL_PATH = fileURLToPath(new URL('../../assets/models/human-male.glb', import.meta.url));
 
 let postureModelPromise: Promise<PlannerPostureModelMetrics> | null = null;
 

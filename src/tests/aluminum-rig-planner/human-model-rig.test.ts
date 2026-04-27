@@ -23,9 +23,7 @@ import {
   type PosturePoint,
 } from '../../components/calculator/aluminum-rig-planner/posture';
 
-const MODEL_PATH = fileURLToPath(
-  new URL('../../../public/models/aluminum-rig-planner/human-male-realistic.glb', import.meta.url)
-);
+const MODEL_PATH = fileURLToPath(new URL('../../assets/models/human-male.glb', import.meta.url));
 const HUMAN_MODEL_RIG_SOURCE = readFileSync(
   new URL('../../components/calculator/aluminum-rig-planner/human-model-rig.ts', import.meta.url),
   'utf8'

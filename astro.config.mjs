@@ -126,6 +126,7 @@ export default defineConfig({
     }),
   ],
   vite: {
+    assetsInclude: ['**/*.glb'],
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
