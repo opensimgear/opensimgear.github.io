@@ -6,13 +6,15 @@ import {
 } from './constants';
 import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
 import { createPlannerPostureSkeleton, type PosturePoint } from './posture';
+import {
+  getPlannerPostureTargetRanges as getSharedPlannerPostureTargetRanges,
+  PLANNER_POSTURE_TARGET_RANGES,
+  type PlannerPostureTargetRange,
+} from './posture-targets';
 import type { PlannerInput, PlannerPostureModelMetrics, PlannerPosturePreset, PlannerPostureSettings } from './types';
 
 export type PlannerPostureMetricStatus = 'ok' | 'warn' | 'bad';
-export type PlannerPostureMetricRange = {
-  min: number;
-  max: number;
-};
+export type PlannerPostureMetricRange = PlannerPostureTargetRange;
 export type PlannerPostureMetric = {
   key: string;
   label: string;
@@ -41,64 +43,6 @@ const EPSILON = 0.000001;
 const MONITOR_DEBUG_BALL_DIAMETER_MM = 10;
 const WRIST_ORIGINAL_FOREARM_ANGLE_DEG = 180;
 const FOOT_TO_TOE_ORIGINAL_POSTURE_ANGLE_DEG = 180;
-
-const TARGET_RANGES: Record<PlannerPosturePreset, Record<string, PlannerPostureMetricRange>> = {
-  gt: {
-    wristBend: { min: 0, max: 40 },
-    elbowBend: { min: 90, max: 120 },
-    kneeBend: { min: 120, max: 135 },
-    torsoToThigh: { min: 60, max: 120 },
-    ankleBend: { min: 75, max: 86 },
-    footToToeBend: { min: 35, max: 65 },
-    brakeAlignment: { min: -3, max: 3 },
-    eyeToWheelTop: { min: 50, max: 100 },
-    eyeToMonitorMidpoint: { min: -50, max: 50 },
-  },
-  rally: {
-    wristBend: { min: 0, max: 40 },
-    elbowBend: { min: 95, max: 135 },
-    kneeBend: { min: 110, max: 140 },
-    torsoToThigh: { min: 60, max: 125 },
-    ankleBend: { min: 40, max: 68 },
-    footToToeBend: { min: 25, max: 75 },
-    brakeAlignment: { min: -3, max: 3 },
-    eyeToWheelTop: { min: 50, max: 150 },
-    eyeToMonitorMidpoint: { min: -50, max: 50 },
-  },
-  drift: {
-    wristBend: { min: 0, max: 40 },
-    elbowBend: { min: 95, max: 135 },
-    kneeBend: { min: 110, max: 140 },
-    torsoToThigh: { min: 60, max: 125 },
-    ankleBend: { min: 75, max: 81 },
-    footToToeBend: { min: 25, max: 75 },
-    brakeAlignment: { min: -3, max: 3 },
-    eyeToWheelTop: { min: 50, max: 100 },
-    eyeToMonitorMidpoint: { min: -50, max: 50 },
-  },
-  road: {
-    wristBend: { min: 0, max: 40 },
-    elbowBend: { min: 100, max: 135 },
-    kneeBend: { min: 118, max: 142 },
-    torsoToThigh: { min: 80, max: 130 },
-    ankleBend: { min: 45, max: 71 },
-    footToToeBend: { min: 20, max: 80 },
-    brakeAlignment: { min: -3, max: 3 },
-    eyeToWheelTop: { min: 50, max: 100 },
-    eyeToMonitorMidpoint: { min: -50, max: 50 },
-  },
-  custom: {
-    wristBend: { min: 0, max: 40 },
-    elbowBend: { min: 90, max: 120 },
-    kneeBend: { min: 120, max: 135 },
-    torsoToThigh: { min: 85, max: 120 },
-    ankleBend: { min: 75, max: 86 },
-    footToToeBend: { min: 35, max: 65 },
-    brakeAlignment: { min: -3, max: 3 },
-    eyeToWheelTop: { min: 50, max: 100 },
-    eyeToMonitorMidpoint: { min: -50, max: 50 },
-  },
-};
 
 function subtract(a: PosturePoint, b: PosturePoint): PosturePoint {
   return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
@@ -269,7 +213,7 @@ export function createPlannerPostureReport(
     },
     postureModel
   );
-  const ranges = TARGET_RANGES[postureSettings.preset];
+  const ranges = PLANNER_POSTURE_TARGET_RANGES[postureSettings.preset];
   const wheelCenter = getWheelCenter(input);
   const wheelTopZ = wheelCenter[2] + (input.wheelDiameterMm * MM_TO_METERS) / 2;
   const eyeCenter = skeleton.joints.eyeCenter;
@@ -391,5 +335,5 @@ export function createPlannerPostureReport(
 }
 
 export function getPlannerPostureTargetRanges(preset: PlannerPosturePreset) {
-  return TARGET_RANGES[preset];
+  return getSharedPlannerPostureTargetRanges(preset);
 }

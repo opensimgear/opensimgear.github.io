@@ -11,6 +11,7 @@ import {
   PROFILE_SHORT_MM,
   UPRIGHT_BEAM_DEPTH_MM,
 } from './constants';
+import { getPlannerPostureTargetRanges, type PlannerPostureTargetRange } from './posture-targets';
 import type {
   PlannerAnthropometryRatios,
   PlannerInput,
@@ -79,6 +80,14 @@ type PedalFootTarget = {
   toeBoneLength: number;
 };
 
+type PedalFootSolveContext = {
+  hip: Vector;
+  kneeLift: number;
+  lowerLegLength: number;
+  preset: PlannerPosturePreset;
+  thighLength: number;
+};
+
 const MM_TO_METERS = 0.001;
 const EPSILON = 0.000001;
 const PEDAL_WIDTH_MM = 60;
@@ -97,6 +106,11 @@ export const POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM = 120;
 export const POSTURE_BOOSTER_BOTTOM_OFFSET_MAX_MM = 10;
 export const POSTURE_BOOSTER_BACK_OFFSET_MAX_MM = 90;
 const POSTURE_TALON_BACKWARD_ANGLE_RAD = toRad(POSTURE_TALON_BACKWARD_ANGLE_DEG);
+const POSTURE_TALON_FOOT_ANGLE_RAD = toRad(POSTURE_TALON_FOOT_ANGLE_DEG);
+const FOOT_TO_TOE_ORIGINAL_POSTURE_ANGLE_DEG = 180;
+const PEDAL_FOOT_SLIDE_SEARCH_STEPS = 12;
+const PEDAL_FOOT_UNREACHABLE_SCORE_WEIGHT = 100000;
+const PEDAL_FOOT_NEGATIVE_FACE_OFFSET_SCORE = 10000;
 const HAND_GRIP_LENGTH_MIN_MM = 55;
 const HAND_GRIP_LENGTH_MAX_MM = 140;
 const HAND_GRIP_HEIGHT_RATIO = 0.076;
@@ -149,6 +163,10 @@ function dot(a: Vector, b: Vector) {
 
 function length(a: Vector) {
   return Math.sqrt(dot(a, a));
+}
+
+function distance(a: Vector, b: Vector) {
+  return length(subtract(a, b));
 }
 
 function normalize(a: Vector, fallback: Vector = [1, 0, 0]): Vector {
@@ -234,11 +252,174 @@ function getFixedFootBoneDirection(pedalDirection: Vector, talonDirection: Vecto
   return normalize(footDirection);
 }
 
+function angleAtJointDeg(a: Vector, joint: Vector, b: Vector) {
+  const jointToA = subtract(a, joint);
+  const jointToB = subtract(b, joint);
+  const denominator = length(jointToA) * length(jointToB);
+
+  if (denominator < EPSILON) {
+    return 0;
+  }
+
+  const cosine = clamp(dot(jointToA, jointToB) / denominator, -1, 1);
+
+  return (Math.acos(cosine) * 180) / Math.PI;
+}
+
+function angleBetweenSegmentsDeg(aStart: Vector, aEnd: Vector, bStart: Vector, bEnd: Vector) {
+  const a = subtract(aEnd, aStart);
+  const b = subtract(bEnd, bStart);
+  const denominator = length(a) * length(b);
+
+  if (denominator < EPSILON) {
+    return 0;
+  }
+
+  const cosine = clamp(dot(a, b) / denominator, -1, 1);
+
+  return (Math.acos(cosine) * 180) / Math.PI;
+}
+
+function angleDecreaseFromOriginalDeg(originalAngleDeg: number, a: Vector, joint: Vector, b: Vector) {
+  return Math.max(0, originalAngleDeg - angleAtJointDeg(a, joint, b));
+}
+
+function getRangeScore(value: number, range: PlannerPostureTargetRange) {
+  const target = (range.min + range.max) / 2;
+  const width = Math.max(1, range.max - range.min);
+
+  return Math.abs(value - target) / width;
+}
+
+function getPedalFootSlideValues(slideMinM: number, slideMaxM: number, preferredSlideM: number) {
+  const values = [slideMinM, slideMaxM, clamp(preferredSlideM, slideMinM, slideMaxM)];
+  const step = (slideMaxM - slideMinM) / PEDAL_FOOT_SLIDE_SEARCH_STEPS;
+
+  if (step > EPSILON) {
+    for (let index = 0; index <= PEDAL_FOOT_SLIDE_SEARCH_STEPS; index += 1) {
+      values.push(slideMinM + step * index);
+    }
+  }
+
+  return [...new Set(values.map((value) => Number(value.toFixed(6))))];
+}
+
+function solveAnkleFromTalonAndToeStart(talon: Vector, toeStart: Vector, heelLength: number, footStartLength: number) {
+  const talonToToeStart = subtract(toeStart, talon);
+  const talonToToeStartLength = length(talonToToeStart);
+
+  if (talonToToeStartLength < EPSILON) {
+    return null;
+  }
+
+  const direction = scale(talonToToeStart, 1 / talonToToeStartLength);
+  const along =
+    (heelLength * heelLength - footStartLength * footStartLength + talonToToeStartLength * talonToToeStartLength) /
+    (2 * talonToToeStartLength);
+  const height = Math.sqrt(Math.max(0, heelLength * heelLength - along * along));
+  const perpendicular: Vector = [-direction[2], 0, direction[0]];
+  const candidates = [
+    add(add(talon, scale(direction, along)), scale(perpendicular, height)),
+    add(add(talon, scale(direction, along)), scale(perpendicular, -height)),
+  ];
+
+  return candidates.sort((a, b) => b[2] - a[2])[0];
+}
+
+function solvePedalFootCandidate(
+  heelX: number,
+  pedalPlatePivot: Vector,
+  pedalFacePivot: Vector,
+  pedalDirection: Vector,
+  heelLength: number,
+  footStartLength: number,
+  toeBoneLength: number
+): PedalFootTarget | null {
+  const heel: Vector = [heelX, pedalPlatePivot[1], pedalPlatePivot[2]];
+  const talonToToeStartLength = Math.sqrt(
+    Math.max(
+      0,
+      heelLength * heelLength +
+        footStartLength * footStartLength -
+        2 * heelLength * footStartLength * Math.cos(POSTURE_TALON_FOOT_ANGLE_RAD)
+    )
+  );
+  const facePivotToHeel = subtract(pedalFacePivot, heel);
+  const faceQuadraticB = dot(facePivotToHeel, pedalDirection);
+  const faceQuadraticC = dot(facePivotToHeel, facePivotToHeel) - talonToToeStartLength * talonToToeStartLength;
+  const discriminant = faceQuadraticB * faceQuadraticB - faceQuadraticC;
+
+  if (discriminant < -EPSILON) {
+    return null;
+  }
+
+  const sqrtDiscriminant = Math.sqrt(Math.max(0, discriminant));
+  const toeStartOffsets = [-faceQuadraticB - sqrtDiscriminant, -faceQuadraticB + sqrtDiscriminant];
+  const toeStarts = toeStartOffsets
+    .map((offset) => add(pedalFacePivot, scale(pedalDirection, offset)))
+    .filter((toeStart) => dot(subtract(toeStart, pedalFacePivot), pedalDirection) >= -EPSILON);
+
+  if (toeStarts.length === 0) {
+    return null;
+  }
+
+  const toeStart = toeStarts.sort(
+    (a, b) => dot(subtract(a, pedalFacePivot), pedalDirection) - dot(subtract(b, pedalFacePivot), pedalDirection)
+  )[0];
+  const ankle = solveAnkleFromTalonAndToeStart(heel, toeStart, heelLength, footStartLength);
+
+  if (!ankle) {
+    return null;
+  }
+
+  return {
+    ankle,
+    direction: pedalDirection,
+    footBoneLength: footStartLength,
+    heel,
+    heelLength,
+    pedalPivot: pedalFacePivot,
+    talonSlideMaxX: heelX,
+    talonSlideMinX: heelX,
+    toeStart,
+    toe: add(toeStart, scale(pedalDirection, toeBoneLength)),
+    toeBoneLength,
+  };
+}
+
+function scorePedalFootCandidate(candidate: PedalFootTarget, context: PedalFootSolveContext) {
+  const leg = solveTwoLinkPose(context.hip, candidate.ankle, context.thighLength, context.lowerLegLength, [
+    0,
+    0,
+    context.kneeLift,
+  ]);
+  const ranges = getPlannerPostureTargetRanges(context.preset);
+  const ankleBend = angleBetweenSegmentsDeg(leg.joint, candidate.ankle, candidate.toeStart, candidate.heel);
+  const footToToeBend = angleDecreaseFromOriginalDeg(
+    FOOT_TO_TOE_ORIGINAL_POSTURE_ANGLE_DEG,
+    candidate.ankle,
+    candidate.toeStart,
+    candidate.toe
+  );
+  const toeStartOffset = dot(subtract(candidate.toeStart, candidate.pedalPivot), candidate.direction);
+  const toeOffset = dot(subtract(candidate.toe, candidate.pedalPivot), candidate.direction);
+  const unreachableScore = distance(leg.end, candidate.ankle) * PEDAL_FOOT_UNREACHABLE_SCORE_WEIGHT;
+  const faceOffsetScore = Math.max(0, -toeStartOffset, -toeOffset) * PEDAL_FOOT_NEGATIVE_FACE_OFFSET_SCORE;
+
+  return (
+    unreachableScore +
+    faceOffsetScore +
+    getRangeScore(ankleBend, ranges.ankleBend) * 4 +
+    getRangeScore(footToToeBend, ranges.footToToeBend)
+  );
+}
+
 function getPedalTarget(
   input: PlannerInput,
   centerYmm: number,
   footLengthM: number,
-  heelLengthM: number
+  heelLengthM: number,
+  solveContext: PedalFootSolveContext | null = null
 ): PedalFootTarget {
   const pedalDirection = getPedalDirection(input);
   const talonTailToAnkleDirection = getTalonTailToAnkleDirection(pedalDirection);
@@ -267,24 +448,60 @@ function getPedalTarget(
     Math.abs(pedalPlaneNormal[0]) > EPSILON
       ? pedalFacePivot[0] - dot(footContactOffset, pedalPlaneNormal) / pedalPlaneNormal[0]
       : pivotXM;
-  const heel: Vector = [clamp(slideContactXM, slideMinM, slideMaxM), pedalPlatePivot[1], pedalPlatePivot[2]];
-
-  const ankle = add(heel, scale(talonTailToAnkleDirection, heelLength));
-  const solvedToeStart = add(ankle, scale(footBoneDirection, footStartLength));
-
-  return {
-    ankle,
+  const fallbackHeel: Vector = [clamp(slideContactXM, slideMinM, slideMaxM), pedalPlatePivot[1], pedalPlatePivot[2]];
+  const fallbackAnkle = add(fallbackHeel, scale(talonTailToAnkleDirection, heelLength));
+  const fallbackToeStart = add(fallbackAnkle, scale(footBoneDirection, footStartLength));
+  const fallbackTarget = {
+    ankle: fallbackAnkle,
     direction: pedalDirection,
     footBoneLength: footStartLength,
-    heel,
+    heel: fallbackHeel,
     heelLength,
     pedalPivot: pedalFacePivot,
     talonSlideMaxX: slideMaxM,
     talonSlideMinX: slideMinM,
-    toeStart: solvedToeStart,
-    toe: add(solvedToeStart, scale(pedalDirection, toeBoneLength)),
+    toeStart: fallbackToeStart,
+    toe: add(fallbackToeStart, scale(pedalDirection, toeBoneLength)),
     toeBoneLength,
   };
+
+  if (!solveContext) {
+    return fallbackTarget;
+  }
+
+  let bestTarget = fallbackTarget;
+  let bestScore = scorePedalFootCandidate(bestTarget, solveContext);
+
+  for (const heelX of getPedalFootSlideValues(slideMinM, slideMaxM, slideContactXM)) {
+    const candidate = solvePedalFootCandidate(
+      heelX,
+      pedalPlatePivot,
+      pedalFacePivot,
+      pedalDirection,
+      heelLength,
+      footStartLength,
+      toeBoneLength
+    );
+
+    if (!candidate) {
+      continue;
+    }
+
+    const score = scorePedalFootCandidate(candidate, solveContext);
+
+    if (score + EPSILON >= bestScore) {
+      continue;
+    }
+
+    bestTarget = {
+      ...candidate,
+      talonSlideMaxX: slideMaxM,
+      talonSlideMinX: slideMinM,
+    };
+    bestScore = score;
+  }
+
+  return bestTarget;
 }
 
 function solvePedalFootPose(target: PedalFootTarget, ankle: Vector): PedalFootTarget {
@@ -553,8 +770,20 @@ export function createPlannerPostureSkeleton(
   const thighLength = ratios.thighLength * heightM;
   const lowerLegLength = ratios.lowerLegLength * heightM;
   const kneeLift = PRESET_KNEE_LIFT[settings.preset];
-  const rightPedal = getPedalTarget(input, pedalCentersYmm.accelerator, pedalFootLength, heelLength);
-  const leftPedal = getPedalTarget(input, pedalCentersYmm.brake, pedalFootLength, heelLength);
+  const rightPedal = getPedalTarget(input, pedalCentersYmm.accelerator, pedalFootLength, heelLength, {
+    hip: hipRight,
+    kneeLift,
+    lowerLegLength,
+    preset: settings.preset,
+    thighLength,
+  });
+  const leftPedal = getPedalTarget(input, pedalCentersYmm.brake, pedalFootLength, heelLength, {
+    hip: hipLeft,
+    kneeLift,
+    lowerLegLength,
+    preset: settings.preset,
+    thighLength,
+  });
   const upperArmLength = ratios.upperArmLength * heightM;
   const forearmHandLength = ratios.forearmHandLength * heightM;
   const handGripLength = getHandGripLength(heightM, forearmHandLength);

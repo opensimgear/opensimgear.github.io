@@ -21,7 +21,6 @@ import {
   POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM,
   POSTURE_HIP_ABOVE_SEAT_MM,
   POSTURE_HIP_FORWARD_ON_SEAT_MM,
-  POSTURE_TALON_BACKWARD_ANGLE_DEG,
   POSTURE_TALON_FOOT_ANGLE_DEG,
   POSTURE_TALON_PEDAL_PLANE_OFFSET_MM,
   POSTURE_TOE_BONE_START_SHARE,
@@ -154,6 +153,33 @@ describe('aluminum rig planner posture solver', () => {
     expect(footToToeMetric?.label).toBe('Foot to toe bend');
     expect(footToToeMetric?.valueDeg).toBeCloseTo(expectedFootToToeBend, 1);
     expect(footToToeMetric?.valueDeg).toBeGreaterThanOrEqual(0);
+  });
+
+  it('slides talons to tune ankle bend while keeping the talon-foot angle fixed', () => {
+    const gtSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      preset: 'gt',
+    });
+    const rallySkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      preset: 'rally',
+    });
+    const getLeftAnkleBend = (skeleton: typeof gtSkeleton) =>
+      radToDeg(
+        getAngleBetweenSegments(
+          skeleton.joints.kneeLeft,
+          skeleton.joints.ankleLeft,
+          skeleton.joints.toeStartLeft,
+          skeleton.joints.heelLeft
+        )
+      );
+    const getLeftTalonFootAngle = (skeleton: typeof gtSkeleton) =>
+      getAngleAtJoint(skeleton.joints.heelLeft, skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft);
+
+    expect(gtSkeleton.joints.heelLeft[0]).not.toBeCloseTo(rallySkeleton.joints.heelLeft[0], 5);
+    expect(getLeftAnkleBend(rallySkeleton)).toBeLessThan(getLeftAnkleBend(gtSkeleton));
+    expect(getLeftTalonFootAngle(gtSkeleton)).toBeCloseTo((POSTURE_TALON_FOOT_ANGLE_DEG * Math.PI) / 180, 6);
+    expect(getLeftTalonFootAngle(rallySkeleton)).toBeCloseTo((POSTURE_TALON_FOOT_ANGLE_DEG * Math.PI) / 180, 6);
   });
 
   it('pre-scales human model pose targets so height scaling does not lengthen or shorten IK bones', () => {
@@ -539,15 +565,6 @@ describe('aluminum rig planner posture solver', () => {
     };
     const leftToeDirection = getDirection(skeleton.joints.toeStartLeft, skeleton.joints.toeLeft);
     const rightToeDirection = getDirection(skeleton.joints.toeStartRight, skeleton.joints.toeRight);
-    const leftTalonDirection = getDirection(skeleton.joints.ankleLeft, skeleton.joints.heelLeft);
-    const rightTalonDirection = getDirection(skeleton.joints.ankleRight, skeleton.joints.heelRight);
-    const pedalNormal = [-pedalDirection[2], 0, pedalDirection[0]] as const;
-    const talonAngleRad = (POSTURE_TALON_BACKWARD_ANGLE_DEG * Math.PI) / 180;
-    const expectedTalonDirection = [
-      -(pedalDirection[0] * Math.sin(talonAngleRad) + pedalNormal[0] * Math.cos(talonAngleRad)),
-      0,
-      -(pedalDirection[2] * Math.sin(talonAngleRad) + pedalNormal[2] * Math.cos(talonAngleRad)),
-    ] as const;
     const baseHeelAngle = getAngleAtJoint(
       skeleton.joints.ankleLeft,
       skeleton.joints.heelLeft,
@@ -586,12 +603,6 @@ describe('aluminum rig planner posture solver', () => {
     expect(rightToeDirection[0]).toBeCloseTo(pedalDirection[0], 6);
     expect(rightToeDirection[1]).toBeCloseTo(pedalDirection[1], 6);
     expect(rightToeDirection[2]).toBeCloseTo(pedalDirection[2], 6);
-    expect(leftTalonDirection[0]).toBeCloseTo(expectedTalonDirection[0], 6);
-    expect(leftTalonDirection[1]).toBeCloseTo(0, 6);
-    expect(leftTalonDirection[2]).toBeCloseTo(expectedTalonDirection[2], 6);
-    expect(rightTalonDirection[0]).toBeCloseTo(expectedTalonDirection[0], 6);
-    expect(rightTalonDirection[1]).toBeCloseTo(0, 6);
-    expect(rightTalonDirection[2]).toBeCloseTo(expectedTalonDirection[2], 6);
     expect(getDistance(skeleton.joints.ankleLeft, skeleton.joints.heelLeft)).toBeCloseTo(heelLength, 5);
     expect(getDistance(skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft)).toBeCloseTo(footBoneLength, 5);
     expect(getDistance(skeleton.joints.toeStartLeft, skeleton.joints.toeLeft)).toBeCloseTo(toeBoneLength, 5);

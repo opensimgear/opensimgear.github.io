@@ -611,7 +611,7 @@ function clampPresetSearchSeed(
       PLANNER_DIMENSION_LIMITS.pedalsHeightMaxMm
     ),
     pedalsDeltaMm: clamp(
-      roundToStep(seed.pedalsDeltaMm, PLANNER_CONTROL_STEP_MM),
+      seed.pedalsDeltaMm,
       PLANNER_DIMENSION_LIMITS.pedalsDeltaMinMm,
       PLANNER_DIMENSION_LIMITS.pedalsDeltaMaxMm
     ),

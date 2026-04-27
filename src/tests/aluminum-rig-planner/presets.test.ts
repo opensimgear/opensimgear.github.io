@@ -180,6 +180,16 @@ describe('aluminum rig planner posture presets', () => {
     expect(result.pedalsDeltaMm).toBe(input.pedalsDeltaMm);
   });
 
+  it.each(NON_CUSTOM_PRESETS)('preserves current pedal delta X when recomputing %s preset', (preset) => {
+    const input = {
+      ...DEFAULT_PLANNER_INPUT,
+      pedalsDeltaMm: 37,
+    };
+    const result = recomputePresetDynamicPlannerInput(input, preset, DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm);
+
+    expect(result.pedalsDeltaMm).toBe(input.pedalsDeltaMm);
+  });
+
   it.each(NON_CUSTOM_PRESETS)('keeps solved pedal values after applying %s preset', (preset) => {
     const heightCm = 182;
     const seededInput = clampPlannerInput({ ...DEFAULT_PLANNER_INPUT, ...getPresetFixedInputValues(preset) });

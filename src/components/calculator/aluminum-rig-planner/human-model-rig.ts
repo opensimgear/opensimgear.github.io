@@ -236,6 +236,14 @@ function createSegment(name: HumanBoneName, start: Vector3, end: Vector3): Human
 }
 
 function toDisplayName(name: string) {
+  if (name === 'leftTalon') {
+    return 'Left heel';
+  }
+
+  if (name === 'rightTalon') {
+    return 'Right heel';
+  }
+
   return name.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/^./, (letter) => letter.toUpperCase());
 }
 

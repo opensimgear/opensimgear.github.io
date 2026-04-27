@@ -338,8 +338,14 @@ describe('aluminum rig planner human model rig', () => {
     const baselineTooltips = getTooltips(model!);
     const baselineTorsoTooltip = getTooltipByTitle(baselineTooltips, 'Torso', 'Length');
     const baselineHandTooltip = getTooltipByTitle(baselineTooltips, 'Hand Left', 'Position');
+    const baselineLeftHeelTooltip = getTooltipByTitle(baselineTooltips, 'Left heel', 'Length');
+    const baselineRightHeelTooltip = getTooltipByTitle(baselineTooltips, 'Right heel', 'Length');
     expect(baselineTorsoTooltip).toBeDefined();
     expect(baselineHandTooltip).toBeDefined();
+    expect(baselineLeftHeelTooltip).toBeDefined();
+    expect(baselineRightHeelTooltip).toBeDefined();
+    expect(getTooltipByTitle(baselineTooltips, 'Left Talon', 'Length')).toBeUndefined();
+    expect(getTooltipByTitle(baselineTooltips, 'Right Talon', 'Length')).toBeUndefined();
 
     const baselineTorsoLength = parseMm(getTooltipValue(baselineTorsoTooltip!, 'Length')!);
     const baselineHandPosition = parsePosition(getTooltipValue(baselineHandTooltip!, 'Position')!);
