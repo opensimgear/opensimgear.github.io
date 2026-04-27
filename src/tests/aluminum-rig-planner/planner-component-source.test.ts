@@ -49,8 +49,9 @@ describe('aluminum rig planner component wiring', () => {
       /postureSettings\.monitorHeightFromBaseMm = applyPresetToPostureSettings\(\s*postureSettings,\s*nextInput,\s*postureModelMetrics\s*\)\.monitorHeightFromBaseMm;/
     );
     expect(plannerSource).toContain(
-      'const postureReport = $derived(createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics));'
+      'postureModelMetrics ? createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics) : null'
     );
+    expect(plannerSource).toContain('if (!model || !model.postureModelMetrics)');
     expect(plannerSource).toContain('geometry={sceneGeometry}');
     expect(plannerSource).toContain('postureSettings={scenePostureSettings}');
   });

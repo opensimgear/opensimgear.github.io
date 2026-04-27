@@ -1,6 +1,5 @@
 import {
   BASE_BEAM_HEIGHT_MM,
-  DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_POSTURE_HEIGHT_CM,
   PLANNER_CONTROL_STEP_MM,
@@ -212,12 +211,21 @@ function getPresetPedalHeightVsHipsTargetMm(preset: SolvablePlannerPosturePreset
   return PLANNER_POSTURE_PRESETS[preset].pedalHeightVsHipsMm;
 }
 
-function getPedalHeightVsHipsMm(input: PlannerInput, preset: SolvablePlannerPosturePreset, heightCm: number) {
-  const skeleton = createPlannerPostureSkeleton(input, {
-    ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-    preset,
-    heightCm,
-  });
+function getPedalHeightVsHipsMm(
+  input: PlannerInput,
+  preset: SolvablePlannerPosturePreset,
+  heightCm: number,
+  modelMetrics: PlannerPostureModelMetrics
+) {
+  const skeleton = createPlannerPostureSkeleton(
+    input,
+    {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      preset,
+      heightCm,
+    },
+    modelMetrics
+  );
 
   return BASE_BEAM_HEIGHT_MM + 3 + input.pedalsHeightMm - skeleton.joints.hipCenter[2] * METERS_TO_MM;
 }
@@ -226,14 +234,15 @@ function getPresetPedalsHeightSeedMm(
   input: PlannerInput,
   preset: SolvablePlannerPosturePreset,
   heightCm: number,
-  fallbackPedalsHeightMm: number
+  fallbackPedalsHeightMm: number,
+  modelMetrics: PlannerPostureModelMetrics
 ) {
   const seedInput = clampPlannerInput({
     ...input,
     ...getPresetFixedFinalValues(preset),
     pedalsHeightMm: fallbackPedalsHeightMm,
   });
-  const currentPedalHeightVsHipsMm = getPedalHeightVsHipsMm(seedInput, preset, heightCm);
+  const currentPedalHeightVsHipsMm = getPedalHeightVsHipsMm(seedInput, preset, heightCm, modelMetrics);
 
   return fallbackPedalsHeightMm + getPresetPedalHeightVsHipsTargetMm(preset) - currentPedalHeightVsHipsMm;
 }
@@ -241,7 +250,8 @@ function getPresetPedalsHeightSeedMm(
 function getPresetSeed(
   input: PlannerInput,
   preset: SolvablePlannerPosturePreset,
-  heightCm: number
+  heightCm: number,
+  modelMetrics: PlannerPostureModelMetrics
 ): PlannerPosturePresetSeed {
   const heightDeltaCm = clamp(heightCm, 100, 220) - DEFAULT_POSTURE_HEIGHT_CM;
   const boosterSeedAdjustment = getPresetBoosterSeedAdjustment(preset, heightCm);
@@ -253,7 +263,7 @@ function getPresetSeed(
       steeringColumnBaseHeightMm: 450 + heightDeltaCm * 0.35 + boosterSeedAdjustment.zMm,
       steeringColumnDistanceMm: 330 + heightDeltaCm * 1.1 + boosterSeedAdjustment.xMm,
       pedalTrayDistanceMm: 430 + heightDeltaCm * 3 + boosterSeedAdjustment.xMm,
-      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
+      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm, modelMetrics),
       pedalsDeltaMm: input.pedalsDeltaMm,
       pedalAngleDeg: input.pedalAngleDeg,
       pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
@@ -267,7 +277,7 @@ function getPresetSeed(
       steeringColumnBaseHeightMm: 440 + heightDeltaCm * 0.35 + boosterSeedAdjustment.zMm,
       steeringColumnDistanceMm: 330 + heightDeltaCm * 1.1 + boosterSeedAdjustment.xMm,
       pedalTrayDistanceMm: 440 + heightDeltaCm * 3 + boosterSeedAdjustment.xMm,
-      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
+      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm, modelMetrics),
       pedalsDeltaMm: input.pedalsDeltaMm,
       pedalAngleDeg: input.pedalAngleDeg,
       pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
@@ -281,7 +291,7 @@ function getPresetSeed(
       steeringColumnBaseHeightMm: 400 + heightDeltaCm * 0.45 + boosterSeedAdjustment.zMm,
       steeringColumnDistanceMm: 430 + heightDeltaCm * 1.8 + boosterSeedAdjustment.xMm,
       pedalTrayDistanceMm: 560 + heightDeltaCm * 3.4 + boosterSeedAdjustment.xMm,
-      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
+      pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm, modelMetrics),
       pedalsDeltaMm: input.pedalsDeltaMm,
       pedalAngleDeg: input.pedalAngleDeg,
       pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
@@ -294,7 +304,7 @@ function getPresetSeed(
     steeringColumnBaseHeightMm: 420 + heightDeltaCm * 0.4 + boosterSeedAdjustment.zMm,
     steeringColumnDistanceMm: 380 + heightDeltaCm * 1.5 + boosterSeedAdjustment.xMm,
     pedalTrayDistanceMm: 470 + heightDeltaCm * 3.2 + boosterSeedAdjustment.xMm,
-    pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm),
+    pedalsHeightMm: getPresetPedalsHeightSeedMm(input, preset, heightCm, fallbackPedalsHeightMm, modelMetrics),
     pedalsDeltaMm: input.pedalsDeltaMm,
     pedalAngleDeg: input.pedalAngleDeg,
     pedalBrakeDeltaMm: input.pedalBrakeDeltaMm,
@@ -313,8 +323,15 @@ function getCurrentPlannerInputSeed(input: PlannerInput): PlannerPosturePresetSe
   };
 }
 
-function getSolverSeed(input: PlannerInput, preset: PlannerPosturePreset, heightCm: number) {
-  return isPresetSolvablePreset(preset) ? getPresetSeed(input, preset, heightCm) : getCurrentPlannerInputSeed(input);
+function getSolverSeed(
+  input: PlannerInput,
+  preset: PlannerPosturePreset,
+  heightCm: number,
+  modelMetrics: PlannerPostureModelMetrics
+) {
+  return isPresetSolvablePreset(preset)
+    ? getPresetSeed(input, preset, heightCm, modelMetrics)
+    : getCurrentPlannerInputSeed(input);
 }
 
 function getSolverBoosterSeedAdjustment(input: PlannerInput, preset: PlannerPosturePreset, heightCm: number) {
@@ -411,7 +428,7 @@ function scoreCandidate(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null,
+  modelMetrics: PlannerPostureModelMetrics,
   metricKeys: string[] | null = null,
   targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
@@ -463,7 +480,7 @@ function getPedalContactErrorScore(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null,
+  modelMetrics: PlannerPostureModelMetrics,
   targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
   const contactErrorMm = getPlannerPostureFootContactErrorMm(
@@ -484,7 +501,7 @@ function refinePedalsToFootContact(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null,
+  modelMetrics: PlannerPostureModelMetrics,
   targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
   const limits = getPresetSearchLimits(input);
@@ -579,7 +596,7 @@ function getBoostedSteeringBaseHeightFloorMm(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null,
+  modelMetrics: PlannerPostureModelMetrics,
   targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
   const boosterSeedAdjustment = getSolverBoosterSeedAdjustment(input, preset, heightCm);
@@ -664,7 +681,7 @@ function solveDynamicPlannerInput(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null,
+  modelMetrics: PlannerPostureModelMetrics,
   useBoostedSteeringBaseFloor = true,
   targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ): PlannerInput {
@@ -680,7 +697,7 @@ function solveDynamicPlannerInput(
     );
   }
 
-  let bestSeed = clampPresetSearchSeed(getSolverSeed(input, preset, heightCm), limits);
+  let bestSeed = clampPresetSearchSeed(getSolverSeed(input, preset, heightCm, modelMetrics), limits);
   let bestInput = createCandidateInput(input, bestSeed);
   let bestScore = scoreCandidate(bestInput, preset, heightCm, modelMetrics, null, targetRangesByPreset);
   const maybeAdoptCandidate = (candidateSeed: PlannerPosturePresetSeed, metricKeys: string[]) => {
@@ -813,7 +830,7 @@ export function recomputePresetDynamicPlannerInput(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null,
+  modelMetrics: PlannerPostureModelMetrics,
   targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ): PlannerInput {
   return solveDynamicPlannerInput(input, preset, heightCm, modelMetrics, true, targetRangesByPreset);
@@ -823,7 +840,7 @@ export function getOptimizedPresetMonitorHeightFromBaseMm(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null,
+  modelMetrics: PlannerPostureModelMetrics,
   targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ) {
   const skeleton = createPlannerPostureSkeleton(
@@ -843,7 +860,7 @@ export function getOptimizedPresetMonitorHeightFromBaseMm(
 export function applyPresetToPostureSettings(
   settings: PlannerPostureSettings<PlannerPosturePreset>,
   input: PlannerInput,
-  modelMetrics: PlannerPostureModelMetrics | null = null
+  modelMetrics: PlannerPostureModelMetrics
 ): PlannerPostureSettings<PlannerPosturePreset> {
   if (!isPresetSolvablePreset(settings.preset)) {
     return { ...settings };
@@ -865,7 +882,7 @@ export function applyPresetToPlannerInput(
   input: PlannerInput,
   preset: PlannerPosturePreset,
   heightCm: number,
-  modelMetrics: PlannerPostureModelMetrics | null = null,
+  modelMetrics: PlannerPostureModelMetrics,
   targetRangesByPreset: PlannerPostureTargetRangesByPreset = DEFAULT_PLANNER_POSTURE_SETTINGS.targetRangesByPreset
 ): PlannerInput {
   if (!isPresetSolvablePreset(preset)) {
@@ -887,8 +904,8 @@ export function applyPresetToPlannerInput(
 export function createPresetPlannerInput(
   preset: PlannerPosturePreset,
   heightCm: number,
-  currentInput: PlannerInput = DEFAULT_PLANNER_INPUT,
-  modelMetrics: PlannerPostureModelMetrics | null = null
+  currentInput: PlannerInput,
+  modelMetrics: PlannerPostureModelMetrics
 ): PlannerInput {
   return applyPresetToPlannerInput(currentInput, preset, heightCm, modelMetrics);
 }

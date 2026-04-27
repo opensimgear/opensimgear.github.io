@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 import {
   BASE_BEAM_HEIGHT_MM,
@@ -20,6 +20,8 @@ import {
   applyPresetToPlannerInput,
   applyPresetToPostureSettings,
 } from '../../components/calculator/aluminum-rig-planner/presets';
+import type { PlannerPostureModelMetrics } from '../../components/calculator/aluminum-rig-planner/types';
+import { loadHumanModelPostureModelFixture } from './human-model-fixture';
 
 function subtract(a: [number, number, number], b: [number, number, number]): [number, number, number] {
   return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
@@ -50,8 +52,14 @@ function formatMetricValue(metric: ReturnType<typeof createPlannerPostureReport>
 }
 
 describe('aluminum rig planner posture report', () => {
+  let modelMetrics: PlannerPostureModelMetrics;
+
+  beforeAll(async () => {
+    modelMetrics = await loadHumanModelPostureModelFixture();
+  });
+
   it('creates finite default posture metrics', () => {
-    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
 
     expect(report.metrics.length).toBeGreaterThan(0);
     for (const metric of report.metrics) {
@@ -71,7 +79,8 @@ describe('aluminum rig planner posture report', () => {
         pedalTrayDistanceMm: 150,
         pedalsHeightMm: 300,
       },
-      DEFAULT_PLANNER_POSTURE_SETTINGS
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
     );
 
     expect(report.hints.length).toBeGreaterThan(0);
@@ -79,7 +88,7 @@ describe('aluminum rig planner posture report', () => {
   });
 
   it('reports eye-based posture metrics without extra eye debug payload', () => {
-    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
 
     expect(report.metrics.some((metric) => metric.key === 'eyeToWheelTop' && metric.label === 'Eye to wheel top')).toBe(
       true
@@ -93,7 +102,7 @@ describe('aluminum rig planner posture report', () => {
   });
 
   it('does not report fixed preset pedal height versus hips', () => {
-    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
 
     expect(
       report.metrics.some(
@@ -103,8 +112,12 @@ describe('aluminum rig planner posture report', () => {
   });
 
   it('reports brake alignment from left hip to toe on the XY plane', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
     const metric = report.metrics.find((candidate) => candidate.key === 'brakeAlignment');
     const deltaX = skeleton.joints.toeLeft[0] - skeleton.joints.hipLeft[0];
     const deltaY = skeleton.joints.toeLeft[1] - skeleton.joints.hipLeft[1];
@@ -115,8 +128,12 @@ describe('aluminum rig planner posture report', () => {
   });
 
   it('reports wrist bend as deviation from the forearm direction', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
     const metric = report.metrics.find((candidate) => candidate.key === 'wristBend');
     const leftWristBend =
       180 - angleDeg(skeleton.joints.elbowLeft, skeleton.joints.wristLeft, skeleton.joints.handLeft);
@@ -137,16 +154,17 @@ describe('aluminum rig planner posture report', () => {
       heightCm <= PLANNER_POSTURE_LIMITS.heightMaxCm;
       heightCm += 1
     ) {
-      const input = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, 'gt', heightCm);
+      const input = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, 'gt', heightCm, modelMetrics);
       const settings = applyPresetToPostureSettings(
         {
           ...DEFAULT_PLANNER_POSTURE_SETTINGS,
           preset: 'gt',
           heightCm,
         },
-        input
+        input,
+        modelMetrics
       );
-      const report = createPlannerPostureReport(input, settings);
+      const report = createPlannerPostureReport(input, settings, modelMetrics);
 
       for (const metric of report.metrics) {
         const value = metric.unit === 'mm' ? metric.valueMm : metric.valueDeg;
@@ -209,8 +227,8 @@ describe('aluminum rig planner posture report', () => {
       monitorTargetFovDeg: 30,
     };
     const expectedDistanceMm = getSolvedMonitorDistanceFromEyesMm(postureSettings);
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
-    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, modelMetrics);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings, modelMetrics);
 
     expect(report.monitorDebug.position[0]).toBeCloseTo(skeleton.joints.eyeCenter[0] + expectedDistanceMm * 0.001, 6);
   });

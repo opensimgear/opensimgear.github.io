@@ -36,7 +36,7 @@ export function createPlannerFovOverlay(
   input: PlannerInput,
   postureSettings: PlannerPostureSettings<PlannerPosturePreset>,
   postureReport: PlannerPostureReport,
-  postureModelMetrics: PlannerPostureModelMetrics | null
+  postureModelMetrics: PlannerPostureModelMetrics
 ): PlannerFovOverlay {
   const skeleton = createPlannerPostureSkeleton(
     input,

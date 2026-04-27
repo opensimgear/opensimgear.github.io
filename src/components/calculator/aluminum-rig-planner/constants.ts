@@ -10,13 +10,6 @@ import type {
 } from './types';
 import { createDefaultPlannerPostureTargetRangesByPreset } from './posture-targets';
 
-export {
-  ANTHROPOMETRY_LENGTH_LIMITS_MM,
-  DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE,
-  DEFAULT_ANTHROPOMETRY_LENGTHS_MM,
-  DEFAULT_ANTHROPOMETRY_RATIOS,
-} from './anthropometry-defaults';
-
 export const MM_TO_METERS = 0.001;
 export const PROFILE_SHORT_MM = 40;
 export const PROFILE_TALL_MM = 80;
@@ -77,6 +70,7 @@ export const SCENE_IDLE_LOAD_TIMEOUT_MS = 180;
 export const IMMEDIATE_SCENE_LOAD_TIMEOUT_MS = 0;
 export const DEFAULT_CUSTOM_PROFILE_COLOR = '#ff0000';
 export const CUT_LIST_HIGHLIGHT_COLOR = '#22c55e';
+export const DEFAULT_POSTURE_HEIGHT_CM = 169;
 
 export const DEFAULT_PLANNER_INPUT: PlannerInput = {
   baseLengthMm: 1350,
@@ -192,7 +186,6 @@ export const MONITOR_CURVATURE_OPTIONS = [
   { text: '800R', value: '800r' },
 ] as const satisfies ReadonlyArray<{ text: string; value: PlannerMonitorCurvature }>;
 
-export const DEFAULT_POSTURE_HEIGHT_CM = 169;
 export const DEFAULT_ACTIVE_POSTURE_PRESET: PlannerPosturePreset = 'gt';
 export const DEFAULT_MONITOR_SIZE_IN = 32;
 export const DEFAULT_MONITOR_ASPECT_RATIO: PlannerMonitorAspectRatio = '16:10';

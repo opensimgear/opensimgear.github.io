@@ -396,7 +396,7 @@ describe('aluminum rig planner human model rig', () => {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       heightCm: 205,
     };
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, model!.postureModelMetrics);
     const modelScale = postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM;
 
     const bones = collectBones(model!.object);
@@ -422,7 +422,7 @@ describe('aluminum rig planner human model rig', () => {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       heightCm: 205,
     };
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, model!.postureModelMetrics);
     const modelScale = postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM;
 
     model!.applySkeleton(skeleton, 1);
@@ -464,7 +464,11 @@ describe('aluminum rig planner human model rig', () => {
     const model = createRiggedHumanModelFromRoot(gltf.scene);
     expect(model).not.toBeNull();
 
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      model!.postureModelMetrics
+    );
     const modelScale = 1.08;
 
     model!.applySkeleton(skeleton, modelScale);
@@ -486,8 +490,16 @@ describe('aluminum rig planner human model rig', () => {
     expect(basicModel).not.toBeNull();
     expect(advancedModel).not.toBeNull();
 
-    const basicSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const advancedSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const basicSkeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      basicModel!.postureModelMetrics
+    );
+    const advancedSkeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      advancedModel!.postureModelMetrics
+    );
 
     basicModel!.applySkeleton(basicSkeleton, 1);
     advancedModel!.applySkeleton(advancedSkeleton, 1);
@@ -508,7 +520,11 @@ describe('aluminum rig planner human model rig', () => {
     const model = createRiggedHumanModelFromRoot(gltf.scene);
     expect(model).not.toBeNull();
 
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      model!.postureModelMetrics
+    );
     const bones = collectBones(model!.object);
 
     model!.applySkeleton(skeleton, 1);
@@ -568,7 +584,8 @@ describe('aluminum rig planner human model rig', () => {
         seatAngleDeg: 16,
         backrestAngleDeg: 42,
       },
-      DEFAULT_PLANNER_POSTURE_SETTINGS
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      model!.postureModelMetrics
     );
 
     model!.applySkeleton(skeleton, 1);

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 import {
   BASE_BEAM_HEIGHT_MM,
@@ -12,19 +12,25 @@ import {
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { clampPlannerInput, getPedalBrakeDeltaMaxMm } from '../../components/calculator/aluminum-rig-planner/geometry';
 import {
-  createPlannerPostureSkeleton,
+  createPlannerPostureSkeleton as createPlannerPostureSkeletonWithModel,
   getPlannerPostureFootContactErrorMm,
 } from '../../components/calculator/aluminum-rig-planner/posture';
-import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
+import { createPlannerPostureReport as createPlannerPostureReportWithModel } from '../../components/calculator/aluminum-rig-planner/posture-report';
 import {
-  applyPresetToPlannerInput,
-  applyPresetToPostureSettings,
-  getOptimizedPresetMonitorHeightFromBaseMm,
+  applyPresetToPlannerInput as applyPresetToPlannerInputWithModel,
+  applyPresetToPostureSettings as applyPresetToPostureSettingsWithModel,
+  getOptimizedPresetMonitorHeightFromBaseMm as getOptimizedPresetMonitorHeightFromBaseMmWithModel,
   getPresetAfterPlannerInputEdit,
   PLANNER_POSTURE_PRESETS,
-  recomputePresetDynamicPlannerInput,
+  recomputePresetDynamicPlannerInput as recomputePresetDynamicPlannerInputWithModel,
 } from '../../components/calculator/aluminum-rig-planner/presets';
-import type { PlannerInput, PlannerPosturePreset } from '../../components/calculator/aluminum-rig-planner/types';
+import type {
+  PlannerInput,
+  PlannerPostureModelMetrics,
+  PlannerPosturePreset,
+  PlannerPostureSettings,
+} from '../../components/calculator/aluminum-rig-planner/types';
+import { loadHumanModelPostureModelFixture } from './human-model-fixture';
 
 const NON_CUSTOM_PRESETS = ['gt', 'rally', 'drift', 'road'] satisfies PlannerPosturePreset[];
 const DYNAMIC_KEYS = [
@@ -44,6 +50,35 @@ const FIXED_FINAL_PRESET_KEYS = [
   'wheelAngleDeg',
 ] as const;
 const DYNAMIC_KEY_SET = new Set<keyof PlannerInput>(DYNAMIC_KEYS);
+let modelMetrics: PlannerPostureModelMetrics;
+
+function createPlannerPostureSkeleton(input: PlannerInput, settings: PlannerPostureSettings<PlannerPosturePreset>) {
+  return createPlannerPostureSkeletonWithModel(input, settings, modelMetrics);
+}
+
+function createPlannerPostureReport(input: PlannerInput, settings: PlannerPostureSettings<PlannerPosturePreset>) {
+  return createPlannerPostureReportWithModel(input, settings, modelMetrics);
+}
+
+function getOptimizedPresetMonitorHeightFromBaseMm(
+  input: PlannerInput,
+  preset: PlannerPosturePreset,
+  heightCm: number
+) {
+  return getOptimizedPresetMonitorHeightFromBaseMmWithModel(input, preset, heightCm, modelMetrics);
+}
+
+function recomputePresetDynamicPlannerInput(input: PlannerInput, preset: PlannerPosturePreset, heightCm: number) {
+  return recomputePresetDynamicPlannerInputWithModel(input, preset, heightCm, modelMetrics);
+}
+
+function applyPresetToPlannerInput(input: PlannerInput, preset: PlannerPosturePreset, heightCm: number) {
+  return applyPresetToPlannerInputWithModel(input, preset, heightCm, modelMetrics);
+}
+
+function applyPresetToPostureSettings(settings: PlannerPostureSettings<PlannerPosturePreset>, input: PlannerInput) {
+  return applyPresetToPostureSettingsWithModel(settings, input, modelMetrics);
+}
 
 function expectOnlyDynamicFieldsToChange(before: PlannerInput, after: PlannerInput) {
   for (const key of Object.keys(before) as Array<keyof PlannerInput>) {
@@ -108,6 +143,10 @@ function getPresetFixedInputValues(preset: (typeof NON_CUSTOM_PRESETS)[number]) 
 }
 
 describe('aluminum rig planner posture presets', () => {
+  beforeAll(async () => {
+    modelMetrics = await loadHumanModelPostureModelFixture();
+  });
+
   it('uses GT as the default active preset', () => {
     expect(DEFAULT_ACTIVE_POSTURE_PRESET).toBe('gt');
     expect(DEFAULT_PLANNER_POSTURE_SETTINGS.preset).toBe(DEFAULT_ACTIVE_POSTURE_PRESET);
@@ -438,11 +477,15 @@ describe('aluminum rig planner posture presets', () => {
       heightCm += 1
     ) {
       const input = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, heightCm);
-      const contactErrorMm = getPlannerPostureFootContactErrorMm(input, {
-        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-        preset,
-        heightCm,
-      });
+      const contactErrorMm = getPlannerPostureFootContactErrorMm(
+        input,
+        {
+          ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+          preset,
+          heightCm,
+        },
+        modelMetrics
+      );
 
       if (!Number.isFinite(contactErrorMm) || contactErrorMm > 150) {
         failures.push(`${preset} ${heightCm}cm foot-to-pedal gap ${contactErrorMm.toFixed(1)}mm`);

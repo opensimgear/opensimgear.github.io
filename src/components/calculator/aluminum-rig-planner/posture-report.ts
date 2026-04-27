@@ -1,9 +1,4 @@
-import {
-  BASE_BEAM_HEIGHT_MM,
-  DEFAULT_PLANNER_POSTURE_SETTINGS,
-  PLANNER_DIMENSION_LIMITS,
-  UPRIGHT_BEAM_DEPTH_MM,
-} from './constants';
+import { BASE_BEAM_HEIGHT_MM, PLANNER_DIMENSION_LIMITS, UPRIGHT_BEAM_DEPTH_MM } from './constants';
 import { getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
 import { createPlannerPostureSkeleton, type PosturePoint } from './posture';
 import {
@@ -207,8 +202,8 @@ function getClampHints(input: PlannerInput) {
 
 export function createPlannerPostureReport(
   input: PlannerInput,
-  postureSettings: PlannerPostureSettings<PlannerPosturePreset> = DEFAULT_PLANNER_POSTURE_SETTINGS,
-  postureModel: PlannerPostureModelMetrics | null = null
+  postureSettings: PlannerPostureSettings<PlannerPosturePreset>,
+  postureModel: PlannerPostureModelMetrics
 ): PlannerPostureReport {
   const skeleton = createPlannerPostureSkeleton(
     input,

@@ -103,7 +103,7 @@ export type HumanRigHoverTooltip = HumanRigTooltipData & {
 export type RiggedHumanModel = {
   getTooltipTargets: () => Mesh[];
   object: Group;
-  postureModelMetrics: PlannerPostureModelMetrics | null;
+  postureModelMetrics: PlannerPostureModelMetrics;
   applySkeleton: (skeleton: PlannerPostureSkeleton, modelScale: number) => void;
   setDisplayOptions: (showModel: boolean, showSkeleton: boolean) => void;
   dispose: () => void;
@@ -1149,7 +1149,7 @@ function isHumanModelBoneName(name: string): name is HumanModelBoneName {
 export function createRiggedHumanModelFromRoot(root: Group): RiggedHumanModel | null {
   const rig = collectRig(root);
 
-  if (rig.bones.size === 0 || rig.skinnedMeshes.length === 0) {
+  if (rig.bones.size === 0 || rig.skinnedMeshes.length === 0 || !rig.postureModelMetrics) {
     return null;
   }
 

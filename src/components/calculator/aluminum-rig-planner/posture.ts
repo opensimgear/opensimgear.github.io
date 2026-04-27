@@ -1,8 +1,6 @@
 import {
   BASE_BEAM_HEIGHT_MM,
   BASE_MODULE_LAYOUT,
-  DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE,
-  DEFAULT_ANTHROPOMETRY_RATIOS,
   DEFAULT_POSTURE_HEIGHT_CM,
   HALF_PROFILE_SHORT_MM,
   PEDAL_TRAY_LAYOUT,
@@ -118,8 +116,6 @@ const HAND_GRIP_LENGTH_MIN_MM = 55;
 const HAND_GRIP_LENGTH_MAX_MM = 140;
 const HAND_GRIP_HEIGHT_RATIO = 0.076;
 const HAND_MAX_FOREARM_HAND_SHARE = 0.45;
-const DEFAULT_EYE_CENTER_FORWARD_FROM_HIP = 0.064;
-const DEFAULT_EYE_CENTER_HEIGHT_FROM_HIP = 0.407;
 
 const PRESET_KNEE_LIFT = {
   gt: 0.24,
@@ -527,8 +523,8 @@ function solvePedalFootPose(target: PedalFootTarget, ankle: Vector): PedalFootTa
   };
 }
 
-function getHeelLength(heightM: number, footLengthRatio: number, postureModel: PlannerPostureModelMetrics | null) {
-  return footLengthRatio * heightM * (postureModel?.heelLengthShare ?? DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE);
+function getHeelLength(heightM: number, footLengthRatio: number, postureModel: PlannerPostureModelMetrics) {
+  return footLengthRatio * heightM * postureModel.heelLengthShare;
 }
 
 function getWheelTargets(input: PlannerInput, rightSign: number) {
@@ -625,20 +621,17 @@ function getWristFromHand(hand: Vector, handGripLength: number, handBoneDirectio
 
 export function getEffectiveAnthropometryRatios(
   settings: PlannerPostureSettings<PlannerPosturePreset>,
-  postureModel: PlannerPostureModelMetrics | null = null
+  postureModel: PlannerPostureModelMetrics
 ): PlannerAnthropometryRatios {
   void settings;
 
-  return { ...(postureModel?.anthropometryRatios ?? DEFAULT_ANTHROPOMETRY_RATIOS) };
+  return { ...postureModel.anthropometryRatios };
 }
 
-function getEffectiveEyeCenterRatios(postureModel: PlannerPostureModelMetrics | null) {
+function getEffectiveEyeCenterRatios(postureModel: PlannerPostureModelMetrics) {
   return {
-    forwardFromHip: postureModel?.eyeCenterForwardFromHip ?? DEFAULT_EYE_CENTER_FORWARD_FROM_HIP,
-    heightFromHip:
-      postureModel?.eyeCenterHeightFromHip ??
-      postureModel?.eyeCenterSittingHeight ??
-      DEFAULT_EYE_CENTER_HEIGHT_FROM_HIP,
+    forwardFromHip: postureModel.eyeCenterForwardFromHip,
+    heightFromHip: postureModel.eyeCenterHeightFromHip,
   };
 }
 
@@ -663,7 +656,7 @@ function getBoosterSeatOffset(settings: PlannerPostureSettings<PlannerPosturePre
 export function getPlannerPostureFootContactErrorMm(
   input: PlannerInput,
   settings: PlannerPostureSettings<PlannerPosturePreset>,
-  postureModel: PlannerPostureModelMetrics | null = null
+  postureModel: PlannerPostureModelMetrics
 ) {
   const heightM =
     clamp(settings.heightCm, PLANNER_POSTURE_LIMITS.heightMinCm, PLANNER_POSTURE_LIMITS.heightMaxCm) / 100;
@@ -728,7 +721,7 @@ export function getPlannerPostureFootContactErrorMm(
 export function createPlannerPostureSkeleton(
   input: PlannerInput,
   settings: PlannerPostureSettings<PlannerPosturePreset>,
-  postureModel: PlannerPostureModelMetrics | null = null
+  postureModel: PlannerPostureModelMetrics
 ): PlannerPostureSkeleton {
   const heightM =
     clamp(settings.heightCm, PLANNER_POSTURE_LIMITS.heightMinCm, PLANNER_POSTURE_LIMITS.heightMaxCm) / 100;

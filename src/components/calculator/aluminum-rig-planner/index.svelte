@@ -119,11 +119,7 @@
   const POSTURE_TRANSITION_DURATION_MS = 320;
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
-  const DEFAULT_INPUT: PlannerInput = createPresetPlannerInput(
-    DEFAULT_ACTIVE_POSTURE_PRESET,
-    DEFAULT_POSTURE_HEIGHT_CM,
-    DEFAULT_PLANNER_INPUT
-  );
+  const DEFAULT_INPUT: PlannerInput = { ...DEFAULT_PLANNER_INPUT };
   const DEFAULT_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings = {
     ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
     profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
@@ -307,7 +303,7 @@
         return;
       }
 
-      if (!model) {
+      if (!model || !model.postureModelMetrics) {
         humanModelStatus = 'error';
         return;
       }
@@ -315,7 +311,7 @@
       humanModel = model;
       humanModelStatus = 'ready';
 
-      if (model.postureModelMetrics && isPresetSolvablePreset(postureSettings.preset)) {
+      if (isPresetSolvablePreset(postureSettings.preset)) {
         const nextInput = applyPresetToPlannerInput(
           plannerInput,
           postureSettings.preset,
@@ -405,7 +401,19 @@
   const geometry = $derived(derivePlannerGeometry(plannerInput));
   const sceneGeometry = $derived(derivePlannerGeometry(animatedPlannerInput));
   const postureModelMetrics = $derived(humanModel?.postureModelMetrics ?? null);
-  const postureReport = $derived(createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics));
+  const defaultModelInput = $derived(
+    postureModelMetrics
+      ? createPresetPlannerInput(
+          DEFAULT_ACTIVE_POSTURE_PRESET,
+          DEFAULT_POSTURE_HEIGHT_CM,
+          DEFAULT_PLANNER_INPUT,
+          postureModelMetrics
+        )
+      : DEFAULT_INPUT
+  );
+  const postureReport = $derived(
+    postureModelMetrics ? createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics) : null
+  );
   const scenePostureSettings = $derived<PlannerPostureSettings<PlannerPosturePreset>>({
     ...postureSettings,
     heightCm: animatedPostureHeightCm,
@@ -1074,6 +1082,11 @@
   }
 
   function resetSetup() {
+    if (!postureModelMetrics) {
+      humanModelStatus = 'error';
+      return;
+    }
+
     Object.assign(postureSettings, clonePostureSettings(DEFAULT_POSTURE_SETTINGS));
     postureHeightControlValue = postureSettings.heightCm;
     cancelPostureHeightAnimation();
@@ -1100,30 +1113,35 @@
   }
 
   function resetSteeringColumnModule() {
-    setSteeringColumnDistanceMm(DEFAULT_INPUT.steeringColumnDistanceMm);
-    setSteeringColumnBaseHeightMm(DEFAULT_INPUT.steeringColumnBaseHeightMm);
-    setSteeringColumnHeightMm(DEFAULT_INPUT.steeringColumnHeightMm);
+    setSteeringColumnDistanceMm(defaultModelInput.steeringColumnDistanceMm);
+    setSteeringColumnBaseHeightMm(defaultModelInput.steeringColumnBaseHeightMm);
+    setSteeringColumnHeightMm(defaultModelInput.steeringColumnHeightMm);
   }
 
   function resetPedalTrayModule() {
-    setPedalTrayDepthMm(DEFAULT_INPUT.pedalTrayDepthMm);
-    setPedalTrayDistanceMm(DEFAULT_INPUT.pedalTrayDistanceMm);
+    setPedalTrayDepthMm(defaultModelInput.pedalTrayDepthMm);
+    setPedalTrayDistanceMm(defaultModelInput.pedalTrayDistanceMm);
   }
 
   function resetPedalsModule() {
-    setPedalsHeightMm(DEFAULT_INPUT.pedalsHeightMm);
-    setPedalsDeltaMm(DEFAULT_INPUT.pedalsDeltaMm);
-    setPedalAngleDeg(DEFAULT_INPUT.pedalAngleDeg);
-    setPedalLengthMm(DEFAULT_INPUT.pedalLengthMm);
-    setPedalAcceleratorDeltaMm(DEFAULT_INPUT.pedalAcceleratorDeltaMm);
-    setPedalBrakeDeltaMm(DEFAULT_INPUT.pedalBrakeDeltaMm);
-    setPedalClutchDeltaMm(DEFAULT_INPUT.pedalClutchDeltaMm);
+    setPedalsHeightMm(defaultModelInput.pedalsHeightMm);
+    setPedalsDeltaMm(defaultModelInput.pedalsDeltaMm);
+    setPedalAngleDeg(defaultModelInput.pedalAngleDeg);
+    setPedalLengthMm(defaultModelInput.pedalLengthMm);
+    setPedalAcceleratorDeltaMm(defaultModelInput.pedalAcceleratorDeltaMm);
+    setPedalBrakeDeltaMm(defaultModelInput.pedalBrakeDeltaMm);
+    setPedalClutchDeltaMm(defaultModelInput.pedalClutchDeltaMm);
   }
 
   function setPosturePreset(value: PlannerPosturePreset) {
     postureSettings.preset = value;
 
     if (isPresetSolvablePreset(value)) {
+      if (!postureModelMetrics) {
+        humanModelStatus = 'error';
+        return;
+      }
+
       const nextInput = applyPresetToPlannerInput(
         plannerInput,
         value,
@@ -1145,6 +1163,11 @@
 
   function optimizeCurrentPosturePreset() {
     if (postureSettings.preset !== 'custom') {
+      return;
+    }
+
+    if (!postureModelMetrics) {
+      humanModelStatus = 'error';
       return;
     }
 
@@ -1214,6 +1237,11 @@
     postureSettings.heightCm = nextHeightCm;
 
     if (isPresetSolvablePreset(postureSettings.preset)) {
+      if (!postureModelMetrics) {
+        humanModelStatus = 'error';
+        return;
+      }
+
       const nextInput = recomputePresetDynamicPlannerInput(
         plannerInput,
         postureSettings.preset,
@@ -1459,7 +1487,7 @@
       <div
         class="flex min-w-0 flex-col border-b border-zinc-300 bg-[linear-gradient(180deg,#fafafa_0%,#f4f4f5_100%)] lg:border-b-0 lg:border-r"
       >
-        {#if PlannerScene && humanModel}
+        {#if PlannerScene && humanModel && postureReport}
           <div class={isNarrowViewport ? 'mx-auto w-[clamp(18rem,84vw,42rem)] max-w-full' : 'w-full'}>
             <PlannerScene
               geometry={sceneGeometry}
@@ -1537,19 +1565,21 @@
           </Folder>
           {#if postureSettings.advanced}
             <Folder title="Posture target">
-              {#each postureReport.metrics as metric (metric.key)}
-                {@const sliderLimits = getPlannerPostureTargetRangeControlLimits(postureSettings.preset, metric.key)}
-                <IntervalSlider
-                  bind:value={
-                    () => getPostureTargetRange(metric.key), (value) => setPostureTargetRange(metric.key, value)
-                  }
-                  label={metric.label}
-                  min={sliderLimits.min}
-                  max={sliderLimits.max}
-                  step={1}
-                  format={(value) => formatPostureTargetValue(value, metric.unit)}
-                />
-              {/each}
+              {#if postureReport}
+                {#each postureReport.metrics as metric (metric.key)}
+                  {@const sliderLimits = getPlannerPostureTargetRangeControlLimits(postureSettings.preset, metric.key)}
+                  <IntervalSlider
+                    bind:value={
+                      () => getPostureTargetRange(metric.key), (value) => setPostureTargetRange(metric.key, value)
+                    }
+                    label={metric.label}
+                    min={sliderLimits.min}
+                    max={sliderLimits.max}
+                    step={1}
+                    format={(value) => formatPostureTargetValue(value, metric.unit)}
+                  />
+                {/each}
+              {/if}
             </Folder>
           {/if}
           <Folder title="Monitor">

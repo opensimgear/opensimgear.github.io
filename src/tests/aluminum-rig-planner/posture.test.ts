@@ -1,9 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 import {
   BASE_BEAM_HEIGHT_MM,
-  DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE,
-  DEFAULT_ANTHROPOMETRY_RATIOS,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_POSTURE_HEIGHT_CM,
@@ -32,6 +30,8 @@ import {
   getPlannerPostureTargetRangeControlLimits,
   getPlannerPostureTargetRanges,
 } from '../../components/calculator/aluminum-rig-planner/posture-targets';
+import type { PlannerPostureModelMetrics } from '../../components/calculator/aluminum-rig-planner/types';
+import { loadHumanModelPostureModelFixture } from './human-model-fixture';
 
 function expectPointToBeFinite(point: [number, number, number]) {
   expect(point.every((value) => Number.isFinite(value))).toBe(true);
@@ -110,13 +110,23 @@ const PEDAL_THICKNESS_MM = 8;
 const PEDAL_PLATE_THICKNESS_MM = 3;
 
 describe('aluminum rig planner posture solver', () => {
+  let modelMetrics: PlannerPostureModelMetrics;
+
+  beforeAll(async () => {
+    modelMetrics = await loadHumanModelPostureModelFixture();
+  });
+
   it('uses fixed default pedal geometry values', () => {
     expect(DEFAULT_PLANNER_INPUT.pedalAngleDeg).toBe(80);
     expect(DEFAULT_PLANNER_INPUT.pedalsDeltaMm).toBe(140);
   });
 
   it('creates finite whole-body joints and segments from default cockpit geometry', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
 
     for (const point of Object.values(skeleton.joints)) {
       expectPointToBeFinite(point);
@@ -127,8 +137,12 @@ describe('aluminum rig planner posture solver', () => {
   });
 
   it('reports ankle bend and foot-to-toe bend from the original straight posture', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
     const ankleMetric = report.metrics.find((metric) => metric.key === 'ankleBend');
     const footToToeMetric = report.metrics.find((metric) => metric.key === 'footToToeBend');
     const oldAnkleRangeMetric = report.metrics.find((metric) => (metric.key as string) === 'ankleRange');
@@ -176,10 +190,14 @@ describe('aluminum rig planner posture solver', () => {
 
   it('pre-scales human model pose targets so height scaling does not lengthen or shorten IK bones', () => {
     for (const heightCm of [130, 200]) {
-      const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
-        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-        heightCm,
-      });
+      const skeleton = createPlannerPostureSkeleton(
+        DEFAULT_PLANNER_INPUT,
+        {
+          ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+          heightCm,
+        },
+        modelMetrics
+      );
       const modelScale = heightCm / DEFAULT_POSTURE_HEIGHT_CM;
       const poseSkeleton = createHumanModelPoseSkeleton(skeleton, modelScale);
       const hipCenter = skeleton.joints.hipCenter;
@@ -203,18 +221,22 @@ describe('aluminum rig planner posture solver', () => {
     }
   });
 
-  it('uses the default ratios for height-based posture solving', () => {
-    const ratios = getEffectiveAnthropometryRatios(DEFAULT_PLANNER_POSTURE_SETTINGS);
+  it('uses model-derived ratios for height-based posture solving', () => {
+    const ratios = getEffectiveAnthropometryRatios(DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
 
-    expect(ratios.upperArmLength).toBe(DEFAULT_ANTHROPOMETRY_RATIOS.upperArmLength);
-    expect(ratios.lowerLegLength).toBe(DEFAULT_ANTHROPOMETRY_RATIOS.lowerLegLength);
+    expect(ratios.upperArmLength).toBe(modelMetrics.anthropometryRatios.upperArmLength);
+    expect(ratios.lowerLegLength).toBe(modelMetrics.anthropometryRatios.lowerLegLength);
   });
 
   it('clamps hands to the reachable model arm length', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
     const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
-    const upperArmLength = DEFAULT_ANTHROPOMETRY_RATIOS.upperArmLength * heightM;
-    const forearmHandLength = DEFAULT_ANTHROPOMETRY_RATIOS.forearmHandLength * heightM;
+    const upperArmLength = modelMetrics.anthropometryRatios.upperArmLength * heightM;
+    const forearmHandLength = modelMetrics.anthropometryRatios.forearmHandLength * heightM;
 
     expect(getDistance(skeleton.joints.shoulderLeft, skeleton.joints.elbowLeft)).toBeCloseTo(upperArmLength, 5);
     expect(getDistance(skeleton.joints.shoulderRight, skeleton.joints.elbowRight)).toBeCloseTo(upperArmLength, 5);
@@ -235,7 +257,7 @@ describe('aluminum rig planner posture solver', () => {
       ...DEFAULT_PLANNER_INPUT,
       wheelAngleDeg: 28,
     };
-    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
     const wheelAngleRad = (-input.wheelAngleDeg * Math.PI) / 180;
     const wheelTorusPlaneDirectionZx = [-Math.sin(wheelAngleRad), 0, Math.cos(wheelAngleRad)] as [
       number,
@@ -264,7 +286,7 @@ describe('aluminum rig planner posture solver', () => {
       ...DEFAULT_PLANNER_INPUT,
       wheelDiameterMm,
     };
-    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
     const wheelCenterX =
       input.seatBaseDepthMm +
       input.steeringColumnDistanceMm +
@@ -287,10 +309,10 @@ describe('aluminum rig planner posture solver', () => {
       steeringColumnDistanceMm: 1200,
       wheelDistanceFromSteeringColumnMm: 0,
     };
-    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
     const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
-    const upperArmLength = DEFAULT_ANTHROPOMETRY_RATIOS.upperArmLength * heightM;
-    const forearmHandLength = DEFAULT_ANTHROPOMETRY_RATIOS.forearmHandLength * heightM;
+    const upperArmLength = modelMetrics.anthropometryRatios.upperArmLength * heightM;
+    const forearmHandLength = modelMetrics.anthropometryRatios.forearmHandLength * heightM;
     const wheelCenterX =
       input.seatBaseDepthMm +
       input.steeringColumnDistanceMm +
@@ -313,7 +335,7 @@ describe('aluminum rig planner posture solver', () => {
 
   it('adds eye center joint and uses posture-model eye and heel ratios', () => {
     const postureModel = {
-      anthropometryRatios: { ...DEFAULT_ANTHROPOMETRY_RATIOS },
+      anthropometryRatios: { ...modelMetrics.anthropometryRatios },
       eyeCenterSittingHeight: 0.2,
       eyeCenterForwardFromHip: 0.11,
       eyeCenterHeightFromHip: 0.34,
@@ -343,11 +365,11 @@ describe('aluminum rig planner posture solver', () => {
     expect(skeleton.joints.eyeCenter[1]).toBeCloseTo(expectedEyeCenter[1], 6);
     expect(skeleton.joints.eyeCenter[2]).toBeCloseTo(expectedEyeCenter[2], 6);
     expect(getDistance(skeleton.joints.ankleLeft, skeleton.joints.heelLeft)).toBeCloseTo(
-      DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM * postureModel.heelLengthShare,
+      modelMetrics.anthropometryRatios.footLength * heightM * postureModel.heelLengthShare,
       5
     );
     expect(getDistance(skeleton.joints.toeStartLeft, skeleton.joints.toeLeft)).toBeCloseTo(
-      DEFAULT_ANTHROPOMETRY_RATIOS.footLength *
+      modelMetrics.anthropometryRatios.footLength *
         heightM *
         (1 - postureModel.heelLengthShare) *
         (1 - POSTURE_TOE_BONE_START_SHARE),
@@ -356,12 +378,20 @@ describe('aluminum rig planner posture solver', () => {
   });
 
   it('scales seat-to-hip offsets from the 169 cm baseline', () => {
-    const midDriver = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const midDriver = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
     const tallHeightCm = 205;
-    const tallDriver = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
-      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      heightCm: tallHeightCm,
-    });
+    const tallDriver = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        heightCm: tallHeightCm,
+      },
+      modelMetrics
+    );
     const seatAngleRad = (DEFAULT_PLANNER_INPUT.seatAngleDeg * Math.PI) / 180;
     const seatForward = [Math.cos(seatAngleRad), 0, Math.sin(seatAngleRad)] as const;
     const seatNormal = [-Math.sin(seatAngleRad), 0, Math.cos(seatAngleRad)] as const;
@@ -387,14 +417,22 @@ describe('aluminum rig planner posture solver', () => {
     const minHeightOffset = getPostureBoosterSeatOffsetMm(100);
     const belowThresholdOffset = getPostureBoosterSeatOffsetMm(119);
     const thresholdOffset = getPostureBoosterSeatOffsetMm(POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM);
-    const belowThresholdSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
-      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      heightCm: 119,
-    });
-    const thresholdSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
-      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      heightCm: POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM,
-    });
+    const belowThresholdSkeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        heightCm: 119,
+      },
+      modelMetrics
+    );
+    const thresholdSkeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        heightCm: POSTURE_BOOSTER_HEIGHT_THRESHOLD_CM,
+      },
+      modelMetrics
+    );
 
     expect(minHeightOffset.bottomMm).toBe(POSTURE_BOOSTER_BOTTOM_OFFSET_MAX_MM);
     expect(minHeightOffset.backMm).toBe(POSTURE_BOOSTER_BACK_OFFSET_MAX_MM);
@@ -407,11 +445,19 @@ describe('aluminum rig planner posture solver', () => {
   });
 
   it('updates the solved skeleton when posture inputs change', () => {
-    const midDriver = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const tallDriver = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
-      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      heightCm: 205,
-    });
+    const midDriver = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
+    const tallDriver = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        heightCm: 205,
+      },
+      modelMetrics
+    );
 
     expect(tallDriver.joints.head[2]).toBeGreaterThan(midDriver.joints.head[2]);
     expect(tallDriver.joints.elbowLeft).not.toEqual(midDriver.joints.elbowLeft);
@@ -419,10 +465,14 @@ describe('aluminum rig planner posture solver', () => {
   });
 
   it('clamps ankles to the reachable model leg length', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
     const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
-    const thighLength = DEFAULT_ANTHROPOMETRY_RATIOS.thighLength * heightM;
-    const lowerLegLength = DEFAULT_ANTHROPOMETRY_RATIOS.lowerLegLength * heightM;
+    const thighLength = modelMetrics.anthropometryRatios.thighLength * heightM;
+    const lowerLegLength = modelMetrics.anthropometryRatios.lowerLegLength * heightM;
 
     expect(getDistance(skeleton.joints.hipLeft, skeleton.joints.kneeLeft)).toBeCloseTo(thighLength, 5);
     expect(getDistance(skeleton.joints.kneeLeft, skeleton.joints.ankleLeft)).toBeCloseTo(lowerLegLength, 5);
@@ -437,12 +487,12 @@ describe('aluminum rig planner posture solver', () => {
       pedalsDeltaMm: 200,
       pedalsHeightMm: 350,
     };
-    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
     const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
-    const footLength = DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM;
-    const heelLength = footLength * DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE;
-    const thighLength = DEFAULT_ANTHROPOMETRY_RATIOS.thighLength * heightM;
-    const lowerLegLength = DEFAULT_ANTHROPOMETRY_RATIOS.lowerLegLength * heightM;
+    const footLength = modelMetrics.anthropometryRatios.footLength * heightM;
+    const heelLength = footLength * modelMetrics.heelLengthShare;
+    const thighLength = modelMetrics.anthropometryRatios.thighLength * heightM;
+    const lowerLegLength = modelMetrics.anthropometryRatios.lowerLegLength * heightM;
     const footBoneLength = (footLength - heelLength) * POSTURE_TOE_BONE_START_SHARE;
     const toeBoneLength = (footLength - heelLength) * (1 - POSTURE_TOE_BONE_START_SHARE);
 
@@ -463,7 +513,9 @@ describe('aluminum rig planner posture solver', () => {
     expect(
       getAngleAtJoint(skeleton.joints.hipRight, skeleton.joints.kneeRight, skeleton.joints.ankleRight)
     ).toBeCloseTo(Math.PI, 5);
-    expect(getPlannerPostureFootContactErrorMm(input, DEFAULT_PLANNER_POSTURE_SETTINGS)).toBeGreaterThan(0);
+    expect(getPlannerPostureFootContactErrorMm(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics)).toBeGreaterThan(
+      0
+    );
   });
 
   it('keeps reachable offset pedals contacted instead of choosing bent floating feet', () => {
@@ -471,8 +523,12 @@ describe('aluminum rig planner posture solver', () => {
       ...DEFAULT_PLANNER_INPUT,
       pedalsDeltaMm: 200,
     };
-    const baseSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const offsetSkeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const baseSkeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
+    const offsetSkeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
     const baseRightKneeAngle = getAngleAtJoint(
       baseSkeleton.joints.hipRight,
       baseSkeleton.joints.kneeRight,
@@ -484,7 +540,9 @@ describe('aluminum rig planner posture solver', () => {
       offsetSkeleton.joints.ankleRight
     );
 
-    expect(getPlannerPostureFootContactErrorMm(input, DEFAULT_PLANNER_POSTURE_SETTINGS)).toBeLessThan(0.5);
+    expect(getPlannerPostureFootContactErrorMm(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics)).toBeLessThan(
+      0.5
+    );
     expect(offsetRightKneeAngle).toBeGreaterThan(baseRightKneeAngle);
   });
 
@@ -497,7 +555,7 @@ describe('aluminum rig planner posture solver', () => {
       pedalsHeightMm: 0,
       pedalAngleDeg: 45,
     };
-    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
 
     expect(
       getSignedThighAngleRelativeToSeat(skeleton.joints.hipLeft, skeleton.joints.kneeLeft, input.seatAngleDeg)
@@ -508,17 +566,25 @@ describe('aluminum rig planner posture solver', () => {
   });
 
   it('lets talon joints slide on the pedal tray plate while toe joints stay offset from the pedal face', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
-    const tallerSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
-      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      heightCm: 205,
-    });
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
+    const tallerSkeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        heightCm: 205,
+      },
+      modelMetrics
+    );
     const heightM = DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100;
-    const footLength = DEFAULT_ANTHROPOMETRY_RATIOS.footLength * heightM;
-    const tallerFootLength = DEFAULT_ANTHROPOMETRY_RATIOS.footLength * (205 / 100);
-    const heelLength = footLength * DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE;
+    const footLength = modelMetrics.anthropometryRatios.footLength * heightM;
+    const tallerFootLength = modelMetrics.anthropometryRatios.footLength * (205 / 100);
+    const heelLength = footLength * modelMetrics.heelLengthShare;
     const toeLength = footLength - heelLength;
-    const tallerHeelLength = tallerFootLength * DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE;
+    const tallerHeelLength = tallerFootLength * modelMetrics.heelLengthShare;
     const tallerToeLength = tallerFootLength - tallerHeelLength;
     const footBoneLength = toeLength * POSTURE_TOE_BONE_START_SHARE;
     const toeBoneLength = toeLength * (1 - POSTURE_TOE_BONE_START_SHARE);
@@ -650,13 +716,18 @@ describe('aluminum rig planner posture solver', () => {
   });
 
   it('keeps toe joints in pedal-local space while talons stay free on the tray plate', () => {
-    const baseSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const baseSkeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
     const steeperSkeleton = createPlannerPostureSkeleton(
       {
         ...DEFAULT_PLANNER_INPUT,
         pedalAngleDeg: DEFAULT_PLANNER_INPUT.pedalAngleDeg + 15,
       },
-      DEFAULT_PLANNER_POSTURE_SETTINGS
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
     );
 
     const pedalPivot = [
@@ -668,8 +739,8 @@ describe('aluminum rig planner posture solver', () => {
       (BASE_BEAM_HEIGHT_MM + PEDAL_PLATE_THICKNESS_MM + DEFAULT_PLANNER_INPUT.pedalsHeightMm) / 1000,
     ] as const;
     const traySlideMinX = (DEFAULT_PLANNER_INPUT.seatBaseDepthMm + DEFAULT_PLANNER_INPUT.pedalTrayDistanceMm) / 1000;
-    const footLength = DEFAULT_ANTHROPOMETRY_RATIOS.footLength * (DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100);
-    const heelLength = footLength * DEFAULT_ANTHROPOMETRY_HEEL_LENGTH_SHARE;
+    const footLength = modelMetrics.anthropometryRatios.footLength * (DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm / 100);
+    const heelLength = footLength * modelMetrics.heelLengthShare;
     const footBoneLength = (footLength - heelLength) * POSTURE_TOE_BONE_START_SHARE;
     const basePedalLeanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg - 90) * Math.PI) / 180;
     const steeperPedalLeanRad = ((DEFAULT_PLANNER_INPUT.pedalAngleDeg + 15 - 90) * Math.PI) / 180;
@@ -753,7 +824,11 @@ describe('aluminum rig planner posture solver', () => {
   });
 
   it('keeps each leg on its assigned pedal side', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
 
     expect(skeleton.joints.kneeLeft[1]).toBeGreaterThan(0);
     expect(skeleton.joints.ankleLeft[1]).toBeCloseTo(skeleton.joints.heelLeft[1], 6);
@@ -762,7 +837,11 @@ describe('aluminum rig planner posture solver', () => {
   });
 
   it('lets upper arms hang downward under gravity before reaching the wheel', () => {
-    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const skeleton = createPlannerPostureSkeleton(
+      DEFAULT_PLANNER_INPUT,
+      DEFAULT_PLANNER_POSTURE_SETTINGS,
+      modelMetrics
+    );
 
     expect(skeleton.joints.elbowLeft[2]).toBeLessThan(skeleton.joints.shoulderLeft[2]);
     expect(skeleton.joints.elbowRight[2]).toBeLessThan(skeleton.joints.shoulderRight[2]);
