@@ -43,6 +43,10 @@ export type MonitorDimensionsMm = {
   heightMm: number;
   thicknessMm: number;
 };
+export type MonitorScreenEdgePoints = {
+  left: [number, number, number];
+  right: [number, number, number];
+};
 
 export function getMonitorDimensionsMm(
   settings: Pick<PlannerPostureSettings<PlannerPosturePreset>, 'monitorAspectRatio' | 'monitorSizeIn'>
@@ -116,6 +120,29 @@ export function getSolvedMonitorDistanceFromEyesMm(
   const chordLineDistanceMm = fovGeometry.chordWidthMm / 2 / Math.tan((targetFovDeg * Math.PI) / 360);
 
   return chordLineDistanceMm + fovGeometry.chordLineOffsetFromApexMm;
+}
+
+export function getMonitorScreenEdgePoints(
+  midpoint: [number, number, number],
+  settings: Pick<
+    PlannerPostureSettings<PlannerPosturePreset>,
+    'monitorAspectRatio' | 'monitorCurvature' | 'monitorSizeIn'
+  >
+): MonitorScreenEdgePoints {
+  const dimensions = getMonitorDimensionsMm(settings);
+  const curvatureRadiusMm = getCurvatureRadiusMm(settings.monitorCurvature, dimensions.widthMm);
+  const halfChordM = mm(dimensions.widthMm / 2);
+  const chordLineOffsetM = curvatureRadiusMm
+    ? mm(
+        curvatureRadiusMm -
+          Math.sqrt(Math.max(0, curvatureRadiusMm * curvatureRadiusMm - (dimensions.widthMm / 2) ** 2))
+      )
+    : 0;
+
+  return {
+    left: [midpoint[0] - chordLineOffsetM, midpoint[1] - halfChordM, midpoint[2]],
+    right: [midpoint[0] - chordLineOffsetM, midpoint[1] + halfChordM, midpoint[2]],
+  };
 }
 
 function createMonitorMeshSpec(

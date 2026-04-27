@@ -7,6 +7,7 @@
   import type { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
   import { PI_INTENSITY, SCENE_VIEW } from './constants';
+  import { createPlannerFovOverlay, type PlannerFovOverlay } from './fov-overlay';
   import ViewportCameraControls from '../shared/ViewportCameraControls.svelte';
   import ViewportGizmo from '../shared/ViewportGizmo.svelte';
   import SceneGrid from '../shared/SceneGrid.svelte';
@@ -48,14 +49,20 @@
   }: Props = $props();
   const ORTHOGRAPHIC_ASPECT_RATIO = 3 / 2;
   const PERSPECTIVE_FOV_RADIANS = (50 * Math.PI) / 180;
+  const TOP_FOV_CAMERA_UP: [number, number, number] = [0, 1, 0];
+  const TOP_FOV_DIRECTION = new Vector3(0, 0, -1);
+  const TOP_FOV_VIEW_PADDING = 1.35;
+  const TOP_FOV_MIN_VIEW_HEIGHT = 1.4;
 
   const defaultCameraPosition = $derived<[number, number, number]>(
     isNarrowViewport ? SCENE_VIEW.narrowCameraPosition : SCENE_VIEW.wideCameraPosition
   );
   let savedView = $state<{
+    cameraUp?: [number, number, number];
     position: [number, number, number];
     target: [number, number, number];
   } | null>(null);
+  let fovOverlayVisible = $state(false);
   let perspectiveCameraRef = $state<PerspectiveCamera | null>(null);
   let orthographicCameraRef = $state<OrthographicCamera | null>(null);
   let orbitControlsRef = $state<ThreeOrbitControls | null>(null);
@@ -75,6 +82,7 @@
 
   const cameraPosition = $derived<[number, number, number]>(savedView?.position ?? defaultCameraPosition);
   const controlsTarget = $derived<[number, number, number]>(savedView?.target ?? SCENE_VIEW.controlsTarget);
+  const cameraUp = $derived<[number, number, number]>(savedView?.cameraUp ?? SCENE_VIEW.cameraUp);
   const gizmoSize = $derived(isNarrowViewport ? SCENE_VIEW.narrowGizmoSizePx : SCENE_VIEW.wideGizmoSizePx);
   const orthographicViewHeight = $derived(
     2 *
@@ -88,6 +96,10 @@
     return [-right, right, top, -top, 0.1, 20];
   });
   let useOrthographicCamera = $state(false);
+  const fovOverlay = $derived.by<PlannerFovOverlay>(() =>
+    createPlannerFovOverlay(geometry.input, postureSettings, postureReport, humanModel.postureModelMetrics)
+  );
+  const activeFovOverlay = $derived(fovOverlayVisible ? fovOverlay : null);
   const humanRigTooltipStyle = $derived.by(() => {
     if (!humanRigTooltip || !tooltipElement || !viewportElement) {
       return 'visibility: hidden;';
@@ -130,6 +142,7 @@
     }
 
     savedView = {
+      cameraUp: activeCamera.up.toArray() as [number, number, number],
       position: activeCamera.position.toArray() as [number, number, number],
       target: orbitControlsRef.target.toArray() as [number, number, number],
     };
@@ -146,13 +159,15 @@
     syncOrbitCameraView({
       camera: activeCamera,
       controls,
-      cameraUp: SCENE_VIEW.cameraUp,
+      cameraUp,
       position: cameraPosition,
       target: controlsTarget,
     });
   }
 
   async function setCameraMode(nextUseOrthographicCamera: boolean) {
+    fovOverlayVisible = false;
+
     if (useOrthographicCamera === nextUseOrthographicCamera) {
       return;
     }
@@ -168,7 +183,62 @@
   }
 
   async function resetCameraView() {
+    fovOverlayVisible = false;
     savedView = null;
+    await tick();
+    applySavedView();
+  }
+
+  function getTopFovCameraView(): {
+    position: [number, number, number];
+    target: [number, number, number];
+  } {
+    const centerX = (fovOverlay.bounds.minX + fovOverlay.bounds.maxX) / 2;
+    const centerY = (fovOverlay.bounds.minY + fovOverlay.bounds.maxY) / 2;
+    const width = Math.max(0.1, fovOverlay.bounds.maxX - fovOverlay.bounds.minX);
+    const height = Math.max(0.1, fovOverlay.bounds.maxY - fovOverlay.bounds.minY);
+    const viewHeight =
+      Math.max(TOP_FOV_MIN_VIEW_HEIGHT, height, width / ORTHOGRAPHIC_ASPECT_RATIO) * TOP_FOV_VIEW_PADDING;
+    const cameraDistance = viewHeight / (2 * Math.tan(PERSPECTIVE_FOV_RADIANS / 2));
+    const target: [number, number, number] = [centerX, centerY, SCENE_VIEW.controlsTarget[2]];
+
+    return {
+      position: [centerX, centerY, target[2] + cameraDistance],
+      target,
+    };
+  }
+
+  function isTopFovCameraOrientation() {
+    const activeCamera = useOrthographicCamera ? orthographicCameraRef : perspectiveCameraRef;
+
+    if (!activeCamera) {
+      return false;
+    }
+
+    const direction = new Vector3();
+    activeCamera.getWorldDirection(direction);
+
+    return direction.angleTo(TOP_FOV_DIRECTION) < 0.035;
+  }
+
+  function hideFovOverlayIfOrientationChanged() {
+    if (!fovOverlayVisible || isTopFovCameraOrientation()) {
+      return;
+    }
+
+    fovOverlayVisible = false;
+  }
+
+  async function showTopFovOverlay() {
+    const nextView = getTopFovCameraView();
+
+    useOrthographicCamera = true;
+    savedView = {
+      cameraUp: TOP_FOV_CAMERA_UP,
+      position: nextView.position,
+      target: nextView.target,
+    };
+    fovOverlayVisible = true;
     await tick();
     applySavedView();
   }
@@ -228,9 +298,14 @@
 >
   <ViewportCameraControls
     activeCameraMode={useOrthographicCamera ? 'orthographic' : 'perspective'}
+    topFovOverlayActive={fovOverlayVisible}
     topOffsetPx={getSceneControlsTopOffsetPx(gizmoSize)}
     onResetView={async () => {
       await resetCameraView();
+      focusViewport();
+    }}
+    onShowTopFovOverlay={async () => {
+      await showTopFovOverlay();
       focusViewport();
     }}
     onSetCameraMode={async (mode) => {
@@ -246,7 +321,7 @@
         makeDefault
         manual
         position={cameraPosition}
-        up={SCENE_VIEW.cameraUp}
+        up={cameraUp}
         zoom={1}
         bind:ref={orthographicCameraRef}
       >
@@ -254,6 +329,7 @@
           bind:ref={orbitControlsRef}
           enableDamping
           dampingFactor={SCENE_VIEW.orbitDampingFactor}
+          onchange={hideFovOverlayIfOrientationChanged}
           target={controlsTarget}
         >
           <ViewportGizmo size={gizmoSize} placement="top-right" />
@@ -263,13 +339,14 @@
       <T.PerspectiveCamera
         makeDefault
         position={cameraPosition}
-        up={SCENE_VIEW.cameraUp}
+        up={cameraUp}
         bind:ref={perspectiveCameraRef}
       >
         <OrbitControls
           bind:ref={orbitControlsRef}
           enableDamping
           dampingFactor={SCENE_VIEW.orbitDampingFactor}
+          onchange={hideFovOverlayIfOrientationChanged}
           target={controlsTarget}
         >
           <ViewportGizmo size={gizmoSize} placement="top-right" />
@@ -307,6 +384,7 @@
         {highlightedBeamIds}
         {humanModel}
         {measurementOverlay}
+        fovOverlay={activeFovOverlay}
         onHumanRigTooltipChange={(tooltip) => {
           humanRigTooltip = tooltip;
         }}

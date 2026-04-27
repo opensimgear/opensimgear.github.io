@@ -1,5 +1,7 @@
 <script lang="ts">
   import { CUT_LIST_HIGHLIGHT_COLOR, DEFAULT_POSTURE_HEIGHT_CM } from './constants';
+  import FovOverlay from './FovOverlay.svelte';
+  import type { PlannerFovOverlay } from './fov-overlay';
   import type { PlannerGeometry } from './geometry';
   import MeasurementArrow from './MeasurementArrow.svelte';
   import type { PlannerMeasurementOverlay } from './measurement-overlay';
@@ -24,6 +26,7 @@
     humanModel: RiggedHumanModelData;
     measurementOverlay?: PlannerMeasurementOverlay | null;
     onHumanRigTooltipChange: (tooltip: HumanRigHoverTooltip | null) => void;
+    fovOverlay?: PlannerFovOverlay | null;
     profileColor: string;
     postureReport: PlannerPostureReport;
     postureSettings: PlannerPostureSettings<PlannerPosturePreset>;
@@ -37,6 +40,7 @@
     humanModel,
     measurementOverlay = null,
     onHumanRigTooltipChange,
+    fovOverlay = null,
     profileColor,
     postureReport,
     postureSettings,
@@ -105,6 +109,10 @@
 
 {#if measurementOverlay}
   <MeasurementArrow color={measurementOverlay.color} start={measurementOverlay.start} end={measurementOverlay.end} />
+{/if}
+
+{#if fovOverlay}
+  <FovOverlay overlay={fovOverlay} />
 {/if}
 
 {#if postureSettings.showModel || postureSettings.showSkeleton}

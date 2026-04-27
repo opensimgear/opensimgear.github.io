@@ -4,6 +4,7 @@ import { DEFAULT_PLANNER_POSTURE_SETTINGS } from '../../components/calculator/al
 import {
   createMonitorModule,
   getMonitorDimensionsMm,
+  getMonitorScreenEdgePoints,
   getMonitorTargetFovFromDistanceMm,
   getSolvedMonitorDistanceFromEyesMm,
 } from '../../components/calculator/aluminum-rig-planner/modules/monitor';
@@ -109,6 +110,36 @@ describe('aluminum rig planner monitor module', () => {
     const expectedDistanceMm = halfChordMm / Math.tan((settings.monitorTargetFovDeg * Math.PI) / 360) + sagittaMm;
 
     expect(getSolvedMonitorDistanceFromEyesMm(settings)).toBeCloseTo(expectedDistanceMm, 6);
+  });
+
+  it('returns flat monitor screen edge points across the chord width', () => {
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: 'disabled' as const,
+    };
+    const dimensions = getMonitorDimensionsMm(settings);
+    const edges = getMonitorScreenEdgePoints(midpoint, settings);
+
+    expect(edges.left).toEqual([midpoint[0], midpoint[1] - (dimensions.widthMm / 2) * 0.001, midpoint[2]]);
+    expect(edges.right).toEqual([midpoint[0], midpoint[1] + (dimensions.widthMm / 2) * 0.001, midpoint[2]]);
+  });
+
+  it('moves curved monitor screen edge points back to the chord line', () => {
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '1000r' as const,
+    };
+    const dimensions = getMonitorDimensionsMm(settings);
+    const halfChordMm = dimensions.widthMm / 2;
+    const sagittaMm = 1000 - Math.sqrt(1000 * 1000 - halfChordMm * halfChordMm);
+    const edges = getMonitorScreenEdgePoints(midpoint, settings);
+
+    expect(edges.left[0]).toBeCloseTo(midpoint[0] - sagittaMm * 0.001, 6);
+    expect(edges.left[1]).toBeCloseTo(midpoint[1] - halfChordMm * 0.001, 6);
+    expect(edges.right[0]).toBeCloseTo(midpoint[0] - sagittaMm * 0.001, 6);
+    expect(edges.right[1]).toBeCloseTo(midpoint[1] + halfChordMm * 0.001, 6);
   });
 
   it('converts flat monitor distance back into matching horizontal FOV', () => {

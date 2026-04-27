@@ -136,6 +136,14 @@ describe('aluminum rig planner component wiring', () => {
     const monitorFolderIndex = plannerSource.indexOf('<Folder title="Monitor">');
     const settingsPaneIndex = plannerSource.indexOf('<Pane title="Settings"', monitorFolderIndex);
     const monitorSource = plannerSource.slice(monitorFolderIndex, settingsPaneIndex);
+    const monitorModuleSource = readFileSync(
+      new URL('../../components/calculator/aluminum-rig-planner/modules/monitor.ts', import.meta.url),
+      'utf8'
+    );
+    const cameraControlsSource = readFileSync(
+      new URL('../../components/calculator/shared/ViewportCameraControls.svelte', import.meta.url),
+      'utf8'
+    );
 
     expect(monitorFolderIndex).toBeGreaterThan(-1);
     expect(monitorSource).toContain('label="Target FOV"');
@@ -146,5 +154,10 @@ describe('aluminum rig planner component wiring', () => {
     expect(plannerSource).toMatch(
       /bind:value=\{\(\) => postureSettings\.monitorDistanceFromEyesMm, setMonitorDistanceFromEyesMm\}/
     );
+    expect(monitorModuleSource).toContain('getMonitorScreenEdgePoints');
+    expect(sceneSource).toContain('showTopFovOverlay');
+    expect(sceneSource).toContain('fovOverlayVisible');
+    expect(cameraControlsSource).toContain('aria-label="Show top FOV overlay"');
+    expect(cameraControlsSource).toContain('title="Top FOV"');
   });
 });
