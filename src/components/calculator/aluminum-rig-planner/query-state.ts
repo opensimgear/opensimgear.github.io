@@ -256,7 +256,11 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const rawMonitorTargetFovDeg = isFiniteNumber(state?.monitorTargetFovDeg)
     ? state.monitorTargetFovDeg
     : hasLegacyMonitorDistance
-      ? getMonitorTargetFovFromDistanceMm(monitorDistanceFromEyesMm, { monitorAspectRatio, monitorSizeIn })
+      ? getMonitorTargetFovFromDistanceMm(monitorDistanceFromEyesMm, {
+          monitorAspectRatio,
+          monitorCurvature,
+          monitorSizeIn,
+        })
       : defaults.monitorTargetFovDeg;
   const monitorTargetFovDeg = clampNumber(
     rawMonitorTargetFovDeg,

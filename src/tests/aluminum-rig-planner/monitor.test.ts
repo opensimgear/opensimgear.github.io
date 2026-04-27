@@ -1,9 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import {
-  CURVED_MONITOR_RECOMMENDED_FOV_DEG,
-  DEFAULT_PLANNER_POSTURE_SETTINGS,
-} from '../../components/calculator/aluminum-rig-planner/constants';
+import { DEFAULT_PLANNER_POSTURE_SETTINGS } from '../../components/calculator/aluminum-rig-planner/constants';
 import {
   createMonitorModule,
   getMonitorDimensionsMm,
@@ -100,17 +97,18 @@ describe('aluminum rig planner monitor module', () => {
     }
   });
 
-  it('uses recommended curved monitor viewing distance instead of always using the arc center', () => {
+  it('solves curved monitor apex distance from target horizontal FOV against the chord line', () => {
     const settings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1800r' as const,
+      monitorTargetFovDeg: 60,
     };
     const dimensions = getMonitorDimensionsMm(settings);
-    const recommendedDistanceMm =
-      dimensions.widthMm / 2 / Math.tan((CURVED_MONITOR_RECOMMENDED_FOV_DEG * Math.PI) / 360);
+    const halfChordMm = dimensions.widthMm / 2;
+    const sagittaMm = 1800 - Math.sqrt(1800 * 1800 - halfChordMm * halfChordMm);
+    const expectedDistanceMm = halfChordMm / Math.tan((settings.monitorTargetFovDeg * Math.PI) / 360) + sagittaMm;
 
-    expect(getSolvedMonitorDistanceFromEyesMm(settings)).toBeCloseTo(recommendedDistanceMm, 6);
-    expect(getSolvedMonitorDistanceFromEyesMm(settings)).toBeLessThan(1800);
+    expect(getSolvedMonitorDistanceFromEyesMm(settings)).toBeCloseTo(expectedDistanceMm, 6);
   });
 
   it('converts flat monitor distance back into matching horizontal FOV', () => {
@@ -123,5 +121,21 @@ describe('aluminum rig planner monitor module', () => {
     const targetFovDeg = getMonitorTargetFovFromDistanceMm(distanceMm, settings);
 
     expect(targetFovDeg).toBeCloseTo(settings.monitorTargetFovDeg, 6);
+  });
+
+  it('gives a curved monitor a higher FOV than a flat monitor at the same apex distance', () => {
+    const flatSettings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: 'disabled' as const,
+    };
+    const curvedSettings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '5000r' as const,
+    };
+    const distanceMm = 600;
+
+    expect(getMonitorTargetFovFromDistanceMm(distanceMm, curvedSettings)).toBeGreaterThan(
+      getMonitorTargetFovFromDistanceMm(distanceMm, flatSettings)
+    );
   });
 });

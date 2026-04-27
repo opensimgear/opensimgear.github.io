@@ -132,10 +132,15 @@ describe('aluminum rig planner component wiring', () => {
     expect(posturePaneSource).not.toContain('label="Advanced"');
   });
 
-  it('shows target FOV and distance editing only for flat monitors', () => {
-    expect(plannerSource).toMatch(/\{#if postureSettings\.monitorCurvature === 'disabled'\}/);
-    expect(plannerSource).toMatch(/label="Target FOV"/);
-    expect(plannerSource).toMatch(/label="Distance"/);
+  it('shows target FOV and distance editing for flat and curved monitors', () => {
+    const monitorFolderIndex = plannerSource.indexOf('<Folder title="Monitor">');
+    const settingsPaneIndex = plannerSource.indexOf('<Pane title="Settings"', monitorFolderIndex);
+    const monitorSource = plannerSource.slice(monitorFolderIndex, settingsPaneIndex);
+
+    expect(monitorFolderIndex).toBeGreaterThan(-1);
+    expect(monitorSource).toContain('label="Target FOV"');
+    expect(monitorSource).toContain('label="Distance"');
+    expect(monitorSource).not.toContain("postureSettings.monitorCurvature === 'disabled'");
     expect(plannerSource).toContain('getMonitorTargetFovFromDistanceMm');
     expect(plannerSource).toMatch(/function setMonitorDistanceFromEyesMm\(value: number\)/);
     expect(plannerSource).toMatch(

@@ -180,7 +180,7 @@ export const MONITOR_ASPECT_RATIO_OPTIONS = [
   { text: '5:4', value: '5:4' },
 ] as const satisfies ReadonlyArray<{ text: string; value: PlannerMonitorAspectRatio }>;
 export const MONITOR_CURVATURE_OPTIONS = [
-  { text: 'Disabled', value: 'disabled' },
+  { text: 'Flat', value: 'disabled' },
   { text: '5000R', value: '5000r' },
   { text: '4000R', value: '4000r' },
   { text: '3000R', value: '3000r' },
@@ -199,7 +199,6 @@ export const DEFAULT_MONITOR_ASPECT_RATIO: PlannerMonitorAspectRatio = '16:10';
 export const DEFAULT_MONITOR_CURVATURE: PlannerMonitorCurvature = 'disabled';
 export const DEFAULT_MONITOR_TILT_DEG = 0;
 export const DEFAULT_MONITOR_TARGET_FOV_DEG = 60;
-export const CURVED_MONITOR_RECOMMENDED_FOV_DEG = 40;
 export const DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM = 900;
 export const DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM = 770;
 export const LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;

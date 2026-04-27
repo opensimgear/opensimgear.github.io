@@ -480,7 +480,7 @@
         PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm,
         getSolvedMonitorDistanceFromEyesMm({
           monitorAspectRatio: postureSettings.monitorAspectRatio,
-          monitorCurvature: 'disabled',
+          monitorCurvature: postureSettings.monitorCurvature,
           monitorSizeIn: postureSettings.monitorSizeIn,
           monitorTargetFovDeg: PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg,
         })
@@ -491,7 +491,7 @@
         PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm,
         getSolvedMonitorDistanceFromEyesMm({
           monitorAspectRatio: postureSettings.monitorAspectRatio,
-          monitorCurvature: 'disabled',
+          monitorCurvature: postureSettings.monitorCurvature,
           monitorSizeIn: postureSettings.monitorSizeIn,
           monitorTargetFovDeg: PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
         })
@@ -1262,13 +1262,9 @@
   }
 
   function clampMonitorTargetFovDeg(value: number) {
-    return (
-      Math.round(
-        Math.max(
-          PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
-          Math.min(PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg, value)
-        ) * 10
-      ) / 10
+    return Math.max(
+      PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg, value)
     );
   }
 
@@ -1583,16 +1579,14 @@
               step={PLANNER_POSTURE_LIMITS.monitorTiltStepDeg}
               format={(value) => `${value}°`}
             />
-            {#if postureSettings.monitorCurvature === 'disabled'}
-              <Slider
-                bind:value={() => postureSettings.monitorTargetFovDeg, setMonitorTargetFovDeg}
-                label="Target FOV"
-                min={PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg}
-                max={PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg}
-                step={PLANNER_POSTURE_LIMITS.monitorTargetFovStepDeg}
-                format={(value) => `${value}°`}
-              />
-            {/if}
+            <Slider
+              bind:value={() => postureSettings.monitorTargetFovDeg, setMonitorTargetFovDeg}
+              label="Target FOV"
+              min={PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg}
+              max={PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg}
+              step={PLANNER_POSTURE_LIMITS.monitorTargetFovStepDeg}
+              format={(value) => `${value.toFixed(1)}°`}
+            />
             <Slider
               bind:value={() => postureSettings.monitorHeightFromBaseMm, setMonitorHeightFromBaseMm}
               label="Height"
@@ -1601,16 +1595,14 @@
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            {#if postureSettings.monitorCurvature === 'disabled'}
-              <Slider
-                bind:value={() => postureSettings.monitorDistanceFromEyesMm, setMonitorDistanceFromEyesMm}
-                label="Distance"
-                min={monitorDistanceLimits.min}
-                max={monitorDistanceLimits.max}
-                step={PLANNER_CONTROL_STEP_MM}
-                format={(value) => `${value} mm`}
-              />
-            {/if}
+            <Slider
+              bind:value={() => postureSettings.monitorDistanceFromEyesMm, setMonitorDistanceFromEyesMm}
+              label="Distance"
+              min={monitorDistanceLimits.min}
+              max={monitorDistanceLimits.max}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
           </Folder>
         </Pane>
         <Pane title="Settings" position="inline" bind:expanded={paneExpanded.setup}>

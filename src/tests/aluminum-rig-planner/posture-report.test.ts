@@ -2,13 +2,15 @@ import { describe, expect, it } from 'vitest';
 
 import {
   BASE_BEAM_HEIGHT_MM,
-  CURVED_MONITOR_RECOMMENDED_FOV_DEG,
   DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM,
   DEFAULT_PLANNER_INPUT,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_POSTURE_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
-import { getMonitorDimensionsMm } from '../../components/calculator/aluminum-rig-planner/modules/monitor';
+import {
+  getMonitorDimensionsMm,
+  getSolvedMonitorDistanceFromEyesMm,
+} from '../../components/calculator/aluminum-rig-planner/modules/monitor';
 import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
 import {
   createPlannerPostureReport,
@@ -199,15 +201,14 @@ describe('aluminum rig planner posture report', () => {
     );
   });
 
-  it('places curved monitor midpoint at the recommended curved viewing distance', () => {
+  it('places curved monitor apex at the target-FOV solved distance', () => {
     const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
       monitorDistanceFromEyesMm: 333,
       monitorTargetFovDeg: 30,
     };
-    const dimensions = getMonitorDimensionsMm(postureSettings);
-    const expectedDistanceMm = dimensions.widthMm / 2 / Math.tan((CURVED_MONITOR_RECOMMENDED_FOV_DEG * Math.PI) / 360);
+    const expectedDistanceMm = getSolvedMonitorDistanceFromEyesMm(postureSettings);
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings);
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings);
 

@@ -10,7 +10,10 @@ import {
   PLANNER_POSTURE_LIMITS,
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { getSteeringColumnDistanceMaxMm } from '../../components/calculator/aluminum-rig-planner/geometry';
-import { getSolvedMonitorDistanceFromEyesMm } from '../../components/calculator/aluminum-rig-planner/modules/monitor';
+import {
+  getMonitorTargetFovFromDistanceMm,
+  getSolvedMonitorDistanceFromEyesMm,
+} from '../../components/calculator/aluminum-rig-planner/modules/monitor';
 import { getPlannerPostureTargetRangeControlLimits } from '../../components/calculator/aluminum-rig-planner/posture-targets';
 import { mergePlannerQueryState } from '../../components/calculator/aluminum-rig-planner/query-state';
 
@@ -252,6 +255,20 @@ describe('aluminum rig planner query state', () => {
       DEFAULT_PLANNER_POSTURE_SETTINGS.monitorDistanceFromEyesMm
     );
     expect(state.postureSettings.monitorHeightFromBaseMm).toBe(820);
+  });
+
+  it('migrates legacy curved monitor distance using chord-line FOV geometry', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorCurvature: '5000r',
+        monitorDistanceFromEyesMm: 600,
+      },
+    });
+
+    expect(state.postureSettings.monitorTargetFovDeg).toBeCloseTo(
+      getMonitorTargetFovFromDistanceMm(600, state.postureSettings),
+      6
+    );
   });
 
   it('uses z-up monitor midpoint height when present in shared-link state', () => {

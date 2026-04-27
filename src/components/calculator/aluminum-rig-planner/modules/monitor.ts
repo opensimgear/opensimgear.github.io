@@ -5,7 +5,6 @@ import type {
   PlannerPosturePreset,
   PlannerPostureSettings,
 } from '../types';
-import { CURVED_MONITOR_RECOMMENDED_FOV_DEG } from '../constants';
 import { mm, type MeshSpec } from './shared';
 
 const INCH_TO_MM = 25.4;
@@ -67,14 +66,43 @@ function getCurvatureRadiusMm(curvature: PlannerMonitorCurvature, widthMm: numbe
   return Math.max(CURVATURE_RADIUS_MM[curvature], widthMm / 2 + MONITOR_PLATE_THICKNESS_MM);
 }
 
-export function getMonitorTargetFovFromDistanceMm(
-  distanceMm: number,
-  settings: Pick<PlannerPostureSettings<PlannerPosturePreset>, 'monitorAspectRatio' | 'monitorSizeIn'>
+function getMonitorFovGeometryMm(
+  settings: Pick<
+    PlannerPostureSettings<PlannerPosturePreset>,
+    'monitorAspectRatio' | 'monitorCurvature' | 'monitorSizeIn'
+  >
 ) {
   const dimensions = getMonitorDimensionsMm(settings);
-  const safeDistanceMm = Math.max(1, distanceMm);
+  const curvatureRadiusMm = getCurvatureRadiusMm(settings.monitorCurvature, dimensions.widthMm);
 
-  return (2 * Math.atan(dimensions.widthMm / 2 / safeDistanceMm) * 180) / Math.PI;
+  if (!curvatureRadiusMm) {
+    return {
+      chordWidthMm: dimensions.widthMm,
+      chordLineOffsetFromApexMm: 0,
+    };
+  }
+
+  const halfChordMm = dimensions.widthMm / 2;
+  const chordLineOffsetFromApexMm =
+    curvatureRadiusMm - Math.sqrt(Math.max(0, curvatureRadiusMm * curvatureRadiusMm - halfChordMm * halfChordMm));
+
+  return {
+    chordWidthMm: dimensions.widthMm,
+    chordLineOffsetFromApexMm,
+  };
+}
+
+export function getMonitorTargetFovFromDistanceMm(
+  distanceMm: number,
+  settings: Pick<
+    PlannerPostureSettings<PlannerPosturePreset>,
+    'monitorAspectRatio' | 'monitorCurvature' | 'monitorSizeIn'
+  >
+) {
+  const fovGeometry = getMonitorFovGeometryMm(settings);
+  const safeDistanceMm = Math.max(1, distanceMm - fovGeometry.chordLineOffsetFromApexMm);
+
+  return (2 * Math.atan(fovGeometry.chordWidthMm / 2 / safeDistanceMm) * 180) / Math.PI;
 }
 
 export function getSolvedMonitorDistanceFromEyesMm(
@@ -83,19 +111,11 @@ export function getSolvedMonitorDistanceFromEyesMm(
     'monitorAspectRatio' | 'monitorCurvature' | 'monitorSizeIn' | 'monitorTargetFovDeg'
   >
 ) {
-  const dimensions = getMonitorDimensionsMm(settings);
-  const curvatureRadiusMm = getCurvatureRadiusMm(settings.monitorCurvature, dimensions.widthMm);
-
-  if (curvatureRadiusMm) {
-    const recommendedFovDistanceMm =
-      dimensions.widthMm / 2 / Math.tan((CURVED_MONITOR_RECOMMENDED_FOV_DEG * Math.PI) / 360);
-
-    return Math.min(curvatureRadiusMm, recommendedFovDistanceMm);
-  }
-
+  const fovGeometry = getMonitorFovGeometryMm(settings);
   const targetFovDeg = Math.max(1, Math.min(170, settings.monitorTargetFovDeg));
+  const chordLineDistanceMm = fovGeometry.chordWidthMm / 2 / Math.tan((targetFovDeg * Math.PI) / 360);
 
-  return dimensions.widthMm / 2 / Math.tan((targetFovDeg * Math.PI) / 360);
+  return chordLineDistanceMm + fovGeometry.chordLineOffsetFromApexMm;
 }
 
 function createMonitorMeshSpec(
