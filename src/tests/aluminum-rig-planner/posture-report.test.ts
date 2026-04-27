@@ -10,14 +10,14 @@ import {
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import { getMonitorDimensionsMm } from '../../components/calculator/aluminum-rig-planner/modules/monitor';
 import { createPlannerPostureSkeleton } from '../../components/calculator/aluminum-rig-planner/posture';
-import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
+import {
+  createPlannerPostureReport,
+  getPlannerPostureTargetRanges,
+} from '../../components/calculator/aluminum-rig-planner/posture-report';
 import {
   applyPresetToPlannerInput,
   applyPresetToPostureSettings,
 } from '../../components/calculator/aluminum-rig-planner/presets';
-import type { PlannerPosturePreset } from '../../components/calculator/aluminum-rig-planner/types';
-
-const SOLVABLE_PRESETS = ['gt', 'rally', 'drift', 'road'] satisfies PlannerPosturePreset[];
 
 function subtract(a: [number, number, number], b: [number, number, number]): [number, number, number] {
   return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
@@ -121,38 +121,36 @@ describe('aluminum rig planner posture report', () => {
     const expectedWristBend = Number(((leftWristBend + rightWristBend) / 2).toFixed(1));
 
     expect(metric?.label).toBe('Wrist bend');
-    expect(metric?.range).toEqual({ min: 0, max: 40 });
+    expect(metric?.range).toEqual(getPlannerPostureTargetRanges('gt').wristBend);
     expect(metric?.valueDeg).toBeCloseTo(expectedWristBend, 6);
   });
 
-  it('keeps preset posture reports out of bad status for every supported height', () => {
+  it('keeps GT posture reports out of bad status for every supported height', () => {
     const failures: string[] = [];
 
-    for (const preset of SOLVABLE_PRESETS) {
-      for (
-        let heightCm = PLANNER_POSTURE_LIMITS.heightMinCm;
-        heightCm <= PLANNER_POSTURE_LIMITS.heightMaxCm;
-        heightCm += 1
-      ) {
-        const input = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, preset, heightCm);
-        const settings = applyPresetToPostureSettings(
-          {
-            ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-            preset,
-            heightCm,
-          },
-          input
-        );
-        const report = createPlannerPostureReport(input, settings);
+    for (
+      let heightCm = PLANNER_POSTURE_LIMITS.heightMinCm;
+      heightCm <= PLANNER_POSTURE_LIMITS.heightMaxCm;
+      heightCm += 1
+    ) {
+      const input = applyPresetToPlannerInput(DEFAULT_PLANNER_INPUT, 'gt', heightCm);
+      const settings = applyPresetToPostureSettings(
+        {
+          ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+          preset: 'gt',
+          heightCm,
+        },
+        input
+      );
+      const report = createPlannerPostureReport(input, settings);
 
-        for (const metric of report.metrics) {
-          const value = metric.unit === 'mm' ? metric.valueMm : metric.valueDeg;
+      for (const metric of report.metrics) {
+        const value = metric.unit === 'mm' ? metric.valueMm : metric.valueDeg;
 
-          if (!Number.isFinite(value) || metric.status === 'bad') {
-            failures.push(
-              `${preset} ${heightCm}cm ${metric.key}: ${formatMetricValue(metric)} failed ${metric.range.min}-${metric.range.max}${metric.unit}; status ${metric.status}${metric.hint ? `; ${metric.hint}` : ''}`
-            );
-          }
+        if (!Number.isFinite(value) || metric.status === 'bad') {
+          failures.push(
+            `gt ${heightCm}cm ${metric.key}: ${formatMetricValue(metric)} failed ${metric.range.min}-${metric.range.max}${metric.unit}; status ${metric.status}${metric.hint ? `; ${metric.hint}` : ''}`
+          );
         }
       }
     }

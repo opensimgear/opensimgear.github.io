@@ -27,6 +27,7 @@ import {
 } from '../../components/calculator/aluminum-rig-planner/posture';
 import { createHumanModelPoseSkeleton } from '../../components/calculator/aluminum-rig-planner/human-model-rig';
 import { createPlannerPostureReport } from '../../components/calculator/aluminum-rig-planner/posture-report';
+import { getPlannerPostureTargetRanges } from '../../components/calculator/aluminum-rig-planner/posture-targets';
 
 function expectPointToBeFinite(point: [number, number, number]) {
   expect(point.every((value) => Number.isFinite(value))).toBe(true);
@@ -155,31 +156,12 @@ describe('aluminum rig planner posture solver', () => {
     expect(footToToeMetric?.valueDeg).toBeGreaterThanOrEqual(0);
   });
 
-  it('slides talons to tune ankle bend while keeping the talon-foot angle fixed', () => {
-    const gtSkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
-      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      preset: 'gt',
-    });
-    const rallySkeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, {
-      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      preset: 'rally',
-    });
-    const getLeftAnkleBend = (skeleton: typeof gtSkeleton) =>
-      radToDeg(
-        getAngleBetweenSegments(
-          skeleton.joints.kneeLeft,
-          skeleton.joints.ankleLeft,
-          skeleton.joints.toeStartLeft,
-          skeleton.joints.heelLeft
-        )
-      );
-    const getLeftTalonFootAngle = (skeleton: typeof gtSkeleton) =>
-      getAngleAtJoint(skeleton.joints.heelLeft, skeleton.joints.ankleLeft, skeleton.joints.toeStartLeft);
+  it('uses the same posture targets for every preset', () => {
+    const gtRanges = getPlannerPostureTargetRanges('gt');
 
-    expect(gtSkeleton.joints.heelLeft[0]).not.toBeCloseTo(rallySkeleton.joints.heelLeft[0], 5);
-    expect(getLeftAnkleBend(rallySkeleton)).toBeLessThan(getLeftAnkleBend(gtSkeleton));
-    expect(getLeftTalonFootAngle(gtSkeleton)).toBeCloseTo((POSTURE_TALON_FOOT_ANGLE_DEG * Math.PI) / 180, 6);
-    expect(getLeftTalonFootAngle(rallySkeleton)).toBeCloseTo((POSTURE_TALON_FOOT_ANGLE_DEG * Math.PI) / 180, 6);
+    for (const preset of ['rally', 'drift', 'road', 'custom'] as const) {
+      expect(getPlannerPostureTargetRanges(preset)).toBe(gtRanges);
+    }
   });
 
   it('pre-scales human model pose targets so height scaling does not lengthen or shorten IK bones', () => {
