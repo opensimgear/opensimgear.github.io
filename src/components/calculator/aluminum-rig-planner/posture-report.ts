@@ -225,7 +225,7 @@ export function createPlannerPostureReport(
   const metrics = [
     createMetric(
       'wristBend',
-      'Wrist bend',
+      'Wrist Bend',
       'deg',
       mean([
         angleDecreaseFromOriginalDeg(
@@ -245,7 +245,7 @@ export function createPlannerPostureReport(
     ),
     createMetric(
       'elbowBend',
-      'Elbow bend',
+      'Elbow Bend',
       'deg',
       mean([
         angleDeg(skeleton.joints.shoulderLeft, skeleton.joints.elbowLeft, skeleton.joints.wristLeft),
@@ -255,7 +255,7 @@ export function createPlannerPostureReport(
     ),
     createMetric(
       'kneeBend',
-      'Knee bend',
+      'Knee Bend',
       'deg',
       mean([
         angleDeg(skeleton.joints.hipLeft, skeleton.joints.kneeLeft, skeleton.joints.ankleLeft),
@@ -265,7 +265,7 @@ export function createPlannerPostureReport(
     ),
     createMetric(
       'torsoToThigh',
-      'Torso to thigh',
+      'Thigh Bend',
       'deg',
       mean([
         angleDeg(skeleton.joints.shoulderCenter, skeleton.joints.hipLeft, skeleton.joints.kneeLeft),
@@ -275,7 +275,7 @@ export function createPlannerPostureReport(
     ),
     createMetric(
       'ankleBend',
-      'Ankle bend',
+      'Ankle Bend',
       'deg',
       mean([
         angleBetweenSegmentsDeg(
@@ -295,7 +295,7 @@ export function createPlannerPostureReport(
     ),
     createMetric(
       'footToToeBend',
-      'Foot to toe bend',
+      'Toe Bend',
       'deg',
       mean([
         angleDecreaseFromOriginalDeg(
@@ -315,17 +315,17 @@ export function createPlannerPostureReport(
     ),
     createMetric(
       'brakeAlignment',
-      'Brake alignment',
+      'Brake Alignment',
       'deg',
       projectedXyAngleDeg(skeleton.joints.hipLeft, skeleton.joints.toeLeft),
       ranges
     ),
     ...(wheelTopZ !== null && monitorMidpoint
       ? [
-          createMetric('eyeToWheelTop', 'Eye to wheel top', 'mm', (eyeCenter[2] - wheelTopZ) / MM_TO_METERS, ranges),
+          createMetric('eyeToWheelTop', 'Eye to Wheel Top', 'mm', (eyeCenter[2] - wheelTopZ) / MM_TO_METERS, ranges),
           createMetric(
             'eyeToMonitorMidpoint',
-            'Eye to monitor midpoint',
+            'Eye to Monitor Mid',
             'mm',
             (eyeCenter[2] - monitorMidpoint[2]) / MM_TO_METERS,
             ranges

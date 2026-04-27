@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, tick, type Component } from 'svelte';
+  import {type Component, onMount, tick} from 'svelte';
   import {
     Button,
     Checkbox,
@@ -7,41 +7,37 @@
     Element,
     Folder,
     IntervalSlider,
+    type IntervalSliderValue,
     List,
     Pane,
     Slider,
-    type IntervalSliderValue,
   } from 'svelte-tweakpane-ui';
 
-  import {
-    DEFAULT_CURRENCY_LOCALE,
-    formatPlannerMoney,
-    resolvePlannerCurrency,
-    resolvePlannerLocale,
-  } from './currency';
-  import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
-  import { decodeQueryState, encodeQueryState } from '../shared/query-state';
+  import {DEFAULT_CURRENCY_LOCALE, formatPlannerMoney, resolvePlannerCurrency, resolvePlannerLocale,} from './currency';
+  import {createDebouncedUrlStateWriter} from '../shared/debounced-url-state';
+  import {decodeQueryState, encodeQueryState} from '../shared/query-state';
   import CutOptimizerPanel from './CutOptimizerPanel.svelte';
-  import { createPlannerCutListEntries } from './cut-list';
+  import {createPlannerCutListEntries} from './cut-list';
   import {
     COLOR_MODE_OPTIONS,
-    DEFAULT_CUSTOM_PROFILE_COLOR,
-    DEFAULT_PLANNER_POSTURE_SETTINGS,
-    DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
-    DEFAULT_PLANNER_INPUT,
     DEFAULT_ACTIVE_POSTURE_PRESET,
+    DEFAULT_CUSTOM_PROFILE_COLOR,
+    DEFAULT_PLANNER_INPUT,
+    DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
+    DEFAULT_PLANNER_POSTURE_SETTINGS,
     DEFAULT_POSTURE_HEIGHT_CM,
     getPlannerStockCostDefault,
     getPlannerStockCostMax,
-    PLANNER_POSTURE_LIMITS,
+    MONITOR_ASPECT_RATIO_OPTIONS,
+    MONITOR_CURVATURE_OPTIONS,
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
     PLANNER_LAYOUT,
-    MONITOR_ASPECT_RATIO_OPTIONS,
-    MONITOR_CURVATURE_OPTIONS,
+    PLANNER_POSTURE_LIMITS,
     POSTURE_PRESET_OPTIONS,
     URL_STATE_DEBOUNCE_MS,
   } from './constants';
+  import type {PlannerGeometry} from './geometry';
   import {
     clampSteeringColumnHeights,
     derivePlannerGeometry,
@@ -58,14 +54,11 @@
     type PlannerMeasurementKey,
     type PlannerMeasurementOverlay,
   } from './measurement-overlay';
-  import { getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
-  import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
-  import { createPlannerOptimizationResult } from './optimizer';
-  import { createPlannerPostureReport, type PlannerPostureMetric, type PlannerPostureReport } from './posture-report';
-  import {
-    clonePlannerPostureTargetRangesByPreset,
-    getPlannerPostureTargetRangeControlLimits,
-  } from './posture-targets';
+  import {getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm} from './modules/monitor';
+  import {loadPrebuiltProfileGeometries} from './modules/profile-geometry';
+  import {createPlannerOptimizationResult} from './optimizer';
+  import {createPlannerPostureReport, type PlannerPostureMetric, type PlannerPostureReport} from './posture-report';
+  import {clonePlannerPostureTargetRangesByPreset, getPlannerPostureTargetRangeControlLimits,} from './posture-targets';
   import {
     applyPresetToPlannerInput,
     applyPresetToPostureSettings,
@@ -74,16 +67,15 @@
     isPresetSolvablePreset,
     recomputePresetDynamicPlannerInput,
   } from './presets';
-  import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
+  import {mergePlannerQueryState, type PlannerQueryState} from './query-state';
   import {
+    type AluminumRigPaneExpandedState,
     getAluminumRigPaneExpandedState,
     getNextAluminumRigPaneExpandedState,
     isNarrowAluminumRigViewport,
-    type AluminumRigPaneExpandedState,
   } from './state';
-  import { BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR } from './modules/shared';
-  import { createRiggedHumanModel, type RiggedHumanModel } from './human-model-rig';
-  import type { PlannerGeometry } from './geometry';
+  import {BLACK_PROFILE_COLOR, SILVER_PROFILE_COLOR} from './modules/shared';
+  import {createRiggedHumanModel, type RiggedHumanModel} from './human-model-rig';
   import type {
     CutListProfileType,
     PlannerCurrencyCode,
@@ -118,11 +110,11 @@
   const POSTURE_TRANSITION_DURATION_MS = 320;
   const debouncedUrlStateWriter = createDebouncedUrlStateWriter(URL_STATE_DEBOUNCE_MS);
 
-  const DEFAULT_INPUT: PlannerInput = { ...DEFAULT_PLANNER_INPUT };
+  const DEFAULT_INPUT: PlannerInput = {...DEFAULT_PLANNER_INPUT};
   const DEFAULT_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings = {
     ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
-    profileWeightsKgPerMeter: { ...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter },
-    stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({ ...option })),
+    profileWeightsKgPerMeter: {...DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.profileWeightsKgPerMeter},
+    stockOptions: DEFAULT_PLANNER_OPTIMIZATION_SETTINGS.stockOptions.map((option) => ({...option})),
   };
   const DEFAULT_POSTURE_SETTINGS: PlannerPostureSettings<PlannerPosturePreset> = {
     ...DEFAULT_PLANNER_POSTURE_SETTINGS,
@@ -163,17 +155,17 @@
     },
   ] as const;
   const OPTIMIZER_MODE_OPTIONS = [
-    { text: 'Cost', value: 'cost' },
-    { text: 'Waste', value: 'waste' },
+    {text: 'Cost', value: 'cost'},
+    {text: 'Waste', value: 'waste'},
   ] as const;
   const CURRENCY_MODE_OPTIONS = [
-    { text: 'Auto', value: 'auto' },
-    { text: 'Euro', value: 'eur' },
-    { text: 'Dollar', value: 'usd' },
+    {text: 'Auto', value: 'auto'},
+    {text: 'Euro', value: 'eur'},
+    {text: 'Dollar', value: 'usd'},
   ] as const;
   const SHIPPING_MODE_OPTIONS = [
-    { text: 'Flat', value: 'flat' },
-    { text: 'Per kg', value: 'per-kg' },
+    {text: 'Flat', value: 'flat'},
+    {text: 'Per kg', value: 'per-kg'},
   ] as const;
   const PROFILE_TYPES: CutListProfileType[] = ['80x40', '40x40'];
   const BLADE_THICKNESS_MIN_MM = 0.5;
@@ -200,8 +192,8 @@
   function cloneOptimizationSettings(settings: PlannerOptimizationSettings): PlannerOptimizationSettings {
     return {
       ...settings,
-      profileWeightsKgPerMeter: { ...settings.profileWeightsKgPerMeter },
-      stockOptions: settings.stockOptions.map((option) => ({ ...option })),
+      profileWeightsKgPerMeter: {...settings.profileWeightsKgPerMeter},
+      stockOptions: settings.stockOptions.map((option) => ({...option})),
     };
   }
 
@@ -233,8 +225,8 @@
     }
   }
 
-  let plannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
-  let animatedPlannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
+  let plannerInput = $state<PlannerInput>({...DEFAULT_INPUT});
+  let animatedPlannerInput = $state<PlannerInput>({...DEFAULT_INPUT});
   let optimizationSettings = $state<PlannerOptimizationSettings>(
     cloneOptimizationSettings(DEFAULT_OPTIMIZATION_SETTINGS)
   );
@@ -288,7 +280,7 @@
   }
 
   function getPresetSolveOptions() {
-    return { includeMonitor: visibleModules.monitor };
+    return {includeMonitor: visibleModules.monitor};
   }
 
   function syncPresetMonitorHeightFromInput(input: PlannerInput, modelMetrics = postureModelMetrics) {
@@ -415,19 +407,19 @@
   const defaultModelInput = $derived(
     postureModelMetrics
       ? createPresetPlannerInput(
-          DEFAULT_ACTIVE_POSTURE_PRESET,
-          DEFAULT_POSTURE_HEIGHT_CM,
-          DEFAULT_PLANNER_INPUT,
-          postureModelMetrics,
-          getPresetSolveOptions()
-        )
+        DEFAULT_ACTIVE_POSTURE_PRESET,
+        DEFAULT_POSTURE_HEIGHT_CM,
+        DEFAULT_PLANNER_INPUT,
+        postureModelMetrics,
+        getPresetSolveOptions()
+      )
       : DEFAULT_INPUT
   );
   const postureReport = $derived(
     postureModelMetrics
       ? createPlannerPostureReport(geometry.input, postureSettings, postureModelMetrics, {
-          includeMonitor: visibleModules.monitor,
-        })
+        includeMonitor: visibleModules.monitor,
+      })
       : null
   );
   const scenePostureSettings = $derived<PlannerPostureSettings<PlannerPosturePreset>>({
@@ -557,7 +549,7 @@
   const seatBaseDepthMaxMm = $derived(Math.min(PLANNER_DIMENSION_LIMITS.seatBaseDepthMaxMm, plannerInput.baseLengthMm));
 
   $effect(() => {
-    const nextInput = { ...plannerInput };
+    const nextInput = {...plannerInput};
 
     if (!isAnimatingPlannerInput) {
       Object.assign(animatedPlannerInput, nextInput);
@@ -577,7 +569,7 @@
       return;
     }
 
-    for (const { text, selector, closest, testId } of PLANNER_TEST_ID_TARGETS) {
+    for (const {text, selector, closest, testId} of PLANNER_TEST_ID_TARGETS) {
       const element = Array.from(plannerRoot.querySelectorAll<HTMLElement>(selector)).find(
         (candidate) => candidate.textContent?.trim() === text
       );
@@ -724,7 +716,7 @@
 
     node.addEventListener('pointerdown', beginInteraction, true);
     node.addEventListener('mousedown', beginInteraction, true);
-    node.addEventListener('touchstart', beginInteraction, { capture: true, passive: true });
+    node.addEventListener('touchstart', beginInteraction, {capture: true, passive: true});
     node.addEventListener('keydown', beginKeyInteraction, true);
     node.addEventListener('focusout', endInteraction, true);
     node.addEventListener('change', endInteraction, true);
@@ -822,7 +814,7 @@
       return;
     }
 
-    pendingCustomPresetInput = { ...$state.snapshot(plannerInput) };
+    pendingCustomPresetInput = {...$state.snapshot(plannerInput)};
   }
 
   function assignProgrammaticPlannerInput(input: PlannerInput, options: { animate?: boolean } = {}) {
@@ -1096,38 +1088,42 @@
     scheduleMeasurementOverlay('wheelDiameterMm');
   }
 
-  function resetSetup() {
-    if (!postureModelMetrics) {
-      humanModelStatus = 'error';
-      return;
-    }
-
-    Object.assign(postureSettings, clonePostureSettings(DEFAULT_POSTURE_SETTINGS));
-    postureHeightControlValue = postureSettings.heightCm;
-    cancelPostureHeightAnimation();
-    animatedPostureHeightCm = postureSettings.heightCm;
-    const nextInput = createPresetPlannerInput(
-      DEFAULT_ACTIVE_POSTURE_PRESET,
-      DEFAULT_POSTURE_HEIGHT_CM,
-      DEFAULT_PLANNER_INPUT,
-      postureModelMetrics,
-      getPresetSolveOptions()
-    );
-
-    Object.assign(plannerInput, nextInput);
-    cancelPlannerInputAnimation();
-    Object.assign(animatedPlannerInput, nextInput);
-    syncPresetMonitorHeightFromInput(nextInput);
-    profileColorMode = 'black';
-    customProfileColor = DEFAULT_CUSTOM_PROFILE_COLOR;
-    showEndCaps = true;
-    syncPlannerUrlState();
-  }
-
   function resetSteeringColumnModule() {
     setSteeringColumnDistanceMm(defaultModelInput.steeringColumnDistanceMm);
     setSteeringColumnBaseHeightMm(defaultModelInput.steeringColumnBaseHeightMm);
     setSteeringColumnHeightMm(defaultModelInput.steeringColumnHeightMm);
+  }
+
+  function resetMonitorModule() {
+    setMonitorSizeIn(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorSizeIn);
+    setMonitorAspectRatio(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorAspectRatio);
+    setMonitorCurvature(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorCurvature);
+    setMonitorTiltDeg(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTiltDeg);
+    setMonitorTargetFovDeg(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTargetFovDeg);
+    setMonitorHeightFromBaseMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorHeightFromBaseMm);
+    syncSolvedMonitorDistanceFromEyesMm();
+  }
+
+  function resetBaseModule() {
+    setBaseLengthMm(defaultModelInput.baseLengthMm);
+    setBaseWidthMm(defaultModelInput.baseWidthMm);
+    setSeatBaseDepthMm(defaultModelInput.seatBaseDepthMm);
+    setBaseInnerBeamSpacingMm(defaultModelInput.baseInnerBeamSpacingMm);
+  }
+
+  function resetSeatModule() {
+    setSeatLengthMm(defaultModelInput.seatLengthMm);
+    setSeatDeltaMm(defaultModelInput.seatDeltaMm);
+    setSeatHeightFromBaseInnerBeamsMm(defaultModelInput.seatHeightFromBaseInnerBeamsMm);
+    setSeatAngleDeg(defaultModelInput.seatAngleDeg);
+    setBackrestAngleDeg(defaultModelInput.backrestAngleDeg);
+  }
+
+  function resetWheelModule() {
+    setWheelHeightOffsetMm(defaultModelInput.wheelHeightOffsetMm);
+    setWheelAngleDeg(defaultModelInput.wheelAngleDeg);
+    setWheelDistanceFromSteeringColumnMm(defaultModelInput.wheelDistanceFromSteeringColumnMm);
+    setWheelDiameterMm(defaultModelInput.wheelDiameterMm);
   }
 
   function resetPedalTrayModule() {
@@ -1189,7 +1185,7 @@
       getPresetSolveOptions()
     );
 
-    assignProgrammaticPlannerInput(nextInput, { animate: true });
+    assignProgrammaticPlannerInput(nextInput, {animate: true});
     syncPresetMonitorHeightFromInput(nextInput);
     syncPlannerUrlState();
   }
@@ -1255,7 +1251,7 @@
         getPresetSolveOptions()
       );
 
-      assignProgrammaticPlannerInput(nextInput, { animate: animateTransition });
+      assignProgrammaticPlannerInput(nextInput, {animate: animateTransition});
       syncPresetMonitorHeightFromInput(nextInput);
     }
 
@@ -1365,7 +1361,7 @@
   }
 
   function normalizePostureTargetRangeValue(value: IntervalSliderValue): PlannerPostureTargetRange {
-    return Array.isArray(value) ? { min: value[0], max: value[1] } : value;
+    return Array.isArray(value) ? {min: value[0], max: value[1]} : value;
   }
 
   function clampPostureTargetRangeValue(value: number, key: PlannerPostureTargetKey) {
@@ -1554,12 +1550,12 @@
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
         <Pane title="General" position="inline" bind:expanded={paneExpanded.general}>
-          <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
+          <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish"/>
           {#if profileColorMode === 'custom'}
-            <Color bind:value={customProfileColor} label="Custom" />
+            <Color bind:value={customProfileColor} label="Custom"/>
           {/if}
-          <Checkbox bind:value={showEndCaps} label="Endcaps" />
-          <Checkbox bind:value={() => postureSettings.advanced, setPostureAdvanced} label="Advanced" />
+          <Checkbox bind:value={showEndCaps} label="Endcaps"/>
+          <Checkbox bind:value={() => postureSettings.advanced, setPostureAdvanced} label="Advanced"/>
         </Pane>
         <Pane title="Posture" position="inline" bind:expanded={paneExpanded.posture}>
           <Folder title="Driver">
@@ -1578,11 +1574,11 @@
                 format={(value) => `${value.toFixed(0)} cm`}
               />
             </div>
-            <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Model" />
-            <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Skeleton" />
+            <Checkbox bind:value={() => postureSettings.showModel, setShowPostureModel} label="Show Model"/>
+            <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Show Skeleton"/>
           </Folder>
           {#if postureSettings.advanced}
-            <Folder title="Posture target">
+            <Folder title="Posture Target">
               {#if postureReport}
                 {#each postureReport.metrics as metric (metric.key)}
                   {@const sliderLimits = getPlannerPostureTargetRangeControlLimits(postureSettings.preset, metric.key)}
@@ -1601,9 +1597,9 @@
             </Folder>
           {/if}
         </Pane>
-        <Pane title="Settings" position="inline" bind:expanded={paneExpanded.setup}>
-          <Folder title="Enabled Modules" expanded={false}>
-            <Checkbox bind:value={() => visibleModules.monitor, setMonitorVisible} label="Monitor" />
+        <Pane title="Rig Settings" position="inline" bind:expanded={paneExpanded.setup}>
+          <Folder title="Enabled Modules">
+            <Checkbox bind:value={() => visibleModules.monitor, setMonitorVisible} label="Monitor"/>
           </Folder>
           {#if visibleModules.monitor}
             <Folder title="Monitor" expanded={false}>
@@ -1618,7 +1614,7 @@
               <List
                 bind:value={() => postureSettings.monitorAspectRatio, setMonitorAspectRatio}
                 options={MONITOR_ASPECT_RATIO_OPTIONS}
-                label="Aspect"
+                label="Aspect Ratio"
               />
               <List
                 bind:value={() => postureSettings.monitorCurvature, setMonitorCurvature}
@@ -1635,7 +1631,7 @@
               />
               <Slider
                 bind:value={() => postureSettings.monitorTargetFovDeg, setMonitorTargetFovDeg}
-                label="Target FOV"
+                label="FOV"
                 min={PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg}
                 max={PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg}
                 step={PLANNER_POSTURE_LIMITS.monitorTargetFovStepDeg}
@@ -1643,7 +1639,7 @@
               />
               <Slider
                 bind:value={() => postureSettings.monitorHeightFromBaseMm, setMonitorHeightFromBaseMm}
-                label="Height"
+                label="Height from Base"
                 min={PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm}
                 max={PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm}
                 step={PLANNER_CONTROL_STEP_MM}
@@ -1651,18 +1647,19 @@
               />
               <Slider
                 bind:value={() => postureSettings.monitorDistanceFromEyesMm, setMonitorDistanceFromEyesMm}
-                label="Distance"
+                label="Distance from Eyes"
                 min={monitorDistanceLimits.min}
                 max={monitorDistanceLimits.max}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />
+              <Button on:click={resetMonitorModule} label="" title="Reset"/>
             </Folder>
           {/if}
           <Folder title="Base" expanded={false}>
             <Slider
               bind:value={() => plannerInput.baseLengthMm, setBaseLengthMm}
-              label="Base length"
+              label="Length"
               min={PLANNER_DIMENSION_LIMITS.baseLengthMinMm}
               max={PLANNER_DIMENSION_LIMITS.baseLengthMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
@@ -1670,7 +1667,7 @@
             />
             <Slider
               bind:value={() => plannerInput.baseWidthMm, setBaseWidthMm}
-              label="Base width"
+              label="Width"
               min={PLANNER_DIMENSION_LIMITS.baseWidthMinMm}
               max={PLANNER_DIMENSION_LIMITS.baseWidthMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
@@ -1678,7 +1675,7 @@
             />
             <Slider
               bind:value={() => plannerInput.seatBaseDepthMm, setSeatBaseDepthMm}
-              label="Seat base depth"
+              label="Seat Base Depth"
               min={PLANNER_DIMENSION_LIMITS.seatBaseDepthMinMm}
               max={seatBaseDepthMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
@@ -1686,25 +1683,26 @@
             />
             <Slider
               bind:value={() => plannerInput.baseInnerBeamSpacingMm, setBaseInnerBeamSpacingMm}
-              label="Inner beam spacing"
+              label="Seat Beam Spacing"
               min={PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMinMm}
               max={PLANNER_DIMENSION_LIMITS.baseInnerBeamSpacingMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
+            <Button on:click={resetBaseModule} label="" title="Reset"/>
           </Folder>
           <Folder title="Seat" expanded={false}>
             <Slider
-              bind:value={() => plannerInput.seatLengthMm, setSeatLengthMm}
-              label="Seat Length"
-              min={PLANNER_DIMENSION_LIMITS.seatLengthMinMm}
-              max={PLANNER_DIMENSION_LIMITS.seatLengthMaxMm}
+              bind:value={() => plannerInput.seatHeightFromBaseInnerBeamsMm, setSeatHeightFromBaseInnerBeamsMm}
+              label="Height"
+              min={PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMinMm}
+              max={PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
             <Slider
               bind:value={() => plannerInput.seatDeltaMm, setSeatDeltaMm}
-              label="Seat delta"
+              label="Position"
               min={PLANNER_DIMENSION_LIMITS.seatDeltaMinMm}
               max={PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
@@ -1712,16 +1710,16 @@
               wide={true}
             />
             <Slider
-              bind:value={() => plannerInput.seatHeightFromBaseInnerBeamsMm, setSeatHeightFromBaseInnerBeamsMm}
-              label="Seat height"
-              min={PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMinMm}
-              max={PLANNER_DIMENSION_LIMITS.seatHeightFromBaseInnerBeamsMaxMm}
+              bind:value={() => plannerInput.seatLengthMm, setSeatLengthMm}
+              label="Seat Pan Length"
+              min={PLANNER_DIMENSION_LIMITS.seatLengthMinMm}
+              max={PLANNER_DIMENSION_LIMITS.seatLengthMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
             <Slider
               bind:value={() => plannerInput.seatAngleDeg, setSeatAngleDeg}
-              label="Seat angle"
+              label="Seat Pan Angle"
               min={PLANNER_DIMENSION_LIMITS.seatAngleDegMin}
               max={PLANNER_DIMENSION_LIMITS.seatAngleDegMax}
               step={1}
@@ -1729,59 +1727,53 @@
             />
             <Slider
               bind:value={() => plannerInput.backrestAngleDeg, setBackrestAngleDeg}
-              label="Backrest angle"
+              label="Backrest Angle"
               min={PLANNER_DIMENSION_LIMITS.backrestAngleDegMin}
               max={PLANNER_DIMENSION_LIMITS.backrestAngleDegMax}
               step={1}
               format={(value) => `${value}°`}
             />
+            <Button on:click={resetSeatModule} label="" title="Reset"/>
           </Folder>
           <Folder title="Wheel" expanded={false}>
             <Slider
-              bind:value={() => plannerInput.wheelHeightOffsetMm, setWheelHeightOffsetMm}
-              label="Height vs column base"
-              min={wheelHeightOffsetLimits.min}
-              max={wheelHeightOffsetLimits.max}
+              bind:value={() => plannerInput.wheelDiameterMm, setWheelDiameterMm}
+              label="Diameter"
+              min={wheelDiameterLimits.min}
+              max={wheelDiameterLimits.max}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
             <Slider
               bind:value={() => plannerInput.wheelAngleDeg, setWheelAngleDeg}
-              label="Wheel angle"
+              label="Angle"
               min={wheelAngleLimits.min}
               max={wheelAngleLimits.max}
               step={1}
               format={(value) => `${value}°`}
             />
             <Slider
+              bind:value={() => plannerInput.wheelHeightOffsetMm, setWheelHeightOffsetMm}
+              label="V Offset"
+              min={wheelHeightOffsetLimits.min}
+              max={wheelHeightOffsetLimits.max}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
               bind:value={() => plannerInput.wheelDistanceFromSteeringColumnMm, setWheelDistanceFromSteeringColumnMm}
-              label="Wheel X vs column"
+              label="H Offset"
               min={wheelDistanceLimits.min}
               max={wheelDistanceLimits.max}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Slider
-              bind:value={() => plannerInput.wheelDiameterMm, setWheelDiameterMm}
-              label="Wheel diameter"
-              min={wheelDiameterLimits.min}
-              max={wheelDiameterLimits.max}
-              step={PLANNER_CONTROL_STEP_MM}
-              format={(value) => `${value} mm`}
-            />
+            <Button on:click={resetWheelModule} label="" title="Reset"/>
           </Folder>
-          <Folder title="Steering column" expanded={false}>
-            <Slider
-              bind:value={() => plannerInput.steeringColumnBaseHeightMm, setSteeringColumnBaseHeightMm}
-              label="Base height"
-              min={steeringColumnBaseHeightLimits.min}
-              max={steeringColumnBaseHeightLimits.max}
-              step={PLANNER_CONTROL_STEP_MM}
-              format={(value) => `${value} mm`}
-            />
+          <Folder title="Steering Column" expanded={false}>
             <Slider
               bind:value={() => plannerInput.steeringColumnHeightMm, setSteeringColumnHeightMm}
-              label="Column Height"
+              label="Height"
               min={steeringColumnHeightLimits.min}
               max={steeringColumnHeightLimits.max}
               step={PLANNER_CONTROL_STEP_MM}
@@ -1789,18 +1781,26 @@
             />
             <Slider
               bind:value={() => plannerInput.steeringColumnDistanceMm, setSteeringColumnDistanceMm}
-              label="Column distance"
+              label="Distance"
               min={steeringColumnDistanceLimits.min}
               max={steeringColumnDistanceLimits.max}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Button on:click={resetSteeringColumnModule} label="Reset" title="Reset" />
+            <Slider
+              bind:value={() => plannerInput.steeringColumnBaseHeightMm, setSteeringColumnBaseHeightMm}
+              label="Base Height"
+              min={steeringColumnBaseHeightLimits.min}
+              max={steeringColumnBaseHeightLimits.max}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Button on:click={resetSteeringColumnModule} label="" title="Reset"/>
           </Folder>
-          <Folder title="Pedal tray" expanded={false}>
+          <Folder title="Pedal Tray" expanded={false}>
             <Slider
               bind:value={() => plannerInput.pedalTrayDepthMm, setPedalTrayDepthMm}
-              label="Tray depth"
+              label="Depth"
               min={PLANNER_DIMENSION_LIMITS.pedalTrayDepthMinMm}
               max={PLANNER_DIMENSION_LIMITS.pedalTrayDepthMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
@@ -1808,15 +1808,31 @@
             />
             <Slider
               bind:value={() => plannerInput.pedalTrayDistanceMm, setPedalTrayDistanceMm}
-              label="Tray distance"
+              label="Distance"
               min={pedalTrayDistanceLimits.min}
               max={pedalTrayDistanceLimits.max}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
+            <Button on:click={resetPedalTrayModule} label="Reset" title="Reset"/>
           </Folder>
           <Folder title="Pedals" expanded={false}>
+            <Slider
+              bind:value={() => plannerInput.pedalLengthMm, setPedalLengthMm}
+              label="Length"
+              min={pedalLengthLimits.min}
+              max={pedalLengthLimits.max}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
+              bind:value={() => plannerInput.pedalAngleDeg, setPedalAngleDeg}
+              label="Angle"
+              min={pedalAngleLimits.min}
+              max={pedalAngleLimits.max}
+              step={1}
+              format={(value) => `${value}°`}
+            />
             <Slider
               bind:value={() => plannerInput.pedalsHeightMm, setPedalsHeightMm}
               label="Height"
@@ -1827,31 +1843,15 @@
             />
             <Slider
               bind:value={() => plannerInput.pedalsDeltaMm, setPedalsDeltaMm}
-              label="Delta X"
+              label="H Offset"
               min={pedalsDeltaLimits.min}
               max={pedalsDeltaLimits.max}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
             <Slider
-              bind:value={() => plannerInput.pedalAngleDeg, setPedalAngleDeg}
-              label="Pedal angle"
-              min={pedalAngleLimits.min}
-              max={pedalAngleLimits.max}
-              step={1}
-              format={(value) => `${value}°`}
-            />
-            <Slider
-              bind:value={() => plannerInput.pedalLengthMm, setPedalLengthMm}
-              label="Pedal length"
-              min={pedalLengthLimits.min}
-              max={pedalLengthLimits.max}
-              step={PLANNER_CONTROL_STEP_MM}
-              format={(value) => `${value} mm`}
-            />
-            <Slider
               bind:value={() => plannerInput.pedalAcceleratorDeltaMm, setPedalAcceleratorDeltaMm}
-              label="Accelerator delta"
+              label="Accel Side Offset"
               min={pedalAcceleratorDeltaLimits.min}
               max={pedalAcceleratorDeltaLimits.max}
               step={PLANNER_CONTROL_STEP_MM}
@@ -1859,7 +1859,7 @@
             />
             <Slider
               bind:value={() => plannerInput.pedalBrakeDeltaMm, setPedalBrakeDeltaMm}
-              label="Brake delta"
+              label="Brake Side Offset"
               min={pedalBrakeDeltaLimits.min}
               max={pedalBrakeDeltaLimits.max}
               step={PLANNER_CONTROL_STEP_MM}
@@ -1867,22 +1867,21 @@
             />
             <Slider
               bind:value={() => plannerInput.pedalClutchDeltaMm, setPedalClutchDeltaMm}
-              label="Clutch delta"
+              label="Clutch Side Offset"
               min={pedalClutchDeltaLimits.min}
               max={pedalClutchDeltaLimits.max}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Button on:click={resetPedalsModule} label="Reset" title="Reset" />
+            <Button on:click={resetPedalsModule} label="" title="Reset"/>
           </Folder>
-          <Button on:click={resetSetup} label="Reset" title="Reset" />
         </Pane>
-        <Pane title="Cut optimizer" position="inline" bind:expanded={paneExpanded.optimizer}>
+        <Pane title="Cutlist Optimizer" position="inline" bind:expanded={paneExpanded.optimizer}>
           <Folder title="Settings">
             <List
               bind:value={() => optimizationSettings.mode, setOptimizerMode}
               options={OPTIMIZER_MODE_OPTIONS}
-              label="Optimize"
+              label="Optimize Mode"
             />
             <List
               bind:value={() => optimizationSettings.currencyMode, setCurrencyMode}
@@ -1891,7 +1890,7 @@
             />
             <Slider
               bind:value={() => optimizationSettings.bladeThicknessMm, setBladeThicknessMm}
-              label="Kerf"
+              label="Blade Kerf"
               min={BLADE_THICKNESS_MIN_MM}
               max={BLADE_THICKNESS_MAX_MM}
               step={BLADE_THICKNESS_STEP_MM}
@@ -1913,7 +1912,7 @@
             {#if optimizationSettings.shippingMode === 'flat'}
               <Slider
                 bind:value={() => optimizationSettings.flatShippingCost, setFlatShippingCost}
-                label="Ship cost"
+                label="Shiping Cost"
                 min={0}
                 max={OPTIMIZER_LIMITS.flatShippingCostMax}
                 step={1}
@@ -1922,7 +1921,7 @@
             {:else}
               <Slider
                 bind:value={() => optimizationSettings.shippingRatePerKg, setShippingRatePerKg}
-                label="Ship rate"
+                label="Shiping Rate"
                 min={0}
                 max={OPTIMIZER_LIMITS.shippingRatePerKgMax}
                 step={0.1}
@@ -1930,7 +1929,7 @@
               />
             {/if}
           </Folder>
-          <Folder title="Stock configuration" bind:expanded={stockConfigurationExpanded}>
+          <Folder title="Stock Configuration" bind:expanded={stockConfigurationExpanded}>
             {#each PROFILE_TYPES as profileType (profileType)}
               <Folder title={profileType}>
                 <Slider
@@ -1965,7 +1964,7 @@
                         step={1}
                         format={formatCurrencyValue}
                       />
-                      <Button on:click={() => removeStockOption(stockOption.id)} label="Remove" title="Remove" />
+                      <Button on:click={() => removeStockOption(stockOption.id)} label="" title="Remove"/>
                     </Folder>
                   {/each}
                 {:else}
@@ -1975,7 +1974,7 @@
                 {/if}
                 <Button
                   on:click={() => addStockOption(profileType)}
-                  label="Add stock length"
+                  label=""
                   title="Add stock length"
                 />
               </Folder>
