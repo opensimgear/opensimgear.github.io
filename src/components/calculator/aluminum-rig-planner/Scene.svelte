@@ -165,14 +165,30 @@
     });
   }
 
+  function isTopFovCameraUp() {
+    const activeCamera = useOrthographicCamera ? orthographicCameraRef : perspectiveCameraRef;
+
+    if (!activeCamera) {
+      return false;
+    }
+
+    return activeCamera.up.angleTo(new Vector3(...TOP_FOV_CAMERA_UP)) < 0.001;
+  }
+
   async function setCameraMode(nextUseOrthographicCamera: boolean) {
+    const shouldResetFovView = useOrthographicCamera && !nextUseOrthographicCamera && isTopFovCameraUp();
     fovOverlayVisible = false;
 
     if (useOrthographicCamera === nextUseOrthographicCamera) {
       return;
     }
 
-    captureCurrentView();
+    if (shouldResetFovView) {
+      savedView = null;
+    } else {
+      captureCurrentView();
+    }
+
     useOrthographicCamera = nextUseOrthographicCamera;
     await tick();
     applySavedView();
@@ -184,6 +200,7 @@
 
   async function resetCameraView() {
     fovOverlayVisible = false;
+    useOrthographicCamera = false;
     savedView = null;
     await tick();
     applySavedView();
@@ -336,12 +353,7 @@
         </OrbitControls>
       </T.OrthographicCamera>
     {:else}
-      <T.PerspectiveCamera
-        makeDefault
-        position={cameraPosition}
-        up={cameraUp}
-        bind:ref={perspectiveCameraRef}
-      >
+      <T.PerspectiveCamera makeDefault position={cameraPosition} up={cameraUp} bind:ref={perspectiveCameraRef}>
         <OrbitControls
           bind:ref={orbitControlsRef}
           enableDamping

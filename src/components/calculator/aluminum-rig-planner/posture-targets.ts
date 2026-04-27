@@ -30,7 +30,7 @@ const CURRENT_PLANNER_POSTURE_TARGET_RANGES: PlannerPostureTargetRanges = {
   elbowBend: { min: 100, max: 130 },
   kneeBend: { min: 110, max: 140 },
   torsoToThigh: { min: 90, max: 120 },
-  ankleBend: { min: 90, max: 115 },
+  ankleBend: { min: 75, max: 90 },
   footToToeBend: { min: 35, max: 65 },
   brakeAlignment: { min: -5, max: 5 },
   eyeToWheelTop: { min: 50, max: 100 },

@@ -159,5 +159,24 @@ describe('aluminum rig planner component wiring', () => {
     expect(sceneSource).toContain('fovOverlayVisible');
     expect(cameraControlsSource).toContain('aria-label="Show top FOV overlay"');
     expect(cameraControlsSource).toContain('title="Top FOV"');
+    expect(cameraControlsSource.indexOf('aria-label="Use orthographic camera"')).toBeLessThan(
+      cameraControlsSource.indexOf('aria-label="Show top FOV overlay"')
+    );
+  });
+
+  it('resets the scene camera back to perspective mode', () => {
+    expect(sceneSource).toMatch(
+      /async function resetCameraView\(\) \{\s*fovOverlayVisible = false;\s*useOrthographicCamera = false;\s*savedView = null;\s*await tick\(\);\s*applySavedView\(\);\s*\}/
+    );
+  });
+
+  it('does not carry top FOV camera up into perspective mode', () => {
+    expect(sceneSource).toContain('function isTopFovCameraUp()');
+    expect(sceneSource).toContain(
+      'const shouldResetFovView = useOrthographicCamera && !nextUseOrthographicCamera && isTopFovCameraUp();'
+    );
+    expect(sceneSource).toMatch(
+      /if \(shouldResetFovView\) \{\s*savedView = null;\s*\} else \{\s*captureCurrentView\(\);/
+    );
   });
 });

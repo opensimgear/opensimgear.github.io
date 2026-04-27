@@ -65,6 +65,12 @@ type HumanRestSegment = {
   start: Vector3;
   end: Vector3;
 };
+type HumanRestBonePose = {
+  localPosition: Vector3;
+  localScale: Vector3;
+  segment: HumanRestSegment;
+  worldMatrix: Matrix4;
+};
 
 type HumanDebugBoneName =
   | HumanBoneName
@@ -77,11 +83,6 @@ type HumanDebugBoneName =
 type HumanRig = {
   bones: Map<HumanModelBoneName, Bone>;
   debugOverlay: HumanRigDebugOverlay;
-  restBoneLocalPositions: Map<HumanModelBoneName, Vector3>;
-  restBoneLocalQuaternions: Map<HumanModelBoneName, Quaternion>;
-  restBoneLocalScales: Map<HumanModelBoneName, Vector3>;
-  restSegments: Map<HumanBoneName, HumanRestSegment>;
-  restBoneWorldMatrices: Map<HumanBoneName, Matrix4>;
   postureModelMetrics: PlannerPostureModelMetrics | null;
   root: Group;
   skinnedMeshes: SkinnedMesh[];
@@ -435,19 +436,28 @@ export function calculateHumanModelBoneRigRatios(root: Group): PlannerAnthropome
   return calculateHumanModelPostureModel(root)?.anthropometryRatios ?? null;
 }
 
-function createRestSegmentsFromBones(bones: Map<HumanModelBoneName, Bone>) {
-  const segments: HumanRestSegment[] = [];
+function createRestBonePosesFromModel(bones: Map<HumanModelBoneName, Bone>) {
+  const poses: Array<[HumanBoneName, HumanRestBonePose]> = [];
 
   for (const name of HUMAN_BONE_ORDER) {
+    const bone = bones.get(name);
     const start = getModelBonePosition(bones, name);
     const end = getModelBonePosition(bones, HUMAN_BONE_END_BONES[name]);
 
-    if (start && end) {
-      segments.push(createSegment(name, start, end));
+    if (bone && start && end) {
+      poses.push([
+        name,
+        {
+          localPosition: bone.position.clone(),
+          localScale: bone.scale.clone(),
+          segment: createSegment(name, start, end),
+          worldMatrix: bone.matrixWorld.clone(),
+        },
+      ]);
     }
   }
 
-  return new Map(segments.map((segment) => [segment.name, segment]));
+  return new Map(poses);
 }
 
 function getSegmentDirection(start: Vector3, end: Vector3, target: Vector3) {
@@ -593,32 +603,30 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
   const safeModelScale = Math.max(BONE_LENGTH_EPSILON, modelScale);
   const poseSkeleton = createHumanModelPoseSkeleton(skeleton, safeModelScale);
 
-  resetBonesToRestPose(rig);
   rig.root.position.set(0, 0, 0);
   rig.root.scale.setScalar(1);
   rig.root.updateWorldMatrix(true, true);
+  resetBonesToRestPose(rig);
 
   const targetSegments = createTargetSegments(poseSkeleton);
+  const restBonePoses = withNeutralRootRotation(rig.root, () => createRestBonePosesFromModel(rig.bones));
 
   for (const name of HUMAN_BONE_ORDER) {
     const bone = rig.bones.get(name);
-    const restLocalPosition = rig.restBoneLocalPositions.get(name);
-    const restLocalScale = rig.restBoneLocalScales.get(name);
-    const restSegment = rig.restSegments.get(name);
-    const restBoneWorldMatrix = rig.restBoneWorldMatrices.get(name);
+    const restBonePose = restBonePoses.get(name);
     const targetSegment = targetSegments.get(name);
 
-    if (!bone || !restLocalPosition || !restLocalScale || !restSegment || !restBoneWorldMatrix || !targetSegment) {
+    if (!bone || !restBonePose || !targetSegment) {
       continue;
     }
 
     poseBone(
       rig.root,
       bone,
-      restSegment,
-      restLocalPosition,
-      restLocalScale,
-      restBoneWorldMatrix,
+      restBonePose.segment,
+      restBonePose.localPosition,
+      restBonePose.localScale,
+      restBonePose.worldMatrix,
       targetSegment[0],
       targetSegment[1],
       HUMAN_TARGET_START_BONE_NAMES.has(name),
@@ -666,21 +674,25 @@ function applyPlannerPose(rig: HumanRig, skeleton: PlannerPostureSkeleton, model
 }
 
 function resetBonesToRestPose(rig: HumanRig) {
-  for (const name of HUMAN_MODEL_BONE_ORDER) {
-    const bone = rig.bones.get(name);
-    const position = rig.restBoneLocalPositions.get(name);
-    const quaternion = rig.restBoneLocalQuaternions.get(name);
-    const scale = rig.restBoneLocalScales.get(name);
-
-    if (!bone || !position || !quaternion || !scale) {
-      continue;
+  withNeutralRootRotation(rig.root, () => {
+    for (const mesh of rig.skinnedMeshes) {
+      mesh.skeleton.pose();
     }
+  });
+}
 
-    bone.position.copy(position);
-    bone.quaternion.copy(quaternion);
-    bone.scale.copy(scale);
-    bone.updateMatrixWorld(true);
-  }
+function withNeutralRootRotation<T>(root: Group, callback: () => T) {
+  const rootQuaternion = root.quaternion.clone();
+
+  root.quaternion.identity();
+  root.updateWorldMatrix(true, true);
+
+  const result = callback();
+
+  root.quaternion.copy(rootQuaternion);
+  root.updateWorldMatrix(true, true);
+
+  return result;
 }
 
 function configureObject(object: Object3D) {
@@ -1100,10 +1112,6 @@ function collectRig(root: Group): HumanRig {
   const bones = new Map<HumanModelBoneName, Bone>();
   const debugOverlay = createDebugOverlay();
   const skinnedMeshes: SkinnedMesh[] = [];
-  const restBoneLocalPositions = new Map<HumanModelBoneName, Vector3>();
-  const restBoneLocalQuaternions = new Map<HumanModelBoneName, Quaternion>();
-  const restBoneLocalScales = new Map<HumanModelBoneName, Vector3>();
-  const restBoneWorldMatrices = new Map<HumanBoneName, Matrix4>();
 
   root.updateWorldMatrix(true, true);
   root.traverse((object) => {
@@ -1122,32 +1130,12 @@ function collectRig(root: Group): HumanRig {
   root.updateWorldMatrix(true, true);
 
   const postureModelMetrics = calculateHumanModelPostureModel(root);
-  const restSegments = createRestSegmentsFromBones(bones);
   root.add(debugOverlay.group);
   updateDebugOverlay(debugOverlay, createDebugSegmentsFromModelBones(root, bones));
-
-  for (const name of HUMAN_MODEL_BONE_ORDER) {
-    const bone = bones.get(name);
-
-    if (bone) {
-      restBoneLocalPositions.set(name, bone.position.clone());
-      restBoneLocalQuaternions.set(name, bone.quaternion.clone());
-      restBoneLocalScales.set(name, bone.scale.clone());
-
-      if ((HUMAN_BONE_ORDER as string[]).includes(name)) {
-        restBoneWorldMatrices.set(name as HumanBoneName, bone.matrixWorld.clone());
-      }
-    }
-  }
 
   return {
     bones,
     debugOverlay,
-    restBoneLocalPositions,
-    restBoneLocalQuaternions,
-    restBoneLocalScales,
-    restSegments,
-    restBoneWorldMatrices,
     postureModelMetrics,
     root,
     skinnedMeshes,

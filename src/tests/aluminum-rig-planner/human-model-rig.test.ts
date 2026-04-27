@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
-import { Bone, Quaternion, Vector3 } from 'three';
+import { Bone, Box3, Object3D, Quaternion, SkinnedMesh, Vector3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import {
@@ -18,6 +18,7 @@ import {
 } from '../../components/calculator/aluminum-rig-planner/constants';
 import {
   createPlannerPostureSkeleton,
+  POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM,
   type PlannerPostureSkeleton,
   type PosturePoint,
 } from '../../components/calculator/aluminum-rig-planner/posture';
@@ -25,6 +26,11 @@ import {
 const MODEL_PATH = fileURLToPath(
   new URL('../../../public/models/aluminum-rig-planner/human-male-realistic.glb', import.meta.url)
 );
+const HUMAN_MODEL_RIG_SOURCE = readFileSync(
+  new URL('../../components/calculator/aluminum-rig-planner/human-model-rig.ts', import.meta.url),
+  'utf8'
+);
+const MODEL_RATIO_PRECISION = 3;
 const MODEL_SEGMENTS = [
   {
     label: 'torso',
@@ -160,6 +166,109 @@ function collectBones(root: { traverse: (callback: (object: unknown) => void) =>
   return bones;
 }
 
+function getSkinnedMeshBounds(root: Object3D) {
+  const bounds = new Box3();
+
+  root.updateWorldMatrix(true, true);
+  root.traverse((object) => {
+    if (object instanceof SkinnedMesh) {
+      bounds.union(new Box3().setFromObject(object));
+    }
+  });
+
+  return bounds;
+}
+
+function getRequiredBonePosition(bones: Map<string, Bone>, name: string) {
+  const bone = bones.get(name);
+
+  if (!bone) {
+    throw new Error(`Missing ${name}`);
+  }
+
+  return bone.getWorldPosition(new Vector3());
+}
+
+function averageDistance(bones: Map<string, Bone>, pairs: Array<[string, string]>) {
+  return (
+    pairs.reduce((total, [start, end]) => {
+      return total + getRequiredBonePosition(bones, start).distanceTo(getRequiredBonePosition(bones, end));
+    }, 0) / pairs.length
+  );
+}
+
+function averageVerticalDistance(bones: Map<string, Bone>, pairs: Array<[string, string]>) {
+  return (
+    pairs.reduce((total, [start, end]) => {
+      return total + Math.abs(getRequiredBonePosition(bones, start).y - getRequiredBonePosition(bones, end).y);
+    }, 0) / pairs.length
+  );
+}
+
+function roundModelRatio(value: number) {
+  return Number(value.toFixed(MODEL_RATIO_PRECISION));
+}
+
+function deriveExpectedPostureModel(root: Object3D) {
+  const bones = collectBones(root);
+  const bounds = getSkinnedMeshBounds(root);
+  const height = bounds.getSize(new Vector3()).y;
+  const hip = getRequiredBonePosition(bones, 'torso');
+  const leftShoulder = getRequiredBonePosition(bones, 'leftUpperArm');
+  const rightShoulder = getRequiredBonePosition(bones, 'rightUpperArm');
+  const eyeCenter = getRequiredBonePosition(bones, 'eyeCenter');
+  const heelLength = averageVerticalDistance(bones, [
+    ['leftTalon', 'leftTalonTip'],
+    ['rightTalon', 'rightTalonTip'],
+  ]);
+  const toeLength = averageDistance(bones, [
+    ['leftTalonTip', 'leftToeTip'],
+    ['rightTalonTip', 'rightToeTip'],
+  ]);
+  const footLength = heelLength + toeLength;
+  const shoulderY = (leftShoulder.y + rightShoulder.y) / 2;
+
+  return {
+    anthropometryRatios: {
+      sittingHeight: roundModelRatio((bounds.max.y - hip.y) / height),
+      seatedShoulderHeight: roundModelRatio(
+        (shoulderY - hip.y + POSTURE_SHOULDER_ABOVE_HIP_CLEARANCE_MM * 0.001) / height
+      ),
+      hipBreadth: roundModelRatio(averageDistance(bones, [['leftThigh', 'rightThigh']]) / height),
+      shoulderBreadth: roundModelRatio(averageDistance(bones, [['leftUpperArm', 'rightUpperArm']]) / height),
+      upperArmLength: roundModelRatio(
+        averageDistance(bones, [
+          ['leftUpperArm', 'leftForearm'],
+          ['rightUpperArm', 'rightForearm'],
+        ]) / height
+      ),
+      forearmHandLength: roundModelRatio(
+        averageDistance(bones, [
+          ['leftForearm', 'leftHandTip'],
+          ['rightForearm', 'rightHandTip'],
+        ]) / height
+      ),
+      thighLength: roundModelRatio(
+        averageDistance(bones, [
+          ['leftThigh', 'leftShin'],
+          ['rightThigh', 'rightShin'],
+        ]) / height
+      ),
+      lowerLegLength: roundModelRatio(
+        averageDistance(bones, [
+          ['leftShin', 'leftTalon'],
+          ['rightShin', 'rightTalon'],
+        ]) / height
+      ),
+      footLength: roundModelRatio(footLength / height),
+    },
+    eyeCenterForwardFromHip: roundModelRatio((eyeCenter.x - hip.x) / height),
+    eyeCenterHeightFromHip: roundModelRatio((eyeCenter.y - hip.y) / height),
+    eyeCenterSittingHeight: roundModelRatio((eyeCenter.y - hip.y) / height),
+    heelLengthShare: roundModelRatio(heelLength / footLength),
+  };
+}
+
 function expectVectorClose(actual: Vector3, expected: Vector3, label = 'vector', precision = 6) {
   expect(actual.x, `${label}.x`).toBeCloseTo(expected.x, precision);
   expect(actual.y, `${label}.y`).toBeCloseTo(expected.y, precision);
@@ -259,40 +368,23 @@ describe('aluminum rig planner human model rig', () => {
     const gltf = await loadHumanModel();
     const ratios = calculateHumanModelBoneRigRatios(gltf.scene);
 
-    expect(ratios).toEqual({
-      sittingHeight: 0.477,
-      seatedShoulderHeight: 0.292,
-      hipBreadth: 0.123,
-      shoulderBreadth: 0.205,
-      upperArmLength: 0.141,
-      forearmHandLength: 0.195,
-      thighLength: 0.248,
-      lowerLegLength: 0.231,
-      footLength: 0.156,
-    });
+    expect(ratios).toEqual(deriveExpectedPostureModel(gltf.scene).anthropometryRatios);
   });
 
   it('extracts full posture-model data from the GLB rest pose', async () => {
     const gltf = await loadHumanModel();
     const postureModel = calculateHumanModelPostureModel(gltf.scene);
 
-    expect(postureModel).toEqual({
-      anthropometryRatios: {
-        sittingHeight: 0.477,
-        seatedShoulderHeight: 0.292,
-        hipBreadth: 0.123,
-        shoulderBreadth: 0.205,
-        upperArmLength: 0.141,
-        forearmHandLength: 0.195,
-        thighLength: 0.248,
-        lowerLegLength: 0.231,
-        footLength: 0.156,
-      },
-      eyeCenterForwardFromHip: 0.054,
-      eyeCenterHeightFromHip: 0.411,
-      eyeCenterSittingHeight: 0.411,
-      heelLengthShare: 0.333,
-    });
+    expect(postureModel).toEqual(deriveExpectedPostureModel(gltf.scene));
+  });
+
+  it('derives rest bone data from the model instead of rig-level precomputed positions', () => {
+    expect(HUMAN_MODEL_RIG_SOURCE).toContain('createRestBonePosesFromModel(rig.bones)');
+    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restBoneLocalPositions');
+    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restBoneLocalQuaternions');
+    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restBoneLocalScales');
+    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restSegments: Map');
+    expect(HUMAN_MODEL_RIG_SOURCE).not.toContain('restBoneWorldMatrices');
   });
 
   it('scales the whole model without changing individual bone scales', async () => {

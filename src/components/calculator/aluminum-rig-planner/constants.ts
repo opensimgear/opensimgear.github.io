@@ -100,9 +100,9 @@ export const DEFAULT_PLANNER_INPUT: PlannerInput = {
   steeringColumnDistanceMm: 400,
   steeringColumnBaseHeightMm: 430,
   steeringColumnHeightMm: 510,
-  wheelHeightOffsetMm: 170,
+  wheelHeightOffsetMm: 180,
   wheelAngleDeg: 14,
-  wheelDistanceFromSteeringColumnMm: -210,
+  wheelDistanceFromSteeringColumnMm: -250,
   wheelDiameterMm: 320,
 };
 

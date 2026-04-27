@@ -1,5 +1,6 @@
 <script lang="ts">
   import { T } from '@threlte/core';
+  import { Text } from '@threlte/extras';
   import { Euler, Quaternion, Vector3, type EulerOrder } from 'three';
 
   import type { PlannerFovOverlay } from './fov-overlay';
@@ -28,9 +29,9 @@
 
   const { overlay }: Props = $props();
   const LINE_AXIS = new Vector3(0, 1, 0);
-  const FOV_LINE_RADIUS = 0.006;
-  const SCREEN_EDGE_RADIUS = 0.004;
+  const FOV_LINE_RADIUS = 0.003;
   const EYE_DOT_RADIUS = 0.018;
+  const LABEL_HEIGHT_OFFSET = 0.035;
 
   function createSegmentMesh(segment: Segment): SegmentMesh | null {
     const start = new Vector3(...segment.start);
@@ -56,6 +57,35 @@
     };
   }
 
+  function createTopViewDirection(start: PosturePoint, end: PosturePoint) {
+    const direction = new Vector3(end[0] - start[0], end[1] - start[1], 0);
+
+    return direction.lengthSq() > 0 ? direction.normalize() : null;
+  }
+
+  const fovAngleLabel = $derived.by(() => {
+    const leftDirection = createTopViewDirection(overlay.eyeCenter, overlay.leftScreenEdge);
+    const rightDirection = createTopViewDirection(overlay.eyeCenter, overlay.rightScreenEdge);
+
+    if (!leftDirection || !rightDirection) {
+      return '0\u00b0';
+    }
+
+    return `${Math.round((leftDirection.angleTo(rightDirection) * 180) / Math.PI)}\u00b0`;
+  });
+
+  const fovAngleLabelPosition = $derived.by<[number, number, number]>(() => {
+    const eye = new Vector3(...overlay.eyeCenter);
+    const screenMidpoint = new Vector3(...overlay.leftScreenEdge)
+      .add(new Vector3(...overlay.rightScreenEdge))
+      .multiplyScalar(0.5);
+    const labelPosition = eye.lerp(screenMidpoint, 0.55);
+    labelPosition.z =
+      Math.max(overlay.eyeCenter[2], overlay.leftScreenEdge[2], overlay.rightScreenEdge[2]) + LABEL_HEIGHT_OFFSET;
+
+    return labelPosition.toArray() as [number, number, number];
+  });
+
   const segments = $derived.by<SegmentMesh[]>(() =>
     [
       {
@@ -73,14 +103,6 @@
         opacity: 0.86,
         radius: FOV_LINE_RADIUS,
         start: overlay.eyeCenter,
-      },
-      {
-        color: '#0f172a',
-        end: overlay.rightScreenEdge,
-        id: 'screen-edge-line',
-        opacity: 0.65,
-        radius: SCREEN_EDGE_RADIUS,
-        start: overlay.leftScreenEdge,
       },
     ].flatMap((segment) => {
       const mesh = createSegmentMesh(segment);
@@ -108,3 +130,16 @@
   <T.SphereGeometry args={[EYE_DOT_RADIUS, 18, 12]} />
   <T.MeshBasicMaterial color="#1d4ed8" depthTest={false} depthWrite={false} toneMapped={false} />
 </T.Mesh>
+
+<Text
+  anchorX="center"
+  anchorY="middle"
+  color="#1d4ed8"
+  depthOffset={-1}
+  fontSize={0.075}
+  outlineColor="#ffffff"
+  outlineWidth={0.004}
+  position={fovAngleLabelPosition}
+  renderOrder={32}
+  text={fovAngleLabel}
+/>

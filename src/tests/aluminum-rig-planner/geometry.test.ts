@@ -270,7 +270,7 @@ describe('aluminum rig planner geometry', () => {
 
     expect(connector).toBeDefined();
     expect(base).toBeDefined();
-    expect(connector?.size[0]).toBeCloseTo(mm(134));
+    expect(connector?.size[0]).toBeCloseTo(projectFromRim(connector?.position ?? [0, 0, 0]) * 2);
     expect(projectFromRim(base?.position ?? [0, 0, 0])).toBeCloseTo(
       (connector?.size[0] ?? 0) + (base?.size[0] ?? 0) / 2
     );

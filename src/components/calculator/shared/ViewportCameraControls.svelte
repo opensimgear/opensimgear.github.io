@@ -113,40 +113,6 @@
       </button>
     {/if}
 
-    {#if onShowTopFovOverlay}
-      <button
-        type="button"
-        class={[
-          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
-          topFovOverlayActive
-            ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
-            : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
-        ]}
-        aria-pressed={topFovOverlayActive}
-        aria-label="Show top FOV overlay"
-        title="Top FOV"
-        onclick={showTopFovOverlay}
-      >
-        <svg
-          viewBox="0 0 24 24"
-          class="h-4.5 w-4.5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M7.8 16.8a6.5 6.5 0 0 1 0-9.2"></path>
-          <path d="M12 12 4.5 5.8"></path>
-          <path d="M12 12 4.5 18.2"></path>
-          <path d="M12 12h7.5"></path>
-          <path d="M19.5 8.5v7"></path>
-        </svg>
-        <span class="sr-only">Top FOV</span>
-      </button>
-    {/if}
-
     {#if onSetCameraMode}
       <button
         type="button"
@@ -210,6 +176,38 @@
           <path d="M15 5v14"></path>
         </svg>
         <span class="sr-only">Orthographic</span>
+      </button>
+    {/if}
+
+    {#if onShowTopFovOverlay}
+      <button
+        type="button"
+        class={[
+          'grid h-8 w-8 place-items-center rounded-full border backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2',
+          topFovOverlayActive
+            ? 'border-blue-300/80 bg-white/30 text-blue-600 shadow-[0_2px_12px_rgba(59,130,246,0.12)]'
+            : 'border-white/30 bg-white/10 text-zinc-500 hover:border-white/60 hover:bg-white/25 hover:text-zinc-900',
+        ]}
+        aria-pressed={topFovOverlayActive}
+        aria-label="Show top FOV overlay"
+        title="Top FOV"
+        onclick={showTopFovOverlay}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          class="h-4.5 w-4.5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M13.3 6.8a6.7 6.7 0 0 1 0 10.4"></path>
+          <path d="M8.2 9.1 17.6 5.8"></path>
+          <path d="M8.2 14.9 17.6 18.2"></path>
+        </svg>
+        <span class="sr-only">Top FOV</span>
       </button>
     {/if}
   </div>
