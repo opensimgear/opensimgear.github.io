@@ -848,9 +848,9 @@
     }
 
     const previousInput = pendingCustomPresetInput;
-    const nextPreset = getPresetAfterPlannerInputEdit(postureSettings.preset, previousInput, plannerInput);
-
     pendingCustomPresetInput = null;
+
+    const nextPreset = getPresetAfterPlannerInputEdit(postureSettings.preset, previousInput, plannerInput);
 
     if (nextPreset === postureSettings.preset) {
       return;
