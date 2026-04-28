@@ -28,7 +28,10 @@
     DEFAULT_ACTIVE_POSTURE_PRESET,
     DEFAULT_PLANNER_POSTURE_SETTINGS,
     DEFAULT_POSTURE_HEIGHT_CM,
+    isMonitorContinuousCurveCurvature,
     MONITOR_ASPECT_RATIO_OPTIONS,
+    MONITOR_CONTINUOUS_CURVE_CURVATURE_OPTIONS,
+    MONITOR_CONTINUOUS_CURVE_FALLBACK_CURVATURE,
     MONITOR_CURVATURE_OPTIONS,
     PLANNER_POSTURE_LIMITS,
     POSTURE_PRESET_OPTIONS,
@@ -62,7 +65,12 @@
     type PlannerMeasurementKey,
     type PlannerMeasurementOverlay,
   } from './scene/measurement-overlay';
-  import { getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
+  import {
+    getArcCenterDistanceMm,
+    getArcCenterFovDeg,
+    getMonitorTargetFovFromDistanceMm,
+    getSolvedMonitorDistanceFromEyesMm,
+  } from './modules/monitor';
   import { loadPrebuiltProfileGeometries } from './modules/profile-geometry';
   import { createPlannerOptimizationResult } from './cut-list/optimizer';
   import {
@@ -497,11 +505,32 @@
     min: getPedalTrayDistanceMinMm(plannerInput),
     max: getPedalTrayDistanceMaxMm(plannerInput),
   }));
+  const isMonitorContinuousCurveActive = $derived(shouldUseMonitorContinuousCurve());
+  const monitorCurvatureOptions = $derived(
+    postureSettings.monitorContinuousCurve ? MONITOR_CONTINUOUS_CURVE_CURVATURE_OPTIONS : MONITOR_CURVATURE_OPTIONS
+  );
+  const monitorTargetFovLimits = $derived.by(() => {
+    const arcFovDeg = isMonitorContinuousCurveActive ? getArcCenterFovDeg(postureSettings) : null;
+
+    return {
+      min: Math.floor(Math.min(PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg, arcFovDeg ?? Number.POSITIVE_INFINITY)),
+      max: Math.ceil(Math.max(PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg, arcFovDeg ?? Number.NEGATIVE_INFINITY)),
+    };
+  });
   const monitorDistanceLimits = $derived.by(() => {
     if (!visibleModules.monitor) {
       return {
         min: PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm,
         max: PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm,
+      };
+    }
+
+    const arcDistanceMm = isMonitorContinuousCurveActive ? getArcCenterDistanceMm(postureSettings) : null;
+
+    if (arcDistanceMm) {
+      return {
+        min: Math.floor(Math.min(PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm, arcDistanceMm)),
+        max: Math.ceil(Math.max(PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm, arcDistanceMm)),
       };
     }
 
@@ -1116,6 +1145,9 @@
     setMonitorTiltDeg(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTiltDeg);
     setMonitorTargetFovDeg(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTargetFovDeg);
     setMonitorHeightFromBaseMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorHeightFromBaseMm);
+    setMonitorTripleScreen(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTripleScreen);
+    setMonitorTripleScreenBezelMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTripleScreenBezelMm);
+    setMonitorContinuousCurve(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorContinuousCurve);
     syncSolvedMonitorDistanceFromEyesMm();
   }
 
@@ -1288,12 +1320,28 @@
   }
 
   function setMonitorCurvature(value: PlannerMonitorCurvature) {
-    postureSettings.monitorCurvature = value;
+    const nextValue =
+      postureSettings.monitorContinuousCurve && !isMonitorContinuousCurveCurvature(value)
+        ? MONITOR_CONTINUOUS_CURVE_FALLBACK_CURVATURE
+        : value;
+
+    postureSettings.monitorCurvature = nextValue;
+
+    if (nextValue === 'disabled') {
+      postureSettings.monitorContinuousCurve = false;
+    }
+
     syncSolvedMonitorDistanceFromEyesMm();
     syncPlannerUrlState();
   }
 
   function setMonitorTiltDeg(value: number) {
+    if (postureSettings.monitorTripleScreen) {
+      postureSettings.monitorTiltDeg = 0;
+      syncPlannerUrlState();
+      return;
+    }
+
     postureSettings.monitorTiltDeg = Math.max(
       PLANNER_POSTURE_LIMITS.monitorTiltMinDeg,
       Math.min(PLANNER_POSTURE_LIMITS.monitorTiltMaxDeg, value)
@@ -1308,6 +1356,15 @@
     );
   }
 
+  function shouldUseMonitorContinuousCurve(
+    settings: Pick<
+      PlannerPostureSettings<PlannerPosturePreset>,
+      'monitorCurvature' | 'monitorContinuousCurve'
+    > = postureSettings
+  ) {
+    return settings.monitorCurvature !== 'disabled' && settings.monitorContinuousCurve;
+  }
+
   function setMonitorTargetFovDeg(value: number) {
     postureSettings.monitorTargetFovDeg = clampMonitorTargetFovDeg(value);
     syncSolvedMonitorDistanceFromEyesMm();
@@ -1319,6 +1376,22 @@
       return;
     }
 
+    if (shouldUseMonitorContinuousCurve()) {
+      const arcDistanceMm = getArcCenterDistanceMm(postureSettings);
+
+      if (arcDistanceMm) {
+        postureSettings.monitorDistanceFromEyesMm = Math.round(arcDistanceMm);
+        const arcFovDeg = getArcCenterFovDeg(postureSettings);
+
+        if (arcFovDeg !== null) {
+          postureSettings.monitorTargetFovDeg = arcFovDeg;
+        }
+
+        return;
+      }
+    }
+
+    postureSettings.monitorTargetFovDeg = clampMonitorTargetFovDeg(postureSettings.monitorTargetFovDeg);
     postureSettings.monitorDistanceFromEyesMm = Math.round(getSolvedMonitorDistanceFromEyesMm(postureSettings));
   }
 
@@ -1332,6 +1405,12 @@
 
   function setMonitorDistanceFromEyesMm(value: number) {
     if (!visibleModules.monitor) {
+      return;
+    }
+
+    if (shouldUseMonitorContinuousCurve()) {
+      syncSolvedMonitorDistanceFromEyesMm();
+      syncPlannerUrlState();
       return;
     }
 
@@ -1354,6 +1433,36 @@
       syncPresetMonitorHeightFromInput(plannerInput);
       syncSolvedMonitorDistanceFromEyesMm();
     }
+  }
+
+  function setMonitorTripleScreen(value: boolean) {
+    postureSettings.monitorTripleScreen = value;
+
+    if (value) {
+      postureSettings.monitorTiltDeg = 0;
+    }
+
+    syncSolvedMonitorDistanceFromEyesMm();
+    syncPlannerUrlState();
+  }
+
+  function setMonitorTripleScreenBezelMm(value: number) {
+    postureSettings.monitorTripleScreenBezelMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMaxMm, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setMonitorContinuousCurve(value: boolean) {
+    postureSettings.monitorContinuousCurve = value;
+
+    if (value && !isMonitorContinuousCurveCurvature(postureSettings.monitorCurvature)) {
+      postureSettings.monitorCurvature = MONITOR_CONTINUOUS_CURVE_FALLBACK_CURVATURE;
+    }
+
+    syncSolvedMonitorDistanceFromEyesMm();
+    syncPlannerUrlState();
   }
 
   function setShowPostureModel(value: boolean) {
@@ -1633,12 +1742,19 @@
               />
               <List
                 bind:value={() => postureSettings.monitorCurvature, setMonitorCurvature}
-                options={MONITOR_CURVATURE_OPTIONS}
+                options={monitorCurvatureOptions}
                 label="Curvature"
               />
+              {#if postureSettings.monitorCurvature !== 'disabled'}
+                <Checkbox
+                  bind:value={() => postureSettings.monitorContinuousCurve, setMonitorContinuousCurve}
+                  label="Continuous Curve"
+                />
+              {/if}
               <Slider
                 bind:value={() => postureSettings.monitorTiltDeg, setMonitorTiltDeg}
                 label="Tilt"
+                disabled={postureSettings.monitorTripleScreen}
                 min={PLANNER_POSTURE_LIMITS.monitorTiltMinDeg}
                 max={PLANNER_POSTURE_LIMITS.monitorTiltMaxDeg}
                 step={PLANNER_POSTURE_LIMITS.monitorTiltStepDeg}
@@ -1647,8 +1763,9 @@
               <Slider
                 bind:value={() => postureSettings.monitorTargetFovDeg, setMonitorTargetFovDeg}
                 label="FOV"
-                min={PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg}
-                max={PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg}
+                disabled={isMonitorContinuousCurveActive}
+                min={monitorTargetFovLimits.min}
+                max={monitorTargetFovLimits.max}
                 step={PLANNER_POSTURE_LIMITS.monitorTargetFovStepDeg}
                 format={(value) => `${value.toFixed(1)}°`}
               />
@@ -1663,11 +1780,26 @@
               <Slider
                 bind:value={() => postureSettings.monitorDistanceFromEyesMm, setMonitorDistanceFromEyesMm}
                 label="Distance from Eyes"
+                disabled={isMonitorContinuousCurveActive}
                 min={monitorDistanceLimits.min}
                 max={monitorDistanceLimits.max}
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />
+              <Checkbox
+                bind:value={() => postureSettings.monitorTripleScreen, setMonitorTripleScreen}
+                label="Triple Screen"
+              />
+              {#if postureSettings.monitorTripleScreen}
+                <Slider
+                  bind:value={() => postureSettings.monitorTripleScreenBezelMm, setMonitorTripleScreenBezelMm}
+                  label="Bezel Gap"
+                  min={PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMinMm}
+                  max={PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMaxMm}
+                  step={PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelStepMm}
+                  format={(value) => `${value} mm`}
+                />
+              {/if}
               <Button on:click={resetMonitorModule} label="" title="Reset" />
             </Folder>
           {/if}

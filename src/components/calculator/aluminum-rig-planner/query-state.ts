@@ -1,15 +1,22 @@
 import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS, getPlannerStockCostMax } from './constants/optimizer';
 import {
   DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
+  MONITOR_CONTINUOUS_CURVE_FALLBACK_CURVATURE,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
+  isMonitorContinuousCurveCurvature,
   LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM,
   MONITOR_ASPECT_RATIO_OPTIONS,
   MONITOR_CURVATURE_OPTIONS,
   PLANNER_POSTURE_LIMITS,
 } from './constants/posture';
 import { BASE_BEAM_HEIGHT_MM } from './constants/profile';
+import {
+  getArcCenterDistanceMm,
+  getArcCenterFovDeg,
+  getMonitorTargetFovFromDistanceMm,
+  getSolvedMonitorDistanceFromEyesMm,
+} from './modules/monitor';
 import { clampPlannerInput } from './scene/geometry';
-import { getMonitorTargetFovFromDistanceMm, getSolvedMonitorDistanceFromEyesMm } from './modules/monitor';
 import {
   clonePlannerPostureTargetRangesByPreset,
   getPlannerPostureTargetRangeControlLimits,
@@ -62,6 +69,9 @@ export type PlannerQueryState = Partial<PlannerInput> & {
     monitorMidpointXMm?: unknown;
     monitorMidpointYMm?: unknown;
     monitorMidpointZMm?: unknown;
+    monitorTripleScreen?: unknown;
+    monitorTripleScreenBezelMm?: unknown;
+    monitorContinuousCurve?: unknown;
     preset?: unknown;
     targetRangesByPreset?: unknown;
   };
@@ -234,9 +244,26 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const monitorAspectRatio = isMonitorAspectRatio(state?.monitorAspectRatio)
     ? state.monitorAspectRatio
     : defaults.monitorAspectRatio;
-  const monitorCurvature = isMonitorCurvature(state?.monitorCurvature)
+  const rawMonitorCurvature = isMonitorCurvature(state?.monitorCurvature)
     ? state.monitorCurvature
     : defaults.monitorCurvature;
+  const monitorTripleScreen =
+    typeof state?.monitorTripleScreen === 'boolean' ? state.monitorTripleScreen : defaults.monitorTripleScreen;
+  const rawMonitorContinuousCurve =
+    typeof state?.monitorContinuousCurve === 'boolean' ? state.monitorContinuousCurve : defaults.monitorContinuousCurve;
+  const monitorCurvature =
+    rawMonitorContinuousCurve && !isMonitorContinuousCurveCurvature(rawMonitorCurvature)
+      ? MONITOR_CONTINUOUS_CURVE_FALLBACK_CURVATURE
+      : rawMonitorCurvature;
+  const monitorContinuousCurve = monitorCurvature !== 'disabled' && rawMonitorContinuousCurve;
+  const shouldContinuousCurve = monitorCurvature !== 'disabled' && monitorContinuousCurve;
+  const monitorTiltDeg = monitorTripleScreen
+    ? 0
+    : clampNumber(
+        readNumber(state?.monitorTiltDeg, defaults.monitorTiltDeg),
+        PLANNER_POSTURE_LIMITS.monitorTiltMinDeg,
+        PLANNER_POSTURE_LIMITS.monitorTiltMaxDeg
+      );
   const legacyViewpointXMm = LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM - DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM;
   const stateMonitorDistanceFromEyesMm = state?.monitorDistanceFromEyesMm;
   const stateMonitorMidpointXMm = state?.monitorMidpointXMm;
@@ -261,17 +288,33 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
           monitorSizeIn,
         })
       : defaults.monitorTargetFovDeg;
-  const monitorTargetFovDeg = clampNumber(
-    rawMonitorTargetFovDeg,
-    PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
-    PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg
-  );
+  const arcCenterFovDeg = shouldContinuousCurve
+    ? getArcCenterFovDeg({
+        monitorAspectRatio,
+        monitorCurvature,
+        monitorSizeIn,
+      })
+    : null;
+  const monitorTargetFovDeg =
+    arcCenterFovDeg ??
+    clampNumber(
+      rawMonitorTargetFovDeg,
+      PLANNER_POSTURE_LIMITS.monitorTargetFovMinDeg,
+      PLANNER_POSTURE_LIMITS.monitorTargetFovMaxDeg
+    );
   const solvedMonitorDistanceFromEyesMm = getSolvedMonitorDistanceFromEyesMm({
     monitorAspectRatio,
     monitorCurvature,
     monitorSizeIn,
     monitorTargetFovDeg,
   });
+  const arcCenterDistanceMm = shouldContinuousCurve
+    ? getArcCenterDistanceMm({
+        monitorAspectRatio,
+        monitorCurvature,
+        monitorSizeIn,
+      })
+    : null;
   const legacyMonitorMidpointHeightMm = isFiniteNumber(state?.monitorMidpointZMm)
     ? state.monitorMidpointZMm
     : state?.monitorMidpointYMm;
@@ -297,22 +340,25 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     monitorSizeIn,
     monitorAspectRatio,
     monitorCurvature,
-    monitorTiltDeg: clampNumber(
-      readNumber(state?.monitorTiltDeg, defaults.monitorTiltDeg),
-      PLANNER_POSTURE_LIMITS.monitorTiltMinDeg,
-      PLANNER_POSTURE_LIMITS.monitorTiltMaxDeg
-    ),
+    monitorTiltDeg,
     monitorTargetFovDeg,
     monitorDistanceFromEyesMm: clampNumber(
-      solvedMonitorDistanceFromEyesMm,
+      arcCenterDistanceMm ?? solvedMonitorDistanceFromEyesMm,
       PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMinMm,
-      PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm
+      Math.max(PLANNER_POSTURE_LIMITS.monitorDistanceFromEyesMaxMm, arcCenterDistanceMm ?? 0)
     ),
     monitorHeightFromBaseMm: clampNumber(
       monitorHeightFromBaseMm,
       PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm,
       PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm
     ),
+    monitorTripleScreen,
+    monitorTripleScreenBezelMm: clampNumber(
+      readNumber(state?.monitorTripleScreenBezelMm, defaults.monitorTripleScreenBezelMm),
+      PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMinMm,
+      PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMaxMm
+    ),
+    monitorContinuousCurve,
   } satisfies PlannerPostureSettings<PlannerPosturePreset>;
 }
 

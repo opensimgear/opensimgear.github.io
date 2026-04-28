@@ -74,6 +74,9 @@ export type PlannerPostureSettings<Preset extends PlannerPosturePreset = Planner
   monitorTargetFovDeg: number;
   monitorDistanceFromEyesMm: number;
   monitorHeightFromBaseMm: number;
+  monitorTripleScreen: boolean;
+  monitorTripleScreenBezelMm: number;
+  monitorContinuousCurve: boolean;
 };
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;

@@ -147,6 +147,24 @@ describe('aluminum rig planner monitor module', () => {
     expect(edges.right[1]).toBeCloseTo(midpoint[1] + halfChordMm * 0.001, 6);
   });
 
+  it('returns curved monitor curve center point one radius behind the apex midpoint', async () => {
+    const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
+      string,
+      unknown
+    >;
+    const getMonitorCurveCenterPoint = monitorModule.getMonitorCurveCenterPoint as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => [number, number, number] | null;
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const curveCenter = getMonitorCurveCenterPoint(midpoint, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '1000r' as const,
+    });
+
+    expect(curveCenter).toEqual([0, 0, 0.8]);
+  });
+
   it('converts flat monitor distance back into matching horizontal FOV', () => {
     const settings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
@@ -173,5 +191,259 @@ describe('aluminum rig planner monitor module', () => {
     expect(getMonitorTargetFovFromDistanceMm(distanceMm, curvedSettings)).toBeGreaterThan(
       getMonitorTargetFovFromDistanceMm(distanceMm, flatSettings)
     );
+  });
+
+  it('returns symmetric triple-screen inner and outer edge points in hinge mode', async () => {
+    const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
+      string,
+      unknown
+    >;
+    const getTripleScreenEdgePoints = monitorModule.getTripleScreenEdgePoints as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => {
+      leftInner: [number, number, number];
+      leftOuter: [number, number, number];
+      rightInner: [number, number, number];
+      rightOuter: [number, number, number];
+    };
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const edges = getTripleScreenEdgePoints(midpoint, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorTripleScreenBezelMm: 5,
+    });
+
+    expect(edges.leftInner[0]).toBeCloseTo(edges.rightInner[0], 6);
+    expect(edges.leftOuter[0]).toBeCloseTo(edges.rightOuter[0], 6);
+    expect(edges.leftInner[1]).toBeCloseTo(-edges.rightInner[1], 6);
+    expect(edges.leftOuter[1]).toBeCloseTo(-edges.rightOuter[1], 6);
+    expect(edges.leftOuter[1]).toBeLessThan(edges.leftInner[1]);
+    expect(edges.rightOuter[1]).toBeGreaterThan(edges.rightInner[1]);
+  });
+
+  it.each([
+    ['flat', 'disabled' as const],
+    ['curved', '1000r' as const],
+  ])('aims %s hinged side monitor normals at the eye point', async (_label, monitorCurvature) => {
+    const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
+      string,
+      unknown
+    >;
+    const getTripleScreenSidePanels = monitorModule.getTripleScreenSidePanels as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => {
+      left: { position: [number, number, number]; yawRadians: number };
+      right: { position: [number, number, number]; yawRadians: number };
+    };
+    const getSolvedMonitorDistanceFromEyesMm = monitorModule.getSolvedMonitorDistanceFromEyesMm as (
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => number;
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorContinuousCurve: false,
+      monitorCurvature,
+      monitorTargetFovDeg: 60,
+      monitorTripleScreenBezelMm: 5,
+    };
+    const sidePanels = getTripleScreenSidePanels(midpoint, settings);
+    const distanceMm = getSolvedMonitorDistanceFromEyesMm(settings);
+    const eyePoint: [number, number, number] = [midpoint[0] - distanceMm * 0.001, midpoint[1], midpoint[2]];
+    const assertNormalPassesThroughEye = (panel: { position: [number, number, number]; yawRadians: number }) => {
+      const panelToEye = [eyePoint[0] - panel.position[0], eyePoint[1] - panel.position[1]];
+      const normal = [-Math.cos(panel.yawRadians), -Math.sin(panel.yawRadians)];
+      const cross = panelToEye[0] * normal[1] - panelToEye[1] * normal[0];
+
+      expect(cross).toBeCloseTo(0, 6);
+    };
+
+    assertNormalPassesThroughEye(sidePanels.left);
+    assertNormalPassesThroughEye(sidePanels.right);
+  });
+
+  it('keeps measured curved triples on separate hinge-based panel arcs', async () => {
+    const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
+      string,
+      unknown
+    >;
+    const getMonitorCurveCenterPoint = monitorModule.getMonitorCurveCenterPoint as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => [number, number, number] | null;
+    const getTripleScreenCurveCenterPoints = monitorModule.getTripleScreenCurveCenterPoints as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => {
+      left: [number, number, number];
+      right: [number, number, number];
+    } | null;
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '1000r' as const,
+      monitorTargetFovDeg: 60,
+      monitorTripleScreenBezelMm: 5,
+    };
+    const center = getMonitorCurveCenterPoint(midpoint, settings);
+    const sideCenters = getTripleScreenCurveCenterPoints(midpoint, settings);
+
+    expect(center).not.toBeNull();
+    expect(sideCenters).not.toBeNull();
+    expect(sideCenters?.left[1]).not.toBeCloseTo(center?.[1] ?? 0, 6);
+    expect(sideCenters?.right[1]).not.toBeCloseTo(center?.[1] ?? 0, 6);
+  });
+
+  it('returns symmetric triple-screen inner and outer edge points in continuous curve mode', async () => {
+    const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
+      string,
+      unknown
+    >;
+    const getTripleScreenEdgePoints = monitorModule.getTripleScreenEdgePoints as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => {
+      leftInner: [number, number, number];
+      leftOuter: [number, number, number];
+      rightInner: [number, number, number];
+      rightOuter: [number, number, number];
+    };
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '1000r' as const,
+      monitorTripleScreenBezelMm: 5,
+    } as typeof DEFAULT_PLANNER_POSTURE_SETTINGS & { monitorContinuousCurve?: boolean };
+    (settings as Record<string, unknown>).monitorContinuousCurve = true;
+    const edges = getTripleScreenEdgePoints(midpoint, settings);
+
+    expect(edges.leftInner[0]).toBeCloseTo(edges.rightInner[0], 6);
+    expect(edges.leftOuter[0]).toBeCloseTo(edges.rightOuter[0], 6);
+    expect(edges.leftInner[1]).toBeCloseTo(-edges.rightInner[1], 6);
+    expect(edges.leftOuter[1]).toBeCloseTo(-edges.rightOuter[1], 6);
+    expect(edges.leftOuter[1]).toBeLessThan(edges.leftInner[1]);
+    expect(edges.rightOuter[1]).toBeGreaterThan(edges.rightInner[1]);
+    expect(edges.leftOuter[0]).toBeLessThan(edges.leftInner[0]);
+    expect(edges.rightOuter[0]).toBeLessThan(edges.rightInner[0]);
+  });
+
+  it('keeps continuous-curve side monitor chords perpendicular to the eye-to-midpoint line', async () => {
+    const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
+      string,
+      unknown
+    >;
+    const getTripleScreenEdgePoints = monitorModule.getTripleScreenEdgePoints as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => {
+      leftInner: [number, number, number];
+      leftOuter: [number, number, number];
+      rightInner: [number, number, number];
+      rightOuter: [number, number, number];
+    };
+    const getArcCenterDistanceMm = monitorModule.getArcCenterDistanceMm as (
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => number | null;
+
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '1000r' as const,
+      monitorTripleScreenBezelMm: 5,
+    } as typeof DEFAULT_PLANNER_POSTURE_SETTINGS & { monitorContinuousCurve?: boolean };
+    (settings as Record<string, unknown>).monitorContinuousCurve = true;
+    const edges = getTripleScreenEdgePoints(midpoint, settings);
+    const radiusMm = getArcCenterDistanceMm(settings);
+
+    expect(radiusMm).not.toBeNull();
+
+    const eyeCenter: [number, number, number] = [midpoint[0] - (radiusMm ?? 0) * 0.001, midpoint[1], midpoint[2]];
+    const leftChord: [number, number] = [
+      edges.leftOuter[0] - edges.leftInner[0],
+      edges.leftOuter[1] - edges.leftInner[1],
+    ];
+    const leftChordMidpoint: [number, number] = [
+      (edges.leftInner[0] + edges.leftOuter[0]) / 2,
+      (edges.leftInner[1] + edges.leftOuter[1]) / 2,
+    ];
+    const rightChord: [number, number] = [
+      edges.rightOuter[0] - edges.rightInner[0],
+      edges.rightOuter[1] - edges.rightInner[1],
+    ];
+    const rightChordMidpoint: [number, number] = [
+      (edges.rightInner[0] + edges.rightOuter[0]) / 2,
+      (edges.rightInner[1] + edges.rightOuter[1]) / 2,
+    ];
+
+    expect(
+      leftChord[0] * (leftChordMidpoint[0] - eyeCenter[0]) + leftChord[1] * (leftChordMidpoint[1] - eyeCenter[1])
+    ).toBeCloseTo(0, 6);
+    expect(
+      rightChord[0] * (rightChordMidpoint[0] - eyeCenter[0]) + rightChord[1] * (rightChordMidpoint[1] - eyeCenter[1])
+    ).toBeCloseTo(0, 6);
+  });
+
+  it('returns symmetric side monitor curve centers for curved triple screens', async () => {
+    const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
+      string,
+      unknown
+    >;
+    const getTripleScreenCurveCenterPoints = monitorModule.getTripleScreenCurveCenterPoints as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => {
+      left: [number, number, number];
+      right: [number, number, number];
+    } | null;
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const centers = getTripleScreenCurveCenterPoints(midpoint, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '1000r' as const,
+      monitorTargetFovDeg: 60,
+      monitorTripleScreenBezelMm: 5,
+    });
+
+    expect(centers).not.toBeNull();
+    expect(centers?.left[0]).toBeCloseTo(centers?.right[0] ?? 0, 6);
+    expect(centers?.left[1]).toBeCloseTo(-(centers?.right[1] ?? 0), 6);
+    expect(centers?.left[0] ?? 0).toBeLessThan(midpoint[0]);
+  });
+
+  it('uses one shared curve center for continuous curved triple screens', async () => {
+    const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
+      string,
+      unknown
+    >;
+    const getMonitorCurveCenterPoint = monitorModule.getMonitorCurveCenterPoint as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => [number, number, number] | null;
+    const getTripleScreenCurveCenterPoints = monitorModule.getTripleScreenCurveCenterPoints as (
+      midpoint: [number, number, number],
+      settings: typeof DEFAULT_PLANNER_POSTURE_SETTINGS
+    ) => {
+      left: [number, number, number];
+      right: [number, number, number];
+    } | null;
+    const midpoint: [number, number, number] = [1, 0, 0.8];
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '1000r' as const,
+      monitorContinuousCurve: true,
+      monitorTargetFovDeg: 45,
+      monitorTripleScreen: true,
+      monitorTripleScreenBezelMm: 5,
+    };
+    const center = getMonitorCurveCenterPoint(midpoint, settings);
+    const sideCenters = getTripleScreenCurveCenterPoints(midpoint, settings);
+
+    expect(center).not.toBeNull();
+    expect(sideCenters).not.toBeNull();
+    expect(sideCenters?.left[0]).toBeCloseTo(center?.[0] ?? 0, 6);
+    expect(sideCenters?.left[1]).toBeCloseTo(center?.[1] ?? 0, 6);
+    expect(sideCenters?.left[2]).toBeCloseTo(center?.[2] ?? 0, 6);
+    expect(sideCenters?.right[0]).toBeCloseTo(center?.[0] ?? 0, 6);
+    expect(sideCenters?.right[1]).toBeCloseTo(center?.[1] ?? 0, 6);
+    expect(sideCenters?.right[2]).toBeCloseTo(center?.[2] ?? 0, 6);
   });
 });

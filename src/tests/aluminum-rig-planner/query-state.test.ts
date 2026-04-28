@@ -13,6 +13,7 @@ import {
 } from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import { getSteeringColumnDistanceMaxMm } from '~/components/calculator/aluminum-rig-planner/scene/geometry';
 import {
+  getArcCenterDistanceMm,
   getMonitorTargetFovFromDistanceMm,
   getSolvedMonitorDistanceFromEyesMm,
 } from '~/components/calculator/aluminum-rig-planner/modules/monitor';
@@ -244,6 +245,18 @@ describe('aluminum rig planner query state', () => {
     );
   });
 
+  it('sets monitor tilt to zero when triple screen hydrates from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorTiltDeg: 9,
+        monitorTripleScreen: true,
+      },
+    });
+
+    expect(state.postureSettings.monitorTiltDeg).toBe(0);
+    expect(state.postureSettings.monitorTripleScreen).toBe(true);
+  });
+
   it('migrates old monitor midpoint shared-link fields to the new monitor module shape', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       posture: {
@@ -283,5 +296,65 @@ describe('aluminum rig planner query state', () => {
     });
 
     expect(state.postureSettings.monitorHeightFromBaseMm).toBe(820);
+  });
+
+  it('hydrates continuous-curve triple-screen arc-center distance from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorCurvature: '1000r',
+        monitorContinuousCurve: true,
+        monitorTargetFovDeg: 45,
+        monitorTripleScreen: true,
+      },
+    });
+
+    expect(state.postureSettings.monitorDistanceFromEyesMm).toBeCloseTo(
+      getArcCenterDistanceMm(state.postureSettings) ?? 0,
+      6
+    );
+    expect(state.postureSettings.monitorContinuousCurve).toBe(true);
+    expect(state.postureSettings.monitorTripleScreen).toBe(true);
+  });
+
+  it('hydrates curved triple screens as measured distance when continuous curve is off', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorCurvature: '5000r',
+        monitorContinuousCurve: false,
+        monitorTargetFovDeg: 45,
+        monitorTripleScreen: true,
+      },
+    });
+
+    expect(state.postureSettings.monitorDistanceFromEyesMm).toBeCloseTo(
+      getSolvedMonitorDistanceFromEyesMm(state.postureSettings),
+      6
+    );
+    expect(state.postureSettings.monitorDistanceFromEyesMm).not.toBeCloseTo(
+      getArcCenterDistanceMm(state.postureSettings) ?? 0,
+      1
+    );
+    expect(state.postureSettings.monitorContinuousCurve).toBe(false);
+    expect(state.postureSettings.monitorCurvature).toBe('5000r');
+    expect(state.postureSettings.monitorTripleScreen).toBe(true);
+  });
+
+  it('clamps continuous-curve shared links to the largest supported radius', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorCurvature: '5000r',
+        monitorContinuousCurve: true,
+        monitorTargetFovDeg: 45,
+        monitorTripleScreen: true,
+      },
+    });
+
+    expect(state.postureSettings.monitorCurvature).toBe('1500r');
+    expect(state.postureSettings.monitorDistanceFromEyesMm).toBeCloseTo(
+      getArcCenterDistanceMm(state.postureSettings) ?? 0,
+      6
+    );
+    expect(state.postureSettings.monitorContinuousCurve).toBe(true);
+    expect(state.postureSettings.monitorTripleScreen).toBe(true);
   });
 });

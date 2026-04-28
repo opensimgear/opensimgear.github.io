@@ -1,6 +1,5 @@
 import { PLANNER_DIMENSION_LIMITS } from '../constants/planner';
 import { BASE_BEAM_HEIGHT_MM, UPRIGHT_BEAM_DEPTH_MM } from '../constants/profile';
-import { getSolvedMonitorDistanceFromEyesMm } from '../modules/monitor';
 import { createPlannerPostureSkeleton, type PosturePoint } from './posture';
 import {
   getPlannerPostureTargetRanges as getSharedPlannerPostureTargetRanges,
@@ -165,10 +164,8 @@ function getMonitorMidpoint(
   referencePoint: PosturePoint,
   settings: PlannerPostureSettings<PlannerPosturePreset>
 ): PosturePoint {
-  const distanceFromEyesMm = getSolvedMonitorDistanceFromEyesMm(settings);
-
   return [
-    referencePoint[0] + distanceFromEyesMm * MM_TO_METERS,
+    referencePoint[0] + settings.monitorDistanceFromEyesMm * MM_TO_METERS,
     0,
     (BASE_BEAM_HEIGHT_MM + settings.monitorHeightFromBaseMm) * MM_TO_METERS,
   ];

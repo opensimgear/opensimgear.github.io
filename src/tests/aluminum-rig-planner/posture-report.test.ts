@@ -7,10 +7,6 @@ import {
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_POSTURE_LIMITS,
 } from '~/components/calculator/aluminum-rig-planner/constants/posture';
-import {
-  getMonitorDimensionsMm,
-  getSolvedMonitorDistanceFromEyesMm,
-} from '~/components/calculator/aluminum-rig-planner/modules/monitor';
 import { createPlannerPostureSkeleton } from '~/components/calculator/aluminum-rig-planner/posture/posture';
 import {
   createPlannerPostureReport,
@@ -188,7 +184,7 @@ describe('aluminum rig planner posture report', () => {
     expect(failures, failures.slice(0, 30).join('\n')).toEqual([]);
   }, 20000);
 
-  it('solves flat monitor midpoint distance from target horizontal FOV using eye center anchor', () => {
+  it('places flat monitor midpoint at the configured eye distance', () => {
     const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: 'disabled' as const,
@@ -213,14 +209,15 @@ describe('aluminum rig planner posture report', () => {
       eyeCenterHeightFromHip: 0.36,
       heelLengthShare: 0.3,
     };
-    const dimensions = getMonitorDimensionsMm(postureSettings);
-    const expectedDistanceMm = dimensions.widthMm / 2 / Math.tan((postureSettings.monitorTargetFovDeg * Math.PI) / 360);
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, postureModel);
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings, postureModel);
     const monitorDebug = report.monitorDebug!;
 
     expect(monitorDebug.diameterM).toBeCloseTo(0.01, 6);
-    expect(monitorDebug.position[0]).toBeCloseTo(skeleton.joints.eyeCenter[0] + expectedDistanceMm * 0.001, 6);
+    expect(monitorDebug.position[0]).toBeCloseTo(
+      skeleton.joints.eyeCenter[0] + postureSettings.monitorDistanceFromEyesMm * 0.001,
+      6
+    );
     expect(monitorDebug.position[1]).toBe(0);
     expect(monitorDebug.position[2]).toBeCloseTo(
       (BASE_BEAM_HEIGHT_MM + postureSettings.monitorHeightFromBaseMm) * 0.001,
@@ -228,18 +225,37 @@ describe('aluminum rig planner posture report', () => {
     );
   });
 
-  it('places curved monitor apex at the target-FOV solved distance', () => {
+  it('places curved monitor apex at the configured eye distance', () => {
     const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
       monitorDistanceFromEyesMm: 333,
       monitorTargetFovDeg: 30,
     };
-    const expectedDistanceMm = getSolvedMonitorDistanceFromEyesMm(postureSettings);
     const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, modelMetrics);
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings, modelMetrics);
     const monitorDebug = report.monitorDebug!;
 
-    expect(monitorDebug.position[0]).toBeCloseTo(skeleton.joints.eyeCenter[0] + expectedDistanceMm * 0.001, 6);
+    expect(monitorDebug.position[0]).toBeCloseTo(
+      skeleton.joints.eyeCenter[0] + postureSettings.monitorDistanceFromEyesMm * 0.001,
+      6
+    );
+  });
+
+  it('keeps continuous-curve triple-screen center monitor arc centered on the eye point', () => {
+    const postureSettings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorCurvature: '1000r' as const,
+      monitorDistanceFromEyesMm: 1000,
+      monitorContinuousCurve: true,
+      monitorTargetFovDeg: 45,
+      monitorTripleScreen: true,
+    };
+    const skeleton = createPlannerPostureSkeleton(DEFAULT_PLANNER_INPUT, postureSettings, modelMetrics);
+    const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings, modelMetrics);
+    const monitorDebug = report.monitorDebug!;
+
+    expect(monitorDebug.position[0] - skeleton.joints.eyeCenter[0]).toBeCloseTo(1, 6);
+    expect(monitorDebug.position[1]).toBe(skeleton.joints.eyeCenter[1]);
   });
 });
