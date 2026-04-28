@@ -7,11 +7,11 @@ export const SCENE_VIEW = {
   /** Camera position for narrow view. */
   narrowCameraPosition: [0.8, -1.6, 1] as [number, number, number],
   /** Camera position for wide view. */
-  wideCameraPosition: [1.7, -1.7, 1.5] as [number, number, number],
+  wideCameraPosition: [-1.0, -1.2, 1.3] as [number, number, number],
   /** Camera up direction. */
   cameraUp: [0, 0, 1] as [number, number, number],
   /** Target point for camera controls. */
-  controlsTarget: [0.7, 0, 0.5] as [number, number, number],
+  controlsTarget: [0.3, 0, 0.5] as [number, number, number],
   /** Gizmo size in pixels for narrow view. */
   narrowGizmoSizePx: 48,
   /** Gizmo size in pixels for wide view. */

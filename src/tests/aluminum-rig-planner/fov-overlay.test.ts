@@ -38,8 +38,9 @@ describe('aluminum rig planner FOV overlay', () => {
     expect(overlay).not.toBeNull();
     expect(overlay?.summary.eyeDistanceToPanelMm).toBe(postureSettings.monitorDistanceFromEyesMm);
     expect(overlay?.summary.totalFovDeg).toBeCloseTo(overlay?.summary.fovPerMonitorDeg ?? 0, 6);
-    expect(overlay?.summary.position[0]).toBeLessThan(overlay?.eyeCenter[0] ?? 0);
-    expect(overlay?.bounds.minX).toBeLessThanOrEqual(overlay?.summary.position[0] ?? 0);
+    expect(overlay?.fovLabels).toHaveLength(1);
+    expect(overlay?.fovLabels[0]?.valueDeg).toBeCloseTo(overlay?.summary.fovPerMonitorDeg ?? 0, 6);
+    expect(overlay?.fovLabels[0]?.position[0]).toBeGreaterThan(overlay?.eyeCenter[0] ?? 0);
   });
 
   it('summarizes wider total FOV for triple monitors', () => {
@@ -56,5 +57,6 @@ describe('aluminum rig planner FOV overlay', () => {
     expect(overlay).not.toBeNull();
     expect(overlay?.summary.eyeDistanceToPanelMm).toBe(postureSettings.monitorDistanceFromEyesMm);
     expect(overlay?.summary.totalFovDeg).toBeGreaterThan(overlay?.summary.fovPerMonitorDeg ?? 0);
+    expect(overlay?.fovLabels).toHaveLength(3);
   });
 });

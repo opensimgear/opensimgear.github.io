@@ -12,9 +12,11 @@ export const MONITOR_PLATE_THICKNESS_MM = 3;
 /** Bezel / screen surface color. */
 export const MONITOR_COLOR = '#050505';
 /** Corner rounding radius of each monitor segment (mm). */
-export const MONITOR_CORNER_RADIUS_MM = 4;
+export const MONITOR_CORNER_RADIUS_MM = 0;
 /** Number of arc segments used to approximate a curved monitor. */
 export const MONITOR_CURVED_SEGMENT_COUNT = 25;
+/** Visual air gap between adjacent triple monitors (mm). */
+export const MONITOR_TRIPLE_SCREEN_GAP_MM = 3;
 /** Corner segments for the monitor rounded box. */
 export const MONITOR_CORNER_SEGMENTS = 3;
 /** PBR material for the monitor surface. */

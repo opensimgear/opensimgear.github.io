@@ -1,9 +1,9 @@
 import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS, getPlannerStockCostMax } from './constants/optimizer';
 import {
   DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
-  MONITOR_CONTINUOUS_CURVE_FALLBACK_CURVATURE,
+  MONITOR_ARC_CENTER_AT_EYES_FALLBACK_CURVATURE,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
-  isMonitorContinuousCurveCurvature,
+  isMonitorArcCenterAtEyesCurvature,
   LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM,
   MONITOR_ASPECT_RATIO_OPTIONS,
   MONITOR_CURVATURE_OPTIONS,
@@ -70,6 +70,7 @@ export type PlannerQueryState = Partial<PlannerInput> & {
     monitorMidpointYMm?: unknown;
     monitorMidpointZMm?: unknown;
     monitorTripleScreen?: unknown;
+    monitorArcCenterAtEyes?: unknown;
     monitorContinuousCurve?: unknown;
     preset?: unknown;
     targetRangesByPreset?: unknown;
@@ -248,14 +249,20 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     : defaults.monitorCurvature;
   const monitorTripleScreen =
     typeof state?.monitorTripleScreen === 'boolean' ? state.monitorTripleScreen : defaults.monitorTripleScreen;
-  const rawMonitorContinuousCurve =
-    typeof state?.monitorContinuousCurve === 'boolean' ? state.monitorContinuousCurve : defaults.monitorContinuousCurve;
+  const legacyMonitorContinuousCurve = state?.monitorContinuousCurve;
+  const rawMonitorArcCenterAtEyes =
+    typeof state?.monitorArcCenterAtEyes === 'boolean'
+      ? state.monitorArcCenterAtEyes
+      : typeof legacyMonitorContinuousCurve === 'boolean'
+        ? legacyMonitorContinuousCurve
+        : defaults.monitorArcCenterAtEyes;
+  const canUseArcCenterAtEyes = monitorTripleScreen && rawMonitorArcCenterAtEyes;
   const monitorCurvature =
-    rawMonitorContinuousCurve && !isMonitorContinuousCurveCurvature(rawMonitorCurvature)
-      ? MONITOR_CONTINUOUS_CURVE_FALLBACK_CURVATURE
+    canUseArcCenterAtEyes && !isMonitorArcCenterAtEyesCurvature(rawMonitorCurvature)
+      ? MONITOR_ARC_CENTER_AT_EYES_FALLBACK_CURVATURE
       : rawMonitorCurvature;
-  const monitorContinuousCurve = monitorCurvature !== 'disabled' && rawMonitorContinuousCurve;
-  const shouldContinuousCurve = monitorCurvature !== 'disabled' && monitorContinuousCurve;
+  const monitorArcCenterAtEyes = canUseArcCenterAtEyes && monitorCurvature !== 'disabled';
+  const shouldArcCenterAtEyes = monitorArcCenterAtEyes;
   const monitorTiltDeg = monitorTripleScreen
     ? 0
     : clampNumber(
@@ -287,7 +294,7 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
           monitorSizeIn,
         })
       : defaults.monitorTargetFovDeg;
-  const arcCenterFovDeg = shouldContinuousCurve
+  const arcCenterFovDeg = shouldArcCenterAtEyes
     ? getArcCenterFovDeg({
         monitorAspectRatio,
         monitorCurvature,
@@ -307,7 +314,7 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     monitorSizeIn,
     monitorTargetFovDeg,
   });
-  const arcCenterDistanceMm = shouldContinuousCurve
+  const arcCenterDistanceMm = shouldArcCenterAtEyes
     ? getArcCenterDistanceMm({
         monitorAspectRatio,
         monitorCurvature,
@@ -352,7 +359,7 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
       PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm
     ),
     monitorTripleScreen,
-    monitorContinuousCurve,
+    monitorArcCenterAtEyes,
   } satisfies PlannerPostureSettings<PlannerPosturePreset>;
 }
 

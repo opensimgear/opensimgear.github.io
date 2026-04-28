@@ -18,7 +18,6 @@ describe('aluminum rig planner monitor module', () => {
       monitorAspectRatio: '16:10',
     });
 
-    expect(dimensions.thicknessMm).toBe(3);
     expect(dimensions.widthMm).toBeCloseTo(689.3, 1);
     expect(dimensions.heightMm).toBeCloseTo(430.8, 1);
   });
@@ -211,6 +210,12 @@ describe('aluminum rig planner monitor module', () => {
     const edges = getTripleScreenEdgePoints(midpoint, {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
     });
+    const centerEdges = getMonitorScreenEdgePoints(midpoint, DEFAULT_PLANNER_POSTURE_SETTINGS);
+    const leftGapM = Math.hypot(edges.leftInner[0] - centerEdges.left[0], edges.leftInner[1] - centerEdges.left[1]);
+    const rightGapM = Math.hypot(
+      edges.rightInner[0] - centerEdges.right[0],
+      edges.rightInner[1] - centerEdges.right[1]
+    );
 
     expect(edges.leftInner[0]).toBeCloseTo(edges.rightInner[0], 6);
     expect(edges.leftOuter[0]).toBeCloseTo(edges.rightOuter[0], 6);
@@ -218,6 +223,8 @@ describe('aluminum rig planner monitor module', () => {
     expect(edges.leftOuter[1]).toBeCloseTo(-edges.rightOuter[1], 6);
     expect(edges.leftOuter[1]).toBeLessThan(edges.leftInner[1]);
     expect(edges.rightOuter[1]).toBeGreaterThan(edges.rightInner[1]);
+    expect(leftGapM).toBeCloseTo(0.003, 6);
+    expect(rightGapM).toBeCloseTo(0.003, 6);
   });
 
   it.each([
@@ -241,7 +248,7 @@ describe('aluminum rig planner monitor module', () => {
     const midpoint: [number, number, number] = [1, 0, 0.8];
     const settings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      monitorContinuousCurve: false,
+      monitorArcCenterAtEyes: false,
       monitorCurvature,
       monitorTargetFovDeg: 60,
     };
@@ -291,7 +298,7 @@ describe('aluminum rig planner monitor module', () => {
     expect(sideCenters?.right[1]).not.toBeCloseTo(center?.[1] ?? 0, 6);
   });
 
-  it('returns symmetric triple-screen inner and outer edge points in continuous curve mode', async () => {
+  it('returns symmetric triple-screen inner and outer edge points in arc-center-at-eyes mode', async () => {
     const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
       string,
       unknown
@@ -309,9 +316,15 @@ describe('aluminum rig planner monitor module', () => {
     const settings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
-    } as typeof DEFAULT_PLANNER_POSTURE_SETTINGS & { monitorContinuousCurve?: boolean };
-    (settings as Record<string, unknown>).monitorContinuousCurve = true;
+    } as typeof DEFAULT_PLANNER_POSTURE_SETTINGS & { monitorArcCenterAtEyes?: boolean };
+    (settings as Record<string, unknown>).monitorArcCenterAtEyes = true;
     const edges = getTripleScreenEdgePoints(midpoint, settings);
+    const centerEdges = getMonitorScreenEdgePoints(midpoint, settings);
+    const leftGapM = Math.hypot(edges.leftInner[0] - centerEdges.left[0], edges.leftInner[1] - centerEdges.left[1]);
+    const rightGapM = Math.hypot(
+      edges.rightInner[0] - centerEdges.right[0],
+      edges.rightInner[1] - centerEdges.right[1]
+    );
 
     expect(edges.leftInner[0]).toBeCloseTo(edges.rightInner[0], 6);
     expect(edges.leftOuter[0]).toBeCloseTo(edges.rightOuter[0], 6);
@@ -321,9 +334,11 @@ describe('aluminum rig planner monitor module', () => {
     expect(edges.rightOuter[1]).toBeGreaterThan(edges.rightInner[1]);
     expect(edges.leftOuter[0]).toBeLessThan(edges.leftInner[0]);
     expect(edges.rightOuter[0]).toBeLessThan(edges.rightInner[0]);
+    expect(leftGapM).toBeCloseTo(0.003, 6);
+    expect(rightGapM).toBeCloseTo(0.003, 6);
   });
 
-  it('keeps continuous-curve side monitor chords perpendicular to the eye-to-midpoint line', async () => {
+  it('keeps arc-center-at-eyes side monitor chords perpendicular to the eye-to-midpoint line', async () => {
     const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
       string,
       unknown
@@ -345,8 +360,8 @@ describe('aluminum rig planner monitor module', () => {
     const settings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
-    } as typeof DEFAULT_PLANNER_POSTURE_SETTINGS & { monitorContinuousCurve?: boolean };
-    (settings as Record<string, unknown>).monitorContinuousCurve = true;
+    } as typeof DEFAULT_PLANNER_POSTURE_SETTINGS & { monitorArcCenterAtEyes?: boolean };
+    (settings as Record<string, unknown>).monitorArcCenterAtEyes = true;
     const edges = getTripleScreenEdgePoints(midpoint, settings);
     const radiusMm = getArcCenterDistanceMm(settings);
 
@@ -403,7 +418,7 @@ describe('aluminum rig planner monitor module', () => {
     expect(centers?.left[0] ?? 0).toBeLessThan(midpoint[0]);
   });
 
-  it('uses one shared curve center for continuous curved triple screens', async () => {
+  it('uses one shared curve center for arc-center-at-eyes curved triple screens', async () => {
     const monitorModule = (await import('~/components/calculator/aluminum-rig-planner/modules/monitor')) as Record<
       string,
       unknown
@@ -423,7 +438,7 @@ describe('aluminum rig planner monitor module', () => {
     const settings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
-      monitorContinuousCurve: true,
+      monitorArcCenterAtEyes: true,
       monitorTargetFovDeg: 45,
       monitorTripleScreen: true,
     };

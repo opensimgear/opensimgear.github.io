@@ -242,12 +242,12 @@ describe('aluminum rig planner posture report', () => {
     );
   });
 
-  it('keeps continuous-curve triple-screen center monitor arc centered on the eye point', () => {
+  it('keeps arc-center-at-eyes triple-screen center monitor arc centered on the eye point', () => {
     const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
       monitorDistanceFromEyesMm: 1000,
-      monitorContinuousCurve: true,
+      monitorArcCenterAtEyes: true,
       monitorTargetFovDeg: 45,
       monitorTripleScreen: true,
     };

@@ -298,7 +298,25 @@ describe('aluminum rig planner query state', () => {
     expect(state.postureSettings.monitorHeightFromBaseMm).toBe(820);
   });
 
-  it('hydrates continuous-curve triple-screen arc-center distance from shared-link state', () => {
+  it('hydrates arc-center-at-eyes triple-screen arc-center distance from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorCurvature: '1000r',
+        monitorArcCenterAtEyes: true,
+        monitorTargetFovDeg: 45,
+        monitorTripleScreen: true,
+      },
+    });
+
+    expect(state.postureSettings.monitorDistanceFromEyesMm).toBeCloseTo(
+      getArcCenterDistanceMm(state.postureSettings) ?? 0,
+      6
+    );
+    expect(state.postureSettings.monitorArcCenterAtEyes).toBe(true);
+    expect(state.postureSettings.monitorTripleScreen).toBe(true);
+  });
+
+  it('migrates legacy monitorContinuousCurve shared-link state', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       posture: {
         monitorCurvature: '1000r',
@@ -312,15 +330,33 @@ describe('aluminum rig planner query state', () => {
       getArcCenterDistanceMm(state.postureSettings) ?? 0,
       6
     );
-    expect(state.postureSettings.monitorContinuousCurve).toBe(true);
+    expect(state.postureSettings.monitorArcCenterAtEyes).toBe(true);
     expect(state.postureSettings.monitorTripleScreen).toBe(true);
   });
 
-  it('hydrates curved triple screens as measured distance when continuous curve is off', () => {
+  it('ignores arc-center-at-eyes shared-link state when triple screen is off', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorArcCenterAtEyes: true,
+        monitorCurvature: '5000r',
+        monitorTargetFovDeg: 45,
+        monitorTripleScreen: false,
+      },
+    });
+
+    expect(state.postureSettings.monitorArcCenterAtEyes).toBe(false);
+    expect(state.postureSettings.monitorCurvature).toBe('5000r');
+    expect(state.postureSettings.monitorDistanceFromEyesMm).toBeCloseTo(
+      getSolvedMonitorDistanceFromEyesMm(state.postureSettings),
+      6
+    );
+  });
+
+  it('hydrates curved triple screens as measured distance when arc-center-at-eyes is off', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       posture: {
         monitorCurvature: '5000r',
-        monitorContinuousCurve: false,
+        monitorArcCenterAtEyes: false,
         monitorTargetFovDeg: 45,
         monitorTripleScreen: true,
       },
@@ -334,16 +370,16 @@ describe('aluminum rig planner query state', () => {
       getArcCenterDistanceMm(state.postureSettings) ?? 0,
       1
     );
-    expect(state.postureSettings.monitorContinuousCurve).toBe(false);
+    expect(state.postureSettings.monitorArcCenterAtEyes).toBe(false);
     expect(state.postureSettings.monitorCurvature).toBe('5000r');
     expect(state.postureSettings.monitorTripleScreen).toBe(true);
   });
 
-  it('clamps continuous-curve shared links to the largest supported radius', () => {
+  it('clamps arc-center-at-eyes shared links to the largest supported radius', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       posture: {
         monitorCurvature: '5000r',
-        monitorContinuousCurve: true,
+        monitorArcCenterAtEyes: true,
         monitorTargetFovDeg: 45,
         monitorTripleScreen: true,
       },
@@ -354,7 +390,7 @@ describe('aluminum rig planner query state', () => {
       getArcCenterDistanceMm(state.postureSettings) ?? 0,
       6
     );
-    expect(state.postureSettings.monitorContinuousCurve).toBe(true);
+    expect(state.postureSettings.monitorArcCenterAtEyes).toBe(true);
     expect(state.postureSettings.monitorTripleScreen).toBe(true);
   });
 });

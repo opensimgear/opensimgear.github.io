@@ -7,7 +7,7 @@
 - Do use the superpowers:subagent-driven-development skill to implement
 - **use the caveman skill always!**
 - tests can only test inputs, outputs and side effects of functions, never implementation details or constants
-- always check if the application is running locally and verify changes in the browser when working on frontend code
+- always check if the application is running locally if you want to test in the browser
 - use ~/ for import from src for all code, never relative imports
 
 ## Commands
