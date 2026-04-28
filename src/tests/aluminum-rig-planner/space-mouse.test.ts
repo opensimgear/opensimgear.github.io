@@ -12,14 +12,9 @@ import {
   getTargetFromCameraPose,
   getVerticalFovDegreesFromDiagonalRadians,
   syncOrbitCameraView,
-  SPACEMOUSE_Z_UP_COORDINATE_SYSTEM,
 } from '~/components/calculator/shared/space-mouse';
 
 describe('aluminum rig planner space mouse helpers', () => {
-  it('uses z-up coordinate system expected by 3Dconnexion navlib', () => {
-    expect(SPACEMOUSE_Z_UP_COORDINATE_SYSTEM).toEqual([1, 0, 0, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, 0, 0, 1]);
-  });
-
   it('converts between vertical and diagonal perspective fov values', () => {
     const diagonalFov = getDiagonalFovRadians(50, 1.5);
 

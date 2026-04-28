@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { computeTrapezoidalProfile } from '../../components/calculator/actuator-sizing/profile';
+import { computeTrapezoidalProfile } from '~/components/calculator/actuator-sizing/profile';
 
 describe('computeTrapezoidalProfile', () => {
   it('returns correct phase times for a standard trapezoidal profile', () => {

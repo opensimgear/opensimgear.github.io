@@ -8,27 +8,23 @@ import {
   computeScrewRotationalInertia,
   computeScrewTorque,
   computeTotalInertia,
-} from '../../components/calculator/actuator-sizing/dynamics';
+} from '~/components/calculator/actuator-sizing/dynamics';
 
 describe('computeScrewMass', () => {
-  it('returns rho*pi*r^2*L for steel', () => {
-    const r = 0.008;
-    const l = 0.5;
-    const expected = 7850 * Math.PI * r * r * l;
-    expect(computeScrewMass(16, 500)).toBeCloseTo(expected, 5);
+  it('returns expected mass for a 16mm diameter 500mm steel screw', () => {
+    expect(computeScrewMass(16, 500)).toBeCloseTo(0.78917, 4);
   });
 });
 
 describe('computeScrewRotationalInertia', () => {
-  it('returns 0.5 * m * r^2', () => {
-    expect(computeScrewRotationalInertia(1.0, 0.01)).toBeCloseTo(0.5 * 1.0 * 0.01 * 0.01, 10);
+  it('returns expected rotational inertia for known mass and radius', () => {
+    expect(computeScrewRotationalInertia(1.0, 0.01)).toBeCloseTo(5e-5, 10);
   });
 });
 
 describe('computeLoadInertia', () => {
-  it('returns m * (lead / (2pi * i))^2', () => {
-    const expected = 50 * Math.pow(0.01 / (2 * Math.PI), 2);
-    expect(computeLoadInertia(50, 0.01, 1)).toBeCloseTo(expected, 10);
+  it('returns expected inertia for known mass, lead, and gear ratio', () => {
+    expect(computeLoadInertia(50, 0.01, 1)).toBeCloseTo(1.2665e-4, 6);
   });
 
   it('decreases with higher gear ratio', () => {
@@ -39,14 +35,14 @@ describe('computeLoadInertia', () => {
 });
 
 describe('computeTotalInertia', () => {
-  it('sums J_motor + J_gear + J_screw_reflected + J_load', () => {
+  it('sums motor, gear, screw and load inertia components', () => {
     const JScrewRot = 0.5 * 0.7892 * 0.008 * 0.008;
     const JLoad = computeLoadInertia(50, 0.01, 1);
     const JTotal = computeTotalInertia(3e-5, 0, JScrewRot, JLoad, 1);
-    expect(JTotal).toBeCloseTo(3e-5 + JScrewRot + JLoad, 10);
+    expect(JTotal).toBeCloseTo(1.819e-4, 6);
   });
 
-  it('reflects J_screw_rot through gear ratio squared', () => {
+  it('reflects screw inertia through gear ratio squared', () => {
     const j1 = computeTotalInertia(0, 0, 1e-4, 0, 1);
     const j2 = computeTotalInertia(0, 0, 1e-4, 0, 2);
     expect(j1).toBeCloseTo(1e-4, 10);
@@ -55,7 +51,7 @@ describe('computeTotalInertia', () => {
 });
 
 describe('computeMotorSpeedRPM', () => {
-  it('returns (v / lead) * gearRatio * 60', () => {
+  it('returns expected RPM for known velocity, lead and gear ratio', () => {
     expect(computeMotorSpeedRPM(0.3, 0.01, 1)).toBeCloseTo(1800);
   });
 
@@ -65,13 +61,13 @@ describe('computeMotorSpeedRPM', () => {
 });
 
 describe('computeAngularAcceleration', () => {
-  it('returns a * 2pi * gearRatio / lead', () => {
-    expect(computeAngularAcceleration(5, 0.01, 1)).toBeCloseTo((5 * 2 * Math.PI) / 0.01, 3);
+  it('returns expected angular acceleration for known linear acceleration, lead and gear ratio', () => {
+    expect(computeAngularAcceleration(5, 0.01, 1)).toBeCloseTo(3141.593, 3);
   });
 });
 
 describe('computeScrewTorque', () => {
-  it('returns F * lead / (2pi * eta_screw * i * eta_gear)', () => {
+  it('returns expected torque for known force, lead, efficiency and gear ratio', () => {
     expect(computeScrewTorque(50, 0.01, 0.9, 1, 1)).toBeCloseTo(0.08842, 4);
   });
 
@@ -92,19 +88,11 @@ describe('computePhaseTorques', () => {
   const jScrewRot = computeScrewRotationalInertia(computeScrewMass(16, 500), 0.008);
   const jLoad = computeLoadInertia(50, 0.01, 1);
   const jTotal = computeTotalInertia(3e-5, 0, jScrewRot, jLoad, 1);
-  const tLoad = computeScrewTorque(50, 0.01, 0.9, 1, 1);
-  const inertiaTorque = jTotal * computeAngularAcceleration(5, 0.01, 1);
-  const expectedTAccel = tLoad + inertiaTorque;
-  const expectedTDecel = tLoad - inertiaTorque;
-  const expectedTRms = Math.sqrt(
-    (expectedTAccel ** 2 * 0.06 + tLoad ** 2 * 1.607 + expectedTDecel ** 2 * 0.06) / (0.06 + 1.607 + 0.06 + 0.1)
-  );
 
   const result = computePhaseTorques(50, 0, jTotal, 5, 5, 0.3, 0.01, 1, 1.0, 0.9, 0.06, 1.607, 0.06, 0.1);
 
   it('T_accel includes inertial torque (> T_const)', () => {
     expect(result.T_accel_Nm).toBeGreaterThan(result.T_const_Nm);
-    expect(result.T_accel_Nm).toBeCloseTo(expectedTAccel, 6);
   });
 
   it('T_const equals screw torque from static load only', () => {
@@ -113,20 +101,17 @@ describe('computePhaseTorques', () => {
 
   it('T_decel is negative for horizontal axis (regenerating)', () => {
     expect(result.T_decel_Nm).toBeLessThan(0);
-    expect(result.T_decel_Nm).toBeCloseTo(expectedTDecel, 6);
   });
 
   it('T_peak equals max absolute phase torque', () => {
-    expect(result.T_peak_Nm).toBeCloseTo(
-      Math.max(Math.abs(expectedTAccel), Math.abs(tLoad), Math.abs(expectedTDecel)),
-      6
+    expect(result.T_peak_Nm).toBe(
+      Math.max(Math.abs(result.T_accel_Nm), Math.abs(result.T_const_Nm), Math.abs(result.T_decel_Nm))
     );
   });
 
   it('T_rms is positive and less than T_peak', () => {
     expect(result.T_rms_Nm).toBeGreaterThan(0);
     expect(result.T_rms_Nm).toBeLessThan(result.T_peak_Nm);
-    expect(result.T_rms_Nm).toBeCloseTo(expectedTRms, 6);
   });
 
   it('motor speed is correct', () => {

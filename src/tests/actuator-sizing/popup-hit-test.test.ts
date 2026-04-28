@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   isPointInsidePopupBounds,
   shouldSwallowPopupClick,
-} from '../../components/calculator/actuator-sizing/popup-hit-test';
+} from '~/components/calculator/actuator-sizing/popup-hit-test';
 
 describe('isPointInsidePopupBounds', () => {
   it('returns false when popup bounds missing', () => {

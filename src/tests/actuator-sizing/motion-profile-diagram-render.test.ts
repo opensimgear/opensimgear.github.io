@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { render } from 'svelte/server';
-import ActuatorSizingCalculator from '../../components/calculator/actuator-sizing/index.svelte';
-import MotionProfileDiagram from '../../components/calculator/actuator-sizing/MotionProfileDiagram.svelte';
-import { buildMotionProfileDiagram } from '../../components/calculator/actuator-sizing/motion-profile-diagram';
+import ActuatorSizingCalculator from '~/components/calculator/actuator-sizing/index.svelte';
+import MotionProfileDiagram from '~/components/calculator/actuator-sizing/MotionProfileDiagram.svelte';
+import { buildMotionProfileDiagram } from '~/components/calculator/actuator-sizing/motion-profile-diagram';
 
 const renderComponent = render as (
   component: unknown,

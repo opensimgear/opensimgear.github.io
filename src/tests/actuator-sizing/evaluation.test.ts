@@ -4,8 +4,8 @@ import {
   computeScore,
   evaluateMotorForActuator,
   rankMotors,
-} from '../../components/calculator/actuator-sizing/evaluation';
-import type { ServoMotor } from '../../components/calculator/actuator-sizing/types';
+} from '~/components/calculator/actuator-sizing/evaluation';
+import type { ServoMotor } from '~/components/calculator/actuator-sizing/types';
 
 const testMotor: ServoMotor = {
   id: 'test',

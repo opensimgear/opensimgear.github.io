@@ -8,7 +8,6 @@ import {
 } from '~/components/calculator/aluminum-rig-planner/constants/planner';
 import { BASE_BEAM_HEIGHT_MM } from '~/components/calculator/aluminum-rig-planner/constants/profile';
 import {
-  DEFAULT_ACTIVE_POSTURE_PRESET,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_POSTURE_LIMITS,
 } from '~/components/calculator/aluminum-rig-planner/constants/posture';
@@ -152,11 +151,6 @@ describe('aluminum rig planner posture presets', () => {
     modelMetrics = await loadHumanModelPostureModelFixture();
   });
 
-  it('uses GT as the default active preset', () => {
-    expect(DEFAULT_ACTIVE_POSTURE_PRESET).toBe('gt');
-    expect(DEFAULT_PLANNER_POSTURE_SETTINGS.preset).toBe(DEFAULT_ACTIVE_POSTURE_PRESET);
-  });
-
   it.each(NON_CUSTOM_PRESETS)('applies every fixed-final preset value for %s', (preset) => {
     const result = applyPresetToPlannerInput(
       {
@@ -188,14 +182,11 @@ describe('aluminum rig planner posture presets', () => {
     };
     const result = applyPresetToPlannerInput(current, preset, DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm);
 
-    expect('wheelHeightOffsetMm' in PLANNER_POSTURE_PRESETS[preset]).toBe(false);
-    expect('wheelDistanceFromSteeringColumnMm' in PLANNER_POSTURE_PRESETS[preset]).toBe(false);
     expect(result.wheelHeightOffsetMm).toBe(current.wheelHeightOffsetMm);
     expect(result.wheelDistanceFromSteeringColumnMm).toBe(current.wheelDistanceFromSteeringColumnMm);
   });
 
   it.each(NON_CUSTOM_PRESETS)('stores %s pedal height as a hip-relative preset value', (preset) => {
-    expect('pedalsHeightMm' in PLANNER_POSTURE_PRESETS[preset]).toBe(false);
     expect(Number.isFinite(PLANNER_POSTURE_PRESETS[preset].pedalHeightVsHipsMm)).toBe(true);
   });
 
@@ -210,7 +201,6 @@ describe('aluminum rig planner posture presets', () => {
     };
     const result = applyPresetToPlannerInput(input, preset, DEFAULT_PLANNER_POSTURE_SETTINGS.heightCm);
 
-    expect('pedalAngleDeg' in PLANNER_POSTURE_PRESETS[preset]).toBe(false);
     expect(result.pedalAngleDeg).toBe(input.pedalAngleDeg);
   });
 

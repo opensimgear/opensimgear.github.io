@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { decodeQueryState, encodeQueryState } from '../../components/calculator/shared/query-state';
+import { decodeQueryState, encodeQueryState } from '~/components/calculator/shared/query-state';
 
 function encodeUtf8Base64(value: string) {
   return Buffer.from(value, 'utf8').toString('base64');

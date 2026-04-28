@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildTwitterMetaHead } from '../../utils/social-meta';
+import { buildTwitterMetaHead } from '~/utils/social-meta';
 
 describe('buildTwitterMetaHead', () => {
   it('derives twitter title and description from existing head entries when missing', () => {

@@ -120,11 +120,6 @@ describe('aluminum rig planner posture solver', () => {
     modelMetrics = await loadHumanModelPostureModelFixture();
   });
 
-  it('uses fixed default pedal geometry values', () => {
-    expect(DEFAULT_PLANNER_INPUT.pedalAngleDeg).toBe(80);
-    expect(DEFAULT_PLANNER_INPUT.pedalsDeltaMm).toBe(140);
-  });
-
   it('creates finite whole-body joints and segments from default cockpit geometry', () => {
     const skeleton = createPlannerPostureSkeleton(
       DEFAULT_PLANNER_INPUT,

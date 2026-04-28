@@ -5,7 +5,7 @@ import {
   getActuatorSizingPaneExpandedState,
   getNextActuatorSizingPaneExpandedState,
   isNarrowActuatorSizingViewport,
-} from '../../components/calculator/actuator-sizing/state';
+} from '~/components/calculator/actuator-sizing/state';
 
 describe('isNarrowActuatorSizingViewport', () => {
   it('treats widths below mobile breakpoint as narrow', () => {

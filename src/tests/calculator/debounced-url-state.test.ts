@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createDebouncedUrlStateWriter } from '../../components/calculator/shared/debounced-url-state';
+import { createDebouncedUrlStateWriter } from '~/components/calculator/shared/debounced-url-state';
 
 describe('createDebouncedUrlStateWriter', () => {
   let replaceState: ReturnType<typeof vi.fn>;

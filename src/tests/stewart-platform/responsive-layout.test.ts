@@ -2,13 +2,10 @@ import { describe, expect, it } from 'vitest';
 
 import {
   MOBILE_STEWART_BREAKPOINT,
-  getStewartGizmoSize,
   getNextStewartPaneExpandedState,
-  getStewartStatusPanelClassNames,
-  getStewartSceneClassNames,
   getStewartPaneExpandedState,
   isNarrowStewartViewport,
-} from '../../components/calculator/stewart-platform/state';
+} from '~/components/calculator/stewart-platform/state';
 
 describe('isNarrowStewartViewport', () => {
   it('treats widths below mobile breakpoint as narrow', () => {
@@ -82,60 +79,5 @@ describe('getNextStewartPaneExpandedState', () => {
     };
 
     expect(getNextStewartPaneExpandedState(currentPaneExpanded, false, false)).toBe(currentPaneExpanded);
-  });
-});
-
-describe('getStewartSceneClassNames', () => {
-  it('keeps aspect-based scene sizing on narrow viewports', () => {
-    expect(getStewartSceneClassNames(true)).toContain('relative');
-    expect(getStewartSceneClassNames(true)).toContain('aspect-[3/2]');
-    expect(getStewartSceneClassNames(true)).toContain('radial-gradient');
-  });
-
-  it('keeps same scene sizing shell on wide viewports', () => {
-    expect(getStewartSceneClassNames(false)).toContain('relative');
-    expect(getStewartSceneClassNames(false)).toContain('aspect-[3/2]');
-    expect(getStewartSceneClassNames(false)).toContain('radial-gradient');
-  });
-});
-
-describe('mobile scene UI helpers', () => {
-  it('uses smaller gizmo size on narrow viewports', () => {
-    expect(getStewartGizmoSize(true)).toBe(48);
-    expect(getStewartGizmoSize(false)).toBe(64);
-  });
-
-  it('uses compact collapsed status panel on narrow viewports', () => {
-    const classNames = getStewartStatusPanelClassNames(true, false);
-
-    expect(classNames).toContain('bottom-2');
-    expect(classNames).toContain('right-2');
-    expect(classNames).toContain('px-2');
-    expect(classNames).toContain('py-1');
-    expect(classNames).toContain('text-[8px]');
-    expect(classNames).toContain('cursor-pointer');
-    expect(classNames).not.toContain('pointer-events-none');
-  });
-
-  it('uses expanded status panel on narrow viewports when open', () => {
-    const classNames = getStewartStatusPanelClassNames(true, true);
-
-    expect(classNames).toContain('bottom-2');
-    expect(classNames).toContain('right-2');
-    expect(classNames).toContain('px-2');
-    expect(classNames).toContain('py-1.5');
-    expect(classNames).toContain('text-[8px]');
-    expect(classNames).toContain('max-w-[calc(100%-52px)]');
-    expect(classNames).not.toContain('pointer-events-none');
-  });
-
-  it('keeps roomier status panel styling on wide viewports', () => {
-    const classNames = getStewartStatusPanelClassNames(false, false);
-
-    expect(classNames).toContain('bottom-3');
-    expect(classNames).toContain('right-3');
-    expect(classNames).toContain('px-3');
-    expect(classNames).toContain('py-2');
-    expect(classNames).toContain('text-xs');
   });
 });

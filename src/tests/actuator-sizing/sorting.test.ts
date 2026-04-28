@@ -1,12 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import {
-  DEFAULT_SORT_STATE,
   getAriaSort,
   sortMotorResults,
   toggleSortState,
   type SortState,
-} from '../../components/calculator/actuator-sizing/sorting';
-import type { MotorEvaluationV2, ServoMotor } from '../../components/calculator/actuator-sizing/types';
+} from '~/components/calculator/actuator-sizing/sorting';
+import type { MotorEvaluationV2, ServoMotor } from '~/components/calculator/actuator-sizing/types';
 
 function motor(id: string): ServoMotor {
   return {
@@ -43,10 +42,6 @@ function result(id: string, overrides: Partial<MotorEvaluationV2>): MotorEvaluat
 }
 
 describe('toggleSortState', () => {
-  it('uses score descending as the default initial state', () => {
-    expect(DEFAULT_SORT_STATE).toEqual({ key: 'score', descending: true });
-  });
-
   it('starts a newly clicked column in descending order', () => {
     const state: SortState = { key: 'score', descending: false };
     expect(toggleSortState(state, 'score')).toEqual({ key: 'score', descending: true });

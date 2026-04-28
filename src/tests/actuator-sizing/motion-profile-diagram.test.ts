@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildMotionProfileDiagram } from '../../components/calculator/actuator-sizing/motion-profile-diagram';
+import { buildMotionProfileDiagram } from '~/components/calculator/actuator-sizing/motion-profile-diagram';
 
 describe('buildMotionProfileDiagram', () => {
   it('returns velocity-only geometry for a trapezoidal profile', () => {

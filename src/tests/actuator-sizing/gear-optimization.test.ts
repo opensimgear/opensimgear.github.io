@@ -2,13 +2,13 @@ import { describe, expect, it } from 'vitest';
 import {
   findOptimalGearRatio,
   type GearOptimizationContext,
-} from '../../components/calculator/actuator-sizing/gear-optimization';
+} from '~/components/calculator/actuator-sizing/gear-optimization';
 import {
   computeLoadInertia,
   computePhaseTorques,
   computeTotalInertia,
-} from '../../components/calculator/actuator-sizing/dynamics';
-import type { ServoMotor } from '../../components/calculator/actuator-sizing/types';
+} from '~/components/calculator/actuator-sizing/dynamics';
+import type { ServoMotor } from '~/components/calculator/actuator-sizing/types';
 
 // ─── fixtures ───────────────────────────────────────────────────────────────
 

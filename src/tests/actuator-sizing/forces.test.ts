@@ -3,21 +3,19 @@ import {
   computeForcePerActuator,
   computeHoldingForce,
   computeStaticForce,
-} from '../../components/calculator/actuator-sizing/forces';
-
-const G = 9.81;
+} from '~/components/calculator/actuator-sizing/forces';
 
 describe('computeStaticForce', () => {
-  it('sums gravity and friction', () => {
+  it('sums gravity and friction for known mass', () => {
     const F = computeStaticForce(50, 100);
-    expect(F).toBeCloseTo(50 * G + 100, 3);
+    expect(F).toBeCloseTo(590.5, 1);
   });
 });
 
 describe('computeHoldingForce', () => {
-  it('returns gravity only (friction zero at rest)', () => {
+  it('returns gravity force for known mass', () => {
     const F = computeHoldingForce(50);
-    expect(F).toBeCloseTo(50 * G, 3);
+    expect(F).toBeCloseTo(490.5, 1);
   });
 });
 
@@ -35,12 +33,10 @@ describe('computeForcePerActuator', () => {
   });
 
   it('divides by 6*cos(angle) for Stewart platform', () => {
-    const expected = 1000 / (6 * Math.cos(Math.PI / 4));
-    expect(computeForcePerActuator(1000, 'stewart', 1.0, 45)).toBeCloseTo(expected, 3);
+    expect(computeForcePerActuator(1000, 'stewart', 1.0, 45)).toBeCloseTo(235.702, 3);
   });
 
   it('applies imbalance factor for Stewart platform', () => {
-    const expected = (1000 / (6 * Math.cos(Math.PI / 4))) * 1.2;
-    expect(computeForcePerActuator(1000, 'stewart', 1.2, 45)).toBeCloseTo(expected, 3);
+    expect(computeForcePerActuator(1000, 'stewart', 1.2, 45)).toBeCloseTo(282.843, 3);
   });
 });
