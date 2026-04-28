@@ -25,12 +25,9 @@ export const PLANNER_POSTURE_LIMITS = {
   monitorTiltMinDeg: -10,
   monitorTiltMaxDeg: 10,
   monitorTiltStepDeg: 1,
-  monitorTargetFovMinDeg: 45,
-  monitorTargetFovMaxDeg: 110,
-  monitorTargetFovStepDeg: 1,
-  monitorTripleScreenBezelMinMm: 0,
-  monitorTripleScreenBezelMaxMm: 40,
-  monitorTripleScreenBezelStepMm: 1,
+  monitorTargetFovMinDeg: 35,
+  monitorTargetFovMaxDeg: 75,
+  monitorTargetFovStepDeg: 0.1,
 } as const;
 
 export const POSTURE_PRESET_OPTIONS = [
@@ -86,7 +83,6 @@ export const DEFAULT_MONITOR_TARGET_FOV_DEG = 60;
 export const DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM = 900;
 export const DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM = 770;
 export const DEFAULT_MONITOR_TRIPLE_SCREEN = false;
-export const DEFAULT_MONITOR_TRIPLE_SCREEN_BEZEL_MM = 5;
 export const DEFAULT_MONITOR_CONTINUOUS_CURVE = false;
 export const LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;
 
@@ -105,6 +101,5 @@ export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   monitorDistanceFromEyesMm: DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
   monitorHeightFromBaseMm: DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM,
   monitorTripleScreen: DEFAULT_MONITOR_TRIPLE_SCREEN,
-  monitorTripleScreenBezelMm: DEFAULT_MONITOR_TRIPLE_SCREEN_BEZEL_MM,
   monitorContinuousCurve: DEFAULT_MONITOR_CONTINUOUS_CURVE,
 };

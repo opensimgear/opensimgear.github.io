@@ -1146,7 +1146,6 @@
     setMonitorTargetFovDeg(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTargetFovDeg);
     setMonitorHeightFromBaseMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorHeightFromBaseMm);
     setMonitorTripleScreen(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTripleScreen);
-    setMonitorTripleScreenBezelMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTripleScreenBezelMm);
     setMonitorContinuousCurve(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorContinuousCurve);
     syncSolvedMonitorDistanceFromEyesMm();
   }
@@ -1443,14 +1442,6 @@
     }
 
     syncSolvedMonitorDistanceFromEyesMm();
-    syncPlannerUrlState();
-  }
-
-  function setMonitorTripleScreenBezelMm(value: number) {
-    postureSettings.monitorTripleScreenBezelMm = Math.max(
-      PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMinMm,
-      Math.min(PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMaxMm, value)
-    );
     syncPlannerUrlState();
   }
 
@@ -1790,16 +1781,6 @@
                 bind:value={() => postureSettings.monitorTripleScreen, setMonitorTripleScreen}
                 label="Triple Screen"
               />
-              {#if postureSettings.monitorTripleScreen}
-                <Slider
-                  bind:value={() => postureSettings.monitorTripleScreenBezelMm, setMonitorTripleScreenBezelMm}
-                  label="Bezel Gap"
-                  min={PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMinMm}
-                  max={PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMaxMm}
-                  step={PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelStepMm}
-                  format={(value) => `${value} mm`}
-                />
-              {/if}
               <Button on:click={resetMonitorModule} label="" title="Reset" />
             </Folder>
           {/if}

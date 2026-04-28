@@ -70,7 +70,6 @@ export type PlannerQueryState = Partial<PlannerInput> & {
     monitorMidpointYMm?: unknown;
     monitorMidpointZMm?: unknown;
     monitorTripleScreen?: unknown;
-    monitorTripleScreenBezelMm?: unknown;
     monitorContinuousCurve?: unknown;
     preset?: unknown;
     targetRangesByPreset?: unknown;
@@ -353,11 +352,6 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
       PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm
     ),
     monitorTripleScreen,
-    monitorTripleScreenBezelMm: clampNumber(
-      readNumber(state?.monitorTripleScreenBezelMm, defaults.monitorTripleScreenBezelMm),
-      PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMinMm,
-      PLANNER_POSTURE_LIMITS.monitorTripleScreenBezelMaxMm
-    ),
     monitorContinuousCurve,
   } satisfies PlannerPostureSettings<PlannerPosturePreset>;
 }

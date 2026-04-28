@@ -75,7 +75,6 @@ export type PlannerPostureSettings<Preset extends PlannerPosturePreset = Planner
   monitorDistanceFromEyesMm: number;
   monitorHeightFromBaseMm: number;
   monitorTripleScreen: boolean;
-  monitorTripleScreenBezelMm: number;
   monitorContinuousCurve: boolean;
 };
 

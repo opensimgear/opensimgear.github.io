@@ -202,14 +202,14 @@ export function getMonitorCurveCenterPoint(
 export function getTripleScreenSideYawRadians(
   settings: Pick<
     PlannerPostureSettings<PlannerPosturePreset>,
-    'monitorAspectRatio' | 'monitorCurvature' | 'monitorSizeIn' | 'monitorTargetFovDeg' | 'monitorTripleScreenBezelMm'
+    'monitorAspectRatio' | 'monitorCurvature' | 'monitorSizeIn' | 'monitorTargetFovDeg'
   >
 ) {
   const dimensions = getMonitorDimensionsMm(settings);
   const distanceMm = getSolvedMonitorDistanceFromEyesMm(settings);
   const halfCenterWidthMm = dimensions.widthMm / 2;
   const sagittaMm = getMonitorSagittaMm(settings);
-  const hingeDistanceFromCenterMm = halfCenterWidthMm + settings.monitorTripleScreenBezelMm;
+  const hingeDistanceFromCenterMm = halfCenterWidthMm;
   const adjacentMm = Math.max(1, distanceMm - sagittaMm);
   const diagonalMm = Math.hypot(adjacentMm, hingeDistanceFromCenterMm);
   const hingeAngleRadians = Math.atan2(hingeDistanceFromCenterMm, adjacentMm);
@@ -245,24 +245,17 @@ export function getTripleScreenSidePanels(
   midpoint: [number, number, number],
   settings: Pick<
     PlannerPostureSettings<PlannerPosturePreset>,
-    | 'monitorAspectRatio'
-    | 'monitorCurvature'
-    | 'monitorContinuousCurve'
-    | 'monitorSizeIn'
-    | 'monitorTargetFovDeg'
-    | 'monitorTripleScreenBezelMm'
+    'monitorAspectRatio' | 'monitorCurvature' | 'monitorContinuousCurve' | 'monitorSizeIn' | 'monitorTargetFovDeg'
   >
 ): { left: TripleScreenSidePanel; right: TripleScreenSidePanel } {
   const dimensions = getMonitorDimensionsMm(settings);
   const curvatureRadiusMm = getCurvatureRadiusMm(settings.monitorCurvature, dimensions.widthMm);
   const halfChordMm = dimensions.widthMm / 2;
-  const bezelMm = settings.monitorTripleScreenBezelMm;
 
   // Continuous curve mode shares one arc centered at the eye point.
   if (curvatureRadiusMm && settings.monitorContinuousCurve) {
     const halfAngleRad = Math.asin(Math.min(1, halfChordMm / curvatureRadiusMm));
-    const bezelAngleRad = bezelMm / curvatureRadiusMm;
-    const sideCenterAngleRad = halfAngleRad * 2 + bezelAngleRad;
+    const sideCenterAngleRad = halfAngleRad * 2;
 
     // Side panel apex is on the arc at angular offset ±sideCenterAngleRad from center.
     // Arc center (eye point) is at distance curvatureRadiusMm behind the midpoint apex.
@@ -287,7 +280,7 @@ export function getTripleScreenSidePanels(
   const sagittaMm = getMonitorSagittaMm(settings);
 
   const hingeXMm = -sagittaMm;
-  const hingeAbsYMm = halfChordMm + bezelMm;
+  const hingeAbsYMm = halfChordMm;
 
   const innerLocalXMm = -sagittaMm;
   const innerLocalAbsYMm = halfChordMm;
@@ -322,12 +315,7 @@ export function getTripleScreenEdgePoints(
   midpoint: [number, number, number],
   settings: Pick<
     PlannerPostureSettings<PlannerPosturePreset>,
-    | 'monitorAspectRatio'
-    | 'monitorCurvature'
-    | 'monitorContinuousCurve'
-    | 'monitorSizeIn'
-    | 'monitorTargetFovDeg'
-    | 'monitorTripleScreenBezelMm'
+    'monitorAspectRatio' | 'monitorCurvature' | 'monitorContinuousCurve' | 'monitorSizeIn' | 'monitorTargetFovDeg'
   >
 ): TripleScreenEdgePoints {
   const dimensions = getMonitorDimensionsMm(settings);
@@ -367,12 +355,7 @@ export function getTripleScreenCurveCenterPoints(
   midpoint: [number, number, number],
   settings: Pick<
     PlannerPostureSettings<PlannerPosturePreset>,
-    | 'monitorAspectRatio'
-    | 'monitorCurvature'
-    | 'monitorContinuousCurve'
-    | 'monitorSizeIn'
-    | 'monitorTargetFovDeg'
-    | 'monitorTripleScreenBezelMm'
+    'monitorAspectRatio' | 'monitorCurvature' | 'monitorContinuousCurve' | 'monitorSizeIn' | 'monitorTargetFovDeg'
   >
 ): TripleScreenCurveCenterPoints | null {
   const dimensions = getMonitorDimensionsMm(settings);

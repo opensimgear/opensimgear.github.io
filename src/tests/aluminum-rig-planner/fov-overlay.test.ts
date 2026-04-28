@@ -42,14 +42,13 @@ describe('aluminum rig planner FOV overlay', () => {
     expect(overlay?.bounds.minX).toBeLessThanOrEqual(overlay?.summary.position[0] ?? 0);
   });
 
-  it('summarizes wider total FOV for triple monitors including bezels', () => {
+  it('summarizes wider total FOV for triple monitors', () => {
     const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
       monitorDistanceFromEyesMm: 800,
       monitorTargetFovDeg: 55,
       monitorTripleScreen: true,
-      monitorTripleScreenBezelMm: 40,
     };
     const report = createPlannerPostureReport(DEFAULT_PLANNER_INPUT, postureSettings, postureModel);
     const overlay = createPlannerFovOverlay(DEFAULT_PLANNER_INPUT, postureSettings, report, postureModel);

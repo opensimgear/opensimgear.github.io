@@ -210,7 +210,6 @@ describe('aluminum rig planner monitor module', () => {
     const midpoint: [number, number, number] = [1, 0, 0.8];
     const edges = getTripleScreenEdgePoints(midpoint, {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-      monitorTripleScreenBezelMm: 5,
     });
 
     expect(edges.leftInner[0]).toBeCloseTo(edges.rightInner[0], 6);
@@ -245,7 +244,6 @@ describe('aluminum rig planner monitor module', () => {
       monitorContinuousCurve: false,
       monitorCurvature,
       monitorTargetFovDeg: 60,
-      monitorTripleScreenBezelMm: 5,
     };
     const sidePanels = getTripleScreenSidePanels(midpoint, settings);
     const distanceMm = getSolvedMonitorDistanceFromEyesMm(settings);
@@ -283,7 +281,6 @@ describe('aluminum rig planner monitor module', () => {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
       monitorTargetFovDeg: 60,
-      monitorTripleScreenBezelMm: 5,
     };
     const center = getMonitorCurveCenterPoint(midpoint, settings);
     const sideCenters = getTripleScreenCurveCenterPoints(midpoint, settings);
@@ -312,7 +309,6 @@ describe('aluminum rig planner monitor module', () => {
     const settings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
-      monitorTripleScreenBezelMm: 5,
     } as typeof DEFAULT_PLANNER_POSTURE_SETTINGS & { monitorContinuousCurve?: boolean };
     (settings as Record<string, unknown>).monitorContinuousCurve = true;
     const edges = getTripleScreenEdgePoints(midpoint, settings);
@@ -349,7 +345,6 @@ describe('aluminum rig planner monitor module', () => {
     const settings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
-      monitorTripleScreenBezelMm: 5,
     } as typeof DEFAULT_PLANNER_POSTURE_SETTINGS & { monitorContinuousCurve?: boolean };
     (settings as Record<string, unknown>).monitorContinuousCurve = true;
     const edges = getTripleScreenEdgePoints(midpoint, settings);
@@ -400,7 +395,6 @@ describe('aluminum rig planner monitor module', () => {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorCurvature: '1000r' as const,
       monitorTargetFovDeg: 60,
-      monitorTripleScreenBezelMm: 5,
     });
 
     expect(centers).not.toBeNull();
@@ -432,7 +426,6 @@ describe('aluminum rig planner monitor module', () => {
       monitorContinuousCurve: true,
       monitorTargetFovDeg: 45,
       monitorTripleScreen: true,
-      monitorTripleScreenBezelMm: 5,
     };
     const center = getMonitorCurveCenterPoint(midpoint, settings);
     const sideCenters = getTripleScreenCurveCenterPoints(midpoint, settings);
