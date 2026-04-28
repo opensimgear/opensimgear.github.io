@@ -8,6 +8,7 @@
 - **use the caveman skill always!**
 - tests can only test inputs, outputs and side effects of functions, never implementation details or constants
 - always check if the application is running locally and verify changes in the browser when working on frontend code
+- use ~/ for import from src for all code, never relative imports
 
 ## Commands
 
@@ -18,12 +19,17 @@ pnpm dev          # Start Astro dev server
 pnpm build        # Type-check (astro check) + build for production
 pnpm preview      # Preview the production build locally
 pnpm test         # Run Vitest test suite
+pnpm e2e          # Run Playwright BDD e2e tests (auto-starts dev server)
 pnpm dlx eslint . # Lint the codebase (no npm script defined)
 pnpm dlx prettier --write . # Format code, always run after writing code
 ```
 
 The `build` command runs `astro check` first, which performs TypeScript type checking across all `.astro`, `.ts`, and
 `.svelte` files. Unit tests live in `src/tests/` and run with Vitest via `pnpm test`.
+
+E2E tests use **Playwright BDD** with Gherkin feature files in `e2e/features/` and step definitions in `e2e/steps/`.
+`pnpm e2e` auto-starts the dev server; to run against an external URL:
+`PLAYWRIGHT_BASE_URL=https://example.com pnpm e2e`.
 
 ## Architecture
 
@@ -39,13 +45,17 @@ The `build` command runs `astro check` first, which performs TypeScript type che
 
 ### Component Layers
 
-1. **Starlight overrides** (`src/components/overrides/`): Custom `Head.astro`, `Hero.astro`, `PageFrame.astro` that
-   replace Starlight's defaults
+1. **Starlight overrides** (`src/components/overrides/`): Custom `Head.astro`, `Hero.astro`, `PageTitle.astro`,
+   `SiteTitle.astro` that replace Starlight's defaults
 2. **Calculator components** (`src/components/calculator/`): Svelte-based interactive calculators
    - `actuator-sizing/` — actuator sizing calculator
    - `stewart-platform/` — 3D Stewart Platform calculator using Threlte/Three.js
-3. **UI components** (`src/components/ui/`): Reusable Astro UI primitives (Button, WidgetWrapper, Timeline, etc.)
-4. **Utility components** (`src/components/util/`): CookieConsent, CookiePreferencesLink, GoogleAnalytics
+   - `aluminum-rig-planner/` — aluminum rig planner with posture optimizer and cut-list generator
+   - `shared/` — shared calculator utilities (3D scene controls, viewport gizmo, debounced URL state, SpaceMouse)
+3. **Common components** (`src/components/common/`): `Image.astro` wrapper
+4. **UI components** (`src/components/ui/`): Reusable Astro UI primitives (Button, WidgetWrapper, Timeline, etc.)
+5. **Utility components** (`src/components/util/`): `Analytics.astro`, `CookiePreferencesLink.svelte`,
+   `LazyYoutube.svelte`, `cookie-consent.ts`
 
 ### Site Configuration
 
@@ -56,6 +66,13 @@ changing site-wide configuration.
 ### Integrations of Note
 
 - **astro-icon** — provides `<Icon>` component using Iconify icon sets (`@iconify-json/tabler`, `@iconify-json/mdi`)
+- **@sentry/astro** — error tracking (Sentry)
+- **starlight-links-validator** — validates internal links at build time
+- **starlight-auto-sidebar** — auto-generates sidebar from directory structure
+- **@nuasite/checks** — SEO, accessibility, performance checks at build time (see `astro.config.mjs` for config)
+- **@playform/compress** — asset compression
+- **astro-robots-txt** / **astro-webmanifest** — SEO and PWA support
+- **astro-sitemap** — sitemap generation, filtered via `src/utils/seo-policy.ts`
 
 ### Code Style
 
