@@ -1,0 +1,70 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getCollection } from 'astro:content';
+import ProductList from '~/components/products/ProductList.astro';
+
+export function getStaticPaths() {
+  const kinds = ['commercial', 'opensource'] as const;
+
+  return kinds.map((kind) => ({
+    params: { kind },
+  }));
+}
+
+const { kind } = Astro.params;
+const products = (await getCollection('products'))
+  .filter((product) => product.data.kind === kind)
+  .sort((a, b) => a.data.name.localeCompare(b.data.name));
+
+function titleCaseSlug(value: string) {
+  return value
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function kindLabel(value: string) {
+  return value === 'opensource' ? 'Open Source' : 'Commercial';
+}
+
+const title = `${kindLabel(kind ?? '')} Products`;
+const categoryRows = Array.from(new Set(products.map((product) => product.data.component_category)))
+  .sort()
+  .map((category) => ({
+    category,
+    label: titleCaseSlug(category),
+    products: products.filter((product) => product.data.component_category === category),
+  }));
+---
+
+<StarlightPage
+  frontmatter={{
+    title,
+    description: `${title} in the OpenSimGear third-party product database.`,
+  }}
+>
+  <p>{products.length} records across {categoryRows.length} categories.</p>
+
+  {
+    categoryRows.map((row) => (
+      <section class="category-section">
+        <h2 id={row.category}>
+          <a href={`/products/${kind}/${row.category}/`}>{row.label}</a>
+        </h2>
+        <ProductList products={row.products} />
+      </section>
+    ))
+  }
+</StarlightPage>
+
+<style>
+  .category-section {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .category-section h2 {
+    margin-bottom: 0;
+  }
+</style>

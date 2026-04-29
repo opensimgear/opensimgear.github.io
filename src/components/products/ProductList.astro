@@ -1,0 +1,133 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type ProductEntry = CollectionEntry<'products'>;
+
+type Props = {
+  products: ProductEntry[];
+  headingLevel?: 'h2' | 'h3';
+  showKind?: boolean;
+};
+
+const { products, headingLevel = 'h3', showKind = false } = Astro.props;
+const Heading = headingLevel;
+
+function titleCaseSlug(value: string) {
+  return value
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function kindLabel(kind: string) {
+  return kind === 'opensource' ? 'Open Source' : 'Commercial';
+}
+
+function productHref(product: ProductEntry['data']) {
+  return `/products/${product.kind}/${product.component_category}/${product.slug}/`;
+}
+
+function primaryMeta(product: ProductEntry['data']) {
+  return [
+    showKind ? kindLabel(product.kind) : null,
+    titleCaseSlug(product.component_category),
+    product.subcategory,
+    product.organization.display,
+  ].filter(Boolean);
+}
+
+function summary(product: ProductEntry['data']) {
+  return (
+    product.availability.status ??
+    product.availability.maturity_or_status ??
+    product.availability.price_or_msrp ??
+    product.availability.license ??
+    product.details.fit_notes?.toString() ??
+    null
+  );
+}
+---
+
+<div class="product-list">
+  {
+    products.map(({ data: product }) => (
+      <article class="product-card">
+        <div class="product-card__body">
+          <Heading>
+            <a href={productHref(product)}>{product.title || product.name}</a>
+          </Heading>
+          <p class="product-card__meta">{primaryMeta(product).join(' / ')}</p>
+          {summary(product) && <p class="product-card__summary">{summary(product)}</p>}
+        </div>
+        <a class="product-card__link" href={productHref(product)} aria-label={`View ${product.name}`}>
+          View
+        </a>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .product-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .product-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .product-card h2,
+  .product-card h3 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  .product-card__meta {
+    margin: 0.25rem 0 0;
+    color: var(--sl-color-gray-3);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .product-card__summary {
+    margin: 0.5rem 0 0;
+    color: var(--sl-color-gray-2);
+    font-size: 0.925rem;
+    line-height: 1.5;
+  }
+
+  .product-card__link {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 6px;
+    color: var(--sl-color-text);
+    font-size: 0.875rem;
+    line-height: 1;
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .product-card__link:hover,
+  .product-card__link:focus {
+    border-color: var(--sl-color-accent);
+    color: var(--sl-color-accent-high);
+  }
+
+  @media (max-width: 40rem) {
+    .product-card {
+      grid-template-columns: 1fr;
+    }
+
+    .product-card__link {
+      justify-self: start;
+    }
+  }
+</style>

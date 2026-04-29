@@ -1,0 +1,13 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import ProductExplorer from '~/components/products/ProductExplorer.svelte';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Products',
+    description: 'Commercial and open-source simulator hardware products and projects.',
+  }}
+>
+  <ProductExplorer dataUrl="/products/products.json" client:load />
+</StarlightPage>

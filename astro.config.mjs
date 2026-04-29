@@ -73,6 +73,14 @@ export default defineConfig({
           autogenerate: { directory: 'calculators' },
         },
         {
+          label: 'Products',
+          items: [
+            { label: 'All Products', link: '/products/' },
+            { label: 'Commercial', link: '/products/commercial/' },
+            { label: 'Open Source', link: '/products/opensource/' },
+          ],
+        },
+        {
           label: '3rd Party',
           autogenerate: { directory: '3rdparty' },
           badge: {

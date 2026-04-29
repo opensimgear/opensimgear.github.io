@@ -1,0 +1,171 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Product = CollectionEntry<'products'>['data'];
+
+type Props = {
+  product: Product;
+};
+
+const { product } = Astro.props;
+
+function titleCaseSlug(value: string) {
+  return value
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function kindLabel(kind: string) {
+  return kind === 'opensource' ? 'Open Source' : 'Commercial';
+}
+
+function fieldLabel(value: string) {
+  return value
+    .replaceAll('_', ' ')
+    .replace(/\b\w/g, (letter) => letter.toUpperCase())
+    .replace('Url', 'URL')
+    .replace('Bom', 'BOM');
+}
+
+function asList(value: unknown) {
+  if (Array.isArray(value)) return value.filter(Boolean).map(String);
+  if (typeof value === 'string' && value.trim()) return [value];
+  return [];
+}
+
+const overviewRows = [
+  ['Product Name', product.name],
+  ['Type', kindLabel(product.kind)],
+  ['Category', titleCaseSlug(product.component_category)],
+  ['Subcategory', product.subcategory],
+  ['Organization', product.organization.display],
+  ['Status', product.availability.status ?? product.availability.maturity_or_status],
+  ['Price / MSRP', product.availability.price_or_msrp],
+  ['License', product.availability.license],
+  ['Region / Availability', product.availability.region_or_availability],
+  ['Last Checked', product.last_checked],
+].filter(([, value]) => value);
+
+const detailRows = Object.entries(product.raw_fields).filter(([field]) => field !== 'source_urls');
+const sourceUrls = product.urls.sources.filter((url) => /^https?:\/\//.test(url));
+---
+
+<section class="product-detail">
+  <div class="product-detail__summary">
+    {
+      overviewRows.map(([label, value]) => (
+        <div>
+          <dt>{label}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2 id="source-links">Source Links</h2>
+  <ul class="source-list">
+    {
+      sourceUrls.map((url) => (
+        <li>
+          <a href={url}>{url}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 id="research-fields">Research Fields</h2>
+  <div class="field-list">
+    {
+      detailRows.map(([field, value]) => (
+        <section class="field-row" aria-labelledby={`${product.slug}-${field}`}>
+          <h3 id={`${product.slug}-${field}`}>{fieldLabel(field)}</h3>
+          {asList(value).length > 1 ? (
+            <ul>
+              {asList(value).map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>{asList(value)[0]}</p>
+          )}
+        </section>
+      ))
+    }
+  </div>
+
+  <h2 id="source-note">Source Note</h2>
+  <details>
+    <summary>Show original research markdown</summary>
+    <pre><code>{product.content_markdown}</code></pre>
+  </details>
+</section>
+
+<style>
+  .product-detail {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .product-detail__summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 0.75rem;
+  }
+
+  .product-detail__summary > div,
+  .field-row {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    padding: 0.875rem;
+  }
+
+  .product-detail__summary dt {
+    color: var(--sl-color-gray-3);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .product-detail__summary dd {
+    margin: 0.25rem 0 0;
+  }
+
+  .source-list {
+    overflow-wrap: anywhere;
+  }
+
+  .field-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .field-row h3 {
+    font-size: 0.95rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .field-row p,
+  .field-row ul {
+    margin-bottom: 0;
+  }
+
+  details {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    padding: 0.875rem;
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  pre {
+    margin-bottom: 0;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+</style>
