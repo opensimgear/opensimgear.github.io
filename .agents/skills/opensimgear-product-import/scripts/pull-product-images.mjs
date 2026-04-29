@@ -179,11 +179,12 @@ function regenerateImageMap(products) {
 
   const entries = withAssets.map((product, index) => `  '${product.id}': ${importName(index, product)},`);
 
-  return `${imports.join('\n')}
+  return `import type { ImageMetadata } from 'astro';
+${imports.join('\n')}
 
-export const productImages = {
+export const productImages: Record<string, ImageMetadata> = {
 ${entries.join('\n')}
-} as const;
+};
 
 export type ProductImageId = keyof typeof productImages;
 `;
