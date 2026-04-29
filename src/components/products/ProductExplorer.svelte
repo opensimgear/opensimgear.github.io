@@ -834,7 +834,7 @@
     overflow: hidden;
     border: 1px solid var(--sl-color-gray-6);
     border-radius: 6px;
-    background: color-mix(in srgb, var(--sl-color-bg), var(--sl-color-gray-6) 30%);
+    background: #fff;
     text-decoration: none;
   }
 

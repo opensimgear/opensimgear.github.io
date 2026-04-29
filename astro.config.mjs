@@ -74,12 +74,8 @@ export default defineConfig({
           autogenerate: { directory: 'calculators' },
         },
         {
-          label: 'Products',
-          items: productSidebarItems,
-        },
-        {
           label: '3rd Party',
-          autogenerate: { directory: '3rdparty' },
+          items: productSidebarItems,
           badge: {
             text: 'WIP',
             variant: 'caution',
