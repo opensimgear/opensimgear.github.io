@@ -23,6 +23,12 @@ const title = 'OpenSimGear';
 
 // https://astro.build/config
 export default defineConfig({
+  experimental: {
+    rustCompiler: true,
+    queuedRendering: {
+      enabled: true,
+    },
+  },
   site: 'https://www.opensimgear.org',
   integrations: [
     svelte(),
