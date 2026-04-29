@@ -156,6 +156,10 @@
   let sortKey: SortKey = $state(defaultSortKey);
   let currentPage = $state(1);
   let pageSize = $state(defaultPageSize);
+  let makerQuery = $state('');
+  let showAllCategories = $state(false);
+  let showAllGroups = $state(false);
+  let showAllMakers = $state(false);
   let mounted = false;
   let suppressUrlSync = false;
 
@@ -342,6 +346,15 @@
   let pageDisplayStart = $derived(filteredProducts.length ? pageStartIndex + 1 : 0);
   let pageEndIndex = $derived(Math.min(pageStartIndex + pageSize, filteredProducts.length));
   let paginatedProducts = $derived(filteredProducts.slice(pageStartIndex, pageEndIndex));
+  let visibleCategoryOptions = $derived(showAllCategories ? categoryOptions : categoryOptions.slice(0, 5));
+  let visibleGroupOptions = $derived(showAllGroups ? groupOptions : groupOptions.slice(0, 4));
+  let filteredMakerOptions = $derived.by(() => {
+    const normalizedMakerQuery = normalizeText(makerQuery);
+
+    if (!normalizedMakerQuery) return makerOptions;
+    return makerOptions.filter((option) => normalizeText(option.label).includes(normalizedMakerQuery));
+  });
+  let visibleMakerOptions = $derived(showAllMakers ? filteredMakerOptions : filteredMakerOptions.slice(0, 5));
 
   function titleCaseSlug(value: string): string {
     return value
@@ -395,6 +408,65 @@
 
   function normalizeText(value: string): string {
     return value.toLowerCase().replace(/\s+/g, ' ').trim();
+  }
+
+  function formatCount(value: number): string {
+    return new Intl.NumberFormat('en-US').format(value);
+  }
+
+  function toggleFilterValue(filter: string[], value: string): void {
+    if (filter.includes(value)) {
+      filter.splice(filter.indexOf(value), 1);
+    } else {
+      filter.push(value);
+    }
+
+    currentPage = 1;
+    syncUrlState();
+  }
+
+  function toggleSourceFilterValue(value: SourceFilter): void {
+    if (sourceFilter.includes(value)) {
+      sourceFilter = sourceFilter.filter((item) => item !== value);
+    } else {
+      sourceFilter = [...sourceFilter, value];
+    }
+
+    currentPage = 1;
+    syncUrlState();
+  }
+
+  function optionCountText(count: number): string {
+    return formatCount(count);
+  }
+
+  function productDateLabel(product: Product): string {
+    return product.kind === 'opensource' ? 'Updated' : 'Added';
+  }
+
+  function formatProductDate(value: string | null): string {
+    if (!value) return 'Unknown';
+
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return value;
+
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(parsed);
+  }
+
+  function productMetaGroup(product: Product): string {
+    return product.category_group ? titleCaseSlug(product.category_group) : titleCaseSlug(product.component_category);
+  }
+
+  function productTags(product: Product): string[] {
+    return [
+      titleCaseSlug(product.component_category),
+      product.category_group ? titleCaseSlug(product.category_group) : null,
+      product.subcategory,
+    ].filter((value): value is string => Boolean(value)).slice(0, 3);
   }
 
   function searchableText(product: Product): string {
@@ -833,225 +905,314 @@
   }
 </script>
 
-<section class="not-content grid gap-4" aria-label="Product database">
+<section class="not-content grid gap-4 text-sm" aria-label="Product database">
   <div
-    class="grid auto-rows-fr gap-2 [grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr))]"
+    class="grid auto-rows-fr gap-3 [grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))]"
     aria-label="Product totals"
   >
-    <div class="grid h-full content-between rounded-lg border border-[var(--sl-color-gray-5)] p-3">
-      <span
-        class="block whitespace-nowrap text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-        >Products</span
-      >
-      <strong class="mt-1 block text-[1.45rem] leading-[1.15]">{totals.all}</strong>
-    </div>
-    <div class="grid h-full content-between rounded-lg border border-[var(--sl-color-gray-5)] p-3">
-      <span
-        class="block whitespace-nowrap text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-        >Commercial</span
-      >
-      <strong class="mt-1 block text-[1.45rem] leading-[1.15]">{totals.commercial}</strong>
-    </div>
-    <div class="grid h-full content-between rounded-lg border border-[var(--sl-color-gray-5)] p-3">
-      <span
-        class="block whitespace-nowrap text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-        >Open Source</span
-      >
-      <strong class="mt-1 block text-[1.45rem] leading-[1.15]">{totals.opensource}</strong>
-    </div>
-    <div class="grid h-full content-between rounded-lg border border-[var(--sl-color-gray-5)] p-3">
-      <span
-        class="block whitespace-nowrap text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-        >Categories</span
-      >
-      <strong class="mt-1 block text-[1.45rem] leading-[1.15]">{totals.categories}</strong>
-    </div>
-    <div class="grid h-full content-between rounded-lg border border-[var(--sl-color-gray-5)] p-3">
-      <span
-        class="block whitespace-nowrap text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-        >Makers</span
-      >
-      <strong class="mt-1 block text-[1.45rem] leading-[1.15]">{totals.makers}</strong>
-    </div>
+    <article class="rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] px-4 py-3">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-gray-2)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M12 3 4.5 7.2v9.6L12 21l7.5-4.2V7.2L12 3Z" />
+            <path d="M12 12 4.5 7.2M12 12l7.5-4.8M12 12v9" />
+          </svg>
+        </span>
+        <div>
+          <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Products</p>
+          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.all)}</strong>
+        </div>
+      </div>
+    </article>
+    <article class="rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] px-4 py-3">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-gray-2)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M4 20h16M7 20V9m5 11V4m5 16v-7M5 9h4M10 4h4M15 13h4" />
+          </svg>
+        </span>
+        <div>
+          <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Commercial</p>
+          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.commercial)}</strong>
+        </div>
+      </div>
+    </article>
+    <article class="rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] px-4 py-3">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-gray-2)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M12 21a9 9 0 1 1 0-18" />
+            <path d="M12 3a9 9 0 0 1 0 18" />
+            <path d="M12 12v9" />
+          </svg>
+        </span>
+        <div>
+          <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Open Source</p>
+          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.opensource)}</strong>
+        </div>
+      </div>
+    </article>
+    <article class="rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] px-4 py-3">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-gray-2)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <rect x="4" y="4" width="6" height="6" rx="1.2" />
+            <rect x="14" y="4" width="6" height="6" rx="1.2" />
+            <rect x="4" y="14" width="6" height="6" rx="1.2" />
+            <rect x="14" y="14" width="6" height="6" rx="1.2" />
+          </svg>
+        </span>
+        <div>
+          <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Categories</p>
+          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.categories)}</strong>
+        </div>
+      </div>
+    </article>
+    <article class="rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] px-4 py-3">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-gray-2)]">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+            <circle cx="9.5" cy="7" r="3.5" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a3.5 3.5 0 0 1 0 6.74" />
+          </svg>
+        </span>
+        <div>
+          <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Makers</p>
+          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.makers)}</strong>
+        </div>
+      </div>
+    </article>
   </div>
 
-  <div
-    class="grid text-xs h-[clamp(34rem,calc(100vh-13rem),56rem)] gap-4 min-h-0 max-[64rem]:h-auto [grid-template-columns:minmax(16rem,18rem)_minmax(0,1fr)] max-[64rem]:grid-cols-1"
-  >
+  <div class="grid min-h-0 gap-4 [grid-template-columns:minmax(16.5rem,18rem)_minmax(0,1fr)] max-[72rem]:grid-cols-1">
     <aside
-      class="grid content-start gap-3 overflow-auto rounded-lg border border-[var(--sl-color-gray-5)] p-4 min-h-0 max-[64rem]:overflow-visible"
+      class="grid min-w-0 content-start gap-5 self-start rounded-[16px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] p-4"
       aria-label="Product filters"
     >
-      <label class="grid min-w-0 gap-[0.35rem]">
-        <span class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-          >Search</span
-        >
+      <section class="grid min-w-0 gap-3">
+        <div class="flex items-center justify-between">
+          <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Search</h2>
+          {#if activeFilterCount}
+            <button
+              class="rounded-[8px] border border-[var(--sl-color-gray-5)] px-2 py-1 text-[0.7rem] font-[650] text-[var(--sl-color-gray-2)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+              type="button"
+              onclick={resetFilters}
+            >
+              Reset
+            </button>
+          {/if}
+        </div>
+        <label class="relative block min-w-0">
+          <input
+            class="box-border w-full min-w-0 rounded-[10px] border border-[var(--sl-color-gray-5)] bg-[rgba(9,13,20,0.75)] py-2 pl-3 pr-10 text-[0.85rem] text-[var(--sl-color-text)] outline-none placeholder:text-[var(--sl-color-gray-3)] focus:border-[var(--sl-color-accent)]"
+            bind:value={query}
+            type="search"
+            placeholder="Search name, maker, category..."
+            oninput={resetPage}
+          />
+          <span class="pointer-events-none absolute inset-y-0 right-3 grid place-items-center text-[var(--sl-color-gray-3)]">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
+          </span>
+        </label>
+      </section>
+
+      <section class="grid min-w-0 gap-2">
+        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Type</h2>
+        {#each kindOptions as option (option.value)}
+          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+            <input
+              class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
+              type="checkbox"
+              checked={kindFilter.includes(option.value)}
+              onchange={() => toggleFilterValue(kindFilter, option.value)}
+            />
+            <span class="min-w-0 flex-1 truncate">{option.label}</span>
+            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">
+              {optionCountText(option.count)}
+            </span>
+          </label>
+        {/each}
+      </section>
+
+      <section class="grid min-w-0 gap-2">
+        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Component</h2>
+        {#each visibleCategoryOptions as option (option.value)}
+          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+            <input
+              class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
+              type="checkbox"
+              checked={categoryFilter.includes(option.value)}
+              onchange={() => toggleFilterValue(categoryFilter, option.value)}
+            />
+            <span class="min-w-0 flex-1 truncate">{option.label}</span>
+            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+          </label>
+        {/each}
+        {#if categoryOptions.length > 5}
+          <button
+            class="inline-flex items-center gap-1 justify-self-start text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
+            type="button"
+            onclick={() => (showAllCategories = !showAllCategories)}
+            aria-label={showAllCategories ? 'Show fewer components' : 'Show more components'}
+          >
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              {#if showAllCategories}
+                <path d="M5 12h14" />
+              {:else}
+                <path d="M12 5v14M5 12h14" />
+              {/if}
+            </svg>
+            {showAllCategories ? 'Less' : 'More'}
+          </button>
+        {/if}
+      </section>
+
+      <section class="grid min-w-0 gap-2">
+        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Group</h2>
+        {#each visibleGroupOptions as option (option.value)}
+          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+            <input
+              class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
+              type="checkbox"
+              checked={groupFilter.includes(option.value)}
+              onchange={() => toggleFilterValue(groupFilter, option.value)}
+            />
+            <span class="min-w-0 flex-1 truncate">{option.label}</span>
+            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+          </label>
+        {/each}
+        {#if groupOptions.length > 4}
+          <button
+            class="inline-flex items-center gap-1 justify-self-start text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
+            type="button"
+            onclick={() => (showAllGroups = !showAllGroups)}
+            aria-label={showAllGroups ? 'Show fewer groups' : 'Show more groups'}
+          >
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              {#if showAllGroups}
+                <path d="M5 12h14" />
+              {:else}
+                <path d="M12 5v14M5 12h14" />
+              {/if}
+            </svg>
+            {showAllGroups ? 'Less' : 'More'}
+          </button>
+        {/if}
+      </section>
+
+      <section class="grid min-w-0 gap-2">
+        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Maker</h2>
         <input
-          class="w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.7rem] py-[0.6rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
-          bind:value={query}
+          class="box-border w-full min-w-0 rounded-[10px] border border-[var(--sl-color-gray-5)] bg-[rgba(9,13,20,0.75)] px-3 py-2 text-[0.82rem] text-[var(--sl-color-text)] outline-none placeholder:text-[var(--sl-color-gray-3)] focus:border-[var(--sl-color-accent)]"
+          bind:value={makerQuery}
           type="search"
-          placeholder="Name, maker, category, compatibility, notes"
-          oninput={resetPage}
+          placeholder="Search maker..."
         />
-      </label>
+        {#each visibleMakerOptions as option (option.value)}
+          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+            <input
+              class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
+              type="checkbox"
+              checked={makerFilter.includes(option.value)}
+              onchange={() => toggleFilterValue(makerFilter, option.value)}
+            />
+            <span class="min-w-0 flex-1 truncate">{option.label}</span>
+            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+          </label>
+        {/each}
+        {#if filteredMakerOptions.length > 5}
+          <button
+            class="inline-flex items-center gap-1 justify-self-start text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
+            type="button"
+            onclick={() => (showAllMakers = !showAllMakers)}
+            aria-label={showAllMakers ? 'Show fewer makers' : 'Show more makers'}
+          >
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              {#if showAllMakers}
+                <path d="M5 12h14" />
+              {:else}
+                <path d="M12 5v14M5 12h14" />
+              {/if}
+            </svg>
+            {showAllMakers ? 'Less' : 'More'}
+          </button>
+        {/if}
+      </section>
 
-      <label class="grid min-w-0 gap-[0.35rem]">
-        <span class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-          >Type</span
-        >
-        <select
-          class="min-h-28 w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.5rem] py-[0.45rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
-          multiple
-          size="2"
-          bind:value={kindFilter}
-          onchange={resetPage}
-        >
-          {#each kindOptions as option (option.value)}
-            <option value={option.value}>{option.label} ({option.count})</option>
-          {/each}
-        </select>
-      </label>
+      <section class="grid min-w-0 gap-2">
+        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Availability</h2>
+        {#each availabilityOptions as option (option.value)}
+          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+            <input
+              class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
+              type="checkbox"
+              checked={availabilityFilter.includes(option.value)}
+              onchange={() => toggleFilterValue(availabilityFilter, option.value)}
+            />
+            <span class="min-w-0 flex-1 truncate">{option.label}</span>
+            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+          </label>
+        {/each}
+      </section>
 
-      <label class="grid min-w-0 gap-[0.35rem]">
-        <span class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-          >Component</span
-        >
-        <select
-          class="min-h-32 w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.5rem] py-[0.45rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
-          multiple
-          size="6"
-          bind:value={categoryFilter}
-          onchange={resetPage}
-        >
-          {#each categoryOptions as option (option.value)}
-            <option value={option.value}>{option.label} ({option.count})</option>
-          {/each}
-        </select>
-      </label>
+      <section class="grid min-w-0 gap-2">
+        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">License</h2>
+        {#each licenseOptions as option (option.value)}
+          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+            <input
+              class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
+              type="checkbox"
+              checked={licenseFilter.includes(option.value)}
+              onchange={() => toggleFilterValue(licenseFilter, option.value)}
+            />
+            <span class="min-w-0 flex-1 truncate">{option.label}</span>
+            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+          </label>
+        {/each}
+      </section>
 
-      <label class="grid min-w-0 gap-[0.35rem]">
-        <span class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-          >Group</span
-        >
-        <select
-          class="min-h-28 w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.5rem] py-[0.45rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
-          multiple
-          size="4"
-          bind:value={groupFilter}
-          onchange={resetPage}
-        >
-          {#each groupOptions as option (option.value)}
-            <option value={option.value}>{option.label} ({option.count})</option>
-          {/each}
-        </select>
-      </label>
-
-      <label class="grid min-w-0 gap-[0.35rem]">
-        <span class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-          >Maker</span
-        >
-        <select
-          class="min-h-32 w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.5rem] py-[0.45rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
-          multiple
-          size="6"
-          bind:value={makerFilter}
-          onchange={resetPage}
-        >
-          {#each makerOptions as option (option.value)}
-            <option value={option.value}>{option.label} ({option.count})</option>
-          {/each}
-        </select>
-      </label>
-
-      <label class="grid min-w-0 gap-[0.35rem]">
-        <span class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-          >Availability</span
-        >
-        <select
-          class="min-h-28 w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.5rem] py-[0.45rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
-          multiple
-          size="4"
-          bind:value={availabilityFilter}
-          onchange={resetPage}
-        >
-          {#each availabilityOptions as option (option.value)}
-            <option value={option.value}>{option.label} ({option.count})</option>
-          {/each}
-        </select>
-      </label>
-
-      <label class="grid min-w-0 gap-[0.35rem]">
-        <span class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-          >License</span
-        >
-        <select
-          class="min-h-28 w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.5rem] py-[0.45rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
-          multiple
-          size="4"
-          bind:value={licenseFilter}
-          onchange={resetPage}
-        >
-          {#each licenseOptions as option (option.value)}
-            <option value={option.value}>{option.label} ({option.count})</option>
-          {/each}
-        </select>
-      </label>
-
-      <label class="grid min-w-0 gap-[0.35rem]">
-        <span class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-          >Source</span
-        >
-        <select
-          class="min-h-24 w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.5rem] py-[0.45rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
-          multiple
-          size="3"
-          bind:value={sourceFilter}
-          onchange={resetPage}
-        >
-          {#each sourceOptions as option (option.value)}
-            <option value={option.value}>{option.label} ({option.count})</option>
-          {/each}
-        </select>
-      </label>
-
-      <button
-        class="w-full rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.8rem] py-[0.6rem] leading-[1.2] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-55 focus-visible:outline-2 focus-visible:outline-[var(--sl-color-accent)] focus-visible:outline-offset-2"
-        type="button"
-        onclick={resetFilters}
-        disabled={!activeFilterCount && sortKey === 'name-asc'}
-      >
-        Reset filters
-      </button>
+      <section class="grid min-w-0 gap-2">
+        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Source</h2>
+        {#each sourceOptions as option (option.value)}
+          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+            <input
+              class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
+              type="checkbox"
+              checked={sourceFilter.includes(option.value as SourceFilter)}
+              onchange={() => toggleSourceFilterValue(option.value as SourceFilter)}
+            />
+            <span class="min-w-0 flex-1 truncate">{option.label}</span>
+            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+          </label>
+        {/each}
+      </section>
     </aside>
 
     <section
-      class="m-0 grid min-h-0 overflow-hidden rounded-lg border border-[var(--sl-color-gray-5)] [grid-template-rows:auto_auto_minmax(0,1fr)_auto]"
+      class="grid min-h-0 overflow-hidden rounded-[16px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] [grid-template-rows:auto_auto_minmax(0,1fr)_auto]"
       aria-label="Filtered products"
     >
-      <div
-        class="flex items-center justify-between gap-[0.65rem] border-b border-[var(--sl-color-gray-6)] px-3 py-[0.65rem] max-[42rem]:flex-col max-[42rem]:items-stretch"
-      >
+      <div class="flex items-center justify-between gap-3 border-b border-[var(--sl-color-gray-5)] px-4 py-3 max-[56rem]:flex-col max-[56rem]:items-stretch">
         {#if loadState === 'loading'}
-          <p class="m-0" aria-live="polite">Loading products...</p>
+          <p class="m-0 text-[0.92rem] text-[var(--sl-color-gray-2)]" aria-live="polite">Loading products...</p>
         {:else if loadState === 'error'}
-          <p class="m-0" aria-live="polite">Load failed.</p>
+          <p class="m-0 text-[0.92rem] text-[var(--sl-color-gray-2)]" aria-live="polite">Load failed.</p>
         {:else}
-          <p class="m-0" aria-live="polite">
-            <strong>{pageDisplayStart}-{pageEndIndex}</strong> of {filteredProducts.length}
-            {activeFilterCount ? ` / ${activeFilterCount} filters` : ''}
+          <p class="m-0 text-[0.92rem] text-[var(--sl-color-gray-2)]" aria-live="polite">
+            {pageDisplayStart}-{pageEndIndex} of {formatCount(filteredProducts.length)} products
           </p>
         {/if}
 
-        <div class="flex flex-wrap items-end gap-2 max-[42rem]:flex-col max-[42rem]:items-stretch">
-          <label
-            class="grid min-w-0 items-center gap-[0.35rem] [grid-template-columns:auto_minmax(8rem,1fr)] max-[42rem]:grid-cols-1"
-          >
-            <span
-              class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-              >Sort</span
-            >
+        <div class="flex flex-wrap items-center gap-4 text-[0.84rem]">
+          <label class="flex items-center gap-2">
+            <span class="text-[var(--sl-color-gray-2)]">Sort by</span>
             <select
-              class="w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.7rem] py-[0.6rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
+              class="min-w-[8.5rem] rounded-[10px] border border-[var(--sl-color-gray-5)] bg-[rgba(9,13,20,0.75)] px-3 py-2 text-[var(--sl-color-text)] outline-none focus:border-[var(--sl-color-accent)]"
               bind:value={sortKey}
               onchange={resetPage}
             >
@@ -1061,15 +1222,10 @@
             </select>
           </label>
 
-          <label
-            class="grid min-w-0 items-center gap-[0.35rem] [grid-template-columns:auto_minmax(4.5rem,1fr)] max-[42rem]:grid-cols-1"
-          >
-            <span
-              class="block text-[0.78rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-              >Per page</span
-            >
+          <label class="flex items-center gap-2">
+            <span class="text-[var(--sl-color-gray-2)]">Per page</span>
             <select
-              class="w-full min-w-0 rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.7rem] py-[0.6rem] leading-[1.2] text-[var(--sl-color-text)] focus:outline-2 focus:outline-[var(--sl-color-accent)] focus:outline-offset-2"
+              class="min-w-[4.5rem] rounded-[10px] border border-[var(--sl-color-gray-5)] bg-[rgba(9,13,20,0.75)] px-3 py-2 text-[var(--sl-color-text)] outline-none focus:border-[var(--sl-color-accent)]"
               bind:value={pageSize}
               onchange={resetPage}
             >
@@ -1082,53 +1238,39 @@
       </div>
 
       {#if activeFilters.length}
-        <div
-          class="grid gap-[0.35rem] border-b border-[var(--sl-color-gray-6)] px-3 py-[0.55rem]"
-          aria-label="Applied filters"
-        >
-          <span class="text-[0.72rem] font-[650] uppercase leading-[1.2] tracking-[0] text-[var(--sl-color-gray-3)]"
-            >Applied</span
-          >
-          <div class="flex flex-wrap gap-[0.35rem]">
-            {#each activeFilters as filter (filter.token)}
-              <button
-                class="inline-flex max-w-full items-center gap-1 rounded-full border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] px-[0.45rem] py-[0.28rem] text-[0.76rem] leading-[1.2] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] focus-visible:outline-2 focus-visible:outline-[var(--sl-color-accent)] focus-visible:outline-offset-2"
-                type="button"
-                onclick={() => clearFilter(filter.key, filter.rawValue)}
-                aria-label={`Remove ${filter.label} filter ${filter.value}`}
-              >
-                <span class="text-[var(--sl-color-gray-3)]">{filter.label}</span>
-                <strong
-                  class="max-w-[14rem] overflow-hidden text-ellipsis whitespace-nowrap font-[650] max-[42rem]:max-w-[10rem]"
-                >
-                  {filter.value}
-                </strong>
-                <span aria-hidden="true">x</span>
-              </button>
-            {/each}
-          </div>
+        <div class="flex flex-wrap gap-2 border-b border-[var(--sl-color-gray-5)] px-4 py-3" aria-label="Applied filters">
+          {#each activeFilters as filter (filter.token)}
+            <button
+              class="inline-flex max-w-full items-center gap-2 rounded-full border border-[var(--sl-color-gray-5)] bg-[rgba(9,13,20,0.72)] px-3 py-1 text-[0.76rem] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+              type="button"
+              onclick={() => clearFilter(filter.key, filter.rawValue)}
+              aria-label={`Remove ${filter.label} filter ${filter.value}`}
+            >
+              <span class="text-[var(--sl-color-gray-2)]">{filter.label}</span>
+              <strong class="max-w-[14rem] overflow-hidden text-ellipsis whitespace-nowrap font-[650]">{filter.value}</strong>
+              <span aria-hidden="true">×</span>
+            </button>
+          {/each}
         </div>
       {/if}
 
-      <div class="grid min-h-0 content-start gap-2 overflow-auto p-3 max-[64rem]:overflow-visible">
+      <div class="grid min-h-0 content-start gap-3 overflow-auto p-4 max-[72rem]:overflow-visible">
         {#if loadState === 'loading'}
-          <p class="m-0 rounded-lg border border-[var(--sl-color-gray-5)] p-4">Loading products...</p>
+          <p class="m-0 rounded-[14px] border border-[var(--sl-color-gray-5)] px-4 py-6 text-[var(--sl-color-gray-2)]">Loading products...</p>
         {:else if loadState === 'error'}
-          <p class="m-0 rounded-lg border border-[var(--sl-color-gray-5)] p-4">{loadError}</p>
+          <p class="m-0 rounded-[14px] border border-[var(--sl-color-gray-5)] px-4 py-6 text-[var(--sl-color-gray-2)]">{loadError}</p>
         {:else}
           {#each paginatedProducts as product (product.id)}
             {@const image = productImage(product)}
-            <article
-              class="grid h-[180px] grid-cols-[auto_minmax(0,1fr)] items-stretch gap-[0.55rem] rounded-[6px] border border-[var(--sl-color-gray-5)] p-2 max-[42rem]:h-auto max-[42rem]:grid-cols-1 max-[42rem]:items-start"
-            >
+            <article class="grid min-h-[10.5rem] gap-4 rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(12,18,28,0.72)] p-3 [grid-template-columns:10.5rem_minmax(0,1fr)_15rem] max-[80rem]:[grid-template-columns:9rem_minmax(0,1fr)] max-[56rem]:grid-cols-1">
               {#if image}
                 <a
-                  class="grid h-full min-w-[4.75rem] w-auto aspect-square place-items-center overflow-hidden rounded-[4px] border border-[var(--sl-color-gray-6)] bg-white no-underline max-[42rem]:h-auto max-[42rem]:max-w-48 max-[42rem]:w-full"
+                  class="grid aspect-square w-full place-items-center overflow-hidden rounded-[10px] border border-[var(--sl-color-gray-5)] bg-white no-underline"
                   href={productHref(product)}
                   aria-label={`View ${product.name}`}
                 >
                   <img
-                    class="block h-full w-full object-contain p-1"
+                    class="block h-full w-full object-contain p-2"
                     src={image.src}
                     alt={imageAlt(product)}
                     width={image.width}
@@ -1139,160 +1281,146 @@
                 </a>
               {/if}
 
-              <div class="grid min-w-0 gap-[0.35rem]">
-                <div class="flex items-start justify-between gap-2 max-[42rem]:flex-col max-[42rem]:items-stretch">
-                  <div class="min-w-0">
-                    <h2 class="line-clamp-2 overflow-hidden text-[0.9rem] leading-[1.2]">
-                      <a
-                        class="text-[var(--sl-color-text)] underline-offset-[0.18em] [text-decoration-thickness:1px]"
-                        href={productHref(product)}
-                      >
-                        {product.title || product.name}
-                      </a>
-                    </h2>
-                    <p
-                      class="mt-[0.1rem] overflow-hidden text-ellipsis whitespace-nowrap text-[0.8rem] leading-[1.3] text-[var(--sl-color-gray-2)]"
-                    >
-                      {makerName(product) || 'Unknown maker'}
-                    </p>
-                  </div>
-                  <span
-                    class={[
-                      'shrink-0 whitespace-nowrap rounded-full border px-[0.34rem] py-[0.18rem] text-[0.68rem] font-[650] leading-[1.2] text-[var(--sl-color-gray-2)] max-[42rem]:self-start',
-                      product.kind === 'commercial'
-                        ? 'border-yellow-300 bg-yellow-100 text-yellow-900'
-                        : 'border-green-300 bg-green-100 text-green-900',
-                    ]}
-                  >
-                    {kindLabel(product.kind)}
-                  </span>
+              <div class="grid min-w-0 content-start gap-3">
+                <div class="grid gap-1">
+                  <h2 class="m-0 line-clamp-2 text-[1.05rem] font-[700] leading-[1.2]">
+                    <a class="text-[var(--sl-color-text)] no-underline hover:text-[var(--sl-color-accent-high)]" href={productHref(product)}>
+                      {product.title || product.name}
+                    </a>
+                  </h2>
+                  <p class="m-0 text-[0.82rem] text-[var(--sl-color-gray-2)]">{makerName(product) || 'Unknown maker'}</p>
                 </div>
 
-                <div class="m-0 flex max-h-[1.45rem] flex-wrap gap-1 overflow-hidden" aria-label="Product attributes">
-                  <span
-                    class="rounded-full border border-[var(--sl-color-gray-5)] px-[0.34rem] py-[0.18rem] text-[0.68rem] font-[650] leading-[1.2] text-[var(--sl-color-gray-2)]"
-                  >
-                    {titleCaseSlug(product.component_category)}
-                  </span>
-                  {#if product.category_group}
-                    <span
-                      class="rounded-full border border-[var(--sl-color-gray-5)] px-[0.34rem] py-[0.18rem] text-[0.68rem] font-[650] leading-[1.2] text-[var(--sl-color-gray-2)]"
-                    >
-                      {titleCaseSlug(product.category_group)}
+                <div class="flex flex-wrap gap-2" aria-label="Product attributes">
+                  {#each productTags(product) as tag (tag)}
+                    <span class="rounded-full border border-[var(--sl-color-gray-5)] bg-[rgba(18,26,38,0.85)] px-2.5 py-1 text-[0.72rem] font-[650] leading-none text-[var(--sl-color-gray-2)]">
+                      {tag}
                     </span>
-                  {/if}
-                  {#if product.subcategory}
-                    <span
-                      class="rounded-full border border-[var(--sl-color-gray-5)] px-[0.34rem] py-[0.18rem] text-[0.68rem] font-[650] leading-[1.2] text-[var(--sl-color-gray-2)]"
-                    >
-                      {product.subcategory}
-                    </span>
-                  {/if}
+                  {/each}
                 </div>
 
                 {#if productSummary(product)}
-                  <p class="line-clamp-1 overflow-hidden text-[0.8rem] leading-[1.3] text-[var(--sl-color-gray-2)]">
-                    {productSummary(product)}
-                  </p>
+                  <p class="m-0 line-clamp-2 text-[0.88rem] leading-[1.5] text-[var(--sl-color-text)]">{productSummary(product)}</p>
                 {/if}
 
-                <div class="m-0 flex flex-wrap gap-[0.3rem]">
+                <div class="flex flex-wrap gap-2">
                   <a
-                    class="rounded-[5px] border border-[var(--sl-color-gray-5)] px-[0.38rem] py-[0.24rem] text-[0.74rem] leading-[1.2] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+                    class="inline-flex items-center gap-2 rounded-[10px] border border-[var(--sl-color-gray-5)] px-3 py-2 text-[0.82rem] font-[650] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
                     href={productHref(product)}
                   >
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M12 5H5v14h14v-7" />
+                      <path d="M14 5h5v5" />
+                      <path d="m10 14 9-9" />
+                    </svg>
                     Details
                   </a>
                   {#each primarySourceLinks(product) as link (link.label)}
                     <a
-                      class="rounded-[5px] border border-[var(--sl-color-gray-5)] px-[0.38rem] py-[0.24rem] text-[0.74rem] leading-[1.2] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+                      class="inline-flex items-center gap-2 rounded-[10px] border border-[var(--sl-color-gray-5)] px-3 py-2 text-[0.82rem] font-[650] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
                       href={link.url}
                       target="_blank"
                       rel="noreferrer noopener"
                     >
+                      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <path d="M12 5H5v14h14v-7" />
+                        <path d="M14 5h5v5" />
+                        <path d="m10 14 9-9" />
+                      </svg>
                       {link.label}
                     </a>
                   {/each}
                 </div>
               </div>
+
+              <div class="grid content-start gap-3 border-l border-[var(--sl-color-gray-5)] pl-4 max-[80rem]:col-span-2 max-[80rem]:grid-cols-[1fr_1fr_1fr] max-[80rem]:border-l-0 max-[80rem]:border-t max-[80rem]:pl-0 max-[80rem]:pt-3 max-[56rem]:grid-cols-1">
+                <div class="flex justify-end max-[80rem]:justify-start">
+                  <span
+                    class={[
+                      'inline-flex whitespace-nowrap rounded-full px-3 py-1 text-[0.76rem] font-[700] leading-none',
+                      product.kind === 'commercial'
+                        ? 'bg-yellow-200 text-yellow-900'
+                        : 'bg-emerald-200 text-emerald-900',
+                    ]}
+                  >
+                    {kindLabel(product.kind)}
+                  </span>
+                </div>
+                <div class="flex items-start gap-2 text-[0.82rem] text-[var(--sl-color-gray-2)]">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="10" cy="7" r="3" />
+                  </svg>
+                  <span class="min-w-0 break-words">{makerName(product) || 'Unknown maker'}</span>
+                </div>
+                <div class="flex items-start gap-2 text-[0.82rem] text-[var(--sl-color-gray-2)]">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path d="M4 7h16M4 12h16M4 17h10" />
+                  </svg>
+                  <span class="min-w-0 break-words">{productMetaGroup(product)}</span>
+                </div>
+                <div class="flex items-start gap-2 text-[0.82rem] text-[var(--sl-color-gray-2)]">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <rect x="3.5" y="5" width="17" height="15" rx="2" />
+                    <path d="M8 3v4M16 3v4M3.5 10h17" />
+                  </svg>
+                  <span>{productDateLabel(product)} {formatProductDate(product.last_checked)}</span>
+                </div>
+              </div>
             </article>
           {:else}
-            <p class="m-0 rounded-lg border border-[var(--sl-color-gray-5)] p-4">No products match current filters.</p>
+            <p class="m-0 rounded-[14px] border border-[var(--sl-color-gray-5)] px-4 py-6 text-[var(--sl-color-gray-2)]">No products match current filters.</p>
           {/each}
         {/if}
       </div>
 
-      <nav
-        class="flex items-center justify-end gap-1 border-t border-[var(--sl-color-gray-6)] px-[0.6rem] py-[0.45rem] max-[42rem]:flex-col max-[42rem]:items-stretch"
-        aria-label="Product pages"
-      >
+      <nav class="flex items-center justify-end gap-1 border-t border-[var(--sl-color-gray-5)] px-4 py-3 max-[56rem]:flex-wrap" aria-label="Product pages">
         <button
-          class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] p-0 align-middle leading-none text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-55 focus-visible:outline-2 focus-visible:outline-[var(--sl-color-accent)] focus-visible:outline-offset-2"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
           type="button"
           onclick={() => goToPage(1)}
           disabled={activePage === 1}
           aria-label="First page"
           title="First page"
         >
-          <svg
-            class="block h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
+          <svg class="block h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6 5v14M18 6l-6 6 6 6M12 6l-6 6 6 6" />
           </svg>
         </button>
         <button
-          class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] p-0 align-middle leading-none text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-55 focus-visible:outline-2 focus-visible:outline-[var(--sl-color-accent)] focus-visible:outline-offset-2"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
           type="button"
           onclick={() => goToPage(activePage - 1)}
           disabled={activePage === 1}
           aria-label="Previous page"
           title="Previous page"
         >
-          <svg
-            class="block h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
+          <svg class="block h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M15 6l-6 6 6 6" />
           </svg>
         </button>
-        <span
-          class="whitespace-nowrap px-[0.35rem] text-[0.78rem] leading-[1.2] text-[var(--sl-color-gray-2)]"
-          aria-live="polite"
-        >
-          Page {activePage} / {totalPages}
-        </span>
+        <span class="px-3 text-[0.84rem] text-[var(--sl-color-gray-2)]" aria-live="polite">Page {activePage} / {totalPages}</span>
         <button
-          class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] p-0 align-middle leading-none text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-55 focus-visible:outline-2 focus-visible:outline-[var(--sl-color-accent)] focus-visible:outline-offset-2"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
           type="button"
           onclick={() => goToPage(activePage + 1)}
           disabled={activePage === totalPages}
           aria-label="Next page"
           title="Next page"
         >
-          <svg
-            class="block h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
+          <svg class="block h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M9 6l6 6-6 6" />
           </svg>
         </button>
         <button
-          class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] p-0 align-middle leading-none text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-55 focus-visible:outline-2 focus-visible:outline-[var(--sl-color-accent)] focus-visible:outline-offset-2"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
           type="button"
           onclick={() => goToPage(totalPages)}
           disabled={activePage === totalPages}
           aria-label="Last page"
           title="Last page"
         >
-          <svg
-            class="block h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
+          <svg class="block h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M18 5v14M6 6l6 6-6 6M12 6l6 6-6 6" />
           </svg>
         </button>

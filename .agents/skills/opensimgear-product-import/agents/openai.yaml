@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenSimGear Product Import"
+  short_description: "Research third-party products and import them into OpenSimGear."
+  default_prompt: "Research products from a vendor page, create product markdown notes, update the OpenSimGear third-party product database, download images, and refresh the product image import map."
