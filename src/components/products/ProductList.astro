@@ -53,16 +53,21 @@ function summary(product: ProductEntry['data']) {
 }
 ---
 
-<div class="product-list">
+<div class="grid gap-3">
   {
     products.map(({ data: product }) => {
       const image = productImage(product);
 
       return (
-        <article class="product-card">
+        <article class="grid items-center gap-4 rounded-lg border border-[var(--sl-color-gray-5)] p-4 max-[40rem]:grid-cols-1 [grid-template-columns:minmax(5.5rem,7rem)_minmax(0,1fr)_auto]">
           {image && (
-            <a class="product-card__media" href={productHref(product)} aria-label={`View ${product.name}`}>
+            <a
+              class="grid aspect-[4/3] w-full place-items-center overflow-hidden rounded-md border border-[var(--sl-color-gray-6)] bg-white no-underline max-[40rem]:max-w-40"
+              href={productHref(product)}
+              aria-label={`View ${product.name}`}
+            >
               <img
+                class="block h-full w-full object-contain p-[0.3rem]"
                 src={image.src}
                 alt={product.image?.alt ?? `${product.title || product.name} product photo`}
                 width={image.width}
@@ -72,14 +77,20 @@ function summary(product: ProductEntry['data']) {
               />
             </a>
           )}
-          <div class="product-card__body">
-            <Heading>
+          <div class="min-w-0">
+            <Heading class="m-0 text-base leading-[1.35]">
               <a href={productHref(product)}>{product.title || product.name}</a>
             </Heading>
-            <p class="product-card__meta">{primaryMeta(product).join(' / ')}</p>
-            {summary(product) && <p class="product-card__summary">{summary(product)}</p>}
+            <p class="mt-1 text-sm leading-[1.4] text-[var(--sl-color-gray-3)]">{primaryMeta(product).join(' / ')}</p>
+            {summary(product) && (
+              <p class="mt-2 text-[0.925rem] leading-[1.5] text-[var(--sl-color-gray-2)]">{summary(product)}</p>
+            )}
           </div>
-          <a class="product-card__link" href={productHref(product)} aria-label={`View ${product.name}`}>
+          <a
+            class="whitespace-nowrap rounded-md border border-[var(--sl-color-gray-5)] px-3 py-2 text-sm leading-none text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] max-[40rem]:justify-self-start"
+            href={productHref(product)}
+            aria-label={`View ${product.name}`}
+          >
             View
           </a>
         </article>
@@ -87,96 +98,3 @@ function summary(product: ProductEntry['data']) {
     })
   }
 </div>
-
-<style>
-  .product-list {
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .product-card {
-    display: grid;
-    grid-template-columns: minmax(5.5rem, 7rem) minmax(0, 1fr) auto;
-    gap: 1rem;
-    align-items: center;
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 8px;
-    padding: 1rem;
-  }
-
-  .product-card__media {
-    display: grid;
-    place-items: center;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border: 1px solid var(--sl-color-gray-6);
-    border-radius: 6px;
-    background: #fff;
-    text-decoration: none;
-  }
-
-  .product-card__media img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 0.3rem;
-  }
-
-  .product-card__body {
-    min-width: 0;
-  }
-
-  .product-card h2,
-  .product-card h3 {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.35;
-  }
-
-  .product-card__meta {
-    margin: 0.25rem 0 0;
-    color: var(--sl-color-gray-3);
-    font-size: 0.875rem;
-    line-height: 1.4;
-  }
-
-  .product-card__summary {
-    margin: 0.5rem 0 0;
-    color: var(--sl-color-gray-2);
-    font-size: 0.925rem;
-    line-height: 1.5;
-  }
-
-  .product-card__link {
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 6px;
-    color: var(--sl-color-text);
-    font-size: 0.875rem;
-    line-height: 1;
-    padding: 0.5rem 0.75rem;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .product-card__link:hover,
-  .product-card__link:focus {
-    border-color: var(--sl-color-accent);
-    color: var(--sl-color-accent-high);
-  }
-
-  @media (max-width: 40rem) {
-    .product-card {
-      grid-template-columns: 1fr;
-    }
-
-    .product-card__media {
-      max-width: 10rem;
-    }
-
-    .product-card__link {
-      justify-self: start;
-    }
-  }
-</style>

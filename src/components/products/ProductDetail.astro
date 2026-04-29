@@ -54,11 +54,12 @@ const sourceUrls = product.urls.sources.filter((url) => /^https?:\/\//.test(url)
 const imageAlt = product.image?.alt ?? `${product.title || product.name} product photo`;
 ---
 
-<section class="product-detail">
+<section class="grid gap-5">
   {
     image && (
-      <figure class="product-detail__media">
+      <figure class="m-0 grid justify-items-start gap-2">
         <img
+          class="block max-h-[26rem] w-full max-w-[44rem] rounded-lg border border-[var(--sl-color-gray-5)] bg-white p-3 object-contain"
           src={image.src}
           alt={imageAlt}
           width={image.width}
@@ -67,9 +68,9 @@ const imageAlt = product.image?.alt ?? `${product.title || product.name} product
           decoding="async"
         />
         {product.image?.source_url && (
-          <figcaption>
+          <figcaption class="text-[0.85rem] text-[var(--sl-color-gray-3)]">
             Image source:{' '}
-            <a href={product.image.source_url} rel="noreferrer">
+            <a href={product.image.source_url} rel="noreferrer" target="_blank">
               {product.image.source_type}
             </a>
           </figcaption>
@@ -78,42 +79,49 @@ const imageAlt = product.image?.alt ?? `${product.title || product.name} product
     )
   }
 
-  <div class="product-detail__summary">
+  <div class="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))]">
     {
       overviewRows.map(([label, value]) => (
-        <div>
-          <dt>{label}</dt>
-          <dd>{value}</dd>
+        <div class="rounded-lg border border-[var(--sl-color-gray-5)] p-[0.875rem]">
+          <dt class="m-0 text-[0.8rem] font-semibold uppercase tracking-[0] text-[var(--sl-color-gray-3)]">{label}</dt>
+          <dd class="mt-1 m-0">{value}</dd>
         </div>
       ))
     }
   </div>
 
   <h2 id="source-links">Source Links</h2>
-  <ul class="source-list">
+  <ul class="[overflow-wrap:anywhere]">
     {
       sourceUrls.map((url) => (
         <li>
-          <a href={url}>{url}</a>
+          <a href={url} target="_blank" rel="noreferrer noopener">
+            {url}
+          </a>
         </li>
       ))
     }
   </ul>
 
   <h2 id="research-fields">Research Fields</h2>
-  <div class="field-list">
+  <div class="grid gap-3">
     {
       detailRows.map(([field, value]) => (
-        <section class="field-row" aria-labelledby={`${product.slug}-${field}`}>
-          <h3 id={`${product.slug}-${field}`}>{fieldLabel(field)}</h3>
+        <section
+          class="rounded-lg border border-[var(--sl-color-gray-5)] p-[0.875rem]"
+          aria-labelledby={`${product.slug}-${field}`}
+        >
+          <h3 class="mb-2 mt-0 text-[0.95rem]" id={`${product.slug}-${field}`}>
+            {fieldLabel(field)}
+          </h3>
           {asList(value).length > 1 ? (
-            <ul>
+            <ul class="mb-0">
               {asList(value).map((item) => (
                 <li>{item}</li>
               ))}
             </ul>
           ) : (
-            <p>{asList(value)[0]}</p>
+            <p class="mb-0">{asList(value)[0]}</p>
           )}
         </section>
       ))
@@ -121,100 +129,8 @@ const imageAlt = product.image?.alt ?? `${product.title || product.name} product
   </div>
 
   <h2 id="source-note">Source Note</h2>
-  <details>
-    <summary>Show original research markdown</summary>
-    <pre><code>{product.content_markdown}</code></pre>
+  <details class="rounded-lg border border-[var(--sl-color-gray-5)] p-[0.875rem]">
+    <summary class="cursor-pointer font-semibold">Show original research markdown</summary>
+    <pre class="mb-0 overflow-x-auto whitespace-pre-wrap"><code>{product.content_markdown}</code></pre>
   </details>
 </section>
-
-<style>
-  .product-detail {
-    display: grid;
-    gap: 1.25rem;
-  }
-
-  .product-detail__media {
-    display: grid;
-    gap: 0.45rem;
-    justify-items: start;
-    margin: 0;
-  }
-
-  .product-detail__media img {
-    display: block;
-    width: min(100%, 44rem);
-    max-height: 26rem;
-    object-fit: contain;
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 8px;
-    background: #fff;
-    padding: 0.75rem;
-  }
-
-  .product-detail__media figcaption {
-    color: var(--sl-color-gray-3);
-    font-size: 0.85rem;
-  }
-
-  .product-detail__summary {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-    gap: 0.75rem;
-  }
-
-  .product-detail__summary > div,
-  .field-row {
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 8px;
-    padding: 0.875rem;
-  }
-
-  .product-detail__summary dt {
-    color: var(--sl-color-gray-3);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0;
-    margin: 0;
-    text-transform: uppercase;
-  }
-
-  .product-detail__summary dd {
-    margin: 0.25rem 0 0;
-  }
-
-  .source-list {
-    overflow-wrap: anywhere;
-  }
-
-  .field-list {
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .field-row h3 {
-    font-size: 0.95rem;
-    margin: 0 0 0.5rem;
-  }
-
-  .field-row p,
-  .field-row ul {
-    margin-bottom: 0;
-  }
-
-  details {
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 8px;
-    padding: 0.875rem;
-  }
-
-  summary {
-    cursor: pointer;
-    font-weight: 600;
-  }
-
-  pre {
-    margin-bottom: 0;
-    overflow-x: auto;
-    white-space: pre-wrap;
-  }
-</style>

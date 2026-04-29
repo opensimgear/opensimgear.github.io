@@ -57,6 +57,6 @@ function buildKindItem(kind, products) {
 }
 
 export const productSidebarItems = [
-  { label: 'All Products', link: '/products/' },
+  { label: 'Product Search', link: '/products/' },
   ...kindOrder.map((kind) => buildKindItem(kind, productDatabase.products)),
 ];

@@ -3,9 +3,11 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import ProductExplorer from '~/components/products/ProductExplorer.svelte';
 ---
 
+<style>:root { --sl-content-width: 90rem; }</style>
+
 <StarlightPage
   frontmatter={{
-    title: 'Products',
+    title: '3rd Party Products',
     description: 'Commercial and open-source simulator hardware products and projects.',
   }}
 >
