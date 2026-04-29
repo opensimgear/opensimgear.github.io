@@ -1,0 +1,39 @@
+# Aiologs Handbrake
+
+- product: Handbrake
+- manufacturer: Aiologs
+- component_category: handbrakes
+- subcategory: analog/digital USB handbrake
+- status: Current Aiologs shop product; shipment date shown as 17 April in search result.
+- price_or_msrp: USD 180 to USD 200 depending options, official Aiologs shop, checked 2026-04-29.
+- region/availability: Aiologs direct; international shipping [region specifics uncertain].
+- official_url: https://shop.aiologs.net/new/product/handbrake/
+- source_urls:
+  - https://shop.aiologs.net/new/product/handbrake/
+- key_specs:
+  - 2-in-1 analog axis and digital button modes.
+  - Polished aluminum handle with adjustable installation height.
+  - Stainless steel case 64 x 54 x 115 mm with plexiglass top.
+  - Adjustable internal RGB lighting.
+  - Alpha potentiometer sensor from Taiwan.
+  - Includes knob, rod, mounting plate, clamp, USB cable.
+  - Weight 1.9 kg; package dimensions 17 x 12 x 10 cm.
+- compatibility:
+  - Windows PC via USB.
+  - DriveHub console adapter compatibility claimed by Aiologs.
+- software/driver ecosystem:
+  - Generic USB controller behavior; no major configuration suite noted.
+- strengths:
+  - Compact and includes clamp.
+  - Analog/digital mode choice.
+  - Good boutique feel at mid price.
+- limitations:
+  - Potentiometer sensor rather than Hall/load-cell.
+  - Smaller vendor and shipping windows can vary.
+- fit_notes:
+  - Good if compact mounting and included clamp matter more than load-cell sensing.
+- similar_products:
+  - MOZA HBP
+  - SIMAGIC TB-1
+  - Logitech RS Shifter and Handbrake
+- last_checked: 2026-04-29

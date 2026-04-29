@@ -1,0 +1,47 @@
+# MobiFlight Panel Design Templates
+
+- project: MobiFlight panel design templates
+- maintainer_or_org: MobiFlight community / Tuomas Kuosmanen and contributors
+- component_category: rigs-and-cockpits
+- subcategory: home cockpit panel templates
+- maturity_or_status: Work in progress; latest GitHub release captured from 2021, but broader MobiFlight ecosystem
+  remains active.
+- license: GPL-3.0
+- repo_url: https://github.com/MobiFlight/mobiflight-templates
+- docs_url: https://github.com/MobiFlight/mobiflight-templates/wiki
+- source_urls:
+  - https://github.com/MobiFlight/mobiflight-templates
+  - https://github.com/MobiFlight/MobiFlight-Connector
+  - https://www.mobiflight.com/
+- key_features:
+  - Open SVG cockpit-panel design template based on Dzus/MS25212C-style aircraft panel dimensions.
+  - Layered template separates mounting plate, light plate, button caps, and labels for fabrication workflows.
+  - Intended as a starting point for CNC router, CO2 laser, 3D printer, and open panel designs.
+- hardware_or_bom:
+  - Clear acrylic lower plate, white acrylic light plate, button/switch cutouts, M5 mounting holes, Dzus-style geometry.
+  - Links to community panel repositories and wiki notes for switches, components, and construction methods.
+- firmware_or_software_stack:
+  - Pairs naturally with MobiFlight Connector and Arduino modules for cockpit IO.
+  - Template itself is edited in Inkscape or another SVG-capable CAD/vector tool.
+- build_requirements:
+  - Inkscape or SVG editor.
+  - CNC router or laser cutter, acrylic sheets, 3D printer for parts, panel hardware, and cockpit wiring.
+- compatibility:
+  - Designed for flight-sim home cockpit panels and MobiFlight/Arduino IO.
+  - Useful across MSFS, X-Plane, and Prepar3D when connected through MobiFlight-supported interfaces.
+- strengths:
+  - Gives repeatable panel geometry instead of one-off hand layouts.
+  - GPL share-alike encourages derivative templates to flow back.
+  - Bridges physical cockpit panels with an active open-source IO ecosystem.
+- limitations:
+  - Templates are not complete cockpit frames.
+  - Builders still need aircraft-specific labels, electronics, knobs, backlighting, and mounting structure.
+  - Latest tagged release is old even if ecosystem continues.
+- commercial_analogs:
+  - Flight Panels and desktop avionics modules
+  - Sim Innovations/Knobster panel setups
+  - RealSimGear panel-mounted avionics
+- fit_notes:
+  - Useful under rigs-and-cockpits as the panel interface layer between frame and electronics.
+  - Best when paired with MobiFlight Connector and a consistent cockpit mounting standard.
+- last_checked: 2026-04-29

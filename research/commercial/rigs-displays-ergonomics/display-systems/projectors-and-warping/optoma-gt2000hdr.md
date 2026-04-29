@@ -1,0 +1,38 @@
+# Optoma GT2000HDR
+
+- product: GT2000HDR
+- manufacturer: Optoma
+- component_category: display-systems
+- subcategory: short-throw laser gaming projector
+- status: current
+- price_or_msrp: Official page did not expose price; retailer pricing varies [uncertain], checked 2026-04-29
+- region/availability: Optoma USA and authorized retailers.
+- official_url: https://www.optomausa.com/product/gt2000hdr
+- source_urls:
+  - https://www.optomausa.com/product/gt2000hdr
+  - https://www.optomausa.com/product-details/gt2000hdr
+  - https://www.bhphotovideo.com/c/product/1766094-REG/optoma_technology_gt2000hdr_3500_lumen_full_hd.html
+- key_specs:
+  - 1080p Full HD DLP laser projector.
+  - 3500 lumens, laser life up to 30,000 hours.
+  - Short throw: 100 in image from just over 3 ft; throw ratio 0.496:1.
+  - 1080p 120 Hz at 8.6 ms and 4K input at 1080p 60 Hz 17 ms.
+  - Dual HDMI 2.0, RS232, USB-A power.
+- compatibility:
+  - PC/console HDMI sources.
+  - Projection simulator builds need screen, calibration, and possibly edge blending/warping.
+- software/driver ecosystem:
+  - Projector firmware/OSD; no native simulator integration.
+- strengths:
+  - Laser light source lowers maintenance versus lamps.
+  - Bright and compact for casual simulator projection.
+- limitations:
+  - Native 1080p limits gauge clarity versus modern monitors.
+  - Fixed throw ratio constrains cockpit geometry.
+- fit_notes:
+  - Useful for budget large-FOV projection when resolution is secondary to scale.
+- similar_products:
+  - BenQ TK700STi
+  - Optoma GT1080HDRx
+  - BenQ X500i
+- last_checked: 2026-04-29

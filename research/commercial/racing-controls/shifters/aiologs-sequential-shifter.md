@@ -1,0 +1,38 @@
+# Aiologs Shifter Sequential
+
+- product: Shifter Sequential
+- manufacturer: Aiologs
+- component_category: shifters
+- subcategory: compact sequential shifter
+- status: Current Aiologs shop product; shipment date shown as 30 April in search result.
+- price_or_msrp: USD 180 to USD 200 depending options, official Aiologs shop, checked 2026-04-29.
+- region/availability: Aiologs direct; international shipping [uncertain regions].
+- official_url: https://shop.aiologs.net/new/product/shifter/
+- source_urls:
+  - https://shop.aiologs.net/new/product/shifter/
+- key_specs:
+  - Stainless steel case 64 x 54 x 115 mm with plexiglass top cover.
+  - Polished aluminum handle with adjustable installation height.
+  - Omron tactical switches from Japan.
+  - Adjustable internal RGB lighting.
+  - Includes knob, rod, mounting plate, clamp, USB cable.
+  - Weight 1.9 kg; package dimensions 17 x 12 x 10 cm.
+- compatibility:
+  - Windows PC via USB.
+  - DriveHub console adapter compatibility claimed by Aiologs.
+- software/driver ecosystem:
+  - USB HID-style device; no major branded suite noted [uncertain].
+- strengths:
+  - Compact, sharp tactile sequential feel.
+  - Includes clamp and mounting hardware.
+  - Fair price for metal boutique shifter.
+- limitations:
+  - Sequential only.
+  - Smaller company and ordering/shipping windows can vary.
+- fit_notes:
+  - Good for rally and touring rigs with limited space.
+- similar_products:
+  - MOZA SGP
+  - SIMAGIC Q1S
+  - Heusinkveld MagShift
+- last_checked: 2026-04-29

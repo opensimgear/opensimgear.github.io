@@ -1,0 +1,48 @@
+# AITrack
+
+- project: AITrack
+- maintainer_or_org: AIRLegend
+- component_category: vr-and-head-tracking
+- subcategory: webcam AI head tracking
+- maturity_or_status: Mature but slower-moving; GitHub shows 15 tags, 1.4k stars, and many open issues.
+- license: MIT
+- repo_url: https://github.com/AIRLegend/aitrack
+- docs_url: https://github.com/AIRLegend/aitrack/wiki
+- source_urls:
+  - https://github.com/AIRLegend/aitrack
+  - https://github.com/AIRLegend/aitrack/releases
+  - https://github.com/AIRLegend/aitrack/wiki
+- key_features:
+  - 6DoF head tracking software designed to work alongside opentrack.
+  - Uses neural-network-based webcam head pose estimation.
+  - Sends tracking data to opentrack over UDP.
+  - Works without IR LEDs or special hardware, tolerates poor lighting and partial face occlusion such as glasses.
+  - Can run on a second PC and stream tracking data to the main machine.
+- hardware_or_bom:
+  - Webcam at about 480p/30 FPS minimum, or smartphone camera through DroidCam.
+  - No LED clip, reflector, or special sensor required.
+- firmware_or_software_stack:
+  - C++ application with ONNX/neural model assets and OpenCV-style camera stack [exact dependencies in repository].
+  - Requires opentrack for game/simulator output.
+- build_requirements:
+  - Users install Visual C++ Redistributable x64, opentrack, and AITrack release zip.
+  - Developers build with CMake/Visual Studio project files.
+- compatibility:
+  - Any simulator supported by opentrack output protocols.
+  - Useful for MSFS, DCS, IL-2, trucking, space sims, and racing if view control is supported.
+- strengths:
+  - Hardware-free headtracking path.
+  - Good low-cost entry for laptops/webcams.
+  - Remote-run mode can offload tracking to a spare machine.
+- limitations:
+  - Depends on opentrack for simulator protocols.
+  - Webcam pose estimation can be less robust than a dedicated IR clip under extreme head turns.
+  - Current maintenance level should be checked before relying on it for new OS/camera setups.
+- commercial_analogs:
+  - TrackIR 5
+  - Tobii Eye Tracker 5 head-pose component
+  - TrackHat webcam/IR setups
+- fit_notes:
+  - Best for users testing headtracking before buying IR hardware.
+  - Good secondary option when physical clip/cap ergonomics are annoying.
+- last_checked: 2026-04-29

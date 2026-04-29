@@ -1,0 +1,42 @@
+# Thrustmaster TSS Handbrake Sparco Mod Plus
+
+- product: TSS Handbrake Sparco Mod Plus
+- manufacturer: Thrustmaster
+- component_category: handbrakes
+- subcategory: 2-in-1 progressive handbrake and sequential shifter
+- status: Current Thrustmaster product.
+- price_or_msrp: Official product page did not expose a direct handbrake price in captured snippet; current price should
+  be checked at retailer/cart [uncertain].
+- region/availability: Thrustmaster official store and retailers.
+- official_url: https://www.thrustmaster.com/products/tss-handbrake-sparco-mod/
+- source_urls:
+  - https://www.thrustmaster.com/products/tss-handbrake-sparco-mod/
+  - https://ts.thrustmaster.com/download/accessories/Manuals/TSS_Handbrake/TSS_Handbrake_User_Manual.pdf
+- key_specs:
+  - Official Sparco-licensed 1:1 replica.
+  - 90 percent metal steel/aluminum construction.
+  - Progressive handbrake mode and sequential shifter mode.
+  - H.E.A.R.T. contactless magnetic sensors.
+  - Industrial-class flat coil springs with 8.8 lb / 4 kg resistance.
+  - 25.8 x 13.6 x 32.7 cm, 2070 g.
+- compatibility:
+  - PC, PS4, PS5, Xbox.
+  - Console compatibility depends on compatible Thrustmaster wheel bases and game support; PC works with wheels from
+    other brands.
+- software/driver ecosystem:
+  - Thrustmaster drivers/support lists and firmware ecosystem.
+- strengths:
+  - Console-compatible handbrake path for Thrustmaster users.
+  - Dual-mode handbrake/sequential shifter.
+  - Contactless sensing.
+- limitations:
+  - Expensive versus MOZA HBP/Logitech RS [exact current price uncertain].
+  - Console support can be game/base-specific.
+  - Not load-cell based.
+- fit_notes:
+  - Useful when console support matters; can be mounted to cockpit or desk with TM Racing Clamp sold separately.
+- similar_products:
+  - Logitech RS Shifter and Handbrake
+  - Fanatec ClubSport Handbrake V2
+  - MOZA HBP Handbrake
+- last_checked: 2026-04-29

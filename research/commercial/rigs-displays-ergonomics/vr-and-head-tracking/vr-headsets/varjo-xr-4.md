@@ -1,0 +1,38 @@
+# Varjo XR-4
+
+- product: XR-4
+- manufacturer: Varjo
+- component_category: vr-and-head-tracking
+- subcategory: professional mixed-reality headset
+- status: current
+- price_or_msrp: EUR 5,990 excluding sales tax on Varjo purchase page, checked 2026-04-29
+- region/availability: Business/professional purchase through Varjo; Secure/Focal editions differ.
+- official_url: https://varjo.com/products/xr-4/
+- source_urls:
+  - https://varjo.com/products/xr-4/
+  - https://varjo.com/purchase/
+  - https://support.varjo.com/migration/hc/en-us/xr-4-series-system-requirements
+- key_specs:
+  - 4K x 4K mini-LED displays.
+  - 120 x 105 degree field of view.
+  - Inside-out tracking and optional base-station tracking variants.
+  - Eye tracking and high-end spatial audio.
+  - Varjo states 28 million pixels and pilot-grade clarity.
+- compatibility:
+  - Professional training/simulation, SteamVR/OpenVR support where configured.
+  - Requires Varjo Base and workstation-class PC; system requirements depend on use.
+- software/driver ecosystem:
+  - Varjo Base, Varjo subscriptions/options, SteamVR/OpenVR for supported apps.
+- strengths:
+  - Professional fidelity for flight, defense, and mission training.
+  - Strong mixed-reality/passthrough stack.
+- limitations:
+  - Enterprise price and procurement model.
+  - Overkill for most consumer sim rigs.
+- fit_notes:
+  - Consider for commercial training where support, fidelity, and deployment controls matter.
+- similar_products:
+  - Varjo XR-4 Focal Edition
+  - Pimax Crystal Super
+  - HTC VIVE Focus Vision Business
+- last_checked: 2026-04-29

@@ -1,0 +1,37 @@
+# Next Level Racing Elite Freestanding Triple Monitor Stand
+
+- product: Elite Free Standing Complete Triple Monitor Stand - Black Edition
+- manufacturer: Next Level Racing
+- component_category: display-systems
+- subcategory: freestanding triple monitor stand
+- status: current
+- price_or_msrp: USD $499 official US store, checked 2026-04-29
+- region/availability: Official US store and global retailers.
+- official_url:
+  https://store-us.nextlevelracing.com/products/elite-free-standing-complete-triple-monitor-stand-black-edition
+- source_urls:
+  - https://store-us.nextlevelracing.com/products/elite-free-standing-complete-triple-monitor-stand-black-edition
+  - https://nextlevelracing.com/products/elite-free-standing-triple-monitor-stand-black-edition/
+  - https://www.bhphotovideo.com/c/product/1817502-REG/next_level_racing_nlr_e036_elite_free_standing_triple.html
+- key_specs:
+  - Aluminum extrusion freestanding triple monitor stand.
+  - Supports three 21 to 43 in displays or one 65 in display per retailer/official specs.
+  - VESA 75 x 75 to 200 x 200 plates.
+  - Height, width, angle, and tilt adjustments.
+- compatibility:
+  - Works across NLR and other cockpits; freestanding design suits motion rigs.
+  - Designed to clear wider cockpits/Traction Plus setups via adjustable uprights.
+- software/driver ecosystem: None; physical display mount.
+- strengths:
+  - Premium aluminum construction and cable-management hardware.
+  - Works for large triple displays.
+- limitations:
+  - More expensive than round-tube stands.
+  - Requires space behind/around rig.
+- fit_notes:
+  - Good high-end triple setup for racing/flight/truck sims.
+- similar_products:
+  - Sim-Lab Freestanding Vario Monitor Mount
+  - Trak Racer Freestanding Triple Monitor Stand
+  - Next Level Racing Round Tube Freestanding Triple Monitor Stand
+- last_checked: 2026-04-29

@@ -1,0 +1,37 @@
+# Fanatec CSL Pedals
+
+- product: CSL Pedals
+- manufacturer: Fanatec
+- component_category: pedals
+- subcategory: budget two-pedal set, Hall-sensor position sensing
+- status: Available on official US page in search result.
+- price_or_msrp: USD 139.99, official US store, checked 2026-04-29.
+- region/availability: Fanatec direct stores; often bundled with CSL DD systems.
+- official_url: https://www.fanatec.com/us/en/p/pedals/csl_p/csl-pedals
+- source_urls:
+  - https://www.fanatec.com/us/en/p/pedals/csl_p/csl-pedals
+  - https://www.fanatec.com/us/en/explorer/products/pedals/guide-to-fanatecs-csl-pedals/
+- key_specs:
+  - Two-pedal steel set.
+  - Hall-effect sensors on throttle and brake.
+  - Upgradeable with clutch kit, metal pedal faces, and load-cell kit.
+- compatibility:
+  - Fanatec wheel bases via RJ12.
+  - PC standalone requires supported adapter/load-cell electronics [uncertain depending configuration].
+  - Console use through compatible Fanatec base.
+- software/driver ecosystem:
+  - Fanatec App / Control Panel when connected to PC/Fanatec base.
+- strengths:
+  - Low entry price.
+  - Contactless sensors avoid potentiometer wear.
+  - Modular upgrade path.
+- limitations:
+  - Stock brake is position/travel based, not load-cell.
+  - Light pedal set needs rigid mounting or anti-slip support.
+- fit_notes:
+  - Good starter pedals; serious braking consistency improves with Load Cell Kit and solid pedal deck.
+- similar_products:
+  - Logitech RS Pedals
+  - Thrustmaster T3PM
+  - MOZA SR-P Lite
+- last_checked: 2026-04-29

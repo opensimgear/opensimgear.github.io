@@ -1,0 +1,39 @@
+# MOZA CRP2 Load Cell Pedals
+
+- product: CRP2 Load Cell Pedals
+- manufacturer: MOZA Racing
+- component_category: pedals
+- subcategory: modular load-cell pedal set
+- status: In stock on official US page in search result.
+- price_or_msrp: USD 369.00 sale price, USD 399.00 regular price for throttle+brake, official US store, checked
+  2026-04-29.
+- region/availability: MOZA US/global stores and resellers.
+- official_url: https://us.mozaracing.com/products/crp2-pedals
+- source_urls:
+  - https://us.mozaracing.com/products/crp2-pedals
+  - https://us.mozaracing.com/pages/crp2-pedals
+- key_specs:
+  - CNC aerospace-grade aluminum body, carbon-fiber heel plate, high-strength steel base.
+  - 200 kg load-cell sensor range.
+  - Brake uses load-cell plus 15-bit magnetic angle sensor fusion.
+  - 115 standard brake-feel adjustments and up to 1764 optional configurations per MOZA page.
+  - Optional CRP2 clutch and active mBooster accessories.
+- compatibility:
+  - PC and Xbox systems listed on MOZA page [likely through MOZA ecosystem; verify path].
+  - MOZA ecosystem and USB/PC use.
+- software/driver ecosystem:
+  - MOZA Pit House for calibration, curves, and firmware.
+- strengths:
+  - Strong specs for price.
+  - Very tunable brake feel.
+  - Integrates with MOZA bases and accessories.
+- limitations:
+  - Ecosystem/software less established than Heusinkveld at pro level.
+  - Optional clutch and accessories add cost.
+- fit_notes:
+  - Rigid pedal deck recommended for high brake forces.
+- similar_products:
+  - Fanatec ClubSport V3
+  - Heusinkveld Sprint
+  - Sim-Lab XP1
+- last_checked: 2026-04-29

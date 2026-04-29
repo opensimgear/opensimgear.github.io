@@ -1,0 +1,37 @@
+# OMP TRS-E
+
+- product: TRS-E Racing Seat
+- manufacturer: OMP
+- component_category: seats-and-ergonomics
+- subcategory: motorsport seat
+- status: current through retailers; official product-specific URL not confirmed [uncertain]
+- price_or_msrp: EUR 239 retailer/quote source, checked 2026-04-29 [uncertain]
+- region/availability: Motorsport retailers in EU/US; color and FIA status vary by listing.
+- official_url: Product-specific official page not found during pass [uncertain]
+- source_urls:
+  - https://www.racegearco.com/product/omp-trs-e-racing-seat/
+  - https://track-first.com/auto-racing-seats-fia/p/omp-trs-e-seat
+  - https://www.prosimtech.com/en/module/g_pcbuilder/printpc?currentpc=34145
+  - https://www.murraymotorsport.com/amfile/file/download/file/200/product/24391/
+- key_specs:
+  - Tubular steel and foam racing seat per retailer descriptions.
+  - FIA-approved variants listed by retailers.
+  - Five belt openings; HANS-compatible listing appears in retailer quote.
+  - Side or bottom mounting mentioned by retailer quote [uncertain].
+- compatibility:
+  - Works with sim rigs through compatible bucket-seat side or base mounts.
+  - Good for lower-cost motorsport authenticity.
+- software/driver ecosystem: None; physical seating product.
+- strengths:
+  - Real racing-seat construction at lower price than many fiberglass shells.
+  - More compliant padding than some hard-shell buckets.
+- limitations:
+  - Heavier and less rigid than fiberglass/composite shells.
+  - Need to verify exact mounting/homologation by SKU before purchase.
+- fit_notes:
+  - Good budget motorsport-style seat where comfort matters more than shell stiffness.
+- similar_products:
+  - Sparco Sprint
+  - Corbeau FX1 Pro
+  - Trak Racer GT-Pro Seat
+- last_checked: 2026-04-29

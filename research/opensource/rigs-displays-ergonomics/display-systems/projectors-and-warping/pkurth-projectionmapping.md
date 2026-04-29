@@ -1,0 +1,49 @@
+# pkurth ProjectionMapping
+
+- project: ProjectionMapping
+- maintainer_or_org: Philipp Kurth
+- component_category: display-systems
+- subcategory: large-scale projection mapping system
+- maturity_or_status: Research/prototype code; no GitHub releases, 1 contributor, Windows/D3D12 focused.
+- license: MIT
+- repo_url: https://github.com/pkurth/ProjectionMapping
+- docs_url: https://github.com/pkurth/ProjectionMapping#readme
+- source_urls:
+  - https://github.com/pkurth/ProjectionMapping
+  - https://doi.org/10.1109/TVCG.2022.3203085
+  - https://doi.org/10.1109/TVCG.2018.2868530
+- key_features:
+  - Open-source projection mapping system for many projectors illuminating one or more tracked target objects.
+  - Includes calibration routine, depth-camera object tracker, brightness solver, error mitigation, and networking.
+  - Supports multi-computer projector setups through a network protocol.
+- hardware_or_bom:
+  - Multiple projectors, depth camera, Windows 10+ workstation(s), D3D12-capable GPU(s), networked PCs for larger
+    installs.
+  - Assets from screenshots are not included.
+- firmware_or_software_stack:
+  - C++/D3D12 renderer, HLSL shaders, Premake-generated Visual Studio 2019 solution.
+  - Depends on submodules and bundled external libraries.
+- build_requirements:
+  - Windows 10 or higher.
+  - Visual Studio 2019.
+  - GPU with shader model 6.1 or higher recommended.
+  - Clone with submodules and run generate.bat.
+- compatibility:
+  - Suitable for research or custom projection environments, not directly packaged for simulator games.
+  - Could inform multi-projector cockpit screens where brightness uniformity matters.
+- strengths:
+  - More advanced than simple quad mappers: includes tracking, calibration, brightness solving, networking.
+  - MIT license.
+  - Backed by published projection-mapping research.
+- limitations:
+  - Windows/D3D12-only and tested mostly on NVIDIA GPUs.
+  - Not a user-friendly cockpit calibration product.
+  - Requires engineering effort to adapt to simulator visual pipelines.
+- commercial_analogs:
+  - VIOSO Integrate
+  - Domeprojection ProjectionTools
+  - Fly Elise-ng Immersive Display PRO
+- fit_notes:
+  - Use as technical reference for large projection rigs, not immediate sim-rig setup software.
+  - Interesting for advanced builders trying to solve projector uniformity and dynamic target errors.
+- last_checked: 2026-04-29

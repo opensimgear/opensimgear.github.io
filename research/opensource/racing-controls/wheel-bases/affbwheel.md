@@ -1,0 +1,49 @@
+# AFFBWheel
+
+- project: AFFBWheel
+- maintainer_or_org: vsulako
+- component_category: wheel-bases
+- subcategory: Arduino force-feedback wheel controller
+- maturity_or_status: Active-ish hobby firmware; 160+ stars and ongoing issue activity, but still DIY experimental.
+- license: MIT
+- repo_url: https://github.com/vsulako/AFFBWheel
+- docs_url: https://github.com/vsulako/AFFBWheel
+- source_urls:
+  - https://github.com/vsulako/AFFBWheel
+  - https://github.com/vsulako/AFFBWheelGUI
+- key_features:
+  - Arduino ATmega32U4 wheel controller with force feedback.
+  - 8 axes, 32 buttons, steering range commands, serial/GUI configuration, and common FFB effects.
+  - Supports steering encoder or TLE5010/AS5600 sensor, pedals, extra axes, button shift registers, and analog
+    H-shifter.
+- hardware_or_bom:
+  - Arduino Leonardo/Pro Micro/Micro class board.
+  - Incremental encoder or magnetic angle sensor, potentiometers for axes, 74HC165 or MCP23017 inputs, BTS7960 motor
+    driver, DC motor, 12-24 V motor supply.
+  - Optional ADCs/multiplexers such as MCP3204, ADS1015, and 74HC405x.
+- firmware_or_software_stack:
+  - Arduino sketch plus AFFBWheelGUI.
+  - Uses Arduino libraries such as digitalWriteFast, avdweb_AnalogReadFast, and Encoder.
+  - USB HID code credits VNWheel/hoantv lineage.
+- build_requirements:
+  - Arduino IDE 1.8.19 recommended by docs.
+  - Configure `config.h`, wire encoder/sensor, motor driver, axes, and buttons.
+  - Tune force PWM, steering range, centers, limits, and button debounce.
+- compatibility:
+  - PC DirectInput USB force-feedback wheel device.
+  - GIMX may help where games do not support DIY wheels.
+- strengths:
+  - Low-cost entry into FFB wheel firmware using common Arduino boards.
+  - Integrated pedals/buttons/shifter support.
+  - MIT license and concrete wiring/configuration notes.
+- limitations:
+  - DC motor/BTS7960 class hardware cannot match modern DD fidelity.
+  - Conditional FFB effect accuracy is caveated by maintainer.
+  - Requires firmware tuning and electronics debugging.
+- commercial_analogs:
+  - Logitech G29/G923
+  - Thrustmaster T300/T248
+  - entry belt/gear FFB wheel bases
+- fit_notes:
+  - Better for learning, repair, or low-power DIY FFB than for high-torque direct-drive rigs.
+- last_checked: 2026-04-29

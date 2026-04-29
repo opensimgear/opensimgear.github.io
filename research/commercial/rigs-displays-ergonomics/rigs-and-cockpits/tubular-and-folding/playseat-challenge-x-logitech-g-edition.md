@@ -1,0 +1,35 @@
+# Playseat Challenge X Logitech G Edition
+
+- product: Playseat Challenge X Logitech G Edition
+- manufacturer: Playseat / Logitech G
+- component_category: rigs-and-cockpits
+- subcategory: foldable cockpit
+- status: current
+- price_or_msrp: USD $299 MSRP, Logitech/Playseat pages, checked 2026-04-29
+- region/availability: US and select global markets through Logitech, Playseat, and retailers.
+- official_url: https://www.logitechg.com/en-us/products/gaming-furniture/playseat-challenge-x-sim-racing-seat.html
+- source_urls:
+  - https://www.logitechg.com/en-us/products/gaming-furniture/playseat-challenge-x-sim-racing-seat.html
+  - https://www.playseat.com/products/playseat-challenge-x
+  - https://www.playseat.com/en-us/pages/logitech
+- key_specs:
+  - Foldable cockpit with carbon steel frame and ActiFit fabric.
+  - Six X-Adapt seating positions.
+  - In-use size about 140 x 60 x 105 cm; weight 11.6 kg.
+  - User range listed from 120 to 220 cm height and up to 163 kg weight.
+- compatibility:
+  - Includes shifter mount and tilting pedal bracket.
+  - Built around Logitech ecosystem but accepts common wheel and pedal mounting.
+- software/driver ecosystem: None; physical cockpit.
+- strengths:
+  - Very fast storage and low footprint.
+  - Better body support than desk clamps for casual racing.
+- limitations:
+  - Fabric/folding frame less rigid than aluminum profile for strong direct drive and load-cell pedals.
+- fit_notes:
+  - Best for shared spaces where storage matters more than absolute stiffness.
+- similar_products:
+  - Playseat Challenge
+  - Next Level Racing F-GT Lite
+  - Next Level Racing GTLite Pro
+- last_checked: 2026-04-29

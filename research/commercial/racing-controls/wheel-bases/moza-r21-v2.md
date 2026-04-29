@@ -1,0 +1,38 @@
+# MOZA R21 V2 Wheel Base
+
+- product: R21 V2 Wheel Base
+- manufacturer: MOZA Racing
+- component_category: wheel-bases
+- subcategory: high-torque direct-drive wheel base
+- status: MOZA product page showed sold out on one official page; global page showed selectable variants.
+- price_or_msrp: USD 819.00 to USD 849.00 on MOZA global/US search result; USD 849.00 for R21 V2 on official page,
+  checked 2026-04-29.
+- region/availability: MOZA official stores and resellers; stock varies.
+- official_url: https://mozaracing.com/en-us/product/wheel-base-r21/
+- source_urls:
+  - https://mozaracing.com/en-us/product/wheel-base-r21/
+  - https://mozaracing.com/product/wheel-base-r21
+  - https://mozaracing.com/wp-content/themes/soledad-child/mozaracing/PDF/R16%20%26%20R21%20Wheel%20Base%20User%20Manual.pdf
+- key_specs:
+  - 21 Nm direct drive, 21-bit magnetic encoder, 1000 Hz USB refresh.
+  - 360 W peak power, aluminum housing, 327 x 170 x 130 mm, 8.9 kg.
+  - 90 to 2700 degree rotation, bottom mount, optional side/front mount and E-stop.
+- compatibility:
+  - PC and MOZA ecosystem.
+- software/driver ecosystem:
+  - MOZA Pit House, mobile app, NexGen 4.0 FFB, firmware updates.
+- strengths:
+  - High torque at aggressive price.
+  - Good thermal and encoder specs on official page.
+  - Strong for heavy rims and high downforce cars.
+- limitations:
+  - PC-only official support.
+  - Requires rigid cockpit and disciplined force limits.
+  - Stock status varies.
+- fit_notes:
+  - Do not pair with weak wheel stands; use profile cockpit and consider E-stop.
+- similar_products:
+  - Simucube 2 Pro
+  - VRS DirectForce Pro
+  - Asetek Invicta 27 Nm
+- last_checked: 2026-04-29

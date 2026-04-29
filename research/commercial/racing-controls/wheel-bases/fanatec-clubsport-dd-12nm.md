@@ -1,0 +1,38 @@
+# Fanatec ClubSport DD 12 Nm
+
+- product: ClubSport DD
+- manufacturer: Fanatec
+- component_category: wheel-bases
+- subcategory: mid/high direct-drive wheel base
+- status: Currently unavailable on official US search result.
+- price_or_msrp: USD 699.99, official US store, checked 2026-04-29.
+- region/availability: Fanatec direct stores; region stock varies.
+- official_url: https://www.fanatec.com/us/en/p/wheel-bases/cs_dd_us/clubsport-dd-us
+- source_urls:
+  - https://www.fanatec.com/us/en/p/wheel-bases/cs_dd_us/clubsport-dd-us
+- key_specs:
+  - 12 Nm consistent torque direct drive.
+  - FullForce high-frequency force-feedback/vibration technology.
+  - Thermally optimized design for sustained torque.
+  - QR2 base-side ecosystem.
+- compatibility:
+  - PC.
+  - Xbox ready with Xbox-licensed Fanatec steering wheel.
+  - Not native PlayStation; use ClubSport DD+ for PlayStation.
+- software/driver ecosystem:
+  - Fanatec App / Control Panel, firmware updates, tuning menu, FullForce support when implemented by games.
+- strengths:
+  - Big step above CSL DD/GT DD Pro torque without going to 20+ Nm.
+  - Strong Fanatec ecosystem integration.
+  - FullForce may add detail in supported titles.
+- limitations:
+  - Availability was unavailable in search result.
+  - FullForce support depends on games.
+  - Fanatec wheel dependency.
+- fit_notes:
+  - Needs sturdy cockpit or strong wheel deck; not ideal for weak desk clamps.
+- similar_products:
+  - MOZA R12
+  - Asetek Forte Wheelbase
+  - SIMAGIC Alpha Mini
+- last_checked: 2026-04-29

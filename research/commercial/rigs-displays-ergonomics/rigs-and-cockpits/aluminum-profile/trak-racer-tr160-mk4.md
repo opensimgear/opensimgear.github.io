@@ -1,0 +1,35 @@
+# Trak Racer TR160 MK4
+
+- product: TR160 MK4 Racing Simulator
+- manufacturer: Trak Racer
+- component_category: rigs-and-cockpits
+- subcategory: heavy-duty aluminum profile cockpit
+- status: current
+- price_or_msrp: Base cockpit price varies by selected options; turnkey Spec 4 TR160 listed at USD $21,999, checked
+  2026-04-29
+- region/availability: Regional Trak Racer stores; US stock and pre-order windows vary.
+- official_url: https://trakracer.com/products/tr160-mk4-racing-simulator-1
+- source_urls:
+  - https://trakracer.com/products/tr160-mk4-racing-simulator-1
+  - https://trakracer.com/products/spec-4-plug-and-play-simulator
+- key_specs:
+  - 160 x 40 mm aluminum base profile and 120 x 40 mm wheel uprights.
+  - Motion-ready frame with heavy-duty brackets.
+  - Accessory ecosystem includes monitor, keyboard, bass shaker, and flight controls.
+- compatibility:
+  - Supports high-torque direct drive and strong load-cell or hydraulic pedals.
+  - Works with TR One wheel and shifter mounting systems.
+- software/driver ecosystem: None for chassis; turnkey motion bundles may include D-BOX ecosystem.
+- strengths:
+  - Very rigid platform for high-end and motion builds.
+  - Large accessory catalog.
+- limitations:
+  - Larger, heavier, and costlier than TR80-class rigs.
+  - Option selection affects final compatibility and price.
+- fit_notes:
+  - Choose when cockpit stiffness and future motion matter more than compact footprint.
+- similar_products:
+  - Sim-Lab P1X Pro
+  - Advanced SimRacing ASR Pro
+  - Next Level Racing F-GT Elite 160
+- last_checked: 2026-04-29

@@ -1,0 +1,39 @@
+# TrackHat Sensor V2
+
+- product: Sensor V2 Head Tracker
+- manufacturer: TrackHat
+- component_category: vr-and-head-tracking
+- subcategory: optical/IR head tracking
+- status: current
+- price_or_msrp: GBP 108 sale price, GBP 135 regular price on product page; alternate page showed GBP 96 sale from GBP
+  120 [uncertain], checked 2026-04-29
+- region/availability: TrackHat direct; UK pricing, international shipping varies.
+- official_url: https://www.trackhat.org/product-page/trackhat-sensor-v2
+- source_urls:
+  - https://www.trackhat.org/product-page/trackhat-sensor-v2
+  - https://www.trackhat.org/sensorv2/
+  - https://www.trackhat.org/head-tracking-blog/trackhat-sensor-v2-vs-trackir
+- key_specs:
+  - Infrared camera/head tracker for home flight simulation.
+  - 60 Hz tracking.
+  - Machine-learning facial tracking plus point tracking mode.
+  - IR illumination for varied lighting.
+  - Listed optimal range 1 to 3 ft, good 3 to 5 ft, acceptable to 8 ft.
+- compatibility:
+  - Works with ultrawides, triples, TVs, projectors when placed in front of user.
+  - TrackHat OpenTrack software supports many games/sims.
+- software/driver ecosystem:
+  - TrackHat OpenTrack, local processing.
+- strengths:
+  - No headset clip required for face tracking.
+  - Cheaper than many TrackIR/Tobii options.
+- limitations:
+  - 60 Hz lower than TrackIR sample-rate claims.
+  - Needs front sensor placement and software tuning.
+- fit_notes:
+  - Good budget/no-clip option for monitor sim users.
+- similar_products:
+  - TrackIR 5
+  - Tobii Eye Tracker 5
+  - DelanClip Fusion Pro
+- last_checked: 2026-04-29

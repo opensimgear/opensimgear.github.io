@@ -1,0 +1,45 @@
+# Chinese SimRacing 14Bit Handbrake Custom Firmware
+
+- project: Chinese SimRacing 14Bit Handbrake Custom Firmware
+- maintainer_or_org: Daniel Korgel / Dak0r
+- component_category: handbrakes
+- subcategory: replacement firmware for generic Hall-sensor handbrakes
+- maturity_or_status: Focused firmware mod for common Chinese 12/14-bit handbrakes; active enough and practical.
+- license: Apache-2.0
+- repo_url: https://github.com/Dak0r/Chinese-SimRacing-14Bit-Handbrake-Custom-Firmware-Arduino-Sketch
+- docs_url: https://github.com/Dak0r/Chinese-SimRacing-14Bit-Handbrake-Custom-Firmware-Arduino-Sketch
+- source_urls:
+  - https://github.com/Dak0r/Chinese-SimRacing-14Bit-Handbrake-Custom-Firmware-Arduino-Sketch
+  - https://github.com/MHeironimus/ArduinoJoystickLibrary
+- key_features:
+  - Replacement Arduino sketch for generic Chinese "14 Bit" handbrakes using Pro Micro and Hall sensor.
+  - Allows modifications such as adding extra buttons.
+  - Direct replacement intended to behave like original firmware plus two-button example.
+- hardware_or_bom:
+  - Existing 12/14-bit Chinese sim racing handbrake with Arduino Pro Micro and Hall sensor.
+  - Optional added buttons wired to spare pins.
+- firmware_or_software_stack:
+  - Arduino sketch.
+  - MHeironimus ArduinoJoystickLibrary.
+- build_requirements:
+  - Open Arduino IDE, select Arduino Leonardo, flash sketch over handbrake's Pro Micro.
+  - Confirm board PCB version and hall sensor pin mapping; repo notes at least v3.0 and mentions v4.0 differences
+    unknown.
+- compatibility:
+  - PC USB analog handbrake axis.
+  - Generic sims accepting standalone handbrake input.
+- strengths:
+  - Very practical for improving common low-cost hardware.
+  - Apache-2.0 license.
+  - Lets one commodity handbrake become more hackable.
+- limitations:
+  - Not a full mechanical open-hardware design.
+  - PCB revisions may differ.
+  - Flashing can overwrite vendor firmware and may be hard to revert.
+- commercial_analogs:
+  - generic AliExpress 14-bit handbrakes
+  - MOZA HBP
+  - Fanatec ClubSport Handbrake
+- fit_notes:
+  - Best for owners of compatible cheap handbrakes who want open firmware and extra inputs.
+- last_checked: 2026-04-29

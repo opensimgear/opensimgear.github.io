@@ -1,0 +1,35 @@
+# Fanatec CSL Steering Wheel P1 V2
+
+- product: CSL Steering Wheel P1 V2
+- manufacturer: Fanatec
+- component_category: steering-wheels
+- subcategory: budget round wheel with integrated controls
+- status: Current Fanatec catalog item [uncertain direct stock].
+- price_or_msrp: Typically positioned as Fanatec budget wheel; exact current US price not confirmed on official product
+  page during this pass [uncertain].
+- region/availability: Fanatec direct and bundles; often appears in Ready2Race bundles.
+- official_url: https://www.fanatec.com/us-en/steering-wheels/csl-steering-wheel-p1-v2
+- source_urls:
+  - https://www.fanatec.com/us/en/explorer/products/steering-wheel/2025-fanatec-steering-wheels-bestsellers/
+  - https://www.fanatec.com/us-en/steering-wheels/csl-steering-wheel-p1-v2
+- key_specs:
+  - Round entry-level Fanatec wheel, used often with CSL DD bundles.
+  - Integrated buttons and paddles; quick-release version depends on bundle/revision [uncertain].
+- compatibility:
+  - Requires Fanatec wheel base.
+  - Platform support follows connected base and wheel license.
+- software/driver ecosystem:
+  - Fanatec App / Control Panel for base tuning and firmware.
+- strengths:
+  - Low-cost path into Fanatec ecosystem.
+  - Round shape works across many car types.
+- limitations:
+  - Less premium controls, rim materials, and paddle feel than ClubSport/Podium wheels.
+  - Not ideal for high-torque bases compared with metal/QR2 Pro equipped wheels.
+- fit_notes:
+  - Fit for CSL DD buyers who need a simple all-rounder before upgrading.
+- similar_products:
+  - Logitech RS Round Wheel
+  - MOZA ES Steering Wheel
+  - Thrustmaster 28 GT Wheel Add-On
+- last_checked: 2026-04-29

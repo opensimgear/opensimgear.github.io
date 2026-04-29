@@ -1,0 +1,44 @@
+# Akaki H Shifter
+
+- project: Akaki-H-shifter
+- maintainer_or_org: akakikuumeri
+- component_category: shifters
+- subcategory: 3D printable H-pattern shifter with optional handbrake
+- maturity_or_status: Small complete hobby build with CAD/STL, Arduino code, video/build instructions.
+- license: No repository license found [uncertain].
+- repo_url: https://github.com/akakikuumeri/Akaki-H-shifter
+- docs_url: https://github.com/akakikuumeri/Akaki-H-shifter
+- source_urls:
+  - https://github.com/akakikuumeri/Akaki-H-shifter
+  - https://www.youtube.com/watch?v=fTknGo8n0Co
+- key_features:
+  - 3D printable 8-speed H-pattern shifter.
+  - Cam elements for centering and latch action.
+  - Arduino Micro USB HID gamepad support with no drivers on Windows/Mac.
+  - Includes simple analog handbrake using potentiometer and rubber band.
+- hardware_or_bom:
+  - Arduino Pro Micro, five PCB microswitches, M3 bolts/nuts, two rubber bands, desk clamps.
+  - Handbrake add-on uses generic rotational potentiometer.
+  - STL/STEP files in repo.
+- firmware_or_software_stack:
+  - Arduino sketch for gear inputs and optional analog handbrake.
+- build_requirements:
+  - 3D printing, basic Arduino wiring, microswitch alignment, rubber-band tensioning, optional desk clamp mounting.
+- compatibility:
+  - PC/Mac USB HID gamepad.
+  - Reported by maintainer as working with Dirt Rally, Truck Simulator, Assetto Corsa, and similar games.
+- strengths:
+  - Very printable and low external hardware count.
+  - Includes both shifter and basic handbrake concept.
+  - Good beginner-friendly H-shifter project.
+- limitations:
+  - No explicit license.
+  - Rubber-band/cam feel is hobby-grade.
+  - Microswitch gear detection is simpler than analog gate detection.
+- commercial_analogs:
+  - Logitech Driving Force Shifter
+  - SHH shifters
+  - Fanatec ClubSport Shifter SQ
+- fit_notes:
+  - Good low-cost printable shifter; not a premium metal-feel replacement.
+- last_checked: 2026-04-29

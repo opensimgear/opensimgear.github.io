@@ -1,0 +1,36 @@
+# Logitech G RS Pedals
+
+- product: RS Pedals
+- manufacturer: Logitech G
+- component_category: pedals
+- subcategory: budget/mid load-cell pedal set
+- status: Current Logitech product in official category listing.
+- price_or_msrp: USD 159.99, official Logitech listing, checked 2026-04-29.
+- region/availability: Logitech US and regional stores.
+- official_url: https://www.logitechg.com/en-us/products/driving.html
+- source_urls:
+  - https://www.logitechg.com/en-us/products/driving.html
+  - https://www.logitechg.com/en-us/shop/c/racing-wheels-and-pedals
+- key_specs:
+  - Load-cell and Hall-effect pedal set.
+  - Brake force listed as 75 kg / 165.3 lb.
+  - Optional RS Clutch Module listed separately.
+- compatibility:
+  - Logitech Racing Series ecosystem.
+  - PC/console compatibility depends on connection through Logitech wheel/base/adapter [uncertain].
+- software/driver ecosystem:
+  - Logitech G HUB for calibration and firmware where supported.
+- strengths:
+  - Very low price for a load-cell brake.
+  - Simple upgrade path within Logitech RS ecosystem.
+  - Optional clutch keeps initial cost down.
+- limitations:
+  - Less proven than older PRO pedals.
+  - Exact standalone USB/console behavior should be checked before purchase.
+- fit_notes:
+  - Best paired with RS50 base; hard mounting still recommended.
+- similar_products:
+  - Fanatec CSL Pedals with Load Cell Kit
+  - Thrustmaster T-LCM
+  - MOZA SR-P
+- last_checked: 2026-04-29

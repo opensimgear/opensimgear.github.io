@@ -1,0 +1,35 @@
+# Playseat Trophy
+
+- product: Playseat Trophy
+- manufacturer: Playseat
+- component_category: rigs-and-cockpits
+- subcategory: lightweight tubular cockpit
+- status: current
+- price_or_msrp: USD $599 official US page, checked 2026-04-29
+- region/availability: Worldwide shipping from Playseat; Logitech edition also sold in select markets.
+- official_url: https://www.playseat.com/en-us/products/playseat-trophy-black
+- source_urls:
+  - https://www.playseat.com/en-us/products/playseat-trophy-black
+  - https://playseat.com/playseatr-trophy
+  - https://news.logitech.com/press-releases/news-details/2023/Playseat-and-Logitech-G-Announce-The-Global-Availability-Of-Playseat-Trophy-Logitech-G-Edition/default.aspx
+- key_specs:
+  - Frameless body-conforming seat on high-carbon steel frame.
+  - Product dimensions listed around 140 x 58 x 100 cm.
+  - Weight about 17 kg.
+  - Recommended by Playseat for direct drive wheels.
+- compatibility:
+  - Compatible with common steering wheels and pedals.
+  - Console and PC compatible through mounted controls.
+- software/driver ecosystem: None; physical cockpit.
+- strengths:
+  - Stronger and more comfortable than many folding rigs while still easy to move.
+  - Integrated seat shape keeps footprint tidy.
+- limitations:
+  - Less modular than aluminum profile; seat shape may need lumbar padding for some users.
+- fit_notes:
+  - Good premium living-room cockpit when an 8020 frame is too large or industrial-looking.
+- similar_products:
+  - Logitech Playseat Trophy
+  - Next Level Racing GTTrack
+  - Trak Racer TR8 Pro
+- last_checked: 2026-04-29

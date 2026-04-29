@@ -1,0 +1,34 @@
+# Playseat Formula Intelligence
+
+- product: Formula Intelligence
+- manufacturer: Playseat
+- component_category: rigs-and-cockpits
+- subcategory: formula-style cockpit
+- status: current
+- price_or_msrp: EUR 2,499 official Playseat page, checked 2026-04-29
+- region/availability: Playseat worldwide shipping; availability varies by color and edition.
+- official_url: https://www.playseat.com/products/playseat-formula-intelligence-black
+- source_urls:
+  - https://www.playseat.com/products/playseat-formula-intelligence-black
+  - https://playseat.com/racing-chairs/formula-intelligence/
+- key_specs:
+  - Formula seating posture with ForceLock adjustment system.
+  - Anodised aluminum and flow-formed carbon steel structure.
+  - Integrated monitor mount.
+  - Pre-drilled adaptable plates for direct drive wheels and pedals.
+- compatibility:
+  - Aimed at formula/open-wheel driving positions.
+  - Compatible with many direct drive wheel bases and pedal sets.
+- software/driver ecosystem: None; physical cockpit.
+- strengths:
+  - Purpose-built F1 posture and integrated display support.
+  - High-end finish compared with flat aluminum profile frames.
+- limitations:
+  - Expensive and discipline-specific; not ideal for GT, truck, or flight ergonomics.
+- fit_notes:
+  - Choose only if reclined formula posture is the main goal.
+- similar_products:
+  - Next Level Racing F-GT Elite
+  - Trak Racer Alpine Racing TRX
+  - Sim-Lab X1 Pro
+- last_checked: 2026-04-29

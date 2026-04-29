@@ -1,0 +1,37 @@
+# Thrustmaster T818
+
+- product: T818 Direct Drive
+- manufacturer: Thrustmaster
+- component_category: wheel-bases
+- subcategory: direct-drive wheel base
+- status: Current Thrustmaster product; official product page describes T818 V2.
+- price_or_msrp: Official price not confirmed on product page in this pass; Thrustmaster eShop page lists T818
+  family/bundles [uncertain].
+- region/availability: Thrustmaster official shop and resellers; PC-focused base.
+- official_url: https://www.thrustmaster.com/products/t818-black-edition/
+- source_urls:
+  - https://www.thrustmaster.com/products/
+  - https://eshop.thrustmaster.com/en_us/products-steering-wheels/type/t818-direct-drive.html
+- key_specs:
+  - Direct drive with 10 Nm constant torque per official product snippet.
+  - Dynamic RGB LEDs, quick release, desk/cockpit mounting support.
+  - Compatible with Thrustmaster wheel rim ecosystem via adapter for older rims.
+- compatibility:
+  - PC.
+  - Thrustmaster wheel rims with T818 quick-release system/adapter.
+- software/driver ecosystem:
+  - Thrustmaster PC drivers, firmware updater, support site game/LED compatibility lists.
+- strengths:
+  - Direct-drive upgrade path for existing Thrustmaster rim owners.
+  - 10 Nm constant torque class is enough for serious home use.
+  - Established retail/reseller network.
+- limitations:
+  - Console compatibility is more limited than T300/T-GT style products [uncertain].
+  - Ecosystem transition to new QR can require adapters.
+- fit_notes:
+  - Best when preserving Thrustmaster add-on rims matters.
+- similar_products:
+  - Logitech PRO DD11
+  - Fanatec ClubSport DD
+  - MOZA R12
+- last_checked: 2026-04-29

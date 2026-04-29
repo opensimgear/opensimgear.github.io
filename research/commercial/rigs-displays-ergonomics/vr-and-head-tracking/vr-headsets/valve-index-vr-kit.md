@@ -1,0 +1,36 @@
+# Valve Index VR Kit
+
+- product: Valve Index VR Kit
+- manufacturer: Valve
+- component_category: vr-and-head-tracking
+- subcategory: tethered PC VR headset
+- status: out of stock for full kit on Steam during check; headset-only in stock
+- price_or_msrp: USD $999 full kit, USD $499 headset-only, Steam page, checked 2026-04-29
+- region/availability: Steam hardware regions; component stock varies.
+- official_url: https://store.steampowered.com/sub/354231/Valve_Index_VR_Kit/
+- source_urls:
+  - https://store.steampowered.com/sub/354231/Valve_Index_VR_Kit/
+  - https://store.steampowered.com/valveindex
+- key_specs:
+  - PC VR headset, controllers, and two SteamVR 2.0 base stations in full kit.
+  - DisplayPort 1.2 and USB connection.
+  - Minimum GPU GTX 970/RX 480; recommended GTX 1070 or better.
+  - Official page points to valvesoftware.com/index for full specs.
+- compatibility:
+  - Native SteamVR/OpenVR ecosystem.
+  - Base stations and Index controllers compatible with many Lighthouse PCVR setups.
+- software/driver ecosystem:
+  - SteamVR, OpenVR, Linux/SteamOS support.
+- strengths:
+  - Excellent tracking and controller ecosystem.
+  - Direct DisplayPort PCVR without video compression.
+- limitations:
+  - Aging resolution versus newer headsets.
+  - Full kit out of stock during check.
+- fit_notes:
+  - Still relevant when Lighthouse tracking and SteamVR reliability matter more than pixel density.
+- similar_products:
+  - HTC VIVE Pro 2
+  - Bigscreen Beyond 2
+  - Pimax Crystal Light
+- last_checked: 2026-04-29

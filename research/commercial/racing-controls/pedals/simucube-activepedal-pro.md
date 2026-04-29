@@ -1,0 +1,41 @@
+# Simucube ActivePedal Pro
+
+- product: ActivePedal Pro
+- manufacturer: Simucube
+- component_category: pedals
+- subcategory: active force-feedback pedal
+- status: In stock on official pages in search results.
+- price_or_msrp: USD 1,799.00 to USD 3,767.00 configuration range on Simucube US page; single US product page also
+  showed USD 1,849.00, checked 2026-04-29.
+- region/availability: Simucube US/EU/UK direct and resellers.
+- official_url: https://simucube.com/en-us/simucube-activepedal-pro/
+- source_urls:
+  - https://simucube.com/en-us/simucube-activepedal-pro/
+  - https://simucube.com/en-us/activepedal-pro/
+  - https://simucube.com/simucube-activepedal-pro/
+  - https://simucube.com/en-us/news/press-release-simucube-activepedal-pro/
+- key_specs:
+  - Active force-feedback pedal configurable as brake/throttle/clutch.
+  - 110 kg max pedal force, 74 mm max travel, 22 mm height adjustment.
+  - 100 x 255 x 418 mm, 5.8 kg excluding package/PSU/accessories.
+  - Requires Simucube Link Hub; supports two passive load-cell pedal inputs.
+- compatibility:
+  - PC.
+  - Can combine with Simucube Co-Pedal and Link Hub.
+- software/driver ecosystem:
+  - Simucube Tuner with pedal profiles, automatic profile switching, ABS/traction/RPM/G-force effects.
+- strengths:
+  - Software-defined pedal feel without mechanical swaps.
+  - Active effects provide feedback passive pedals cannot.
+  - Strong for multi-car users.
+- limitations:
+  - Very expensive per pedal.
+  - More electronics/software dependency.
+  - Requires network/link hardware planning.
+- fit_notes:
+  - Best for high-end rigs where rapid profile changes and active ABS/traction cues justify cost.
+- similar_products:
+  - Simucube ActivePedal Ultimate
+  - Asetek Invicta T.H.O.R.P. II
+  - Heusinkveld Ultimate+
+- last_checked: 2026-04-29

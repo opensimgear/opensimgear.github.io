@@ -1,0 +1,38 @@
+# MOZA HGP Shifter
+
+- product: HGP Shifter
+- manufacturer: MOZA Racing
+- component_category: shifters
+- subcategory: H-pattern shifter
+- status: Current product; official product page showed dispatched within 3 business days.
+- price_or_msrp: CAD 219.00 on official global page variant found in search result; US price not confirmed in same
+  result, checked 2026-04-29.
+- region/availability: MOZA official stores and resellers.
+- official_url: https://mozaracing.com/product/moza-hgp-shifter/
+- source_urls:
+  - https://mozaracing.com/product/moza-hgp-shifter/
+  - https://mozaracing.com/moza-hgp-shifter/
+- key_specs:
+  - CNC-machined anodized aviation-grade aluminum.
+  - 7 forward gears plus reverse.
+  - 15-bit non-contact angle sensor.
+  - Intelligent downshift throttle-blip system configurable in MOZA Pit House.
+  - 100 x 140 x 250 mm, 1.8 kg, M6 mounting.
+- compatibility:
+  - PC direct by USB or compatible MOZA wheel base shifter port.
+- software/driver ecosystem:
+  - MOZA Pit House for throttle blip and device settings.
+- strengths:
+  - Robust H-pattern option at mid price.
+  - Direct PC USB path.
+  - MOZA ecosystem integration.
+- limitations:
+  - H-pattern only, no sequential mode.
+  - Intelligent blip feature may not suit purist/manual drivers.
+- fit_notes:
+  - Good for road/classic/drift rigs using MOZA bases or PC standalone.
+- similar_products:
+  - Fanatec ClubSport Shifter SQ
+  - Thrustmaster TH8A
+  - SIMAGIC DS-8X
+- last_checked: 2026-04-29

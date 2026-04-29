@@ -1,0 +1,40 @@
+# Heusinkveld Handbrake
+
+- product: Handbrake
+- manufacturer: Heusinkveld
+- component_category: handbrakes
+- subcategory: load-cell analog handbrake
+- status: Current Heusinkveld shop product.
+- price_or_msrp: EUR 279.00 excluding VAT / EUR 337.59 including VAT, official Heusinkveld page, checked 2026-04-29.
+- region/availability: Heusinkveld direct EU store and resellers.
+- official_url: https://heusinkveld.com/shop/handbrake-shifters/handbrake/
+- source_urls:
+  - https://heusinkveld.com/shop/handbrake-shifters/handbrake/
+  - https://heusinkveld.com/highlights/heusinkveld-handbrake/
+  - https://cdn.heusinkveld.com/wp-content/uploads/2025/11/Handbrake-Manual-DIGI-24-NOV-2025.pdf
+- key_specs:
+  - Force-sensitive 120 kg load cell.
+  - Up to 22 kg force measured at lever.
+  - Powder-coated stainless steel, 317 x 162 x 84 mm, 2.17 kg.
+  - Integrated controller, USB cable, mounting materials/tools included.
+  - Adjustable two-stage spring/elastomer feel, horizontal or vertical lever, yaw adapter plate.
+- compatibility:
+  - Windows 10 or newer, PC USB.
+  - Not compatible with consoles per Heusinkveld FAQ.
+- software/driver ecosystem:
+  - Heusinkveld SmartControl and SmartControl Live for force, curves, dead zones, and profiles.
+- strengths:
+  - Premium load-cell precision and software.
+  - Compact, strong, and highly adjustable.
+  - Strong support reputation.
+- limitations:
+  - PC only.
+  - Higher price than angle-sensor handbrakes.
+  - Requires solid mounting to feel right.
+- fit_notes:
+  - Excellent for rally/drift users already using Heusinkveld pedals.
+- similar_products:
+  - Fanatec ClubSport Handbrake V2
+  - SIMAGIC TB-RS
+  - VNM Handbrake V1.5
+- last_checked: 2026-04-29

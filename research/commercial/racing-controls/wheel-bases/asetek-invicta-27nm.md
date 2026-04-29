@@ -1,0 +1,39 @@
+# Asetek Invicta Direct Drive Wheelbase 27 Nm
+
+- product: Invicta Direct Drive Wheelbase 27 Nm
+- manufacturer: Asetek Racing
+- component_category: wheel-bases
+- subcategory: pro high-torque direct-drive wheel base
+- status: In stock on official global product snippet.
+- price_or_msrp: EUR 1,175.63 excluding VAT on official global page; checked 2026-04-29.
+- region/availability: Asetek global/US stores and resellers.
+- official_url: https://www.asetek.com/simsports/product/invicta-direct-drive-wheelbase-27nm/
+- source_urls:
+  - https://www.asetek.com/simsports/product/invicta-direct-drive-wheelbase-27nm/
+  - https://www.asetek.com/simsports/us/product/invicta-direct-drive-wheelbase-27nm/
+  - https://www.asetek.com/simsports/products/invicta/
+- key_specs:
+  - 27 Nm direct-drive wheel base.
+  - Resolution listed as 0.000085 degrees, about 4,000,000 steps per revolution.
+  - Peak slew rate listed in Invicta line page as 9.4 Nm/ms.
+  - Asetek quick release and third-party QR adapter ecosystem.
+- compatibility:
+  - PC.
+  - Asetek wheels and third-party wheels via Asetek quick-release adapter.
+- software/driver ecosystem:
+  - RaceHub for wheelbase, steering wheel, and pedal calibration/profiles.
+- strengths:
+  - Very high torque ceiling and fast response.
+  - Open-ish wheel path through QR adapter.
+  - Strong integration with Asetek pedals/wheels.
+- limitations:
+  - Expensive and physically demanding.
+  - PC-only official platform.
+  - High torque needs safety discipline and rigid mounting.
+- fit_notes:
+  - Pro/endurance rigs should use E-stop/torque-off strategy and profile cockpit.
+- similar_products:
+  - Simucube 2 Pro
+  - Fanatec Podium DD2
+  - MOZA R21
+- last_checked: 2026-04-29

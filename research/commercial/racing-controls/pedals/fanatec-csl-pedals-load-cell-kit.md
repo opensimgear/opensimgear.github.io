@@ -1,0 +1,35 @@
+# Fanatec CSL Pedals Load Cell Kit
+
+- product: CSL Pedals Load Cell Kit
+- manufacturer: Fanatec
+- component_category: pedals
+- subcategory: load-cell brake upgrade for CSL Pedals
+- status: Available on official US page in search result.
+- price_or_msrp: USD 99.99, official US store, checked 2026-04-29.
+- region/availability: Fanatec direct stores.
+- official_url: https://www.fanatec.com/us-en/accessories/pedal-accessories/csl-pedals-load-cell-kit
+- source_urls:
+  - https://www.fanatec.com/us-en/accessories/pedal-accessories/csl-pedals-load-cell-kit
+  - https://www.fanatec.com/us/en/explorer/products/pedals/csl-pedals-load-cell-kit/
+- key_specs:
+  - Replaces CSL brake pedal with load-cell brake module.
+  - 12-bit precision, adjustable brake force, heavy elastomer stack with 65 Shore hardness.
+  - Adds upgraded electronics with USB or RJ12 connection; standard brake can become clutch.
+- compatibility:
+  - Only compatible with CSL Pedals.
+  - PC standalone by USB when installed; console through compatible Fanatec base.
+- software/driver ecosystem:
+  - Fanatec Tuning Menu / Control Panel for brake force and calibration.
+- strengths:
+  - Cheap path from travel brake to pressure-based braking.
+  - Makes CSL Pedals much more viable for competitive racing.
+- limitations:
+  - Requires CSL Pedals.
+  - Elastomer feel is stiff and less tunable than higher-end pedal sets.
+- fit_notes:
+  - Needs hard mounting; load-cell force can push loose floor pedals away.
+- similar_products:
+  - Fanatec CSL Elite Pedals V2
+  - Thrustmaster T-LCM
+  - Logitech RS Pedals
+- last_checked: 2026-04-29
