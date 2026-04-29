@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { productImages } from '~/data/3rdparty-product-images';
 
   type ProductKind = 'commercial' | 'opensource';
   type ProductValue = string | string[] | null;
@@ -18,6 +19,22 @@
     | 'price-desc'
     | 'sources-desc'
     | 'checked-desc';
+  type ProductImage = {
+    src: string;
+    width: number;
+    height: number;
+    format: string;
+  };
+  type ProductImageRecord = {
+    url: string;
+    asset: string;
+    alt: string;
+    source_url: string | null;
+    source_type: string;
+    width: number;
+    height: number;
+    format: string;
+  };
 
   type Product = {
     id: string;
@@ -50,6 +67,7 @@
     };
     details: Record<string, ProductValue>;
     raw_fields: Record<string, ProductValue>;
+    image: ProductImageRecord;
   };
 
   type Option = {
@@ -199,11 +217,21 @@
   }
 
   function makerName(product: Product): string {
-    return product.organization.display ?? product.organization.manufacturer ?? product.organization.maintainer_or_org ?? '';
+    return (
+      product.organization.display ?? product.organization.manufacturer ?? product.organization.maintainer_or_org ?? ''
+    );
   }
 
   function productHref(product: Product): string {
     return `/products/${product.kind}/${product.component_category}/${product.slug}/`;
+  }
+
+  function productImage(product: Product): ProductImage | null {
+    return productImages[product.id] ?? null;
+  }
+
+  function imageAlt(product: Product): string {
+    return product.image?.alt ?? `${product.title || product.name} product photo`;
   }
 
   function asList(value: ProductValue | undefined): string[] {
@@ -296,7 +324,11 @@
 
   function availabilityBucket(product: Product): AvailabilityBucket {
     const value = normalizeText(
-      [product.availability.status, product.availability.maturity_or_status, product.availability.region_or_availability]
+      [
+        product.availability.status,
+        product.availability.maturity_or_status,
+        product.availability.region_or_availability,
+      ]
         .filter(Boolean)
         .join(' ')
     );
@@ -407,7 +439,9 @@
       case 'name-desc':
         return compareText(b.title || b.name, a.title || a.name);
       case 'category-asc':
-        return compareText(a.component_category, b.component_category) || compareText(a.title || a.name, b.title || b.name);
+        return (
+          compareText(a.component_category, b.component_category) || compareText(a.title || a.name, b.title || b.name)
+        );
       case 'kind-asc':
         return (
           compareText(kindLabel(a.kind), kindLabel(b.kind)) ||
@@ -578,61 +612,77 @@
       <p class="empty-state">{loadError}</p>
     {:else}
       {#each filteredProducts as product (product.id)}
+        {@const image = productImage(product)}
         <article class="product-card">
-          <div class="product-card__header">
-            <div>
-              <h2>
-                <a href={productHref(product)}>{product.title || product.name}</a>
-              </h2>
-              <p>{makerName(product) || 'Unknown maker'}</p>
-            </div>
-            <span class="kind-badge" data-kind={product.kind}>{kindLabel(product.kind)}</span>
-          </div>
-
-          <div class="tag-row" aria-label="Product attributes">
-            <span>{titleCaseSlug(product.component_category)}</span>
-            {#if product.category_group}
-              <span>{titleCaseSlug(product.category_group)}</span>
-            {/if}
-            {#if product.subcategory}
-              <span>{product.subcategory}</span>
-            {/if}
-          </div>
-
-          {#if productSummary(product)}
-            <p class="product-card__summary">{productSummary(product)}</p>
+          {#if image}
+            <a class="product-card__media" href={productHref(product)} aria-label={`View ${product.name}`}>
+              <img
+                src={image.src}
+                alt={imageAlt(product)}
+                width={image.width}
+                height={image.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
           {/if}
 
-          <dl class="fact-grid">
-            {#if priceText(product)}
+          <div class="product-card__body">
+            <div class="product-card__header">
               <div>
-                <dt>Price</dt>
-                <dd>{priceText(product)}</dd>
+                <h2>
+                  <a href={productHref(product)}>{product.title || product.name}</a>
+                </h2>
+                <p>{makerName(product) || 'Unknown maker'}</p>
               </div>
-            {/if}
-            {#if product.availability.license}
-              <div>
-                <dt>License</dt>
-                <dd>{product.availability.license}</dd>
-              </div>
-            {/if}
-            <div>
-              <dt>Sources</dt>
-              <dd>{sourceCount(product)}</dd>
+              <span class="kind-badge" data-kind={product.kind}>{kindLabel(product.kind)}</span>
             </div>
-            {#if product.last_checked}
-              <div>
-                <dt>Checked</dt>
-                <dd>{product.last_checked}</dd>
-              </div>
-            {/if}
-          </dl>
 
-          <div class="link-row">
-            <a href={productHref(product)}>Details</a>
-            {#each primarySourceLinks(product) as link (link.label)}
-              <a href={link.url} rel="noreferrer">{link.label}</a>
-            {/each}
+            <div class="tag-row" aria-label="Product attributes">
+              <span>{titleCaseSlug(product.component_category)}</span>
+              {#if product.category_group}
+                <span>{titleCaseSlug(product.category_group)}</span>
+              {/if}
+              {#if product.subcategory}
+                <span>{product.subcategory}</span>
+              {/if}
+            </div>
+
+            {#if productSummary(product)}
+              <p class="product-card__summary">{productSummary(product)}</p>
+            {/if}
+
+            <dl class="fact-grid">
+              {#if priceText(product)}
+                <div>
+                  <dt>Price</dt>
+                  <dd>{priceText(product)}</dd>
+                </div>
+              {/if}
+              {#if product.availability.license}
+                <div>
+                  <dt>License</dt>
+                  <dd>{product.availability.license}</dd>
+                </div>
+              {/if}
+              <div>
+                <dt>Sources</dt>
+                <dd>{sourceCount(product)}</dd>
+              </div>
+              {#if product.last_checked}
+                <div>
+                  <dt>Checked</dt>
+                  <dd>{product.last_checked}</dd>
+                </div>
+              {/if}
+            </dl>
+
+            <div class="link-row">
+              <a href={productHref(product)}>Details</a>
+              {#each primarySourceLinks(product) as link (link.label)}
+                <a href={link.url} rel="noreferrer">{link.label}</a>
+              {/each}
+            </div>
           </div>
         </article>
       {:else}
@@ -768,10 +818,38 @@
 
   .product-card {
     display: grid;
+    grid-template-columns: minmax(7.5rem, 10rem) minmax(0, 1fr);
     gap: 0.85rem;
+    align-items: start;
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 8px;
     padding: 1rem;
+  }
+
+  .product-card__media {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid var(--sl-color-gray-6);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--sl-color-bg), var(--sl-color-gray-6) 30%);
+    text-decoration: none;
+  }
+
+  .product-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.4rem;
+  }
+
+  .product-card__body {
+    display: grid;
+    gap: 0.85rem;
+    min-width: 0;
   }
 
   .product-card__header {
@@ -903,6 +981,14 @@
 
     .kind-badge {
       align-self: start;
+    }
+
+    .product-card {
+      grid-template-columns: 1fr;
+    }
+
+    .product-card__media {
+      max-width: 12rem;
     }
   }
 </style>

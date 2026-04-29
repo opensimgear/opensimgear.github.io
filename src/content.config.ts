@@ -7,6 +7,16 @@ import { autoSidebarLoader } from 'starlight-auto-sidebar/loader';
 import { autoSidebarSchema } from 'starlight-auto-sidebar/schema';
 
 const productValueSchema = z.union([z.string(), z.array(z.string()), z.null()]);
+const productImageSchema = z.object({
+  url: z.string(),
+  asset: z.string(),
+  alt: z.string(),
+  source_url: z.string().nullable(),
+  source_type: z.string(),
+  width: z.number(),
+  height: z.number(),
+  format: z.string(),
+});
 
 const products = defineCollection({
   loader: file('src/data/3rdparty-products.json', {
@@ -47,6 +57,7 @@ const products = defineCollection({
     details: z.record(z.string(), productValueSchema),
     raw_fields: z.record(z.string(), productValueSchema),
     original_field_names: z.record(z.string(), z.string()),
+    image: productImageSchema,
     content_markdown: z.string(),
   }),
 });

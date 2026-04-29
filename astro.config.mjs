@@ -14,6 +14,7 @@ import robotsTxt from 'astro-robots-txt';
 import webmanifest from 'astro-webmanifest';
 import checks from '@nuasite/checks';
 
+import { productSidebarItems } from './product-sidebar.mjs';
 import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -74,11 +75,7 @@ export default defineConfig({
         },
         {
           label: 'Products',
-          items: [
-            { label: 'All Products', link: '/products/' },
-            { label: 'Commercial', link: '/products/commercial/' },
-            { label: 'Open Source', link: '/products/opensource/' },
-          ],
+          items: productSidebarItems,
         },
         {
           label: '3rd Party',

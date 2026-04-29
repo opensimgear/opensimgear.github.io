@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { productImages } from '~/data/3rdparty-product-images';
 
 type Product = CollectionEntry<'products'>['data'];
 
@@ -8,6 +9,7 @@ type Props = {
 };
 
 const { product } = Astro.props;
+const image = productImages[product.id];
 
 function titleCaseSlug(value: string) {
   return value
@@ -49,9 +51,33 @@ const overviewRows = [
 
 const detailRows = Object.entries(product.raw_fields).filter(([field]) => field !== 'source_urls');
 const sourceUrls = product.urls.sources.filter((url) => /^https?:\/\//.test(url));
+const imageAlt = product.image?.alt ?? `${product.title || product.name} product photo`;
 ---
 
 <section class="product-detail">
+  {
+    image && (
+      <figure class="product-detail__media">
+        <img
+          src={image.src}
+          alt={imageAlt}
+          width={image.width}
+          height={image.height}
+          loading="eager"
+          decoding="async"
+        />
+        {product.image?.source_url && (
+          <figcaption>
+            Image source:{' '}
+            <a href={product.image.source_url} rel="noreferrer">
+              {product.image.source_type}
+            </a>
+          </figcaption>
+        )}
+      </figure>
+    )
+  }
+
   <div class="product-detail__summary">
     {
       overviewRows.map(([label, value]) => (
@@ -105,6 +131,29 @@ const sourceUrls = product.urls.sources.filter((url) => /^https?:\/\//.test(url)
   .product-detail {
     display: grid;
     gap: 1.25rem;
+  }
+
+  .product-detail__media {
+    display: grid;
+    gap: 0.45rem;
+    justify-items: start;
+    margin: 0;
+  }
+
+  .product-detail__media img {
+    display: block;
+    width: min(100%, 44rem);
+    max-height: 26rem;
+    object-fit: contain;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--sl-color-bg), var(--sl-color-gray-6) 30%);
+    padding: 0.75rem;
+  }
+
+  .product-detail__media figcaption {
+    color: var(--sl-color-gray-3);
+    font-size: 0.85rem;
   }
 
   .product-detail__summary {

@@ -8,11 +8,13 @@ const TIMEOUT_MS = 12000;
 const MAX_HTML_BYTES = 2_000_000;
 const MAX_IMAGE_BYTES = 8_000_000;
 const CONCURRENCY = 8;
+const refreshAll = process.argv.includes('--refresh');
 
 const imageExtensions = new Set(['jpg', 'jpeg', 'png', 'webp', 'avif']);
 const weakImagePattern =
   /logo|icon|favicon|sprite|placeholder|avatar|profile|banner|payment|paypal|klarna|visa|mastercard|amex|trust|badge|flag|loading|spinner|pixel|tracking|social|share|apple-touch/i;
-const strongImagePattern = /product|hero|main|gallery|media|photo|image|jpg|jpeg|png|webp|avif|render|build|kit|pedal|wheel|base|shifter|handbrake|joystick|throttle|collective|yoke|seat|rig|cockpit|tension|motion|button|panel|vr|tracker|headset|display|wind/i;
+const strongImagePattern =
+  /product|hero|main|gallery|media|photo|image|jpg|jpeg|png|webp|avif|render|build|kit|pedal|wheel|base|shifter|handbrake|joystick|throttle|collective|yoke|seat|rig|cockpit|tension|motion|button|panel|vr|tracker|headset|display|wind/i;
 
 function isHttpUrl(value) {
   return typeof value === 'string' && /^https?:\/\//i.test(value);
@@ -81,7 +83,8 @@ async function fetchWithTimeout(url, options = {}) {
     return await fetch(url, {
       ...options,
       headers: {
-        accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/jpeg,*/*;q=0.8',
+        accept:
+          'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/jpeg,*/*;q=0.8',
         'accept-language': 'en-US,en;q=0.9',
         'user-agent': USER_AGENT,
         ...(options.headers ?? {}),
@@ -126,6 +129,22 @@ async function fetchHtml(url) {
   }
 }
 
+async function fetchText(url) {
+  try {
+    const response = await fetchWithTimeout(url, {
+      headers: {
+        accept: 'text/plain,text/markdown,text/html,*/*;q=0.8',
+      },
+    });
+    if (!response.ok) return null;
+
+    const buffer = await responseBuffer(response, MAX_HTML_BYTES);
+    return buffer.toString('utf8');
+  } catch {
+    return null;
+  }
+}
+
 function attributeMap(tag) {
   const attrs = {};
   const pattern = /([:@\w.-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g;
@@ -148,7 +167,11 @@ function extractMetaImages(html, baseUrl, source) {
   for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
     const attrs = attributeMap(match[0]);
     const key = (attrs.property ?? attrs.name ?? attrs.itemprop ?? '').toLowerCase();
-    if (!/^(og:image|og:image:secure_url|twitter:image|twitter:image:src|image|thumbnail|thumbnailurl|thing:thumbnail)$/.test(key)) {
+    if (
+      !/^(og:image|og:image:secure_url|twitter:image|twitter:image:src|image|thumbnail|thumbnailurl|thing:thumbnail)$/.test(
+        key
+      )
+    ) {
       continue;
     }
 
@@ -292,6 +315,93 @@ function extractImgTags(html, baseUrl, source) {
   return candidates;
 }
 
+function extractLooseImageUrls(text, baseUrl, source) {
+  const candidates = [];
+
+  for (const match of text.matchAll(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g)) {
+    const imageUrl = normalizeUrl(match[2], baseUrl);
+    if (!imageUrl) continue;
+
+    candidates.push({
+      url: imageUrl,
+      sourceUrl: source.url,
+      sourceType: source.type,
+      role: 'markdown',
+      alt: match[1] ?? '',
+      sourceRank: source.rank,
+    });
+  }
+
+  const absoluteImagePattern = /https?:\/\/[^"')\s<>]*\.(?:jpe?g|png|webp|avif)(?:\?[^"')\s<>]*)?/gi;
+  const quotedImagePattern = /["']([^"']*\.(?:jpe?g|png|webp|avif)(?:\?[^"']*)?)["']/gi;
+
+  for (const match of text.matchAll(absoluteImagePattern)) {
+    const imageUrl = normalizeUrl(match[0], baseUrl);
+    if (!imageUrl) continue;
+
+    candidates.push({
+      url: imageUrl,
+      sourceUrl: source.url,
+      sourceType: source.type,
+      role: 'loose',
+      alt: '',
+      sourceRank: source.rank,
+    });
+  }
+
+  for (const match of text.matchAll(quotedImagePattern)) {
+    const imageUrl = normalizeUrl(match[1], baseUrl);
+    if (!imageUrl) continue;
+
+    candidates.push({
+      url: imageUrl,
+      sourceUrl: source.url,
+      sourceType: source.type,
+      role: 'loose',
+      alt: '',
+      sourceRank: source.rank,
+    });
+  }
+
+  return candidates;
+}
+
+function githubRepoInfo(url) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname !== 'github.com') return null;
+
+    const [owner, repo] = parsed.pathname.split('/').filter(Boolean);
+    if (!owner || !repo) return null;
+
+    return { owner, repo: repo.replace(/\.git$/, '') };
+  } catch {
+    return null;
+  }
+}
+
+async function githubReadmeCandidates(source) {
+  const repoInfo = githubRepoInfo(source.url);
+  if (!repoInfo) return [];
+
+  const candidates = [];
+  for (const branch of ['main', 'master']) {
+    const readmeUrl = `https://raw.githubusercontent.com/${repoInfo.owner}/${repoInfo.repo}/${branch}/README.md`;
+    const text = await fetchText(readmeUrl);
+    if (!text) continue;
+
+    candidates.push(
+      ...extractLooseImageUrls(text, readmeUrl, {
+        ...source,
+        url: readmeUrl,
+        type: source.type,
+      })
+    );
+  }
+
+  return candidates;
+}
+
 function productTokens(product) {
   const words = [
     product.name,
@@ -327,9 +437,13 @@ function candidateScore(candidate, product) {
   if (candidate.role === 'link') score += 20;
   if (candidate.role === 'img') score += 14;
   if (candidate.role === 'direct') score += 35;
+  if (candidate.role === 'markdown') score += 28;
+  if (candidate.role === 'loose') score += 18;
+  if (candidate.role === 'youtube') score += 12;
   if (strongImagePattern.test(haystack)) score += 10;
   if (imageExtensions.has(ext)) score += 8;
-  if (candidate.widthHint && candidate.heightHint) score += Math.min(candidate.widthHint, candidate.heightHint) >= 300 ? 12 : -6;
+  if (candidate.widthHint && candidate.heightHint)
+    score += Math.min(candidate.widthHint, candidate.heightHint) >= 300 ? 12 : -6;
   if (candidate.width && candidate.height) {
     if (candidate.width >= 500 && candidate.height >= 350) score += 26;
     if (candidate.width >= 900 && candidate.height >= 600) score += 12;
@@ -416,6 +530,8 @@ async function candidatesForSource(source) {
     });
   }
 
+  candidates.push(...(await githubReadmeCandidates(source)));
+
   const html = await fetchHtml(source.url);
   if (!html) return candidates;
 
@@ -424,6 +540,7 @@ async function candidatesForSource(source) {
     ...extractJsonLdImages(html, source.url, source),
     ...extractMetaImages(html, source.url, source),
     ...extractImgTags(html, source.url, source),
+    ...extractLooseImageUrls(html, source.url, source),
   ];
 }
 
@@ -497,6 +614,12 @@ const database = JSON.parse(await readFile(dataPath, 'utf8'));
 let completed = 0;
 
 const images = await runQueue(database.products, async (product) => {
+  if (product.image && !refreshAll) {
+    completed += 1;
+    console.log(`${completed}/${database.products.length} keep ${product.id}`);
+    return product.image;
+  }
+
   const image = await enrichProduct(product);
   completed += 1;
   const marker = image ? 'ok' : 'miss';
