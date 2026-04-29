@@ -1,0 +1,50 @@
+# OpenHarrier AV8B-NA
+
+- project: OpenHarrier AV8B-NA
+- maintainer_or_org: OpenHarrier
+- component_category: rigs-and-cockpits
+- subcategory: full-scale flight cockpit
+- maturity_or_status: Active/open project; GitHub org shows AV8B-NA repo updated January 2026.
+- license: GPL-3.0 in AV8B-NA repository
+- repo_url: https://github.com/OpenHarrier/AV8B-NA
+- docs_url: https://openharrier.org/
+- source_urls:
+  - https://openharrier.org/
+  - https://github.com/OpenHarrier
+  - https://github.com/OpenHarrier/AV8B-NA
+  - https://openharrier.org/build-photos/ejection-seat/
+- key_features:
+  - Open source design for a full-scale AV-8B Harrier simulation cockpit.
+  - Modular build strategy for ejection seat, main console, left console, and right console.
+  - Supports wood, 3D printed parts, laser-cut/engraved or CNC-cut panels, and real or simulated Dzus rails.
+  - Uses free/open tools such as FreeCAD and KiCad for design files.
+- hardware_or_bom:
+  - Repository includes AV-8B files, ejection-seat folder, cockpit components, and electronics/CAD assets [repository
+    structure visible; exact BOM completeness uncertain].
+  - Hardware approach combines wood structure, acrylic/panel fabrication, 3D prints, and Arduino-based electronics.
+- firmware_or_software_stack:
+  - Arduino used for most electronics per project home page.
+  - KiCad appears in workflow for electronics design.
+- build_requirements:
+  - FreeCAD/KiCad literacy.
+  - Woodworking, 3D printing, laser/CNC panel fabrication, and Arduino wiring skills.
+  - Access to cockpit reference material and patience for replica layout work.
+- compatibility:
+  - Targeted to AV-8B Harrier simulation cockpits, likely DCS AV-8B workflows [uncertain].
+  - Real panels can be mixed with fabricated panels where dimensions match.
+- strengths:
+  - More modular than a monolithic cockpit, so builders can start with seat or consoles.
+  - Open workflow avoids proprietary CAD/ECAD software.
+  - Useful for Harrier-specific cockpit ergonomics and side-console geometry.
+- limitations:
+  - Narrow aircraft focus.
+  - Smaller ecosystem than OpenHornet.
+  - Some planned seat variant support, such as Martin-Baker Mk10, is not yet available per project page.
+- commercial_analogs:
+  - Custom AV-8B trainer cockpits
+  - NeoEngress combat cockpit fabrication services
+  - Dogfight Boss modular flight cockpit panels
+- fit_notes:
+  - Strong candidate for Harrier-focused builders who want accurate seat/consoles without starting from blank CAD.
+  - Also useful as a pattern for modular wood plus printed-part cockpit construction.
+- last_checked: 2026-04-29

@@ -1,0 +1,39 @@
+# Meta Quest 3S
+
+- product: Meta Quest 3S
+- manufacturer: Meta
+- component_category: vr-and-head-tracking
+- subcategory: budget standalone mixed-reality VR headset
+- status: current
+- price_or_msrp: USD $349.99 128GB and USD $449.99 256GB current US prices after 2026-04-19 increase, from recent
+  reporting; official store price not captured directly [uncertain]
+- region/availability: Meta Store and major retailers in supported Quest regions.
+- official_url: https://www.meta.com/quest/quest-3s/
+- source_urls:
+  - https://www.tomshardware.com/virtual-reality/meta-raising-quest-headset-prices-due-to-ai-driven-ram-shortage-quest-3-to-cost-usd600-quest-3s-usd350-from-april-19
+  - https://www.pcgamer.com/hardware/vr-hardware/meta-is-raising-the-price-of-the-quest-3-and-quest-3s-due-to-memory-price-rises-made-worse-by-meta/
+  - https://www.androidcentral.com/gaming/virtual-reality/meta-quest-3s
+- key_specs:
+  - Snapdragon XR2 Gen 2 and 8 GB RAM class hardware.
+  - 1832 x 1920 pixels per eye LCD.
+  - Fresnel lenses.
+  - Full-color passthrough and Touch Plus controllers.
+  - 128 GB and 256 GB storage models.
+- compatibility:
+  - Quest Store/Horizon OS standalone.
+  - PC VR through wired/wireless streaming options.
+- software/driver ecosystem:
+  - Meta Horizon OS, Quest Store, Meta PC app, SteamVR streaming options.
+- strengths:
+  - Lowest current-cost route into modern Quest ecosystem.
+  - Same main chipset generation as Quest 3.
+- limitations:
+  - Fresnel lenses and lower resolution hurt gauge clarity versus Quest 3.
+  - Same PC VR compression trade-offs as Quest 3.
+- fit_notes:
+  - Good budget headset, but flight sim users reading small instruments should prefer Quest 3 or higher-resolution PCVR.
+- similar_products:
+  - Meta Quest 3
+  - PlayStation VR2 with PC adapter
+  - Pico 4
+- last_checked: 2026-04-29

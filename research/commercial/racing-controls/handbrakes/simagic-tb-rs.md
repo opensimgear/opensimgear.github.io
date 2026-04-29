@@ -1,0 +1,39 @@
+# SIMAGIC TB-RS Hydraulic Handbrake
+
+- product: TB-RS Hydraulic Handbrake
+- manufacturer: SIMAGIC
+- component_category: handbrakes
+- subcategory: hydraulic analog handbrake
+- status: In stock on official page in search result.
+- price_or_msrp: USD 239.00 sale price, USD 269.00 regular price, official page, checked 2026-04-29.
+- region/availability: SIMAGIC official store and distributors.
+- official_url: https://simagic.com/pages/details-tb-rs
+- source_urls:
+  - https://simagic.com/pages/details-tb-rs
+  - https://simagic.com/products/simagic-tb-rs
+  - https://image.simagic.com/profile/upload/2024/04/19/SIMAGIC_TB-RS_UM.pdf
+- key_specs:
+  - Hydraulic handbrake with adjustable damping.
+  - Aluminum alloy construction.
+  - Horizontal handle installation supported; rotatable oil container.
+  - 178 x 95 x 387 mm, 1.35 kg.
+  - M6 threaded and through-hole mounting.
+  - Optional SIMAGIC haptic feedback module support.
+- compatibility:
+  - PC direct by USB or SIMAGIC wheel base.
+- software/driver ecosystem:
+  - SimPro Manager 2.0 for detection, updates, and handbrake configuration.
+- strengths:
+  - Hydraulic feel and strong adjustability.
+  - Haptic upgrade path inside SIMAGIC ecosystem.
+  - Works standalone or through SIMAGIC base.
+- limitations:
+  - More expensive than MOZA HBP and TB-1.
+  - Hydraulic hardware adds complexity and potential service concerns.
+- fit_notes:
+  - Good premium rally/drift match for SIMAGIC Alpha/P1000/P2000 rigs.
+- similar_products:
+  - Heusinkveld Handbrake
+  - Fanatec ClubSport Handbrake V2
+  - VNM Handbrake V1.5
+- last_checked: 2026-04-29

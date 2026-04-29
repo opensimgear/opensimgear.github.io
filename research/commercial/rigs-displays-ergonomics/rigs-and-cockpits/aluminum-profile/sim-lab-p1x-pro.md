@@ -1,0 +1,35 @@
+# Sim-Lab P1X Pro
+
+- product: P1X Pro Sim Racing Cockpit
+- manufacturer: Sim-Lab
+- component_category: rigs-and-cockpits
+- subcategory: high-end aluminum profile cockpit
+- status: current
+- price_or_msrp: Price varies by region/options; official page did not expose captured price [uncertain], checked
+  2026-04-29
+- region/availability: EU/global Sim-Lab store; US availability through Sim-Lab US and retailers varies.
+- official_url: https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit
+- source_urls:
+  - https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit
+  - https://sim-lab.eu/en-us/collections/p1x-pro-sim-racing-cockpit
+- key_specs:
+  - Flagship aluminum profile cockpit for high-load direct drive and pedal setups.
+  - Modular profile structure for monitor mounts, shifters, button boxes, and motion accessories.
+  - Seat and accessories normally configured separately.
+- compatibility:
+  - Fits broad wheelbase/pedal ecosystem through wheel deck and front-mount options.
+  - Works with Sim-Lab monitor and Vario mounting accessories.
+- software/driver ecosystem: None; physical mounting product.
+- strengths:
+  - Very rigid base for high-end hardware.
+  - Large accessory ecosystem.
+- limitations:
+  - Higher cost and larger footprint than GT1 Evo.
+  - More assembly and configuration effort.
+- fit_notes:
+  - Best when future motion, triples, heavy pedals, or pro controls are likely.
+- similar_products:
+  - Advanced SimRacing ASR Pro
+  - Trak Racer TR160
+  - Next Level Racing F-GT Elite 160
+- last_checked: 2026-04-29

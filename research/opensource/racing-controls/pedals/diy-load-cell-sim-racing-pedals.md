@@ -1,0 +1,48 @@
+# DIY Load Cell Sim Racing Pedals
+
+- project: DIY Load Cell Sim Racing Pedals
+- maintainer_or_org: tbattz
+- component_category: pedals
+- subcategory: Arduino load-cell pedal firmware
+- maturity_or_status: Small firmware/reference project; active enough but not a full mechanical pedal design.
+- license: GPL-3.0
+- repo_url: https://github.com/tbattz/DIYLoadCellSimRacingPedals
+- docs_url: https://github.com/tbattz/DIYLoadCellSimRacingPedals
+- source_urls:
+  - https://github.com/tbattz/DIYLoadCellSimRacingPedals
+  - https://github.com/MHeironimus/ArduinoJoystickLibrary
+- key_features:
+  - Arduino scripts read two load cells and expose brake/throttle as Windows joystick inputs.
+  - Uses HX711 amplifiers and Arduino Joystick Library.
+  - Notes HX711 10 Hz vs 80 Hz rate modification.
+- hardware_or_bom:
+  - Arduino Leonardo or other ATmega32u4 board.
+  - Two HX711 load-cell amplifiers.
+  - Two straight bar load cells.
+  - External mechanical pedal structure required.
+- firmware_or_software_stack:
+  - Arduino sketch.
+  - HX711 Arduino library.
+  - MHeironimus ArduinoJoystickLibrary.
+- build_requirements:
+  - Wire HX711 boards and load cells.
+  - Use ATmega32u4 board for USB HID.
+  - Optionally modify HX711 board for faster 80 Hz reads.
+- compatibility:
+  - Windows PC joystick/game controller via USB HID.
+  - Can map in sims as separate pedal axes.
+- strengths:
+  - Minimal, understandable firmware reference.
+  - Useful for adding load-cell electronics to existing DIY mechanics.
+  - GPL-licensed.
+- limitations:
+  - No mechanical CAD/BOM for pedal bodies.
+  - HX711 speed/noise tradeoff needs attention.
+  - Basic calibration and filtering compared with dedicated pedal firmware.
+- commercial_analogs:
+  - Thrustmaster T-LCM electronics concept
+  - Fanatec CSL Load Cell Kit
+  - entry load-cell pedal mods
+- fit_notes:
+  - Use as electronics starting point, not complete pedal product.
+- last_checked: 2026-04-29

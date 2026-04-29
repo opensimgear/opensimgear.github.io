@@ -1,0 +1,35 @@
+# Next Level Racing ERS3 Elite Reclining Seat
+
+- product: ERS3 Elite Reclining Seat
+- manufacturer: Next Level Racing
+- component_category: seats-and-ergonomics
+- subcategory: reclining sim racing seat
+- status: sold out on official US store during check
+- price_or_msrp: USD $249 official US store, checked 2026-04-29
+- region/availability: US official store and global retailers; stock varies.
+- official_url: https://store-us.nextlevelracing.com/products/ers3-elite-reclining-seat
+- source_urls:
+  - https://store-us.nextlevelracing.com/products/ers3-elite-reclining-seat
+  - https://nextlevelracing.com/products/ers3/
+  - https://store-us.nextlevelracing.com/collections/seats
+- key_specs:
+  - Reclining sim seat with double recliners.
+  - Designed for long sessions and a wide/open seating feel.
+  - Leather and suede edition variants appear in retailer listings.
+- compatibility:
+  - Pairs with Next Level Racing Elite and compatible universal seat brackets.
+  - Suitable for GT, truck, and farming-style upright positions.
+- software/driver ecosystem: None; physical seating product.
+- strengths:
+  - Affordable comfort upgrade versus rigid bucket seats.
+  - Recline makes mixed-use rigs easier to fit.
+- limitations:
+  - Reclining mechanisms can flex more than fixed shells under heavy braking.
+  - Stock was unavailable on official US store at check time.
+- fit_notes:
+  - Good for users prioritizing comfort and adjustability over pure racing support.
+- similar_products:
+  - Next Level Racing ERS4
+  - GT Omega RS12
+  - Trak Racer Recliner Seat
+- last_checked: 2026-04-29

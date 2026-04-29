@@ -1,0 +1,38 @@
+# MOZA R12 V2 Wheel Base
+
+- product: R12 V2 Wheel Base
+- manufacturer: MOZA Racing
+- component_category: wheel-bases
+- subcategory: mid/high direct-drive wheel base
+- status: Current MOZA product; US product page showed sale pricing.
+- price_or_msrp: USD 429.00 sale price, USD 469.00 regular price, official US store, checked 2026-04-29.
+- region/availability: MOZA US/global stores and resellers.
+- official_url: https://us.mozaracing.com/products/r12-wheelbase
+- source_urls:
+  - https://us.mozaracing.com/products/r12-wheelbase
+  - https://mozaracing.com/en-us/r12-wheel-base/
+  - https://mozaracing.com/en-us/product/r12-wheel-base/
+- key_specs:
+  - 12 Nm direct drive, 21-bit magnetic encoder.
+  - 216 W peak power, 1000 Hz USB refresh, 90 to 2700 degree rotation.
+  - 225.87 x 156.68 x 123.99 mm, 7.5 kg.
+  - Ports for power, USB, pedal, dash, shifter, handbrake, E-stop.
+- compatibility:
+  - PC and MOZA ecosystem.
+  - Supports optional table clamp and E-stop.
+- software/driver ecosystem:
+  - MOZA Pit House, mobile app, NexGen 4.0 FFB, iRacing 360 Hz mode support noted by MOZA.
+- strengths:
+  - Sweet-spot torque for many aluminum-profile rigs.
+  - Advanced encoder and FFB stack at midrange price.
+  - Good port selection.
+- limitations:
+  - PC-only official platform.
+  - Stronger bases still offer more headroom for heavy rims and low clipping.
+- fit_notes:
+  - Needs rigid wheel deck; useful step before 16 to 21 Nm class.
+- similar_products:
+  - Fanatec ClubSport DD
+  - Thrustmaster T818
+  - Asetek Forte Wheelbase
+- last_checked: 2026-04-29

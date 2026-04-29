@@ -1,0 +1,38 @@
+# NaturalPoint TrackIR 5
+
+- product: TrackIR 5
+- manufacturer: NaturalPoint
+- component_category: vr-and-head-tracking
+- subcategory: optical head tracking
+- status: current through official/authorized regional retailers; official JS site not crawlable
+- price_or_msrp: GBP 179.99 basic, GBP 189.99 standard, GBP 222.16 gamer bundle on TrackIR UK; US reseller bundle USD
+  $175 from Jestik, checked 2026-04-29 [uncertain by region]
+- region/availability: Official TrackIR site plus UK/EU/US resellers; stock varies.
+- official_url: https://trackir.com/products/trackir5/
+- source_urls:
+  - https://trackir.com/products/trackir5/
+  - https://www.trackir.co.uk/collections/bundle
+  - https://www.jestik.com/products/natural-point-trackclip-pro-bundle
+  - https://d1rhoi6onixddn.cloudfront.net/docs/TrackIR-software-5_5_0-Manual_24.07.pdf
+- key_specs:
+  - Infrared optical 6DoF head tracking.
+  - Reseller specs list 640 x 480 raw resolution, 120 FPS sample rate, 9 ms response time, 51.7 degree FOV.
+  - Uses passive TrackClip or active TrackClip Pro.
+- compatibility:
+  - PC sims with TrackIR Enhanced support; broad flight sim support.
+  - TrackClip Pro attaches to headset; passive clip uses cap/reflectors.
+- software/driver ecosystem:
+  - NaturalPoint TrackIR 5.x software and supported game list.
+- strengths:
+  - Mature, low-latency head tracking with broad sim support.
+  - Keeps real cockpit controls visible.
+- limitations:
+  - Needs clip/cap and line of sight.
+  - Official software/game-list updates can affect support.
+- fit_notes:
+  - Best for DCS/MSFS/space sims on monitors when VR is too hot, blurry, or isolating.
+- similar_products:
+  - Tobii Eye Tracker 5
+  - TrackHat Sensor V2
+  - DelanClip Fusion Pro
+- last_checked: 2026-04-29

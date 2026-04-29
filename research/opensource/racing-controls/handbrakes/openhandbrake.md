@@ -1,0 +1,38 @@
+# OpenHandbrake
+
+- project: OpenHandbrake
+- maintainer_or_org: BiggiePete
+- component_category: handbrakes
+- subcategory: embedded controller and hardware handbrake project
+- maturity_or_status: Very early/simple repository; source exists but documentation is minimal.
+- license: MIT
+- repo_url: https://github.com/BiggiePete/OpenHandbrake
+- docs_url: https://github.com/BiggiePete/OpenHandbrake
+- source_urls:
+  - https://github.com/BiggiePete/OpenHandbrake
+- key_features:
+  - Embedded controller and hardware project for a simple, non-FFB sim racing handbrake.
+  - Goal is a strong HID software interface and cost-effective base/handle manufacturing.
+- hardware_or_bom:
+  - Repository intent covers base, handle, and embedded controller; detailed BOM not evident from README [uncertain].
+- firmware_or_software_stack:
+  - Embedded HID firmware [uncertain implementation details].
+- build_requirements:
+  - Insufficient public build docs in README; inspect source/CAD before attempting [uncertain].
+- compatibility:
+  - Intended as USB HID handbrake for racing sims.
+- strengths:
+  - MIT license.
+  - Explicitly targets both controller and hardware, not only firmware.
+  - Could become a clean open handbrake base if documentation grows.
+- limitations:
+  - Minimal docs and no proven community adoption yet.
+  - Maturity is far behind zhyma or AM-STUDIO examples.
+  - BOM/build steps unclear.
+- commercial_analogs:
+  - MOZA HBP
+  - Fanatec ClubSport Handbrake
+  - Aiologs Handbrake
+- fit_notes:
+  - Track as emerging MIT project; not enough public detail for a reliable build recommendation.
+- last_checked: 2026-04-29

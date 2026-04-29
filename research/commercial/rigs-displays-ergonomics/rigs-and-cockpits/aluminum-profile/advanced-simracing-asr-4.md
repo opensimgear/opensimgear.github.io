@@ -1,0 +1,35 @@
+# Advanced SimRacing ASR 4
+
+- product: ASR 4 Chassis Open Face
+- manufacturer: Advanced SimRacing
+- component_category: rigs-and-cockpits
+- subcategory: high-end aluminum profile cockpit
+- status: current; EVO wheel deck variants on back order during check
+- price_or_msrp: CAD $1,179.99 official page, checked 2026-04-29
+- region/availability: Canada, continental US, EU shipping per official page; lead times vary.
+- official_url: https://www.advancedsimracing.com/products/asr-4-open-face
+- source_urls:
+  - https://www.advancedsimracing.com/products/asr-4-open-face
+  - https://www.advancedsimracing.com/products/asr-4-flat-face-1
+- key_specs:
+  - 4.5 x 1.5 in aluminum base and reinforced steering column.
+  - Base length 50 in, width 22 in.
+  - Weight about 116 lb without accessories.
+  - Adjustable pedal tray and multiple wheel deck/front-mount options.
+- compatibility:
+  - Standard, Fanatec side, Simucube/MiGE-style front, and Asetek front mount options.
+  - Supports powerful direct drive and high-force pedal systems.
+- software/driver ecosystem: None; physical mounting product.
+- strengths:
+  - Stiff chassis with lifetime replacement warranty.
+  - Useful middle ground below ASR Pro.
+- limitations:
+  - More expensive than entry profile frames.
+  - Back-order windows can affect build schedules.
+- fit_notes:
+  - Strong static rig choice for high-force pedals and direct drive.
+- similar_products:
+  - Trak Racer TR120
+  - Sim-Lab P1X Pro
+  - Next Level Racing F-GT Elite
+- last_checked: 2026-04-29

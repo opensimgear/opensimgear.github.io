@@ -1,0 +1,35 @@
+# Logitech G RS50 Base
+
+- product: RS50 Base
+- manufacturer: Logitech G
+- component_category: wheel-bases
+- subcategory: entry/mid direct-drive wheel base
+- status: Current Logitech product in official driving category listing.
+- price_or_msrp: USD 349.99 to USD 449.99 in official Logitech category listing, checked 2026-04-29.
+- region/availability: Logitech US and regional stores [platform/version varies].
+- official_url: https://www.logitechg.com/en-us/products/driving.html
+- source_urls:
+  - https://www.logitechg.com/en-us/products/driving.html
+  - https://www.logitechg.com/en-us/shop/c/racing-wheels-and-pedals
+- key_specs:
+  - 8 Nm direct drive with TRUEFORCE according to Logitech category listing.
+  - Sold as base or RS50 system bundle with steering wheel and table clamp.
+- compatibility:
+  - Logitech Racing Series ecosystem.
+  - Platform compatibility depends on selected variant and wheel hub [uncertain].
+- software/driver ecosystem:
+  - Logitech G HUB; TRUEFORCE support depends on game.
+- strengths:
+  - Aggressive price for 8 Nm direct drive from major brand.
+  - Fits newer Logitech modular racing ecosystem.
+  - Official accessories include RS wheels, pedals, QR adapter, and adapter cable.
+- limitations:
+  - Newer ecosystem, less proven accessory depth than Fanatec.
+  - Exact standalone platform split should be rechecked before buying.
+- fit_notes:
+  - Interesting CSL DD/MOZA R5 competitor for buyers already comfortable with Logitech G HUB.
+- similar_products:
+  - Fanatec CSL DD QR2
+  - MOZA R5
+  - Thrustmaster T598
+- last_checked: 2026-04-29

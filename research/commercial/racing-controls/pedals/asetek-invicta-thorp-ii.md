@@ -1,0 +1,40 @@
+# Asetek Invicta Pedals T.H.O.R.P. II
+
+- product: Invicta Pedals T.H.O.R.P. II
+- manufacturer: Asetek Racing
+- component_category: pedals
+- subcategory: hydraulic brake and throttle pedal set
+- status: In stock and ready to ship on official US page in search result.
+- price_or_msrp: USD 829.00 excluding sales tax, official US store, checked 2026-04-29.
+- region/availability: Asetek US/global stores and resellers.
+- official_url: https://www.asetek.com/simsports/us/product/invicta-pedals-thorp-2/
+- source_urls:
+  - https://www.asetek.com/simsports/us/product/invicta-pedals-thorp-2/
+  - https://www.asetek.com/simsports/us/product/invicta-sim-racing-pedals-brake-throttle/
+  - https://www.asetek.com/simsports/products/invicta/
+- key_specs:
+  - Two-pedal brake/throttle set with T.H.O.R.P. II hydraulic brake cylinder.
+  - Automotive-grade pressure sensor, 0 to 100 bar measurement.
+  - 100 bar equals 180 kg force on pedal face per official page.
+  - 16-bit electronics, 16-bit magnetic Hall throttle sensor, tool-free front adjustments, tested to 1,000,000
+    activations.
+- compatibility:
+  - PC, Windows 10/11.
+  - Asetek clutch system slides onto Asetek pedal sets.
+- software/driver ecosystem:
+  - RaceHub for calibration, curves, dead zones, throttle curves, RGB, and profile storage.
+- strengths:
+  - Hard hydraulic-style brake aimed at race-car muscle-memory braking.
+  - Strong RaceHub integration.
+  - High build-quality spec and serviceable upgrade ecosystem.
+- limitations:
+  - Expensive.
+  - Very firm brake may not suit casual/desk setups.
+  - PC-only.
+- fit_notes:
+  - Needs rigid cockpit and strong pedal plate; consider S-Series if wide pedal spacing matters.
+- similar_products:
+  - Heusinkveld Ultimate+
+  - Simucube ActivePedal Pro
+  - VRS DirectForce Pro Pedals
+- last_checked: 2026-04-29

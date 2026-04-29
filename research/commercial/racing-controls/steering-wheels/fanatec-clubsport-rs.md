@@ -1,0 +1,36 @@
+# Fanatec ClubSport Steering Wheel RS
+
+- product: ClubSport Steering Wheel RS
+- manufacturer: Fanatec
+- component_category: steering-wheels
+- subcategory: round GT/road wheel with integrated controls
+- status: Available on official US page in search result.
+- price_or_msrp: USD 369.99, official US store, checked 2026-04-29.
+- region/availability: Fanatec direct stores; region stock varies.
+- official_url: https://www.fanatec.com/us-en/steering-wheels/clubsport-steering-wheel-rs
+- source_urls:
+  - https://www.fanatec.com/us-en/steering-wheels/clubsport-steering-wheel-rs
+- key_specs:
+  - 320 mm fully round rim.
+  - Automotive-grade leather, metal/carbon-fiber construction, RevLED bar, three-digit LED display, 11 buttons, 7-way
+    FunkySwitch, analog joystick.
+  - ClubSport magnetic paddle module and QR2 Wheel-Side included on current listing.
+- compatibility:
+  - Requires Fanatec wheel base.
+  - PC and console compatibility depends on connected Fanatec base and platform license.
+- software/driver ecosystem:
+  - Fanatec App / Control Panel for firmware, calibration, telemetry LEDs, and tuning.
+- strengths:
+  - Round 320 mm shape suits GT, road cars, rally, drifting, and truck sims better than compact formula wheels.
+  - Magnetic paddles and QR2 included.
+  - On-wheel display and tuning controls useful in Fanatec ecosystem.
+- limitations:
+  - More mass and diameter than formula wheels, so it can soften response on weaker bases.
+  - Fanatec ecosystem dependency.
+- fit_notes:
+  - Good single-wheel choice for mixed racing when a full round rim matters.
+- similar_products:
+  - SIMAGIC GTS
+  - Simucube Tahko GT-21
+  - Logitech PRO Racing GT D Rim
+- last_checked: 2026-04-29

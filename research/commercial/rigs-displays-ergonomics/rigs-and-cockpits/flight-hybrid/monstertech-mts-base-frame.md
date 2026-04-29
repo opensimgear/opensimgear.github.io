@@ -1,0 +1,34 @@
+# MONSTERTECH MTS Base Frame
+
+- product: MTS Base Frame
+- manufacturer: MONSTERTECH / MTSIM
+- component_category: rigs-and-cockpits
+- subcategory: modular flight/racing cockpit
+- status: current
+- price_or_msrp: From EUR 1,007.40 including VAT on official category page, checked 2026-04-29
+- region/availability: EU official store with international shipping options; configuration-dependent.
+- official_url: https://www.monster.tech/en/product-category/mts-en/
+- source_urls:
+  - https://www.monster.tech/en/product-category/mts-en/
+  - https://www.monster.tech/wp-content/uploads/2021/10/21-11-26_monstertech_mts_base_frame_manual.pdf
+- key_specs:
+  - Modular aluminum cockpit with MTS add-ons for HOTAS, center joystick, yoke, wheel, monitor, keyboard, mouse, and
+    motion adapters.
+  - Base frame is foundation; modules are selected separately.
+- compatibility:
+  - Strong flight-sim ecosystem for DCS, MSFS, space sims, and hybrid racing.
+  - Supports D-BOX and Qubic motion extension sets through add-ons.
+- software/driver ecosystem: None for frame; hardware mounted uses its own drivers.
+- strengths:
+  - Excellent modularity for flight controls and cockpit replication.
+  - Broad MTS accessory catalog.
+- limitations:
+  - Expensive once populated with modules and seat.
+  - More complex to configure than racing-only cockpits.
+- fit_notes:
+  - Best for users who need physical HOTAS/yoke/panel geometry to match aircraft layouts.
+- similar_products:
+  - Volair Sim VS-01
+  - Obutto r3volution
+  - SimFab DCS Edition
+- last_checked: 2026-04-29

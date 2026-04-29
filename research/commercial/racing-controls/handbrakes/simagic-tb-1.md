@@ -1,0 +1,39 @@
+# SIMAGIC TB-1 Handbrake
+
+- product: TB-1 Handbrake
+- manufacturer: SIMAGIC
+- component_category: handbrakes
+- subcategory: compact analog handbrake
+- status: In stock on official page in search result.
+- price_or_msrp: USD 139.00 sale price, USD 189.00 regular price, official page, checked 2026-04-29.
+- region/availability: SIMAGIC official store and distributors.
+- official_url: https://simagic.com/pages/details-tb1
+- source_urls:
+  - https://simagic.com/pages/details-tb1
+  - https://simagicusa.com/products/simagic-tb1-hand-brake
+  - https://image.simagic.com/profile/upload/2022/08/14/a5246367-33da-4912-81be-6ab318347271.pdf
+- key_specs:
+  - Full-metal CNC construction.
+  - Two-stage resistance system.
+  - Adjustable damper and swappable rubber compounds.
+  - USB socket and small form factor.
+  - Simagic USA reseller source describes load-cell sensor and dual analog/digital modes, but official page snippet did
+    not fully confirm all details [uncertain].
+- compatibility:
+  - PC direct or SIMAGIC wheel base [uncertain by connection path].
+- software/driver ecosystem:
+  - SIMAGIC SimPro Manager / support downloads.
+- strengths:
+  - Lower-cost SIMAGIC handbrake option.
+  - Compact and adjustable.
+  - Good ecosystem fit with SIMAGIC rigs.
+- limitations:
+  - Less premium than TB-RS hydraulic model.
+  - Some specs need recheck against official manual/product page.
+- fit_notes:
+  - Good mid-budget SIMAGIC pick if hydraulic TB-RS is overkill.
+- similar_products:
+  - MOZA HBP
+  - Aiologs Handbrake
+  - Fanatec ClubSport Handbrake V2
+- last_checked: 2026-04-29

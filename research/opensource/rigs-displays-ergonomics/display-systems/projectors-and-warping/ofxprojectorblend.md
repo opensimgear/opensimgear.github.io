@@ -1,0 +1,46 @@
+# ofxProjectorBlend
+
+- project: ofxProjectorBlend
+- maintainer_or_org: Flightphase / James George / Jeff Crouse fork lineage
+- component_category: display-systems
+- subcategory: projector edge blending library
+- maturity_or_status: Older openFrameworks add-on; no published releases and limited recent maintenance.
+- license: MIT-style permissive license text in README
+- repo_url: https://github.com/Flightphase/ofxProjectorBlend
+- docs_url: https://github.com/Flightphase/ofxProjectorBlend#readme
+- source_urls:
+  - https://github.com/Flightphase/ofxProjectorBlend
+  - https://paulbourke.net/texture_colour/edgeblend/
+- key_features:
+  - openFrameworks add-on that splits an application into two or more projector outputs.
+  - Provides edge-blend helpers for multi-projector installations.
+  - Includes examples for two screens, three vertical screens, GUI controls, and alignment imagery.
+- hardware_or_bom:
+  - Requires multiple projectors, multi-output GPU or Matrox-style splitter, and preferably projector hardware blending
+    support for best results.
+  - No physical BOM beyond display hardware.
+- firmware_or_software_stack:
+  - C++ openFrameworks add-on.
+  - Based on Paul Bourke's commodity-projector edge-blending work.
+- build_requirements:
+  - openFrameworks project integration.
+  - C++ build environment and manual alignment/calibration.
+- compatibility:
+  - Useful if building a custom renderer or display bridge in openFrameworks.
+  - Not a standalone warp/blend app for existing simulator outputs.
+- strengths:
+  - Small, readable codebase for edge-blend concepts.
+  - Permissive licensing makes reuse easy.
+  - Good educational reference for custom display software.
+- limitations:
+  - Old and narrow in scope.
+  - Does not solve full camera calibration, black-level correction, or arbitrary curved screens by itself.
+  - Requires coding rather than UI-only calibration.
+- commercial_analogs:
+  - Fly Elise-ng blending functions
+  - VIOSO edge blending
+  - Projector hardware edge-blend processors
+- fit_notes:
+  - Best as a building block for a custom visual system, not as a finished sim display solution.
+  - Useful for understanding overlap masks before choosing commercial warp/blend.
+- last_checked: 2026-04-29

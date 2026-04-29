@@ -1,0 +1,33 @@
+# Trak Racer GT-Pro Fiberglass Seat
+
+- product: GT Pro Racing Seat - Fiberglass Black
+- manufacturer: Trak Racer
+- component_category: seats-and-ergonomics
+- subcategory: fixed sim racing bucket
+- status: current
+- price_or_msrp: USD $349 seat-only official US page, checked 2026-04-29
+- region/availability: US store ships from San Marcos, Texas; regional Trak Racer stores vary.
+- official_url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat
+- source_urls:
+  - https://trakracer.com/products/gt-style-fixed-fiberglass-seat
+- key_specs:
+  - Fixed-back GT bucket seat with ultra-light fiberglass shell.
+  - S to XL driver fit, up to about 42 in waist.
+  - Weight capacity listed up to 160 kg / 352 lb.
+  - Side-mount M8 design; harness-ready.
+- compatibility:
+  - Compatible with TR8 Pro, TR80, TR120, TR160, Alpine Racing TRX, and other side-mount rigs.
+  - Good with direct drive, load-cell pedals, motion, and haptic setups.
+- software/driver ecosystem: None; physical seating product.
+- strengths:
+  - More rigid under braking than recliners.
+  - Sim-focused fit and pricing.
+- limitations:
+  - Fixed buckets can create pressure points; brackets may be extra depending on variant.
+- fit_notes:
+  - Best for GT/rally/endurance posture when side support matters.
+- similar_products:
+  - Trak Racer TRS TR Series GT Pro Seat
+  - Next Level Racing ES1
+  - Corbeau FX1 Pro
+- last_checked: 2026-04-29

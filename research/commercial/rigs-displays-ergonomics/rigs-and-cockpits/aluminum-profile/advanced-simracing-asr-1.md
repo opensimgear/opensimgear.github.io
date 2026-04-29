@@ -1,0 +1,34 @@
+# Advanced SimRacing ASR 1
+
+- product: ASR 1 Chassis
+- manufacturer: Advanced SimRacing
+- component_category: rigs-and-cockpits
+- subcategory: entry aluminum profile cockpit
+- status: current
+- price_or_msrp: CAD $427.49 sale price, CAD $569.99 regular price, official page, checked 2026-04-29
+- region/availability: Ships from Canada; free shipping over CAD $100 per official page.
+- official_url: https://www.advancedsimracing.com/products/asr-1
+- source_urls:
+  - https://www.advancedsimracing.com/products/asr-1
+- key_specs:
+  - Generation 2 profile chassis with 1.5 x 1.5 in base.
+  - Base length 50 in, width 22 in.
+  - Assembled weight listed at 69 lb without accessories.
+  - Steel pedal plate and adjustable wheel deck.
+- compatibility:
+  - Entry and midrange wheels; can handle many direct drive setups within sensible torque.
+  - Seat mounting hardware included; seat separate.
+- software/driver ecosystem: None; physical mounting product.
+- strengths:
+  - Strong value with North American manufacturing.
+  - More rigid than wheel stands while staying compact.
+- limitations:
+  - Less mass and profile size than ASR 4/Pro.
+  - Not ideal for very heavy motion or pro-grade pedal forces.
+- fit_notes:
+  - Good first aluminum rig for upgrading from desk or wheel stand.
+- similar_products:
+  - Sim-Lab GT1 Evo
+  - Trak Racer TR80 MK5
+  - RigMetal Basic
+- last_checked: 2026-04-29

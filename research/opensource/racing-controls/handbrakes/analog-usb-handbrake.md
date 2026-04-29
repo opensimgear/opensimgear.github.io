@@ -1,0 +1,43 @@
+# Analog USB Handbrake
+
+- project: Analog USB Handbrake
+- maintainer_or_org: obsoletenerd
+- component_category: handbrakes
+- subcategory: conversion kit for real/drift handbrake lever
+- maturity_or_status: Complete small conversion guide; older repo, no explicit license.
+- license: No repository license found [uncertain].
+- repo_url: https://github.com/obsoletenerd/analog-usb-handbrake
+- docs_url: https://github.com/obsoletenerd/analog-usb-handbrake
+- source_urls:
+  - https://github.com/obsoletenerd/analog-usb-handbrake
+- key_features:
+  - Converts cheap real-car drift/race handbrake into analog USB handbrake for racing sims.
+  - Uses sliding potentiometer, RC shock/spring, 3D printed brackets, Arduino Pro Micro/Leonardo, and simple wiring.
+  - Includes STL files, photos, wiring diagram, and Arduino sketch.
+- hardware_or_bom:
+  - Drift/race hydraulic handbrake lever, 1:10 RC shock, Arduino Pro Micro/Leonardo, 10k sliding potentiometer, zip
+    ties, 3D printer.
+  - Printed potentiometer bracket, rear shock mount, connecting arm, Arduino case/lid.
+- firmware_or_software_stack:
+  - Arduino analog USB handbrake sketch.
+  - USB joystick output [library not specified in README excerpt; uncertain].
+- build_requirements:
+  - Strip unneeded handbrake parts, print brackets/case, attach potentiometer and shock, wire pot to VCC/A0/GND, flash
+    Arduino, insulate controller.
+- compatibility:
+  - PC USB analog handbrake axis.
+- strengths:
+  - Very accessible mechanical conversion using cheap real handbrake hardware.
+  - Clear photos and wiring.
+  - Physical feel can be better than fully printed levers.
+- limitations:
+  - No explicit license.
+  - Sliding potentiometer can wear over time.
+  - Zip-tie/shock mounting is pragmatic but not premium engineering.
+- commercial_analogs:
+  - generic AliExpress analog handbrakes
+  - MOZA HBP
+  - Fanatec ClubSport Handbrake
+- fit_notes:
+  - Good low-cost conversion path if a real handbrake lever is easier to source than fabricating a chassis.
+- last_checked: 2026-04-29

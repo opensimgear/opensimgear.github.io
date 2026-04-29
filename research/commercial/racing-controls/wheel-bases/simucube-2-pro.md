@@ -1,0 +1,38 @@
+# Simucube 2 Pro
+
+- product: Simucube 2 Pro
+- manufacturer: Simucube
+- component_category: wheel-bases
+- subcategory: pro direct-drive wheel base
+- status: Current Simucube product.
+- price_or_msrp: USD 1,449.00 observed as official add-on price on Simucube US page, checked 2026-04-29.
+- region/availability: Simucube US/EU store and global resellers.
+- official_url: https://simucube.com/en-us/simucube-2-pro/
+- source_urls:
+  - https://simucube.com/en-us/simucube-2-pro/
+  - https://simucube.com/app/uploads/2022/11/Simucube_2_User_Guide.pdf
+- key_specs:
+  - 25 Nm max torque.
+  - 22-bit absolute angle sensor.
+  - 8.0 Nm/ms max torque slew rate.
+  - Wireless wheel support, torque reconstruction, static force reduction, damping/inertia/friction filters.
+  - 130 x 130 x 270 mm with SQR; 11.1 kg.
+- compatibility:
+  - PC.
+  - Simucube Wireless Wheel System and standard third-party USB wheels with suitable QR.
+- software/driver ecosystem:
+  - Simucube Tuner for profiles, filters, torque, wireless wheels, and firmware.
+- strengths:
+  - Benchmark open-ecosystem DD base.
+  - Strong filtering/tuning software.
+  - High torque headroom and broad boutique wheel compatibility.
+- limitations:
+  - No console support.
+  - QR, wheel, mounts, and E-stop choices add setup complexity.
+- fit_notes:
+  - Best on rigid profile rigs; excellent for users who want base-agnostic USB/wireless wheels.
+- similar_products:
+  - Asetek Invicta 27 Nm
+  - VRS DirectForce Pro
+  - MOZA R21
+- last_checked: 2026-04-29

@@ -1,0 +1,40 @@
+# Pico Wheel
+
+- project: Pico Wheel
+- maintainer_or_org: khui0
+- component_category: steering-wheels
+- subcategory: non-FFB 3D-printed wheel/controller
+- maturity_or_status: Small complete hobby project; low complexity and modest activity.
+- license: GPL-3.0
+- repo_url: https://github.com/khui0/pico-wheel
+- docs_url: https://github.com/khui0/pico-wheel
+- source_urls:
+  - https://github.com/khui0/pico-wheel
+- key_features:
+  - DIY sim racing wheel using Raspberry Pi Pico and AS5600 magnetic encoder.
+  - Basic buttons and printable mechanism.
+  - No force feedback.
+- hardware_or_bom:
+  - Raspberry Pi Pico or Pico W, AS5600 magnetic encoder, diametric magnet, two momentary push buttons, 608ZZ bearings,
+    M2/M3 hardware, rubber bands, 3D printed parts.
+- firmware_or_software_stack:
+  - Arduino IDE firmware using arduino-pico.
+  - AS5600 library and Joystick library.
+- build_requirements:
+  - 3D printing, basic soldering, Arduino Pico setup, magnetic encoder alignment.
+- compatibility:
+  - PC USB joystick/game controller.
+  - Suitable for games accepting generic steering axes/buttons.
+- strengths:
+  - Very low-cost entry project.
+  - Simple BOM and modern Pico controller.
+  - Good educational wheel input example.
+- limitations:
+  - No FFB, few controls, and hobby-grade mechanical feel.
+  - Not suited to serious sim racing without further mechanical work.
+- commercial_analogs:
+  - basic non-FFB racing wheels
+  - budget game controllers with steering axis
+- fit_notes:
+  - Better for learning, testing, or kids/arcade rigs than for performance driving.
+- last_checked: 2026-04-29

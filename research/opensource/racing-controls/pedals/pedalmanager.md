@@ -1,0 +1,45 @@
+# PedalManager
+
+- project: PedalManager
+- maintainer_or_org: MorGuux
+- component_category: pedals
+- subcategory: Arduino pedal firmware/calibration library
+- maturity_or_status: Small but focused firmware project; last updated recently.
+- license: GPL-3.0
+- repo_url: https://github.com/MorGuux/PedalManager
+- docs_url: https://github.com/MorGuux/PedalManager
+- source_urls:
+  - https://github.com/MorGuux/PedalManager
+- key_features:
+  - Arduino-powered sim racing pedal manager.
+  - Supports analogRead, ADS1115, and HX711 load cell inputs.
+  - EEPROM calibration, saturation, deadzone, six-point axis mapping, and adjustable smoothing filter.
+  - Pedal class can be reused to send data outside HID.
+- hardware_or_bom:
+  - Arduino-compatible controller.
+  - Analog potentiometers/hall sensors through analogRead or ADC, ADS1115, HX711 load cell, matching pedal mechanics.
+- firmware_or_software_stack:
+  - Arduino C++.
+  - Uses Smoothed, ArduinoJoystickLibrary, ADSX115 fork, HX711, and MultiMap.
+  - Includes command protocol examples for calibration.
+- build_requirements:
+  - Integrate class into sketch, define hardware input type per pedal, implement HID or other output, wire sensors, and
+    set calibration.
+- compatibility:
+  - PC USB HID when used with Joystick library.
+  - Could be adapted for wireless/Bluetooth/serial output.
+- strengths:
+  - More calibration-friendly than minimal HX711 sketches.
+  - Sensor abstraction supports multiple pedal electronics.
+  - Useful for custom firmware in high-resolution passive pedals.
+- limitations:
+  - Firmware/library only; no mechanical pedal CAD.
+  - Requires developer work to integrate into a finished controller.
+  - Small project/community.
+- commercial_analogs:
+  - Heusinkveld SmartControl-style calibration layer [conceptual]
+  - Sim-Lab RaceDirector pedal calibration [conceptual]
+  - Leo Bodnar/FreeJoy pedal controller workflows
+- fit_notes:
+  - Good firmware layer for builders making their own pedal electronics around ADS1115/HX711.
+- last_checked: 2026-04-29

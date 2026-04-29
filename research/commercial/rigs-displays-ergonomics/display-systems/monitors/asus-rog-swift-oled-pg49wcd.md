@@ -1,0 +1,37 @@
+# ASUS ROG Swift OLED PG49WCD
+
+- product: ROG Swift OLED PG49WCD
+- manufacturer: ASUS
+- component_category: display-systems
+- subcategory: super ultrawide OLED monitor
+- status: current
+- price_or_msrp: Official page did not expose current store price in captured text; launch/current retail pricing varies
+  [uncertain], checked 2026-04-29
+- region/availability: ASUS US product page and retailers.
+- official_url: https://rog.asus.com/us/monitors/above-34-inches/rog-swift-oled-pg49wcd/
+- source_urls:
+  - https://rog.asus.com/us/monitors/above-34-inches/rog-swift-oled-pg49wcd/
+  - https://dlcdnets.asus.com/pub/ASUS/LCD%20Monitors/PG49WCD/ASUS_PG49WCD_Series_UM_EN.pdf?model=PG49WCD
+- key_specs:
+  - 49 in 32:9 QD-OLED, 5120 x 1440.
+  - 144 Hz refresh rate and 0.03 ms GTG.
+  - 1800R curve, 99% DCI-P3, 1000 nit peak small-window HDR.
+  - DisplayPort 1.4 DSC, HDMI 2.1, USB-C with 90 W power delivery.
+- compatibility:
+  - Standard monitor support; best with sims supporting 32:9 and correct FOV.
+  - KVM/USB-C features useful for shared work/gaming desks.
+- software/driver ecosystem:
+  - ASUS DisplayWidget Center and ROG monitor firmware/support.
+- strengths:
+  - QD-OLED contrast and color with strong connectivity.
+  - Smart KVM useful for dual-PC setups.
+- limitations:
+  - 144 Hz below newer 240 Hz 49 in OLED rivals.
+  - OLED burn-in care needed for static HUDs.
+- fit_notes:
+  - Good if USB-C/KVM and image quality matter more than maximum refresh.
+- similar_products:
+  - Samsung Odyssey OLED G9 G95SD
+  - Gigabyte AORUS CO49DQ
+  - MSI MPG 491CQP
+- last_checked: 2026-04-29

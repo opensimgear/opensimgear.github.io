@@ -1,0 +1,39 @@
+# Fanatec ClubSport Pedals V3
+
+- product: ClubSport Pedals V3
+- manufacturer: Fanatec
+- component_category: pedals
+- subcategory: three-pedal load-cell set
+- status: Available on official US page in search result.
+- price_or_msrp: USD 429.99, official US store, checked 2026-04-29.
+- region/availability: Fanatec direct stores.
+- official_url: https://www.fanatec.com/us-en/pedals/clubsport-pedals-v3
+- source_urls:
+  - https://www.fanatec.com/us-en/pedals/clubsport-pedals-v3
+  - https://www.fanatec.com/media/pdf/50/g0/0a/Manual_CSP-V3.pdf
+- key_specs:
+  - Three-pedal CNC aluminum/metal set.
+  - 90 kg adjustable load-cell brake.
+  - Contactless Hall sensors on throttle and clutch.
+  - 12-bit resolution; throttle/brake vibration motors; adjustable pedal plates, brake stiffness, travel, and throttle
+    spring.
+- compatibility:
+  - Fanatec wheel bases via RJ12.
+  - PC standalone via USB.
+  - Console use through compatible Fanatec base.
+- software/driver ecosystem:
+  - Fanatec Control Panel / wheel tuning menu; optional game SDK can drive vibration motors.
+- strengths:
+  - Mature midrange ecosystem pedal set.
+  - PC standalone or Fanatec-base connection.
+  - Strong adjustability and accessory support.
+- limitations:
+  - Older design versus newer high-end spring/load-cell pedals.
+  - Optional Brake Performance Kit often needed for firmer modern feel.
+- fit_notes:
+  - Works best hard-mounted; vibration features depend on games/software.
+- similar_products:
+  - MOZA CRP2
+  - Heusinkveld Sprint
+  - Asetek Forte Pedals
+- last_checked: 2026-04-29

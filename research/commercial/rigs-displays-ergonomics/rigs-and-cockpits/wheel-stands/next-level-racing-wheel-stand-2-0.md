@@ -1,0 +1,34 @@
+# Next Level Racing Wheel Stand 2.0
+
+- product: Wheel Stand 2.0
+- manufacturer: Next Level Racing
+- component_category: rigs-and-cockpits
+- subcategory: wheel stand
+- status: current
+- price_or_msrp: USD $279 official US store, checked 2026-04-29
+- region/availability: US official store; global distributor network.
+- official_url: https://store-us.nextlevelracing.com/products/next-level-racing-wheel-stand-2-0
+- source_urls:
+  - https://store-us.nextlevelracing.com/products/next-level-racing-wheel-stand-2-0
+  - https://nextlevelracing.com/products/racing-wheel-stand-2-0/
+- key_specs:
+  - Foldable steel wheel stand with adjustable wheel and pedal plates.
+  - Included shifter and handbrake support can mount left or right.
+  - Game chair cradle helps stop chair roll under braking.
+  - Can be upgraded to a full cockpit with GTSeat Add-On.
+- compatibility:
+  - Predrilled for major Logitech, Thrustmaster, Fanatec and similar wheel/pedal sets.
+  - Works best with desk or office-chair setups that need storage.
+- software/driver ecosystem: None; physical mounting product.
+- strengths:
+  - Strong budget step before a full cockpit.
+  - Foldable and upgradable.
+- limitations:
+  - Chair movement and frame flex can still show with high torque direct drive or heavy load-cell braking.
+- fit_notes:
+  - Good small-room bridge between clamp-on desk use and aluminum profile cockpit.
+- similar_products:
+  - Wheel Stand Pro Deluxe V2
+  - Next Level Racing Wheel Stand DD
+  - GT Omega Apex Wheel Stand
+- last_checked: 2026-04-29

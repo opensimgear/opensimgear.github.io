@@ -1,0 +1,42 @@
+# AM-STUDIO Analog E-Brake
+
+- project: Analog E-Brake
+- maintainer_or_org: AM-STUDIO
+- component_category: handbrakes
+- subcategory: Arduino analog handbrake
+- maturity_or_status: Popular older YouTube/GitHub project; minimal repo documentation.
+- license: CC BY-NC-ND 4.0; source-available but not OSI/open-hardware-compliant because commercial use and derivative
+  sharing are restricted.
+- repo_url: https://github.com/AM-STUDIO/Analog-E-Brake
+- docs_url: https://github.com/AM-STUDIO/Analog-E-Brake
+- source_urls:
+  - https://github.com/AM-STUDIO/Analog-E-Brake
+  - https://www.youtube.com/watch?v=kv0FTpRLFMY
+- key_features:
+  - Analog USB handbrake firmware/sketch for sim racing.
+  - Uses Arduino Joystick folder/library and uploaded sketch.
+  - Tied to AM-STUDIO build video.
+- hardware_or_bom:
+  - Arduino-compatible HID board, analog sensor/potentiometer, mechanical handbrake lever, wiring [exact BOM in video,
+    repo minimal].
+- firmware_or_software_stack:
+  - Arduino sketch plus Joystick library.
+- build_requirements:
+  - Follow video/build notes, copy Joystick folder to Arduino libraries, flash sketch, wire analog sensor.
+- compatibility:
+  - PC USB joystick axis.
+- strengths:
+  - Very simple and widely referenced by DIY sim racers.
+  - Easy electronics pattern for analog handbrake.
+- limitations:
+  - Restrictive license and minimal docs.
+  - No formal CAD/BOM in repo.
+  - Older Arduino-library packaging style.
+- commercial_analogs:
+  - MOZA HBP
+  - Fanatec ClubSport Handbrake
+  - Aiologs Handbrake
+  - generic AliExpress analog handbrakes
+- fit_notes:
+  - Useful as simple Arduino sketch reference; not a clean open-hardware design.
+- last_checked: 2026-04-29

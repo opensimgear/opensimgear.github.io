@@ -1,0 +1,37 @@
+# MOZA R9 V3 Wheel Base
+
+- product: R9 V3 Direct Drive Wheel Base
+- manufacturer: MOZA Racing
+- component_category: wheel-bases
+- subcategory: compact midrange direct-drive wheel base
+- status: In stock and dispatched within 2 business days on official US page in search result.
+- price_or_msrp: USD 329.00 sale price, USD 349.00 regular price, official US store, checked 2026-04-29.
+- region/availability: MOZA US/global stores and resellers.
+- official_url: https://us.mozaracing.com/products/r9-wheelbase
+- source_urls:
+  - https://us.mozaracing.com/products/r9-wheelbase
+  - https://mozaracing.com/en-us/product/r9-wheel-base/
+- key_specs:
+  - 9 Nm direct-drive servo base.
+  - 21-bit magnetic encoder, 1000 Hz USB refresh, 180 W peak power.
+  - 240 x 157 x 124 mm housing, aviation-grade aluminum.
+  - Ports for power, pedals, E-stop, USB, dash, shifter, handbrake.
+- compatibility:
+  - PC.
+  - MOZA wheels and ecosystem devices.
+- software/driver ecosystem:
+  - MOZA Pit House and mobile app, NexGen 4.0 FFB, firmware updates.
+- strengths:
+  - Strong price-to-torque ratio.
+  - Compact size with enough torque for many serious rigs.
+  - Rich tuning through Pit House.
+- limitations:
+  - PC-only official platform.
+  - Optional E-stop and mounts add cost.
+- fit_notes:
+  - Good upgrade target from gear/belt wheels or R5 when cockpit can handle 9 Nm.
+- similar_products:
+  - Fanatec CSL DD 8 Nm
+  - Logitech RS50 Base
+  - MOZA R12
+- last_checked: 2026-04-29

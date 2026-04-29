@@ -1,0 +1,39 @@
+# BenQ TK700STi
+
+- product: TK700STi
+- manufacturer: BenQ
+- component_category: display-systems
+- subcategory: short-throw gaming projector
+- status: current on BenQ product page; ProjectorCentral marks discontinued April 2025 [uncertain]
+- price_or_msrp: BenQ captured page did not expose final price; historical sale/retail often around USD $1,399 to $1,699
+  [uncertain], checked 2026-04-29
+- region/availability: BenQ US page and retailers; availability may be remaining stock.
+- official_url: https://www.benq.com/en-us/projector/gaming-projector/tk700sti.html
+- source_urls:
+  - https://www.benq.com/en-us/projector/gaming-projector/tk700sti.html
+  - https://www.projectorcentral.com/benq-tk700sti.htm
+  - https://www.rtings.com/projector/reviews/benq/tk700sti
+- key_specs:
+  - 4K UHD DLP projector, 3000 ANSI lumens.
+  - Short throw: 100 in image at about 5 ft.
+  - HDR10, 95% Rec.709.
+  - Lowest input lag listed by BenQ as 4.16 ms.
+  - Android TV built in.
+- compatibility:
+  - HDMI source devices including PC and consoles.
+  - For cockpit projection, needs screen surface, mount geometry, and possible warping/blending software.
+- software/driver ecosystem:
+  - Android TV dongle/ecosystem; projector OSD.
+- strengths:
+  - Large image in tight spaces.
+  - Low input lag for projector class.
+- limitations:
+  - Projection alignment, shadows, and ambient light control matter.
+  - Not native multi-projector warp/blend by itself.
+- fit_notes:
+  - Best for single large front screen or curved-screen experiments where monitor size is impractical.
+- similar_products:
+  - Optoma GT2000HDR
+  - BenQ X500i
+  - BenQ TK700
+- last_checked: 2026-04-29

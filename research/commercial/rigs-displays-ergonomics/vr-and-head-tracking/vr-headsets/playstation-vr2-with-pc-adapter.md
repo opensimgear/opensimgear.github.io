@@ -1,0 +1,37 @@
+# PlayStation VR2 With PC Adapter
+
+- product: PlayStation VR2 with PlayStation VR2 PC Adapter
+- manufacturer: Sony Interactive Entertainment
+- component_category: vr-and-head-tracking
+- subcategory: console VR headset with PC VR adapter
+- status: current
+- price_or_msrp: PS VR2 RRP USD $399.99 from March 2025 price cut; PC adapter USD $59.99, checked 2026-04-29
+- region/availability: PlayStation Direct, retailers, and select PC adapter retailers; adapter stock varies.
+- official_url: https://direct.playstation.com/en-us/playstation-vr2
+- source_urls:
+  - https://direct.playstation.com/en-us/playstation-vr2
+  - https://blog.playstation.com/2025/02/27/a-great-new-price-for-playstation-vr2/
+  - https://blog.playstation.com/2024/06/03/playstation-vr2-players-can-access-games-on-pc-with-adapter-starting-on-august-7/
+- key_specs:
+  - Dual 2000 x 2040 OLED displays with 4K HDR at up to 120 fps on PS5.
+  - Eye tracking, headset feedback, Sense controllers on PS5.
+  - PC adapter enables SteamVR titles, requires DisplayPort 1.4 cable, Steam account, and compatible PC.
+- compatibility:
+  - Native PS5 VR ecosystem.
+  - PC VR via official adapter and PlayStation VR2 App/SteamVR.
+- software/driver ecosystem:
+  - PlayStation 5 system software, PS VR2 PC app, SteamVR.
+- strengths:
+  - Affordable OLED PCVR route if you already own PS VR2 or PS5.
+  - Strong console VR library plus SteamVR access.
+- limitations:
+  - On PC, Sony notes key PS5 features such as HDR, headset feedback, eye tracking, adaptive triggers, and advanced
+    haptics are not available.
+  - Adapter setup can need DisplayPort cable and Bluetooth compatibility work.
+- fit_notes:
+  - Best value if PS5 use is also desired; less ideal as pure PCVR versus native PC headsets.
+- similar_products:
+  - Meta Quest 3
+  - Valve Index
+  - HTC VIVE Focus Vision
+- last_checked: 2026-04-29

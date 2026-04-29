@@ -1,0 +1,35 @@
+# Sim-Lab GT1 Evo
+
+- product: GT1 Evo Simracing Cockpit
+- manufacturer: Sim-Lab
+- component_category: rigs-and-cockpits
+- subcategory: aluminum profile cockpit
+- status: current
+- price_or_msrp: USD $449 official US store, checked 2026-04-29
+- region/availability: US store ships from Pennsylvania; EU/global store also available.
+- official_url: https://sim-lab.us/products/gt1-evo-simracing-cockpit
+- source_urls:
+  - https://sim-lab.us/products/gt1-evo-simracing-cockpit
+  - https://sim-lab.eu/en-us/products/gt1-evo-base-product
+- key_specs:
+  - Aluminum profile chassis, black finish.
+  - Listed dimensions 1350 x 580 x 660 mm.
+  - Adjustable pedal tray height and angle.
+  - Side mount for shifter/handbrake included.
+- compatibility:
+  - Sim-Lab lists Fanatec, Logitech, Moza, Simagic, Thrustmaster, Asetek, VRS and many pedal sets.
+  - Seat, brackets and slider are separate.
+- software/driver ecosystem: None; physical mounting product.
+- strengths:
+  - Strong value aluminum rig with broad upgrade path.
+  - Domestic US fulfillment reduces import friction.
+- limitations:
+  - Seat and monitor mount add cost.
+  - Less heavy-duty than flagship 160 mm profile frames.
+- fit_notes:
+  - Strong midrange baseline for direct drive wheels without pro cockpit pricing.
+- similar_products:
+  - Trak Racer TR80 MK5
+  - Advanced SimRacing ASR 1
+  - GT Omega Prime Lite
+- last_checked: 2026-04-29

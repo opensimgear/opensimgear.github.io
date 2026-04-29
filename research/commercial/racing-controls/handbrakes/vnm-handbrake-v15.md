@@ -1,0 +1,43 @@
+# VNM Handbrake V1.5 Rally Version
+
+- product: Handbrake V1.5 Rally Version
+- manufacturer: VNM Simulation
+- component_category: handbrakes
+- subcategory: load-cell rally handbrake
+- status: Official VNM page showed 29 in stock, can be backordered.
+- price_or_msrp: USD 239.00 ex-work Vietnam on official VNM page; EU partner showed EUR 299.00 including VAT, checked
+  2026-04-29.
+- region/availability: VNM direct and regional distributors; final price varies with shipping/import tax.
+- official_url: https://vnmsimulation.com/product/vnm-handbrake-v1-5-rally-version/
+- source_urls:
+  - https://vnmsimulation.com/product/vnm-handbrake-v1-5-rally-version/
+  - https://simultimate.eu/product/vnm-handbrake-v1-5/
+  - https://simufy.com/en/products/freno-de-mano-v1-5-vnm
+- key_specs:
+  - All-aluminum black anodized design.
+  - Industrial 200 kg load cell.
+  - 16-bit STM32 ADC.
+  - Ball-bearing actuation.
+  - Adjustable handle length and angle at 0, 15, 30, 45, 60, 75, 90 degrees.
+  - Stiffness options with springs.
+  - Weight 2.8 kg; box dimensions 39.5 x 19.5 x 18 cm.
+- compatibility:
+  - USB PC; some reseller/community listings mention PlayStation/adapter compatibility, but verify before console use
+    [uncertain].
+- software/driver ecosystem:
+  - VNM quick start guide/user manual; calibration method not confirmed in this pass.
+- strengths:
+  - High adjustability for rally cockpit ergonomics.
+  - Load-cell sensing and 16-bit ADC.
+  - Strong regional reseller network.
+- limitations:
+  - Direct price excludes shipping/import tax.
+  - Console support uncertain.
+  - Product exists beside V1, so exact version must be checked when ordering.
+- fit_notes:
+  - Good premium rally/drift handbrake for profile rigs with unusual lever-angle needs.
+- similar_products:
+  - Heusinkveld Handbrake
+  - SIMAGIC TB-RS
+  - Fanatec ClubSport Handbrake V2
+- last_checked: 2026-04-29
