@@ -419,65 +419,68 @@ import productImage416_opensource_throttles_authentikit_spitfire_mkix from '~/as
 import productImage417_commercial_vr_and_head_tracking_bigscreen_beyond_2 from '~/assets/products/commercial:vr-and-head-tracking:bigscreen-beyond-2.webp';
 import productImage418_commercial_vr_and_head_tracking_pimax_crystal_light from '~/assets/products/commercial:vr-and-head-tracking:pimax-crystal-light.webp';
 import productImage419_commercial_vr_and_head_tracking_pimax_crystal_super from '~/assets/products/commercial:vr-and-head-tracking:pimax-crystal-super.webp';
-import productImage420_commercial_vr_and_head_tracking_delanclip_fusion_pro from '~/assets/products/commercial:vr-and-head-tracking:delanclip-fusion-pro.webp';
-import productImage421_commercial_vr_and_head_tracking_tobii_eye_tracker_5 from '~/assets/products/commercial:vr-and-head-tracking:tobii-eye-tracker-5.webp';
-import productImage422_commercial_vr_and_head_tracking_meta_quest_3_512gb from '~/assets/products/commercial:vr-and-head-tracking:meta-quest-3-512gb.webp';
-import productImage423_commercial_vr_and_head_tracking_meta_quest_3s from '~/assets/products/commercial:vr-and-head-tracking:meta-quest-3s.webp';
-import productImage424_commercial_vr_and_head_tracking_playstation_vr2_with_pc_adapter from '~/assets/products/commercial:vr-and-head-tracking:playstation-vr2-with-pc-adapter.webp';
-import productImage425_commercial_vr_and_head_tracking_trackhat_sensor_v2 from '~/assets/products/commercial:vr-and-head-tracking:trackhat-sensor-v2.webp';
-import productImage426_commercial_vr_and_head_tracking_trackir_5 from '~/assets/products/commercial:vr-and-head-tracking:trackir-5.webp';
-import productImage427_commercial_vr_and_head_tracking_valve_index_vr_kit from '~/assets/products/commercial:vr-and-head-tracking:valve-index-vr-kit.webp';
-import productImage428_commercial_vr_and_head_tracking_htc_vive_focus_vision from '~/assets/products/commercial:vr-and-head-tracking:htc-vive-focus-vision.webp';
-import productImage429_commercial_vr_and_head_tracking_varjo_xr_4 from '~/assets/products/commercial:vr-and-head-tracking:varjo-xr-4.webp';
-import productImage430_opensource_vr_and_head_tracking_aitrack from '~/assets/products/opensource:vr-and-head-tracking:aitrack.webp';
-import productImage431_opensource_vr_and_head_tracking_hadesvr from '~/assets/products/opensource:vr-and-head-tracking:hadesvr.webp';
-import productImage432_opensource_vr_and_head_tracking_monado from '~/assets/products/opensource:vr-and-head-tracking:monado.webp';
-import productImage433_opensource_vr_and_head_tracking_openhmd from '~/assets/products/opensource:vr-and-head-tracking:openhmd.webp';
-import productImage434_opensource_vr_and_head_tracking_opentrack from '~/assets/products/opensource:vr-and-head-tracking:opentrack.webp';
-import productImage435_opensource_vr_and_head_tracking_openvr_space_calibrator from '~/assets/products/opensource:vr-and-head-tracking:openvr-space-calibrator.webp';
-import productImage436_opensource_vr_and_head_tracking_osvr_core from '~/assets/products/opensource:vr-and-head-tracking:osvr-core.webp';
-import productImage437_opensource_vr_and_head_tracking_project_north_star from '~/assets/products/opensource:vr-and-head-tracking:project-north-star.webp';
-import productImage438_opensource_vr_and_head_tracking_relativty from '~/assets/products/opensource:vr-and-head-tracking:relativty.webp';
-import productImage439_commercial_wheel_bases_fanatec_clubsport_dd_12nm from '~/assets/products/commercial:wheel-bases:fanatec-clubsport-dd-12nm.webp';
-import productImage440_commercial_wheel_bases_fanatec_clubsport_dd_plus_15nm from '~/assets/products/commercial:wheel-bases:fanatec-clubsport-dd-plus-15nm.webp';
-import productImage441_commercial_wheel_bases_fanatec_csl_dd_qr2_5nm from '~/assets/products/commercial:wheel-bases:fanatec-csl-dd-qr2-5nm.webp';
-import productImage442_commercial_wheel_bases_vrs_directforce_pro from '~/assets/products/commercial:wheel-bases:vrs-directforce-pro.webp';
-import productImage443_commercial_wheel_bases_fanatec_gt_dd_pro_8nm_qr2 from '~/assets/products/commercial:wheel-bases:fanatec-gt-dd-pro-8nm-qr2.webp';
-import productImage444_commercial_wheel_bases_asetek_invicta_27nm from '~/assets/products/commercial:wheel-bases:asetek-invicta-27nm.webp';
-import productImage445_commercial_wheel_bases_logitech_pro_dd11 from '~/assets/products/commercial:wheel-bases:logitech-pro-dd11.webp';
-import productImage446_commercial_wheel_bases_moza_r12_v2 from '~/assets/products/commercial:wheel-bases:moza-r12-v2.webp';
-import productImage447_commercial_wheel_bases_moza_r21_v2 from '~/assets/products/commercial:wheel-bases:moza-r21-v2.webp';
-import productImage448_commercial_wheel_bases_moza_r5 from '~/assets/products/commercial:wheel-bases:moza-r5.webp';
-import productImage449_commercial_wheel_bases_moza_r9_v3 from '~/assets/products/commercial:wheel-bases:moza-r9-v3.webp';
-import productImage450_commercial_wheel_bases_logitech_rs50_base from '~/assets/products/commercial:wheel-bases:logitech-rs50-base.webp';
-import productImage451_commercial_wheel_bases_simucube_2_pro from '~/assets/products/commercial:wheel-bases:simucube-2-pro.webp';
-import productImage452_commercial_wheel_bases_thrustmaster_t818 from '~/assets/products/commercial:wheel-bases:thrustmaster-t818.webp';
-import productImage453_opensource_wheel_bases_affbwheel from '~/assets/products/opensource:wheel-bases:affbwheel.webp';
-import productImage454_opensource_wheel_bases_arduino_ffb_wheel from '~/assets/products/opensource:wheel-bases:arduino-ffb-wheel.webp';
-import productImage455_opensource_wheel_bases_diy_directdrive_odrive from '~/assets/products/opensource:wheel-bases:diy-directdrive-odrive.webp';
-import productImage456_opensource_wheel_bases_openffboard from '~/assets/products/opensource:wheel-bases:openffboard.webp';
-import productImage457_opensource_wheel_bases_opensimwheel_osw from '~/assets/products/opensource:wheel-bases:opensimwheel-osw.webp';
-import productImage458_commercial_wind_simulation_sim_racing_studio_hurricane from '~/assets/products/commercial:wind-simulation:sim-racing-studio-hurricane.webp';
-import productImage459_commercial_wind_simulation_sim_racing_studio_hurricane_pro from '~/assets/products/commercial:wind-simulation:sim-racing-studio-hurricane-pro.webp';
-import productImage460_commercial_wind_simulation_srs_hurricane_power_wind_kit_package from '~/assets/products/commercial:wind-simulation:srs-hurricane-power-wind-kit-package.webp';
-import productImage461_commercial_wind_simulation_hsimracing_ultrawind_elite from '~/assets/products/commercial:wind-simulation:hsimracing-ultrawind-elite.webp';
-import productImage462_commercial_wind_simulation_3drap_feeling_pro_wind_generators from '~/assets/products/commercial:wind-simulation:3drap-feeling-pro-wind-generators.webp';
-import productImage463_commercial_wind_simulation_sim3d_wind_sim_kit from '~/assets/products/commercial:wind-simulation:sim3d-wind-sim-kit.webp';
-import productImage464_commercial_wind_simulation_at3d_wind_sim_kit from '~/assets/products/commercial:wind-simulation:at3d-wind-sim-kit.webp';
-import productImage465_commercial_wind_simulation_race_solutions_wind_simulator from '~/assets/products/commercial:wind-simulation:race-solutions-wind-simulator.webp';
-import productImage466_commercial_wind_simulation_grizzly_simgineering_wind_simulator_kit from '~/assets/products/commercial:wind-simulation:grizzly-simgineering-wind-simulator-kit.webp';
-import productImage467_opensource_wind_simulation_esp_simhub from '~/assets/products/opensource:wind-simulation:esp-simhub.webp';
-import productImage468_opensource_wind_simulation_wind_simulator_project from '~/assets/products/opensource:wind-simulation:wind-simulator-project.webp';
-import productImage469_commercial_yokes_redbird_alloy_yk1 from '~/assets/products/commercial:yokes:redbird-alloy-yk1.webp';
-import productImage470_commercial_yokes_honeycomb_alpha_flight_controls_xpc from '~/assets/products/commercial:yokes:honeycomb-alpha-flight-controls-xpc.webp';
-import productImage471_commercial_yokes_brunner_cls_e_ng_yoke from '~/assets/products/commercial:yokes:brunner-cls-e-ng-yoke.webp';
-import productImage472_commercial_yokes_logitech_flight_yoke_system from '~/assets/products/commercial:yokes:logitech-flight-yoke-system.webp';
-import productImage473_commercial_yokes_fulcrum_one_yoke from '~/assets/products/commercial:yokes:fulcrum-one-yoke.webp';
-import productImage474_commercial_yokes_thrustmaster_tca_yoke_boeing_edition from '~/assets/products/commercial:yokes:thrustmaster-tca-yoke-boeing-edition.webp';
-import productImage475_commercial_yokes_turtle_beach_velocityone_flight from '~/assets/products/commercial:yokes:turtle-beach-velocityone-flight.webp';
-import productImage476_commercial_yokes_virtual_fly_yoko_plus from '~/assets/products/commercial:yokes:virtual-fly-yoko-plus.webp';
-import productImage477_opensource_yokes_arduino_ffb_yoke from '~/assets/products/opensource:yokes:arduino-ffb-yoke.webp';
-import productImage478_opensource_yokes_cadet_yoke_v2 from '~/assets/products/opensource:yokes:cadet-yoke-v2.webp';
+import productImage420_commercial_vr_and_head_tracking_pimax_crystal_super_8k_micro_oled from '~/assets/products/commercial:vr-and-head-tracking:pimax-crystal-super-8k-micro-oled.webp';
+import productImage421_commercial_vr_and_head_tracking_delanclip_fusion_pro from '~/assets/products/commercial:vr-and-head-tracking:delanclip-fusion-pro.webp';
+import productImage422_commercial_vr_and_head_tracking_pimax_dream_air from '~/assets/products/commercial:vr-and-head-tracking:pimax-dream-air.webp';
+import productImage423_commercial_vr_and_head_tracking_pimax_dream_air_se from '~/assets/products/commercial:vr-and-head-tracking:pimax-dream-air-se.webp';
+import productImage424_commercial_vr_and_head_tracking_tobii_eye_tracker_5 from '~/assets/products/commercial:vr-and-head-tracking:tobii-eye-tracker-5.webp';
+import productImage425_commercial_vr_and_head_tracking_meta_quest_3_512gb from '~/assets/products/commercial:vr-and-head-tracking:meta-quest-3-512gb.webp';
+import productImage426_commercial_vr_and_head_tracking_meta_quest_3s from '~/assets/products/commercial:vr-and-head-tracking:meta-quest-3s.webp';
+import productImage427_commercial_vr_and_head_tracking_sony_interactive_entertainment_playstation_vr2 from '~/assets/products/commercial:vr-and-head-tracking:sony-interactive-entertainment-playstation-vr2.webp';
+import productImage428_commercial_vr_and_head_tracking_trackhat_sensor_v2 from '~/assets/products/commercial:vr-and-head-tracking:trackhat-sensor-v2.webp';
+import productImage429_commercial_vr_and_head_tracking_trackir_5 from '~/assets/products/commercial:vr-and-head-tracking:trackir-5.webp';
+import productImage430_commercial_vr_and_head_tracking_valve_index_vr_kit from '~/assets/products/commercial:vr-and-head-tracking:valve-index-vr-kit.webp';
+import productImage431_commercial_vr_and_head_tracking_htc_vive_focus_vision from '~/assets/products/commercial:vr-and-head-tracking:htc-vive-focus-vision.webp';
+import productImage432_commercial_vr_and_head_tracking_varjo_xr_4 from '~/assets/products/commercial:vr-and-head-tracking:varjo-xr-4.webp';
+import productImage433_opensource_vr_and_head_tracking_aitrack from '~/assets/products/opensource:vr-and-head-tracking:aitrack.webp';
+import productImage434_opensource_vr_and_head_tracking_hadesvr from '~/assets/products/opensource:vr-and-head-tracking:hadesvr.webp';
+import productImage435_opensource_vr_and_head_tracking_monado from '~/assets/products/opensource:vr-and-head-tracking:monado.webp';
+import productImage436_opensource_vr_and_head_tracking_openhmd from '~/assets/products/opensource:vr-and-head-tracking:openhmd.webp';
+import productImage437_opensource_vr_and_head_tracking_opentrack from '~/assets/products/opensource:vr-and-head-tracking:opentrack.webp';
+import productImage438_opensource_vr_and_head_tracking_openvr_space_calibrator from '~/assets/products/opensource:vr-and-head-tracking:openvr-space-calibrator.webp';
+import productImage439_opensource_vr_and_head_tracking_osvr_core from '~/assets/products/opensource:vr-and-head-tracking:osvr-core.webp';
+import productImage440_opensource_vr_and_head_tracking_project_north_star from '~/assets/products/opensource:vr-and-head-tracking:project-north-star.webp';
+import productImage441_opensource_vr_and_head_tracking_relativty from '~/assets/products/opensource:vr-and-head-tracking:relativty.webp';
+import productImage442_commercial_wheel_bases_fanatec_clubsport_dd_12nm from '~/assets/products/commercial:wheel-bases:fanatec-clubsport-dd-12nm.webp';
+import productImage443_commercial_wheel_bases_fanatec_clubsport_dd_plus_15nm from '~/assets/products/commercial:wheel-bases:fanatec-clubsport-dd-plus-15nm.webp';
+import productImage444_commercial_wheel_bases_fanatec_csl_dd_qr2_5nm from '~/assets/products/commercial:wheel-bases:fanatec-csl-dd-qr2-5nm.webp';
+import productImage445_commercial_wheel_bases_vrs_directforce_pro from '~/assets/products/commercial:wheel-bases:vrs-directforce-pro.webp';
+import productImage446_commercial_wheel_bases_fanatec_gt_dd_pro_8nm_qr2 from '~/assets/products/commercial:wheel-bases:fanatec-gt-dd-pro-8nm-qr2.webp';
+import productImage447_commercial_wheel_bases_asetek_invicta_27nm from '~/assets/products/commercial:wheel-bases:asetek-invicta-27nm.webp';
+import productImage448_commercial_wheel_bases_logitech_pro_dd11 from '~/assets/products/commercial:wheel-bases:logitech-pro-dd11.webp';
+import productImage449_commercial_wheel_bases_moza_r12_v2 from '~/assets/products/commercial:wheel-bases:moza-r12-v2.webp';
+import productImage450_commercial_wheel_bases_moza_r21_v2 from '~/assets/products/commercial:wheel-bases:moza-r21-v2.webp';
+import productImage451_commercial_wheel_bases_moza_r5 from '~/assets/products/commercial:wheel-bases:moza-r5.webp';
+import productImage452_commercial_wheel_bases_moza_r9_v3 from '~/assets/products/commercial:wheel-bases:moza-r9-v3.webp';
+import productImage453_commercial_wheel_bases_logitech_rs50_base from '~/assets/products/commercial:wheel-bases:logitech-rs50-base.webp';
+import productImage454_commercial_wheel_bases_simucube_2_pro from '~/assets/products/commercial:wheel-bases:simucube-2-pro.webp';
+import productImage455_commercial_wheel_bases_thrustmaster_t818 from '~/assets/products/commercial:wheel-bases:thrustmaster-t818.webp';
+import productImage456_opensource_wheel_bases_affbwheel from '~/assets/products/opensource:wheel-bases:affbwheel.webp';
+import productImage457_opensource_wheel_bases_arduino_ffb_wheel from '~/assets/products/opensource:wheel-bases:arduino-ffb-wheel.webp';
+import productImage458_opensource_wheel_bases_diy_directdrive_odrive from '~/assets/products/opensource:wheel-bases:diy-directdrive-odrive.webp';
+import productImage459_opensource_wheel_bases_openffboard from '~/assets/products/opensource:wheel-bases:openffboard.webp';
+import productImage460_opensource_wheel_bases_opensimwheel_osw from '~/assets/products/opensource:wheel-bases:opensimwheel-osw.webp';
+import productImage461_commercial_wind_simulation_sim_racing_studio_hurricane from '~/assets/products/commercial:wind-simulation:sim-racing-studio-hurricane.webp';
+import productImage462_commercial_wind_simulation_sim_racing_studio_hurricane_pro from '~/assets/products/commercial:wind-simulation:sim-racing-studio-hurricane-pro.webp';
+import productImage463_commercial_wind_simulation_srs_hurricane_power_wind_kit_package from '~/assets/products/commercial:wind-simulation:srs-hurricane-power-wind-kit-package.webp';
+import productImage464_commercial_wind_simulation_hsimracing_ultrawind_elite from '~/assets/products/commercial:wind-simulation:hsimracing-ultrawind-elite.webp';
+import productImage465_commercial_wind_simulation_3drap_feeling_pro_wind_generators from '~/assets/products/commercial:wind-simulation:3drap-feeling-pro-wind-generators.webp';
+import productImage466_commercial_wind_simulation_sim3d_wind_sim_kit from '~/assets/products/commercial:wind-simulation:sim3d-wind-sim-kit.webp';
+import productImage467_commercial_wind_simulation_at3d_wind_sim_kit from '~/assets/products/commercial:wind-simulation:at3d-wind-sim-kit.webp';
+import productImage468_commercial_wind_simulation_race_solutions_wind_simulator from '~/assets/products/commercial:wind-simulation:race-solutions-wind-simulator.webp';
+import productImage469_commercial_wind_simulation_grizzly_simgineering_wind_simulator_kit from '~/assets/products/commercial:wind-simulation:grizzly-simgineering-wind-simulator-kit.webp';
+import productImage470_opensource_wind_simulation_esp_simhub from '~/assets/products/opensource:wind-simulation:esp-simhub.webp';
+import productImage471_opensource_wind_simulation_wind_simulator_project from '~/assets/products/opensource:wind-simulation:wind-simulator-project.webp';
+import productImage472_commercial_yokes_redbird_alloy_yk1 from '~/assets/products/commercial:yokes:redbird-alloy-yk1.webp';
+import productImage473_commercial_yokes_honeycomb_alpha_flight_controls_xpc from '~/assets/products/commercial:yokes:honeycomb-alpha-flight-controls-xpc.webp';
+import productImage474_commercial_yokes_brunner_cls_e_ng_yoke from '~/assets/products/commercial:yokes:brunner-cls-e-ng-yoke.webp';
+import productImage475_commercial_yokes_logitech_flight_yoke_system from '~/assets/products/commercial:yokes:logitech-flight-yoke-system.webp';
+import productImage476_commercial_yokes_fulcrum_one_yoke from '~/assets/products/commercial:yokes:fulcrum-one-yoke.webp';
+import productImage477_commercial_yokes_thrustmaster_tca_yoke_boeing_edition from '~/assets/products/commercial:yokes:thrustmaster-tca-yoke-boeing-edition.webp';
+import productImage478_commercial_yokes_turtle_beach_velocityone_flight from '~/assets/products/commercial:yokes:turtle-beach-velocityone-flight.webp';
+import productImage479_commercial_yokes_virtual_fly_yoko_plus from '~/assets/products/commercial:yokes:virtual-fly-yoko-plus.webp';
+import productImage480_opensource_yokes_arduino_ffb_yoke from '~/assets/products/opensource:yokes:arduino-ffb-yoke.webp';
+import productImage481_opensource_yokes_cadet_yoke_v2 from '~/assets/products/opensource:yokes:cadet-yoke-v2.webp';
 
 export const productImages: Record<string, ImageMetadata> = {
   "commercial:belt-tensioners:pt-actuator-belt-force": productImage0_commercial_belt_tensioners_pt_actuator_belt_force,
@@ -900,65 +903,68 @@ export const productImages: Record<string, ImageMetadata> = {
   "commercial:vr-and-head-tracking:bigscreen-beyond-2": productImage417_commercial_vr_and_head_tracking_bigscreen_beyond_2,
   "commercial:vr-and-head-tracking:pimax-crystal-light": productImage418_commercial_vr_and_head_tracking_pimax_crystal_light,
   "commercial:vr-and-head-tracking:pimax-crystal-super": productImage419_commercial_vr_and_head_tracking_pimax_crystal_super,
-  "commercial:vr-and-head-tracking:delanclip-fusion-pro": productImage420_commercial_vr_and_head_tracking_delanclip_fusion_pro,
-  "commercial:vr-and-head-tracking:tobii-eye-tracker-5": productImage421_commercial_vr_and_head_tracking_tobii_eye_tracker_5,
-  "commercial:vr-and-head-tracking:meta-quest-3-512gb": productImage422_commercial_vr_and_head_tracking_meta_quest_3_512gb,
-  "commercial:vr-and-head-tracking:meta-quest-3s": productImage423_commercial_vr_and_head_tracking_meta_quest_3s,
-  "commercial:vr-and-head-tracking:playstation-vr2-with-pc-adapter": productImage424_commercial_vr_and_head_tracking_playstation_vr2_with_pc_adapter,
-  "commercial:vr-and-head-tracking:trackhat-sensor-v2": productImage425_commercial_vr_and_head_tracking_trackhat_sensor_v2,
-  "commercial:vr-and-head-tracking:trackir-5": productImage426_commercial_vr_and_head_tracking_trackir_5,
-  "commercial:vr-and-head-tracking:valve-index-vr-kit": productImage427_commercial_vr_and_head_tracking_valve_index_vr_kit,
-  "commercial:vr-and-head-tracking:htc-vive-focus-vision": productImage428_commercial_vr_and_head_tracking_htc_vive_focus_vision,
-  "commercial:vr-and-head-tracking:varjo-xr-4": productImage429_commercial_vr_and_head_tracking_varjo_xr_4,
-  "opensource:vr-and-head-tracking:aitrack": productImage430_opensource_vr_and_head_tracking_aitrack,
-  "opensource:vr-and-head-tracking:hadesvr": productImage431_opensource_vr_and_head_tracking_hadesvr,
-  "opensource:vr-and-head-tracking:monado": productImage432_opensource_vr_and_head_tracking_monado,
-  "opensource:vr-and-head-tracking:openhmd": productImage433_opensource_vr_and_head_tracking_openhmd,
-  "opensource:vr-and-head-tracking:opentrack": productImage434_opensource_vr_and_head_tracking_opentrack,
-  "opensource:vr-and-head-tracking:openvr-space-calibrator": productImage435_opensource_vr_and_head_tracking_openvr_space_calibrator,
-  "opensource:vr-and-head-tracking:osvr-core": productImage436_opensource_vr_and_head_tracking_osvr_core,
-  "opensource:vr-and-head-tracking:project-north-star": productImage437_opensource_vr_and_head_tracking_project_north_star,
-  "opensource:vr-and-head-tracking:relativty": productImage438_opensource_vr_and_head_tracking_relativty,
-  "commercial:wheel-bases:fanatec-clubsport-dd-12nm": productImage439_commercial_wheel_bases_fanatec_clubsport_dd_12nm,
-  "commercial:wheel-bases:fanatec-clubsport-dd-plus-15nm": productImage440_commercial_wheel_bases_fanatec_clubsport_dd_plus_15nm,
-  "commercial:wheel-bases:fanatec-csl-dd-qr2-5nm": productImage441_commercial_wheel_bases_fanatec_csl_dd_qr2_5nm,
-  "commercial:wheel-bases:vrs-directforce-pro": productImage442_commercial_wheel_bases_vrs_directforce_pro,
-  "commercial:wheel-bases:fanatec-gt-dd-pro-8nm-qr2": productImage443_commercial_wheel_bases_fanatec_gt_dd_pro_8nm_qr2,
-  "commercial:wheel-bases:asetek-invicta-27nm": productImage444_commercial_wheel_bases_asetek_invicta_27nm,
-  "commercial:wheel-bases:logitech-pro-dd11": productImage445_commercial_wheel_bases_logitech_pro_dd11,
-  "commercial:wheel-bases:moza-r12-v2": productImage446_commercial_wheel_bases_moza_r12_v2,
-  "commercial:wheel-bases:moza-r21-v2": productImage447_commercial_wheel_bases_moza_r21_v2,
-  "commercial:wheel-bases:moza-r5": productImage448_commercial_wheel_bases_moza_r5,
-  "commercial:wheel-bases:moza-r9-v3": productImage449_commercial_wheel_bases_moza_r9_v3,
-  "commercial:wheel-bases:logitech-rs50-base": productImage450_commercial_wheel_bases_logitech_rs50_base,
-  "commercial:wheel-bases:simucube-2-pro": productImage451_commercial_wheel_bases_simucube_2_pro,
-  "commercial:wheel-bases:thrustmaster-t818": productImage452_commercial_wheel_bases_thrustmaster_t818,
-  "opensource:wheel-bases:affbwheel": productImage453_opensource_wheel_bases_affbwheel,
-  "opensource:wheel-bases:arduino-ffb-wheel": productImage454_opensource_wheel_bases_arduino_ffb_wheel,
-  "opensource:wheel-bases:diy-directdrive-odrive": productImage455_opensource_wheel_bases_diy_directdrive_odrive,
-  "opensource:wheel-bases:openffboard": productImage456_opensource_wheel_bases_openffboard,
-  "opensource:wheel-bases:opensimwheel-osw": productImage457_opensource_wheel_bases_opensimwheel_osw,
-  "commercial:wind-simulation:sim-racing-studio-hurricane": productImage458_commercial_wind_simulation_sim_racing_studio_hurricane,
-  "commercial:wind-simulation:sim-racing-studio-hurricane-pro": productImage459_commercial_wind_simulation_sim_racing_studio_hurricane_pro,
-  "commercial:wind-simulation:srs-hurricane-power-wind-kit-package": productImage460_commercial_wind_simulation_srs_hurricane_power_wind_kit_package,
-  "commercial:wind-simulation:hsimracing-ultrawind-elite": productImage461_commercial_wind_simulation_hsimracing_ultrawind_elite,
-  "commercial:wind-simulation:3drap-feeling-pro-wind-generators": productImage462_commercial_wind_simulation_3drap_feeling_pro_wind_generators,
-  "commercial:wind-simulation:sim3d-wind-sim-kit": productImage463_commercial_wind_simulation_sim3d_wind_sim_kit,
-  "commercial:wind-simulation:at3d-wind-sim-kit": productImage464_commercial_wind_simulation_at3d_wind_sim_kit,
-  "commercial:wind-simulation:race-solutions-wind-simulator": productImage465_commercial_wind_simulation_race_solutions_wind_simulator,
-  "commercial:wind-simulation:grizzly-simgineering-wind-simulator-kit": productImage466_commercial_wind_simulation_grizzly_simgineering_wind_simulator_kit,
-  "opensource:wind-simulation:esp-simhub": productImage467_opensource_wind_simulation_esp_simhub,
-  "opensource:wind-simulation:wind-simulator-project": productImage468_opensource_wind_simulation_wind_simulator_project,
-  "commercial:yokes:redbird-alloy-yk1": productImage469_commercial_yokes_redbird_alloy_yk1,
-  "commercial:yokes:honeycomb-alpha-flight-controls-xpc": productImage470_commercial_yokes_honeycomb_alpha_flight_controls_xpc,
-  "commercial:yokes:brunner-cls-e-ng-yoke": productImage471_commercial_yokes_brunner_cls_e_ng_yoke,
-  "commercial:yokes:logitech-flight-yoke-system": productImage472_commercial_yokes_logitech_flight_yoke_system,
-  "commercial:yokes:fulcrum-one-yoke": productImage473_commercial_yokes_fulcrum_one_yoke,
-  "commercial:yokes:thrustmaster-tca-yoke-boeing-edition": productImage474_commercial_yokes_thrustmaster_tca_yoke_boeing_edition,
-  "commercial:yokes:turtle-beach-velocityone-flight": productImage475_commercial_yokes_turtle_beach_velocityone_flight,
-  "commercial:yokes:virtual-fly-yoko-plus": productImage476_commercial_yokes_virtual_fly_yoko_plus,
-  "opensource:yokes:arduino-ffb-yoke": productImage477_opensource_yokes_arduino_ffb_yoke,
-  "opensource:yokes:cadet-yoke-v2": productImage478_opensource_yokes_cadet_yoke_v2,
+  "commercial:vr-and-head-tracking:pimax-crystal-super-8k-micro-oled": productImage420_commercial_vr_and_head_tracking_pimax_crystal_super_8k_micro_oled,
+  "commercial:vr-and-head-tracking:delanclip-fusion-pro": productImage421_commercial_vr_and_head_tracking_delanclip_fusion_pro,
+  "commercial:vr-and-head-tracking:pimax-dream-air": productImage422_commercial_vr_and_head_tracking_pimax_dream_air,
+  "commercial:vr-and-head-tracking:pimax-dream-air-se": productImage423_commercial_vr_and_head_tracking_pimax_dream_air_se,
+  "commercial:vr-and-head-tracking:tobii-eye-tracker-5": productImage424_commercial_vr_and_head_tracking_tobii_eye_tracker_5,
+  "commercial:vr-and-head-tracking:meta-quest-3-512gb": productImage425_commercial_vr_and_head_tracking_meta_quest_3_512gb,
+  "commercial:vr-and-head-tracking:meta-quest-3s": productImage426_commercial_vr_and_head_tracking_meta_quest_3s,
+  "commercial:vr-and-head-tracking:sony-interactive-entertainment-playstation-vr2": productImage427_commercial_vr_and_head_tracking_sony_interactive_entertainment_playstation_vr2,
+  "commercial:vr-and-head-tracking:trackhat-sensor-v2": productImage428_commercial_vr_and_head_tracking_trackhat_sensor_v2,
+  "commercial:vr-and-head-tracking:trackir-5": productImage429_commercial_vr_and_head_tracking_trackir_5,
+  "commercial:vr-and-head-tracking:valve-index-vr-kit": productImage430_commercial_vr_and_head_tracking_valve_index_vr_kit,
+  "commercial:vr-and-head-tracking:htc-vive-focus-vision": productImage431_commercial_vr_and_head_tracking_htc_vive_focus_vision,
+  "commercial:vr-and-head-tracking:varjo-xr-4": productImage432_commercial_vr_and_head_tracking_varjo_xr_4,
+  "opensource:vr-and-head-tracking:aitrack": productImage433_opensource_vr_and_head_tracking_aitrack,
+  "opensource:vr-and-head-tracking:hadesvr": productImage434_opensource_vr_and_head_tracking_hadesvr,
+  "opensource:vr-and-head-tracking:monado": productImage435_opensource_vr_and_head_tracking_monado,
+  "opensource:vr-and-head-tracking:openhmd": productImage436_opensource_vr_and_head_tracking_openhmd,
+  "opensource:vr-and-head-tracking:opentrack": productImage437_opensource_vr_and_head_tracking_opentrack,
+  "opensource:vr-and-head-tracking:openvr-space-calibrator": productImage438_opensource_vr_and_head_tracking_openvr_space_calibrator,
+  "opensource:vr-and-head-tracking:osvr-core": productImage439_opensource_vr_and_head_tracking_osvr_core,
+  "opensource:vr-and-head-tracking:project-north-star": productImage440_opensource_vr_and_head_tracking_project_north_star,
+  "opensource:vr-and-head-tracking:relativty": productImage441_opensource_vr_and_head_tracking_relativty,
+  "commercial:wheel-bases:fanatec-clubsport-dd-12nm": productImage442_commercial_wheel_bases_fanatec_clubsport_dd_12nm,
+  "commercial:wheel-bases:fanatec-clubsport-dd-plus-15nm": productImage443_commercial_wheel_bases_fanatec_clubsport_dd_plus_15nm,
+  "commercial:wheel-bases:fanatec-csl-dd-qr2-5nm": productImage444_commercial_wheel_bases_fanatec_csl_dd_qr2_5nm,
+  "commercial:wheel-bases:vrs-directforce-pro": productImage445_commercial_wheel_bases_vrs_directforce_pro,
+  "commercial:wheel-bases:fanatec-gt-dd-pro-8nm-qr2": productImage446_commercial_wheel_bases_fanatec_gt_dd_pro_8nm_qr2,
+  "commercial:wheel-bases:asetek-invicta-27nm": productImage447_commercial_wheel_bases_asetek_invicta_27nm,
+  "commercial:wheel-bases:logitech-pro-dd11": productImage448_commercial_wheel_bases_logitech_pro_dd11,
+  "commercial:wheel-bases:moza-r12-v2": productImage449_commercial_wheel_bases_moza_r12_v2,
+  "commercial:wheel-bases:moza-r21-v2": productImage450_commercial_wheel_bases_moza_r21_v2,
+  "commercial:wheel-bases:moza-r5": productImage451_commercial_wheel_bases_moza_r5,
+  "commercial:wheel-bases:moza-r9-v3": productImage452_commercial_wheel_bases_moza_r9_v3,
+  "commercial:wheel-bases:logitech-rs50-base": productImage453_commercial_wheel_bases_logitech_rs50_base,
+  "commercial:wheel-bases:simucube-2-pro": productImage454_commercial_wheel_bases_simucube_2_pro,
+  "commercial:wheel-bases:thrustmaster-t818": productImage455_commercial_wheel_bases_thrustmaster_t818,
+  "opensource:wheel-bases:affbwheel": productImage456_opensource_wheel_bases_affbwheel,
+  "opensource:wheel-bases:arduino-ffb-wheel": productImage457_opensource_wheel_bases_arduino_ffb_wheel,
+  "opensource:wheel-bases:diy-directdrive-odrive": productImage458_opensource_wheel_bases_diy_directdrive_odrive,
+  "opensource:wheel-bases:openffboard": productImage459_opensource_wheel_bases_openffboard,
+  "opensource:wheel-bases:opensimwheel-osw": productImage460_opensource_wheel_bases_opensimwheel_osw,
+  "commercial:wind-simulation:sim-racing-studio-hurricane": productImage461_commercial_wind_simulation_sim_racing_studio_hurricane,
+  "commercial:wind-simulation:sim-racing-studio-hurricane-pro": productImage462_commercial_wind_simulation_sim_racing_studio_hurricane_pro,
+  "commercial:wind-simulation:srs-hurricane-power-wind-kit-package": productImage463_commercial_wind_simulation_srs_hurricane_power_wind_kit_package,
+  "commercial:wind-simulation:hsimracing-ultrawind-elite": productImage464_commercial_wind_simulation_hsimracing_ultrawind_elite,
+  "commercial:wind-simulation:3drap-feeling-pro-wind-generators": productImage465_commercial_wind_simulation_3drap_feeling_pro_wind_generators,
+  "commercial:wind-simulation:sim3d-wind-sim-kit": productImage466_commercial_wind_simulation_sim3d_wind_sim_kit,
+  "commercial:wind-simulation:at3d-wind-sim-kit": productImage467_commercial_wind_simulation_at3d_wind_sim_kit,
+  "commercial:wind-simulation:race-solutions-wind-simulator": productImage468_commercial_wind_simulation_race_solutions_wind_simulator,
+  "commercial:wind-simulation:grizzly-simgineering-wind-simulator-kit": productImage469_commercial_wind_simulation_grizzly_simgineering_wind_simulator_kit,
+  "opensource:wind-simulation:esp-simhub": productImage470_opensource_wind_simulation_esp_simhub,
+  "opensource:wind-simulation:wind-simulator-project": productImage471_opensource_wind_simulation_wind_simulator_project,
+  "commercial:yokes:redbird-alloy-yk1": productImage472_commercial_yokes_redbird_alloy_yk1,
+  "commercial:yokes:honeycomb-alpha-flight-controls-xpc": productImage473_commercial_yokes_honeycomb_alpha_flight_controls_xpc,
+  "commercial:yokes:brunner-cls-e-ng-yoke": productImage474_commercial_yokes_brunner_cls_e_ng_yoke,
+  "commercial:yokes:logitech-flight-yoke-system": productImage475_commercial_yokes_logitech_flight_yoke_system,
+  "commercial:yokes:fulcrum-one-yoke": productImage476_commercial_yokes_fulcrum_one_yoke,
+  "commercial:yokes:thrustmaster-tca-yoke-boeing-edition": productImage477_commercial_yokes_thrustmaster_tca_yoke_boeing_edition,
+  "commercial:yokes:turtle-beach-velocityone-flight": productImage478_commercial_yokes_turtle_beach_velocityone_flight,
+  "commercial:yokes:virtual-fly-yoko-plus": productImage479_commercial_yokes_virtual_fly_yoko_plus,
+  "opensource:yokes:arduino-ffb-yoke": productImage480_opensource_yokes_arduino_ffb_yoke,
+  "opensource:yokes:cadet-yoke-v2": productImage481_opensource_yokes_cadet_yoke_v2,
 };
 
 export type ProductImageId = keyof typeof productImages;

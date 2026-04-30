@@ -1,8 +1,8 @@
 commercial:
   - product_name: Beyond 2
-    description: Bigscreen Beyond 2. lightweight tethered PC VR headset. current; official
-      page says shipping in 2-3 days during check. Very lightweight PC VR headset;
-      review source cites 107 g.
+    description: Bigscreen Beyond 2. lightweight tethered PC VR headset. current;
+      official page says shipping in 2-3 days during check. Very lightweight PC
+      VR headset; review source cites 107 g.
     manufacturer: Bigscreen
     component_category: vr-and-head-tracking
     component_sub_category: VR headset
@@ -15,8 +15,8 @@ commercial:
         url: https://store.bigscreenvr.com/products/bigscreen-beyond-2
         region: Unknown
   - product_name: Crystal Light
-    description: Pimax Crystal Light. high-resolution tethered PC VR headset. current. 2880
-      x 2880 pixels per eye.
+    description: Pimax Crystal Light. high-resolution tethered PC VR headset.
+      current. 2880 x 2880 pixels per eye.
     manufacturer: Pimax
     component_category: vr-and-head-tracking
     component_sub_category: VR headset
@@ -29,8 +29,9 @@ commercial:
         url: https://pimax.com/products/pimax-crystal-light
         region: Unknown
   - product_name: Crystal Super
-    description: Pimax Crystal Super. ultra-high-resolution tethered PC VR headset. current.
-      3840 x 3840 pixels per eye.
+    description: Pimax Crystal Super. ultra-high-resolution tethered PC VR headset.
+      current. QLED 50PPD, 57PPD, and Ultrawide versions use 3840 x 3840 pixels
+      per eye.
     manufacturer: Pimax
     component_category: vr-and-head-tracking
     component_sub_category: VR headset
@@ -38,13 +39,29 @@ commercial:
     picture_url: https://pimax.com/cdn/shop/files/product_pimaxcrystalsuper-withcontrollers_white.webp?v=1756796355&width=1920
     shops:
       - name: Pimax
-        price: 1735
+        price: 1599
         currency: USD
         url: https://pimax.com/products/pimax-crystal-super
         region: US
+  - product_name: Crystal Super 8K Micro-OLED
+    description: Pimax Crystal Super 8K Micro-OLED. micro-OLED tethered PC VR
+      headset. pre-order/current. Sony Micro-OLED panels, 3840 x 3552 pixels per
+      eye, 53 PPD, and 116 degree horizontal FOV.
+    manufacturer: Pimax
+    component_category: vr-and-head-tracking
+    component_sub_category: VR headset
+    product_url: https://pimax.com/products/pimax-crystal-super-sony-8k-micro-oled
+    picture_url: https://cdn.shopify.com/s/files/1/0127/3767/5323/files/micro-OLED_1_adf58c8a-a860-4b6b-bf90-7096c8440395.webp?v=1764653377
+    shops:
+      - name: Pimax
+        price: 2199
+        currency: USD
+        url: https://pimax.com/products/pimax-crystal-super-sony-8k-micro-oled
+        region: US
   - product_name: DelanClip Fusion Pro
-    description: DelanClip Fusion Pro. wireless IR head tracking bundle. current. Fusion Pro
-      bundle includes wireless DelanClip Fusion IR emitter and DelanCam1.
+    description: DelanClip Fusion Pro. wireless IR head tracking bundle. current.
+      Fusion Pro bundle includes wireless DelanClip Fusion IR emitter and
+      DelanCam1.
     manufacturer: Delan Engineering / DelanClip
     component_category: vr-and-head-tracking
     component_sub_category: Head tracking
@@ -56,9 +73,40 @@ commercial:
         currency: GBP
         url: https://delanclip.com/product/delanclip-fusion-pro/
         region: UK
+  - product_name: Dream Air
+    description: Pimax Dream Air. small-form-factor micro-OLED tethered PC VR
+      headset. pre-order/current. Sony Micro-OLED panels, 3840 x 3552 pixels per
+      eye, 110 degree horizontal FOV, and under 170 g headset weight.
+    manufacturer: Pimax
+    component_category: vr-and-head-tracking
+    component_sub_category: VR headset
+    product_url: https://pimax.com/products/pimax-dream-air
+    picture_url: https://cdn.shopify.com/s/files/1/0127/3767/5323/files/20260425-203244.jpg?v=1777120392
+    shops:
+      - name: Pimax
+        price: 1999
+        currency: USD
+        url: https://pimax.com/products/pimax-dream-air
+        region: US
+  - product_name: Dream Air SE
+    description: Pimax Dream Air SE. lower-cost small-form-factor micro-OLED
+      tethered PC VR headset. pre-order/current. 2560 x 2560 pixels per eye, 105
+      degree horizontal FOV, and under 140 g headset weight.
+    manufacturer: Pimax
+    component_category: vr-and-head-tracking
+    component_sub_category: VR headset
+    product_url: https://pimax.com/products/pimax-dream-air-se
+    picture_url: https://cdn.shopify.com/s/files/1/0127/3767/5323/files/k10_1_d2d915e7-24b1-4ac3-8711-f787e094b36b.jpg?v=1777120155
+    shops:
+      - name: Pimax
+        price: 899
+        currency: USD
+        url: https://pimax.com/products/pimax-dream-air-se
+        region: US
   - product_name: Eye Tracker 5
-    description: Tobii Eye Tracker 5. eye and head tracking. current; direct US webshop
-      unavailable due tariff update. Tracks head and eyes simultaneously.
+    description: Tobii Eye Tracker 5. eye and head tracking. current; direct US
+      webshop unavailable due tariff update. Tracks head and eyes
+      simultaneously.
     manufacturer: Tobii Gaming
     component_category: vr-and-head-tracking
     component_sub_category: Head tracking
@@ -98,23 +146,24 @@ commercial:
         currency: USD
         url: https://www.meta.com/quest/quest-3s/
         region: Unknown
-  - product_name: PlayStation VR2 with PlayStation VR2 PC Adapter
-    description: PlayStation VR2 With PC Adapter. console VR headset with PC VR adapter.
-      current. Dual 2000 x 2040 OLED displays with 4K HDR at up to 120 fps on PS5.
+  - product_name: PlayStation VR2
+    description: PlayStation VR2. console VR headset. currently unavailable on
+      PlayStation Direct US during check. 2000 x 2040 pixels per eye, 4K HDR,
+      110 degree field of view, and PS5 required.
     manufacturer: Sony Interactive Entertainment
     component_category: vr-and-head-tracking
     component_sub_category: VR headset
-    product_url: https://direct.playstation.com/en-us/playstation-vr2
-    picture_url: https://media.direct.playstation.com/is/image/sierialto/ps-vr2-headset-feedback-1920x1080
+    product_url: https://direct.playstation.com/en-us/buy-consoles/playstationvr2
+    picture_url: https://media.direct.playstation.com/is/image/sierialto/ps-vr2-headset-controllers-angle
     shops:
       - name: PlayStation Direct
-        price: 399.99
+        price: 399
         currency: USD
-        url: https://direct.playstation.com/en-us/playstation-vr2
-        region: Unknown
+        url: https://direct.playstation.com/en-us/buy-consoles/playstationvr2
+        region: US
   - product_name: Sensor V2 Head Tracker
-    description: TrackHat Sensor V2. optical/IR head tracking. current. Infrared camera/head
-      tracker for home flight simulation.
+    description: TrackHat Sensor V2. optical/IR head tracking. current. Infrared
+      camera/head tracker for home flight simulation.
     manufacturer: TrackHat
     component_category: vr-and-head-tracking
     component_sub_category: Head tracking
@@ -128,8 +177,8 @@ commercial:
         region: UK
   - product_name: TrackIR 5
     description: NaturalPoint TrackIR 5. optical head tracking. current through
-      official/authorized regional retailers; official JS site not crawlable. Infrared
-      optical 6DoF head tracking.
+      official/authorized regional retailers; official JS site not crawlable.
+      Infrared optical 6DoF head tracking.
     manufacturer: NaturalPoint
     component_category: vr-and-head-tracking
     component_sub_category: Head tracking
@@ -142,9 +191,9 @@ commercial:
         url: https://trackir.com/products/trackir5/
         region: US
   - product_name: Valve Index VR Kit
-    description: Valve Index VR Kit. tethered PC VR headset. out of stock for full kit on
-      Steam during check; headset-only in stock. PC VR headset, controllers, and two
-      SteamVR 2.0 base stations in full kit.
+    description: Valve Index VR Kit. tethered PC VR headset. out of stock for full
+      kit on Steam during check; headset-only in stock. PC VR headset,
+      controllers, and two SteamVR 2.0 base stations in full kit.
     manufacturer: Valve
     component_category: vr-and-head-tracking
     component_sub_category: VR headset
@@ -157,8 +206,8 @@ commercial:
         url: https://store.steampowered.com/sub/354231/Valve_Index_VR_Kit/
         region: Unknown
   - product_name: VIVE Focus Vision
-    description: HTC VIVE Focus Vision. standalone and PC VR headset. current. Dual LCD
-      panels, 2448 x 2448 pixels per eye.
+    description: HTC VIVE Focus Vision. standalone and PC VR headset. current. Dual
+      LCD panels, 2448 x 2448 pixels per eye.
     manufacturer: HTC VIVE
     component_category: vr-and-head-tracking
     component_sub_category: VR headset
@@ -171,7 +220,8 @@ commercial:
         url: https://shop-us.vive.com/pages/vive-focus-vision
         region: US
   - product_name: XR-4
-    description: Varjo XR-4. professional mixed-reality headset. current. 4K x 4K mini-LED displays.
+    description: Varjo XR-4. professional mixed-reality headset. current. 4K x 4K
+      mini-LED displays.
     manufacturer: Varjo
     component_category: vr-and-head-tracking
     component_sub_category: MR headset
@@ -185,9 +235,9 @@ commercial:
         region: Unknown
 opensource:
   - project_name: AITrack
-    description: AITrack. webcam AI head tracking. Mature but slower-moving; GitHub shows 15
-      tags, 1.4k stars, and many open issues. 6DoF head tracking software designed to
-      work alongside opentrack.
+    description: AITrack. webcam AI head tracking. Mature but slower-moving; GitHub
+      shows 15 tags, 1.4k stars, and many open issues. 6DoF head tracking
+      software designed to work alongside opentrack.
     maker: AIRLegend
     component_category: vr-and-head-tracking
     component_sub_category: Head tracking
@@ -196,8 +246,8 @@ opensource:
     picture_url: https://opengraph.githubassets.com/6b706df3f3310e0ad786ad4d86844b33c49917c4faa245765b0b23419459cfd2/AIRLegend/aitrack
   - project_name: HadesVR
     description: HadesVR. DIY SteamVR-compatible headset/controllers. Active-ish DIY
-      project; latest captured GitHub release 1.5 from 2023, with open issues and active
-      docs. DIY SteamVR-compatible VR setup for tinkerers.
+      project; latest captured GitHub release 1.5 from 2023, with open issues
+      and active docs. DIY SteamVR-compatible VR setup for tinkerers.
     maker: HadesVR
     component_category: vr-and-head-tracking
     component_sub_category: VR runtime
@@ -205,10 +255,10 @@ opensource:
     project_url: https://github.com/HadesVR/HadesVR
     picture_url: https://raw.githubusercontent.com/HadesVR/HadesVR/main/docs/img/Headset.png
   - project_name: Monado
-    description: Monado. OpenXR runtime. Active open-source XR runtime; developer site is
-      current and lists Linux, Android, and Windows development. Cross-platform
-      open-source OpenXR runtime for VR/AR on Linux, Android, Windows, and other
-      devices.
+    description: Monado. OpenXR runtime. Active open-source XR runtime; developer
+      site is current and lists Linux, Android, and Windows development.
+      Cross-platform open-source OpenXR runtime for VR/AR on Linux, Android,
+      Windows, and other devices.
     maker: Monado / freedesktop.org / Collabora contributors
     component_category: vr-and-head-tracking
     component_sub_category: VR runtime
@@ -216,10 +266,10 @@ opensource:
     project_url: https://gitlab.freedesktop.org/monado/monado
     picture_url: https://gitlab.freedesktop.org/.within.website/x/cmd/anubis/static/img/pensive.webp?cacheBuster=v1.25.0-10-ga2a4cde
   - project_name: OpenHMD
-    description: OpenHMD. open HMD driver API. Unmaintained; README says OpenHMD is not
-      actively maintained and XR driver work has largely moved to Monado.
-      Free/open-source API and drivers for immersive technology such as head-mounted
-      displays with built-in head tracking.
+    description: OpenHMD. open HMD driver API. Unmaintained; README says OpenHMD is
+      not actively maintained and XR driver work has largely moved to Monado.
+      Free/open-source API and drivers for immersive technology such as
+      head-mounted displays with built-in head tracking.
     maker: OpenHMD community
     component_category: vr-and-head-tracking
     component_sub_category: VR runtime
@@ -227,9 +277,9 @@ opensource:
     project_url: https://github.com/OpenHMD/OpenHMD
     picture_url: http://www.openhmd.net/wordpress/wp-content/uploads/2018/06/3glasses-pre.png
   - project_name: opentrack
-    description: opentrack. head tracking software. Active and mature; GitHub shows latest
-      release opentrack 2026.1.0 on 2025-12-31. Tracks user head rotation/position and
-      relays it to games and flight simulation software.
+    description: opentrack. head tracking software. Active and mature; GitHub shows
+      latest release opentrack 2026.1.0 on 2025-12-31. Tracks user head
+      rotation/position and relays it to games and flight simulation software.
     maker: opentrack contributors / Stanislaw Halik
     component_category: vr-and-head-tracking
     component_sub_category: VR runtime
@@ -237,10 +287,11 @@ opensource:
     project_url: https://github.com/opentrack/opentrack
     picture_url: https://opengraph.githubassets.com/3a141d2a0e47de2893955e811ce5c00254ff8010b4b73f296cafd407a618e01c/opentrack/opentrack
   - project_name: OpenVR Space Calibrator
-    description: OpenVR Space Calibrator. mixed tracking-space calibration. Mature but old
-      upstream; latest captured release v1.4 from 2022, with community forks in use
-      [uncertain]. Aligns multiple SteamVR/OpenVR tracking systems so tracked devices
-      from one vendor can be used with another HMD/tracking space.
+    description: OpenVR Space Calibrator. mixed tracking-space calibration. Mature
+      but old upstream; latest captured release v1.4 from 2022, with community
+      forks in use [uncertain]. Aligns multiple SteamVR/OpenVR tracking systems
+      so tracked devices from one vendor can be used with another HMD/tracking
+      space.
     maker: pushrax
     component_category: vr-and-head-tracking
     component_sub_category: VR calibration
@@ -248,10 +299,10 @@ opensource:
     project_url: https://github.com/pushrax/OpenVR-SpaceCalibrator
     picture_url: https://wiki.vronlinux.org/logo.webp
   - project_name: OSVR Core
-    description: OSVR Core. VR/AR software platform. Dormant legacy platform; developer
-      portal generated in 2018 and latest captured OSVR-Core release from 2015.
-      Open-source software platform for discovery, configuration, and operation of VR/AR
-      devices and peripherals.
+    description: OSVR Core. VR/AR software platform. Dormant legacy platform;
+      developer portal generated in 2018 and latest captured OSVR-Core release
+      from 2015. Open-source software platform for discovery, configuration, and
+      operation of VR/AR devices and peripherals.
     maker: OSVR / Sensics and contributors
     component_category: vr-and-head-tracking
     component_sub_category: VR runtime
@@ -260,8 +311,8 @@ opensource:
     picture_url: https://github.com/fluidicon.png
   - project_name: Project North Star
     description: Project North Star. open-source AR headset. Open-sourced reference
-      hardware; no GitHub releases, community docs remain available. Open-source files
-      for Leap Motion's Project North Star AR headset.
+      hardware; no GitHub releases, community docs remain available. Open-source
+      files for Leap Motion's Project North Star AR headset.
     maker: Leap Motion / Ultraleap community
     component_category: vr-and-head-tracking
     component_sub_category: AR headset
@@ -270,9 +321,10 @@ opensource:
     project_url: https://github.com/leapmotion/ProjectNorthStar
     picture_url: https://raw.githubusercontent.com/leapmotion/ProjectNorthStar/master/Mechanical/imgs/hero-north-star-release.jpg
   - project_name: Relativty
-    description: Relativty. open-source VR headset. Dormant but influential DIY VR headset
-      project; README includes a May 2023 recommended build note. Fully open-source
-      hardware, software, and firmware VR headset project with SteamVR support.
+    description: Relativty. open-source VR headset. Dormant but influential DIY VR
+      headset project; README includes a May 2023 recommended build note. Fully
+      open-source hardware, software, and firmware VR headset project with
+      SteamVR support.
     maker: Relativty / Maxim xyz and Gabriel Combe
     component_category: vr-and-head-tracking
     component_sub_category: VR headset

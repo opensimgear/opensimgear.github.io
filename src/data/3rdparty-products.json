@@ -30,9 +30,9 @@
     }
   },
   "summary": {
-    "total_records": 479,
+    "total_records": 482,
     "by_kind": {
-      "commercial": 391,
+      "commercial": 394,
       "opensource": 88
     },
     "by_component_category": {
@@ -52,7 +52,7 @@
       "steering-wheels": 16,
       "tactile-feedback": 17,
       "throttles": 52,
-      "vr-and-head-tracking": 22,
+      "vr-and-head-tracking": 25,
       "wheel-bases": 19,
       "wind-simulation": 11,
       "yokes": 10
@@ -7676,7 +7676,7 @@
       "kind": "commercial",
       "slug": "pimax-crystal-super",
       "product_name": "Crystal Super",
-      "description": "Pimax Crystal Super. ultra-high-resolution tethered PC VR headset. current. 3840 x 3840 pixels per eye.",
+      "description": "Pimax Crystal Super. ultra-high-resolution tethered PC VR headset. current. QLED 50PPD, 57PPD, and Ultrawide versions use 3840 x 3840 pixels per eye.",
       "manufacturer": "Pimax",
       "component_category": "vr-and-head-tracking",
       "component_sub_category": "VR headset",
@@ -7685,9 +7685,29 @@
         {
           "name": "Pimax",
           "region": "US",
-          "price": 1735,
+          "price": 1599,
           "currency": "USD",
           "url": "https://pimax.com/products/pimax-crystal-super"
+        }
+      ]
+    },
+    {
+      "id": "commercial:vr-and-head-tracking:pimax-crystal-super-8k-micro-oled",
+      "kind": "commercial",
+      "slug": "pimax-crystal-super-8k-micro-oled",
+      "product_name": "Crystal Super 8K Micro-OLED",
+      "description": "Pimax Crystal Super 8K Micro-OLED. micro-OLED tethered PC VR headset. pre-order/current. Sony Micro-OLED panels, 3840 x 3552 pixels per eye, 53 PPD, and 116 degree horizontal FOV.",
+      "manufacturer": "Pimax",
+      "component_category": "vr-and-head-tracking",
+      "component_sub_category": "VR headset",
+      "product_url": "https://pimax.com/products/pimax-crystal-super-sony-8k-micro-oled",
+      "shops": [
+        {
+          "name": "Pimax",
+          "region": "US",
+          "price": 2199,
+          "currency": "USD",
+          "url": "https://pimax.com/products/pimax-crystal-super-sony-8k-micro-oled"
         }
       ]
     },
@@ -7708,6 +7728,46 @@
           "price": 59.99,
           "currency": "GBP",
           "url": "https://delanclip.com/product/delanclip-fusion-pro/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:vr-and-head-tracking:pimax-dream-air",
+      "kind": "commercial",
+      "slug": "pimax-dream-air",
+      "product_name": "Dream Air",
+      "description": "Pimax Dream Air. small-form-factor micro-OLED tethered PC VR headset. pre-order/current. Sony Micro-OLED panels, 3840 x 3552 pixels per eye, 110 degree horizontal FOV, and under 170 g headset weight.",
+      "manufacturer": "Pimax",
+      "component_category": "vr-and-head-tracking",
+      "component_sub_category": "VR headset",
+      "product_url": "https://pimax.com/products/pimax-dream-air",
+      "shops": [
+        {
+          "name": "Pimax",
+          "region": "US",
+          "price": 1999,
+          "currency": "USD",
+          "url": "https://pimax.com/products/pimax-dream-air"
+        }
+      ]
+    },
+    {
+      "id": "commercial:vr-and-head-tracking:pimax-dream-air-se",
+      "kind": "commercial",
+      "slug": "pimax-dream-air-se",
+      "product_name": "Dream Air SE",
+      "description": "Pimax Dream Air SE. lower-cost small-form-factor micro-OLED tethered PC VR headset. pre-order/current. 2560 x 2560 pixels per eye, 105 degree horizontal FOV, and under 140 g headset weight.",
+      "manufacturer": "Pimax",
+      "component_category": "vr-and-head-tracking",
+      "component_sub_category": "VR headset",
+      "product_url": "https://pimax.com/products/pimax-dream-air-se",
+      "shops": [
+        {
+          "name": "Pimax",
+          "region": "US",
+          "price": 899,
+          "currency": "USD",
+          "url": "https://pimax.com/products/pimax-dream-air-se"
         }
       ]
     },
@@ -7772,22 +7832,22 @@
       ]
     },
     {
-      "id": "commercial:vr-and-head-tracking:playstation-vr2-with-pc-adapter",
+      "id": "commercial:vr-and-head-tracking:sony-interactive-entertainment-playstation-vr2",
       "kind": "commercial",
-      "slug": "playstation-vr2-with-pc-adapter",
-      "product_name": "PlayStation VR2 with PlayStation VR2 PC Adapter",
-      "description": "PlayStation VR2 With PC Adapter. console VR headset with PC VR adapter. current. Dual 2000 x 2040 OLED displays with 4K HDR at up to 120 fps on PS5.",
+      "slug": "sony-interactive-entertainment-playstation-vr2",
+      "product_name": "PlayStation VR2",
+      "description": "PlayStation VR2. console VR headset. currently unavailable on PlayStation Direct US during check. 2000 x 2040 pixels per eye, 4K HDR, 110 degree field of view, and PS5 required.",
       "manufacturer": "Sony Interactive Entertainment",
       "component_category": "vr-and-head-tracking",
       "component_sub_category": "VR headset",
-      "product_url": "https://direct.playstation.com/en-us/playstation-vr2",
+      "product_url": "https://direct.playstation.com/en-us/buy-consoles/playstationvr2",
       "shops": [
         {
           "name": "PlayStation Direct",
-          "region": "Unknown",
-          "price": 399.99,
+          "region": "US",
+          "price": 399,
           "currency": "USD",
-          "url": "https://direct.playstation.com/en-us/playstation-vr2"
+          "url": "https://direct.playstation.com/en-us/buy-consoles/playstationvr2"
         }
       ]
     },

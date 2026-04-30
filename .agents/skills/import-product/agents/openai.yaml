@@ -1,0 +1,4 @@
+interface:
+  display_name: "Import Product"
+  short_description: "Import product links into the simulator products database."
+  default_prompt: "Give me a product or vendor link to research, add to research/products/db, and regenerate product data/images."
