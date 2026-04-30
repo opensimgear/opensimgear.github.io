@@ -1,0 +1,195 @@
+commercial:
+  - product_name: ClubSport Handbrake V2
+    description: Fanatec ClubSport Handbrake V2. load-cell analog handbrake. Currently
+      unavailable on official US page in search result; alternate locale showed
+      available. Precision load-cell sensor with analog input.
+    manufacturer: Fanatec
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://www.fanatec.com/us-en/shifters-others/clubsport-handbrake-v2
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Add-ons/CS_HB_V2/CS_HB_V2-01.webp
+    shops:
+      - name: Fanatec
+        price: 229.99
+        currency: USD
+        url: https://www.fanatec.com/us-en/shifters-others/clubsport-handbrake-v2
+        region: Unknown
+  - product_name: Handbrake
+    description: Aiologs Handbrake. analog/digital USB handbrake. Current Aiologs shop
+      product; shipment date shown as 17 April in search result. 2-in-1 analog axis and
+      digital button modes.
+    manufacturer: Aiologs
+    component_category: handbrakes
+    component_sub_category: Handbrake firmware
+    product_url: https://shop.aiologs.net/new/product/handbrake/
+    picture_url: https://shop.aiologs.net/new/wp-content/uploads/2020/01/h-a1.jpg
+    shops:
+      - name: Aiologs
+        price: 180
+        currency: USD
+        url: https://shop.aiologs.net/new/product/handbrake/
+        region: Global
+  - product_name: Handbrake
+    description: Heusinkveld Handbrake. load-cell analog handbrake. Current Heusinkveld shop
+      product. Force-sensitive 120 kg load cell.
+    manufacturer: Heusinkveld
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://heusinkveld.com/shop/handbrake-shifters/handbrake/
+    picture_url: https://cdn-eu.heusinkveld.com/wp-content/uploads/sites/7/2026/04/render-nieuw-april-2026.png
+    shops:
+      - name: Heusinkveld
+        price: 279
+        currency: EUR
+        url: https://heusinkveld.com/shop/handbrake-shifters/handbrake/
+        region: EU
+  - product_name: Handbrake V1.5 Rally Version
+    description: VNM Handbrake V1.5 Rally Version. load-cell rally handbrake. Official VNM
+      page showed 29 in stock, can be backordered. All-aluminum black anodized design.
+    manufacturer: VNM Simulation
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://vnmsimulation.com/product/vnm-handbrake-v1-5-rally-version/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/12/output-onlinepngtools-150x150.png
+    shops:
+      - name: VNM Simulation
+        price: 239
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-handbrake-v1-5-rally-version/
+        region: Unknown
+  - product_name: HBP Handbrake
+    description: MOZA HBP Handbrake. analog Hall-sensor handbrake. Official US page showed
+      dispatched within 3 business days. CNC-machined aviation-grade aluminum body.
+    manufacturer: MOZA Racing
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://us.mozaracing.com/products/hbp-handbrake
+    picture_url: https://us.mozaracing.com/cdn/shop/files/MOZA-HBP-Handbrake-1.webp?v=1767606020&width=1920
+    shops:
+      - name: MOZA US
+        price: 99
+        currency: USD
+        url: https://us.mozaracing.com/products/hbp-handbrake
+        region: Unknown
+  - product_name: RS Shifter and Handbrake
+    description: Logitech G RS Shifter and Handbrake. 2-in-1 sequential shifter and analog
+      handbrake. Current Logitech product. Toolless mode switch between sequential
+      shifter and handbrake.
+    manufacturer: Logitech G
+    component_category: handbrakes
+    component_sub_category: Hybrid handbrake
+    product_url: https://www.logitechg.com/en-us/products/driving/rs-shifter-handbrake.html
+    picture_url: https://www.logitech.com/assets/65578/jumpstart-smartdock.jpg
+    shops:
+      - name: Logitech G
+        price: 149.99
+        currency: USD
+        url: https://www.logitechg.com/en-us/products/driving/rs-shifter-handbrake.html
+        region: Unknown
+  - product_name: TB-1 Handbrake
+    description: SIMAGIC TB-1 Handbrake. compact analog handbrake. In stock on official page
+      in search result. Full-metal CNC construction.
+    manufacturer: SIMAGIC
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://simagic.com/pages/details-tb1
+    picture_url: https://simagic.com/cdn/shop/files/TB-1_transparent_base.png?v=1766649428&width=500
+    shops:
+      - name: SIMAGIC
+        price: 139
+        currency: USD
+        url: https://simagic.com/pages/details-tb1
+        region: Unknown
+  - product_name: TB-RS Hydraulic Handbrake
+    description: SIMAGIC TB-RS Hydraulic Handbrake. hydraulic analog handbrake. In stock on
+      official page in search result. Hydraulic handbrake with adjustable damping.
+    manufacturer: SIMAGIC
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://simagic.com/pages/details-tb-rs
+    picture_url: https://simagic.com/cdn/shop/files/TB-RS_transparent_base.png?v=1766649288&width=500
+    shops:
+      - name: SIMAGIC
+        price: 239
+        currency: USD
+        url: https://simagic.com/pages/details-tb-rs
+        region: Unknown
+  - product_name: TSS Handbrake Sparco Mod Plus
+    description: Thrustmaster TSS Handbrake Sparco Mod Plus. 2-in-1 progressive handbrake
+      and sequential shifter. Current Thrustmaster product. Official Sparco-licensed 1:1
+      replica.
+    manufacturer: Thrustmaster
+    component_category: handbrakes
+    component_sub_category: Hybrid handbrake
+    product_url: https://www.thrustmaster.com/products/tss-handbrake-sparco-mod/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/TSS-Handbrake-Sparco-Mod-768x768-1.webp
+    shops: []
+  - product_name: XB1 Loadcell Handbrake
+    description: Sim-Lab XB1 Loadcell Handbrake. load-cell analog handbrake. Current/legacy
+      Sim-Lab product [official page not captured directly in this pass]. Load-cell
+      handbrake.
+    manufacturer: Sim-Lab
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://sim-lab.eu/
+    picture_url: https://sim-lab.eu/cdn/shop/files/Shifter_tryout.png?v=1738697793
+    shops:
+      - name: Sim-Lab EU
+        price: 199
+        currency: EUR
+        url: https://sim-lab.eu/
+        region: Unknown
+opensource:
+  - project_name: Analog E-Brake
+    description: AM-STUDIO Analog E-Brake. Arduino analog handbrake. Popular older
+      YouTube/GitHub project; minimal repo documentation. Analog USB handbrake
+      firmware/sketch for sim racing.
+    maker: AM-STUDIO
+    component_category: handbrakes
+    component_sub_category: Handbrake firmware
+    license: CC BY-NC-ND 4.0; source-available but not OSI/open-hardware-compliant because
+      commercial use and derivative sharing are restricted.
+    project_url: https://github.com/AM-STUDIO/Analog-E-Brake
+    picture_url: https://i.ytimg.com/vi/kv0FTpRLFMY/maxresdefault.jpg
+  - project_name: Analog USB Handbrake
+    description: Analog USB Handbrake. conversion kit for real/drift handbrake lever.
+      Complete small conversion guide; older repo, no explicit license. Converts cheap
+      real-car drift/race handbrake into analog USB handbrake for racing sims.
+    maker: obsoletenerd
+    component_category: handbrakes
+    component_sub_category: Handbrake conversion
+    license: No repository license found [uncertain].
+    project_url: https://github.com/obsoletenerd/analog-usb-handbrake
+    picture_url: https://raw.githubusercontent.com/obsoletenerd/analog-usb-handbrake/master/Meta/Analog-USB-Handbrake-Lever.jpg
+  - project_name: Chinese SimRacing 14Bit Handbrake Custom Firmware
+    description: Chinese SimRacing 14Bit Handbrake Custom Firmware. replacement firmware for
+      generic Hall-sensor handbrakes. Focused firmware mod for common Chinese 12/14-bit
+      handbrakes; active enough and practical. Replacement Arduino sketch for generic
+      Chinese "14 Bit" handbrakes using Pro Micro and Hall sensor.
+    maker: Daniel Korgel / Dak0r
+    component_category: handbrakes
+    component_sub_category: Handbrake firmware
+    license: Apache-2.0
+    project_url: https://github.com/Dak0r/Chinese-SimRacing-14Bit-Handbrake-Custom-Firmware-Arduino-Sketch
+    picture_url: https://raw.githubusercontent.com/Dak0r/Chinese-SimRacing-14Bit-Handbrake-Custom-Firmware-Arduino-Sketch/master/14bit%20v3%20images/pcb_v3_top_anot.jpg
+  - project_name: force_sensing_handbrake
+    description: Force Sensing Handbrake. load-cell force-sensing handbrake. Complete
+      documented project with bilingual README, CAD/STL, firmware, and Thingiverse
+      mirror; older but still useful. Converts handbrake force into USB joystick axis
+      using load cell rather than displacement.
+    maker: zhyma
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    license: CC-BY-4.0
+    project_url: https://github.com/zhyma/force_sensing_handbrake
+    picture_url: https://raw.githubusercontent.com/zhyma/force_sensing_handbrake/master/img/comics.jpg
+  - project_name: OpenHandbrake
+    description: OpenHandbrake. embedded controller and hardware handbrake project. Very
+      early/simple repository; source exists but documentation is minimal. Embedded
+      controller and hardware project for a simple, non-FFB sim racing handbrake.
+    maker: BiggiePete
+    component_category: handbrakes
+    component_sub_category: Handbrake firmware
+    license: MIT
+    project_url: https://github.com/BiggiePete/OpenHandbrake
+    picture_url: https://github.com/fluidicon.png

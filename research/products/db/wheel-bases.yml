@@ -1,0 +1,255 @@
+commercial:
+  - product_name: ClubSport DD
+    description: Fanatec ClubSport DD 12 Nm. mid/high direct-drive wheel base. Currently
+      unavailable on official US search result. 12 Nm consistent torque direct drive.
+    manufacturer: Fanatec
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://www.fanatec.com/us/en/p/wheel-bases/cs_dd_us/clubsport-dd-us
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CS_DD/cs_dd-01.webp
+    shops:
+      - name: Fanatec
+        price: 699.99
+        currency: USD
+        url: https://www.fanatec.com/us/en/p/wheel-bases/cs_dd_us/clubsport-dd-us
+        region: Unknown
+  - product_name: ClubSport DD Plus
+    description: Fanatec ClubSport DD Plus 15 Nm. PlayStation-compatible high-torque
+      direct-drive wheel base. Current Fanatec product [stock not confirmed in this
+      pass]. 15 Nm direct-drive wheel base [official bundle/spec source, price
+      uncertain].
+    manufacturer: Fanatec
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://www.fanatec.com/us-en/racing-wheels-direct-drive-bases/direct-drive-bases/clubsport-dd-plus
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CS_DD/cs_dd-01.webp
+    shops:
+      - name: Fanatec
+        price: 999.99
+        currency: USD
+        url: https://www.fanatec.com/us-en/racing-wheels-direct-drive-bases/direct-drive-bases/clubsport-dd-plus
+        region: Unknown
+  - product_name: CSL DD QR2 (5 Nm)
+    description: Fanatec CSL DD QR2 5 Nm. entry direct-drive wheel base. Available on
+      official US page in search result. Direct drive, 5 Nm peak torque standard.
+    manufacturer: Fanatec
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://www.fanatec.com/us-en/racing-wheels-direct-drive-bases/direct-drive-bases/csl-dd-qr2-5-nm
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CSL_DD_QR2L_90/CSL_DD_QR2L_90-01.webp
+    shops:
+      - name: Fanatec
+        price: 399.99
+        currency: USD
+        url: https://www.fanatec.com/us-en/racing-wheels-direct-drive-bases/direct-drive-bases/csl-dd-qr2-5-nm
+        region: US
+  - product_name: DirectForce Pro Wheel Base
+    description: VRS DirectForce Pro Wheel Base. pro direct-drive wheel base. Current/legacy
+      commercial product; official shop details were hard to confirm in this pass
+      [uncertain]. 20 Nm class direct-drive system [uncertain current package].
+    manufacturer: Virtual Racing School
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://vrs.racing/shop
+    picture_url: https://www.velocityprosims.com/cdn/shop/files/motor-and-controller-transparent.png?v=1716639109&width={width}
+    shops:
+      - name: VRS
+        price: 1189.99
+        currency: USD
+        url: https://vrs.racing/shop
+        region: US
+  - product_name: Gran Turismo DD Pro Wheel Base (8 Nm) + QR2 Base-Side Type-C
+    description: Fanatec Gran Turismo DD Pro Wheel Base 8 Nm QR2. PlayStation-compatible
+      direct-drive wheel base. Currently unavailable on official US search result.
+      Official Gran Turismo direct-drive wheel base.
+    manufacturer: Fanatec
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://www.fanatec.com/us/en/p/wheel-bases/gt_dd_pro_wb_qr2c_us/gran-turismo-dd-pro-wheel-base-qr2c-us
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CRD-9020006/CRD-9020006_01.webp
+    shops:
+      - name: Fanatec
+        price: 599.99
+        currency: USD
+        url: https://www.fanatec.com/us/en/p/wheel-bases/gt_dd_pro_wb_qr2c_us/gran-turismo-dd-pro-wheel-base-qr2c-us
+        region: US
+  - product_name: Invicta Direct Drive Wheelbase 27 Nm
+    description: Asetek Invicta Direct Drive Wheelbase 27 Nm. pro high-torque direct-drive
+      wheel base. In stock on official global product snippet. 27 Nm direct-drive wheel
+      base.
+    manufacturer: Asetek Racing
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://www.asetek.com/simsports/product/invicta-direct-drive-wheelbase-27nm/
+    picture_url: https://www.asetek.com/simsports/us/wp-content/uploads/sites/2/2024/05/Invicta-Wheelbase-Front-Right-Raised-Orange-LED_NoBG.png
+    shops:
+      - name: Asetek
+        price: 1175.63
+        currency: EUR
+        url: https://www.asetek.com/simsports/product/invicta-direct-drive-wheelbase-27nm/
+        region: US
+  - product_name: PRO DD11 Wheel Base
+    description: Logitech G PRO DD11 Wheel Base. console/PC direct-drive wheel base. Current
+      Logitech product; product listing showed available price range. 11 Nm direct drive
+      with TRUEFORCE.
+    manufacturer: Logitech G
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://www.logitechg.com/en-us/products/driving/pro-dd11-base.html
+    picture_url: https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-racing/pro-racing-wheel/2024-updates/pro-racing-base-ps-gallery1.png
+    shops:
+      - name: Logitech G
+        price: 599.99
+        currency: USD
+        url: https://www.logitechg.com/en-us/products/driving/pro-dd11-base.html
+        region: US
+  - product_name: R12 V2 Wheel Base
+    description: MOZA R12 V2 Wheel Base. mid/high direct-drive wheel base. Current MOZA
+      product; US product page showed sale pricing. 12 Nm direct drive, 21-bit magnetic
+      encoder.
+    manufacturer: MOZA Racing
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://us.mozaracing.com/products/r12-wheelbase
+    picture_url: https://us.mozaracing.com/cdn/shop/files/preview_images/hqdefault_9d60cb41-f7be-4041-a624-0dc1cb5d15e3.jpg?v=1767606042&width=480
+    shops:
+      - name: MOZA US
+        price: 429
+        currency: USD
+        url: https://us.mozaracing.com/products/r12-wheelbase
+        region: US
+  - product_name: R21 V2 Wheel Base
+    description: MOZA R21 V2 Wheel Base. high-torque direct-drive wheel base. MOZA product
+      page showed sold out on one official page; global page showed selectable variants.
+      21 Nm direct drive, 21-bit magnetic encoder, 1000 Hz USB refresh.
+    manufacturer: MOZA Racing
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://mozaracing.com/en-us/product/wheel-base-r21/
+    picture_url: https://mozaracing.com/cdn/shop/files/R21-Cloud-based-Mobile-App-Control_01b72ff3-0cc9-4f93-b0e4-1de2a618df93.webp?v=1749013177&width=1676
+    shops:
+      - name: MOZA
+        price: 819
+        currency: USD
+        url: https://mozaracing.com/en-us/product/wheel-base-r21/
+        region: Unknown
+  - product_name: R5 Wheel Base
+    description: MOZA R5 Wheel Base. entry direct-drive wheel base. Current MOZA product.
+      5.5 Nm peak torque direct drive.
+    manufacturer: MOZA Racing
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://mozaracing.com/en-us/wheel-base-r5/
+    picture_url: https://mozaracing.com/cdn/shop/files/R5_fd53ca42-18cd-480a-a4a7-b8dca179d5dc.png?v=1753256093
+    shops: []
+  - product_name: R9 V3 Direct Drive Wheel Base
+    description: MOZA R9 V3 Wheel Base. compact midrange direct-drive wheel base. In stock
+      and dispatched within 2 business days on official US page in search result. 9 Nm
+      direct-drive servo base.
+    manufacturer: MOZA Racing
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://us.mozaracing.com/products/r9-wheelbase
+    picture_url: https://us.mozaracing.com/cdn/shop/files/r9_1_3f9de0b1-4d1a-4099-a5e2-389a02092d41.webp?v=1752745276&width=1000
+    shops:
+      - name: MOZA US
+        price: 329
+        currency: USD
+        url: https://us.mozaracing.com/products/r9-wheelbase
+        region: US
+  - product_name: RS50 Base
+    description: Logitech G RS50 Base. entry/mid direct-drive wheel base. Current Logitech
+      product in official driving category listing. 8 Nm direct drive with TRUEFORCE
+      according to Logitech category listing.
+    manufacturer: Logitech G
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://www.logitechg.com/en-us/products/driving.html
+    picture_url: https://resource.logitechg.com/w_416,h_312,ar_4:3,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/rs50-base-pdp/gallery/rs50-base-wheel-hub-front-angle-gallery-1.png
+    shops:
+      - name: Logitech G
+        price: 349.99
+        currency: USD
+        url: https://www.logitechg.com/en-us/products/driving.html
+        region: US
+  - product_name: Simucube 2 Pro
+    description: Simucube 2 Pro. pro direct-drive wheel base. Current Simucube product. 25
+      Nm max torque.
+    manufacturer: Simucube
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://simucube.com/en-us/simucube-2-pro/
+    picture_url: https://simucube.com/app/uploads/sites/5/2023/09/WheelbaseMenu.png
+    shops:
+      - name: Simucube
+        price: 1449
+        currency: USD
+        url: https://simucube.com/en-us/simucube-2-pro/
+        region: US
+  - product_name: T818 Direct Drive
+    description: Thrustmaster T818. direct-drive wheel base. Current Thrustmaster product;
+      official product page describes T818 V2. Direct drive with 10 Nm constant torque
+      per official product snippet.
+    manufacturer: Thrustmaster
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://www.thrustmaster.com/products/t818-black-edition/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/12/T818-Black-Edition-list.png
+    shops: []
+opensource:
+  - project_name: AFFBWheel
+    description: AFFBWheel. Arduino force-feedback wheel controller. Active-ish hobby
+      firmware; 160+ stars and ongoing issue activity, but still DIY experimental.
+      Arduino ATmega32U4 wheel controller with force feedback.
+    maker: vsulako
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    license: MIT
+    project_url: https://github.com/vsulako/AFFBWheel
+    picture_url: https://raw.githubusercontent.com/vsulako/AFFBWheel/master/images/firmware-instructions/install_arduino_lib_en.png
+  - project_name: Arduino-FFB-wheel
+    description: Arduino-FFB-wheel. Arduino DirectInput FFB wheel firmware. Active hobby
+      firmware with releases; repository shows ongoing updates but no explicit license.
+      Standalone DirectInput USB joystick with force feedback on ATmega32U4 boards.
+    maker: ranenbg, based on BRWheel by Fernando Igor and others
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    license: No repository license found [uncertain].
+    project_url: https://github.com/ranenbg/Arduino-FFB-wheel
+    picture_url: https://raw.githubusercontent.com/ranenbg/Arduino-FFB-wheel/master/brWheel_my/wirings/Firmware-v250%20pinout.png
+  - project_name: DIY-DirectDrive
+    description: DIY-DirectDrive. ODrive-based direct-drive wheel software. Source
+      available, small historic Python project; site and repo still reachable but low
+      recent activity. Python software for creating a direct-drive force-feedback wheel
+      with an ODrive Robotics board and industrial servo motor.
+    maker: Jan Balke
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    license: GPL-3.0
+    project_url: https://github.com/JanBalke420/DIY-DirectDrive
+    picture_url: https://jan-balke.com/img/ODrive.jpg
+  - project_name: OpenFFBoard
+    description: OpenFFBoard. modular force-feedback controller and motor-driver ecosystem.
+      Active ongoing project with current firmware, hardware, wiki, and configurator
+      repositories. Universal USB HID force-feedback interface for DIY wheels,
+      joysticks, and other simulator controls.
+    maker: Yannick Richter / Ultrawipf
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    license: MIT for main firmware; MIT top-level hardware license with possible subfolder
+      exceptions; GPL-3.0 for configurator.
+    project_url: https://github.com/Ultrawipf/OpenFFBoard
+    picture_url: https://raw.githubusercontent.com/wiki/Ultrawipf/OpenFFBoard/img/ffboard_firmware_overview.png
+  - project_name: OpenSimWheel / OSW
+    description: OpenSimWheel / OSW. legacy direct-drive servo wheel-base architecture.
+      Historic DIY direct-drive reference; largely superseded by Simucube-era commercial
+      products and newer open stacks such as OpenFFBoard. Direct-drive wheel using
+      off-the-shelf industrial servo drive, servo motor, STM32F4DISCOVERY controller,
+      and wheel shaft adapter.
+    maker: Early Virtual-Racing community; tutorial by Martin Ascher / Ascher Racing
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    license: Original tutorial calls it an open-source software project, but exact license
+      and firmware availability are unclear in current archives [uncertain].
+    project_url: "null"
+    picture_url: https://raw.githubusercontent.com/wiki/Ultrawipf/OpenFFBoard/img/odrive/OD_DFU_Jumper.jpg

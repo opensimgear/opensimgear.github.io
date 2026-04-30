@@ -22,6 +22,12 @@ const title = 'OpenSimGear';
 
 // https://astro.build/config
 export default defineConfig({
+  experimental: {
+    chromeDevtoolsWorkspace: true,
+    queuedRendering: {
+      enabled: true,
+    },
+  },
   site: 'https://www.opensimgear.org',
   integrations: [
     svelte(),
@@ -73,8 +79,8 @@ export default defineConfig({
           autogenerate: { directory: 'calculators' },
         },
         {
-          label: '3rd Party',
-          autogenerate: { directory: '3rdparty' },
+          label: '3rd Party Database',
+          items: [{ label: 'Product Database', link: '/product-db/' }],
           badge: {
             text: 'WIP',
             variant: 'caution',

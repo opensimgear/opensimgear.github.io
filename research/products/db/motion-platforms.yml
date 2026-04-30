@@ -1,0 +1,414 @@
+commercial:
+  - product_name: 3DOF Motion Set QS-210
+    description: "Qubic System QS-210 3DOF Motion Set. linear-actuator 3DOF kit.
+      available via Qubic distributors. 3DOF bundle: four QS-210 actuators, two
+      power cabinets, and one QS-MC6 controller."
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://qubicsystem.com/product/3dof-motion-set-qs-210-qs-220/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/12/QS-210_3DOF_bundle_product_01.jpg
+    shops:
+      - name: Qubic System
+        price: 6680
+        currency: EUR
+        url: https://qubicsystem.com/product/3dof-motion-set-qs-210-qs-220/
+        region: Unknown
+  - product_name: 3DOF Motion Set QS-220
+    description: "Qubic System QS-220 3DOF Motion Set. linear-actuator 3DOF kit.
+      available via Qubic distributors. 3DOF bundle: four QS-220 actuators, two
+      power cabinets, and one QS-MC6 controller."
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://qubicsystem.com/product/3dof-motion-set-qs-210-qs-220/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/12/QS-210_3DOF_bundle_product_01.jpg
+    shops:
+      - name: Qubic System
+        price: 8880
+        currency: EUR
+        url: https://qubicsystem.com/product/3dof-motion-set-qs-210-qs-220/
+        region: Unknown
+  - product_name: APEX GT
+    description: "SimCraft APEX GT. professional 3DOF/6DOF turnkey racing simulator.
+      available by reservation/quote process. APEX 3 GT: roll, pitch, yaw."
+    manufacturer: SimCraft
+    component_category: motion-platforms
+    component_sub_category: 6DOF platform
+    product_url: https://simcraft.com/racing-simulators/products/apex-gt/
+    picture_url: https://simcraftacademy.com/wp-content/uploads/slider2/simcraft_realistic_motion_simulator_based_on_physics.jpeg
+    shops:
+      - name: SimCraft
+        price: 49900
+        currency: USD
+        url: https://simcraft.com/racing-simulators/products/apex-gt/
+        region: US
+  - product_name: DK2 Motion System
+    description: Sigma Integrale DK2. compact 3DOF/4-actuator motion system.
+      available from Sigma Integrale. 2 in / 50 mm travel.
+    manufacturer: Sigma Integrale
+    component_category: motion-platforms
+    component_sub_category: 4DOF platform
+    product_url: https://www.sigmaintegrale.com/
+    picture_url: https://www.sigmaintegrale.com/cdn/shop/articles/Motion_Integrity_Sigma_Integrale_Motion_Systems_EXPLAINED_c154411e-df55-4dff-96d6-531dfe7e3e76.png?v=1777411772&width=1044
+    shops:
+      - name: Sigma Integrale
+        price: 3950
+        currency: USD
+        url: https://www.sigmaintegrale.com/
+        region: US
+  - product_name: DK2+ Motion System
+    description: Sigma Integrale DK2+. high-payload 2 in motion system. available
+      from Sigma Integrale. Four-actuator premium 2 in / 50 mm system.
+    manufacturer: Sigma Integrale
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://www.sigmaintegrale.com/products/dk2-plus-billet-motion-system
+    picture_url: https://www.sigmaintegrale.com/cdn/shop/files/DK2_Dimensional_Drawings.png?v=1771276244&width=3000
+    shops:
+      - name: Sigma Integrale
+        price: 7460
+        currency: USD
+        url: https://www.sigmaintegrale.com/products/dk2-plus-billet-motion-system
+        region: US
+  - product_name: DK6+ Motion System
+    description: Sigma Integrale DK6+. 6 in high-travel motion system. available
+      from Sigma Integrale. Four-actuator 6 in / 150 mm travel system.
+    manufacturer: Sigma Integrale
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://www.sigmaintegrale.com/products/dk6-motion-system
+    picture_url: https://www.sigmaintegrale.com/cdn/shop/files/DK6_4_Actuator_Motion_System_2_-_explained.jpg?v=1758315535&width=1920
+    shops:
+      - name: Sigma Integrale
+        price: 9900
+        currency: USD
+        url: https://www.sigmaintegrale.com/products/dk6-motion-system
+        region: US
+  - product_name: Formula Simulator
+    description: AXSIM Formula Simulator. turnkey formula-style motion racing
+      simulator. legacy AXSIM product lineup; contact AXSIM for current
+      availability and quote [uncertain]. Formula-style simulator derived from
+      an original F1 monocoque.
+    manufacturer: AXSIM / Cranfield Simulation
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://axsim.racing/products/
+    picture_url: https://axsim.racing/wp-content/uploads/2025/05/FORMULA-SIMULATOR.webp
+    shops: []
+  - product_name: G5 Haptic System
+    description: D-BOX G5 Haptic System. haptic actuator motion system. available
+      through D-BOX/resellers; quote or reseller pricing. Electromechanical G5
+      haptic actuators with USB-connected controller.
+    manufacturer: D-BOX
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://www.d-box.com/the-new-g5-actuators
+    picture_url: https://www.d-box.com/hs-fs/hubfs/D-BOX_Landing%20G5%20page_600x500_Bloc%202_Actuator.jpg?width=600&height=500&name=D-BOX_Landing%20G5%20page_600x500_Bloc%202_Actuator.jpg
+    shops: []
+  - product_name: GFQ Simulator
+    description: AXSIM GFQ Simulator. compact turnkey motion racing simulator.
+      legacy AXSIM product lineup; contact AXSIM for current availability and
+      quote [uncertain]. Hybrid frame with aluminium extrusion base and tubular
+      steel structure.
+    manufacturer: AXSIM / Cranfield Simulation
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://axsim.racing/products/
+    picture_url: https://axsim.racing/wp-content/uploads/2025/05/gfq-sim-5.webp
+    shops: []
+  - product_name: GT Simulator
+    description: AXSIM GT Simulator. turnkey GT motion racing simulator. legacy
+      AXSIM product lineup; contact AXSIM for current availability and quote
+      [uncertain]. GT-format professional-grade racing simulator for home or
+      facility use.
+    manufacturer: AXSIM / Cranfield Simulation
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://axsim.racing/products/
+    picture_url: https://axsim.racing/wp-content/uploads/2025/05/gt-sim-2.webp
+    shops: []
+  - product_name: H3 with SFU Gearbox
+    description: "DOF Reality H3 with SFU Gearbox. 3DOF seat/cockpit motion
+      platform. available from DOF Reality and SRS reseller listing. 3DOF class:
+      pitch, roll, and yaw/rear traction loss per DOF Reality compare snippet."
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://dofreality.com/products/
+    picture_url: https://dofreality.com/wp-content/uploads/m2_universal_0-300x208.png
+    shops:
+      - name: DOF Reality
+        price: 3299
+        currency: USD
+        url: https://dofreality.com/products/
+        region: Global
+  - product_name: Legend GT 6DOF Motion Platform
+    description: PT Actuator Legend GT 6DOF. 6DOF motion platform. available from PT
+      Actuator. 6DOF motion platform for sim racing and flight.
+    manufacturer: PT Actuator
+    component_category: motion-platforms
+    component_sub_category: 6DOF platform
+    product_url: https://www.pt-actuator.com/product/legend-6dof-motion-platform/
+    picture_url: https://www.pt-actuator.com/wp-content/uploads/2025/05/1-1%E5%8E%8B%E7%BC%A91.jpg
+    shops: []
+  - product_name: Motion Plus Platform
+    description: "Next Level Racing Motion Plus. modular heave/pitch/roll platform.
+      available from official US store. Modular platform: one module for 2DOF,
+      two modules for 3DOF."
+    manufacturer: Next Level Racing
+    component_category: motion-platforms
+    component_sub_category: Motion kit
+    product_url: https://nextlevelracing.com/products/motion-plus-platform/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2022/03/Motion-Plus-Platform.webp
+    shops:
+      - name: Next Level Racing
+        price: 2999
+        currency: USD
+        url: https://nextlevelracing.com/products/motion-plus-platform/
+        region: US
+  - product_name: Motion Simulator Platform V3
+    description: Next Level Racing Motion Platform V3. seat mover. available from
+      official US store. Seat-only motion platform.
+    manufacturer: Next Level Racing
+    component_category: motion-platforms
+    component_sub_category: Motion software
+    product_url: https://nextlevelracing.com/products/next-level-racing-motion-platform-v3/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2019/12/Motion-Platform-V3.webp
+    shops:
+      - name: Next Level Racing
+        price: 2999
+        currency: USD
+        url: https://nextlevelracing.com/products/next-level-racing-motion-platform-v3/
+        region: US
+  - product_name: P3 SFU Gearbox
+    description: "DOF Reality P3 with SFU Gearbox. 3DOF full-platform motion system.
+      available from DOF Reality and SRS reseller listing. 3DOF class: pitch,
+      roll, and yaw/rear traction loss per DOF Reality compare snippet."
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://dofreality.com/products/
+    picture_url: https://dofreality.com/wp-content/uploads/m2_universal_0-300x208.png
+    shops:
+      - name: DOF Reality
+        price: 6299
+        currency: USD
+        url: https://dofreality.com/products/
+        region: Global
+  - product_name: QS-S35
+    description: Qubic System QS-S35. commercial 6DOF motion platform. available via
+      distributor/contact. 6DOF platform with long-travel actuators.
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: 6DOF platform
+    product_url: https://qubicsystem.com/product/qs-s35/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/06/QS-S35_flight_crop_07.jpg
+    shops:
+      - name: Qubic System
+        price: 59500
+        currency: EUR
+        url: https://qubicsystem.com/product/qs-s35/
+        region: Unknown
+  - product_name: RS MEGA+
+    description: eRacing-Lab RS MEGA+. 4-actuator motion system. available from
+      eRacing-Lab shop. Four actuators included.
+    manufacturer: eRacing-Lab
+    component_category: motion-platforms
+    component_sub_category: 4DOF platform
+    product_url: https://eracing-lab.com/products/rs-mega-plus
+    picture_url: https://eracing-lab.com/cdn/shop/files/RSMEGAAMCRedc_1200x1200.jpg?v=1697723983
+    shops:
+      - name: eRacing-Lab
+        price: 2600
+        currency: USD
+        url: https://eracing-lab.com/products/rs-mega-plus
+        region: Global
+  - product_name: Scorpion Actuator Kits
+    description: PT Actuator Scorpion Kits. modular actuator motion kit. available
+      from PT Actuator. Modular actuator kits with Scorpion E/S/U-style levels.
+    manufacturer: PT Actuator
+    component_category: motion-platforms
+    component_sub_category: Motion kit
+    product_url: https://www.pt-actuator.com/product/scorpion-actuator-kits/
+    picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/07/Feature_1.jpg
+    shops:
+      - name: PT Actuator
+        price: 6999
+        currency: USD
+        url: https://www.pt-actuator.com/product/scorpion-actuator-kits/
+        region: China
+  - product_name: Stage 5 Full Motion Racing Simulator
+    description: SimXperience Stage 5. turnkey full motion racing simulator.
+      available from SimXperience shop. Turnkey racing simulator with motion
+      system, rear traction loss, tactile feedback, and optional GS-5/G-Belt in
+      loaded packages.
+    manufacturer: SimXperience
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://www.simxperience.com/shop/stage-5-full-motion-racing-simulator-18
+    picture_url: https://www.simxperience.com/web/image/product.product/976/image_128/%5BSX-STG5-2024%5D%20Stage%205%20Full%20Motion%20Racing%20Simulator%20%28Standard%20Crate%20To%20Exterior%20of%20Home%2C%20Default%20Pro%20Package%29?unique=1f5d2d4
+    shops:
+      - name: SimXperience
+        price: 29999
+        currency: USD
+        url: https://www.simxperience.com/shop/stage-5-full-motion-racing-simulator-18
+        region: US
+  - product_name: T1000 2 Motions Racing Simulator
+    description: ProSimu T1000 2 Motions. 2DOF cockpit motion simulator. available
+      from ProSimu. 2DOF dynamic cockpit based on T1000 chassis.
+    manufacturer: ProSimu
+    component_category: motion-platforms
+    component_sub_category: 2DOF platform
+    product_url: https://www.prosimu.com/en/t1000-2motions.html
+    picture_url: https://www.prosimu.com/wafx_res/Images/0-375-untitled.117.png
+    shops: []
+  - product_name: T1000 3 Motions Racing Simulator
+    description: ProSimu T1000 3 Motions. 3DOF cockpit with traction loss. available
+      from ProSimu. T1000 3M SV includes traction loss system integrated into
+      chassis.
+    manufacturer: ProSimu
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://www.prosimu.com/en/t1000-3motions.html
+    picture_url: https://www.prosimu.com/wafx_res/Images/0-249-untitled.80.webp
+    shops: []
+  - product_name: T1000 5 Motions Racing Simulator
+    description: "ProSimu T1000 5 Motions. 5-actuator cockpit motion simulator.
+      available from ProSimu. Five-actuator system: four PRS200 actuators plus
+      one PRS50 actuator for traction loss."
+    manufacturer: ProSimu
+    component_category: motion-platforms
+    component_sub_category: 5DOF platform
+    product_url: https://www.prosimu.com/en/t1000-5motions.html
+    picture_url: https://www.prosimu.com/wafx_res/Images/0-262-t10005m-04726x494.png
+    shops: []
+  - product_name: Traction Plus Platform
+    description: Next Level Racing Traction Plus. traction loss / yaw and surge-sway
+      platform. available through official regional stores/retailers.
+      Whole-cockpit sliding platform for understeer/oversteer/traction loss
+      cues.
+    manufacturer: Next Level Racing
+    component_category: motion-platforms
+    component_sub_category: Traction platform
+    product_url: https://nextlevelracing.com/products/traction-plus-platform/
+    picture_url: https://store-uk.nextlevelracing.com/cdn/shop/collections/NextLevelRacingMotionPlusPlatform3.jpg?v=1741655496&width=1500
+    shops:
+      - name: Next Level Racing
+        price: 6499
+        currency: USD
+        url: https://nextlevelracing.com/products/traction-plus-platform/
+        region: Global
+  - product_name: Yaw3 Motion Simulator
+    description: "Yaw VR Yaw3. compact VR motion simulator. available for order from
+      Yaw VR shop. Roll range: 40 deg."
+    manufacturer: Yaw VR
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://shop.yawvr.com/product/yaw3-motion-simulator/
+    picture_url: https://shop.yawvr.com/wp-content/uploads/yaw3-central-module-1200x1200.jpg
+    shops:
+      - name: Yaw VR
+        price: 3990
+        currency: USD
+        url: https://shop.yawvr.com/product/yaw3-motion-simulator/
+        region: Unknown
+opensource:
+  - project_name: 6DOF Motion Platform
+    description: Simmetrik 6DOF Motion Platform. open hardware 6DOF motion simulator
+      platform. Public open-source DIY 6DOF platform project; activity level
+      appears older [uncertain]. Repository describes an open-source DIY 6DOF
+      motion simulator platform.
+    maker: Simmetrik
+    component_category: motion-platforms
+    component_sub_category: 6DOF platform
+    license: CERN-OHL-S-2.0
+    project_url: https://github.com/Simmetrik/6DOF-Motion-Platform
+    picture_url: research/products/local_images/6DOF_Motion_Platform.jpg
+  - project_name: 6DOF Rotary Stewart Motion Simulator
+    description: 6DOF Rotary Stewart Motion Simulator. 6DOF rotary Stewart platform
+      with AC servos. Active advanced DIY project; GitHub metadata showed
+      updates in March 2026. Full-stack 6DOF motion simulator using rotary
+      Stewart geometry.
+    maker: knaufinator
+    component_category: motion-platforms
+    component_sub_category: 6DOF platform
+    license: MIT
+    project_url: https://github.com/knaufinator/6DOF-Rotary-Stewart-Motion-Simulator
+    picture_url: https://raw.githubusercontent.com/knaufinator/6DOF-Rotary-Stewart-Motion-Simulator/phoenix/documentation/images/stewart_platform_controller.png
+  - project_name: AASD15A Servo Controller for Motion Simrigs
+    description: Motion4Sim AASD15A Servo Controller Firmware. public firmware for
+      AASD15A/SFX/6DOF/belt controller. Public firmware release repository with
+      ongoing version notes through v3.30. Firmware for Motion4Sim M4S
+      controller family.
+    maker: motion4sim
+    component_category: motion-platforms
+    component_sub_category: Motion controller
+    license: No explicit license found.
+    project_url: https://github.com/motion4sim/AASD15A-Servo-Controller-for-Motion-Simrigs
+    picture_url: https://github.com/fluidicon.png
+  - project_name: AMC-AASD15A Firmware
+    description: AMC-AASD15A Firmware. AASD15A servo motion controller firmware.
+      Active public firmware/manual repository with release notes through 2025.
+      Firmware/manual repository for AMC-AASD15A controller.
+    maker: Thanos / tronicgr
+    component_category: motion-platforms
+    component_sub_category: Motion controller
+    license: No explicit open-source license found; firmware/source openness unclear
+      [uncertain].
+    project_url: https://github.com/tronicgr/AMC-AASD15A-Firmware
+    picture_url: https://raw.githubusercontent.com/tronicgr/AMC-AASD15A-Firmware/master/Thanos-utility/AMC-AASD_Config_tool/AMC-AASD15A-config-tool.jpg
+  - project_name: FlyPT Mover
+    description: FlyPT Mover. modular motion-cueing software. Active personal-use
+      freeware; official site had Mover 3.7 beta download and recent docs crawl.
+      Modular motion simulator software with sources, poses, filters, outputs,
+      and rig previews.
+    maker: FlyPTMover / FlyPT
+    component_category: motion-platforms
+    component_sub_category: Motion software
+    license: Free for personal home use; not confirmed open source.
+    project_url: https://github.com/FlyPTMover
+    picture_url: https://opengraph.githubassets.com/1/FlyPTMover/Releases
+  - project_name: SC230 Theta 3DOF Sim Rig
+    description: OpenSimCraft Theta 8020 3DOF. 80/20 aluminum 3DOF motion cockpit.
+      Early open hardware design; README says current work is finalizing cockpit
+      chassis 1.0. 3DOF sim rig made from 80/20 T-slot aluminum extrusions.
+    maker: OpenSimCraft
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    license: No explicit license found in repository.
+    project_url: https://github.com/OpenSimCraft/theta-8020-3dof
+    picture_url: https://raw.githubusercontent.com/opensimcraft/theta-8020-3dof/master/SC230%20Theta%20Large%20Screen.png
+  - project_name: SFX-100 / SimFeedback AC Servo
+    description: SFX-100 / SimFeedback. 4-actuator DIY linear motion platform.
+      Mature DIY community platform with sponsor/member access model; official
+      site reported hundreds of builders. Four SFX-100 linear actuators using AC
+      servos and ball screws.
+    maker: Rausch IT / SimFeedback community
+    component_category: motion-platforms
+    component_sub_category: 4DOF platform
+    license: "Mixed: documentation/images/STLs under CC BY-NC-SA 4.0; SimFeedback
+      core and Arduino firmware are freeware/donationware, not open source;
+      telemetry plugins on GitHub are MIT-style per official downloads page."
+    project_url: https://github.com/SimFeedback/SimFeedback-AC-Servo
+    picture_url: https://raw.githubusercontent.com/SimFeedback/SimFeedback-AC-Servo/master/Docs/SFX100.png
+  - project_name: SMC3
+    description: SMC3. Arduino motion platform motor controller. Stable older DIY
+      controller; GitHub metadata showed last update in 2023. Arduino Uno R3
+      controller for up to three motion-simulator motors.
+    maker: SimulatorMotorController
+    component_category: motion-platforms
+    component_sub_category: Motion controller
+    license: MIT
+    project_url: https://github.com/SimulatorMotorController/SMC3
+    picture_url: https://github.com/fluidicon.png
+  - project_name: Stewart-platform-6DOF
+    description: Bjoes Stewart Platform 6DOF. FlyPT Mover-driven 6DOF Stewart
+      platform. Public DIY build repository; BOM and drawings noted as work in
+      progress. 6DOF simulator with Arduino controllers for FlyPT Mover.
+    maker: Bjoes
+    component_category: motion-platforms
+    component_sub_category: Motion software
+    license: No explicit license found.
+    project_url: https://github.com/Bjoes/Stewart-platform-6DOF
+    picture_url: https://github.com/Bjoes/Stewart-platform-6DOF/assets/79850208/ee65c17e-6068-451a-889e-bb3d4af36408

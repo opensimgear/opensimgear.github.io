@@ -1,0 +1,125 @@
+commercial:
+  - product_name: SRS "Hurricane One" Power Wind Kit
+    description: Sim Racing Studio Hurricane One. single-channel speed-linked fan kit.
+      available from SRS shop. Entry SRS Hurricane wind kit listed in SRS shop.
+    manufacturer: Sim Racing Studio
+    component_category: wind-simulation
+    component_sub_category: Fan kit
+    product_url: https://www.simracingstudio.com/shop
+    picture_url: https://static.wixstatic.com/media/b5302b_a2a38e9ca37e4cb29fc28a5936cf6018%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/b5302b_a2a38e9ca37e4cb29fc28a5936cf6018%7Emv2.jpg
+    shops:
+      - name: Sim Racing Studio
+        price: 179
+        currency: USD
+        url: https://www.simracingstudio.com/shop
+        region: Unknown
+  - product_name: SRS "Hurricane PRO" Power Wind Kit Package
+    description: Sim Racing Studio Hurricane PRO. multi-fan speed-linked wind kit. available
+      from SRS shop. Package includes Intellibox 2.0, three Hurricane PRO fans, 12 V
+      power supply/DC splitter, three Cat5 cables, USB cable, and mounting options.
+    manufacturer: Sim Racing Studio
+    component_category: wind-simulation
+    component_sub_category: Fan kit
+    product_url: https://www.simracingstudio.com/product-page/srs-hurricane-pro-power-wind-kit-package-1
+    picture_url: https://static.wixstatic.com/media/092827_37f755bbb35043bb9ec48166ec529b17~mv2.jpg/v1/fill/w_154,h_154,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/092827_37f755bbb35043bb9ec48166ec529b17~mv2.jpg
+    shops:
+      - name: Sim Racing Studio
+        price: 429
+        currency: USD
+        url: https://www.simracingstudio.com/product-page/srs-hurricane-pro-power-wind-kit-package-1
+        region: Unknown
+  - product_name: SRS "Hurricane" Power Wind Kit Package
+    description: Sim Racing Studio Hurricane. dual-channel speed-linked fan kit. available
+      from SRS shop. SRS Hurricane wind kit package listed in shop.
+    manufacturer: Sim Racing Studio
+    component_category: wind-simulation
+    component_sub_category: Fan kit
+    product_url: https://www.simracingstudio.com/shop
+    picture_url: https://static.wixstatic.com/media/b5302b_a2a38e9ca37e4cb29fc28a5936cf6018%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/b5302b_a2a38e9ca37e4cb29fc28a5936cf6018%7Emv2.jpg
+    shops:
+      - name: Sim Racing Studio
+        price: 309
+        currency: USD
+        url: https://www.simracingstudio.com/shop
+        region: Unknown
+  - product_name: UltraWind Elite
+    description: HSimRacing UltraWind Elite. dual wind simulator kit. available from
+      HSimRacing product page. Dual wind simulator kit.
+    manufacturer: HSimRacing
+    component_category: wind-simulation
+    component_sub_category: Wind kit
+    product_url: https://hsimracing.com/product/ultrawind-elite/
+    picture_url: https://hsimracing.com/wp-content/uploads/2025/06/ULTRAWIND-ELITE2-600x600.jpg
+    shops: []
+  - product_name: Wind Generators Turbine Fan for 3DRap Feeling PRO
+    description: 3DRap Feeling PRO Wind Generators. ducted fan wind simulator add-on.
+      available from 3DRap Sim Racing store. Uses 120 x 38 mm high-performance fans.
+    manufacturer: 3DRap
+    component_category: wind-simulation
+    component_sub_category: Fan kit
+    product_url: https://sim.3drap.it/products/wind-generators-turbine-fan-3drap-feeling-pro
+    picture_url: https://3drap.com/cdn/shop/files/wind_simulator_3drap_feeling_pro_hspeed.jpg?v=1747652784&width=1920
+    shops: []
+  - product_name: Wind Sim Kit
+    description: SIM3D Wind Sim Kit. SimHub/SRS-compatible wind kit. available from SIM3D
+      site [uncertain from captured direct source]. Commercial wind kit referenced by
+      sim racing community and SRS licensing page.
+    manufacturer: SIM3D
+    component_category: wind-simulation
+    component_sub_category: Wind firmware
+    product_url: https://www.sim-3d.co.uk/product/wind-sim-kit/29
+    picture_url: https://static.wixstatic.com/media/092827_6e3003b9c9e2468dab193b268230a6a8~mv2.jpg/v1/fill/w_100,h_100,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/092827_6e3003b9c9e2468dab193b268230a6a8~mv2.jpg
+    shops: []
+  - product_name: Wind Sim Kit for Sim Racing Rig, Aluminum Extrusion
+    description: AT3D Wind Sim Kit. aluminum-profile wind kit. available from AT3D product
+      page. Wind sim kit intended for aluminum extrusion sim rigs.
+    manufacturer: AT3D
+    component_category: wind-simulation
+    component_sub_category: Wind kit
+    product_url: https://at3d.net/wind-sim-kit-for-sim-racing-rig-aluminum-extrusion/
+    picture_url: https://cdn11.bigcommerce.com/s-5ucmuxhzvi/images/stencil/500x659/products/183/817/il_fullxfull.3925650007_sehw__53720.1691953471.jpg?c=2
+    shops: []
+  - product_name: Wind Simulator
+    description: Race Solutions Wind Simulator. SimHub-compatible wind simulator. available
+      from Race Solutions product page. Variable airflow device for sim racing.
+    manufacturer: Race Solutions
+    component_category: wind-simulation
+    component_sub_category: Wind firmware
+    product_url: https://www.race-solutions.com/wind-simulator.html
+    picture_url: https://www.race-solutions.com/kepek/termekek/9/5/wind_simulator_2.jpg
+    shops: []
+  - product_name: Wind Simulator Kit
+    description: Grizzly Simgineering Wind Simulator Kit. SimHub fan-control kit. available
+      from manufacturer store. Kit for headwind simulation in racing sims.
+    manufacturer: Grizzly Simgineering
+    component_category: wind-simulation
+    component_sub_category: Wind firmware
+    product_url: https://www.grizzly-simgineering.com/en/product-page/windsimulator-kit-1
+    picture_url: https://static.wixstatic.com/media/c4543e_225c6a9d02724f88bdecb888d2276c9f~mv2.jpg/v1/fill/w_300,h_300,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/c4543e_225c6a9d02724f88bdecb888d2276c9f~mv2.jpg
+    shops:
+      - name: Grizzly Simgineering
+        price: 79
+        currency: EUR
+        url: https://www.grizzly-simgineering.com/en/product-page/windsimulator-kit-1
+        region: EU
+opensource:
+  - project_name: ESP-SimHub
+    description: ESP-SimHub. ESP8266/ESP32 SimHub firmware for wireless peripherals. Active
+      public firmware project; GitHub metadata showed updates in April 2026.
+      SimHub-compatible firmware for ESP8266 and ESP32 boards.
+    maker: eCrowneEng
+    component_category: wind-simulation
+    component_sub_category: Wind firmware
+    license: No explicit license found in repository.
+    project_url: https://github.com/eCrowneEng/ESP-SimHub
+    picture_url: http://ecrowne.com/_next/image?url=%2Fplatformio%2Fplatformio-ide-vscode-build-project.png&w=1200&q=75
+  - project_name: Wind Simulator Project
+    description: Wind Simulator Project. Arduino Uno PWM PC-fan iRacing wind simulator.
+      Older complete build guide for iRacing. Low-cost iRacing wind simulator using
+      PWM-controlled 4-pin PC fans.
+    maker: Crypto69
+    component_category: wind-simulation
+    component_sub_category: Wind firmware
+    license: GPL-3.0
+    project_url: https://github.com/Crypto69/Wind-Simulator-Project
+    picture_url: https://raw.githubusercontent.com/Crypto69/Wind-Simulator-Project/master/Images/Wiring.png

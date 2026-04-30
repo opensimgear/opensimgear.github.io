@@ -1,0 +1,193 @@
+commercial:
+  - product_name: ClubSport Shifter SQ V1.5
+    description: Fanatec ClubSport Shifter SQ V1.5. hybrid H-pattern and sequential shifter.
+      Currently unavailable on official US page in search result. Full-metal
+      construction.
+    manufacturer: Fanatec
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    product_url: https://www.fanatec.com/us-en/shifters-others/clubsport-shifter-v-1.5
+    picture_url: https://d1nzm2nlurbj16.cloudfront.net/images/ClubSport_Shifter_SQ_V1.5.width-1500.format-webp.webp
+    shops:
+      - name: Fanatec
+        price: 299.99
+        currency: USD
+        url: https://www.fanatec.com/us-en/shifters-others/clubsport-shifter-v-1.5
+        region: Unknown
+  - product_name: Driving Force Shifter
+    description: Logitech Driving Force Shifter. budget H-pattern shifter. Current Logitech
+      product in official driving category listing. H-pattern add-on shifter for
+      Logitech G racing wheels.
+    manufacturer: Logitech G
+    component_category: shifters
+    component_sub_category: H-pattern shifter
+    product_url: https://www.logitechg.com/en-us/products/driving/driving-force-shifter.html
+    picture_url: https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/driving-force-shifter/shifter-gallery-1.png
+    shops:
+      - name: Logitech G
+        price: 59.99
+        currency: USD
+        url: https://www.logitechg.com/en-us/products/driving/driving-force-shifter.html
+        region: Unknown
+  - product_name: DS-8X Shifter
+    description: SIMAGIC DS-8X Shifter. hybrid H-pattern and sequential shifter. In stock on
+      official page in search result. Hybrid H-pattern/sequential shifter.
+    manufacturer: SIMAGIC
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    product_url: https://simagic.com/pages/details-ds-8x
+    picture_url: https://simagic.com/cdn/shop/files/Q1_transparent_base.png?v=1766649236&width=500
+    shops:
+      - name: SIMAGIC
+        price: 299
+        currency: USD
+        url: https://simagic.com/pages/details-ds-8x
+        region: Unknown
+  - product_name: HGP Shifter
+    description: MOZA HGP Shifter. H-pattern shifter. Current product; official product page
+      showed dispatched within 3 business days. CNC-machined anodized aviation-grade
+      aluminum.
+    manufacturer: MOZA Racing
+    component_category: shifters
+    component_sub_category: H-pattern shifter
+    product_url: https://mozaracing.com/product/moza-hgp-shifter/
+    picture_url: https://mozaracing.com/cdn/shop/files/MOZA-HGP-Shifter-1-update.webp?v=1752228791&width=1920
+    shops:
+      - name: MOZA
+        price: 219
+        currency: CAD
+        url: https://mozaracing.com/product/moza-hgp-shifter/
+        region: Unknown
+  - product_name: MagShift Sequential Shifter
+    description: Heusinkveld MagShift. premium sequential shifter. Current Heusinkveld FAQ
+      references MagShift; current store price not confirmed [uncertain]. Sequential
+      shifter with adjustable shift force per Heusinkveld FAQ.
+    manufacturer: Heusinkveld
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    product_url: https://heusinkveld.com/shop/handbrake-shifters/magshift/
+    picture_url: https://www.onlineracedriver.com/wp-content/uploads/2023/11/The-New-Heusinkveld-MagShift-Sequential-Shifter.jpg
+    shops:
+      - name: Heusinkveld
+        price: 209
+        currency: EUR
+        url: https://heusinkveld.com/shop/handbrake-shifters/magshift/
+        region: Unknown
+  - product_name: Q1S Sequential Shifter
+    description: SIMAGIC Q1S Sequential Shifter. sequential shifter. Official US distributor
+      page showed out of stock; SIMAGIC ecosystem product [stock varies]. Sequential
+      shifter with adjustable damping.
+    manufacturer: SIMAGIC
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    product_url: https://simagicusa.com/products/simagic-q1s-sequential-shifter
+    picture_url: https://simagic-usa.myshopify.com/cdn/shop/files/SIMAGIC-Q1S-SEQUENTIAL-SHIFTER-Simagic-84797959.jpg?v=1748875424
+    shops:
+      - name: SIMAGIC US
+        price: 239
+        currency: USD
+        url: https://simagicusa.com/products/simagic-q1s-sequential-shifter
+        region: Unknown
+  - product_name: SGP Sequential Shifter
+    description: MOZA SGP Sequential Shifter. sequential shifter. Current product; official
+      US page showed dispatched within 3 business days. Aerospace-grade aluminum alloy
+      and high-strength steel.
+    manufacturer: MOZA Racing
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    product_url: https://us.mozaracing.com/products/sgp-shifter
+    picture_url: https://us.mozaracing.com/cdn/shop/files/SGP_Sequential_Shifter-1.png?v=1767606044&width=1920
+    shops:
+      - name: MOZA US
+        price: 129
+        currency: USD
+        url: https://us.mozaracing.com/products/sgp-shifter
+        region: Unknown
+  - product_name: Shifter Sequential
+    description: Aiologs Shifter Sequential. compact sequential shifter. Current Aiologs
+      shop product; shipment date shown as 30 April in search result. Stainless steel
+      case 64 x 54 x 115 mm with plexiglass top cover.
+    manufacturer: Aiologs
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    product_url: https://shop.aiologs.net/new/product/shifter/
+    picture_url: https://shop.aiologs.net/new/wp-content/uploads/2020/01/s-a1.jpg
+    shops:
+      - name: Aiologs
+        price: 180
+        currency: USD
+        url: https://shop.aiologs.net/new/product/shifter/
+        region: Global
+  - product_name: TH8A Shifter Add-On
+    description: Thrustmaster TH8A Shifter Add-On. hybrid H-pattern and sequential shifter.
+      Long-running Thrustmaster product; current stock/continuation not confirmed
+      [uncertain]. Metal shifter with H-pattern and sequential plates [uncertain exact
+      current kit].
+    manufacturer: Thrustmaster
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    product_url: https://www.thrustmaster.com/products/th8a-shifter-add-on/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/P_List-TH8A-SHIFTER-add-on-1-1.webp
+    shops:
+      - name: Thrustmaster
+        price: 199.99
+        currency: USD
+        url: https://www.thrustmaster.com/products/th8a-shifter-add-on/
+        region: Unknown
+  - product_name: TH8S Shifter Add-On
+    description: Thrustmaster TH8S Shifter Add-On. budget H-pattern shifter. Current
+      Thrustmaster product [stock not confirmed in this pass]. H-pattern shifter with 7
+      forward gears plus reverse [uncertain].
+    manufacturer: Thrustmaster
+    component_category: shifters
+    component_sub_category: H-pattern shifter
+    product_url: https://www.thrustmaster.com/products/th8s-shifter-add-on/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/06/TH8S_800x800-transparency-768x768-1.webp
+    shops:
+      - name: Thrustmaster
+        price: 69.99
+        currency: USD
+        url: https://www.thrustmaster.com/products/th8s-shifter-add-on/
+        region: Unknown
+opensource:
+  - project_name: Akaki-H-shifter
+    description: Akaki H Shifter. 3D printable H-pattern shifter with optional handbrake.
+      Small complete hobby build with CAD/STL, Arduino code, video/build instructions.
+      3D printable 8-speed H-pattern shifter.
+    maker: akakikuumeri
+    component_category: shifters
+    component_sub_category: H-pattern shifter
+    license: No repository license found [uncertain].
+    project_url: https://github.com/akakikuumeri/Akaki-H-shifter
+    picture_url: https://opengraph.githubassets.com/19094c5ad327c7f35eddd4e12ed96379094b16b8f024be78cb14c45131f295fd/akakikuumeri/Akaki-H-shifter
+  - project_name: DIYSimShifter
+    description: DIYSimShifter. 3D printable sequential shifter. Complete small project with
+      GitHub files, website guide, Thingiverse guide, and build video. 3D printable
+      sequential shifter designed for strength, longevity, and low cost.
+    maker: brendanbeavis / Beavis Motorsport
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    license: No repository license found [uncertain].
+    project_url: https://github.com/brendanbeavis/DIYSimShifter
+    picture_url: https://beavismotorsport.com/sim-racing/images/SHIFTER.jpg
+  - project_name: Sim Racing Library for Arduino
+    description: Sim Racing Library For Arduino. Arduino library and USB adapter shields for
+      Logitech pedals/shifters. Mature library with generated docs, examples, releases,
+      and companion shield files. Arduino library for interfacing sim racing equipment
+      such as pedals, analog shifters, analog handbrakes, and Logitech shifters.
+    maker: dmadison
+    component_category: shifters
+    component_sub_category: Shifter adapter
+    license: LGPL-3.0 for library; shield hardware license not verified [uncertain].
+    project_url: https://github.com/dmadison/Sim-Racing-Arduino
+    picture_url: https://raw.githubusercontent.com/dmadison/Sim-Racing-Shields/master/images/Sim-Racing-Shields_Header.jpg
+  - project_name: SRT Gearbox V10
+    description: Lebois Racing SRT Gearbox V10. DIY H-pattern/sequential gearbox. Current
+      Lebois DIY gearbox generation; official docs, store kits, firmware, mods, and
+      community support exist. 6-speed H-pattern plus reverse.
+    maker: Lebois Racing
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    license: Not clearly declared on public documentation [uncertain].
+    project_url: "null"
+    picture_url: https://lebois-racing.com/wp-content/uploads/2024/03/Mod-HSS-600x400.jpg

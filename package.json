@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
+    "products:build": "node scripts/build-products-database.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",
@@ -13,13 +14,13 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.8",
-    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/mdx": "^5.0.4",
     "@astrojs/partytown": "^2.1.7",
     "@astrojs/sitemap": "^3.7.2",
-    "@astrojs/starlight": "^0.38.3",
+    "@astrojs/starlight": "^0.38.4",
     "@astrojs/starlight-tailwind": "^5.0.0",
-    "@astrojs/svelte": "^8.0.5",
+    "@astrojs/svelte": "^8.1.0",
     "@astrojs/tailwind": "^6.0.2",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/tabler": "^1.2.33",
@@ -32,7 +33,7 @@
     "@threlte/core": "^8.5.9",
     "@threlte/extras": "^9.14.8",
     "@types/three": "^0.183.1",
-    "astro": "^6.1.8",
+    "astro": "^6.1.10",
     "astro-expressive-code": "^0.41.7",
     "astro-icon": "^1.1.5",
     "astro-navbar": "^2.4.0",
@@ -49,6 +50,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@astrojs/compiler-rs": "^0.1.10",
     "@astrolib/seo": "1.0.0-beta.8",
     "@cucumber/cucumber": "^12.2.0",
     "@eslint/js": "10.0.1",
@@ -72,7 +74,8 @@
     "typescript-eslint": "8.58.1",
     "unpic": "4.2.2",
     "vanilla-cookieconsent": "^3.1.0",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.4",
+    "yaml": "^2.8.3"
   },
   "packageManager": "pnpm@10.33.1"
 }
