@@ -1,119 +1,157 @@
----
 commercial:
-- product_name: Belt Force
-  description: 'PT Actuator Belt Force. electromagnetic dual-channel belt tensioner. available from PT Actuator. Dual driven channels: left and right.'
-  manufacturer: PT Actuator
-  component_category: belt-tensioners
-  component_sub_category: Belt tensioner
-  product_url: https://www.pt-actuator.com/product/belt-force/
-  picture_url: https://www.pt-actuator.com/wp-content/uploads/2025/09/BeltForce-Grey-2-670x670.jpg
-  shops:
-  - region: PT Actuator direct online store; shipping/tax/duty by destination.
-    price: 1999
-    currency: USD
-    url: https://www.pt-actuator.com/product/belt-force/
-- product_name: G-Belt Dual Axis Active Seat Belt Tensioning System
-  description: SimXperience G-Belt. dual-axis active harness tensioner. available from SimXperience shop. Dual-axis active belt tension feedback system for flight or racing simulation.
-  manufacturer: SimXperience
-  component_category: belt-tensioners
-  component_sub_category: Belt tensioner
-  product_url: https://www.simxperience.com/shop/sx-sbt-001-g-belt-dual-axis-active-seat-belt-tensioning-system-712
-  picture_url: https://www.simxperience.com/web/image/product.product/715/image_1024/%5BSX-SBT-001%5D%20G-Belt%20Dual%20Axis%20Active%20Seat%20Belt%20Tensioning%20System?unique=0c36168
-  shops:
-  - region: US-based SimXperience direct shop; shipping/installation details by order.
-    price: 999
-    currency: USD
-    url: https://www.simxperience.com/shop/sx-sbt-001-g-belt-dual-axis-active-seat-belt-tensioning-system-712
-- product_name: PT Active Belt Tensioner Pro + Tower
-  description: PT Actuator Active Belt Tensioner Pro + Tower. motor/spool active belt tensioner. available from PT Actuator. Active belt tensioner with harness tower.
-  manufacturer: PT Actuator
-  component_category: belt-tensioners
-  component_sub_category: Belt tensioner
-  product_url: https://www.pt-actuator.com/product/pt-active-belt-tensioner/
-  picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/09/%E7%BB%84%E5%90%88-380x380-1.jpg
-  shops:
-  - region: PT Actuator direct online store; ships from China/FOB terms may apply to some products.
-    price: 1499
-    currency: USD
-    url: https://www.pt-actuator.com/product/pt-active-belt-tensioner/
-- product_name: QS-BT1
-  description: Qubic System QS-BT1. dual-channel direct-drive belt tensioner. available via distributors / contact Qubic for lead time. Dual-channel direct-drive seat belt tensioner.
-  manufacturer: Qubic System
-  component_category: belt-tensioners
-  component_sub_category: Belt tensioner
-  product_url: https://qubicsystem.com/product/qs-bt1/
-  picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2023/12/qs-bt1-belts_08.jpg
-  shops:
-  - region: Qubic distributor network; contact Qubic if no local distributor or product is out of stock.
-    price: 1390
-    currency: EUR
-    url: https://qubicsystem.com/product/qs-bt1/
-- product_name: RS Active Force
-  description: eRacing-Lab RS Active Force. dual-actuator active belt kit. available from eRacing-Lab shop. Package includes Thanos4U controller, two RS actuators with servo motors/drivers, carbon-fiber roller bar, and 5-point 2.5 in quick-buckle belt.
-  manufacturer: eRacing-Lab
-  component_category: belt-tensioners
-  component_sub_category: Belt tensioner
-  product_url: https://eracing-lab.com/products/rs-solo-active-belt-kit-copy
-  picture_url: https://eracing-lab.com/cdn/shop/files/RS_SOLO_-_ACTIVE_FORCE_RED_9e3bfacd-a9e6-4f10-8d81-95e96e7ce6f8_1200x1200.jpg?v=1749819379
-  shops:
-  - region: eRacing-Lab direct online shop; shipping/tax/duty by destination.
-    price: 1180
-    currency: USD
-    url: https://eracing-lab.com/products/rs-solo-active-belt-kit-copy
+  - product_name: Belt Force
+    description: "PT Actuator Belt Force. electromagnetic dual-channel belt tensioner.
+      available from PT Actuator. Dual driven channels: left and right."
+    manufacturer: PT Actuator
+    component_category: belt-tensioners
+    component_sub_category: Belt tensioner
+    product_url: https://www.pt-actuator.com/product/belt-force/
+    picture_url: https://www.pt-actuator.com/wp-content/uploads/2025/09/BeltForce-Grey-2-670x670.jpg
+    shops:
+      - name: PT Actuator
+        price: 1999
+        currency: USD
+        url: https://www.pt-actuator.com/product/belt-force/
+        region: Unknown
+  - product_name: G-Belt Dual Axis Active Seat Belt Tensioning System
+    description: SimXperience G-Belt. dual-axis active harness tensioner. available from
+      SimXperience shop. Dual-axis active belt tension feedback system for flight or
+      racing simulation.
+    manufacturer: SimXperience
+    component_category: belt-tensioners
+    component_sub_category: Belt tensioner
+    product_url: https://www.simxperience.com/shop/sx-sbt-001-g-belt-dual-axis-active-seat-belt-tensioning-system-712
+    picture_url: https://www.simxperience.com/web/image/product.product/715/image_1024/%5BSX-SBT-001%5D%20G-Belt%20Dual%20Axis%20Active%20Seat%20Belt%20Tensioning%20System?unique=0c36168
+    shops:
+      - name: SimXperience
+        price: 999
+        currency: USD
+        url: https://www.simxperience.com/shop/sx-sbt-001-g-belt-dual-axis-active-seat-belt-tensioning-system-712
+        region: US
+  - product_name: PT Active Belt Tensioner Pro + Tower
+    description: PT Actuator Active Belt Tensioner Pro + Tower. motor/spool active belt
+      tensioner. available from PT Actuator. Active belt tensioner with harness tower.
+    manufacturer: PT Actuator
+    component_category: belt-tensioners
+    component_sub_category: Belt tensioner
+    product_url: https://www.pt-actuator.com/product/pt-active-belt-tensioner/
+    picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/09/%E7%BB%84%E5%90%88-380x380-1.jpg
+    shops:
+      - name: PT Actuator
+        price: 1499
+        currency: USD
+        url: https://www.pt-actuator.com/product/pt-active-belt-tensioner/
+        region: China
+  - product_name: QS-BT1
+    description: Qubic System QS-BT1. dual-channel direct-drive belt tensioner. available
+      via distributors / contact Qubic for lead time. Dual-channel direct-drive seat
+      belt tensioner.
+    manufacturer: Qubic System
+    component_category: belt-tensioners
+    component_sub_category: Belt tensioner
+    product_url: https://qubicsystem.com/product/qs-bt1/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2023/12/qs-bt1-belts_08.jpg
+    shops:
+      - name: Qubic System
+        price: 1390
+        currency: EUR
+        url: https://qubicsystem.com/product/qs-bt1/
+        region: Unknown
+  - product_name: RS Active Force
+    description: eRacing-Lab RS Active Force. dual-actuator active belt kit. available from
+      eRacing-Lab shop. Package includes Thanos4U controller, two RS actuators with
+      servo motors/drivers, carbon-fiber roller bar, and 5-point 2.5 in quick-buckle
+      belt.
+    manufacturer: eRacing-Lab
+    component_category: belt-tensioners
+    component_sub_category: Belt tensioner
+    product_url: https://eracing-lab.com/products/rs-solo-active-belt-kit-copy
+    picture_url: https://eracing-lab.com/cdn/shop/files/RS_SOLO_-_ACTIVE_FORCE_RED_9e3bfacd-a9e6-4f10-8d81-95e96e7ce6f8_1200x1200.jpg?v=1749819379
+    shops:
+      - name: eRacing-Lab
+        price: 1180
+        currency: USD
+        url: https://eracing-lab.com/products/rs-solo-active-belt-kit-copy
+        region: Unknown
 opensource:
-- project_name: Belt-Tensioner-Robot-Servo
-  description: Belt Tensioner Robot Servo. SimHub active belt tensioner using hobby servos. Older working DIY project; GitHub metadata showed last update in 2022. Active sim-racing harness tensioner controlled from SimHub.
-  maker: StuyoP
-  component_category: belt-tensioners
-  component_sub_category: Belt controller
-  license: GPL-3.0
-  project_url: https://github.com/StuyoP/Belt-Tensioner-Robot-Servo
-  picture_url: https://resize.thingiverse.com/?url=https://cdn.thingiverse.com/assets/b4/30/d4/0a/fb/IMG_2242.JPG&w=628&h=472&fit=contain&cbg=white&n=-1
-- project_name: Flag Ghost Belt Tensioner
-  description: Flag Ghost Belt Tensioner. Compact AASD/90ST servo active harness tensioner. Community DIY design referenced by Thanos, Motion4Sim, and OverTake posts. Plans appear to be distributed privately or sold by FlagGhost rather than published as an open repository. Compact active belt design for sim racing harness cueing.
-  maker: FlagGhost / community plan seller through Thanos Discord
-  component_category: belt-tensioners
-  component_sub_category: Belt tensioner
-  license: Unknown; no explicit open-source license found. Plans are reported as available for purchase from FlagGhost.
-  project_url: https://www.youtube.com/watch?v=fOlSEwAlbic
-  picture_url: https://i.ytimg.com/vi/fOlSEwAlbic/maxresdefault.jpg
-- project_name: gTenxor
-  description: gTenxor. SimHub plugin and Arduino/gTenxor servo controller. Public prototype/plugin project from 2023; small community footprint. SimHub plugin controls a seat belt/harness from telemetry.
-  maker: BojoteX / Jesus Altuve
-  component_category: belt-tensioners
-  component_sub_category: Belt controller
-  license: MIT, stated in README.
-  project_url: https://github.com/BojoteX/gTenxor
-  picture_url: https://raw.githubusercontent.com/BojoteX/gTenxor/master/images/gTenxor_hq.jpg
-- project_name: Hoernle's Belt Tensioner
-  description: Hoernle Belt Tensioner. Free 80/90ST servo active harness tensioner with single and dual axis versions. Public community design started in June 2022; OverTake thread first post edited for v1.5 on 2025-11-16. Multiple community builds are reported. Converts simulator telemetry into harness pull for sustained braking and lateral-force cueing.
-  maker: Hoernle / OverTake and Virtual Racing community
-  component_category: belt-tensioners
-  component_sub_category: Belt tensioner
-  license: Free community project; explicit hardware/software license not found in researched sources.
-  project_url: https://www.overtake.gg/threads/hoernles-belt-tensioner-detailed-build-instructions.249951/
-  picture_url: https://overtake-data.community.forum/attachments/919/919714-ec2710136cbdf0106afb40b79b1f5a91.jpg?hash=PawqtXHyd6
-- project_name: Seat Belt Tensioner GT V3.0
-  description: LeBois GT v3.0 Belt Tensioner. SimHub Arduino 350 W motor-and-spool DIY harness tensioner. Public DIY project from 2020, updated through 2026, but author now marks the mod not recommended due to reliability limits and points builders toward P1 or future V4. Budget DIY active harness tensioner for braking, ABS, shifting, and negative-G style cues.
-  maker: Lebois Racing
-  component_category: belt-tensioners
-  component_sub_category: Belt controller
-  license: 3D files download page states Creative Commons BY-NC-ND for distributed files.
-  project_url: https://lebois-racing.com/seat-belt-tensioner-gt/
-  picture_url: https://lebois-racing.com/wp-content/uploads/2020/07/sim-racing-belt-tensioner-srt-gt.jpg
-- project_name: SilentChill oDrive Seat Belt Tensioner
-  description: SilentChill oDrive Belt Tensioner. ODrive dual-motor 3D printed active harness tensioner. Public video-documented DIY prototype from around 2023; shared files/configs are referenced in video notes and comments rather than a formal repository. 3D-printed active seat belt tensioner built around ODrive motor control.
-  maker: SilentChill 6DOF Motion Gaming
-  component_category: belt-tensioners
-  component_sub_category: Belt tensioner
-  license: Unknown; no explicit open-source license found for STL/config sharing.
-  project_url: https://www.youtube.com/watch?v=vuurS1u4X_c
-  picture_url: https://i.ytimg.com/vi/vuurS1u4X_c/maxresdefault.jpg
-- project_name: SimHub Profiles / SimHub Custom Serial documentation
-  description: blekenbleu SimHub Custom Serial Profiles. SimHub custom serial servo-profile foundation. Public documentation/profile set; used as a base by multiple DIY belt projects. Documents SimHub custom serial workflows for Arduino/Blue Pill style devices.
-  maker: blekenbleu
-  component_category: belt-tensioners
-  component_sub_category: Belt controller
-  license: CC0-1.0 for SimHub-Profiles repository.
-  project_url: https://github.com/blekenbleu/SimHub-Profiles
-  picture_url: https://blekenbleu.github.io/Arduino/SimHubCustomSerial.gif
+  - project_name: Belt-Tensioner-Robot-Servo
+    description: Belt Tensioner Robot Servo. SimHub active belt tensioner using hobby
+      servos. Older working DIY project; GitHub metadata showed last update in 2022.
+      Active sim-racing harness tensioner controlled from SimHub.
+    maker: StuyoP
+    component_category: belt-tensioners
+    component_sub_category: Belt controller
+    license: GPL-3.0
+    project_url: https://github.com/StuyoP/Belt-Tensioner-Robot-Servo
+    picture_url: https://resize.thingiverse.com/?url=https://cdn.thingiverse.com/assets/b4/30/d4/0a/fb/IMG_2242.JPG&w=628&h=472&fit=contain&cbg=white&n=-1
+  - project_name: Flag Ghost Belt Tensioner
+    description: Flag Ghost Belt Tensioner. Compact AASD/90ST servo active harness
+      tensioner. Community DIY design referenced by Thanos, Motion4Sim, and OverTake
+      posts. Plans appear to be distributed privately or sold by FlagGhost rather than
+      published as an open repository. Compact active belt design for sim racing harness
+      cueing.
+    maker: FlagGhost / community plan seller through Thanos Discord
+    component_category: belt-tensioners
+    component_sub_category: Belt tensioner
+    license: Unknown; no explicit open-source license found. Plans are reported as available
+      for purchase from FlagGhost.
+    project_url: https://www.youtube.com/watch?v=fOlSEwAlbic
+    picture_url: https://i.ytimg.com/vi/fOlSEwAlbic/maxresdefault.jpg
+  - project_name: gTenxor
+    description: gTenxor. SimHub plugin and Arduino/gTenxor servo controller. Public
+      prototype/plugin project from 2023; small community footprint. SimHub plugin
+      controls a seat belt/harness from telemetry.
+    maker: BojoteX / Jesus Altuve
+    component_category: belt-tensioners
+    component_sub_category: Belt controller
+    license: MIT, stated in README.
+    project_url: https://github.com/BojoteX/gTenxor
+    picture_url: https://raw.githubusercontent.com/BojoteX/gTenxor/master/images/gTenxor_hq.jpg
+  - project_name: Hoernle's Belt Tensioner
+    description: Hoernle Belt Tensioner. Free 80/90ST servo active harness tensioner with
+      single and dual axis versions. Public community design started in June 2022;
+      OverTake thread first post edited for v1.5 on 2025-11-16. Multiple community
+      builds are reported. Converts simulator telemetry into harness pull for sustained
+      braking and lateral-force cueing.
+    maker: Hoernle / OverTake and Virtual Racing community
+    component_category: belt-tensioners
+    component_sub_category: Belt tensioner
+    license: Free community project; explicit hardware/software license not found in
+      researched sources.
+    project_url: https://www.overtake.gg/threads/hoernles-belt-tensioner-detailed-build-instructions.249951/
+    picture_url: https://overtake-data.community.forum/attachments/919/919714-ec2710136cbdf0106afb40b79b1f5a91.jpg?hash=PawqtXHyd6
+  - project_name: Seat Belt Tensioner GT V3.0
+    description: LeBois GT v3.0 Belt Tensioner. SimHub Arduino 350 W motor-and-spool DIY
+      harness tensioner. Public DIY project from 2020, updated through 2026, but author
+      now marks the mod not recommended due to reliability limits and points builders
+      toward P1 or future V4. Budget DIY active harness tensioner for braking, ABS,
+      shifting, and negative-G style cues.
+    maker: Lebois Racing
+    component_category: belt-tensioners
+    component_sub_category: Belt controller
+    license: 3D files download page states Creative Commons BY-NC-ND for distributed files.
+    project_url: https://lebois-racing.com/seat-belt-tensioner-gt/
+    picture_url: https://lebois-racing.com/wp-content/uploads/2020/07/sim-racing-belt-tensioner-srt-gt.jpg
+  - project_name: SilentChill oDrive Seat Belt Tensioner
+    description: SilentChill oDrive Belt Tensioner. ODrive dual-motor 3D printed active
+      harness tensioner. Public video-documented DIY prototype from around 2023; shared
+      files/configs are referenced in video notes and comments rather than a formal
+      repository. 3D-printed active seat belt tensioner built around ODrive motor
+      control.
+    maker: SilentChill 6DOF Motion Gaming
+    component_category: belt-tensioners
+    component_sub_category: Belt tensioner
+    license: Unknown; no explicit open-source license found for STL/config sharing.
+    project_url: https://www.youtube.com/watch?v=vuurS1u4X_c
+    picture_url: https://i.ytimg.com/vi/vuurS1u4X_c/maxresdefault.jpg
+  - project_name: SimHub Profiles / SimHub Custom Serial documentation
+    description: blekenbleu SimHub Custom Serial Profiles. SimHub custom serial
+      servo-profile foundation. Public documentation/profile set; used as a base by
+      multiple DIY belt projects. Documents SimHub custom serial workflows for
+      Arduino/Blue Pill style devices.
+    maker: blekenbleu
+    component_category: belt-tensioners
+    component_sub_category: Belt controller
+    license: CC0-1.0 for SimHub-Profiles repository.
+    project_url: https://github.com/blekenbleu/SimHub-Profiles
+    picture_url: https://blekenbleu.github.io/Arduino/SimHubCustomSerial.gif

@@ -1,183 +1,223 @@
----
 commercial:
-- product_name: AORUS CO49DQ
-  description: Gigabyte AORUS CO49DQ. super ultrawide OLED monitor. current/possibly limited regional availability [uncertain]. 49 in OLED, 32:9 DQHD 5120 x 1440.
-  manufacturer: Gigabyte
-  component_category: display-systems
-  component_sub_category: Monitor
-  product_url: https://www.gigabyte.com/Monitor/AORUS-CO49DQ
-  picture_url: https://static.gigabyte.com/StaticFile/Image/Global/be9bcbc502c7d2b8a19b3d603a1817ed/ProductRemoveBg/45066
-  shops:
-  - region: Gigabyte global product page; retailer availability varies.
-    price: 1099.99
-    currency: USD
-    url: https://www.gigabyte.com/Monitor/AORUS-CO49DQ
-- product_name: Elite Free Standing Complete Triple Monitor Stand - Black Edition
-  description: Next Level Racing Elite Freestanding Triple Monitor Stand. freestanding triple monitor stand. current. Aluminum extrusion freestanding triple monitor stand.
-  manufacturer: Next Level Racing
-  component_category: display-systems
-  component_sub_category: Monitor mount
-  product_url: https://store-us.nextlevelracing.com/products/elite-free-standing-complete-triple-monitor-stand-black-edition
-  picture_url: https://store-us.nextlevelracing.com/cdn/shop/files/NLREliteFreeStandingTripleMonitorStand_BlackEdition1.jpg?v=1750395894&width=1920
-  shops:
-  - region: Official US store and global retailers.
-    price: 499
-    currency: USD
-    url: https://store-us.nextlevelracing.com/products/elite-free-standing-complete-triple-monitor-stand-black-edition
-- product_name: Freestanding Triple Monitor Stand - Supports up to 45 in Displays
-  description: Trak Racer Freestanding Triple Monitor Stand 45. freestanding triple monitor stand. current; stock due late June 2026 on captured page. Freestanding stand for triple monitors up to 45 in.
-  manufacturer: Trak Racer
-  component_category: display-systems
-  component_sub_category: Monitor mount
-  product_url: https://trakracer.com/products/floor-triple-monitor-stand
-  picture_url: https://trakracer.com/cdn/shop/files/MS-CM-SIN-TR2_06_81ed3728-9855-47ba-9ab6-e9c8f617e571_1200x1200.png?v=1746416521
-  shops:
-  - region: US store ships from San Marcos, Texas; stock/backorder varies.
-    price: 439
-    currency: USD
-    url: https://trakracer.com/products/floor-triple-monitor-stand
-- product_name: Freestanding Vario Monitor Mount
-  description: Sim-Lab Freestanding Vario Monitor Mount. freestanding monitor mount. current; variants showed sold out/unavailable on US page during check. Freestanding single/triple/upgrade variants.
-  manufacturer: Sim-Lab
-  component_category: display-systems
-  component_sub_category: Monitor mount
-  product_url: https://sim-lab.us/products/vario-triple-monitor-mount-sim-racing
-  picture_url: https://sim-lab.us/cdn/shop/files/TriplestandVARIO2_5fc4c950-909c-4842-a258-fa32afe0edec.jpg?v=1752590761&width=1946
-  shops:
-  - region: Sim-Lab US ships from Pennsylvania; EU/global store also available; stock varies.
-    price: 259.01
-    currency: USD
-    url: https://sim-lab.us/products/vario-triple-monitor-mount-sim-racing
-- product_name: GT2000HDR
-  description: Optoma GT2000HDR. short-throw laser gaming projector. current. 1080p Full HD DLP laser projector.
-  manufacturer: Optoma
-  component_category: display-systems
-  component_sub_category: Projector
-  product_url: https://www.optomausa.com/product/gt2000hdr
-  picture_url: https://region-resource.optoma.com/country/ig4Jh8LWF0uqQAoDpEV0qNhWtjuQPVexkNYv4Q3k.png
-  shops: []
-- product_name: Immersive Display PRO
-  description: Fly Elise-ng Immersive Display PRO. projection warping and edge-blending software. current. Software for multi-projector warping and edge blending.
-  manufacturer: Fly Elise-ng
-  component_category: display-systems
-  component_sub_category: Projection mapping
-  product_url: https://fly.elise-ng.net/immersive-display-pro-licence/
-  picture_url: https://fly.elise-ng.net/wp-content/uploads/2018/12/Untitled-2-22.png
-  shops: []
-- product_name: Odyssey Neo G9 57 G95NC
-  description: Samsung Odyssey Neo G9 57 G95NC. super ultrawide monitor. current; business page showed contact/chat for assistance rather than simple add-to-cart during check. 57 in 32:9 Dual UHD, 7680 x 2160.
-  manufacturer: Samsung
-  component_category: display-systems
-  component_sub_category: Monitor
-  product_url: https://www.samsung.com/us/business/computing/monitors/gaming/57-odyssey-neo-g9-dual-4k-uhd-quantum-mini-led-240hz-1ms-hdr-1000-curved-gaming-monitor-ls57cg952nnxza/
-  picture_url: https://images.samsung.com/is/image/samsung/p6pim/us/ls57cg952nnxza/gallery/us-odyssey-neo-g9-g95nc-ls57cg952nnxza-550299919
-  shops:
-  - region: Samsung US consumer/business channels and retailers; availability varies.
-    price: 2499.99
-    currency: USD
-    url: https://www.samsung.com/us/business/computing/monitors/gaming/57-odyssey-neo-g9-dual-4k-uhd-quantum-mini-led-240hz-1ms-hdr-1000-curved-gaming-monitor-ls57cg952nnxza/
-- product_name: Odyssey OLED G9 G95SD
-  description: Samsung Odyssey OLED G9 G95SD. super ultrawide OLED monitor. current. 49 in 32:9 Dual QHD, 5120 x 1440 OLED.
-  manufacturer: Samsung
-  component_category: display-systems
-  component_sub_category: Monitor
-  product_url: https://www.samsung.com/us/computing/monitors/oled-monitor/49-odyssey-oled-g9-g95sd-dual-qhd-240hz-0-03ms-curved-gaming-monitor-with-glare-free-and-smart-features-ls49dg956snxgo/
-  picture_url: https://images.samsung.com/is/image/samsung/p6pim/us/ls49dg956snxgo/gallery/us-odyssey-oled-g9-g95sd-570122-ls49dg956snxgo-549841426
-  shops:
-  - region: Samsung US and retailers.
-    price: 1299.99
-    currency: USD
-    url: https://www.samsung.com/us/computing/monitors/oled-monitor/49-odyssey-oled-g9-g95sd-dual-qhd-240hz-0-03ms-curved-gaming-monitor-with-glare-free-and-smart-features-ls49dg956snxgo/
-- product_name: ROG Bezel-Free Kit ABF01
-  description: ASUS ROG Bezel-Free Kit ABF01. triple-monitor bezel blending accessory. current/limited availability [uncertain]. Optical accessory that refracts images across monitor bezels.
-  manufacturer: ASUS
-  component_category: display-systems
-  component_sub_category: Monitor
-  product_url: https://rog.asus.com/us/monitors/accessories/rog-bezel-free-kit-abf01-model/
-  picture_url: https://dlcdnwebimgs.asus.com/gain/89CB37E9-9C2B-4625-B71E-AE6B71F567F5/fwebp
-  shops:
-  - region: ASUS eStore/retailers; stock varies.
-    price: 109
-    currency: USD
-    url: https://rog.asus.com/us/monitors/accessories/rog-bezel-free-kit-abf01-model/
-- product_name: ROG Swift OLED PG49WCD
-  description: ASUS ROG Swift OLED PG49WCD. super ultrawide OLED monitor. current. 49 in 32:9 QD-OLED, 5120 x 1440.
-  manufacturer: ASUS
-  component_category: display-systems
-  component_sub_category: Monitor
-  product_url: https://rog.asus.com/us/monitors/above-34-inches/rog-swift-oled-pg49wcd/
-  picture_url: https://dlcdnwebimgs.asus.com/gain/89CB37E9-9C2B-4625-B71E-AE6B71F567F5/fwebp
-  shops: []
-- product_name: TK700STi
-  description: BenQ TK700STi. short-throw gaming projector. current on BenQ product page; ProjectorCentral marks discontinued April 2025 [uncertain]. 4K UHD DLP projector, 3000 ANSI lumens.
-  manufacturer: BenQ
-  component_category: display-systems
-  component_sub_category: Projector
-  product_url: https://www.benq.com/en-us/projector/gaming-projector/tk700sti.html
-  picture_url: https://image.benq.com/is/image/benqco/gaming-tk700sti-kv?$ResponsivePreset$
-  shops:
-  - region: BenQ US page and retailers; availability may be remaining stock.
-    price: 1399
-    currency: USD
-    url: https://www.benq.com/en-us/projector/gaming-projector/tk700sti.html
-- product_name: UltraGear 45GX950A-B
-  description: LG UltraGear 45GX950A-B. ultrawide OLED monitor. current. 44.5 in OLED, 21:9 5K2K WUHD 5120 x 2160.
-  manufacturer: LG
-  component_category: display-systems
-  component_sub_category: Monitor
-  product_url: https://www.lg.com/us/monitors/lg-45gx950a-b-gaming-monitor
-  picture_url: https://img.youtube.com/vi/HpWJKhqjeQQ/2.jpg?io=transform:fill,width:1536
-  shops:
-  - region: LG US and regional LG stores/retailers.
-    price: 1599.99
-    currency: USD
-    url: https://www.lg.com/us/monitors/lg-45gx950a-b-gaming-monitor
+  - product_name: AORUS CO49DQ
+    description: Gigabyte AORUS CO49DQ. super ultrawide OLED monitor. current/possibly
+      limited regional availability [uncertain]. 49 in OLED, 32:9 DQHD 5120 x 1440.
+    manufacturer: Gigabyte
+    component_category: display-systems
+    component_sub_category: Monitor
+    product_url: https://www.gigabyte.com/Monitor/AORUS-CO49DQ
+    picture_url: https://static.gigabyte.com/StaticFile/Image/Global/be9bcbc502c7d2b8a19b3d603a1817ed/ProductRemoveBg/45066
+    shops:
+      - name: Gigabyte
+        price: 1099.99
+        currency: USD
+        url: https://www.gigabyte.com/Monitor/AORUS-CO49DQ
+        region: Global
+  - product_name: Elite Free Standing Complete Triple Monitor Stand - Black Edition
+    description: Next Level Racing Elite Freestanding Triple Monitor Stand. freestanding
+      triple monitor stand. current. Aluminum extrusion freestanding triple monitor
+      stand.
+    manufacturer: Next Level Racing
+    component_category: display-systems
+    component_sub_category: Monitor mount
+    product_url: https://store-us.nextlevelracing.com/products/elite-free-standing-complete-triple-monitor-stand-black-edition
+    picture_url: https://store-us.nextlevelracing.com/cdn/shop/files/NLREliteFreeStandingTripleMonitorStand_BlackEdition1.jpg?v=1750395894&width=1920
+    shops:
+      - name: Next Level Racing US
+        price: 499
+        currency: USD
+        url: https://store-us.nextlevelracing.com/products/elite-free-standing-complete-triple-monitor-stand-black-edition
+        region: US
+  - product_name: Freestanding Triple Monitor Stand - Supports up to 45 in Displays
+    description: Trak Racer Freestanding Triple Monitor Stand 45. freestanding triple
+      monitor stand. current; stock due late June 2026 on captured page. Freestanding
+      stand for triple monitors up to 45 in.
+    manufacturer: Trak Racer
+    component_category: display-systems
+    component_sub_category: Monitor mount
+    product_url: https://trakracer.com/products/floor-triple-monitor-stand
+    picture_url: https://trakracer.com/cdn/shop/files/MS-CM-SIN-TR2_06_81ed3728-9855-47ba-9ab6-e9c8f617e571_1200x1200.png?v=1746416521
+    shops:
+      - name: Trak Racer
+        price: 439
+        currency: USD
+        url: https://trakracer.com/products/floor-triple-monitor-stand
+        region: US
+  - product_name: Freestanding Vario Monitor Mount
+    description: Sim-Lab Freestanding Vario Monitor Mount. freestanding monitor mount.
+      current; variants showed sold out/unavailable on US page during check.
+      Freestanding single/triple/upgrade variants.
+    manufacturer: Sim-Lab
+    component_category: display-systems
+    component_sub_category: Monitor mount
+    product_url: https://sim-lab.us/products/vario-triple-monitor-mount-sim-racing
+    picture_url: https://sim-lab.us/cdn/shop/files/TriplestandVARIO2_5fc4c950-909c-4842-a258-fa32afe0edec.jpg?v=1752590761&width=1946
+    shops:
+      - name: Sim-Lab US
+        price: 259.01
+        currency: USD
+        url: https://sim-lab.us/products/vario-triple-monitor-mount-sim-racing
+        region: US
+  - product_name: GT2000HDR
+    description: Optoma GT2000HDR. short-throw laser gaming projector. current. 1080p Full
+      HD DLP laser projector.
+    manufacturer: Optoma
+    component_category: display-systems
+    component_sub_category: Projector
+    product_url: https://www.optomausa.com/product/gt2000hdr
+    picture_url: https://region-resource.optoma.com/country/ig4Jh8LWF0uqQAoDpEV0qNhWtjuQPVexkNYv4Q3k.png
+    shops: []
+  - product_name: Immersive Display PRO
+    description: Fly Elise-ng Immersive Display PRO. projection warping and edge-blending
+      software. current. Software for multi-projector warping and edge blending.
+    manufacturer: Fly Elise-ng
+    component_category: display-systems
+    component_sub_category: Projection mapping
+    product_url: https://fly.elise-ng.net/immersive-display-pro-licence/
+    picture_url: https://fly.elise-ng.net/wp-content/uploads/2018/12/Untitled-2-22.png
+    shops: []
+  - product_name: Odyssey Neo G9 57 G95NC
+    description: Samsung Odyssey Neo G9 57 G95NC. super ultrawide monitor. current; business
+      page showed contact/chat for assistance rather than simple add-to-cart during
+      check. 57 in 32:9 Dual UHD, 7680 x 2160.
+    manufacturer: Samsung
+    component_category: display-systems
+    component_sub_category: Monitor
+    product_url: https://www.samsung.com/us/business/computing/monitors/gaming/57-odyssey-neo-g9-dual-4k-uhd-quantum-mini-led-240hz-1ms-hdr-1000-curved-gaming-monitor-ls57cg952nnxza/
+    picture_url: https://images.samsung.com/is/image/samsung/p6pim/us/ls57cg952nnxza/gallery/us-odyssey-neo-g9-g95nc-ls57cg952nnxza-550299919
+    shops:
+      - name: Samsung
+        price: 2499.99
+        currency: USD
+        url: https://www.samsung.com/us/business/computing/monitors/gaming/57-odyssey-neo-g9-dual-4k-uhd-quantum-mini-led-240hz-1ms-hdr-1000-curved-gaming-monitor-ls57cg952nnxza/
+        region: US
+  - product_name: Odyssey OLED G9 G95SD
+    description: Samsung Odyssey OLED G9 G95SD. super ultrawide OLED monitor. current. 49 in
+      32:9 Dual QHD, 5120 x 1440 OLED.
+    manufacturer: Samsung
+    component_category: display-systems
+    component_sub_category: Monitor
+    product_url: https://www.samsung.com/us/computing/monitors/oled-monitor/49-odyssey-oled-g9-g95sd-dual-qhd-240hz-0-03ms-curved-gaming-monitor-with-glare-free-and-smart-features-ls49dg956snxgo/
+    picture_url: https://images.samsung.com/is/image/samsung/p6pim/us/ls49dg956snxgo/gallery/us-odyssey-oled-g9-g95sd-570122-ls49dg956snxgo-549841426
+    shops:
+      - name: Samsung
+        price: 1299.99
+        currency: USD
+        url: https://www.samsung.com/us/computing/monitors/oled-monitor/49-odyssey-oled-g9-g95sd-dual-qhd-240hz-0-03ms-curved-gaming-monitor-with-glare-free-and-smart-features-ls49dg956snxgo/
+        region: US
+  - product_name: ROG Bezel-Free Kit ABF01
+    description: ASUS ROG Bezel-Free Kit ABF01. triple-monitor bezel blending accessory.
+      current/limited availability [uncertain]. Optical accessory that refracts images
+      across monitor bezels.
+    manufacturer: ASUS
+    component_category: display-systems
+    component_sub_category: Monitor
+    product_url: https://rog.asus.com/us/monitors/accessories/rog-bezel-free-kit-abf01-model/
+    picture_url: https://dlcdnwebimgs.asus.com/gain/89CB37E9-9C2B-4625-B71E-AE6B71F567F5/fwebp
+    shops:
+      - name: ASUS ROG
+        price: 109
+        currency: USD
+        url: https://rog.asus.com/us/monitors/accessories/rog-bezel-free-kit-abf01-model/
+        region: Unknown
+  - product_name: ROG Swift OLED PG49WCD
+    description: ASUS ROG Swift OLED PG49WCD. super ultrawide OLED monitor. current. 49 in
+      32:9 QD-OLED, 5120 x 1440.
+    manufacturer: ASUS
+    component_category: display-systems
+    component_sub_category: Monitor
+    product_url: https://rog.asus.com/us/monitors/above-34-inches/rog-swift-oled-pg49wcd/
+    picture_url: https://dlcdnwebimgs.asus.com/gain/89CB37E9-9C2B-4625-B71E-AE6B71F567F5/fwebp
+    shops: []
+  - product_name: TK700STi
+    description: BenQ TK700STi. short-throw gaming projector. current on BenQ product page;
+      ProjectorCentral marks discontinued April 2025 [uncertain]. 4K UHD DLP projector,
+      3000 ANSI lumens.
+    manufacturer: BenQ
+    component_category: display-systems
+    component_sub_category: Projector
+    product_url: https://www.benq.com/en-us/projector/gaming-projector/tk700sti.html
+    picture_url: https://image.benq.com/is/image/benqco/gaming-tk700sti-kv?$ResponsivePreset$
+    shops:
+      - name: BenQ
+        price: 1399
+        currency: USD
+        url: https://www.benq.com/en-us/projector/gaming-projector/tk700sti.html
+        region: US
+  - product_name: UltraGear 45GX950A-B
+    description: LG UltraGear 45GX950A-B. ultrawide OLED monitor. current. 44.5 in OLED,
+      21:9 5K2K WUHD 5120 x 2160.
+    manufacturer: LG
+    component_category: display-systems
+    component_sub_category: Monitor
+    product_url: https://www.lg.com/us/monitors/lg-45gx950a-b-gaming-monitor
+    picture_url: https://img.youtube.com/vi/HpWJKhqjeQQ/2.jpg?io=transform:fill,width:1536
+    shops:
+      - name: LG
+        price: 1599.99
+        currency: USD
+        url: https://www.lg.com/us/monitors/lg-45gx950a-b-gaming-monitor
+        region: US
 opensource:
-- project_name: MapMap
-  description: MapMap. projection mapping software. Mature but low/reduced activity; public repo has 10 tags and many open issues. Free/open-source video mapping software for Windows, macOS, and Linux.
-  maker: MapMap team
-  component_category: display-systems
-  component_sub_category: Projection mapping
-  license: GPL-3.0
-  project_url: https://github.com/mapmapteam/mapmap
-  picture_url: https://mapmapteam.github.io/documentation_images/toggle_display_controls.png
-- project_name: ofxPiMapper
-  description: ofxPiMapper. embedded projection mapping. Mature openFrameworks add-on; active enough to have recent GitHub Actions notes, but Raspberry Pi disk image support lags newer Pi hardware. Projection mapping add-on for openFrameworks, designed to run on Raspberry Pi.
-  maker: Krisjanis Rijnieks / kr15h
-  component_category: display-systems
-  component_sub_category: Projection mapping
-  license: MIT-style or open-source license in repository LICENSE.md [uncertain exact SPDX]
-  project_url: https://github.com/kr15h/ofxPiMapper
-  picture_url: https://ofxpimapper.com/assets/images/ofxpimapper-ogimage.jpg
-- project_name: ofxProjectorBlend
-  description: ofxProjectorBlend. projector edge blending library. Older openFrameworks add-on; no published releases and limited recent maintenance. openFrameworks add-on that splits an application into two or more projector outputs.
-  maker: Flightphase / James George / Jeff Crouse fork lineage
-  component_category: display-systems
-  component_sub_category: Projector
-  license: MIT-style permissive license text in README
-  project_url: https://github.com/Flightphase/ofxProjectorBlend
-  picture_url: https://opengraph.githubassets.com/64f1add62be39ec1cb6072eeb3354547531f8bc67d7d9d780c160a4e4defbe93/Flightphase/ofxProjectorBlend
-- project_name: OpenGC
-  description: OpenGC. glass cockpit instrument display software. Dormant; home page last updated April 24, 2006. Multi-platform, multi-simulator C++ toolkit for simulated flightdeck glass cockpit displays.
-  maker: Damion Shelton / OpenGC project
-  component_category: display-systems
-  component_sub_category: Display software
-  license: Example application GPL; libraries BSD-style per project home page
-  project_url: https://sourceforge.net/projects/opengc/
-  picture_url: https://a.fsdn.com/con/img/hi-text.png
-- project_name: ProjectionMapping
-  description: pkurth ProjectionMapping. large-scale projection mapping system. Research/prototype code; no GitHub releases, 1 contributor, Windows/D3D12 focused. Open-source projection mapping system for many projectors illuminating one or more tracked target objects.
-  maker: Philipp Kurth
-  component_category: display-systems
-  component_sub_category: Projection mapping
-  license: MIT
-  project_url: https://github.com/pkurth/ProjectionMapping
-  picture_url: https://raw.githubusercontent.com/pkurth/ProjectionMapping/master/assets/samples/teaser.jpg
-- project_name: Splash
-  description: Splash. projection warping and blending software. Active-ish open-source project; GitHub mirror says development moved to GitLab; latest captured release 0.10.8 from 2024. Modular multi-projector video-mapping software.
-  maker: Emmanuel Durand / SAT Metalab / Lab148 contributors
-  component_category: display-systems
-  component_sub_category: Projection mapping
-  license: GPL-3.0-or-later
-  project_url: https://gitlab.com/splashmapper/splash
-  picture_url: https://opengraph.githubassets.com/60b9272bd7988eb798f2b9d14291472661efb35ca0f9e38d4d804964dc115875/paperManu/splash
+  - project_name: MapMap
+    description: MapMap. projection mapping software. Mature but low/reduced activity;
+      public repo has 10 tags and many open issues. Free/open-source video mapping
+      software for Windows, macOS, and Linux.
+    maker: MapMap team
+    component_category: display-systems
+    component_sub_category: Projection mapping
+    license: GPL-3.0
+    project_url: https://github.com/mapmapteam/mapmap
+    picture_url: https://mapmapteam.github.io/documentation_images/toggle_display_controls.png
+  - project_name: ofxPiMapper
+    description: ofxPiMapper. embedded projection mapping. Mature openFrameworks add-on;
+      active enough to have recent GitHub Actions notes, but Raspberry Pi disk image
+      support lags newer Pi hardware. Projection mapping add-on for openFrameworks,
+      designed to run on Raspberry Pi.
+    maker: Krisjanis Rijnieks / kr15h
+    component_category: display-systems
+    component_sub_category: Projection mapping
+    license: MIT-style or open-source license in repository LICENSE.md [uncertain exact SPDX]
+    project_url: https://github.com/kr15h/ofxPiMapper
+    picture_url: https://ofxpimapper.com/assets/images/ofxpimapper-ogimage.jpg
+  - project_name: ofxProjectorBlend
+    description: ofxProjectorBlend. projector edge blending library. Older openFrameworks
+      add-on; no published releases and limited recent maintenance. openFrameworks
+      add-on that splits an application into two or more projector outputs.
+    maker: Flightphase / James George / Jeff Crouse fork lineage
+    component_category: display-systems
+    component_sub_category: Projector
+    license: MIT-style permissive license text in README
+    project_url: https://github.com/Flightphase/ofxProjectorBlend
+    picture_url: https://opengraph.githubassets.com/64f1add62be39ec1cb6072eeb3354547531f8bc67d7d9d780c160a4e4defbe93/Flightphase/ofxProjectorBlend
+  - project_name: OpenGC
+    description: OpenGC. glass cockpit instrument display software. Dormant; home page last
+      updated April 24, 2006. Multi-platform, multi-simulator C++ toolkit for simulated
+      flightdeck glass cockpit displays.
+    maker: Damion Shelton / OpenGC project
+    component_category: display-systems
+    component_sub_category: Display software
+    license: Example application GPL; libraries BSD-style per project home page
+    project_url: https://sourceforge.net/projects/opengc/
+    picture_url: https://a.fsdn.com/con/img/hi-text.png
+  - project_name: ProjectionMapping
+    description: pkurth ProjectionMapping. large-scale projection mapping system.
+      Research/prototype code; no GitHub releases, 1 contributor, Windows/D3D12 focused.
+      Open-source projection mapping system for many projectors illuminating one or more
+      tracked target objects.
+    maker: Philipp Kurth
+    component_category: display-systems
+    component_sub_category: Projection mapping
+    license: MIT
+    project_url: https://github.com/pkurth/ProjectionMapping
+    picture_url: https://raw.githubusercontent.com/pkurth/ProjectionMapping/master/assets/samples/teaser.jpg
+  - project_name: Splash
+    description: Splash. projection warping and blending software. Active-ish open-source
+      project; GitHub mirror says development moved to GitLab; latest captured release
+      0.10.8 from 2024. Modular multi-projector video-mapping software.
+    maker: Emmanuel Durand / SAT Metalab / Lab148 contributors
+    component_category: display-systems
+    component_sub_category: Projection mapping
+    license: GPL-3.0-or-later
+    project_url: https://gitlab.com/splashmapper/splash
+    picture_url: https://opengraph.githubassets.com/60b9272bd7988eb798f2b9d14291472661efb35ca0f9e38d4d804964dc115875/paperManu/splash

@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { productImages } from '~/data/3rdparty-product-images';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 
 type Product = CollectionEntry<'products'>['data'];
 
@@ -47,31 +48,64 @@ function formatPrice(price: number, currency: string) {
 }
 
 const overviewRows = [
-  [product.kind === 'opensource' ? 'Project Name' : 'Product Name', productName(product)],
-  ['Type', kindLabel(product.kind)],
-  ['Category', titleCaseSlug(product.component_category)],
-  ['Subcategory', product.component_sub_category],
-  ['Maker', makerName(product)],
   ['License', product.license],
 ].filter(([, value]) => value);
 
-const links = [
+const productPageUrl = primaryUrl(product);
+
+const breadcrumbItems = [
   {
-    label: product.kind === 'commercial' ? 'Product URL' : 'Project URL',
-    url: primaryUrl(product),
+    label: titleCaseSlug(product.component_category),
+    href: `/products/?category=${encodeURIComponent(product.component_category)}`,
   },
-  {
-    label: 'Picture URL',
-    url: product.picture_url,
-  },
-].filter((link): link is { label: string; url: string } => isHttpUrl(link.url));
+  product.component_sub_category
+    ? {
+        label: titleCaseSlug(product.component_sub_category),
+        href: `/products/?group=${encodeURIComponent(product.component_sub_category)}`,
+      }
+    : null,
+].filter((item): item is { label: string; href: string } => Boolean(item));
 
 const imageAlt = `${productName(product)} product photo`;
 ---
 
-<section class="grid gap-5">
+<WidgetWrapper containerClass="max-w-5xl">
+<div class="grid gap-5">
+  {makerName(product) && <h2 class="m-0 text-[1.2rem] font-[700] leading-tight">{makerName(product)}</h2>}
+
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <nav class="flex flex-wrap items-center gap-1 text-[0.76rem] font-[650] text-[var(--sl-color-gray-2)]" aria-label="Product category breadcrumb">
+      {
+        breadcrumbItems.map((item, index) => (
+          <>
+            {index > 0 && <span aria-hidden="true" class="text-[var(--sl-color-gray-3)]">&gt;</span>}
+            <a
+              class="rounded-none bg-transparent px-0 py-0 leading-none text-[var(--sl-color-gray-2)] no-underline underline-offset-4 hover:text-[var(--sl-color-accent-high)] hover:underline focus-visible:text-[var(--sl-color-accent-high)] focus-visible:underline"
+              href={item.href}
+              aria-label={`Filter by ${item.label}`}
+            >
+              {item.label}
+            </a>
+          </>
+        ))
+      }
+    </nav>
+    <div class="flex flex-wrap items-center justify-end gap-2">
+      <span
+        class:list={[
+          'inline-flex whitespace-nowrap rounded-full px-3 py-1 text-[0.76rem] font-[700] leading-none',
+          product.kind === 'commercial'
+            ? 'bg-yellow-200 text-yellow-900'
+            : 'bg-emerald-200 text-emerald-900',
+        ]}
+      >
+        {kindLabel(product.kind)}
+      </span>
+    </div>
+  </div>
+
   {
-    image ? (
+    image && (
       <figure class="m-0 grid justify-items-start gap-2">
         <img
           class="block max-h-[26rem] w-full max-w-[44rem] rounded-lg border border-[var(--sl-color-gray-5)] bg-white p-3 object-contain"
@@ -83,18 +117,6 @@ const imageAlt = `${productName(product)} product photo`;
           decoding="async"
         />
       </figure>
-    ) : (
-      isHttpUrl(product.picture_url) && (
-        <figure class="m-0 grid justify-items-start gap-2">
-          <img
-            class="block max-h-[26rem] w-full max-w-[44rem] rounded-lg border border-[var(--sl-color-gray-5)] bg-white p-3 object-contain"
-            src={product.picture_url}
-            alt={imageAlt}
-            loading="eager"
-            decoding="async"
-          />
-        </figure>
-      )
     )
   }
 
@@ -115,42 +137,72 @@ const imageAlt = `${productName(product)} product photo`;
     }
   </div>
 
-  <h2 id="links">Links</h2>
-  <ul class="[overflow-wrap:anywhere]">
-    {
-      links.map((link) => (
-        <li>
-          <strong>{link.label}: </strong>
-          <a href={link.url} target="_blank" rel="noreferrer noopener">
-            {link.url}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  {
+    isHttpUrl(productPageUrl) && (
+      <div>
+        <a
+          class="inline-flex items-center gap-2 rounded-[10px] border border-[var(--sl-color-gray-5)] px-3 py-2 text-[0.82rem] font-[650] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+          href={productPageUrl}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M12 5H5v14h14v-7" />
+            <path d="M14 5h5v5" />
+            <path d="m10 14 9-9" />
+          </svg>
+          Product Page
+        </a>
+      </div>
+    )
+  }
 
   {
     product.kind === 'commercial' && (
       <>
-        <h2 id="shops">Shops</h2>
+        <h2 id="available-at">Available at</h2>
         {product.shops?.length ? (
-          <div class="grid gap-3">
-            {product.shops.map((shop) => (
-              <section class="rounded-lg border border-[var(--sl-color-gray-5)] p-[0.875rem]">
-                <h3 class="mb-2 mt-0 text-[0.95rem]">{shop.region ?? 'Shop'}</h3>
-                <p class="mb-2 mt-0 font-semibold">{formatPrice(shop.price, shop.currency)}</p>
-                {shop.url && (
-                  <a href={shop.url} target="_blank" rel="noreferrer noopener">
-                    {shop.url}
-                  </a>
-                )}
-              </section>
-            ))}
+          <div class="overflow-x-auto rounded-lg border border-[var(--sl-color-gray-5)]">
+            <table class="m-0 w-full min-w-[28rem] border-collapse text-left text-[0.9rem]">
+              <thead class="border-b border-[var(--sl-color-gray-5)] text-[0.76rem] uppercase tracking-[0] text-[var(--sl-color-gray-3)]">
+                <tr>
+                  <th class="px-4 py-3 font-[700]">Name</th>
+                  <th class="px-4 py-3 text-right font-[700]">Price</th>
+                  <th class="px-4 py-3 text-right font-[700]">Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                {product.shops.map((shop) => (
+                  <tr class="border-b border-[var(--sl-color-gray-6)] last:border-b-0">
+                    <td class="px-4 py-3">{shop.name ?? 'Shop'}</td>
+                    <td class="px-4 py-3 text-right font-[650]">{formatPrice(shop.price, shop.currency)}</td>
+                    <td class="px-4 py-3 text-right">
+                      {isHttpUrl(shop.url) && (
+                        <a
+                          class="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-[8px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-gray-2)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+                          href={shop.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          aria-label={`Open ${shop.name ?? 'shop'} page`}
+                        >
+                          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                            <path d="M12 5H5v14h14v-7" />
+                            <path d="M14 5h5v5" />
+                            <path d="m10 14 9-9" />
+                          </svg>
+                        </a>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         ) : (
-          <p>No numeric shop price is available in the YAML database.</p>
+          <p>No price available.</p>
         )}
       </>
     )
   }
-</section>
+</div>
+</WidgetWrapper>

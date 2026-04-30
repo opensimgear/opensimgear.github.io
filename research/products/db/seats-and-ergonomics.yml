@@ -1,115 +1,140 @@
----
 commercial:
-- product_name: Elite ES1 Seat
-  description: Next Level Racing Elite ES1 Seat. fixed sim racing seat. current. Fixed sim racing seat developed using motorsport and sim feedback.
-  manufacturer: Next Level Racing
-  component_category: seats-and-ergonomics
-  component_sub_category: Racing seat
-  product_url: https://nextlevelracing.com/products/elite-es1-sim-racing-seat/
-  picture_url: https://nextlevelracing.com/wp-content/uploads/2021/09/Elite-ES1-Sim-Racing-Seat.webp
-  shops:
-  - region: Next Level Racing EUK store and global retailers; US stock varies.
-    price: 399
-    currency: USD
-    url: https://nextlevelracing.com/products/elite-es1-sim-racing-seat/
-- product_name: ERS3 Elite Reclining Seat
-  description: Next Level Racing ERS3 Elite Reclining Seat. reclining sim racing seat. sold out on official US store during check. Reclining sim seat with double recliners.
-  manufacturer: Next Level Racing
-  component_category: seats-and-ergonomics
-  component_sub_category: Racing seat
-  product_url: https://store-us.nextlevelracing.com/products/ers3-elite-reclining-seat
-  picture_url: https://store-us.nextlevelracing.com/cdn/shop/files/NextLevelRacingERS31_313c3682-5178-4946-b97a-849866bd74b1.jpg?v=1750395967&width=1920
-  shops:
-  - region: US official store and global retailers; stock varies.
-    price: 249
-    currency: USD
-    url: https://store-us.nextlevelracing.com/products/ers3-elite-reclining-seat
-- product_name: FX1 Pro
-  description: Corbeau FX1 Pro. motorsport fixed-back seat. current. Fixed-back fiberglass composite seat.
-  manufacturer: Corbeau
-  component_category: seats-and-ergonomics
-  component_sub_category: Racing seat
-  product_url: https://corbeau.com/products/fx1-pro
-  picture_url: https://corbeau.com/cdn/shop/files/tr6701f-s.jpg?v=1729531591&width=50
-  shops:
-  - region: US manufacturer store and motorsport retailers; colors/sizes vary.
-    price: 449
-    currency: USD
-    url: https://corbeau.com/products/fx1-pro
-- product_name: Grid Q
-  description: Sparco Grid Q. motorsport fixed-back seat. current through retailers; official product-specific URL not confirmed [uncertain]. QRT fiberglass shell; FIA 8855-1999 approval listed by retailer.
-  manufacturer: Sparco
-  component_category: seats-and-ergonomics
-  component_sub_category: Racing seat
-  product_url: Product-specific official page not found during pass [uncertain]
-  picture_url: https://static.wixstatic.com/media/98a6d0_7f3f0fdd0be745f99e2b2ae84c4071e8~mv2_d_1412_1848_s_2.png/v1/fill/w_71,h_92,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/98a6d0_7f3f0fdd0be745f99e2b2ae84c4071e8~mv2_d_1412_1848_s_2.png
-  shops:
-  - region: Motorsport retailers in EU/UK/US; stock varies by homologation/color.
-    price: 511.18
-    currency: EUR
-    url: Product-specific official page not found during pass [uncertain]
-- product_name: GT Pro Racing Seat - Fiberglass Black
-  description: Trak Racer GT-Pro Fiberglass Seat. fixed sim racing bucket. current. Fixed-back GT bucket seat with ultra-light fiberglass shell.
-  manufacturer: Trak Racer
-  component_category: seats-and-ergonomics
-  component_sub_category: Racing seat
-  product_url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat
-  picture_url: https://trakracer.com/cdn/shop/files/SEAT-5.1_f8693293-e0b9-440d-a90d-f8026ca2eb16_1024x1024.png?v=1700585793
-  shops:
-  - region: US store ships from San Marcos, Texas; regional Trak Racer stores vary.
-    price: 349
-    currency: USD
-    url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat
-- product_name: Pilot Seat MPS-1 Blackbird
-  description: MONSTERTECH Pilot Seat MPS-1 Blackbird. flight simulator pilot seat. current. Dedicated pilot seat option for MTS cockpit ecosystem.
-  manufacturer: MONSTERTECH / MTSIM
-  component_category: seats-and-ergonomics
-  component_sub_category: Flight seat
-  product_url: https://www.monster.tech/en/product-category/mts-en/
-  picture_url: https://www.monster.tech/wp-content/uploads/2021/12/monstertech_pilot_seat_mps1_ohne_schriftzug_01-768x768.jpg
-  shops:
-  - region: EU official store; configured variants and shipping region affect final cost.
-    price: 856.14
-    currency: EUR
-    url: https://www.monster.tech/en/product-category/mts-en/
-- product_name: TRS TR Series GT Pro Racing Seat - Fiberglass Black
-  description: Trak Racer TRS TR Series GT Pro Seat. fixed sim racing bucket. current. GT-style fixed-back racing seat with ultra-rigid fiberglass shell.
-  manufacturer: Trak Racer
-  component_category: seats-and-ergonomics
-  component_sub_category: Racing seat
-  product_url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat-2
-  picture_url: https://trakracer.com/cdn/shop/files/SA-11-UPDATE_02_1024x1024.png?v=1737422000
-  shops:
-  - region: US official store; regional stores vary.
-    price: 419
-    currency: USD
-    url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat-2
-- product_name: TRS-E Racing Seat
-  description: OMP TRS-E. motorsport seat. current through retailers; official product-specific URL not confirmed [uncertain]. Tubular steel and foam racing seat per retailer descriptions.
-  manufacturer: OMP
-  component_category: seats-and-ergonomics
-  component_sub_category: Racing seat
-  product_url: Product-specific official page not found during pass [uncertain]
-  picture_url: https://www.racegearco.com/wp-content/uploads/2026/1/1767773100/omp-trs-e-racing-seat-1767773106.webp
-  shops:
-  - region: Motorsport retailers in EU/US; color and FIA status vary by listing.
-    price: 239
-    currency: EUR
-    url: Product-specific official page not found during pass [uncertain]
+  - product_name: Elite ES1 Seat
+    description: Next Level Racing Elite ES1 Seat. fixed sim racing seat. current. Fixed sim
+      racing seat developed using motorsport and sim feedback.
+    manufacturer: Next Level Racing
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://nextlevelracing.com/products/elite-es1-sim-racing-seat/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2021/09/Elite-ES1-Sim-Racing-Seat.webp
+    shops:
+      - name: Next Level Racing
+        price: 399
+        currency: USD
+        url: https://nextlevelracing.com/products/elite-es1-sim-racing-seat/
+        region: US
+  - product_name: ERS3 Elite Reclining Seat
+    description: Next Level Racing ERS3 Elite Reclining Seat. reclining sim racing seat.
+      sold out on official US store during check. Reclining sim seat with double
+      recliners.
+    manufacturer: Next Level Racing
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://store-us.nextlevelracing.com/products/ers3-elite-reclining-seat
+    picture_url: https://store-us.nextlevelracing.com/cdn/shop/files/NextLevelRacingERS31_313c3682-5178-4946-b97a-849866bd74b1.jpg?v=1750395967&width=1920
+    shops:
+      - name: Next Level Racing US
+        price: 249
+        currency: USD
+        url: https://store-us.nextlevelracing.com/products/ers3-elite-reclining-seat
+        region: US
+  - product_name: FX1 Pro
+    description: Corbeau FX1 Pro. motorsport fixed-back seat. current. Fixed-back fiberglass
+      composite seat.
+    manufacturer: Corbeau
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://corbeau.com/products/fx1-pro
+    picture_url: https://corbeau.com/cdn/shop/files/tr6701f-s.jpg?v=1729531591&width=50
+    shops:
+      - name: Corbeau
+        price: 449
+        currency: USD
+        url: https://corbeau.com/products/fx1-pro
+        region: US
+  - product_name: Grid Q
+    description: Sparco Grid Q. motorsport fixed-back seat. current through retailers;
+      official product-specific URL not confirmed [uncertain]. QRT fiberglass shell; FIA
+      8855-1999 approval listed by retailer.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: Product-specific official page not found during pass [uncertain]
+    picture_url: https://static.wixstatic.com/media/98a6d0_7f3f0fdd0be745f99e2b2ae84c4071e8~mv2_d_1412_1848_s_2.png/v1/fill/w_71,h_92,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/98a6d0_7f3f0fdd0be745f99e2b2ae84c4071e8~mv2_d_1412_1848_s_2.png
+    shops:
+      - name: Sparco
+        price: 511.18
+        currency: EUR
+        url: Product-specific official page not found during pass [uncertain]
+        region: US
+  - product_name: GT Pro Racing Seat - Fiberglass Black
+    description: Trak Racer GT-Pro Fiberglass Seat. fixed sim racing bucket. current.
+      Fixed-back GT bucket seat with ultra-light fiberglass shell.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat
+    picture_url: https://trakracer.com/cdn/shop/files/SEAT-5.1_f8693293-e0b9-440d-a90d-f8026ca2eb16_1024x1024.png?v=1700585793
+    shops:
+      - name: Trak Racer
+        price: 349
+        currency: USD
+        url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat
+        region: US
+  - product_name: Pilot Seat MPS-1 Blackbird
+    description: MONSTERTECH Pilot Seat MPS-1 Blackbird. flight simulator pilot seat.
+      current. Dedicated pilot seat option for MTS cockpit ecosystem.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    product_url: https://www.monster.tech/en/product-category/mts-en/
+    picture_url: https://www.monster.tech/wp-content/uploads/2021/12/monstertech_pilot_seat_mps1_ohne_schriftzug_01-768x768.jpg
+    shops:
+      - name: Monstertech
+        price: 856.14
+        currency: EUR
+        url: https://www.monster.tech/en/product-category/mts-en/
+        region: EU
+  - product_name: TRS TR Series GT Pro Racing Seat - Fiberglass Black
+    description: Trak Racer TRS TR Series GT Pro Seat. fixed sim racing bucket. current.
+      GT-style fixed-back racing seat with ultra-rigid fiberglass shell.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat-2
+    picture_url: https://trakracer.com/cdn/shop/files/SA-11-UPDATE_02_1024x1024.png?v=1737422000
+    shops:
+      - name: Trak Racer
+        price: 419
+        currency: USD
+        url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat-2
+        region: US
+  - product_name: TRS-E Racing Seat
+    description: OMP TRS-E. motorsport seat. current through retailers; official
+      product-specific URL not confirmed [uncertain]. Tubular steel and foam racing seat
+      per retailer descriptions.
+    manufacturer: OMP
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: Product-specific official page not found during pass [uncertain]
+    picture_url: https://www.racegearco.com/wp-content/uploads/2026/1/1767773100/omp-trs-e-racing-seat-1767773106.webp
+    shops:
+      - name: OMP
+        price: 239
+        currency: EUR
+        url: Product-specific official page not found during pass [uncertain]
+        region: US
 opensource:
-- project_name: OpenHarrier SJU-4A Ejection Seat
-  description: OpenHarrier SJU-4A Ejection Seat. flight replica seat. Public build instructions and FreeCAD model available through OpenHarrier; Martin-Baker Mk10 variant not yet available per project page. Replica Stencel SJU-4/A seat for AV-8B Harrier cockpit builds.
-  maker: OpenHarrier
-  component_category: seats-and-ergonomics
-  component_sub_category: Flight seat
-  license: GPL-3.0 in AV8B-NA repository
-  project_url: https://github.com/OpenHarrier/AV8B-NA/tree/main/EjectionSeats/SJU-4A
-  picture_url: https://openharrier.org/wp-content/uploads/2024/06/sju-4a-freecad-2024-06-14-070153-1.png
-- project_name: OpenHornet SJU-17 Ejection Seat
-  description: OpenHornet SJU-17 Ejection Seat. flight replica seat. Released as part of OpenHornet hardware package; release notes mention SJU-17 full release package and later DXF updates. Replica NACES/SJU-17-style ejection seat package for an F/A-18 cockpit build.
-  maker: OpenHornet / jrsteensen and contributors
-  component_category: seats-and-ergonomics
-  component_sub_category: Flight seat
-  license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International through OpenHornet project
-  project_url: https://github.com/jrsteensen/OpenHornet
-  picture_url: https://raw.githubusercontent.com/jrsteensen/OpenHornet/master/images/Glareshields.2019.10.21.PNG
+  - project_name: OpenHarrier SJU-4A Ejection Seat
+    description: OpenHarrier SJU-4A Ejection Seat. flight replica seat. Public build
+      instructions and FreeCAD model available through OpenHarrier; Martin-Baker Mk10
+      variant not yet available per project page. Replica Stencel SJU-4/A seat for AV-8B
+      Harrier cockpit builds.
+    maker: OpenHarrier
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    license: GPL-3.0 in AV8B-NA repository
+    project_url: https://github.com/OpenHarrier/AV8B-NA/tree/main/EjectionSeats/SJU-4A
+    picture_url: https://openharrier.org/wp-content/uploads/2024/06/sju-4a-freecad-2024-06-14-070153-1.png
+  - project_name: OpenHornet SJU-17 Ejection Seat
+    description: OpenHornet SJU-17 Ejection Seat. flight replica seat. Released as part of
+      OpenHornet hardware package; release notes mention SJU-17 full release package and
+      later DXF updates. Replica NACES/SJU-17-style ejection seat package for an F/A-18
+      cockpit build.
+    maker: OpenHornet / jrsteensen and contributors
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International through
+      OpenHornet project
+    project_url: https://github.com/jrsteensen/OpenHornet
+    picture_url: https://raw.githubusercontent.com/jrsteensen/OpenHornet/master/images/Glareshields.2019.10.21.PNG

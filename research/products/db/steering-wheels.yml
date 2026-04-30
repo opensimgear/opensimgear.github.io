@@ -1,163 +1,202 @@
----
 commercial:
-- product_name: ClubSport Steering Wheel Formula V2.5
-  description: Fanatec ClubSport Steering Wheel Formula V2.5. formula-style wheel with integrated controls. Current product page; US store showed currently unavailable in search result. 270 mm formula rim with 5 mm carbon fiber front plate.
-  manufacturer: Fanatec
-  component_category: steering-wheels
-  component_sub_category: Formula wheel
-  product_url: https://www.fanatec.com/us-en/steering-wheels/complete-wheels/clubsport-steering-wheel-formula-v2.5
-  picture_url: https://d1nzm2nlurbj16.cloudfront.net/images/CS_SWFORM_V25-01A.width-1500.format-webp.webp
-  shops:
-  - region: Fanatec US/EU web stores; availability varies by region.
-    price: 399.99
-    currency: USD
-    url: https://www.fanatec.com/us-en/steering-wheels/complete-wheels/clubsport-steering-wheel-formula-v2.5
-- product_name: ClubSport Steering Wheel RS
-  description: Fanatec ClubSport Steering Wheel RS. round GT/road wheel with integrated controls. Available on official US page in search result. 320 mm fully round rim.
-  manufacturer: Fanatec
-  component_category: steering-wheels
-  component_sub_category: GT wheel
-  product_url: https://www.fanatec.com/us-en/steering-wheels/clubsport-steering-wheel-rs
-  picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Steering-Wheels/CS_SW_RS/cs_sw_rs-01.webp
-  shops:
-  - region: Fanatec direct stores; region stock varies.
-    price: 369.99
-    currency: USD
-    url: https://www.fanatec.com/us-en/steering-wheels/clubsport-steering-wheel-rs
-- product_name: CSL Steering Wheel P1 V2
-  description: Fanatec CSL Steering Wheel P1 V2. budget round wheel with integrated controls. Current Fanatec catalog item [uncertain direct stock]. Round entry-level Fanatec wheel, used often with CSL DD bundles.
-  manufacturer: Fanatec
-  component_category: steering-wheels
-  component_sub_category: GT wheel
-  product_url: https://www.fanatec.com/us-en/steering-wheels/csl-steering-wheel-p1-v2
-  picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Steering-Wheels/CSL_SW_P1_V2R_QR2L/CSL_SW_P1_V2R-01.webp
-  shops: []
-- product_name: CSX-3
-  description: Cube Controls CSX-3. premium formula wheel with display. Current product; discounted on official page in search result. 28.2 cm grip-to-grip length, 1143 g.
-  manufacturer: Cube Controls
-  component_category: steering-wheels
-  component_sub_category: Formula wheel
-  product_url: https://www.cubecontrols.com/product/formula-csx-3/
-  picture_url: https://www.cubecontrols.com/wp-content/uploads/2022/09/cube-controls-cx3-front-lights-on-1200x800-1.webp
-  shops:
-  - region: Cube Controls direct EU store and global resellers.
-    price: 1384.65
-    currency: EUR
-    url: https://www.cubecontrols.com/product/formula-csx-3/
-- product_name: F-CORE
-  description: Cube Controls F-CORE. wireless/USB formula wheel. Current product in Cube Controls formula collection. 29 cm diameter, 895 g.
-  manufacturer: Cube Controls
-  component_category: steering-wheels
-  component_sub_category: Wheel electronics
-  product_url: https://www.cubecontrols.com/product/f-core/
-  picture_url: https://www.cubecontrols.com/wp-content/uploads/2025/03/fcorevo-formula-front.webp
-  shops:
-  - region: Cube Controls direct EU store and worldwide resellers.
-    price: 401
-    currency: EUR
-    url: https://www.cubecontrols.com/product/f-core/
-- product_name: FSR Formula Wheel
-  description: MOZA FSR Formula Wheel. formula wheel with display. Current or recently current MOZA product [uncertain stock by region]. Formula-style rim with integrated display, shift LEDs, rotary controls, buttons, and paddle modules [uncertain].
-  manufacturer: MOZA Racing
-  component_category: steering-wheels
-  component_sub_category: Formula wheel
-  product_url: https://mozaracing.com/en-us/product/fsr-formula-wheel/
-  picture_url: https://mozaracing.com/cdn/shop/files/FSR2_Formula_Wheel-1.webp?v=1752135264&width=1920
-  shops: []
-- product_name: FX Pro Formula Steering Wheel
-  description: SIMAGIC FX Pro. formula wheel with display. In stock on official page in search result. 290 mm formula wheel, 1750 g.
-  manufacturer: SIMAGIC
-  component_category: steering-wheels
-  component_sub_category: Formula wheel
-  product_url: https://simagic.com/pages/details-fx-pro
-  picture_url: https://simagic.com/cdn/shop/files/FX_Pro-transparent_base.png?v=1766645403&width=500
-  shops:
-  - region: SIMAGIC official store and distributors.
-    price: 549
-    currency: USD
-    url: https://simagic.com/pages/details-fx-pro
-- product_name: GT Neo
-  description: SIMAGIC GT Neo. GT/formula-style wheel with open-ecosystem option. In stock on official page in search result. 300 mm diameter, 1100 g excluding QR.
-  manufacturer: SIMAGIC
-  component_category: steering-wheels
-  component_sub_category: Formula wheel
-  product_url: https://simagic.com/pages/details-gt-neo
-  picture_url: https://simagic.com/cdn/shop/files/FX_Pro-transparent_base.png?v=1766645403&width=500
-  shops:
-  - region: SIMAGIC official store and regional distributors.
-    price: 269
-    currency: USD
-    url: https://simagic.com/pages/details-gt-neo
-- product_name: KS Steering Wheel
-  description: MOZA KS Steering Wheel. GT/formula-style wheel. Current MOZA product [uncertain stock by region]. 300 mm GT/formula-style rim [uncertain].
-  manufacturer: MOZA Racing
-  component_category: steering-wheels
-  component_sub_category: Formula wheel
-  product_url: https://mozaracing.com/en-us/product/ks-steering-wheel/
-  picture_url: https://mozaracing.com/cdn/shop/files/KS_Steering_Wheel-1.webp?v=1752135237&width=1920
-  shops:
-  - region: MOZA global/US web stores and reseller network.
-    price: 279
-    currency: USD
-    url: https://mozaracing.com/en-us/product/ks-steering-wheel/
-- product_name: Tahko GT-21 Wireless Wheel
-  description: Simucube Tahko GT-21 Wireless Wheel. wireless round GT wheel. In stock on Simucube US page in search result. 320 mm CNC-finished steel flat GT rim with suede finish.
-  manufacturer: Simucube
-  component_category: steering-wheels
-  component_sub_category: Wheel electronics
-  product_url: https://simucube.com/en-us/tahko/
-  picture_url: https://simucube.com/app/uploads/sites/5/2021/10/Simucube-Tahko-GT-21_Web_Transparent_fixed_-3.png
-  shops:
-  - region: Simucube direct US/EU and resellers.
-    price: 859
-    currency: USD
-    url: https://simucube.com/en-us/tahko/
+  - product_name: ClubSport Steering Wheel Formula V2.5
+    description: Fanatec ClubSport Steering Wheel Formula V2.5. formula-style wheel with
+      integrated controls. Current product page; US store showed currently unavailable
+      in search result. 270 mm formula rim with 5 mm carbon fiber front plate.
+    manufacturer: Fanatec
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://www.fanatec.com/us-en/steering-wheels/complete-wheels/clubsport-steering-wheel-formula-v2.5
+    picture_url: https://d1nzm2nlurbj16.cloudfront.net/images/CS_SWFORM_V25-01A.width-1500.format-webp.webp
+    shops:
+      - name: Fanatec
+        price: 399.99
+        currency: USD
+        url: https://www.fanatec.com/us-en/steering-wheels/complete-wheels/clubsport-steering-wheel-formula-v2.5
+        region: US
+  - product_name: ClubSport Steering Wheel RS
+    description: Fanatec ClubSport Steering Wheel RS. round GT/road wheel with integrated
+      controls. Available on official US page in search result. 320 mm fully round rim.
+    manufacturer: Fanatec
+    component_category: steering-wheels
+    component_sub_category: GT wheel
+    product_url: https://www.fanatec.com/us-en/steering-wheels/clubsport-steering-wheel-rs
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Steering-Wheels/CS_SW_RS/cs_sw_rs-01.webp
+    shops:
+      - name: Fanatec
+        price: 369.99
+        currency: USD
+        url: https://www.fanatec.com/us-en/steering-wheels/clubsport-steering-wheel-rs
+        region: Unknown
+  - product_name: CSL Steering Wheel P1 V2
+    description: Fanatec CSL Steering Wheel P1 V2. budget round wheel with integrated
+      controls. Current Fanatec catalog item [uncertain direct stock]. Round entry-level
+      Fanatec wheel, used often with CSL DD bundles.
+    manufacturer: Fanatec
+    component_category: steering-wheels
+    component_sub_category: GT wheel
+    product_url: https://www.fanatec.com/us-en/steering-wheels/csl-steering-wheel-p1-v2
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Steering-Wheels/CSL_SW_P1_V2R_QR2L/CSL_SW_P1_V2R-01.webp
+    shops: []
+  - product_name: CSX-3
+    description: Cube Controls CSX-3. premium formula wheel with display. Current product;
+      discounted on official page in search result. 28.2 cm grip-to-grip length, 1143 g.
+    manufacturer: Cube Controls
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://www.cubecontrols.com/product/formula-csx-3/
+    picture_url: https://www.cubecontrols.com/wp-content/uploads/2022/09/cube-controls-cx3-front-lights-on-1200x800-1.webp
+    shops:
+      - name: Cube Controls
+        price: 1384.65
+        currency: EUR
+        url: https://www.cubecontrols.com/product/formula-csx-3/
+        region: EU
+  - product_name: F-CORE
+    description: Cube Controls F-CORE. wireless/USB formula wheel. Current product in Cube
+      Controls formula collection. 29 cm diameter, 895 g.
+    manufacturer: Cube Controls
+    component_category: steering-wheels
+    component_sub_category: Wheel electronics
+    product_url: https://www.cubecontrols.com/product/f-core/
+    picture_url: https://www.cubecontrols.com/wp-content/uploads/2025/03/fcorevo-formula-front.webp
+    shops:
+      - name: Cube Controls
+        price: 401
+        currency: EUR
+        url: https://www.cubecontrols.com/product/f-core/
+        region: EU
+  - product_name: FSR Formula Wheel
+    description: MOZA FSR Formula Wheel. formula wheel with display. Current or recently
+      current MOZA product [uncertain stock by region]. Formula-style rim with
+      integrated display, shift LEDs, rotary controls, buttons, and paddle modules
+      [uncertain].
+    manufacturer: MOZA Racing
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://mozaracing.com/en-us/product/fsr-formula-wheel/
+    picture_url: https://mozaracing.com/cdn/shop/files/FSR2_Formula_Wheel-1.webp?v=1752135264&width=1920
+    shops: []
+  - product_name: FX Pro Formula Steering Wheel
+    description: SIMAGIC FX Pro. formula wheel with display. In stock on official page in
+      search result. 290 mm formula wheel, 1750 g.
+    manufacturer: SIMAGIC
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://simagic.com/pages/details-fx-pro
+    picture_url: https://simagic.com/cdn/shop/files/FX_Pro-transparent_base.png?v=1766645403&width=500
+    shops:
+      - name: SIMAGIC
+        price: 549
+        currency: USD
+        url: https://simagic.com/pages/details-fx-pro
+        region: Unknown
+  - product_name: GT Neo
+    description: SIMAGIC GT Neo. GT/formula-style wheel with open-ecosystem option. In stock
+      on official page in search result. 300 mm diameter, 1100 g excluding QR.
+    manufacturer: SIMAGIC
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://simagic.com/pages/details-gt-neo
+    picture_url: https://simagic.com/cdn/shop/files/FX_Pro-transparent_base.png?v=1766645403&width=500
+    shops:
+      - name: SIMAGIC
+        price: 269
+        currency: USD
+        url: https://simagic.com/pages/details-gt-neo
+        region: Unknown
+  - product_name: KS Steering Wheel
+    description: MOZA KS Steering Wheel. GT/formula-style wheel. Current MOZA product
+      [uncertain stock by region]. 300 mm GT/formula-style rim [uncertain].
+    manufacturer: MOZA Racing
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://mozaracing.com/en-us/product/ks-steering-wheel/
+    picture_url: https://mozaracing.com/cdn/shop/files/KS_Steering_Wheel-1.webp?v=1752135237&width=1920
+    shops:
+      - name: MOZA
+        price: 279
+        currency: USD
+        url: https://mozaracing.com/en-us/product/ks-steering-wheel/
+        region: US
+  - product_name: Tahko GT-21 Wireless Wheel
+    description: Simucube Tahko GT-21 Wireless Wheel. wireless round GT wheel. In stock on
+      Simucube US page in search result. 320 mm CNC-finished steel flat GT rim with
+      suede finish.
+    manufacturer: Simucube
+    component_category: steering-wheels
+    component_sub_category: Wheel electronics
+    product_url: https://simucube.com/en-us/tahko/
+    picture_url: https://simucube.com/app/uploads/sites/5/2021/10/Simucube-Tahko-GT-21_Web_Transparent_fixed_-3.png
+    shops:
+      - name: Simucube
+        price: 859
+        currency: USD
+        url: https://simucube.com/en-us/tahko/
+        region: US
 opensource:
-- project_name: FreeJoy
-  description: FreeJoy. configurable USB HID input controller for wheels, pedals, shifters, and panels. Mature hobby firmware with large community footprint; active repository. Configurable USB HID game-device controller based on cheap STM32F103C8 boards.
-  maker: FreeJoy-Team
-  component_category: steering-wheels
-  component_sub_category: Wheel electronics
-  license: GPL-3.0
-  project_url: https://github.com/FreeJoy-Team/FreeJoy
-  picture_url: https://raw.githubusercontent.com/FreeJoy-Team/FreeJoy/master/images/main.png
-- project_name: LY steeringWheel MeterBox STM32 FreeRTOS
-  description: LY SteeringWheel MeterBox. formula-style wheel with display and SimHub support. Complete university Formula Student graduation project; repo and external hardware project available. STM32F407 steering wheel for Formula Student car and simulator use.
-  maker: Nolimy
-  component_category: steering-wheels
-  component_sub_category: Formula wheel
-  license: GPL-3.0
-  project_url: https://github.com/Nolimy/steeringWheel_MeterBox_STM32_FreeRTOS
-  picture_url: https://raw.githubusercontent.com/Nolimy/steeringWheel_MeterBox_STM32_FreeRTOS/main/readme%20md/simhub1.png
-- project_name: OpenSourceSimWheelESP32
-  description: OpenSourceSimWheelESP32. wireless steering-wheel/button-box electronics. Active, documented, fully operational project with releases and extensive documentation. Open hardware/software for ESP32 sim-racing wheel or button box.
-  maker: afpineda
-  component_category: steering-wheels
-  component_sub_category: Wheel electronics
-  license: EUPL-1.2
-  project_url: https://github.com/afpineda/OpenSourceSimWheelESP32
-  picture_url: https://repository-images.githubusercontent.com/489044238/1d81d5ed-5a48-4502-8079-3e7befab7929
-- project_name: Pico Wheel
-  description: Pico Wheel. non-FFB 3D-printed wheel/controller. Small complete hobby project; low complexity and modest activity. DIY sim racing wheel using Raspberry Pi Pico and AS5600 magnetic encoder.
-  maker: khui0
-  component_category: steering-wheels
-  component_sub_category: Wheel electronics
-  license: GPL-3.0
-  project_url: https://github.com/khui0/pico-wheel
-  picture_url: https://github.com/khui0/pico-wheel/assets/101839505/29395627-e298-49d1-adba-7828c009001b
-- project_name: Turn Racing DIY Wheels
-  description: Turn Racing DIY Wheels. source-available 3D/CAD steering wheel archive. Archived community DIY wheel file collection; repo updated but license is restrictive. Archive includes multiple Turn DIY wheel projects such as 488 Challenge, 911 GT3 Cup, Fiesta WRC, GT GT3, GTE, R8 LMS, RSR-17, AMG GT3 [uncertain exact current repo coverage].
-  maker: Turn Racing community
-  component_category: steering-wheels
-  component_sub_category: Wheel archive
-  license: CC BY-NC-ND 4.0; source-available but not OSI/open-hardware-compliant because commercial use and derivative sharing are restricted.
-  project_url: https://github.com/turnracing/turnracing-diy
-  picture_url: https://simracing-pc.de/wp-content/uploads/2025/05/simracing-pc.jpg
-- project_name: WirelessWheel
-  description: WirelessWheel. NRF24 wireless wheel electronics. Functional hobby project; updated but smaller and older than OpenSourceSimWheelESP32. NRF24-powered wireless steering wheel with buttons, LEDs, Nextion display, and SimHub support.
-  maker: MorGuux
-  component_category: steering-wheels
-  component_sub_category: Wheel electronics
-  license: GPL-3.0
-  project_url: https://github.com/MorGuux/WirelessWheel
-  picture_url: https://repository-images.githubusercontent.com/298696858/beb10cdf-2252-4644-bd03-47356db0214f
+  - project_name: FreeJoy
+    description: FreeJoy. configurable USB HID input controller for wheels, pedals,
+      shifters, and panels. Mature hobby firmware with large community footprint; active
+      repository. Configurable USB HID game-device controller based on cheap STM32F103C8
+      boards.
+    maker: FreeJoy-Team
+    component_category: steering-wheels
+    component_sub_category: Wheel electronics
+    license: GPL-3.0
+    project_url: https://github.com/FreeJoy-Team/FreeJoy
+    picture_url: https://raw.githubusercontent.com/FreeJoy-Team/FreeJoy/master/images/main.png
+  - project_name: LY steeringWheel MeterBox STM32 FreeRTOS
+    description: LY SteeringWheel MeterBox. formula-style wheel with display and SimHub
+      support. Complete university Formula Student graduation project; repo and external
+      hardware project available. STM32F407 steering wheel for Formula Student car and
+      simulator use.
+    maker: Nolimy
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    license: GPL-3.0
+    project_url: https://github.com/Nolimy/steeringWheel_MeterBox_STM32_FreeRTOS
+    picture_url: https://raw.githubusercontent.com/Nolimy/steeringWheel_MeterBox_STM32_FreeRTOS/main/readme%20md/simhub1.png
+  - project_name: OpenSourceSimWheelESP32
+    description: OpenSourceSimWheelESP32. wireless steering-wheel/button-box electronics.
+      Active, documented, fully operational project with releases and extensive
+      documentation. Open hardware/software for ESP32 sim-racing wheel or button box.
+    maker: afpineda
+    component_category: steering-wheels
+    component_sub_category: Wheel electronics
+    license: EUPL-1.2
+    project_url: https://github.com/afpineda/OpenSourceSimWheelESP32
+    picture_url: https://repository-images.githubusercontent.com/489044238/1d81d5ed-5a48-4502-8079-3e7befab7929
+  - project_name: Pico Wheel
+    description: Pico Wheel. non-FFB 3D-printed wheel/controller. Small complete hobby
+      project; low complexity and modest activity. DIY sim racing wheel using Raspberry
+      Pi Pico and AS5600 magnetic encoder.
+    maker: khui0
+    component_category: steering-wheels
+    component_sub_category: Wheel electronics
+    license: GPL-3.0
+    project_url: https://github.com/khui0/pico-wheel
+    picture_url: https://github.com/khui0/pico-wheel/assets/101839505/29395627-e298-49d1-adba-7828c009001b
+  - project_name: Turn Racing DIY Wheels
+    description: Turn Racing DIY Wheels. source-available 3D/CAD steering wheel archive.
+      Archived community DIY wheel file collection; repo updated but license is
+      restrictive. Archive includes multiple Turn DIY wheel projects such as 488
+      Challenge, 911 GT3 Cup, Fiesta WRC, GT GT3, GTE, R8 LMS, RSR-17, AMG GT3
+      [uncertain exact current repo coverage].
+    maker: Turn Racing community
+    component_category: steering-wheels
+    component_sub_category: Wheel archive
+    license: CC BY-NC-ND 4.0; source-available but not OSI/open-hardware-compliant because
+      commercial use and derivative sharing are restricted.
+    project_url: https://github.com/turnracing/turnracing-diy
+    picture_url: https://simracing-pc.de/wp-content/uploads/2025/05/simracing-pc.jpg
+  - project_name: WirelessWheel
+    description: WirelessWheel. NRF24 wireless wheel electronics. Functional hobby project;
+      updated but smaller and older than OpenSourceSimWheelESP32. NRF24-powered wireless
+      steering wheel with buttons, LEDs, Nextion display, and SimHub support.
+    maker: MorGuux
+    component_category: steering-wheels
+    component_sub_category: Wheel electronics
+    license: GPL-3.0
+    project_url: https://github.com/MorGuux/WirelessWheel
+    picture_url: https://repository-images.githubusercontent.com/298696858/beb10cdf-2252-4644-bd03-47356db0214f

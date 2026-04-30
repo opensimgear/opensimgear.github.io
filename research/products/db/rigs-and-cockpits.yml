@@ -1,491 +1,600 @@
----
 commercial:
-- product_name: ASR 1 Chassis
-  description: Advanced SimRacing ASR 1. entry aluminum profile cockpit. current. Generation 2 profile chassis with 1.5 x 1.5 in base.
-  manufacturer: Advanced SimRacing
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  product_url: https://www.advancedsimracing.com/products/asr-1
-  picture_url: https://www.advancedsimracing.com/cdn/shop/files/Advanced_SimRacing_-_ASR_1_Main_View_4fbac7c1-8c58-47bd-96ea-71ebfcffe9d5.jpg?v=1755411305&width=1920
-  shops:
-  - region: Ships from Canada; free shipping over CAD $100 per official page.
-    price: 427.49
-    currency: USD
-    url: https://www.advancedsimracing.com/products/asr-1
-- product_name: ASR 4 Chassis Open Face
-  description: Advanced SimRacing ASR 4. high-end aluminum profile cockpit. current; EVO wheel deck variants on back order during check. 4.5 x 1.5 in aluminum base and reinforced steering column.
-  manufacturer: Advanced SimRacing
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  product_url: https://www.advancedsimracing.com/products/asr-4-open-face
-  picture_url: https://www.advancedsimracing.com/cdn/shop/files/ASR_4_open_Transparent_no_shadow.Main34SideView_2801a917-3162-47fe-8115-0cd3ba6714be.png?v=1755411307&width=1920
-  shops:
-  - region: Canada, continental US, EU shipping per official page; lead times vary.
-    price: 1179.99
-    currency: USD
-    url: https://www.advancedsimracing.com/products/asr-4-open-face
-- product_name: ASR Pro Chassis Generation 2
-  description: Advanced SimRacing ASR Pro. professional aluminum profile cockpit. current; back order alert showed week of 2026-05-11 during check. Generation 2 flat-face aluminum profile with reinforced 6 in base.
-  manufacturer: Advanced SimRacing
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  product_url: https://www.advancedsimracing.com/products/asr-pro
-  picture_url: https://www.advancedsimracing.com/cdn/shop/files/ASR_PRO_Transparent_No_shadow.Main34FrontView_7e586e55-7ba8-4ea3-b341-76bad42c30f5.png?v=1750944136&width=1920
-  shops:
-  - region: Canada-based manufacturer; ships to supported regions with large-item delivery notes.
-    price: 1649.99
-    currency: USD
-    url: https://www.advancedsimracing.com/products/asr-pro
-- product_name: Collective Extension
-  description: Collective Extension. flight-control mounts and accessories. Suspended on EU WINCTRL store; listed in catalog but not normally purchasable. Collective Extension.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=328
-  picture_url: https://eu.winctrl.com/static/ipfs/QmUTbwDVSzqcUQCC24a3mjEhS1y3HBCdzqbS5gJiqRj2NM
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 1, suspend_sales 1.
-    price: 47.95
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=328
-- product_name: Dual Throttle connector for WINCTRL Orion/Gemini Base
-  description: Dual Throttle connector for WINCTRL Orion/Gemini Base. flight-control mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API. Dual Throttle connector for WINCTRL Orion/Gemini Base x1.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=381
-  picture_url: https://eu.winctrl.com/static/ipfs/QmaXkLe2FHqK1ic7oC5pR86gRfFSNQDWqqRpaLoNEajVhm
-  shops:
-  - region: EU WINCTRL store; local stock 4, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 19.72
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=381
-- product_name: EXPED
-  description: EXPED. flight-control mounts and accessories. Listed on EU WINCTRL store; local stock not available in API response. EXPED.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=825
-  picture_url: https://eu.winctrl.com/static/ipfs/QmRA4AQRPRZh9EeFdLW2uzNuMqXVoZZK6RqsdEGX8yjBCC
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 0.99
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=825
-- product_name: Finger Lift for Gemini Only
-  description: Finger Lift for Gemini Only. flight-control mounts and accessories. Listed on EU WINCTRL store; local stock not available in API response. Finger Lift for Gemini Only.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=346
-  picture_url: https://eu.winctrl.com/static/ipfs/QmcBHEoU3AToENNGEHn9gAMbj1Sjdq82o1xx4B6jYSgzHo
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 49.39
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=346
-- product_name: Finger Lift for WINCTRL Orion1 Only
-  description: Finger Lift for WINCTRL Orion1 Only. flight-control mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API. Finger Lift for WINCTRL Orion1 Only.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=345
-  picture_url: https://eu.winctrl.com/static/ipfs/QmTg5wn759a1kjaA2hfyDaJKAMzH8wAirEhMNG2SkEZjbU
-  shops:
-  - region: EU WINCTRL store; local stock 4, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 49.39
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=345
-- product_name: Finger Lift for WINCTRL Orion2 Only
-  description: Finger Lift for WINCTRL Orion2 Only. flight-control mounts and accessories. Pre-order listing on EU WINCTRL store. Finger Lift for WINCTRL Orion2 Only x1.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=347
-  picture_url: https://eu.winctrl.com/static/ipfs/QmXVVAuAh3GSVhmHE2JobNxLDva7nEFnJT8GY5rp4eR4Jk
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 1, suspend_sales 0.
-    price: 49.39
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=347
-- product_name: Formula Intelligence
-  description: Playseat Formula Intelligence. formula-style cockpit. current. Formula seating posture with ForceLock adjustment system.
-  manufacturer: Playseat
-  component_category: rigs-and-cockpits
-  component_sub_category: Formula cockpit
-  product_url: https://www.playseat.com/products/playseat-formula-intelligence-black
-  picture_url: https://www.playseat.com/cdn/shop/collections/Screenshot_2025-06-03_at_16.32.12_bea07877-6eeb-4630-a92f-4ff9fe6cfb6c.png?v=1764770232&width=800
-  shops:
-  - region: Playseat worldwide shipping; availability varies by color and edition.
-    price: 2499
-    currency: EUR
-    url: https://www.playseat.com/products/playseat-formula-intelligence-black
-- product_name: Gemini Chair Mount
-  description: Gemini Chair Mount. flight-control mounts and accessories. Listed on EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Gemini Chair Mount.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=327
-  picture_url: https://eu.winctrl.com/static/ipfs/QmQYH5P8PSJJYMV5zUP2hDcAnr6Zi5KVuKKAcHZfZW5Zx3
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 999999
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=327
-- product_name: GT1 Evo Simracing Cockpit
-  description: Sim-Lab GT1 Evo. aluminum profile cockpit. current. Aluminum profile chassis, black finish.
-  manufacturer: Sim-Lab
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  product_url: https://sim-lab.us/products/gt1-evo-simracing-cockpit
-  picture_url: https://sim-lab.us/cdn/shop/files/GT1_Evo_SparcoGridQ_VarioSingle.jpg?v=1763040475&width=1920
-  shops:
-  - region: US store ships from Pennsylvania; EU/global store also available.
-    price: 449
-    currency: USD
-    url: https://sim-lab.us/products/gt1-evo-simracing-cockpit
-- product_name: Joystick Desk Mount2 with Profile Bar 1
-  description: Joystick Desk Mount2 with Profile Bar 1. flight-control mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API. Joystick Desk Mount2 with Profile Bar 1.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=1185
-  picture_url: https://eu.winctrl.com/static/ipfs/QmVibjhxqfrmTDcGPprYSdr2TWrMgBjCKA8DfhA2815PS6
-  shops:
-  - region: EU WINCTRL store; local stock 4, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 34.61
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=1185
-- product_name: Joystick Extension Rod
-  description: Joystick Extension Rod. flight-control mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API. Joystick Extension Rod.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=311
-  picture_url: https://eu.winctrl.com/static/ipfs/QmQV3FYkMUheJyfioLm2Nkn9DrFYcnA9bgDBmxyYm443X6
-  shops:
-  - region: EU WINCTRL store; local stock 4, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 49.39
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=311
-- product_name: Joystick Z-Axis module
-  description: Joystick Z-Axis module. flight-control mounts and accessories. Listed on EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Joystick Z-Axis module.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=312
-  picture_url: https://eu.winctrl.com/static/ipfs/QmdBVVSZdVkf8VACdhSJWkH9H8tCtY5gDqWXtcU4rfkJAV
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 999999
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=312
-- product_name: MAG Switch1 TS
-  description: MAG Switch1 TS. flight-control mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API. MAG Switch1 TS.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=1105
-  picture_url: https://eu.winctrl.com/static/ipfs/QmPzqtqusthK61hCBtnBFNqGSFrWbPFtBjN9zuEMhcDL1s
-  shops:
-  - region: EU WINCTRL store; local stock 4, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 49.39
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=1105
-- product_name: MTS Base Frame
-  description: MONSTERTECH MTS Base Frame. modular flight/racing cockpit. current. Modular aluminum cockpit with MTS add-ons for HOTAS, center joystick, yoke, wheel, monitor, keyboard, mouse, and motion adapters.
-  manufacturer: MONSTERTECH / MTSIM
-  component_category: rigs-and-cockpits
-  component_sub_category: Flight cockpit
-  product_url: https://www.monster.tech/en/product-category/mts-en/
-  picture_url: https://www.monster.tech/wp-content/uploads/2023/01/monstertech_mts_baseframe_b_01.jpg
-  shops:
-  - region: EU official store with international shipping options; configuration-dependent.
-    price: 1007.4
-    currency: EUR
-    url: https://www.monster.tech/en/product-category/mts-en/
-- product_name: P1X Pro Sim Racing Cockpit
-  description: Sim-Lab P1X Pro. high-end aluminum profile cockpit. current. Flagship aluminum profile cockpit for high-load direct drive and pedal setups.
-  manufacturer: Sim-Lab
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  product_url: https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit
-  picture_url: https://sim-lab.eu/cdn/shop/files/p1xpro_4.jpg?v=1762973240&width=2048
-  shops: []
-- product_name: Panel Mount1
-  description: Panel Mount1. flight-control mounts and accessories. Pre-order listing on EU WINCTRL store. Panel Mount1.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=645
-  picture_url: https://eu.winctrl.com/static/ipfs/QmbqZ1wpLiC25QGXjKaPGnTNJQ2pGaNnNMnNDP5GC2yBBT
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 1, suspend_sales 0.
-    price: 28.57
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=645
-- product_name: Panel Mount1(x3)
-  description: Panel Mount1(x3). flight-control mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API. Panel Mount1x3.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=665
-  picture_url: https://eu.winctrl.com/static/ipfs/QmcYPG5bMiNFf3dquahLi6pqQqQEx4zmguAkNpohvaEK73
-  shops:
-  - region: EU WINCTRL store; local stock 4, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 70.89
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=665
-- product_name: Playseat Challenge X Logitech G Edition
-  description: Playseat Challenge X Logitech G Edition. foldable cockpit. current. Foldable cockpit with carbon steel frame and ActiFit fabric.
-  manufacturer: Playseat / Logitech G
-  component_category: rigs-and-cockpits
-  component_sub_category: Portable cockpit
-  product_url: https://www.logitechg.com/en-us/products/gaming-furniture/playseat-challenge-x-sim-racing-seat.html
-  picture_url: https://www.playseat.com/cdn/shop/collections/Screenshot2025-06-02at12.15.21_34e13864-39c6-4dbb-98ab-a57fedf18715.png?v=1764770168&width=800
-  shops:
-  - region: US and select global markets through Logitech, Playseat, and retailers.
-    price: 299
-    currency: USD
-    url: https://www.logitechg.com/en-us/products/gaming-furniture/playseat-challenge-x-sim-racing-seat.html
-- product_name: Playseat Trophy
-  description: Playseat Trophy. lightweight tubular cockpit. current. Frameless body-conforming seat on high-carbon steel frame.
-  manufacturer: Playseat
-  component_category: rigs-and-cockpits
-  component_sub_category: Portable cockpit
-  product_url: https://www.playseat.com/en-us/products/playseat-trophy-black
-  picture_url: https://www.playseat.com/cdn/shop/files/playseat-trophy-black-01_1.png?v=1764770405&width=1920
-  shops:
-  - region: Worldwide shipping from Playseat; Logitech edition also sold in select markets.
-    price: 599
-    currency: USD
-    url: https://www.playseat.com/en-us/products/playseat-trophy-black
-- product_name: PRIME Cockpit
-  description: GT Omega PRIME. aluminum profile cockpit. current. Aluminum profile sim racing cockpit.
-  manufacturer: GT Omega
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  product_url: https://gtomega.com/products/prime-cockpit
-  picture_url: https://www.gtomega.com/cdn/shop/files/Cockpit_Prime_2026_01_e4a939aa-2c63-4617-b19d-49981d9acefe.webp?v=1774430611
-  shops: []
-- product_name: r3volution cockpit
-  description: Obutto r3volution. hybrid workstation/flight/racing cockpit. out of stock on official product page. Steel tube cockpit with reclinable sports seat.
-  manufacturer: Obutto
-  component_category: rigs-and-cockpits
-  component_sub_category: Flight cockpit
-  product_url: https://obutto.com/product/r3volution-cockpit/
-  picture_url: https://obutto.com/wp-content/uploads/2018/12/obutto-r3volution-600x338.png
-  shops:
-  - region: Official page showed out of stock; availability likely limited by region.
-    price: 876
-    currency: USD
-    url: https://obutto.com/product/r3volution-cockpit/
-- product_name: Super Libra Desk Mount
-  description: Super Libra Desk Mount. flight-control mounts and accessories. Listed on EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Libra Desk Mount.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=309
-  picture_url: https://eu.winctrl.com/static/ipfs/QmXP2BkkJDkEhLz5yLA7YeTbXuukGUF6zBnHBiyHzwjGVT
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 999999
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=309
-- product_name: Super Libra Desk Plate
-  description: Super Libra Desk Plate. flight-control mounts and accessories. Listed on EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Libra Desk Plate.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=320
-  picture_url: https://eu.winctrl.com/static/ipfs/QmRSLfot1B89xUbczpuSHCZbexJMNLMNxhsSRDtM9p8EmZ
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 999999
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=320
-- product_name: Super Taurus Desk Mount
-  description: Super Taurus Desk Mount. flight-control mounts and accessories. Listed on EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Taurus Desk Mount.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=310
-  picture_url: https://eu.winctrl.com/static/ipfs/Qmc7TEvqmMykaL1TFBfBKN9cyBddua4ZuRPPsQDv1L6kmu
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 999999
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=310
-- product_name: Super Taurus ViperAce Adapter
-  description: Super Taurus ViperAce Adapter. flight-control mounts and accessories. Listed on EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Taurus ViperAce Adapter.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=376
-  picture_url: https://eu.winctrl.com/static/ipfs/QmQy2t7Qx9inqErBQFvsWyzrSvzEvL2qs8gX82MRnPD9Cs
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 999999
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=376
-- product_name: Throttle Desk Mount5 with Profile Bar 1
-  description: Throttle Desk Mount5 with Profile Bar 1. flight-control mounts and accessories. Pre-order listing on EU WINCTRL store. Throttle Desk Mount5 with Profile Bar 1.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=1225
-  picture_url: https://eu.winctrl.com/static/ipfs/QmfXaWbFjki79uwaAiyFGAivfNmaBF95kjkJzmBT417o7j
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 1, suspend_sales 0.
-    price: 34.61
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=1225
-- product_name: TM Grip Conversion Kit
-  description: TM Grip Conversion Kit. flight-control mounts and accessories. Listed on EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. TM Grip Conversion Kit.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=321
-  picture_url: https://eu.winctrl.com/static/ipfs/Qme5R55cN7ExC7jpdqCh6uLusbJoKBJYYySHfaVBzqPjTS
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 999999
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=321
-- product_name: TR160 MK4 Racing Simulator
-  description: Trak Racer TR160 MK4. heavy-duty aluminum profile cockpit. current. 160 x 40 mm aluminum base profile and 120 x 40 mm wheel uprights.
-  manufacturer: Trak Racer
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  product_url: https://trakracer.com/products/tr160-mk4-racing-simulator-1
-  picture_url: https://trakracer.com/cdn/shop/files/TR160-1-TK-AU_282_29_56ce2992-ac89-4bb8-9db0-1f0824976913_1024x1024.jpg?v=1696947837
-  shops:
-  - region: Regional Trak Racer stores; US stock and pre-order windows vary.
-    price: 21999
-    currency: USD
-    url: https://trakracer.com/products/tr160-mk4-racing-simulator-1
-- product_name: TR80 Racing Simulator MK5
-  description: Trak Racer TR80 MK5. aluminum profile cockpit. current; low stock shown on source page during check. Aluminum profile cockpit with formula/GT hybrid pedal plate.
-  manufacturer: Trak Racer
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  product_url: https://trakracer.com/collections/racing-simulators/products/tr80-racing-simulator-mk5
-  picture_url: https://trakracer.eu/cdn/shop/files/19003e_shopify-min_900x.png?v=1648075378
-  shops:
-  - region: Ships from San Marcos, Texas for US page; regional Trak Racer stores exist.
-    price: 450
-    currency: USD
-    url: https://trakracer.com/collections/racing-simulators/products/tr80-racing-simulator-mk5
-- product_name: ViperAce EX Shaker Kit
-  description: ViperAce EX Shaker Kit. flight-control mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API. ViperAce EX Shake Kits.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=372
-  picture_url: https://eu.winctrl.com/static/ipfs/QmW4dKCB5hs6vwASBH3JnUkJhggFpXMc7v47fwLLYJuU9s
-  shops:
-  - region: EU WINCTRL store; local stock 4, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 49.39
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=372
-- product_name: Volair Sim Flight and Racing Simulation Cockpit Chassis
-  description: Volair Sim VS-01. universal flight/racing cockpit. current site active; chassis purchase listing not captured in shop [uncertain]. Universal flight/racing steel chassis with real racing-style seat.
-  manufacturer: Volair Sim
-  component_category: rigs-and-cockpits
-  component_sub_category: Flight cockpit
-  product_url: https://volairsim.com/
-  picture_url: https://volairsim.com/wp-content/uploads/2021/04/VS_Price-1-768x543.jpg
-  shops:
-  - region: Volair Sim is based in Carmel, Indiana; direct accessory shop active.
-    price: 579
-    currency: USD
-    url: https://volairsim.com/
-- product_name: Wheel Stand 2.0
-  description: Next Level Racing Wheel Stand 2.0. wheel stand. current. Foldable steel wheel stand with adjustable wheel and pedal plates.
-  manufacturer: Next Level Racing
-  component_category: rigs-and-cockpits
-  component_sub_category: Wheel stand
-  product_url: https://store-us.nextlevelracing.com/products/next-level-racing-wheel-stand-2-0
-  picture_url: https://store-us.nextlevelracing.com/cdn/shop/files/WheelStand2.0-Image1.jpg?v=1750395926&width=1920
-  shops:
-  - region: US official store; global distributor network.
-    price: 279
-    currency: USD
-    url: https://store-us.nextlevelracing.com/products/next-level-racing-wheel-stand-2-0
-- product_name: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit
-  description: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit. flight-control mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=370
-  picture_url: https://eu.winctrl.com/static/ipfs/Qmen1expyzeVxexrYHGNhgkiJbvykXxQNu6romTg8gbJLH
-  shops:
-  - region: EU WINCTRL store; local stock 4, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 49.39
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=370
-- product_name: WINCTRL Orion Metal Flight Rudder Pedals (Damper Kit)
-  description: WINCTRL Orion Metal Flight Rudder Pedals (Damper Kit). flight-control mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL Orion Metal Flight Rudder Pedals (Damper Kit).
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=805
-  picture_url: https://eu.winctrl.com/static/ipfs/QmUR2XLYLinqFX92Mj1sY8jF4XZKrgNFVY1fEQx2bYe3A2
-  shops:
-  - region: EU WINCTRL store; local stock 4, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 38.42
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=805
-- product_name: WINCTRL Orion2 MFSSB Kits
-  description: WINCTRL Orion2 MFSSB Kits. flight-control mounts and accessories. Listed on EU WINCTRL store; local stock not available in API response. WINCTRL Orion2 MFSSB Kits.
-  manufacturer: WINCTRL
-  component_category: rigs-and-cockpits
-  component_sub_category: Rig mounts
-  product_url: https://eu.winctrl.com/view/goods-details.html?id=371
-  picture_url: https://eu.winctrl.com/static/ipfs/QmXghES91mNqbc7iFeRAmbvPufz6pcRECUCom7kSYhpxfR
-  shops:
-  - region: EU WINCTRL store; local stock 0, transfer stock 0, preOrder 0, suspend_sales 0.
-    price: 266.92
-    currency: EUR
-    url: https://eu.winctrl.com/view/goods-details.html?id=371
+  - product_name: ASR 1 Chassis
+    description: Advanced SimRacing ASR 1. entry aluminum profile cockpit. current.
+      Generation 2 profile chassis with 1.5 x 1.5 in base.
+    manufacturer: Advanced SimRacing
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://www.advancedsimracing.com/products/asr-1
+    picture_url: https://www.advancedsimracing.com/cdn/shop/files/Advanced_SimRacing_-_ASR_1_Main_View_4fbac7c1-8c58-47bd-96ea-71ebfcffe9d5.jpg?v=1755411305&width=1920
+    shops:
+      - name: Advanced SimRacing
+        price: 427.49
+        currency: USD
+        url: https://www.advancedsimracing.com/products/asr-1
+        region: Canada
+  - product_name: ASR 4 Chassis Open Face
+    description: Advanced SimRacing ASR 4. high-end aluminum profile cockpit. current; EVO
+      wheel deck variants on back order during check. 4.5 x 1.5 in aluminum base and
+      reinforced steering column.
+    manufacturer: Advanced SimRacing
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://www.advancedsimracing.com/products/asr-4-open-face
+    picture_url: https://www.advancedsimracing.com/cdn/shop/files/ASR_4_open_Transparent_no_shadow.Main34SideView_2801a917-3162-47fe-8115-0cd3ba6714be.png?v=1755411307&width=1920
+    shops:
+      - name: Advanced SimRacing
+        price: 1179.99
+        currency: USD
+        url: https://www.advancedsimracing.com/products/asr-4-open-face
+        region: US
+  - product_name: ASR Pro Chassis Generation 2
+    description: Advanced SimRacing ASR Pro. professional aluminum profile cockpit. current;
+      back order alert showed week of 2026-05-11 during check. Generation 2 flat-face
+      aluminum profile with reinforced 6 in base.
+    manufacturer: Advanced SimRacing
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://www.advancedsimracing.com/products/asr-pro
+    picture_url: https://www.advancedsimracing.com/cdn/shop/files/ASR_PRO_Transparent_No_shadow.Main34FrontView_7e586e55-7ba8-4ea3-b341-76bad42c30f5.png?v=1750944136&width=1920
+    shops:
+      - name: Advanced SimRacing
+        price: 1649.99
+        currency: USD
+        url: https://www.advancedsimracing.com/products/asr-pro
+        region: Canada
+  - product_name: Collective Extension
+    description: Collective Extension. flight-control mounts and accessories. Suspended on
+      EU WINCTRL store; listed in catalog but not normally purchasable. Collective
+      Extension.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=328
+    picture_url: https://eu.winctrl.com/static/ipfs/QmUTbwDVSzqcUQCC24a3mjEhS1y3HBCdzqbS5gJiqRj2NM
+    shops:
+      - name: WINCTRL EU
+        price: 47.95
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=328
+        region: EU
+  - product_name: Dual Throttle connector for WINCTRL Orion/Gemini Base
+    description: Dual Throttle connector for WINCTRL Orion/Gemini Base. flight-control
+      mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API.
+      Dual Throttle connector for WINCTRL Orion/Gemini Base x1.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=381
+    picture_url: https://eu.winctrl.com/static/ipfs/QmaXkLe2FHqK1ic7oC5pR86gRfFSNQDWqqRpaLoNEajVhm
+    shops:
+      - name: WINCTRL EU
+        price: 19.72
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=381
+        region: EU
+  - product_name: EXPED
+    description: EXPED. flight-control mounts and accessories. Listed on EU WINCTRL store;
+      local stock not available in API response. EXPED.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=825
+    picture_url: https://eu.winctrl.com/static/ipfs/QmRA4AQRPRZh9EeFdLW2uzNuMqXVoZZK6RqsdEGX8yjBCC
+    shops:
+      - name: WINCTRL EU
+        price: 0.99
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=825
+        region: EU
+  - product_name: Finger Lift for Gemini Only
+    description: Finger Lift for Gemini Only. flight-control mounts and accessories. Listed
+      on EU WINCTRL store; local stock not available in API response. Finger Lift for
+      Gemini Only.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=346
+    picture_url: https://eu.winctrl.com/static/ipfs/QmcBHEoU3AToENNGEHn9gAMbj1Sjdq82o1xx4B6jYSgzHo
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=346
+        region: EU
+  - product_name: Finger Lift for WINCTRL Orion1 Only
+    description: Finger Lift for WINCTRL Orion1 Only. flight-control mounts and accessories.
+      Active EU WINCTRL store listing; total_stock 4 from API. Finger Lift for WINCTRL
+      Orion1 Only.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=345
+    picture_url: https://eu.winctrl.com/static/ipfs/QmTg5wn759a1kjaA2hfyDaJKAMzH8wAirEhMNG2SkEZjbU
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=345
+        region: EU
+  - product_name: Finger Lift for WINCTRL Orion2 Only
+    description: Finger Lift for WINCTRL Orion2 Only. flight-control mounts and accessories.
+      Pre-order listing on EU WINCTRL store. Finger Lift for WINCTRL Orion2 Only x1.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=347
+    picture_url: https://eu.winctrl.com/static/ipfs/QmXVVAuAh3GSVhmHE2JobNxLDva7nEFnJT8GY5rp4eR4Jk
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=347
+        region: EU
+  - product_name: Formula Intelligence
+    description: Playseat Formula Intelligence. formula-style cockpit. current. Formula
+      seating posture with ForceLock adjustment system.
+    manufacturer: Playseat
+    component_category: rigs-and-cockpits
+    component_sub_category: Formula cockpit
+    product_url: https://www.playseat.com/products/playseat-formula-intelligence-black
+    picture_url: https://www.playseat.com/cdn/shop/collections/Screenshot_2025-06-03_at_16.32.12_bea07877-6eeb-4630-a92f-4ff9fe6cfb6c.png?v=1764770232&width=800
+    shops:
+      - name: Playseat
+        price: 2499
+        currency: EUR
+        url: https://www.playseat.com/products/playseat-formula-intelligence-black
+        region: Global
+  - product_name: Gemini Chair Mount
+    description: Gemini Chair Mount. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Gemini
+      Chair Mount.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=327
+    picture_url: https://eu.winctrl.com/static/ipfs/QmQYH5P8PSJJYMV5zUP2hDcAnr6Zi5KVuKKAcHZfZW5Zx3
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=327
+        region: EU
+  - product_name: GT1 Evo Simracing Cockpit
+    description: Sim-Lab GT1 Evo. aluminum profile cockpit. current. Aluminum profile
+      chassis, black finish.
+    manufacturer: Sim-Lab
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://sim-lab.us/products/gt1-evo-simracing-cockpit
+    picture_url: https://sim-lab.us/cdn/shop/files/GT1_Evo_SparcoGridQ_VarioSingle.jpg?v=1763040475&width=1920
+    shops:
+      - name: Sim-Lab US
+        price: 449
+        currency: USD
+        url: https://sim-lab.us/products/gt1-evo-simracing-cockpit
+        region: US
+  - product_name: Joystick Desk Mount2 with Profile Bar 1
+    description: Joystick Desk Mount2 with Profile Bar 1. flight-control mounts and
+      accessories. Active EU WINCTRL store listing; total_stock 4 from API. Joystick
+      Desk Mount2 with Profile Bar 1.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=1185
+    picture_url: https://eu.winctrl.com/static/ipfs/QmVibjhxqfrmTDcGPprYSdr2TWrMgBjCKA8DfhA2815PS6
+    shops:
+      - name: WINCTRL EU
+        price: 34.61
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=1185
+        region: EU
+  - product_name: Joystick Extension Rod
+    description: Joystick Extension Rod. flight-control mounts and accessories. Active EU
+      WINCTRL store listing; total_stock 4 from API. Joystick Extension Rod.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=311
+    picture_url: https://eu.winctrl.com/static/ipfs/QmQV3FYkMUheJyfioLm2Nkn9DrFYcnA9bgDBmxyYm443X6
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=311
+        region: EU
+  - product_name: Joystick Z-Axis module
+    description: Joystick Z-Axis module. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Joystick
+      Z-Axis module.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=312
+    picture_url: https://eu.winctrl.com/static/ipfs/QmdBVVSZdVkf8VACdhSJWkH9H8tCtY5gDqWXtcU4rfkJAV
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=312
+        region: EU
+  - product_name: MAG Switch1 TS
+    description: MAG Switch1 TS. flight-control mounts and accessories. Active EU WINCTRL
+      store listing; total_stock 4 from API. MAG Switch1 TS.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=1105
+    picture_url: https://eu.winctrl.com/static/ipfs/QmPzqtqusthK61hCBtnBFNqGSFrWbPFtBjN9zuEMhcDL1s
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=1105
+        region: EU
+  - product_name: MTS Base Frame
+    description: MONSTERTECH MTS Base Frame. modular flight/racing cockpit. current. Modular
+      aluminum cockpit with MTS add-ons for HOTAS, center joystick, yoke, wheel,
+      monitor, keyboard, mouse, and motion adapters.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://www.monster.tech/en/product-category/mts-en/
+    picture_url: https://www.monster.tech/wp-content/uploads/2023/01/monstertech_mts_baseframe_b_01.jpg
+    shops:
+      - name: Monstertech
+        price: 1007.4
+        currency: EUR
+        url: https://www.monster.tech/en/product-category/mts-en/
+        region: EU
+  - product_name: P1X Pro Sim Racing Cockpit
+    description: Sim-Lab P1X Pro. high-end aluminum profile cockpit. current. Flagship
+      aluminum profile cockpit for high-load direct drive and pedal setups.
+    manufacturer: Sim-Lab
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit
+    picture_url: https://sim-lab.eu/cdn/shop/files/p1xpro_4.jpg?v=1762973240&width=2048
+    shops: []
+  - product_name: Panel Mount1
+    description: Panel Mount1. flight-control mounts and accessories. Pre-order listing on
+      EU WINCTRL store. Panel Mount1.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=645
+    picture_url: https://eu.winctrl.com/static/ipfs/QmbqZ1wpLiC25QGXjKaPGnTNJQ2pGaNnNMnNDP5GC2yBBT
+    shops:
+      - name: WINCTRL EU
+        price: 28.57
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=645
+        region: EU
+  - product_name: Panel Mount1(x3)
+    description: Panel Mount1(x3). flight-control mounts and accessories. Active EU WINCTRL
+      store listing; total_stock 4 from API. Panel Mount1x3.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=665
+    picture_url: https://eu.winctrl.com/static/ipfs/QmcYPG5bMiNFf3dquahLi6pqQqQEx4zmguAkNpohvaEK73
+    shops:
+      - name: WINCTRL EU
+        price: 70.89
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=665
+        region: EU
+  - product_name: Playseat Challenge X Logitech G Edition
+    description: Playseat Challenge X Logitech G Edition. foldable cockpit. current.
+      Foldable cockpit with carbon steel frame and ActiFit fabric.
+    manufacturer: Playseat / Logitech G
+    component_category: rigs-and-cockpits
+    component_sub_category: Portable cockpit
+    product_url: https://www.logitechg.com/en-us/products/gaming-furniture/playseat-challenge-x-sim-racing-seat.html
+    picture_url: https://www.playseat.com/cdn/shop/collections/Screenshot2025-06-02at12.15.21_34e13864-39c6-4dbb-98ab-a57fedf18715.png?v=1764770168&width=800
+    shops:
+      - name: Logitech G
+        price: 299
+        currency: USD
+        url: https://www.logitechg.com/en-us/products/gaming-furniture/playseat-challenge-x-sim-racing-seat.html
+        region: US
+  - product_name: Playseat Trophy
+    description: Playseat Trophy. lightweight tubular cockpit. current. Frameless
+      body-conforming seat on high-carbon steel frame.
+    manufacturer: Playseat
+    component_category: rigs-and-cockpits
+    component_sub_category: Portable cockpit
+    product_url: https://www.playseat.com/en-us/products/playseat-trophy-black
+    picture_url: https://www.playseat.com/cdn/shop/files/playseat-trophy-black-01_1.png?v=1764770405&width=1920
+    shops:
+      - name: Playseat
+        price: 599
+        currency: USD
+        url: https://www.playseat.com/en-us/products/playseat-trophy-black
+        region: Global
+  - product_name: PRIME Cockpit
+    description: GT Omega PRIME. aluminum profile cockpit. current. Aluminum profile sim
+      racing cockpit.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://gtomega.com/products/prime-cockpit
+    picture_url: https://www.gtomega.com/cdn/shop/files/Cockpit_Prime_2026_01_e4a939aa-2c63-4617-b19d-49981d9acefe.webp?v=1774430611
+    shops: []
+  - product_name: r3volution cockpit
+    description: Obutto r3volution. hybrid workstation/flight/racing cockpit. out of stock
+      on official product page. Steel tube cockpit with reclinable sports seat.
+    manufacturer: Obutto
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://obutto.com/product/r3volution-cockpit/
+    picture_url: https://obutto.com/wp-content/uploads/2018/12/obutto-r3volution-600x338.png
+    shops:
+      - name: Obutto
+        price: 876
+        currency: USD
+        url: https://obutto.com/product/r3volution-cockpit/
+        region: Unknown
+  - product_name: Super Libra Desk Mount
+    description: Super Libra Desk Mount. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super
+      Libra Desk Mount.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=309
+    picture_url: https://eu.winctrl.com/static/ipfs/QmXP2BkkJDkEhLz5yLA7YeTbXuukGUF6zBnHBiyHzwjGVT
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=309
+        region: EU
+  - product_name: Super Libra Desk Plate
+    description: Super Libra Desk Plate. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super
+      Libra Desk Plate.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=320
+    picture_url: https://eu.winctrl.com/static/ipfs/QmRSLfot1B89xUbczpuSHCZbexJMNLMNxhsSRDtM9p8EmZ
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=320
+        region: EU
+  - product_name: Super Taurus Desk Mount
+    description: Super Taurus Desk Mount. flight-control mounts and accessories. Listed on
+      EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super
+      Taurus Desk Mount.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=310
+    picture_url: https://eu.winctrl.com/static/ipfs/Qmc7TEvqmMykaL1TFBfBKN9cyBddua4ZuRPPsQDv1L6kmu
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=310
+        region: EU
+  - product_name: Super Taurus ViperAce Adapter
+    description: Super Taurus ViperAce Adapter. flight-control mounts and accessories.
+      Listed on EU WINCTRL store with placeholder price/out-of-stock behavior
+      [uncertain]. Super Taurus ViperAce Adapter.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=376
+    picture_url: https://eu.winctrl.com/static/ipfs/QmQy2t7Qx9inqErBQFvsWyzrSvzEvL2qs8gX82MRnPD9Cs
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=376
+        region: EU
+  - product_name: Throttle Desk Mount5 with Profile Bar 1
+    description: Throttle Desk Mount5 with Profile Bar 1. flight-control mounts and
+      accessories. Pre-order listing on EU WINCTRL store. Throttle Desk Mount5 with
+      Profile Bar 1.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=1225
+    picture_url: https://eu.winctrl.com/static/ipfs/QmfXaWbFjki79uwaAiyFGAivfNmaBF95kjkJzmBT417o7j
+    shops:
+      - name: WINCTRL EU
+        price: 34.61
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=1225
+        region: EU
+  - product_name: TM Grip Conversion Kit
+    description: TM Grip Conversion Kit. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. TM Grip
+      Conversion Kit.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=321
+    picture_url: https://eu.winctrl.com/static/ipfs/Qme5R55cN7ExC7jpdqCh6uLusbJoKBJYYySHfaVBzqPjTS
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=321
+        region: EU
+  - product_name: TR160 MK4 Racing Simulator
+    description: Trak Racer TR160 MK4. heavy-duty aluminum profile cockpit. current. 160 x
+      40 mm aluminum base profile and 120 x 40 mm wheel uprights.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://trakracer.com/products/tr160-mk4-racing-simulator-1
+    picture_url: https://trakracer.com/cdn/shop/files/TR160-1-TK-AU_282_29_56ce2992-ac89-4bb8-9db0-1f0824976913_1024x1024.jpg?v=1696947837
+    shops:
+      - name: Trak Racer
+        price: 21999
+        currency: USD
+        url: https://trakracer.com/products/tr160-mk4-racing-simulator-1
+        region: US
+  - product_name: TR80 Racing Simulator MK5
+    description: Trak Racer TR80 MK5. aluminum profile cockpit. current; low stock shown on
+      source page during check. Aluminum profile cockpit with formula/GT hybrid pedal
+      plate.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://trakracer.com/collections/racing-simulators/products/tr80-racing-simulator-mk5
+    picture_url: https://trakracer.eu/cdn/shop/files/19003e_shopify-min_900x.png?v=1648075378
+    shops:
+      - name: Trak Racer
+        price: 450
+        currency: USD
+        url: https://trakracer.com/collections/racing-simulators/products/tr80-racing-simulator-mk5
+        region: US
+  - product_name: ViperAce EX Shaker Kit
+    description: ViperAce EX Shaker Kit. flight-control mounts and accessories. Active EU
+      WINCTRL store listing; total_stock 4 from API. ViperAce EX Shake Kits.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=372
+    picture_url: https://eu.winctrl.com/static/ipfs/QmW4dKCB5hs6vwASBH3JnUkJhggFpXMc7v47fwLLYJuU9s
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=372
+        region: EU
+  - product_name: Volair Sim Flight and Racing Simulation Cockpit Chassis
+    description: Volair Sim VS-01. universal flight/racing cockpit. current site active;
+      chassis purchase listing not captured in shop [uncertain]. Universal flight/racing
+      steel chassis with real racing-style seat.
+    manufacturer: Volair Sim
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://volairsim.com/
+    picture_url: https://volairsim.com/wp-content/uploads/2021/04/VS_Price-1-768x543.jpg
+    shops:
+      - name: Volair Sim
+        price: 579
+        currency: USD
+        url: https://volairsim.com/
+        region: US
+  - product_name: Wheel Stand 2.0
+    description: Next Level Racing Wheel Stand 2.0. wheel stand. current. Foldable steel
+      wheel stand with adjustable wheel and pedal plates.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Wheel stand
+    product_url: https://store-us.nextlevelracing.com/products/next-level-racing-wheel-stand-2-0
+    picture_url: https://store-us.nextlevelracing.com/cdn/shop/files/WheelStand2.0-Image1.jpg?v=1750395926&width=1920
+    shops:
+      - name: Next Level Racing US
+        price: 279
+        currency: USD
+        url: https://store-us.nextlevelracing.com/products/next-level-racing-wheel-stand-2-0
+        region: US
+  - product_name: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit
+    description: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit. flight-control
+      mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API.
+      WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=370
+    picture_url: https://eu.winctrl.com/static/ipfs/Qmen1expyzeVxexrYHGNhgkiJbvykXxQNu6romTg8gbJLH
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=370
+        region: EU
+  - product_name: WINCTRL Orion Metal Flight Rudder Pedals (Damper Kit)
+    description: WINCTRL Orion Metal Flight Rudder Pedals (Damper Kit). flight-control
+      mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API.
+      WINCTRL Orion Metal Flight Rudder Pedals (Damper Kit).
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=805
+    picture_url: https://eu.winctrl.com/static/ipfs/QmUR2XLYLinqFX92Mj1sY8jF4XZKrgNFVY1fEQx2bYe3A2
+    shops:
+      - name: WINCTRL EU
+        price: 38.42
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=805
+        region: EU
+  - product_name: WINCTRL Orion2 MFSSB Kits
+    description: WINCTRL Orion2 MFSSB Kits. flight-control mounts and accessories. Listed on
+      EU WINCTRL store; local stock not available in API response. WINCTRL Orion2 MFSSB
+      Kits.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=371
+    picture_url: https://eu.winctrl.com/static/ipfs/QmXghES91mNqbc7iFeRAmbvPufz6pcRECUCom7kSYhpxfR
+    shops:
+      - name: WINCTRL EU
+        price: 266.92
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=371
+        region: EU
 opensource:
-- project_name: DIY Aluminium Profile Sim Rig
-  description: DIY Aluminium Profile Sim Rig. aluminum profile cockpit. Personal build design; README includes cockpit updates through 2025, but project is still a shared plan rather than a maintained product line. Compact 40 mm aluminum extrusion cockpit inspired by Sim-Lab GT1 Evo and P1-X geometry.
-  maker: djpr1me
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  license: CC0-1.0
-  project_url: https://github.com/djpr1me/Sim-Rig-Cockpit
-  picture_url: https://raw.githubusercontent.com/djpr1me/Sim-Rig-Cockpit/main/pr1me_simrig_rotated_pedals.png
-- project_name: MobiFlight panel design templates
-  description: MobiFlight Panel Design Templates. home cockpit panel templates. Work in progress; latest GitHub release captured from 2021, but broader MobiFlight ecosystem remains active. Open SVG cockpit-panel design template based on Dzus/MS25212C-style aircraft panel dimensions.
-  maker: MobiFlight community / Tuomas Kuosmanen and contributors
-  component_category: rigs-and-cockpits
-  component_sub_category: Cockpit plans
-  license: GPL-3.0
-  project_url: https://github.com/MobiFlight/mobiflight-templates
-  picture_url: https://user-images.githubusercontent.com/2587818/119951371-8b725600-bfa4-11eb-8002-0fe23cdbc718.png
-- project_name: OpenHarrier AV8B-NA
-  description: OpenHarrier AV8B-NA. full-scale flight cockpit. Active/open project; GitHub org shows AV8B-NA repo updated January 2026. Open source design for a full-scale AV-8B Harrier simulation cockpit.
-  maker: OpenHarrier
-  component_category: rigs-and-cockpits
-  component_sub_category: Flight cockpit
-  license: GPL-3.0 in AV8B-NA repository
-  project_url: https://github.com/OpenHarrier/AV8B-NA
-  picture_url: https://openharrier.org/wp-content/uploads/2023/06/20230523_204630.jpg
-- project_name: OpenHornet
-  description: OpenHornet. full-scale flight cockpit. Public beta hardware build package; latest captured GitHub release is v0.3.0 "Advancing the Airframe" in April 2026 [uncertain year from GitHub page]. Open hardware package for a high-fidelity F/A-18C simulator cockpit.
-  maker: OpenHornet / jrsteensen and contributors
-  component_category: rigs-and-cockpits
-  component_sub_category: Flight cockpit
-  license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International for OpenHornet works
-  project_url: https://github.com/jrsteensen/OpenHornet
-  picture_url: https://openhornet.com/wp-content/uploads/2018/04/open_hornet_horizontal_final-300x47.png
-- project_name: theta-8020-3dof
-  description: OpenSimCraft theta-8020-3dof. aluminum profile motion cockpit. Dormant public design; GitHub org shows last activity around 2020 for this chassis [uncertain]. 3-degrees-of-freedom sim racing chassis built from 80/20 T-slot aluminum extrusion.
-  maker: OpenSimCraft
-  component_category: rigs-and-cockpits
-  component_sub_category: Aluminum cockpit
-  license: CERN-OHL-S for OpenSimCraft hardware designs
-  project_url: https://github.com/OpenSimCraft/theta-8020-3dof
-  picture_url: https://opengraph.githubassets.com/f9f08651b538cdc60cab352eb8c2ce9b405ed5249cd2fa54b1c9e79c88097d23/opensimcraft/theta-8020-3dof
+  - project_name: DIY Aluminium Profile Sim Rig
+    description: DIY Aluminium Profile Sim Rig. aluminum profile cockpit. Personal build
+      design; README includes cockpit updates through 2025, but project is still a
+      shared plan rather than a maintained product line. Compact 40 mm aluminum
+      extrusion cockpit inspired by Sim-Lab GT1 Evo and P1-X geometry.
+    maker: djpr1me
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    license: CC0-1.0
+    project_url: https://github.com/djpr1me/Sim-Rig-Cockpit
+    picture_url: https://raw.githubusercontent.com/djpr1me/Sim-Rig-Cockpit/main/pr1me_simrig_rotated_pedals.png
+  - project_name: MobiFlight panel design templates
+    description: MobiFlight Panel Design Templates. home cockpit panel templates. Work in
+      progress; latest GitHub release captured from 2021, but broader MobiFlight
+      ecosystem remains active. Open SVG cockpit-panel design template based on
+      Dzus/MS25212C-style aircraft panel dimensions.
+    maker: MobiFlight community / Tuomas Kuosmanen and contributors
+    component_category: rigs-and-cockpits
+    component_sub_category: Cockpit plans
+    license: GPL-3.0
+    project_url: https://github.com/MobiFlight/mobiflight-templates
+    picture_url: https://user-images.githubusercontent.com/2587818/119951371-8b725600-bfa4-11eb-8002-0fe23cdbc718.png
+  - project_name: OpenHarrier AV8B-NA
+    description: OpenHarrier AV8B-NA. full-scale flight cockpit. Active/open project; GitHub
+      org shows AV8B-NA repo updated January 2026. Open source design for a full-scale
+      AV-8B Harrier simulation cockpit.
+    maker: OpenHarrier
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    license: GPL-3.0 in AV8B-NA repository
+    project_url: https://github.com/OpenHarrier/AV8B-NA
+    picture_url: https://openharrier.org/wp-content/uploads/2023/06/20230523_204630.jpg
+  - project_name: OpenHornet
+    description: OpenHornet. full-scale flight cockpit. Public beta hardware build package;
+      latest captured GitHub release is v0.3.0 "Advancing the Airframe" in April 2026
+      [uncertain year from GitHub page]. Open hardware package for a high-fidelity
+      F/A-18C simulator cockpit.
+    maker: OpenHornet / jrsteensen and contributors
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International for
+      OpenHornet works
+    project_url: https://github.com/jrsteensen/OpenHornet
+    picture_url: https://openhornet.com/wp-content/uploads/2018/04/open_hornet_horizontal_final-300x47.png
+  - project_name: theta-8020-3dof
+    description: OpenSimCraft theta-8020-3dof. aluminum profile motion cockpit. Dormant
+      public design; GitHub org shows last activity around 2020 for this chassis
+      [uncertain]. 3-degrees-of-freedom sim racing chassis built from 80/20 T-slot
+      aluminum extrusion.
+    maker: OpenSimCraft
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    license: CERN-OHL-S for OpenSimCraft hardware designs
+    project_url: https://github.com/OpenSimCraft/theta-8020-3dof
+    picture_url: https://opengraph.githubassets.com/f9f08651b538cdc60cab352eb8c2ce9b405ed5249cd2fa54b1c9e79c88097d23/opensimcraft/theta-8020-3dof

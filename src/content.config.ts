@@ -7,10 +7,16 @@ import { autoSidebarLoader } from 'starlight-auto-sidebar/loader';
 import { autoSidebarSchema } from 'starlight-auto-sidebar/schema';
 
 const shopSchema = z.object({
-  region: z.string().nullable(),
+  name: z.string().nullable(),
+  region: z.string(),
   price: z.number(),
   currency: z.string(),
   url: z.string().nullable(),
+});
+
+const estimatedPriceSchema = z.object({
+  price: z.number(),
+  currency: z.string(),
 });
 
 const products = defineCollection({
@@ -30,8 +36,8 @@ const products = defineCollection({
     component_sub_category: z.string().nullable(),
     product_url: z.string().nullable().optional(),
     project_url: z.string().nullable().optional(),
-    picture_url: z.string().nullable(),
     shops: z.array(shopSchema).optional(),
+    estimated_price: estimatedPriceSchema.optional(),
     license: z.string().nullable().optional(),
   }),
 });

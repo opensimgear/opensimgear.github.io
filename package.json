@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
+    "products:build": "node scripts/build-products-database.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",
@@ -73,7 +74,8 @@
     "typescript-eslint": "8.58.1",
     "unpic": "4.2.2",
     "vanilla-cookieconsent": "^3.1.0",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.4",
+    "yaml": "^2.8.3"
   },
   "packageManager": "pnpm@10.33.1"
 }

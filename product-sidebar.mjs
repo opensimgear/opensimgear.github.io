@@ -8,7 +8,7 @@ const kindLabels = {
   opensource: 'Open Source',
 };
 
-const kindOrder = ['commercial', 'opensource'];
+const kindOrder = ['opensource', 'commercial'];
 
 function titleCaseSlug(value) {
   return value
@@ -41,7 +41,7 @@ function buildCategoryItem(kind, category, products) {
   return {
     label: titleCaseSlug(category),
     collapsed: true,
-    items: [{ label: 'Overview', link: `/products/${kind}/${category}/` }, ...categoryProducts],
+    items: categoryProducts,
   };
 }
 
@@ -53,10 +53,7 @@ function buildKindItem(kind, products) {
   return {
     label: kindLabels[kind],
     collapsed: true,
-    items: [
-      { label: 'Overview', link: `/products/${kind}/` },
-      ...categories.map((category) => buildCategoryItem(kind, category, products)),
-    ],
+    items: categories.map((category) => buildCategoryItem(kind, category, products)),
   };
 }
 

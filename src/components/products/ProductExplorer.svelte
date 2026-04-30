@@ -24,10 +24,15 @@
     format?: string;
   };
   type Shop = {
-    region: string | null;
+    name: string | null;
+    region: string;
     price: number;
     currency: string;
     url: string | null;
+  };
+  type PriceSource = {
+    price: number;
+    currency: string;
   };
 
   type Product = {
@@ -43,8 +48,8 @@
     component_sub_category: string | null;
     product_url?: string | null;
     project_url?: string | null;
-    picture_url: string | null;
     shops?: Shop[];
+    estimated_price?: PriceSource;
     license?: string | null;
   };
 
@@ -60,6 +65,23 @@
     value: string;
     rawValue?: string;
     token: string;
+  };
+  type ProductBreadcrumbItem = {
+    label: string;
+    value: string;
+    filter: 'category' | 'group';
+  };
+  type ImageOverlay = {
+    src: string;
+    alt: string;
+    originLeft: number;
+    originTop: number;
+    originWidth: number;
+    originHeight: number;
+    left: number;
+    top: number;
+    width: number;
+    height: number;
   };
 
   type Props = {
@@ -96,12 +118,12 @@
   const sourceLabels: Record<SourceFilter, string> = {
     primary: 'Product or project URL',
     shop: 'Shop URL',
-    image: 'Picture URL',
+    image: 'Local image',
   };
 
-  const pageSizeOptions = [12, 24, 48, 96];
+  const pageSizeOptions = [10, 24, 48, 96];
   const defaultSortKey: SortKey = 'name-asc';
-  const defaultPageSize = 24;
+  const defaultPageSize = 10;
 
   const QUERY_PARAM_KEYS = {
     query: 'q',
@@ -135,11 +157,18 @@
   let showAllCategories = $state(false);
   let showAllGroups = $state(false);
   let showAllMakers = $state(false);
+  let priceLocale = $state('en-US');
+  let priceCurrency = $state('USD');
+  let imageOverlay: ImageOverlay | null = $state(null);
+  let imageOverlayToken = 0;
   let mounted = false;
   let suppressUrlSync = false;
 
   onMount(() => {
     let cancelled = false;
+    const locale = navigator.languages?.[0] ?? navigator.language ?? 'en-US';
+    priceLocale = locale;
+    priceCurrency = currencyForLocale(locale);
     applyUrlState(new URLSearchParams(window.location.search));
 
     async function loadProducts(): Promise<void> {
@@ -233,19 +262,6 @@
       .filter((product) => matchesSourceFilter(product, sourceFilter))
       .toSorted(compareProducts);
   });
-
-  let activeFilterCount = $derived(
-    [
-      query.trim(),
-      kindFilter.length,
-      categoryFilter.length,
-      groupFilter.length,
-      makerFilter.length,
-      availabilityFilter.length,
-      licenseFilter.length,
-      sourceFilter.length,
-    ].reduce((total, value) => total + (typeof value === 'number' ? value : value ? 1 : 0), 0)
-  );
 
   let activeFilters = $derived.by(() => {
     const filters: ActiveFilter[] = [];
@@ -363,11 +379,74 @@
   }
 
   function productImage(product: Product): ProductImage | null {
-    return productImages[product.id] ?? (isHttpUrl(product.picture_url) ? { src: product.picture_url } : null);
+    return productImages[product.id] ?? null;
   }
 
   function imageAlt(product: Product): string {
-    return `${displayName(product)} product photo`;
+    return displayName(product);
+  }
+
+  function imageOverlayStyle(overlay: ImageOverlay): string {
+    return `left: ${overlay.left}px; top: ${overlay.top}px; width: ${overlay.width}px; height: ${overlay.height}px;`;
+  }
+
+  function openImageOverlay(event: MouseEvent | FocusEvent, product: Product, image: ProductImage): void {
+    const target = event.currentTarget;
+    if (!(target instanceof HTMLElement) || typeof window === 'undefined') return;
+
+    const rect = target.getBoundingClientRect();
+    const gap = 8;
+    const width = rect.width * 2;
+    const height = rect.height * 2;
+    const maxLeft = Math.max(gap, window.innerWidth - width - gap);
+    const maxTop = Math.max(gap, window.innerHeight - height - gap);
+    const token = ++imageOverlayToken;
+    const nextOverlay = {
+      src: image.src,
+      alt: imageAlt(product),
+      originLeft: rect.left,
+      originTop: rect.top,
+      originWidth: rect.width,
+      originHeight: rect.height,
+      left: Math.min(Math.max(rect.left + rect.width / 2 - width / 2, gap), maxLeft),
+      top: Math.min(Math.max(rect.top + rect.height / 2 - height / 2, gap), maxTop),
+      width,
+      height,
+    };
+
+    imageOverlay = {
+      ...nextOverlay,
+      left: rect.left,
+      top: rect.top,
+      width: rect.width,
+      height: rect.height,
+    };
+
+    window.requestAnimationFrame(() => {
+      if (imageOverlayToken === token) {
+        imageOverlay = nextOverlay;
+      }
+    });
+  }
+
+  function closeImageOverlay(): void {
+    if (!imageOverlay) return;
+
+    const token = ++imageOverlayToken;
+    const overlay = imageOverlay;
+    imageOverlay = {
+      ...overlay,
+      left: overlay.originLeft,
+      top: overlay.originTop,
+      width: overlay.originWidth,
+      height: overlay.originHeight,
+    };
+
+    window.setTimeout(() => {
+      if (imageOverlayToken === token) {
+        imageOverlay = null;
+      }
+    }, 150);
   }
 
   function productSummary(product: Product): string {
@@ -408,26 +487,52 @@
     return formatCount(count);
   }
 
-  function productDateLabel(product: Product): string {
-    return product.kind === 'opensource' ? 'Project' : 'Product';
-  }
-
   function productMetaGroup(product: Product): string {
     return product.component_sub_category ?? titleCaseSlug(product.component_category);
   }
 
-  function productTags(product: Product): string[] {
-    return [
-      titleCaseSlug(product.component_category),
-      product.component_sub_category,
-      product.kind === 'opensource' ? product.license : priceText(product),
-    ].filter((value): value is string => Boolean(value)).slice(0, 3);
+  function productBreadcrumb(product: Product): ProductBreadcrumbItem[] {
+    const crumbs: ProductBreadcrumbItem[] = [
+      {
+        label: titleCaseSlug(product.component_category),
+        value: product.component_category,
+        filter: 'category',
+      },
+    ];
+
+    if (product.component_sub_category) {
+      crumbs.push({
+        label: titleCaseSlug(product.component_sub_category),
+        value: product.component_sub_category,
+        filter: 'group',
+      });
+    }
+
+    return crumbs;
+  }
+
+  function applyBreadcrumbFilter(crumb: ProductBreadcrumbItem): void {
+    if (crumb.filter === 'category') {
+      toggleFilterValue(categoryFilter, crumb.value);
+    } else {
+      toggleFilterValue(groupFilter, crumb.value);
+    }
+  }
+
+  function applyMakerFilter(product: Product): void {
+    const maker = makerName(product);
+    if (maker) {
+      toggleFilterValue(makerFilter, maker);
+    }
   }
 
   function searchableText(product: Product): string {
     const shopText = (product.shops ?? [])
-      .map((shop) => [shop.region, shop.price, shop.currency, shop.url].filter(Boolean).join(' '))
+      .map((shop) => [shop.name, shop.region, shop.price, shop.currency, shop.url].filter(Boolean).join(' '))
       .join(' ');
+    const estimateText = product.estimated_price
+      ? [product.estimated_price.price, product.estimated_price.currency].join(' ')
+      : '';
 
     return normalizeText(
       [
@@ -439,9 +544,9 @@
         product.description,
         product.product_url,
         product.project_url,
-        product.picture_url,
         product.license,
         shopText,
+        estimateText,
       ]
         .filter(Boolean)
         .join(' ')
@@ -461,7 +566,7 @@
     if (filter.length === 0) return true;
     return filter.some((value) => {
       if (value === 'primary') return isHttpUrl(primaryUrl(product));
-      if (value === 'image') return isHttpUrl(product.picture_url);
+      if (value === 'image') return Boolean(productImages[product.id]);
       return (product.shops ?? []).some((shop) => isHttpUrl(shop.url));
     });
   }
@@ -513,7 +618,7 @@
   function availabilityBucket(product: Product): AvailabilityBucket {
     const value = normalizeText(
       product.kind === 'commercial'
-        ? (product.shops ?? []).map((shop) => [shop.region, shop.url].filter(Boolean).join(' ')).join(' ')
+        ? (product.shops ?? []).map((shop) => [shop.name, shop.region, shop.url].filter(Boolean).join(' ')).join(' ')
         : [product.project_url, product.description].filter(Boolean).join(' ')
     );
 
@@ -556,32 +661,122 @@
 
   function primarySourceLinks(product: Product): { label: string; url: string }[] {
     return [
-      { label: product.kind === 'commercial' ? 'Product' : 'Project', url: primaryUrl(product) },
-      { label: 'Image', url: product.picture_url },
+      { label: product.kind === 'commercial' ? 'Product Page' : 'Project', url: primaryUrl(product) },
     ].filter((link): link is { label: string; url: string } => isHttpUrl(link.url));
   }
 
-  function priceText(product: Product): string {
-    const shop = product.shops?.[0];
-    if (!shop) return '';
-
-    return `${shop.currency} ${shop.price}`;
+  function validPriceSource(source: PriceSource | null | undefined): PriceSource | null {
+    if (!source || !Number.isFinite(source.price) || !source.currency) return null;
+    return source;
   }
 
-  function priceValue(product: Product): number | null {
-    const shop = product.shops?.[0];
-    if (!shop) return null;
+  function currencyForLocale(locale: string): string {
+    const region = locale.split('-').at(-1)?.toUpperCase();
+    const currenciesByRegion: Record<string, string> = {
+      US: 'USD',
+      CA: 'CAD',
+      GB: 'GBP',
+      IE: 'EUR',
+      DE: 'EUR',
+      FR: 'EUR',
+      ES: 'EUR',
+      IT: 'EUR',
+      NL: 'EUR',
+      BE: 'EUR',
+      AT: 'EUR',
+      PT: 'EUR',
+      FI: 'EUR',
+      GR: 'EUR',
+      AU: 'AUD',
+      NZ: 'NZD',
+      CH: 'CHF',
+      SE: 'SEK',
+      NO: 'NOK',
+      DK: 'DKK',
+      JP: 'JPY',
+      CN: 'CNY',
+      IN: 'INR',
+    };
 
+    return (region && currenciesByRegion[region]) || 'USD';
+  }
+
+  function usdMultiplier(currency: string): number {
     const multipliers: Record<string, number> = {
       USD: 1,
       EUR: 1.08,
       GBP: 1.25,
       CAD: 0.73,
       AUD: 0.65,
+      NZD: 0.6,
       CHF: 1.1,
+      SEK: 0.095,
+      NOK: 0.092,
+      DKK: 0.145,
+      JPY: 0.0064,
+      CNY: 0.14,
+      INR: 0.012,
     };
 
-    return shop.price * (multipliers[shop.currency] ?? 1);
+    return multipliers[currency] ?? 1;
+  }
+
+  function convertPrice(source: PriceSource, currency: string): PriceSource {
+    return {
+      price: (source.price * usdMultiplier(source.currency)) / usdMultiplier(currency),
+      currency,
+    };
+  }
+
+  function productPriceSource(product: Product): PriceSource | null {
+    if (product.kind === 'opensource') {
+      const estimate = validPriceSource(product.estimated_price);
+      return estimate ? convertPrice(estimate, priceCurrency) : null;
+    }
+
+    const prices = (product.shops ?? [])
+      .map((shop) => validPriceSource(shop))
+      .filter((source): source is PriceSource => Boolean(source))
+      .map((source) => convertPrice(source, priceCurrency));
+    if (!prices.length) return null;
+
+    return {
+      price: prices.reduce((sum, source) => sum + source.price, 0) / prices.length,
+      currency: priceCurrency,
+    };
+  }
+
+  function formatPrice(source: PriceSource): string {
+    try {
+      return new Intl.NumberFormat(priceLocale, {
+        style: 'currency',
+        currency: source.currency,
+        maximumFractionDigits: Number.isInteger(source.price) ? 0 : 2,
+      }).format(source.price);
+    } catch {
+      return `${source.currency} ${new Intl.NumberFormat(priceLocale).format(source.price)}`;
+    }
+  }
+
+  function priceText(product: Product): string {
+    const source = productPriceSource(product);
+    if (!source) return '';
+
+    return formatPrice(source);
+  }
+
+  function priceDisplayText(product: Product): string {
+    const text = priceText(product);
+    if (!text) return 'Price unknown';
+
+    return product.kind === 'commercial' ? `Avg ${text}` : text;
+  }
+
+  function priceValue(product: Product): number | null {
+    const source = productPriceSource(product);
+    if (!source) return null;
+
+    return source.price;
   }
 
   function compareText(a: string, b: string): number {
@@ -917,15 +1112,6 @@
       <section class="grid min-w-0 gap-3">
         <div class="flex items-center justify-between">
           <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Search</h2>
-          {#if activeFilterCount}
-            <button
-              class="rounded-[8px] border border-[var(--sl-color-gray-5)] px-2 py-1 text-[0.7rem] font-[650] text-[var(--sl-color-gray-2)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
-              type="button"
-              onclick={resetFilters}
-            >
-              Reset
-            </button>
-          {/if}
         </div>
         <label class="relative block min-w-0">
           <input
@@ -947,15 +1133,15 @@
       <section class="grid min-w-0 gap-2">
         <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Type</h2>
         {#each kindOptions as option (option.value)}
-          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+          <label class="flex min-w-0 items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
             <input
               class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
               type="checkbox"
               checked={kindFilter.includes(option.value)}
               onchange={() => toggleFilterValue(kindFilter, option.value)}
             />
-            <span class="min-w-0 flex-1 truncate">{option.label}</span>
-            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">
+            <span class="min-w-0 flex-1 truncate" title={option.label}>{option.label}</span>
+            <span class="w-10 shrink-0 text-right text-[0.74rem] tabular-nums text-[var(--sl-color-gray-2)]">
               {optionCountText(option.count)}
             </span>
           </label>
@@ -965,20 +1151,20 @@
       <section class="grid min-w-0 gap-2">
         <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Component</h2>
         {#each visibleCategoryOptions as option (option.value)}
-          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+          <label class="flex min-w-0 items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
             <input
               class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
               type="checkbox"
               checked={categoryFilter.includes(option.value)}
               onchange={() => toggleFilterValue(categoryFilter, option.value)}
             />
-            <span class="min-w-0 flex-1 truncate">{option.label}</span>
-            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+            <span class="min-w-0 flex-1 truncate" title={option.label}>{option.label}</span>
+            <span class="w-10 shrink-0 text-right text-[0.74rem] tabular-nums text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
           </label>
         {/each}
         {#if categoryOptions.length > 5}
           <button
-            class="inline-flex items-center gap-1 justify-self-start text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
+            class="inline-flex items-center gap-1 justify-self-start border-0 bg-transparent p-0 text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
             type="button"
             onclick={() => (showAllCategories = !showAllCategories)}
             aria-label={showAllCategories ? 'Show fewer components' : 'Show more components'}
@@ -998,20 +1184,20 @@
       <section class="grid min-w-0 gap-2">
         <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Subcategory</h2>
         {#each visibleGroupOptions as option (option.value)}
-          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+          <label class="flex min-w-0 items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
             <input
               class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
               type="checkbox"
               checked={groupFilter.includes(option.value)}
               onchange={() => toggleFilterValue(groupFilter, option.value)}
             />
-            <span class="min-w-0 flex-1 truncate">{option.label}</span>
-            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+            <span class="min-w-0 flex-1 truncate" title={option.label}>{option.label}</span>
+            <span class="w-10 shrink-0 text-right text-[0.74rem] tabular-nums text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
           </label>
         {/each}
         {#if groupOptions.length > 4}
           <button
-            class="inline-flex items-center gap-1 justify-self-start text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
+            class="inline-flex items-center gap-1 justify-self-start border-0 bg-transparent p-0 text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
             type="button"
             onclick={() => (showAllGroups = !showAllGroups)}
             aria-label={showAllGroups ? 'Show fewer subcategories' : 'Show more subcategories'}
@@ -1037,20 +1223,20 @@
           placeholder="Search maker..."
         />
         {#each visibleMakerOptions as option (option.value)}
-          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+          <label class="flex min-w-0 items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
             <input
               class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
               type="checkbox"
               checked={makerFilter.includes(option.value)}
               onchange={() => toggleFilterValue(makerFilter, option.value)}
             />
-            <span class="min-w-0 flex-1 truncate">{option.label}</span>
-            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+            <span class="min-w-0 flex-1 truncate" title={option.label}>{option.label}</span>
+            <span class="w-10 shrink-0 text-right text-[0.74rem] tabular-nums text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
           </label>
         {/each}
         {#if filteredMakerOptions.length > 5}
           <button
-            class="inline-flex items-center gap-1 justify-self-start text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
+            class="inline-flex items-center gap-1 justify-self-start border-0 bg-transparent p-0 text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
             type="button"
             onclick={() => (showAllMakers = !showAllMakers)}
             aria-label={showAllMakers ? 'Show fewer makers' : 'Show more makers'}
@@ -1070,15 +1256,15 @@
       <section class="grid min-w-0 gap-2">
         <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Availability</h2>
         {#each availabilityOptions as option (option.value)}
-          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+          <label class="flex min-w-0 items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
             <input
               class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
               type="checkbox"
               checked={availabilityFilter.includes(option.value)}
               onchange={() => toggleFilterValue(availabilityFilter, option.value)}
             />
-            <span class="min-w-0 flex-1 truncate">{option.label}</span>
-            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+            <span class="min-w-0 flex-1 truncate" title={option.label}>{option.label}</span>
+            <span class="w-10 shrink-0 text-right text-[0.74rem] tabular-nums text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
           </label>
         {/each}
       </section>
@@ -1086,15 +1272,15 @@
       <section class="grid min-w-0 gap-2">
         <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">License</h2>
         {#each licenseOptions as option (option.value)}
-          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+          <label class="flex min-w-0 items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
             <input
               class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
               type="checkbox"
               checked={licenseFilter.includes(option.value)}
               onchange={() => toggleFilterValue(licenseFilter, option.value)}
             />
-            <span class="min-w-0 flex-1 truncate">{option.label}</span>
-            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+            <span class="min-w-0 flex-1 truncate" title={option.label}>{option.label}</span>
+            <span class="w-10 shrink-0 text-right text-[0.74rem] tabular-nums text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
           </label>
         {/each}
       </section>
@@ -1102,15 +1288,15 @@
       <section class="grid min-w-0 gap-2">
         <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Links</h2>
         {#each sourceOptions as option (option.value)}
-          <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
+          <label class="flex min-w-0 items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
             <input
               class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
               type="checkbox"
               checked={sourceFilter.includes(option.value as SourceFilter)}
               onchange={() => toggleSourceFilterValue(option.value as SourceFilter)}
             />
-            <span class="min-w-0 flex-1 truncate">{option.label}</span>
-            <span class="w-9 shrink-0 text-left text-[0.74rem] text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
+            <span class="min-w-0 flex-1 truncate" title={option.label}>{option.label}</span>
+            <span class="w-10 shrink-0 text-right text-[0.74rem] tabular-nums text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
           </label>
         {/each}
       </section>
@@ -1161,7 +1347,8 @@
       </div>
 
       {#if activeFilters.length}
-        <div class="flex flex-wrap gap-2 border-b border-[var(--sl-color-gray-5)] px-4 py-3" aria-label="Applied filters">
+        <div class="flex items-start justify-between gap-3 border-b border-[var(--sl-color-gray-5)] px-4 py-3" aria-label="Applied filters">
+          <div class="flex min-w-0 flex-1 flex-wrap gap-2">
           {#each activeFilters as filter (filter.token)}
             <button
               class="inline-flex max-w-full items-center gap-2 rounded-full border border-[var(--sl-color-gray-5)] bg-[rgba(9,13,20,0.72)] px-3 py-1 text-[0.76rem] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
@@ -1170,10 +1357,19 @@
               aria-label={`Remove ${filter.label} filter ${filter.value}`}
             >
               <span class="text-[var(--sl-color-gray-2)]">{filter.label}</span>
-              <strong class="max-w-[14rem] overflow-hidden text-ellipsis whitespace-nowrap font-[650]">{filter.value}</strong>
+              <strong class="max-w-[14rem] overflow-hidden text-ellipsis whitespace-nowrap font-[650]" title={filter.value}>{filter.value}</strong>
               <span aria-hidden="true">×</span>
             </button>
           {/each}
+          </div>
+          <button
+            class="inline-flex shrink-0 items-center gap-2 rounded-[10px] border border-[var(--sl-color-gray-5)] bg-transparent px-3 py-1 text-[0.76rem] font-[650] text-[var(--sl-color-gray-2)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+            type="button"
+            onclick={resetFilters}
+            aria-label="Reset filters"
+          >
+            Reset
+          </button>
         </div>
       {/if}
 
@@ -1185,12 +1381,17 @@
         {:else}
           {#each paginatedProducts as product (product.id)}
             {@const image = productImage(product)}
-            <article class="grid min-h-[10.5rem] gap-4 rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(12,18,28,0.72)] p-3 [grid-template-columns:10.5rem_minmax(0,1fr)_15rem] max-[80rem]:[grid-template-columns:9rem_minmax(0,1fr)] max-[56rem]:grid-cols-1">
+            {@const maker = makerName(product)}
+            <article class="grid min-h-[10.5rem] gap-4 rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(12,18,28,0.72)] p-3 [grid-template-columns:10.5rem_minmax(0,1fr)_11.5rem] max-[80rem]:[grid-template-columns:9rem_minmax(0,1fr)] max-[56rem]:grid-cols-1">
               {#if image}
                 <a
                   class="grid aspect-square w-full place-items-center overflow-hidden rounded-[10px] border border-[var(--sl-color-gray-5)] bg-white no-underline"
                   href={productHref(product)}
                   aria-label={`View ${displayName(product)}`}
+                  onmouseenter={(event) => openImageOverlay(event, product, image)}
+                  onfocus={(event) => openImageOverlay(event, product, image)}
+                  onmouseleave={closeImageOverlay}
+                  onblur={closeImageOverlay}
                 >
                   <img
                     class="block h-full w-full object-contain p-2"
@@ -1211,16 +1412,35 @@
                       {displayName(product)}
                     </a>
                   </h2>
-                  <p class="m-0 text-[0.82rem] text-[var(--sl-color-gray-2)]">{makerName(product) || 'Unknown maker'}</p>
+                  {#if maker}
+                    <button
+                      class="justify-self-start rounded-none bg-transparent p-0 text-left text-[0.82rem] text-[var(--sl-color-gray-2)] underline-offset-4 hover:text-[var(--sl-color-accent-high)] hover:underline focus-visible:text-[var(--sl-color-accent-high)] focus-visible:underline"
+                      type="button"
+                      onclick={() => applyMakerFilter(product)}
+                      aria-label={`Filter by maker ${maker}`}
+                    >
+                      {maker}
+                    </button>
+                  {:else}
+                    <p class="m-0 text-[0.82rem] text-[var(--sl-color-gray-2)]">Unknown maker</p>
+                  {/if}
                 </div>
 
-                <div class="flex flex-wrap gap-2" aria-label="Product attributes">
-                  {#each productTags(product) as tag (tag)}
-                    <span class="rounded-full border border-[var(--sl-color-gray-5)] bg-[rgba(18,26,38,0.85)] px-2.5 py-1 text-[0.72rem] font-[650] leading-none text-[var(--sl-color-gray-2)]">
-                      {tag}
-                    </span>
+                <nav class="flex flex-wrap items-center gap-1 text-[0.76rem] font-[650] text-[var(--sl-color-gray-2)]" aria-label="Product category breadcrumb">
+                  {#each productBreadcrumb(product) as crumb, index (index)}
+                    {#if index > 0}
+                      <span aria-hidden="true" class="text-[var(--sl-color-gray-3)]">&gt;</span>
+                    {/if}
+                    <button
+                      class="rounded-none bg-transparent px-0 py-0 leading-none text-[var(--sl-color-gray-2)] underline-offset-4 hover:text-[var(--sl-color-accent-high)] hover:underline focus-visible:text-[var(--sl-color-accent-high)] focus-visible:underline"
+                      type="button"
+                      onclick={() => applyBreadcrumbFilter(crumb)}
+                      aria-label={`Filter by ${crumb.label}`}
+                    >
+                      {crumb.label}
+                    </button>
                   {/each}
-                </div>
+                </nav>
 
                 {#if productSummary(product)}
                   <p class="m-0 line-clamp-2 text-[0.88rem] leading-[1.5] text-[var(--sl-color-text)]">{productSummary(product)}</p>
@@ -1256,8 +1476,8 @@
                 </div>
               </div>
 
-              <div class="grid content-start gap-3 border-l border-[var(--sl-color-gray-5)] pl-4 max-[80rem]:col-span-2 max-[80rem]:grid-cols-[1fr_1fr_1fr] max-[80rem]:border-l-0 max-[80rem]:border-t max-[80rem]:pl-0 max-[80rem]:pt-3 max-[56rem]:grid-cols-1">
-                <div class="flex justify-end max-[80rem]:justify-start">
+              <div class="grid content-start justify-items-start gap-3 border-l border-[var(--sl-color-gray-5)] pl-4 text-left max-[80rem]:col-span-2 max-[80rem]:grid-cols-[1fr_1fr] max-[80rem]:border-l-0 max-[80rem]:border-t max-[80rem]:pl-0 max-[80rem]:pt-3 max-[56rem]:grid-cols-1">
+                <div class="flex min-w-0 justify-self-end">
                   <span
                     class={[
                       'inline-flex whitespace-nowrap rounded-full px-3 py-1 text-[0.76rem] font-[700] leading-none',
@@ -1269,26 +1489,23 @@
                     {kindLabel(product.kind)}
                   </span>
                 </div>
-                <div class="flex items-start gap-2 text-[0.82rem] text-[var(--sl-color-gray-2)]">
+                <div class="flex min-w-0 max-w-full items-start justify-start gap-2 text-[0.82rem] text-[var(--sl-color-gray-2)]">
                   <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="10" cy="7" r="3" />
+                    <rect x="3" y="6" width="18" height="12" rx="2" />
+                    <circle cx="12" cy="12" r="2.25" />
+                    <path d="M6 10v4M18 10v4" />
                   </svg>
-                  <span class="min-w-0 break-words">{makerName(product) || 'Unknown maker'}</span>
+                  <span class="min-w-0 truncate" title={priceDisplayText(product)}>{priceDisplayText(product)}</span>
                 </div>
-                <div class="flex items-start gap-2 text-[0.82rem] text-[var(--sl-color-gray-2)]">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                    <path d="M4 7h16M4 12h16M4 17h10" />
-                  </svg>
-                  <span class="min-w-0 break-words">{productMetaGroup(product)}</span>
-                </div>
-                <div class="flex items-start gap-2 text-[0.82rem] text-[var(--sl-color-gray-2)]">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                    <rect x="3.5" y="5" width="17" height="15" rx="2" />
-                    <path d="M8 3v4M16 3v4M3.5 10h17" />
-                  </svg>
-                  <span>{productDateLabel(product)} URL {primaryUrl(product) ? 'available' : 'unknown'}</span>
-                </div>
+                {#if product.license}
+                  <div class="flex min-w-0 max-w-full items-start justify-start gap-2 text-[0.82rem] text-[var(--sl-color-gray-2)]">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z" />
+                      <path d="m9 12 2 2 4-5" />
+                    </svg>
+                    <span class="min-w-0 truncate" title={product.license}>{product.license}</span>
+                  </div>
+                {/if}
               </div>
             </article>
           {:else}
@@ -1299,7 +1516,7 @@
 
       <nav class="flex items-center justify-end gap-1 border-t border-[var(--sl-color-gray-5)] px-4 py-3 max-[56rem]:flex-wrap" aria-label="Product pages">
         <button
-          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] bg-transparent text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
           type="button"
           onclick={() => goToPage(1)}
           disabled={activePage === 1}
@@ -1311,7 +1528,7 @@
           </svg>
         </button>
         <button
-          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] bg-transparent text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
           type="button"
           onclick={() => goToPage(activePage - 1)}
           disabled={activePage === 1}
@@ -1324,7 +1541,7 @@
         </button>
         <span class="px-3 text-[0.84rem] text-[var(--sl-color-gray-2)]" aria-live="polite">Page {activePage} / {totalPages}</span>
         <button
-          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] bg-transparent text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
           type="button"
           onclick={() => goToPage(activePage + 1)}
           disabled={activePage === totalPages}
@@ -1336,7 +1553,7 @@
           </svg>
         </button>
         <button
-          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] bg-transparent text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] disabled:cursor-not-allowed disabled:opacity-45"
           type="button"
           onclick={() => goToPage(totalPages)}
           disabled={activePage === totalPages}
@@ -1350,4 +1567,14 @@
       </nav>
     </section>
   </div>
+
+  {#if imageOverlay}
+    <img
+      class="pointer-events-none fixed z-[2147483647] rounded-[10px] bg-white object-contain p-2 outline outline-1 outline-[var(--sl-color-gray-5)] shadow-[0_18px_45px_rgba(0,0,0,0.38)] transition-[left,top,width,height] duration-150 ease-out"
+      src={imageOverlay.src}
+      alt=""
+      style={imageOverlayStyle(imageOverlay)}
+      aria-hidden="true"
+    />
+  {/if}
 </section>
