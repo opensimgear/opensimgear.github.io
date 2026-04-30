@@ -13,6 +13,7 @@ const jsonPath = join(rootDir, 'src/data/3rdparty-products.json');
 const distJsonPath = join(rootDir, 'dist/products/products.json');
 const assetDir = join(rootDir, 'src/assets/products');
 const imageMapPath = join(rootDir, 'src/data/3rdparty-product-images.ts');
+const imageSourceCachePath = join(rootDir, 'scripts/3rdparty-product-image-sources.json');
 
 const MAX_WIDTH = 720;
 const MAX_HEIGHT = 540;
@@ -115,6 +116,25 @@ async function readJsonProducts(path) {
   } catch {
     return [];
   }
+}
+
+async function readJson(path, fallback) {
+  try {
+    const data = JSON.parse(await readFile(path, 'utf8'));
+    return data;
+  } catch {
+    return fallback;
+  }
+}
+
+function writeJson(path, value) {
+  return writeFile(path, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+}
+
+function productImageSource(product) {
+  if (product.picture_url) return product.picture_url;
+  if (product.kind !== 'opensource') return null;
+  return githubFallbackForProduct(product);
 }
 
 function buildStableLookup(stableProducts) {
@@ -393,6 +413,10 @@ function githubOpenGraphFallback(sourceUrl) {
   }
 }
 
+function githubFallbackForProduct(product) {
+  return githubOpenGraphFallback(product.project_url ?? product.product_url);
+}
+
 async function convertImageBuffer(buffer, outputPath) {
   await sharp(buffer, { failOn: 'none' })
     .rotate()
@@ -401,38 +425,47 @@ async function convertImageBuffer(buffer, outputPath) {
     .toFile(outputPath);
 }
 
-async function ensureProductImage(product) {
+async function ensureProductImage(product, cachedSource) {
   const filename = `${product.id}.webp`;
   const outputPath = join(assetDir, filename);
   const legacyPath = join(assetDir, legacyAssetName(product.id));
+  const sourceUrl = productImageSource(product);
 
-  if (!refreshImages && (await exists(outputPath))) {
+  if (!sourceUrl) {
+    if (product.kind !== 'opensource') {
+      throw new Error(`${product.id}: missing picture_url`);
+    }
+
+    throw new Error(`${product.id}: missing picture_url and no github fallback`);
+  }
+
+  if (!refreshImages && cachedSource === sourceUrl && (await exists(outputPath))) {
     await sharp(outputPath).metadata();
-    return filename;
+    return { filename, sourceUrl };
   }
 
-  if (!refreshImages && (await exists(legacyPath))) {
+  if (!refreshImages && cachedSource === sourceUrl && (await exists(legacyPath))) {
     await copyFile(legacyPath, outputPath);
-    return filename;
+    return { filename, sourceUrl };
   }
 
-  if (!product.picture_url) {
-    throw new Error(`${product.id}: missing picture_url`);
-  }
-
-  const referer = product.product_url ?? product.project_url ?? product.picture_url;
-  let sourceUrl = product.picture_url;
+  const referer = product.product_url ?? product.project_url ?? product.picture_url ?? '';
+  let finalSourceUrl = sourceUrl;
 
   try {
-    await convertImageBuffer(await fetchImageBuffer(sourceUrl, referer), outputPath);
+    await convertImageBuffer(await fetchImageBuffer(finalSourceUrl, referer), outputPath);
   } catch (error) {
-    const fallback = githubOpenGraphFallback(referer);
-    if (!fallback) throw new Error(`${product.id}: image fetch failed: ${error.message}`);
-    sourceUrl = fallback;
-    await convertImageBuffer(await fetchImageBuffer(sourceUrl, referer), outputPath);
+    const fallback =
+      finalSourceUrl === product.picture_url ? githubFallbackForProduct(product) : githubOpenGraphFallback(referer);
+    if (!fallback) {
+      throw new Error(`${product.id}: image fetch failed: ${error.message}`);
+    }
+
+    finalSourceUrl = fallback;
+    await convertImageBuffer(await fetchImageBuffer(finalSourceUrl, referer), outputPath);
   }
 
-  return filename;
+  return { filename, sourceUrl: finalSourceUrl };
 }
 
 async function runQueue(items, worker) {
@@ -472,6 +505,8 @@ async function writeImageMap(products, filenames) {
 
 const products = await readYamlProducts();
 validateProducts(products);
+const imageSourceCache = await readJson(imageSourceCachePath, Object.create(null));
+const updatedImageSourceCache = Object.create(null);
 
 await writeFile(jsonPath, `${JSON.stringify(databaseFor(products), null, 2)}\n`);
 
@@ -480,13 +515,16 @@ if (!skipImages) {
 
   let completed = 0;
   const filenames = await runQueue(products, async (product) => {
-    const filename = await ensureProductImage(product);
+    const cachedSource = imageSourceCache[product.id] ?? null;
+    const { filename, sourceUrl } = await ensureProductImage(product, cachedSource);
+    updatedImageSourceCache[product.id] = sourceUrl;
     completed += 1;
     console.log(`${completed}/${products.length} ${filename}`);
     return filename;
   });
 
   await writeImageMap(products, filenames);
+  await writeJson(imageSourceCachePath, updatedImageSourceCache);
 } else {
   console.log('Skipped image generation.');
 }

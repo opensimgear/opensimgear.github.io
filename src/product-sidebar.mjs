@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 
-const productsPath = new URL('./src/data/3rdparty-products.json', import.meta.url);
+const productsPath = new URL('./data/3rdparty-products.json', import.meta.url);
 const productDatabase = JSON.parse(readFileSync(productsPath, 'utf8'));
 
 const kindLabels = {

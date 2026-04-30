@@ -378,8 +378,28 @@
     return product.kind === 'commercial' ? product.product_url : product.project_url;
   }
 
+  function githubOpenGraphImage(product: Product): string | null {
+    if (product.kind !== 'opensource') return null;
+
+    const projectUrl = product.project_url;
+    if (!projectUrl) return null;
+
+    try {
+      const url = new URL(projectUrl);
+      if (url.hostname !== 'github.com') return null;
+
+      const [owner, repo] = url.pathname.split('/').filter(Boolean);
+      if (!owner || !repo) return null;
+
+      return `https://opengraph.githubassets.com/1/${owner}/${repo}`;
+    } catch {
+      return null;
+    }
+  }
+
   function productImage(product: Product): ProductImage | null {
-    return productImages[product.id] ?? null;
+    const fallback = githubOpenGraphImage(product);
+    return productImages[product.id] ?? (fallback ? { src: fallback } : null);
   }
 
   function imageAlt(product: Product): string {
@@ -396,8 +416,28 @@
 
     const rect = target.getBoundingClientRect();
     const gap = 8;
-    const width = rect.width * 2;
-    const height = rect.height * 2;
+    const availableWidth = Math.max(gap, window.innerWidth - gap * 2);
+    const availableHeight = Math.max(gap, window.innerHeight - gap * 2);
+
+    const sourceWidth = image.width ?? rect.width * 2;
+    const sourceHeight = image.height ?? rect.height * 2;
+    const sourceRatio = sourceHeight > 0 ? sourceWidth / sourceHeight : 1;
+
+    let width = rect.width * 2;
+    let height = width / sourceRatio;
+
+    if (height > availableHeight) {
+      height = Math.min(availableHeight, rect.height * 2);
+      width = height * sourceRatio;
+    }
+    if (width > availableWidth) {
+      width = availableWidth;
+      height = Math.min(availableHeight, width / sourceRatio);
+    }
+
+    width = Math.max(rect.width, Math.min(width, availableWidth));
+    height = Math.max(rect.height, Math.min(height, availableHeight));
+
     const maxLeft = Math.max(gap, window.innerWidth - width - gap);
     const maxTop = Math.max(gap, window.innerHeight - height - gap);
     const token = ++imageOverlayToken;
@@ -566,7 +606,7 @@
     if (filter.length === 0) return true;
     return filter.some((value) => {
       if (value === 'primary') return isHttpUrl(primaryUrl(product));
-      if (value === 'image') return Boolean(productImages[product.id]);
+      if (value === 'image') return Boolean(productImage(product));
       return (product.shops ?? []).some((shop) => isHttpUrl(shop.url));
     });
   }
@@ -1570,7 +1610,7 @@
 
   {#if imageOverlay}
     <img
-      class="pointer-events-none fixed z-[2147483647] rounded-[10px] bg-white object-contain p-2 outline outline-1 outline-[var(--sl-color-gray-5)] shadow-[0_18px_45px_rgba(0,0,0,0.38)] transition-[left,top,width,height] duration-150 ease-out"
+      class="pointer-events-none fixed z-[2147483647] rounded-[10px] bg-white object-cover p-0 outline outline-1 outline-[var(--sl-color-gray-5)] shadow-[0_18px_45px_rgba(0,0,0,0.38)] transition-[left,top,width,height] duration-150 ease-out"
       src={imageOverlay.src}
       alt=""
       style={imageOverlayStyle(imageOverlay)}

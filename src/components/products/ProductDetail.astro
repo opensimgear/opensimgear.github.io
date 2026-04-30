@@ -10,7 +10,7 @@ type Props = {
 };
 
 const { product } = Astro.props;
-const image = productImages[product.id];
+const image = productImages[product.id] ?? githubOpenGraphImage(product);
 
 function titleCaseSlug(value: string) {
   return value
@@ -37,6 +37,26 @@ function primaryUrl(product: Product) {
 
 function isHttpUrl(value: string | null | undefined): value is string {
   return typeof value === 'string' && /^https?:\/\//.test(value);
+}
+
+function githubOpenGraphImage(product: Product) {
+  if (product.kind !== 'opensource') return null;
+
+  if (!product.project_url) return null;
+
+  try {
+    const url = new URL(product.project_url);
+    if (url.hostname !== 'github.com') return null;
+
+    const [owner, repo] = url.pathname.split('/').filter(Boolean);
+    if (!owner || !repo) return null;
+
+    return {
+      src: `https://opengraph.githubassets.com/1/${owner}/${repo}`,
+    };
+  } catch {
+    return null;
+  }
 }
 
 function formatPrice(price: number, currency: string) {
@@ -106,11 +126,11 @@ const imageAlt = `${productName(product)} product photo`;
 
   {
     image && (
-      <figure class="m-0 grid justify-items-start gap-2">
-        <img
-          class="block max-h-[26rem] w-full max-w-[44rem] rounded-lg border border-[var(--sl-color-gray-5)] bg-white p-3 object-contain"
-          src={image.src}
-          alt={imageAlt}
+  <figure class="m-0 grid justify-items-start gap-2">
+    <img
+      class="block max-h-[26rem] w-full max-w-[44rem] rounded-lg border border-[var(--sl-color-gray-5)] bg-white p-3 object-contain"
+      src={image.src}
+      alt={imageAlt}
           width={image.width}
           height={image.height}
           loading="eager"

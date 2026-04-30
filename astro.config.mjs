@@ -14,7 +14,7 @@ import robotsTxt from 'astro-robots-txt';
 import webmanifest from 'astro-webmanifest';
 import checks from '@nuasite/checks';
 
-import { productSidebarItems } from './product-sidebar.mjs';
+import { productSidebarItems } from './src/product-sidebar.mjs';
 import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -24,7 +24,7 @@ const title = 'OpenSimGear';
 // https://astro.build/config
 export default defineConfig({
   experimental: {
-    rustCompiler: true,
+    chromeDevtoolsWorkspace: true,
     queuedRendering: {
       enabled: true,
     },
@@ -80,7 +80,7 @@ export default defineConfig({
           autogenerate: { directory: 'calculators' },
         },
         {
-          label: '3rd Party',
+          label: '3rd Party Database',
           items: productSidebarItems,
           badge: {
             text: 'WIP',
