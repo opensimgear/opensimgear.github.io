@@ -1,74 +1,75 @@
+---
 commercial:
-  - product_name: "Dynamic Motion Seat"
-    description: "ACME Dynamic Motion Seat. professional dynamic motion seat. quote/custom professional product. Electric motion components built inside crew-seat forms."
-    manufacturer: "ACME Worldwide"
-    component_category: "g-seats"
-    component_sub_category: "professional dynamic motion seat"
-    product_url: "https://www.acme-worldwide.com/"
-    picture_url: "https://www.acme-worldwide.com/wp-content/uploads/2018/06/M346-2-1.png"
-    shops: []
-  - product_name: "G-Seat"
-    description: "Moog G-Seat. professional electric G-seat. quote/custom professional product. Up to nine moving elements in seat bucket, seat pan, back pad, shoulder harness, and seat belt."
-    manufacturer: "Moog"
-    component_category: "g-seats"
-    component_sub_category: "professional electric G-seat"
-    product_url: "https://www.moog.com/products/g-seats.html"
-    picture_url: "https://www.moog.com/content/dam/sites/moog/images/Products/G-Seats/Simulation-G-Seat-Fighter_700x400_Gray.jpg"
-    shops: []
-  - product_name: "G-Suit System"
-    description: "ACME G-Suit System. bladder/pressure G-cue system. quote/custom professional product. Complete turnkey G-suit cueing option with compressors, valves, filters, and tanks per ACME site."
-    manufacturer: "ACME Worldwide"
-    component_category: "g-seats"
-    component_sub_category: "bladder/pressure G-cue system"
-    product_url: "https://www.acme-worldwide.com/"
-    picture_url: "https://www.acme-worldwide.com/wp-content/uploads/2018/06/M346-2-1.png"
-    shops: []
-  - product_name: "GS-5 G-Seat"
-    description: "SimXperience GS-5. paddle-based G-seat. available from SimXperience shop. Full 6DOF motion feedback seat for flight or racing simulation."
-    manufacturer: "SimXperience"
-    component_category: "g-seats"
-    component_sub_category: "paddle-based G-seat"
-    product_url: "https://www.simxperience.com/shop/sx-gs5-001-gs-5-g-seat-711"
-    picture_url: "https://www.simxperience.com/web/image/product.template/711/image_1024?unique=8c5dd17"
-    shops:
-      - region: "US-based direct sale; shipping/financing listed by SimXperience."
-        price: 2999
-        currency: "USD"
-        url: "https://www.simxperience.com/shop/sx-gs5-001-gs-5-g-seat-711"
-  - product_name: "GS-Cobra Motion Simulator"
-    description: "Geko Systems GS-Cobra. active seat / G-seat hybrid. official site still online; current ordering status should be confirmed. Active upholstered seat with enclosed rack-and-pinion actuators."
-    manufacturer: "Geko Systems"
-    component_category: "g-seats"
-    component_sub_category: "active seat / G-seat hybrid"
-    product_url: "https://gekosystems.com/en/gs-cobra-motion-simulator-en/gs-cobra-motion-simulator-design-performance-en/gs-cobra-motion-simulator-features-and-performance"
-    picture_url: "https://gekosystems.com/images/gs-cobra/GSeatManager1.jpg"
-    shops:
-      - region: "Europe-based vendor; current production/lead time should be verified before purchase."
-        price: 1650
-        currency: "EUR"
-        url: "https://gekosystems.com/en/gs-cobra-motion-simulator-en/gs-cobra-motion-simulator-design-performance-en/gs-cobra-motion-simulator-features-and-performance"
-  - product_name: "Motion Integrated G-Seat"
-    description: "Bergison Motion Integrated G-Seat. professional flight G-seat. quote/custom professional product. Motion Integrated G-Seat has regular pilot-seat footprint."
-    manufacturer: "Bergison GmbH"
-    component_category: "g-seats"
-    component_sub_category: "professional flight G-seat"
-    product_url: "https://bergison.com/"
-    picture_url: "https://bergison.com/img/MIGS-motion.png"
-    shops: []
+- product_name: Dynamic Motion Seat
+  description: ACME Dynamic Motion Seat. professional dynamic motion seat. quote/custom professional product. Electric motion components built inside crew-seat forms.
+  manufacturer: ACME Worldwide
+  component_category: g-seats
+  component_sub_category: Motion seat
+  product_url: https://www.acme-worldwide.com/
+  picture_url: https://www.acme-worldwide.com/wp-content/uploads/2018/06/M346-2-1.png
+  shops: []
+- product_name: G-Seat
+  description: Moog G-Seat. professional electric G-seat. quote/custom professional product. Up to nine moving elements in seat bucket, seat pan, back pad, shoulder harness, and seat belt.
+  manufacturer: Moog
+  component_category: g-seats
+  component_sub_category: Motion seat
+  product_url: https://www.moog.com/products/g-seats.html
+  picture_url: https://www.moog.com/content/dam/sites/moog/images/Products/G-Seats/Simulation-G-Seat-Fighter_700x400_Gray.jpg
+  shops: []
+- product_name: G-Suit System
+  description: ACME G-Suit System. bladder/pressure G-cue system. quote/custom professional product. Complete turnkey G-suit cueing option with compressors, valves, filters, and tanks per ACME site.
+  manufacturer: ACME Worldwide
+  component_category: g-seats
+  component_sub_category: G-seat cues
+  product_url: https://www.acme-worldwide.com/
+  picture_url: https://www.acme-worldwide.com/wp-content/uploads/2018/06/M346-2-1.png
+  shops: []
+- product_name: GS-5 G-Seat
+  description: SimXperience GS-5. paddle-based G-seat. available from SimXperience shop. Full 6DOF motion feedback seat for flight or racing simulation.
+  manufacturer: SimXperience
+  component_category: g-seats
+  component_sub_category: G-seat cues
+  product_url: https://www.simxperience.com/shop/sx-gs5-001-gs-5-g-seat-711
+  picture_url: https://www.simxperience.com/web/image/product.template/711/image_1024?unique=8c5dd17
+  shops:
+  - region: US-based direct sale; shipping/financing listed by SimXperience.
+    price: 2999
+    currency: USD
+    url: https://www.simxperience.com/shop/sx-gs5-001-gs-5-g-seat-711
+- product_name: GS-Cobra Motion Simulator
+  description: Geko Systems GS-Cobra. active seat / G-seat hybrid. official site still online; current ordering status should be confirmed. Active upholstered seat with enclosed rack-and-pinion actuators.
+  manufacturer: Geko Systems
+  component_category: g-seats
+  component_sub_category: Motion seat
+  product_url: https://gekosystems.com/en/gs-cobra-motion-simulator-en/gs-cobra-motion-simulator-design-performance-en/gs-cobra-motion-simulator-features-and-performance
+  picture_url: https://gekosystems.com/images/gs-cobra/GSeatManager1.jpg
+  shops:
+  - region: Europe-based vendor; current production/lead time should be verified before purchase.
+    price: 1650
+    currency: EUR
+    url: https://gekosystems.com/en/gs-cobra-motion-simulator-en/gs-cobra-motion-simulator-design-performance-en/gs-cobra-motion-simulator-features-and-performance
+- product_name: Motion Integrated G-Seat
+  description: Bergison Motion Integrated G-Seat. professional flight G-seat. quote/custom professional product. Motion Integrated G-Seat has regular pilot-seat footprint.
+  manufacturer: Bergison GmbH
+  component_category: g-seats
+  component_sub_category: G-seat
+  product_url: https://bergison.com/
+  picture_url: https://bergison.com/img/MIGS-motion.png
+  shops: []
 opensource:
-  - project_name: "Arduino RC servo / SimTools g-seat code resources"
-    description: "XSimulator Arduino Servo G-Seat Code. Arduino servo control for paddles/flaps. Older community FAQ/resource path, published 2014; downloadable marketplace item may require XSimulator account/credits. FAQ explains that one Arduino PWM pin can drive one RC servo."
-    maker: "XSimulator community / eaorobbie [uncertain]"
-    component_category: "g-seats"
-    component_sub_category: "Arduino servo control for paddles/flaps"
-    license: "Not stated on visible FAQ page [uncertain]."
-    project_url: "null"
-    picture_url: "https://www.xsimulator.net/community/styles/default/xenforo/xsimulator.og.png"
-  - project_name: "Modified SMC3 code for G-Seat"
-    description: "XSimulator Modified SMC3 for G-Seat. adapted SMC3 control code for g-seat actuation. Forum FAQ entry published 2019; source linked from forum post. XSimulator FAQ points to modified SMC3 code for g-seat use by BlazinH."
-    maker: "BlazinH / XSimulator community"
-    component_category: "g-seats"
-    component_sub_category: "adapted SMC3 control code for g-seat actuation"
-    license: "Not stated on visible FAQ page [uncertain]; upstream SMC3 is MIT."
-    project_url: "null"
-    picture_url: "https://www.xsimulator.net/community/styles/default/xenforo/xsimulator.og.png"
+- project_name: Arduino RC servo / SimTools g-seat code resources
+  description: XSimulator Arduino Servo G-Seat Code. Arduino servo control for paddles/flaps. Older community FAQ/resource path, published 2014; downloadable marketplace item may require XSimulator account/credits. FAQ explains that one Arduino PWM pin can drive one RC servo.
+  maker: XSimulator community / eaorobbie [uncertain]
+  component_category: g-seats
+  component_sub_category: G-seat controller
+  license: Not stated on visible FAQ page [uncertain].
+  project_url: 'null'
+  picture_url: https://www.xsimulator.net/community/styles/default/xenforo/xsimulator.og.png
+- project_name: Modified SMC3 code for G-Seat
+  description: XSimulator Modified SMC3 for G-Seat. adapted SMC3 control code for g-seat actuation. Forum FAQ entry published 2019; source linked from forum post. XSimulator FAQ points to modified SMC3 code for g-seat use by BlazinH.
+  maker: BlazinH / XSimulator community
+  component_category: g-seats
+  component_sub_category: G-seat controller
+  license: Not stated on visible FAQ page [uncertain]; upstream SMC3 is MIT.
+  project_url: 'null'
+  picture_url: https://www.xsimulator.net/community/styles/default/xenforo/xsimulator.og.png
