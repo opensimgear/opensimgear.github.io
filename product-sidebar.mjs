@@ -21,6 +21,10 @@ function productHref(product) {
   return `/products/${product.kind}/${product.component_category}/${product.slug}/`;
 }
 
+function productName(product) {
+  return product.product_name ?? product.project_name ?? '';
+}
+
 function compareLabels(a, b) {
   return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' });
 }
@@ -29,7 +33,7 @@ function buildCategoryItem(kind, category, products) {
   const categoryProducts = products
     .filter((product) => product.kind === kind && product.component_category === category)
     .map((product) => ({
-      label: product.title || product.name,
+      label: productName(product),
       link: productHref(product),
     }))
     .sort(compareLabels);

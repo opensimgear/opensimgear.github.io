@@ -3,12 +3,11 @@
   import { productImages } from '~/data/3rdparty-product-images';
 
   type ProductKind = 'commercial' | 'opensource';
-  type ProductValue = string | string[] | null;
   type AvailabilityBucket = 'available' | 'active' | 'limited' | 'unknown';
   type LicenseBucket = 'known' | 'permissive' | 'copyleft' | 'noncommercial' | 'unknown';
   type FilterValue = string[];
   type LoadState = 'loading' | 'ready' | 'error';
-  type SourceFilter = 'official' | 'repo' | 'docs';
+  type SourceFilter = 'primary' | 'shop' | 'image';
   type FacetKey = 'kind' | 'category' | 'group' | 'maker' | 'availability' | 'license' | 'source';
   type SortKey =
     | 'name-asc'
@@ -17,58 +16,36 @@
     | 'kind-asc'
     | 'maker-asc'
     | 'price-asc'
-    | 'price-desc'
-    | 'sources-desc'
-    | 'checked-desc';
+    | 'price-desc';
   type ProductImage = {
     src: string;
-    width: number;
-    height: number;
-    format: string;
+    width?: number;
+    height?: number;
+    format?: string;
   };
-  type ProductImageRecord = {
-    url: string;
-    asset: string;
-    alt: string;
-    source_url: string | null;
-    source_type: string;
-    width: number;
-    height: number;
-    format: string;
+  type Shop = {
+    region: string | null;
+    price: number;
+    currency: string;
+    url: string | null;
   };
 
   type Product = {
     id: string;
     kind: ProductKind;
-    name: string;
-    title: string;
     slug: string;
+    product_name?: string;
+    project_name?: string;
+    description: string | null;
+    manufacturer?: string | null;
+    maker?: string | null;
     component_category: string;
-    component_categories: string[];
-    category_group: string | null;
-    subcategory: string | null;
-    last_checked: string | null;
-    urls: {
-      official: string | null;
-      repo: string | null;
-      docs: string | null;
-      sources: string[];
-    };
-    organization: {
-      manufacturer: string | null;
-      maintainer_or_org: string | null;
-      display: string | null;
-    };
-    availability: {
-      status: string | null;
-      maturity_or_status: string | null;
-      price_or_msrp: string | null;
-      region_or_availability: string | null;
-      license: string | null;
-    };
-    details: Record<string, ProductValue>;
-    raw_fields: Record<string, ProductValue>;
-    image: ProductImageRecord;
+    component_sub_category: string | null;
+    product_url?: string | null;
+    project_url?: string | null;
+    picture_url: string | null;
+    shops?: Shop[];
+    license?: string | null;
   };
 
   type Option = {
@@ -99,8 +76,6 @@
     { value: 'maker-asc', label: 'Maker A-Z' },
     { value: 'price-asc', label: 'Price low-high' },
     { value: 'price-desc', label: 'Price high-low' },
-    { value: 'sources-desc', label: 'Most sources' },
-    { value: 'checked-desc', label: 'Newest check' },
   ];
 
   const availabilityLabels: Record<AvailabilityBucket, string> = {
@@ -119,9 +94,9 @@
   };
 
   const sourceLabels: Record<SourceFilter, string> = {
-    official: 'Official page',
-    repo: 'Repository',
-    docs: 'Docs page',
+    primary: 'Product or project URL',
+    shop: 'Shop URL',
+    image: 'Picture URL',
   };
 
   const pageSizeOptions = [12, 24, 48, 96];
@@ -223,7 +198,7 @@
     buildOptions(filterProductsForOptions('category'), (product) => product.component_category, titleCaseSlug)
   );
   let groupOptions = $derived(
-    buildOptions(filterProductsForOptions('group'), (product) => product.category_group, titleCaseSlug)
+    buildOptions(filterProductsForOptions('group'), componentGroup, titleCaseSlug)
   );
   let makerOptions = $derived(buildOptions(filterProductsForOptions('maker'), makerName, (value) => value));
   let availabilityOptions = $derived(
@@ -251,7 +226,7 @@
       .filter((product) => matchesQuery(product, normalizedQuery))
       .filter((product) => matchesFilter(kindFilter, product.kind))
       .filter((product) => matchesFilter(categoryFilter, product.component_category))
-      .filter((product) => matchesFilter(groupFilter, product.category_group))
+      .filter((product) => matchesFilter(groupFilter, componentGroup(product)))
       .filter((product) => matchesFilter(makerFilter, makerName(product)))
       .filter((product) => matchesFilter(availabilityFilter, availabilityBucket(product)))
       .filter((product) => matchesFilter(licenseFilter, licenseBucket(product)))
@@ -300,7 +275,7 @@
     for (const value of groupFilter) {
       filters.push({
         key: 'group',
-        label: 'Group',
+        label: 'Subcategory',
         value: titleCaseSlug(value),
         rawValue: value,
         token: `group:${value}`,
@@ -368,42 +343,35 @@
   }
 
   function makerName(product: Product): string {
-    return (
-      product.organization.display ?? product.organization.manufacturer ?? product.organization.maintainer_or_org ?? ''
-    );
+    return product.manufacturer ?? product.maker ?? '';
+  }
+
+  function displayName(product: Product): string {
+    return product.product_name ?? product.project_name ?? '';
+  }
+
+  function componentGroup(product: Product): string | null {
+    return product.component_sub_category;
   }
 
   function productHref(product: Product): string {
     return `/products/${product.kind}/${product.component_category}/${product.slug}/`;
   }
 
+  function primaryUrl(product: Product): string | null | undefined {
+    return product.kind === 'commercial' ? product.product_url : product.project_url;
+  }
+
   function productImage(product: Product): ProductImage | null {
-    return productImages[product.id] ?? null;
+    return productImages[product.id] ?? (isHttpUrl(product.picture_url) ? { src: product.picture_url } : null);
   }
 
   function imageAlt(product: Product): string {
-    return product.image?.alt ?? `${product.title || product.name} product photo`;
-  }
-
-  function asList(value: ProductValue | undefined): string[] {
-    if (Array.isArray(value)) return value.filter(Boolean);
-    if (typeof value === 'string' && value.trim()) return [value.trim()];
-    return [];
-  }
-
-  function firstText(value: ProductValue | undefined): string {
-    return asList(value)[0] ?? '';
+    return `${displayName(product)} product photo`;
   }
 
   function productSummary(product: Product): string {
-    return (
-      product.availability.status ??
-      product.availability.maturity_or_status ??
-      product.availability.price_or_msrp ??
-      product.availability.license ??
-      firstText(product.details.fit_notes) ??
-      ''
-    );
+    return product.description ?? product.license ?? '';
   }
 
   function normalizeText(value: string): string {
@@ -441,55 +409,39 @@
   }
 
   function productDateLabel(product: Product): string {
-    return product.kind === 'opensource' ? 'Updated' : 'Added';
-  }
-
-  function formatProductDate(value: string | null): string {
-    if (!value) return 'Unknown';
-
-    const parsed = new Date(value);
-    if (Number.isNaN(parsed.getTime())) return value;
-
-    return new Intl.DateTimeFormat('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    }).format(parsed);
+    return product.kind === 'opensource' ? 'Project' : 'Product';
   }
 
   function productMetaGroup(product: Product): string {
-    return product.category_group ? titleCaseSlug(product.category_group) : titleCaseSlug(product.component_category);
+    return product.component_sub_category ?? titleCaseSlug(product.component_category);
   }
 
   function productTags(product: Product): string[] {
     return [
       titleCaseSlug(product.component_category),
-      product.category_group ? titleCaseSlug(product.category_group) : null,
-      product.subcategory,
+      product.component_sub_category,
+      product.kind === 'opensource' ? product.license : priceText(product),
     ].filter((value): value is string => Boolean(value)).slice(0, 3);
   }
 
   function searchableText(product: Product): string {
-    const detailText = Object.values(product.details).flatMap(asList).join(' ');
-    const rawText = Object.values(product.raw_fields).flatMap(asList).join(' ');
+    const shopText = (product.shops ?? [])
+      .map((shop) => [shop.region, shop.price, shop.currency, shop.url].filter(Boolean).join(' '))
+      .join(' ');
 
     return normalizeText(
       [
-        product.title,
-        product.name,
+        displayName(product),
         kindLabel(product.kind),
         product.component_category,
-        product.component_categories.join(' '),
-        product.category_group,
-        product.subcategory,
+        product.component_sub_category,
         makerName(product),
-        product.availability.status,
-        product.availability.maturity_or_status,
-        product.availability.price_or_msrp,
-        product.availability.region_or_availability,
-        product.availability.license,
-        detailText,
-        rawText,
+        product.description,
+        product.product_url,
+        product.project_url,
+        product.picture_url,
+        product.license,
+        shopText,
       ]
         .filter(Boolean)
         .join(' ')
@@ -507,7 +459,11 @@
 
   function matchesSourceFilter(product: Product, filter: SourceFilter[]): boolean {
     if (filter.length === 0) return true;
-    return filter.some((value) => isHttpUrl(product.urls[value]));
+    return filter.some((value) => {
+      if (value === 'primary') return isHttpUrl(primaryUrl(product));
+      if (value === 'image') return isHttpUrl(product.picture_url);
+      return (product.shops ?? []).some((shop) => isHttpUrl(shop.url));
+    });
   }
 
   function buildOptions(
@@ -539,7 +495,7 @@
       .filter((product) => matchesQuery(product, normalizedQuery))
       .filter((product) => exclude === 'kind' || matchesFilter(kindFilter, product.kind))
       .filter((product) => exclude === 'category' || matchesFilter(categoryFilter, product.component_category))
-      .filter((product) => exclude === 'group' || matchesFilter(groupFilter, product.category_group))
+      .filter((product) => exclude === 'group' || matchesFilter(groupFilter, componentGroup(product)))
       .filter((product) => exclude === 'maker' || matchesFilter(makerFilter, makerName(product)))
       .filter((product) => exclude === 'availability' || matchesFilter(availabilityFilter, availabilityBucket(product)))
       .filter((product) => exclude === 'license' || matchesFilter(licenseFilter, licenseBucket(product)))
@@ -547,22 +503,18 @@
   }
 
   function buildSourceOptions(sourceProducts: Product[]): Option[] {
-    return (['official', 'repo', 'docs'] as const).map((value) => ({
+    return (['primary', 'shop', 'image'] as const).map((value) => ({
       value,
       label: sourceLabels[value],
-      count: sourceProducts.filter((product) => isHttpUrl(product.urls[value])).length,
+      count: sourceProducts.filter((product) => matchesSourceFilter(product, [value])).length,
     }));
   }
 
   function availabilityBucket(product: Product): AvailabilityBucket {
     const value = normalizeText(
-      [
-        product.availability.status,
-        product.availability.maturity_or_status,
-        product.availability.region_or_availability,
-      ]
-        .filter(Boolean)
-        .join(' ')
+      product.kind === 'commercial'
+        ? (product.shops ?? []).map((shop) => [shop.region, shop.url].filter(Boolean).join(' ')).join(' ')
+        : [product.project_url, product.description].filter(Boolean).join(' ')
     );
 
     if (!value) return 'unknown';
@@ -580,7 +532,7 @@
   }
 
   function licenseBucket(product: Product): LicenseBucket {
-    const value = normalizeText(product.availability.license ?? '');
+    const value = normalizeText(product.license ?? '');
 
     if (!value || /unknown|not found|unclear|not clearly|not verified|no explicit/.test(value)) {
       return 'unknown';
@@ -598,57 +550,38 @@
     return 'known';
   }
 
-  function sourceCount(product: Product): number {
-    return new Set(sourceUrls(product)).size;
-  }
-
   function isHttpUrl(value: string | null | undefined): value is string {
     return typeof value === 'string' && /^https?:\/\//.test(value);
   }
 
-  function sourceUrls(product: Product): string[] {
-    return [product.urls.official, product.urls.repo, product.urls.docs, ...product.urls.sources].filter(isHttpUrl);
-  }
-
   function primarySourceLinks(product: Product): { label: string; url: string }[] {
     return [
-      { label: 'Official', url: product.urls.official },
-      { label: 'Repo', url: product.urls.repo },
-      { label: 'Docs', url: product.urls.docs },
+      { label: product.kind === 'commercial' ? 'Product' : 'Project', url: primaryUrl(product) },
+      { label: 'Image', url: product.picture_url },
     ].filter((link): link is { label: string; url: string } => isHttpUrl(link.url));
   }
 
   function priceText(product: Product): string {
-    return product.availability.price_or_msrp ?? firstText(product.raw_fields.price_or_msrp);
+    const shop = product.shops?.[0];
+    if (!shop) return '';
+
+    return `${shop.currency} ${shop.price}`;
   }
 
   function priceValue(product: Product): number | null {
-    const value = priceText(product);
-    if (!value) return null;
+    const shop = product.shops?.[0];
+    if (!shop) return null;
 
-    const currencyMatch = value.match(/\b(USD|EUR|GBP|CAD|AUD|CHF)\b|[$\u20ac\u00a3]/i);
-    const amountMatch = value.match(/(?:USD|EUR|GBP|CAD|AUD|CHF|[$\u20ac\u00a3])\s*([0-9][0-9,]*(?:\.\d+)?)/i);
-    const fallbackAmountMatch = value.match(/\b([0-9][0-9,]*(?:\.\d+)?)\b/);
-    const rawAmount = amountMatch?.[1] ?? fallbackAmountMatch?.[1];
-    if (!rawAmount) return null;
-
-    const amount = Number.parseFloat(rawAmount.replaceAll(',', ''));
-    if (!Number.isFinite(amount)) return null;
-
-    const currency = currencyMatch?.[0].toUpperCase() ?? 'USD';
     const multipliers: Record<string, number> = {
-      $: 1,
       USD: 1,
-      '\u20ac': 1.08,
       EUR: 1.08,
-      '\u00a3': 1.25,
       GBP: 1.25,
       CAD: 0.73,
       AUD: 0.65,
       CHF: 1.1,
     };
 
-    return amount * (multipliers[currency] ?? 1);
+    return shop.price * (multipliers[shop.currency] ?? 1);
   }
 
   function compareText(a: string, b: string): number {
@@ -662,37 +595,27 @@
     return direction === 'asc' ? a - b : b - a;
   }
 
-  function compareDate(a: string | null, b: string | null): number {
-    return compareNumber(a ? Date.parse(a) : null, b ? Date.parse(b) : null, 'desc');
-  }
-
   function compareProducts(a: Product, b: Product): number {
     switch (sortKey) {
       case 'name-desc':
-        return compareText(b.title || b.name, a.title || a.name);
+        return compareText(displayName(b), displayName(a));
       case 'category-asc':
-        return (
-          compareText(a.component_category, b.component_category) || compareText(a.title || a.name, b.title || b.name)
-        );
+        return compareText(a.component_category, b.component_category) || compareText(displayName(a), displayName(b));
       case 'kind-asc':
         return (
           compareText(kindLabel(a.kind), kindLabel(b.kind)) ||
           compareText(a.component_category, b.component_category) ||
-          compareText(a.title || a.name, b.title || b.name)
+          compareText(displayName(a), displayName(b))
         );
       case 'maker-asc':
-        return compareText(makerName(a), makerName(b)) || compareText(a.title || a.name, b.title || b.name);
+        return compareText(makerName(a), makerName(b)) || compareText(displayName(a), displayName(b));
       case 'price-asc':
-        return compareNumber(priceValue(a), priceValue(b), 'asc') || compareText(a.title || a.name, b.title || b.name);
+        return compareNumber(priceValue(a), priceValue(b), 'asc') || compareText(displayName(a), displayName(b));
       case 'price-desc':
-        return compareNumber(priceValue(a), priceValue(b), 'desc') || compareText(a.title || a.name, b.title || b.name);
-      case 'sources-desc':
-        return sourceCount(b) - sourceCount(a) || compareText(a.title || a.name, b.title || b.name);
-      case 'checked-desc':
-        return compareDate(a.last_checked, b.last_checked) || compareText(a.title || a.name, b.title || b.name);
+        return compareNumber(priceValue(a), priceValue(b), 'desc') || compareText(displayName(a), displayName(b));
       case 'name-asc':
       default:
-        return compareText(a.title || a.name, b.title || b.name);
+        return compareText(displayName(a), displayName(b));
     }
   }
 
@@ -708,7 +631,7 @@
   }
 
   function isSourceFilter(value: string | null): value is SourceFilter {
-    return value === 'official' || value === 'repo' || value === 'docs';
+    return value === 'primary' || value === 'shop' || value === 'image';
   }
 
   function hasOptionValue(options: Option[], value: string): boolean {
@@ -805,7 +728,7 @@
     );
     groupFilter = normalizeFilterValues(
       groupFilter,
-      buildOptions(filterProductsForOptions('group'), (product) => product.category_group, titleCaseSlug)
+      buildOptions(filterProductsForOptions('group'), componentGroup, titleCaseSlug)
     );
     makerFilter = normalizeFilterValues(
       makerFilter,
@@ -1073,7 +996,7 @@
       </section>
 
       <section class="grid min-w-0 gap-2">
-        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Group</h2>
+        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Subcategory</h2>
         {#each visibleGroupOptions as option (option.value)}
           <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
             <input
@@ -1091,7 +1014,7 @@
             class="inline-flex items-center gap-1 justify-self-start text-[0.78rem] font-[650] text-[var(--sl-color-gray-2)] hover:text-[var(--sl-color-accent-high)]"
             type="button"
             onclick={() => (showAllGroups = !showAllGroups)}
-            aria-label={showAllGroups ? 'Show fewer groups' : 'Show more groups'}
+            aria-label={showAllGroups ? 'Show fewer subcategories' : 'Show more subcategories'}
           >
             <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               {#if showAllGroups}
@@ -1177,7 +1100,7 @@
       </section>
 
       <section class="grid min-w-0 gap-2">
-        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Source</h2>
+        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Links</h2>
         {#each sourceOptions as option (option.value)}
           <label class="flex items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
             <input
@@ -1267,14 +1190,14 @@
                 <a
                   class="grid aspect-square w-full place-items-center overflow-hidden rounded-[10px] border border-[var(--sl-color-gray-5)] bg-white no-underline"
                   href={productHref(product)}
-                  aria-label={`View ${product.name}`}
+                  aria-label={`View ${displayName(product)}`}
                 >
                   <img
                     class="block h-full w-full object-contain p-2"
                     src={image.src}
                     alt={imageAlt(product)}
-                    width={image.width}
-                    height={image.height}
+                    width={image.width ?? undefined}
+                    height={image.height ?? undefined}
                     loading="lazy"
                     decoding="async"
                   />
@@ -1285,7 +1208,7 @@
                 <div class="grid gap-1">
                   <h2 class="m-0 line-clamp-2 text-[1.05rem] font-[700] leading-[1.2]">
                     <a class="text-[var(--sl-color-text)] no-underline hover:text-[var(--sl-color-accent-high)]" href={productHref(product)}>
-                      {product.title || product.name}
+                      {displayName(product)}
                     </a>
                   </h2>
                   <p class="m-0 text-[0.82rem] text-[var(--sl-color-gray-2)]">{makerName(product) || 'Unknown maker'}</p>
@@ -1364,7 +1287,7 @@
                     <rect x="3.5" y="5" width="17" height="15" rx="2" />
                     <path d="M8 3v4M16 3v4M3.5 10h17" />
                   </svg>
-                  <span>{productDateLabel(product)} {formatProductDate(product.last_checked)}</span>
+                  <span>{productDateLabel(product)} URL {primaryUrl(product) ? 'available' : 'unknown'}</span>
                 </div>
               </div>
             </article>

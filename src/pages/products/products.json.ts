@@ -5,7 +5,9 @@ export const prerender = true;
 export async function GET() {
   const products = (await getCollection('products'))
     .map((product) => product.data)
-    .sort((a, b) => (a.title || a.name).localeCompare(b.title || b.name));
+    .sort((a, b) =>
+      (a.product_name ?? a.project_name ?? '').localeCompare(b.product_name ?? b.project_name ?? '')
+    );
 
   return new Response(JSON.stringify({ products }), {
     headers: {

@@ -29,14 +29,21 @@ function kindLabel(value: string) {
   return value === 'opensource' ? 'Open Source' : 'Commercial';
 }
 
+function productName() {
+  return product.data.product_name ?? product.data.project_name ?? '';
+}
+
+function productMaker() {
+  return product.data.manufacturer ?? product.data.maker ?? '';
+}
+
 function compactTitle() {
   const maxTitleLength = 56;
+  const name = productName();
+  const maker = productMaker();
   const titleCandidates = [
-    product.data.title,
-    product.data.name,
-    product.data.organization.display
-      ? product.data.title.replace(`${product.data.organization.display} `, '')
-      : product.data.title,
+    name,
+    maker && name.startsWith(`${maker} `) ? name.replace(`${maker} `, '') : name,
   ].filter(Boolean);
   const matchingTitle = titleCandidates
     .filter((candidate) => candidate.length <= maxTitleLength)
@@ -44,15 +51,15 @@ function compactTitle() {
 
   if (matchingTitle) return matchingTitle;
 
-  return (product.data.title || product.data.name).slice(0, maxTitleLength).replace(/\s+\S*$/, '');
+  return name.slice(0, maxTitleLength).replace(/\s+\S*$/, '');
 }
 
 const title = compactTitle();
 const descriptionParts = [
   kindLabel(product.data.kind),
   titleCaseSlug(product.data.component_category),
-  product.data.subcategory,
-  product.data.organization.display,
+  product.data.component_sub_category,
+  productMaker(),
 ].filter(Boolean);
 ---
 
@@ -62,9 +69,8 @@ const descriptionParts = [
     description: descriptionParts.join(' / '),
   }}
   headings={[
-    { depth: 2, slug: 'source-links', text: 'Source Links' },
-    { depth: 2, slug: 'research-fields', text: 'Research Fields' },
-    { depth: 2, slug: 'source-note', text: 'Source Note' },
+    { depth: 2, slug: 'links', text: 'Links' },
+    { depth: 2, slug: 'shops', text: 'Shops' },
   ]}
 >
   <ProductDetail product={product.data} />

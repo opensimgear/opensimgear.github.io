@@ -6,16 +6,11 @@ import { docsSchema } from '@astrojs/starlight/schema';
 import { autoSidebarLoader } from 'starlight-auto-sidebar/loader';
 import { autoSidebarSchema } from 'starlight-auto-sidebar/schema';
 
-const productValueSchema = z.union([z.string(), z.array(z.string()), z.null()]);
-const productImageSchema = z.object({
-  url: z.string(),
-  asset: z.string(),
-  alt: z.string(),
-  source_url: z.string().nullable(),
-  source_type: z.string(),
-  width: z.number(),
-  height: z.number(),
-  format: z.string(),
+const shopSchema = z.object({
+  region: z.string().nullable(),
+  price: z.number(),
+  currency: z.string(),
+  url: z.string().nullable(),
 });
 
 const products = defineCollection({
@@ -25,40 +20,19 @@ const products = defineCollection({
   schema: z.looseObject({
     id: z.string(),
     kind: z.enum(['commercial', 'opensource']),
-    name: z.string(),
-    title: z.string(),
     slug: z.string(),
+    product_name: z.string().optional(),
+    project_name: z.string().optional(),
+    description: z.string().nullable(),
+    manufacturer: z.string().nullable().optional(),
+    maker: z.string().nullable().optional(),
     component_category: z.string(),
-    component_categories: z.array(z.string()),
-    declared_component_category: productValueSchema.optional(),
-    category_group: z.string().nullable(),
-    subcategory: z.string().nullable(),
-    subcategory_path: z.array(z.string()),
-    source_file: z.string(),
-    last_checked: z.string().nullable(),
-    urls: z.object({
-      official: z.string().nullable(),
-      repo: z.string().nullable(),
-      docs: z.string().nullable(),
-      sources: z.array(z.string()),
-    }),
-    organization: z.object({
-      manufacturer: z.string().nullable(),
-      maintainer_or_org: z.string().nullable(),
-      display: z.string().nullable(),
-    }),
-    availability: z.object({
-      status: z.string().nullable(),
-      maturity_or_status: z.string().nullable(),
-      price_or_msrp: z.string().nullable(),
-      region_or_availability: z.string().nullable(),
-      license: z.string().nullable(),
-    }),
-    details: z.record(z.string(), productValueSchema),
-    raw_fields: z.record(z.string(), productValueSchema),
-    original_field_names: z.record(z.string(), z.string()),
-    image: productImageSchema,
-    content_markdown: z.string(),
+    component_sub_category: z.string().nullable(),
+    product_url: z.string().nullable().optional(),
+    project_url: z.string().nullable().optional(),
+    picture_url: z.string().nullable(),
+    shops: z.array(shopSchema).optional(),
+    license: z.string().nullable().optional(),
   }),
 });
 

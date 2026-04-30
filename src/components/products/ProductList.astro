@@ -32,24 +32,25 @@ function productImage(product: ProductEntry['data']) {
   return productImages[product.id];
 }
 
+function productName(product: ProductEntry['data']) {
+  return product.product_name ?? product.project_name ?? '';
+}
+
+function makerName(product: ProductEntry['data']) {
+  return product.manufacturer ?? product.maker ?? '';
+}
+
 function primaryMeta(product: ProductEntry['data']) {
   return [
     showKind ? kindLabel(product.kind) : null,
     titleCaseSlug(product.component_category),
-    product.subcategory,
-    product.organization.display,
+    product.component_sub_category,
+    makerName(product),
   ].filter(Boolean);
 }
 
 function summary(product: ProductEntry['data']) {
-  return (
-    product.availability.status ??
-    product.availability.maturity_or_status ??
-    product.availability.price_or_msrp ??
-    product.availability.license ??
-    product.details.fit_notes?.toString() ??
-    null
-  );
+  return product.description ?? product.license ?? null;
 }
 ---
 
@@ -64,12 +65,12 @@ function summary(product: ProductEntry['data']) {
             <a
               class="grid aspect-[4/3] w-full place-items-center overflow-hidden rounded-md border border-[var(--sl-color-gray-6)] bg-white no-underline max-[40rem]:max-w-40"
               href={productHref(product)}
-              aria-label={`View ${product.name}`}
+              aria-label={`View ${productName(product)}`}
             >
               <img
                 class="block h-full w-full object-contain p-[0.3rem]"
                 src={image.src}
-                alt={product.image?.alt ?? `${product.title || product.name} product photo`}
+                alt={`${productName(product)} product photo`}
                 width={image.width}
                 height={image.height}
                 loading="lazy"
@@ -79,7 +80,7 @@ function summary(product: ProductEntry['data']) {
           )}
           <div class="min-w-0">
             <Heading class="m-0 text-base leading-[1.35]">
-              <a href={productHref(product)}>{product.title || product.name}</a>
+              <a href={productHref(product)}>{productName(product)}</a>
             </Heading>
             <p class="mt-1 text-sm leading-[1.4] text-[var(--sl-color-gray-3)]">{primaryMeta(product).join(' / ')}</p>
             {summary(product) && (
@@ -89,7 +90,7 @@ function summary(product: ProductEntry['data']) {
           <a
             class="whitespace-nowrap rounded-md border border-[var(--sl-color-gray-5)] px-3 py-2 text-sm leading-none text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)] max-[40rem]:justify-self-start"
             href={productHref(product)}
-            aria-label={`View ${product.name}`}
+            aria-label={`View ${productName(product)}`}
           >
             View
           </a>

@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 const { kind, component } = Astro.params;
 const products = (await getCollection('products'))
   .filter((product) => product.data.kind === kind && product.data.component_category === component)
-  .sort((a, b) => a.data.name.localeCompare(b.data.name));
+  .sort((a, b) => productName(a.data).localeCompare(productName(b.data)));
 
 function titleCaseSlug(value: string) {
   return value
@@ -31,11 +31,15 @@ function kindLabel(value: string) {
   return value === 'opensource' ? 'Open Source' : 'Commercial';
 }
 
+function productName(product: (typeof products)[number]['data']) {
+  return product.product_name ?? product.project_name ?? '';
+}
+
 const kindName = kindLabel(kind ?? '');
 const componentName = titleCaseSlug(component ?? '');
 const title = `${kindName} ${componentName}`;
 const recordLabel = products.length === 1 ? 'record' : 'records';
-const intro = `Browse ${products.length} ${kindName.toLowerCase()} ${componentName.toLowerCase()} ${recordLabel} from the OpenSimGear product database. Each entry keeps its researched source links, availability details, compatibility notes, strengths, limitations, and original source note together so this category can be compared without losing the trail back to the JSON data.`;
+const intro = `Browse ${products.length} ${kindName.toLowerCase()} ${componentName.toLowerCase()} ${recordLabel} from the OpenSimGear product database. Each entry uses the YAML-derived product schema with names, makers, product or project links, pictures, and shop pricing where available.`;
 ---
 
 <StarlightPage

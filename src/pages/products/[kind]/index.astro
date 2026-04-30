@@ -14,7 +14,7 @@ export function getStaticPaths() {
 const { kind } = Astro.params;
 const products = (await getCollection('products'))
   .filter((product) => product.data.kind === kind)
-  .sort((a, b) => a.data.name.localeCompare(b.data.name));
+  .sort((a, b) => productName(a.data).localeCompare(productName(b.data)));
 
 function titleCaseSlug(value: string) {
   return value
@@ -25,6 +25,10 @@ function titleCaseSlug(value: string) {
 
 function kindLabel(value: string) {
   return value === 'opensource' ? 'Open Source' : 'Commercial';
+}
+
+function productName(product: (typeof products)[number]['data']) {
+  return product.product_name ?? product.project_name ?? '';
 }
 
 const title = `${kindLabel(kind ?? '')} Products`;

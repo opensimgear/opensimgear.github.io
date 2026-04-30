@@ -22,41 +22,56 @@ function kindLabel(kind: string) {
   return kind === 'opensource' ? 'Open Source' : 'Commercial';
 }
 
-function fieldLabel(value: string) {
-  return value
-    .replaceAll('_', ' ')
-    .replace(/\b\w/g, (letter) => letter.toUpperCase())
-    .replace('Url', 'URL')
-    .replace('Bom', 'BOM');
+function productName(product: Product) {
+  return product.product_name ?? product.project_name ?? '';
 }
 
-function asList(value: unknown) {
-  if (Array.isArray(value)) return value.filter(Boolean).map(String);
-  if (typeof value === 'string' && value.trim()) return [value];
-  return [];
+function makerName(product: Product) {
+  return product.manufacturer ?? product.maker ?? '';
+}
+
+function primaryUrl(product: Product) {
+  return product.kind === 'commercial' ? product.product_url : product.project_url;
+}
+
+function isHttpUrl(value: string | null | undefined): value is string {
+  return typeof value === 'string' && /^https?:\/\//.test(value);
+}
+
+function formatPrice(price: number, currency: string) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+    maximumFractionDigits: Number.isInteger(price) ? 0 : 2,
+  }).format(price);
 }
 
 const overviewRows = [
-  ['Product Name', product.name],
+  [product.kind === 'opensource' ? 'Project Name' : 'Product Name', productName(product)],
   ['Type', kindLabel(product.kind)],
   ['Category', titleCaseSlug(product.component_category)],
-  ['Subcategory', product.subcategory],
-  ['Organization', product.organization.display],
-  ['Status', product.availability.status ?? product.availability.maturity_or_status],
-  ['Price / MSRP', product.availability.price_or_msrp],
-  ['License', product.availability.license],
-  ['Region / Availability', product.availability.region_or_availability],
-  ['Last Checked', product.last_checked],
+  ['Subcategory', product.component_sub_category],
+  ['Maker', makerName(product)],
+  ['License', product.license],
 ].filter(([, value]) => value);
 
-const detailRows = Object.entries(product.raw_fields).filter(([field]) => field !== 'source_urls');
-const sourceUrls = product.urls.sources.filter((url) => /^https?:\/\//.test(url));
-const imageAlt = product.image?.alt ?? `${product.title || product.name} product photo`;
+const links = [
+  {
+    label: product.kind === 'commercial' ? 'Product URL' : 'Project URL',
+    url: primaryUrl(product),
+  },
+  {
+    label: 'Picture URL',
+    url: product.picture_url,
+  },
+].filter((link): link is { label: string; url: string } => isHttpUrl(link.url));
+
+const imageAlt = `${productName(product)} product photo`;
 ---
 
 <section class="grid gap-5">
   {
-    image && (
+    image ? (
       <figure class="m-0 grid justify-items-start gap-2">
         <img
           class="block max-h-[26rem] w-full max-w-[44rem] rounded-lg border border-[var(--sl-color-gray-5)] bg-white p-3 object-contain"
@@ -67,15 +82,25 @@ const imageAlt = product.image?.alt ?? `${product.title || product.name} product
           loading="eager"
           decoding="async"
         />
-        {product.image?.source_url && (
-          <figcaption class="text-[0.85rem] text-[var(--sl-color-gray-3)]">
-            Image source:{' '}
-            <a href={product.image.source_url} rel="noreferrer" target="_blank">
-              {product.image.source_type}
-            </a>
-          </figcaption>
-        )}
       </figure>
+    ) : (
+      isHttpUrl(product.picture_url) && (
+        <figure class="m-0 grid justify-items-start gap-2">
+          <img
+            class="block max-h-[26rem] w-full max-w-[44rem] rounded-lg border border-[var(--sl-color-gray-5)] bg-white p-3 object-contain"
+            src={product.picture_url}
+            alt={imageAlt}
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+      )
+    )
+  }
+
+  {
+    product.description && (
+      <p class="m-0 text-[1rem] leading-[1.65] text-[var(--sl-color-gray-2)]">{product.description}</p>
     )
   }
 
@@ -90,47 +115,42 @@ const imageAlt = product.image?.alt ?? `${product.title || product.name} product
     }
   </div>
 
-  <h2 id="source-links">Source Links</h2>
+  <h2 id="links">Links</h2>
   <ul class="[overflow-wrap:anywhere]">
     {
-      sourceUrls.map((url) => (
+      links.map((link) => (
         <li>
-          <a href={url} target="_blank" rel="noreferrer noopener">
-            {url}
+          <strong>{link.label}: </strong>
+          <a href={link.url} target="_blank" rel="noreferrer noopener">
+            {link.url}
           </a>
         </li>
       ))
     }
   </ul>
 
-  <h2 id="research-fields">Research Fields</h2>
-  <div class="grid gap-3">
-    {
-      detailRows.map(([field, value]) => (
-        <section
-          class="rounded-lg border border-[var(--sl-color-gray-5)] p-[0.875rem]"
-          aria-labelledby={`${product.slug}-${field}`}
-        >
-          <h3 class="mb-2 mt-0 text-[0.95rem]" id={`${product.slug}-${field}`}>
-            {fieldLabel(field)}
-          </h3>
-          {asList(value).length > 1 ? (
-            <ul class="mb-0">
-              {asList(value).map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          ) : (
-            <p class="mb-0">{asList(value)[0]}</p>
-          )}
-        </section>
-      ))
-    }
-  </div>
-
-  <h2 id="source-note">Source Note</h2>
-  <details class="rounded-lg border border-[var(--sl-color-gray-5)] p-[0.875rem]">
-    <summary class="cursor-pointer font-semibold">Show original research markdown</summary>
-    <pre class="mb-0 overflow-x-auto whitespace-pre-wrap"><code>{product.content_markdown}</code></pre>
-  </details>
+  {
+    product.kind === 'commercial' && (
+      <>
+        <h2 id="shops">Shops</h2>
+        {product.shops?.length ? (
+          <div class="grid gap-3">
+            {product.shops.map((shop) => (
+              <section class="rounded-lg border border-[var(--sl-color-gray-5)] p-[0.875rem]">
+                <h3 class="mb-2 mt-0 text-[0.95rem]">{shop.region ?? 'Shop'}</h3>
+                <p class="mb-2 mt-0 font-semibold">{formatPrice(shop.price, shop.currency)}</p>
+                {shop.url && (
+                  <a href={shop.url} target="_blank" rel="noreferrer noopener">
+                    {shop.url}
+                  </a>
+                )}
+              </section>
+            ))}
+          </div>
+        ) : (
+          <p>No numeric shop price is available in the YAML database.</p>
+        )}
+      </>
+    )
+  }
 </section>
