@@ -54,48 +54,11 @@
   }
 }
 
-@layer starlight {
-
-  @media (min-width: 72rem) {
-    .sl-container {
-      margin-inline: var(--sl-content-margin-inline, auto);
-      width: min(var(--sl-content-width), calc(100% - 3rem));
-      max-width: var(--sl-content-width);
-    }
-
-    .main-pane {
-      width: 100%;
-    }
-
-    [data-has-sidebar][data-has-toc] .main-pane {
-      --sl-content-margin-inline: auto 0;
-      order: 1;
-      width: calc(
-        var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
-      );
-    }
-
-    .right-sidebar-container {
-      order: 2;
-      position: relative;
-      width: calc(
-        var(--sl-sidebar-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
-      );
-    }
-  }
-}
-
 [data-has-hero] header {
   border-bottom: 1px solid transparent;
   background-color: transparent;
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-}
-
-html[data-has-hero] .content-panel .sl-container {
-  width: min(var(--sl-content-width), calc(100% - 3rem));
-  max-width: var(--sl-content-width);
-  margin-inline: auto;
 }
 
 .hero > img {
