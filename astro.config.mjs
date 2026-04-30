@@ -14,7 +14,6 @@ import robotsTxt from 'astro-robots-txt';
 import webmanifest from 'astro-webmanifest';
 import checks from '@nuasite/checks';
 
-import { productSidebarItems } from './src/product-sidebar.mjs';
 import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -81,7 +80,7 @@ export default defineConfig({
         },
         {
           label: '3rd Party Database',
-          items: productSidebarItems,
+          items: [{ label: 'Product Database', link: '/product-db/' }],
           badge: {
             text: 'WIP',
             variant: 'caution',

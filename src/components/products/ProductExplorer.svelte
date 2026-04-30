@@ -138,6 +138,7 @@
     page: 'page',
     pageSize: 'pageSize',
   } as const;
+  const PRODUCT_QUERY_PARAM_KEY = 'product';
 
   let products: Product[] = $state([]);
   let loadState: LoadState = $state('loading');
@@ -160,6 +161,7 @@
   let priceLocale = $state('en-US');
   let priceCurrency = $state('USD');
   let imageOverlay: ImageOverlay | null = $state(null);
+  let selectedProduct: Product | null = $state(null);
   let imageOverlayToken = 0;
   let mounted = false;
   let suppressUrlSync = false;
@@ -189,6 +191,7 @@
         if (!cancelled) {
           products = payload.products;
           normalizeCurrentState();
+          applySelectedProductFromUrl();
           loadState = 'ready';
           syncUrlState();
         }
@@ -204,6 +207,7 @@
     const handlePopState = () => {
       applyUrlState(new URLSearchParams(window.location.search));
       normalizeCurrentState();
+      applySelectedProductFromUrl();
     };
     window.addEventListener('popstate', handlePopState);
     mounted = true;
@@ -370,8 +374,8 @@
     return product.component_sub_category;
   }
 
-  function productHref(product: Product): string {
-    return `/products/${product.kind}/${product.component_category}/${product.slug}/`;
+  function productKey(product: Product): string {
+    return product.id;
   }
 
   function primaryUrl(product: Product): string | null | undefined {
@@ -703,6 +707,10 @@
     return [
       { label: product.kind === 'commercial' ? 'Product Page' : 'Project', url: primaryUrl(product) },
     ].filter((link): link is { label: string; url: string } => isHttpUrl(link.url));
+  }
+
+  function productShopLinks(product: Product): Shop[] {
+    return (product.shops ?? []).filter((shop) => isHttpUrl(shop.url));
   }
 
   function validPriceSource(source: PriceSource | null | undefined): PriceSource | null {
@@ -1061,7 +1069,52 @@
     currentPage = Math.max(1, Math.min(page, totalPages));
     syncUrlState();
   }
+
+  function applySelectedProductFromUrl(): void {
+    if (typeof window === 'undefined') return;
+
+    const key = new URLSearchParams(window.location.search).get(PRODUCT_QUERY_PARAM_KEY);
+    selectedProduct = key ? products.find((product) => productKey(product) === key) ?? null : null;
+  }
+
+  function openProductDetail(product: Product): void {
+    if (typeof window === 'undefined') return;
+
+    closeImageOverlay();
+    selectedProduct = product;
+
+    const url = new URL(window.location.href);
+    url.searchParams.set(PRODUCT_QUERY_PARAM_KEY, productKey(product));
+    window.history.pushState(
+      { ...window.history.state, productModal: productKey(product) },
+      '',
+      `${url.pathname}${url.search}${url.hash}`
+    );
+  }
+
+  function closeProductDetail(): void {
+    if (typeof window === 'undefined') return;
+
+    selectedProduct = null;
+    const state = window.history.state as { productModal?: string } | null;
+    if (state?.productModal) {
+      window.history.back();
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete(PRODUCT_QUERY_PARAM_KEY);
+    window.history.replaceState(window.history.state, '', `${url.pathname}${url.search}${url.hash}`);
+  }
+
+  function handleModalKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && selectedProduct) {
+      closeProductDetail();
+    }
+  }
 </script>
+
+<svelte:window onkeydown={handleModalKeydown} />
 
 <section class="not-content grid gap-4 text-sm" aria-label="Product database">
   <div
@@ -1424,10 +1477,11 @@
             {@const maker = makerName(product)}
             <article class="grid min-h-[10.5rem] gap-4 rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(12,18,28,0.72)] p-3 [grid-template-columns:10.5rem_minmax(0,1fr)_11.5rem] max-[80rem]:[grid-template-columns:9rem_minmax(0,1fr)] max-[56rem]:grid-cols-1">
               {#if image}
-                <a
-                  class="grid aspect-square w-full place-items-center overflow-hidden rounded-[10px] border border-[var(--sl-color-gray-5)] bg-white no-underline"
-                  href={productHref(product)}
+                <button
+                  class="grid aspect-square w-full place-items-center overflow-hidden rounded-[10px] border border-[var(--sl-color-gray-5)] bg-white p-0"
+                  type="button"
                   aria-label={`View ${displayName(product)}`}
+                  onclick={() => openProductDetail(product)}
                   onmouseenter={(event) => openImageOverlay(event, product, image)}
                   onfocus={(event) => openImageOverlay(event, product, image)}
                   onmouseleave={closeImageOverlay}
@@ -1442,15 +1496,19 @@
                     loading="lazy"
                     decoding="async"
                   />
-                </a>
+                </button>
               {/if}
 
               <div class="grid min-w-0 content-start gap-3">
                 <div class="grid gap-1">
                   <h2 class="m-0 line-clamp-2 text-[1.05rem] font-[700] leading-[1.2]">
-                    <a class="text-[var(--sl-color-text)] no-underline hover:text-[var(--sl-color-accent-high)]" href={productHref(product)}>
+                    <button
+                      class="rounded-none bg-transparent p-0 text-left text-[var(--sl-color-text)] hover:text-[var(--sl-color-accent-high)]"
+                      type="button"
+                      onclick={() => openProductDetail(product)}
+                    >
                       {displayName(product)}
-                    </a>
+                    </button>
                   </h2>
                   {#if maker}
                     <button
@@ -1487,9 +1545,10 @@
                 {/if}
 
                 <div class="flex flex-wrap gap-2">
-                  <a
+                  <button
                     class="inline-flex items-center gap-2 rounded-[10px] border border-[var(--sl-color-gray-5)] px-3 py-2 text-[0.82rem] font-[650] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
-                    href={productHref(product)}
+                    type="button"
+                    onclick={() => openProductDetail(product)}
                   >
                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                       <path d="M12 5H5v14h14v-7" />
@@ -1497,7 +1556,7 @@
                       <path d="m10 14 9-9" />
                     </svg>
                     Details
-                  </a>
+                  </button>
                   {#each primarySourceLinks(product) as link (link.label)}
                     <a
                       class="inline-flex items-center gap-2 rounded-[10px] border border-[var(--sl-color-gray-5)] px-3 py-2 text-[0.82rem] font-[650] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
@@ -1607,6 +1666,182 @@
       </nav>
     </section>
   </div>
+
+  {#if selectedProduct}
+    {@const modalImage = productImage(selectedProduct)}
+    {@const modalMaker = makerName(selectedProduct)}
+    {@const modalShops = productShopLinks(selectedProduct)}
+    <div
+      class="fixed inset-0 z-[2147483646] grid place-items-center bg-black/70 p-4 backdrop-blur-sm"
+      role="presentation"
+      onclick={(event) => {
+        if (event.target === event.currentTarget) closeProductDetail();
+      }}
+    >
+      <div
+        class="grid max-h-[min(44rem,calc(100vh-2rem))] w-full max-w-5xl overflow-hidden rounded-[16px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] shadow-[0_22px_70px_rgba(0,0,0,0.45)]"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="product-detail-title"
+      >
+        <header class="flex items-start justify-between gap-4 border-b border-[var(--sl-color-gray-5)] px-5 py-4">
+          <div class="grid min-w-0 gap-1">
+            {#if modalMaker}
+              <p class="m-0 text-[0.8rem] font-[650] text-[var(--sl-color-gray-2)]">{modalMaker}</p>
+            {/if}
+            <h2 id="product-detail-title" class="m-0 text-[1.25rem] font-[750] leading-tight text-[var(--sl-color-text)]">
+              {displayName(selectedProduct)}
+            </h2>
+          </div>
+          <button
+            class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] bg-transparent text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+            type="button"
+            onclick={closeProductDetail}
+            aria-label="Close product detail"
+            title="Close"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </header>
+
+        <div class="grid gap-5 overflow-auto p-5">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <nav class="flex flex-wrap items-center gap-1 text-[0.76rem] font-[650] text-[var(--sl-color-gray-2)]" aria-label="Product category breadcrumb">
+              {#each productBreadcrumb(selectedProduct) as crumb, index (index)}
+                {#if index > 0}
+                  <span aria-hidden="true" class="text-[var(--sl-color-gray-3)]">&gt;</span>
+                {/if}
+                <button
+                  class="rounded-none bg-transparent px-0 py-0 leading-none text-[var(--sl-color-gray-2)] underline-offset-4 hover:text-[var(--sl-color-accent-high)] hover:underline focus-visible:text-[var(--sl-color-accent-high)] focus-visible:underline"
+                  type="button"
+                  onclick={() => {
+                    applyBreadcrumbFilter(crumb);
+                    closeProductDetail();
+                  }}
+                  aria-label={`Filter by ${crumb.label}`}
+                >
+                  {crumb.label}
+                </button>
+              {/each}
+            </nav>
+            <span
+              class={[
+                'inline-flex whitespace-nowrap rounded-full px-3 py-1 text-[0.76rem] font-[700] leading-none',
+                selectedProduct.kind === 'commercial'
+                  ? 'bg-yellow-200 text-yellow-900'
+                  : 'bg-emerald-200 text-emerald-900',
+              ]}
+            >
+              {kindLabel(selectedProduct.kind)}
+            </span>
+          </div>
+
+          <div class="grid gap-5 [grid-template-columns:minmax(0,22rem)_minmax(0,1fr)] max-[52rem]:grid-cols-1">
+            {#if modalImage}
+              <figure class="m-0 grid content-start gap-2">
+                <img
+                  class="block max-h-[24rem] w-full rounded-[12px] border border-[var(--sl-color-gray-5)] bg-white p-3 object-contain"
+                  src={modalImage.src}
+                  alt={imageAlt(selectedProduct)}
+                  width={modalImage.width ?? undefined}
+                  height={modalImage.height ?? undefined}
+                  loading="eager"
+                  decoding="async"
+                />
+              </figure>
+            {/if}
+
+            <div class="grid content-start gap-4">
+              {#if selectedProduct.description}
+                <p class="m-0 text-[0.95rem] leading-[1.65] text-[var(--sl-color-gray-2)]">{selectedProduct.description}</p>
+              {/if}
+
+              <div class="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))]">
+                <div class="rounded-[12px] border border-[var(--sl-color-gray-5)] p-3">
+                  <dt class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-3)]">Price</dt>
+                  <dd class="m-0 mt-1 text-[var(--sl-color-text)]">{priceDisplayText(selectedProduct)}</dd>
+                </div>
+                {#if selectedProduct.license}
+                  <div class="rounded-[12px] border border-[var(--sl-color-gray-5)] p-3">
+                    <dt class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-3)]">License</dt>
+                    <dd class="m-0 mt-1 text-[var(--sl-color-text)]">{selectedProduct.license}</dd>
+                  </div>
+                {/if}
+                <div class="rounded-[12px] border border-[var(--sl-color-gray-5)] p-3">
+                  <dt class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-3)]">Component</dt>
+                  <dd class="m-0 mt-1 text-[var(--sl-color-text)]">{titleCaseSlug(selectedProduct.component_category)}</dd>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2">
+                {#each primarySourceLinks(selectedProduct) as link (link.url)}
+                  <a
+                    class="inline-flex items-center gap-2 rounded-[10px] border border-[var(--sl-color-gray-5)] px-3 py-2 text-[0.82rem] font-[650] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M12 5H5v14h14v-7" />
+                      <path d="M14 5h5v5" />
+                      <path d="m10 14 9-9" />
+                    </svg>
+                    {link.label}
+                  </a>
+                {/each}
+              </div>
+            </div>
+          </div>
+
+          {#if selectedProduct.kind === 'commercial'}
+            <section class="grid gap-3" aria-labelledby="product-shops-title">
+              <h3 id="product-shops-title" class="m-0 text-[1rem] font-[700]">Available at</h3>
+              {#if modalShops.length}
+                <div class="overflow-x-auto rounded-[12px] border border-[var(--sl-color-gray-5)]">
+                  <table class="m-0 w-full min-w-[28rem] border-collapse text-left text-[0.9rem]">
+                    <thead class="border-b border-[var(--sl-color-gray-5)] text-[0.76rem] uppercase tracking-[0] text-[var(--sl-color-gray-3)]">
+                      <tr>
+                        <th class="px-4 py-3 font-[700]">Name</th>
+                        <th class="px-4 py-3 text-right font-[700]">Price</th>
+                        <th class="px-4 py-3 text-right font-[700]">Link</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {#each modalShops as shop (shop.url)}
+                        <tr class="border-b border-[var(--sl-color-gray-6)] last:border-b-0">
+                          <td class="px-4 py-3">{shop.name ?? 'Shop'}</td>
+                          <td class="px-4 py-3 text-right font-[650]">{formatPrice(shop)}</td>
+                          <td class="px-4 py-3 text-right">
+                            <a
+                              class="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-[8px] border border-[var(--sl-color-gray-5)] text-[var(--sl-color-gray-2)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+                              href={shop.url}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              aria-label={`Open ${shop.name ?? 'shop'} page`}
+                            >
+                              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                <path d="M12 5H5v14h14v-7" />
+                                <path d="M14 5h5v5" />
+                                <path d="m10 14 9-9" />
+                              </svg>
+                            </a>
+                          </td>
+                        </tr>
+                      {/each}
+                    </tbody>
+                  </table>
+                </div>
+              {:else}
+                <p class="m-0 rounded-[12px] border border-[var(--sl-color-gray-5)] px-4 py-3 text-[var(--sl-color-gray-2)]">No shop links available.</p>
+              {/if}
+            </section>
+          {/if}
+        </div>
+      </div>
+    </div>
+  {/if}
 
   {#if imageOverlay}
     <img

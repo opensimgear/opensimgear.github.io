@@ -1,7 +1,8 @@
-import { access, copyFile, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { access, copyFile, mkdir, readFile, readdir, rename, writeFile } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { constants as fsConstants } from 'node:fs';
-import { basename, join } from 'node:path';
+import { createHash } from 'node:crypto';
+import { basename, isAbsolute, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import { parse as parseYaml } from 'yaml';
@@ -55,6 +56,17 @@ function normalizeUrl(value) {
   return /^https?:\/\//i.test(url) ? url : null;
 }
 
+function normalizeImageSource(value) {
+  const source = value?.toString().trim();
+  if (!source || /^(null|n\/a|na|none|unknown|not found)$/i.test(source)) return null;
+  return /^(https?:\/\/|file:\/\/)/i.test(source) ||
+    source.startsWith('~/') ||
+    source.includes('/') ||
+    /\.(avif|gif|jpe?g|png|svg|tiff?|webp)$/i.test(source)
+    ? source
+    : null;
+}
+
 function productDisplayName(product) {
   return product.product_name ?? product.project_name ?? '';
 }
@@ -73,7 +85,7 @@ function canonicalPrice(value) {
 }
 
 function canonicalProduct(product, kind) {
-  const pictureUrl = normalizeUrl(product.picture_url);
+  const pictureUrl = normalizeImageSource(product.picture_url);
 
   if (kind === 'commercial') {
     return {
@@ -129,6 +141,10 @@ async function readJson(path, fallback) {
 
 function writeJson(path, value) {
   return writeFile(path, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+}
+
+function sortObject(value) {
+  return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)));
 }
 
 function productImageSource(product) {
@@ -401,6 +417,38 @@ async function fetchImageBuffer(url, referer) {
   }
 }
 
+function isRemoteImageSource(source) {
+  return /^https?:\/\//i.test(source);
+}
+
+function resolveLocalImageSource(source) {
+  if (source.startsWith('file://')) return fileURLToPath(source);
+  if (source.startsWith('~/')) return resolve(rootDir, 'src', source.slice(2));
+  return isAbsolute(source) ? source : resolve(rootDir, source);
+}
+
+async function readLocalImageBuffer(source) {
+  const path = resolveLocalImageSource(source);
+  try {
+    return await readFile(path);
+  } catch (error) {
+    throw new Error(`local image read failed (${path}): ${error.message}`);
+  }
+}
+
+function hashBuffer(buffer) {
+  return createHash('sha256').update(buffer).digest('hex');
+}
+
+async function imageSourceCacheEntry(source) {
+  if (isRemoteImageSource(source)) {
+    return { cacheKey: source, buffer: null };
+  }
+
+  const buffer = await readLocalImageBuffer(source);
+  return { cacheKey: `${source}#sha256=${hashBuffer(buffer)}`, buffer };
+}
+
 function githubOpenGraphFallback(sourceUrl) {
   try {
     const url = new URL(sourceUrl);
@@ -418,11 +466,17 @@ function githubFallbackForProduct(product) {
 }
 
 async function convertImageBuffer(buffer, outputPath) {
+  const temporaryOutputPath = `${outputPath}.tmp`;
   await sharp(buffer, { failOn: 'none' })
     .rotate()
     .resize({ width: MAX_WIDTH, height: MAX_HEIGHT, fit: 'inside', withoutEnlargement: true })
     .webp({ quality: 78 })
-    .toFile(outputPath);
+    .toFile(temporaryOutputPath);
+  await rename(temporaryOutputPath, outputPath);
+}
+
+function isCachedImageSource(cachedSource, sourceUrl) {
+  return typeof cachedSource === 'string' && cachedSource === sourceUrl;
 }
 
 async function ensureProductImage(product, cachedSource) {
@@ -439,22 +493,31 @@ async function ensureProductImage(product, cachedSource) {
     throw new Error(`${product.id}: missing picture_url and no github fallback`);
   }
 
-  if (!refreshImages && cachedSource === sourceUrl && (await exists(outputPath))) {
+  const { cacheKey: sourceCacheKey, buffer: sourceBuffer } = await imageSourceCacheEntry(sourceUrl);
+  const cacheHit = !refreshImages && isCachedImageSource(cachedSource, sourceCacheKey);
+
+  if (cacheHit && (await exists(outputPath))) {
     await sharp(outputPath).metadata();
-    return { filename, sourceUrl };
+    return { filename, sourceUrl: sourceCacheKey };
   }
 
-  if (!refreshImages && cachedSource === sourceUrl && (await exists(legacyPath))) {
+  if (cacheHit && (await exists(legacyPath))) {
     await copyFile(legacyPath, outputPath);
-    return { filename, sourceUrl };
+    return { filename, sourceUrl: sourceCacheKey };
   }
 
   const referer = product.product_url ?? product.project_url ?? product.picture_url ?? '';
   let finalSourceUrl = sourceUrl;
+  let finalSourceCacheKey = sourceCacheKey;
 
   try {
-    await convertImageBuffer(await fetchImageBuffer(finalSourceUrl, referer), outputPath);
+    const buffer = isRemoteImageSource(finalSourceUrl) ? await fetchImageBuffer(finalSourceUrl, referer) : sourceBuffer;
+    await convertImageBuffer(buffer, outputPath);
   } catch (error) {
+    if (!isRemoteImageSource(finalSourceUrl)) {
+      throw new Error(`${product.id}: ${error.message}`);
+    }
+
     const fallback =
       finalSourceUrl === product.picture_url ? githubFallbackForProduct(product) : githubOpenGraphFallback(referer);
     if (!fallback) {
@@ -462,10 +525,11 @@ async function ensureProductImage(product, cachedSource) {
     }
 
     finalSourceUrl = fallback;
+    finalSourceCacheKey = fallback;
     await convertImageBuffer(await fetchImageBuffer(finalSourceUrl, referer), outputPath);
   }
 
-  return { filename, sourceUrl: finalSourceUrl };
+  return { filename, sourceUrl: finalSourceCacheKey };
 }
 
 async function runQueue(items, worker) {
@@ -524,7 +588,7 @@ if (!skipImages) {
   });
 
   await writeImageMap(products, filenames);
-  await writeJson(imageSourceCachePath, updatedImageSourceCache);
+  await writeJson(imageSourceCachePath, sortObject(updatedImageSourceCache));
 } else {
   console.log('Skipped image generation.');
 }

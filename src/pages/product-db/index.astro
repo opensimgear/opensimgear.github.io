@@ -1,15 +1,23 @@
 ---
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import ProductExplorer from '~/components/products/ProductExplorer.svelte';
+import { Aside } from '@astrojs/starlight/components';
 ---
 
-<style>:root { --sl-content-width: 90rem; }</style>
+<style>
+  :root {
+    --sl-content-width: 90rem;
+  }
+</style>
 
 <StarlightPage
   frontmatter={{
-    title: '3rd Party Products',
+    title: '3rd Party Product Database',
     description: 'Commercial and open-source simulator hardware products and projects.',
+    tableOfContents: false,
   }}
 >
+  <Aside type="caution"> The database is work in progress, expect possibly wrong data. </Aside>
+
   <ProductExplorer dataUrl="/products/products.json" client:load />
 </StarlightPage>
