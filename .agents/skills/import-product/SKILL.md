@@ -1,6 +1,11 @@
 ---
 name: import-product
-description: Use when an agent receives a product, vendor, collection, or category URL and must research/scrape current simulator hardware or software products, add or update entries in this repo's `research/products/db/*.yml` products database, then regenerate `src/data/3rdparty-products.json`, product image assets, image source cache, and product image imports with the repo generator. Triggers include “add products from this link”, “scrape this vendor into products db”, “update db from URL”, “regenerate products/images”, or similar product database import tasks.
+description:
+  Use when an agent receives a product, vendor, collection, or category URL and must research/scrape current simulator
+  hardware or software products, add or update entries in this repo's `research/products/db/*.yml` products database,
+  then regenerate `src/data/3rdparty-products.json`, product image assets, image source cache, and product image imports
+  with the repo generator. Triggers include “add products from this link”, “scrape this vendor into products db”,
+  “update db from URL”, “regenerate products/images”, or similar product database import tasks.
 ---
 
 # Import Product
@@ -15,7 +20,8 @@ description: Use when an agent receives a product, vendor, collection, or catego
 3. Research live source link. Browse if data may be current, price/availability changed, or source attribution matters.
    - Prefer official vendor/product/collection pages.
    - Use Shopify `.js` endpoints when available: `https://host/products/<handle>.js`.
-   - For exact product lists on a vendor site, open shop/collection pages and product pages; avoid adding accessories unless user asks.
+   - For exact product lists on a vendor site, open shop/collection pages and product pages; avoid adding accessories
+     unless user asks.
 4. Decide add vs update:
    - Update existing manufacturer/product rows when same product already exists.
    - Add only missing products from requested link/scope.
@@ -23,7 +29,8 @@ description: Use when an agent receives a product, vendor, collection, or catego
 5. Edit only `research/products/db/<category>.yml` unless generator output updates are required.
 6. Regenerate from repo root:
    - `pnpm products:build`
-   - This updates `src/data/3rdparty-products.json`, `src/data/3rdparty-product-images.ts`, `scripts/3rdparty-product-image-sources.json`, and may create `src/assets/products/*.webp`.
+   - This updates `src/data/3rdparty-products.json`, `src/data/3rdparty-product-images.ts`,
+     `scripts/3rdparty-product-image-sources.json`, and may create `src/assets/products/*.webp`.
 7. Verify:
    - YAML parses.
    - Generator exits 0.
@@ -37,7 +44,8 @@ For commercial products:
 ```yaml
 commercial:
   - product_name: Product Name
-    description: Manufacturer Product Name. compact product type. current/pre-order/out of stock if relevant. Key official spec(s).
+    description:
+      Manufacturer Product Name. compact product type. current/pre-order/out of stock if relevant. Key official spec(s).
     manufacturer: Manufacturer
     component_category: category-file-name
     component_sub_category: Existing subcategory style
@@ -51,18 +59,22 @@ commercial:
         region: US
 ```
 
-For open-source projects, follow existing `opensource` rows in same category. Do not invent license certainty; use `[uncertain]` when source is unclear.
+For open-source projects, follow existing `opensource` rows in same category. Do not invent license certainty; use
+`[uncertain]` when source is unclear.
 
 ## Data Rules
 
 - Use existing category file naming exactly for `component_category`.
 - Reuse existing `component_sub_category` vocabulary where possible.
 - Keep descriptions compact: `Brand Model. type. status. key specs/source facts.`
-- Prices must be numbers, not strings. Use full-payment/current displayed price unless existing DB pattern clearly uses entry price or bundle price.
+- Prices must be numbers, not strings. Use full-payment/current displayed price unless existing DB pattern clearly uses
+  entry price or bundle price.
 - Use `shops: []` if no reliable shop price is available.
+- Add to `shops` if there are already entries and the source url is different
 - Prefer official product image URLs. If image requires CDN URL, use product JSON/media source where possible.
 - Mark uncertainty explicitly in description instead of omitting risk.
-- Do not add duplicates for mere variants unless the site sells them as distinct product lines and existing DB style supports separate rows.
+- Do not add duplicates for mere variants unless the site sells them as distinct product lines and existing DB style
+  supports separate rows.
 - Do not add accessory/service pages as products unless user explicitly requests those.
 
 ## Commands

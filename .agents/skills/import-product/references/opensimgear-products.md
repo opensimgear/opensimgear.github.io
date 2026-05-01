@@ -11,7 +11,9 @@
 
 ## Generator Behavior
 
-`pnpm products:build` reads every YAML file under `research/products/db`, validates category consistency, assigns stable ids from existing generated JSON, writes `src/data/3rdparty-products.json`, fetches/converts images into WebP assets, writes the image import map, and updates the source cache.
+`pnpm products:build` reads every YAML file under `research/products/db`, validates category consistency, assigns stable
+ids from existing generated JSON, writes `src/data/3rdparty-products.json`, fetches/converts images into WebP assets,
+writes the image import map, and updates the source cache.
 
 Generator side effects are expected. New products normally create:
 
@@ -27,14 +29,17 @@ Commercial ids use:
 
 `commercial:<component_category>:<manufacturer-and-product-slug>`
 
-Do not hand-edit ids in generated JSON. Preserve product names/manufacturers in YAML enough for stable slug matching. If renaming an existing product, check generated id did not unexpectedly churn.
+Do not hand-edit ids in generated JSON. Preserve product names/manufacturers in YAML enough for stable slug matching. If
+renaming an existing product, check generated id did not unexpectedly churn.
 
 ## Product Scope
 
 The database is for simulator hardware/software. For vendor links with broad catalogs:
 
-- Include products relevant to simulation input, cockpit, display, motion, tactile, wind, VR/head tracking, seats/rigs, or simulator software.
-- Skip merch, spare parts, cables, warranty, subscriptions, generic accessories, and unrelated gaming products unless user asks.
+- Include products relevant to simulation input, cockpit, display, motion, tactile, wind, VR/head tracking, seats/rigs,
+  or simulator software.
+- Skip merch, spare parts, cables, warranty, subscriptions, generic accessories, and unrelated gaming products unless
+  user asks.
 - For bundles, add when sold as primary simulator product/bundle and existing DB has comparable bundle rows.
 
 ## Verification Checklist
