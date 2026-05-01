@@ -31,6 +31,7 @@
     currency: string;
     status: 'available' | 'eol' | 'out-of-stock';
     url: string | null;
+    last_updated?: string | null;
   };
   type PriceSource = {
     price: number | 'Unknown';
@@ -54,6 +55,7 @@
     component_sub_category: string | null;
     product_url?: string | null;
     project_url?: string | null;
+    last_updated?: string | null;
     shops?: Shop[];
     estimated_price?: PriceSource;
     license?: string | null;

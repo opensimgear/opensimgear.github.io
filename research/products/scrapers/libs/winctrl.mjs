@@ -1,20 +1,22 @@
 export function winCtrlShopName(base) {
-  return isWinCtrl(base) ? 'WINCTRL' : null;
+  return isWinCtrlShop(base) ? 'WINCTRL' : null;
 }
 
 export function inferWinCtrlRegion(base) {
-  if (!isWinCtrl(base)) return null;
+  if (!isWinCtrlShop(base)) return null;
   const host = base.hostname.toLowerCase().replace(/^www\./, '');
   const labels = host.split('.');
   return labels.includes('ea') ? 'US' : null;
+}
+
+export function isWinCtrlShop(base) {
+  return base.hostname.toLowerCase().endsWith('winctrl.com');
 }
 
 export async function scrapeWinCtrl(
   base,
   { fetchWithRetry, requestHeaders, isUsefulShopProduct, verbose = () => {} },
 ) {
-  if (!isWinCtrl(base)) return [];
-
   const endpoint = new URL('/home/list/get', base);
   verbose(`  fetch WinCtrl API: ${endpoint}`);
   const response = await fetchWithRetry(endpoint, {
@@ -50,10 +52,6 @@ export async function scrapeWinCtrl(
       };
     })
     .filter((product) => isUsefulShopProduct(product) || isUsefulWinCtrlProduct(product));
-}
-
-function isWinCtrl(base) {
-  return base.hostname.toLowerCase().endsWith('winctrl.com');
 }
 
 function winCtrlStatus(product) {

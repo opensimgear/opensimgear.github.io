@@ -9,6 +9,7 @@
     "products:build": "node research/products/build-products-database.mjs",
     "products:update": "node research/products/scrapers/generic-shop.mjs",
     "products:update-all": "node research/products/scrapers/update-shops.mjs",
+    "products:validate": "node research/products/scrapers/validate-products.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",

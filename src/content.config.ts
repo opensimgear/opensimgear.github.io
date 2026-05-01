@@ -13,6 +13,7 @@ const shopSchema = z.object({
   currency: z.string(),
   status: z.enum(['available', 'eol', 'out-of-stock']),
   url: z.string().nullable(),
+  last_updated: z.string().nullable(),
 });
 
 const estimatedPriceSchema = z.object({
@@ -37,6 +38,7 @@ const products = defineCollection({
     component_sub_category: z.string().nullable(),
     product_url: z.string().nullable().optional(),
     project_url: z.string().nullable().optional(),
+    last_updated: z.string().nullable().optional(),
     shops: z.array(shopSchema).optional(),
     estimated_price: estimatedPriceSchema.optional(),
     license: z.string().nullable().optional(),

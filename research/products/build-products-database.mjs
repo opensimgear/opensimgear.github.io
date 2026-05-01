@@ -97,6 +97,11 @@ function canonicalShopStatus(value) {
   return 'available';
 }
 
+function canonicalDate(value) {
+  const date = value?.toString().trim();
+  return date || null;
+}
+
 function canonicalProduct(product, kind) {
   const pictureUrl = normalizeImageSource(product.picture_url);
 
@@ -111,6 +116,7 @@ function canonicalProduct(product, kind) {
       component_sub_category: product.component_sub_category?.toString() ?? '',
       license: 'Commercial',
       product_url: normalizeUrl(product.product_url),
+      last_updated: canonicalDate(product.last_updated),
       shops: (product.shops ?? []).map((shop) => ({
         name: shop.name?.toString() ?? '',
         region: shop.region?.toString() ?? '',
@@ -118,6 +124,7 @@ function canonicalProduct(product, kind) {
         currency: shop.currency?.toString() || 'Unknown',
         status: canonicalShopStatus(shop.status),
         url: normalizeUrl(shop.url),
+        last_updated: canonicalDate(shop.last_updated),
       })),
     };
   }
@@ -132,6 +139,7 @@ function canonicalProduct(product, kind) {
     component_sub_category: product.component_sub_category?.toString() ?? '',
     license: product.license?.toString() ?? '',
     project_url: normalizeUrl(product.project_url),
+    last_updated: canonicalDate(product.last_updated),
     ...(product.estimated_price ? { estimated_price: canonicalPrice(product.estimated_price) } : {}),
   };
 }

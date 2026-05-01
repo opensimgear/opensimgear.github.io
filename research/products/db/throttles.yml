@@ -130,7 +130,8 @@ commercial:
         price: 47.95
         currency: USD
         url: https://sim-lab.eu/products/flight-sim-throttle-mount
-        region: Unknown
+        region: EU
+        status: available
   - product_name: Modern Throttle Grip Mk.II Premium
     description: STECS Modern Throttle Grip Mk.II Premium. rig mounts. listed on
       Flightsimcontrols. Official shop listing.

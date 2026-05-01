@@ -14,6 +14,7 @@ commercial:
         currency: USD
         url: https://cammusracing.com/product/global-first-cammus-c5-direct-drive-steering-wheel/
         region: Global
+        status: available
   - product_name: C12 Direct Drive Steering Wheel
     description: CAMMUS C12. integrated 12 Nm direct-drive steering wheel. in stock on official
       shop. New-version C12 sold with T-bracket and optional GT/GT3 rim add-on.
@@ -28,6 +29,7 @@ commercial:
         currency: USD
         url: https://cammusracing.com/product/cammus-c12-direct-drive-steering-wheel/
         region: Global
+        status: available
   - product_name: DDWB 15Nm Wheelbase
     description: CAMMUS DDWB 15Nm. direct-drive wheel base. in stock on official shop. 15 Nm
       maximum torque servo-motor base with aluminum shell, active cooling, buttons, rotary
@@ -39,10 +41,11 @@ commercial:
     picture_url: https://cammusracing.com/wp-content/uploads/2022/12/CAMMUS-DDWB15Nm-2025-New-9.png
     shops:
       - name: CAMMUS
-        price: 559
+        price: Unknown
         currency: USD
         url: https://cammusracing.com/product/cammus-wheelbase-gt1-ddwb-15nm/
         region: Global
+        status: out-of-stock
   - product_name: ClubSport DD
     description: Fanatec ClubSport DD 12 Nm. mid/high direct-drive wheel base. in stock on
       official EU catalog. 12 Nm consistent torque with FullForce high-fidelity force
@@ -58,6 +61,7 @@ commercial:
         currency: EUR
         url: https://www.fanatec.com/eu/en/p/wheel-bases/cs_dd_eu/clubsport-dd-eu
         region: EU
+        status: available
   - product_name: ClubSport DD+ (15 Nm)
     description: Fanatec ClubSport DD+ 15 Nm. PlayStation-compatible high-torque direct-drive
       wheel base. in stock on official EU catalog. 15 Nm consistent torque with FullForce
@@ -69,10 +73,11 @@ commercial:
     picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CS_DD-P/CS_DD-P-01.png
     shops:
       - name: Fanatec
-        price: 764.95
-        currency: EUR
+        price: 864.99
+        currency: USD
         url: https://www.fanatec.com/eu/en/p/wheel-bases/cs_dd+_eu/clubsport-dd-plus-eu
         region: EU
+        status: available
   - product_name: CSL DD QR2 (5 Nm)
     description: Fanatec CSL DD QR2 5 Nm. entry direct-drive wheel base. in stock on official EU
       catalog. Compact direct drive base with QR2 Lite and 5 Nm peak torque.
@@ -87,6 +92,7 @@ commercial:
         currency: EUR
         url: https://www.fanatec.com/eu/en/p/wheel-bases/csl_dd_qr2l_90_eu/csl-dd-qr2l-5-nm-eu
         region: EU
+        status: available
   - product_name: CSL DD QR2 (8 Nm)
     description: Fanatec CSL DD QR2 8 Nm. compact direct-drive wheel base. in stock on official
       EU catalog. QR2 Lite-equipped CSL DD with boosted 8 Nm force feedback.
@@ -101,6 +107,7 @@ commercial:
         currency: EUR
         url: https://www.fanatec.com/eu/en/p/wheel-bases/csl_dd_qr2l_8nm_eu/csl-dd-qr2-lite-8-nm-eu
         region: EU
+        status: available
   - product_name: DirectForce Pro Wheel Base
     description: VRS DirectForce Pro Wheel Base. pro direct-drive wheel base. Current/legacy
       commercial product; official shop details were hard to confirm in this pass
@@ -140,10 +147,11 @@ commercial:
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CRD-9020022/CRD-9020022-05.png
     shops:
       - name: Fanatec
-        price: 1099.95
-        currency: EUR
+        price: 1199.99
+        currency: USD
         url: https://www.fanatec.com/eu/en/p/wheel-bases/crd-9020022-eu/podium-dd-eu
         region: EU
+        status: available
   - product_name: Invicta Direct Drive Wheelbase 27 Nm
     description: Asetek Invicta Direct Drive Wheelbase 27 Nm. pro high-torque direct-drive wheel
       base. in stock on official global shop. 27 Nm direct-drive wheel base with 22-bit
@@ -174,6 +182,7 @@ commercial:
         currency: USD
         url: https://www.asetek.com/simsports/global/product/initium-direct-drive-wheelbase-eu/
         region: Global
+        status: available
   - product_name: VNM x Cube Controls Direct Drives
     description: VNM x Cube Controls Direct Drives. direct-drive wheel base collaboration. in
       stock on Cube Controls official shop. Telemetry-based force feedback wheel base line
@@ -218,6 +227,12 @@ commercial:
         currency: USD
         url: https://us.mozaracing.com/products/r12-wheelbase
         region: US
+      - name: Eu
+        price: 459
+        currency: USD
+        url: https://eu.mozaracing.com/products/r12-wheelbase
+        region: EU
+        status: available
   - product_name: R21 V2 Wheel Base
     description: MOZA R21 V2 Wheel Base. high-torque direct-drive wheel base. MOZA product page
       showed sold out on one official page; global page showed selectable variants. 21 Nm
@@ -257,6 +272,12 @@ commercial:
         currency: USD
         url: https://us.mozaracing.com/products/r9-wheelbase
         region: US
+      - name: Eu
+        price: 349
+        currency: USD
+        url: https://eu.mozaracing.com/products/r9-wheelbase
+        region: EU
+        status: available
   - product_name: RS50 Base
     description: Logitech G RS50 Base. entry/mid direct-drive wheel base. Current Logitech
       product in official driving category listing. 8 Nm direct drive with TRUEFORCE
@@ -282,10 +303,11 @@ commercial:
     picture_url: https://simucube.com/app/uploads/sites/5/2023/09/WB-PRO-1-FRONTRIGHT.webp
     shops:
       - name: Simucube
-        price: 1299
-        currency: USD
+        price: Unknown
+        currency: EUR
         url: https://simucube.com/en-us/simucube-2-pro/
         region: US
+        status: out-of-stock
   - product_name: Simucube 2 Sport
     description: Simucube 2 Sport. direct-drive wheel base. in stock on official US shop. Entry
       Simucube 2 direct-drive base with 360 Hz force feedback support for iRacing.
@@ -296,10 +318,11 @@ commercial:
     picture_url: https://simucube.com/app/uploads/sites/5/2023/09/WB-SPORT-1-FRONTRIGHT.webp
     shops:
       - name: Simucube
-        price: 999
-        currency: USD
+        price: 818
+        currency: EUR
         url: https://simucube.com/en-us/simucube-2-sport/
         region: US
+        status: available
   - product_name: Simucube 3 Sport
     description: Simucube 3 Sport. direct-drive wheel base. out of stock on official US shop. 15
       Nm Simucube 3 wheel base with telemetry-based effects and re-engineered control
@@ -311,10 +334,11 @@ commercial:
     picture_url: https://simucube.com/app/uploads/sites/5/2025/10/SC3SPORT-1-1.webp
     shops:
       - name: Simucube
-        price: 1399
-        currency: USD
+        price: 1039
+        currency: EUR
         url: https://simucube.com/en-us/simucube-3-sport/
         region: US
+        status: available
   - product_name: Simucube 3 Pro
     description: Simucube 3 Pro. pro direct-drive wheel base. in stock on official US shop. 25
       Nm Simucube 3 wheel base with telemetry-based effects and re-engineered control
@@ -326,10 +350,11 @@ commercial:
     picture_url: https://simucube.com/app/uploads/sites/5/2025/10/SC3PRO-1-1.webp
     shops:
       - name: Simucube
-        price: 1599
-        currency: USD
+        price: Unknown
+        currency: EUR
         url: https://simucube.com/en-us/simucube-3-pro/
         region: US
+        status: out-of-stock
   - product_name: Simucube 3 Ultimate
     description: Simucube 3 Ultimate. flagship direct-drive wheel base. out of stock on official
       US shop. 35 Nm Simucube 3 wheel base with telemetry-based effects and re-engineered
@@ -341,10 +366,11 @@ commercial:
     picture_url: https://simucube.com/app/uploads/sites/5/2025/10/SC3ULT-1-1.webp
     shops:
       - name: Simucube
-        price: 3299
-        currency: USD
+        price: Unknown
+        currency: EUR
         url: https://simucube.com/en-us/simucube-3-ultimate/
         region: US
+        status: out-of-stock
   - product_name: Simagic Alpha Mini
     description: Simagic Alpha Mini. compact direct-drive wheel base. in stock on official shop.
       10 Nm servo wheel base with compact housing.
@@ -359,6 +385,7 @@ commercial:
         currency: USD
         url: https://simagic.com/products/alpha-mini
         region: Global
+        status: available
   - product_name: Simagic Alpha Wheelbase
     description: Simagic Alpha Wheelbase. direct-drive wheel base. in stock on official shop. 15
       Nm servo wheel base with Simagic quick release support.
@@ -373,6 +400,7 @@ commercial:
         currency: USD
         url: https://simagic.com/products/alpha
         region: Global
+        status: available
   - product_name: Simagic Alpha Ultimate
     description: Simagic Alpha Ultimate. high-torque direct-drive wheel base. in stock on
       official shop. 23 Nm direct-drive base with custom servo motor and 262144 ppr encoder
@@ -388,6 +416,7 @@ commercial:
         currency: USD
         url: https://simagic.com/products/alpha-u
         region: Global
+        status: available
   - product_name: Simagic Alpha EVO Sport 9 Nm
     description: Simagic Alpha EVO Sport 9 Nm. compact direct-drive wheel base. in stock on
       official shop. 9 Nm Alpha EVO base with 5-pole direct-drive servo motor.
@@ -402,6 +431,13 @@ commercial:
         currency: USD
         url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
         region: Global
+        status: available
+      - name: Trakracer
+        price: 479
+        currency: USD
+        url: https://trakracer.eu/products/simagic-alpha-evo-sport-9nm-wheel-base
+        region: EU
+        status: available
   - product_name: Simagic Alpha EVO 12 Nm
     description: Simagic Alpha EVO 12 Nm. direct-drive wheel base. in stock on official shop. 12
       Nm Alpha EVO base with 5-pole direct-drive servo motor.
@@ -416,6 +452,12 @@ commercial:
         currency: USD
         url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
         region: Global
+      - name: Trakracer
+        price: 619
+        currency: USD
+        url: https://trakracer.eu/products/simagic-alpha-evo-12nm-wheel-base
+        region: EU
+        status: available
   - product_name: Simagic Alpha EVO Pro 18 Nm
     description: Simagic Alpha EVO Pro 18 Nm. direct-drive wheel base. in stock on official
       shop. 18 Nm Alpha EVO Pro base for high force-feedback output.
@@ -444,6 +486,7 @@ commercial:
         currency: USD
         url: https://simagic.com/products/simagic-alpha-evo-ultra-28nm-direct-drive-wheel-base
         region: Global
+        status: available
   - product_name: MOZA R16 Wheel Base V2
     description: MOZA R16 Wheel Base V2. direct-drive wheel base. listed on GermanSimRacing
       wheelbase collection. 16 Nm industrial-grade motor with ultra-low static torque
@@ -474,6 +517,12 @@ commercial:
         currency: EUR
         url: https://shop.germansimracing.de/en/products/moza-r21-ultra-dd-wheelbase
         region: DE
+      - name: Eu
+        price: 799
+        currency: USD
+        url: https://eu.mozaracing.com/products/r21-ultra
+        region: EU
+        status: available
   - product_name: MOZA R25 Ultra DD Wheelbase
     description: MOZA R25 Ultra DD Wheelbase. flagship direct-drive wheel base. listed on
       GermanSimRacing wheelbase collection. 25 Nm continuous-torque base with real-time
@@ -618,6 +667,12 @@ commercial:
         currency: EUR
         url: https://shop.germansimracing.de/en/products/vnm-direct-drive-elite-18nm
         region: DE
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-direct-drive-spacer-plate/
+        region: Unknown
+        status: out-of-stock
   - product_name: VNM Direct Drive Premier
     description: VNM Direct Drive Premier. direct-drive wheel base. out of stock on
       GermanSimRacing wheelbase collection. 13 Nm direct-drive base.
@@ -822,6 +877,890 @@ commercial:
         currency: USD
         url: https://www.thrustmaster.com/en-us/products/tx-racing-wheel-servo-base/
         region: US
+  - product_name: Cockpit Direct Drive Front Mount
+    description: GT Cockpit Direct Drive Front Mount. ffb controller. listed on Fanatec. Attach
+      a front mounted direct drive wheelbase to your Fanatec ClubSport GT Cockpit with this
+      solid front mounting bracket.
+    manufacturer: GT
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900013-ww/clubsport-gt-direct-drive-front-mount
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Accessories/Cockpit-Accessories/CRD-9900013-WW/CRD-9900013-WW-01.webp
+    shops:
+      - name: Fanatec
+        price: 79.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900013-ww/clubsport-gt-direct-drive-front-mount
+        region: EU
+        status: available
+  - product_name: ClubSport DD (12 Nm)
+    description: Fanatec ClubSport DD (12 Nm). ffb controller. listed on Fanatec. The ClubSport
+      DD delivers 12 Nm of consistent torque with incredible responsiveness and dynamics.
+      FullForce technology fuses high-fidelity vibration cues with the core force fee...
+    manufacturer: Fanatec
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.fanatec.com/us/en/p/wheel-bases/cs_dd_us/clubsport-dd-us
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CS_DD/cs_dd-01.webp
+    shops:
+      - name: Fanatec
+        price: 664.99
+        currency: USD
+        url: https://www.fanatec.com/us/en/p/wheel-bases/cs_dd_us/clubsport-dd-us
+        region: US
+        status: available
+  - product_name: DD QR2 (5 Nm)
+    description: CSL DD QR2 (5 Nm). ffb controller. listed on Fanatec. Push the limits using an
+      exceptional Direct Drive Wheel Base in a compact design. Now including QR2, you'll
+      enjoy even more precision and detailed force feedback.
+    manufacturer: CSL
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.fanatec.com/us/en/p/wheel-bases/csl_dd_qr2l_90_us/csl-dd-qr2l-5-nm-us
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CSL_DD_QR2L_90/CSL_DD_QR2L_90-01.webp
+    shops:
+      - name: Fanatec
+        price: 369.99
+        currency: USD
+        url: https://www.fanatec.com/us/en/p/wheel-bases/csl_dd_qr2l_90_us/csl-dd-qr2l-5-nm-us
+        region: US
+        status: available
+  - product_name: DD QR2 (8 Nm)
+    description: CSL DD QR2 (8 Nm). ffb controller. listed on Fanatec. Push the limits using an
+      exceptional Direct Drive Wheel Base in a compact design. Now including QR2, you'll
+      enjoy even more precision and detailed force feedback.
+    manufacturer: CSL
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.fanatec.com/us/en/p/wheel-bases/csl_dd_qr2l_8nm_us/csl-dd-qr2-lite-8-nm-us
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CSL_DD_QR2L_180/CSL_DD_QR2L_180-01.webp
+    shops:
+      - name: Fanatec
+        price: 449.99
+        currency: USD
+        url: https://www.fanatec.com/us/en/p/wheel-bases/csl_dd_qr2l_8nm_us/csl-dd-qr2-lite-8-nm-us
+        region: US
+        status: available
+  - product_name: R25 Ultra True Torque Direct Drive Wheel Base
+    description: MOZA R25 Ultra True Torque Direct Drive Wheel Base. ffb controller. listed on
+      Eu. Unlock pro-level sim racing precision with the MOZA R25 Ultra True Torque Direct
+      Drive Wheel Base. Featuring a 25Nm sustained torque motor, built-in true torque
+      sensor, zero-cog...
+    manufacturer: MOZA
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://eu.mozaracing.com/products/r25-ultra
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/R25U-Z.png?v=1767606232
+    shops:
+      - name: Eu
+        price: 999
+        currency: USD
+        url: https://eu.mozaracing.com/products/r25-ultra
+        region: EU
+        status: available
+  - product_name: Universal Hub Kit
+    description: MOZA Universal Hub Kit. ffb controller. listed on Eu. The MOZA Universal Hub
+      Kit provides a versatile and reliable solution for integrating the MOZA steering wheel
+      with various third-party bases, enhancing your simulation experienc...
+    manufacturer: MOZA
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://eu.mozaracing.com/products/universal-hub
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZA-Universal-Hub-Kit-4.webp?v=1751281058
+    shops:
+      - name: Eu
+        price: 49
+        currency: USD
+        url: https://eu.mozaracing.com/products/universal-hub
+        region: EU
+        status: available
+  - product_name: Table Clamp
+    description: Eu Table Clamp. ffb controller. listed on Eu. Crafted from high-strength
+      CNC-machined steel, this desk clamp mount delivers exceptional rigidity and
+      durability. The precision multi-angle adjustment ensures a stable and comf...
+    manufacturer: Eu
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://eu.mozaracing.com/products/table-clamp
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/R5-R9-Table-Clamp-2.png?v=1751281058
+    shops:
+      - name: Eu
+        price: 45
+        currency: USD
+        url: https://eu.mozaracing.com/products/table-clamp
+        region: EU
+        status: available
+  - product_name: Premium Torque off button
+    description: Simucube Premium Torque off button. ffb controller. listed on Simucube. Premium
+      Simucube 2 Torque off-button, for those who want the best to complement their rig.
+    manufacturer: Simucube
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://simucube.com/simucube-premium-torque-off-button/
+    picture_url: https://simucube.com/app/uploads/2023/09/premium_torque_off_w-cable.png
+    shops:
+      - name: Simucube
+        price: 129
+        currency: EUR
+        url: https://simucube.com/simucube-premium-torque-off-button/
+        region: Unknown
+        status: available
+  - product_name: Savu Extra Paddle Kit
+    description: Simucube Savu Extra Paddle Kit. ffb controller. listed on Simucube. Simucube
+      Savu extra paddle kit compatible with both sim racing wheel models Simucube Savu Sport
+      and Pro. Upgrade your steering wheel for maximum performance.
+    manufacturer: Simucube
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://simucube.com/simucube-savu-extra-paddle-kit/
+    picture_url: https://simucube.com/app/uploads/2025/09/SAVU-EXTRA-PADDLE-3.webp
+    shops:
+      - name: Simucube
+        price: 81
+        currency: EUR
+        url: https://simucube.com/simucube-savu-extra-paddle-kit/
+        region: Unknown
+        status: available
+  - product_name: WheelBase CAN Extender (P-E114)
+    description: "Simagic WheelBase CAN Extender (P-E114). ffb controller. listed on Simagic.
+      Hardware Compatibility: Alpha Series Wheelbase, Alpha EVO Wheelbase Dispatched within
+      3 business days of ordering; transit time 7–8 business days."
+    manufacturer: Simagic
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://simagic.com/products/p-e114
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/WheelBase_CAN_-11-12.png?v=1762935385
+    shops:
+      - name: Simagic
+        price: 16.9
+        currency: USD
+        url: https://simagic.com/products/p-e114
+        region: Unknown
+        status: available
+  - product_name: 330mm/13" Flat-Bottom GT Sim Racing Wheel – Aluminium with Durable Silicon Hand Grips
+    description: Trakracer 330mm/13" Flat-Bottom GT Sim Racing Wheel – Aluminium with Durable
+      Silicon Hand Grips. ffb controller. listed on Trakracer. Elevate your sim racing setup
+      with the Trak Racer 330mm/13" Flat-Bottom Closed GT Sim Racing Wheel — a track-grade
+      accessory designed for precision, comfort, and durability. The...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/trak-tour-steering-wheel-d-shape
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRSWH2A.6790.webp?v=1774907229
+    shops:
+      - name: Trakracer
+        price: 59
+        currency: USD
+        url: https://trakracer.eu/products/trak-tour-steering-wheel-d-shape
+        region: EU
+        status: available
+  - product_name: 330mm/13" Flat-Bottom GT Sim Racing Wheel – Aluminium with Durable Silicon Hand Grips
+    description: Trakracer 330mm/13" Flat-Bottom GT Sim Racing Wheel – Aluminium with Durable
+      Silicon Hand Grips. ffb controller. listed on Trakracer. Elevate your sim racing setup
+      with the Trak Racer 330mm/13" Flat-Bottom GT Sim Racing Wheel — a track-grade
+      accessory designed for precision, comfort, and durability. The Flat-B...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/trak-tour-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TrakRacerGTwheel_2.png?v=1709717812
+    shops:
+      - name: Trakracer
+        price: Unknown
+        currency: USD
+        url: https://trakracer.eu/products/trak-tour-steering-wheel
+        region: EU
+        status: out-of-stock
+  - product_name: 330mm/13" Flat-Bottom Open GT Sim Racing Wheel – Aluminium with Durable
+      Silicon Hand Grips
+    description: Trakracer 330mm/13" Flat-Bottom Open GT Sim Racing Wheel – Aluminium with
+      Durable Silicon Hand Grips. ffb controller. listed on Trakracer. Elevate your sim
+      racing setup with the Trak Racer 330mm/13" Flat-Bottom Open GT Sim Racing Wheel — a
+      track-grade accessory designed for precision, comfort, and durability. The F...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/trak-tour-steering-wheel-open-d-shape
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRSWH4A.6794.webp?v=1774907272
+    shops:
+      - name: Trakracer
+        price: 59
+        currency: USD
+        url: https://trakracer.eu/products/trak-tour-steering-wheel-open-d-shape
+        region: EU
+        status: available
+  - product_name: Alpine Formula One™ Team A525 REPLICA Sim Racing Steering Wheel
+    description: BWT Alpine Formula One™ Team A525 REPLICA Sim Racing Steering Wheel. ffb
+      controller. listed on Trakracer. The A525 is the most authentic BWT Alpine Formula
+      One™ Team steering wheel ever built for sim racing. Developed in close collaboration
+      with BWT Alpine Formula One™ Team engineer...
+    manufacturer: BWT
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/bwt-alpine-formula-onetm-team-a525-replica-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/ALP-REP104.png?v=1760496687
+    shops:
+      - name: Trakracer
+        price: 1999
+        currency: USD
+        url: https://trakracer.eu/products/bwt-alpine-formula-onetm-team-a525-replica-steering-wheel
+        region: EU
+        status: available
+  - product_name: Conspit 290GP Formula Steering Wheel – 3D Ergonomic Formula-Class Wheel
+    description: Trakracer Conspit 290GP Formula Steering Wheel – 3D Ergonomic Formula-Class
+      Wheel. ffb controller. listed on Trakracer. The Conspit 290GP Formula Wheel is a
+      next-generation, high-performance Formula-style racing wheel, built for sim racers who
+      want extreme control, comfort, and endurance. The 290...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/290gp-formula-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/conspit_290_gt_sim_racing_wheel.png?v=1764061897
+    shops:
+      - name: Trakracer
+        price: 719
+        currency: USD
+        url: https://trakracer.eu/products/290gp-formula-wheel
+        region: EU
+        status: available
+  - product_name: Conspit 300GT Steering Wheel
+    description: Trakracer Conspit 300GT Steering Wheel. ffb controller. listed on Trakracer.
+      The Conspit 300 GT introduces a groundbreaking combination of Conspit’s proprietary
+      technologies, built upon a race-grade carbon fiber lightweight structure. It
+      integrates cutti...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/300gt-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Conspit-300GT-Steering-Wheel-Front.webp?v=1757577189
+    shops:
+      - name: Trakracer
+        price: 449
+        currency: USD
+        url: https://trakracer.eu/products/300gt-steering-wheel
+        region: EU
+        status: available
+  - product_name: Conspit 310 APEX Steering Wheel
+    description: Trakracer Conspit 310 APEX Steering Wheel. ffb controller. listed on Trakracer.
+      .pd-row{display:flex;flex-wrap:wrap;align-items:center;margin:32px 0;} .pd-text{flex:1
+      1 50%;padding:16px;box-sizing:border-box;} .pd-img{flex:1 1
+      50%;padding:16px;box-sizing:bo...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/conspit-310-apex-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/ConspitQuickCon_1.png?v=1773698972
+    shops:
+      - name: Trakracer
+        price: 319
+        currency: USD
+        url: https://trakracer.eu/products/conspit-310-apex-steering-wheel
+        region: EU
+        status: available
+  - product_name: Conspit CP105 MAX01 Formula Wheel
+    description: Trakracer Conspit CP105 MAX01 Formula Wheel. ffb controller. listed on
+      Trakracer. Conspit CP105 MAX01 Formula Wheel.
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/conspit-cp105-max01-formula-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Max01-1.png?v=1764206599
+    shops:
+      - name: Trakracer
+        price: 799
+        currency: USD
+        url: https://trakracer.eu/products/conspit-cp105-max01-formula-wheel
+        region: EU
+        status: available
+  - product_name: Conspit CSD SimHub Dashboard – 5″ IPS Race Display with RGB Alerts
+    description: Trakracer Conspit CSD SimHub Dashboard – 5″ IPS Race Display with RGB Alerts.
+      ffb controller. listed on Trakracer. The Conspit CSD SimHub Dashboard brings
+      race-grade instrumentation to your sim racing cockpit with precision, clarity, and
+      immersive feedback. This dashboard features a 5-inch I...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/csd-simhub-dashboard
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/conspit_csd_dashboard_sim_racing_dash.png?v=1764061897
+    shops:
+      - name: Trakracer
+        price: 299
+        currency: USD
+        url: https://trakracer.eu/products/csd-simhub-dashboard
+        region: EU
+        status: available
+  - product_name: Qubic Seat Belt Tensioner with Universal Bracket - for Trak Racer and Non-Trak
+      Racer Cockpits
+    description: Trakracer Qubic Seat Belt Tensioner with Universal Bracket - for Trak Racer and
+      Non-Trak Racer Cockpits. ffb controller. listed on Trakracer. Add the missing piece of
+      true immersion to your simulator with a seat belt tensioner bracket designed to
+      deliver real harness force feedback. A seat belt tensioner transforms si...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/qubic-system-qs-bt1-direct-drive-seat-belt-tensioner-with-universal-bracket
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/QS-BT1_Tensioner-Bracket-Bundle.webp?v=1764296562
+    shops:
+      - name: Trakracer
+        price: 1739
+        currency: USD
+        url: https://trakracer.eu/products/qubic-system-qs-bt1-direct-drive-seat-belt-tensioner-with-universal-bracket
+        region: EU
+        status: available
+  - product_name: Qubic System QS-BT1 Direct Drive Seat Belt Tensioner with Optional Trak Racer
+      Seat Harness
+    description: Trakracer Qubic System QS-BT1 Direct Drive Seat Belt Tensioner with Optional
+      Trak Racer Seat Harness. ffb controller. listed on Trakracer. QS-BT1 Dual-Channel Seat
+      Belt Tensioner (Direct-Drive Harness Feedback) Experience the forces your body expects
+      in real driving and flying. The QS-BT1 Dual-Channel Seat Belt Ten...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/qubic-system-qs-bt1-direct-drive-seat-belt-tensioner-with-trak-racer-seat-harness-red
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/QS-BT1_main_product_orto_01_1500x1000_e32053b8-059a-433d-84b8-db2a2d6e0443.png?v=1764624297
+    shops:
+      - name: Trakracer
+        price: 1689
+        currency: USD
+        url: https://trakracer.eu/products/qubic-system-qs-bt1-direct-drive-seat-belt-tensioner-with-trak-racer-seat-harness-red
+        region: EU
+        status: available
+  - product_name: FORMULA MAYARIS 2 CARBON FIBER FORMULA STEERING WHEEL (4 PADDLE VERSION)
+    description: REXING FORMULA MAYARIS 2 CARBON FIBER FORMULA STEERING WHEEL (4 PADDLE
+      VERSION). ffb controller. listed on Trakracer. Rexing Formula Steering Wheel –
+      Pro-Level Control for Serious Sim Racers Built for the most demanding sim racing
+      professionals and enthusiasts, the Rexing Formula Steering Wheel...
+    manufacturer: REXING
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/rexing-formula-steering-wheel-mayaris-2
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/product-image-1.png?v=1717052135
+    shops:
+      - name: Trakracer
+        price: 1619
+        currency: USD
+        url: https://trakracer.eu/products/rexing-formula-steering-wheel-mayaris-2
+        region: EU
+        status: available
+  - product_name: Simagic Alpha EVO Pro 18nm Wheel Base
+    description: Trakracer Simagic Alpha EVO Pro 18nm Wheel Base. ffb controller. listed on
+      Trakracer. Simagic Alpha EVO Pro 18Nm Wheel Base — Maximum Direct Drive Torque for
+      Professional Sim Racing The Simagic Alpha EVO Pro 18Nm Wheel Base is the flagship of
+      Simagic’s direct dri...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-alpha-evo-pro-18nm-wheel-base
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Frame525.png?v=1759211433
+    shops:
+      - name: Trakracer
+        price: 839
+        currency: USD
+        url: https://trakracer.eu/products/simagic-alpha-evo-pro-18nm-wheel-base
+        region: EU
+        status: available
+  - product_name: Simagic Dual Paddle Shifter Module – Left/Right Magnetic Paddle Upgrade
+    description: Trakracer Simagic Dual Paddle Shifter Module – Left/Right Magnetic Paddle
+      Upgrade. ffb controller. listed on Trakracer. Product Description Experience refined
+      control and rapid gear changes with the Dual Paddle Shifter Module, engineered
+      exclusively for Simagic’s GT Neo and Neo X wheels. This mod...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-dual-paddle-shifter-module-left-right-magnetic-paddle-upgrade
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/dual_paddle1.png?v=1759287535
+    shops:
+      - name: Trakracer
+        price: 69
+        currency: USD
+        url: https://trakracer.eu/products/simagic-dual-paddle-shifter-module-left-right-magnetic-paddle-upgrade
+        region: EU
+        status: available
+  - product_name: Simagic EVO Side Mounting Bracket (MB-S) – Rigid Mount for Alpha EVO Wheelbases
+    description: Trakracer Simagic EVO Side Mounting Bracket (MB-S) – Rigid Mount for Alpha EVO
+      Wheelbases. ffb controller. listed on Trakracer. Product Description The Simagic EVO
+      Side Mounting Bracket (MB-S) is purpose-built to support your Simagic Alpha EVO
+      wheelbase—whether the Sport, 12 Nm, or the Pro 18 Nm model—wi...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/wheelbase-mounting-bracket-for-simagic-evo
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/MB-S.png?v=1759211389
+    shops:
+      - name: Trakracer
+        price: 39
+        currency: USD
+        url: https://trakracer.eu/products/wheelbase-mounting-bracket-for-simagic-evo
+        region: EU
+        status: available
+  - product_name: Simagic GT NEO Formula Wheel – Carbon & LCD Display, 12 Buttons
+    description: Trakracer Simagic GT NEO Formula Wheel – Carbon & LCD Display, 12 Buttons. ffb
+      controller. listed on Trakracer. Product Description The Simagic GT NEO Steering Wheel
+      is a premium sim racing wheel designed for excellence in Formula, GT, and open-wheel
+      simulation. It features a front panel...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-gt-neo-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Simagic_GTNEO_2.png?v=1759211598
+    shops:
+      - name: Trakracer
+        price: 325
+        currency: USD
+        url: https://trakracer.eu/products/simagic-gt-neo-steering-wheel
+        region: EU
+        status: available
+  - product_name: Simagic GT NEO Hub with Alpha EVO 12nm Wheel Base
+    description: Trakracer Simagic GT NEO Hub with Alpha EVO 12nm Wheel Base. ffb controller.
+      listed on Trakracer. Why Choose This Bundle? This bundle pairs the highly modular GT
+      NEO hub with a powerful 12Nm Alpha EVO wheel base, delivering precise control,
+      professional-level force feedback,...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-gt-neo-hub-with-alpha-evo-12nm-wheel-base
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTNeowith12nmwheelbase.png?v=1763092851
+    shops:
+      - name: Trakracer
+        price: 892
+        currency: USD
+        url: https://trakracer.eu/products/simagic-gt-neo-hub-with-alpha-evo-12nm-wheel-base
+        region: EU
+        status: available
+  - product_name: Simagic GT NEO Hub with Alpha EVO Sport 9nm Wheel Base
+    description: Trakracer Simagic GT NEO Hub with Alpha EVO Sport 9nm Wheel Base. ffb
+      controller. listed on Trakracer. Why Choose This Bundle? This bundle pairs a
+      high-precision, modular GT NEO hub with a compact, responsive Alpha EVO Sport wheel
+      base, providing sim racers with excellent torque,...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-gt-neo-hub-with-alpha-evo-sport-9nm-wheel-base
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTNeowith9nmwheelbase.png?v=1763092847
+    shops:
+      - name: Trakracer
+        price: 759
+        currency: USD
+        url: https://trakracer.eu/products/simagic-gt-neo-hub-with-alpha-evo-sport-9nm-wheel-base
+        region: EU
+        status: available
+  - product_name: Simagic NEO X Hub – Modular DIY Steering Wheel Button Hub
+    description: Trakracer Simagic NEO X Hub – Modular DIY Steering Wheel Button Hub. ffb
+      controller. listed on Trakracer. Product Description The Simagic NEO X Hub is a
+      next-generation, fully modular button hub designed for sim racers who demand maximum
+      flexibility, precision, and control in their...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Frame541.png?v=1759211526
+    shops:
+      - name: Trakracer
+        price: 239
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub
+        region: EU
+        status: available
+  - product_name: Simagic NEO X Hub with Alpha EVO 12nm Wheel Base and Leather Steering Wheel
+    description: Trakracer Simagic NEO X Hub with Alpha EVO 12nm Wheel Base and Leather Steering
+      Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle? Combining
+      modular input flexibility, premium leather steering control, and high-torque
+      direct-drive performance, this bundle is perfect for home...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-12nm-wheel-base-and-leather-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTHubwith9nmwheelbase_a8a5e784-189b-4c71-b0ac-0c10d0f4cf1e.png?v=1763092849
+    shops:
+      - name: Trakracer
+        price: 879
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-12nm-wheel-base-and-leather-steering-wheel
+        region: EU
+        status: available
+  - product_name: Simagic NEO X Hub with Alpha EVO Pro 18nm Wheel Base and Leather Steering Wheel
+    description: Trakracer Simagic NEO X Hub with Alpha EVO Pro 18nm Wheel Base and Leather
+      Steering Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle?
+      Combining modular hub flexibility, premium leather steering control, and the ultimate
+      high-torque direct-drive experience, this bundle delivers u...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-pro-18nm-wheel-base-and-leather-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTHubwith18nmwheelbase_fb0731b3-e3d4-4da8-9a65-207b4ecdded3.png?v=1763092848
+    shops:
+      - name: Trakracer
+        price: 1082
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-pro-18nm-wheel-base-and-leather-steering-wheel
+        region: EU
+        status: available
+  - product_name: Simagic NEO X Hub with Alpha EVO Sport 9nm Wheel Base and Leather Steering Wheel
+    description: Trakracer Simagic NEO X Hub with Alpha EVO Sport 9nm Wheel Base and Leather
+      Steering Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle?
+      This bundle pairs modular input control with a premium leather rim and a refined
+      belt-drive base to deliver a versatile, realistic steering solut...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-sport-9nm-wheel-base-and-leather-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTHubwith9nmwheelbase.png?v=1763092848
+    shops:
+      - name: Trakracer
+        price: 740
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-sport-9nm-wheel-base-and-leather-steering-wheel
+        region: EU
+        status: available
+  - product_name: Simagic NEO X Hub with Leather Steering Wheel
+    description: Trakracer Simagic NEO X Hub with Leather Steering Wheel. ffb controller. listed
+      on Trakracer. Why Choose This Simagic Bundle? This two-part bundle merges advanced
+      modular control with classic racecar realism. The NEO X Hub delivers flexible inputs,
+      customizable paddles,...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub-with-leather-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTHubwithSimagicLeatherWheelRound.png?v=1763092846
+    shops:
+      - name: Trakracer
+        price: 293
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub-with-leather-steering-wheel
+        region: EU
+        status: available
+  - product_name: Simagic Single Paddle Shifter Module – Left/Right Magnetic Paddle Upgrade
+    description: Trakracer Simagic Single Paddle Shifter Module – Left/Right Magnetic Paddle
+      Upgrade. ffb controller. listed on Trakracer. Product Description The Simagic Single
+      Paddle Shifter Module is designed for sim racers who want to add a single high-quality
+      paddle shifter to their Simagic wheel setup. Whethe...
+    manufacturer: Trakracer
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://trakracer.eu/products/single-paddle-shifter-module-for-simagic-wheels
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/simagic_single_paddle_sim_racing_wheel_accessory.png?v=1758522624
+    shops:
+      - name: Trakracer
+        price: 49
+        currency: USD
+        url: https://trakracer.eu/products/single-paddle-shifter-module-for-simagic-wheels
+        region: EU
+        status: available
+  - product_name: Direct Drive Elite (18 Nm)
+    description: VNM Direct Drive Elite (18 Nm). ffb controller. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/vi/product/vnm-direct-drive-elite/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/02/750_6927-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-direct-drive-elite/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Direct Drive Elite (18 Nm)
+    description: VNM Direct Drive Elite (18 Nm). ffb controller. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/product/vnm-direct-drive-elite/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/02/750_6927-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-direct-drive-elite/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Direct Drive Mount V1 – Front mount
+    description: VNM Direct Drive Mount V1 – Front mount. ffb controller. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/vi/product/vnm-direct-drive-mount-v1-front-mount/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/DD-Mount-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 72
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-direct-drive-mount-v1-front-mount/
+        region: Unknown
+        status: available
+  - product_name: Direct Drive Mount V1 – Front mount
+    description: VNM Direct Drive Mount V1 – Front mount. ffb controller. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/product/vnm-direct-drive-mount-v1/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/DD-Mount-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 72
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-direct-drive-mount-v1/
+        region: Unknown
+        status: available
+  - product_name: Direct Drive Mount V2 – Bottom mount
+    description: VNM Direct Drive Mount V2 – Bottom mount. ffb controller. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/vi/product/vnm-direct-drive-mount-v2-bottom-mount/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/Picture1.png
+    shops:
+      - name: Vnmsimulation
+        price: 40
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-direct-drive-mount-v2-bottom-mount/
+        region: Unknown
+        status: available
+  - product_name: Direct Drive Mount V2 – Bottom mount
+    description: VNM Direct Drive Mount V2 – Bottom mount. ffb controller. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/product/vnm-direct-drive-mount-v2-bottom-mount/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/Picture1.png
+    shops:
+      - name: Vnmsimulation
+        price: 40
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-direct-drive-mount-v2-bottom-mount/
+        region: Unknown
+        status: available
+  - product_name: Direct Drive Mount V4 – Bottom mount
+    description: VNM Direct Drive Mount V4 – Bottom mount. ffb controller. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/vi/product/vnm-direct-drive-mount-v4-bottom-mount/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/Picture2.png
+    shops:
+      - name: Vnmsimulation
+        price: 55
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-direct-drive-mount-v4-bottom-mount/
+        region: Unknown
+        status: available
+  - product_name: Direct Drive Mount V4 – Bottom mount
+    description: VNM Direct Drive Mount V4 – Bottom mount. ffb controller. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/product/vnm-direct-drive-mount-v4-bottom-mount/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/Picture2.png
+    shops:
+      - name: Vnmsimulation
+        price: 55
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-direct-drive-mount-v4-bottom-mount/
+        region: Unknown
+        status: available
+  - product_name: Direct Drive Premier (13 Nm)
+    description: VNM Direct Drive Premier (13 Nm). ffb controller. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/vi/product/vnm-direct-drive-premier/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/02/750_6892-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-direct-drive-premier/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Direct Drive Premier (13 Nm)
+    description: VNM Direct Drive Premier (13 Nm). ffb controller. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/product/vnm-direct-drive-premier/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/02/750_6892-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-direct-drive-premier/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Direct Drive Supreme (25 Nm)
+    description: VNM Direct Drive Supreme (25 Nm). ffb controller. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/vi/product/vnm-direct-drive-supreme/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/02/750_6912-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-direct-drive-supreme/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Direct Drive Supreme (25 Nm)
+    description: VNM Direct Drive Supreme (25 Nm). ffb controller. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/product/vnm-direct-drive-supreme/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/02/750_6912-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-direct-drive-supreme/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Direct Drive Xtreme (32 Nm)
+    description: VNM Direct Drive Xtreme (32 Nm). ffb controller. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/vi/product/vnm-direct-drive-xtreme/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/1-5.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-direct-drive-xtreme/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Direct Drive Xtreme (32 Nm)
+    description: VNM Direct Drive Xtreme (32 Nm). ffb controller. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://vnmsimulation.com/product/vnm-direct-drive-xtreme/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/1-5.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-direct-drive-xtreme/
+        region: Unknown
+        status: out-of-stock
+  - product_name: SimSports® Wheelbase Mount With Tilt
+    description: Asetek SimSports® Wheelbase Mount With Tilt. ffb controller. listed on Asetek.
+      The Asetek Racing™ Wheelbase Mount is a fully adjustable mounting option for your
+      Asetek Racing™wheelbase. This mounting option gives you a range of possible mounting
+      options. T...
+    manufacturer: Asetek
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.asetek.com/simsports/product/asetek-simsports-wheelbase-mount-with-tilt/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2024/12/image-11.png
+    shops:
+      - name: Asetek
+        url: https://www.asetek.com/simsports/product/asetek-simsports-wheelbase-mount-with-tilt/
+        region: Unknown
+        status: available
+  - product_name: Forte® Direct Drive Wheelbase 18Nm
+    description: Asetek Forte® Direct Drive Wheelbase 18Nm. ffb controller. listed on Asetek.
+      The Forte Direct Drive Wheelbase provides smooth and responsive feedback, and you’ll
+      immediately start to feel every bump and curve as you race on your favorite tracks
+      worldwide...
+    manufacturer: Asetek
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.asetek.com/simsports/product/forte-direct-drive-wheelbase-18nm/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2024/05/Forte-Wheelbase-Front-Right-Raised-Orange-LED_NoBG.png
+    shops:
+      - name: Asetek
+        url: https://www.asetek.com/simsports/product/forte-direct-drive-wheelbase-18nm/
+        region: Unknown
+        status: available
+  - product_name: Initium Direct Drive Wheelbase EU
+    description: Asetek Initium Direct Drive Wheelbase EU. ffb controller. listed on Asetek. The
+      Initium Direct Drive Wheelbase puts you squarely in the driver’s seat, delivering an
+      exquisite driving experience thanks to its 5.5 NM force-feedback servo motor,
+      connecting...
+    manufacturer: Asetek
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.asetek.com/simsports/product/initium-direct-drive-wheelbase-eu/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2025/06/initium-direct-drive-wheelbase.png
+    shops:
+      - name: Asetek
+        url: https://www.asetek.com/simsports/product/initium-direct-drive-wheelbase-eu/
+        region: Unknown
+        status: available
+  - product_name: Invicta™ Direct Drive Wheelbase 27Nm
+    description: Asetek Invicta™ Direct Drive Wheelbase 27Nm. ffb controller. listed on Asetek.
+      Experience consistent 27Nm force feedback with no loss of detail, even under the most
+      demanding conditions. Every movement is translated instantly thanks to ultra-fast
+      response,...
+    manufacturer: Asetek
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.asetek.com/simsports/product/invicta-direct-drive-wheelbase-27nm/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2024/05/Invicta-Wheelbase-Front-Left-Raised-Blue-LED_NoBG.png
+    shops:
+      - name: Asetek
+        url: https://www.asetek.com/simsports/product/invicta-direct-drive-wheelbase-27nm/
+        region: Unknown
+        status: available
+  - product_name: La Prima™ Direct Drive Wheelbase 12Nm
+    description: Asetek La Prima™ Direct Drive Wheelbase 12Nm. ffb controller. listed on Asetek.
+      Start your sim racing journey with the 12Nm La Prima™ Direct Drive Wheelbase. It
+      delivers precise and responsive feedback, allowing you to instantly feel every part of
+      your favo...
+    manufacturer: Asetek
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.asetek.com/simsports/product/la-prima-direct-drive-wheelbase-12nm/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2025/06/La-Prima-Wheelbase-Front-Right-Raised_NoBG-1.png
+    shops:
+      - name: Asetek
+        price: Unknown
+        currency: USD
+        url: https://www.asetek.com/simsports/product/la-prima-direct-drive-wheelbase-12nm/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Wheelbase Power Button
+    description: Asetek Wheelbase Power Button. ffb controller. listed on Asetek. Need to
+      replace your Power button for your Asetek Racing™ Wheelbase? Or do you just really
+      like the satisfying click? Then this if for you.
+    manufacturer: Asetek
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.asetek.com/simsports/product/wb-on-off-button/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2024/02/ON_OFF-button-box_front.png
+    shops:
+      - name: Asetek
+        url: https://www.asetek.com/simsports/product/wb-on-off-button/
+        region: Unknown
+        status: available
+  - product_name: Wheelbase Torque Button
+    description: Asetek Wheelbase Torque Button. ffb controller. listed on Asetek. Need to
+      replace your Torque button for your Asetek Racing™ Wheelbase? Or do you just really
+      like the satisfying click? Then this if for you.
+    manufacturer: Asetek
+    component_category: wheel-bases
+    component_sub_category: ffb-controller
+    product_url: https://www.asetek.com/simsports/product/wb-torque-off-button/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2024/02/Torque-OFF-button-box_front.png
+    shops:
+      - name: Asetek
+        url: https://www.asetek.com/simsports/product/wb-torque-off-button/
+        region: Unknown
+        status: available
 opensource:
   - project_name: AFFBWheel
     description: AFFBWheel. Arduino force-feedback wheel controller. Active-ish hobby firmware;

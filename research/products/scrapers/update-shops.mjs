@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { execFile } from 'node:child_process';
+import { execFile, spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,7 +15,7 @@ const write = args.includes('--write');
 const build = args.includes('--build');
 const fileArg = stringArg('--file');
 const concurrency = numberArg('--concurrency') ?? 1;
-const urlsFromArgs = positionalUrls();
+const sourcesFromArgs = positionalSources();
 const scraperArgs = passthroughArgs();
 
 if (args.includes('--help') || args.includes('-h')) {
@@ -23,36 +23,29 @@ if (args.includes('--help') || args.includes('-h')) {
   process.exit(0);
 }
 
-const urls = uniqueUrls([
-  ...(fileArg || !urlsFromArgs.length ? await readUrlsFromFile(fileArg ?? DEFAULT_SOURCE_FILE) : []),
-  ...urlsFromArgs,
+const sources = uniqueSources([
+  ...(fileArg || !sourcesFromArgs.length ? await readSourcesFromFile(fileArg ?? DEFAULT_SOURCE_FILE) : []),
+  ...sourcesFromArgs,
 ]);
 
-if (!urls.length) {
+if (!sources.length) {
   console.error('No shop URLs found.');
   printUsage();
   process.exit(1);
 }
 
-console.log(`Updating ${urls.length} shop source${urls.length === 1 ? '' : 's'} (${write ? 'write' : 'dry-run'})`);
+console.log(`Updating ${sources.length} shop source${sources.length === 1 ? '' : 's'} (${write ? 'write' : 'dry-run'})`);
 
 const failures = [];
-await runQueue(urls, concurrency, async (url, index) => {
-  const prefix = `[${index + 1}/${urls.length}]`;
-  console.log(`${prefix} ${url}`);
+await runQueue(sources, concurrency, async (source, index) => {
+  const prefix = `[${index + 1}/${sources.length}]`;
+  console.log(`${prefix} ${source.url}${source.method ? ` (${source.method})` : ''}`);
 
   try {
-    const { stdout, stderr } = await execFileAsync(process.execPath, [SCRAPER, url, ...scraperArgs], {
-      cwd: ROOT,
-      maxBuffer: 1024 * 1024 * 64,
-    });
-    if (stdout.trim()) console.log(stdout.trim());
-    if (stderr.trim()) console.error(stderr.trim());
+    await runScraper(source, scraperArgs);
   } catch (error) {
-    failures.push({ url, error });
+    failures.push({ source, error });
     console.error(`${prefix} failed: ${error.message}`);
-    if (error.stdout?.trim()) console.log(error.stdout.trim());
-    if (error.stderr?.trim()) console.error(error.stderr.trim());
   }
 });
 
@@ -69,12 +62,12 @@ if (build) {
 if (failures.length) {
   console.error(`Failed ${failures.length} shop source${failures.length === 1 ? '' : 's'}:`);
   for (const failure of failures) {
-    console.error(`- ${failure.url}: ${failure.error.message}`);
+    console.error(`- ${failure.source.url}: ${failure.error.message}`);
   }
   process.exit(1);
 }
 
-console.log(`Updated ${urls.length} shop source${urls.length === 1 ? '' : 's'}.`);
+console.log(`Updated ${sources.length} shop source${sources.length === 1 ? '' : 's'}.`);
 
 function printUsage() {
   console.log(`Usage:
@@ -89,6 +82,9 @@ Runner flags:
   --file <path>          JSON URL list file. Defaults to research/products/source.json when no URLs are given.
   --concurrency <n>      Number of shops to scrape at once. Defaults to 1.
   --build               Run pnpm products:build once after all shops.
+
+Source JSON may be ["https://shop.example"] or [{"url":"https://shop.example","method":"custom"}].
+Source methods: crawl, woocommerce, shopify, custom.
 
 Other flags are passed through to generic-shop.mjs.`);
 }
@@ -105,14 +101,14 @@ function numberArg(name) {
   return Number.isFinite(number) && number > 0 ? number : null;
 }
 
-function positionalUrls() {
+function positionalSources() {
   const values = [];
-  const takesValue = new Set(['--file', '--concurrency', '--limit', '--max-pages', '--threshold', '--shop-name', '--manufacturer', '--category', '--subcategory', '--region', '--map']);
+  const takesValue = valueFlags();
 
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (takesValue.has(args[index - 1])) continue;
-    if (/^https?:\/\//i.test(arg)) values.push(arg);
+    if (/^https?:\/\//i.test(arg)) values.push(sourceFromValue(arg));
   }
 
   return values;
@@ -137,16 +133,57 @@ function passthroughArgs() {
   return values;
 }
 
-async function readUrlsFromFile(file) {
+function valueFlags() {
+  return new Set([
+    '--file',
+    '--concurrency',
+    '--limit',
+    '--max-pages',
+    '--threshold',
+    '--shop-name',
+    '--manufacturer',
+    '--category',
+    '--subcategory',
+    '--region',
+    '--map',
+    '--method',
+    '--blacklist',
+  ]);
+}
+
+function runScraper(source, args) {
+  return new Promise((resolve, reject) => {
+    const childArgs = [SCRAPER, source.url, ...args];
+    if (source.method && !args.includes('--method')) childArgs.push('--method', source.method);
+    const child = spawn(process.execPath, childArgs, {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+
+    child.stdout.pipe(process.stdout, { end: false });
+    child.stderr.pipe(process.stderr, { end: false });
+    child.on('error', reject);
+    child.on('close', (code, signal) => {
+      if (code === 0) {
+        resolve();
+        return;
+      }
+
+      reject(new Error(signal ? `scraper exited with signal ${signal}` : `scraper exited with code ${code}`));
+    });
+  });
+}
+
+async function readSourcesFromFile(file) {
   const text = await readFile(path.resolve(ROOT, file), 'utf8');
   if (file.endsWith('.json')) {
     const parsed = JSON.parse(text);
-    const urls = Array.isArray(parsed) ? parsed : parsed.urls;
-    if (!Array.isArray(urls)) {
-      throw new Error(`${file} must be a JSON array of URLs.`);
+    const values = Array.isArray(parsed) ? parsed : parsed.urls;
+    if (!Array.isArray(values)) {
+      throw new Error(`${file} must be a JSON array of URLs or { url, method } objects.`);
     }
 
-    return urls.filter((url) => typeof url === 'string' && /^https?:\/\//i.test(url));
+    return values.map(sourceFromValue).filter(Boolean);
   }
 
   return text
@@ -155,11 +192,36 @@ async function readUrlsFromFile(file) {
     .filter((line) => line && !line.startsWith('#'))
     .map((line) => line.replace(/^[-*]\s+/, '').trim())
     .map((line) => line.match(/^https?:\/\/\S+/i)?.[0])
-    .filter(Boolean);
+    .filter(Boolean)
+    .map(sourceFromValue);
 }
 
-function uniqueUrls(values) {
-  return [...new Set(values.map((value) => value.replace(/\/+$/, '')))];
+function sourceFromValue(value) {
+  if (typeof value === 'string') {
+    return /^https?:\/\//i.test(value) ? { url: value.replace(/\/+$/, '') } : null;
+  }
+
+  if (!value || typeof value !== 'object' || typeof value.url !== 'string') return null;
+  if (!/^https?:\/\//i.test(value.url)) return null;
+  return {
+    url: value.url.replace(/\/+$/, ''),
+    ...(value.method ? { method: normalizeMethod(value.method) } : {}),
+  };
+}
+
+function normalizeMethod(value) {
+  const method = String(value).toLowerCase();
+  if (method === 'else') return 'crawl';
+  if (['crawl', 'woocommerce', 'shopify', 'custom'].includes(method)) return method;
+  throw new Error(`Invalid source method: ${value}`);
+}
+
+function uniqueSources(values) {
+  const byUrl = new Map();
+  for (const source of values.filter(Boolean)) {
+    byUrl.set(source.url, source);
+  }
+  return [...byUrl.values()];
 }
 
 async function runQueue(items, limit, worker) {

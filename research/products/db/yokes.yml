@@ -13,7 +13,8 @@ commercial:
         price: 69.95
         currency: USD
         url: https://sim-lab.eu/products/flight-sim-yoke-deck
-        region: Unknown
+        region: EU
+        status: available
   - product_name: Alloy YK1
     description: Redbird Alloy YK1. professional-grade GA yoke. Active Redbird product;
       contact-sales flow on product page. Metal construction.

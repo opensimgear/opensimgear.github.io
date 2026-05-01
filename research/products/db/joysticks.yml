@@ -1229,10 +1229,11 @@ commercial:
         url: https://www.monster.tech/en/product/joystick-hotas-table-mount/
         region: EU
       - name: Sim Lab
-        price: 47.95
+        price: Unknown
         currency: USD
         url: https://sim-lab.eu/products/flight-sim-joystick-mount
         region: Unknown
+        status: out-of-stock
   - product_name: Joystick / HOTAS Desk Mount Long
     description: MONSTERTECH Joystick / HOTAS Desk Mount Long. extended desk-mounted flight
       control mount. in stock on official EU store. Long aluminum mount for joysticks with

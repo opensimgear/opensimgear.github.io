@@ -1,0 +1,36 @@
+[
+  {
+    "name_words": [
+      "(In Stock)"
+    ],
+    "reason": "Availability label, not part of product name."
+  },
+  {
+    "name": "Assetto Corsa Rally",
+    "reason": "Promo game code, not simulator hardware."
+  },
+  {
+    "name": "Stream Deck",
+    "reason": "Generic streaming accessory."
+  },
+  {
+    "name": "CORSAIR XENEON",
+    "reason": "Generic monitor product from shared Corsair/Fanatec catalog."
+  },
+  {
+    "name": "🎁 MOZA Universal Hub Kit (100% off)",
+    "reason": "Bogus"
+  },
+  {
+    "name": "🎁 Assetto Corsa Rally – Steam Code (MOZA Promo Gift) (100% off)",
+    "reason": "Bogus"
+  },
+  {
+    "name": "🎁 MOZA Canvas Bag (100% off)",
+    "reason": "Bogus"
+  },
+  {
+    "name": "🎁 Table Clamp For Yoke (100% off)",
+    "reason": "Bogus"
+  }
+]

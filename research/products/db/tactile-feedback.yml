@@ -233,6 +233,12 @@ commercial:
         currency: USD
         url: https://trakracer.com/products/trak-racer-4ch-40w-low-frequency-class-d-amplifier-with-2-bass-shakers-and-rig-mounts
         region: US
+      - name: Trakracer
+        price: 179
+        currency: USD
+        url: https://trakracer.eu/products/trak-racer-4ch-40w-low-frequency-class-d-amplifier-with-2-bass-shakers-and-rig-mounts
+        region: EU
+        status: available
 opensource:
   - project_name: GT7 Shaker for Linux
     description: GT7 Shaker for Linux. Gran Turismo 7 bass-shaker telemetry converter. Active

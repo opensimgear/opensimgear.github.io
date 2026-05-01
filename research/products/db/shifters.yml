@@ -1,7 +1,8 @@
 commercial:
   - product_name: H Shifter
-    description: CAMMUS H Shifter. H-pattern sim racing shifter. pre-order on official shop. Official
-      CAMMUS shifter listing; ships from China warehouse through current global channel.
+    description: CAMMUS H Shifter. H-pattern sim racing shifter. pre-order on official shop.
+      Official CAMMUS shifter listing; ships from China warehouse through current global
+      channel.
     manufacturer: CAMMUS
     component_category: shifters
     component_sub_category: h-pattern-shifter
@@ -13,10 +14,11 @@ commercial:
         currency: USD
         url: https://cammusracing.com/product/cammus-h-shifter/
         region: Global
+        status: available
   - product_name: Push Pull Sequential Rally Paddle Shifter
-    description: Apex Sim Racing Push Pull Sequential Rally Paddle Shifter. push-pull sequential paddle
-      shifter for rally sim racing. in stock on official shop. Aluminum and carbon-fiber
-      construction for a tactile push-pull sequential shift action.
+    description: Apex Sim Racing Push Pull Sequential Rally Paddle Shifter. push-pull sequential
+      paddle shifter for rally sim racing. in stock on official shop. Aluminum and
+      carbon-fiber construction for a tactile push-pull sequential shift action.
     manufacturer: Apex Sim Racing
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -29,9 +31,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/apex-sim-racing-push-pull-sequential-rally-paddle-shifter
         region: US
   - product_name: V2 JINX ARB, Shifter & Brake Bias Gaming Combo - Silver
-    description: Jinx Shifters V2 JINX ARB, Shifter & Brake Bias Gaming Combo - Silver. sequential
-      shifter and ARB/brake-bias control combo. in stock on official shop. USB PC plug-and-play
-      controller with 12-step ARB and brake-bias adjustment.
+    description: Jinx Shifters V2 JINX ARB, Shifter & Brake Bias Gaming Combo - Silver.
+      sequential shifter and ARB/brake-bias control combo. in stock on official shop. USB PC
+      plug-and-play controller with 12-step ARB and brake-bias adjustment.
     manufacturer: Jinx Shifters
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -44,9 +46,9 @@ commercial:
         url: https://jinxshifters.com/products/jinx-shifter-combo
         region: AU
   - product_name: V2 JINX ARB, Shifter & Brake Bias Gaming Combo - Black
-    description: Jinx Shifters V2 JINX ARB, Shifter & Brake Bias Gaming Combo - Black. sequential
-      shifter and ARB/brake-bias control combo. in stock on official shop. USB PC plug-and-play
-      controller with 12-step ARB and brake-bias adjustment.
+    description: Jinx Shifters V2 JINX ARB, Shifter & Brake Bias Gaming Combo - Black.
+      sequential shifter and ARB/brake-bias control combo. in stock on official shop. USB PC
+      plug-and-play controller with 12-step ARB and brake-bias adjustment.
     manufacturer: Jinx Shifters
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -59,9 +61,10 @@ commercial:
         url: https://jinxshifters.com/products/full-black-combo-unit
         region: AU
   - product_name: V3 JINX ARB, Shifter & Brake Bias Gaming Combo - Silver
-    description: Jinx Shifters V3 JINX ARB, Shifter & Brake Bias Gaming Combo - Silver. sequential
-      shifter and ARB/brake-bias control combo. in stock on official shop. USB PC plug-and-play
-      controller with polyurethane ARB knobs and 12-step ARB/brake-bias adjustment.
+    description: Jinx Shifters V3 JINX ARB, Shifter & Brake Bias Gaming Combo - Silver.
+      sequential shifter and ARB/brake-bias control combo. in stock on official shop. USB PC
+      plug-and-play controller with polyurethane ARB knobs and 12-step ARB/brake-bias
+      adjustment.
     manufacturer: Jinx Shifters
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -74,9 +77,9 @@ commercial:
         url: https://jinxshifters.com/products/v3-jinx-arb-shifter-brake-bias-gaming-combo-silver
         region: AU
   - product_name: SQ1 Sequential Shifter
-    description: Sim-Lab SQ1 Sequential Shifter. sequential shifter. in stock on official EU shop.
-      All-metal shifter with interchangeable roller profiles, quick-adjust tension, and Hall-sensor
-      technology.
+    description: Sim-Lab SQ1 Sequential Shifter. sequential shifter. in stock on official EU
+      shop. All-metal shifter with interchangeable roller profiles, quick-adjust tension,
+      and Hall-sensor technology.
     manufacturer: Sim-Lab
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -89,8 +92,8 @@ commercial:
         url: https://sim-lab.eu/en-de/products/sequential-shifter-sq1
         region: EU
   - product_name: Push-Pull Rally Shifter
-    description: Sim-Lab Push-Pull Rally Shifter. push-pull sequential rally shifter. in stock on
-      official EU shop. Aluminum shifter with full-carbon paddle and wheelbase mounting
+    description: Sim-Lab Push-Pull Rally Shifter. push-pull sequential rally shifter. in stock
+      on official EU shop. Aluminum shifter with full-carbon paddle and wheelbase mounting
       compatibility.
     manufacturer: Sim-Lab
     component_category: shifters
@@ -99,13 +102,14 @@ commercial:
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/pushpull_1.png?v=1744711353
     shops:
       - name: Sim-Lab EU
-        price: 195.71
-        currency: EUR
+        price: 199
+        currency: USD
         url: https://sim-lab.eu/en-de/products/push-pull-rally-shifter-sim-racing
         region: EU
+        status: available
   - product_name: ClubSport Shifter SQ V1.5
-    description: Fanatec ClubSport Shifter SQ V1.5. hybrid H-pattern and sequential shifter. in stock on
-      official EU catalog. Full-metal shifter with ClubSport USB Adapter included.
+    description: Fanatec ClubSport Shifter SQ V1.5. hybrid H-pattern and sequential shifter. in
+      stock on official EU catalog. Full-metal shifter with ClubSport USB Adapter included.
     manufacturer: Fanatec
     component_category: shifters
     component_sub_category: hybrid-shifter
@@ -118,8 +122,9 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/add-ons/crd-9040002-ww/clubsport-shifter-sq
         region: EU
   - product_name: Driving Force Shifter
-    description: Logitech Driving Force Shifter. budget H-pattern shifter. Current Logitech product in
-      official driving category listing. H-pattern add-on shifter for Logitech G racing wheels.
+    description: Logitech Driving Force Shifter. budget H-pattern shifter. Current Logitech
+      product in official driving category listing. H-pattern add-on shifter for Logitech G
+      racing wheels.
     manufacturer: Logitech G
     component_category: shifters
     component_sub_category: h-pattern-shifter
@@ -132,8 +137,8 @@ commercial:
         url: https://www.logitechg.com/en-us/products/driving/driving-force-shifter.html
         region: Unknown
   - product_name: DS-8X Shifter
-    description: Simagic DS-8X Shifter. hybrid H-pattern and sequential shifter. in stock on official
-      shop. Hybrid H-pattern/sequential shifter.
+    description: Simagic DS-8X Shifter. hybrid H-pattern and sequential shifter. in stock on
+      official shop. Hybrid H-pattern/sequential shifter.
     manufacturer: Simagic
     component_category: shifters
     component_sub_category: hybrid-shifter
@@ -145,9 +150,11 @@ commercial:
         currency: USD
         url: https://simagic.com/products/ds-8x-shifter
         region: Global
+        status: available
   - product_name: HGP Shifter
-    description: MOZA HGP Shifter. H-pattern shifter. Current product; official product page showed
-      dispatched within 3 business days. CNC-machined anodized aviation-grade aluminum.
+    description: MOZA HGP Shifter. H-pattern shifter. Current product; official product page
+      showed dispatched within 3 business days. CNC-machined anodized aviation-grade
+      aluminum.
     manufacturer: MOZA Racing
     component_category: shifters
     component_sub_category: h-pattern-shifter
@@ -159,10 +166,16 @@ commercial:
         currency: CAD
         url: https://mozaracing.com/product/moza-hgp-shifter/
         region: Unknown
+      - name: Eu
+        price: 159
+        currency: USD
+        url: https://eu.mozaracing.com/products/hgp-shifter
+        region: EU
+        status: available
   - product_name: MagShift Sequential Shifter
     description: Heusinkveld MagShift. premium sequential shifter. in stock on official EU shop.
-      Adjustable magnetic sequential shifter with 4.5 to 11 kg peak shift force, integrated mini
-      button box, and opto-electronic sensors.
+      Adjustable magnetic sequential shifter with 4.5 to 11 kg peak shift force, integrated
+      mini button box, and opto-electronic sensors.
     manufacturer: Heusinkveld
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -175,9 +188,9 @@ commercial:
         url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift/
         region: EU
   - product_name: MagShift Mini
-    description: Heusinkveld MagShift Mini. compact sequential shifter. in stock on official EU shop.
-      Compact heavy-duty shifter with patented 2-way adjustable magnetic shift system and up to 8 kg
-      shift force.
+    description: Heusinkveld MagShift Mini. compact sequential shifter. in stock on official EU
+      shop. Compact heavy-duty shifter with patented 2-way adjustable magnetic shift system
+      and up to 8 kg shift force.
     manufacturer: Heusinkveld
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -189,6 +202,7 @@ commercial:
         currency: EUR
         url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift-mini/
         region: EU
+        status: available
   - product_name: Q1S Sequential Shifter
     description: Simagic Q1S Sequential Shifter. sequential shifter. in stock on official shop.
       Sequential shifter with adjustable damping.
@@ -203,6 +217,7 @@ commercial:
         currency: USD
         url: https://simagic.com/products/sequential-shifter-q1s
         region: Global
+        status: available
   - product_name: Q1 Sequential Shifter
     description: Simagic Q1 Sequential Shifter. sequential shifter. in stock on official shop.
       Sequential shifter sold in Q1 and Q1-P variants.
@@ -217,10 +232,11 @@ commercial:
         currency: USD
         url: https://simagic.com/products/sequential-shifter-q1
         region: Global
+        status: available
   - product_name: SGP Sequential Shifter
-    description: MOZA SGP Sequential Shifter. sequential shifter. Current product; official US page
-      showed dispatched within 3 business days. Aerospace-grade aluminum alloy and high-strength
-      steel.
+    description: MOZA SGP Sequential Shifter. sequential shifter. Current product; official US
+      page showed dispatched within 3 business days. Aerospace-grade aluminum alloy and
+      high-strength steel.
     manufacturer: MOZA Racing
     component_category: shifters
     component_sub_category: hybrid-shifter
@@ -232,10 +248,16 @@ commercial:
         currency: USD
         url: https://us.mozaracing.com/products/sgp-shifter
         region: Unknown
+      - name: Eu
+        price: 139
+        currency: USD
+        url: https://eu.mozaracing.com/products/sgp-shifter
+        region: EU
+        status: available
   - product_name: Shifter Sequential
-    description: Aiologs Shifter Sequential. compact sequential shifter. Current Aiologs shop product;
-      shipment date shown as 30 April in search result. Stainless steel case 64 x 54 x 115 mm with
-      plexiglass top cover.
+    description: Aiologs Shifter Sequential. compact sequential shifter. Current Aiologs shop
+      product; shipment date shown as 30 April in search result. Stainless steel case 64 x
+      54 x 115 mm with plexiglass top cover.
     manufacturer: Aiologs
     component_category: shifters
     component_sub_category: hybrid-shifter
@@ -248,9 +270,10 @@ commercial:
         url: https://shop.aiologs.net/new/product/shifter/
         region: Global
   - product_name: TH8A Shifter Add-On
-    description: Thrustmaster TH8A Shifter Add-On. hybrid H-pattern and sequential shifter. Long-running
-      Thrustmaster product; current stock/continuation not confirmed [uncertain]. Metal shifter with
-      H-pattern and sequential plates [uncertain exact current kit].
+    description: Thrustmaster TH8A Shifter Add-On. hybrid H-pattern and sequential shifter.
+      Long-running Thrustmaster product; current stock/continuation not confirmed
+      [uncertain]. Metal shifter with H-pattern and sequential plates [uncertain exact
+      current kit].
     manufacturer: Thrustmaster
     component_category: shifters
     component_sub_category: hybrid-shifter
@@ -263,9 +286,9 @@ commercial:
         url: https://www.thrustmaster.com/products/th8a-shifter-add-on/
         region: Unknown
   - product_name: TH8S Shifter Add-On
-    description: Thrustmaster TH8S Shifter Add-On. budget H-pattern shifter. Current Thrustmaster
-      product [stock not confirmed in this pass]. H-pattern shifter with 7 forward gears plus
-      reverse [uncertain].
+    description: Thrustmaster TH8S Shifter Add-On. budget H-pattern shifter. Current
+      Thrustmaster product [stock not confirmed in this pass]. H-pattern shifter with 7
+      forward gears plus reverse [uncertain].
     manufacturer: Thrustmaster
     component_category: shifters
     component_sub_category: h-pattern-shifter
@@ -278,9 +301,9 @@ commercial:
         url: https://www.thrustmaster.com/products/th8s-shifter-add-on/
         region: Unknown
   - product_name: H Pattern Shifter
-    description: Pro-Sim H Pattern Shifter. high-end 6-speed plus reverse H-pattern shifter. in stock on
-      official UK shop. Quaife-developed mechanism with robust real-car-style feel and 5 year
-      warranty.
+    description: Pro-Sim H Pattern Shifter. high-end 6-speed plus reverse H-pattern shifter. in
+      stock on official UK shop. Quaife-developed mechanism with robust real-car-style feel
+      and 5 year warranty.
     manufacturer: Pro-Sim
     component_category: shifters
     component_sub_category: h-pattern-shifter
@@ -293,9 +316,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/h-pattern-shifter/
         region: UK
   - product_name: Sequential Shifter
-    description: Pro-Sim Sequential Shifter. high-end sequential shifter. in stock on official UK shop.
-      Quaife-developed production gearbox mechanism with visible Perspex cover and robust
-      real-car-style action.
+    description: Pro-Sim Sequential Shifter. high-end sequential shifter. in stock on official
+      UK shop. Quaife-developed production gearbox mechanism with visible Perspex cover and
+      robust real-car-style action.
     manufacturer: Pro-Sim
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -308,8 +331,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/sequential-shifter/
         region: UK
   - product_name: PSL Sequential Shifter V2
-    description: Pro-Sim PSL Sequential Shifter V2. compact sequential shifter. in stock on official UK
-      shop. Quaife-derived hardened-steel internals, 2.8 kg body, and USB PC compatibility.
+    description: Pro-Sim PSL Sequential Shifter V2. compact sequential shifter. in stock on
+      official UK shop. Quaife-derived hardened-steel internals, 2.8 kg body, and USB PC
+      compatibility.
     manufacturer: Pro-Sim
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -322,9 +346,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/psl-sequential-shifter/
         region: UK
   - product_name: Shift Lock
-    description: Pro-Sim Shift Lock. hydraulic shifter lock module. currently out of stock on official
-      UK shop. Adds software-controlled dog or synchro shift-lock behavior for simulator gear
-      changes.
+    description: Pro-Sim Shift Lock. hydraulic shifter lock module. currently out of stock on
+      official UK shop. Adds software-controlled dog or synchro shift-lock behavior for
+      simulator gear changes.
     manufacturer: Pro-Sim
     component_category: shifters
     component_sub_category: shifter-adapter
@@ -337,9 +361,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/shift-lock/
         region: UK
   - product_name: SHH Shifter HUBB
-    description: SHH Shifter HUBB. hybrid H-pattern and sequential shifter. in stock on official EU
-      shop. Seventh-generation SHH shifter with full-metal internal mechanism, bearings, modular
-      design, selectable top plates, and multiple mount options.
+    description: SHH Shifter HUBB. hybrid H-pattern and sequential shifter. in stock on official
+      EU shop. Seventh-generation SHH shifter with full-metal internal mechanism, bearings,
+      modular design, selectable top plates, and multiple mount options.
     manufacturer: SHH Simulation
     component_category: shifters
     component_sub_category: hybrid-shifter
@@ -352,9 +376,10 @@ commercial:
         url: https://www.shiftershh.com/en/home/26-shh-shifter-hubb.html
         region: EU
   - product_name: Fanatec clubsport shifter – tilt adjustment
-    description: Sim Lab Fanatec clubsport shifter – tilt adjustment. sequential shifter. listed on Sim
-      Lab. Fanatec shifter mount made from 8 mm thick aluminum. Mounting is done by the provided
-      slot nuts that slide into the sides of the Fanatec Clubsport shifter. It can be positioned...
+    description: Sim Lab Fanatec clubsport shifter – tilt adjustment. sequential shifter. listed
+      on Sim Lab. Fanatec shifter mount made from 8 mm thick aluminum. Mounting is done by
+      the provided slot nuts that slide into the sides of the Fanatec Clubsport shifter. It
+      can be positioned...
     manufacturer: Sim Lab
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -362,14 +387,16 @@ commercial:
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/SLA029_Fanatecclubsportshifter_tiltadjustment.png?v=1744719177
     shops:
       - name: Sim Lab
-        price: 29.95
+        price: Unknown
         currency: USD
         url: https://sim-lab.eu/products/fanatec-clubsport-shifter-tilt-adjustment-sim-racing-accessories
         region: Unknown
+        status: out-of-stock
   - product_name: Shifter & HB bracket
     description: Sim Lab Shifter & HB bracket. sequential shifter. listed on Sim Lab. Shifter +
-      Handbrake mounting plate made for 40 mm Aluminium profile series. Compatibility Sim-Lab XB1
-      Handbrake DSD Sequential Pro Fanatec CS Shifter SQ Fanatec Handbrake Heusin...
+      Handbrake mounting plate made for 40 mm Aluminium profile series. Compatibility
+      Sim-Lab XB1 Handbrake DSD Sequential Pro Fanatec CS Shifter SQ Fanatec Handbrake
+      Heusin...
     manufacturer: Sim Lab
     component_category: shifters
     component_sub_category: sequential-shifter
@@ -380,12 +407,428 @@ commercial:
         price: 29.95
         currency: USD
         url: https://sim-lab.eu/products/shifter-hb-bracket-sim-racing-accessories
+        region: EU
+        status: available
+  - product_name: Cockpit Shifter Mount - Left (Black)
+    description: GT Cockpit Shifter Mount - Left (Black). sequential shifter. listed on Fanatec.
+      Our unique tubular shifter mounting kit has the strength and flexibility you need when
+      shifting gears on track or performing handbrake turns on your favorite Rally stage.
+    manufacturer: GT
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900023-ww/gt-cockpit-shifter-mount-left-black
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Accessories/Cockpit-Accessories/CRD-9900023-WW/CRD-9900023-WW-02.webp
+    shops:
+      - name: Fanatec
+        price: 169.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900023-ww/gt-cockpit-shifter-mount-left-black
+        region: EU
+        status: available
+  - product_name: Cockpit Shifter Mount - Left (White)
+    description: GT Cockpit Shifter Mount - Left (White). sequential shifter. listed on Fanatec.
+      Our unique tubular shifter mounting kit has the strength and flexibility you need when
+      shifting gears on track or performing handbrake turns on your favorite Rally stage.
+    manufacturer: GT
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900025-ww/gt-cockpit-shifter-mount-left-white
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Accessories/Cockpit-Accessories/CRD-9900025-WW/CRD-9900025-WW-02.webp
+    shops:
+      - name: Fanatec
+        price: 169.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900025-ww/gt-cockpit-shifter-mount-left-white
+        region: EU
+        status: available
+  - product_name: Cockpit Shifter Mount - Right (Black)
+    description: GT Cockpit Shifter Mount - Right (Black). sequential shifter. listed on
+      Fanatec. Our unique tubular shifter mounting kit has the strength and flexibility you
+      need when shifting gears on track or performing handbrake turns on your favorite Rally
+      stage.
+    manufacturer: GT
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900024-ww/gt-cockpit-shifter-mount-right-black
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Accessories/Cockpit-Accessories/CRD-9900024-WW/CRD-9900024-WW-02.webp
+    shops:
+      - name: Fanatec
+        price: 169.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900024-ww/gt-cockpit-shifter-mount-right-black
+        region: EU
+        status: available
+  - product_name: Cockpit Shifter Mount - Right (White)
+    description: GT Cockpit Shifter Mount - Right (White). sequential shifter. listed on
+      Fanatec. Our unique tubular shifter mounting kit has the strength and flexibility you
+      need when shifting gears on track or performing handbrake turns on your favorite Rally
+      stage.
+    manufacturer: GT
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900026-ww/gt-cockpit-shifter-mount-right-white
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Accessories/Cockpit-Accessories/CRD-9900026-WW/CRD-9900026-WW-02.webp
+    shops:
+      - name: Fanatec
+        price: 169.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900026-ww/gt-cockpit-shifter-mount-right-white
+        region: EU
+        status: available
+  - product_name: Sequential Shifter
+    description: SQ1 Sequential Shifter. sequential shifter. listed on Sim Lab. The SQ1
+      Sequential Shifter is a durable, all-metal shifter designed for racing simulators. It
+      includes three interchangeable roller profiles to adjust the shifting feel, from a...
+    manufacturer: SQ1
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://sim-lab.eu/products/sequential-shifter-sq1
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/sq1shifter_1.png?v=1744704979
+    shops:
+      - name: Sim Lab
+        price: 199
+        currency: USD
+        url: https://sim-lab.eu/products/sequential-shifter-sq1
+        region: EU
+        status: available
+  - product_name: H2SQ DUAL-MODE SHIFTER
+    description: BDH H2SQ DUAL-MODE SHIFTER. sequential shifter. listed on Trakracer. BDH H2SQ
+      DUAL-MODE SHIFTER The BDH H2SQ represents the next generation in mechanical simulation
+      hardware. Built on over two years of testing and iteration, the H2SQ improves upo...
+    manufacturer: BDH
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://trakracer.eu/products/bdh-h2sq-shifter-the-ultimate-fusion-of-realism-and-performance-copy
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/DSC09348_copy.jpg?v=1754142598
+    shops:
+      - name: Trakracer
+        price: 1191
+        currency: USD
+        url: https://trakracer.eu/products/bdh-h2sq-shifter-the-ultimate-fusion-of-realism-and-performance-copy
+        region: EU
+        status: available
+  - product_name: Conspit H3 Dual-Mode Hydraulic Handbrake – Precision Rally & Drift Control
+    description: Trakracer Conspit H3 Dual-Mode Hydraulic Handbrake – Precision Rally & Drift
+      Control. sequential shifter. listed on Trakracer. Product Description The Conspit H3
+      Dual-Mode Hydraulic Handbrake is purpose-built for sim racing enthusiasts and
+      professionals who demand absolute precision in drift, rally, and...
+    manufacturer: Trakracer
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://trakracer.eu/products/conspit-h3-hydraulic-handbrake
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/conspit_h3_handbrake_sim_racing_handbrake.png?v=1764061897
+    shops:
+      - name: Trakracer
+        price: 299
+        currency: USD
+        url: https://trakracer.eu/products/conspit-h3-hydraulic-handbrake
+        region: EU
+        status: available
+  - product_name: Heusinkveld MagShift Sequential Shifter — Magnetic Force-Adjustable GT, Rally
+      & Touring-Car Shifter for Professional Sim Racing Rigs
+    description: Trakracer Heusinkveld MagShift Sequential Shifter — Magnetic Force-Adjustable
+      GT, Rally & Touring-Car Shifter for Professional Sim Racing Rigs. sequential shifter.
+      listed on Trakracer. Product Description The Heusinkveld MagShift Sequential Shifter
+      is a premium magnetic-actuated gear shifter engineered to deliver an ultra-realistic,
+      mechanical shift feel for p...
+    manufacturer: Trakracer
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://trakracer.eu/products/magshift
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Rectangle43_7f68644c-800a-49a0-bd1b-3ffedae34ce4.png?v=1721804256
+    shops:
+      - name: Trakracer
+        price: 399
+        currency: USD
+        url: https://trakracer.eu/products/magshift
+        region: EU
+        status: available
+  - product_name: Simagic DS-8X Dual-Mode 8-Speed H-Pattern / Sequential Shifter
+    description: Trakracer Simagic DS-8X Dual-Mode 8-Speed H-Pattern / Sequential Shifter.
+      sequential shifter. listed on Trakracer. Product Description The Simagic DS-8X Shifter
+      is a premium dual-mode sim racing shifter that seamlessly switches between H-pattern
+      and sequential shifting modes, delivering the...
+    manufacturer: Trakracer
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://trakracer.eu/products/simagic-ds-8x-shifter
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/DS-8X_7.png?v=1759211939
+    shops:
+      - name: Trakracer
+        price: 355
+        currency: USD
+        url: https://trakracer.eu/products/simagic-ds-8x-shifter
+        region: EU
+        status: available
+  - product_name: Simagic Q1S Sequential Shifter – Compact Planetary Gear Shifter with Neutral,
+      Adjustable Force & USB
+    description: Trakracer Simagic Q1S Sequential Shifter – Compact Planetary Gear Shifter with
+      Neutral, Adjustable Force & USB. sequential shifter. listed on Trakracer. The Simagic
+      Q1S Sequential Shifter blends compact design with advanced functionality, offering
+      smooth and precise gear changes for your sim racing setup. Featuring a planetary g...
+    manufacturer: Trakracer
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://trakracer.eu/products/simagic-q1s-sequential-shifter-compact-planetary-gear-shifter-with-neutral-adjustable-force-usb
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/QS1_5000x_a5c90f98-031a-4278-9f0e-1a68445d1071.png?v=1762349402
+    shops:
+      - name: Trakracer
+        price: 279
+        currency: USD
+        url: https://trakracer.eu/products/simagic-q1s-sequential-shifter-compact-planetary-gear-shifter-with-neutral-adjustable-force-usb
+        region: EU
+        status: available
+  - product_name: Formula and GT Racing Simulator Cockpit
+    description: TR5 Formula and GT Racing Simulator Cockpit. h-pattern shifter. listed on
+      Trakracer. Ultimate Adjustability for Every Driver Fine-tune your TR5 for the perfect
+      fit. Wheelbase Adjustment Position your steering wheel exactly where you need it with
+      full height, ang...
+    manufacturer: TR5
+    component_category: shifters
+    component_sub_category: h-pattern-shifter
+    product_url: https://trakracer.eu/products/tr5-hybrid-racing-simulator-with-shifter-handbrake-mount
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR5-White_e01_1_1080x_97ece2d2-38c4-447f-91d3-2b16e53ba61f.webp?v=1760559854
+    shops:
+      - name: Trakracer
+        price: 549
+        currency: USD
+        url: https://trakracer.eu/products/tr5-hybrid-racing-simulator-with-shifter-handbrake-mount
+        region: EU
+        status: available
+  - product_name: Handbrake V1 - Handbrake Pro Kit
+    description: VNM Handbrake V1 - Handbrake Pro Kit. sequential shifter. listed on Trakracer.
+      The Handbrake Pro Kit gives you access to additional combinations of springs and
+      elastomers to adjust tension and a 90 degree Conversion Kit, giving you extra mounting
+      freedom a...
+    manufacturer: VNM
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://trakracer.eu/products/vnm-handbrake-v1-handbrake-pro-kit
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/59AB1D2D-06F2-4A03-ACF8-9569A4709BC3.png?v=1662452998
+    shops:
+      - name: Trakracer
+        price: 10
+        currency: USD
+        url: https://trakracer.eu/products/vnm-handbrake-v1-handbrake-pro-kit
+        region: EU
+        status: available
+  - product_name: Rally and Drift Handbrake V1.5
+    description: VNM Rally and Drift Handbrake V1.5. sequential shifter. listed on Trakracer.
+      The VNM Rally/Drift Handbrake is engineered by VNM Simulation to deliver the authentic
+      feel and performance of a real rally and drift handbrake system. Designed specifically
+      for...
+    manufacturer: VNM
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://trakracer.eu/products/vnm-handbrake-v1-5
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/capture_91bc4615-7d8d-446f-9cf7-0cb4325d2f88.png?v=1654831576
+    shops:
+      - name: Trakracer
+        price: 265
+        currency: USD
+        url: https://trakracer.eu/products/vnm-handbrake-v1-5
+        region: EU
+        status: available
+  - product_name: 5-gears (4+R) H-pattern Plate
+    description: Vnmsimulation 5-gears (4+R) H-pattern Plate. sequential shifter. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/product/7-gears-6r-h-pattern-plate/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/VNM-STEERI-1.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 15
+        currency: USD
+        url: https://vnmsimulation.com/product/7-gears-6r-h-pattern-plate/
         region: Unknown
+        status: available
+  - product_name: 6-gears (5+R) H-pattern Plate
+    description: Vnmsimulation 6-gears (5+R) H-pattern Plate. sequential shifter. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/product/6-gears-5r-h-pattern-plate/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/VNM-STEERI.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 15
+        currency: USD
+        url: https://vnmsimulation.com/product/6-gears-5r-h-pattern-plate/
+        region: Unknown
+        status: available
+  - product_name: 8-gears (7+R) H-pattern Plate
+    description: Vnmsimulation 8-gears (7+R) H-pattern Plate. sequential shifter. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/product/8-gears-7r-h-pattern-plate/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/1-2.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 15
+        currency: USD
+        url: https://vnmsimulation.com/product/8-gears-7r-h-pattern-plate/
+        region: Unknown
+        status: available
+  - product_name: Optional H-Pattern Plates
+    description: Vnmsimulation Optional H-Pattern Plates. sequential shifter. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/product/optional-h-pattern-plates/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/0l0a0020-min-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 0
+        currency: USD
+        url: https://vnmsimulation.com/product/optional-h-pattern-plates/
+        region: Unknown
+        status: available
+  - product_name: Table Clamps for VNM Shifter (2 pcs)
+    description: Vnmsimulation Table Clamps for VNM Shifter (2 pcs). sequential shifter. listed
+      on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/vi/product/table-clamps-for-vnm-shifter-2-pcs/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/7.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 30
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/table-clamps-for-vnm-shifter-2-pcs/
+        region: Unknown
+        status: available
+  - product_name: Table Clamps for VNM Shifter (2 pcs)
+    description: Vnmsimulation Table Clamps for VNM Shifter (2 pcs). sequential shifter. listed
+      on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/product/table-clamps-for-vnm-shifter-2-pcs/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/7.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 30
+        currency: USD
+        url: https://vnmsimulation.com/product/table-clamps-for-vnm-shifter-2-pcs/
+        region: Unknown
+        status: available
+  - product_name: SEQ Shifter V2
+    description: VNM SEQ Shifter V2. sequential shifter. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/vi/product/vnm-seq-shifter-v2/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/1-3.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 299
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-seq-shifter-v2/
+        region: Unknown
+        status: available
+  - product_name: SEQ Shifter V2
+    description: VNM SEQ Shifter V2. sequential shifter. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/product/vnm-seq-shifter-v2/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/1-3.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 299
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-seq-shifter-v2/
+        region: Unknown
+        status: available
+  - product_name: Shifter and Handbrake Mounting Kit
+    description: VNM Shifter and Handbrake Mounting Kit. sequential shifter. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/vi/product/vnm-shifter-and-handbrake-mounting-kit/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/Picture3-2.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 55
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-shifter-and-handbrake-mounting-kit/
+        region: Unknown
+        status: available
+  - product_name: Shifter and Handbrake Mounting Kit
+    description: VNM Shifter and Handbrake Mounting Kit. sequential shifter. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/product/vnm-shifter-and-handbrake-mounting-kit/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/Picture3-2.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 55
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-shifter-and-handbrake-mounting-kit/
+        region: Unknown
+        status: available
+  - product_name: Shifter x Handbrake Mounting Plate
+    description: VNM Shifter x Handbrake Mounting Plate. sequential shifter. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/vi/product/vnm-shifter-x-handbrake-mounting-plate/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/02/750_6659-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 15
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-shifter-x-handbrake-mounting-plate/
+        region: Unknown
+        status: available
+  - product_name: Shifter x Handbrake Mounting Plate
+    description: VNM Shifter x Handbrake Mounting Plate. sequential shifter. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://vnmsimulation.com/product/vnm-shifter-x-handbrake-mounting-plate/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/02/750_6659-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 15
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-shifter-x-handbrake-mounting-plate/
+        region: Unknown
+        status: available
+  - product_name: New Arrival CAMMUS Metal Shift Paddles for C5 Racing Wheel
+    description: "Cammusracing New Arrival CAMMUS Metal Shift Paddles for C5 Racing Wheel.
+      sequential shifter. listed on Cammusracing. High metal paddles are designed for the C5
+      wheel. Please note : If you are the customer from our overseas warehouse region, you
+      will be responsible for local customs clearance a..."
+    manufacturer: Cammusracing
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://cammusracing.com/product/cammus-new-metal-shift-paddle-for-c5/
+    picture_url: https://cammusracing.com/wp-content/uploads/2025/10/Image-2025-10-21-at-10.28-scaled.jpeg
+    shops:
+      - name: Cammusracing
+        price: 29
+        currency: USD
+        url: https://cammusracing.com/product/cammus-new-metal-shift-paddle-for-c5/
+        region: Unknown
+        status: available
 opensource:
   - project_name: Akaki-H-shifter
-    description: Akaki H Shifter. 3D printable H-pattern shifter with optional handbrake. Small complete
-      hobby build with CAD/STL, Arduino code, video/build instructions. 3D printable 8-speed
-      H-pattern shifter.
+    description: Akaki H Shifter. 3D printable H-pattern shifter with optional handbrake. Small
+      complete hobby build with CAD/STL, Arduino code, video/build instructions. 3D
+      printable 8-speed H-pattern shifter.
     maker: akakikuumeri
     component_category: shifters
     component_sub_category: h-pattern-shifter
@@ -393,9 +836,9 @@ opensource:
     project_url: https://github.com/akakikuumeri/Akaki-H-shifter
     picture_url: https://opengraph.githubassets.com/19094c5ad327c7f35eddd4e12ed96379094b16b8f024be78cb14c45131f295fd/akakikuumeri/Akaki-H-shifter
   - project_name: DIYSimShifter
-    description: DIYSimShifter. 3D printable sequential shifter. Complete small project with GitHub
-      files, website guide, Thingiverse guide, and build video. 3D printable sequential shifter
-      designed for strength, longevity, and low cost.
+    description: DIYSimShifter. 3D printable sequential shifter. Complete small project with
+      GitHub files, website guide, Thingiverse guide, and build video. 3D printable
+      sequential shifter designed for strength, longevity, and low cost.
     maker: brendanbeavis / Beavis Motorsport
     component_category: shifters
     component_sub_category: hybrid-shifter
@@ -403,10 +846,10 @@ opensource:
     project_url: https://github.com/brendanbeavis/DIYSimShifter
     picture_url: https://beavismotorsport.com/sim-racing/images/SHIFTER.jpg
   - project_name: Sim Racing Library for Arduino
-    description: Sim Racing Library For Arduino. Arduino library and USB adapter shields for Logitech
-      pedals/shifters. Mature library with generated docs, examples, releases, and companion shield
-      files. Arduino library for interfacing sim racing equipment such as pedals, analog shifters,
-      analog handbrakes, and Logitech shifters.
+    description: Sim Racing Library For Arduino. Arduino library and USB adapter shields for
+      Logitech pedals/shifters. Mature library with generated docs, examples, releases, and
+      companion shield files. Arduino library for interfacing sim racing equipment such as
+      pedals, analog shifters, analog handbrakes, and Logitech shifters.
     maker: dmadison
     component_category: shifters
     component_sub_category: shifter-adapter
@@ -414,9 +857,9 @@ opensource:
     project_url: https://github.com/dmadison/Sim-Racing-Arduino
     picture_url: https://raw.githubusercontent.com/dmadison/Sim-Racing-Shields/master/images/Sim-Racing-Shields_Header.jpg
   - project_name: SRT Gearbox V10
-    description: Lebois Racing SRT Gearbox V10. DIY H-pattern/sequential gearbox. Current Lebois DIY
-      gearbox generation; official docs, store kits, firmware, mods, and community support exist.
-      6-speed H-pattern plus reverse.
+    description: Lebois Racing SRT Gearbox V10. DIY H-pattern/sequential gearbox. Current Lebois
+      DIY gearbox generation; official docs, store kits, firmware, mods, and community
+      support exist. 6-speed H-pattern plus reverse.
     maker: Lebois Racing
     component_category: shifters
     component_sub_category: hybrid-shifter

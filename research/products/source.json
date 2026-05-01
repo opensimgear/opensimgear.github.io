@@ -1,5 +1,54 @@
 [
-  "https://www.fanatec.com/eu",
-  "https://www.fanatec.com/us",
-  "https://ascher-racing.com"
+  {
+    "url": "https://www.fanatec.com/eu",
+    "method": "custom"
+  },
+  {
+    "url": "https://www.fanatec.com/us",
+    "method": "custom"
+  },
+  {
+    "url": "https://ascher-racing.com/de/shop",
+    "method": "crawl"
+  },
+  {
+    "url": "https://eu.mozaracing.com/",
+    "method": "shopify"
+  },
+  {
+    "url": "https://simucube.com/",
+    "method": "woocommerce"
+  },
+  {
+    "url": "https://simagic.com/",
+    "method": "shopify"
+  },
+  {
+    "url": "https://heusinkveld.com/eu/",
+    "method": "woocommerce"
+  },
+  {
+    "url": "https://sim-lab.eu/",
+    "method": "shopify"
+  },
+  {
+    "url": "https://trakracer.eu/",
+    "method": "shopify"
+  },
+  {
+    "url": "https://www.asetek.com/simsports/webshop/",
+    "method": "crawl"
+  },
+  {
+    "url": "https://simufy.com/",
+    "method": "shopify"
+  },
+  {
+    "url": "https://www.d-box.com/en/products/sim-racing/",
+    "method": "crawl"
+  },
+  {
+    "url": "https://cammusracing.com/product-category/shop-all/",
+    "method": "woocommerce"
+  }
 ]

@@ -5,13 +5,16 @@ import path from 'node:path';
 import { basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse, stringify } from 'yaml';
-import { inferWinCtrlRegion, scrapeWinCtrl, winCtrlShopName } from './libs/winctrl.mjs';
+import { fanatecShopName, inferFanatecRegion, isFanatecShop, scrapeFanatec } from './libs/fanatec.mjs';
+import { inferWinCtrlRegion, isWinCtrlShop, scrapeWinCtrl, winCtrlShopName } from './libs/winctrl.mjs';
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const DB_DIR = path.join(ROOT, 'research/products/db');
 const GENERATED_PRODUCTS = path.join(ROOT, 'src/data/3rdparty-products.json');
+const DEFAULT_BLACKLIST = path.join(ROOT, 'research/products/blacklist.json');
 const USER_AGENT =
   'Mozilla/5.0 (compatible; OpenSimGearShopScraper/1.0; +https://opensimgear.com)';
+const FETCH_TIMEOUT_MS = 5_000;
 
 let args = [];
 let startUrl = null;
@@ -29,6 +32,8 @@ let manufacturerOverride = null;
 let categoryOverride = null;
 let subcategoryOverride = null;
 let regionOverride = null;
+let SCRAPE_METHOD = 'auto';
+let blacklistPath = DEFAULT_BLACKLIST;
 let mappings = [];
 
 async function main(argv = process.argv.slice(2)) {
@@ -36,7 +41,7 @@ async function main(argv = process.argv.slice(2)) {
 
   if (!startUrl) {
     console.error(
-      'Usage: pnpm products:update -- <url> [--write] [--build] [--max-pages 50] [--rate-limit-ms 750] [--retries 3] [--map "shop name=product:id"]',
+      'Usage: pnpm products:update -- <url> [--method auto|custom|woocommerce|shopify|crawl] [--blacklist research/products/blacklist.json] [--write] [--build] [--max-pages 50] [--rate-limit-ms 750] [--retries 3] [--map "shop name=product:id"]',
     );
     process.exit(1);
   }
@@ -47,12 +52,18 @@ async function main(argv = process.argv.slice(2)) {
   verbose(`match threshold: ${MATCH_THRESHOLD}`);
   verbose(`rate limit: ${RATE_LIMIT_MS}ms`);
   verbose(`retries: ${MAX_RETRIES}`);
+  verbose(`scrape method: ${SCRAPE_METHOD}`);
 
+  const blacklist = await loadProductBlacklist(blacklistPath);
   const source = await scrapeShop(startUrl);
+  source.products = source.products.map((product) => sanitizeFoundProductName(product, blacklist));
   const databases = await loadDatabases();
   const generated = await loadGeneratedProducts();
   const index = buildProductIndex(databases, generated);
-  const foundProducts = source.products.slice(0, LIMIT ?? source.products.length);
+  const allowedProducts = source.products.filter((product) => !isBlacklistedProduct(product, blacklist));
+  const ignoredCount = source.products.length - allowedProducts.length;
+  if (ignoredCount) verbose(`blacklist ignored products: ${ignoredCount}`);
+  const foundProducts = allowedProducts.slice(0, LIMIT ?? allowedProducts.length);
   const actions = [];
 
   for (const found of foundProducts) {
@@ -96,11 +107,13 @@ function parseCliArgs(argv) {
   categoryOverride = stringArg('--category');
   subcategoryOverride = stringArg('--subcategory');
   regionOverride = stringArg('--region');
+  SCRAPE_METHOD = methodArg();
+  blacklistPath = path.resolve(ROOT, stringArg('--blacklist') ?? DEFAULT_BLACKLIST);
   mappings = mappingArgs();
 }
 
 function positionalUrl() {
-  return args.find((arg, index) => !arg.startsWith('--') && !['--map', '--limit', '--max-pages', '--threshold', '--rate-limit-ms', '--retries', '--shop-name', '--manufacturer', '--category', '--subcategory', '--region'].includes(args[index - 1]));
+  return args.find((arg, index) => !arg.startsWith('--') && !valueFlags().has(args[index - 1]));
 }
 
 function stringArg(name) {
@@ -113,6 +126,31 @@ function numberArg(name) {
   if (!value) return null;
   const number = Number(value);
   return Number.isFinite(number) ? number : null;
+}
+
+function methodArg() {
+  const method = (stringArg('--method') ?? 'auto').toLowerCase();
+  if (method === 'else') return 'crawl';
+  if (['auto', 'custom', 'woocommerce', 'shopify', 'crawl'].includes(method)) return method;
+  throw new Error(`Invalid --method value: ${method}. Use auto, custom, woocommerce, shopify, or crawl.`);
+}
+
+function valueFlags() {
+  return new Set([
+    '--map',
+    '--limit',
+    '--max-pages',
+    '--threshold',
+    '--rate-limit-ms',
+    '--retries',
+    '--shop-name',
+    '--manufacturer',
+    '--category',
+    '--subcategory',
+    '--region',
+    '--method',
+    '--blacklist',
+  ]);
 }
 
 function mappingArgs() {
@@ -136,44 +174,77 @@ function mappingFor(name) {
 
 async function scrapeShop(url) {
   const base = new URL(url);
-  const shopName = shopNameOverride ?? winCtrlShopName(base) ?? hostShopName(base.hostname);
-  const region = regionOverride ?? inferWinCtrlRegion(base) ?? inferShopRegion(base);
+  await assertUrlReachable(base);
+
+  const shopName = shopNameOverride ?? winCtrlShopName(base) ?? fanatecShopName(base) ?? hostShopName(base.hostname);
+  const region = regionOverride ?? inferWinCtrlRegion(base) ?? inferFanatecRegion(base) ?? inferShopRegion(base);
 
   verbose(`shop name: ${shopName}`);
   verbose(`shop region: ${region}`);
-  verbose('try WinCtrl list API');
-  const winCtrlProducts = await scrapeWinCtrl(base, {
-    fetchWithRetry,
-    requestHeaders,
-    isUsefulShopProduct,
-    verbose,
-  }).catch((error) => {
-    verbose(`  WinCtrl failed: ${error.message}`);
-    return [];
-  });
-  verbose(`  WinCtrl products: ${winCtrlProducts.length}`);
+  const customProducts = [];
 
-  verbose('try WooCommerce Store API');
-  const wooCommerceProducts = await scrapeWooCommerce(base).catch((error) => {
-    verbose(`  WooCommerce failed: ${error.message}`);
-    return [];
-  });
-  verbose(`  WooCommerce products: ${wooCommerceProducts.length}`);
+  if (shouldUseMethod('custom') && isWinCtrlShop(base)) {
+    verbose('try WinCtrl list API');
+    const winCtrlProducts = await scrapeWinCtrl(base, {
+      fetchWithRetry,
+      requestHeaders,
+      isUsefulShopProduct,
+      verbose,
+    }).catch((error) => {
+      verbose(`  WinCtrl failed: ${error.message}`);
+      return [];
+    });
+    verbose(`  WinCtrl products: ${winCtrlProducts.length}`);
+    customProducts.push(...winCtrlProducts);
+  }
 
-  verbose('try Shopify products.json');
-  const shopifyProducts = await scrapeShopify(base).catch((error) => {
-    verbose(`  Shopify failed: ${error.message}`);
-    return [];
-  });
-  verbose(`  Shopify products: ${shopifyProducts.length}`);
+  if (shouldUseMethod('custom') && isFanatecShop(base)) {
+    verbose('try Fanatec sitemap parser');
+    const fanatecProducts = await scrapeFanatec(base, {
+      fetchText,
+      isUsefulShopProduct,
+      parseGenericProduct,
+      maxProducts: LIMIT ?? MAX_CRAWL_PAGES,
+      verbose,
+    }).catch((error) => {
+      verbose(`  Fanatec failed: ${error.message}`);
+      return [];
+    });
+    verbose(`  Fanatec products: ${fanatecProducts.length}`);
+    customProducts.push(...fanatecProducts);
+  }
+
+  const wooCommerceProducts = [];
+  if (shouldUseMethod('woocommerce')) {
+    verbose('try WooCommerce Store API');
+    wooCommerceProducts.push(
+      ...(await scrapeWooCommerce(base).catch((error) => {
+        verbose(`  WooCommerce failed: ${error.message}`);
+        return [];
+      })),
+    );
+    verbose(`  WooCommerce products: ${wooCommerceProducts.length}`);
+  }
+
+  const shopifyProducts = [];
+  if (shouldUseMethod('shopify')) {
+    verbose('try Shopify products.json');
+    shopifyProducts.push(
+      ...(await scrapeShopify(base).catch((error) => {
+        verbose(`  Shopify failed: ${error.message}`);
+        return [];
+      })),
+    );
+    verbose(`  Shopify products: ${shopifyProducts.length}`);
+  }
 
   const products = [
-    ...winCtrlProducts,
+    ...customProducts,
     ...wooCommerceProducts,
     ...shopifyProducts,
   ];
 
-  if (!products.length) {
+  if (!products.length && shouldUseMethod('crawl')) {
     verbose('try generic HTML crawler');
     products.push(...(await scrapeGenericHtml(base)));
     verbose(`  generic products: ${products.length}`);
@@ -185,6 +256,11 @@ async function scrapeShop(url) {
     region,
     products: uniqueProducts(products).sort((a, b) => a.name.localeCompare(b.name)),
   };
+}
+
+function shouldUseMethod(method) {
+  if (SCRAPE_METHOD === 'auto') return true;
+  return SCRAPE_METHOD === method;
 }
 
 async function scrapeWooCommerce(base) {
@@ -466,6 +542,74 @@ async function loadGeneratedProducts() {
   }
 }
 
+async function loadProductBlacklist(file) {
+  try {
+    const data = JSON.parse(await readFile(file, 'utf8'));
+    const entries = Array.isArray(data) ? data : data.products;
+    if (!Array.isArray(entries)) {
+      throw new Error(`${file} must be a JSON array or an object with a products array.`);
+    }
+    return entries;
+  } catch (error) {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  }
+}
+
+function isBlacklistedProduct(product, blacklist) {
+  return blacklist.some((entry) => matchesBlacklistEntry(product, entry));
+}
+
+function sanitizeFoundProductName(product, blacklist) {
+  return {
+    ...product,
+    name: stripBlacklistedNameWords(product.name, blacklist),
+  };
+}
+
+function stripBlacklistedNameWords(name, blacklist) {
+  let value = cleanText(name);
+  for (const word of blacklistedNameWords(blacklist)) {
+    value = value.replace(nameWordPattern(word), ' ');
+  }
+  return cleanText(value);
+}
+
+function blacklistedNameWords(blacklist) {
+  return blacklist.flatMap((entry) => {
+    if (!entry || typeof entry !== 'object') return [];
+    return entry.name_words ?? entry.nameWords ?? [];
+  });
+}
+
+function nameWordPattern(word) {
+  const phrase = word.toString().trim().split(/\s+/).map(escapeRegExp).join('\\s+');
+  return new RegExp(`\\s*(?:[([{]\\s*)?${phrase}(?:\\s*[)\\]}])?\\s*`, 'gi');
+}
+
+function matchesBlacklistEntry(product, entry) {
+  const text = normalizeName(
+    [product.name, product.url, product.sourceKey, ...(product.categories ?? [])].filter(Boolean).join(' '),
+  );
+  const productUrl = urlKey(product.url);
+
+  if (typeof entry === 'string') {
+    const needle = normalizeName(entry);
+    return Boolean(needle && (text.includes(needle) || productUrl.includes(entry.toLowerCase())));
+  }
+
+  if (!entry || typeof entry !== 'object') return false;
+  if (!['name', 'url', 'sourceKey', 'category', 'match'].some((field) => entry[field])) return false;
+
+  return [
+    entry.name ? normalizeName(product.name).includes(normalizeName(entry.name)) : true,
+    entry.url ? productUrl === urlKey(entry.url) || productUrl.includes(urlKey(entry.url)) : true,
+    entry.sourceKey ? product.sourceKey === entry.sourceKey : true,
+    entry.category ? normalizeName((product.categories ?? []).join(' ')).includes(normalizeName(entry.category)) : true,
+    entry.match ? text.includes(normalizeName(entry.match)) : true,
+  ].every(Boolean);
+}
+
 function buildProductIndex(databases, generatedProducts) {
   const records = [];
 
@@ -550,12 +694,14 @@ function decideAction(found, match, source) {
   const status = normalizeShopStatus(found.status);
   const parsedPrice = usablePrice(found.price);
   const price = status === 'out-of-stock' ? 'Unknown' : parsedPrice;
+  const lastUpdated = currentUpdateDate();
   const shop = {
     name: source.shopName,
     ...(price !== undefined ? { price, currency: found.currency ?? 'USD' } : {}),
     url: normalizeUrl(found.url),
     region: source.region,
     status,
+    last_updated: lastUpdated,
   };
 
   if (!match) {
@@ -601,6 +747,7 @@ function applyAction(databases, action, source) {
   if (action.type === 'add-shop') {
     action.match.record.product.shops ??= [];
     action.match.record.product.shops.push(action.shop);
+    touchProduct(action.match.record.product, action.shop);
     action.match.record.database.touched = true;
     return;
   }
@@ -609,6 +756,8 @@ function applyAction(databases, action, source) {
     action.existingShop.price = action.shop.price;
     action.existingShop.currency = action.shop.currency;
     action.existingShop.status = action.shop.status;
+    action.existingShop.last_updated = action.shop.last_updated;
+    touchProduct(action.match.record.product, action.shop);
     action.match.record.database.touched = true;
     return;
   }
@@ -617,8 +766,14 @@ function applyAction(databases, action, source) {
     for (const field of action.missingFields) {
       action.existingShop[field] = action.shop[field];
     }
+    action.existingShop.last_updated = action.shop.last_updated;
+    touchProduct(action.match.record.product, action.shop);
     action.match.record.database.touched = true;
   }
+}
+
+function touchProduct(product, shop) {
+  product.last_updated = shop.last_updated ?? currentUpdateDate();
 }
 
 function missingShopFields(existingShop, shop) {
@@ -645,8 +800,13 @@ function newProduct(action) {
     component_sub_category: action.subCategory,
     product_url: action.found.url,
     picture_url: action.found.image,
+    last_updated: action.shop.last_updated,
     shops: [action.shop],
   };
+}
+
+function currentUpdateDate() {
+  return new Date().toISOString().slice(0, 10);
 }
 
 function findExistingShop(product, shop) {
@@ -832,7 +992,7 @@ function looksLikeProductUrl(url, base) {
     return false;
   }
   if (looksLikePaginationUrl(url, base.toString())) return false;
-  return /(product|products|shop|store)/i.test(parsed.pathname);
+  return /(product|products|shop|store)/i.test(parsed.pathname) || /\/p\//i.test(parsed.pathname);
 }
 
 function looksLikeShopPage(url, base) {
@@ -842,7 +1002,7 @@ function looksLikeShopPage(url, base) {
     return false;
   }
 
-  return /\/(shop|store|collections?|categories|product-category|catalog)(\/|$)/i.test(parsed.pathname);
+  return /\/(shop|store|collections?|categories|product-category|catalog|c)(\/|$)/i.test(parsed.pathname);
 }
 
 function looksLikePaginationUrl(url, currentUrl) {
@@ -869,13 +1029,24 @@ function requestHeaders(accept) {
 async function fetchText(url) {
   const response = await fetchWithRetry(url, {
     headers: requestHeaders('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),
-    signal: AbortSignal.timeout(30_000),
   });
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
   return response.text();
 }
 
 let nextFetchAt = 0;
+
+async function assertUrlReachable(url) {
+  verbose(`reachability check: ${url}`);
+  try {
+    await fetchWithTimeout(url, {
+      headers: requestHeaders('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),
+      redirect: 'follow',
+    });
+  } catch (error) {
+    throw new Error(`URL unreachable within ${FETCH_TIMEOUT_MS / 1000}s: ${url} (${error.message})`);
+  }
+}
 
 async function fetchWithRetry(url, options = {}) {
   let lastResponse = null;
@@ -891,11 +1062,12 @@ async function fetchWithRetry(url, options = {}) {
     await waitForRateLimit();
 
     try {
-      const response = await fetch(url, options);
+      const response = await fetchWithTimeout(url, options);
       if (!shouldRetryResponse(response) || attempt === MAX_RETRIES) return response;
       lastResponse = response;
       lastError = null;
     } catch (error) {
+      if (isTimeoutError(error)) throw error;
       if (attempt === MAX_RETRIES) throw error;
       lastResponse = null;
       lastError = error;
@@ -904,6 +1076,16 @@ async function fetchWithRetry(url, options = {}) {
 
   if (lastError) throw lastError;
   return lastResponse;
+}
+
+async function fetchWithTimeout(url, options = {}) {
+  const timeoutSignal = AbortSignal.timeout(FETCH_TIMEOUT_MS);
+  const signal = options.signal ? AbortSignal.any([options.signal, timeoutSignal]) : timeoutSignal;
+  return fetch(url, { ...options, signal });
+}
+
+function isTimeoutError(error) {
+  return error?.name === 'TimeoutError' || error?.name === 'AbortError';
 }
 
 async function waitForRateLimit() {

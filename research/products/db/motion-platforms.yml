@@ -14,6 +14,7 @@ commercial:
         currency: USD
         url: https://cammusracing.com/product/2026-new-arrival-cammus-rds4-motion-kit-4-actuator-for-sim-racing/
         region: Global
+        status: available
   - product_name: 3DOF Motion Set QS-210
     description: "Qubic System QS-210 3DOF Motion Set. linear-actuator 3DOF kit. available via
       Qubic distributors. 3DOF bundle: four QS-210 actuators, two power cabinets, and one
@@ -664,6 +665,601 @@ commercial:
         currency: EUR
         url: https://www.shiftershh.com/en/home/21-cog-shh-3dof-motion-system.html
         region: EU
+  - product_name: Pro Haptic Bass Shaker
+    description: 100W Pro Haptic Bass Shaker. motion simulator. listed on Trakracer. Trak Racer
+      TR-BSA100 Pro Haptic Bass Shaker with – Deep Engine & Low-Frequency Immersion
+      Experience true tactile immersion with the Trak Racer TR-BSA100 Pro Haptic Bass Shaker
+      ,...
+    manufacturer: 100W
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://trakracer.eu/products/100w-pro-haptic-bass-shaker
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR-BSA200-KIT.2_d4a11652-9a95-4022-800b-36a70c0b8b00.png?v=1720181775
+    shops:
+      - name: Trakracer
+        price: 69
+        currency: USD
+        url: https://trakracer.eu/products/100w-pro-haptic-bass-shaker
+        region: EU
+        status: available
+  - product_name: Pro Haptic Bass Shaker - Set of 2
+    description: 10W Pro Haptic Bass Shaker - Set of 2. motion simulator. listed on Trakracer.
+      10W Bass Shakers – Precision Haptic Feedback for Sim Racing Controls Transform how
+      your sim rig feels with compact 10W bass shakers, purpose-built to add realistic
+      vibration fee...
+    manufacturer: 10W
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://trakracer.eu/products/10w-pro-haptic-bass-shaker-set-of-2
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRR115_BS-10W_Top01_1x2_dbf2c4b5-7e2a-445a-b68f-61b440011206.png?v=1774560861
+    shops:
+      - name: Trakracer
+        price: 59
+        currency: USD
+        url: https://trakracer.eu/products/10w-pro-haptic-bass-shaker-set-of-2
+        region: EU
+        status: available
+  - product_name: G5 Bracket Mounts for Aluminum Profile Type Simulator Frames
+    description: D-BOX G5 Bracket Mounts for Aluminum Profile Type Simulator Frames. 4dof
+      platform. listed on Trakracer. Trak Racer is the Official Simulator Supplier of Alpine
+      F1 Team and Partner of Airbus Aircraft. WHAT'S INCLUDED 1 x D-BOX Mounting Brackets 4
+      x M8*16 Hex Screws 4 x M6*16 Hex Sc...
+    manufacturer: D-BOX
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://trakracer.eu/products/d-box-g5-bracket-mounts-for-aluminum-profile-type-simulator-frames
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRMOVE-2-B.5_ae524044-f63c-4efb-9b67-51ebba63d0e2.png?v=1731587350
+    shops:
+      - name: Trakracer
+        price: 15
+        currency: USD
+        url: https://trakracer.eu/products/d-box-g5-bracket-mounts-for-aluminum-profile-type-simulator-frames
+        region: EU
+        status: available
+  - product_name: GEN 5 Motion Actuator (1.5" stroke/travel range)
+    description: D-BOX GEN 5 Motion Actuator (1.5" stroke/travel range). motion simulator.
+      listed on Trakracer. Trak Racer is the Official Simulator Supplier of Alpine F1 Team
+      and Partner of Airbus Aircraft. Looking to take your sim racing to another level? Look
+      no further than D-BOX's al...
+    manufacturer: D-BOX
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://trakracer.eu/products/d-box-gen-5-motion-actuator-1-5-stroke-travel-range
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/DBOX.1_d16f8294-d946-4d0c-ba1e-c9299597e320.webp?v=1739505403
+    shops:
+      - name: Trakracer
+        price: 1999
+        currency: USD
+        url: https://trakracer.eu/products/d-box-gen-5-motion-actuator-1-5-stroke-travel-range
+        region: EU
+        status: available
+  - product_name: Simagic P-APS Accessories Power Supply – Power Unit for Haptic, LED & Heel-Stop Modules
+    description: Trakracer Simagic P-APS Accessories Power Supply – Power Unit for Haptic, LED &
+      Heel-Stop Modules. 4dof platform. listed on Trakracer. Product Description The Simagic
+      P-APS Accessories Power Supply is built to streamline your sim racing setup by
+      delivering reliable, clean, and efficient power to multiple high-d...
+    manufacturer: Trakracer
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://trakracer.eu/products/simagic-accessories-power-supply
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/P-APS.png?v=1759211861
+    shops:
+      - name: Trakracer
+        price: 39
+        currency: USD
+        url: https://trakracer.eu/products/simagic-accessories-power-supply
+        region: EU
+        status: available
+  - product_name: Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and Bass Shaker Kit
+    description: Trakracer Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and Bass
+      Shaker Kit. motion simulator. listed on Trakracer. Trak Racer Pro Bass Shaker & Stereo
+      Amplifier Kit – Ultimate Simulation Vibration & Immersion System Upgrade your
+      simulator or gaming setup with the Trak Racer Pro Bass Shaker &...
+    manufacturer: Trakracer
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://trakracer.eu/products/haptic-bass-shaker-kit-with-200w-bass-amp-and-100w-shaker
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR-BSA200-KIT.1.png?v=1720000141
+    shops:
+      - name: Trakracer
+        price: 219
+        currency: USD
+        url: https://trakracer.eu/products/haptic-bass-shaker-kit-with-200w-bass-amp-and-100w-shaker
+        region: EU
+        status: available
+  - product_name: Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and Bass Shaker Kit
+      with Rig Mount
+    description: Trakracer Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and Bass
+      Shaker Kit with Rig Mount. motion simulator. listed on Trakracer. Trak Racer Pro Bass
+      Shaker & Stereo Amplifier Kit with Universal Mounting Plate – Simulation Vibration &
+      Immersion System Upgrade your simulator or gaming setup with the Trak Ra...
+    manufacturer: Trakracer
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://trakracer.eu/products/haptic-bass-shaker-kit-with-200w-amp-100w-shaker-and-shaker-mount
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/tr-bsa200kit_1.webp?v=1733459529
+    shops:
+      - name: Trakracer
+        price: 249
+        currency: USD
+        url: https://trakracer.eu/products/haptic-bass-shaker-kit-with-200w-amp-100w-shaker-and-shaker-mount
+        region: EU
+        status: available
+  - product_name: Universal Bass Shaker/Buttkicker/Tactile Transducer Sim Rig Mount
+    description: Trakracer Universal Bass Shaker/Buttkicker/Tactile Transducer Sim Rig Mount.
+      motion simulator. listed on Trakracer. Trak Racer is the Official Simulator Supplier
+      of Alpine F1 Team and Partner of Airbus Aircraft. Add extra immersion to your rig with
+      this single-mount, universal bass shaker hol...
+    manufacturer: Trakracer
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://trakracer.eu/products/universal-bass-shaker-buttkicker-tactile-transducer-sim-rig-mount-1
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/40_TR80-OFCPLATE2_02_Shopify_50e35cd1-fa68-4689-a2cd-55b6ec123e4e.png?v=1726843859
+    shops:
+      - name: Trakracer
+        price: 39
+        currency: USD
+        url: https://trakracer.eu/products/universal-bass-shaker-buttkicker-tactile-transducer-sim-rig-mount-1
+        region: EU
+        status: available
+  - product_name: 3 Dof motion kit with 4 linear actuator 100
+    description: Vnmsimulation 3 Dof motion kit with 4 linear actuator 100. 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/vi/product/3-dof-motion-kit-with-4-linear-actuator-100/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/vnm13-2-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/3-dof-motion-kit-with-4-linear-actuator-100/
+        region: Unknown
+        status: out-of-stock
+  - product_name: 3 Dof motion kit with 4 linear actuator 100
+    description: Vnmsimulation 3 Dof motion kit with 4 linear actuator 100. 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/product/3-dof-motion-kit-with-4-linear-actuator-100/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/vnm13-2-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/3-dof-motion-kit-with-4-linear-actuator-100/
+        region: Unknown
+        status: out-of-stock
+  - product_name: 3 Dof motion kit with 4 linear actuator 150
+    description: Vnmsimulation 3 Dof motion kit with 4 linear actuator 150. 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/vi/product/3-dof-motion-kit-with-4-linear-actuator-150/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/3DOFMotionkitwith4linearactuator100_V2Cabinet.png
+    shops:
+      - name: Vnmsimulation
+        price: 3897
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/3-dof-motion-kit-with-4-linear-actuator-150/
+        region: Unknown
+        status: available
+  - product_name: 3 Dof motion kit with 4 linear actuator 150 & 3000W power supply
+    description: Vnmsimulation 3 Dof motion kit with 4 linear actuator 150 & 3000W power supply.
+      4dof platform. listed on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/product/3-dof-motion-kit-with-4-linear-actuator-150/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/3DOFMotionkitwith4linearactuator100_V2Cabinet.png
+    shops:
+      - name: Vnmsimulation
+        price: 3897
+        currency: USD
+        url: https://vnmsimulation.com/product/3-dof-motion-kit-with-4-linear-actuator-150/
+        region: Unknown
+        status: available
+  - product_name: Motion System 3DOF 4 Actuator 150 (without seat)
+    description: Vnmsimulation Motion System 3DOF 4 Actuator 150 (without seat). 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/vi/product/motion-system-3dof-4-actuator-150-without-seat/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/19-3.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 4250
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/motion-system-3dof-4-actuator-150-without-seat/
+        region: Unknown
+        status: available
+  - product_name: Motion System 3DOF 4 Actuator 150 (without seat)
+    description: Vnmsimulation Motion System 3DOF 4 Actuator 150 (without seat). 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/product/motion-system-3dof-4-actuator-150-without-seat/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/19-3.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 4250
+        currency: USD
+        url: https://vnmsimulation.com/product/motion-system-3dof-4-actuator-150-without-seat/
+        region: Unknown
+        status: available
+  - product_name: Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF without seat)
+    description: Vnmsimulation Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF
+      without seat). 4dof platform. listed on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/vi/product/motion-system-3dof-4-actuator-150-with-surge-tl-150-5-dof-without-seat/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/21-3.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/motion-system-3dof-4-actuator-150-with-surge-tl-150-5-dof-without-seat/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF without seat)
+    description: Vnmsimulation Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF
+      without seat). 4dof platform. listed on Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/product/motion-system-3dof-4-actuator-150-with-surge-tl-150-5-dof-without-seat/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/21-3.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/motion-system-3dof-4-actuator-150-with-surge-tl-150-5-dof-without-seat/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Actuator 100
+    description: VNM Actuator 100. motion simulator. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/vi/product/vnm-actuator-100/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/1-9.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 800
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-actuator-100/
+        region: Unknown
+        status: available
+  - product_name: Actuator 100
+    description: VNM Actuator 100. motion simulator. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/product/vnm-actuator-100/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/1-9.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 800
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-actuator-100/
+        region: Unknown
+        status: available
+  - product_name: Actuator 150
+    description: VNM Actuator 150. motion simulator. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/vi/product/vnm-actuator-150/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/1-10.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-actuator-150/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Actuator 150
+    description: VNM Actuator 150. motion simulator. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/product/vnm-actuator-150/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/1-10.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-actuator-150/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Actuator 300
+    description: VNM Actuator 300. motion simulator. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/vi/product/vnm-actuator-300/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/6-2.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-actuator-300/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Actuator 300
+    description: VNM Actuator 300. motion simulator. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/product/vnm-actuator-300/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/6-2.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-actuator-300/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Motion 2 TL and Surge Platform 4080
+    description: VNM Motion 2 TL and Surge Platform 4080. 4dof platform. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/vi/product/vnm-motion-2-tl-and-surge-platform-4080/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/double-tl-and-surge-3-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 4050
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-motion-2-tl-and-surge-platform-4080/
+        region: Unknown
+        status: available
+  - product_name: Motion 2 TL and Surge Platform 4080
+    description: VNM Motion 2 TL and Surge Platform 4080. 4dof platform. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/product/vnm-motion-2-tl-and-surge-platform-4080/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/double-tl-and-surge-3-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 4050
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-motion-2-tl-and-surge-platform-4080/
+        region: Unknown
+        status: available
+  - product_name: Motion 3 DOF 3 Linear Actuator 100 kit
+    description: VNM Motion 3 DOF 3 Linear Actuator 100 kit. motion simulator. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/vi/product/vnm-motion-3-dof-3-linear-actuator-100-kit/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/VNM-STEERI-7.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-motion-3-dof-3-linear-actuator-100-kit/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Motion 3 DOF 3 Linear Actuator 100 kit
+    description: VNM Motion 3 DOF 3 Linear Actuator 100 kit. motion simulator. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/product/vnm-motion-3-dof-3-linear-actuator-100-kit/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/VNM-STEERI-7.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-motion-3-dof-3-linear-actuator-100-kit/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Motion 3 DOF 3 Linear Actuator 150 kit
+    description: VNM Motion 3 DOF 3 Linear Actuator 150 kit. motion simulator. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/vi/product/vnm-motion-3-dof-3-linear-actuator-150-kit/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/4.png
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-motion-3-dof-3-linear-actuator-150-kit/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Motion 3 DOF 3 Linear Actuator 150 kit
+    description: VNM Motion 3 DOF 3 Linear Actuator 150 kit. motion simulator. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/product/vnm-motion-3-dof-3-linear-actuator-150-kit/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/4.png
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-motion-3-dof-3-linear-actuator-150-kit/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Motion Cabinet (7 – 9 Controllers)
+    description: VNM Motion Cabinet (7 – 9 Controllers). motion simulator. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/product/vnm-motion-cabinet-7-9-controllers/
+    shops:
+      - name: Vnmsimulation
+        price: 350
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-motion-cabinet-7-9-controllers/
+        region: Unknown
+        status: available
+  - product_name: Motion Controller
+    description: VNM Motion Controller. motion simulator. listed on Vnmsimulation. Official shop
+      listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/vi/product/vnm-motion-controller/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/VNM-STEERI-5.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 300
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-motion-controller/
+        region: Unknown
+        status: available
+  - product_name: Motion Controller
+    description: VNM Motion Controller. motion simulator. listed on Vnmsimulation. Official shop
+      listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/product/vnm-motion-controller/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/VNM-STEERI-5.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 300
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-motion-controller/
+        region: Unknown
+        status: available
+  - product_name: Motion EMC Stop Button
+    description: VNM Motion EMC Stop Button. motion simulator. listed on Vnmsimulation. Official
+      shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/vi/product/vnm-motion-emc-stop-button/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/VNM-STEERI-2.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 43
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-motion-emc-stop-button/
+        region: Unknown
+        status: available
+  - product_name: Motion EMC Stop Button
+    description: VNM Motion EMC Stop Button. motion simulator. listed on Vnmsimulation. Official
+      shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: motion-simulator
+    product_url: https://vnmsimulation.com/product/vnm-motion-emc-stop-button/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/VNM-STEERI-2.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 43
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-motion-emc-stop-button/
+        region: Unknown
+        status: available
+  - product_name: Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and seat)
+    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and seat). 4dof
+      platform. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/vi/product/vnm-motion-system-6dof-4-actuator-150-1-sg-and-2tl-no-rig-and-seat/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/vnm-motion-6-dof-7-actuators-no-rig-v1-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 7700
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-motion-system-6dof-4-actuator-150-1-sg-and-2tl-no-rig-and-seat/
+        region: Unknown
+        status: available
+  - product_name: Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and seat)
+    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and seat). 4dof
+      platform. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/product/vnm-motion-system-6dof-4-actuator-150-1-sg-and-2tl-no-rig-and-seat/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/vnm-motion-6-dof-7-actuators-no-rig-v1-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 7700
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-motion-system-6dof-4-actuator-150-1-sg-and-2tl-no-rig-and-seat/
+        region: Unknown
+        status: available
+  - product_name: Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat)
+    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat). 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/vi/product/vnm-motion-system-6dof-4-actuator-150-1-sg-and-2tl-no-seat/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/vnm-motion-6-dof-7-actuators-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-motion-system-6dof-4-actuator-150-1-sg-and-2tl-no-seat/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat)
+    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat). 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/product/vnm-motion-system-6dof-4-actuator-150-1-sg-and-2tl-no-seat/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/vnm-motion-6-dof-7-actuators-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-motion-system-6dof-4-actuator-150-1-sg-and-2tl-no-seat/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Motion TL and surge platform 4080
+    description: VNM Motion TL and surge platform 4080. 4dof platform. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/vi/product/vnm-motion-tl-and-surge-platform-4080/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/platform-motion-sgtl-4-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-motion-tl-and-surge-platform-4080/
+        region: Unknown
+        status: out-of-stock
+  - product_name: Motion TL and surge platform 4080
+    description: VNM Motion TL and surge platform 4080. 4dof platform. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: motion-platforms
+    component_sub_category: 4dof-platform
+    product_url: https://vnmsimulation.com/product/vnm-motion-tl-and-surge-platform-4080/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/platform-motion-sgtl-4-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-motion-tl-and-surge-platform-4080/
+        region: Unknown
+        status: out-of-stock
 opensource:
   - project_name: 6DOF Motion Platform
     description: Simmetrik 6DOF Motion Platform. open hardware 6DOF motion simulator platform.
