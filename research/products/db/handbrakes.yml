@@ -1,19 +1,19 @@
 commercial:
   - product_name: ClubSport Handbrake V2
-    description: Fanatec ClubSport Handbrake V2. load-cell analog handbrake. Currently
-      unavailable on official US page in search result; alternate locale showed
-      available. Precision load-cell sensor with analog input.
+    description: Fanatec ClubSport Handbrake V2. load-cell analog handbrake. in
+      stock on official EU catalog. Stronger rally/drift handbrake with improved
+      electronics and included ClubSport USB Adapter.
     manufacturer: Fanatec
     component_category: handbrakes
     component_sub_category: Analog handbrake
-    product_url: https://www.fanatec.com/us-en/shifters-others/clubsport-handbrake-v2
-    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Add-ons/CS_HB_V2/CS_HB_V2-01.webp
+    product_url: https://www.fanatec.com/eu/en/p/add-ons/crd-9050002-ww/clubsport-handbrake
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Add-ons/CS_HB_V2/CS_HB_V2-01.png
     shops:
       - name: Fanatec
-        price: 229.99
-        currency: USD
-        url: https://www.fanatec.com/us-en/shifters-others/clubsport-handbrake-v2
-        region: Unknown
+        price: 184.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/add-ons/crd-9050002-ww/clubsport-handbrake
+        region: EU
   - product_name: Handbrake
     description: Aiologs Handbrake. analog/digital USB handbrake. Current Aiologs shop
       product; shipment date shown as 17 April in search result. 2-in-1 analog axis and
@@ -30,18 +30,20 @@ commercial:
         url: https://shop.aiologs.net/new/product/handbrake/
         region: Global
   - product_name: Handbrake
-    description: Heusinkveld Handbrake. load-cell analog handbrake. Current Heusinkveld shop
-      product. Force-sensitive 120 kg load cell.
+    description: Heusinkveld Handbrake. load-cell analog handbrake. in stock on
+      official EU shop. Force-sensitive 120 kg load cell with adjustable
+      dual-stage spring system, vertical/horizontal lever positions, and
+      included elastomers.
     manufacturer: Heusinkveld
     component_category: handbrakes
     component_sub_category: Analog handbrake
-    product_url: https://heusinkveld.com/shop/handbrake-shifters/handbrake/
-    picture_url: https://cdn-eu.heusinkveld.com/wp-content/uploads/sites/7/2026/04/render-nieuw-april-2026.png
+    product_url: https://heusinkveld.com/eu/shop/handbrake-shifters/handbrake/
+    picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/01/8719689204402-1-Handbrake-standing-lever_1024x768.png
     shops:
       - name: Heusinkveld
-        price: 279
+        price: 339
         currency: EUR
-        url: https://heusinkveld.com/shop/handbrake-shifters/handbrake/
+        url: https://heusinkveld.com/eu/shop/handbrake-shifters/handbrake/
         region: EU
   - product_name: Handbrake V1.5 Rally Version
     description: VNM Handbrake V1.5 Rally Version. load-cell rally handbrake. Official VNM
@@ -125,20 +127,65 @@ commercial:
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/TSS-Handbrake-Sparco-Mod-768x768-1.webp
     shops: []
   - product_name: XB1 Loadcell Handbrake
-    description: Sim-Lab XB1 Loadcell Handbrake. load-cell analog handbrake. Current/legacy
-      Sim-Lab product [official page not captured directly in this pass]. Load-cell
-      handbrake.
+    description: Sim-Lab XB1 Loadcell Handbrake. load-cell analog handbrake. in
+      stock on official EU shop. 150 kg load cell, adjustable pre-load and
+      damper resistance, and full aluminum construction.
     manufacturer: Sim-Lab
     component_category: handbrakes
     component_sub_category: Analog handbrake
-    product_url: https://sim-lab.eu/
-    picture_url: https://sim-lab.eu/cdn/shop/files/Shifter_tryout.png?v=1738697793
+    product_url: https://sim-lab.eu/en-de/products/handbrake-xb1-loadcell-sim-racing
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/xb1handbrake2.jpg?v=1744267566
     shops:
       - name: Sim-Lab EU
-        price: 199
+        price: 195.71
         currency: EUR
-        url: https://sim-lab.eu/
-        region: Unknown
+        url: https://sim-lab.eu/en-de/products/handbrake-xb1-loadcell-sim-racing
+        region: EU
+  - product_name: DRIFTpro Load Cell E-Brake
+    description: RealGear DRIFTpro Load Cell E-Brake. analog load-cell handbrake.
+      made to order on official Ricmotech store. Force-sensing sim-racing
+      e-brake for drift and rally use.
+    manufacturer: RealGear
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://www.ricmotech.com/realgear-driftpro-load-cell-e-brake
+    picture_url: https://www.ricmotech.com/assets/images/RGR-DPHB-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 244.5
+        currency: USD
+        url: https://www.ricmotech.com/realgear-driftpro-load-cell-e-brake
+        region: US
+  - product_name: RALLYpro Vertical Hydraulic Hand Brake
+    description: RealGear RALLYpro Vertical Hydraulic Hand Brake. analog hydraulic
+      handbrake. official Ricmotech store listing. Vertical all-metal hydraulic
+      handbrake for racing simulators.
+    manufacturer: RealGear
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://www.ricmotech.com/realgear-rallypro-hydraulic-vertical-hand-brake
+    picture_url: https://www.ricmotech.com/assets/images/RGR-RPHBV-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 473.5
+        currency: USD
+        url: https://www.ricmotech.com/realgear-rallypro-hydraulic-vertical-hand-brake
+        region: US
+  - product_name: RALLYpro Xtreme Hand Brake
+    description: RealGear RALLYpro Xtreme Hand Brake. analog hydraulic handbrake.
+      official Ricmotech store listing. Wilwood hydraulic handbrake adapted for
+      sim-racing use.
+    manufacturer: RealGear
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://www.ricmotech.com/realgear-rallypro-xtreme-hand-brake
+    picture_url: https://www.ricmotech.com/assets/images/RGR-RPHBVW-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 599.5
+        currency: USD
+        url: https://www.ricmotech.com/realgear-rallypro-xtreme-hand-brake
+        region: US
 opensource:
   - project_name: Analog E-Brake
     description: AM-STUDIO Analog E-Brake. Arduino analog handbrake. Popular older

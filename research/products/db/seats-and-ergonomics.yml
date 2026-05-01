@@ -1,32 +1,92 @@
 commercial:
   - product_name: Elite ES1 Seat
-    description: Next Level Racing Elite ES1 Seat. fixed sim racing seat. current. Fixed sim
-      racing seat developed using motorsport and sim feedback.
+    description: Next Level Racing Elite ES1 Seat. fixed sim racing seat. in stock
+      on official store. Fixed Elite-series sim racing seat developed from
+      motorsport and sim feedback.
     manufacturer: Next Level Racing
     component_category: seats-and-ergonomics
     component_sub_category: Racing seat
-    product_url: https://nextlevelracing.com/products/elite-es1-sim-racing-seat/
-    picture_url: https://nextlevelracing.com/wp-content/uploads/2021/09/Elite-ES1-Sim-Racing-Seat.webp
+    product_url: https://nextlevelracing.com/product/elite-es1-sim-racing-seat/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2021/09/es1_sim_racing_seat_2-1.png
     shops:
       - name: Next Level Racing
         price: 399
         currency: USD
-        url: https://nextlevelracing.com/products/elite-es1-sim-racing-seat/
+        url: https://nextlevelracing.com/product/elite-es1-sim-racing-seat/
         region: US
   - product_name: ERS3 Elite Reclining Seat
-    description: Next Level Racing ERS3 Elite Reclining Seat. reclining sim racing seat.
-      sold out on official US store during check. Reclining sim seat with double
-      recliners.
+    description: Next Level Racing ERS3 Elite Reclining Seat. reclining sim racing
+      seat. in stock on official store. Elite-series reclining sim seat.
     manufacturer: Next Level Racing
     component_category: seats-and-ergonomics
     component_sub_category: Racing seat
-    product_url: https://store-us.nextlevelracing.com/products/ers3-elite-reclining-seat
-    picture_url: https://store-us.nextlevelracing.com/cdn/shop/files/NextLevelRacingERS31_313c3682-5178-4946-b97a-849866bd74b1.jpg?v=1750395967&width=1920
+    product_url: https://nextlevelracing.com/product/ers3/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2023/11/ers3_web_gallery.png
     shops:
-      - name: Next Level Racing US
-        price: 249
+      - name: Next Level Racing
+        price: 279
         currency: USD
-        url: https://store-us.nextlevelracing.com/products/ers3-elite-reclining-seat
+        url: https://nextlevelracing.com/product/ers3/
+        region: US
+  - product_name: ES2 Elite Sim Racing Seat
+    description: Next Level Racing ES2 Elite Sim Racing Seat. fixed sim racing seat.
+      in stock on official store. FIA Official Licensed Elite-series seat with
+      hydro-dip carbon finish.
+    manufacturer: Next Level Racing
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://nextlevelracing.com/product/es2-elite-sim-racing-seat/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2025/08/es2_web_gallery_1.webp
+    shops:
+      - name: Next Level Racing
+        price: 499
+        currency: USD
+        url: https://nextlevelracing.com/product/es2-elite-sim-racing-seat/
+        region: US
+  - product_name: ERS3 Hypercool Ventilated Sim Racing Seat
+    description: Next Level Racing ERS3 Hypercool Ventilated Sim Racing Seat.
+      ventilated reclining sim racing seat. in stock on official store.
+      Reclining Elite-series seat with Hypercool ventilation.
+    manufacturer: Next Level Racing
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://nextlevelracing.com/product/ers3-hypercool-ventilated-sim-racing-seat/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2025/07/ers3_hypercool_web_1.png
+    shops:
+      - name: Next Level Racing
+        price: 499
+        currency: USD
+        url: https://nextlevelracing.com/product/ers3-hypercool-ventilated-sim-racing-seat/
+        region: US
+  - product_name: PRS1 Performance Reclining Seat
+    description: Next Level Racing PRS1 Performance Reclining Seat. reclining sim
+      racing seat. in stock on official store. Performance reclining seat for
+      racing cockpit builds.
+    manufacturer: Next Level Racing
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://nextlevelracing.com/product/prs1-performance-reclining-seat/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2025/06/PRS1_WEB_1.webp
+    shops:
+      - name: Next Level Racing
+        price: 399
+        currency: USD
+        url: https://nextlevelracing.com/product/prs1-performance-reclining-seat/
+        region: US
+  - product_name: PRS2 Performance Reclining Seat
+    description: Next Level Racing PRS2 Performance Reclining Seat. reclining sim
+      racing seat. in stock on official store. Performance reclining seat for
+      racing cockpit builds.
+    manufacturer: Next Level Racing
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://nextlevelracing.com/product/prs2-performance-reclining-seat/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2025/06/PRS1_WEB_1-1.webp
+    shops:
+      - name: Next Level Racing
+        price: 399
+        currency: USD
+        url: https://nextlevelracing.com/product/prs2-performance-reclining-seat/
         region: US
   - product_name: FX1 Pro
     description: Corbeau FX1 Pro. motorsport fixed-back seat. current. Fixed-back fiberglass
@@ -42,21 +102,20 @@ commercial:
         currency: USD
         url: https://corbeau.com/products/fx1-pro
         region: US
-  - product_name: Grid Q
-    description: Sparco Grid Q. motorsport fixed-back seat. current through retailers;
-      official product-specific URL not confirmed [uncertain]. QRT fiberglass shell; FIA
-      8855-1999 approval listed by retailer.
+  - product_name: SEAT GRID Q GAMING BK
+    description: Sparco Grid Q Gaming. fixed sim racing bucket seat. current on
+      official German shop. Gaming version of the Grid Q seat for sim cockpits.
     manufacturer: Sparco
     component_category: seats-and-ergonomics
     component_sub_category: Racing seat
-    product_url: Product-specific official page not found during pass [uncertain]
-    picture_url: https://static.wixstatic.com/media/98a6d0_7f3f0fdd0be745f99e2b2ae84c4071e8~mv2_d_1412_1848_s_2.png/v1/fill/w_71,h_92,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/98a6d0_7f3f0fdd0be745f99e2b2ae84c4071e8~mv2_d_1412_1848_s_2.png
+    product_url: https://www.sparco-official.com/de/seat-grid-q-gaming-bk.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/008009gnr_grid-q_gaming.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
-      - name: Sparco
-        price: 511.18
+      - name: Sparco Official DE
+        price: 450.18
         currency: EUR
-        url: Product-specific official page not found during pass [uncertain]
-        region: US
+        url: https://www.sparco-official.com/de/seat-grid-q-gaming-bk.html
+        region: DE
   - product_name: GT Pro Racing Seat - Fiberglass Black
     description: Trak Racer GT-Pro Fiberglass Seat. fixed sim racing bucket. current.
       Fixed-back GT bucket seat with ultra-light fiberglass shell.
@@ -71,19 +130,277 @@ commercial:
         currency: USD
         url: https://trakracer.com/products/gt-style-fixed-fiberglass-seat
         region: US
+  - product_name: PRO RS Simulator Seat
+    description: GT Omega PRO RS Simulator Seat. reclining simulator seat. in
+      stock on official UK shop. Race-focused simulator seat with cold-moulded
+      foam and fabric or PVC leather finish options.
+    manufacturer: GT Omega
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.gtomega.co.uk/products/pro-rs-simulator-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/RS_ProGen2_Leather_Black_2026_U_01.webp?v=1770650314
+    shops:
+      - name: GT Omega UK
+        price: 169.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/pro-rs-simulator-seat
+        region: UK
+  - product_name: INERTIA Bucket Seat
+    description: GT Omega INERTIA Bucket Seat. fixed sim racing bucket seat. in
+      stock on official UK shop. Lightweight fiberglass frame with cold-cure
+      foam cushions and breathable fabric.
+    manufacturer: GT Omega
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.gtomega.co.uk/products/inertia-bucket-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Bucket_Seat_Inertia_2026_00.webp?v=1767705897
+    shops:
+      - name: GT Omega UK
+        price: 269.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/inertia-bucket-seat
+        region: UK
+  - product_name: CHASE V2 Bucket Seat
+    description: GT Omega CHASE V2 Bucket Seat. fixed sim racing bucket seat. in
+      stock on official UK shop. Wider fiberglass bucket seat with enhanced
+      materials and streamlined shell.
+    manufacturer: GT Omega
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.gtomega.co.uk/products/chase-bucket-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Bucket_Seat_Chase_2026_00.webp?v=1768229060
+    shops:
+      - name: GT Omega UK
+        price: 269.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/chase-bucket-seat
+        region: UK
+  - product_name: XL RS Simulator Seat V2
+    description: GT Omega XL RS Simulator Seat V2. wide reclining simulator
+      seat. in stock on official UK shop. Wider racing seat with sliders,
+      recline function, lumbar cushion, and headrest cushion.
+    manufacturer: GT Omega
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.gtomega.co.uk/products/xl-rs-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/XLRS_V2_Leather_White_01_Cushion.webp?v=1770893146
+    shops:
+      - name: GT Omega UK
+        price: 199.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/xl-rs-seat
+        region: UK
+  - product_name: RS9 Simulator Seat
+    description: GT Omega RS9 Simulator Seat. wide reclining simulator seat.
+      currently out of stock on official UK shop. Reinforced PVC seat with
+      cold-moulded foam and wider shell than RS6.
+    manufacturer: GT Omega
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.gtomega.co.uk/products/simulator-rs9-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/RS9_LowerAngle.png?v=1751637956
+    shops:
+      - name: GT Omega UK
+        price: 209.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/simulator-rs9-seat
+        region: UK
+  - product_name: RS12 Simulator Seat
+    description: GT Omega RS12 Simulator Seat. reclining simulator seat. in stock
+      on official UK shop. Fabric racing seat with steel frame, cold-moulded
+      foam, sliders, recline function, and lumbar cushion.
+    manufacturer: GT Omega
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.gtomega.co.uk/products/rs12-simulator-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/RS12_Fabric_Black_U_01_C.webp?v=1763547308
+    shops:
+      - name: GT Omega UK
+        price: 215.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/rs12-simulator-seat
+        region: UK
+  - product_name: S1 Enduro GT Seat
+    description: Sim-Lab S1 Enduro GT Seat. fixed sim racing bucket seat. in
+      stock on official EU shop. GT driving position seat with 4-point harness
+      openings and optional slider/bracket support.
+    manufacturer: Sim-Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://sim-lab.eu/en-de/products/s1-enduro-gt-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/enduro-front.png?v=1771592525
+    shops:
+      - name: Sim-Lab EU
+        price: 441.57
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/s1-enduro-gt-seat
+        region: EU
+  - product_name: Sim-Lab Speed 1 Bucket Seat
+    description: Sim-Lab Speed 1 Bucket Seat. fixed sim racing bucket seat.
+      currently out of stock on official EU shop. EU-made bucket seat with
+      memory foam padding and 4/5-point harness preparation.
+    manufacturer: Sim-Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://sim-lab.eu/en-de/products/sim-lab-speed-1-sim-racing-bucket-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/SPEED1BlackWS-1_b8d13707-7b0a-40b2-8c80-983078712fc1.jpg?v=1745925009
+    shops:
+      - name: Sim-Lab EU
+        price: 421.91
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/sim-lab-speed-1-sim-racing-bucket-seat
+        region: EU
+  - product_name: Sim-Lab Speed 3 Bucket Seat
+    description: Sim-Lab Speed 3 Bucket Seat. fixed sim racing bucket seat.
+      currently out of stock on official EU shop. Fiberglass shell seat with
+      3D spacer mesh fabric, removable foam cushions, and 5-point harness
+      support.
+    manufacturer: Sim-Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://sim-lab.eu/en-de/products/sim-lab-speed-3-bucket-seat-sim-racing
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/SLR022_SPEED3-Simbucketseat_Black_Blacksh.jpg?v=1744286604
+    shops:
+      - name: Sim-Lab EU
+        price: 421.91
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/sim-lab-speed-3-bucket-seat-sim-racing
+        region: EU
+  - product_name: Mercedes-AMG PETRONAS Formula One Team Sim Racing Seat
+    description: Sim-Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Seat.
+      licensed formula sim seat. currently out of stock on official EU shop.
+      Reinforced GRP seat engineered for an authentic Formula One seating
+      position.
+    manufacturer: Sim-Lab / Mercedes-AMG PETRONAS
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://sim-lab.eu/en-de/products/mercedes-amg-petronas-formula-one-team-sim-racing-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Frame_300_2.png?v=1766149308
+    shops:
+      - name: Sim-Lab EU
+        price: 490.76
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/mercedes-amg-petronas-formula-one-team-sim-racing-seat
+        region: EU
   - product_name: Pilot Seat MPS-1 Blackbird
     description: MONSTERTECH Pilot Seat MPS-1 Blackbird. flight simulator pilot seat.
-      current. Dedicated pilot seat option for MTS cockpit ecosystem.
+      in stock on official EU store. Flight-sim seat optimized for MTSIM
+      cockpits and sim rigs.
     manufacturer: MONSTERTECH / MTSIM
     component_category: seats-and-ergonomics
     component_sub_category: Flight seat
-    product_url: https://www.monster.tech/en/product-category/mts-en/
-    picture_url: https://www.monster.tech/wp-content/uploads/2021/12/monstertech_pilot_seat_mps1_ohne_schriftzug_01-768x768.jpg
+    product_url: https://www.monster.tech/en/product/pilot-seat-mps-1/
+    picture_url: https://www.monster.tech/wp-content/uploads/2021/12/monstertech_pilot_seat_mps1_ohne_schriftzug_01.jpg
     shops:
       - name: Monstertech
-        price: 856.14
+        price: 713.45
         currency: EUR
-        url: https://www.monster.tech/en/product-category/mts-en/
+        url: https://www.monster.tech/en/product/pilot-seat-mps-1/
+        region: EU
+  - product_name: Pilot Seat MPS-3 Forest Falcon
+    description: MONSTERTECH Pilot Seat MPS-3 Forest Falcon. flight simulator pilot
+      seat. in stock on official EU store. Flight-sim seat with durable coated
+      fabric for MTSIM cockpits and sim rigs.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    product_url: https://www.monster.tech/en/product/pilot-seat-mps-3-forest-falcon/
+    picture_url: https://www.monster.tech/wp-content/uploads/2023/04/MTSIM-Pilotensitz-MPS-3-Forest-Falcon-ohne-Armlehnen-05.jpg
+    shops:
+      - name: Monstertech
+        price: 797.48
+        currency: EUR
+        url: https://www.monster.tech/en/product/pilot-seat-mps-3-forest-falcon/
+        region: EU
+  - product_name: Pilot Seat MPS-5 Night Falcon
+    description: MONSTERTECH Pilot Seat MPS-5 Night Falcon. flight simulator pilot
+      seat. in stock on official EU store. Cordura-covered flight-sim seat for
+      MTSIM cockpits and sim rigs.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    product_url: https://www.monster.tech/en/product/pilot-seat-mps-5-night-falcon/
+    picture_url: https://www.monster.tech/wp-content/uploads/2023/07/mtsim_MPS-5_night_falcon_11.jpg
+    shops:
+      - name: Monstertech
+        price: 797.48
+        currency: EUR
+        url: https://www.monster.tech/en/product/pilot-seat-mps-5-night-falcon/
+        region: EU
+  - product_name: Pilot Seat MPS-6 Black Hawk
+    description: MONSTERTECH Pilot Seat MPS-6 Black Hawk. flight simulator pilot
+      seat. in stock on official EU store. Nappa-leather flight-sim seat for
+      MTSIM cockpits and sim rigs.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    product_url: https://www.monster.tech/en/product/pilot-seat-mps-6-black-hawk/
+    picture_url: https://www.monster.tech/wp-content/uploads/2025/07/mps_6_black_hawk_09.jpg
+    shops:
+      - name: Monstertech
+        price: 923.53
+        currency: EUR
+        url: https://www.monster.tech/en/product/pilot-seat-mps-6-black-hawk/
+        region: EU
+  - product_name: Pilot Seat MPS-8 Storm Sheep
+    description: MONSTERTECH Pilot Seat MPS-8 Storm Sheep. flight simulator pilot
+      seat. in stock on official EU store. Real lambskin and PU-leather
+      flight-sim seat for MTSIM cockpits and sim rigs.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    product_url: https://www.monster.tech/en/product/pilot-seat-mps-8-storm-sheep/
+    picture_url: https://www.monster.tech/wp-content/uploads/2026/03/mtsim_mps-8_storm_sheep_01_logo-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 1007.56
+        currency: EUR
+        url: https://www.monster.tech/en/product/pilot-seat-mps-8-storm-sheep/
+        region: EU
+  - product_name: Flight Chair MFC-3 Forest Falcon
+    description: MONSTERTECH Flight Chair MFC-3 Forest Falcon. flight simulator
+      chair. in stock on official EU store. Office-style chair developed for
+      flight controls with Cordura Ranger Green fabric.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    product_url: https://www.monster.tech/en/product/flight-chair-mfc-3/
+    picture_url: https://www.monster.tech/wp-content/uploads/2021/06/monstertech_flight_chair_mfc_3_forest_falcon_01_front.jpg
+    shops:
+      - name: Monstertech
+        price: 797.48
+        currency: EUR
+        url: https://www.monster.tech/en/product/flight-chair-mfc-3/
+        region: EU
+  - product_name: Flight Chair MFC-5 Night Falcon
+    description: MONSTERTECH Flight Chair MFC-5 Night Falcon. flight simulator
+      chair. in stock on official EU store. Office-style chair developed for
+      flight controls with black Cordura fabric.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    product_url: https://www.monster.tech/en/product/flight-chair-mfc-5/
+    picture_url: https://www.monster.tech/wp-content/uploads/2021/11/monstertech_mfc5_ohne_schriftzug_01_front.jpg
+    shops:
+      - name: Monstertech
+        price: 713.45
+        currency: EUR
+        url: https://www.monster.tech/en/product/flight-chair-mfc-5/
+        region: EU
+  - product_name: Flight Chair MFC-8 Storm Sheep
+    description: MONSTERTECH Flight Chair MFC-8 Storm Sheep. flight simulator
+      chair. in stock on official EU store. Office-style flight-control chair
+      with real lambskin and PU-leather covering.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    product_url: https://www.monster.tech/en/product/flight-chair-mfc-8-storm-sheep/
+    picture_url: https://www.monster.tech/wp-content/uploads/2024/01/mtsim_mfc8_storm_sheep_01_logo_alt2.jpg
+    shops:
+      - name: Monstertech
+        price: 906.72
+        currency: EUR
+        url: https://www.monster.tech/en/product/flight-chair-mfc-8-storm-sheep/
         region: EU
   - product_name: TRS TR Series GT Pro Racing Seat - Fiberglass Black
     description: Trak Racer TRS TR Series GT Pro Seat. fixed sim racing bucket. current.
@@ -114,6 +431,401 @@ commercial:
         currency: EUR
         url: Product-specific official page not found during pass [uncertain]
         region: US
+  - product_name: TrackTime TT27 Sport Seat
+    description: RaceRoom / TrackTime TT27 Sport Seat. adjustable retro sim
+      racing seat. ready for shipment on official shop. Artificial-leather seat
+      with ergonomic side bolsters and shoulder belt feed-throughs.
+    manufacturer: RaceRoom / TrackTime
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.raceroomstore.com/shop_en/tracktimett27seat.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/t/t/tt27-sitz.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 194.35
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/tracktimett27seat.html
+        region: EU
+  - product_name: TrackTime TT33 Sport Seat
+    description: RaceRoom / TrackTime TT33 Sport Seat. adjustable sim racing
+      seat. ready for shipment on official shop. Artificial-leather sport seat
+      with TrackTime stitching, side bolsters, and shoulder belt feed-throughs.
+    manufacturer: RaceRoom / TrackTime
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.raceroomstore.com/shop_en/tracktimett33seat.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/t/t/tt33-sitz.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 249
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/tracktimett33seat.html
+        region: EU
+  - product_name: Signature GT Sim-Racing Bucket Seat
+    description: Ricmotech Signature GT. fiberglass sim-racing bucket seat.
+      official Ricmotech store listing. Fixed bucket seat designed specifically
+      for simulator cockpit builds.
+    manufacturer: Ricmotech
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.ricmotech.com/ricmotech-signature-gt-sim-racing-bucket-seat
+    picture_url: https://www.ricmotech.com/assets/images/RGR-SRBS-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 590
+        currency: USD
+        url: https://www.ricmotech.com/ricmotech-signature-gt-sim-racing-bucket-seat
+        region: US
+  - product_name: Signature Halo Sim-Racing Bucket Seat
+    description: Ricmotech Signature Halo. suede sim-racing halo bucket seat.
+      official Ricmotech store listing. Fixed halo-style bucket seat for
+      simulator cockpit builds.
+    manufacturer: Ricmotech
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.ricmotech.com/ricmotech-signature-sim-racing-halo-seat
+    picture_url: https://www.ricmotech.com/assets/images/RGR-SRHS-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 660
+        currency: USD
+        url: https://www.ricmotech.com/ricmotech-signature-sim-racing-halo-seat
+        region: US
+  - product_name: PRO GT Seat
+    description: RSEAT PRO GT. fixed sim racing bucket seat. available on
+      official store. Composite shell seat with wear-resistant fabric, thicker
+      shell, endurance padding, and 6 cm shoulder-belt holes.
+    manufacturer: RSEAT
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://rseat.net/products/rseat-pro-gt
+    picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-pro-gt-seat-01.png?v=1729512002
+    shops:
+      - name: RSEAT
+        price: 899
+        currency: USD
+        url: https://rseat.net/products/rseat-pro-gt
+        region: US
+  - product_name: PRO Formula Seat
+    description: RSEAT PRO Formula. fixed formula-position sim racing bucket
+      seat. available on official store. Composite shell seat with
+      wear-resistant fabric, thicker shell, endurance padding, and stitched
+      logo.
+    manufacturer: RSEAT
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://rseat.net/products/rseat-pro-formula
+    picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-pro-formula-seat-02.png?v=1729504140
+    shops:
+      - name: RSEAT
+        price: 999
+        currency: USD
+        url: https://rseat.net/products/rseat-pro-formula
+        region: US
+  - product_name: GT Pro Racing Seat - Carbon Fiber Finish
+    description: Trak Racer GT Pro Carbon Fiber Finish. fixed sim racing bucket.
+      current on official US shop. Carbon-fiber-look GT bucket seat for racing
+      simulator cockpits.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://trakracer.com/products/gt-style-fixed-carbon-fibre-texture-hydro-dipped-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/SA-15_Hero_0.webp?v=1776135045
+    shops:
+      - name: Trak Racer
+        price: 549
+        currency: USD
+        url: https://trakracer.com/products/gt-style-fixed-carbon-fibre-texture-hydro-dipped-seat
+        region: US
+  - product_name: RS GT Rally-Pro Racing Seat - Carbon Fiber Finish
+    description: Trak Racer RS GT Rally-Pro Carbon Fiber Finish. fixed rally-style
+      sim racing bucket. current on official US shop. Carbon-fiber-look rally
+      bucket seat for simulator cockpits.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://trakracer.com/products/rally-style-fixed-carbon-fiber-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/SA-14_Hero_0.webp?v=1776134702
+    shops:
+      - name: Trak Racer
+        price: 549
+        currency: USD
+        url: https://trakracer.com/products/rally-style-fixed-carbon-fiber-seat
+        region: US
+  - product_name: TRS TR Series GT Pro Racing Seat - Full Carbon Fiber
+    description: Trak Racer TRS TR Series GT Pro Full Carbon Fiber. fixed sim
+      racing bucket. current on official US shop. Full carbon-fiber GT bucket
+      seat for simulator cockpits.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://trakracer.com/products/carbon-fibre-tr-series-bucket-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/SA-16_Hero_0.webp?v=1776135406
+    shops:
+      - name: Trak Racer
+        price: 899
+        currency: USD
+        url: https://trakracer.com/products/carbon-fibre-tr-series-bucket-seat
+        region: US
+  - product_name: HCF Hybrid Formula Pro Racing Seat - Full Carbon Fiber
+    description: Trak Racer HCF Hybrid Formula Pro Full Carbon Fiber. hybrid
+      formula/GT simulator seat. current on official US shop. Carbon-fiber seat
+      shell for TRX-style Formula and GT seating.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://trakracer.com/products/carbon-fibre-hybrid-bucket-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRX-SCF_HCF_Hero.webp?v=1776327195
+    shops:
+      - name: Trak Racer
+        price: 899
+        currency: USD
+        url: https://trakracer.com/products/carbon-fibre-hybrid-bucket-seat
+        region: US
+  - product_name: HSX Hybrid Formula Pro Racing Seat - Fiberglass Black
+    description: Trak Racer HSX Hybrid Formula Pro Fiberglass Black. hybrid
+      formula/GT simulator seat. current on official US shop. Fiberglass Alpine
+      F1-engineered seat for TRX-style rigs.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://trakracer.com/products/trx-hybrid-fixed-fiberglass-seat-all-black
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/image_17.png?v=1695994283
+    shops:
+      - name: Trak Racer
+        price: 399
+        currency: USD
+        url: https://trakracer.com/products/trx-hybrid-fixed-fiberglass-seat-all-black
+        region: US
+  - product_name: Recliner Sim Racing Seat - Premium Leather Alcantara Style
+    description: Trak Racer Recliner Sim Racing Seat. reclining simulator seat.
+      current on official US shop. Adjustable recliner seat with leather and
+      Alcantara-style finish.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://trakracer.com/products/recliner-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/products/SEAT-6.1.png?v=1758100898
+    shops:
+      - name: Trak Racer
+        price: 299
+        currency: USD
+        url: https://trakracer.com/products/recliner-seat
+        region: US
+  - product_name: Recliner Sim Racing Seat - Premium Diamond-Stitched Finish
+    description: Trak Racer Recliner Sim Racing Seat Diamond-Stitched. reclining
+      simulator seat. current on official US shop. Adjustable recliner seat with
+      diamond-stitched leather-style finish.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://trakracer.com/products/recliner-seat-2
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/products/SEAT-6.2.png?v=1695981895
+    shops:
+      - name: Trak Racer
+        price: 299
+        currency: USD
+        url: https://trakracer.com/products/recliner-seat-2
+        region: US
+  - product_name: Flight Simulator Seat
+    description: Trak Racer Flight Simulator Seat. reclining flight simulator
+      seat. current on official US shop. Includes seat bracket set for flight
+      simulator cockpits.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: Flight seat
+    product_url: https://trakracer.com/products/recliner-seat-copy
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRR093_FRONTLEFT01_1.webp?v=1768275083
+    shops:
+      - name: Trak Racer
+        price: 269
+        currency: USD
+        url: https://trakracer.com/products/recliner-seat-copy
+        region: US
+  - product_name: GAMING SEAT QRT-R
+    description: Sparco QRT-R Gaming. fixed sim racing bucket seat. current on
+      official German shop. QRT-R gaming seat for simulator cockpits.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/sedile-gaming-qrt-r.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/008012gnr_qrt-r_gaming_p7ahzetabgketme6.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 764.94
+        currency: EUR
+        url: https://www.sparco-official.com/de/sedile-gaming-qrt-r.html
+        region: DE
+  - product_name: GP GAMING NR SKY SEAT
+    description: Sparco GP Gaming NR Sky Seat. formula-style sim racing seat.
+      current on official German shop. GP seat variant for Evolve GP simulator
+      cockpits.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/gp-seat-008026gnrsky.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/008026gnrsky.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 696.62
+        currency: EUR
+        url: https://www.sparco-official.com/de/gp-seat-008026gnrsky.html
+        region: DE
+  - product_name: GP SEAT
+    description: Sparco GP Seat. formula-style sim racing seat. current on
+      official German shop. Seat for Evolve GP simulator cockpits.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/gp-seat-008026.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/s/e/sedile_evolve_gp_01_1_iecovtxlmnyfqup5.png?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=&format=jpeg
+    shops:
+      - name: Sparco Official DE
+        price: 662.46
+        currency: EUR
+        url: https://www.sparco-official.com/de/gp-seat-008026.html
+        region: DE
+  - product_name: SEAT EVO XL QRT GAMING
+    description: Sparco EVO XL QRT Gaming. fixed sim racing bucket seat. current
+      on official German shop. Gaming version of the EVO XL QRT seat.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/sedile-evo-xl-qrt-gaming.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/1/008015GNR_01.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 635.62
+        currency: EUR
+        url: https://www.sparco-official.com/de/sedile-evo-xl-qrt-gaming.html
+        region: DE
+  - product_name: SEAT EVO II QRT GAMING
+    description: Sparco EVO II QRT Gaming. fixed sim racing bucket seat. current
+      on official German shop. Gaming version of the EVO II QRT seat.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/sedile-evo-l-qrt-gaming.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/008013gnr_vsxfm56z8ayr11sx.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 623.42
+        currency: EUR
+        url: https://www.sparco-official.com/de/sedile-evo-l-qrt-gaming.html
+        region: DE
+  - product_name: SEAT PRO ADV QRT GAMING
+    description: Sparco PRO ADV QRT Gaming. fixed sim racing bucket seat. current
+      on official German shop. Gaming version of the PRO ADV QRT seat.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/sedile-pro-adv-qrt-gaming.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/008017gnr_l4xaeeql9xqipyxh_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 601.46
+        currency: EUR
+        url: https://www.sparco-official.com/de/sedile-pro-adv-qrt-gaming.html
+        region: DE
+  - product_name: PRO2000 QRT GAMING
+    description: Sparco PRO2000 QRT Gaming. fixed sim racing bucket seat. current
+      on official German shop. Gaming version of the PRO2000 QRT seat.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/pro2000-qrt-gaming.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/008016gnr_pro2000_gaming_xi4rmwmzmcboj9c3.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 573.4
+        currency: EUR
+        url: https://www.sparco-official.com/de/pro2000-qrt-gaming.html
+        region: DE
+  - product_name: CIRCUIT II QRT GAMING
+    description: Sparco Circuit II QRT Gaming. fixed sim racing bucket seat.
+      current on official German shop. Gaming version of the Circuit II QRT seat.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/sedile-circuit-ii-qrt-gaming.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/008011gnr_circuit_ii_gaming_dordn0cmr7gk4smm.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 556.32
+        currency: EUR
+        url: https://www.sparco-official.com/de/sedile-circuit-ii-qrt-gaming.html
+        region: DE
+  - product_name: EVO QRT GAMING
+    description: Sparco EVO QRT Gaming. fixed sim racing bucket seat. current on
+      official German shop. Gaming version of the EVO QRT seat.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/sedile-evo-qrt-gaming.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/008007gnr_vjjkt1etoj0tnf25.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 546.56
+        currency: EUR
+        url: https://www.sparco-official.com/de/sedile-evo-qrt-gaming.html
+        region: DE
+  - product_name: SEAT CIRCUIT QRT GAMING
+    description: Sparco Circuit QRT Gaming. fixed sim racing bucket seat. current
+      on official German shop. Gaming version of the Circuit QRT seat.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/sedile-circuit-qrt-gaming.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/008010gnr_circuit_i_gaming_kmxwtgkrmvymbaex.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 536.8
+        currency: EUR
+        url: https://www.sparco-official.com/de/sedile-circuit-qrt-gaming.html
+        region: DE
+  - product_name: GAMING ROAD SEAT NR/RS
+    description: Sparco Gaming Road Seat NR/RS. sim racing road-style seat.
+      current on official German shop. Seat listed for gaming simulator and
+      Evolve Kart use.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/sim-kart-endurance-seat-009103gnrrs.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/009103gnrrs.png?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=&format=jpeg
+    shops:
+      - name: Sparco Official DE
+        price: 422.12
+        currency: EUR
+        url: https://www.sparco-official.com/de/sim-kart-endurance-seat-009103gnrrs.html
+        region: DE
+  - product_name: ICON
+    description: Sparco Icon. office-style gaming chair. current on official
+      German shop. Adjustable Sparco-branded office/gaming seat.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/sed-ufficio-icon-sky-nr-az-2019-23645.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/0/0/00998_nrnr_07_hx4ngcpnsciu9acg.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 298.9
+        currency: EUR
+        url: https://www.sparco-official.com/de/sed-ufficio-icon-sky-nr-az-2019-23645.html
+        region: DE
+  - product_name: COACH OFFICE SEAT
+    description: Sparco Coach Office Seat. office-style gaming chair. current on
+      official German shop. Sparco-branded office/gaming seat.
+    manufacturer: Sparco
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.sparco-official.com/de/coach-office-seat.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/B/G/BGC0006B0_N25_01_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 195.2
+        currency: EUR
+        url: https://www.sparco-official.com/de/coach-office-seat.html
+        region: DE
 opensource:
   - project_name: OpenHarrier SJU-4A Ejection Seat
     description: OpenHarrier SJU-4A Ejection Seat. flight replica seat. Public build

@@ -128,74 +128,347 @@ commercial:
     product_url: https://axsim.racing/products/
     picture_url: https://axsim.racing/wp-content/uploads/2025/05/gt-sim-2.webp
     shops: []
-  - product_name: H3 with SFU Gearbox
-    description: "DOF Reality H3 with SFU Gearbox. 3DOF seat/cockpit motion
-      platform. available from DOF Reality and SRS reseller listing. 3DOF class:
-      pitch, roll, and yaw/rear traction loss per DOF Reality compare snippet."
+  - product_name: HERO H2
+    description: DOF Reality HERO H2. 2DOF full-motion platform. available from DOF
+      Reality. Moves seat and controls on pitch and roll axes.
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 2DOF platform
+    product_url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-hero-h2/
+    picture_url: https://dofreality.com/wp-content/uploads/H2_universal_0.png
+    shops:
+      - name: DOF Reality
+        price: 2699
+        currency: USD
+        url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-hero-h2/
+        region: Global
+  - product_name: HERO H3
+    description: DOF Reality HERO H3. 3DOF full-motion platform. available from DOF
+      Reality. Provides pitch, roll, yaw, and traction-loss motion cues.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 3DOF platform
-    product_url: https://dofreality.com/products/
-    picture_url: https://dofreality.com/wp-content/uploads/m2_universal_0-300x208.png
+    product_url: https://dofreality.com/product/universal/universal-motion-platform-3-axis-hero-h3/
+    picture_url: https://dofreality.com/wp-content/uploads/H3_universal_0.png
     shops:
       - name: DOF Reality
         price: 3299
         currency: USD
-        url: https://dofreality.com/products/
+        url: https://dofreality.com/product/universal/universal-motion-platform-3-axis-hero-h3/
+        region: Global
+  - product_name: HERO H4
+    description: DOF Reality HERO H4. 4DOF full-motion platform. available from DOF
+      Reality. Adds heave to HERO pitch, roll, yaw, and traction-loss cues.
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 4DOF platform
+    product_url: https://dofreality.com/product/universal/universal-motion-platform-4-axis-hero-h4-with-sfu-and-xtra-smooth-gearing/
+    picture_url: https://dofreality.com/wp-content/uploads/h4_universal_0.png
+    shops:
+      - name: DOF Reality
+        price: 3999
+        currency: USD
+        url: https://dofreality.com/product/universal/universal-motion-platform-4-axis-hero-h4-with-sfu-and-xtra-smooth-gearing/
+        region: Global
+  - product_name: HERO H6
+    description: DOF Reality HERO H6. 6DOF full-motion platform. available from DOF
+      Reality. Delivers heave, roll, pitch, surge, sway, and yaw.
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 6DOF platform
+    product_url: https://dofreality.com/product/universal/universal-motion-platform-6-axis-hero-h6/
+    picture_url: https://dofreality.com/wp-content/uploads/h6_universal_0.png
+    shops:
+      - name: DOF Reality
+        price: 7599
+        currency: USD
+        url: https://dofreality.com/product/universal/universal-motion-platform-6-axis-hero-h6/
+        region: Global
+  - product_name: MOVER M2
+    description: DOF Reality MOVER M2. 2DOF seat mover. available from DOF Reality.
+      Entry-level seat-motion platform for existing PlaySeat or GT Omega ART
+      frames.
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 2DOF platform
+    product_url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-mover-m2/
+    picture_url: https://dofreality.com/wp-content/uploads/m2_universal_0.png
+    shops:
+      - name: DOF Reality
+        price: 1499
+        currency: USD
+        url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-mover-m2/
+        region: Global
+  - product_name: MOVER PRO MP2
+    description: DOF Reality MOVER PRO MP2. 2DOF professional seat mover. available
+      from DOF Reality. Moves seat on pitch and roll axes for static-frame
+      installations.
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 2DOF platform
+    product_url: https://dofreality.com/product/universal/motion-universal-platform-2-axis-pro-mover-mp2/
+    picture_url: https://dofreality.com/wp-content/uploads/m2_universal_0.png
+    shops:
+      - name: DOF Reality
+        price: 3499
+        currency: USD
+        url: https://dofreality.com/product/universal/motion-universal-platform-2-axis-pro-mover-mp2/
         region: Global
   - product_name: Legend GT 6DOF Motion Platform
-    description: PT Actuator Legend GT 6DOF. 6DOF motion platform. available from PT
-      Actuator. 6DOF motion platform for sim racing and flight.
+    description: PT Actuator Legend GT 6DOF. turnkey 6DOF motion platform.
+      available from PT Actuator. Plug-and-play sim racing/flight platform with
+      integrated sway, surge, yaw basement and CANBus control center.
     manufacturer: PT Actuator
     component_category: motion-platforms
     component_sub_category: 6DOF platform
     product_url: https://www.pt-actuator.com/product/legend-6dof-motion-platform/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2025/05/1-1%E5%8E%8B%E7%BC%A91.jpg
-    shops: []
+    shops:
+      - name: PT Actuator
+        price: 19000
+        currency: USD
+        url: https://www.pt-actuator.com/product/legend-6dof-motion-platform/
+        region: China
+  - product_name: Champion GT
+    description: PT Actuator Champion GT. 3DOF/4-actuator motion kit. available
+      from PT Actuator. 60-size 600 W servo system with four 100 mm stroke
+      actuators, 80 kg single-actuator thrust, and 320 kg system payload.
+    manufacturer: PT Actuator
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://www.pt-actuator.com/product/champion-gt/
+    picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/08/General-Assembly-Drawing_1.jpg
+    shops:
+      - name: PT Actuator
+        price: 6500
+        currency: USD
+        url: https://www.pt-actuator.com/product/champion-gt/
+        region: China
+  - product_name: 3DOF Champion Motion System
+    description: PT Actuator 3DOF Champion Motion System. entry 3DOF/4-actuator
+      motion kit. available from PT Actuator. Four 75 mm stroke Champion
+      actuators with 60 kg single-actuator thrust and 240 kg payload.
+    manufacturer: PT Actuator
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://www.pt-actuator.com/product/3dof-rhino-gt-motion-system-2/
+    picture_url: https://www.pt-actuator.com/wp-content/uploads/2025/03/General-Assembly-Drawing_1.jpg
+    shops:
+      - name: PT Actuator
+        price: 5500
+        currency: USD
+        url: https://www.pt-actuator.com/product/3dof-rhino-gt-motion-system-2/
+        region: China
+  - product_name: Motion Dragon 6DOF GT
+    description: PT Actuator Motion Dragon 6DOF GT. 6DOF GT motion platform.
+      available from PT Actuator. Seven-actuator system with Scorpion S
+      actuators, traction-loss and surge actuators, controller, Belt TensionR,
+      and tower.
+    manufacturer: PT Actuator
+    component_category: motion-platforms
+    component_sub_category: 6DOF platform
+    product_url: https://www.pt-actuator.com/product/motion-dragon-6dof-gt/
+    picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/08/1-1-1.jpg
+    shops:
+      - name: PT Actuator
+        price: 14999
+        currency: USD
+        url: https://www.pt-actuator.com/product/motion-dragon-6dof-gt/
+        region: China
   - product_name: Motion Plus Platform
-    description: "Next Level Racing Motion Plus. modular heave/pitch/roll platform.
-      available from official US store. Modular platform: one module for 2DOF,
+    description: "Next Level Racing Motion Plus Platform. modular heave/pitch/roll
+      platform. in stock on official store. Modular platform: one module for 2DOF,
       two modules for 3DOF."
     manufacturer: Next Level Racing
     component_category: motion-platforms
     component_sub_category: Motion kit
-    product_url: https://nextlevelracing.com/products/motion-plus-platform/
-    picture_url: https://nextlevelracing.com/wp-content/uploads/2022/03/Motion-Plus-Platform.webp
+    product_url: https://nextlevelracing.com/product/motion-plus-platform/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2022/03/motion_plus_web_1.png
     shops:
       - name: Next Level Racing
         price: 2999
         currency: USD
-        url: https://nextlevelracing.com/products/motion-plus-platform/
+        url: https://nextlevelracing.com/product/motion-plus-platform/
         region: US
   - product_name: Motion Simulator Platform V3
-    description: Next Level Racing Motion Platform V3. seat mover. available from
-      official US store. Seat-only motion platform.
+    description: Next Level Racing Motion Platform V3. seat mover. in stock on
+      official store. Seat-only motion platform for acceleration, braking, and
+      cornering cues.
     manufacturer: Next Level Racing
     component_category: motion-platforms
     component_sub_category: Motion software
-    product_url: https://nextlevelracing.com/products/next-level-racing-motion-platform-v3/
-    picture_url: https://nextlevelracing.com/wp-content/uploads/2019/12/Motion-Platform-V3.webp
+    product_url: https://nextlevelracing.com/product/motion-platform-v3/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2019/12/Motion_v3_feature-1.png
     shops:
       - name: Next Level Racing
         price: 2999
         currency: USD
-        url: https://nextlevelracing.com/products/next-level-racing-motion-platform-v3/
+        url: https://nextlevelracing.com/product/motion-platform-v3/
         region: US
-  - product_name: P3 SFU Gearbox
-    description: "DOF Reality P3 with SFU Gearbox. 3DOF full-platform motion system.
-      available from DOF Reality and SRS reseller listing. 3DOF class: pitch,
-      roll, and yaw/rear traction loss per DOF Reality compare snippet."
+  - product_name: PRO P2
+    description: DOF Reality PRO P2. 2DOF professional full-motion platform.
+      available from DOF Reality. Moves seat and controls on pitch and roll axes.
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 2DOF platform
+    product_url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-pro-p2/
+    picture_url: https://dofreality.com/wp-content/uploads/p2_universal_0-1.png
+    shops:
+      - name: DOF Reality
+        price: 4999
+        currency: USD
+        url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-pro-p2/
+        region: Global
+  - product_name: PRO P3
+    description: DOF Reality PRO P3. 3DOF professional full-motion platform.
+      available from DOF Reality. Provides pitch, roll, yaw, and traction-loss
+      motion cues.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 3DOF platform
-    product_url: https://dofreality.com/products/
-    picture_url: https://dofreality.com/wp-content/uploads/m2_universal_0-300x208.png
+    product_url: https://dofreality.com/product/universal/universal-motion-platform-3-axis-pro-p3/
+    picture_url: https://dofreality.com/wp-content/uploads/p3_universal_0-1.png
     shops:
       - name: DOF Reality
-        price: 6299
+        price: 5999
         currency: USD
-        url: https://dofreality.com/products/
+        url: https://dofreality.com/product/universal/universal-motion-platform-3-axis-pro-p3/
         region: Global
+  - product_name: PRO P4
+    description: DOF Reality PRO P4. 4DOF professional full-motion platform.
+      available from DOF Reality. Universal platform for racing, flight, and
+      helicopter simulation with added heave axis.
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 4DOF platform
+    product_url: https://dofreality.com/product/universal/universal-motion-platform-4-axis-pro-p4-with-sfu-and-xtra-smooth-gearing/
+    picture_url: https://dofreality.com/wp-content/uploads/p4_universal_0_.png
+    shops:
+      - name: DOF Reality
+        price: 5999
+        currency: USD
+        url: https://dofreality.com/product/universal/universal-motion-platform-4-axis-pro-p4-with-sfu-and-xtra-smooth-gearing/
+        region: Global
+  - product_name: PRO P6
+    description: DOF Reality PRO P6. 6DOF professional full-motion platform.
+      available from DOF Reality. Delivers heave, roll, pitch, surge, sway, and
+      yaw.
+    manufacturer: DOF Reality
+    component_category: motion-platforms
+    component_sub_category: 6DOF platform
+    product_url: https://dofreality.com/product/universal/universal-motion-platform-6-axis-pro-p6/
+    picture_url: https://dofreality.com/wp-content/uploads/p6_universal_0-1.png
+    shops:
+      - name: DOF Reality
+        price: 9999
+        currency: USD
+        url: https://dofreality.com/product/universal/universal-motion-platform-6-axis-pro-p6/
+        region: Global
+  - product_name: 2.5DOF Motion Set QS-210/QS-220 + QS-Pivot
+    description: Qubic System 2.5DOF Motion Set. two-actuator QS-210 or QS-220
+      bundle with QS-Pivot. available from Qubic System. Designed to provide
+      heave, load change, and weight-transfer motion cues with two actuators.
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: Motion kit
+    product_url: https://qubicsystem.com/product/2-5dof-motion-set-qs-210-qs-220-qs-pivot/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/12/QS-210_QS-Pivot_bundle_product_01-700x700.jpg
+    shops:
+      - name: Qubic System
+        price: 3865
+        currency: EUR
+        url: https://qubicsystem.com/product/2-5dof-motion-set-qs-210-qs-220-qs-pivot/
+        region: EU
+  - product_name: 5DOF Motion Set QS-210/QS-220 + QS-CH2
+    description: Qubic System 5DOF Motion Set. QS-210 or QS-220 3DOF actuator bundle
+      combined with QS-CH2. available from Qubic System. Adds surge and yaw
+      effects to the 3DOF actuator platform.
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: 5DOF platform
+    product_url: https://qubicsystem.com/product/5dof-motion-set-qs-210-qs-220-qs-ch2/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/12/QS-CH2_QS-210_5DOF_bundle_product_01-700x700.jpg
+    shops:
+      - name: Qubic System
+        price: 16480
+        currency: EUR
+        url: https://qubicsystem.com/product/5dof-motion-set-qs-210-qs-220-qs-ch2/
+        region: EU
+  - product_name: QS-210
+    description: Qubic System QS-210. 3DOF linear-actuator motion system for sim
+      racing cockpits. available from Qubic System. QS-210 range covers smaller
+      travel actuator configurations up to the 3DOF motion set.
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://qubicsystem.com/product/qs-210/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2023/06/QS-210_3dof_product_00-700x700.jpg
+    shops:
+      - name: Qubic System
+        price: 3515
+        currency: EUR
+        url: https://qubicsystem.com/product/qs-210/
+        region: EU
+  - product_name: QS-220
+    description: Qubic System QS-220. fast linear-actuator 3DOF motion platform for
+      sim racing cockpits. available from Qubic System. QS-220 range covers the
+      faster actuator configurations up to the 3DOF motion set.
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://qubicsystem.com/product/qs-220/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2019/12/QS-220_3dof_product_00-700x700.jpg
+    shops:
+      - name: Qubic System
+        price: 4615
+        currency: EUR
+        url: https://qubicsystem.com/product/qs-220/
+        region: EU
+  - product_name: QS-CH2
+    description: Qubic System QS-CH2. traction-loss and surge platform for racing
+      simulation. available from Qubic System. Designed to add longitudinal and
+      yaw movement cues to supported simulator rigs.
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: Traction platform
+    product_url: https://qubicsystem.com/product/qs-ch2/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2022/11/QS-CH2-thumb_01-700x700.jpg
+    shops:
+      - name: Qubic System
+        price: 9800
+        currency: EUR
+        url: https://qubicsystem.com/product/qs-ch2/
+        region: EU
+  - product_name: QS-H13
+    description: Qubic System QS-H13 Challenger. compact 2DOF seat-mover for racing
+      and flight simulation. available from Qubic System. Built for quiet,
+      compact motion in home simulator setups.
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: 2DOF platform
+    product_url: https://qubicsystem.com/product/qs-h13/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2024/12/QS-H13_R12_product_04b-700x700.jpg
+    shops:
+      - name: Qubic System
+        price: 3165
+        currency: EUR
+        url: https://qubicsystem.com/product/qs-h13/
+        region: EU
+  - product_name: QS-S25
+    description: Qubic System QS-S25 Spider. 6DOF motion cockpit for professional
+      racing simulation. available from Qubic System. Advanced cockpit with
+      six-axis motion for high-end simulator use.
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: 6DOF platform
+    product_url: https://qubicsystem.com/product/qs-s25/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2019/11/QS-S25_product_01-700x700.jpg
+    shops:
+      - name: Qubic System
+        price: 29500
+        currency: EUR
+        url: https://qubicsystem.com/product/qs-s25/
+        region: EU
   - product_name: QS-S35
     description: Qubic System QS-S35. commercial 6DOF motion platform. available via
       distributor/contact. 6DOF platform with long-travel actuators.
@@ -210,6 +483,21 @@ commercial:
         currency: EUR
         url: https://qubicsystem.com/product/qs-s35/
         region: Unknown
+  - product_name: QS-V20
+    description: Qubic System QS-V20. extended 4DOF motion cockpit with traction
+      loss for racing simulation. available from Qubic System. Designed for
+      advanced sim racers and professional racing simulation.
+    manufacturer: Qubic System
+    component_category: motion-platforms
+    component_sub_category: 4DOF platform
+    product_url: https://qubicsystem.com/product/qs-v20/
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2021/09/QS-V20_product_04-700x700.jpg
+    shops:
+      - name: Qubic System
+        price: 19500
+        currency: EUR
+        url: https://qubicsystem.com/product/qs-v20/
+        region: EU
   - product_name: RS MEGA+
     description: eRacing-Lab RS MEGA+. 4-actuator motion system. available from
       eRacing-Lab shop. Four actuators included.
@@ -225,8 +513,9 @@ commercial:
         url: https://eracing-lab.com/products/rs-mega-plus
         region: Global
   - product_name: Scorpion Actuator Kits
-    description: PT Actuator Scorpion Kits. modular actuator motion kit. available
-      from PT Actuator. Modular actuator kits with Scorpion E/S/U-style levels.
+    description: PT Actuator Scorpion Actuator Kits. modular actuator motion kit.
+      available from PT Actuator. Scorpion E/S/C/U kit family with 3-actuator,
+      4-actuator, commercial, and 6DOF Ultimate configurations.
     manufacturer: PT Actuator
     component_category: motion-platforms
     component_sub_category: Motion kit
@@ -234,7 +523,7 @@ commercial:
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/07/Feature_1.jpg
     shops:
       - name: PT Actuator
-        price: 6999
+        price: 3999
         currency: USD
         url: https://www.pt-actuator.com/product/scorpion-actuator-kits/
         region: China
@@ -285,20 +574,20 @@ commercial:
     shops: []
   - product_name: Traction Plus Platform
     description: Next Level Racing Traction Plus. traction loss / yaw and surge-sway
-      platform. available through official regional stores/retailers.
-      Whole-cockpit sliding platform for understeer/oversteer/traction loss
-      cues.
+      platform. official product API lists price but product page currently
+      returns 404 [uncertain]. Whole-cockpit sliding platform for understeer,
+      oversteer, and traction-loss cues.
     manufacturer: Next Level Racing
     component_category: motion-platforms
     component_sub_category: Traction platform
-    product_url: https://nextlevelracing.com/products/traction-plus-platform/
-    picture_url: https://store-uk.nextlevelracing.com/cdn/shop/collections/NextLevelRacingMotionPlusPlatform3.jpg?v=1741655496&width=1500
+    product_url: https://nextlevelracing.com/faq/traction-plus-platform/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2019/12/TRACTION_PLUS_FEATURE.png
     shops:
       - name: Next Level Racing
         price: 6499
         currency: USD
-        url: https://nextlevelracing.com/products/traction-plus-platform/
-        region: Global
+        url: https://nextlevelracing.com/faq/traction-plus-platform/
+        region: US
   - product_name: Yaw3 Motion Simulator
     description: "Yaw VR Yaw3. compact VR motion simulator. available for order from
       Yaw VR shop. Roll range: 40 deg."
@@ -313,6 +602,68 @@ commercial:
         currency: USD
         url: https://shop.yawvr.com/product/yaw3-motion-simulator/
         region: Unknown
+  - product_name: 3motion
+    description: RaceRoom / TrackTime 3motion. turnkey 3DOF motion simulator.
+      available on official shop. Ready-to-race simulator with SilentForce
+      actuators, TrackTime racing seat, 4K monitor, gaming PC, and sound system.
+    manufacturer: RaceRoom / TrackTime
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://www.raceroomstore.com/shop_en/3motion.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/3/m/3motionbild1.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 14499
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/3motion.html
+        region: EU
+  - product_name: 3motion Advanced
+    description: RaceRoom / TrackTime 3motion Advanced. turnkey 3DOF motion
+      simulator. available on official shop. Ready-to-race package with
+      SilentForce actuators, Sparco Grid Q seat, Samsung Odyssey display, and PC.
+    manufacturer: RaceRoom / TrackTime
+    component_category: motion-platforms
+    component_sub_category: Motion simulator
+    product_url: https://www.raceroomstore.com/shop_en/3motion-advanced-547.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/3/m/3motionadvanced_002_1_2.png
+    shops:
+      - name: RaceRoom Store
+        price: 16099
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/3motion-advanced-547.html
+        region: EU
+  - product_name: TrackTime 3Motion Kit
+    description: RaceRoom / TrackTime 3Motion Kit. motion base kit for custom
+      simulator builds. available on official shop. Seat-mover kit with three
+      SilentForce actuators, SimTools support, compact base frame, and
+      TrackTime shell seat.
+    manufacturer: RaceRoom / TrackTime
+    component_category: motion-platforms
+    component_sub_category: Motion kit
+    product_url: https://www.raceroomstore.com/shop_en/3motion-689.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/3/m/3mot_kit_4.png
+    shops:
+      - name: RaceRoom Store
+        price: 9099
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/3motion-689.html
+        region: EU
+  - product_name: COG-SHH 3DOF Motion System
+    description: COG-SHH 3DOF Motion System. compact 3DOF motion platform. in
+      stock on official SHH Simulation EU shop. Come Over Gaming and SHH
+      Simulation motion system with linear functionality, efficient operation,
+      and plug-in power-cable variants.
+    manufacturer: COG-SHH / SHH Simulation
+    component_category: motion-platforms
+    component_sub_category: 3DOF platform
+    product_url: https://www.shiftershh.com/en/home/21-cog-shh-3dof-motion-system.html
+    picture_url: https://www.shiftershh.com/314-large_default/cog-shh-3dof-motion-system.jpg
+    shops:
+      - name: SHH Simulation
+        price: 3790
+        currency: EUR
+        url: https://www.shiftershh.com/en/home/21-cog-shh-3dof-motion-system.html
+        region: EU
 opensource:
   - project_name: 6DOF Motion Platform
     description: Simmetrik 6DOF Motion Platform. open hardware 6DOF motion simulator

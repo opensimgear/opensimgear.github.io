@@ -104,27 +104,48 @@ commercial:
     picture_url: https://www.daytonaudio.com/images/product/medium/1104.jpg
     shops: []
   - product_name: HF8 Haptic Feedback Gaming Pad
-    description: Next Level Racing HF8. haptic seat pad. available through global retailers;
-      original model still listed. Seat pad with 8 vibration zones/motors.
+    description: Next Level Racing HF8 Haptic Gaming Pad. haptic seat pad. in
+      stock on official store. Seat pad with 8 vibration zones/motors.
     manufacturer: Next Level Racing
     component_category: tactile-feedback
     component_sub_category: Seat haptics
-    product_url: https://nextlevelracing.com/products/hf8-haptic-gaming-pad/
-    picture_url: https://nextlevelracing.com/wp-content/uploads/2023/01/HF8-Haptic-Gaming-Pad.webp
-    shops: []
+    product_url: https://nextlevelracing.com/product/hf8-haptic-gaming-pad/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2022/12/hf8_gallery_4-1.webp
+    shops:
+      - name: Next Level Racing
+        price: 199
+        currency: USD
+        url: https://nextlevelracing.com/product/hf8-haptic-gaming-pad/
+        region: US
   - product_name: HF8 Pro Haptic Feedback Pad
-    description: Next Level Racing HF8 Pro. haptic seat pad. official US store showed sold
-      out in captured page. Haptic seat pad with stronger motors than HF8.
+    description: Next Level Racing HF8 Pro Haptic Feedback Pad. haptic seat pad.
+      in stock on official store. Updated haptic feedback pad with stronger
+      motors than HF8.
     manufacturer: Next Level Racing
     component_category: tactile-feedback
     component_sub_category: Seat haptics
-    product_url: https://nextlevelracing.com/products/hf8-pro-haptic-feedback-pad/
-    picture_url: https://nextlevelracing.com/wp-content/uploads/2025/04/hf8pro_web_gallery_1.webp
+    product_url: https://nextlevelracing.com/product/hf8-pro-haptic-feedback-pad/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2025/04/hf8pro_web_gallery_1_vibration.png
     shops:
       - name: Next Level Racing
         price: 299
         currency: USD
-        url: https://nextlevelracing.com/products/hf8-pro-haptic-feedback-pad/
+        url: https://nextlevelracing.com/product/hf8-pro-haptic-feedback-pad/
+        region: US
+  - product_name: ERS3 Haptic Feedback Sim Racing Seat
+    description: Next Level Racing ERS3 Haptic Feedback Sim Racing Seat. haptic
+      reclining sim racing seat. in stock on official store. ERS3 seat with
+      integrated haptic feedback.
+    manufacturer: Next Level Racing
+    component_category: tactile-feedback
+    component_sub_category: Seat haptics
+    product_url: https://nextlevelracing.com/product/ers3-haptic-feedback-sim-racing-seat/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2026/02/Next-Level-Racing-ERS3-Haptic-Seat-AMZ-1.jpg
+    shops:
+      - name: Next Level Racing
+        price: 499
+        currency: USD
+        url: https://nextlevelracing.com/product/ers3-haptic-feedback-sim-racing-seat/
         region: US
   - product_name: MQB-1 MiniQuake Tactile Transducer
     description: Earthquake Sound MQB-1 MiniQuake. standalone tactile transducer. available
@@ -173,6 +194,51 @@ commercial:
         currency: USD
         url: https://www.simracingstudio.com/shop
         region: Global
+  - product_name: 100W Pro Haptic Bass Shaker
+    description: Trak Racer 100W Pro Haptic Bass Shaker. standalone tactile
+      transducer. current on official US shop. 100 W bass shaker for simulator
+      haptic feedback.
+    manufacturer: Trak Racer
+    component_category: tactile-feedback
+    component_sub_category: Tactile transducer
+    product_url: https://trakracer.com/products/100w-haptic-bass-shaker
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR-BSA200-KIT.2.png?v=1718672819
+    shops:
+      - name: Trak Racer
+        price: 69
+        currency: USD
+        url: https://trakracer.com/products/100w-haptic-bass-shaker
+        region: US
+  - product_name: 10W Pro Haptic Bass Shaker - Set of 2
+    description: Trak Racer 10W Pro Haptic Bass Shaker Set. compact tactile
+      transducer pair. current on official US shop. Two 10 W bass shakers for
+      simulator haptic feedback.
+    manufacturer: Trak Racer
+    component_category: tactile-feedback
+    component_sub_category: Tactile transducer
+    product_url: https://trakracer.com/products/10w-pro-haptic-bass-shaker-set-of-2
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRR115_BS-10W_Top01_1x2_f0d8966a-0624-43be-9777-102e373a3d93.png?v=1774558525
+    shops:
+      - name: Trak Racer
+        price: 69
+        currency: USD
+        url: https://trakracer.com/products/10w-pro-haptic-bass-shaker-set-of-2
+        region: US
+  - product_name: 4CH 40W Low-Frequency Amplifier with 2 Bass Shakers and Rig Mounts
+    description: Trak Racer 4CH 40W Low-Frequency Amplifier Kit. haptic feedback
+      kit. current on official US shop. Four-channel amplifier bundle with two
+      bass shakers and rig mounts.
+    manufacturer: Trak Racer
+    component_category: tactile-feedback
+    component_sub_category: Seat haptics
+    product_url: https://trakracer.com/products/trak-racer-4ch-40w-low-frequency-class-d-amplifier-with-2-bass-shakers-and-rig-mounts
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRR115_TRBSA4AKIT_FrontRight01_1-combined.png?v=1774558817
+    shops:
+      - name: Trak Racer
+        price: 199
+        currency: USD
+        url: https://trakracer.com/products/trak-racer-4ch-40w-low-frequency-class-d-amplifier-with-2-bass-shakers-and-rig-mounts
+        region: US
 opensource:
   - project_name: GT7 Shaker for Linux
     description: GT7 Shaker for Linux. Gran Turismo 7 bass-shaker telemetry converter.

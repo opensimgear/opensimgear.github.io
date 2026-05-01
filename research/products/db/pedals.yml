@@ -1,8 +1,8 @@
 commercial:
   - product_name: ActivePedal Pro
-    description: Simucube ActivePedal Pro. active force-feedback pedal. In stock on official
-      pages in search results. Active force-feedback pedal configurable as
-      brake/throttle/clutch.
+    description: Simucube ActivePedal Pro. active force-feedback pedal. in stock
+      on official US shop. Active pedal configurable as brake, throttle, or
+      clutch with software-defined pedal feel.
     manufacturer: Simucube
     component_category: pedals
     component_sub_category: FFB pedal
@@ -10,15 +10,14 @@ commercial:
     picture_url: https://simucube.com/app/uploads/sites/5/2024/09/APP-1-1.webp
     shops:
       - name: Simucube
-        price: 1799
+        price: 1849
         currency: USD
         url: https://simucube.com/en-us/simucube-activepedal-pro/
         region: US
   - product_name: ActivePedal Ultimate
-    description: Simucube ActivePedal Ultimate. flagship active force-feedback pedal. Out of
-      stock on one official US product page in search result; configurable product pages
-      still listed ranges. Active force-feedback pedal configurable as brake, throttle,
-      or clutch.
+    description: Simucube ActivePedal Ultimate. flagship active force-feedback pedal.
+      in stock on official US shop. Active pedal configurable as brake, throttle,
+      or clutch with software-defined pedal feel.
     manufacturer: Simucube
     component_category: pedals
     component_sub_category: FFB pedal
@@ -30,20 +29,36 @@ commercial:
         currency: USD
         url: https://simucube.com/en-us/simucube-activepedal-ultimate/
         region: US
+  - product_name: Simucube Co-Pedal
+    description: Simucube Co-Pedal. passive throttle/clutch pedal. in stock on
+      official US shop. Two-in-one passive pedal built to complement Simucube
+      ActivePedal with configurable throttle or clutch use.
+    manufacturer: Simucube
+    component_category: pedals
+    component_sub_category: Two-pedal set
+    product_url: https://simucube.com/en-us/simucube-co-pedal/
+    picture_url: https://simucube.com/app/uploads/sites/5/2025/11/CoPedal_Product_Take1.webp
+    shops:
+      - name: Simucube
+        price: 499
+        currency: USD
+        url: https://simucube.com/en-us/simucube-co-pedal/
+        region: US
   - product_name: ClubSport Pedals V3
-    description: Fanatec ClubSport Pedals V3. three-pedal load-cell set. Available on
-      official US page in search result. Three-pedal CNC aluminum/metal set.
+    description: Fanatec ClubSport Pedals V3. three-pedal load-cell set. in stock
+      on official EU catalog. Metal pedal set with load-cell brake and adjustable
+      pedal geometry.
     manufacturer: Fanatec
     component_category: pedals
     component_sub_category: Load-cell pedals
-    product_url: https://www.fanatec.com/us-en/pedals/clubsport-pedals-v3
-    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Pedals/CSP_V3/CSP_V3-01.webp
+    product_url: https://www.fanatec.com/eu/en/p/pedals/csp_v3/clubsport-pedals-v3
+    picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Pedals/CSP_V3/CSP_V3-01.png
     shops:
       - name: Fanatec
-        price: 429.99
-        currency: USD
-        url: https://www.fanatec.com/us-en/pedals/clubsport-pedals-v3
-        region: Unknown
+        price: 309.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/pedals/csp_v3/clubsport-pedals-v3
+        region: EU
   - product_name: CRP2 Load Cell Pedals
     description: MOZA CRP2 Load Cell Pedals. modular load-cell pedal set. In stock on
       official US page in search result. CNC aerospace-grade aluminum body, carbon-fiber
@@ -60,34 +75,65 @@ commercial:
         url: https://us.mozaracing.com/products/crp2-pedals
         region: US
   - product_name: CSL Pedals
-    description: Fanatec CSL Pedals. budget two-pedal set, Hall-sensor position sensing.
-      Available on official US page in search result. Two-pedal steel set.
+    description: Fanatec CSL Pedals. budget two-pedal set with Hall-sensor
+      position sensing. in stock on official EU catalog. Steel throttle and
+      brake pedal set.
     manufacturer: Fanatec
     component_category: pedals
     component_sub_category: Two-pedal set
-    product_url: https://www.fanatec.com/us/en/p/pedals/csl_p/csl-pedals
-    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Pedals/CSL_P/csl_p-01.webp
+    product_url: https://www.fanatec.com/eu/en/p/pedals/csl_p/csl-pedals
+    picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Pedals/CSL_P/csl_p-01.png
     shops:
       - name: Fanatec
-        price: 139.99
-        currency: USD
-        url: https://www.fanatec.com/us/en/p/pedals/csl_p/csl-pedals
-        region: Unknown
-  - product_name: CSL Pedals Load Cell Kit
-    description: Fanatec CSL Pedals Load Cell Kit. load-cell brake upgrade for CSL Pedals.
-      Available on official US page in search result. Replaces CSL brake pedal with
-      load-cell brake module.
+        price: 99.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/pedals/csl_p/csl-pedals
+        region: EU
+  - product_name: CSL Elite Pedals V2
+    description: Fanatec CSL Elite Pedals V2. three-pedal load-cell set. in stock on
+      official EU catalog. Overhauled load-cell brake with Hall sensors on
+      throttle and clutch.
     manufacturer: Fanatec
     component_category: pedals
-    component_sub_category: Brake upgrade
-    product_url: https://www.fanatec.com/us-en/accessories/pedal-accessories/csl-pedals-load-cell-kit
-    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Accessories/Pedal-Accessories/CSL_P_LCK/CSL_P_LCK-01.webp
+    component_sub_category: Load-cell pedals
+    product_url: https://www.fanatec.com/eu/en/p/pedals/csl_ep_v2/csl-elite-pedals-v2
+    picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Pedals/CSL_EP_V2/CSL_EP_V2-01.png
     shops:
       - name: Fanatec
-        price: 99.99
-        currency: USD
-        url: https://www.fanatec.com/us-en/accessories/pedal-accessories/csl-pedals-load-cell-kit
-        region: Unknown
+        price: 274.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/pedals/csl_ep_v2/csl-elite-pedals-v2
+        region: EU
+  - product_name: CSL Pedals LC
+    description: Fanatec CSL Pedals LC. CSL Pedals bundle with load-cell brake. in
+      stock on official EU catalog. Includes throttle, load-cell brake, and
+      clutch pedal.
+    manufacturer: Fanatec
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://www.fanatec.com/eu/en/p/pedals/csl_p_lc/csl_pedals_lc
+    picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Pedals/CSL_P_LC/CSL_P_LC-01.png
+    shops:
+      - name: Fanatec
+        price: 179.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/pedals/csl_p_lc/csl_pedals_lc
+        region: EU
+  - product_name: ClubSport Pedals V3 Inverted
+    description: Fanatec ClubSport Pedals V3 Inverted. inverted three-pedal
+      load-cell set. in stock on official EU catalog. Inverted clutch and brake
+      arrangement for road-car pedal feel.
+    manufacturer: Fanatec
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://www.fanatec.com/eu/en/p/pedals/csp_v3i/clubsport-pedals-v3-inverted
+    picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Pedals/CSP_V3i/CSP_V3i-01.png
+    shops:
+      - name: Fanatec
+        price: 429.99
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/pedals/csp_v3i/clubsport-pedals-v3-inverted
+        region: EU
   - product_name: DirectForce Pro Pedals
     description: VRS DirectForce Pro Pedals. high-end load-cell pedal set.
       Current/long-running product; official current availability unclear [uncertain].
@@ -118,21 +164,37 @@ commercial:
         currency: USD
         url: https://www.asetek.com/simsports/us/product/invicta-pedals-thorp-2/
         region: US
+  - product_name: SP01 Core
+    description: Cube Controls SP01 Core. load-cell sim racing pedal set. in stock
+      on official shop. Fully customizable weight, travel, and preload with
+      swappable dampers, springs, and elastomers; compact design without external
+      electronics.
+    manufacturer: Cube Controls
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://www.cubecontrols.com/product/sp01-core/
+    picture_url: https://www.cubecontrols.com/wp-content/uploads/2025/02/sp01core-gallery01.webp
+    shops:
+      - name: Cube Controls
+        price: 889
+        currency: EUR
+        url: https://www.cubecontrols.com/product/sp01-core/
+        region: EU
   - product_name: Pedal Set XP1 Loadcell
-    description: Sim-Lab XP1 Loadcell Pedals. modular load-cell pedal set. Current product;
-      some regional product page showed sold out. Load-cell brake; snippet describes 200
-      kg load cell translating to 100 kg pedal pressure.
+    description: Sim-Lab XP1 Loadcell Pedals. modular load-cell pedal set. in
+      stock on official EU shop. 200 kg load-cell brake design with up to 100 kg
+      pedal pressure, hall sensors, elastomers, and spring tuning.
     manufacturer: Sim-Lab
     component_category: pedals
-    component_sub_category: Brake upgrade
-    product_url: https://sim-lab.eu/products/pedal-set-xp1-loadcell-sim-racing
-    picture_url: https://sim-lab.eu/cdn/shop/files/xp1_3.jpg?v=1744710997&width=2048
+    component_sub_category: Load-cell pedals
+    product_url: https://sim-lab.eu/en-de/products/pedal-set-xp1-loadcell-sim-racing
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/xp1_1.jpg?v=1744710935
     shops:
       - name: Sim-Lab EU
-        price: 169
+        price: 392.4
         currency: EUR
-        url: https://sim-lab.eu/products/pedal-set-xp1-loadcell-sim-racing
-        region: US
+        url: https://sim-lab.eu/en-de/products/pedal-set-xp1-loadcell-sim-racing
+        region: EU
   - product_name: PRO Racing Pedals
     description: Logitech G PRO Racing Pedals. modular load-cell pedal set. Current Logitech
       product. Load-cell brake rated 100 kg / 220.4 lb in Logitech listing.
@@ -162,19 +224,19 @@ commercial:
         url: https://www.logitechg.com/en-us/products/driving.html
         region: US
   - product_name: Sprint Pedals Black
-    description: Heusinkveld Sprint Pedals. high-end load-cell pedal set. Current
-      Heusinkveld product. Load-cell pedal set for serious sim racers and esports
-      professionals.
+    description: Heusinkveld Sprint 2-pedal set. high-end load-cell pedal set.
+      in stock on official EU shop. Compact adjustable throttle/brake set with
+      load sensors designed for consistent simulator input.
     manufacturer: Heusinkveld
     component_category: pedals
     component_sub_category: Load-cell pedals
-    product_url: https://heusinkveld.com/products/sim-pedals/sim-pedals-sprint/
-    picture_url: https://cdn-eu.heusinkveld.com/wp-content/uploads/sites/7/2025/02/8719689204372-1-Ultimate-BLACK-3-pedal-set-1024x768-1-1.png
+    product_url: https://heusinkveld.com/eu/shop/sprint-pedals/sprint/
+    picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/02/8719689204334-2-Sprint-2-pedal-set_1024x768.png
     shops:
       - name: Heusinkveld
-        price: 119.25
+        price: 549
         currency: EUR
-        url: https://heusinkveld.com/products/sim-pedals/sim-pedals-sprint/
+        url: https://heusinkveld.com/eu/shop/sprint-pedals/sprint/
         region: EU
   - product_name: T-LCM Pedals
     description: Thrustmaster T-LCM Pedals. load-cell three-pedal set. Current Thrustmaster
@@ -191,19 +253,35 @@ commercial:
         url: https://www.thrustmaster.com/products/t-lcm-pedals/
         region: Unknown
   - product_name: Ultimate+ Pedals
-    description: Heusinkveld Ultimate Plus Pedals. pro load-cell/hydraulic-damped pedal set.
-      Current Heusinkveld product. Designed for high-end professional motorsport
-      simulators.
+    description: Heusinkveld Ultimate+ 2-pedal set Black. pro load-cell pedal
+      set. in stock on official EU shop. Professional simulator pedals capable
+      of up to 140 kg force with 9 brake resistance settings.
     manufacturer: Heusinkveld
     component_category: pedals
     component_sub_category: Hydraulic pedals
-    product_url: https://heusinkveld.com/products/sim-pedals/sim-pedals-pro/
-    picture_url: https://cdn-eu.heusinkveld.com/wp-content/uploads/sites/7/2025/02/8719689204372-1-Ultimate-BLACK-3-pedal-set-1024x768-1-1.png
+    product_url: https://heusinkveld.com/eu/shop/pedals/ultimate-2-pedal-set-black/
+    picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/02/8719689204365-1-Ultimate-BLACK-2-pedal-set-1024x768-1-1.png
     shops:
       - name: Heusinkveld
-        price: 379
+        price: 1179
         currency: EUR
-        url: https://heusinkveld.com/products/sim-pedals/sim-pedals-pro/
+        url: https://heusinkveld.com/eu/shop/pedals/ultimate-2-pedal-set-black/
+        region: EU
+  - product_name: RaceCenter 2-pedal set
+    description: Heusinkveld RaceCenter 2-pedal set. commercial simulator pedal
+      set. currently out of stock on official EU shop. Heavy-duty steel pedals
+      with oversized load-cell sensors and overload protection for
+      high-frequency commercial use.
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://heusinkveld.com/eu/shop/racecenter-pedals/3-pedal-set-silver-copy/
+    picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/04/RC-productfoto-1024x768-1.png
+    shops:
+      - name: Heusinkveld
+        price: 600
+        currency: EUR
+        url: https://heusinkveld.com/eu/shop/racecenter-pedals/3-pedal-set-silver-copy/
         region: EU
   - product_name: VX-PRO Pedals
     description: SIMGRADE VX-PRO Pedals. high-value load-cell pedal set. Current product;
@@ -220,6 +298,111 @@ commercial:
         currency: EUR
         url: https://simgrade.fi/product/vx-pro-pedals/
         region: EU
+  - product_name: Pro-Sim Evo Pedals
+    description: Pro-Sim Evo Pedals. high-end hydraulic simulator pedal set. in
+      stock on official UK shop. Driver-training pedal set supplied with
+      Pro-Sim professional simulators and used for F1-level training.
+    manufacturer: Pro-Sim
+    component_category: pedals
+    component_sub_category: Hydraulic pedals
+    product_url: https://www.pro-sim.co.uk/shop/evo-pro-pedals/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/06/IMG_2502.jpg
+    shops:
+      - name: Pro-Sim
+        price: 2750
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/evo-pro-pedals/
+        region: UK
+  - product_name: GTpro1-S Triple Overhung Wilwood Pedal Assembly
+    description: RealGear GTpro1-S. overhung professional simulator pedal set.
+      official Ricmotech store listing. Wilwood-based triple overhung pedal
+      assembly for racing simulator builds.
+    manufacturer: RealGear
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://www.ricmotech.com/realgear-gtpro-triple-overhung-wilwood-edition-pedals
+    picture_url: https://www.ricmotech.com/assets/images/GTpro1s.jpg
+    shops:
+      - name: Ricmotech
+        price: 1299.95
+        currency: USD
+        url: https://www.ricmotech.com/realgear-gtpro-triple-overhung-wilwood-edition-pedals
+        region: US
+  - product_name: GTpro3 Xtreme Tilton Pedals Gen2
+    description: RealGear GTpro3 Xtreme Tilton Gen2. hydraulic sim racing pedal
+      set. made to order on official Ricmotech store. Tilton-based professional
+      three-pedal simulator assembly.
+    manufacturer: RealGear
+    component_category: pedals
+    component_sub_category: Hydraulic pedals
+    product_url: https://www.ricmotech.com/realgear-gtpro3-tilton-hydraulic-sim-pedals-gen2
+    picture_url: https://www.ricmotech.com/assets/images/GTpro3_sim_pedals_1.jpg
+    shops:
+      - name: Ricmotech
+        price: 1745
+        currency: USD
+        url: https://www.ricmotech.com/realgear-gtpro3-tilton-hydraulic-sim-pedals-gen2
+        region: US
+  - product_name: Raceline Pedals III
+    description: Thrustmaster Raceline Pedals III. modular three-pedal sim racing
+      pedal set. in stock on official US shop. Three-pedal H.E.A.R.T sensor set with
+      metal structure, modular layout, and upgrade path.
+    manufacturer: Thrustmaster
+    component_category: pedals
+    component_sub_category: Three-pedal set
+    product_url: https://www.thrustmaster.com/en-us/products/raceline-pedals-iii/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/03/website_ProductPageListing-RacelinePedalsIII-800x800-1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 149.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/raceline-pedals-iii/
+        region: US
+  - product_name: Raceline Pedals LTE
+    description: Thrustmaster Raceline Pedals LTE. entry sim racing pedal set. in
+      stock on official US shop. Modular Raceline pedal set designed for
+      Thrustmaster racing-wheel setups.
+    manufacturer: Thrustmaster
+    component_category: pedals
+    component_sub_category: Two-pedal set
+    product_url: https://www.thrustmaster.com/en-us/products/raceline-pedals-lte/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/03/website_ProductPageListing-RacelinePedalsLTE-800x800-1.png
+    shops:
+      - name: Thrustmaster US
+        price: 99.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/raceline-pedals-lte/
+        region: US
+  - product_name: T3PM
+    description: Thrustmaster T3PM. magnetic three-pedal sim racing set. in stock
+      on official US shop. Three-pedal magnetic pedal set with adjustable brake
+      pressure options.
+    manufacturer: Thrustmaster
+    component_category: pedals
+    component_sub_category: Three-pedal set
+    product_url: https://www.thrustmaster.com/en-us/products/t3pm/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2021/10/t3pm.png
+    shops:
+      - name: Thrustmaster US
+        price: 149.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/t3pm/
+        region: US
+  - product_name: T3PA Add-On
+    description: Thrustmaster T3PA Add-On. three-pedal add-on set. in stock on
+      official US shop. Clutch, brake, and throttle pedal add-on for compatible
+      Thrustmaster racing wheels.
+    manufacturer: Thrustmaster
+    component_category: pedals
+    component_sub_category: Three-pedal set
+    product_url: https://www.thrustmaster.com/en-us/products/t3pa-add-on/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2021/10/t3pa-add-on-pedals-768x768-1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 99.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/t3pa-add-on/
+        region: US
 opensource:
   - project_name: CNCDan Sim Pedals
     description: CNCDan Sim Pedals. laser-cut and 3D-printed load-cell/hall pedal set.

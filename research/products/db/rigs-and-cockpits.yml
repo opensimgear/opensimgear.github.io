@@ -43,6 +43,36 @@ commercial:
         currency: USD
         url: https://www.advancedsimracing.com/products/asr-pro
         region: Canada
+  - product_name: ClubSport GT Cockpit
+    description: Fanatec ClubSport GT Cockpit. adjustable sim racing cockpit. in
+      stock on official EU catalog. Hybrid cockpit frame with black and white
+      color options.
+    manufacturer: Fanatec
+    component_category: rigs-and-cockpits
+    component_sub_category: Cockpit frame
+    product_url: https://www.fanatec.com/eu/en/p/cockpits/cs_gt_c_blk/clubsport-gt-cockpit-black
+    picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Cockpits/CS_GT_C_BLK/CS_GT_C_BLK-01.png
+    shops:
+      - name: Fanatec
+        price: 914.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/cockpits/cs_gt_c_blk/clubsport-gt-cockpit-black
+        region: EU
+  - product_name: CSL Cockpit V1.5
+    description: Fanatec CSL Cockpit V1.5. entry aluminum and steel cockpit. in
+      stock on official EU catalog. Compact frame optimized for low flex and
+      support for Fanatec and third-party hardware.
+    manufacturer: Fanatec
+    component_category: rigs-and-cockpits
+    component_sub_category: Cockpit frame
+    product_url: https://www.fanatec.com/eu/en/p/cockpits/crd-9010009-ww/csl-cockpit-v1-5
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Cockpits/CRD-9010009-WW/CRD-9010009-WW-01.png
+    shops:
+      - name: Fanatec
+        price: 219.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/cockpits/crd-9010009-ww/csl-cockpit-v1-5
+        region: EU
   - product_name: Collective Extension
     description: Collective Extension. flight-control mounts and accessories. Suspended on
       EU WINCTRL store; listed in catalog but not normally purchasable. Collective
@@ -161,19 +191,20 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=327
         region: EU
   - product_name: GT1 Evo Simracing Cockpit
-    description: Sim-Lab GT1 Evo. aluminum profile cockpit. current. Aluminum profile
-      chassis, black finish.
+    description: Sim-Lab GT1 Evo Sim Racing Cockpit. aluminum profile cockpit.
+      in stock on official EU shop. Rigid profile cockpit with sturdy pedal
+      plate, accessory side mount, and direct-drive upgrade options.
     manufacturer: Sim-Lab
     component_category: rigs-and-cockpits
     component_sub_category: Aluminum cockpit
-    product_url: https://sim-lab.us/products/gt1-evo-simracing-cockpit
-    picture_url: https://sim-lab.us/cdn/shop/files/GT1_Evo_SparcoGridQ_VarioSingle.jpg?v=1763040475&width=1920
+    product_url: https://sim-lab.eu/en-de/products/gt1-evo-sim-racing-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/GT1_Evo_Sim-LabBlue_VarioSingle_3febb7ea-0c94-4d64-9c98-0e8dd374d917.jpg?v=1762974780
     shops:
-      - name: Sim-Lab US
-        price: 449
-        currency: USD
-        url: https://sim-lab.us/products/gt1-evo-simracing-cockpit
-        region: US
+      - name: Sim-Lab EU
+        price: 372.73
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/gt1-evo-sim-racing-cockpit
+        region: EU
   - product_name: Joystick Desk Mount2 with Profile Bar 1
     description: Joystick Desk Mount2 with Profile Bar 1. flight-control mounts and
       accessories. Active EU WINCTRL store listing; total_stock 4 from API. Joystick
@@ -233,29 +264,169 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=1105
         region: EU
   - product_name: MTS Base Frame
-    description: MONSTERTECH MTS Base Frame. modular flight/racing cockpit. current. Modular
-      aluminum cockpit with MTS add-ons for HOTAS, center joystick, yoke, wheel,
-      monitor, keyboard, mouse, and motion adapters.
+    description: MONSTERTECH MTS Base Frame. modular flight/racing cockpit. in
+      stock on official EU store. Base module for a complete MTS cockpit,
+      expandable with flight, racing, and office modules.
     manufacturer: MONSTERTECH / MTSIM
     component_category: rigs-and-cockpits
     component_sub_category: Flight cockpit
-    product_url: https://www.monster.tech/en/product-category/mts-en/
-    picture_url: https://www.monster.tech/wp-content/uploads/2023/01/monstertech_mts_baseframe_b_01.jpg
+    product_url: https://www.monster.tech/en/product/mts-base-frame/
+    picture_url: https://www.monster.tech/wp-content/uploads/2021/10/monstertech_mts_baseframe_b_01-scaled.jpg
     shops:
       - name: Monstertech
-        price: 1007.4
+        price: 923.53
         currency: EUR
-        url: https://www.monster.tech/en/product-category/mts-en/
+        url: https://www.monster.tech/en/product/mts-base-frame/
+        region: EU
+  - product_name: Sim Stand Frame
+    description: MONSTERTECH Sim Stand Frame. modular simulator stand frame. in stock
+      on official EU store. Base frame module for the Sim Stand ecosystem.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://www.monster.tech/en/product/sim-stand-frame/
+    picture_url: https://www.monster.tech/wp-content/uploads/2025/11/sim_stand_frame_b_10-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 284.87
+        currency: EUR
+        url: https://www.monster.tech/en/product/sim-stand-frame/
+        region: EU
+  - product_name: Joystick / HOTAS Desk Mount
+    description: MONSTERTECH Joystick / HOTAS Desk Mount. desk-mounted flight
+      control mount. in stock on official EU store. Aluminum mount for joystick,
+      throttle, and HOTAS systems.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://www.monster.tech/en/product/joystick-hotas-table-mount/
+    picture_url: https://www.monster.tech/wp-content/uploads/2015/08/mtsim_desk_mount_tm_ava_03b-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 105.04
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-table-mount/
+        region: EU
+  - product_name: Joystick / HOTAS Desk Mount Long
+    description: MONSTERTECH Joystick / HOTAS Desk Mount Long. extended
+      desk-mounted flight control mount. in stock on official EU store. Long
+      aluminum mount for joysticks with extensions and HOTAS systems.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://www.monster.tech/en/product/joystick-hotas-table-mount-long/
+    picture_url: https://www.monster.tech/wp-content/uploads/2017/10/tbm_long_b_01b-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 116.81
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-table-mount-long/
+        region: EU
+  - product_name: Joystick / HOTAS Chair Mount
+    description: MONSTERTECH Joystick / HOTAS Chair Mount. chair-mounted flight
+      control mount. in stock on official EU store. Mount module for attaching a
+      joystick or throttle to a chair-based flight setup.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://www.monster.tech/en/product/joystick-hotas-chair-mount-single/
+    picture_url: https://www.monster.tech/wp-content/uploads/2018/03/monstertech_hotas_chair_mount_product.jpg
+    shops:
+      - name: Monstertech
+        price: 91.6
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-chair-mount-single/
+        region: EU
+  - product_name: Joystick / HOTAS Rail Mount
+    description: MONSTERTECH Joystick / HOTAS Rail Mount. rail-mounted flight
+      control mount. in stock on official EU store. Mount for attaching joystick
+      or throttle controls to a slide rail.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://www.monster.tech/en/product/joystick-hotas-rail-mount/
+    picture_url: https://www.monster.tech/wp-content/uploads/2022/03/monstertech_rail_mount_warthog_joystick_01-1-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 116.81
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-rail-mount/
+        region: EU
+  - product_name: Joystick / HOTAS Rail Mount Long
+    description: MONSTERTECH Joystick / HOTAS Rail Mount Long. extended
+      rail-mounted flight control mount. in stock on official EU store. Long rail
+      mount for joysticks with extensions.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: rigs-and-cockpits
+    component_sub_category: Rig mounts
+    product_url: https://www.monster.tech/en/product/joystick-hotas-rail-mount-long-version/
+    picture_url: https://www.monster.tech/wp-content/uploads/2022/03/monstertech_schienenhalterung_rail_mount_lang_mit_joystick_01b-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 133.61
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-rail-mount-long-version/
         region: EU
   - product_name: P1X Pro Sim Racing Cockpit
-    description: Sim-Lab P1X Pro. high-end aluminum profile cockpit. current. Flagship
-      aluminum profile cockpit for high-load direct drive and pedal setups.
+    description: Sim-Lab P1X Pro Sim Racing Cockpit. high-end aluminum profile
+      cockpit. in stock on official EU shop. Modular rigid chassis for direct
+      drive wheels and load-cell pedals.
     manufacturer: Sim-Lab
     component_category: rigs-and-cockpits
     component_sub_category: Aluminum cockpit
-    product_url: https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit
-    picture_url: https://sim-lab.eu/cdn/shop/files/p1xpro_4.jpg?v=1762973240&width=2048
-    shops: []
+    product_url: https://sim-lab.eu/en-de/products/p1x-pro-sim-racing-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/PX1_Pro_Wheeldeck_Sim-LabBlue_VarioSingle_45afb94c-4d36-4dcd-a7a7-96eed6de601f.jpg?v=1762973240
+    shops:
+      - name: Sim-Lab EU
+        price: 775.96
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/p1x-pro-sim-racing-cockpit
+        region: EU
+  - product_name: P1X Ultimate Simracing Cockpit
+    description: Sim-Lab P1X Ultimate Simracing Cockpit. flagship aluminum
+      profile cockpit. in stock on official EU shop. Latest P1 cockpit with
+      slotted profiles, straight uprights, and modular assembly.
+    manufacturer: Sim-Lab
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://sim-lab.eu/en-de/products/p1x-ultimate-simracing-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/PX1_Ultimate_Wheeldeck_Sim-LabBlue_VarioSingle_bca39084-b038-47ca-baad-b8760410ce76.jpg?v=1762973864
+    shops:
+      - name: Sim-Lab EU
+        price: 884.15
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/p1x-ultimate-simracing-cockpit
+        region: EU
+  - product_name: GT1 Pro Sim Racing Cockpit
+    description: Sim-Lab GT1 Pro Sim Racing Cockpit. aluminum profile cockpit.
+      in stock on official EU shop. Rigid pre-drilled chassis for direct-drive
+      wheelbases with side mounts for shifters and accessories.
+    manufacturer: Sim-Lab
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://sim-lab.eu/en-de/products/gt1-pro-sim-racing-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/GT1_Pro_Sim-LabBlue_VarioSingle_e5d044dd-ef80-4b56-99c9-435eb2ecdda6.jpg?v=1762974564
+    shops:
+      - name: Sim-Lab EU
+        price: 638.27
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/gt1-pro-sim-racing-cockpit
+        region: EU
+  - product_name: Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit
+    description: Sim-Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing
+      Cockpit. licensed formula-position cockpit. in stock on official EU shop.
+      Rigid formula cockpit with front, side, and wheeldeck mounts included.
+    manufacturer: Sim-Lab / Mercedes-AMG PETRONAS
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://sim-lab.eu/en-de/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Sim-Lab_F1_SeatBrackets_Cockpit_56290bdc-89c4-46d8-b8eb-337743d6d621.jpg?v=1763049167
+    shops:
+      - name: Sim-Lab EU
+        price: 982.49
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit
+        region: EU
   - product_name: Panel Mount1
     description: Panel Mount1. flight-control mounts and accessories. Pre-order listing on
       EU WINCTRL store. Panel Mount1.
@@ -313,14 +484,155 @@ commercial:
         url: https://www.playseat.com/en-us/products/playseat-trophy-black
         region: Global
   - product_name: PRIME Cockpit
-    description: GT Omega PRIME. aluminum profile cockpit. current. Aluminum profile sim
-      racing cockpit.
+    description: GT Omega PRIME Cockpit. aluminum profile cockpit. in stock on
+      official UK shop. Heavy-duty 160x40 aluminum-profile frame for direct
+      drive wheelbases and high-end pedals.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
     component_sub_category: Aluminum cockpit
-    product_url: https://gtomega.com/products/prime-cockpit
-    picture_url: https://www.gtomega.com/cdn/shop/files/Cockpit_Prime_2026_01_e4a939aa-2c63-4617-b19d-49981d9acefe.webp?v=1774430611
-    shops: []
+    product_url: https://www.gtomega.co.uk/products/prime-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Prime_2026_01_e4a939aa-2c63-4617-b19d-49981d9acefe.webp?v=1774430611
+    shops:
+      - name: GT Omega UK
+        price: 539.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/prime-cockpit
+        region: UK
+  - product_name: PRIME Lite Cockpit
+    description: GT Omega PRIME Lite Cockpit. aluminum profile cockpit. in stock
+      on official UK shop. Compact 8040 aluminum-profile sim racing cockpit
+      compatible with the PRIME range.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://www.gtomega.co.uk/products/prime-lite-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_PrimeLite_2025_00_L_F.webp?v=1765377668
+    shops:
+      - name: GT Omega UK
+        price: 369.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/prime-lite-cockpit
+        region: UK
+  - product_name: PRIME Lite-R Cockpit
+    description: GT Omega PRIME Lite-R Cockpit. entry aluminum profile cockpit.
+      currently out of stock on official UK shop. Streamlined ultra-light PRIME
+      cockpit focused on stability, adjustability, and compact size.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://www.gtomega.co.uk/products/prime-lite-r
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Prime_Lite-R_2025_00.webp?v=1765378153
+    shops:
+      - name: GT Omega UK
+        price: 203.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/prime-lite-r
+        region: UK
+  - product_name: ART Cockpit
+    description: GT Omega ART Cockpit. steel racing cockpit. in stock on official
+      UK shop. Adjustable wheel platform, pedal platform, gear mount, frame
+      length, and seat position.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.gtomega.co.uk/products/art-racing-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Art_2025_00_L.webp?v=1775766898
+    shops:
+      - name: GT Omega UK
+        price: 129.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/art-racing-cockpit
+        region: UK
+  - product_name: TITAN Cockpit
+    description: GT Omega TITAN Cockpit. steel tube racing cockpit. in stock on
+      official UK shop. 2 in diameter steel tube frame with adjustable wheel and
+      pedal plates.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.gtomega.co.uk/products/titan-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Titan_V1_2026_01.webp?v=1772700988
+    shops:
+      - name: GT Omega UK
+        price: 299.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/titan-cockpit
+        region: UK
+  - product_name: HYBRID Cockpit
+    description: GT Omega HYBRID Cockpit. adjustable GT/formula racing cockpit. in
+      stock on official UK shop. Supports transitions between hybrid and GT
+      racing positions with PRIME pedal tray and seat adjustment system.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.gtomega.co.uk/products/hybrid-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Hybrid_F_2026_00.webp?v=1767792809
+    shops:
+      - name: GT Omega UK
+        price: 449.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/hybrid-cockpit
+        region: UK
+  - product_name: SPRINT Folding Cockpit
+    description: GT Omega SPRINT Folding Cockpit. foldable sim racing cockpit. in
+      stock on official UK shop. Compact cockpit with formula-inspired seating
+      position and included shifter/handbrake mount.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Portable cockpit
+    product_url: https://www.gtomega.co.uk/products/sprint-folding-cockpit
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Sprint_Cockpit_00.webp?v=1774649552
+    shops:
+      - name: GT Omega UK
+        price: 179.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/sprint-folding-cockpit
+        region: UK
+  - product_name: DD-X Wheel Stand
+    description: GT Omega DD-X Wheel Stand. direct-drive wheel stand. in stock on
+      official UK shop. Fixed Y-frame wheel stand engineered for forces up to
+      21 Nm.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Wheel stand
+    product_url: https://www.gtomega.co.uk/products/dd-x-wheel-stand
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Wheelstand_DD-X_2025_00.webp?v=1770904113
+    shops:
+      - name: GT Omega UK
+        price: 149.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/dd-x-wheel-stand
+        region: UK
+  - product_name: PRO Wheel Stand
+    description: GT Omega PRO Wheel Stand. folding wheel stand. in stock on
+      official UK shop. Space-saving wheel and pedal stand based on the Classic
+      wheel stand design.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Wheel stand
+    product_url: https://www.gtomega.co.uk/products/pro-steering-wheel-stand
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Wheelstand_Pro_2025_01.webp?v=1772112607
+    shops:
+      - name: GT Omega UK
+        price: 99.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/pro-steering-wheel-stand
+        region: UK
+  - product_name: APEX Wheel Stand
+    description: GT Omega APEX Wheel Stand. folding wheel stand. in stock on
+      official UK shop. Adjustable wheel and pedal stand with substantial frame
+      and compact fold-away storage.
+    manufacturer: GT Omega
+    component_category: rigs-and-cockpits
+    component_sub_category: Wheel stand
+    product_url: https://www.gtomega.co.uk/products/apex-steering-wheel-stand
+    picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Apex_LifestyleSet_01.webp?v=1774650822
+    shops:
+      - name: GT Omega UK
+        price: 109.95
+        currency: GBP
+        url: https://www.gtomega.co.uk/products/apex-steering-wheel-stand
+        region: UK
   - product_name: r3volution cockpit
     description: Obutto r3volution. hybrid workstation/flight/racing cockpit. out of stock
       on official product page. Steel tube cockpit with reclinable sports seat.
@@ -425,34 +737,33 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=321
         region: EU
-  - product_name: TR160 MK4 Racing Simulator
-    description: Trak Racer TR160 MK4. heavy-duty aluminum profile cockpit. current. 160 x
-      40 mm aluminum base profile and 120 x 40 mm wheel uprights.
+  - product_name: TR160 V5 Racing Simulator with Seat Slider Kit
+    description: Trak Racer TR160 V5. heavy-duty aluminum profile cockpit. current
+      on official US shop. 160 mm profile sim racing cockpit with seat slider kit.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: Aluminum cockpit
-    product_url: https://trakracer.com/products/tr160-mk4-racing-simulator-1
-    picture_url: https://trakracer.com/cdn/shop/files/TR160-1-TK-AU_282_29_56ce2992-ac89-4bb8-9db0-1f0824976913_1024x1024.jpg?v=1696947837
+    product_url: https://trakracer.com/products/tr160-v5
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR1605Blacke-cm05-min_d3dbb0cb-e499-4a52-81c5-abb112834010.png?v=1734837861
     shops:
       - name: Trak Racer
-        price: 21999
+        price: 730
         currency: USD
-        url: https://trakracer.com/products/tr160-mk4-racing-simulator-1
+        url: https://trakracer.com/products/tr160-v5
         region: US
-  - product_name: TR80 Racing Simulator MK5
-    description: Trak Racer TR80 MK5. aluminum profile cockpit. current; low stock shown on
-      source page during check. Aluminum profile cockpit with formula/GT hybrid pedal
-      plate.
+  - product_name: TR80S Racing Simulator
+    description: Trak Racer TR80S. aluminum profile cockpit. current on official
+      US shop. Formula and GT hybrid pedal plate with side-mounted wheel uprights.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: Aluminum cockpit
-    product_url: https://trakracer.com/collections/racing-simulators/products/tr80-racing-simulator-mk5
-    picture_url: https://trakracer.eu/cdn/shop/files/19003e_shopify-min_900x.png?v=1648075378
+    product_url: https://trakracer.com/products/tr80s-racing-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR80S_eNoMonitor01-min_912d07bc-22b0-4f8b-9790-40c093816d14.png?v=1764113221
     shops:
       - name: Trak Racer
-        price: 450
+        price: 499
         currency: USD
-        url: https://trakracer.com/collections/racing-simulators/products/tr80-racing-simulator-mk5
+        url: https://trakracer.com/products/tr80s-racing-simulator
         region: US
   - product_name: ViperAce EX Shaker Kit
     description: ViperAce EX Shaker Kit. flight-control mounts and accessories. Active EU
@@ -484,18 +795,168 @@ commercial:
         url: https://volairsim.com/
         region: US
   - product_name: Wheel Stand 2.0
-    description: Next Level Racing Wheel Stand 2.0. wheel stand. current. Foldable steel
-      wheel stand with adjustable wheel and pedal plates.
+    description: Next Level Racing Wheel Stand 2.0. wheel stand. in stock on
+      official store. Foldable steel wheel stand with adjustable wheel and pedal
+      plates.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: Wheel stand
-    product_url: https://store-us.nextlevelracing.com/products/next-level-racing-wheel-stand-2-0
-    picture_url: https://store-us.nextlevelracing.com/cdn/shop/files/WheelStand2.0-Image1.jpg?v=1750395926&width=1920
+    product_url: https://nextlevelracing.com/product/wheel-stand/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2021/11/ws2_web_11-1.png
     shops:
-      - name: Next Level Racing US
+      - name: Next Level Racing
         price: 279
         currency: USD
-        url: https://store-us.nextlevelracing.com/products/next-level-racing-wheel-stand-2-0
+        url: https://nextlevelracing.com/product/wheel-stand/
+        region: US
+  - product_name: Wheel Stand Lite 2.0
+    description: Next Level Racing Wheel Stand Lite 2.0. compact wheel stand. in
+      stock on official store. Foldable entry wheel stand for compact racing
+      setups.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Wheel stand
+    product_url: https://nextlevelracing.com/product/wheel-stand-lite-2-0/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2024/10/ws_lite_web_1.webp
+    shops:
+      - name: Next Level Racing
+        price: 179
+        currency: USD
+        url: https://nextlevelracing.com/product/wheel-stand-lite-2-0/
+        region: US
+  - product_name: Wheel Stand Racer
+    description: Next Level Racing Wheel Stand Racer. entry wheel stand. in stock on
+      official store. Compact wheel and pedal stand for racing simulator setups.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Wheel stand
+    product_url: https://nextlevelracing.com/product/next-level-racing-wheel-stand-racer/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2019/12/HEEL_STAND_RACER_HERO_3.png
+    shops:
+      - name: Next Level Racing
+        price: 99
+        currency: USD
+        url: https://nextlevelracing.com/product/next-level-racing-wheel-stand-racer/
+        region: US
+  - product_name: F-GT Pro Formula and GT Racing Simulator Cockpit
+    description: Next Level Racing F-GT Pro. formula and GT racing simulator
+      cockpit. in stock on official store. Round-tube cockpit with Formula and
+      GT driving-position support.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://nextlevelracing.com/product/f-gt-pro/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2025/04/fgt_pro_web_1-1.webp
+    shops:
+      - name: Next Level Racing
+        price: 1199
+        currency: USD
+        url: https://nextlevelracing.com/product/f-gt-pro/
+        region: US
+  - product_name: GTRacer 2.0
+    description: Next Level Racing GTRacer 2.0. GT racing simulator cockpit. in
+      stock on official store. Round-tube pre-fabricated cockpit for GT racing
+      setups.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://nextlevelracing.com/product/gtracer-2-0/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2025/01/GTRacer2.0-Features-1.png
+    shops:
+      - name: Next Level Racing
+        price: 499
+        currency: USD
+        url: https://nextlevelracing.com/product/gtracer-2-0/
+        region: US
+  - product_name: Victory Simulator Cockpit
+    description: Next Level Racing Victory Simulator Cockpit. entry racing cockpit.
+      in stock on official store. Pre-fabricated racing cockpit for wheel and
+      pedal setups.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://nextlevelracing.com/product/victory-simulator-cockpit/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2024/11/victory_cockpit_web_1.webp
+    shops:
+      - name: Next Level Racing
+        price: 329
+        currency: USD
+        url: https://nextlevelracing.com/product/victory-simulator-cockpit/
+        region: US
+  - product_name: F-GT Elite 160 Scuderia Ferrari Edition
+    description: Next Level Racing F-GT Elite 160 Scuderia Ferrari Edition.
+      licensed aluminum-profile racing cockpit. in stock on official store.
+      Ferrari-licensed Elite 160 cockpit.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://nextlevelracing.com/product/f-gt-elite-160-scuderia-ferrari-edition/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2023/03/fgt_elite_ferrari_1.webp
+    shops:
+      - name: Next Level Racing
+        price: 1299
+        currency: USD
+        url: https://nextlevelracing.com/product/f-gt-elite-160-scuderia-ferrari-edition/
+        region: US
+  - product_name: GTElite Racing Simulator Cockpit Front and Side Mount Edition
+    description: Next Level Racing GTElite Racing Simulator Cockpit Front and Side
+      Mount Edition. aluminum-profile cockpit. in stock on official store. Elite
+      GT cockpit with front and side mount wheel-base support.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://nextlevelracing.com/product/gtelite-racing-simulator-cockpit-front-side-mount-edition/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2022/03/gt_elite_sidemount_gallery_6.png
+    shops:
+      - name: Next Level Racing
+        price: 799
+        currency: USD
+        url: https://nextlevelracing.com/product/gtelite-racing-simulator-cockpit-front-side-mount-edition/
+        region: US
+  - product_name: Flight Simulator MSFS Edition
+    description: Next Level Racing Flight Simulator MSFS Edition. licensed flight
+      simulator cockpit. in stock on official store. Microsoft Flight Simulator
+      edition cockpit for yoke, joystick, throttle, and rudder setups.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://nextlevelracing.com/product/flight-simulator-msfs-edition/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2025/05/fs_msfs_edition_web_1.webp
+    shops:
+      - name: Next Level Racing
+        price: 999
+        currency: USD
+        url: https://nextlevelracing.com/product/flight-simulator-msfs-edition/
+        region: US
+  - product_name: Flight Simulator Pro
+    description: Next Level Racing Flight Simulator Pro. flight simulator cockpit.
+      in stock on official store. Full flight cockpit and seat package for
+      commercial and combat flight controls.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://nextlevelracing.com/product/flight-simulator-pro-2/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2023/06/Flight-Simulator-Pro.webp
+    shops:
+      - name: Next Level Racing
+        price: 1198
+        currency: USD
+        url: https://nextlevelracing.com/product/flight-simulator-pro-2/
+        region: US
+  - product_name: Flight Stand Pro
+    description: Next Level Racing Flight Stand Pro. flight simulator stand. in stock
+      on official store. Stand for yoke, joystick, throttle, and rudder pedal
+      setups.
+    manufacturer: Next Level Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://nextlevelracing.com/product/flight-stand-pro/
+    picture_url: https://nextlevelracing.com/wp-content/uploads/2023/06/flight_stand_pro_web_1-1.webp
+    shops:
+      - name: Next Level Racing
+        price: 499
+        currency: USD
+        url: https://nextlevelracing.com/product/flight-stand-pro/
         region: US
   - product_name: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit
     description: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit. flight-control
@@ -542,6 +1003,782 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=371
         region: EU
+  - product_name: Pro-Sim Formula Evo Sport
+    description: Pro-Sim Formula Evo Sport. formula racing simulator cockpit. in
+      stock on official UK shop. Tubular formula-position simulator with bespoke
+      seat, high-foot driving position, and compact footprint.
+    manufacturer: Pro-Sim
+    component_category: rigs-and-cockpits
+    component_sub_category: Formula cockpit
+    product_url: https://www.pro-sim.co.uk/shop/pro-sim-formula-evo-sport/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2025/06/01.1150-1-e1750009343482.jpg
+    shops:
+      - name: Pro-Sim
+        price: 13950
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/pro-sim-formula-evo-sport/
+        region: UK
+  - product_name: PSL GT
+    description: Pro-Sim PSL GT. professional GT simulator cockpit. in stock on
+      official UK shop. Entry professional GT frame using Pro-Sim core
+      components with adjustable pedal height and stocked for dispatch.
+    manufacturer: Pro-Sim
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.pro-sim.co.uk/shop/psl-gt/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2022/07/Pro-Sim-7-scaled.jpg
+    shops:
+      - name: Pro-Sim
+        price: 19900
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/psl-gt/
+        region: UK
+  - product_name: PSL Sport
+    description: Pro-Sim PSL Sport. esports GT simulator package. in stock on
+      official UK shop. Pro-Sim GT simulator package with Evo pedals and
+      25 Nm-class direct-drive system.
+    manufacturer: Pro-Sim
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.pro-sim.co.uk/shop/psl-pro-esport-package/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2020/01/PSL-GT-scaled.jpg
+    shops:
+      - name: Pro-Sim
+        price: 14675
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/psl-pro-esport-package/
+        region: UK
+  - product_name: Pro-Sim Formula Cockpit
+    description: Pro-Sim Formula Cockpit. full-body formula simulator cockpit.
+      in stock on official UK shop. Real F1-car-mould cockpit with custom
+      colour options and stated 10-week shipping window.
+    manufacturer: Pro-Sim
+    component_category: rigs-and-cockpits
+    component_sub_category: Formula cockpit
+    product_url: https://www.pro-sim.co.uk/shop/pro-sim-half-f1-car/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2017/10/P1040594-scaled.jpg
+    shops:
+      - name: Pro-Sim
+        price: 34750
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/pro-sim-half-f1-car/
+        region: UK
+  - product_name: Pro-Sim Evolution GT
+    description: Pro-Sim Evolution GT. professional GT simulator cockpit. in
+      stock on official UK shop. Adjustable GT driving-position simulator with
+      Sparco bucket seat as standard and stocked for dispatch.
+    manufacturer: Pro-Sim
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.pro-sim.co.uk/shop/pro-sim-evolution-gt/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/12/Pro-Sim-9.jpg
+    shops:
+      - name: Pro-Sim
+        price: 25550
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/pro-sim-evolution-gt/
+        region: UK
+  - product_name: Pro-Sim Formula Evolution
+    description: Pro-Sim Formula Evolution. professional formula simulator
+      cockpit. in stock on official UK shop. Formula driver-development
+      simulator with bespoke seat and high-foot formula/prototype driving
+      position.
+    manufacturer: Pro-Sim
+    component_category: rigs-and-cockpits
+    component_sub_category: Formula cockpit
+    product_url: https://www.pro-sim.co.uk/shop/pro-sim-formula-evolution/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2025/03/Formula-simulator-3-website-small.jpg
+    shops:
+      - name: Pro-Sim
+        price: 26350
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/pro-sim-formula-evolution/
+        region: UK
+  - product_name: TrackTime Game Seat RR3055 in RaceRoom Design
+    description: RaceRoom / TrackTime Game Seat RR3055. foldable sim racing
+      cockpit. ready for shipment on official shop. Adjustable tubular frame,
+      RR55 synthetic-leather foldable seat, wheel plate, and pedal mount for
+      PC, PlayStation, and Xbox.
+    manufacturer: RaceRoom / TrackTime
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.raceroomstore.com/shop_en/game-seat-rr3055.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/r/r/rr3055-raceroom_02_1_2.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 199
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/game-seat-rr3055.html
+        region: EU
+  - product_name: TrackTime Game Seat RR3033 in RaceRoom Design
+    description: RaceRoom / TrackTime Game Seat RR3033. adjustable sim racing
+      cockpit. ready for shipment on official shop. Adjustable tubular frame,
+      RR33 synthetic-leather sport seat, wheel plate, and pedal mount.
+    manufacturer: RaceRoom / TrackTime
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.raceroomstore.com/shop_en/game-seat-rr3033.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/m/a/maxi_product_2.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 249
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/game-seat-rr3033.html
+        region: EU
+  - product_name: TrackTime Game Seat TT3055
+    description: RaceRoom / TrackTime Game Seat TT3055. foldable sim racing
+      cockpit. ready for shipment on official shop. Steel tube frame with TT55
+      foldable sport seat, wheel mount, and pedal tray.
+    manufacturer: RaceRoom / TrackTime
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3055.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/t/t/tt3055.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 199
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3055.html
+        region: EU
+  - product_name: TrackTime Game Seat TT3033
+    description: RaceRoom / TrackTime Game Seat TT3033. adjustable sim racing
+      cockpit. ready for shipment on official shop. Steel tube frame with TT33
+      sport seat, adjustable wheel bracket, and pedal mount.
+    manufacturer: RaceRoom / TrackTime
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3033.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/t/t/tt3033.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 249
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3033.html
+        region: EU
+  - product_name: Simulator RR3055
+    description: RaceRoom Simulator RR3055. ready-to-race simulator package.
+      available on official shop. RR55 seat simulator with tubular frame,
+      wheel/pedal set, monitor, gaming PC, and 5.1 sound system.
+    manufacturer: RaceRoom / TrackTime
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.raceroomstore.com/shop_en/simulator-rr3055.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/s/i/simulator_rr3055-1.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 3999
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/simulator-rr3055.html
+        region: EU
+  - product_name: Simulator RR3033
+    description: RaceRoom Simulator RR3033. ready-to-race simulator package.
+      available on official shop. RR33 adjustable-seat simulator with tubular
+      frame, wheel/pedal set, monitor, gaming PC, and 5.1 sound system.
+    manufacturer: RaceRoom / TrackTime
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.raceroomstore.com/shop_en/simulator-rr3033.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/s/i/simulator_rr_3033-1.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 4099
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/simulator-rr3033.html
+        region: EU
+  - product_name: Flight Case Simulator RR4055
+    description: RaceRoom Flight Case Simulator RR4055. transportable
+      ready-to-race simulator package. available on official shop. RR55
+      simulator with flight case, wheel/pedal set, monitor, PC, and 5.1 sound.
+    manufacturer: RaceRoom / TrackTime
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.raceroomstore.com/shop_en/flight-case-simulator-rr4055.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/f/l/flight_case_rr4055-2.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 4599
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/flight-case-simulator-rr4055.html
+        region: EU
+  - product_name: Flight Case Simulator RR4027
+    description: RaceRoom Flight Case Simulator RR4027. transportable
+      ready-to-race simulator package. available on official shop. RR27-seat
+      simulator with flight case, wheel/pedal set, monitor, PC, and 5.1 sound.
+    manufacturer: RaceRoom / TrackTime
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.raceroomstore.com/shop_en/flight-case-simulator-rr4027.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/f/l/flight_case_rr_4027-2.jpg
+    shops:
+      - name: RaceRoom Store
+        price: 4699
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/flight-case-simulator-rr4027.html
+        region: EU
+  - product_name: TrackTime Race Rig Simulator
+    description: RaceRoom / TrackTime Race Rig Simulator. assembled race
+      simulator package. available on official shop. Race Rig frame with TT07
+      bucket seat, 49 in Samsung Odyssey monitor, Lenovo gaming PC, and
+      RaceRoom hardware/software package.
+    manufacturer: RaceRoom / TrackTime
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3033-basic-bundle-691.html
+    picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/t/r/tracktime_racerig_multihalterung_75105485_014_1_2_-_kopie_1.png
+    shops:
+      - name: RaceRoom Store
+        price: 9561
+        currency: EUR
+        url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3033-basic-bundle-691.html
+        region: EU
+  - product_name: AP-Xtreme APX-1000 Sim Chassis
+    description: Ricmotech AP-Xtreme APX-1000. bare racing simulator chassis.
+      official Ricmotech store listing. Tubular steel AP-Xtreme chassis for
+      sim-racing cockpit builds.
+    manufacturer: Ricmotech / AP-Xtreme
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.ricmotech.com/ap-xtreme-1000-racing-simulator-chassis
+    picture_url: https://www.ricmotech.com/assets/images/apx-1000-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 1380
+        currency: USD
+        url: https://www.ricmotech.com/ap-xtreme-1000-racing-simulator-chassis
+        region: US
+  - product_name: AP-Xtreme APX-2000 Single Monitor Chassis
+    description: Ricmotech AP-Xtreme APX-2000. single-monitor racing simulator
+      chassis. official Ricmotech store listing. AP-Xtreme cockpit chassis with
+      integrated single-monitor support.
+    manufacturer: Ricmotech / AP-Xtreme
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.ricmotech.com/single-monitor-racing-simulator-chassis
+    picture_url: https://www.ricmotech.com/assets/images/APX-2000-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 1745
+        currency: USD
+        url: https://www.ricmotech.com/single-monitor-racing-simulator-chassis
+        region: US
+  - product_name: AP-Xtreme APX-3000 Triple Monitor Chassis
+    description: Ricmotech AP-Xtreme APX-3000. triple-monitor racing simulator
+      chassis. official Ricmotech store listing. AP-Xtreme cockpit chassis with
+      modular rails and integrated triple-monitor stand.
+    manufacturer: Ricmotech / AP-Xtreme
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.ricmotech.com/ap-xtreme-sim-racing-chassis
+    picture_url: https://www.ricmotech.com/assets/images/APX-3000-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 1995
+        currency: USD
+        url: https://www.ricmotech.com/ap-xtreme-sim-racing-chassis
+        region: US
+  - product_name: AP-Xtreme APX-3000UW Wide Triple Monitor Chassis
+    description: Ricmotech AP-Xtreme APX-3000UW. wide triple-monitor racing
+      simulator chassis. official Ricmotech store listing. AP-Xtreme cockpit for
+      wide triple-monitor simulator setups.
+    manufacturer: Ricmotech / AP-Xtreme
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.ricmotech.com/ap-xtreme-3000uw-sim-racing-chassis
+    picture_url: https://www.ricmotech.com/assets/images/APX-3000UW-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 2225
+        currency: USD
+        url: https://www.ricmotech.com/ap-xtreme-3000uw-sim-racing-chassis
+        region: US
+  - product_name: AP-Xtreme Lite APX-500 Bare Sim Chassis
+    description: Ricmotech AP-Xtreme Lite APX-500. compact bare racing simulator
+      chassis. official Ricmotech store listing. Small-format AP-Xtreme chassis
+      for sim-racing cockpit builds.
+    manufacturer: Ricmotech / AP-Xtreme
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.ricmotech.com/ap-xtreme-lite-sim-racing-chassis
+    picture_url: https://www.ricmotech.com/assets/images/APX-500-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 995
+        currency: USD
+        url: https://www.ricmotech.com/ap-xtreme-lite-sim-racing-chassis
+        region: US
+  - product_name: P1 Cockpit
+    description: RSEAT P1. configurable aluminum-profile sim racing cockpit.
+      available on official store. Front or bottom mount variants with optional
+      RSEAT GT seat; base frame-only variant captured for price.
+    manufacturer: RSEAT
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://rseat.net/products/p1-black
+    picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-p1-black-store-10.png?v=1729241100
+    shops:
+      - name: RSEAT
+        price: 1269
+        currency: USD
+        url: https://rseat.net/products/p1-black
+        region: US
+  - product_name: A1 PRO GT Cockpit
+    description: RSEAT A1 PRO GT. aluminum-profile GT sim racing cockpit.
+      available on official store. 40 x 160 mm 6063-T6 aluminum extrusion
+      chassis with wheel-mount and optional seat variants.
+    manufacturer: RSEAT
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://rseat.net/products/a1-pro-gt-black
+    picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-a1-pro-gt-black-store-09.png?v=1726779191
+    shops:
+      - name: RSEAT
+        price: 1049
+        currency: USD
+        url: https://rseat.net/products/a1-pro-gt-black
+        region: US
+  - product_name: A1 PRO Formula Cockpit
+    description: RSEAT A1 PRO Formula. aluminum-profile formula sim racing
+      cockpit. available on official store. 40 x 160 mm 6063-T6 aluminum
+      extrusion chassis with formula seating and optional seat variants.
+    manufacturer: RSEAT
+    component_category: rigs-and-cockpits
+    component_sub_category: Formula cockpit
+    product_url: https://rseat.net/products/a1-pro-formula-black
+    picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-a1-pro-formula-black-store-01.png?v=1727255476
+    shops:
+      - name: RSEAT
+        price: 1149
+        currency: USD
+        url: https://rseat.net/products/a1-pro-formula-black
+        region: US
+  - product_name: Alpine Racing TRX
+    description: Trak Racer Alpine Racing TRX. hybrid Formula/GT cockpit. current
+      on official US shop. Alpine F1-engineered simulator with rapid Formula and
+      GT seating position adjustment.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://trakracer.com/products/alpine-trx-v2
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRX-V2-ALP24_eHero_6f515fc4-ae08-459c-b043-199ec1250111.webp?v=1763514318
+    shops:
+      - name: Trak Racer
+        price: 999
+        currency: USD
+        url: https://trakracer.com/products/alpine-trx-v2
+        region: US
+  - product_name: BWT Alpine Formula One Team TRA Hybrid Racing Simulator
+    description: Trak Racer TRA Hybrid. aluminum Formula/GT cockpit. current on
+      official US shop. BWT Alpine Formula One Team simulator with tool-free
+      Formula and GT pedal adjustment.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://trakracer.com/products/alpine-racing-tra-hybrid-extrusion-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRAPDPHero_3000x2000_91f89d40-1c33-4753-8fcb-2c59e17c0990.webp?v=1773898509
+    shops:
+      - name: Trak Racer
+        price: 1399
+        currency: USD
+        url: https://trakracer.com/products/alpine-racing-tra-hybrid-extrusion-simulator
+        region: US
+  - product_name: Carbon Fibre TRX Racing Simulator
+    description: Trak Racer Carbon Fibre TRX. carbon-fiber hybrid Formula/GT
+      cockpit. current on official US shop. Premium TRX cockpit with Formula and
+      GT adjustment.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://trakracer.com/products/carbon-fibre-trx-racing-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/Image1.webp?v=1760680106
+    shops:
+      - name: Trak Racer
+        price: 3999
+        currency: USD
+        url: https://trakracer.com/products/carbon-fibre-trx-racing-simulator
+        region: US
+  - product_name: TR120S V2 Racing Simulator with Seat Slider Kit
+    description: Trak Racer TR120S V2. aluminum profile cockpit. current on
+      official US shop. 120 mm profile cockpit with seat slider kit.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://trakracer.com/products/tr120s-v2-racing-simulator-new
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR120S-BLKe02-min.png?v=1735332033
+    shops:
+      - name: Trak Racer
+        price: 570
+        currency: USD
+        url: https://trakracer.com/products/tr120s-v2-racing-simulator-new
+        region: US
+  - product_name: TR8 PRO V2 Racing Simulator
+    description: Trak Racer TR8 PRO V2. tubular racing simulator cockpit. current
+      on official US shop. Rigid fixed-frame simulator for Formula and GT driving
+      positions.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://trakracer.com/products/tr8-pro-racing-simulator-1
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR8_Pro_V2_s-e-cm1_01.webp?v=1758687555
+    shops:
+      - name: Trak Racer
+        price: 699
+        currency: USD
+        url: https://trakracer.com/products/tr8-pro-racing-simulator-1
+        region: US
+  - product_name: TR40S Racing Simulator
+    description: Trak Racer TR40S. entry aluminum profile cockpit. current on
+      official US shop. Compact profile simulator with pre-drilled pedal mount
+      and flight-sim expandability.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://trakracer.com/products/tr40s-racing-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR40S_e01-min_60bd3152-e101-4518-9ac7-5b0de933aff4.png?v=1736301057
+    shops:
+      - name: Trak Racer
+        price: 349
+        currency: USD
+        url: https://trakracer.com/products/tr40s-racing-simulator
+        region: US
+  - product_name: TR5 Formula and GT Racing Simulator Cockpit
+    description: Trak Racer TR5. Formula and GT racing cockpit. current on
+      official US shop. Adjustable wheelbase, pedal plate, and seat-position
+      simulator cockpit.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://trakracer.com/products/tr5
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR5-White_e01_1.png?v=1759295535
+    shops:
+      - name: Trak Racer
+        price: 599
+        currency: USD
+        url: https://trakracer.com/products/tr5
+        region: US
+  - product_name: FS3 V2 Wheel Stand
+    description: Trak Racer FS3 V2 Wheel Stand. folding wheel stand. current on
+      official US shop. Compact simulator stand for wheelbase, pedals, and
+      shifter mounting.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Wheel stand
+    product_url: https://trakracer.com/products/fs3-steering-wheel-stand-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/FS3-03_s03-min.png?v=1736474426
+    shops:
+      - name: Trak Racer
+        price: 229
+        currency: USD
+        url: https://trakracer.com/products/fs3-steering-wheel-stand-simulator
+        region: US
+  - product_name: TR160 Flight with Flight Seat
+    description: Trak Racer TR160 Flight. aluminum flight cockpit. current on
+      official US shop. TR160 flight package with seat, flight mounts, and shifter
+      mount.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://trakracer.com/products/tr160-flight-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR160M5_Flight_Hero01_0.webp?v=1769728911
+    shops:
+      - name: Trak Racer
+        price: 1369
+        currency: USD
+        url: https://trakracer.com/products/tr160-flight-simulator
+        region: US
+  - product_name: TR120S Flight with Flight Seat
+    description: Trak Racer TR120S Flight. aluminum flight cockpit. current on
+      official US shop. TR120S flight package with seat, flight mounts, and
+      profile cockpit frame.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://trakracer.com/products/tr120s-flight-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR120S_Hero01_5.webp?v=1769729895
+    shops:
+      - name: Trak Racer
+        price: 1299
+        currency: USD
+        url: https://trakracer.com/products/tr120s-flight-simulator
+        region: US
+  - product_name: TR80S Flight with Flight Seat
+    description: Trak Racer TR80S Flight. aluminum flight cockpit. current on
+      official US shop. TR80S flight package with seat, flight mounts, and
+      wide-body profile frame.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://trakracer.com/products/tr80s-flight-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR80S_Hero01_6.webp?v=1770933454
+    shops:
+      - name: Trak Racer
+        price: 879
+        currency: USD
+        url: https://trakracer.com/products/tr80s-flight-simulator
+        region: US
+  - product_name: TR40S Flight with Flight Seat
+    description: Trak Racer TR40S Flight. compact flight cockpit. current on
+      official US shop. TR40S flight package with seat, flight mounts, and
+      aluminum profile frame.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://trakracer.com/products/tr40s-flight-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR40S_F_Hero01_4.webp?v=1770934975
+    shops:
+      - name: Trak Racer
+        price: 729
+        currency: USD
+        url: https://trakracer.com/products/tr40s-flight-simulator
+        region: US
+  - product_name: TR8 Pro Flight with Flight Seat
+    description: Trak Racer TR8 Pro Flight. tubular flight cockpit. current on
+      official US shop. TR8 Pro flight package with seat, yoke/rudder adjustment,
+      and flight-control mounting.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://trakracer.com/products/tr8-pro-flight-simulator
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR8Pro_Hero01_2.webp?v=1770932997
+    shops:
+      - name: Trak Racer
+        price: 999
+        currency: USD
+        url: https://trakracer.com/products/tr8-pro-flight-simulator
+        region: US
+  - product_name: TR5 Flight Simulator with Mount
+    description: Trak Racer TR5 Flight Simulator. racing and flight cockpit
+      bundle. current on official US shop. TR5 cockpit bundled with dual flight
+      sim mount.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://trakracer.com/products/tr5-flight-simulator-with-mount
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRR061_HEROFLIGHT01_1.png?v=1771592679
+    shops:
+      - name: Trak Racer
+        price: 699
+        currency: USD
+        url: https://trakracer.com/products/tr5-flight-simulator-with-mount
+        region: US
+  - product_name: FS3 V2 Flight Simulator Stand
+    description: Trak Racer FS3 V2 Flight Stand. compact flight simulator stand.
+      current on official US shop. Wheel-stand style frame configured for flight
+      simulation controls.
+    manufacturer: Trak Racer
+    component_category: rigs-and-cockpits
+    component_sub_category: Flight cockpit
+    product_url: https://trakracer.com/products/fs3-flight-simulator-wheel-stand
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/FS3-03-FLT_tm01-min.png?v=1736473994
+    shops:
+      - name: Trak Racer
+        price: 269
+        currency: USD
+        url: https://trakracer.com/products/fs3-flight-simulator-wheel-stand
+        region: US
+  - product_name: GP RIG II
+    description: Sparco GP Rig II. complete formula simulator rig. current on
+      official German shop. GP Pro simulator package with Fanatec sim kit,
+      P310 Open wheel, PC, keyboard stand, and monitor.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Formula cockpit
+    product_url: https://www.sparco-official.com/de/gp-rig-ii-gp-pro-fanatec-sim-kit-p310-open-pc-keybord-monitor-g03304.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03304_01_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 7376.12
+        currency: EUR
+        url: https://www.sparco-official.com/de/gp-rig-ii-gp-pro-fanatec-sim-kit-p310-open-pc-keybord-monitor-g03304.html
+        region: DE
+  - product_name: GP RIG I
+    description: Sparco GP Rig I. formula simulator rig. current on official
+      German shop. GP Pro simulator package with Fanatec sim kit and P310 Open
+      wheel.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Formula cockpit
+    product_url: https://www.sparco-official.com/de/gp-rig-i-gp-pro-fanatec-sim-kit-p310-open-g03305-1.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03305_02.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 2727.92
+        currency: EUR
+        url: https://www.sparco-official.com/de/gp-rig-i-gp-pro-fanatec-sim-kit-p310-open-g03305-1.html
+        region: DE
+  - product_name: GT-R RIG II - CIRCUIT II
+    description: Sparco GT-R Rig II Circuit II. complete GT simulator rig.
+      current on official German shop. GT-R Pro package with Fanatec sim kit,
+      R330 leather wheel, PC, keyboard stand, and monitor.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/gt-r-rig-ii-gt-r-pro-fanatec-sim-kit-r330-leather-pc-keybord-stand-monitor-g034018011gnr-1.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g034018011gnr_02_3.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 7501.78
+        currency: EUR
+        url: https://www.sparco-official.com/de/gt-r-rig-ii-gt-r-pro-fanatec-sim-kit-r330-leather-pc-keybord-stand-monitor-g034018011gnr-1.html
+        region: DE
+  - product_name: GT-R RIG I - CIRCUIT II
+    description: Sparco GT-R Rig I Circuit II. GT simulator rig. current on
+      official German shop. GT-R Pro package with Fanatec sim kit and R330
+      leather wheel.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/gt-r-rig-i-gt-r-pro-fanatec-sim-kit-r330-leather-g035018011gnr-1.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g035018011gnr_01_3.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 2609.58
+        currency: EUR
+        url: https://www.sparco-official.com/de/gt-r-rig-i-gt-r-pro-fanatec-sim-kit-r330-leather-g035018011gnr-1.html
+        region: DE
+  - product_name: KIT KART RIG II
+    description: Sparco Kart Rig II. complete kart simulator rig. current on
+      official German shop. Kart Pro simulator package with Fanatec sim kit,
+      KG345 wheel, PC, keyboard stand, and monitor.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/kart-rig-ii-kart-pro-fanatec-sim-kit-kg345-pc-keybord-stand-monitor-g03904-1.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03904_01_2.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 7522.52
+        currency: EUR
+        url: https://www.sparco-official.com/de/kart-rig-ii-kart-pro-fanatec-sim-kit-kg345-pc-keybord-stand-monitor-g03904-1.html
+        region: DE
+  - product_name: KIT KART RIG I
+    description: Sparco Kart Rig I. kart simulator rig. current on official
+      German shop. Kart Pro simulator package with Fanatec sim kit and KG345
+      wheel.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/kart-rig-i-kart-pro-fanatec-sim-kit-kg345-g03905.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03905_01_3.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 2630.32
+        currency: EUR
+        url: https://www.sparco-official.com/de/kart-rig-i-kart-pro-fanatec-sim-kit-kg345-g03905.html
+        region: DE
+  - product_name: SIM GT-R RIG II - QRT-R SPECIAL EDITION
+    description: Sparco SIM GT-R Rig II QRT-R Special Edition. complete GT
+      simulator rig. current on official German shop. Evolve GT-R rig bundle with
+      QRT-R seat.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/sim-gt-r-rig-ii-qrt-r-special-edition.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g034028012gnr_01.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 5917
+        currency: EUR
+        url: https://www.sparco-official.com/de/sim-gt-r-rig-ii-qrt-r-special-edition.html
+        region: DE
+  - product_name: SIM GT-R RIG I - QRT-R SPECIAL EDITION
+    description: Sparco SIM GT-R Rig I QRT-R Special Edition. GT simulator rig.
+      current on official German shop. Evolve GT-R rig bundle with QRT-R seat.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/sim-gt-r-rig-i-qrt-r-special-edition.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g035028012gnr_01.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 2022.76
+        currency: EUR
+        url: https://www.sparco-official.com/de/sim-gt-r-rig-i-qrt-r-special-edition.html
+        region: DE
+  - product_name: EVOLVE KART ENDURANCE
+    description: Sparco Evolve Kart Endurance. kart simulator cockpit. current on
+      official German shop. Evolve Kart chassis for endurance kart simulation.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/evolve-kart-endurance-g03920.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03920.png?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=&format=jpeg
+    shops:
+      - name: Sparco Official DE
+        price: 1526.22
+        currency: EUR
+        url: https://www.sparco-official.com/de/evolve-kart-endurance-g03920.html
+        region: DE
+  - product_name: EVOLVE GT-R PRO | QRT-R
+    description: Sparco Evolve GT-R Pro QRT-R. GT simulator cockpit. current on
+      official German shop. Evolve GT-R Pro frame with QRT-R seat.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/evolve-pro-qrt-r.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g0328012gnr_01_kvdqkbglq5roqs15.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 1340.78
+        currency: EUR
+        url: https://www.sparco-official.com/de/evolve-pro-qrt-r.html
+        region: DE
+  - product_name: EVOLVE GP PRO NR
+    description: Sparco Evolve GP Pro NR. formula simulator cockpit. current on
+      official German shop. Evolve GP Pro formula-style simulator frame.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Formula cockpit
+    product_url: https://www.sparco-official.com/de/evolve-gp-g03800nr.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03800_01_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 1337.12
+        currency: EUR
+        url: https://www.sparco-official.com/de/evolve-gp-g03800nr.html
+        region: DE
+  - product_name: EVOLVE KART PRO
+    description: Sparco Evolve Kart Pro. kart simulator cockpit. current on
+      official German shop. Evolve Kart Pro chassis for kart simulation.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/evolve-kart-pro-g03900.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03900_01.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 1281
+        currency: EUR
+        url: https://www.sparco-official.com/de/evolve-kart-pro-g03900.html
+        region: DE
+  - product_name: EVOLVE KART PRO-JUNIOR
+    description: Sparco Evolve Kart Pro-Junior. junior kart simulator cockpit.
+      current on official German shop. Junior Evolve Kart chassis for kart
+      simulation.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/evolve-kart-pro-g03910.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03900_01_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 1228.54
+        currency: EUR
+        url: https://www.sparco-official.com/de/evolve-kart-pro-g03910.html
+        region: DE
+  - product_name: EVOLVE GT-R PRO - CIRCUIT II
+    description: Sparco Evolve GT-R Pro Circuit II. GT simulator cockpit. current
+      on official German shop. Evolve GT-R Pro frame with Circuit II seat.
+    manufacturer: Sparco
+    component_category: rigs-and-cockpits
+    component_sub_category: Racing cockpit
+    product_url: https://www.sparco-official.com/de/evolve-gt-r-pro-frame-pro-brackets-circuit-ii-seat-g0328011gnr.html
+    picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g0328011gnr_01.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
+    shops:
+      - name: Sparco Official DE
+        price: 1168.76
+        currency: EUR
+        url: https://www.sparco-official.com/de/evolve-gt-r-pro-frame-pro-brackets-circuit-ii-seat-g0328011gnr.html
+        region: DE
 opensource:
   - project_name: DIY Aluminium Profile Sim Rig
     description: DIY Aluminium Profile Sim Rig. aluminum profile cockpit. Personal build

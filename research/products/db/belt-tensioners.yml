@@ -1,8 +1,9 @@
 commercial:
   - product_name: Belt Force
     description: "PT Actuator Belt Force. electromagnetic dual-channel belt
-      tensioner. available from PT Actuator. Dual driven channels: left and
-      right."
+      tensioner. available from PT Actuator. Dual left/right channels with
+      rated 12 kg and peak 17 kg pull force per channel, RGB harness tower, and
+      SimHub/PT-Actuator SDK support."
     manufacturer: PT Actuator
     component_category: belt-tensioners
     component_sub_category: Belt tensioner
@@ -13,7 +14,7 @@ commercial:
         price: 1999
         currency: USD
         url: https://www.pt-actuator.com/product/belt-force/
-        region: Unknown
+        region: China
   - product_name: G-Belt Dual Axis Active Seat Belt Tensioning System
     description: SimXperience G-Belt. dual-axis active harness tensioner. available
       from SimXperience shop. Dual-axis active belt tension feedback system for
@@ -31,18 +32,34 @@ commercial:
         region: US
   - product_name: PT Active Belt Tensioner Pro + Tower
     description: PT Actuator Active Belt Tensioner Pro + Tower. motor/spool active
-      belt tensioner. available from PT Actuator. Active belt tensioner with
-      harness tower.
+      belt tensioner. currently out of stock on official shop. Dual-channel
+      Sim Racing Studio belt system with 12 kg pull force per channel and
+      381 mm / 15 in stroke.
     manufacturer: PT Actuator
     component_category: belt-tensioners
     component_sub_category: Belt tensioner
-    product_url: https://www.pt-actuator.com/product/pt-active-belt-tensioner/
+    product_url: https://www.pt-actuator.com/product/pt-active-belt-tensioner-2/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/09/%E7%BB%84%E5%90%88-380x380-1.jpg
     shops:
       - name: PT Actuator
         price: 1499
         currency: USD
-        url: https://www.pt-actuator.com/product/pt-active-belt-tensioner/
+        url: https://www.pt-actuator.com/product/pt-active-belt-tensioner-2/
+        region: China
+  - product_name: PT Active Belt Tensioner + Tower
+    description: PT Actuator Active Belt Tensioner + Tower. motor/spool active
+      belt tensioner. currently out of stock on official shop. 5-point belt
+      system with 15 kg max pull force and Sim Racing Studio integration.
+    manufacturer: PT Actuator
+    component_category: belt-tensioners
+    component_sub_category: Belt tensioner
+    product_url: https://www.pt-actuator.com/product/pt-active-belt-tensioner-tower/
+    picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/12/%E7%BB%84%E5%90%88.jpg
+    shops:
+      - name: PT Actuator
+        price: 1149
+        currency: USD
+        url: https://www.pt-actuator.com/product/pt-active-belt-tensioner-tower/
         region: China
   - product_name: QS-BT1
     description: Qubic System QS-BT1. dual-channel direct-drive belt tensioner.
@@ -52,7 +69,7 @@ commercial:
     component_category: belt-tensioners
     component_sub_category: Belt tensioner
     product_url: https://qubicsystem.com/product/qs-bt1/
-    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2023/12/qs-bt1-belts_08.jpg
+    picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2023/12/QS-BT1_R3_product_01b.jpg
     shops:
       - name: Qubic System
         price: 1390

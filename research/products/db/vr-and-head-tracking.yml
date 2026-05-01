@@ -205,19 +205,71 @@ commercial:
         currency: USD
         url: https://store.steampowered.com/sub/354231/Valve_Index_VR_Kit/
         region: Unknown
-  - product_name: VIVE Focus Vision
-    description: HTC VIVE Focus Vision. standalone and PC VR headset. current. Dual
-      LCD panels, 2448 x 2448 pixels per eye.
+  - product_name: Flow
+    description: HTC VIVE Flow. compact VR glasses/headset. current. Lightweight
+      foldable HMD for immersive content with phone or controller.
     manufacturer: HTC VIVE
     component_category: vr-and-head-tracking
     component_sub_category: VR headset
-    product_url: https://shop-us.vive.com/pages/vive-focus-vision
-    picture_url: https://shop-us.vive.com/cdn/shop/files/vive-focus-vision-vr-headset-kv-hero-2.jpg?v=1769020242&width=480
+    product_url: https://www.vive.com/us/product/vive-flow/overview/
+    picture_url: https://www.vive.com/media/filer_public/vive/product/comparison/flow-360.png
     shops:
       - name: VIVE US
-        price: 999.99
+        price: 199.99
         currency: USD
-        url: https://shop-us.vive.com/pages/vive-focus-vision
+        url: https://shop-us.vive.com/products/21071655
+        region: US
+  - product_name: VIVE Focus Vision
+    description: HTC VIVE Focus Vision. hybrid standalone and PC VR/MR headset.
+      current. 2448 x 2448 pixels per eye, up to 120 degree field of view, 90 Hz,
+      eye tracking, and DisplayPort mode.
+    manufacturer: HTC VIVE
+    component_category: vr-and-head-tracking
+    component_sub_category: MR headset
+    product_url: https://www.vive.com/us/product/vive-focus-vision/overview/
+    picture_url: https://shop-us.vive.com/cdn/shop/files/shopify_hmd_focus-vision.jpg?v=1767729889
+    shops:
+      - name: VIVE US
+        price: 1149
+        currency: USD
+        url: https://shop-us.vive.com/products/21071155
+        region: US
+  - product_name: Pro 2 Full Kit
+    description: HTC VIVE Pro 2 Full Kit. tethered PC VR headset kit. listed by
+      VIVE but no longer available during check. 4896 x 2448 combined
+      resolution, 120 degree horizontal FOV, 120 Hz, SteamVR tracking, base
+      stations, and controllers.
+    manufacturer: HTC VIVE
+    component_category: vr-and-head-tracking
+    component_sub_category: VR headset
+    product_url: https://www.vive.com/us/product/vive-pro2-full-kit/overview/
+    picture_url: https://www.vive.com/media/filer_public/fed-assets/vive-pro2-full-kit/images/pro-2-full-kit-meta-image.jpg
+    shops: []
+  - product_name: Pro 2 Headset
+    description: HTC VIVE Pro 2 Headset. tethered PC VR headset. listed by VIVE
+      but no longer available during check. 5K class display, 120 degree
+      horizontal FOV, 120 Hz, SteamVR tracking compatibility; base stations and
+      controllers sold separately.
+    manufacturer: HTC VIVE
+    component_category: vr-and-head-tracking
+    component_sub_category: VR headset
+    product_url: https://www.vive.com/us/product/vive-pro2/overview/
+    picture_url: https://www.vive.com/media/filer_public/fed-assets/vivepro2/images/pro2-meta.jpg
+    shops: []
+  - product_name: XR Elite
+    description: HTC VIVE XR Elite. standalone and PC VR/MR headset. out of stock
+      on official product page during check. Convertible all-in-one XR headset
+      with high-resolution passthrough and glasses-like form factor.
+    manufacturer: HTC VIVE
+    component_category: vr-and-head-tracking
+    component_sub_category: MR headset
+    product_url: https://www.vive.com/us/product/vive-xr-elite/overview/
+    picture_url: https://www.vive.com/media/filer_public/vive/product-listing/hero-vive-xr-elite-full-kit-687.png
+    shops:
+      - name: VIVE US
+        price: 899
+        currency: USD
+        url: https://www.vive.com/us/product/vive-xr-elite/overview/
         region: US
   - product_name: XR-4
     description: Varjo XR-4. professional mixed-reality headset. current. 4K x 4K

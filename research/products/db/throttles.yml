@@ -757,6 +757,66 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1385
         region: EU
+  - product_name: HOTAS Warthog Dual Throttle
+    description: Thrustmaster HOTAS Warthog Dual Throttle. dual-engine combat
+      throttle. in stock on official US shop. Metal A-10C-inspired dual throttle
+      controller for flight simulation.
+    manufacturer: Thrustmaster
+    component_category: throttles
+    component_sub_category: HOTAS throttle
+    product_url: https://www.thrustmaster.com/en-us/products/hotas-warthog-dual-throttle/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/04/HotasWarthog_DualThrottle_800x800_1-768x768-1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 349.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/hotas-warthog-dual-throttle/
+        region: US
+  - product_name: Sol-R 6 Throttle
+    description: Thrustmaster Sol-R 6 Throttle. space-sim throttle. in stock on
+      official US shop. Modular throttle for the Sol-R space-sim control
+      ecosystem.
+    manufacturer: Thrustmaster
+    component_category: throttles
+    component_sub_category: HOTAS throttle
+    product_url: https://www.thrustmaster.com/en-us/products/sol-r-6-throttle/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/10/Website-SolR6-800x800-1.png
+    shops:
+      - name: Thrustmaster US
+        price: 129.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/sol-r-6-throttle/
+        region: US
+  - product_name: TCA Quadrant Boeing Edition
+    description: Thrustmaster TCA Quadrant Boeing Edition. Boeing-style throttle
+      quadrant. in stock on official US shop. Civil aviation throttle quadrant
+      for Boeing airliner simulation.
+    manufacturer: Thrustmaster
+    component_category: throttles
+    component_sub_category: Throttle quadrant
+    product_url: https://www.thrustmaster.com/en-us/products/tca-quadrant-boeing-edition/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/TCABoeingEdition_6-removebg-preview.webp
+    shops:
+      - name: Thrustmaster US
+        price: 169.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/tca-quadrant-boeing-edition/
+        region: US
+  - product_name: TCA Quadrant Add-On Airbus Edition
+    description: Thrustmaster TCA Quadrant Add-On Airbus Edition. Airbus-style
+      throttle quadrant add-on. in stock on official US shop. Add-on quadrant for
+      Airbus airliner simulation controls.
+    manufacturer: Thrustmaster
+    component_category: throttles
+    component_sub_category: Throttle quadrant
+    product_url: https://www.thrustmaster.com/en-us/products/tca-quadrant-add-on-airbus-edition/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/tca-quadrant-add-on-airbus-edition-pc-768x768-2.webp
+    shops:
+      - name: Thrustmaster US
+        price: 109.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/tca-quadrant-add-on-airbus-edition/
+        region: US
 opensource:
   - project_name: AuthentiKit Spitfire MkIX
     description: "AuthentiKit Spitfire MkIX. self-build replica Spitfire MkIX flight

@@ -1,19 +1,113 @@
 commercial:
+  - product_name: Push Pull Sequential Rally Paddle Shifter
+    description: Apex Sim Racing Push Pull Sequential Rally Paddle Shifter.
+      push-pull sequential paddle shifter for rally sim racing. in stock on
+      official shop. Aluminum and carbon-fiber construction for a tactile
+      push-pull sequential shift action.
+    manufacturer: Apex Sim Racing
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://www.apexsimracing.com/en-de/products/apex-sim-racing-push-pull-sequential-rally-paddle-shifter
+    picture_url: https://cdn.shopify.com/s/files/1/0031/7987/2365/files/IMG_6062.jpg?v=1714414832
+    shops:
+      - name: Apex Sim Racing
+        price: 199
+        currency: USD
+        url: https://www.apexsimracing.com/en-de/products/apex-sim-racing-push-pull-sequential-rally-paddle-shifter
+        region: US
+  - product_name: V2 JINX ARB, Shifter & Brake Bias Gaming Combo - Silver
+    description: Jinx Shifters V2 JINX ARB, Shifter & Brake Bias Gaming Combo
+      - Silver. sequential shifter and ARB/brake-bias control combo. in stock
+      on official shop. USB PC plug-and-play controller with 12-step ARB and
+      brake-bias adjustment.
+    manufacturer: Jinx Shifters
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://jinxshifters.com/products/jinx-shifter-combo
+    picture_url: https://cdn.shopify.com/s/files/1/0112/7635/3632/products/image_28582a4a-552c-4259-b9cf-0590722d6247.jpg?v=1626683987
+    shops:
+      - name: Jinx Shifters
+        price: 2427.7
+        currency: AUD
+        url: https://jinxshifters.com/products/jinx-shifter-combo
+        region: AU
+  - product_name: V2 JINX ARB, Shifter & Brake Bias Gaming Combo - Black
+    description: Jinx Shifters V2 JINX ARB, Shifter & Brake Bias Gaming Combo
+      - Black. sequential shifter and ARB/brake-bias control combo. in stock
+      on official shop. USB PC plug-and-play controller with 12-step ARB and
+      brake-bias adjustment.
+    manufacturer: Jinx Shifters
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://jinxshifters.com/products/full-black-combo-unit
+    picture_url: https://cdn.shopify.com/s/files/1/0112/7635/3632/products/IMG_7521.jpg?v=1585195503
+    shops:
+      - name: Jinx Shifters
+        price: 2667.8
+        currency: AUD
+        url: https://jinxshifters.com/products/full-black-combo-unit
+        region: AU
+  - product_name: V3 JINX ARB, Shifter & Brake Bias Gaming Combo - Silver
+    description: Jinx Shifters V3 JINX ARB, Shifter & Brake Bias Gaming Combo
+      - Silver. sequential shifter and ARB/brake-bias control combo. in stock
+      on official shop. USB PC plug-and-play controller with polyurethane ARB
+      knobs and 12-step ARB/brake-bias adjustment.
+    manufacturer: Jinx Shifters
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://jinxshifters.com/products/v3-jinx-arb-shifter-brake-bias-gaming-combo-silver
+    picture_url: https://cdn.shopify.com/s/files/1/0112/7635/3632/products/IMG_6096_2.jpg?v=1670196589
+    shops:
+      - name: Jinx Shifters
+        price: 2630.23
+        currency: AUD
+        url: https://jinxshifters.com/products/v3-jinx-arb-shifter-brake-bias-gaming-combo-silver
+        region: AU
+  - product_name: SQ1 Sequential Shifter
+    description: Sim-Lab SQ1 Sequential Shifter. sequential shifter. in stock
+      on official EU shop. All-metal shifter with interchangeable roller
+      profiles, quick-adjust tension, and Hall-sensor technology.
+    manufacturer: Sim-Lab
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://sim-lab.eu/en-de/products/sequential-shifter-sq1
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/sq1shifter_1.png?v=1744704979
+    shops:
+      - name: Sim-Lab EU
+        price: 195.71
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/sequential-shifter-sq1
+        region: EU
+  - product_name: Push-Pull Rally Shifter
+    description: Sim-Lab Push-Pull Rally Shifter. push-pull sequential rally
+      shifter. in stock on official EU shop. Aluminum shifter with full-carbon
+      paddle and wheelbase mounting compatibility.
+    manufacturer: Sim-Lab
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://sim-lab.eu/en-de/products/push-pull-rally-shifter-sim-racing
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/pushpull_1.png?v=1744711353
+    shops:
+      - name: Sim-Lab EU
+        price: 195.71
+        currency: EUR
+        url: https://sim-lab.eu/en-de/products/push-pull-rally-shifter-sim-racing
+        region: EU
   - product_name: ClubSport Shifter SQ V1.5
-    description: Fanatec ClubSport Shifter SQ V1.5. hybrid H-pattern and sequential shifter.
-      Currently unavailable on official US page in search result. Full-metal
-      construction.
+    description: Fanatec ClubSport Shifter SQ V1.5. hybrid H-pattern and
+      sequential shifter. in stock on official EU catalog. Full-metal shifter
+      with ClubSport USB Adapter included.
     manufacturer: Fanatec
     component_category: shifters
     component_sub_category: Hybrid shifter
-    product_url: https://www.fanatec.com/us-en/shifters-others/clubsport-shifter-v-1.5
-    picture_url: https://d1nzm2nlurbj16.cloudfront.net/images/ClubSport_Shifter_SQ_V1.5.width-1500.format-webp.webp
+    product_url: https://www.fanatec.com/eu/en/p/add-ons/crd-9040002-ww/clubsport-shifter-sq
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Add-ons/CSS_SQ/CSS_SQ-01.png
     shops:
       - name: Fanatec
-        price: 299.99
-        currency: USD
-        url: https://www.fanatec.com/us-en/shifters-others/clubsport-shifter-v-1.5
-        region: Unknown
+        price: 244.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/add-ons/crd-9040002-ww/clubsport-shifter-sq
+        region: EU
   - product_name: Driving Force Shifter
     description: Logitech Driving Force Shifter. budget H-pattern shifter. Current Logitech
       product in official driving category listing. H-pattern add-on shifter for
@@ -59,20 +153,35 @@ commercial:
         url: https://mozaracing.com/product/moza-hgp-shifter/
         region: Unknown
   - product_name: MagShift Sequential Shifter
-    description: Heusinkveld MagShift. premium sequential shifter. Current Heusinkveld FAQ
-      references MagShift; current store price not confirmed [uncertain]. Sequential
-      shifter with adjustable shift force per Heusinkveld FAQ.
+    description: Heusinkveld MagShift. premium sequential shifter. in stock on
+      official EU shop. Adjustable magnetic sequential shifter with 4.5 to 11 kg
+      peak shift force, integrated mini button box, and opto-electronic sensors.
     manufacturer: Heusinkveld
     component_category: shifters
-    component_sub_category: Hybrid shifter
-    product_url: https://heusinkveld.com/shop/handbrake-shifters/magshift/
-    picture_url: https://www.onlineracedriver.com/wp-content/uploads/2023/11/The-New-Heusinkveld-MagShift-Sequential-Shifter.jpg
+    component_sub_category: Sequential shifter
+    product_url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift/
+    picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2024/12/8719689204419-1-Heusinkveld-MagShift-1-1.png
     shops:
       - name: Heusinkveld
-        price: 209
+        price: 399
         currency: EUR
-        url: https://heusinkveld.com/shop/handbrake-shifters/magshift/
-        region: Unknown
+        url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift/
+        region: EU
+  - product_name: MagShift Mini
+    description: Heusinkveld MagShift Mini. compact sequential shifter. in stock
+      on official EU shop. Compact heavy-duty shifter with patented 2-way
+      adjustable magnetic shift system and up to 8 kg shift force.
+    manufacturer: Heusinkveld
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift-mini/
+    picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/04/Magshift-Mini-Heusinkveld1323_1024x768.png
+    shops:
+      - name: Heusinkveld
+        price: 259
+        currency: EUR
+        url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift-mini/
+        region: EU
   - product_name: Q1S Sequential Shifter
     description: SIMAGIC Q1S Sequential Shifter. sequential shifter. Official US distributor
       page showed out of stock; SIMAGIC ecosystem product [stock varies]. Sequential
@@ -149,6 +258,82 @@ commercial:
         currency: USD
         url: https://www.thrustmaster.com/products/th8s-shifter-add-on/
         region: Unknown
+  - product_name: H Pattern Shifter
+    description: Pro-Sim H Pattern Shifter. high-end 6-speed plus reverse
+      H-pattern shifter. in stock on official UK shop. Quaife-developed
+      mechanism with robust real-car-style feel and 5 year warranty.
+    manufacturer: Pro-Sim
+    component_category: shifters
+    component_sub_category: H-pattern shifter
+    product_url: https://www.pro-sim.co.uk/shop/h-pattern-shifter/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/07/Left-1-Final-scaled.jpg
+    shops:
+      - name: Pro-Sim
+        price: 1075
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/h-pattern-shifter/
+        region: UK
+  - product_name: Sequential Shifter
+    description: Pro-Sim Sequential Shifter. high-end sequential shifter. in
+      stock on official UK shop. Quaife-developed production gearbox mechanism
+      with visible Perspex cover and robust real-car-style action.
+    manufacturer: Pro-Sim
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://www.pro-sim.co.uk/shop/sequential-shifter/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/07/20210318_164840.jpg
+    shops:
+      - name: Pro-Sim
+        price: 814.5
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/sequential-shifter/
+        region: UK
+  - product_name: PSL Sequential Shifter V2
+    description: Pro-Sim PSL Sequential Shifter V2. compact sequential shifter.
+      in stock on official UK shop. Quaife-derived hardened-steel internals,
+      2.8 kg body, and USB PC compatibility.
+    manufacturer: Pro-Sim
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://www.pro-sim.co.uk/shop/psl-sequential-shifter/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/09/psl-sequential-front-1-scaled.jpg
+    shops:
+      - name: Pro-Sim
+        price: 425
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/psl-sequential-shifter/
+        region: UK
+  - product_name: Shift Lock
+    description: Pro-Sim Shift Lock. hydraulic shifter lock module. currently
+      out of stock on official UK shop. Adds software-controlled dog or synchro
+      shift-lock behavior for simulator gear changes.
+    manufacturer: Pro-Sim
+    component_category: shifters
+    component_sub_category: Shifter adapter
+    product_url: https://www.pro-sim.co.uk/shop/shift-lock/
+    picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2021/03/side-mount-lock2.jpg
+    shops:
+      - name: Pro-Sim
+        price: 375
+        currency: GBP
+        url: https://www.pro-sim.co.uk/shop/shift-lock/
+        region: UK
+  - product_name: SHH Shifter HUBB
+    description: SHH Shifter HUBB. hybrid H-pattern and sequential shifter. in
+      stock on official EU shop. Seventh-generation SHH shifter with full-metal
+      internal mechanism, bearings, modular design, selectable top plates, and
+      multiple mount options.
+    manufacturer: SHH Simulation
+    component_category: shifters
+    component_sub_category: Hybrid shifter
+    product_url: https://www.shiftershh.com/en/home/26-shh-shifter-hubb.html
+    picture_url: https://www.shiftershh.com/923-large_default/shh-shifter-hubb.jpg
+    shops:
+      - name: SHH Simulation
+        price: 129
+        currency: EUR
+        url: https://www.shiftershh.com/en/home/26-shh-shifter-hubb.html
+        region: EU
 opensource:
   - project_name: Akaki-H-shifter
     description: Akaki H Shifter. 3D printable H-pattern shifter with optional handbrake.

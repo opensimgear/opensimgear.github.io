@@ -888,6 +888,168 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=374
         region: EU
+  - product_name: AVA Base
+    description: Thrustmaster AVA Base. modular flight joystick base. in stock on
+      official US shop. Scalable joystick base for advanced flight and combat
+      simulation setups.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: Joystick base
+    product_url: https://www.thrustmaster.com/en-us/products/ava-base/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2024/04/website_ProductListing-AVA-1_800x800.webp
+    shops:
+      - name: Thrustmaster US
+        price: 299.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/ava-base/
+        region: US
+  - product_name: AVA FA18 Super Hornet Flight Stick
+    description: Thrustmaster AVA FA18 Super Hornet Flight Stick. modular combat
+      flight stick. in stock on official US shop. AVA base bundle with F/A-18C
+      Hornet grip for flight simulation.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: Flight joystick
+    product_url: https://www.thrustmaster.com/en-us/products/ava-fa18-super-hornet-flight-stick/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2024/04/website_ProductListing-AVABundle-1_800x800.webp
+    shops:
+      - name: Thrustmaster US
+        price: 599.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/ava-fa18-super-hornet-flight-stick/
+        region: US
+  - product_name: HOTAS Magnetic Base
+    description: Thrustmaster HOTAS Magnetic Base. metal flight-stick base. in
+      stock on official US shop. Standalone magnetic joystick base for compatible
+      Thrustmaster HOTAS grips.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: Joystick base
+    product_url: https://www.thrustmaster.com/en-us/products/hotas-magnetic-base/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/list-Hotas-Magnetic-Base-pc-flight-sim-1-768x768-1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 159.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/hotas-magnetic-base/
+        region: US
+  - product_name: Sol-R 1 Flightstick
+    description: Thrustmaster Sol-R 1 Flightstick. space-sim flightstick. in
+      stock on official US shop. Desktop flightstick for space and flight
+      simulation setups.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: Flight joystick
+    product_url: https://www.thrustmaster.com/en-us/products/sol-r-1-flightstick/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/03/Website_ProductPageListing_SolR1_800x800_1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 219.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/sol-r-1-flightstick/
+        region: US
+  - product_name: Sol-R 2 HOSAS Space Sim Duo
+    description: Thrustmaster Sol-R 2 HOSAS Space Sim Duo. dual-stick space-sim
+      bundle. in stock on official US shop. HOSAS pair for six-degree space
+      flight control.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: HOSAS bundle
+    product_url: https://www.thrustmaster.com/en-us/products/sol-r-2-hosas-space-sim-duo/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/03/Website_ProductPageListing_SolR2_800x800_1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 399.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/sol-r-2-hosas-space-sim-duo/
+        region: US
+  - product_name: Sol-R 5 Base
+    description: Thrustmaster Sol-R 5 Base. standalone joystick base. in stock on
+      official US shop. Modular base for the Sol-R space-sim control ecosystem.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: Joystick base
+    product_url: https://www.thrustmaster.com/en-us/products/sol-r-5-base/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/10/Website_ProductPageListing_SolR5_800x800_1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 169.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/sol-r-5-base/
+        region: US
+  - product_name: TCA Sidestick X Airbus Edition
+    description: Thrustmaster TCA Sidestick X Airbus Edition. Airbus-style flight
+      joystick. in stock on official US shop. Licensed sidestick for Airbus
+      airliner simulation.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: Flight joystick
+    product_url: https://www.thrustmaster.com/en-us/products/tca-sidestick-x-airbus-edition/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/SidestickX-website-800x800-listing-1-768x768-1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 149.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/tca-sidestick-x-airbus-edition/
+        region: US
+  - product_name: T.Flight Hotas One
+    description: Thrustmaster T.Flight Hotas One. entry HOTAS bundle. in stock on
+      official US shop. Joystick and throttle set for Xbox and PC flight
+      simulation.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: HOTAS bundle
+    product_url: https://www.thrustmaster.com/en-us/products/t-flight-hotas-one/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/SF_List-T-FLIGHT-HOTAS-ONE-XBOX-X-S-PC-1-1-768x768-2.webp
+    shops:
+      - name: Thrustmaster US
+        price: 99.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/t-flight-hotas-one/
+        region: US
+  - product_name: T.Flight Hotas 4
+    description: Thrustmaster T.Flight Hotas 4. entry HOTAS bundle. in stock on
+      official US shop. Joystick and throttle set for PlayStation and PC flight
+      simulation.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: HOTAS bundle
+    product_url: https://www.thrustmaster.com/en-us/products/t-flight-hotas-4/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2021/09/list-flight-hotas-4-ps4-pc-768x768-1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 99.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/t-flight-hotas-4/
+        region: US
+  - product_name: T.Flight Stick X
+    description: Thrustmaster T.Flight Stick X. desktop flight joystick. in stock
+      on official US shop. Plug-and-play flight stick for PC flight simulation.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: Flight joystick
+    product_url: https://www.thrustmaster.com/en-us/products/t-flight-stick-x/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/list-t-flight-stick-x-768x768-1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 49.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/t-flight-stick-x/
+        region: US
+  - product_name: USB Joystick
+    description: Thrustmaster USB Joystick. budget desktop flight joystick. in
+      stock on official US shop. Simple USB joystick for PC flight controls.
+    manufacturer: Thrustmaster
+    component_category: joysticks
+    component_sub_category: Flight joystick
+    product_url: https://www.thrustmaster.com/en-us/products/usb-joystick/
+    picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/USB-joystick-pc-768x768-1.webp
+    shops:
+      - name: Thrustmaster US
+        price: 24.99
+        currency: USD
+        url: https://www.thrustmaster.com/en-us/products/usb-joystick/
+        region: US
 opensource:
   - project_name: Open Joystick
     description: Open Joystick FFB. open-source force-feedback joystick concept. Early-stage
