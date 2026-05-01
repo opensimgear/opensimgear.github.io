@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { DEFAULT_PLANNER_INPUT } from '~/components/calculator/aluminum-rig-planner/constants/planner';
 import { DEFAULT_PLANNER_POSTURE_SETTINGS } from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import { createPlannerFovOverlay } from '~/components/calculator/aluminum-rig-planner/posture/fov-overlay';
+import { createPlannerPostureSkeleton } from '~/components/calculator/aluminum-rig-planner/posture/posture';
 import { createPlannerPostureReport } from '~/components/calculator/aluminum-rig-planner/posture/posture-report';
 import type { PlannerPostureModelMetrics } from '~/components/calculator/aluminum-rig-planner/types';
 
@@ -41,6 +42,19 @@ describe('aluminum rig planner FOV overlay', () => {
     expect(overlay?.fovLabels).toHaveLength(1);
     expect(overlay?.fovLabels[0]?.valueDeg).toBeCloseTo(overlay?.summary.fovPerMonitorDeg ?? 0, 6);
     expect(overlay?.fovLabels[0]?.position[0]).toBeGreaterThan(overlay?.eyeCenter[0] ?? 0);
+  });
+
+  it('uses world eye height when base feet raise the cockpit', () => {
+    const input = {
+      ...DEFAULT_PLANNER_INPUT,
+      baseFeetHeightMm: 50,
+    };
+    const report = createPlannerPostureReport(input, DEFAULT_PLANNER_POSTURE_SETTINGS, postureModel);
+    const overlay = createPlannerFovOverlay(input, DEFAULT_PLANNER_POSTURE_SETTINGS, report, postureModel);
+    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, postureModel);
+
+    expect(overlay?.eyeCenter[2]).toBeCloseTo(skeleton.joints.eyeCenter[2] + 0.05, 6);
+    expect(overlay?.summary.eyeDistanceToPanelMm).toBe(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorDistanceFromEyesMm);
   });
 
   it('summarizes wider total FOV for triple monitors', () => {

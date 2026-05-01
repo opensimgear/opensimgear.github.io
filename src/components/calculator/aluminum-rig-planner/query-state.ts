@@ -7,12 +7,14 @@ import {
   LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM,
   MONITOR_ASPECT_RATIO_OPTIONS,
   MONITOR_CURVATURE_OPTIONS,
+  MONITOR_VESA_OPTIONS,
   PLANNER_POSTURE_LIMITS,
 } from './constants/posture';
 import { BASE_BEAM_HEIGHT_MM } from './constants/profile';
 import {
   getArcCenterDistanceMm,
   getArcCenterFovDeg,
+  getDefaultMonitorBottomVesaHoleDistanceMm,
   getMonitorTargetFovFromDistanceMm,
   getSolvedMonitorDistanceFromEyesMm,
 } from './modules/monitor';
@@ -26,6 +28,7 @@ import type {
   PlannerInput,
   PlannerMonitorAspectRatio,
   PlannerMonitorCurvature,
+  PlannerMonitorVesaType,
   PlannerOptimizationSettings,
   PlannerPosturePreset,
   PlannerPostureSettings,
@@ -34,6 +37,7 @@ import type {
   PlannerPostureTargetRanges,
   PlannerPostureTargetRangesByPreset,
   PlannerStockOption,
+  PlannerVisibleModules,
 } from './types';
 
 export type PlannerQueryState = Partial<PlannerInput> & {
@@ -66,6 +70,7 @@ export type PlannerQueryState = Partial<PlannerInput> & {
   > & {
     monitorAspectRatio?: unknown;
     monitorCurvature?: unknown;
+    monitorVesaType?: unknown;
     monitorMidpointXMm?: unknown;
     monitorMidpointYMm?: unknown;
     monitorMidpointZMm?: unknown;
@@ -75,6 +80,7 @@ export type PlannerQueryState = Partial<PlannerInput> & {
     preset?: unknown;
     targetRangesByPreset?: unknown;
   };
+  modules?: Partial<Record<keyof PlannerVisibleModules, unknown>>;
 };
 
 let stockOptionIdSequence = 0;
@@ -224,6 +230,10 @@ function isMonitorCurvature(value: unknown): value is PlannerMonitorCurvature {
   return MONITOR_CURVATURE_OPTIONS.some((option) => option.value === value);
 }
 
+function isMonitorVesaType(value: unknown): value is PlannerMonitorVesaType {
+  return MONITOR_VESA_OPTIONS.some((option) => option.value === value);
+}
+
 function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const defaults = DEFAULT_PLANNER_POSTURE_SETTINGS;
   const preset =
@@ -244,6 +254,10 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const monitorAspectRatio = isMonitorAspectRatio(state?.monitorAspectRatio)
     ? state.monitorAspectRatio
     : defaults.monitorAspectRatio;
+  const defaultMonitorBottomVesaHoleDistanceMm = getDefaultMonitorBottomVesaHoleDistanceMm({
+    monitorAspectRatio,
+    monitorSizeIn,
+  });
   const rawMonitorCurvature = isMonitorCurvature(state?.monitorCurvature)
     ? state.monitorCurvature
     : defaults.monitorCurvature;
@@ -263,6 +277,7 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
       : rawMonitorCurvature;
   const monitorArcCenterAtEyes = canUseArcCenterAtEyes && monitorCurvature !== 'disabled';
   const shouldArcCenterAtEyes = monitorArcCenterAtEyes;
+  const monitorVesaType = isMonitorVesaType(state?.monitorVesaType) ? state.monitorVesaType : defaults.monitorVesaType;
   const monitorTiltDeg = monitorTripleScreen
     ? 0
     : clampNumber(
@@ -360,13 +375,50 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     ),
     monitorTripleScreen,
     monitorArcCenterAtEyes,
+    monitorVesaType,
+    monitorBottomVesaHoleDistanceMm: clampNumber(
+      readNumber(state?.monitorBottomVesaHoleDistanceMm, defaultMonitorBottomVesaHoleDistanceMm),
+      PLANNER_POSTURE_LIMITS.monitorBottomVesaHoleDistanceMinMm,
+      PLANNER_POSTURE_LIMITS.monitorBottomVesaHoleDistanceMaxMm
+    ),
+    monitorBottomVesaHolesToCrossBeamTopMm: clampNumber(
+      readNumber(state?.monitorBottomVesaHolesToCrossBeamTopMm, defaults.monitorBottomVesaHolesToCrossBeamTopMm),
+      PLANNER_POSTURE_LIMITS.monitorBottomVesaHolesToCrossBeamTopMinMm,
+      PLANNER_POSTURE_LIMITS.monitorBottomVesaHolesToCrossBeamTopMaxMm
+    ),
+    monitorStandLegExtraMarginMm: clampNumber(
+      readNumber(state?.monitorStandLegExtraMarginMm, defaults.monitorStandLegExtraMarginMm),
+      PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMinMm,
+      PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMaxMm
+    ),
+    monitorStandFootLengthMm: clampNumber(
+      readNumber(state?.monitorStandFootLengthMm, defaults.monitorStandFootLengthMm),
+      PLANNER_POSTURE_LIMITS.monitorStandFootLengthMinMm,
+      PLANNER_POSTURE_LIMITS.monitorStandFootLengthMaxMm
+    ),
+    monitorStandFeetHeightMm: clampNumber(
+      readNumber(state?.monitorStandFeetHeightMm, defaults.monitorStandFeetHeightMm),
+      PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm,
+      PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm
+    ),
   } satisfies PlannerPostureSettings<PlannerPosturePreset>;
+}
+
+function sanitizeVisibleModules(state: PlannerQueryState['modules']): PlannerVisibleModules {
+  const monitor = typeof state?.monitor === 'boolean' ? state.monitor : true;
+  const monitorStand = monitor && typeof state?.monitorStand === 'boolean' ? state.monitorStand : false;
+
+  return {
+    monitor,
+    monitorStand,
+  };
 }
 
 export function mergePlannerQueryState(defaultInput: PlannerInput, state: PlannerQueryState) {
   const plannerInput = clampPlannerInput({
     baseLengthMm: readNumber(state.baseLengthMm, defaultInput.baseLengthMm),
     baseWidthMm: readNumber(state.baseWidthMm, defaultInput.baseWidthMm),
+    baseFeetHeightMm: readNumber(state.baseFeetHeightMm, defaultInput.baseFeetHeightMm),
     seatBaseDepthMm: readNumber(state.seatBaseDepthMm, defaultInput.seatBaseDepthMm),
     baseInnerBeamSpacingMm: readNumber(state.baseInnerBeamSpacingMm, defaultInput.baseInnerBeamSpacingMm),
     seatLengthMm: readNumber(state.seatLengthMm, defaultInput.seatLengthMm),
@@ -405,5 +457,6 @@ export function mergePlannerQueryState(defaultInput: PlannerInput, state: Planne
     plannerInput,
     optimizationSettings: sanitizeOptimizationSettings(state.optimizer),
     postureSettings: sanitizePostureSettings(state.posture),
+    visibleModules: sanitizeVisibleModules(state.modules),
   };
 }

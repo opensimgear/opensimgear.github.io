@@ -14,6 +14,7 @@ export const URL_STATE_DEBOUNCE_MS = 300;
 export const DEFAULT_PLANNER_INPUT: PlannerInput = {
   baseLengthMm: 1350,
   baseWidthMm: 580,
+  baseFeetHeightMm: 0,
   seatBaseDepthMm: 400,
   baseInnerBeamSpacingMm: 420,
   seatLengthMm: 440,
@@ -45,6 +46,8 @@ export const PLANNER_DIMENSION_LIMITS = {
   baseLengthMaxMm: 1400,
   baseWidthMinMm: 400,
   baseWidthMaxMm: 700,
+  baseFeetHeightMinMm: 0,
+  baseFeetHeightMaxMm: 120,
   seatBaseDepthMinMm: 240,
   seatBaseDepthMaxMm: 600,
   baseInnerBeamSpacingMinMm: 120,

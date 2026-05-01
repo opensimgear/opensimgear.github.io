@@ -1,5 +1,6 @@
 export type PlannerVisibleModules = {
   monitor: boolean;
+  monitorStand: boolean;
 };
 
 export type CutListProfileType = '40x40' | '80x40';
@@ -37,6 +38,7 @@ export type PlannerMonitorCurvature =
   | '1500r'
   | '1000r'
   | '800r';
+export type PlannerMonitorVesaType = '75x75' | '100x100' | '200x100' | '200x200' | '300x200' | '400x200' | '400x400';
 
 export type PlannerAnthropometryRatios = {
   sittingHeight: number;
@@ -76,6 +78,12 @@ export type PlannerPostureSettings<Preset extends PlannerPosturePreset = Planner
   monitorHeightFromBaseMm: number;
   monitorTripleScreen: boolean;
   monitorArcCenterAtEyes: boolean;
+  monitorVesaType: PlannerMonitorVesaType;
+  monitorBottomVesaHoleDistanceMm: number;
+  monitorBottomVesaHolesToCrossBeamTopMm: number;
+  monitorStandLegExtraMarginMm: number;
+  monitorStandFootLengthMm: number;
+  monitorStandFeetHeightMm: number;
 };
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;
@@ -168,6 +176,7 @@ export type PlannerOptimizationResult = {
 export interface PlannerInput {
   baseLengthMm: number;
   baseWidthMm: number;
+  baseFeetHeightMm: number;
   seatBaseDepthMm: number;
   baseInnerBeamSpacingMm: number;
   seatLengthMm: number;

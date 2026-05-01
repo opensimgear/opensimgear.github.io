@@ -147,6 +147,11 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
     ...input,
     baseLengthMm,
     baseWidthMm,
+    baseFeetHeightMm: clamp(
+      input.baseFeetHeightMm,
+      PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm,
+      PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm
+    ),
     seatBaseDepthMm,
     baseInnerBeamSpacingMm: clamp(
       input.baseInnerBeamSpacingMm,

@@ -1,9 +1,17 @@
 import type { PlannerGeometry } from '../scene/geometry';
+import { createMonitorStandModule } from '~/components/calculator/aluminum-rig-planner/modules/monitor-stand';
 import { createBaseModule } from '../modules/base';
 import { createPedalTrayModule } from '../modules/pedal-tray';
 import { createSteeringColumnModule } from '../modules/steering-column';
 import { BLACK_PROFILE_COLOR, getMeshCutListRow } from '../modules/shared';
-import type { CutListEntry, CutListRow, PlannerVisibleModules } from '../types';
+import type { PlannerPostureReport } from '../posture/posture-report';
+import type {
+  CutListEntry,
+  CutListRow,
+  PlannerPosturePreset,
+  PlannerPostureSettings,
+  PlannerVisibleModules,
+} from '../types';
 
 function compareCutListRows(a: CutListRow, b: CutListRow) {
   if (a.profileType !== b.profileType) {
@@ -56,23 +64,37 @@ export function mergeCutListEntries(rows: CutListEntry[]): CutListEntry[] {
   return [...mergedRows.values()].sort(compareCutListRows);
 }
 
-function getPlannerMeshes(geometry: PlannerGeometry, visibleModules: PlannerVisibleModules) {
-  void visibleModules;
-
-  return [
+function getPlannerMeshes(
+  geometry: PlannerGeometry,
+  visibleModules: PlannerVisibleModules,
+  postureReport?: PlannerPostureReport | null,
+  postureSettings?: PlannerPostureSettings<PlannerPosturePreset>
+) {
+  const fixedMeshes = [
     ...createBaseModule(geometry.input, BLACK_PROFILE_COLOR),
     ...createSteeringColumnModule(geometry.input, BLACK_PROFILE_COLOR),
     ...createPedalTrayModule(geometry.input, BLACK_PROFILE_COLOR),
+  ];
+
+  if (!visibleModules.monitor || !visibleModules.monitorStand || !postureReport?.monitorDebug || !postureSettings) {
+    return fixedMeshes;
+  }
+
+  return [
+    ...fixedMeshes,
+    ...createMonitorStandModule(postureReport.monitorDebug, postureSettings, BLACK_PROFILE_COLOR, geometry.input.baseWidthMm),
   ];
 }
 
 export function createPlannerCutListEntries(
   geometry: PlannerGeometry,
   visibleModules: PlannerVisibleModules,
-  showEndCaps: boolean
+  showEndCaps: boolean,
+  postureReport?: PlannerPostureReport | null,
+  postureSettings?: PlannerPostureSettings<PlannerPosturePreset>
 ): CutListEntry[] {
   const rows: CutListEntry[] = [];
-  const meshes = getPlannerMeshes(geometry, visibleModules);
+  const meshes = getPlannerMeshes(geometry, visibleModules, postureReport, postureSettings);
 
   for (const mesh of meshes) {
     const row = getMeshCutListRow(mesh, showEndCaps);
@@ -92,9 +114,11 @@ export function createPlannerCutListEntries(
 export function createPlannerCutList(
   geometry: PlannerGeometry,
   visibleModules: PlannerVisibleModules,
-  showEndCaps: boolean
+  showEndCaps: boolean,
+  postureReport?: PlannerPostureReport | null,
+  postureSettings?: PlannerPostureSettings<PlannerPosturePreset>
 ): CutListRow[] {
-  return createPlannerCutListEntries(geometry, visibleModules, showEndCaps).map(
+  return createPlannerCutListEntries(geometry, visibleModules, showEndCaps, postureReport, postureSettings).map(
     ({ key: _key, beamIds: _beamIds, ...row }) => row
   );
 }

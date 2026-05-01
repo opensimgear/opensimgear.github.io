@@ -24,6 +24,7 @@ describe('aluminum rig planner query state', () => {
   it('sanitizes out-of-range shared-link values before hydration', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       baseWidthMm: 900,
+      baseFeetHeightMm: 999,
       seatLengthMm: 999,
       seatDeltaMm: 999,
       seatHeightFromBaseInnerBeamsMm: -30,
@@ -38,6 +39,7 @@ describe('aluminum rig planner query state', () => {
     });
 
     expect(state.plannerInput.baseWidthMm).toBe(PLANNER_DIMENSION_LIMITS.baseWidthMaxMm);
+    expect(state.plannerInput.baseFeetHeightMm).toBe(PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm);
     expect(state.plannerInput.seatLengthMm).toBe(PLANNER_DIMENSION_LIMITS.seatLengthMaxMm);
     expect(state.plannerInput.seatDeltaMm).toBe(PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm);
     expect(state.plannerInput.seatHeightFromBaseInnerBeamsMm).toBe(0);
@@ -223,6 +225,7 @@ describe('aluminum rig planner query state', () => {
         monitorTargetFovDeg: 999,
         monitorDistanceFromEyesMm: Number.POSITIVE_INFINITY,
         monitorHeightFromBaseMm: -100,
+        monitorStandFeetHeightMm: 999,
       },
     });
 
@@ -237,6 +240,7 @@ describe('aluminum rig planner query state', () => {
       6
     );
     expect(state.postureSettings.monitorHeightFromBaseMm).toBe(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm);
+    expect(state.postureSettings.monitorStandFeetHeightMm).toBe(PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm);
     expect(
       MONITOR_ASPECT_RATIO_OPTIONS.some((option) => option.value === state.postureSettings.monitorAspectRatio)
     ).toBe(true);
@@ -392,5 +396,33 @@ describe('aluminum rig planner query state', () => {
     );
     expect(state.postureSettings.monitorArcCenterAtEyes).toBe(true);
     expect(state.postureSettings.monitorTripleScreen).toBe(true);
+  });
+
+  it('hydrates visible monitor modules from shared state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      modules: {
+        monitor: true,
+        monitorStand: true,
+      },
+    });
+
+    expect(state.visibleModules).toEqual({
+      monitor: true,
+      monitorStand: true,
+    });
+  });
+
+  it('does not enable monitor stand when monitor module is hidden', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      modules: {
+        monitor: false,
+        monitorStand: true,
+      },
+    });
+
+    expect(state.visibleModules).toEqual({
+      monitor: false,
+      monitorStand: false,
+    });
   });
 });

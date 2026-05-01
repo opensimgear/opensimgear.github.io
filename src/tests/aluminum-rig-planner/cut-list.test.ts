@@ -8,11 +8,13 @@ import {
   BASE_BEAM_WIDTH_MM,
   UPRIGHT_BEAM_DEPTH_MM,
 } from '~/components/calculator/aluminum-rig-planner/constants/profile';
+import { DEFAULT_PLANNER_POSTURE_SETTINGS } from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import {
   createPlannerCutList,
   createPlannerCutListEntries,
   mergeCutListRows,
 } from '~/components/calculator/aluminum-rig-planner/cut-list/cut-list';
+import type { PlannerPostureReport } from '~/components/calculator/aluminum-rig-planner/posture/posture-report';
 import { derivePlannerGeometry } from '~/components/calculator/aluminum-rig-planner/scene/geometry';
 
 describe('aluminum rig planner cut list', () => {
@@ -21,8 +23,8 @@ describe('aluminum rig planner cut list', () => {
   }
 
   it('always includes base and fixed module rows', () => {
-    const cutList = createPlannerCutList(createGeometry(), { monitor: false }, false);
-    const entries = createPlannerCutListEntries(createGeometry(), { monitor: false }, false);
+    const cutList = createPlannerCutList(createGeometry(), { monitor: false, monitorStand: false }, false);
+    const entries = createPlannerCutListEntries(createGeometry(), { monitor: false, monitorStand: false }, false);
 
     expect(cutList).toContainEqual({ profileType: '80x40', lengthMm: DEFAULT_PLANNER_INPUT.baseLengthMm, quantity: 2 });
     expect(cutList).toContainEqual({
@@ -46,7 +48,7 @@ describe('aluminum rig planner cut list', () => {
         ...DEFAULT_PLANNER_INPUT,
         baseWidthMm: 600,
       }),
-      { monitor: false },
+      { monitor: false, monitorStand: false },
       false
     );
 
@@ -59,7 +61,7 @@ describe('aluminum rig planner cut list', () => {
         ...DEFAULT_PLANNER_INPUT,
         baseWidthMm: 600,
       }),
-      { monitor: false },
+      { monitor: false, monitorStand: false },
       false
     );
 
@@ -67,8 +69,8 @@ describe('aluminum rig planner cut list', () => {
   });
 
   it('keeps fixed modules in the combined cut list when monitor is hidden', () => {
-    const cutList = createPlannerCutList(createGeometry(), { monitor: false }, false);
-    const cutListWithMonitor = createPlannerCutList(createGeometry(), { monitor: true }, false);
+    const cutList = createPlannerCutList(createGeometry(), { monitor: false, monitorStand: false }, false);
+    const cutListWithMonitor = createPlannerCutList(createGeometry(), { monitor: true, monitorStand: false }, false);
 
     expect(cutList).toEqual(cutListWithMonitor);
     expect(cutList).toContainEqual({ profileType: '40x40', lengthMm: 300, quantity: 2 });
@@ -85,7 +87,7 @@ describe('aluminum rig planner cut list', () => {
   });
 
   it('shortens cut lengths when endcaps are enabled', () => {
-    const cutList = createPlannerCutList(createGeometry(), { monitor: true }, true);
+    const cutList = createPlannerCutList(createGeometry(), { monitor: true, monitorStand: false }, true);
 
     expect(cutList).toContainEqual({
       profileType: '80x40',
@@ -124,7 +126,7 @@ describe('aluminum rig planner cut list', () => {
   });
 
   it('keeps beam ids for every member in merged cut-list entries', () => {
-    const entries = createPlannerCutListEntries(createGeometry(), { monitor: false }, false);
+    const entries = createPlannerCutListEntries(createGeometry(), { monitor: false, monitorStand: false }, false);
     const pedalCrossBeams = entries.find(
       (entry) =>
         entry.profileType === '40x40' &&
@@ -134,5 +136,42 @@ describe('aluminum rig planner cut list', () => {
     expect(pedalCrossBeams?.quantity).toBe(3);
     expect(pedalCrossBeams?.beamIds).toHaveLength(3);
     expect(pedalCrossBeams?.beamIds).toEqual(['pedal-tray-front', 'pedal-tray-middle', 'pedal-tray-rear']);
+  });
+
+  it('adds monitor stand profile pieces only when the stand module is enabled', () => {
+    const postureReport = {
+      metrics: [],
+      hints: [],
+      monitorDebug: {
+        position: [1, 0, 1] as [number, number, number],
+        diameterM: 0.01,
+        constants: { ballDiameterMm: 10 },
+      },
+    } satisfies PlannerPostureReport;
+    const withoutStand = createPlannerCutList(
+      createGeometry(),
+      { monitor: true, monitorStand: false },
+      false,
+      postureReport,
+      DEFAULT_PLANNER_POSTURE_SETTINGS
+    );
+    const withStand = createPlannerCutListEntries(
+      createGeometry(),
+      { monitor: true, monitorStand: true },
+      false,
+      postureReport,
+      DEFAULT_PLANNER_POSTURE_SETTINGS
+    );
+
+    expect(withStand).not.toEqual(withoutStand);
+    expect(withStand.flatMap((entry) => entry.beamIds)).toEqual(
+      expect.arrayContaining([
+        'monitor-stand-crossbeam',
+        'monitor-stand-left-leg',
+        'monitor-stand-right-leg',
+        'monitor-stand-left-foot',
+        'monitor-stand-right-foot',
+      ])
+    );
   });
 });

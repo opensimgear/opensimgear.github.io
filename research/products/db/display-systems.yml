@@ -1,7 +1,8 @@
 commercial:
   - product_name: 8" Dashboard
-    description: Ascher Racing 8" Dashboard. sim racing display/control panel. in stock on official
-      shop. External dashboard display for sim racing telemetry and status information.
+    description: Ascher Racing 8" Dashboard. sim racing display/control panel. in stock on
+      official shop. External dashboard display for sim racing telemetry and status
+      information.
     manufacturer: Ascher Racing
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -14,9 +15,9 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-8-dashboard/
         region: EU
   - product_name: Asetek Sim Racing Dashboard
-    description: Apex Sim Racing Asetek Sim Racing Dashboard. USB dashboard/control panel for Asetek
-      wheelbases. currently out of stock on official shop. Carbon-fiber panel with toggles, push
-      buttons, encoders, and a single USB PC connection.
+    description: Apex Sim Racing Asetek Sim Racing Dashboard. USB dashboard/control panel for
+      Asetek wheelbases. currently out of stock on official shop. Carbon-fiber panel with
+      toggles, push buttons, encoders, and a single USB PC connection.
     manufacturer: Apex Sim Racing
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -29,8 +30,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/asetek-sim-racing-dashboard
         region: US
   - product_name: Ascher Racing Dashboard
-    description: Ascher Racing Dashboard. compact sim racing display/control panel. in stock on official
-      shop. 4 in and 5 in dashboard product family for telemetry and status display.
+    description: Ascher Racing Dashboard. compact sim racing display/control panel. in stock on
+      official shop. 4 in and 5 in dashboard product family for telemetry and status
+      display.
     manufacturer: Ascher Racing
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -43,9 +45,9 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-dashboard/
         region: EU
   - product_name: Fanatec CS DD / CSL DD / GT Pro DD Dashboard
-    description: Apex Sim Racing Fanatec CS DD / CSL DD / GT Pro DD Dashboard. USB dashboard/control
-      panel for Fanatec direct-drive bases. in stock on official shop. Plug-and-play PC panel with
-      carbon-fiber construction.
+    description: Apex Sim Racing Fanatec CS DD / CSL DD / GT Pro DD Dashboard. USB
+      dashboard/control panel for Fanatec direct-drive bases. in stock on official shop.
+      Plug-and-play PC panel with carbon-fiber construction.
     manufacturer: Apex Sim Racing
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -58,9 +60,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/fanatec-cs-dd-csl-dd-gt-pro-dd-dash-board
         region: US
   - product_name: Fanatec Podium DD1 / DD2 Dashboard
-    description: Apex Sim Racing Fanatec Podium DD1 / DD2 Dashboard. USB dashboard/control panel for
-      Fanatec Podium bases. in stock on official shop. Carbon-fiber dashboard panel with single USB
-      PC connection.
+    description: Apex Sim Racing Fanatec Podium DD1 / DD2 Dashboard. USB dashboard/control panel
+      for Fanatec Podium bases. in stock on official shop. Carbon-fiber dashboard panel with
+      single USB PC connection.
     manufacturer: Apex Sim Racing
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -73,9 +75,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/fanatec-podium-dd1-dd2-dash-board
         region: US
   - product_name: GT3R 5" DDU Sim Racing Display V2
-    description: Apex Sim Racing GT3R 5" DDU V2. USB racing display / DDU. in stock on official shop. 5
-      in display with tempered glass, 34 programmable RGB LEDs, SimHub support, aluminum enclosure,
-      and carbon-fiber mount.
+    description: Apex Sim Racing GT3R 5" DDU V2. USB racing display / DDU. in stock on official
+      shop. 5 in display with tempered glass, 34 programmable RGB LEDs, SimHub support,
+      aluminum enclosure, and carbon-fiber mount.
     manufacturer: Apex Sim Racing
     component_category: display-systems
     component_sub_category: ddu-display
@@ -88,9 +90,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/gt3r-ddu-sim-racing-display-q1-2024
         region: US
   - product_name: Moza Racing Dashboard
-    description: Apex Sim Racing Moza Racing Dashboard. USB dashboard/control panel for Moza R5, R9,
-      R12, R16, and R21 wheel bases. in stock on official shop. Carbon-fiber dashboard panel with
-      single USB PC connection.
+    description: Apex Sim Racing Moza Racing Dashboard. USB dashboard/control panel for Moza R5,
+      R9, R12, R16, and R21 wheel bases. in stock on official shop. Carbon-fiber dashboard
+      panel with single USB PC connection.
     manufacturer: Apex Sim Racing
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -104,8 +106,8 @@ commercial:
         region: US
   - product_name: Universal Sim Racing Dashboard
     description: Apex Sim Racing Universal Sim Racing Dashboard. USB dashboard/control panel for
-      Simucube, Simagic Alpha/Evo, VRS, and Mige-style wheel bases. in stock on official shop.
-      Carbon-fiber dashboard panel with single USB PC connection.
+      Simucube, Simagic Alpha/Evo, VRS, and Mige-style wheel bases. in stock on official
+      shop. Carbon-fiber dashboard panel with single USB PC connection.
     manufacturer: Apex Sim Racing
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -118,9 +120,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/simucube-osw-vrs-mige-sc-ultimate-alpha-dash-board-1
         region: US
   - product_name: Simulator Digital Display Dashboard DDU
-    description: Pro-Sim Simulator Digital Display Dashboard DDU. sim racing dashboard/control display.
-      in stock on official UK shop. 4.3 in LCD with 16 RGB LEDs, USB connection, and compatibility
-      with Z1 Dashboard, SimHub, and JRT.
+    description: Pro-Sim Simulator Digital Display Dashboard DDU. sim racing dashboard/control
+      display. in stock on official UK shop. 4.3 in LCD with 16 RGB LEDs, USB connection,
+      and compatibility with Z1 Dashboard, SimHub, and JRT.
     manufacturer: Pro-Sim
     component_category: display-systems
     component_sub_category: ddu-display
@@ -133,9 +135,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/simulator-digital-display-dashboard-ddu/
         region: UK
   - product_name: Display DDU-5
-    description: GRID Display DDU-5. control panel. listed on Sim Lab. The GRID DDU5 is designed to
-      provide valuable race data and enhance vertical FOV. With a robust enclosure and compatibility
-      with multiple simulation titles and software, it offe...
+    description: GRID Display DDU-5. control panel. listed on Sim Lab. The GRID DDU5 is designed
+      to provide valuable race data and enhance vertical FOV. With a robust enclosure and
+      compatibility with multiple simulation titles and software, it offe...
     manufacturer: GRID
     component_category: display-systems
     component_sub_category: ddu-display
@@ -146,12 +148,15 @@ commercial:
         price: Unknown
         currency: USD
         url: https://sim-lab.eu/products/grid-ddu5-sim-racing-dashboard-display-unit
-        region: Unknown
+        region: EU
         status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
   - product_name: Porsche 911 GT3 Cup Dashboard Display Unit
-    description: Sim Lab Porsche 911 GT3 Cup Dashboard Display Unit. control panel. listed on Sim Lab.
-      The GRID Porsche 911 GT3 Cup Dashboard Display Unit features a 10-inch LCD screen, perfectly
-      sized to match the real thing, bringing the authentic feel of a Porsche GT3 Cup car...
+    description: Sim Lab Porsche 911 GT3 Cup Dashboard Display Unit. control panel. listed on
+      Sim Lab. The GRID Porsche 911 GT3 Cup Dashboard Display Unit features a 10-inch LCD
+      screen, perfectly sized to match the real thing, bringing the authentic feel of a
+      Porsche GT3 Cup car...
     manufacturer: Sim Lab
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -162,11 +167,13 @@ commercial:
         price: Unknown
         currency: USD
         url: https://sim-lab.eu/products/porsche-911-gt3-cup-dashboard-display-unit
-        region: Unknown
+        region: EU
         status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
   - product_name: AORUS CO49DQ
-    description: Gigabyte AORUS CO49DQ. super ultrawide OLED monitor. current/possibly limited regional
-      availability [uncertain]. 49 in OLED, 32:9 DQHD 5120 x 1440.
+    description: Gigabyte AORUS CO49DQ. super ultrawide OLED monitor. current/possibly limited
+      regional availability [uncertain]. 49 in OLED, 32:9 DQHD 5120 x 1440.
     manufacturer: Gigabyte
     component_category: display-systems
     component_sub_category: monitor
@@ -179,9 +186,9 @@ commercial:
         url: https://www.gigabyte.com/Monitor/AORUS-CO49DQ
         region: Global
   - product_name: Elite Free Standing Complete Triple Monitor Stand - Black Edition
-    description: Next Level Racing Elite Free Standing Triple Monitor Stand Black Edition. freestanding
-      triple monitor stand. in stock on official store. Aluminum extrusion monitor stand for
-      triple-display sim rigs.
+    description: Next Level Racing Elite Free Standing Triple Monitor Stand Black Edition.
+      freestanding triple monitor stand. in stock on official store. Aluminum extrusion
+      monitor stand for triple-display sim rigs.
     manufacturer: Next Level Racing
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -194,9 +201,9 @@ commercial:
         url: https://nextlevelracing.com/product/elite-free-standing-triple-monitor-stand-black-edition/
         region: US
   - product_name: Elite Freestanding Single Monitor Stand - Black Edition
-    description: Next Level Racing Elite Freestanding Single Monitor Stand Black Edition. freestanding
-      monitor stand. in stock on official store. Aluminum extrusion single-display stand for Elite
-      cockpits and standalone rigs.
+    description: Next Level Racing Elite Freestanding Single Monitor Stand Black Edition.
+      freestanding monitor stand. in stock on official store. Aluminum extrusion
+      single-display stand for Elite cockpits and standalone rigs.
     manufacturer: Next Level Racing
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -209,9 +216,9 @@ commercial:
         url: https://nextlevelracing.com/product/elite-freestanding-single-monitor-stand-black-edition/
         region: US
   - product_name: Round Tube Freestanding Triple Monitor Stand
-    description: Next Level Racing Round Tube Freestanding Triple Monitor Stand. freestanding triple
-      monitor stand. in stock on official store. Round-tube stand for racing and flight simulator
-      display setups.
+    description: Next Level Racing Round Tube Freestanding Triple Monitor Stand. freestanding
+      triple monitor stand. in stock on official store. Round-tube stand for racing and
+      flight simulator display setups.
     manufacturer: Next Level Racing
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -224,9 +231,9 @@ commercial:
         url: https://nextlevelracing.com/product/round-tube-freestanding-triple-monitor-stand/
         region: US
   - product_name: Round Tube Freestanding Single Monitor Stand
-    description: Next Level Racing Round Tube Freestanding Single Monitor Stand. freestanding single
-      monitor stand. in stock on official store. Round-tube display stand for racing and flight
-      simulator setups.
+    description: Next Level Racing Round Tube Freestanding Single Monitor Stand. freestanding
+      single monitor stand. in stock on official store. Round-tube display stand for racing
+      and flight simulator setups.
     manufacturer: Next Level Racing
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -239,9 +246,9 @@ commercial:
         url: https://nextlevelracing.com/product/round-tube-freestanding-single-monitor-stand/
         region: US
   - product_name: Freestanding Triple Monitor Stand - Supports up to 45 in Displays
-    description: Trak Racer Freestanding Triple Monitor Stand 45. freestanding triple monitor stand.
-      current; stock due late June 2026 on captured page. Freestanding stand for triple monitors up
-      to 45 in.
+    description: Trak Racer Freestanding Triple Monitor Stand 45. freestanding triple monitor
+      stand. current; stock due late June 2026 on captured page. Freestanding stand for
+      triple monitors up to 45 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -254,9 +261,9 @@ commercial:
         url: https://trakracer.com/products/floor-triple-monitor-stand
         region: US
   - product_name: Freestanding Vario Monitor Mount
-    description: Sim Lab Freestanding Vario Monitor Mount. freestanding monitor mount. in stock on
-      official EU shop. Freestanding Vario single/triple monitor stand with Vario-VESA alignment and
-      sag-free pivot adapters.
+    description: Sim Lab Freestanding Vario Monitor Mount. freestanding monitor mount. in stock
+      on official EU shop. Freestanding Vario single/triple monitor stand with Vario-VESA
+      alignment and sag-free pivot adapters.
     manufacturer: Sim Lab
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -270,9 +277,9 @@ commercial:
         region: EU
         status: available
   - product_name: Integrated Vario Monitor Mount
-    description: Sim Lab Integrated Vario Monitor Mount. integrated cockpit monitor mount. in stock on
-      official EU shop. Single/triple integrated mount with Vario VESA plates for P1X, GT1, and
-      Mercedes-AMG cockpits.
+    description: Sim Lab Integrated Vario Monitor Mount. integrated cockpit monitor mount. in
+      stock on official EU shop. Single/triple integrated mount with Vario VESA plates for
+      P1X, GT1, and Mercedes-AMG cockpits.
     manufacturer: Sim Lab
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -300,9 +307,9 @@ commercial:
         url: https://www.gtomega.co.uk/products/portable-monitor-stand
         region: UK
   - product_name: Simulator Monitor Stand
-    description: GT Omega Simulator Monitor Stand. freestanding monitor stand. currently out of stock on
-      official UK shop. Fully adjustable standalone sim racing monitor stand with single, triple,
-      and quad variants.
+    description: GT Omega Simulator Monitor Stand. freestanding monitor stand. currently out of
+      stock on official UK shop. Fully adjustable standalone sim racing monitor stand with
+      single, triple, and quad variants.
     manufacturer: GT Omega
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -315,8 +322,9 @@ commercial:
         url: https://www.gtomega.co.uk/products/simulator-monitor-stand
         region: UK
   - product_name: Pro Monitor Stand
-    description: GT Omega Pro Monitor Stand. freestanding monitor stand. in stock on official UK shop.
-      Independent monitor stand with single and triple variants for sim racing displays.
+    description: GT Omega Pro Monitor Stand. freestanding monitor stand. in stock on official UK
+      shop. Independent monitor stand with single and triple variants for sim racing
+      displays.
     manufacturer: GT Omega
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -329,8 +337,8 @@ commercial:
         url: https://www.gtomega.co.uk/products/pro-monitor-stand
         region: UK
   - product_name: GT2000HDR
-    description: Optoma GT2000HDR. short-throw laser gaming projector. current. 1080p Full HD DLP laser
-      projector.
+    description: Optoma GT2000HDR. short-throw laser gaming projector. current. 1080p Full HD
+      DLP laser projector.
     manufacturer: Optoma
     component_category: display-systems
     component_sub_category: projector
@@ -338,8 +346,8 @@ commercial:
     picture_url: https://region-resource.optoma.com/country/ig4Jh8LWF0uqQAoDpEV0qNhWtjuQPVexkNYv4Q3k.png
     shops: []
   - product_name: Immersive Display PRO
-    description: Fly Elise-ng Immersive Display PRO. projection warping and edge-blending software.
-      current. Software for multi-projector warping and edge blending.
+    description: Fly Elise-ng Immersive Display PRO. projection warping and edge-blending
+      software. current. Software for multi-projector warping and edge blending.
     manufacturer: Fly Elise-ng
     component_category: display-systems
     component_sub_category: projection-mapping
@@ -347,9 +355,9 @@ commercial:
     picture_url: https://fly.elise-ng.net/wp-content/uploads/2018/12/Untitled-2-22.png
     shops: []
   - product_name: Odyssey Neo G9 57 G95NC
-    description: Samsung Odyssey Neo G9 57 G95NC. super ultrawide monitor. current; business page showed
-      contact/chat for assistance rather than simple add-to-cart during check. 57 in 32:9 Dual UHD,
-      7680 x 2160.
+    description: Samsung Odyssey Neo G9 57 G95NC. super ultrawide monitor. current; business
+      page showed contact/chat for assistance rather than simple add-to-cart during check.
+      57 in 32:9 Dual UHD, 7680 x 2160.
     manufacturer: Samsung
     component_category: display-systems
     component_sub_category: monitor
@@ -362,8 +370,8 @@ commercial:
         url: https://www.samsung.com/us/business/computing/monitors/gaming/57-odyssey-neo-g9-dual-4k-uhd-quantum-mini-led-240hz-1ms-hdr-1000-curved-gaming-monitor-ls57cg952nnxza/
         region: US
   - product_name: Odyssey OLED G9 G95SD
-    description: Samsung Odyssey OLED G9 G95SD. super ultrawide OLED monitor. current. 49 in 32:9 Dual
-      QHD, 5120 x 1440 OLED.
+    description: Samsung Odyssey OLED G9 G95SD. super ultrawide OLED monitor. current. 49 in
+      32:9 Dual QHD, 5120 x 1440 OLED.
     manufacturer: Samsung
     component_category: display-systems
     component_sub_category: monitor
@@ -376,8 +384,9 @@ commercial:
         url: https://www.samsung.com/us/computing/monitors/oled-monitor/49-odyssey-oled-g9-g95sd-dual-qhd-240hz-0-03ms-curved-gaming-monitor-with-glare-free-and-smart-features-ls49dg956snxgo/
         region: US
   - product_name: ROG Bezel-Free Kit ABF01
-    description: ASUS ROG Bezel-Free Kit ABF01. triple-monitor bezel blending accessory. current/limited
-      availability [uncertain]. Optical accessory that refracts images across monitor bezels.
+    description: ASUS ROG Bezel-Free Kit ABF01. triple-monitor bezel blending accessory.
+      current/limited availability [uncertain]. Optical accessory that refracts images
+      across monitor bezels.
     manufacturer: ASUS
     component_category: display-systems
     component_sub_category: monitor
@@ -390,8 +399,8 @@ commercial:
         url: https://rog.asus.com/us/monitors/accessories/rog-bezel-free-kit-abf01-model/
         region: Unknown
   - product_name: ROG Swift OLED PG49WCD
-    description: ASUS ROG Swift OLED PG49WCD. super ultrawide OLED monitor. current. 49 in 32:9 QD-OLED,
-      5120 x 1440.
+    description: ASUS ROG Swift OLED PG49WCD. super ultrawide OLED monitor. current. 49 in 32:9
+      QD-OLED, 5120 x 1440.
     manufacturer: ASUS
     component_category: display-systems
     component_sub_category: monitor
@@ -400,8 +409,8 @@ commercial:
     shops: []
   - product_name: TK700STi
     description: BenQ TK700STi. short-throw gaming projector. current on BenQ product page;
-      ProjectorCentral marks discontinued April 2025 [uncertain]. 4K UHD DLP projector, 3000 ANSI
-      lumens.
+      ProjectorCentral marks discontinued April 2025 [uncertain]. 4K UHD DLP projector, 3000
+      ANSI lumens.
     manufacturer: BenQ
     component_category: display-systems
     component_sub_category: projector
@@ -414,8 +423,8 @@ commercial:
         url: https://www.benq.com/en-us/projector/gaming-projector/tk700sti.html
         region: US
   - product_name: UltraGear 45GX950A-B
-    description: LG UltraGear 45GX950A-B. ultrawide OLED monitor. current. 44.5 in OLED, 21:9 5K2K WUHD
-      5120 x 2160.
+    description: LG UltraGear 45GX950A-B. ultrawide OLED monitor. current. 44.5 in OLED, 21:9
+      5K2K WUHD 5120 x 2160.
     manufacturer: LG
     component_category: display-systems
     component_sub_category: monitor
@@ -428,9 +437,9 @@ commercial:
         url: https://www.lg.com/us/monitors/lg-45gx950a-b-gaming-monitor
         region: US
   - product_name: TX60 Triple TV Stand
-    description: RSEAT TX60. freestanding triple TV stand. available on official store. Standalone
-      triple-display stand for up to three 60 in TVs with height, depth, tilt, and PRO VESA
-      adjustment.
+    description: RSEAT TX60. freestanding triple TV stand. available on official store.
+      Standalone triple-display stand for up to three 60 in TVs with height, depth, tilt,
+      and PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -444,8 +453,8 @@ commercial:
         region: US
   - product_name: TX43 Triple TV / Monitor Stand
     description: RSEAT TX43. freestanding triple TV/monitor stand. available on official store.
-      Standalone triple-display stand for up to three 43 in displays with height, depth, tilt, and
-      PRO VESA adjustment.
+      Standalone triple-display stand for up to three 43 in displays with height, depth,
+      tilt, and PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -458,9 +467,9 @@ commercial:
         url: https://rseat.net/products/tx43-triple-tv-monitor-stand-for-up-to-3-x-43-inch-tv-monitors
         region: US
   - product_name: TX32 Triple Monitor Stand
-    description: RSEAT TX32. freestanding triple monitor stand. available on official store. Standalone
-      triple-display stand for up to three 32 in monitors with height, depth, tilt, and PRO VESA
-      adjustment.
+    description: RSEAT TX32. freestanding triple monitor stand. available on official store.
+      Standalone triple-display stand for up to three 32 in monitors with height, depth,
+      tilt, and PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -474,8 +483,8 @@ commercial:
         region: US
   - product_name: SX90 Single TV / Monitor Stand
     description: RSEAT SX90. freestanding single TV/monitor stand. available on official store.
-      Standalone display stand for one TV or monitor up to 90 in with height, depth, tilt, and PRO
-      VESA adjustment.
+      Standalone display stand for one TV or monitor up to 90 in with height, depth, tilt,
+      and PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -488,8 +497,9 @@ commercial:
         url: https://rseat.net/products/sx90-single-tv-monitor-stand-for-up-to-90-inch-tvs
         region: US
   - product_name: A1-TX32 Triple Monitor Stand
-    description: RSEAT A1-TX32. integrated triple monitor stand for A1 cockpits. available on official
-      store. Triple monitor mount for up to three 32 in displays with PRO VESA adjustment.
+    description: RSEAT A1-TX32. integrated triple monitor stand for A1 cockpits. available on
+      official store. Triple monitor mount for up to three 32 in displays with PRO VESA
+      adjustment.
     manufacturer: RSEAT
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -502,8 +512,9 @@ commercial:
         url: https://rseat.net/products/a1-tx32-triple-monitor-stand-for-up-to-3-x-32-inch-monitors
         region: US
   - product_name: A1-SX57 Single Monitor Stand
-    description: RSEAT A1-SX57. integrated single monitor stand for A1 cockpits. available on official
-      store. Single-display mount for monitors up to 57 in ultrawide with PRO VESA adjustment.
+    description: RSEAT A1-SX57. integrated single monitor stand for A1 cockpits. available on
+      official store. Single-display mount for monitors up to 57 in ultrawide with PRO VESA
+      adjustment.
     manufacturer: RSEAT
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -516,9 +527,9 @@ commercial:
         url: https://rseat.net/products/a1-sx57-monitor-stand-for-up-to-57-inch-single-monitor
         region: US
   - product_name: SX49 Monitor Stand for P1 Cockpit
-    description: RSEAT SX49. integrated single monitor stand for P1 cockpit. available on official
-      store. Single-display mount for ultrawide monitors up to 49 in with adjustable height and VESA
-      fine adjustment.
+    description: RSEAT SX49. integrated single monitor stand for P1 cockpit. available on
+      official store. Single-display mount for ultrawide monitors up to 49 in with
+      adjustable height and VESA fine adjustment.
     manufacturer: RSEAT
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -531,8 +542,8 @@ commercial:
         url: https://rseat.net/products/sx49-monitor-stand-for-p1-cockpit
         region: US
   - product_name: Freestanding Single Monitor Stand - Supports up to 80 in Display
-    description: Trak Racer Freestanding Single Monitor Stand. freestanding single monitor stand.
-      current on official US shop. Supports displays up to 80 in.
+    description: Trak Racer Freestanding Single Monitor Stand. freestanding single monitor
+      stand. current on official US shop. Supports displays up to 80 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -545,8 +556,8 @@ commercial:
         url: https://trakracer.com/products/tr8020-single-monitor-stand-3
         region: US
   - product_name: Freestanding Dual Monitor Stand - Supports up to 80 in Display
-    description: Trak Racer Freestanding Dual Monitor Stand. freestanding dual monitor stand. current on
-      official US shop. Supports dual displays up to 80 in.
+    description: Trak Racer Freestanding Dual Monitor Stand. freestanding dual monitor stand.
+      current on official US shop. Supports dual displays up to 80 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -559,8 +570,9 @@ commercial:
         url: https://trakracer.com/products/copy-of-freestanding-dual-monitor-stand-up-to-80-display
         region: US
   - product_name: Freestanding Triple Monitor Stand with Extra Leg Supports
-    description: Trak Racer Freestanding Triple Monitor Stand with Extra Leg Supports. freestanding
-      triple monitor stand. current on official US shop. Supports triple displays up to 55 in.
+    description: Trak Racer Freestanding Triple Monitor Stand with Extra Leg Supports.
+      freestanding triple monitor stand. current on official US shop. Supports triple
+      displays up to 55 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -579,8 +591,8 @@ commercial:
         region: EU
         status: available
   - product_name: Freestanding Quad Monitor Stand - Supports up to 45 in Displays
-    description: Trak Racer Freestanding Quad Monitor Stand. freestanding quad monitor stand. current on
-      official US shop. Supports quad displays up to 45 in.
+    description: Trak Racer Freestanding Quad Monitor Stand. freestanding quad monitor stand.
+      current on official US shop. Supports quad displays up to 45 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -593,8 +605,9 @@ commercial:
         url: https://trakracer.com/products/aluminum-quad-monitor-stand
         region: US
   - product_name: Freestanding Quad Monitor Stand with Extra Leg Supports
-    description: Trak Racer Freestanding Quad Monitor Stand with Extra Leg Supports. freestanding quad
-      monitor stand. current on official US shop. Supports quad displays up to 55 in.
+    description: Trak Racer Freestanding Quad Monitor Stand with Extra Leg Supports.
+      freestanding quad monitor stand. current on official US shop. Supports quad displays
+      up to 55 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -613,8 +626,8 @@ commercial:
         region: EU
         status: available
   - product_name: Cockpit-Mounted Single Monitor Stand - Supports up to 80 in Display
-    description: Trak Racer Cockpit-Mounted Single Monitor Stand. integrated cockpit monitor mount.
-      current on official US shop. Supports one display up to 80 in.
+    description: Trak Racer Cockpit-Mounted Single Monitor Stand. integrated cockpit monitor
+      mount. current on official US shop. Supports one display up to 80 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -627,8 +640,8 @@ commercial:
         url: https://trakracer.com/products/tr8020-single-monitor-stand-2
         region: US
   - product_name: Cockpit-Mounted Dual Monitor Stand - Supports up to 80 in Display
-    description: Trak Racer Cockpit-Mounted Dual Monitor Stand. integrated cockpit monitor mount.
-      current on official US shop. Supports dual displays up to 80 in.
+    description: Trak Racer Cockpit-Mounted Dual Monitor Stand. integrated cockpit monitor
+      mount. current on official US shop. Supports dual displays up to 80 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -641,8 +654,8 @@ commercial:
         url: https://trakracer.com/products/copy-of-cockpit-mounted-quad-monitor-stand-up-to-45-displays
         region: US
   - product_name: Cockpit-Mounted Triple Monitor Mount - Supports up to 45 in Displays
-    description: Trak Racer Cockpit-Mounted Triple Monitor Mount. integrated cockpit monitor mount.
-      current on official US shop. Supports triple displays up to 45 in.
+    description: Trak Racer Cockpit-Mounted Triple Monitor Mount. integrated cockpit monitor
+      mount. current on official US shop. Supports triple displays up to 45 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -655,8 +668,8 @@ commercial:
         url: https://trakracer.com/products/cockpit-triple-monitor-stand
         region: US
   - product_name: Cockpit-Mounted Quad Monitor Stand - Supports up to 45 in Displays
-    description: Trak Racer Cockpit-Mounted Quad Monitor Stand. integrated cockpit monitor mount.
-      current on official US shop. Supports quad displays up to 45 in.
+    description: Trak Racer Cockpit-Mounted Quad Monitor Stand. integrated cockpit monitor
+      mount. current on official US shop. Supports quad displays up to 45 in.
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -669,8 +682,9 @@ commercial:
         url: https://trakracer.com/products/black-cockpit-mounted-monitor-stand-with-quad-monitor-mount
         region: US
   - product_name: TM-STAND PRO - MONITOR SUPPORT2023
-    description: Sparco TM-Stand Pro. monitor support for simulator cockpits. current on official German
-      shop. Monitor support listed for Evolve GP and Evolve Kart simulator setups.
+    description: Sparco TM-Stand Pro. monitor support for simulator cockpits. current on
+      official German shop. Monitor support listed for Evolve GP and Evolve Kart simulator
+      setups.
     manufacturer: Sparco
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -683,8 +697,8 @@ commercial:
         url: https://www.sparco-official.com/de/tm-stand-pro-g02386nrrs.html
         region: DE
   - product_name: SPARCO TM-STAND1
-    description: Sparco TM-Stand1. single monitor support for Evolve cockpit. current on official German
-      shop. Single cockpit monitor support for Evolve simulator frames.
+    description: Sparco TM-Stand1. single monitor support for Evolve cockpit. current on
+      official German shop. Single cockpit monitor support for Evolve simulator frames.
     manufacturer: Sparco
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -697,9 +711,10 @@ commercial:
         url: https://www.sparco-official.com/de/supporto-monitor-singolo-cockpit-evolve-nr-rs-2019.html
         region: DE
   - product_name: Integrated Vario™ Monitor Mount
-    description: Sim Lab Integrated Vario™ Monitor Mount. rig mounts. listed on Sim Lab. The GT1 Monitor
-      Mount is an excellent solution for a stable and space-efficient sim racing setup. Available in
-      single and triple monitor configurations, this mount features our...
+    description: Sim Lab Integrated Vario™ Monitor Mount. rig mounts. listed on Sim Lab. The GT1
+      Monitor Mount is an excellent solution for a stable and space-efficient sim racing
+      setup. Available in single and triple monitor configurations, this mount features
+      our...
     manufacturer: Sim Lab
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -713,9 +728,9 @@ commercial:
         region: EU
         status: available
   - product_name: Quad monitor stand add-on
-    description: Sim Lab Quad monitor stand add-on. rig mounts. listed on Sim Lab. Quad monitor mount
-      add-on, for adding a fourth monitor to the triple monitor stand. All parts needed to convert
-      your triple monitor stand into a Quad monitor stand are included....
+    description: Sim Lab Quad monitor stand add-on. rig mounts. listed on Sim Lab. Quad monitor
+      mount add-on, for adding a fourth monitor to the triple monitor stand. All parts
+      needed to convert your triple monitor stand into a Quad monitor stand are included....
     manufacturer: Sim Lab
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -729,9 +744,9 @@ commercial:
         region: EU
         status: available
   - product_name: Universal VESA
-    description: Sim Lab Universal VESA. rig mounts. listed on Sim Lab. The universal VESA plate can be
-      used to mount larger monitors with a different variety of VESA patterns. This plate can easily
-      be mounted on our Vario™ VESA system to make it co...
+    description: Sim Lab Universal VESA. rig mounts. listed on Sim Lab. The universal VESA plate
+      can be used to mount larger monitors with a different variety of VESA patterns. This
+      plate can easily be mounted on our Vario™ VESA system to make it co...
     manufacturer: Sim Lab
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -742,10 +757,13 @@ commercial:
         price: Unknown
         currency: USD
         url: https://sim-lab.eu/products/universal-vesa
-        region: Unknown
+        region: EU
         status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
   - product_name: X1-Pro Integrated Monitor Mount
-    description: Sim Lab X1-Pro Integrated Monitor Mount. rig mounts. listed on Sim Lab. Official shop listing.
+    description: Sim Lab X1-Pro Integrated Monitor Mount. rig mounts. listed on Sim Lab.
+      Official shop listing.
     manufacturer: Sim Lab
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -758,8 +776,8 @@ commercial:
         region: EU
         status: available
   - product_name: MFD1(With USB3.0 Display)
-    description: MFD1(With USB3.0 Display). cockpit panel bundle / MIP. Pre-order listing on EU WINCTRL
-      store. MFD Unit1 x1.
+    description: MFD1(With USB3.0 Display). cockpit panel bundle / MIP. Pre-order listing on EU
+      WINCTRL store. MFD Unit1 x1.
     manufacturer: WINCTRL
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -782,10 +800,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Add-on Side Arms for Triple Monitor Stand 30-45"
-    description: Trak Racer Add-on Side Arms for Triple Monitor Stand 30-45". control panel. listed on
-      Trakracer. Trak Racer Black Steel Add-On Side Arms for an existing Tube-Style Single Monitor
-      Stand Trak Racer is the Official Simulator Supplier of Alpine F1 Team and Partner of Airbus
-      Air...
+    description: Trak Racer Add-on Side Arms for Triple Monitor Stand 30-45". control panel.
+      listed on Trakracer. Trak Racer Black Steel Add-On Side Arms for an existing
+      Tube-Style Single Monitor Stand Trak Racer is the Official Simulator Supplier of
+      Alpine F1 Team and Partner of Airbus Air...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -802,7 +820,8 @@ commercial:
     last_updated: 2026-05-01
   - product_name: AP-Xtreme APX-2000 Single Monitor Chassis
     description: Ricmotech AP-Xtreme APX-2000. single-monitor racing simulator chassis. official
-      Ricmotech store listing. AP-Xtreme cockpit chassis with integrated single-monitor support.
+      Ricmotech store listing. AP-Xtreme cockpit chassis with integrated single-monitor
+      support.
     manufacturer:
       - Ricmotech
       - AP-Xtreme
@@ -838,8 +857,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: AP-Xtreme APX-3000UW Wide Triple Monitor Chassis
-    description: Ricmotech AP-Xtreme APX-3000UW. wide triple-monitor racing simulator chassis. official
-      Ricmotech store listing. AP-Xtreme cockpit for wide triple-monitor simulator setups.
+    description: Ricmotech AP-Xtreme APX-3000UW. wide triple-monitor racing simulator chassis.
+      official Ricmotech store listing. AP-Xtreme cockpit for wide triple-monitor simulator
+      setups.
     manufacturer:
       - Ricmotech
       - AP-Xtreme
@@ -856,9 +876,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Cockpit Monitor Stand (Black)
-    description: Fanatec Cockpit Monitor Stand (Black). cockpit frame. listed on Fanatec. Upgrade your
-      sim racing setup with the GT Cockpit Monitor Stand, perfectly complementing the ClubSport GT
-      Cockpit. It supports 32" to 65" screens, with an included overhead moun...
+    description: Fanatec Cockpit Monitor Stand (Black). cockpit frame. listed on Fanatec.
+      Upgrade your sim racing setup with the GT Cockpit Monitor Stand, perfectly
+      complementing the ClubSport GT Cockpit. It supports 32" to 65" screens, with an
+      included overhead moun...
     manufacturer: Fanatec
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -874,9 +895,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Cockpit Monitor Stand (White)
-    description: Fanatec Cockpit Monitor Stand (White). cockpit frame. listed on Fanatec. Upgrade your
-      sim racing setup with the GT Cockpit Monitor Stand, perfectly complementing the ClubSport GT
-      Cockpit. It supports 32" to 65" screens, with an included overhead moun...
+    description: Fanatec Cockpit Monitor Stand (White). cockpit frame. listed on Fanatec.
+      Upgrade your sim racing setup with the GT Cockpit Monitor Stand, perfectly
+      complementing the ClubSport GT Cockpit. It supports 32" to 65" screens, with an
+      included overhead moun...
     manufacturer: Fanatec
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -892,9 +914,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Cockpit Triple Monitor Expansion Kit (black)
-    description: Fanatec Cockpit Triple Monitor Expansion Kit (black). cockpit frame. listed on Fanatec.
-      Upgrade your ClubSport GT Cockpit with the GT Cockpit Triple Monitor Expansion Kit to
-      transform a single monitor setup into a panoramic showcase, supporting three 32" to 55" scr...
+    description: Fanatec Cockpit Triple Monitor Expansion Kit (black). cockpit frame. listed on
+      Fanatec. Upgrade your ClubSport GT Cockpit with the GT Cockpit Triple Monitor
+      Expansion Kit to transform a single monitor setup into a panoramic showcase,
+      supporting three 32" to 55" scr...
     manufacturer: Fanatec
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -910,9 +933,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Cockpit Triple Monitor Expansion Kit (white)
-    description: Fanatec Cockpit Triple Monitor Expansion Kit (white). cockpit frame. listed on Fanatec.
-      Upgrade your ClubSport GT Cockpit with the GT Cockpit Triple Monitor Expansion Kit to
-      transform a single monitor setup into a panoramic showcase, supporting three 32" to 55" scr...
+    description: Fanatec Cockpit Triple Monitor Expansion Kit (white). cockpit frame. listed on
+      Fanatec. Upgrade your ClubSport GT Cockpit with the GT Cockpit Triple Monitor
+      Expansion Kit to transform a single monitor setup into a panoramic showcase,
+      supporting three 32" to 55" scr...
     manufacturer: Fanatec
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -928,9 +952,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: CM2 HD Racing Dash
-    description: MOZA CM2 HD Racing Dash. rig mounts. listed on Eu. Take control with the MOZA CM2 HD
-      Racing Dash. Equipped with a 5-inch 720P touchscreen, customizable UI, 10 RGB shift
-      indicators, and 6 flag lights, this dashboard delivers real...
+    description: MOZA CM2 HD Racing Dash. rig mounts. listed on Eu. Take control with the MOZA
+      CM2 HD Racing Dash. Equipped with a 5-inch 720P touchscreen, customizable UI, 10 RGB
+      shift indicators, and 6 flag lights, this dashboard delivers real...
     manufacturer: MOZA
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -946,10 +970,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: 1200mm 80x40 Extruded Alum. + VESA Monitor Mount
-    description: "Trak Racer 1200mm 80x40 Extruded Alum. + VESA Monitor Mount. rig mounts. listed on
-      Trakracer. this product ships from spain The 1200mm long anodized black 80mm x 40mm extruded
-      aluminium with VESA mount is used for fitting both flat and curved monitors. Includes: 1x
-      1200m..."
+    description: "Trak Racer 1200mm 80x40 Extruded Alum. + VESA Monitor Mount. rig mounts.
+      listed on Trakracer. this product ships from spain The 1200mm long anodized black 80mm
+      x 40mm extruded aluminium with VESA mount is used for fitting both flat and curved
+      monitors. Includes: 1x 1200m..."
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -965,10 +989,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: 580mm/22.8" Triple Monitor Add-on Arms with VESA Mounts
-    description: Trak Racer 580mm/22.8" Triple Monitor Add-on Arms with VESA Mounts. rig mounts. listed
-      on Trakracer. 580mm/22.8" Triple Monitor Add-on Arms for a Single Monitor Stand Suits Monitors
-      up to 45" Trak Racer is the Official Simulator Supplier of Alpine F1 Team and Partner of
-      Airbus...
+    description: Trak Racer 580mm/22.8" Triple Monitor Add-on Arms with VESA Mounts. rig mounts.
+      listed on Trakracer. 580mm/22.8" Triple Monitor Add-on Arms for a Single Monitor Stand
+      Suits Monitors up to 45" Trak Racer is the Official Simulator Supplier of Alpine F1
+      Team and Partner of Airbus...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -984,10 +1008,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: 980mm/38.58" Triple Monitor Add-on Arms with VESA Mounts
-    description: Trak Racer 980mm/38.58" Triple Monitor Add-on Arms with VESA Mounts. rig mounts. listed
-      on Trakracer. 980mm/38.58" Triple Monitor Add-on Arms for a Single Monitor Stand Suits
-      Monitors up to 45" Trak Racer is the Official Simulator Supplier of Alpine F1 Team and Partner
-      of Airbus...
+    description: Trak Racer 980mm/38.58" Triple Monitor Add-on Arms with VESA Mounts. rig
+      mounts. listed on Trakracer. 980mm/38.58" Triple Monitor Add-on Arms for a Single
+      Monitor Stand Suits Monitors up to 45" Trak Racer is the Official Simulator Supplier
+      of Alpine F1 Team and Partner of Airbus...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1003,10 +1027,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Add-on Side Arms for Triple Monitor Stand 22-32"
-    description: Trak Racer Add-on Side Arms for Triple Monitor Stand 22-32". rig mounts. listed on
-      Trakracer. Trak Racer Black Steel Add-On Side Arms for an existing Tube-Style Single Monitor
-      Stand Trak Racer is the Official Simulator Supplier of Alpine F1 Team and Partner of Airbus
-      Air...
+    description: Trak Racer Add-on Side Arms for Triple Monitor Stand 22-32". rig mounts. listed
+      on Trakracer. Trak Racer Black Steel Add-On Side Arms for an existing Tube-Style
+      Single Monitor Stand Trak Racer is the Official Simulator Supplier of Alpine F1 Team
+      and Partner of Airbus Air...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1022,10 +1046,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Cockpit-Mounted Single Monitor Stand for TR8 Pro & TRX
-    description: Trak Racer Cockpit-Mounted Single Monitor Stand for TR8 Pro & TRX. cockpit frame.
-      listed on Trakracer. Trak Racer TR8 Pro and TRX Integrated Single Monitor Stand Provision for
-      displays with VESA Mounting at 75mm and 100mm (via main plate) and 200mm, 300mm and 400mm (via
-      the inclu...
+    description: Trak Racer Cockpit-Mounted Single Monitor Stand for TR8 Pro & TRX. cockpit
+      frame. listed on Trakracer. Trak Racer TR8 Pro and TRX Integrated Single Monitor Stand
+      Provision for displays with VESA Mounting at 75mm and 100mm (via main plate) and
+      200mm, 300mm and 400mm (via the inclu...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1041,10 +1065,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Cockpit-Mounted Single Monitor Stand for Trak Racer TR5 Sim Racing and Flight Sim Rig
-    description: Trak Racer Cockpit-Mounted Single Monitor Stand for Trak Racer TR5 Sim Racing and
-      Flight Sim Rig. cockpit frame. listed on Trakracer. Trak Racer TR5 Integrated Single Monitor
-      Stand – Cockpit-Mounted Display Solution for Sim Racing & Flight Simulation The Trak Racer TR5
-      Integrated Single Monitor Stand is a cock...
+    description: Trak Racer Cockpit-Mounted Single Monitor Stand for Trak Racer TR5 Sim Racing
+      and Flight Sim Rig. cockpit frame. listed on Trakracer. Trak Racer TR5 Integrated
+      Single Monitor Stand – Cockpit-Mounted Display Solution for Sim Racing & Flight
+      Simulation The Trak Racer TR5 Integrated Single Monitor Stand is a cock...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1060,10 +1084,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Integrated Triple Monitor Stand for Trak Racer TR8 PRO
-    description: Trak Racer Integrated Triple Monitor Stand for Trak Racer TR8 PRO. rig mounts. listed
-      on Trakracer. Integrated Triple Monitor Stand for Trak Racer TR8 PRO Suitable for TR8 Pro
-      Suitable for three monitors or TVs (27 - 45") for both curved and flat monitors. Suits most
-      monitors...
+    description: Trak Racer Integrated Triple Monitor Stand for Trak Racer TR8 PRO. rig mounts.
+      listed on Trakracer. Integrated Triple Monitor Stand for Trak Racer TR8 PRO Suitable
+      for TR8 Pro Suitable for three monitors or TVs (27 - 45") for both curved and flat
+      monitors. Suits most monitors...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1079,10 +1103,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Large Cockpit-Mounted Single Monitor Stand - 1200mm / 47.25" Wide / Version 3
-    description: Trak Racer Large Cockpit-Mounted Single Monitor Stand - 1200mm / 47.25" Wide / Version
-      3. aluminum cockpit. listed on Trakracer. Trak Racer Integrated Single Monitor Stand - For
-      Monitors and TVs up to 80" Centre monitor profile is 1200mm / 47.25" wide. Upgrade later to
-      Triple Monitor Setup up to 45" in si...
+    description: Trak Racer Large Cockpit-Mounted Single Monitor Stand - 1200mm / 47.25" Wide /
+      Version 3. aluminum cockpit. listed on Trakracer. Trak Racer Integrated Single Monitor
+      Stand - For Monitors and TVs up to 80" Centre monitor profile is 1200mm / 47.25" wide.
+      Upgrade later to Triple Monitor Setup up to 45" in si...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1098,10 +1122,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Large Monitor Stand Center Piece with Vesa Mount - 1200mm / 47.25" Wide
-    description: 'Trak Racer Large Monitor Stand Center Piece with Vesa Mount - 1200mm / 47.25" Wide.
-      rig mounts. listed on Trakracer. 1200mm / 47.25" Long 80mm x 40mm Extruded Aluminium with VESA
-      Mount Trak Racer is the Official Simulator Supplier of Alpine F1 Team and Partner of Airbus
-      Aircraft. Warranty: Lif...'
+    description: 'Trak Racer Large Monitor Stand Center Piece with Vesa Mount - 1200mm / 47.25"
+      Wide. rig mounts. listed on Trakracer. 1200mm / 47.25" Long 80mm x 40mm Extruded
+      Aluminium with VESA Mount Trak Racer is the Official Simulator Supplier of Alpine F1
+      Team and Partner of Airbus Aircraft. Warranty: Lif...'
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1117,10 +1141,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Large Monitor Stand Center Piece with Vesa Mount - 1500mm / 59" Wide
-    description: Trak Racer Large Monitor Stand Center Piece with Vesa Mount - 1500mm / 59" Wide. rig
-      mounts. listed on Trakracer. 1500mm / 59" Long 80mm x 40mm Extruded Aluminium with VESA Mount
-      The 1500mm / 59" length consists of 1 x 800mm (31.5") and 2 x 350mm (13.8") high quality black
-      anodized extrusio...
+    description: Trak Racer Large Monitor Stand Center Piece with Vesa Mount - 1500mm / 59"
+      Wide. rig mounts. listed on Trakracer. 1500mm / 59" Long 80mm x 40mm Extruded
+      Aluminium with VESA Mount The 1500mm / 59" length consists of 1 x 800mm (31.5") and 2
+      x 350mm (13.8") high quality black anodized extrusio...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1136,10 +1160,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Small Cockpit-Mounted Single Monitor Stand - 800mm / 31.5" Wide
-    description: Trak Racer Small Cockpit-Mounted Single Monitor Stand - 800mm / 31.5" Wide. cockpit
-      frame. listed on Trakracer. Trak Racer Integrated Single Monitor Stand - For Monitors and TVs
-      up to 80" Centre monitor profile is 800mm / 31.5". Upgrade later to Triple Monitor Setup up to
-      22-34" in size (...
+    description: Trak Racer Small Cockpit-Mounted Single Monitor Stand - 800mm / 31.5" Wide.
+      cockpit frame. listed on Trakracer. Trak Racer Integrated Single Monitor Stand - For
+      Monitors and TVs up to 80" Centre monitor profile is 800mm / 31.5". Upgrade later to
+      Triple Monitor Setup up to 22-34" in size (...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1155,10 +1179,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Universal Integrated Monitor Mounts for Aluminium Extrusion Mounting
-    description: "Trak Racer Universal Integrated Monitor Mounts for Aluminium Extrusion Mounting. rig
-      mounts. listed on Trakracer. Trak Racer Black Anodized Aluminium Sim-Rig Integrated Mounts
-      Trak Racer is the Official Simulator Supplier of Alpine F1 Team and Partner of Airbus
-      Aircraft. Warranty: Lifetime..."
+    description: "Trak Racer Universal Integrated Monitor Mounts for Aluminium Extrusion
+      Mounting. rig mounts. listed on Trakracer. Trak Racer Black Anodized Aluminium Sim-Rig
+      Integrated Mounts Trak Racer is the Official Simulator Supplier of Alpine F1 Team and
+      Partner of Airbus Aircraft. Warranty: Lifetime..."
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1174,9 +1198,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: TV Monitor Universal Bracket Mounting Kit
-    description: Trak Racer TV Monitor Universal Bracket Mounting Kit. rig mounts. listed on Trakracer.
-      Single TR8020 VESA TV/monitor universal bracket mounting kit for flat and curved monitors.
-      TR8020 VESA TV/monitor universal bracket mounting kit with angle adjustment and VESA m...
+    description: Trak Racer TV Monitor Universal Bracket Mounting Kit. rig mounts. listed on
+      Trakracer. Single TR8020 VESA TV/monitor universal bracket mounting kit for flat and
+      curved monitors. TR8020 VESA TV/monitor universal bracket mounting kit with angle
+      adjustment and VESA m...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1192,7 +1217,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Quad monitor upgrade
-    description: VNM Quad monitor upgrade. cockpit frame. listed on Vnmsimulation. Official shop listing.
+    description: VNM Quad monitor upgrade. cockpit frame. listed on Vnmsimulation. Official shop
+      listing.
     manufacturer: VNM
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1208,8 +1234,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: RIG-Mounted Single Monitor stand 4080
-    description: VNM RIG-Mounted Single Monitor stand 4080. cockpit frame. listed on Vnmsimulation.
-      Official shop listing.
+    description: VNM RIG-Mounted Single Monitor stand 4080. cockpit frame. listed on
+      Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1225,8 +1251,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: RIG-mounted Triple Monitor stand
-    description: VNM RIG-mounted Triple Monitor stand. cockpit frame. listed on Vnmsimulation. Official
-      shop listing.
+    description: VNM RIG-mounted Triple Monitor stand. cockpit frame. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1259,9 +1285,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Initium Monitor Mount
-    description: Asetek Initium Monitor Mount. rig mounts. listed on Asetek. Perfect your racing set-up
-      with the Initium Monitor Mount - the perfect way to bring the action to you. Rigid steel
-      construction – No flex or wobble during intense races. Bring...
+    description: Asetek Initium Monitor Mount. rig mounts. listed on Asetek. Perfect your racing
+      set-up with the Initium Monitor Mount - the perfect way to bring the action to you.
+      Rigid steel construction – No flex or wobble during intense races. Bring...
     manufacturer: Asetek
     component_category: display-systems
     component_sub_category: monitor-mount
@@ -1275,10 +1301,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Conspit CSD SimHub Dashboard – 5″ IPS Race Display with RGB Alerts
-    description: Trak Racer Conspit CSD SimHub Dashboard – 5″ IPS Race Display with RGB Alerts. ffb
-      controller. listed on Trakracer. The Conspit CSD SimHub Dashboard brings race-grade
-      instrumentation to your sim racing cockpit with precision, clarity, and immersive feedback.
-      This dashboard features a 5-inch I...
+    description: Trak Racer Conspit CSD SimHub Dashboard – 5″ IPS Race Display with RGB Alerts.
+      ffb controller. listed on Trakracer. The Conspit CSD SimHub Dashboard brings
+      race-grade instrumentation to your sim racing cockpit with precision, clarity, and
+      immersive feedback. This dashboard features a 5-inch I...
     manufacturer: Trak Racer
     component_category: display-systems
     component_sub_category: dashboard-display
@@ -1310,9 +1336,9 @@ commercial:
     license: Commercial
 opensource:
   - project_name: MapMap
-    description: MapMap. projection mapping software. Mature but low/reduced activity; public repo has
-      10 tags and many open issues. Free/open-source video mapping software for Windows, macOS, and
-      Linux.
+    description: MapMap. projection mapping software. Mature but low/reduced activity; public
+      repo has 10 tags and many open issues. Free/open-source video mapping software for
+      Windows, macOS, and Linux.
     maker: MapMap team
     component_category: display-systems
     component_sub_category: projection-mapping
@@ -1320,9 +1346,10 @@ opensource:
     project_url: https://github.com/mapmapteam/mapmap
     picture_url: https://mapmapteam.github.io/documentation_images/toggle_display_controls.png
   - project_name: ofxPiMapper
-    description: ofxPiMapper. embedded projection mapping. Mature openFrameworks add-on; active enough
-      to have recent GitHub Actions notes, but Raspberry Pi disk image support lags newer Pi
-      hardware. Projection mapping add-on for openFrameworks, designed to run on Raspberry Pi.
+    description: ofxPiMapper. embedded projection mapping. Mature openFrameworks add-on; active
+      enough to have recent GitHub Actions notes, but Raspberry Pi disk image support lags
+      newer Pi hardware. Projection mapping add-on for openFrameworks, designed to run on
+      Raspberry Pi.
     maker:
       - Krisjanis Rijnieks
       - kr15h
@@ -1332,9 +1359,9 @@ opensource:
     project_url: https://github.com/kr15h/ofxPiMapper
     picture_url: https://ofxpimapper.com/assets/images/ofxpimapper-ogimage.jpg
   - project_name: ofxProjectorBlend
-    description: ofxProjectorBlend. projector edge blending library. Older openFrameworks add-on; no
-      published releases and limited recent maintenance. openFrameworks add-on that splits an
-      application into two or more projector outputs.
+    description: ofxProjectorBlend. projector edge blending library. Older openFrameworks
+      add-on; no published releases and limited recent maintenance. openFrameworks add-on
+      that splits an application into two or more projector outputs.
     maker:
       - Flightphase
       - James George
@@ -1345,9 +1372,9 @@ opensource:
     project_url: https://github.com/Flightphase/ofxProjectorBlend
     picture_url: https://raw.githubusercontent.com/Flightphase/ofxProjectorBlend/master/04_blendClown/bin/data/blendClown.png
   - project_name: OpenGC
-    description: OpenGC. glass cockpit instrument display software. Dormant; home page last updated
-      April 24, 2006. Multi-platform, multi-simulator C++ toolkit for simulated flightdeck glass
-      cockpit displays.
+    description: OpenGC. glass cockpit instrument display software. Dormant; home page last
+      updated April 24, 2006. Multi-platform, multi-simulator C++ toolkit for simulated
+      flightdeck glass cockpit displays.
     maker:
       - Damion Shelton
       - OpenGC project
@@ -1357,9 +1384,10 @@ opensource:
     project_url: https://sourceforge.net/projects/opengc/
     picture_url: https://a.fsdn.com/con/img/hi-text.png
   - project_name: ProjectionMapping
-    description: pkurth ProjectionMapping. large-scale projection mapping system. Research/prototype
-      code; no GitHub releases, 1 contributor, Windows/D3D12 focused. Open-source projection mapping
-      system for many projectors illuminating one or more tracked target objects.
+    description: pkurth ProjectionMapping. large-scale projection mapping system.
+      Research/prototype code; no GitHub releases, 1 contributor, Windows/D3D12 focused.
+      Open-source projection mapping system for many projectors illuminating one or more
+      tracked target objects.
     maker: Philipp Kurth
     component_category: display-systems
     component_sub_category: projection-mapping
@@ -1367,9 +1395,9 @@ opensource:
     project_url: https://github.com/pkurth/ProjectionMapping
     picture_url: https://raw.githubusercontent.com/pkurth/ProjectionMapping/master/assets/samples/teaser.jpg
   - project_name: Splash
-    description: Splash. projection warping and blending software. Active-ish open-source project;
-      GitHub mirror says development moved to GitLab; latest captured release 0.10.8 from 2024.
-      Modular multi-projector video-mapping software.
+    description: Splash. projection warping and blending software. Active-ish open-source
+      project; GitHub mirror says development moved to GitLab; latest captured release
+      0.10.8 from 2024. Modular multi-projector video-mapping software.
     maker:
       - Emmanuel Durand
       - SAT Metalab

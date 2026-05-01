@@ -3,6 +3,7 @@
  * Re-exports unit conversion and profile constants for convenience.
  */
 
+import { Euler, Vector3 } from 'three';
 import type { CutListProfileType, CutListRow } from '../types';
 import {
   BASE_BEAM_HEIGHT_MM as BASE_BEAM_HEIGHT_MM_VALUE,
@@ -89,6 +90,28 @@ export function getAxisIndex(axis: BeamAxis) {
   return axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
 }
 
+function getAxisUnitVector(axis: BeamAxis) {
+  if (axis === 'x') {
+    return new Vector3(1, 0, 0);
+  }
+
+  if (axis === 'y') {
+    return new Vector3(0, 1, 0);
+  }
+
+  return new Vector3(0, 0, 1);
+}
+
+function getRotatedAxisUnitVector(axis: BeamAxis, rotation: MeshSpec['rotation']) {
+  const vector = getAxisUnitVector(axis);
+
+  if (!rotation) {
+    return vector;
+  }
+
+  return vector.applyEuler(new Euler(...rotation));
+}
+
 /** Get the dominant axis of a mesh (uses explicit axis if set). */
 export function getMeshAxis(mesh: MeshSpec): BeamAxis {
   return mesh.axis ?? getBeamAxis(mesh.size);
@@ -127,12 +150,15 @@ export function getAdjustedBeamPosition(mesh: MeshSpec, includeEndCaps: boolean)
   }
 
   const axis = getMeshAxis(mesh);
-  const axisIndex = getAxisIndex(axis);
+  const axisVector = getRotatedAxisUnitVector(axis, mesh.rotation);
   const nextPosition = [...mesh.position] as [number, number, number];
   const negativeOffset = mesh.openEnds.includes('negative') ? ENDCAP_THICKNESS / 2 : 0;
   const positiveOffset = mesh.openEnds.includes('positive') ? ENDCAP_THICKNESS / 2 : 0;
+  const offset = negativeOffset - positiveOffset;
 
-  nextPosition[axisIndex] += negativeOffset - positiveOffset;
+  nextPosition[0] += axisVector.x * offset;
+  nextPosition[1] += axisVector.y * offset;
+  nextPosition[2] += axisVector.z * offset;
   return nextPosition;
 }
 
@@ -181,15 +207,19 @@ export function createEndCapMeshes(mesh: MeshSpec): MeshSpec[] {
 
   const axis = getMeshAxis(mesh);
   const axisIndex = getAxisIndex(axis);
+  const axisVector = getRotatedAxisUnitVector(axis, mesh.rotation);
   const halfLength = getAxisLength(mesh.size, axis) / 2;
 
   return mesh.openEnds.map((end) => {
     const sign = end === 'positive' ? 1 : -1;
     const position = [...mesh.position] as [number, number, number];
     const size = [...mesh.size] as [number, number, number];
+    const offset = sign * (halfLength - ENDCAP_THICKNESS / 2);
 
     size[axisIndex] = ENDCAP_THICKNESS;
-    position[axisIndex] += sign * (halfLength - ENDCAP_THICKNESS / 2);
+    position[0] += axisVector.x * offset;
+    position[1] += axisVector.y * offset;
+    position[2] += axisVector.z * offset;
 
     return {
       id: `${mesh.id}-endcap-${end}`,

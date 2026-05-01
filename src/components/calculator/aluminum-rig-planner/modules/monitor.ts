@@ -3,7 +3,12 @@
  */
 
 import type { PlannerPostureReport } from '../posture/posture-report';
-import type { PlannerMonitorCurvature, PlannerPosturePreset, PlannerPostureSettings } from '../types';
+import type {
+  PlannerMonitorCurvature,
+  PlannerMonitorVesaType,
+  PlannerPosturePreset,
+  PlannerPostureSettings,
+} from '../types';
 import {
   ASPECT_RATIO_PARTS,
   CURVATURE_RADIUS_MM,
@@ -45,6 +50,11 @@ export type TripleScreenCurveCenterPoints = {
   right: [number, number, number];
 };
 
+const MONITOR_BOTTOM_VESA_HOLE_DISTANCE_RATIO = 0.2;
+const MONITOR_VESA_HOLE_COLOR = '#2563eb';
+const MONITOR_VESA_HOLE_RADIUS_MM = 6;
+const MONITOR_VESA_HOLE_DEPTH_MM = 8;
+
 /** Compute monitor width/height/thickness from screen size and aspect ratio. */
 export function getMonitorDimensionsMm(
   settings: Pick<PlannerPostureSettings<PlannerPosturePreset>, 'monitorAspectRatio' | 'monitorSizeIn'>
@@ -58,6 +68,18 @@ export function getMonitorDimensionsMm(
     heightMm: (diagonalMm * heightRatio) / diagonalRatio,
     thicknessMm: MONITOR_PLATE_THICKNESS_MM,
   };
+}
+
+export function getMonitorVesaDimensionsMm(vesaType: PlannerMonitorVesaType) {
+  const [widthMm, heightMm] = vesaType.split('x').map(Number);
+
+  return { widthMm, heightMm };
+}
+
+export function getDefaultMonitorBottomVesaHoleDistanceMm(
+  settings: Pick<PlannerPostureSettings<PlannerPosturePreset>, 'monitorAspectRatio' | 'monitorSizeIn'>
+) {
+  return Math.round(getMonitorDimensionsMm(settings).heightMm * MONITOR_BOTTOM_VESA_HOLE_DISTANCE_RATIO);
 }
 
 /** Resolve the curvature radius in mm, clamped so the arc fits the monitor width. */
@@ -471,6 +493,57 @@ function createMonitorPanelMeshes(
   ];
 }
 
+function getMonitorLocalPointMm(origin: [number, number, number], yawRadians: number, localXMm: number, localYMm = 0) {
+  const cosYaw = Math.cos(yawRadians);
+  const sinYaw = Math.sin(yawRadians);
+
+  return {
+    xMm: origin[0] / 0.001 + localXMm * cosYaw - localYMm * sinYaw,
+    yMm: origin[1] / 0.001 + localXMm * sinYaw + localYMm * cosYaw,
+  };
+}
+
+function createMonitorVesaHoleMeshes(
+  idPrefix: string,
+  origin: [number, number, number],
+  yawRadians: number,
+  settings: PlannerPostureSettings<PlannerPosturePreset>
+): MeshSpec[] {
+  const dimensions = getMonitorDimensionsMm(settings);
+  const vesaDimensions = getMonitorVesaDimensionsMm(settings.monitorVesaType);
+  const monitorBottomHeightMm = origin[2] / 0.001 - dimensions.heightMm / 2;
+  const bottomVesaHoleHeightMm = monitorBottomHeightMm + settings.monitorBottomVesaHoleDistanceMm;
+  const topVesaHoleHeightMm = bottomVesaHoleHeightMm + vesaDimensions.heightMm;
+  const localXMm = dimensions.thicknessMm / 2 + MONITOR_VESA_HOLE_DEPTH_MM / 2;
+  const yPositions = [-vesaDimensions.widthMm / 2, vesaDimensions.widthMm / 2];
+  const zPositions = [bottomVesaHoleHeightMm, topVesaHoleHeightMm];
+
+  return yPositions.flatMap((yMm) =>
+    zPositions.map((zMm) => {
+      const position = getMonitorLocalPointMm(origin, yawRadians, localXMm, yMm);
+
+      return {
+        id: `${idPrefix}-vesa-hole-${yMm}-${zMm}`,
+        shape: 'cylinder' as const,
+        size: [
+          mm(MONITOR_VESA_HOLE_DEPTH_MM),
+          mm(MONITOR_VESA_HOLE_RADIUS_MM * 2),
+          mm(MONITOR_VESA_HOLE_RADIUS_MM * 2),
+        ] as [number, number, number],
+        position: [mm(position.xMm), mm(position.yMm), mm(zMm)] as [number, number, number],
+        rotation: [0, 0, yawRadians + Math.PI / 2] as [number, number, number],
+        cylinderRadiusTop: mm(MONITOR_VESA_HOLE_RADIUS_MM),
+        cylinderRadiusBottom: mm(MONITOR_VESA_HOLE_RADIUS_MM),
+        cylinderRadialSegments: 20,
+        materialKind: 'metal' as const,
+        color: MONITOR_VESA_HOLE_COLOR,
+        metalness: MONITOR_MATERIAL.metalness,
+        roughness: MONITOR_MATERIAL.roughness,
+      };
+    })
+  );
+}
+
 /** Build center monitor mesh specs – flat or curved arc segments depending on curvature. */
 function createCenterMonitorModule(
   report: PlannerPostureReport,
@@ -480,7 +553,10 @@ function createCenterMonitorModule(
     return [];
   }
 
-  return createMonitorPanelMeshes('monitor-plate', report.monitorDebug.position, 0, settings);
+  return [
+    ...createMonitorPanelMeshes('monitor-plate', report.monitorDebug.position, 0, settings),
+    ...createMonitorVesaHoleMeshes('monitor-plate', report.monitorDebug.position, 0, settings),
+  ];
 }
 
 /** Build side monitor mesh specs for a triple screen setup. */
@@ -492,7 +568,14 @@ function createTripleScreenSideMeshes(
 
   return [
     ...createMonitorPanelMeshes('monitor-plate-left', sidePanels.left.position, sidePanels.left.yawRadians, settings),
+    ...createMonitorVesaHoleMeshes('monitor-plate-left', sidePanels.left.position, sidePanels.left.yawRadians, settings),
     ...createMonitorPanelMeshes(
+      'monitor-plate-right',
+      sidePanels.right.position,
+      sidePanels.right.yawRadians,
+      settings
+    ),
+    ...createMonitorVesaHoleMeshes(
       'monitor-plate-right',
       sidePanels.right.position,
       sidePanels.right.yawRadians,

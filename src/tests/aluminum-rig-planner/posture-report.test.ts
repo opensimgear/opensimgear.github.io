@@ -225,6 +225,27 @@ describe('aluminum rig planner posture report', () => {
     );
   });
 
+  it('keeps eye-to-monitor math aligned when base feet raise the cockpit', () => {
+    const input = {
+      ...DEFAULT_PLANNER_INPUT,
+      baseFeetHeightMm: 50,
+    };
+    const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
+    const monitorHeightFromBaseMm = skeleton.joints.eyeCenter[2] * 1000 - BASE_BEAM_HEIGHT_MM;
+    const postureSettings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorHeightFromBaseMm,
+    };
+    const report = createPlannerPostureReport(input, postureSettings, modelMetrics);
+    const monitorMetric = report.metrics.find((metric) => metric.key === 'eyeToMonitorMidpoint');
+
+    expect(report.monitorDebug?.position[2]).toBeCloseTo(
+      (input.baseFeetHeightMm + BASE_BEAM_HEIGHT_MM + monitorHeightFromBaseMm) * 0.001,
+      6
+    );
+    expect(monitorMetric?.valueMm).toBeCloseTo(0, 6);
+  });
+
   it('places curved monitor apex at the configured eye distance', () => {
     const postureSettings = {
       ...DEFAULT_PLANNER_POSTURE_SETTINGS,

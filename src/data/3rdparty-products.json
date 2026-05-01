@@ -31,9 +31,9 @@
     }
   },
   "summary": {
-    "total_records": 1425,
+    "total_records": 1426,
     "by_kind": {
-      "commercial": 1337,
+      "commercial": 1338,
       "opensource": 88
     },
     "by_component_category": {
@@ -46,7 +46,7 @@
       "joysticks": 114,
       "motion-platforms": 94,
       "pedals": 158,
-      "rigs-and-cockpits": 213,
+      "rigs-and-cockpits": 214,
       "rudder-pedals": 25,
       "seats-and-ergonomics": 91,
       "shifters": 59,
@@ -3124,16 +3124,16 @@
       "component_sub_category": "ddu-display",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/grid-ddu5-sim-racing-dashboard-display-unit",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/grid-ddu5-sim-racing-dashboard-display-unit",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -3148,16 +3148,16 @@
       "component_sub_category": "dashboard-display",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/porsche-911-gt3-cup-dashboard-display-unit",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/porsche-911-gt3-cup-dashboard-display-unit",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -4096,16 +4096,16 @@
       "component_sub_category": "monitor-mount",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/universal-vesa",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/universal-vesa",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -7541,7 +7541,7 @@
       "component_sub_category": "joystick-mount",
       "license": "Commercial",
       "product_url": "https://www.monster.tech/en/product/joystick-hotas-table-mount/",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Monstertech",
@@ -7554,12 +7554,12 @@
         },
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/flight-sim-joystick-mount",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -11800,16 +11800,16 @@
       "component_sub_category": "pedal-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/pedal-heel-rest-sim-racing-accessories",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/pedal-heel-rest-sim-racing-accessories",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         },
         {
           "name": "Heusinkveld",
@@ -11833,16 +11833,16 @@
       "component_sub_category": "pedal-upgrade-kit",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/xp1-pedals-black-conversion-kit",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/xp1-pedals-black-conversion-kit",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -11857,16 +11857,16 @@
       "component_sub_category": "pedal-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/xp1-pedals-foot-support",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/xp1-pedals-foot-support",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -14815,16 +14815,16 @@
       "component_sub_category": "aluminum-cockpit",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/en-de/products/gt1-evo-sim-racing-cockpit",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim-Lab EU",
           "region": "EU",
-          "price": 372.73,
-          "currency": "EUR",
+          "price": 379,
+          "currency": "USD",
           "status": "available",
           "url": "https://sim-lab.eu/en-de/products/gt1-evo-sim-racing-cockpit",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -14950,16 +14950,16 @@
       "component_sub_category": "aluminum-cockpit",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/en-de/products/p1x-ultimate-simracing-cockpit",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim-Lab EU",
           "region": "EU",
-          "price": 884.15,
-          "currency": "EUR",
+          "price": 899,
+          "currency": "USD",
           "status": "available",
           "url": "https://sim-lab.eu/en-de/products/p1x-ultimate-simracing-cockpit",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -16438,7 +16438,7 @@
       "component_sub_category": "formula-cockpit",
       "license": "Commercial",
       "product_url": "https://www.sparco-official.com/de/gp-rig-i-gp-pro-fanatec-sim-kit-p310-open-g03305-1.html",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sparco Official DE",
@@ -16456,7 +16456,7 @@
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sparco-grid-q-sim-racing",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -16807,16 +16807,16 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/corner-bracket-40-mm-slot-8",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/corner-bracket-40-mm-slot-8",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -16879,16 +16879,16 @@
       "component_sub_category": "cockpit-frame",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/gt1-pro-base-cockpit",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": 649,
           "currency": "USD",
           "status": "available",
           "url": "https://sim-lab.eu/products/gt1-pro-base-cockpit",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -16903,16 +16903,16 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/keyboard-tray-sim-racing-accessories",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/keyboard-tray-sim-racing-accessories",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         },
         {
           "name": "Fanatec",
@@ -16960,16 +16960,16 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/p1x-pro-front-wheel-mount",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/p1x-pro-front-wheel-mount",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -17032,16 +17032,16 @@
       "component_sub_category": "cockpit-frame",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit-int",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
           "region": "Unknown",
-          "price": 899,
+          "price": 789,
           "currency": "USD",
           "status": "available",
           "url": "https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit-int",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -17056,16 +17056,16 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/p1x-pro-wheeldeck-mount",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/p1x-pro-wheeldeck-mount",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -17248,16 +17248,16 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/sim-shelf-universal",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sim-shelf-universal",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -17296,16 +17296,16 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/sq1-track-pack",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sq1-track-pack",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -17320,16 +17320,16 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/flight-sim-swivel-mounting-point",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/flight-sim-swivel-mounting-point",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -19311,8 +19311,8 @@
         {
           "name": "Sim-Lab EU",
           "region": "EU",
-          "price": 638.27,
-          "currency": "EUR",
+          "price": 379,
+          "currency": "USD",
           "status": "available",
           "url": "https://sim-lab.eu/en-de/products/gt1-pro-sim-racing-cockpit",
           "last_updated": "2026-05-01"
@@ -19637,7 +19637,7 @@
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": 649,
           "currency": "USD",
           "status": "available",
@@ -19661,7 +19661,7 @@
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
@@ -19708,6 +19708,30 @@
           "currency": "USD",
           "status": "available",
           "url": "https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9010010-ww/xeneon-edge-mounting-bracket-set",
+          "last_updated": "2026-05-01"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gt1-pro-sim-racing-cockpit-2",
+      "kind": "commercial",
+      "slug": "gt1-pro-sim-racing-cockpit-2",
+      "product_name": "Pro Sim Racing Cockpit",
+      "description": "GT1 Pro Sim Racing Cockpit. cockpit frame. listed on Sim Lab. The GT1 Pro redefines accessible high-end sim racing with its rigid design, effortless assembly, and flex-free mounting, complete with side mounts for shifters and accessories....",
+      "manufacturer": "GT1",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/gt1-pro-sim-racing-cockpit",
+      "last_updated": "2026-05-01",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "EU",
+          "price": 649,
+          "currency": "USD",
+          "status": "available",
+          "url": "https://sim-lab.eu/products/gt1-pro-sim-racing-cockpit",
           "last_updated": "2026-05-01"
         }
       ]
@@ -20505,16 +20529,16 @@
       "component_sub_category": "seat-bracket",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/bucket-seat-bracket-set-sim-racing",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/bucket-seat-bracket-set-sim-racing",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -20601,16 +20625,16 @@
       "component_sub_category": "seat-bracket",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/sparco-evo-l-qrt-sim-racing-seat",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sparco-evo-l-qrt-sim-racing-seat",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -20625,16 +20649,16 @@
       "component_sub_category": "seat-bracket",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/sparco-pro-2000-qrt-sim-racing",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sparco-pro-2000-qrt-sim-racing",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -20649,16 +20673,16 @@
       "component_sub_category": "seat-bracket",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/sparco-r100-sim-racing-seat",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sparco-r100-sim-racing-seat",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -20673,16 +20697,16 @@
       "component_sub_category": "seat-bracket",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/sparco-r333-sim-racing-seat",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sparco-r333-sim-racing-seat",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -20697,16 +20721,16 @@
       "component_sub_category": "seat-bracket",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/sparco-rev-qrt-sim-racing-seat",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sparco-rev-qrt-sim-racing-seat",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -22002,7 +22026,7 @@
       "component_sub_category": "racing-seat",
       "license": "Commercial",
       "product_url": "https://www.sparco-official.com/de/sedile-evo-xl-qrt-gaming.html",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sparco Official DE",
@@ -22015,12 +22039,12 @@
         },
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sparco-evo-xl-qrt-sim-racing-seat",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -23267,16 +23291,16 @@
       "component_sub_category": "sequential-shifter",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/fanatec-clubsport-shifter-tilt-adjustment-sim-racing-accessories",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/fanatec-clubsport-shifter-tilt-adjustment-sim-racing-accessories",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },
@@ -26569,16 +26593,16 @@
       "component_sub_category": "gt-wheel",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/porsche-911-rsr-sim-racing-steering-wheel",
-      "last_updated": null,
+      "last_updated": "2026-05-01",
       "shops": [
         {
           "name": "Sim Lab",
-          "region": "Unknown",
+          "region": "EU",
           "price": "Unknown",
           "currency": "USD",
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/porsche-911-rsr-sim-racing-steering-wheel",
-          "last_updated": null
+          "last_updated": "2026-05-01"
         }
       ]
     },

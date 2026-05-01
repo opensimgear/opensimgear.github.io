@@ -1,6 +1,7 @@
 import type {
   PlannerMonitorAspectRatio,
   PlannerMonitorCurvature,
+  PlannerMonitorVesaType,
   PlannerPosturePreset,
   PlannerPostureSettings,
 } from '../types';
@@ -16,7 +17,7 @@ export const PLANNER_POSTURE_LIMITS = {
   ratioStep: 0.001,
   lengthStepMm: 1,
   monitorSizeMinIn: 24,
-  monitorSizeMaxIn: 100,
+  monitorSizeMaxIn: 75,
   monitorSizeStepIn: 1,
   monitorDistanceFromEyesMinMm: 250,
   monitorDistanceFromEyesMaxMm: 2000,
@@ -28,6 +29,16 @@ export const PLANNER_POSTURE_LIMITS = {
   monitorTargetFovMinDeg: 35,
   monitorTargetFovMaxDeg: 75,
   monitorTargetFovStepDeg: 0.1,
+  monitorBottomVesaHoleDistanceMinMm: 0,
+  monitorBottomVesaHoleDistanceMaxMm: 500,
+  monitorBottomVesaHolesToCrossBeamTopMinMm: -100,
+  monitorBottomVesaHolesToCrossBeamTopMaxMm: 200,
+  monitorStandLegExtraMarginMinMm: 40,
+  monitorStandLegExtraMarginMaxMm: 300,
+  monitorStandFootLengthMinMm: 0,
+  monitorStandFootLengthMaxMm: 2000,
+  monitorStandFeetHeightMinMm: 0,
+  monitorStandFeetHeightMaxMm: 120,
 } as const;
 
 export const POSTURE_PRESET_OPTIONS = [
@@ -70,6 +81,16 @@ export const MONITOR_ARC_CENTER_AT_EYES_CURVATURE_OPTIONS = [
 
 export const MONITOR_ARC_CENTER_AT_EYES_FALLBACK_CURVATURE: PlannerMonitorCurvature = '1500r';
 
+export const MONITOR_VESA_OPTIONS = [
+  { text: '75 x 75', value: '75x75' },
+  { text: '100 x 100', value: '100x100' },
+  { text: '200 x 100', value: '200x100' },
+  { text: '200 x 200', value: '200x200' },
+  { text: '300 x 200', value: '300x200' },
+  { text: '400 x 200', value: '400x200' },
+  { text: '400 x 400', value: '400x400' },
+] as const satisfies ReadonlyArray<{ text: string; value: PlannerMonitorVesaType }>;
+
 export function isMonitorArcCenterAtEyesCurvature(curvature: PlannerMonitorCurvature) {
   return MONITOR_ARC_CENTER_AT_EYES_CURVATURE_OPTIONS.some((option) => option.value === curvature);
 }
@@ -84,6 +105,12 @@ export const DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM = 900;
 export const DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM = 950;
 export const DEFAULT_MONITOR_TRIPLE_SCREEN = false;
 export const DEFAULT_MONITOR_ARC_CENTER_AT_EYES = false;
+export const DEFAULT_MONITOR_VESA_TYPE: PlannerMonitorVesaType = '100x100';
+export const DEFAULT_MONITOR_BOTTOM_VESA_HOLE_DISTANCE_MM = 86;
+export const DEFAULT_MONITOR_BOTTOM_VESA_HOLES_TO_CROSS_BEAM_TOP_MM = 100;
+export const DEFAULT_MONITOR_STAND_LEG_EXTRA_MARGIN_MM = 80;
+export const DEFAULT_MONITOR_STAND_FOOT_LENGTH_MM = 500;
+export const DEFAULT_MONITOR_STAND_FEET_HEIGHT_MM = 0;
 export const LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;
 
 export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
@@ -102,4 +129,10 @@ export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   monitorHeightFromBaseMm: DEFAULT_MONITOR_HEIGHT_FROM_BASE_MM,
   monitorTripleScreen: DEFAULT_MONITOR_TRIPLE_SCREEN,
   monitorArcCenterAtEyes: DEFAULT_MONITOR_ARC_CENTER_AT_EYES,
+  monitorVesaType: DEFAULT_MONITOR_VESA_TYPE,
+  monitorBottomVesaHoleDistanceMm: DEFAULT_MONITOR_BOTTOM_VESA_HOLE_DISTANCE_MM,
+  monitorBottomVesaHolesToCrossBeamTopMm: DEFAULT_MONITOR_BOTTOM_VESA_HOLES_TO_CROSS_BEAM_TOP_MM,
+  monitorStandLegExtraMarginMm: DEFAULT_MONITOR_STAND_LEG_EXTRA_MARGIN_MM,
+  monitorStandFootLengthMm: DEFAULT_MONITOR_STAND_FOOT_LENGTH_MM,
+  monitorStandFeetHeightMm: DEFAULT_MONITOR_STAND_FEET_HEIGHT_MM,
 };

@@ -94,6 +94,10 @@ function getFovLabelPosition(eyeCenter: PosturePoint, left: PosturePoint, right:
   ];
 }
 
+function getWorldEyeCenter(input: PlannerInput, eyeCenter: PosturePoint): PosturePoint {
+  return [eyeCenter[0], eyeCenter[1], eyeCenter[2] + input.baseFeetHeightMm * 0.001];
+}
+
 export function createPlannerFovOverlay(
   input: PlannerInput,
   postureSettings: PlannerPostureSettings<PlannerPosturePreset>,
@@ -114,21 +118,22 @@ export function createPlannerFovOverlay(
     },
     postureModelMetrics
   );
+  const eyeCenter = getWorldEyeCenter(input, skeleton.joints.eyeCenter);
   const screenEdges = getMonitorScreenEdgePoints(monitorDebug.position, postureSettings);
-  const points: PosturePoint[] = [skeleton.joints.eyeCenter, screenEdges.left, screenEdges.right];
+  const points: PosturePoint[] = [eyeCenter, screenEdges.left, screenEdges.right];
   const hasCurvedMonitor = postureSettings.monitorCurvature !== 'disabled';
   const tripleScreenData = postureSettings.monitorTripleScreen
     ? getTripleScreenEdgePoints(monitorDebug.position, postureSettings)
     : null;
   const totalLeftEdge = tripleScreenData?.leftOuter ?? screenEdges.left;
   const totalRightEdge = tripleScreenData?.rightOuter ?? screenEdges.right;
-  const fovPerMonitorDeg = getTopViewFovDeg(skeleton.joints.eyeCenter, screenEdges.left, screenEdges.right);
-  const totalFovDeg = getTopViewFovDeg(skeleton.joints.eyeCenter, totalLeftEdge, totalRightEdge);
-  const eyeDistanceToPanelMm = Math.round(Math.max(0, monitorDebug.position[0] - skeleton.joints.eyeCenter[0]) * 1000);
+  const fovPerMonitorDeg = getTopViewFovDeg(eyeCenter, screenEdges.left, screenEdges.right);
+  const totalFovDeg = getTopViewFovDeg(eyeCenter, totalLeftEdge, totalRightEdge);
+  const eyeDistanceToPanelMm = Math.round(Math.max(0, monitorDebug.position[0] - eyeCenter[0]) * 1000);
   const fovLabels = [
     {
       id: 'center-monitor-fov',
-      position: getFovLabelPosition(skeleton.joints.eyeCenter, screenEdges.left, screenEdges.right),
+      position: getFovLabelPosition(eyeCenter, screenEdges.left, screenEdges.right),
       valueDeg: fovPerMonitorDeg,
     },
   ];
@@ -143,21 +148,13 @@ export function createPlannerFovOverlay(
     fovLabels.push(
       {
         id: 'left-monitor-fov',
-        position: getFovLabelPosition(
-          skeleton.joints.eyeCenter,
-          tripleScreenData.leftOuter,
-          tripleScreenData.leftInner
-        ),
-        valueDeg: getTopViewFovDeg(skeleton.joints.eyeCenter, tripleScreenData.leftOuter, tripleScreenData.leftInner),
+        position: getFovLabelPosition(eyeCenter, tripleScreenData.leftOuter, tripleScreenData.leftInner),
+        valueDeg: getTopViewFovDeg(eyeCenter, tripleScreenData.leftOuter, tripleScreenData.leftInner),
       },
       {
         id: 'right-monitor-fov',
-        position: getFovLabelPosition(
-          skeleton.joints.eyeCenter,
-          tripleScreenData.rightInner,
-          tripleScreenData.rightOuter
-        ),
-        valueDeg: getTopViewFovDeg(skeleton.joints.eyeCenter, tripleScreenData.rightInner, tripleScreenData.rightOuter),
+        position: getFovLabelPosition(eyeCenter, tripleScreenData.rightInner, tripleScreenData.rightOuter),
+        valueDeg: getTopViewFovDeg(eyeCenter, tripleScreenData.rightInner, tripleScreenData.rightOuter),
       }
     );
   }
@@ -166,7 +163,7 @@ export function createPlannerFovOverlay(
 
   return {
     bounds: getBounds(points),
-    eyeCenter: skeleton.joints.eyeCenter,
+    eyeCenter,
     fovLabels,
     hasCurvedMonitor,
     leftScreenEdge: screenEdges.left,

@@ -160,14 +160,23 @@ function getWheelCenter(input: PlannerInput): PosturePoint {
   ];
 }
 
+function getBaseFeetHeightM(input: PlannerInput) {
+  return input.baseFeetHeightMm * MM_TO_METERS;
+}
+
+function getWorldPointFromBase(input: PlannerInput, point: PosturePoint): PosturePoint {
+  return [point[0], point[1], point[2] + getBaseFeetHeightM(input)];
+}
+
 function getMonitorMidpoint(
+  input: PlannerInput,
   referencePoint: PosturePoint,
   settings: PlannerPostureSettings<PlannerPosturePreset>
 ): PosturePoint {
   return [
     referencePoint[0] + settings.monitorDistanceFromEyesMm * MM_TO_METERS,
     0,
-    (BASE_BEAM_HEIGHT_MM + settings.monitorHeightFromBaseMm) * MM_TO_METERS,
+    (input.baseFeetHeightMm + BASE_BEAM_HEIGHT_MM + settings.monitorHeightFromBaseMm) * MM_TO_METERS,
   ];
 }
 
@@ -217,9 +226,12 @@ export function createPlannerPostureReport(
   );
   const ranges = getSharedPlannerPostureTargetRanges(postureSettings.preset, postureSettings.targetRangesByPreset);
   const eyeCenter = skeleton.joints.eyeCenter;
+  const worldEyeCenter = getWorldPointFromBase(input, eyeCenter);
   const includeMonitor = options.includeMonitor ?? true;
-  const wheelTopZ = includeMonitor ? getWheelCenter(input)[2] + (input.wheelDiameterMm * MM_TO_METERS) / 2 : null;
-  const monitorMidpoint = includeMonitor ? getMonitorMidpoint(eyeCenter, postureSettings) : null;
+  const wheelTopZ = includeMonitor
+    ? getWorldPointFromBase(input, getWheelCenter(input))[2] + (input.wheelDiameterMm * MM_TO_METERS) / 2
+    : null;
+  const monitorMidpoint = includeMonitor ? getMonitorMidpoint(input, worldEyeCenter, postureSettings) : null;
   const metrics = [
     createMetric(
       'wristBend',
@@ -320,12 +332,18 @@ export function createPlannerPostureReport(
     ),
     ...(wheelTopZ !== null && monitorMidpoint
       ? [
-          createMetric('eyeToWheelTop', 'Eye to Wheel Top', 'mm', (eyeCenter[2] - wheelTopZ) / MM_TO_METERS, ranges),
+          createMetric(
+            'eyeToWheelTop',
+            'Eye to Wheel Top',
+            'mm',
+            (worldEyeCenter[2] - wheelTopZ) / MM_TO_METERS,
+            ranges
+          ),
           createMetric(
             'eyeToMonitorMidpoint',
             'Eye to Monitor Mid',
             'mm',
-            (eyeCenter[2] - monitorMidpoint[2]) / MM_TO_METERS,
+            (worldEyeCenter[2] - monitorMidpoint[2]) / MM_TO_METERS,
             ranges
           ),
         ]

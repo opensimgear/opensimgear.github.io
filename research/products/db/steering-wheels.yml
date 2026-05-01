@@ -1,8 +1,8 @@
 commercial:
   - product_name: GT2 Steering Wheel
     description: CAMMUS GT2 Steering Wheel. GT steering wheel. in stock on official shop. 300 mm
-      leather-grip wheel with real carbon-fiber construction, CNC aluminum components, magnetic
-      paddle shifters, RGB backlit buttons, and 70 mm motorsport quick release.
+      leather-grip wheel with real carbon-fiber construction, CNC aluminum components,
+      magnetic paddle shifters, RGB backlit buttons, and 70 mm motorsport quick release.
     manufacturer: CAMMUS
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -16,9 +16,9 @@ commercial:
         region: Global
         status: out-of-stock
   - product_name: Aero Sim Racing Steering Wheel
-    description: Apex Sim Racing Aero Steering Wheel. 330 mm D-shaped sim racing wheel rim. in stock on
-      official shop. Brushed aluminum wheel available with Alcantara-style grip finishes and
-      carbon-look accents.
+    description: Apex Sim Racing Aero Steering Wheel. 330 mm D-shaped sim racing wheel rim. in
+      stock on official shop. Brushed aluminum wheel available with Alcantara-style grip
+      finishes and carbon-look accents.
     manufacturer: Apex Sim Racing
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -49,9 +49,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: One
-    description: Heusinkveld One. wireless sim racing steering wheel. in stock on official EU shop.
-      Ultra-light composite wheel with magnetic shifter paddles, dual clutch paddles, four push
-      rotaries, and two 7-way switches.
+    description: Heusinkveld One. wireless sim racing steering wheel. in stock on official EU
+      shop. Ultra-light composite wheel with magnetic shifter paddles, dual clutch paddles,
+      four push rotaries, and two 7-way switches.
     manufacturer: Heusinkveld
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -65,9 +65,10 @@ commercial:
         region: EU
         status: available
   - product_name: Ascher Racing x Simucube Ultimate
-    description: Ascher Racing x Simucube Ultimate. co-branded USB formula wheel with integrated 4 in
-      dashboard. currently out of stock on official shop. Based on Ascher's Ultimate wheel with
-      Simucube branding, 21 RGB LEDs, and magnetic double shifter and clutch paddles.
+    description: Ascher Racing x Simucube Ultimate. co-branded USB formula wheel with integrated
+      4 in dashboard. currently out of stock on official shop. Based on Ascher's Ultimate
+      wheel with Simucube branding, 21 RGB LEDs, and magnetic double shifter and clutch
+      paddles.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -86,8 +87,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: B16-USB
-    description: Ascher Racing B16-USB. USB button plate / wheel electronics. in stock on official shop.
-      16 inputs with push buttons, encoders, and paddle shifters.
+    description: Ascher Racing B16-USB. USB button plate / wheel electronics. in stock on
+      official shop. 16 inputs with push buttons, encoders, and paddle shifters.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: wheel-electronics
@@ -100,8 +101,8 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-b16-usb/
         region: EU
   - product_name: B24-SC
-    description: Ascher Racing B24-SC. Simucube Wireless Wheel button plate / wheel electronics. in
-      stock on official shop. Low-latency wireless button plate for Simucube systems.
+    description: Ascher Racing B24-SC. Simucube Wireless Wheel button plate / wheel electronics.
+      in stock on official shop. Low-latency wireless button plate for Simucube systems.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: wheel-electronics
@@ -114,9 +115,9 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-b24-sc/
         region: EU
   - product_name: ClubSport Steering Wheel Formula V2.5
-    description: Fanatec ClubSport Steering Wheel Formula V2.5. formula-style wheel with integrated
-      controls. listed on official EU catalog but not currently sellable. 270 mm formula rim with 5
-      mm carbon-fiber front plate.
+    description: Fanatec ClubSport Steering Wheel Formula V2.5. formula-style wheel with
+      integrated controls. listed on official EU catalog but not currently sellable. 270 mm
+      formula rim with 5 mm carbon-fiber front plate.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -130,8 +131,8 @@ commercial:
         region: EU
         status: available
   - product_name: ClubSport Formula V3
-    description: Fanatec ClubSport Formula V3. formula-style wheel with OLED display. in stock on
-      official EU catalog. 290 mm formula wheel with 2.7 in white OLED display.
+    description: Fanatec ClubSport Formula V3. formula-style wheel with OLED display. in stock
+      on official EU catalog. 290 mm formula wheel with 2.7 in white OLED display.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -145,8 +146,9 @@ commercial:
         region: EU
         status: available
   - product_name: ClubSport Steering Wheel RS
-    description: Fanatec ClubSport Steering Wheel RS. round GT/road wheel with integrated controls. in
-      stock on official EU catalog. 320 mm fully round rim with authentic materials.
+    description: Fanatec ClubSport Steering Wheel RS. round GT/road wheel with integrated
+      controls. in stock on official EU catalog. 320 mm fully round rim with authentic
+      materials.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -159,8 +161,9 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/steering-wheels/crd-9020011-ww/clubsport-steering-wheel-rs
         region: EU
   - product_name: F28-SC V2
-    description: Ascher Racing F28-SC V2. Simucube Wireless Wheel formula wheel. in stock on official
-      shop. Compact formula-style wheel with integrated controls for Simucube systems.
+    description: Ascher Racing F28-SC V2. Simucube Wireless Wheel formula wheel. in stock on
+      official shop. Compact formula-style wheel with integrated controls for Simucube
+      systems.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -173,9 +176,9 @@ commercial:
         url: https://ascher-racing.com/de/catalog/product/view/id/225/s/ascher-racing-f28-sc-v2/category/57/
         region: EU
   - product_name: F64 V3
-    description: Ascher Racing F64 V3. formula wheel with integrated controls. in stock on official
-      shop. Updated V3 wheel with encoders, joystick, rotary switches, thumb encoders, and
-      motorsport clutch paddles.
+    description: Ascher Racing F64 V3. formula wheel with integrated controls. in stock on
+      official shop. Updated V3 wheel with encoders, joystick, rotary switches, thumb
+      encoders, and motorsport clutch paddles.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -188,9 +191,9 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-f64-v3/
         region: EU
   - product_name: McLaren Artura GT4
-    description: Ascher Racing McLaren Artura GT4. licensed McLaren GT4-style formula/GT wheel. in stock
-      on official shop. Platform-independent USB wheel based on the McLaren Artura GT4 steering
-      wheel design.
+    description: Ascher Racing McLaren Artura GT4. licensed McLaren GT4-style formula/GT wheel.
+      in stock on official shop. Platform-independent USB wheel based on the McLaren Artura
+      GT4 steering wheel design.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -203,8 +206,8 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-mclaren-artura-gt4/
         region: EU
   - product_name: McLaren Artura Pro
-    description: Ascher Racing McLaren Artura Pro. licensed McLaren Artura formula/GT wheel. in stock on
-      official shop. Sold in Simucube wireless and USB variants.
+    description: Ascher Racing McLaren Artura Pro. licensed McLaren Artura formula/GT wheel. in
+      stock on official shop. Sold in Simucube wireless and USB variants.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -217,8 +220,8 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-mclaren-artura-pro/
         region: EU
   - product_name: McLaren Artura Sport
-    description: Ascher Racing McLaren Artura Sport. licensed McLaren Artura formula/GT wheel. in stock
-      on official shop. Sold in Simucube wireless and USB variants.
+    description: Ascher Racing McLaren Artura Sport. licensed McLaren Artura formula/GT wheel.
+      in stock on official shop. Sold in Simucube wireless and USB variants.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -231,9 +234,9 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-mclaren-artura-sport/
         region: EU
   - product_name: McLaren Artura Ultimate
-    description: Ascher Racing McLaren Artura Ultimate. licensed McLaren Artura formula/GT wheel with
-      integrated dashboard. in stock on official shop. Platform-independent USB wheel with double
-      magnetic shifter paddles and motorsport clutch paddles.
+    description: Ascher Racing McLaren Artura Ultimate. licensed McLaren Artura formula/GT wheel
+      with integrated dashboard. in stock on official shop. Platform-independent USB wheel
+      with double magnetic shifter paddles and motorsport clutch paddles.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -246,9 +249,9 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-mclaren-artura-ultimate/
         region: EU
   - product_name: Sabelt SW1-R Plus
-    description: Ascher Racing Sabelt SW1-R Plus. GT wheel bundle with Sabelt SW1-R rim and Ascher
-      button plate. in stock on official shop. 295 mm polyurethane-grip wheel with magnetic Gen5
-      paddle shifters.
+    description: Ascher Racing Sabelt SW1-R Plus. GT wheel bundle with Sabelt SW1-R rim and
+      Ascher button plate. in stock on official shop. 295 mm polyurethane-grip wheel with
+      magnetic Gen5 paddle shifters.
     manufacturer: Ascher Racing
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -261,9 +264,9 @@ commercial:
         url: https://ascher-racing.com/de/shop/ascher-racing-sabelt-sw1-r-plus/
         region: EU
   - product_name: CSL Steering Wheel P1 V2
-    description: Fanatec CSL Steering Wheel P1 V2 QR2 Lite. budget round wheel with integrated controls.
-      in stock on official EU catalog. Entry-level 300 mm wheel for CSL DD and other Fanatec wheel
-      bases.
+    description: Fanatec CSL Steering Wheel P1 V2 QR2 Lite. budget round wheel with integrated
+      controls. in stock on official EU catalog. Entry-level 300 mm wheel for CSL DD and
+      other Fanatec wheel bases.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -291,9 +294,9 @@ commercial:
         region: EU
         status: available
   - product_name: ASTRA
-    description: Cube Controls ASTRA. formula-style sim racing wheel. in stock on official shop. New
-      Cube Controls wheel with motorsport-grade buttons, reworked grips, new processor, and Eloi
-      shifter/clutch system.
+    description: Cube Controls ASTRA. formula-style sim racing wheel. in stock on official shop.
+      New Cube Controls wheel with motorsport-grade buttons, reworked grips, new processor,
+      and Eloi shifter/clutch system.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -306,9 +309,9 @@ commercial:
         url: https://www.cubecontrols.com/product/astra/
         region: EU
   - product_name: CSX-3
-    description: Cube Controls CSX-3. premium formula wheel with display. in stock on official shop.
-      Q-CONN connection, customizable RGB LED buttons, full-color touchscreen LCD, carbon-fiber
-      front plate, and CNC aluminum body.
+    description: Cube Controls CSX-3. premium formula wheel with display. in stock on official
+      shop. Q-CONN connection, customizable RGB LED buttons, full-color touchscreen LCD,
+      carbon-fiber front plate, and CNC aluminum body.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -321,9 +324,9 @@ commercial:
         url: https://www.cubecontrols.com/product/formula-csx-3/
         region: EU
   - product_name: CSX-3 Color Edition
-    description: Cube Controls CSX-3 Color Edition. premium formula wheel with display. in stock on
-      official shop. Color-edition CSX-3 with Q-CONN, RGB LED buttons, full-color touchscreen LCD,
-      carbon-fiber front plate, and CNC aluminum body.
+    description: Cube Controls CSX-3 Color Edition. premium formula wheel with display. in stock
+      on official shop. Color-edition CSX-3 with Q-CONN, RGB LED buttons, full-color
+      touchscreen LCD, carbon-fiber front plate, and CNC aluminum body.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -336,9 +339,9 @@ commercial:
         url: https://www.cubecontrols.com/product/csx-3-color-edition/
         region: EU
   - product_name: F-CORE
-    description: Cube Controls F-CORE. wireless/USB formula wheel. currently out of stock on official
-      shop. Q-CONN magnetic connection, USB/Bluetooth Dual Mode, carbon-fiber front plate, and
-      configurable clutch/shifter options.
+    description: Cube Controls F-CORE. wireless/USB formula wheel. currently out of stock on
+      official shop. Q-CONN magnetic connection, USB/Bluetooth Dual Mode, carbon-fiber front
+      plate, and configurable clutch/shifter options.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -351,9 +354,9 @@ commercial:
         url: https://www.cubecontrols.com/product/fcore/
         region: EU
   - product_name: F-CORE EVO Formula
-    description: Cube Controls F-CORE EVO Formula. formula-style sim racing wheel. Formula Blue in stock
-      on official shop; Formula Black currently out of stock. Full metal encoders, revised modern
-      body, and new shifters.
+    description: Cube Controls F-CORE EVO Formula. formula-style sim racing wheel. Formula Blue
+      in stock on official shop; Formula Black currently out of stock. Full metal encoders,
+      revised modern body, and new shifters.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -366,8 +369,8 @@ commercial:
         url: https://www.cubecontrols.com/product/f-core-evo-formula-blue/
         region: EU
   - product_name: F-CORE EVO GT
-    description: Cube Controls F-CORE EVO GT. GT-style sim racing wheel. GT Red and GT Black in stock on
-      official shop. Full metal encoders, revised modern body, and new shifters.
+    description: Cube Controls F-CORE EVO GT. GT-style sim racing wheel. GT Red and GT Black in
+      stock on official shop. Full metal encoders, revised modern body, and new shifters.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -380,9 +383,9 @@ commercial:
         url: https://www.cubecontrols.com/product/f-core-evo-gt-red/
         region: EU
   - product_name: F-PRO
-    description: Cube Controls F-PRO. formula wheel with USB/Bluetooth Dual Mode. in stock on official
-      shop. Customizable RGB backlit buttons, double joystick, magnetic connectors, switchless
-      shifter paddles, carbon-fiber front plate, and die-cast aluminum main body.
+    description: Cube Controls F-PRO. formula wheel with USB/Bluetooth Dual Mode. in stock on
+      official shop. Customizable RGB backlit buttons, double joystick, magnetic connectors,
+      switchless shifter paddles, carbon-fiber front plate, and die-cast aluminum main body.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -395,9 +398,9 @@ commercial:
         url: https://www.cubecontrols.com/product/f-pro-formula-steering-wheel/
         region: EU
   - product_name: F-PRO Color Edition
-    description: Cube Controls F-PRO Color Edition. formula wheel with USB/Bluetooth Dual Mode. in stock
-      on official shop. Color-edition F-PRO with RGB backlit buttons, dual joystick controls,
-      magnetic connectors, and carbon-fiber front plate.
+    description: Cube Controls F-PRO Color Edition. formula wheel with USB/Bluetooth Dual Mode.
+      in stock on official shop. Color-edition F-PRO with RGB backlit buttons, dual joystick
+      controls, magnetic connectors, and carbon-fiber front plate.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -410,9 +413,9 @@ commercial:
         url: https://www.cubecontrols.com/product/f-pro-color-edition/
         region: EU
   - product_name: GT PRO V2 Button Box
-    description: Cube Controls GT PRO V2 Button Box. GT wheel button box / wheel electronics. in stock
-      on official shop. Dual Mode wired/wireless button box with two- or four-paddle options and
-      customizable RGB buttons; main hub not included.
+    description: Cube Controls GT PRO V2 Button Box. GT wheel button box / wheel electronics. in
+      stock on official shop. Dual Mode wired/wireless button box with two- or four-paddle
+      options and customizable RGB buttons; main hub not included.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: wheel-electronics
@@ -425,9 +428,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gtprov2-button-box/
         region: EU
   - product_name: GT PRO V2 Cube
-    description: Cube Controls GT PRO V2 Cube. GT wheel with Cube Pro rim and GT PRO V2 button box. in
-      stock on official shop. Dual Mode connection via Bluetooth or Q-CONN cable, with two- or
-      four-paddle options.
+    description: Cube Controls GT PRO V2 Cube. GT wheel with Cube Pro rim and GT PRO V2 button
+      box. in stock on official shop. Dual Mode connection via Bluetooth or Q-CONN cable,
+      with two- or four-paddle options.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -440,9 +443,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gt-pro-v2-cube/
         region: EU
   - product_name: GT PRO V2 Reparto Corse Perforated
-    description: Cube Controls GT PRO V2 Reparto Corse Perforated. GT wheel with perforated leather
-      D-shape rim. in stock on official shop. GT PRO V2 button box with Dual Mode Bluetooth or
-      Q-CONN cable connection.
+    description: Cube Controls GT PRO V2 Reparto Corse Perforated. GT wheel with perforated
+      leather D-shape rim. in stock on official shop. GT PRO V2 button box with Dual Mode
+      Bluetooth or Q-CONN cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -455,9 +458,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-perforated/
         region: EU
   - product_name: GT PRO V2 Reparto Corse Round Suede
-    description: Cube Controls GT PRO V2 Reparto Corse Round Suede. round suede GT wheel for rally,
-      drifting, and off-road style driving. in stock on official shop. GT PRO V2 button box with
-      Dual Mode Bluetooth or Q-CONN cable connection.
+    description: Cube Controls GT PRO V2 Reparto Corse Round Suede. round suede GT wheel for
+      rally, drifting, and off-road style driving. in stock on official shop. GT PRO V2
+      button box with Dual Mode Bluetooth or Q-CONN cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -470,8 +473,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-round-suede/
         region: EU
   - product_name: GT PRO V2 Reparto Corse Suede
-    description: Cube Controls GT PRO V2 Reparto Corse Suede. GT wheel with suede D-shape rim. in stock
-      on official shop. GT PRO V2 button box with Dual Mode Bluetooth or Q-CONN cable connection.
+    description: Cube Controls GT PRO V2 Reparto Corse Suede. GT wheel with suede D-shape rim.
+      in stock on official shop. GT PRO V2 button box with Dual Mode Bluetooth or Q-CONN
+      cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -484,9 +488,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-suede/
         region: EU
   - product_name: GT PRO V2 Reparto Corse Zero Leather
-    description: Cube Controls GT PRO V2 Reparto Corse Zero Leather. GT wheel with Zero leather rim. in
-      stock on official shop. GT PRO V2 button box with Dual Mode Bluetooth or Q-CONN cable
-      connection.
+    description: Cube Controls GT PRO V2 Reparto Corse Zero Leather. GT wheel with Zero leather
+      rim. in stock on official shop. GT PRO V2 button box with Dual Mode Bluetooth or
+      Q-CONN cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -499,9 +503,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-zero-leather/
         region: EU
   - product_name: GT PRO V2 Reparto Corse Zero Suede
-    description: Cube Controls GT PRO V2 Reparto Corse Zero Suede. GT wheel with Zero suede rim. in
-      stock on official shop. GT PRO V2 button box with Dual Mode Bluetooth or Q-CONN cable
-      connection.
+    description: Cube Controls GT PRO V2 Reparto Corse Zero Suede. GT wheel with Zero suede rim.
+      in stock on official shop. GT PRO V2 button box with Dual Mode Bluetooth or Q-CONN
+      cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -514,8 +518,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-zero-suede/
         region: EU
   - product_name: GT PRO V2 Rubber
-    description: Cube Controls GT PRO V2 Rubber. GT wheel with GT Zero Rubber rim. in stock on official
-      shop. GT PRO V2 button box with Dual Mode Bluetooth or Q-CONN cable connection.
+    description: Cube Controls GT PRO V2 Rubber. GT wheel with GT Zero Rubber rim. in stock on
+      official shop. GT PRO V2 button box with Dual Mode Bluetooth or Q-CONN cable
+      connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -528,9 +533,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gt-pro-v2-rubber/
         region: EU
   - product_name: GT PRO V2 Sport
-    description: Cube Controls GT PRO V2 Sport. GT wheel with Cube Sport rim and GT PRO V2 button box.
-      in stock on official shop. Dual Mode connection via Bluetooth or Q-CONN cable, with two- or
-      four-paddle options.
+    description: Cube Controls GT PRO V2 Sport. GT wheel with Cube Sport rim and GT PRO V2
+      button box. in stock on official shop. Dual Mode connection via Bluetooth or Q-CONN
+      cable, with two- or four-paddle options.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -543,9 +548,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gt-pro-v2-sport/
         region: EU
   - product_name: GT PRO V2 Zero
-    description: Cube Controls GT PRO V2 Zero. GT wheel with GT Zero rim and GT PRO V2 button box. in
-      stock on official shop. Dual Mode connection via Bluetooth or Q-CONN cable, with two- or
-      four-paddle options.
+    description: Cube Controls GT PRO V2 Zero. GT wheel with GT Zero rim and GT PRO V2 button
+      box. in stock on official shop. Dual Mode connection via Bluetooth or Q-CONN cable,
+      with two- or four-paddle options.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -558,9 +563,9 @@ commercial:
         url: https://www.cubecontrols.com/product/gt-pro-v2-zero/
         region: EU
   - product_name: GT-X2
-    description: Cube Controls GT-X2. GT wheel with integrated display. in stock on official shop. 30 or
-      32 cm wheel with 5 in touchscreen display, backlit buttons, front/rear toggles, encoders,
-      thumb encoders, and funky switches.
+    description: Cube Controls GT-X2. GT wheel with integrated display. in stock on official
+      shop. 30 or 32 cm wheel with 5 in touchscreen display, backlit buttons, front/rear
+      toggles, encoders, thumb encoders, and funky switches.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -574,8 +579,8 @@ commercial:
         region: EU
   - product_name: Mercedes-AMG GT Edition SIM Wheel
     description: Cube Controls Mercedes-AMG GT Edition SIM Wheel. licensed GT wheel based on
-      Mercedes-AMG GT Track Series and GT2 steering wheels. in stock on official shop. Uses high-end
-      GT-style shifters and pro-racer ergonomics.
+      Mercedes-AMG GT Track Series and GT2 steering wheels. in stock on official shop. Uses
+      high-end GT-style shifters and pro-racer ergonomics.
     manufacturer: Cube Controls
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -588,9 +593,9 @@ commercial:
         url: https://www.cubecontrols.com/product/mercedes-amg-gt-edition-sim-wheel/
         region: EU
   - product_name: FSR Formula Wheel
-    description: MOZA FSR Formula Wheel. formula wheel with display. Current or recently current MOZA
-      product [uncertain stock by region]. Formula-style rim with integrated display, shift LEDs,
-      rotary controls, buttons, and paddle modules [uncertain].
+    description: MOZA FSR Formula Wheel. formula wheel with display. Current or recently current
+      MOZA product [uncertain stock by region]. Formula-style rim with integrated display,
+      shift LEDs, rotary controls, buttons, and paddle modules [uncertain].
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -604,8 +609,8 @@ commercial:
         region: EU
         status: available
   - product_name: FX Pro Formula Steering Wheel
-    description: Simagic FX Pro Formula Steering Wheel. formula wheel. listed on Simagic. in stock on
-      official shop. 290 mm formula wheel with integrated display.
+    description: Simagic FX Pro Formula Steering Wheel. formula wheel. listed on Simagic. in
+      stock on official shop. 290 mm formula wheel with integrated display.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -620,8 +625,8 @@ commercial:
         status: available
     license: Commercial
   - product_name: GT Neo
-    description: Simagic GT Neo. formula wheel. listed on Simagic. in stock on official shop. 300 mm
-      diameter, 1100 g excluding QR.
+    description: Simagic GT Neo. formula wheel. listed on Simagic. in stock on official shop.
+      300 mm diameter, 1100 g excluding QR.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -636,8 +641,8 @@ commercial:
         status: available
     license: Commercial
   - product_name: FX Formula Steering Wheel
-    description: Simagic FX Formula Steering Wheel. formula wheel. listed on Simagic. in stock on
-      official shop. Compact formula wheel in the Simagic Alpha ecosystem.
+    description: Simagic FX Formula Steering Wheel. formula wheel. listed on Simagic. in stock
+      on official shop. Compact formula wheel in the Simagic Alpha ecosystem.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -652,8 +657,8 @@ commercial:
         status: available
     license: Commercial
   - product_name: GT4 Steering Wheel
-    description: Simagic GT4 Steering Wheel. formula wheel. listed on Simagic. in stock on official
-      shop. Simagic GT4-style racing wheel.
+    description: Simagic GT4 Steering Wheel. formula wheel. listed on Simagic. in stock on
+      official shop. Simagic GT4-style racing wheel.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -668,8 +673,8 @@ commercial:
         status: available
     license: Commercial
   - product_name: GTS Steering Wheel
-    description: Simagic GTS Steering Wheel. gt wheel. listed on Simagic. in stock on official shop.
-      Round racing wheel sold in leather and suede variants.
+    description: Simagic GTS Steering Wheel. gt wheel. listed on Simagic. in stock on official
+      shop. Round racing wheel sold in leather and suede variants.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -684,8 +689,8 @@ commercial:
         status: available
     license: Commercial
   - product_name: GT1 Steering Wheel
-    description: Simagic GT1 Steering Wheel. gt wheel. listed on Simagic. in stock on official shop. GT1
-      wheel sold in round and D-shape leather/suede variants.
+    description: Simagic GT1 Steering Wheel. gt wheel. listed on Simagic. in stock on official
+      shop. GT1 wheel sold in round and D-shape leather/suede variants.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -700,8 +705,8 @@ commercial:
         status: available
     license: Commercial
   - product_name: Neo X Series Steering Wheels
-    description: Simagic Neo X Series Steering Wheels. gt wheel. listed on Simagic. in stock on official
-      shop. Neo X wheel series with 310 mm, 330 mm, and 350 mm variants.
+    description: Simagic Neo X Series Steering Wheels. gt wheel. listed on Simagic. in stock on
+      official shop. Neo X wheel series with 310 mm, 330 mm, and 350 mm variants.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -716,8 +721,8 @@ commercial:
         status: available
     license: Commercial
   - product_name: Neo X Hub
-    description: Simagic Neo X Hub. wheel electronics. listed on Simagic. in stock on official shop. Hub
-      supports optional single or dual paddle modules and compatible wheel rims.
+    description: Simagic Neo X Hub. wheel electronics. listed on Simagic. in stock on official
+      shop. Hub supports optional single or dual paddle modules and compatible wheel rims.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: wheel-electronics
@@ -732,8 +737,8 @@ commercial:
         status: available
     license: Commercial
   - product_name: KS Steering Wheel
-    description: MOZA KS Steering Wheel. GT/formula-style wheel. Current MOZA product [uncertain stock
-      by region]. 300 mm GT/formula-style rim [uncertain].
+    description: MOZA KS Steering Wheel. GT/formula-style wheel. Current MOZA product [uncertain
+      stock by region]. 300 mm GT/formula-style rim [uncertain].
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -764,8 +769,9 @@ commercial:
         region: EU
         status: out-of-stock
   - product_name: Tahko GT-21 Wireless Wheel
-    description: Simucube Tahko GT-21 Wireless Wheel. wireless GT wheel. in stock on official US shop.
-      First steering wheel in the Simucube ecosystem for racers from beginner to professional level.
+    description: Simucube Tahko GT-21 Wireless Wheel. wireless GT wheel. in stock on official US
+      shop. First steering wheel in the Simucube ecosystem for racers from beginner to
+      professional level.
     manufacturer: Simucube
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -785,8 +791,8 @@ commercial:
         region: EU
         status: available
   - product_name: Simucube Tahko GT-21 Black Edition
-    description: Simucube Tahko GT-21 Black Edition. wireless GT wheel. out of stock on official US
-      shop. Black-edition version of the first steering wheel in the Simucube ecosystem.
+    description: Simucube Tahko GT-21 Black Edition. wireless GT wheel. out of stock on official
+      US shop. Black-edition version of the first steering wheel in the Simucube ecosystem.
     manufacturer: Simucube
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -801,8 +807,8 @@ commercial:
         status: out-of-stock
   - product_name: Simucube Tahko Round Orange Edition
     description: Simucube Tahko Round Orange Edition. wireless rally/drifting wheel. in stock on
-      official US shop. Round Tahko wheel for rally and drifting with leather rim and magnetic
-      shifters.
+      official US shop. Round Tahko wheel for rally and drifting with leather rim and
+      magnetic shifters.
     manufacturer: Simucube
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -816,9 +822,9 @@ commercial:
         region: US
         status: available
   - product_name: Simucube Tahko Round Black Edition
-    description: Simucube Tahko Round Black Edition. wireless rally/drifting wheel. out of stock on
-      official US shop. Round Tahko wheel for rally and drifting with leather rim and magnetic
-      shifters.
+    description: Simucube Tahko Round Black Edition. wireless rally/drifting wheel. out of stock
+      on official US shop. Round Tahko wheel for rally and drifting with leather rim and
+      magnetic shifters.
     manufacturer: Simucube
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -838,8 +844,8 @@ commercial:
         region: EU
         status: available
   - product_name: Simucube Valo GT-23
-    description: Simucube Valo GT-23. wireless GT wheel. in stock on official US shop. Alcantara GT
-      wheel with 18 programmable LEDs and tactile shifter feedback.
+    description: Simucube Valo GT-23. wireless GT wheel. in stock on official US shop. Alcantara
+      GT wheel with 18 programmable LEDs and tactile shifter feedback.
     manufacturer: Simucube
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -853,8 +859,8 @@ commercial:
         region: US
         status: available
   - product_name: Simucube Valo GT-23 Leather Version
-    description: Simucube Valo GT-23 Leather Version. wireless GT wheel. in stock on official US shop.
-      Leather GT wheel with 18 programmable LEDs and tactile shifter feedback.
+    description: Simucube Valo GT-23 Leather Version. wireless GT wheel. in stock on official US
+      shop. Leather GT wheel with 18 programmable LEDs and tactile shifter feedback.
     manufacturer: Simucube
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -874,8 +880,9 @@ commercial:
         region: EU
         status: available
   - product_name: Simucube Savu Sport
-    description: Simucube Savu Sport. wireless GT wheel. in stock on official US shop. Simucube 2 and
-      Simucube 3 compatible GT wheel with full-metal frame, backlit buttons, and quiet paddles.
+    description: Simucube Savu Sport. wireless GT wheel. in stock on official US shop. Simucube
+      2 and Simucube 3 compatible GT wheel with full-metal frame, backlit buttons, and quiet
+      paddles.
     manufacturer: Simucube
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -889,8 +896,9 @@ commercial:
         region: US
         status: available
   - product_name: Simucube Savu Pro
-    description: Simucube Savu Pro. wireless GT wheel. in stock on official US shop. Simucube 2 and
-      Simucube 3 compatible GT wheel with full-metal frame, backlit buttons, and quiet paddles.
+    description: Simucube Savu Pro. wireless GT wheel. in stock on official US shop. Simucube 2
+      and Simucube 3 compatible GT wheel with full-metal frame, backlit buttons, and quiet
+      paddles.
     manufacturer: Simucube
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -904,8 +912,9 @@ commercial:
         region: US
         status: available
   - product_name: Simucube x BavarianSimTec Delta Pro SC
-    description: Simucube / BavarianSimTec Delta Pro SC. formula wheel. in stock on official US shop.
-      Simucube Link wheel with screen, wireless power/data, and Simucube 3 compatibility.
+    description: Simucube / BavarianSimTec Delta Pro SC. formula wheel. in stock on official US
+      shop. Simucube Link wheel with screen, wireless power/data, and Simucube 3
+      compatibility.
     manufacturer:
       - Simucube
       - BavarianSimTec
@@ -922,8 +931,8 @@ commercial:
         status: available
   - product_name: Limited Edition GSI x Simucube Formula Pro Elite v2
     description: Limited Edition GSI x Simucube Formula Pro Elite v2. formula wheel. in stock on
-      official US shop. Co-branded Formula Pro Elite v2 with reduced weight, revised ergonomics, and
-      illuminated controls.
+      official US shop. Co-branded Formula Pro Elite v2 with reduced weight, revised
+      ergonomics, and illuminated controls.
     manufacturer:
       - GSI
       - Simucube
@@ -938,9 +947,9 @@ commercial:
         url: https://simucube.com/en-us/limited-edition-gsi-x-simucube-formula-pro-elite-v2/
         region: US
   - product_name: CP-S Simulator Steering Wheel
-    description: Pro-Sim CP-S Simulator Steering Wheel. formula-style simulator wheel. in stock on
-      official UK shop. Formula wheel developed with motorsport input, broad controls, and
-      multi-function hat switch.
+    description: Pro-Sim CP-S Simulator Steering Wheel. formula-style simulator wheel. in stock
+      on official UK shop. Formula wheel developed with motorsport input, broad controls,
+      and multi-function hat switch.
     manufacturer: Pro-Sim
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -957,9 +966,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: LM-Pro Simulator Steering Wheel
-    description: Pro-Sim LM-Pro Simulator Steering Wheel. 300 mm LMP/GT wheel. in stock on official UK
-      shop. Wheel with buttons, toggle switches, rotary encoders, and replaceable industrial coiled
-      cable.
+    description: Pro-Sim LM-Pro Simulator Steering Wheel. 300 mm LMP/GT wheel. in stock on
+      official UK shop. Wheel with buttons, toggle switches, rotary encoders, and
+      replaceable industrial coiled cable.
     manufacturer: Pro-Sim
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -972,9 +981,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/lm-pro-simulator-steering-wheel/
         region: UK
   - product_name: GPX Simulator Steering Wheel
-    description: Pro-Sim GPX Simulator Steering Wheel. formula-style simulator wheel. in stock on
-      official UK shop with stated 4 week lead time. Built to replicate the look and feel of a
-      modern F1 steering wheel.
+    description: Pro-Sim GPX Simulator Steering Wheel. formula-style simulator wheel. in stock
+      on official UK shop with stated 4 week lead time. Built to replicate the look and feel
+      of a modern F1 steering wheel.
     manufacturer: Pro-Sim
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -987,9 +996,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/gpx-simulator-steering-wheel/
         region: UK
   - product_name: LM-PS Simulator Steering Wheel
-    description: Pro-Sim LM-PS Simulator Steering Wheel. formula-style simulator wheel. currently out of
-      stock and superseded by CP-S on official UK shop. Junior single-seater style wheel with
-      Precision Sim Engineering electronics.
+    description: Pro-Sim LM-PS Simulator Steering Wheel. formula-style simulator wheel.
+      currently out of stock and superseded by CP-S on official UK shop. Junior
+      single-seater style wheel with Precision Sim Engineering electronics.
     manufacturer: Pro-Sim
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -1002,9 +1011,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/lm-ps-simulator-steering-wheel/
         region: UK
   - product_name: GT1 Simulator Steering Wheel
-    description: Pro-Sim GT1 Simulator Steering Wheel. GT simulator wheel with integrated display. in
-      stock on official UK shop. 310 mm Sparco wheel with LCD data display, buttons, toggles,
-      encoders, and coiled cable.
+    description: Pro-Sim GT1 Simulator Steering Wheel. GT simulator wheel with integrated
+      display. in stock on official UK shop. 310 mm Sparco wheel with LCD data display,
+      buttons, toggles, encoders, and coiled cable.
     manufacturer: Pro-Sim
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1017,8 +1026,8 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/gt1-simulator-wheel/
         region: UK
   - product_name: WHEELpro MPI F13 Direct Drive Wheel
-    description: RealGear WHEELpro MPI F13. direct-drive sim-racing steering wheel. official Ricmotech
-      store listing. Lightweight MPI-based wheel for direct-drive servo systems.
+    description: RealGear WHEELpro MPI F13. direct-drive sim-racing steering wheel. official
+      Ricmotech store listing. Lightweight MPI-based wheel for direct-drive servo systems.
     manufacturer:
       - RealGear
       - MPI
@@ -1050,8 +1059,8 @@ commercial:
         url: https://www.ricmotech.com/realgear-wheelpro-mpi-f4-wheel-direct-drive
         region: US
   - product_name: WHEELpro MPI GT11A Super-Grip Wheel
-    description: RealGear WHEELpro MPI GT11A Super-Grip. direct-drive GT wheel. official Ricmotech store
-      listing. MPI GT11A rim configured with RealGear direct-drive controls.
+    description: RealGear WHEELpro MPI GT11A Super-Grip. direct-drive GT wheel. official
+      Ricmotech store listing. MPI GT11A rim configured with RealGear direct-drive controls.
     manufacturer:
       - RealGear
       - MPI
@@ -1066,8 +1075,8 @@ commercial:
         url: https://www.ricmotech.com/realgear-wheelpro-mpi-gt11a-wheel-direct-drive
         region: US
   - product_name: WHEELpro MPI GT11C SuperGrip Wheel
-    description: RealGear WHEELpro MPI GT11C SuperGrip. direct-drive GT wheel. official Ricmotech store
-      listing. MPI GT11C rim configured with RealGear direct-drive controls.
+    description: RealGear WHEELpro MPI GT11C SuperGrip. direct-drive GT wheel. official
+      Ricmotech store listing. MPI GT11C rim configured with RealGear direct-drive controls.
     manufacturer:
       - RealGear
       - MPI
@@ -1082,8 +1091,8 @@ commercial:
         url: https://www.ricmotech.com/realgear-wheelpro-mpi-gt11c-wheel-direct-drive
         region: US
   - product_name: MPI/Ricmotech Super Grip GT Sim Wheel
-    description: RealGear MPI/Ricmotech Super Grip GT. direct-drive GT wheel. official Ricmotech store
-      listing. Co-developed MPI and Ricmotech super-grip wheel for sim-racing rigs.
+    description: RealGear MPI/Ricmotech Super Grip GT. direct-drive GT wheel. official Ricmotech
+      store listing. Co-developed MPI and Ricmotech super-grip wheel for sim-racing rigs.
     manufacturer:
       - RealGear
       - MPI
@@ -1099,8 +1108,9 @@ commercial:
         url: https://www.ricmotech.com/realgear-wheelpro-mpi-ricmotech-supergrip-wheel
         region: US
   - product_name: WHEELpro MPI Mazda MX-5 Cup Wheel
-    description: RealGear WHEELpro MPI Mazda MX-5 Cup. direct-drive sim-racing steering wheel. official
-      Ricmotech store listing. Mazda MX-5 Cup-style MPI wheel for direct-drive servo systems.
+    description: RealGear WHEELpro MPI Mazda MX-5 Cup. direct-drive sim-racing steering wheel.
+      official Ricmotech store listing. Mazda MX-5 Cup-style MPI wheel for direct-drive
+      servo systems.
     manufacturer:
       - RealGear
       - MPI
@@ -1115,8 +1125,9 @@ commercial:
         url: https://www.ricmotech.com/realgear-wheelpro-mpi-mx-5-add-on-wheel
         region: US
   - product_name: MPI GT11A Add-on Wheel for Thrustmaster
-    description: RealGear MPI GT11A. Alcantara add-on wheel for Thrustmaster hubs. official Ricmotech
-      store listing. Prototype-style MPI GT11A rim adapted for Thrustmaster wheelbases.
+    description: RealGear MPI GT11A. Alcantara add-on wheel for Thrustmaster hubs. official
+      Ricmotech store listing. Prototype-style MPI GT11A rim adapted for Thrustmaster
+      wheelbases.
     manufacturer:
       - RealGear
       - MPI
@@ -1131,8 +1142,9 @@ commercial:
         url: https://www.ricmotech.com/realgear-mpi-gt11a-alcantara-rim-thrustmaster
         region: US
   - product_name: MPI GT11C Add-on Wheel for Thrustmaster
-    description: RealGear MPI GT11C. Alcantara add-on wheel for Thrustmaster hubs. official Ricmotech
-      store listing. Prototype-style MPI GT11C rim adapted for Thrustmaster wheelbases.
+    description: RealGear MPI GT11C. Alcantara add-on wheel for Thrustmaster hubs. official
+      Ricmotech store listing. Prototype-style MPI GT11C rim adapted for Thrustmaster
+      wheelbases.
     manufacturer:
       - RealGear
       - MPI
@@ -1147,8 +1159,8 @@ commercial:
         url: https://www.ricmotech.com/realgear-mpi-gt11c-alcantara-rim-thrustmaster
         region: US
   - product_name: OMP WHEELpro GT3
-    description: RealGear OMP WHEELpro GT3. direct-drive GT steering wheel. official Ricmotech store
-      listing. OMP GT3-style wheel configured with aluminum magnetic paddle shifters.
+    description: RealGear OMP WHEELpro GT3. direct-drive GT steering wheel. official Ricmotech
+      store listing. OMP GT3-style wheel configured with aluminum magnetic paddle shifters.
     manufacturer:
       - RealGear
       - OMP
@@ -1163,8 +1175,9 @@ commercial:
         url: https://www.ricmotech.com/realgear-gte
         region: US
   - product_name: WHEELpro MPI Stock Car Wheel with Buttons
-    description: RealGear WHEELpro MPI Stock Car Wheel. button-equipped stock car sim wheel. official
-      Ricmotech store listing. MPI stock car wheel with controls on the spokes and around the hub.
+    description: RealGear WHEELpro MPI Stock Car Wheel. button-equipped stock car sim wheel.
+      official Ricmotech store listing. MPI stock car wheel with controls on the spokes and
+      around the hub.
     manufacturer:
       - RealGear
       - MPI
@@ -1179,8 +1192,9 @@ commercial:
         url: https://www.ricmotech.com/RealGear-WHEELpro-MPI-Stock-Car-Sim-Wheel-with-Buttons_p_430.html
         region: US
   - product_name: WHEELpro MPI Sprint Car Wheel with Buttons
-    description: RealGear WHEELpro MPI Sprint Car Wheel. button-equipped sprint car sim wheel. official
-      Ricmotech store listing. 15 inch MPI sprint car wheel configured with simulator controls.
+    description: RealGear WHEELpro MPI Sprint Car Wheel. button-equipped sprint car sim wheel.
+      official Ricmotech store listing. 15 inch MPI sprint car wheel configured with
+      simulator controls.
     manufacturer:
       - RealGear
       - MPI
@@ -1195,8 +1209,9 @@ commercial:
         url: https://www.ricmotech.com/RealGear-WHEELpro-MPI-15-inch-Sprint-Car-Sim-Wheel-with-Buttons_p_433.html
         region: US
   - product_name: WHEELpro MPI 350mm Drifting Wheel with Buttons
-    description: RealGear WHEELpro MPI 350mm Drifting Wheel. button-equipped drift sim wheel. official
-      Ricmotech store listing. 350 mm MPI drifting wheel configured with simulator controls.
+    description: RealGear WHEELpro MPI 350mm Drifting Wheel. button-equipped drift sim wheel.
+      official Ricmotech store listing. 350 mm MPI drifting wheel configured with simulator
+      controls.
     manufacturer:
       - RealGear
       - MPI
@@ -1211,8 +1226,9 @@ commercial:
         url: https://www.ricmotech.com/RealGear-WHEELpro-MPI-350mm-Sim-Drifting-Wheel-with-Buttons_p_480.html
         region: US
   - product_name: Formula Wheel Add-On Ferrari SF-25 Edition
-    description: Thrustmaster Formula Wheel Add-On Ferrari SF-25 Edition. formula wheel add-on. in stock
-      on official US shop. Official life-size Scuderia Ferrari SF-25 steering wheel replica.
+    description: Thrustmaster Formula Wheel Add-On Ferrari SF-25 Edition. formula wheel add-on.
+      in stock on official US shop. Official life-size Scuderia Ferrari SF-25 steering wheel
+      replica.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -1225,9 +1241,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/formula-wheel-add-on-ferrari-sf-25-edition/
         region: US
   - product_name: Formula Wheel Add-On Ferrari SF1000 Edition
-    description: Thrustmaster Formula Wheel Add-On Ferrari SF1000 Edition. formula wheel add-on. in
-      stock on official US shop. Ferrari SF1000-style wheel with integrated display for supported
-      Thrustmaster bases.
+    description: Thrustmaster Formula Wheel Add-On Ferrari SF1000 Edition. formula wheel add-on.
+      in stock on official US shop. Ferrari SF1000-style wheel with integrated display for
+      supported Thrustmaster bases.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -1240,8 +1256,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/formula-wheel-add-on-ferrari-sf1000-edition-us-can/
         region: US
   - product_name: Ferrari 488 GT3 Wheel Add-On
-    description: Thrustmaster Ferrari 488 GT3 Wheel Add-On. GT wheel add-on. in stock on official US
-      shop. Official Ferrari 488 GT3 wheel add-on for Thrustmaster racing wheel bases.
+    description: Thrustmaster Ferrari 488 GT3 Wheel Add-On. GT wheel add-on. in stock on
+      official US shop. Official Ferrari 488 GT3 wheel add-on for Thrustmaster racing wheel
+      bases.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1254,8 +1271,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/ferrari-488-gt3-wheel-add-on/
         region: US
   - product_name: GT Wheel Add-On
-    description: Thrustmaster GT Wheel Add-On. GT wheel add-on. in stock on official US shop. Gran
-      Turismo-branded successor to the T-GT wheel rim.
+    description: Thrustmaster GT Wheel Add-On. GT wheel add-on. in stock on official US shop.
+      Gran Turismo-branded successor to the T-GT wheel rim.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1268,8 +1285,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/gt-wheel-add-on/
         region: US
   - product_name: Hypercar Wheel Add-On
-    description: Thrustmaster Hypercar Wheel Add-On. GT/hypercar wheel add-on. in stock on official US
-      shop. Premium wheel add-on for luxury and hypercar racing simulations.
+    description: Thrustmaster Hypercar Wheel Add-On. GT/hypercar wheel add-on. in stock on
+      official US shop. Premium wheel add-on for luxury and hypercar racing simulations.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1282,8 +1299,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/hypercar-wheel-add-on/
         region: US
   - product_name: 599XX EVO 30 Wheel Add-On Alcantara Edition
-    description: Thrustmaster 599XX EVO 30 Wheel Add-On Alcantara Edition. GT wheel add-on. in stock on
-      official US shop. Ferrari 599XX EVO-style 30 cm Alcantara wheel rim.
+    description: Thrustmaster 599XX EVO 30 Wheel Add-On Alcantara Edition. GT wheel add-on. in
+      stock on official US shop. Ferrari 599XX EVO-style 30 cm Alcantara wheel rim.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1310,8 +1327,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/ferrari-250-gto-wheel-add-on/
         region: US
   - product_name: Ferrari F1 Wheel Add-On
-    description: Thrustmaster Ferrari F1 Wheel Add-On. formula wheel add-on. in stock on official US
-      shop. Ferrari F1-style wheel rim for compatible Thrustmaster racing wheel bases.
+    description: Thrustmaster Ferrari F1 Wheel Add-On. formula wheel add-on. in stock on
+      official US shop. Ferrari F1-style wheel rim for compatible Thrustmaster racing wheel
+      bases.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -1324,8 +1342,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/ferrari-f1-wheel-add-on/
         region: US
   - product_name: TM Open Wheel Add-On
-    description: Thrustmaster TM Open Wheel Add-On. open-wheel formula rim. in stock on official US
-      shop. Lightweight open-wheel add-on for compatible Thrustmaster bases.
+    description: Thrustmaster TM Open Wheel Add-On. open-wheel formula rim. in stock on official
+      US shop. Lightweight open-wheel add-on for compatible Thrustmaster bases.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -1338,8 +1356,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/tm-open-wheel-add-on/
         region: US
   - product_name: EVO Racing 31U Leather
-    description: Thrustmaster EVO Racing 31U Leather. modular formula/GT wheel. in stock on official US
-      shop. EVO Racing Hub-based wheel with 31 cm leather rim.
+    description: Thrustmaster EVO Racing 31U Leather. modular formula/GT wheel. in stock on
+      official US shop. EVO Racing Hub-based wheel with 31 cm leather rim.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1352,8 +1370,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/evo-racing-31u-leather/
         region: US
   - product_name: EVO Racing 32R Leather
-    description: Thrustmaster EVO Racing 32R Leather. modular round GT/rally wheel. in stock on official
-      US shop. EVO Racing Hub-based 32 cm leather wheel rim.
+    description: Thrustmaster EVO Racing 32R Leather. modular round GT/rally wheel. in stock on
+      official US shop. EVO Racing Hub-based 32 cm leather wheel rim.
     manufacturer: Thrustmaster
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1366,8 +1384,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/evo-racing-32r-leather/
         region: US
   - product_name: Flat-Bottom GT Sim Racing Wheel
-    description: Trak Racer 330mm Flat-Bottom GT Sim Racing Wheel. GT wheel rim. current on official US
-      shop. Aluminum 330 mm flat-bottom rim with silicone hand grips.
+    description: Trak Racer 330mm Flat-Bottom GT Sim Racing Wheel. GT wheel rim. current on
+      official US shop. Aluminum 330 mm flat-bottom rim with silicone hand grips.
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1380,8 +1398,9 @@ commercial:
         url: https://trakracer.com/products/trak-tour-steering-wheel-d-shape
         region: US
   - product_name: Flat-Bottom Open GT Sim Racing Wheel
-    description: Trak Racer 330mm Flat-Bottom Open GT Sim Racing Wheel. open GT wheel rim. current on
-      official US shop. Aluminum 330 mm open flat-bottom rim with silicone hand grips.
+    description: Trak Racer 330mm Flat-Bottom Open GT Sim Racing Wheel. open GT wheel rim.
+      current on official US shop. Aluminum 330 mm open flat-bottom rim with silicone hand
+      grips.
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1394,8 +1413,8 @@ commercial:
         url: https://trakracer.com/products/trak-tour-steering-wheel-open-d-shape
         region: US
   - product_name: Round Sim Racing Wheel
-    description: Trak Racer 330mm Round Sim Racing Wheel. round GT/rally wheel rim. current on official
-      US shop. Aluminum 330 mm round rim with silicone hand grips.
+    description: Trak Racer 330mm Round Sim Racing Wheel. round GT/rally wheel rim. current on
+      official US shop. Aluminum 330 mm round rim with silicone hand grips.
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1408,8 +1427,8 @@ commercial:
         url: https://trakracer.com/products/trak-rally-steering-wheel
         region: US
   - product_name: Trak Drift Deep-Dish 350mm Steering Wheel
-    description: Trak Racer Trak Drift Deep-Dish 350mm Steering Wheel. drift wheel rim. current on
-      official US shop. Deep-dish 350 mm wheel rim for simulator steering hubs.
+    description: Trak Racer Trak Drift Deep-Dish 350mm Steering Wheel. drift wheel rim. current
+      on official US shop. Deep-dish 350 mm wheel rim for simulator steering hubs.
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1428,8 +1447,8 @@ commercial:
         region: EU
         status: available
   - product_name: R383 Sparco Logo Suede Black
-    description: Sparco R383. round suede GT/rally wheel rim. current on official German shop. 383 mm
-      Sparco-logo suede steering wheel rim for simulator hubs.
+    description: Sparco R383. round suede GT/rally wheel rim. current on official German shop.
+      383 mm Sparco-logo suede steering wheel rim for simulator hubs.
     manufacturer: Sparco
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1442,8 +1461,8 @@ commercial:
         url: https://www.sparco-official.com/de/r383-logo.html
         region: DE
   - product_name: P310 Open
-    description: Sparco P310 Open. open GT/formula-style steering wheel rim. current on official German
-      shop. Open 310 mm-style Sparco wheel rim for simulator hubs.
+    description: Sparco P310 Open. open GT/formula-style steering wheel rim. current on official
+      German shop. Open 310 mm-style Sparco wheel rim for simulator hubs.
     manufacturer: Sparco
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1456,8 +1475,8 @@ commercial:
         url: https://www.sparco-official.com/de/p310-open-015p310opn.html
         region: DE
   - product_name: R330 Steering Wheel Leather
-    description: Sparco R330. round leather GT wheel rim. current on official German shop. 330 mm
-      leather steering wheel rim for simulator hubs.
+    description: Sparco R330. round leather GT wheel rim. current on official German shop. 330
+      mm leather steering wheel rim for simulator hubs.
     manufacturer: Sparco
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1470,8 +1489,8 @@ commercial:
         url: https://www.sparco-official.com/de/r330.html
         region: DE
   - product_name: KG 345
-    description: Sparco KG 345. kart-style steering wheel rim. current on official German shop. 345 mm
-      Sparco wheel rim for simulator and kart-style setups.
+    description: Sparco KG 345. kart-style steering wheel rim. current on official German shop.
+      345 mm Sparco wheel rim for simulator and kart-style setups.
     manufacturer: Sparco
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1484,9 +1503,9 @@ commercial:
         url: https://www.sparco-official.com/de/kg-345.html
         region: DE
   - product_name: Forte Formula Steering Wheel
-    description: Asetek Forte Formula Steering Wheel. formula-style steering wheel. in stock on official
-      global shop. 290 mm wheel with 128 input options, magnetic shifter paddles, and programmable
-      ARGB LEDs.
+    description: Asetek Forte Formula Steering Wheel. formula-style steering wheel. in stock on
+      official global shop. 290 mm wheel with 128 input options, magnetic shifter paddles,
+      and programmable ARGB LEDs.
     manufacturer: Asetek
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -1500,9 +1519,9 @@ commercial:
         region: Global
         status: available
   - product_name: La Prima Formula Steering Wheel
-    description: Asetek La Prima Formula Steering Wheel. formula-style steering wheel. out of stock on
-      official global shop. 290 mm wheel with 12 push buttons, two 7-way switches, rotary encoders,
-      and magnetic shifter paddles.
+    description: Asetek La Prima Formula Steering Wheel. formula-style steering wheel. out of
+      stock on official global shop. 290 mm wheel with 12 push buttons, two 7-way switches,
+      rotary encoders, and magnetic shifter paddles.
     manufacturer: Asetek
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -1516,9 +1535,9 @@ commercial:
         region: Global
         status: out-of-stock
   - product_name: Initium Steering Wheel (PC)
-    description: Asetek Initium Steering Wheel PC. entry GT-style steering wheel. in stock on official
-      global shop. 300 mm wheel with integrated quick release, magnetic shifters, 21 inputs, and
-      reactive ARGB LEDs.
+    description: Asetek Initium Steering Wheel PC. entry GT-style steering wheel. in stock on
+      official global shop. 300 mm wheel with integrated quick release, magnetic shifters,
+      21 inputs, and reactive ARGB LEDs.
     manufacturer: Asetek
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1532,10 +1551,10 @@ commercial:
         region: Global
         status: available
   - product_name: Mercedes-AMG PETRONAS Formula One Team Sim Racing Steering Wheel (2024/2025)
-    description: Sim Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Steering Wheel (2024/2025).
-      formula wheel. listed on Sim Lab. The officially licensed Mercedes-AMG PETRONAS Formula One
-      Team Sim Racing Steering Wheel (2024/2025) is a masterpiece of engineering and design. Nothing
-      has been spared to make...
+    description: Sim Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Steering Wheel
+      (2024/2025). formula wheel. listed on Sim Lab. The officially licensed Mercedes-AMG
+      PETRONAS Formula One Team Sim Racing Steering Wheel (2024/2025) is a masterpiece of
+      engineering and design. Nothing has been spared to make...
     manufacturer: Sim Lab
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -1549,9 +1568,10 @@ commercial:
         region: EU
         status: available
   - product_name: Porsche 911 RSR Sim Racing Steering Wheel
-    description: Sim Lab Porsche 911 RSR Sim Racing Steering Wheel. gt wheel. listed on Sim Lab. The
-      officially licensed Porsche 911 RSR Sim Racing Steering Wheel utilizes the highest-quality
-      parts available. It is based on the famous Porsche 911 RSR (991.2) steering wheel,...
+    description: Sim Lab Porsche 911 RSR Sim Racing Steering Wheel. gt wheel. listed on Sim Lab.
+      The officially licensed Porsche 911 RSR Sim Racing Steering Wheel utilizes the
+      highest-quality parts available. It is based on the famous Porsche 911 RSR (991.2)
+      steering wheel,...
     manufacturer: Sim Lab
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1562,11 +1582,14 @@ commercial:
         price: Unknown
         currency: USD
         url: https://sim-lab.eu/products/porsche-911-rsr-sim-racing-steering-wheel
-        region: Unknown
+        region: EU
         status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
   - product_name: ClubSport Steering Wheel GT3 for Xbox
-    description: Fanatec ClubSport Steering Wheel GT3 for Xbox. gt wheel. listed on Fanatec. Build your
-      perfect GT3 wheel with the 318 mm ClubSport Wheel Rim GT3 and ClubSport Universal Hub V2.
+    description: Fanatec ClubSport Steering Wheel GT3 for Xbox. gt wheel. listed on Fanatec.
+      Build your perfect GT3 wheel with the 318 mm ClubSport Wheel Rim GT3 and ClubSport
+      Universal Hub V2.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1580,9 +1603,9 @@ commercial:
         region: EU
         status: available
   - product_name: ClubSport Wheel Rim GT3
-    description: Fanatec ClubSport Wheel Rim GT3. gt wheel. listed on Fanatec. Build your perfect GT3
-      wheel with the 318 mm ClubSport Wheel Rim GT3. Optimized for the ClubSport Universal Hub
-      Button Clusters.
+    description: Fanatec ClubSport Wheel Rim GT3. gt wheel. listed on Fanatec. Build your
+      perfect GT3 wheel with the 318 mm ClubSport Wheel Rim GT3. Optimized for the ClubSport
+      Universal Hub Button Clusters.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1596,9 +1619,9 @@ commercial:
         region: EU
         status: available
   - product_name: Steering Wheel SPARCO® GT
-    description: Fanatec Steering Wheel SPARCO® GT. gt wheel. listed on Fanatec. Replica of the SPARCO®
-      P310 wheel. This popular flat wheel design is 310 mm in width but only 235 mm measured from
-      top to bottom. Wrapped in genuine Alcantara® for comfort and g...
+    description: Fanatec Steering Wheel SPARCO® GT. gt wheel. listed on Fanatec. Replica of the
+      SPARCO® P310 wheel. This popular flat wheel design is 310 mm in width but only 235 mm
+      measured from top to bottom. Wrapped in genuine Alcantara® for comfort and g...
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1616,10 +1639,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: Podium Wheel Rim Porsche 911 GT3 Cup (Leather)
-    description: Fanatec Podium Wheel Rim Porsche 911 GT3 Cup (Leather). gt wheel. listed on Fanatec.
-      Full-scale replica of the wheel rim used in Porsche 991 GT3 Cup cars, built to
-      automotive-grade quality. Combined with the optional Podium Button Module Endurance, you can
-      upgra...
+    description: Fanatec Podium Wheel Rim Porsche 911 GT3 Cup (Leather). gt wheel. listed on
+      Fanatec. Full-scale replica of the wheel rim used in Porsche 991 GT3 Cup cars, built
+      to automotive-grade quality. Combined with the optional Podium Button Module
+      Endurance, you can upgra...
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1634,8 +1657,9 @@ commercial:
         status: available
   - product_name: ClubSport Steering Wheel 320 for Xbox
     description: Fanatec ClubSport Steering Wheel 320 for Xbox. gt wheel. listed on Fanatec.
-      Multi-purpose, fully round wheel with ergonomic grips. The smooth leather is durable and
-      comfortable, and features light grey stitching and a light grey centre stripe. It is des...
+      Multi-purpose, fully round wheel with ergonomic grips. The smooth leather is durable
+      and comfortable, and features light grey stitching and a light grey centre stripe. It
+      is des...
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1650,8 +1674,9 @@ commercial:
         status: available
   - product_name: ClubSport Steering Wheel GT Alcantara® V2 for Xbox
     description: Fanatec ClubSport Steering Wheel GT Alcantara® V2 for Xbox. gt wheel. listed on
-      Fanatec. A variation on the popular ClubSport Steering Wheel GT V2, using genuine Alcantara®.
-      The striking lime green accents add a splash of colour to any simulator setup.
+      Fanatec. A variation on the popular ClubSport Steering Wheel GT V2, using genuine
+      Alcantara®. The striking lime green accents add a splash of colour to any simulator
+      setup.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1665,9 +1690,9 @@ commercial:
         region: US
         status: available
   - product_name: ClubSport Steering Wheel GT V2 for Xbox
-    description: Fanatec ClubSport Steering Wheel GT V2 for Xbox. gt wheel. listed on Fanatec. Many
-      supercars of the GT series use a very similar steering wheel. It's just the right size and has
-      incredible grip.
+    description: Fanatec ClubSport Steering Wheel GT V2 for Xbox. gt wheel. listed on Fanatec.
+      Many supercars of the GT series use a very similar steering wheel. It's just the right
+      size and has incredible grip.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1681,8 +1706,9 @@ commercial:
         region: US
         status: available
   - product_name: ClubSport Steering Wheel GT3
-    description: Fanatec ClubSport Steering Wheel GT3. gt wheel. listed on Fanatec. Build your perfect
-      GT3 wheel with the 318 mm ClubSport Wheel Rim GT3 and ClubSport Universal Hub V2.
+    description: Fanatec ClubSport Steering Wheel GT3. gt wheel. listed on Fanatec. Build your
+      perfect GT3 wheel with the 318 mm ClubSport Wheel Rim GT3 and ClubSport Universal Hub
+      V2.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1696,9 +1722,9 @@ commercial:
         region: US
         status: available
   - product_name: ClubSport Steering Wheel GT3 Endurance for Xbox
-    description: Fanatec ClubSport Steering Wheel GT3 Endurance for Xbox. gt wheel. listed on Fanatec.
-      The ClubSport Steering Wheel GT3 Endurance for Xbox delivers realistic performance and
-      features in a stylish, customisable design.
+    description: Fanatec ClubSport Steering Wheel GT3 Endurance for Xbox. gt wheel. listed on
+      Fanatec. The ClubSport Steering Wheel GT3 Endurance for Xbox delivers realistic
+      performance and features in a stylish, customisable design.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1712,8 +1738,9 @@ commercial:
         region: US
         status: available
   - product_name: ClubSport Steering Wheel GT3 for Xbox
-    description: Fanatec ClubSport Steering Wheel GT3 for Xbox. gt wheel. listed on Fanatec. Build your
-      perfect GT3 wheel with the 318 mm ClubSport Wheel Rim GT3 and ClubSport Universal Hub V2.
+    description: Fanatec ClubSport Steering Wheel GT3 for Xbox. gt wheel. listed on Fanatec.
+      Build your perfect GT3 wheel with the 318 mm ClubSport Wheel Rim GT3 and ClubSport
+      Universal Hub V2.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1727,9 +1754,10 @@ commercial:
         region: US
         status: available
   - product_name: ClubSport Steering Wheel Rally Sweden for Xbox
-    description: Fanatec ClubSport Steering Wheel Rally Sweden for Xbox. gt wheel. listed on Fanatec.
-      This special modular Steering Wheel celebrates Ott Tänak’s awesome win at the 2023 Rally
-      Sweden using the Podium Button Module Rally in his M-Sport Ford Puma Hybrid Rally1 WRC car.
+    description: Fanatec ClubSport Steering Wheel Rally Sweden for Xbox. gt wheel. listed on
+      Fanatec. This special modular Steering Wheel celebrates Ott Tänak’s awesome win at the
+      2023 Rally Sweden using the Podium Button Module Rally in his M-Sport Ford Puma Hybrid
+      Rally1 WRC car.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1743,9 +1771,10 @@ commercial:
         region: US
         status: available
   - product_name: ClubSport Steering Wheel SPARCO® GT for Xbox
-    description: Fanatec ClubSport Steering Wheel SPARCO® GT for Xbox. gt wheel. listed on Fanatec.
-      Replica of the SPARCO® P310 wheel. This popular flat wheel design is 310 mm in width but only
-      235 mm measured from top to bottom. Wrapped in genuine Alcantara® for comfort and g...
+    description: Fanatec ClubSport Steering Wheel SPARCO® GT for Xbox. gt wheel. listed on
+      Fanatec. Replica of the SPARCO® P310 wheel. This popular flat wheel design is 310 mm
+      in width but only 235 mm measured from top to bottom. Wrapped in genuine Alcantara®
+      for comfort and g...
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1759,9 +1788,9 @@ commercial:
         region: US
         status: available
   - product_name: ClubSport Wheel Rim GT3
-    description: Fanatec ClubSport Wheel Rim GT3. gt wheel. listed on Fanatec. Build your perfect GT3
-      wheel with the 318 mm ClubSport Wheel Rim GT3. Optimized for the ClubSport Universal Hub
-      Button Clusters.
+    description: Fanatec ClubSport Wheel Rim GT3. gt wheel. listed on Fanatec. Build your
+      perfect GT3 wheel with the 318 mm ClubSport Wheel Rim GT3. Optimized for the ClubSport
+      Universal Hub Button Clusters.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1775,9 +1804,10 @@ commercial:
         region: US
         status: available
   - product_name: Steering Wheel 320 Alcantara® V2
-    description: Fanatec Steering Wheel 320 Alcantara® V2. gt wheel. listed on Fanatec. Multi-purpose,
-      fully round wheel with ergonomic grips. Wrapped in genuine Alcantara® for comfort and grip,
-      the wheel features white stitching and a white leather centre stripe.
+    description: Fanatec Steering Wheel 320 Alcantara® V2. gt wheel. listed on Fanatec.
+      Multi-purpose, fully round wheel with ergonomic grips. Wrapped in genuine Alcantara®
+      for comfort and grip, the wheel features white stitching and a white leather centre
+      stripe.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1791,9 +1821,9 @@ commercial:
         region: US
         status: available
   - product_name: Steering Wheel 320 V2
-    description: Fanatec Steering Wheel 320 V2. gt wheel. listed on Fanatec. Multi-purpose, fully round
-      wheel with ergonomic grips. The smooth leather is durable and comfortable, and features light
-      grey stitching and a light grey centre stripe.
+    description: Fanatec Steering Wheel 320 V2. gt wheel. listed on Fanatec. Multi-purpose,
+      fully round wheel with ergonomic grips. The smooth leather is durable and comfortable,
+      and features light grey stitching and a light grey centre stripe.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1807,9 +1837,9 @@ commercial:
         region: US
         status: available
   - product_name: Steering Wheel GT Alcantara® V2
-    description: Fanatec Steering Wheel GT Alcantara® V2. gt wheel. listed on Fanatec. A variation on
-      the popular ClubSport Wheel Rim GT, using genuine Alcantara®. The striking lime green accents
-      add a splash of colour to any simulator setup.
+    description: Fanatec Steering Wheel GT Alcantara® V2. gt wheel. listed on Fanatec. A
+      variation on the popular ClubSport Wheel Rim GT, using genuine Alcantara®. The
+      striking lime green accents add a splash of colour to any simulator setup.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1823,8 +1853,8 @@ commercial:
         region: US
         status: available
   - product_name: Steering Wheel GT3
-    description: Fanatec Steering Wheel GT3. gt wheel. listed on Fanatec. Full-size GT3-style steering
-      wheel officially licensed for Xbox Series X|S and Xbox One®.
+    description: Fanatec Steering Wheel GT3. gt wheel. listed on Fanatec. Full-size GT3-style
+      steering wheel officially licensed for Xbox Series X|S and Xbox One®.
     manufacturer: Fanatec
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1838,9 +1868,9 @@ commercial:
         region: US
         status: available
   - product_name: 12-inch Round Wheel Mod for ESX
-    description: MOZA 12-inch Round Wheel Mod for ESX. gt wheel. listed on MOZA. 12-inch Round Wheel Mod
-      for ES Steering Wheel Ergonomic Design Microfiber Leather Grips Aluminum Wheel Rim Lightweight
-      Design Shifter Paddle Extension Block.
+    description: MOZA 12-inch Round Wheel Mod for ESX. gt wheel. listed on MOZA. 12-inch Round
+      Wheel Mod for ES Steering Wheel Ergonomic Design Microfiber Leather Grips Aluminum
+      Wheel Rim Lightweight Design Shifter Paddle Extension Block.
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1854,9 +1884,9 @@ commercial:
         region: EU
         status: available
   - product_name: Clamp for Truck Wheel
-    description: MOZA Clamp for Truck Wheel. gt wheel. listed on Eu. Elevate your driving sim experience
-      with the Clamp for Truck Wheel, engineered with robust high-strength steel for unparalleled
-      durability. With versatile adjustments from 0 to...
+    description: MOZA Clamp for Truck Wheel. gt wheel. listed on Eu. Elevate your driving sim
+      experience with the Clamp for Truck Wheel, engineered with robust high-strength steel
+      for unparalleled durability. With versatile adjustments from 0 to...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1870,9 +1900,9 @@ commercial:
         region: EU
         status: available
   - product_name: Essenza SCV12 Sim-Racing Steering Wheel
-    description: MOZA Essenza SCV12 Sim-Racing Steering Wheel. gt wheel. listed on Eu. Essenza SCV12
-      Sim-Racing Steering Wheel This premium sim racing wheel replicates the steering wheel of the
-      Automobili Lamborghini Essenza SCV12 hypercar, a limited edition maste...
+    description: MOZA Essenza SCV12 Sim-Racing Steering Wheel. gt wheel. listed on Eu. Essenza
+      SCV12 Sim-Racing Steering Wheel This premium sim racing wheel replicates the steering
+      wheel of the Automobili Lamborghini Essenza SCV12 hypercar, a limited edition maste...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1886,9 +1916,9 @@ commercial:
         region: EU
         status: available
   - product_name: CS V2P Steering Wheel
-    description: MOZA CS V2P Steering Wheel. gt wheel. listed on Eu. Unleash your full potential on the
-      track with the CS V2P and bring your racing experience to the next level. Guaranteed
-      durability and a sleek aesthetic thanks to its aviation-g...
+    description: MOZA CS V2P Steering Wheel. gt wheel. listed on Eu. Unleash your full potential
+      on the track with the CS V2P and bring your racing experience to the next level.
+      Guaranteed durability and a sleek aesthetic thanks to its aviation-g...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1902,9 +1932,10 @@ commercial:
         region: EU
         status: available
   - product_name: ESX Steering Wheel for PC & Xbox
-    description: MOZA ESX Steering Wheel for PC & Xbox. gt wheel. listed on Eu. The MOZA ESX Steering
-      Wheel combines official Xbox licensing with MOZA Racing’s direct drive technology to deliver
-      an unparalleled racing experience on both PC and Xbox. Built f...
+    description: MOZA ESX Steering Wheel for PC & Xbox. gt wheel. listed on Eu. The MOZA ESX
+      Steering Wheel combines official Xbox licensing with MOZA Racing’s direct drive
+      technology to deliver an unparalleled racing experience on both PC and Xbox. Built
+      f...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1918,9 +1949,9 @@ commercial:
         region: EU
         status: available
   - product_name: FSR2 Formula Wheel
-    description: MOZA FSR2 Formula Wheel. formula wheel. listed on Eu. Elevate your racing experience
-      with the MOZA FSR2 Formula Wheel. This 280mm wheel boasts a vibrant 4.3-inch touchscreen,
-      customizable UI, and precision controls, including a 6-p...
+    description: MOZA FSR2 Formula Wheel. formula wheel. listed on Eu. Elevate your racing
+      experience with the MOZA FSR2 Formula Wheel. This 280mm wheel boasts a vibrant
+      4.3-inch touchscreen, customizable UI, and precision controls, including a 6-p...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -1934,9 +1965,9 @@ commercial:
         region: EU
         status: available
   - product_name: GS V2P GT Wheel
-    description: MOZA GS V2P GT Wheel. gt wheel. listed on Eu. Dominate the track with the MOZA GS GT
-      Wheel, the ultimate sim racing steering wheel—experience luxury and comfort with its
-      Microfiber Leather construction. The stylish forged c...
+    description: MOZA GS V2P GT Wheel. gt wheel. listed on Eu. Dominate the track with the MOZA
+      GS GT Wheel, the ultimate sim racing steering wheel—experience luxury and comfort with
+      its Microfiber Leather construction. The stylish forged c...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1950,9 +1981,9 @@ commercial:
         region: EU
         status: available
   - product_name: Paddles Add-on Kit
-    description: MOZA Paddles Add-on Kit. gt wheel. listed on Eu. Designed for expandability. The MOZA
-      Paddles Add-on module upgrades the CS Pro Wheel with pre-installed mounting points and signal
-      connectors to a six-paddle layout. The additio...
+    description: MOZA Paddles Add-on Kit. gt wheel. listed on Eu. Designed for expandability.
+      The MOZA Paddles Add-on module upgrades the CS Pro Wheel with pre-installed mounting
+      points and signal connectors to a six-paddle layout. The additio...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1966,9 +1997,9 @@ commercial:
         region: EU
         status: available
   - product_name: Porsche Mission R Steering Wheel
-    description: MOZA Porsche Mission R Steering Wheel. gt wheel. listed on Eu. The MOZA Porsche Mission
-      R Steering Wheel is an officially licensed replica crafted with Porsche’s original CAD data.
-      Featuring a 5.4-inch flexible OLED display, CNC-machined al...
+    description: MOZA Porsche Mission R Steering Wheel. gt wheel. listed on Eu. The MOZA Porsche
+      Mission R Steering Wheel is an officially licensed replica crafted with Porsche’s
+      original CAD data. Featuring a 5.4-inch flexible OLED display, CNC-machined al...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1982,9 +2013,9 @@ commercial:
         region: EU
         status: available
   - product_name: RS V2 Steering Wheel
-    description: MOZA RS V2 Steering Wheel. gt wheel. listed on Eu. Upgrade your sim racing setup with
-      the RS sim racing steering wheel. This GT wheel offers compatibility with all MOZA wheelbases
-      currently on sale, seamlessly integrating for an...
+    description: MOZA RS V2 Steering Wheel. gt wheel. listed on Eu. Upgrade your sim racing
+      setup with the RS sim racing steering wheel. This GT wheel offers compatibility with
+      all MOZA wheelbases currently on sale, seamlessly integrating for an...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -1998,9 +2029,9 @@ commercial:
         region: EU
         status: available
   - product_name: Vision GS Wheel
-    description: MOZA Vision GS Wheel. gt wheel. listed on Eu. Experience unparalleled control and
-      futuristic design with the MOZA Vision GS Wheel . Measuring 310mm, it features a 2.85-inch HD
-      circular touch screen with a customizable UI an...
+    description: MOZA Vision GS Wheel. gt wheel. listed on Eu. Experience unparalleled control
+      and futuristic design with the MOZA Vision GS Wheel . Measuring 310mm, it features a
+      2.85-inch HD circular touch screen with a customizable UI an...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2014,8 +2045,8 @@ commercial:
         region: EU
         status: available
   - product_name: GT Pro Hub
-    description: Simagic GT Pro Hub. wheel electronics. listed on Simagic. GT Pro Hub GT CUP. RAISE YOUR
-      TROPHY DIY YOUR CHAMPION WHEEL.
+    description: Simagic GT Pro Hub. wheel electronics. listed on Simagic. GT Pro Hub GT CUP.
+      RAISE YOUR TROPHY DIY YOUR CHAMPION WHEEL.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: wheel-electronics
@@ -2030,8 +2061,8 @@ commercial:
         status: available
     license: Commercial
   - product_name: GT Pro HUB(K)
-    description: Simagic GT Pro HUB(K). wheel electronics. listed on Simagic. For the best GT Racing
-      experience possible Co-developed with GT racers and engineers.
+    description: Simagic GT Pro HUB(K). wheel electronics. listed on Simagic. For the best GT
+      Racing experience possible Co-developed with GT racers and engineers.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: wheel-electronics
@@ -2046,10 +2077,10 @@ commercial:
         status: available
     license: Commercial
   - product_name: 330mm/13" Round Sim Racing Wheel – Aluminium with Durable Silicon Hand Grips
-    description: Trak Racer 330mm/13" Round Sim Racing Wheel – Aluminium with Durable Silicon Hand
-      Grips. gt wheel. listed on Trakracer. Elevate your sim racing setup with the Trak Racer Round
-      330mm/13" Steering Wheel Rim — a track-grade accessory designed for precision, comfort, and
-      durability. The Round Steerin...
+    description: Trak Racer 330mm/13" Round Sim Racing Wheel – Aluminium with Durable Silicon
+      Hand Grips. gt wheel. listed on Trakracer. Elevate your sim racing setup with the Trak
+      Racer Round 330mm/13" Steering Wheel Rim — a track-grade accessory designed for
+      precision, comfort, and durability. The Round Steerin...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2063,10 +2094,10 @@ commercial:
         region: EU
         status: available
   - product_name: Simagic Round 330mm Steering Wheel - Leather (P-330R)
-    description: Trak Racer Simagic Round 330mm Steering Wheel - Leather (P-330R). gt wheel. listed on
-      Trakracer. Simagic P-330R (Leather) – Premium 330 mm Round Sim Racing Wheel Experience true
-      racing precision with the Simagic P-330R Leather Edition — engineered for professional
-      performan...
+    description: Trak Racer Simagic Round 330mm Steering Wheel - Leather (P-330R). gt wheel.
+      listed on Trakracer. Simagic P-330R (Leather) – Premium 330 mm Round Sim Racing Wheel
+      Experience true racing precision with the Simagic P-330R Leather Edition — engineered
+      for professional performan...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2080,7 +2111,8 @@ commercial:
         region: EU
         status: available
   - product_name: D-Shape Steering wheel 330
-    description: VNM D-Shape Steering wheel 330. gt wheel. listed on Vnmsimulation. Official shop listing.
+    description: VNM D-Shape Steering wheel 330. gt wheel. listed on Vnmsimulation. Official
+      shop listing.
     manufacturer: VNM
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2094,7 +2126,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: D-Shape Steering wheel 330
-    description: VNM D-Shape Steering wheel 330. gt wheel. listed on Vnmsimulation. Official shop listing.
+    description: VNM D-Shape Steering wheel 330. gt wheel. listed on Vnmsimulation. Official
+      shop listing.
     manufacturer: VNM
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2108,8 +2141,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Deep Dish Round Steering Wheel 330
-    description: VNM Deep Dish Round Steering Wheel 330. gt wheel. listed on Vnmsimulation. Official
-      shop listing.
+    description: VNM Deep Dish Round Steering Wheel 330. gt wheel. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2123,8 +2156,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Deep Dish Round Steering Wheel 330
-    description: VNM Deep Dish Round Steering Wheel 330. gt wheel. listed on Vnmsimulation. Official
-      shop listing.
+    description: VNM Deep Dish Round Steering Wheel 330. gt wheel. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2138,8 +2171,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Deep Dish Round Steering Wheel 350
-    description: VNM Deep Dish Round Steering Wheel 350. gt wheel. listed on Vnmsimulation. Official
-      shop listing.
+    description: VNM Deep Dish Round Steering Wheel 350. gt wheel. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2153,8 +2186,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Deep Dish Round Steering Wheel 350
-    description: VNM Deep Dish Round Steering Wheel 350. gt wheel. listed on Vnmsimulation. Official
-      shop listing.
+    description: VNM Deep Dish Round Steering Wheel 350. gt wheel. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2224,9 +2257,10 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Forte® Formula Button Box (Black, Aluminum)
-    description: Asetek Forte® Formula Button Box (Black, Aluminum). formula wheel. listed on Asetek.
-      Inspired by real-life Formula and LMP cars, the Forte® Formula button box is based on an
-      injection molded chassis featuring a carbon, glass and plastic composite material allied...
+    description: Asetek Forte® Formula Button Box (Black, Aluminum). formula wheel. listed on
+      Asetek. Inspired by real-life Formula and LMP cars, the Forte® Formula button box is
+      based on an injection molded chassis featuring a carbon, glass and plastic composite
+      material allied...
     manufacturer: Asetek
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -2238,9 +2272,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: Forte® GT Button Box (Black, Aluminum)
-    description: Asetek Forte® GT Button Box (Black, Aluminum). gt wheel. listed on Asetek. Inspired by
-      real-life GT cars, the Forte® GT button box is based on an injection molded chassis featuring
-      a carbon, glass and plastic composite material allied to a metal spider...
+    description: Asetek Forte® GT Button Box (Black, Aluminum). gt wheel. listed on Asetek.
+      Inspired by real-life GT cars, the Forte® GT button box is based on an injection
+      molded chassis featuring a carbon, glass and plastic composite material allied to a
+      metal spider...
     manufacturer: Asetek
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2252,9 +2287,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Invicta Formula Button Box
-    description: Asetek Invicta Formula Button Box. formula wheel. listed on Asetek. Delivery may take
-      up to 2 weeks due to custom orders being handbuilt and shipped from Denmark. Your Wheel. Your
-      Way. Built from a solid block of aluminum with a carbon fiber fro...
+    description: Asetek Invicta Formula Button Box. formula wheel. listed on Asetek. Delivery
+      may take up to 2 weeks due to custom orders being handbuilt and shipped from Denmark.
+      Your Wheel. Your Way. Built from a solid block of aluminum with a carbon fiber fro...
     manufacturer: Asetek
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -2266,9 +2301,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: La Prima™ Formula Button Box (Black)
-    description: Asetek La Prima™ Formula Button Box (Black). formula wheel. listed on Asetek. Inspired
-      by real-life Formula and LMP cars, the La Prima™ Formula button box is based on an injection
-      molded chassis featuring a carbon, glass and plastic composite material all...
+    description: Asetek La Prima™ Formula Button Box (Black). formula wheel. listed on Asetek.
+      Inspired by real-life Formula and LMP cars, the La Prima™ Formula button box is based
+      on an injection molded chassis featuring a carbon, glass and plastic composite
+      material all...
     manufacturer: Asetek
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -2296,9 +2332,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: Steering Wheel Button Color Kit
-    description: Asetek Steering Wheel Button Color Kit. gt wheel. listed on Asetek. Customize the look
-      of your Asetek Racing™ Steering Wheel with the Button Color Kit. The kit includes a wide
-      variety of different colors for buttons, handle cushions, and the Qui...
+    description: Asetek Steering Wheel Button Color Kit. gt wheel. listed on Asetek. Customize
+      the look of your Asetek Racing™ Steering Wheel with the Button Color Kit. The kit
+      includes a wide variety of different colors for buttons, handle cushions, and the
+      Qui...
     manufacturer: Asetek
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2310,9 +2347,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: 12-inch AT Steering Wheel
-    description: "CAMMUS 12-inch AT Steering Wheel. gt wheel. listed on Cammusracing. 13-inch steering
-      wheel with Artificial Leather Without HUB, without quick release Please note : If you are the
-      customer from our overseas warehouse region, you will be responsib..."
+    description: "CAMMUS 12-inch AT Steering Wheel. gt wheel. listed on Cammusracing. 13-inch
+      steering wheel with Artificial Leather Without HUB, without quick release Please note
+      : If you are the customer from our overseas warehouse region, you will be
+      responsib..."
     manufacturer: CAMMUS
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2326,9 +2364,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: GTR Steering Wheel
-    description: "CAMMUS GTR Steering Wheel. gt wheel. listed on Cammusracing. Please note: Stock is
-      limited, first-come, first-served. All products will be shipped from overseas warehouses as
-      much as possible. We promise to ship all orders within 1-3 work..."
+    description: "CAMMUS GTR Steering Wheel. gt wheel. listed on Cammusracing. Please note:
+      Stock is limited, first-come, first-served. All products will be shipped from overseas
+      warehouses as much as possible. We promise to ship all orders within 1-3 work..."
     manufacturer: CAMMUS
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2342,9 +2380,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Universal Hub Kit
-    description: MOZA Universal Hub Kit. ffb controller. listed on Eu. The MOZA Universal Hub Kit
-      provides a versatile and reliable solution for integrating the MOZA steering wheel with
-      various third-party bases, enhancing your simulation experienc...
+    description: MOZA Universal Hub Kit. ffb controller. listed on Eu. The MOZA Universal Hub
+      Kit provides a versatile and reliable solution for integrating the MOZA steering wheel
+      with various third-party bases, enhancing your simulation experienc...
     manufacturer: MOZA
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2360,9 +2398,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Savu Extra Paddle Kit
-    description: Simucube Savu Extra Paddle Kit. ffb controller. listed on Simucube. Simucube Savu extra
-      paddle kit compatible with both sim racing wheel models Simucube Savu Sport and Pro. Upgrade
-      your steering wheel for maximum performance.
+    description: Simucube Savu Extra Paddle Kit. ffb controller. listed on Simucube. Simucube
+      Savu extra paddle kit compatible with both sim racing wheel models Simucube Savu Sport
+      and Pro. Upgrade your steering wheel for maximum performance.
     manufacturer: Simucube
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2378,10 +2416,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Alpine Formula One™ Team A525 REPLICA Sim Racing Steering Wheel
-    description: BWT Alpine Formula One™ Team A525 REPLICA Sim Racing Steering Wheel. ffb controller.
-      listed on Trakracer. The A525 is the most authentic BWT Alpine Formula One™ Team steering
-      wheel ever built for sim racing. Developed in close collaboration with BWT Alpine Formula One™
-      Team engineer...
+    description: BWT Alpine Formula One™ Team A525 REPLICA Sim Racing Steering Wheel. ffb
+      controller. listed on Trakracer. The A525 is the most authentic BWT Alpine Formula
+      One™ Team steering wheel ever built for sim racing. Developed in close collaboration
+      with BWT Alpine Formula One™ Team engineer...
     manufacturer: BWT
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2397,10 +2435,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Conspit 290GP Formula Steering Wheel – 3D Ergonomic Formula-Class Wheel
-    description: Trak Racer Conspit 290GP Formula Steering Wheel – 3D Ergonomic Formula-Class Wheel. ffb
-      controller. listed on Trakracer. The Conspit 290GP Formula Wheel is a next-generation,
-      high-performance Formula-style racing wheel, built for sim racers who want extreme control,
-      comfort, and endurance. The 290...
+    description: Trak Racer Conspit 290GP Formula Steering Wheel – 3D Ergonomic Formula-Class
+      Wheel. ffb controller. listed on Trakracer. The Conspit 290GP Formula Wheel is a
+      next-generation, high-performance Formula-style racing wheel, built for sim racers who
+      want extreme control, comfort, and endurance. The 290...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -2416,9 +2454,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Conspit 300GT Steering Wheel
-    description: Trak Racer Conspit 300GT Steering Wheel. ffb controller. listed on Trakracer. The
-      Conspit 300 GT introduces a groundbreaking combination of Conspit’s proprietary technologies,
-      built upon a race-grade carbon fiber lightweight structure. It integrates cutti...
+    description: Trak Racer Conspit 300GT Steering Wheel. ffb controller. listed on Trakracer.
+      The Conspit 300 GT introduces a groundbreaking combination of Conspit’s proprietary
+      technologies, built upon a race-grade carbon fiber lightweight structure. It
+      integrates cutti...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2434,9 +2473,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Conspit 310 APEX Steering Wheel
-    description: Trak Racer Conspit 310 APEX Steering Wheel. ffb controller. listed on Trakracer.
-      .pd-row{display:flex;flex-wrap:wrap;align-items:center;margin:32px 0;} .pd-text{flex:1 1
-      50%;padding:16px;box-sizing:border-box;} .pd-img{flex:1 1 50%;padding:16px;box-sizing:bo...
+    description: Trak Racer Conspit 310 APEX Steering Wheel. ffb controller. listed on
+      Trakracer. .pd-row{display:flex;flex-wrap:wrap;align-items:center;margin:32px 0;}
+      .pd-text{flex:1 1 50%;padding:16px;box-sizing:border-box;} .pd-img{flex:1 1
+      50%;padding:16px;box-sizing:bo...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2452,8 +2492,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Conspit CP105 MAX01 Formula Wheel
-    description: Trak Racer Conspit CP105 MAX01 Formula Wheel. ffb controller. listed on Trakracer.
-      Conspit CP105 MAX01 Formula Wheel.
+    description: Trak Racer Conspit CP105 MAX01 Formula Wheel. ffb controller. listed on
+      Trakracer. Conspit CP105 MAX01 Formula Wheel.
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -2469,10 +2509,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: FORMULA MAYARIS 2 CARBON FIBER FORMULA STEERING WHEEL (4 PADDLE VERSION)
-    description: REXING FORMULA MAYARIS 2 CARBON FIBER FORMULA STEERING WHEEL (4 PADDLE VERSION). ffb
-      controller. listed on Trakracer. Rexing Formula Steering Wheel – Pro-Level Control for Serious
-      Sim Racers Built for the most demanding sim racing professionals and enthusiasts, the Rexing
-      Formula Steering Wheel...
+    description: REXING FORMULA MAYARIS 2 CARBON FIBER FORMULA STEERING WHEEL (4 PADDLE
+      VERSION). ffb controller. listed on Trakracer. Rexing Formula Steering Wheel –
+      Pro-Level Control for Serious Sim Racers Built for the most demanding sim racing
+      professionals and enthusiasts, the Rexing Formula Steering Wheel...
     manufacturer: REXING
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2489,9 +2529,9 @@ commercial:
     last_updated: 2026-05-01
   - product_name: Simagic GT NEO Formula Wheel – Carbon & LCD Display, 12 Buttons
     description: Trak Racer Simagic GT NEO Formula Wheel – Carbon & LCD Display, 12 Buttons. ffb
-      controller. listed on Trakracer. Product Description The Simagic GT NEO Steering Wheel is a
-      premium sim racing wheel designed for excellence in Formula, GT, and open-wheel simulation. It
-      features a front panel...
+      controller. listed on Trakracer. Product Description The Simagic GT NEO Steering Wheel
+      is a premium sim racing wheel designed for excellence in Formula, GT, and open-wheel
+      simulation. It features a front panel...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -2507,10 +2547,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Simagic NEO X Hub – Modular DIY Steering Wheel Button Hub
-    description: Trak Racer Simagic NEO X Hub – Modular DIY Steering Wheel Button Hub. ffb controller.
-      listed on Trakracer. Product Description The Simagic NEO X Hub is a next-generation, fully
-      modular button hub designed for sim racers who demand maximum flexibility, precision, and
-      control in their...
+    description: Trak Racer Simagic NEO X Hub – Modular DIY Steering Wheel Button Hub. ffb
+      controller. listed on Trakracer. Product Description The Simagic NEO X Hub is a
+      next-generation, fully modular button hub designed for sim racers who demand maximum
+      flexibility, precision, and control in their...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2526,10 +2566,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Simagic NEO X Hub with Alpha EVO 12nm Wheel Base and Leather Steering Wheel
-    description: Trak Racer Simagic NEO X Hub with Alpha EVO 12nm Wheel Base and Leather Steering Wheel.
-      ffb controller. listed on Trakracer. Why Choose This Simagic Bundle? Combining modular input
-      flexibility, premium leather steering control, and high-torque direct-drive performance, this
-      bundle is perfect for home...
+    description: Trak Racer Simagic NEO X Hub with Alpha EVO 12nm Wheel Base and Leather
+      Steering Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle?
+      Combining modular input flexibility, premium leather steering control, and high-torque
+      direct-drive performance, this bundle is perfect for home...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2545,10 +2585,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Simagic NEO X Hub with Alpha EVO Pro 18nm Wheel Base and Leather Steering Wheel
-    description: Trak Racer Simagic NEO X Hub with Alpha EVO Pro 18nm Wheel Base and Leather Steering
-      Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle? Combining modular
-      hub flexibility, premium leather steering control, and the ultimate high-torque direct-drive
-      experience, this bundle delivers u...
+    description: Trak Racer Simagic NEO X Hub with Alpha EVO Pro 18nm Wheel Base and Leather
+      Steering Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle?
+      Combining modular hub flexibility, premium leather steering control, and the ultimate
+      high-torque direct-drive experience, this bundle delivers u...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2564,10 +2604,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Simagic NEO X Hub with Alpha EVO Sport 9nm Wheel Base and Leather Steering Wheel
-    description: Trak Racer Simagic NEO X Hub with Alpha EVO Sport 9nm Wheel Base and Leather Steering
-      Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle? This bundle pairs
-      modular input control with a premium leather rim and a refined belt-drive base to deliver a
-      versatile, realistic steering solut...
+    description: Trak Racer Simagic NEO X Hub with Alpha EVO Sport 9nm Wheel Base and Leather
+      Steering Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle?
+      This bundle pairs modular input control with a premium leather rim and a refined
+      belt-drive base to deliver a versatile, realistic steering solut...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2583,10 +2623,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Simagic NEO X Hub with Leather Steering Wheel
-    description: Trak Racer Simagic NEO X Hub with Leather Steering Wheel. ffb controller. listed on
-      Trakracer. Why Choose This Simagic Bundle? This two-part bundle merges advanced modular
-      control with classic racecar realism. The NEO X Hub delivers flexible inputs, customizable
-      paddles,...
+    description: Trak Racer Simagic NEO X Hub with Leather Steering Wheel. ffb controller.
+      listed on Trakracer. Why Choose This Simagic Bundle? This two-part bundle merges
+      advanced modular control with classic racecar realism. The NEO X Hub delivers flexible
+      inputs, customizable paddles,...
     manufacturer: Trak Racer
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2602,8 +2642,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: QR-A
-    description: Simagic QR-A. gt wheel. listed on Simagic. Seamlessly mount third-party steering wheels
-      with a standard 70mm hole pattern onto Alpha Evo Wheelbase.
+    description: Simagic QR-A. gt wheel. listed on Simagic. Seamlessly mount third-party
+      steering wheels with a standard 70mm hole pattern onto Alpha Evo Wheelbase.
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2635,8 +2675,9 @@ commercial:
         status: available
     license: Commercial
   - product_name: P-330R Round Wheel
-    description: "Simagic P-330R Round Wheel. gt wheel. listed on Simagic. Usage tip: For optimal
-      comfort and durability, use without gloves to prevent pilling on suede surfaces."
+    description: "Simagic P-330R Round Wheel. gt wheel. listed on Simagic. Usage tip: For
+      optimal comfort and durability, use without gloves to prevent pilling on suede
+      surfaces."
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2651,8 +2692,9 @@ commercial:
         status: available
     license: Commercial
   - product_name: P-325D D-Shaped Wheel
-    description: "Simagic P-325D D-Shaped Wheel. gt wheel. listed on Simagic. Usage tip: For optimal
-      comfort and durability, use without gloves to prevent pilling on suede surfaces."
+    description: "Simagic P-325D D-Shaped Wheel. gt wheel. listed on Simagic. Usage tip: For
+      optimal comfort and durability, use without gloves to prevent pilling on suede
+      surfaces."
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2667,8 +2709,9 @@ commercial:
         status: available
     license: Commercial
   - product_name: P-325C Cut-off top Wheel
-    description: "Simagic P-325C Cut-off top Wheel. gt wheel. listed on Simagic. Usage tip: For optimal
-      comfort and durability, use without gloves to prevent pilling on suede surfaces."
+    description: "Simagic P-325C Cut-off top Wheel. gt wheel. listed on Simagic. Usage tip: For
+      optimal comfort and durability, use without gloves to prevent pilling on suede
+      surfaces."
     manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: gt-wheel
@@ -2700,9 +2743,9 @@ commercial:
     last_updated: 2026-05-01
 opensource:
   - project_name: FreeJoy
-    description: FreeJoy. configurable USB HID input controller for wheels, pedals, shifters, and
-      panels. Mature hobby firmware with large community footprint; active repository. Configurable
-      USB HID game-device controller based on cheap STM32F103C8 boards.
+    description: FreeJoy. configurable USB HID input controller for wheels, pedals, shifters,
+      and panels. Mature hobby firmware with large community footprint; active repository.
+      Configurable USB HID game-device controller based on cheap STM32F103C8 boards.
     maker: FreeJoy-Team
     component_category: steering-wheels
     component_sub_category: wheel-electronics
@@ -2711,8 +2754,8 @@ opensource:
     picture_url: https://raw.githubusercontent.com/FreeJoy-Team/FreeJoy/master/images/main.png
   - project_name: LY steeringWheel MeterBox STM32 FreeRTOS
     description: LY SteeringWheel MeterBox. formula-style wheel with display and SimHub support.
-      Complete university Formula Student graduation project; repo and external hardware project
-      available. STM32F407 steering wheel for Formula Student car and simulator use.
+      Complete university Formula Student graduation project; repo and external hardware
+      project available. STM32F407 steering wheel for Formula Student car and simulator use.
     maker: Nolimy
     component_category: steering-wheels
     component_sub_category: formula-wheel
@@ -2720,9 +2763,9 @@ opensource:
     project_url: https://github.com/Nolimy/steeringWheel_MeterBox_STM32_FreeRTOS
     picture_url: https://raw.githubusercontent.com/Nolimy/steeringWheel_MeterBox_STM32_FreeRTOS/main/readme%20md/simhub1.png
   - project_name: OpenSourceSimWheelESP32
-    description: OpenSourceSimWheelESP32. wireless steering-wheel/button-box electronics. Active,
-      documented, fully operational project with releases and extensive documentation. Open
-      hardware/software for ESP32 sim-racing wheel or button box.
+    description: OpenSourceSimWheelESP32. wireless steering-wheel/button-box electronics.
+      Active, documented, fully operational project with releases and extensive
+      documentation. Open hardware/software for ESP32 sim-racing wheel or button box.
     maker: afpineda
     component_category: steering-wheels
     component_sub_category: wheel-electronics
@@ -2730,9 +2773,9 @@ opensource:
     project_url: https://github.com/afpineda/OpenSourceSimWheelESP32
     picture_url: https://repository-images.githubusercontent.com/489044238/1d81d5ed-5a48-4502-8079-3e7befab7929
   - project_name: Pico Wheel
-    description: Pico Wheel. non-FFB 3D-printed wheel/controller. Small complete hobby project; low
-      complexity and modest activity. DIY sim racing wheel using Raspberry Pi Pico and AS5600
-      magnetic encoder.
+    description: Pico Wheel. non-FFB 3D-printed wheel/controller. Small complete hobby project;
+      low complexity and modest activity. DIY sim racing wheel using Raspberry Pi Pico and
+      AS5600 magnetic encoder.
     maker: khui0
     component_category: steering-wheels
     component_sub_category: wheel-electronics
@@ -2740,21 +2783,22 @@ opensource:
     project_url: https://github.com/khui0/pico-wheel
     picture_url: https://github.com/khui0/pico-wheel/assets/101839505/29395627-e298-49d1-adba-7828c009001b
   - project_name: Turn Racing DIY Wheels
-    description: Turn Racing DIY Wheels. source-available 3D/CAD steering wheel archive. Archived
-      community DIY wheel file collection; repo updated but license is restrictive. Archive includes
-      multiple Turn DIY wheel projects such as 488 Challenge, 911 GT3 Cup, Fiesta WRC, GT GT3, GTE,
-      R8 LMS, RSR-17, AMG GT3 [uncertain exact current repo coverage].
+    description: Turn Racing DIY Wheels. source-available 3D/CAD steering wheel archive.
+      Archived community DIY wheel file collection; repo updated but license is restrictive.
+      Archive includes multiple Turn DIY wheel projects such as 488 Challenge, 911 GT3 Cup,
+      Fiesta WRC, GT GT3, GTE, R8 LMS, RSR-17, AMG GT3 [uncertain exact current repo
+      coverage].
     maker: Turn Racing community
     component_category: steering-wheels
     component_sub_category: wheel-archive
-    license: CC BY-NC-ND 4.0; source-available but not OSI/open-hardware-compliant because commercial
-      use and derivative sharing are restricted.
+    license: CC BY-NC-ND 4.0; source-available but not OSI/open-hardware-compliant because
+      commercial use and derivative sharing are restricted.
     project_url: https://github.com/turnracing/turnracing-diy
     picture_url: https://simracing-pc.de/wp-content/uploads/2025/05/simracing-pc.jpg
   - project_name: WirelessWheel
-    description: WirelessWheel. NRF24 wireless wheel electronics. Functional hobby project; updated but
-      smaller and older than OpenSourceSimWheelESP32. NRF24-powered wireless steering wheel with
-      buttons, LEDs, Nextion display, and SimHub support.
+    description: WirelessWheel. NRF24 wireless wheel electronics. Functional hobby project;
+      updated but smaller and older than OpenSourceSimWheelESP32. NRF24-powered wireless
+      steering wheel with buttons, LEDs, Nextion display, and SimHub support.
     maker: MorGuux
     component_category: steering-wheels
     component_sub_category: wheel-electronics

@@ -21,6 +21,7 @@
   } from './cut-list/currency';
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
+  import { getMonitorStandLayoutMm } from '~/components/calculator/aluminum-rig-planner/modules/monitor-stand';
   import CutOptimizerPanel from './cut-list/CutOptimizerPanel.svelte';
   import { createPlannerCutListEntries } from './cut-list/cut-list';
   import { COLOR_MODE_OPTIONS, DEFAULT_CUSTOM_PROFILE_COLOR } from './constants/scene';
@@ -33,6 +34,7 @@
     MONITOR_ARC_CENTER_AT_EYES_CURVATURE_OPTIONS,
     MONITOR_ARC_CENTER_AT_EYES_FALLBACK_CURVATURE,
     MONITOR_CURVATURE_OPTIONS,
+    MONITOR_VESA_OPTIONS,
     PLANNER_POSTURE_LIMITS,
     POSTURE_PRESET_OPTIONS,
   } from './constants/posture';
@@ -68,6 +70,7 @@
   import {
     getArcCenterDistanceMm,
     getArcCenterFovDeg,
+    getDefaultMonitorBottomVesaHoleDistanceMm,
     getMonitorTargetFovFromDistanceMm,
     getSolvedMonitorDistanceFromEyesMm,
   } from './modules/monitor';
@@ -105,6 +108,7 @@
     PlannerInput,
     PlannerMonitorAspectRatio,
     PlannerMonitorCurvature,
+    PlannerMonitorVesaType,
     PlannerOptimizationSettings,
     PlannerPosturePreset,
     PlannerPostureSettings,
@@ -236,6 +240,7 @@
     Object.assign(animatedPlannerInput, mergedState.plannerInput);
     Object.assign(optimizationSettings, cloneOptimizationSettings(mergedState.optimizationSettings));
     Object.assign(postureSettings, clonePostureSettings(mergedState.postureSettings));
+    Object.assign(visibleModules, mergedState.visibleModules);
     postureHeightControlValue = postureSettings.heightCm;
     animatedPostureHeightCm = postureSettings.heightCm;
 
@@ -260,6 +265,7 @@
   let animatedPostureHeightCm = $state(DEFAULT_POSTURE_SETTINGS.heightCm);
   let visibleModules = $state<PlannerVisibleModules>({
     monitor: true,
+    monitorStand: false,
   });
   let profileColorMode = $state<(typeof COLOR_MODE_OPTIONS)[number]['value']>('black');
   let customProfileColor = $state(DEFAULT_CUSTOM_PROFILE_COLOR);
@@ -463,7 +469,18 @@
         ? customProfileColor
         : BLACK_PROFILE_COLOR
   );
-  const cutListEntries = $derived(createPlannerCutListEntries(geometry, visibleModules, showEndCaps));
+  const cutListEntries = $derived(
+    createPlannerCutListEntries(geometry, visibleModules, showEndCaps, postureReport, postureSettings)
+  );
+  const monitorStandLayout = $derived(
+    postureReport?.monitorDebug
+      ? getMonitorStandLayoutMm(postureReport.monitorDebug, postureSettings, geometry.input.baseWidthMm)
+      : null
+  );
+  const monitorStandFootLengthLimits = $derived.by(() => ({
+    min: monitorStandLayout?.footLengthMinMm ?? PLANNER_POSTURE_LIMITS.monitorStandFootLengthMinMm,
+    max: monitorStandLayout?.footLengthMaxMm ?? PLANNER_POSTURE_LIMITS.monitorStandFootLengthMaxMm,
+  }));
   const optimizationResult = $derived(createPlannerOptimizationResult(cutListEntries, optimizationSettings));
   const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
   const currencyCode = $derived<PlannerCurrencyCode>(
@@ -841,6 +858,7 @@
       ...$state.snapshot(plannerInput),
       optimizer: $state.snapshot(optimizationSettings),
       posture: $state.snapshot(postureSettings),
+      modules: $state.snapshot(visibleModules),
     });
     const url = new URL(window.location.href);
 
@@ -918,6 +936,15 @@
     clampPedalSettings();
     syncPlannerUrlState();
     scheduleMeasurementOverlay('baseWidthMm');
+  }
+
+  function setBaseFeetHeightMm(value: number) {
+    markPosturePresetCustom();
+    plannerInput.baseFeetHeightMm = Math.max(
+      PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm,
+      Math.min(PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm, value)
+    );
+    syncPlannerUrlState();
   }
 
   function setSeatBaseDepthMm(value: number) {
@@ -1147,12 +1174,23 @@
     setMonitorHeightFromBaseMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorHeightFromBaseMm);
     setMonitorTripleScreen(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTripleScreen);
     setMonitorArcCenterAtEyes(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorArcCenterAtEyes);
+    setMonitorVesaType(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorVesaType);
     syncSolvedMonitorDistanceFromEyesMm();
+  }
+
+  function resetMonitorStandModule() {
+    setMonitorBottomVesaHolesToCrossBeamTopMm(
+      DEFAULT_PLANNER_POSTURE_SETTINGS.monitorBottomVesaHolesToCrossBeamTopMm
+    );
+    setMonitorStandLegExtraMarginMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandLegExtraMarginMm);
+    setMonitorStandFootLengthMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandFootLengthMm);
+    setMonitorStandFeetHeightMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandFeetHeightMm);
   }
 
   function resetBaseModule() {
     setBaseLengthMm(defaultModelInput.baseLengthMm);
     setBaseWidthMm(defaultModelInput.baseWidthMm);
+    setBaseFeetHeightMm(defaultModelInput.baseFeetHeightMm);
     setSeatBaseDepthMm(defaultModelInput.seatBaseDepthMm);
     setBaseInnerBeamSpacingMm(defaultModelInput.baseInnerBeamSpacingMm);
   }
@@ -1304,16 +1342,24 @@
     syncPlannerUrlState();
   }
 
+  function syncMonitorBottomVesaHoleDistanceFromMonitor() {
+    setMonitorBottomVesaHoleDistanceMm(getDefaultMonitorBottomVesaHoleDistanceMm(postureSettings), {
+      syncUrl: false,
+    });
+  }
+
   function setMonitorSizeIn(value: number) {
     postureSettings.monitorSizeIn = Math.round(
       Math.max(PLANNER_POSTURE_LIMITS.monitorSizeMinIn, Math.min(PLANNER_POSTURE_LIMITS.monitorSizeMaxIn, value))
     );
+    syncMonitorBottomVesaHoleDistanceFromMonitor();
     syncSolvedMonitorDistanceFromEyesMm();
     syncPlannerUrlState();
   }
 
   function setMonitorAspectRatio(value: PlannerMonitorAspectRatio) {
     postureSettings.monitorAspectRatio = value;
+    syncMonitorBottomVesaHoleDistanceFromMonitor();
     syncSolvedMonitorDistanceFromEyesMm();
     syncPlannerUrlState();
   }
@@ -1428,10 +1474,21 @@
   function setMonitorVisible(value: boolean) {
     visibleModules.monitor = value;
 
+    if (!value) {
+      visibleModules.monitorStand = false;
+    }
+
     if (value) {
       syncPresetMonitorHeightFromInput(plannerInput);
       syncSolvedMonitorDistanceFromEyesMm();
     }
+
+    syncPlannerUrlState();
+  }
+
+  function setMonitorStandVisible(value: boolean) {
+    visibleModules.monitorStand = value && visibleModules.monitor;
+    syncPlannerUrlState();
   }
 
   function setMonitorTripleScreen(value: boolean) {
@@ -1457,6 +1514,54 @@
     }
 
     syncSolvedMonitorDistanceFromEyesMm();
+    syncPlannerUrlState();
+  }
+
+  function setMonitorVesaType(value: PlannerMonitorVesaType) {
+    postureSettings.monitorVesaType = value;
+    syncPlannerUrlState();
+  }
+
+  function setMonitorBottomVesaHoleDistanceMm(value: number, options: { syncUrl?: boolean } = {}) {
+    postureSettings.monitorBottomVesaHoleDistanceMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorBottomVesaHoleDistanceMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorBottomVesaHoleDistanceMaxMm, value)
+    );
+
+    if (options.syncUrl !== false) {
+      syncPlannerUrlState();
+    }
+  }
+
+  function setMonitorBottomVesaHolesToCrossBeamTopMm(value: number) {
+    postureSettings.monitorBottomVesaHolesToCrossBeamTopMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorBottomVesaHolesToCrossBeamTopMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorBottomVesaHolesToCrossBeamTopMaxMm, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setMonitorStandLegExtraMarginMm(value: number) {
+    postureSettings.monitorStandLegExtraMarginMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMaxMm, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setMonitorStandFootLengthMm(value: number) {
+    postureSettings.monitorStandFootLengthMm = Math.max(
+      monitorStandFootLengthLimits.min,
+      Math.min(monitorStandFootLengthLimits.max, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setMonitorStandFeetHeightMm(value: number) {
+    postureSettings.monitorStandFeetHeightMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm, value)
+    );
     syncPlannerUrlState();
   }
 
@@ -1719,6 +1824,9 @@
         <Pane title="Rig Settings" position="inline" bind:expanded={paneExpanded.setup}>
           <Folder title="Enabled Modules">
             <Checkbox bind:value={() => visibleModules.monitor, setMonitorVisible} label="Monitor" />
+            {#if visibleModules.monitor}
+              <Checkbox bind:value={() => visibleModules.monitorStand, setMonitorStandVisible} label="Monitor Stand" />
+            {/if}
           </Folder>
           {#if visibleModules.monitor}
             <Folder title="Monitor" expanded={false}>
@@ -1763,7 +1871,7 @@
                 label="Height from Base"
                 min={PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm}
                 max={PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMaxMm}
-                step={PLANNER_CONTROL_STEP_MM}
+                step={1}
                 format={(value) => `${value} mm`}
               />
               <Slider
@@ -1772,7 +1880,20 @@
                 disabled={isMonitorArcCenterAtEyesActive}
                 min={monitorDistanceLimits.min}
                 max={monitorDistanceLimits.max}
-                step={PLANNER_CONTROL_STEP_MM}
+                step={1}
+                format={(value) => `${value} mm`}
+              />
+              <List
+                bind:value={() => postureSettings.monitorVesaType, setMonitorVesaType}
+                options={MONITOR_VESA_OPTIONS}
+                label="VESA"
+              />
+              <Slider
+                bind:value={() => postureSettings.monitorBottomVesaHoleDistanceMm, setMonitorBottomVesaHoleDistanceMm}
+                label="Vesa Height"
+                min={PLANNER_POSTURE_LIMITS.monitorBottomVesaHoleDistanceMinMm}
+                max={PLANNER_POSTURE_LIMITS.monitorBottomVesaHoleDistanceMaxMm}
+                step={1}
                 format={(value) => `${value} mm`}
               />
               <Checkbox
@@ -1786,6 +1907,46 @@
                 />
               {/if}
               <Button on:click={resetMonitorModule} label="" title="Reset" />
+            </Folder>
+          {/if}
+          {#if visibleModules.monitor && visibleModules.monitorStand}
+            <Folder title="Monitor Stand" expanded={false}>
+              <Slider
+                bind:value={
+                  () => postureSettings.monitorBottomVesaHolesToCrossBeamTopMm,
+                  setMonitorBottomVesaHolesToCrossBeamTopMm
+                }
+                label="Holes to Beam Top"
+                min={PLANNER_POSTURE_LIMITS.monitorBottomVesaHolesToCrossBeamTopMinMm}
+                max={PLANNER_POSTURE_LIMITS.monitorBottomVesaHolesToCrossBeamTopMaxMm}
+                step={1}
+                format={(value) => `${value} mm`}
+              />
+              <Slider
+                bind:value={() => postureSettings.monitorStandLegExtraMarginMm, setMonitorStandLegExtraMarginMm}
+                label="Leg Margin"
+                min={PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMinMm}
+                max={PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMaxMm}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+              <Slider
+                bind:value={() => postureSettings.monitorStandFootLengthMm, setMonitorStandFootLengthMm}
+                label="Foot Length"
+                min={monitorStandFootLengthLimits.min}
+                max={monitorStandFootLengthLimits.max}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+              <Slider
+                bind:value={() => postureSettings.monitorStandFeetHeightMm, setMonitorStandFeetHeightMm}
+                label="Feet Height"
+                min={PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm}
+                max={PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+              <Button on:click={resetMonitorStandModule} label="" title="Reset" />
             </Folder>
           {/if}
           <Folder title="Base" expanded={false}>
@@ -1802,6 +1963,14 @@
               label="Width"
               min={PLANNER_DIMENSION_LIMITS.baseWidthMinMm}
               max={PLANNER_DIMENSION_LIMITS.baseWidthMaxMm}
+              step={PLANNER_CONTROL_STEP_MM}
+              format={(value) => `${value} mm`}
+            />
+            <Slider
+              bind:value={() => plannerInput.baseFeetHeightMm, setBaseFeetHeightMm}
+              label="Feet Height"
+              min={PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm}
+              max={PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm}
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />

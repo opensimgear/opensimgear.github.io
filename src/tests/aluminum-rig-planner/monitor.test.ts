@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { DEFAULT_PLANNER_POSTURE_SETTINGS } from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import {
   createMonitorModule,
+  getDefaultMonitorBottomVesaHoleDistanceMm,
   getMonitorDimensionsMm,
   getMonitorScreenEdgePoints,
   getMonitorTargetFovFromDistanceMm,
@@ -34,9 +35,55 @@ describe('aluminum rig planner monitor module', () => {
       monitorTiltDeg: 10,
     });
 
-    expect(meshes).toHaveLength(1);
-    expect(meshes[0].id).toBe('monitor-plate');
-    expect(meshes[0].rotation?.[1]).toBeCloseTo((-10 * Math.PI) / 180, 6);
+    const plates = meshes.filter((mesh) => mesh.id === 'monitor-plate');
+
+    expect(plates).toHaveLength(1);
+    expect(plates[0].rotation?.[1]).toBeCloseTo((-10 * Math.PI) / 180, 6);
+  });
+
+  it('computes default bottom VESA holes 20 percent from monitor bottom', () => {
+    expect(
+      getDefaultMonitorBottomVesaHoleDistanceMm({
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorSizeIn: 32,
+        monitorAspectRatio: '16:10',
+      })
+    ).toBe(86);
+  });
+
+  it('renders blue VESA holes on the monitor back', () => {
+    const report = {
+      monitorDebug: {
+        position: [1, 0, 0.8] as [number, number, number],
+      },
+    } as PlannerPostureReport;
+    const meshes = createMonitorModule(report, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorBottomVesaHoleDistanceMm: 86,
+      monitorVesaType: '100x100',
+    });
+    const holes = meshes.filter((mesh) => mesh.id.includes('vesa-hole'));
+
+    expect(holes).toHaveLength(4);
+    expect(holes.every((mesh) => mesh.color === '#2563eb')).toBe(true);
+    expect(holes[0].position[0]).toBeGreaterThan(report.monitorDebug!.position[0]);
+    expect(Math.min(...holes.map((mesh) => mesh.position[2]))).toBeCloseTo(0.6706, 3);
+  });
+
+  it('renders VESA holes on every triple monitor panel', () => {
+    const report = {
+      monitorDebug: {
+        position: [1, 0, 0.8] as [number, number, number],
+      },
+    } as PlannerPostureReport;
+    const meshes = createMonitorModule(report, {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorBottomVesaHoleDistanceMm: 86,
+      monitorTripleScreen: true,
+      monitorVesaType: '100x100',
+    });
+
+    expect(meshes.filter((mesh) => mesh.id.includes('vesa-hole'))).toHaveLength(12);
   });
 
   it('approximates curved monitor panels with consumer radius segments', () => {
@@ -51,11 +98,12 @@ describe('aluminum rig planner monitor module', () => {
       monitorTiltDeg: -5,
     });
     const monitorDebug = report.monitorDebug!;
-    const centerMesh = meshes[Math.floor(meshes.length / 2)];
-    const leftEdge = meshes[0];
-    const rightEdge = meshes.at(-1);
+    const plates = meshes.filter((mesh) => mesh.id.startsWith('monitor-plate-') && !mesh.id.includes('vesa-hole'));
+    const centerMesh = plates[Math.floor(plates.length / 2)];
+    const leftEdge = plates[0];
+    const rightEdge = plates.at(-1);
 
-    expect(meshes).toHaveLength(25);
+    expect(plates).toHaveLength(25);
     expect(centerMesh.position[0]).toBeCloseTo(monitorDebug.position[0], 3);
     expect(centerMesh.position[1]).toBeCloseTo(monitorDebug.position[1], 6);
     expect(centerMesh.position[2]).toBe(monitorDebug.position[2]);
@@ -77,9 +125,11 @@ describe('aluminum rig planner monitor module', () => {
       monitorCurvature: '1000r',
     });
 
-    for (let index = 0; index < meshes.length - 1; index += 1) {
-      const current = meshes[index];
-      const next = meshes[index + 1];
+    const plates = meshes.filter((mesh) => mesh.id.startsWith('monitor-plate-') && !mesh.id.includes('vesa-hole'));
+
+    for (let index = 0; index < plates.length - 1; index += 1) {
+      const current = plates[index];
+      const next = plates[index + 1];
       const currentHalfWidthM = current.size[1] / 2;
       const nextHalfWidthM = next.size[1] / 2;
       const currentYaw = current.rotation?.[2] ?? 0;

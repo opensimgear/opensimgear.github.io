@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { T } from '@threlte/core';
+
   import { CUT_LIST_HIGHLIGHT_COLOR } from '../constants/scene';
   import { DEFAULT_POSTURE_HEIGHT_CM } from '../constants/posture';
   import FovOverlay from '../posture/FovOverlay.svelte';
@@ -9,6 +11,7 @@
   import { createPedalsModule } from '../modules/pedals';
   import ProfileMesh from './ProfileMesh.svelte';
   import { createBaseModule } from '../modules/base';
+  import { createMonitorStandModule } from '~/components/calculator/aluminum-rig-planner/modules/monitor-stand';
   import { createMonitorModule } from '../modules/monitor';
   import { createPedalTrayModule } from '../modules/pedal-tray';
   import { createSeatModule } from '../modules/seat';
@@ -58,6 +61,11 @@
   const seatModule = $derived(createSeatModule(input));
   const wheelModule = $derived(createWheelModule(input));
   const monitorModule = $derived(visibleModules.monitor ? createMonitorModule(postureReport, postureSettings) : []);
+  const monitorStandModule = $derived(
+    visibleModules.monitor && visibleModules.monitorStand && postureReport.monitorDebug
+      ? createMonitorStandModule(postureReport.monitorDebug, postureSettings, profileColor, input.baseWidthMm)
+      : []
+  );
   const postureSkeleton = $derived(
     createPlannerPostureSkeleton(
       input,
@@ -69,50 +77,76 @@
     )
   );
   const modelScale = $derived(postureSettings.heightCm / DEFAULT_POSTURE_HEIGHT_CM);
+  const baseFeetHeightPosition = $derived([0, 0, input.baseFeetHeightMm / 1000] as [number, number, number]);
 
   const beamMeshes = $derived([...baseModule, ...steeringColumnModule, ...pedalAssembly]);
-  const allMeshes = $derived.by(() => {
-    const adjustedBeams = beamMeshes.map((mesh) => ({
+  const adjustedBeamMeshes = $derived.by(() =>
+    beamMeshes.map((mesh) => ({
       ...mesh,
       color: highlightedBeamIdSet.has(mesh.id) ? CUT_LIST_HIGHLIGHT_COLOR : mesh.color,
       position: getAdjustedBeamPosition(mesh, showEndCaps),
       size: getAdjustedBeamSize(mesh, showEndCaps),
-    }));
-
+    }))
+  );
+  const adjustedMonitorStandMeshes = $derived.by(() =>
+    monitorStandModule.map((mesh) => ({
+      ...mesh,
+      color: highlightedBeamIdSet.has(mesh.id) ? CUT_LIST_HIGHLIGHT_COLOR : mesh.color,
+      position: getAdjustedBeamPosition(mesh, showEndCaps),
+      size: getAdjustedBeamSize(mesh, showEndCaps),
+    }))
+  );
+  const baseMountedMeshes = $derived.by(() => {
     if (!showEndCaps) {
-      return [...adjustedBeams, ...pedalsModule, ...wheelModule, ...seatModule, ...monitorModule];
+      return [...adjustedBeamMeshes, ...pedalsModule, ...wheelModule, ...seatModule];
     }
 
     return [
-      ...adjustedBeams,
+      ...adjustedBeamMeshes,
       ...beamMeshes.flatMap((mesh) => createEndCapMeshes(mesh)),
       ...pedalsModule,
       ...wheelModule,
       ...seatModule,
+    ];
+  });
+  const floorMountedMeshes = $derived.by(() => {
+    if (!showEndCaps) {
+      return [...adjustedMonitorStandMeshes, ...monitorModule];
+    }
+
+    return [
+      ...adjustedMonitorStandMeshes,
+      ...monitorStandModule.flatMap((mesh) => createEndCapMeshes(mesh)),
       ...monitorModule,
     ];
   });
 </script>
 
-{#each allMeshes as mesh (mesh.id)}
+<T.Group position={baseFeetHeightPosition}>
+  {#each baseMountedMeshes as mesh (mesh.id)}
+    <ProfileMesh {mesh} />
+  {/each}
+
+  {#if measurementOverlay}
+    <MeasurementArrow color={measurementOverlay.color} start={measurementOverlay.start} end={measurementOverlay.end} />
+  {/if}
+
+  {#if postureSettings.showModel || postureSettings.showSkeleton}
+    <RiggedHumanModel
+      {humanModel}
+      {modelScale}
+      showModel={postureSettings.showModel}
+      showSkeleton={postureSettings.showSkeleton}
+      skeleton={postureSkeleton}
+      onHoverTooltipChange={onHumanRigTooltipChange}
+    />
+  {/if}
+</T.Group>
+
+{#each floorMountedMeshes as mesh (mesh.id)}
   <ProfileMesh {mesh} />
 {/each}
 
-{#if measurementOverlay}
-  <MeasurementArrow color={measurementOverlay.color} start={measurementOverlay.start} end={measurementOverlay.end} />
-{/if}
-
 {#if fovOverlay}
   <FovOverlay overlay={fovOverlay} />
-{/if}
-
-{#if postureSettings.showModel || postureSettings.showSkeleton}
-  <RiggedHumanModel
-    {humanModel}
-    {modelScale}
-    showModel={postureSettings.showModel}
-    showSkeleton={postureSettings.showSkeleton}
-    skeleton={postureSkeleton}
-    onHoverTooltipChange={onHumanRigTooltipChange}
-  />
 {/if}
