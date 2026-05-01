@@ -1,8 +1,9 @@
 commercial:
   - product_name: RDS4 Motion Kit
-    description: CAMMUS RDS4 Motion Kit. four-actuator motion kit. in stock on official shop. 4-actuator
-      independent motion system with 750 W actuators, 80/100/150 mm stroke options, up to 240 kg
-      load per actuator, SimHub support, and Windows USB control.
+    description: CAMMUS RDS4 Motion Kit. four-actuator motion kit. in stock on
+      official shop. 4-actuator independent motion system with 750 W actuators,
+      80/100/150 mm stroke options, up to 240 kg load per actuator, SimHub
+      support, and Windows USB control.
     manufacturer: CAMMUS
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -16,9 +17,9 @@ commercial:
         region: Global
         status: available
   - product_name: 3DOF Motion Set QS-210
-    description: "Qubic System QS-210 3DOF Motion Set. linear-actuator 3DOF kit. available via Qubic
-      distributors. 3DOF bundle: four QS-210 actuators, two power cabinets, and one QS-MC6
-      controller."
+    description: "Qubic System QS-210 3DOF Motion Set. linear-actuator 3DOF kit.
+      available via Qubic distributors. 3DOF bundle: four QS-210 actuators, two
+      power cabinets, and one QS-MC6 controller."
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -31,9 +32,9 @@ commercial:
         url: https://qubicsystem.com/product/3dof-motion-set-qs-210-qs-220/
         region: Unknown
   - product_name: 3DOF Motion Set QS-220
-    description: "Qubic System QS-220 3DOF Motion Set. linear-actuator 3DOF kit. available via Qubic
-      distributors. 3DOF bundle: four QS-220 actuators, two power cabinets, and one QS-MC6
-      controller."
+    description: "Qubic System QS-220 3DOF Motion Set. linear-actuator 3DOF kit.
+      available via Qubic distributors. 3DOF bundle: four QS-220 actuators, two
+      power cabinets, and one QS-MC6 controller."
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -46,8 +47,8 @@ commercial:
         url: https://qubicsystem.com/product/3dof-motion-set-qs-210-qs-220/
         region: Unknown
   - product_name: APEX GT
-    description: "SimCraft APEX GT. professional 3DOF/6DOF turnkey racing simulator. available by
-      reservation/quote process. APEX 3 GT: roll, pitch, yaw."
+    description: "SimCraft APEX GT. professional 3DOF/6DOF turnkey racing simulator.
+      available by reservation/quote process. APEX 3 GT: roll, pitch, yaw."
     manufacturer: SimCraft
     component_category: motion-platforms
     component_sub_category: 6dof-platform
@@ -60,8 +61,8 @@ commercial:
         url: https://simcraft.com/racing-simulators/products/apex-gt/
         region: US
   - product_name: DK2 Motion System
-    description: Sigma Integrale DK2. compact 3DOF/4-actuator motion system. available from Sigma
-      Integrale. 2 in / 50 mm travel.
+    description: Sigma Integrale DK2. compact 3DOF/4-actuator motion system.
+      available from Sigma Integrale. 2 in / 50 mm travel.
     manufacturer: Sigma Integrale
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -74,8 +75,8 @@ commercial:
         url: https://www.sigmaintegrale.com/
         region: US
   - product_name: DK2+ Motion System
-    description: Sigma Integrale DK2+. high-payload 2 in motion system. available from Sigma Integrale.
-      Four-actuator premium 2 in / 50 mm system.
+    description: Sigma Integrale DK2+. high-payload 2 in motion system. available
+      from Sigma Integrale. Four-actuator premium 2 in / 50 mm system.
     manufacturer: Sigma Integrale
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -88,8 +89,8 @@ commercial:
         url: https://www.sigmaintegrale.com/products/dk2-plus-billet-motion-system
         region: US
   - product_name: DK6+ Motion System
-    description: Sigma Integrale DK6+. 6 in high-travel motion system. available from Sigma Integrale.
-      Four-actuator 6 in / 150 mm travel system.
+    description: Sigma Integrale DK6+. 6 in high-travel motion system. available
+      from Sigma Integrale. Four-actuator 6 in / 150 mm travel system.
     manufacturer: Sigma Integrale
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -102,9 +103,10 @@ commercial:
         url: https://www.sigmaintegrale.com/products/dk6-motion-system
         region: US
   - product_name: Formula Simulator
-    description: AXSIM Formula Simulator. turnkey formula-style motion racing simulator. legacy AXSIM
-      product lineup; contact AXSIM for current availability and quote [uncertain]. Formula-style
-      simulator derived from an original F1 monocoque.
+    description: AXSIM Formula Simulator. turnkey formula-style motion racing
+      simulator. legacy AXSIM product lineup; contact AXSIM for current
+      availability and quote [uncertain]. Formula-style simulator derived from
+      an original F1 monocoque.
     manufacturer:
       - AXSIM
       - Cranfield Simulation
@@ -114,9 +116,9 @@ commercial:
     picture_url: https://axsim.racing/wp-content/uploads/2025/05/FORMULA-SIMULATOR.webp
     shops: []
   - product_name: G5 Haptic System
-    description: D-BOX G5 Haptic System. haptic actuator motion system. available through
-      D-BOX/resellers; quote or reseller pricing. Electromechanical G5 haptic actuators with
-      USB-connected controller.
+    description: D-BOX G5 Haptic System. haptic actuator motion system. available
+      through D-BOX/resellers; quote or reseller pricing. Electromechanical G5
+      haptic actuators with USB-connected controller.
     manufacturer: D-BOX
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -124,9 +126,10 @@ commercial:
     picture_url: https://www.d-box.com/hs-fs/hubfs/D-BOX_Landing%20G5%20page_600x500_Bloc%202_Actuator.jpg?width=600&height=500&name=D-BOX_Landing%20G5%20page_600x500_Bloc%202_Actuator.jpg
     shops: []
   - product_name: GFQ Simulator
-    description: AXSIM GFQ Simulator. compact turnkey motion racing simulator. legacy AXSIM product
-      lineup; contact AXSIM for current availability and quote [uncertain]. Hybrid frame with
-      aluminium extrusion base and tubular steel structure.
+    description: AXSIM GFQ Simulator. compact turnkey motion racing simulator.
+      legacy AXSIM product lineup; contact AXSIM for current availability and
+      quote [uncertain]. Hybrid frame with aluminium extrusion base and tubular
+      steel structure.
     manufacturer:
       - AXSIM
       - Cranfield Simulation
@@ -136,9 +139,10 @@ commercial:
     picture_url: https://axsim.racing/wp-content/uploads/2025/05/gfq-sim-5.webp
     shops: []
   - product_name: GT Simulator
-    description: AXSIM GT Simulator. turnkey GT motion racing simulator. legacy AXSIM product lineup;
-      contact AXSIM for current availability and quote [uncertain]. GT-format professional-grade
-      racing simulator for home or facility use.
+    description: AXSIM GT Simulator. turnkey GT motion racing simulator. legacy
+      AXSIM product lineup; contact AXSIM for current availability and quote
+      [uncertain]. GT-format professional-grade racing simulator for home or
+      facility use.
     manufacturer:
       - AXSIM
       - Cranfield Simulation
@@ -148,8 +152,8 @@ commercial:
     picture_url: https://axsim.racing/wp-content/uploads/2025/05/gt-sim-2.webp
     shops: []
   - product_name: HERO H2
-    description: DOF Reality HERO H2. 2DOF full-motion platform. available from DOF Reality. Moves seat
-      and controls on pitch and roll axes.
+    description: DOF Reality HERO H2. 2DOF full-motion platform. available from DOF
+      Reality. Moves seat and controls on pitch and roll axes.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 2dof-platform
@@ -162,8 +166,8 @@ commercial:
         url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-hero-h2/
         region: Global
   - product_name: HERO H3
-    description: DOF Reality HERO H3. 3DOF full-motion platform. available from DOF Reality. Provides
-      pitch, roll, yaw, and traction-loss motion cues.
+    description: DOF Reality HERO H3. 3DOF full-motion platform. available from DOF
+      Reality. Provides pitch, roll, yaw, and traction-loss motion cues.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -176,8 +180,8 @@ commercial:
         url: https://dofreality.com/product/universal/universal-motion-platform-3-axis-hero-h3/
         region: Global
   - product_name: HERO H4
-    description: DOF Reality HERO H4. 4DOF full-motion platform. available from DOF Reality. Adds heave
-      to HERO pitch, roll, yaw, and traction-loss cues.
+    description: DOF Reality HERO H4. 4DOF full-motion platform. available from DOF
+      Reality. Adds heave to HERO pitch, roll, yaw, and traction-loss cues.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -190,8 +194,8 @@ commercial:
         url: https://dofreality.com/product/universal/universal-motion-platform-4-axis-hero-h4-with-sfu-and-xtra-smooth-gearing/
         region: Global
   - product_name: HERO H6
-    description: DOF Reality HERO H6. 6DOF full-motion platform. available from DOF Reality. Delivers
-      heave, roll, pitch, surge, sway, and yaw.
+    description: DOF Reality HERO H6. 6DOF full-motion platform. available from DOF
+      Reality. Delivers heave, roll, pitch, surge, sway, and yaw.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 6dof-platform
@@ -204,8 +208,9 @@ commercial:
         url: https://dofreality.com/product/universal/universal-motion-platform-6-axis-hero-h6/
         region: Global
   - product_name: MOVER M2
-    description: DOF Reality MOVER M2. 2DOF seat mover. available from DOF Reality. Entry-level
-      seat-motion platform for existing PlaySeat or GT Omega ART frames.
+    description: DOF Reality MOVER M2. 2DOF seat mover. available from DOF Reality.
+      Entry-level seat-motion platform for existing PlaySeat or GT Omega ART
+      frames.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 2dof-platform
@@ -218,8 +223,9 @@ commercial:
         url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-mover-m2/
         region: Global
   - product_name: MOVER PRO MP2
-    description: DOF Reality MOVER PRO MP2. 2DOF professional seat mover. available from DOF Reality.
-      Moves seat on pitch and roll axes for static-frame installations.
+    description: DOF Reality MOVER PRO MP2. 2DOF professional seat mover. available
+      from DOF Reality. Moves seat on pitch and roll axes for static-frame
+      installations.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 2dof-platform
@@ -232,9 +238,9 @@ commercial:
         url: https://dofreality.com/product/universal/motion-universal-platform-2-axis-pro-mover-mp2/
         region: Global
   - product_name: Legend GT 6DOF Motion Platform
-    description: PT Actuator Legend GT 6DOF. turnkey 6DOF motion platform. available from PT Actuator.
-      Plug-and-play sim racing/flight platform with integrated sway, surge, yaw basement and CANBus
-      control center.
+    description: PT Actuator Legend GT 6DOF. turnkey 6DOF motion platform. available
+      from PT Actuator. Plug-and-play sim racing/flight platform with integrated
+      sway, surge, yaw basement and CANBus control center.
     manufacturer: PT Actuator
     component_category: motion-platforms
     component_sub_category: 6dof-platform
@@ -247,9 +253,9 @@ commercial:
         url: https://www.pt-actuator.com/product/legend-6dof-motion-platform/
         region: China
   - product_name: Champion GT
-    description: PT Actuator Champion GT. 3DOF/4-actuator motion kit. available from PT Actuator.
-      60-size 600 W servo system with four 100 mm stroke actuators, 80 kg single-actuator thrust,
-      and 320 kg system payload.
+    description: PT Actuator Champion GT. 3DOF/4-actuator motion kit. available from
+      PT Actuator. 60-size 600 W servo system with four 100 mm stroke actuators,
+      80 kg single-actuator thrust, and 320 kg system payload.
     manufacturer: PT Actuator
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -262,9 +268,9 @@ commercial:
         url: https://www.pt-actuator.com/product/champion-gt/
         region: China
   - product_name: 3DOF Champion Motion System
-    description: PT Actuator 3DOF Champion Motion System. entry 3DOF/4-actuator motion kit. available
-      from PT Actuator. Four 75 mm stroke Champion actuators with 60 kg single-actuator thrust and
-      240 kg payload.
+    description: PT Actuator 3DOF Champion Motion System. entry 3DOF/4-actuator
+      motion kit. available from PT Actuator. Four 75 mm stroke Champion
+      actuators with 60 kg single-actuator thrust and 240 kg payload.
     manufacturer: PT Actuator
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -277,9 +283,10 @@ commercial:
         url: https://www.pt-actuator.com/product/3dof-rhino-gt-motion-system-2/
         region: China
   - product_name: Motion Dragon 6DOF GT
-    description: PT Actuator Motion Dragon 6DOF GT. 6DOF GT motion platform. available from PT Actuator.
-      Seven-actuator system with Scorpion S actuators, traction-loss and surge actuators,
-      controller, Belt TensionR, and tower.
+    description: PT Actuator Motion Dragon 6DOF GT. 6DOF GT motion platform.
+      available from PT Actuator. Seven-actuator system with Scorpion S
+      actuators, traction-loss and surge actuators, controller, Belt TensionR,
+      and tower.
     manufacturer: PT Actuator
     component_category: motion-platforms
     component_sub_category: 6dof-platform
@@ -292,8 +299,9 @@ commercial:
         url: https://www.pt-actuator.com/product/motion-dragon-6dof-gt/
         region: China
   - product_name: Motion Plus Platform
-    description: "Next Level Racing Motion Plus Platform. modular heave/pitch/roll platform. in stock on
-      official store. Modular platform: one module for 2DOF, two modules for 3DOF."
+    description: "Next Level Racing Motion Plus Platform. modular heave/pitch/roll
+      platform. in stock on official store. Modular platform: one module for
+      2DOF, two modules for 3DOF."
     manufacturer: Next Level Racing
     component_category: motion-platforms
     component_sub_category: motion-kit
@@ -306,8 +314,9 @@ commercial:
         url: https://nextlevelracing.com/product/motion-plus-platform/
         region: US
   - product_name: Motion Simulator Platform V3
-    description: Next Level Racing Motion Platform V3. seat mover. in stock on official store. Seat-only
-      motion platform for acceleration, braking, and cornering cues.
+    description: Next Level Racing Motion Platform V3. seat mover. in stock on
+      official store. Seat-only motion platform for acceleration, braking, and
+      cornering cues.
     manufacturer: Next Level Racing
     component_category: motion-platforms
     component_sub_category: motion-software
@@ -320,8 +329,9 @@ commercial:
         url: https://nextlevelracing.com/product/motion-platform-v3/
         region: US
   - product_name: PRO P2
-    description: DOF Reality PRO P2. 2DOF professional full-motion platform. available from DOF Reality.
-      Moves seat and controls on pitch and roll axes.
+    description: DOF Reality PRO P2. 2DOF professional full-motion platform.
+      available from DOF Reality. Moves seat and controls on pitch and roll
+      axes.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 2dof-platform
@@ -334,8 +344,9 @@ commercial:
         url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-pro-p2/
         region: Global
   - product_name: PRO P3
-    description: DOF Reality PRO P3. 3DOF professional full-motion platform. available from DOF Reality.
-      Provides pitch, roll, yaw, and traction-loss motion cues.
+    description: DOF Reality PRO P3. 3DOF professional full-motion platform.
+      available from DOF Reality. Provides pitch, roll, yaw, and traction-loss
+      motion cues.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -348,8 +359,9 @@ commercial:
         url: https://dofreality.com/product/universal/universal-motion-platform-3-axis-pro-p3/
         region: Global
   - product_name: PRO P4
-    description: DOF Reality PRO P4. 4DOF professional full-motion platform. available from DOF Reality.
-      Universal platform for racing, flight, and helicopter simulation with added heave axis.
+    description: DOF Reality PRO P4. 4DOF professional full-motion platform.
+      available from DOF Reality. Universal platform for racing, flight, and
+      helicopter simulation with added heave axis.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -362,8 +374,9 @@ commercial:
         url: https://dofreality.com/product/universal/universal-motion-platform-4-axis-pro-p4-with-sfu-and-xtra-smooth-gearing/
         region: Global
   - product_name: PRO P6
-    description: DOF Reality PRO P6. 6DOF professional full-motion platform. available from DOF Reality.
-      Delivers heave, roll, pitch, surge, sway, and yaw.
+    description: DOF Reality PRO P6. 6DOF professional full-motion platform.
+      available from DOF Reality. Delivers heave, roll, pitch, surge, sway, and
+      yaw.
     manufacturer: DOF Reality
     component_category: motion-platforms
     component_sub_category: 6dof-platform
@@ -376,9 +389,9 @@ commercial:
         url: https://dofreality.com/product/universal/universal-motion-platform-6-axis-pro-p6/
         region: Global
   - product_name: 2.5DOF Motion Set QS-210/QS-220 + QS-Pivot
-    description: Qubic System 2.5DOF Motion Set. two-actuator QS-210 or QS-220 bundle with QS-Pivot.
-      available from Qubic System. Designed to provide heave, load change, and weight-transfer
-      motion cues with two actuators.
+    description: Qubic System 2.5DOF Motion Set. two-actuator QS-210 or QS-220
+      bundle with QS-Pivot. available from Qubic System. Designed to provide
+      heave, load change, and weight-transfer motion cues with two actuators.
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: motion-kit
@@ -391,8 +404,9 @@ commercial:
         url: https://qubicsystem.com/product/2-5dof-motion-set-qs-210-qs-220-qs-pivot/
         region: EU
   - product_name: 5DOF Motion Set QS-210/QS-220 + QS-CH2
-    description: Qubic System 5DOF Motion Set. QS-210 or QS-220 3DOF actuator bundle combined with
-      QS-CH2. available from Qubic System. Adds surge and yaw effects to the 3DOF actuator platform.
+    description: Qubic System 5DOF Motion Set. QS-210 or QS-220 3DOF actuator bundle
+      combined with QS-CH2. available from Qubic System. Adds surge and yaw
+      effects to the 3DOF actuator platform.
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: 5dof-platform
@@ -405,9 +419,9 @@ commercial:
         url: https://qubicsystem.com/product/5dof-motion-set-qs-210-qs-220-qs-ch2/
         region: EU
   - product_name: QS-210
-    description: Qubic System QS-210. 3DOF linear-actuator motion system for sim racing cockpits.
-      available from Qubic System. QS-210 range covers smaller travel actuator configurations up to
-      the 3DOF motion set.
+    description: Qubic System QS-210. 3DOF linear-actuator motion system for sim
+      racing cockpits. available from Qubic System. QS-210 range covers smaller
+      travel actuator configurations up to the 3DOF motion set.
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -420,9 +434,9 @@ commercial:
         url: https://qubicsystem.com/product/qs-210/
         region: EU
   - product_name: QS-220
-    description: Qubic System QS-220. fast linear-actuator 3DOF motion platform for sim racing cockpits.
-      available from Qubic System. QS-220 range covers the faster actuator configurations up to the
-      3DOF motion set.
+    description: Qubic System QS-220. fast linear-actuator 3DOF motion platform for
+      sim racing cockpits. available from Qubic System. QS-220 range covers the
+      faster actuator configurations up to the 3DOF motion set.
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -435,9 +449,9 @@ commercial:
         url: https://qubicsystem.com/product/qs-220/
         region: EU
   - product_name: QS-CH2
-    description: Qubic System QS-CH2. traction-loss and surge platform for racing simulation. available
-      from Qubic System. Designed to add longitudinal and yaw movement cues to supported simulator
-      rigs.
+    description: Qubic System QS-CH2. traction-loss and surge platform for racing
+      simulation. available from Qubic System. Designed to add longitudinal and
+      yaw movement cues to supported simulator rigs.
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: traction-platform
@@ -450,9 +464,9 @@ commercial:
         url: https://qubicsystem.com/product/qs-ch2/
         region: EU
   - product_name: QS-H13
-    description: Qubic System QS-H13 Challenger. compact 2DOF seat-mover for racing and flight
-      simulation. available from Qubic System. Built for quiet, compact motion in home simulator
-      setups.
+    description: Qubic System QS-H13 Challenger. compact 2DOF seat-mover for racing
+      and flight simulation. available from Qubic System. Built for quiet,
+      compact motion in home simulator setups.
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: 2dof-platform
@@ -465,8 +479,9 @@ commercial:
         url: https://qubicsystem.com/product/qs-h13/
         region: EU
   - product_name: QS-S25
-    description: Qubic System QS-S25 Spider. 6DOF motion cockpit for professional racing simulation.
-      available from Qubic System. Advanced cockpit with six-axis motion for high-end simulator use.
+    description: Qubic System QS-S25 Spider. 6DOF motion cockpit for professional
+      racing simulation. available from Qubic System. Advanced cockpit with
+      six-axis motion for high-end simulator use.
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: 6dof-platform
@@ -493,9 +508,9 @@ commercial:
         url: https://qubicsystem.com/product/qs-s35/
         region: Unknown
   - product_name: QS-V20
-    description: Qubic System QS-V20. extended 4DOF motion cockpit with traction loss for racing
-      simulation. available from Qubic System. Designed for advanced sim racers and professional
-      racing simulation.
+    description: Qubic System QS-V20. extended 4DOF motion cockpit with traction
+      loss for racing simulation. available from Qubic System. Designed for
+      advanced sim racers and professional racing simulation.
     manufacturer: Qubic System
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -508,8 +523,8 @@ commercial:
         url: https://qubicsystem.com/product/qs-v20/
         region: EU
   - product_name: RS MEGA+
-    description: eRacing-Lab RS MEGA+. 4-actuator motion system. available from eRacing-Lab shop. Four
-      actuators included.
+    description: eRacing-Lab RS MEGA+. 4-actuator motion system. available from
+      eRacing-Lab shop. Four actuators included.
     manufacturer: eRacing-Lab
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -522,9 +537,9 @@ commercial:
         url: https://eracing-lab.com/products/rs-mega-plus
         region: Global
   - product_name: Scorpion Actuator Kits
-    description: PT Actuator Scorpion Actuator Kits. modular actuator motion kit. available from PT
-      Actuator. Scorpion E/S/C/U kit family with 3-actuator, 4-actuator, commercial, and 6DOF
-      Ultimate configurations.
+    description: PT Actuator Scorpion Actuator Kits. modular actuator motion kit.
+      available from PT Actuator. Scorpion E/S/C/U kit family with 3-actuator,
+      4-actuator, commercial, and 6DOF Ultimate configurations.
     manufacturer: PT Actuator
     component_category: motion-platforms
     component_sub_category: motion-kit
@@ -537,9 +552,10 @@ commercial:
         url: https://www.pt-actuator.com/product/scorpion-actuator-kits/
         region: China
   - product_name: Stage 5 Full Motion Racing Simulator
-    description: SimXperience Stage 5. turnkey full motion racing simulator. available from SimXperience
-      shop. Turnkey racing simulator with motion system, rear traction loss, tactile feedback, and
-      optional GS-5/G-Belt in loaded packages.
+    description: SimXperience Stage 5. turnkey full motion racing simulator.
+      available from SimXperience shop. Turnkey racing simulator with motion
+      system, rear traction loss, tactile feedback, and optional GS-5/G-Belt in
+      loaded packages.
     manufacturer: SimXperience
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -552,8 +568,8 @@ commercial:
         url: https://www.simxperience.com/shop/stage-5-full-motion-racing-simulator-18
         region: US
   - product_name: T1000 2 Motions Racing Simulator
-    description: ProSimu T1000 2 Motions. 2DOF cockpit motion simulator. available from ProSimu. 2DOF
-      dynamic cockpit based on T1000 chassis.
+    description: ProSimu T1000 2 Motions. 2DOF cockpit motion simulator. available
+      from ProSimu. 2DOF dynamic cockpit based on T1000 chassis.
     manufacturer: ProSimu
     component_category: motion-platforms
     component_sub_category: 2dof-platform
@@ -561,8 +577,9 @@ commercial:
     picture_url: https://www.prosimu.com/wafx_res/Images/0-375-untitled.117.png
     shops: []
   - product_name: T1000 3 Motions Racing Simulator
-    description: ProSimu T1000 3 Motions. 3DOF cockpit with traction loss. available from ProSimu. T1000
-      3M SV includes traction loss system integrated into chassis.
+    description: ProSimu T1000 3 Motions. 3DOF cockpit with traction loss. available
+      from ProSimu. T1000 3M SV includes traction loss system integrated into
+      chassis.
     manufacturer: ProSimu
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -570,8 +587,9 @@ commercial:
     picture_url: https://www.prosimu.com/wafx_res/Images/0-249-untitled.80.webp
     shops: []
   - product_name: T1000 5 Motions Racing Simulator
-    description: "ProSimu T1000 5 Motions. 5-actuator cockpit motion simulator. available from ProSimu.
-      Five-actuator system: four PRS200 actuators plus one PRS50 actuator for traction loss."
+    description: "ProSimu T1000 5 Motions. 5-actuator cockpit motion simulator.
+      available from ProSimu. Five-actuator system: four PRS200 actuators plus
+      one PRS50 actuator for traction loss."
     manufacturer: ProSimu
     component_category: motion-platforms
     component_sub_category: 5dof-platform
@@ -579,9 +597,10 @@ commercial:
     picture_url: https://www.prosimu.com/wafx_res/Images/0-262-t10005m-04726x494.png
     shops: []
   - product_name: Traction Plus Platform
-    description: Next Level Racing Traction Plus. traction loss / yaw and surge-sway platform. official
-      product API lists price but product page currently returns 404 [uncertain]. Whole-cockpit
-      sliding platform for understeer, oversteer, and traction-loss cues.
+    description: Next Level Racing Traction Plus. traction loss / yaw and surge-sway
+      platform. official product API lists price but product page currently
+      returns 404 [uncertain]. Whole-cockpit sliding platform for understeer,
+      oversteer, and traction-loss cues.
     manufacturer: Next Level Racing
     component_category: motion-platforms
     component_sub_category: traction-platform
@@ -594,13 +613,13 @@ commercial:
         url: https://nextlevelracing.com/faq/traction-plus-platform/
         region: US
   - product_name: Yaw3 Motion Simulator
-    description: "Yaw VR Yaw3. compact VR motion simulator. available for order from Yaw VR shop. Roll
-      range: 40 deg."
+    description: "Yaw VR Yaw3. compact VR motion simulator. available for order from
+      Yaw VR shop. Roll range: 40 deg."
     manufacturer: Yaw VR
     component_category: motion-platforms
     component_sub_category: motion-simulator
     product_url: https://shop.yawvr.com/product/yaw3-motion-simulator/
-    picture_url: https://shop.yawvr.com/wp-content/uploads/yaw3-central-module-1200x1200.jpg
+    picture_url: https://shop.yawvr.com/wp-content/uploads/asztal.jpg
     shops:
       - name: Yaw VR
         price: 3990
@@ -608,9 +627,9 @@ commercial:
         url: https://shop.yawvr.com/product/yaw3-motion-simulator/
         region: Unknown
   - product_name: 3motion
-    description: RaceRoom / TrackTime 3motion. turnkey 3DOF motion simulator. available on official
-      shop. Ready-to-race simulator with SilentForce actuators, TrackTime racing seat, 4K monitor,
-      gaming PC, and sound system.
+    description: RaceRoom / TrackTime 3motion. turnkey 3DOF motion simulator.
+      available on official shop. Ready-to-race simulator with SilentForce
+      actuators, TrackTime racing seat, 4K monitor, gaming PC, and sound system.
     manufacturer:
       - RaceRoom
       - TrackTime
@@ -625,9 +644,10 @@ commercial:
         url: https://www.raceroomstore.com/shop_en/3motion.html
         region: EU
   - product_name: 3motion Advanced
-    description: RaceRoom / TrackTime 3motion Advanced. turnkey 3DOF motion simulator. available on
-      official shop. Ready-to-race package with SilentForce actuators, Sparco Grid Q seat, Samsung
-      Odyssey display, and PC.
+    description: RaceRoom / TrackTime 3motion Advanced. turnkey 3DOF motion
+      simulator. available on official shop. Ready-to-race package with
+      SilentForce actuators, Sparco Grid Q seat, Samsung Odyssey display, and
+      PC.
     manufacturer:
       - RaceRoom
       - TrackTime
@@ -642,9 +662,10 @@ commercial:
         url: https://www.raceroomstore.com/shop_en/3motion-advanced-547.html
         region: EU
   - product_name: TrackTime 3Motion Kit
-    description: RaceRoom / TrackTime 3Motion Kit. motion base kit for custom simulator builds.
-      available on official shop. Seat-mover kit with three SilentForce actuators, SimTools support,
-      compact base frame, and TrackTime shell seat.
+    description: RaceRoom / TrackTime 3Motion Kit. motion base kit for custom
+      simulator builds. available on official shop. Seat-mover kit with three
+      SilentForce actuators, SimTools support, compact base frame, and TrackTime
+      shell seat.
     manufacturer:
       - RaceRoom
       - TrackTime
@@ -659,9 +680,10 @@ commercial:
         url: https://www.raceroomstore.com/shop_en/3motion-689.html
         region: EU
   - product_name: COG-SHH 3DOF Motion System
-    description: COG-SHH 3DOF Motion System. compact 3DOF motion platform. in stock on official SHH
-      Simulation EU shop. Come Over Gaming and SHH Simulation motion system with linear
-      functionality, efficient operation, and plug-in power-cable variants.
+    description: COG-SHH 3DOF Motion System. compact 3DOF motion platform. in stock
+      on official SHH Simulation EU shop. Come Over Gaming and SHH Simulation
+      motion system with linear functionality, efficient operation, and plug-in
+      power-cable variants.
     manufacturer:
       - COG-SHH
       - SHH Simulation
@@ -676,10 +698,10 @@ commercial:
         url: https://www.shiftershh.com/en/home/21-cog-shh-3dof-motion-system.html
         region: EU
   - product_name: G5 Bracket Mounts for Aluminum Profile Type Simulator Frames
-    description: D-BOX G5 Bracket Mounts for Aluminum Profile Type Simulator Frames. 4dof platform.
-      listed on Trakracer. Trak Racer is the Official Simulator Supplier of Alpine F1 Team and
-      Partner of Airbus Aircraft. WHAT'S INCLUDED 1 x D-BOX Mounting Brackets 4 x M8*16 Hex Screws 4
-      x M6*16 Hex Sc...
+    description: D-BOX G5 Bracket Mounts for Aluminum Profile Type Simulator Frames.
+      4dof platform. listed on Trakracer. Trak Racer is the Official Simulator
+      Supplier of Alpine F1 Team and Partner of Airbus Aircraft. WHAT'S INCLUDED
+      1 x D-BOX Mounting Brackets 4 x M8*16 Hex Screws 4 x M6*16 Hex Sc...
     manufacturer: D-BOX
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -693,10 +715,10 @@ commercial:
         region: EU
         status: available
   - product_name: GEN 5 Motion Actuator (1.5" stroke/travel range)
-    description: D-BOX GEN 5 Motion Actuator (1.5" stroke/travel range). motion simulator. listed on
-      Trakracer. Trak Racer is the Official Simulator Supplier of Alpine F1 Team and Partner of
-      Airbus Aircraft. Looking to take your sim racing to another level? Look no further than
-      D-BOX's al...
+    description: D-BOX GEN 5 Motion Actuator (1.5" stroke/travel range). motion
+      simulator. listed on Trakracer. Trak Racer is the Official Simulator
+      Supplier of Alpine F1 Team and Partner of Airbus Aircraft. Looking to take
+      your sim racing to another level? Look no further than D-BOX's al...
     manufacturer: D-BOX
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -709,11 +731,13 @@ commercial:
         url: https://trakracer.eu/products/d-box-gen-5-motion-actuator-1-5-stroke-travel-range
         region: EU
         status: available
-  - product_name: Simagic P-APS Accessories Power Supply – Power Unit for Haptic, LED & Heel-Stop Modules
-    description: Trak Racer Simagic P-APS Accessories Power Supply – Power Unit for Haptic, LED &
-      Heel-Stop Modules. 4dof platform. listed on Trakracer. Product Description The Simagic P-APS
-      Accessories Power Supply is built to streamline your sim racing setup by delivering reliable,
-      clean, and efficient power to multiple high-d...
+  - product_name: Simagic P-APS Accessories Power Supply – Power Unit for Haptic,
+      LED & Heel-Stop Modules
+    description: Trak Racer Simagic P-APS Accessories Power Supply – Power Unit for
+      Haptic, LED & Heel-Stop Modules. 4dof platform. listed on Trakracer.
+      Product Description The Simagic P-APS Accessories Power Supply is built to
+      streamline your sim racing setup by delivering reliable, clean, and
+      efficient power to multiple high-d...
     manufacturer: Trak Racer
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -726,10 +750,12 @@ commercial:
         url: https://trakracer.eu/products/simagic-accessories-power-supply
         region: EU
         status: available
-  - product_name: Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and Bass Shaker Kit
-    description: Trak Racer Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and Bass Shaker
-      Kit. motion simulator. listed on Trakracer. Trak Racer Pro Bass Shaker & Stereo Amplifier Kit
-      – Ultimate Simulation Vibration & Immersion System Upgrade your simulator or gaming setup with
+  - product_name: Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and
+      Bass Shaker Kit
+    description: Trak Racer Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D
+      Amplifier and Bass Shaker Kit. motion simulator. listed on Trakracer. Trak
+      Racer Pro Bass Shaker & Stereo Amplifier Kit – Ultimate Simulation
+      Vibration & Immersion System Upgrade your simulator or gaming setup with
       the Trak Racer Pro Bass Shaker &...
     manufacturer: Trak Racer
     component_category: motion-platforms
@@ -743,10 +769,12 @@ commercial:
         url: https://trakracer.eu/products/haptic-bass-shaker-kit-with-200w-bass-amp-and-100w-shaker
         region: EU
         status: available
-  - product_name: Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and Bass Shaker Kit with Rig Mount
-    description: Trak Racer Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and Bass Shaker
-      Kit with Rig Mount. motion simulator. listed on Trakracer. Trak Racer Pro Bass Shaker & Stereo
-      Amplifier Kit with Universal Mounting Plate – Simulation Vibration & Immersion System Upgrade
+  - product_name: Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D Amplifier and
+      Bass Shaker Kit with Rig Mount
+    description: Trak Racer Trak Racer V2 Pro 2CH 200W Low-Frequency Class-D
+      Amplifier and Bass Shaker Kit with Rig Mount. motion simulator. listed on
+      Trakracer. Trak Racer Pro Bass Shaker & Stereo Amplifier Kit with
+      Universal Mounting Plate – Simulation Vibration & Immersion System Upgrade
       your simulator or gaming setup with the Trak Ra...
     manufacturer: Trak Racer
     component_category: motion-platforms
@@ -761,9 +789,10 @@ commercial:
         region: EU
         status: available
   - product_name: Universal Bass Shaker/Buttkicker/Tactile Transducer Sim Rig Mount
-    description: Trak Racer Universal Bass Shaker/Buttkicker/Tactile Transducer Sim Rig Mount. motion
-      simulator. listed on Trakracer. Trak Racer is the Official Simulator Supplier of Alpine F1
-      Team and Partner of Airbus Aircraft. Add extra immersion to your rig with this single-mount,
+    description: Trak Racer Universal Bass Shaker/Buttkicker/Tactile Transducer Sim
+      Rig Mount. motion simulator. listed on Trakracer. Trak Racer is the
+      Official Simulator Supplier of Alpine F1 Team and Partner of Airbus
+      Aircraft. Add extra immersion to your rig with this single-mount,
       universal bass shaker hol...
     manufacturer: Trak Racer
     component_category: motion-platforms
@@ -778,8 +807,8 @@ commercial:
         region: EU
         status: available
   - product_name: 3 Dof motion kit with 4 linear actuator 100
-    description: VNM 3 Dof motion kit with 4 linear actuator 100. 4dof platform. listed on
-      Vnmsimulation. Official shop listing.
+    description: VNM 3 Dof motion kit with 4 linear actuator 100. 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -793,8 +822,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: 3 Dof motion kit with 4 linear actuator 100
-    description: VNM 3 Dof motion kit with 4 linear actuator 100. 4dof platform. listed on
-      Vnmsimulation. Official shop listing.
+    description: VNM 3 Dof motion kit with 4 linear actuator 100. 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -808,8 +837,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: 3 Dof motion kit with 4 linear actuator 150
-    description: VNM 3 Dof motion kit with 4 linear actuator 150. 4dof platform. listed on
-      Vnmsimulation. Official shop listing.
+    description: VNM 3 Dof motion kit with 4 linear actuator 150. 4dof platform.
+      listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -823,8 +852,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: 3 Dof motion kit with 4 linear actuator 150 & 3000W power supply
-    description: VNM 3 Dof motion kit with 4 linear actuator 150 & 3000W power supply. 4dof platform.
-      listed on Vnmsimulation. Official shop listing.
+    description: VNM 3 Dof motion kit with 4 linear actuator 150 & 3000W power
+      supply. 4dof platform. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -838,8 +867,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion System 3DOF 4 Actuator 150 (without seat)
-    description: VNM Motion System 3DOF 4 Actuator 150 (without seat). 4dof platform. listed on
-      Vnmsimulation. Official shop listing.
+    description: VNM Motion System 3DOF 4 Actuator 150 (without seat). 4dof
+      platform. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -853,8 +882,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion System 3DOF 4 Actuator 150 (without seat)
-    description: VNM Motion System 3DOF 4 Actuator 150 (without seat). 4dof platform. listed on
-      Vnmsimulation. Official shop listing.
+    description: VNM Motion System 3DOF 4 Actuator 150 (without seat). 4dof
+      platform. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -868,8 +897,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF without seat)
-    description: VNM Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF without seat). 4dof
-      platform. listed on Vnmsimulation. Official shop listing.
+    description: VNM Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF
+      without seat). 4dof platform. listed on Vnmsimulation. Official shop
+      listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -883,8 +913,9 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF without seat)
-    description: VNM Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF without seat). 4dof
-      platform. listed on Vnmsimulation. Official shop listing.
+    description: VNM Motion System 3DOF 4 Actuator 150 with Surge/TL 150 (5 DOF
+      without seat). 4dof platform. listed on Vnmsimulation. Official shop
+      listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -898,7 +929,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Actuator 100
-    description: VNM Actuator 100. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Actuator 100. motion simulator. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -912,7 +944,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Actuator 100
-    description: VNM Actuator 100. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Actuator 100. motion simulator. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -926,7 +959,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Actuator 150
-    description: VNM Actuator 150. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Actuator 150. motion simulator. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -940,7 +974,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Actuator 150
-    description: VNM Actuator 150. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Actuator 150. motion simulator. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -954,7 +989,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Actuator 300
-    description: VNM Actuator 300. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Actuator 300. motion simulator. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -968,7 +1004,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Actuator 300
-    description: VNM Actuator 300. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Actuator 300. motion simulator. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -982,8 +1019,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Motion 2 TL and Surge Platform 4080
-    description: VNM Motion 2 TL and Surge Platform 4080. 4dof platform. listed on Vnmsimulation.
-      Official shop listing.
+    description: VNM Motion 2 TL and Surge Platform 4080. 4dof platform. listed on
+      Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -997,8 +1034,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion 2 TL and Surge Platform 4080
-    description: VNM Motion 2 TL and Surge Platform 4080. 4dof platform. listed on Vnmsimulation.
-      Official shop listing.
+    description: VNM Motion 2 TL and Surge Platform 4080. 4dof platform. listed on
+      Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -1012,8 +1049,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion 3 DOF 3 Linear Actuator 100 kit
-    description: VNM Motion 3 DOF 3 Linear Actuator 100 kit. motion simulator. listed on Vnmsimulation.
-      Official shop listing.
+    description: VNM Motion 3 DOF 3 Linear Actuator 100 kit. motion simulator.
+      listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -1027,8 +1064,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Motion 3 DOF 3 Linear Actuator 100 kit
-    description: VNM Motion 3 DOF 3 Linear Actuator 100 kit. motion simulator. listed on Vnmsimulation.
-      Official shop listing.
+    description: VNM Motion 3 DOF 3 Linear Actuator 100 kit. motion simulator.
+      listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -1042,8 +1079,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Motion 3 DOF 3 Linear Actuator 150 kit
-    description: VNM Motion 3 DOF 3 Linear Actuator 150 kit. motion simulator. listed on Vnmsimulation.
-      Official shop listing.
+    description: VNM Motion 3 DOF 3 Linear Actuator 150 kit. motion simulator.
+      listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -1057,8 +1094,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Motion 3 DOF 3 Linear Actuator 150 kit
-    description: VNM Motion 3 DOF 3 Linear Actuator 150 kit. motion simulator. listed on Vnmsimulation.
-      Official shop listing.
+    description: VNM Motion 3 DOF 3 Linear Actuator 150 kit. motion simulator.
+      listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -1072,8 +1109,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Motion Cabinet (7 – 9 Controllers)
-    description: VNM Motion Cabinet (7 – 9 Controllers). motion simulator. listed on Vnmsimulation.
-      Official shop listing.
+    description: VNM Motion Cabinet (7 – 9 Controllers). motion simulator. listed on
+      Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -1086,7 +1123,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion Controller
-    description: VNM Motion Controller. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Motion Controller. motion simulator. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -1100,7 +1138,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion Controller
-    description: VNM Motion Controller. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Motion Controller. motion simulator. listed on Vnmsimulation.
+      Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -1114,7 +1153,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion EMC Stop Button
-    description: VNM Motion EMC Stop Button. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Motion EMC Stop Button. motion simulator. listed on
+      Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -1128,7 +1168,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion EMC Stop Button
-    description: VNM Motion EMC Stop Button. motion simulator. listed on Vnmsimulation. Official shop listing.
+    description: VNM Motion EMC Stop Button. motion simulator. listed on
+      Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: motion-simulator
@@ -1142,8 +1183,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and seat)
-    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and seat). 4dof platform.
-      listed on Vnmsimulation. Official shop listing.
+    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and
+      seat). 4dof platform. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -1157,8 +1198,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and seat)
-    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and seat). 4dof platform.
-      listed on Vnmsimulation. Official shop listing.
+    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no rig and
+      seat). 4dof platform. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -1172,8 +1213,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat)
-    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat). 4dof platform. listed on
-      Vnmsimulation. Official shop listing.
+    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat). 4dof
+      platform. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -1187,8 +1228,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat)
-    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat). 4dof platform. listed on
-      Vnmsimulation. Official shop listing.
+    description: VNM Motion System 6DOF 4 actuator 150 1 SG and 2TL (no seat). 4dof
+      platform. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -1202,8 +1243,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Motion TL and surge platform 4080
-    description: VNM Motion TL and surge platform 4080. 4dof platform. listed on Vnmsimulation. Official
-      shop listing.
+    description: VNM Motion TL and surge platform 4080. 4dof platform. listed on
+      Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -1217,8 +1258,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Motion TL and surge platform 4080
-    description: VNM Motion TL and surge platform 4080. 4dof platform. listed on Vnmsimulation. Official
-      shop listing.
+    description: VNM Motion TL and surge platform 4080. 4dof platform. listed on
+      Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: motion-platforms
     component_sub_category: 4dof-platform
@@ -1233,9 +1274,10 @@ commercial:
         status: out-of-stock
 opensource:
   - project_name: 6DOF Motion Platform
-    description: Simmetrik 6DOF Motion Platform. open hardware 6DOF motion simulator platform. Public
-      open-source DIY 6DOF platform project; activity level appears older [uncertain]. Repository
-      describes an open-source DIY 6DOF motion simulator platform.
+    description: Simmetrik 6DOF Motion Platform. open hardware 6DOF motion simulator
+      platform. Public open-source DIY 6DOF platform project; activity level
+      appears older [uncertain]. Repository describes an open-source DIY 6DOF
+      motion simulator platform.
     maker: Simmetrik
     component_category: motion-platforms
     component_sub_category: 6dof-platform
@@ -1243,9 +1285,10 @@ opensource:
     project_url: https://github.com/Simmetrik/6DOF-Motion-Platform
     picture_url: research/products/local_images/6DOF_Motion_Platform.jpg
   - project_name: 6DOF Rotary Stewart Motion Simulator
-    description: 6DOF Rotary Stewart Motion Simulator. 6DOF rotary Stewart platform with AC servos.
-      Active advanced DIY project; GitHub metadata showed updates in March 2026. Full-stack 6DOF
-      motion simulator using rotary Stewart geometry.
+    description: 6DOF Rotary Stewart Motion Simulator. 6DOF rotary Stewart platform
+      with AC servos. Active advanced DIY project; GitHub metadata showed
+      updates in March 2026. Full-stack 6DOF motion simulator using rotary
+      Stewart geometry.
     maker: knaufinator
     component_category: motion-platforms
     component_sub_category: 6dof-platform
@@ -1253,9 +1296,10 @@ opensource:
     project_url: https://github.com/knaufinator/6DOF-Rotary-Stewart-Motion-Simulator
     picture_url: https://raw.githubusercontent.com/knaufinator/6DOF-Rotary-Stewart-Motion-Simulator/phoenix/documentation/images/stewart_platform_controller.png
   - project_name: AASD15A Servo Controller for Motion Simrigs
-    description: Motion4Sim AASD15A Servo Controller Firmware. public firmware for AASD15A/SFX/6DOF/belt
-      controller. Public firmware release repository with ongoing version notes through v3.30.
-      Firmware for Motion4Sim M4S controller family.
+    description: Motion4Sim AASD15A Servo Controller Firmware. public firmware for
+      AASD15A/SFX/6DOF/belt controller. Public firmware release repository with
+      ongoing version notes through v3.30. Firmware for Motion4Sim M4S
+      controller family.
     maker: motion4sim
     component_category: motion-platforms
     component_sub_category: motion-controller
@@ -1263,21 +1307,23 @@ opensource:
     project_url: https://github.com/motion4sim/AASD15A-Servo-Controller-for-Motion-Simrigs
     picture_url: https://github.com/fluidicon.png
   - project_name: AMC-AASD15A Firmware
-    description: AMC-AASD15A Firmware. AASD15A servo motion controller firmware. Active public
-      firmware/manual repository with release notes through 2025. Firmware/manual repository for
-      AMC-AASD15A controller.
+    description: AMC-AASD15A Firmware. AASD15A servo motion controller firmware.
+      Active public firmware/manual repository with release notes through 2025.
+      Firmware/manual repository for AMC-AASD15A controller.
     maker:
       - Thanos
       - tronicgr
     component_category: motion-platforms
     component_sub_category: motion-controller
-    license: No explicit open-source license found; firmware/source openness unclear [uncertain].
+    license: No explicit open-source license found; firmware/source openness unclear
+      [uncertain].
     project_url: https://github.com/tronicgr/AMC-AASD15A-Firmware
     picture_url: https://raw.githubusercontent.com/tronicgr/AMC-AASD15A-Firmware/master/Thanos-utility/AMC-AASD_Config_tool/AMC-AASD15A-config-tool.jpg
   - project_name: FlyPT Mover
-    description: FlyPT Mover. modular motion-cueing software. Active personal-use freeware; official
-      site had Mover 3.7 beta download and recent docs crawl. Modular motion simulator software with
-      sources, poses, filters, outputs, and rig previews.
+    description: FlyPT Mover. modular motion-cueing software. Active personal-use
+      freeware; official site had Mover 3.7 beta download and recent docs crawl.
+      Modular motion simulator software with sources, poses, filters, outputs,
+      and rig previews.
     maker:
       - FlyPTMover
       - FlyPT
@@ -1287,9 +1333,9 @@ opensource:
     project_url: https://github.com/FlyPTMover
     picture_url: https://opengraph.githubassets.com/1/FlyPTMover/Releases
   - project_name: SC230 Theta 3DOF Sim Rig
-    description: OpenSimCraft Theta 8020 3DOF. 80/20 aluminum 3DOF motion cockpit. Early open hardware
-      design; README says current work is finalizing cockpit chassis 1.0. 3DOF sim rig made from
-      80/20 T-slot aluminum extrusions.
+    description: OpenSimCraft Theta 8020 3DOF. 80/20 aluminum 3DOF motion cockpit.
+      Early open hardware design; README says current work is finalizing cockpit
+      chassis 1.0. 3DOF sim rig made from 80/20 T-slot aluminum extrusions.
     maker: OpenSimCraft
     component_category: motion-platforms
     component_sub_category: 3dof-platform
@@ -1297,23 +1343,24 @@ opensource:
     project_url: https://github.com/OpenSimCraft/theta-8020-3dof
     picture_url: https://raw.githubusercontent.com/opensimcraft/theta-8020-3dof/master/SC230%20Theta%20Large%20Screen.png
   - project_name: SFX-100 / SimFeedback AC Servo
-    description: SFX-100 / SimFeedback. 4-actuator DIY linear motion platform. Mature DIY community
-      platform with sponsor/member access model; official site reported hundreds of builders. Four
-      SFX-100 linear actuators using AC servos and ball screws.
+    description: SFX-100 / SimFeedback. 4-actuator DIY linear motion platform.
+      Mature DIY community platform with sponsor/member access model; official
+      site reported hundreds of builders. Four SFX-100 linear actuators using AC
+      servos and ball screws.
     maker:
       - Rausch IT
       - SimFeedback community
     component_category: motion-platforms
     component_sub_category: 4dof-platform
-    license: "Mixed: documentation/images/STLs under CC BY-NC-SA 4.0; SimFeedback core and Arduino
-      firmware are freeware/donationware, not open source; telemetry plugins on GitHub are MIT-style
-      per official downloads page."
+    license: "Mixed: documentation/images/STLs under CC BY-NC-SA 4.0; SimFeedback
+      core and Arduino firmware are freeware/donationware, not open source;
+      telemetry plugins on GitHub are MIT-style per official downloads page."
     project_url: https://github.com/SimFeedback/SimFeedback-AC-Servo
     picture_url: https://raw.githubusercontent.com/SimFeedback/SimFeedback-AC-Servo/master/Docs/SFX100.png
   - project_name: SMC3
-    description: SMC3. Arduino motion platform motor controller. Stable older DIY controller; GitHub
-      metadata showed last update in 2023. Arduino Uno R3 controller for up to three
-      motion-simulator motors.
+    description: SMC3. Arduino motion platform motor controller. Stable older DIY
+      controller; GitHub metadata showed last update in 2023. Arduino Uno R3
+      controller for up to three motion-simulator motors.
     maker: SimulatorMotorController
     component_category: motion-platforms
     component_sub_category: motion-controller
@@ -1321,9 +1368,9 @@ opensource:
     project_url: https://github.com/SimulatorMotorController/SMC3
     picture_url: https://github.com/fluidicon.png
   - project_name: Stewart-platform-6DOF
-    description: Bjoes Stewart Platform 6DOF. FlyPT Mover-driven 6DOF Stewart platform. Public DIY build
-      repository; BOM and drawings noted as work in progress. 6DOF simulator with Arduino
-      controllers for FlyPT Mover.
+    description: Bjoes Stewart Platform 6DOF. FlyPT Mover-driven 6DOF Stewart
+      platform. Public DIY build repository; BOM and drawings noted as work in
+      progress. 6DOF simulator with Arduino controllers for FlyPT Mover.
     maker: Bjoes
     component_category: motion-platforms
     component_sub_category: motion-software
