@@ -31,26 +31,26 @@
     }
   },
   "summary": {
-    "total_records": 889,
+    "total_records": 993,
     "by_kind": {
-      "commercial": 801,
+      "commercial": 905,
       "opensource": 88
     },
     "by_component_category": {
       "belt-tensioners": 13,
-      "button-boxes-and-panels": 89,
+      "button-boxes-and-panels": 92,
       "collectives": 10,
       "display-systems": 43,
       "g-seats": 8,
-      "handbrakes": 19,
+      "handbrakes": 20,
       "joysticks": 74,
       "motion-platforms": 57,
-      "pedals": 47,
-      "rigs-and-cockpits": 127,
+      "pedals": 52,
+      "rigs-and-cockpits": 218,
       "rudder-pedals": 23,
       "seats-and-ergonomics": 59,
-      "shifters": 28,
-      "steering-wheels": 103,
+      "shifters": 30,
+      "steering-wheels": 105,
       "tactile-feedback": 21,
       "throttles": 56,
       "vr-and-head-tracking": 29,
@@ -498,6 +498,13 @@
           "price": 285,
           "currency": "USD",
           "url": "https://www.apexsimracing.com/en-de/products/downforce-sim-racing-button-box"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 59,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/button-box-holder-sim-racing-accessories"
         }
       ]
     },
@@ -684,7 +691,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 13290,
+          "price": 132.9,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-fsm-ga-front-switchboard-module-general-aviation/"
         }
@@ -705,7 +712,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 3650,
+          "price": 36.5,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-mfh-multi-functional-holder/"
         }
@@ -768,7 +775,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 9800,
+          "price": 98,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-thq-throttle-quadrant/"
         }
@@ -789,7 +796,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 10380,
+          "price": 103.8,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-thq-v-throttle-quadrant-vertical/"
         }
@@ -1951,6 +1958,69 @@
       ]
     },
     {
+      "id": "commercial:button-boxes-and-panels:grid-display-ddu-5",
+      "kind": "commercial",
+      "slug": "grid-display-ddu-5",
+      "product_name": "Display DDU-5",
+      "description": "GRID Display DDU-5. control panel. listed on Sim Lab. The GRID DDU5 is designed to provide valuable race data and enhance vertical FOV. With a robust enclosure and compatibility with multiple simulation titles and software, it offe...",
+      "manufacturer": "GRID",
+      "component_category": "button-boxes-and-panels",
+      "component_sub_category": "control-panel",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/grid-ddu5-sim-racing-dashboard-display-unit",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 299,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/grid-ddu5-sim-racing-dashboard-display-unit"
+        }
+      ]
+    },
+    {
+      "id": "commercial:button-boxes-and-panels:sim-lab-porsche-911-gt3-cup-991-button-box-console",
+      "kind": "commercial",
+      "slug": "sim-lab-porsche-911-gt3-cup-991-button-box-console",
+      "product_name": "Porsche 911 GT3 Cup (991) Button Box Console",
+      "description": "Sim Lab Porsche 911 GT3 Cup (991) Button Box Console. control panel. listed on Sim Lab. The officially licensed Porsche 911 GT3 Cup (991) Button Box Console provides users with 42 individual inputs and is constructed using the best components and materials availabl...",
+      "manufacturer": "Sim Lab",
+      "component_category": "button-boxes-and-panels",
+      "component_sub_category": "control-panel",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/porsche-911-gt3-cup-991-button-box-console",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 399,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/porsche-911-gt3-cup-991-button-box-console"
+        }
+      ]
+    },
+    {
+      "id": "commercial:button-boxes-and-panels:sim-lab-porsche-911-gt3-cup-dashboard-display-unit",
+      "kind": "commercial",
+      "slug": "sim-lab-porsche-911-gt3-cup-dashboard-display-unit",
+      "product_name": "Porsche 911 GT3 Cup Dashboard Display Unit",
+      "description": "Sim Lab Porsche 911 GT3 Cup Dashboard Display Unit. control panel. listed on Sim Lab. The GRID Porsche 911 GT3 Cup Dashboard Display Unit features a 10-inch LCD screen, perfectly sized to match the real thing, bringing the authentic feel of a Porsche GT3 Cup car...",
+      "manufacturer": "Sim Lab",
+      "component_category": "button-boxes-and-panels",
+      "component_sub_category": "control-panel",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/porsche-911-gt3-cup-dashboard-display-unit",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 599,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/porsche-911-gt3-cup-dashboard-display-unit"
+        }
+      ]
+    },
+    {
       "id": "opensource:button-boxes-and-panels:c172-flight-sim-panel",
       "kind": "opensource",
       "slug": "c172-flight-sim-panel",
@@ -2403,6 +2473,13 @@
           "price": 274.39,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/vario-triple-monitor-mount-sim-racing"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 279,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/vario-triple-monitor-mount-sim-racing"
         }
       ]
     },
@@ -2424,6 +2501,13 @@
           "price": 136.71,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/integrated-monitor-mount-sim-racing"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 139,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/integrated-monitor-mount-sim-racing"
         }
       ]
     },
@@ -3422,6 +3506,13 @@
           "price": 195.71,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/handbrake-xb1-loadcell-sim-racing"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 199,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/handbrake-xb1-loadcell-sim-racing"
         }
       ]
     },
@@ -3485,6 +3576,27 @@
           "price": 599.5,
           "currency": "USD",
           "url": "https://www.ricmotech.com/realgear-rallypro-xtreme-hand-brake"
+        }
+      ]
+    },
+    {
+      "id": "commercial:handbrakes:xb-1-handbrake-angled-mounting-bracket",
+      "kind": "commercial",
+      "slug": "xb-1-handbrake-angled-mounting-bracket",
+      "product_name": "Handbrake angled mounting bracket",
+      "description": "XB-1 Handbrake angled mounting bracket. analog handbrake. listed on Sim Lab. This bracket allows you to mount your XB-1 Handbrake under an angle on the side of an aluminum profile. Hardware is included.",
+      "manufacturer": "XB-1",
+      "component_category": "handbrakes",
+      "component_sub_category": "analog-handbrake",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/xb-1-handbrake-angled-mounting-bracket",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 29,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/xb-1-handbrake-angled-mounting-bracket"
         }
       ]
     },
@@ -3626,7 +3738,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 14700,
+          "price": 147,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/f-14-combat-grip-stand-alone/"
         }
@@ -3647,7 +3759,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 10300,
+          "price": 103,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gladiator-nxt-evo-base-only/"
         }
@@ -3668,7 +3780,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 20400,
+          "price": 204,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gladiator-nxt-evo-f-14-combat-edition/"
         }
@@ -3689,7 +3801,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 16100,
+          "price": 161,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gladiator-evo-space-combat-edition/"
         }
@@ -3710,7 +3822,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 13500,
+          "price": 135,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gladiator-nxt-evo-wwii-combat-edition/"
         }
@@ -3731,7 +3843,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 20900,
+          "price": 209,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gladiator-nxt-evo-omni-throttle/"
         }
@@ -3773,7 +3885,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 44600,
+          "price": 446,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gunfighter-iv-f-14-combat-edition/"
         }
@@ -3794,7 +3906,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 45600,
+          "price": 456,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gunfighter-iv-modern-combat-edition/"
         }
@@ -3815,7 +3927,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 58500,
+          "price": 585,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gunfighter-iv-modern-combat-edition-ultimate/"
         }
@@ -3836,7 +3948,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 42700,
+          "price": 427,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gunfighter-iv-space-combat-edition-premium/"
         }
@@ -3857,7 +3969,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 38300,
+          "price": 383,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gunfighter-iv-wwii-combat-edition/"
         }
@@ -3878,7 +3990,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 31900,
+          "price": 319,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gunfighter-iv-base-only/"
         }
@@ -3941,7 +4053,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 8900,
+          "price": 89,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/kg12-gf-gen-2-grip/"
         }
@@ -3983,7 +4095,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 16100,
+          "price": 161,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/modern-combat-grip-mcg-socket-rev-b/"
         }
@@ -4004,7 +4116,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 29900,
+          "price": 299,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/modern-combat-grip-ultimate-edition/"
         }
@@ -4046,7 +4158,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 10300,
+          "price": 103,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/scg-kosmosima-premium-stand-alone-grip-gladiator/"
         }
@@ -4067,7 +4179,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 12850,
+          "price": 128.5,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/scg-kosmosima-stand-alone-grip-for-gunfighter-left-hand/"
         }
@@ -4088,7 +4200,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 12850,
+          "price": 128.5,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/scg-kosmosima-premium-right-handed/"
         }
@@ -6699,6 +6811,13 @@
           "price": 392.4,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/pedal-set-xp1-loadcell-sim-racing"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 399,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/pedal-set-xp1-loadcell-sim-racing"
         }
       ]
     },
@@ -6993,6 +7112,111 @@
           "price": 99.99,
           "currency": "USD",
           "url": "https://www.thrustmaster.com/en-us/products/t3pa-add-on/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:sim-lab-inverted-pedal-rack-v2",
+      "kind": "commercial",
+      "slug": "sim-lab-inverted-pedal-rack-v2",
+      "product_name": "Inverted Pedal Rack V2",
+      "description": "Sim Lab Inverted Pedal Rack V2. two pedal set. listed on Sim Lab. This inverted pedal rack supports an inverted pedal configuration for a GT-style pedal position. Redesigned as V2 to match our current design language and material standards, it...",
+      "manufacturer": "Sim Lab",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/inverted-pedal-rack-v2",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 199,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/inverted-pedal-rack-v2"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:sim-lab-pedal-slider-baseplate",
+      "kind": "commercial",
+      "slug": "sim-lab-pedal-slider-baseplate",
+      "product_name": "Pedal slider baseplate",
+      "description": "Sim Lab Pedal slider baseplate. two pedal set. listed on Sim Lab. The baseplate ensures secure pedal mounting on the Sim-Lab seat slider for easy pedal position adjustments. It can also be used without the seat slider as a heel rest and a stab...",
+      "manufacturer": "Sim Lab",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/pedal-slider-baseplate-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 159,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/pedal-slider-baseplate-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:sim-lab-sim-pedal-heel-rest",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-pedal-heel-rest",
+      "product_name": "Sim pedal heel rest",
+      "description": "Sim Lab Sim pedal heel rest. two pedal set. listed on Sim Lab. Product Description: The Sim Pedal Heel Rest provides support for the back of your feet, enhancing comfort and stability while operating the pedals. Specifications: Material: 4...",
+      "manufacturer": "Sim Lab",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/pedal-heel-rest-sim-racing-accessories",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 39.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/pedal-heel-rest-sim-racing-accessories"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:xp1-black-conversion-kit",
+      "kind": "commercial",
+      "slug": "xp1-black-conversion-kit",
+      "product_name": "Black Conversion Kit",
+      "description": "XP1 Black Conversion Kit. two pedal set. listed on Sim Lab. The XP1 Black Conversion Kit allows you to change your pedals' appearance by switching from the iconic blue parts to these black ones. Remove all blue parts from your pedals and...",
+      "manufacturer": "XP1",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/xp1-pedals-black-conversion-kit",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 14.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/xp1-pedals-black-conversion-kit"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:xp1-foot-support",
+      "kind": "commercial",
+      "slug": "xp1-foot-support",
+      "product_name": "Foot Support",
+      "description": "XP1 Foot Support. two pedal set. listed on Sim Lab. The foot support improves stability when using your throttle pedal for example. It can be easily installed between the pedal face and pedal face bracket. Due to its symmetrical...",
+      "manufacturer": "XP1",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/xp1-pedals-foot-support",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 19.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/xp1-pedals-foot-support"
         }
       ]
     },
@@ -7380,6 +7604,13 @@
           "price": 372.73,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/gt1-evo-sim-racing-cockpit"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 379,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/gt1-evo-base-product"
         }
       ]
     },
@@ -7527,6 +7758,13 @@
           "price": 105.04,
           "currency": "EUR",
           "url": "https://www.monster.tech/en/product/joystick-hotas-table-mount/"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 47.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/flight-sim-joystick-mount"
         }
       ]
     },
@@ -7653,6 +7891,13 @@
           "price": 884.15,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/p1x-ultimate-simracing-cockpit"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 1088,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/p1x-ultimate-simracing-cockpit-us"
         }
       ]
     },
@@ -7674,6 +7919,13 @@
           "price": 638.27,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/gt1-pro-sim-racing-cockpit"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 399,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/gt1-evo-sim-racing-cockpit-1"
         }
       ]
     },
@@ -7695,6 +7947,13 @@
           "price": 982.49,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 99,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit-int"
         }
       ]
     },
@@ -8136,6 +8395,13 @@
           "price": 999999,
           "currency": "EUR",
           "url": "https://eu.winctrl.com/view/goods-details.html?id=321"
+        },
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 28,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/scg-grip-conversion-kit/"
         }
       ]
     },
@@ -9354,6 +9620,13 @@
           "price": 2727.92,
           "currency": "EUR",
           "url": "https://www.sparco-official.com/de/gp-rig-i-gp-pro-fanatec-sim-kit-p310-open-g03305-1.html"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 259,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sparco-grid-q-sim-racing"
         }
       ]
     },
@@ -9627,6 +9900,1917 @@
           "price": 299,
           "currency": "USD",
           "url": "https://www.asetek.com/simsports/global/product/initium-2-in-1-cockpit/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-adjustable-sim-feet",
+      "kind": "commercial",
+      "slug": "sim-lab-adjustable-sim-feet",
+      "product_name": "Adjustable Sim Feet",
+      "description": "Sim Lab Adjustable Sim Feet. cockpit frame. listed on Sim Lab. Sim Feet are adjustable feet for sim racing cockpits*, allowing for increased stability and better ergonomics. The adjustable feet let you customize the height of the racing rig...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sim-feet-sim-racing-cockpits",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 89,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sim-feet-sim-racing-cockpits"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-bucket-seat-bracket-set",
+      "kind": "commercial",
+      "slug": "sim-lab-bucket-seat-bracket-set",
+      "product_name": "Bucket Seat Bracket Set",
+      "description": "Sim Lab Bucket Seat Bracket Set. cockpit frame. listed on Sim Lab. The bucket seat bracket set is made from durable 4 mm aluminum plates and features a versatile design to fit any seat. These brackets are mounted using 4x M8 bolts on 40 mm, 45...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/bucket-seat-bracket-set-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 39.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/bucket-seat-bracket-set-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-caster-wheels-set",
+      "kind": "commercial",
+      "slug": "sim-lab-caster-wheels-set",
+      "product_name": "Caster Wheels Set",
+      "description": "Sim Lab Caster Wheels Set. rig mounts. listed on Sim Lab. Built with a sturdy black steel housing and a robust trunnion featuring a double ball ring for smooth swiveling. The wheel combines a durable polypropylene core with a polyureth...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/caster-wheels-set",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 29.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/caster-wheels-set"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-center-post",
+      "kind": "commercial",
+      "slug": "sim-lab-center-post",
+      "product_name": "Center Post",
+      "description": "Sim Lab Center Post. rig mounts. listed on Sim Lab. The Center Post supports center-mounted flight sticks or yokes, offering a sturdy, ergonomic base for immersive flight simulation, blending seamlessly with your cockpit. Ergonom...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/flight-sim-center-post",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 79.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/flight-sim-center-post"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-corner-bracket-40-mm-slot-8",
+      "kind": "commercial",
+      "slug": "sim-lab-corner-bracket-40-mm-slot-8",
+      "product_name": "Corner Bracket 40 mm slot 8",
+      "description": "Sim Lab Corner Bracket 40 mm slot 8. rig mounts. listed on Sim Lab. This corner bracket set includes caps and all necessary fasteners, providing a secure and reliable solution for 40 mm profiles with 8 mm slot grooves. Each bracket is designed f...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/corner-bracket-40-mm-slot-8",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 24.99,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/corner-bracket-40-mm-slot-8"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:f33l-sim-gloves",
+      "kind": "commercial",
+      "slug": "f33l-sim-gloves",
+      "product_name": "Sim Gloves",
+      "description": "F33L Sim Gloves. rig mounts. listed on Sim Lab. F33L Sim Gloves are designed for sim racers, offering breathable, flexible materials for enhanced control and comfort. The ergonomic rubber grip reduces hand fatigue during inte...",
+      "manufacturer": "F33L",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/f33l-sim-racing-gloves",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 39.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/f33l-sim-racing-gloves"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-front-mount-evo",
+      "kind": "commercial",
+      "slug": "sim-lab-front-mount-evo",
+      "product_name": "Front mount EVO",
+      "description": "Sim Lab Front mount EVO. rig mounts. listed on Sim Lab. The Evo front mounting bracket is made from a 15mm black-coated aluminum plate. The side plates are both 10 mm thick. It is compatible with the GT1 Evo cockpit. Supports the fol...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/front-mount-gt1-evo-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 119,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/front-mount-gt1-evo-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:grid-mpx-v2",
+      "kind": "commercial",
+      "slug": "grid-mpx-v2",
+      "product_name": "MPX V2",
+      "description": "GRID MPX V2. rig mounts. listed on Sim Lab. Utilizing GRID signature electronics and construction methods, along with the best components available, we are bringing our signature quality and feel to a new price point. At...",
+      "manufacturer": "GRID",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/grid-mpx-v2",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 1199,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/grid-mpx-v2"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gt1-integrated-vario-monitor-mount",
+      "kind": "commercial",
+      "slug": "gt1-integrated-vario-monitor-mount",
+      "product_name": "Integrated Vario™ Monitor Mount",
+      "description": "GT1 Integrated Vario™ Monitor Mount. rig mounts. listed on Sim Lab. The GT1 Monitor Mount is an excellent solution for a stable and space-efficient sim racing setup. Available in single and triple monitor configurations, this mount features our...",
+      "manufacturer": "GT1",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/gt1-pro-integrated-monitor-mount-1",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 129,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/gt1-pro-integrated-monitor-mount-1"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gt1-pro-base-cockpit",
+      "kind": "commercial",
+      "slug": "gt1-pro-base-cockpit",
+      "product_name": "PRO base cockpit",
+      "description": "GT1 PRO base cockpit. cockpit frame. listed on Sim Lab. Official shop listing.",
+      "manufacturer": "GT1",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/gt1-pro-base-cockpit",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 649,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/gt1-pro-base-cockpit"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gt1-pro-sim-racing-cockpit",
+      "kind": "commercial",
+      "slug": "gt1-pro-sim-racing-cockpit",
+      "product_name": "Pro Sim Racing Cockpit",
+      "description": "GT1 Pro Sim Racing Cockpit. cockpit frame. listed on Sim Lab. The GT1 Pro redefines accessible high-end sim racing with its rigid design, effortless assembly, and flex-free mounting, complete with side mounts for shifters and accessories....",
+      "manufacturer": "GT1",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/gt1-pro-sim-racing-cockpit-int",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 649,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/gt1-pro-sim-racing-cockpit-int"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gt1-pro-sim-racing-cockpit-2",
+      "kind": "commercial",
+      "slug": "gt1-pro-sim-racing-cockpit-2",
+      "product_name": "Pro Sim Racing Cockpit",
+      "description": "GT1 Pro Sim Racing Cockpit. cockpit frame. listed on Sim Lab. The GT1 Pro redefines accessible high-end sim racing with its rigid design, effortless assembly, and flex-free mounting, complete with side mounts for shifters and accessories....",
+      "manufacturer": "GT1",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/gt1-pro-sim-racing-cockpit",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 649,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/gt1-pro-sim-racing-cockpit"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-keyboard-tray",
+      "kind": "commercial",
+      "slug": "sim-lab-keyboard-tray",
+      "product_name": "Keyboard Tray",
+      "description": "Sim Lab Keyboard Tray. rig mounts. listed on Sim Lab. The keyboard tray mounts directly to your profile rig and can be positioned on either the left or right side. It measures 500×200 mm, which fits most keyboards, and you can tilt...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/keyboard-tray-sim-racing-accessories",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 69,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/keyboard-tray-sim-racing-accessories"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:p1x-pro-base-cockpit-all",
+      "kind": "commercial",
+      "slug": "p1x-pro-base-cockpit-all",
+      "product_name": "pro base cockpit ALL",
+      "description": "P1X pro base cockpit ALL. cockpit frame. listed on Sim Lab. Official shop listing.",
+      "manufacturer": "P1X",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/p1x-pro-base-cookpit-all",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 879,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/p1x-pro-base-cookpit-all"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:p1x-pro-front-mount",
+      "kind": "commercial",
+      "slug": "p1x-pro-front-mount",
+      "product_name": "Pro Front Mount",
+      "description": "P1X Pro Front Mount. rig mounts. listed on Sim Lab. The P1X Pro Front Mount is designed for use with our P1X PRO, P1X Ultimate, P1X, and P1 cockpits, as well as most third-party 8020 cockpits.* Wheelbase Compatibility Bodnar 50 s...",
+      "manufacturer": "P1X",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/p1x-pro-front-wheel-mount",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 99,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/p1x-pro-front-wheel-mount"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:p1x-pro-podium-bracket-set",
+      "kind": "commercial",
+      "slug": "p1x-pro-podium-bracket-set",
+      "product_name": "PRO Podium Bracket Set",
+      "description": "P1X PRO Podium Bracket Set. rig mounts. listed on Sim Lab. The P1X PRO Podium Bracket Set is designed to side-mount your Fanatec wheelbases to your aluminum profile cockpit. This set provides a secure and adjustable fit. The P1X Pro Pod...",
+      "manufacturer": "P1X",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/p1x-pro-podium-wheel-brackets",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 99,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/p1x-pro-podium-wheel-brackets"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:p1x-pro-sim-racing-cockpit",
+      "kind": "commercial",
+      "slug": "p1x-pro-sim-racing-cockpit",
+      "product_name": "Pro Sim Racing Cockpit",
+      "description": "P1X Pro Sim Racing Cockpit. cockpit frame. listed on Sim Lab. The P1X Pro Sim Racing Cockpit sets a new standard for stability and adjustability, designed for the most demanding sim racers. Its aluminum profile ensures top-tier rigidity, s...",
+      "manufacturer": "P1X",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 789,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:p1x-pro-simracing-cockpit",
+      "kind": "commercial",
+      "slug": "p1x-pro-simracing-cockpit",
+      "product_name": "Pro Simracing cockpit",
+      "description": "P1X Pro Simracing cockpit. cockpit frame. listed on Sim Lab. The P1X Pro Sim Racing Cockpit sets a new standard for stability and adjustability, designed for the most demanding sim racers. Its aluminum profile ensures top-tier rigidity, s...",
+      "manufacturer": "P1X",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit-int",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 899,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit-int"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:p1x-pro-wheeldeck",
+      "kind": "commercial",
+      "slug": "p1x-pro-wheeldeck",
+      "product_name": "Pro Wheeldeck",
+      "description": "P1X Pro Wheeldeck. rig mounts. listed on Sim Lab. The P1X Pro Wheeldeck is the perfect addition to your sim racing setup. Compatible with our P1X PRO, P1X Ultimate, P1X, and P1 cockpit and most third-party 8020 cockpits*, this...",
+      "manufacturer": "P1X",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/p1x-pro-wheeldeck-mount",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 99,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/p1x-pro-wheeldeck-mount"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:p1x-ultimate-base-cockpit-all-variants",
+      "kind": "commercial",
+      "slug": "p1x-ultimate-base-cockpit-all-variants",
+      "product_name": "Ultimate - Base cockpit (all variants)",
+      "description": "P1X Ultimate - Base cockpit (all variants). cockpit frame. listed on Sim Lab. Official shop listing.",
+      "manufacturer": "P1X",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/p1x-ultimate-fanatec-dd-mount-base-cockpit",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 899,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/p1x-ultimate-fanatec-dd-mount-base-cockpit"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-podium-bracket-set",
+      "kind": "commercial",
+      "slug": "sim-lab-podium-bracket-set",
+      "product_name": "Podium Bracket Set",
+      "description": "Sim Lab Podium Bracket Set. rig mounts. listed on Sim Lab. Fanatec podium mounting bracket This Fanatec podium mounting bracket is used to side-mount the DD1, DD2, and CSL DD/DD PRO Fanatec podium drive wheel to your aluminum profile (8...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/podium-bracket-set-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 89,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/podium-bracket-set-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-quad-monitor-stand-add-on",
+      "kind": "commercial",
+      "slug": "sim-lab-quad-monitor-stand-add-on",
+      "product_name": "Quad monitor stand add-on",
+      "description": "Sim Lab Quad monitor stand add-on. rig mounts. listed on Sim Lab. Quad monitor mount add-on, for adding a fourth monitor to the triple monitor stand. All parts needed to convert your triple monitor stand into a Quad monitor stand are included....",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/quad-monitor-stand-add-on-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 99,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/quad-monitor-stand-add-on-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-rudder-tray",
+      "kind": "commercial",
+      "slug": "sim-lab-rudder-tray",
+      "product_name": "Rudder Tray",
+      "description": "Sim Lab Rudder Tray. rig mounts. listed on Sim Lab. The Rudder Tray is built for durability and stability. It accommodates a wide range of rudder pedals, allowing you to perfect your footwork for precision landings and aerial acr...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/flight-sim-rudder-tray",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 69.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/flight-sim-rudder-tray"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-cup-holder",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-cup-holder",
+      "product_name": "Sim Cup holder",
+      "description": "Sim Lab Sim Cup holder. rig mounts. listed on Sim Lab. Cup holder made of solid plastic. Mounts straight to profile. Included in package: Cup Mounting plate Nuts and bolts.",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/cup-holder-sim-racing-accessories",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 14.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/cup-holder-sim-racing-accessories"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-floor",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-floor",
+      "product_name": "Sim Floor",
+      "description": "Sim Lab Sim Floor. rig mounts. listed on Sim Lab. The Sim Floor adds comfort and support for extended gaming sessions. Made from a durable 4mm aluminum diamond plate, it works great as a footrest. It's compatible with our P1X,...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sim-floor-racing-accessories",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 59,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sim-floor-racing-accessories"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-floor-mat",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-floor-mat",
+      "product_name": "Sim Floor Mat",
+      "description": "Sim Lab Sim Floor Mat. rig mounts. listed on Sim Lab. Anti-slip floor mat. Ideal for floor protection and adding finishing touches to your cockpit. Compatible with all Sim-Lab cockpits, with enough space to fit the monitor mounts....",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/floor-mat-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 59,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/floor-mat-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-foot-rest",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-foot-rest",
+      "product_name": "Sim Foot rest",
+      "description": "Sim Lab Sim Foot rest. rig mounts. listed on Sim Lab. Sim foot rest can be mounted on profiles or on baseplates with slotted holes. Intended to be mounted next to the pedals to give the left foot support when not using it to operat...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sim-foot-rest-racing-accessories",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 49.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sim-foot-rest-racing-accessories"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-holder",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-holder",
+      "product_name": "Sim holder",
+      "description": "Sim Lab Sim holder. rig mounts. listed on Sim Lab. Sim Holder - Wheel and headphones storage device. Bolts for mounting included.",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/wheel-headphones-sim-holder-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 9.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/wheel-headphones-sim-holder-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-mousepad",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-mousepad",
+      "product_name": "Sim Mousepad",
+      "description": "Sim Lab Sim Mousepad. rig mounts. listed on Sim Lab. Premium mouse pad plate crafted from durable aluminum, measuring 240 x 200 x 3 mm. Features precision pre-cut holes for effortless mounting. Finished with a sleek black RAL 9005...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/mousepad-sim-racing-accessories",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 19.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/mousepad-sim-racing-accessories"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-seatbelt-4-point-harness",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-seatbelt-4-point-harness",
+      "product_name": "Sim Seatbelt 4-point Harness",
+      "description": "Sim Lab Sim Seatbelt 4-point Harness. cockpit frame. listed on Sim Lab. To maximize the immersion of driving your favorite car in the sim, consider adding a 4-point seat belt harness. This real-life Sim-Lab branded harness bolts on any aluminum cock...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/seatbelt-4-point-harness-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 129,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/seatbelt-4-point-harness-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-shelf-universal",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-shelf-universal",
+      "product_name": "Sim Shelf Universal",
+      "description": "Sim Lab Sim Shelf Universal. rig mounts. listed on Sim Lab. The Sim Shelf Universal is a great addition for placing your PC or control boxes in your cockpits. It is designed to be compatible with all our current and most of our previous-...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sim-shelf-universal",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 99,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sim-shelf-universal"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-lab-allen-key-set",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-lab-allen-key-set",
+      "product_name": "Sim-Lab Allen Key Set",
+      "description": "Sim Lab Sim-Lab Allen Key Set. rig mounts. listed on Sim Lab. Our Sim-Lab Allen Key Set offers nine metric keys in a convenient plastic holder for easy identification.",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sim-lab-allen-key-set",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 12.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sim-lab-allen-key-set"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sim-lab-tee",
+      "kind": "commercial",
+      "slug": "sim-lab-sim-lab-tee",
+      "product_name": "Sim-Lab Tee",
+      "description": "Sim Lab Sim-Lab Tee. rig mounts. listed on Sim Lab. Race in style with the everyday Sim-lab T-shirt featuring a regular fit, round neck, and 100% cotton to keep you cool on every virtual lap. Specifications Size S, M, L, XL, XXL...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sim-lab-tee-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 29.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sim-lab-tee-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sparco-evo-l-qrt",
+      "kind": "commercial",
+      "slug": "sim-lab-sparco-evo-l-qrt",
+      "product_name": "Sparco Evo L QRT",
+      "description": "Sim Lab Sparco Evo L QRT. cockpit frame. listed on Sim Lab. The Sparco Evo L QRT Motorsport bucket seat has been designed based on the Sparco Rev with the new Sparco QRT technology. The shell is made from fiberglass with strengthening ri...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sparco-evo-l-qrt-sim-racing-seat",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 615,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sparco-evo-l-qrt-sim-racing-seat"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sparco-pro-2000-qrt",
+      "kind": "commercial",
+      "slug": "sim-lab-sparco-pro-2000-qrt",
+      "product_name": "Sparco Pro 2000 QRT",
+      "description": "Sim Lab Sparco Pro 2000 QRT. rig mounts. listed on Sim Lab. The Pro 2000 QRT is the latest version of the best-selling seat from Sparco, used by professional racers worldwide. The Pro 2000 QRT is made with all-new QRT Technology, resulti...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sparco-pro-2000-qrt-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 629,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sparco-pro-2000-qrt-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sparco-r100",
+      "kind": "commercial",
+      "slug": "sim-lab-sparco-r100",
+      "product_name": "Sparco R100",
+      "description": "Sim Lab Sparco R100. cockpit frame. listed on Sim Lab. The Sparco R100 sport seat is lightweight, compact, and fits most cars. It includes backrest harness slots for a race harness or seatbelt, and a smooth recline mechanism with co...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sparco-r100-sim-racing-seat",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 389,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sparco-r100-sim-racing-seat"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sparco-r333",
+      "kind": "commercial",
+      "slug": "sim-lab-sparco-r333",
+      "product_name": "Sparco R333",
+      "description": "Sim Lab Sparco R333. cockpit frame. listed on Sim Lab. Description Tubular frame Double adjustment and reclining lever Bottom fixing (271 x 345)* Compatible with 3 or 4 fixing point harnesses * Base mounted. This means no additional...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sparco-r333-sim-racing-seat",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 519,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sparco-r333-sim-racing-seat"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sparco-rev-qrt",
+      "kind": "commercial",
+      "slug": "sim-lab-sparco-rev-qrt",
+      "product_name": "Sparco REV QRT",
+      "description": "Sim Lab Sparco REV QRT. cockpit frame. listed on Sim Lab. Specifications Material: QRT ultra-compact seat self-extinguishing fabric lining Non-slip fabric for shoulder and seat restraint Divisible leg rest and seat cushion Fixed using...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sparco-rev-qrt-sim-racing-seat",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 439,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sparco-rev-qrt-sim-racing-seat"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-sparco-seat-slider",
+      "kind": "commercial",
+      "slug": "sim-lab-sparco-seat-slider",
+      "product_name": "Sparco Seat Slider",
+      "description": "Sim Lab Sparco Seat Slider. cockpit frame. listed on Sim Lab. The seat slider can be used in combination with the Sim-Lab seat brackets. See below how this works. The width of the seat slider can be adjusted by slightly bending the middle...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sparco-seat-slider",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 39.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sparco-seat-slider"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-speaker-mounting-brackets-set",
+      "kind": "commercial",
+      "slug": "sim-lab-speaker-mounting-brackets-set",
+      "product_name": "Speaker mounting brackets (set)",
+      "description": "Sim Lab Speaker mounting brackets (set). rig mounts. listed on Sim Lab. These speaker mounts let you mount your speakers onto an aluminum frame. The brackets are made for speakers with an M6 mounting hole and are sold as a set of 2 (left and right v...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/speaker-mounting-brackets-set-sim-racing",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 19.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/speaker-mounting-brackets-set-sim-racing"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sq1-track-pack",
+      "kind": "commercial",
+      "slug": "sq1-track-pack",
+      "product_name": "Track Pack",
+      "description": "SQ1 Track Pack. rig mounts. listed on Sim Lab. The SQ1 Track Pack accessory bundle includes a black adjustment knob, short lever, and straight shift knob. The black adjustment knob lets you match the look of your cockpit or...",
+      "manufacturer": "SQ1",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/sq1-track-pack",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 39.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sq1-track-pack"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-swivel-mounting-point",
+      "kind": "commercial",
+      "slug": "sim-lab-swivel-mounting-point",
+      "product_name": "Swivel Mounting Point",
+      "description": "Sim Lab Swivel Mounting Point. rig mounts. listed on Sim Lab. The Swivel Mounting Point offers 180-degree rotation for precise placement of secondary controls, adding flexibility and realism to your flight setup. Designed to be compatible...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/flight-sim-swivel-mounting-point",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 99.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/flight-sim-swivel-mounting-point"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-throttle-mount",
+      "kind": "commercial",
+      "slug": "sim-lab-throttle-mount",
+      "product_name": "Throttle Mount",
+      "description": "Sim Lab Throttle Mount. rig mounts. listed on Sim Lab. The Throttle Mount provides stable, reliable support, keeping your controls secure during every flight, and is built to last through countless hours of use. Stable and Reliable...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/flight-sim-throttle-mount",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 47.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/flight-sim-throttle-mount"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-universal-vesa",
+      "kind": "commercial",
+      "slug": "sim-lab-universal-vesa",
+      "product_name": "Universal VESA",
+      "description": "Sim Lab Universal VESA. rig mounts. listed on Sim Lab. The universal VESA plate can be used to mount larger monitors with a different variety of VESA patterns. This plate can easily be mounted on our Vario™ VESA system to make it co...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/universal-vesa",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 29.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/universal-vesa"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-x1-pro-integrated-monitor-mount",
+      "kind": "commercial",
+      "slug": "sim-lab-x1-pro-integrated-monitor-mount",
+      "product_name": "X1-Pro Integrated Monitor Mount",
+      "description": "Sim Lab X1-Pro Integrated Monitor Mount. rig mounts. listed on Sim Lab. Official shop listing.",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/x1-pro-integrated-monitor-mount",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 199,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/x1-pro-integrated-monitor-mount"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:sim-lab-yoke-deck",
+      "kind": "commercial",
+      "slug": "sim-lab-yoke-deck",
+      "product_name": "Yoke Deck",
+      "description": "Sim Lab Yoke Deck. rig mounts. listed on Sim Lab. The Yoke Deck offers a stable platform for flight yokes of all sizes, ensuring smooth and realistic control. Ergonomically designed for comfort and quick to set up, it’s the per...",
+      "manufacturer": "Sim Lab",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/flight-sim-yoke-deck",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 69.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/flight-sim-yoke-deck"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-aviation-cams-kit",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-aviation-cams-kit",
+      "product_name": "Aviation Cams Kit",
+      "description": "Flightsimcontrols Aviation Cams Kit. rig mounts. listed on Flightsimcontrols. Meant for customers who wish to upgrade their existing VKB Gladiator Pro or Gunfighter to the latest cams standard.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/aviation-cams-kit/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 10.5,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/aviation-cams-kit/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-combo-cams-kit",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-combo-cams-kit",
+      "product_name": "Combo Cams Kit",
+      "description": "Flightsimcontrols Combo Cams Kit. rig mounts. listed on Flightsimcontrols. Meant for customers who wish to upgrade their existing VKB Gladiator Pro or Gunfighter to the latest cams standard.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/combo-cams-kit/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 15,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/combo-cams-kit/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-dust-cover-set",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-dust-cover-set",
+      "product_name": "Dust Cover Set",
+      "description": "Flightsimcontrols Dust Cover Set. rig mounts. listed on Flightsimcontrols. Meant for customers who wish to upgrade their existing VKB Gunfighter Mk.I and Mk.II dust cover.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/dust-cover-set/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 22,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/dust-cover-set/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-full-mk-iii-upgrade-set-for-gunfighter-mk-i-mk-ii",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-full-mk-iii-upgrade-set-for-gunfighter-mk-i-mk-ii",
+      "product_name": "Full Mk.III upgrade set for Gunfighter Mk.I / Mk.II",
+      "description": "Flightsimcontrols Full Mk.III upgrade set for Gunfighter Mk.I / Mk.II. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/full-mk-iii-upgrade-set-for-gunfighter/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 93,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/full-mk-iii-upgrade-set-for-gunfighter/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-gladiator-nxt-to-evo-upgrade-kit",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-gladiator-nxt-to-evo-upgrade-kit",
+      "product_name": "Gladiator NXT to EVO Upgrade Kit",
+      "description": "Flightsimcontrols Gladiator NXT to EVO Upgrade Kit. rig mounts. listed on Flightsimcontrols. Meant for customers who wish to upgrade their existing Gladiator NXT joystick to the gimbal of the Gladiator NXT EVO to take advantage of the ball bearings and adjustable dry cl...",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gladiator-nxt-to-evo-upgrade-kit/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 69,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gladiator-nxt-to-evo-upgrade-kit/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gnx-intermodular-reinforcing-plate",
+      "kind": "commercial",
+      "slug": "gnx-intermodular-reinforcing-plate",
+      "product_name": "Intermodular Reinforcing Plate",
+      "description": "GNX Intermodular Reinforcing Plate. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "GNX",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gnx-intermodular-reinforcing-plate/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 4.7,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gnx-intermodular-reinforcing-plate/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gnx-module-coupler-set-of-2",
+      "kind": "commercial",
+      "slug": "gnx-module-coupler-set-of-2",
+      "product_name": "Module Coupler (Set of 2)",
+      "description": "GNX Module Coupler (Set of 2). rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "GNX",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gnx-module-coupler-set/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 7.4,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gnx-module-coupler-set/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gnx-module-to-gladiator-nxt-base-l-reinforcing-plate",
+      "kind": "commercial",
+      "slug": "gnx-module-to-gladiator-nxt-base-l-reinforcing-plate",
+      "product_name": "Module to Gladiator NXT base (L) Reinforcing Plate",
+      "description": "GNX Module to Gladiator NXT base (L) Reinforcing Plate. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "GNX",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gnx-module-to-gladiator-nxt-base-l-reinforcing-plate/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 6.3,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gnx-module-to-gladiator-nxt-base-l-reinforcing-plate/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gnx-module-to-gladiator-nxt-base-r-reinforcing-plate",
+      "kind": "commercial",
+      "slug": "gnx-module-to-gladiator-nxt-base-r-reinforcing-plate",
+      "product_name": "Module to Gladiator NXT base (R) Reinforcing Plate",
+      "description": "GNX Module to Gladiator NXT base (R) Reinforcing Plate. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "GNX",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gnx-module-to-gladiator-nxt-base-r-reinforcing-plate/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 6.3,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gnx-module-to-gladiator-nxt-base-r-reinforcing-plate/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gnx-plastic-spacers",
+      "kind": "commercial",
+      "slug": "gnx-plastic-spacers",
+      "product_name": "Plastic Spacers",
+      "description": "GNX Plastic Spacers. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "GNX",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gnx-plastic-spacers/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 4.2,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gnx-plastic-spacers/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gnx-springs-set",
+      "kind": "commercial",
+      "slug": "gnx-springs-set",
+      "product_name": "Springs Set",
+      "description": "GNX Springs Set. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "GNX",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gnx-springs-set/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 9,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gnx-springs-set/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:gnx-usb-controller-hid-main",
+      "kind": "commercial",
+      "slug": "gnx-usb-controller-hid-main",
+      "product_name": "USB Controller (HID-Main)",
+      "description": "GNX USB Controller (HID-Main). rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "GNX",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gnx-usb-controller-hid-main/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 22.9,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gnx-usb-controller-hid-main/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-gunfighter-grip-fasteners-set-of-2",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-gunfighter-grip-fasteners-set-of-2",
+      "product_name": "Gunfighter Grip Fasteners (Set of 2)",
+      "description": "Flightsimcontrols Gunfighter Grip Fasteners (Set of 2). rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gunfighter-grip-fasteners-set-of-2/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 8.5,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gunfighter-grip-fasteners-set-of-2/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-gunfighter-mk-iii-base-no-grip-open-box",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-gunfighter-mk-iii-base-no-grip-open-box",
+      "product_name": "Gunfighter Mk.III Base (no grip) Open Box",
+      "description": "Flightsimcontrols Gunfighter Mk.III Base (no grip) Open Box. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gunfighter-mk-iii-base-no-grip-ob/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 215,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gunfighter-mk-iii-base-no-grip-ob/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:mcg-ultimate-twist-module-rev-b",
+      "kind": "commercial",
+      "slug": "mcg-ultimate-twist-module-rev-b",
+      "product_name": "Ultimate Twist Module (rev.B)",
+      "description": "MCG Ultimate Twist Module (rev.B). rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "MCG",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/mcg-ultimate-twist-module/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 45,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/mcg-ultimate-twist-module/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:scg-grip-conversion-kit-revb-to-revc",
+      "kind": "commercial",
+      "slug": "scg-grip-conversion-kit-revb-to-revc",
+      "product_name": "Grip Conversion Kit (RevB to RevC)",
+      "description": "SCG Grip Conversion Kit (RevB to RevC). rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "SCG",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/scg-grip-conversion-kit-revb-to-revc/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 19,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/scg-grip-conversion-kit-revb-to-revc/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-small-base-plate",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-small-base-plate",
+      "product_name": "Small Base Plate",
+      "description": "Flightsimcontrols Small Base Plate. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/small-base-plate/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 11.4,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/small-base-plate/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-space-cams-kit",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-space-cams-kit",
+      "product_name": "Space Cams Kit",
+      "description": "Flightsimcontrols Space Cams Kit. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/space-cams-kit/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 10.5,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/space-cams-kit/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-accessory-magazine",
+      "kind": "commercial",
+      "slug": "stecs-accessory-magazine",
+      "product_name": "Accessory Magazine",
+      "description": "STECS Accessory Magazine. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-accessory-magazine/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 6.7,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-accessory-magazine/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-button-module-upgrade-kit-magazine",
+      "kind": "commercial",
+      "slug": "stecs-button-module-upgrade-kit-magazine",
+      "product_name": "Button Module Upgrade Kit + Magazine",
+      "description": "STECS Button Module Upgrade Kit + Magazine. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-button-module-upgrade-kit/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 46.5,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-button-module-upgrade-kit/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-detent-frames-module",
+      "kind": "commercial",
+      "slug": "stecs-detent-frames-module",
+      "product_name": "Detent Frames Module",
+      "description": "STECS Detent Frames Module. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-detent-frames-module/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 32.1,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-detent-frames-module/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-mfh-fixture",
+      "kind": "commercial",
+      "slug": "stecs-mfh-fixture",
+      "product_name": "MFH Fixture",
+      "description": "STECS MFH Fixture. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-mfh-fixture/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 6.7,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-mfh-fixture/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-mini-baseplate",
+      "kind": "commercial",
+      "slug": "stecs-mini-baseplate",
+      "product_name": "Mini Baseplate",
+      "description": "STECS Mini Baseplate. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-mini/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 13,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-mini/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-mini-plus-max-baseplate",
+      "kind": "commercial",
+      "slug": "stecs-mini-plus-max-baseplate",
+      "product_name": "Mini Plus/Max Baseplate",
+      "description": "STECS Mini Plus/Max Baseplate. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-mini-plus-max-baseplate/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 16.6,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-mini-plus-max-baseplate/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-modern-throttle-grip-mk-ii-premium",
+      "kind": "commercial",
+      "slug": "stecs-modern-throttle-grip-mk-ii-premium",
+      "product_name": "Modern Throttle Grip Mk.II Premium",
+      "description": "STECS Modern Throttle Grip Mk.II Premium. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-modern-throttle-grip-mk-ii-premium/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 158,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-modern-throttle-grip-mk-ii-premium/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-modern-throttle-grip-mk-ii-upgrade-kit",
+      "kind": "commercial",
+      "slug": "stecs-modern-throttle-grip-mk-ii-upgrade-kit",
+      "product_name": "Modern Throttle Grip Mk.II Upgrade Kit",
+      "description": "STECS Modern Throttle Grip Mk.II Upgrade Kit. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-mtg-grip-mk2-upgrade-kit/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 63.9,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-mtg-grip-mk2-upgrade-kit/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-rubberized-grip-pads-set-of-2",
+      "kind": "commercial",
+      "slug": "stecs-rubberized-grip-pads-set-of-2",
+      "product_name": "Rubberized Grip Pads – Set of 2",
+      "description": "STECS Rubberized Grip Pads – Set of 2. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-rubberized-grip-pads-set-of-2/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 12.5,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-rubberized-grip-pads-set-of-2/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-space-throttle-add-on-grip-stg-left-hand",
+      "kind": "commercial",
+      "slug": "stecs-space-throttle-add-on-grip-stg-left-hand",
+      "product_name": "Space Throttle Add-On Grip (STG) Left-Hand",
+      "description": "STECS Space Throttle Add-On Grip (STG) Left-Hand. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-space-throttle-add-on-grip-stg-left-hand/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 108,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-space-throttle-add-on-grip-stg-left-hand/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-standard-baseplate",
+      "kind": "commercial",
+      "slug": "stecs-standard-baseplate",
+      "product_name": "Standard Baseplate",
+      "description": "STECS Standard Baseplate. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-standard-baseplate/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 20.7,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-standard-baseplate/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:stecs-stem-back-cover",
+      "kind": "commercial",
+      "slug": "stecs-stem-back-cover",
+      "product_name": "STEM Back Cover",
+      "description": "STECS STEM Back Cover. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "STECS",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/stecs-stem-back-cover/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 6.5,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-stem-back-cover/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:ucm-for-warthog-flightstick-warthog-throttle-mouse-keypad",
+      "kind": "commercial",
+      "slug": "ucm-for-warthog-flightstick-warthog-throttle-mouse-keypad",
+      "product_name": "for Warthog Flightstick/ Warthog Throttle/ Mouse-KeyPad",
+      "description": "UCM for Warthog Flightstick/ Warthog Throttle/ Mouse-KeyPad. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "UCM",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/vkb-ucm-stronghold-warthog-mouse-keypad/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 135,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/vkb-ucm-stronghold-warthog-mouse-keypad/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:ucm-l-for-gunfighter",
+      "kind": "commercial",
+      "slug": "ucm-l-for-gunfighter",
+      "product_name": "for Gunfighter",
+      "description": "UCM-L for Gunfighter. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "UCM-L",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/ucm-l-for-gunfighter/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 165,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/ucm-l-for-gunfighter/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:ucm-s-for-gladiator",
+      "kind": "commercial",
+      "slug": "ucm-s-for-gladiator",
+      "product_name": "for Gladiator",
+      "description": "UCM-S for Gladiator. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "UCM-S",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/ucm-s-for-gladiator/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 139,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/ucm-s-for-gladiator/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:ucm-s-for-gunfighter",
+      "kind": "commercial",
+      "slug": "ucm-s-for-gunfighter",
+      "product_name": "for Gunfighter",
+      "description": "UCM-S for Gunfighter. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "UCM-S",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/ucm-s-for-gunfighter/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 139,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/ucm-s-for-gunfighter/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:ucm-s-for-stecs",
+      "kind": "commercial",
+      "slug": "ucm-s-for-stecs",
+      "product_name": "for STECS",
+      "description": "UCM-S for STECS. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "UCM-S",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/ucm-for-stecs/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 133,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/ucm-for-stecs/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-upgrade-kit-lite-for-gladiator-mk-ii",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-upgrade-kit-lite-for-gladiator-mk-ii",
+      "product_name": "Upgrade Kit Lite for Gladiator Mk.II",
+      "description": "Flightsimcontrols Upgrade Kit Lite for Gladiator Mk.II. rig mounts. listed on Flightsimcontrols. Upgrade kit to convert VKB-Sim Gladiator Mk.II to became compatible with swappable VKB-sim grips with rev.B socket.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/gladiator-upgrade-kit-lite-for-gladiator-mk-ii/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 25,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/gladiator-upgrade-kit-lite-for-gladiator-mk-ii/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-upgrade-scg-kosmosima-grip-standard-to-premium",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-upgrade-scg-kosmosima-grip-standard-to-premium",
+      "product_name": "Upgrade SCG “Kosmosima” Grip Standard to Premium",
+      "description": "Flightsimcontrols Upgrade SCG “Kosmosima” Grip Standard to Premium. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/upgrade-scg-standard-to-premium/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 44.6,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/upgrade-scg-standard-to-premium/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:vkb-grip-stand",
+      "kind": "commercial",
+      "slug": "vkb-grip-stand",
+      "product_name": "Grip Stand",
+      "description": "VKB Grip Stand. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "VKB",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/grip-stand/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 24,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/grip-stand/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:vkb-main-controller-blackbox-stand-alone",
+      "kind": "commercial",
+      "slug": "vkb-main-controller-blackbox-stand-alone",
+      "product_name": "Main Controller (BlackBox) Stand-Alone",
+      "description": "VKB Main Controller (BlackBox) Stand-Alone. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "VKB",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/vkb-main-controller-blackbox-stand-alone/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 47,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/vkb-main-controller-blackbox-stand-alone/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:vkb-ucm-bracket",
+      "kind": "commercial",
+      "slug": "vkb-ucm-bracket",
+      "product_name": "UCM Bracket",
+      "description": "VKB UCM Bracket. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "VKB",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/vkb-ucm-bracket/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 19,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/vkb-ucm-bracket/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:vkb-ucm-cup-holder",
+      "kind": "commercial",
+      "slug": "vkb-ucm-cup-holder",
+      "product_name": "UCM Cup Holder",
+      "description": "VKB UCM Cup Holder. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "VKB",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/vkb-ucm-cup-holder/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 12.5,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/vkb-ucm-cup-holder/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:vkb-ucm-keyboard-holder",
+      "kind": "commercial",
+      "slug": "vkb-ucm-keyboard-holder",
+      "product_name": "UCM Keyboard Holder",
+      "description": "VKB UCM Keyboard Holder. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "VKB",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/vkb-ucm-keyboard-holder/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 11,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/vkb-ucm-keyboard-holder/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:vkb-ucm-phone-holder",
+      "kind": "commercial",
+      "slug": "vkb-ucm-phone-holder",
+      "product_name": "UCM Phone Holder",
+      "description": "VKB UCM Phone Holder. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "VKB",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/vkb-ucm-phone-holder/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 12.5,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/vkb-ucm-phone-holder/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:flightsimcontrols-vkb-sim-gladiator-mk-ii-joystick",
+      "kind": "commercial",
+      "slug": "flightsimcontrols-vkb-sim-gladiator-mk-ii-joystick",
+      "product_name": "VKB-Sim Gladiator Mk.II Joystick",
+      "description": "Flightsimcontrols VKB-Sim Gladiator Mk.II Joystick. rig mounts. listed on Flightsimcontrols. Official shop listing.",
+      "manufacturer": "Flightsimcontrols",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/vkb-sim-gladiator-mk-ii-joystick/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 94,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/vkb-sim-gladiator-mk-ii-joystick/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:wwii-thq-grip-add-on",
+      "kind": "commercial",
+      "slug": "wwii-thq-grip-add-on",
+      "product_name": "THQ Grip (Add-On)",
+      "description": "WWII THQ Grip (Add-On). rig mounts. listed on Flightsimcontrols. Meant for VKB customers who already own a GNX THQ Module and wish to use it with the WWII THQ Grip. Scroll down for Product Description and Details.",
+      "manufacturer": "WWII",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://flightsimcontrols.com/product/wwii-thq-grip-add-on/",
+      "shops": [
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 31,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/wwii-thq-grip-add-on/"
         }
       ]
     },
@@ -9928,7 +12112,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 22400,
+          "price": 224,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/vkb-sim-t-rudder-pedals-mk-v/"
         }
@@ -10510,6 +12694,13 @@
           "price": 441.57,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/s1-enduro-gt-seat"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 449,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/s1-enduro-gt-seat"
         }
       ]
     },
@@ -10531,6 +12722,13 @@
           "price": 421.91,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/sim-lab-speed-1-sim-racing-bucket-seat"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 429,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sim-lab-speed-1-sim-racing-bucket-seat"
         }
       ]
     },
@@ -10552,6 +12750,13 @@
           "price": 421.91,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/sim-lab-speed-3-bucket-seat-sim-racing"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 429,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sim-lab-speed-3-bucket-seat-sim-racing"
         }
       ]
     },
@@ -11161,6 +13366,13 @@
           "price": 635.62,
           "currency": "EUR",
           "url": "https://www.sparco-official.com/de/sedile-evo-xl-qrt-gaming.html"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 689,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sparco-evo-xl-qrt-sim-racing-seat"
         }
       ]
     },
@@ -11245,6 +13457,13 @@
           "price": 556.32,
           "currency": "EUR",
           "url": "https://www.sparco-official.com/de/sedile-circuit-ii-qrt-gaming.html"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 680,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/copy-of-sparco-circuit-ii-qrt"
         }
       ]
     },
@@ -11500,6 +13719,13 @@
           "price": 195.71,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/sequential-shifter-sq1"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 199,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/sequential-shifter-sq1"
         }
       ]
     },
@@ -11521,6 +13747,13 @@
           "price": 195.71,
           "currency": "EUR",
           "url": "https://sim-lab.eu/en-de/products/push-pull-rally-shifter-sim-racing"
+        },
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 199,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/push-pull-rally-shifter-sim-racing"
         }
       ]
     },
@@ -11878,6 +14111,48 @@
           "price": 129,
           "currency": "EUR",
           "url": "https://www.shiftershh.com/en/home/26-shh-shifter-hubb.html"
+        }
+      ]
+    },
+    {
+      "id": "commercial:shifters:sim-lab-fanatec-clubsport-shifter-tilt-adjustment",
+      "kind": "commercial",
+      "slug": "sim-lab-fanatec-clubsport-shifter-tilt-adjustment",
+      "product_name": "Fanatec clubsport shifter – tilt adjustment",
+      "description": "Sim Lab Fanatec clubsport shifter – tilt adjustment. sequential shifter. listed on Sim Lab. Fanatec shifter mount made from 8 mm thick aluminum. Mounting is done by the provided slot nuts that slide into the sides of the Fanatec Clubsport shifter. It can be positioned...",
+      "manufacturer": "Sim Lab",
+      "component_category": "shifters",
+      "component_sub_category": "sequential-shifter",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/fanatec-clubsport-shifter-tilt-adjustment-sim-racing-accessories",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 29.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/fanatec-clubsport-shifter-tilt-adjustment-sim-racing-accessories"
+        }
+      ]
+    },
+    {
+      "id": "commercial:shifters:sim-lab-shifter-hb-bracket",
+      "kind": "commercial",
+      "slug": "sim-lab-shifter-hb-bracket",
+      "product_name": "Shifter & HB bracket",
+      "description": "Sim Lab Shifter & HB bracket. sequential shifter. listed on Sim Lab. Shifter + Handbrake mounting plate made for 40 mm Aluminium profile series. Compatibility Sim-Lab XB1 Handbrake DSD Sequential Pro Fanatec CS Shifter SQ Fanatec Handbrake Heusin...",
+      "manufacturer": "Sim Lab",
+      "component_category": "shifters",
+      "component_sub_category": "sequential-shifter",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/shifter-hb-bracket-sim-racing-accessories",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 29.95,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/shifter-hb-bracket-sim-racing-accessories"
         }
       ]
     },
@@ -13959,6 +16234,48 @@
       ]
     },
     {
+      "id": "commercial:steering-wheels:sim-lab-mercedes-amg-petronas-formula-one-team-sim-racing-steering-wheel-2024-2025",
+      "kind": "commercial",
+      "slug": "sim-lab-mercedes-amg-petronas-formula-one-team-sim-racing-steering-wheel-2024-2025",
+      "product_name": "Mercedes-AMG PETRONAS Formula One Team Sim Racing Steering Wheel (2024/2025)",
+      "description": "Sim Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Steering Wheel (2024/2025). formula wheel. listed on Sim Lab. The officially licensed Mercedes-AMG PETRONAS Formula One Team Sim Racing Steering Wheel (2024/2025) is a masterpiece of engineering and design. Nothing has been spared to make...",
+      "manufacturer": "Sim Lab",
+      "component_category": "steering-wheels",
+      "component_sub_category": "formula-wheel",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/mercedes-amg-petronas-formula-one-team-sim-racing-steering-wheel-2024",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 2699,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/mercedes-amg-petronas-formula-one-team-sim-racing-steering-wheel-2024"
+        }
+      ]
+    },
+    {
+      "id": "commercial:steering-wheels:sim-lab-porsche-911-rsr-sim-racing-steering-wheel",
+      "kind": "commercial",
+      "slug": "sim-lab-porsche-911-rsr-sim-racing-steering-wheel",
+      "product_name": "Porsche 911 RSR Sim Racing Steering Wheel",
+      "description": "Sim Lab Porsche 911 RSR Sim Racing Steering Wheel. gt wheel. listed on Sim Lab. The officially licensed Porsche 911 RSR Sim Racing Steering Wheel utilizes the highest-quality parts available. It is based on the famous Porsche 911 RSR (991.2) steering wheel,...",
+      "manufacturer": "Sim Lab",
+      "component_category": "steering-wheels",
+      "component_sub_category": "gt-wheel",
+      "license": "Commercial",
+      "product_url": "https://sim-lab.eu/products/porsche-911-rsr-sim-racing-steering-wheel",
+      "shops": [
+        {
+          "name": "Sim Lab",
+          "region": "Unknown",
+          "price": 2299,
+          "currency": "USD",
+          "url": "https://sim-lab.eu/products/porsche-911-rsr-sim-racing-steering-wheel"
+        }
+      ]
+    },
+    {
       "id": "opensource:steering-wheels:freejoy",
       "kind": "opensource",
       "slug": "freejoy",
@@ -14490,7 +16807,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 34900,
+          "price": 349,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-dual-thq-fsm-ga-combo/"
         }
@@ -14511,7 +16828,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 44900,
+          "price": 449,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-dual-thq-sem-fsm-ga-combo/"
         }
@@ -14532,7 +16849,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 31950,
+          "price": 319.5,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-dual-thq-sem-v-combo/"
         }
@@ -14553,7 +16870,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 46900,
+          "price": 469,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-dual-thq-thq-v-sem-combo/"
         }
@@ -14574,7 +16891,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 46800,
+          "price": 468,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-triple-thq-fsm-ga-combo/"
         }
@@ -14595,7 +16912,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 46500,
+          "price": 465,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-triple-thq-sem-v-combo/"
         }
@@ -14616,7 +16933,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 20500,
+          "price": 205,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/gnx-wwii-throttle/"
         }
@@ -14682,6 +16999,13 @@
           "price": 289,
           "currency": "USD",
           "url": "https://vkbsimcontrollers.com/products/stecs-throttle-system-mk-ii-standard-us"
+        },
+        {
+          "name": "Flightsimcontrols",
+          "region": "Unknown",
+          "price": 112,
+          "currency": "EUR",
+          "url": "https://flightsimcontrols.com/product/stecs-mtg-grip-standard/"
         }
       ]
     },
@@ -14700,7 +17024,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 33900,
+          "price": 339,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-space-throttle-system-max-left-handed/"
         }
@@ -14721,7 +17045,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 33900,
+          "price": 339,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-space-throttle-system-max-right-handed/"
         }
@@ -14742,7 +17066,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 23700,
+          "price": 237,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-left-hand/"
         }
@@ -14763,7 +17087,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 25800,
+          "price": 258,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-plus-left-handed/"
         }
@@ -14784,7 +17108,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 25800,
+          "price": 258,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-plus-right-handed/"
         }
@@ -14805,7 +17129,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 23700,
+          "price": 237,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-right-hand/"
         }
@@ -14826,7 +17150,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 29700,
+          "price": 297,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-space-throttle-system-standard-left-hand/"
         }
@@ -14847,7 +17171,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 29700,
+          "price": 297,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-space-throttle-system-standard-right-hand/"
         }
@@ -14868,7 +17192,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 34500,
+          "price": 345,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-throttle-system-max/"
         }
@@ -14889,7 +17213,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 39600,
+          "price": 396,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-throttle-system-max-mk-ii/"
         }
@@ -14910,7 +17234,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 24300,
+          "price": 243,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-throttle-system-mini-mk-ii/"
         }
@@ -14931,7 +17255,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 27100,
+          "price": 271,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-throttle-system-mini-plus-mk-ii/"
         }
@@ -14952,7 +17276,7 @@
         {
           "name": "VKB FSC Europe",
           "region": "EU",
-          "price": 33900,
+          "price": 339,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-throttle-system-standard-mk-ii/"
         }

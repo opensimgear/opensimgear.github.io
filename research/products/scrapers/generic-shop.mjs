@@ -302,12 +302,65 @@ function parseGenericProduct(html, fallbackUrl) {
   return {
     name,
     url,
-    image: absolutizeUrl(Array.isArray(jsonProduct?.image) ? jsonProduct.image[0] : jsonProduct?.image ?? meta(html, 'property', 'og:image'), url),
+    image: extractProductImage(html, url, jsonProduct, name),
     price: parsePrice(offer?.price ?? meta(html, 'property', 'product:price:amount') ?? firstMatch(html, /data-price-amount=["']([^"']+)["']/i)),
     currency: offer?.priceCurrency ?? meta(html, 'property', 'product:price:currency'),
     description: cleanText(jsonProduct?.description ?? meta(html, 'name', 'description')),
     categories: [],
   };
+}
+
+function extractProductImage(html, baseUrl, jsonProduct, productName) {
+  const jsonImage = Array.isArray(jsonProduct?.image) ? jsonProduct.image[0] : jsonProduct?.image;
+  const candidates = [
+    imageValue(jsonImage),
+    meta(html, 'property', 'og:image:secure_url'),
+    meta(html, 'property', 'og:image:url'),
+    meta(html, 'property', 'og:image'),
+    meta(html, 'property', 'product:image'),
+    meta(html, 'name', 'twitter:image'),
+    linkHref(html, 'image_src'),
+    ...extractImageCandidates(html, productName),
+  ];
+
+  for (const candidate of candidates) {
+    const image = absolutizeUrl(candidate, baseUrl);
+    if (isUsefulImageUrl(image)) return image;
+  }
+
+  return undefined;
+}
+
+function imageValue(value) {
+  if (!value) return undefined;
+  if (typeof value === 'string') return value;
+  return value.url ?? value.contentUrl ?? undefined;
+}
+
+function extractImageCandidates(html, productName) {
+  const normalizedNameTokens = new Set(normalizeName(productName).split(' ').filter((token) => token.length > 2));
+  const images = [];
+
+  for (const match of html.matchAll(/<img\b[^>]*>/gi)) {
+    const tag = match[0];
+    const source = attr(tag, 'src') ?? srcsetFirstUrl(attr(tag, 'srcset') ?? attr(tag, 'data-srcset'));
+    const text = normalizeName([attr(tag, 'alt'), attr(tag, 'title'), attr(tag, 'class'), attr(tag, 'id')].filter(Boolean).join(' '));
+    if (!source) continue;
+
+    const score =
+      (/\b(product|gallery|main|featured|woocommerce|shopify|media|image)\b/.test(text) ? 2 : 0) +
+      [...normalizedNameTokens].filter((token) => text.includes(token)).length;
+    images.push({ source, score });
+  }
+
+  return images
+    .filter((image) => image.score > 0 || isUsefulImageUrl(image.source))
+    .sort((a, b) => b.score - a.score)
+    .map((image) => image.source);
+}
+
+function srcsetFirstUrl(value) {
+  return value?.split(',')[0]?.trim().split(/\s+/)[0];
 }
 
 function parseJsonLdProduct(html) {
@@ -519,7 +572,15 @@ function newProduct(action) {
 
 function findExistingShop(product, shop) {
   const targetUrl = urlKey(shop.url);
-  return (product.shops ?? []).find((entry) => urlKey(entry.url) === targetUrl || normalizeName(entry.name) === normalizeName(shop.name));
+  const targetDomain = shopDomain(shop.url);
+  return (product.shops ?? []).find((entry) => {
+    const entryDomain = shopDomain(entry.url);
+    return (
+      urlKey(entry.url) === targetUrl ||
+      (entryDomain && entryDomain === targetDomain) ||
+      normalizeName(entry.name) === normalizeName(shop.name)
+    );
+  });
 }
 
 async function writeTouchedDatabases(databases) {
@@ -713,6 +774,12 @@ function canonicalUrl(html) {
   return tag ? attr(tag, 'href') : undefined;
 }
 
+function linkHref(html, rel) {
+  const escaped = escapeRegExp(rel);
+  const tag = firstMatch(html, new RegExp(`<link(?=[^>]*\\brel=["']${escaped}["'])[^>]*>`, 'i'), 0);
+  return tag ? attr(tag, 'href') : undefined;
+}
+
 function attr(tag, name) {
   const match = tag.match(new RegExp(`\\b${escapeRegExp(name)}\\s*=\\s*["']([^"']+)["']`, 'i'));
   return match ? decodeHtml(match[1]) : undefined;
@@ -739,6 +806,15 @@ function urlKey(url) {
   }
 }
 
+function shopDomain(url) {
+  if (!url) return '';
+  try {
+    return new URL(url).hostname.replace(/^www\./, '').toLowerCase();
+  } catch {
+    return '';
+  }
+}
+
 function normalizeUrl(url) {
   return url ? new URL(url).toString() : null;
 }
@@ -750,6 +826,14 @@ function absolutizeUrl(url, baseUrl) {
   } catch {
     return undefined;
   }
+}
+
+function isUsefulImageUrl(url) {
+  if (!url) return false;
+  const text = url.toLowerCase();
+  if (/(\b|\/)(logo|icon|sprite|placeholder|avatar|payment|badge|favicon)(\b|[-_.?/])/.test(text)) return false;
+  if (/\.(svg|gif)(\?|#|$)/.test(text)) return false;
+  return /\.(avif|jpe?g|png|webp)(\?|#|$)/.test(text) || /\/image\/|\/media\/|\/cdn\/|\/products?\//.test(text);
 }
 
 function parseMinorPrice(value, minorUnit = 2) {

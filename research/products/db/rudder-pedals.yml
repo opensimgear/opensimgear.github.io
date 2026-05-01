@@ -1,8 +1,8 @@
 commercial:
   - product_name: Alloy RD1
-    description: Redbird Alloy RD1. professional-grade GA rudder pedals. Active related
-      product on Redbird Alloy page. Rudder pedals designed to mimic real aircraft feel
-      per Redbird related listing.
+    description: Redbird Alloy RD1. professional-grade GA rudder pedals. Active related product
+      on Redbird Alloy page. Rudder pedals designed to mimic real aircraft feel per Redbird
+      related listing.
     manufacturer: Redbird Flight
     component_category: rudder-pedals
     component_sub_category: civil-pedals
@@ -15,9 +15,9 @@ commercial:
         url: https://simulators.redbirdflight.com/products/rd1
         region: US
   - product_name: Charlie Rudder Pedals
-    description: Honeycomb Charlie Rudder Pedals. civil rudder pedals with toe brakes.
-      Active Honeycomb product listing. Rudder pedals with toe brakes [uncertain from
-      current official capture].
+    description: Honeycomb Charlie Rudder Pedals. civil rudder pedals with toe brakes. Active
+      Honeycomb product listing. Rudder pedals with toe brakes [uncertain from current
+      official capture].
     manufacturer: Honeycomb Aeronautical
     component_category: rudder-pedals
     component_sub_category: toe-brake-pedals
@@ -30,8 +30,8 @@ commercial:
         url: https://flyhoneycomb.com/products/charlie-rudder-pedals
         region: Unknown
   - product_name: Flight Sim Rudder Pedals
-    description: Logitech Flight Sim Rudder Pedals. sliding rudder pedals with toe brakes.
-      Low stock on Logitech US on 2026-04-29. Self-centering rudder pedals.
+    description: Logitech Flight Sim Rudder Pedals. sliding rudder pedals with toe brakes. Low
+      stock on Logitech US on 2026-04-29. Self-centering rudder pedals.
     manufacturer: Logitech G
     component_category: rudder-pedals
     component_sub_category: toe-brake-pedals
@@ -44,9 +44,9 @@ commercial:
         url: https://www.logitechg.com/en-us/shop/p/flight-simulator-rudder-pedals
         region: US
   - product_name: MFG Crosswind V3 Combat Rudder Pedals
-    description: "MFG Crosswind V3 Combat. enthusiast three-axis rudder pedals. Active
-      official product page found. Three axes: rudder plus left/right toe brakes per
-      third-party spec page [uncertain]."
+    description: "MFG Crosswind V3 Combat. enthusiast three-axis rudder pedals. Active official
+      product page found. Three axes: rudder plus left/right toe brakes per third-party spec
+      page [uncertain]."
     manufacturer: MFG Sim
     component_category: rudder-pedals
     component_sub_category: rudder-pedals
@@ -55,9 +55,9 @@ commercial:
     shops: []
   - product_name: RH Rotor V2 Rudder Pedals
     description: Slaw Device RH Rotor V2. high-end helicopter-style rudder pedals. One dark
-      aluminum RH Rotor V2 listing shown in stock; other variants out of stock/pre-order
-      on 2026-04-29. Three-axis rudder pedals for rudder plus two separate toe brakes
-      per Slaw Device category listing.
+      aluminum RH Rotor V2 listing shown in stock; other variants out of stock/pre-order on
+      2026-04-29. Three-axis rudder pedals for rudder plus two separate toe brakes per Slaw
+      Device category listing.
     manufacturer: Slaw Device
     component_category: rudder-pedals
     component_sub_category: helicopter-pedals
@@ -70,8 +70,8 @@ commercial:
         url: https://slawdevice.com/en/4-rudder-pedals
         region: EU
   - product_name: RUDDO+
-    description: Virtual Fly RUDDO+. high-end civil rudder pedals with brakes. Active
-      related product on Virtual Fly page. Rudder pedals in Virtual Fly control family.
+    description: Virtual Fly RUDDO+. high-end civil rudder pedals with brakes. Active related
+      product on Virtual Fly page. Rudder pedals in Virtual Fly control family.
     manufacturer: Virtual Fly
     component_category: rudder-pedals
     component_sub_category: toe-brake-pedals
@@ -99,8 +99,8 @@ commercial:
         url: https://slawdevice.com/en/4-rudder-pedals
         region: EU
   - product_name: T-Rudders Mk.V Rudder Pedals (US)
-    description: VKB T-Rudders Mk.V. compact single-axis pedals. Active product on VKBSIM
-      US; add-to-cart status visible in listing. Compact vertical-action rudder pedals.
+    description: VKB T-Rudders Mk.V. compact single-axis pedals. Active product on VKBSIM US;
+      add-to-cart status visible in listing. Compact vertical-action rudder pedals.
     manufacturer: VKB-Sim
     component_category: rudder-pedals
     component_sub_category: rudder-pedals
@@ -142,9 +142,8 @@ commercial:
         url: https://www.thrustmaster.com/products/tpr-thrustmaster-pendular-rudder/
         region: Global
   - product_name: VelocityOne Rudder
-    description: Turtle Beach VelocityOne Rudder. rudder pedals with toe brakes. Active
-      Turtle Beach product listing. Rudder pedals designed for Turtle Beach VelocityOne
-      ecosystem.
+    description: Turtle Beach VelocityOne Rudder. rudder pedals with toe brakes. Active Turtle
+      Beach product listing. Rudder pedals designed for Turtle Beach VelocityOne ecosystem.
     manufacturer: Turtle Beach
     component_category: rudder-pedals
     component_sub_category: toe-brake-pedals
@@ -157,8 +156,8 @@ commercial:
         url: https://www.turtlebeach.com/products/velocity-one-rudder
         region: US
   - product_name: VKB-Sim T-Rudder Pedals Mk.V
-    description: VKB FSC Europe VKB-Sim T-Rudder Pedals Mk.V. VKB rudder pedals. In stock on
-      VKB FSC Europe listing on 2026-04-29. 1 T-Rudder Mk.V.
+    description: VKB FSC Europe VKB-Sim T-Rudder Pedals Mk.V. VKB rudder pedals. In stock on VKB
+      FSC Europe listing on 2026-04-29. 1 T-Rudder Mk.V.
     manufacturer: VKB-Sim
     component_category: rudder-pedals
     component_sub_category: rudder-pedals
@@ -166,13 +165,13 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/10/T-Rudder5_1200_03.jpg
     shops:
       - name: VKB FSC Europe
-        price: 22400
+        price: 224
         currency: EUR
         url: https://flightsimcontrols.com/product/vkb-sim-t-rudder-pedals-mk-v/
         region: EU
   - product_name: VPC ACE-Torq Rudder Pedals
-    description: VIRPIL ACE Torq Rudder Pedals. single-axis vertical rudder pedals. Out of
-      stock on VIRPIL EU page on 2026-04-29. Single-axis pedal set.
+    description: VIRPIL ACE Torq Rudder Pedals. single-axis vertical rudder pedals. Out of stock
+      on VIRPIL EU page on 2026-04-29. Single-axis pedal set.
     manufacturer: VIRPIL Controls
     component_category: rudder-pedals
     component_sub_category: rudder-pedals
@@ -186,10 +185,9 @@ commercial:
         region: US
   - product_name: WINCTRL Cyber Taurus 32 Rudder Pedals E.B.192.Metal.EU 1.0
     description: "WINCTRL Cyber Taurus 32 Rudder Pedals E.B.192.Metal.EU 1.0. flight rudder
-      pedals. Listed on EU WINCTRL store; local stock not available in API response.
-      Primary product image:
-      https://eu.winctrl.com/static/ipfs/QmWZa87H43nuptgSTMRPsX6UPC9kcnPp8hGGts8iuaastF\
-      ."
+      pedals. Listed on EU WINCTRL store; local stock not available in API response. Primary
+      product image:
+      https://eu.winctrl.com/static/ipfs/QmWZa87H43nuptgSTMRPsX6UPC9kcnPp8hGGts8iuaastF."
     manufacturer: WINCTRL
     component_category: rudder-pedals
     component_sub_category: rudder-pedals
@@ -203,10 +201,9 @@ commercial:
         region: EU
   - product_name: WINCTRL Cyber Taurus 32 Rudder Pedals E.B.530.Metal.EU 1.0
     description: "WINCTRL Cyber Taurus 32 Rudder Pedals E.B.530.Metal.EU 1.0. flight rudder
-      pedals. Listed on EU WINCTRL store; local stock not available in API response.
-      Primary product image:
-      https://eu.winctrl.com/static/ipfs/QmaYwv3B2mueLqGov18AWYeydLX7sC89SQNX8UF98ve7qV\
-      ."
+      pedals. Listed on EU WINCTRL store; local stock not available in API response. Primary
+      product image:
+      https://eu.winctrl.com/static/ipfs/QmaYwv3B2mueLqGov18AWYeydLX7sC89SQNX8UF98ve7qV."
     manufacturer: WINCTRL
     component_category: rudder-pedals
     component_sub_category: rudder-pedals
@@ -220,10 +217,9 @@ commercial:
         region: EU
   - product_name: WINCTRL Cyber Taurus Combat Rudder Pedals E.B.192.Metal.EU 1.0
     description: "WINCTRL Cyber Taurus Combat Rudder Pedals E.B.192.Metal.EU 1.0.
-      combat/aircraft rudder pedals. Listed on EU WINCTRL store; local stock not
-      available in API response. Primary product image:
-      https://eu.winctrl.com/static/ipfs/QmaSgLdMjBEjDii5Db1jZ8gFDDH9Lg29PyNMUTEKmEPjpm\
-      ."
+      combat/aircraft rudder pedals. Listed on EU WINCTRL store; local stock not available
+      in API response. Primary product image:
+      https://eu.winctrl.com/static/ipfs/QmaSgLdMjBEjDii5Db1jZ8gFDDH9Lg29PyNMUTEKmEPjpm."
     manufacturer: WINCTRL
     component_category: rudder-pedals
     component_sub_category: combat-pedals
@@ -237,10 +233,9 @@ commercial:
         region: EU
   - product_name: WINCTRL Cyber Taurus Combat Rudder Pedals E.B.192.Metal.US 1.0
     description: "WINCTRL Cyber Taurus Combat Rudder Pedals E.B.192.Metal.US 1.0.
-      combat/aircraft rudder pedals. Listed on EU WINCTRL store; local stock not
-      available in API response. Primary product image:
-      https://eu.winctrl.com/static/ipfs/QmaSgLdMjBEjDii5Db1jZ8gFDDH9Lg29PyNMUTEKmEPjpm\
-      ."
+      combat/aircraft rudder pedals. Listed on EU WINCTRL store; local stock not available
+      in API response. Primary product image:
+      https://eu.winctrl.com/static/ipfs/QmaSgLdMjBEjDii5Db1jZ8gFDDH9Lg29PyNMUTEKmEPjpm."
     manufacturer: WINCTRL
     component_category: rudder-pedals
     component_sub_category: combat-pedals
@@ -254,10 +249,9 @@ commercial:
         region: EU
   - product_name: WINCTRL Cyber Taurus Combat Rudder Pedals E.B.530.Metal.EU 1.0
     description: "WINCTRL Cyber Taurus Combat Rudder Pedals E.B.530.Metal.EU 1.0.
-      combat/aircraft rudder pedals. Listed on EU WINCTRL store; local stock not
-      available in API response. Primary product image:
-      https://eu.winctrl.com/static/ipfs/QmdfKQHchXEbwKPwiiE7RJec33rixWBa2PDSDKdxQvQ3HP\
-      ."
+      combat/aircraft rudder pedals. Listed on EU WINCTRL store; local stock not available
+      in API response. Primary product image:
+      https://eu.winctrl.com/static/ipfs/QmdfKQHchXEbwKPwiiE7RJec33rixWBa2PDSDKdxQvQ3HP."
     manufacturer: WINCTRL
     component_category: rudder-pedals
     component_sub_category: combat-pedals
@@ -300,8 +294,8 @@ commercial:
         region: EU
   - product_name: WINCTRL Orion Metal Flight Rudder Pedals (Standard Edition)
     description: WINCTRL Orion Metal Flight Rudder Pedals (Standard Edition). flight rudder
-      pedals. Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL Orion
-      Metal Flight Rudder Pedals (Standard Edition).
+      pedals. Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL Orion Metal
+      Flight Rudder Pedals (Standard Edition).
     manufacturer: WINCTRL
     component_category: rudder-pedals
     component_sub_category: rudder-pedals
@@ -314,9 +308,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=785
         region: EU
   - product_name: WINCTRL Orion Metal Flight Rudder Pedals (With Damper Edition)
-    description: WINCTRL Orion Metal Flight Rudder Pedals (With Damper Edition). flight
-      rudder pedals. Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL
-      Orion Metal Flight Rudder Pedals (With Damper Edition).
+    description: WINCTRL Orion Metal Flight Rudder Pedals (With Damper Edition). flight rudder
+      pedals. Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL Orion Metal
+      Flight Rudder Pedals (With Damper Edition).
     manufacturer: WINCTRL
     component_category: rudder-pedals
     component_sub_category: rudder-pedals

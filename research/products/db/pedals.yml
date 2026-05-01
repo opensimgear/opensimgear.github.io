@@ -1,8 +1,8 @@
 commercial:
   - product_name: CP5 Pedals
-    description: CAMMUS CP5 Pedals. entry sim racing pedal set. in stock on
-      official shop. Budget CAMMUS pedal set shipped from official global store;
-      detailed sensor specs not stated on current listing [uncertain].
+    description: CAMMUS CP5 Pedals. entry sim racing pedal set. in stock on official shop.
+      Budget CAMMUS pedal set shipped from official global store; detailed sensor specs not
+      stated on current listing [uncertain].
     manufacturer: CAMMUS
     component_category: pedals
     component_sub_category: two-pedal-set
@@ -15,9 +15,9 @@ commercial:
         url: https://cammusracing.com/product/cammus-cp5-pedals/
         region: Global
   - product_name: LC100 Pedals V4
-    description: CAMMUS LC100 Pedals V4. load-cell pedal set. in stock on official
-      shop. V4 upgrade with 200 kg brake load-cell sensor, adjustable throw and
-      stiffness, Hall-effect throttle/clutch sensors, and steel pedal arms.
+    description: CAMMUS LC100 Pedals V4. load-cell pedal set. in stock on official shop. V4
+      upgrade with 200 kg brake load-cell sensor, adjustable throw and stiffness,
+      Hall-effect throttle/clutch sensors, and steel pedal arms.
     manufacturer: CAMMUS
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -30,9 +30,9 @@ commercial:
         url: https://cammusracing.com/product/cammus-lc100-pedals/
         region: Global
   - product_name: ActivePedal Pro
-    description: Simucube ActivePedal Pro. active force-feedback pedal. in stock
-      on official US shop. Active pedal configurable as brake, throttle, or
-      clutch with software-defined pedal feel.
+    description: Simucube ActivePedal Pro. active force-feedback pedal. in stock on official US
+      shop. Active pedal configurable as brake, throttle, or clutch with software-defined
+      pedal feel.
     manufacturer: Simucube
     component_category: pedals
     component_sub_category: ffb-pedal
@@ -45,9 +45,9 @@ commercial:
         url: https://simucube.com/en-us/simucube-activepedal-pro/
         region: US
   - product_name: ActivePedal Ultimate
-    description: Simucube ActivePedal Ultimate. flagship active force-feedback pedal.
-      in stock on official US shop. Active pedal configurable as brake, throttle,
-      or clutch with software-defined pedal feel.
+    description: Simucube ActivePedal Ultimate. flagship active force-feedback pedal. in stock
+      on official US shop. Active pedal configurable as brake, throttle, or clutch with
+      software-defined pedal feel.
     manufacturer: Simucube
     component_category: pedals
     component_sub_category: ffb-pedal
@@ -60,9 +60,9 @@ commercial:
         url: https://simucube.com/en-us/simucube-activepedal-ultimate/
         region: US
   - product_name: Simucube Co-Pedal
-    description: Simucube Co-Pedal. passive throttle/clutch pedal. in stock on
-      official US shop. Two-in-one passive pedal built to complement Simucube
-      ActivePedal with configurable throttle or clutch use.
+    description: Simucube Co-Pedal. passive throttle/clutch pedal. in stock on official US shop.
+      Two-in-one passive pedal built to complement Simucube ActivePedal with configurable
+      throttle or clutch use.
     manufacturer: Simucube
     component_category: pedals
     component_sub_category: two-pedal-set
@@ -75,9 +75,8 @@ commercial:
         url: https://simucube.com/en-us/simucube-co-pedal/
         region: US
   - product_name: ClubSport Pedals V3
-    description: Fanatec ClubSport Pedals V3. three-pedal load-cell set. in stock
-      on official EU catalog. Metal pedal set with load-cell brake and adjustable
-      pedal geometry.
+    description: Fanatec ClubSport Pedals V3. three-pedal load-cell set. in stock on official EU
+      catalog. Metal pedal set with load-cell brake and adjustable pedal geometry.
     manufacturer: Fanatec
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -90,9 +89,9 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/pedals/csp_v3/clubsport-pedals-v3
         region: EU
   - product_name: CRP2 Load Cell Pedals
-    description: MOZA CRP2 Load Cell Pedals. modular load-cell pedal set. In stock on
-      official US page in search result. CNC aerospace-grade aluminum body, carbon-fiber
-      heel plate, high-strength steel base.
+    description: MOZA CRP2 Load Cell Pedals. modular load-cell pedal set. In stock on official
+      US page in search result. CNC aerospace-grade aluminum body, carbon-fiber heel plate,
+      high-strength steel base.
     manufacturer: MOZA Racing
     component_category: pedals
     component_sub_category: brake-upgrade
@@ -105,9 +104,8 @@ commercial:
         url: https://us.mozaracing.com/products/crp2-pedals
         region: US
   - product_name: CSL Pedals
-    description: Fanatec CSL Pedals. budget two-pedal set with Hall-sensor
-      position sensing. in stock on official EU catalog. Steel throttle and
-      brake pedal set.
+    description: Fanatec CSL Pedals. budget two-pedal set with Hall-sensor position sensing. in
+      stock on official EU catalog. Steel throttle and brake pedal set.
     manufacturer: Fanatec
     component_category: pedals
     component_sub_category: two-pedal-set
@@ -120,9 +118,8 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/pedals/csl_p/csl-pedals
         region: EU
   - product_name: CSL Elite Pedals V2
-    description: Fanatec CSL Elite Pedals V2. three-pedal load-cell set. in stock on
-      official EU catalog. Overhauled load-cell brake with Hall sensors on
-      throttle and clutch.
+    description: Fanatec CSL Elite Pedals V2. three-pedal load-cell set. in stock on official EU
+      catalog. Overhauled load-cell brake with Hall sensors on throttle and clutch.
     manufacturer: Fanatec
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -135,9 +132,8 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/pedals/csl_ep_v2/csl-elite-pedals-v2
         region: EU
   - product_name: CSL Pedals LC
-    description: Fanatec CSL Pedals LC. CSL Pedals bundle with load-cell brake. in
-      stock on official EU catalog. Includes throttle, load-cell brake, and
-      clutch pedal.
+    description: Fanatec CSL Pedals LC. CSL Pedals bundle with load-cell brake. in stock on
+      official EU catalog. Includes throttle, load-cell brake, and clutch pedal.
     manufacturer: Fanatec
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -150,9 +146,9 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/pedals/csl_p_lc/csl_pedals_lc
         region: EU
   - product_name: ClubSport Pedals V3 Inverted
-    description: Fanatec ClubSport Pedals V3 Inverted. inverted three-pedal
-      load-cell set. in stock on official EU catalog. Inverted clutch and brake
-      arrangement for road-car pedal feel.
+    description: Fanatec ClubSport Pedals V3 Inverted. inverted three-pedal load-cell set. in
+      stock on official EU catalog. Inverted clutch and brake arrangement for road-car pedal
+      feel.
     manufacturer: Fanatec
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -165,9 +161,9 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/pedals/csp_v3i/clubsport-pedals-v3-inverted
         region: EU
   - product_name: DirectForce Pro Pedals
-    description: VRS DirectForce Pro Pedals. high-end load-cell pedal set.
-      Current/long-running product; official current availability unclear [uncertain].
-      Load cells on throttle, brake, and clutch.
+    description: VRS DirectForce Pro Pedals. high-end load-cell pedal set. Current/long-running
+      product; official current availability unclear [uncertain]. Load cells on throttle,
+      brake, and clutch.
     manufacturer: Virtual Racing School
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -180,9 +176,9 @@ commercial:
         url: https://virtualracingschool.com/academy/hardware/vrs-directforce-pro-pedals-pricing-and-availability/
         region: Unknown
   - product_name: Invicta Pedals T.H.O.R.P. II
-    description: Asetek Invicta Pedals T.H.O.R.P. II. hydraulic brake and throttle pedal
-      set. in stock on official global shop. Two-pedal brake/throttle set with
-      T.H.O.R.P. II hydraulic brake cylinder.
+    description: Asetek Invicta Pedals T.H.O.R.P. II. hydraulic brake and throttle pedal set. in
+      stock on official global shop. Two-pedal brake/throttle set with T.H.O.R.P. II
+      hydraulic brake cylinder.
     manufacturer: Asetek Racing
     component_category: pedals
     component_sub_category: hydraulic-pedals
@@ -195,9 +191,9 @@ commercial:
         url: https://www.asetek.com/simsports/global/product/invicta-pedals-thorp-2/
         region: Global
   - product_name: Forte Sim Racing Pedals Brake & Throttle
-    description: Asetek Forte Sim Racing Pedals Brake & Throttle. load-cell pedal
-      set. in stock on official global shop. M.L.C.P.C. brake cylinder simulates
-      hydraulic feel without full hydraulics.
+    description: Asetek Forte Sim Racing Pedals Brake & Throttle. load-cell pedal set. in stock
+      on official global shop. M.L.C.P.C. brake cylinder simulates hydraulic feel without
+      full hydraulics.
     manufacturer: Asetek Racing
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -210,9 +206,9 @@ commercial:
         url: https://www.asetek.com/simsports/global/product/forte-sim-racing-pedals-brake-throttle/
         region: Global
   - product_name: La Prima Sim Racing Pedals Brake & Throttle
-    description: Asetek La Prima Sim Racing Pedals Brake & Throttle. entry load-cell
-      pedal set. medium stock on official global shop. Two-pedal set with
-      M.L.C.P.C. brake technology and upgrade path to Forte or Invicta.
+    description: Asetek La Prima Sim Racing Pedals Brake & Throttle. entry load-cell pedal set.
+      medium stock on official global shop. Two-pedal set with M.L.C.P.C. brake technology
+      and upgrade path to Forte or Invicta.
     manufacturer: Asetek Racing
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -225,9 +221,9 @@ commercial:
         url: https://www.asetek.com/simsports/global/product/la-prima-sim-racing-pedals-brake-throttle/
         region: Global
   - product_name: Initium Pedal Set
-    description: Asetek Initium Pedal Set. entry two-pedal set. in stock on official
-      global shop. Floor or cockpit mode pedals with hall sensor mechanisms and
-      optional load-cell or hydraulic brake upgrades.
+    description: Asetek Initium Pedal Set. entry two-pedal set. in stock on official global
+      shop. Floor or cockpit mode pedals with hall sensor mechanisms and optional load-cell
+      or hydraulic brake upgrades.
     manufacturer: Asetek Racing
     component_category: pedals
     component_sub_category: two-pedal-set
@@ -240,8 +236,8 @@ commercial:
         url: https://www.asetek.com/simsports/global/product/initium-pedal-set/
         region: Global
   - product_name: P500 Pedal
-    description: Simagic P500 Pedal. entry load-cell pedal set. in stock on official
-      shop. Modular pedal set with optional clutch add-on.
+    description: Simagic P500 Pedal. entry load-cell pedal set. in stock on official shop.
+      Modular pedal set with optional clutch add-on.
     manufacturer: Simagic
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -254,9 +250,8 @@ commercial:
         url: https://simagic.com/products/simagic-p500-pedals
         region: Global
   - product_name: P700 Pedals
-    description: Simagic P700 Pedals. load-cell pedal set. in stock on official
-      shop. Upgraded entry pedal set with 150 kg load cell and 35 adjustable
-      brake settings.
+    description: Simagic P700 Pedals. load-cell pedal set. in stock on official shop. Upgraded
+      entry pedal set with 150 kg load cell and 35 adjustable brake settings.
     manufacturer: Simagic
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -269,9 +264,8 @@ commercial:
         url: https://simagic.com/products/simagic-p700-pedal
         region: Global
   - product_name: P1000 Pedal
-    description: Simagic P1000 Pedal. modular load-cell pedal set. in stock on
-      official shop. P1000-series pedal platform with optional hydraulic and
-      haptic upgrades.
+    description: Simagic P1000 Pedal. modular load-cell pedal set. in stock on official shop.
+      P1000-series pedal platform with optional hydraulic and haptic upgrades.
     manufacturer: Simagic
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -284,9 +278,9 @@ commercial:
         url: https://simagic.com/products/p1000
         region: Global
   - product_name: P1000i Pedal
-    description: Simagic P1000i Pedal. inverted modular load-cell pedal set. in
-      stock on official shop. Inverted P1000-series pedal platform with optional
-      hydraulic and haptic upgrades.
+    description: Simagic P1000i Pedal. inverted modular load-cell pedal set. in stock on
+      official shop. Inverted P1000-series pedal platform with optional hydraulic and haptic
+      upgrades.
     manufacturer: Simagic
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -299,8 +293,8 @@ commercial:
         url: https://simagic.com/products/p1000i
         region: Global
   - product_name: P1000-F Pedal
-    description: Simagic P1000-F Pedal. two-pedal load-cell set. in stock on
-      official shop. P1000-series throttle and brake set.
+    description: Simagic P1000-F Pedal. two-pedal load-cell set. in stock on official shop.
+      P1000-series throttle and brake set.
     manufacturer: Simagic
     component_category: pedals
     component_sub_category: two-pedal-set
@@ -313,8 +307,8 @@ commercial:
         url: https://simagic.com/products/p1000-f
         region: Global
   - product_name: P1000-RS Pedal
-    description: Simagic P1000-RS Pedal. three-pedal load-cell set. in stock on
-      official shop. P1000-series racing pedal set with clutch.
+    description: Simagic P1000-RS Pedal. three-pedal load-cell set. in stock on official shop.
+      P1000-series racing pedal set with clutch.
     manufacturer: Simagic
     component_category: pedals
     component_sub_category: three-pedal-set
@@ -327,8 +321,8 @@ commercial:
         url: https://simagic.com/products/p1000-rs
         region: Global
   - product_name: P1000-FRS Pedal
-    description: Simagic P1000-FRS Pedal. three-pedal load-cell set. in stock on
-      official shop. P1000-series racing pedal set variant.
+    description: Simagic P1000-FRS Pedal. three-pedal load-cell set. in stock on official shop.
+      P1000-series racing pedal set variant.
     manufacturer: Simagic
     component_category: pedals
     component_sub_category: three-pedal-set
@@ -341,8 +335,8 @@ commercial:
         url: https://simagic.com/products/p1000-frs
         region: Global
   - product_name: P1000i-RS Pedal
-    description: Simagic P1000i-RS Pedal. inverted three-pedal load-cell set. in
-      stock on official shop. Inverted P1000-series racing pedal set.
+    description: Simagic P1000i-RS Pedal. inverted three-pedal load-cell set. in stock on
+      official shop. Inverted P1000-series racing pedal set.
     manufacturer: Simagic
     component_category: pedals
     component_sub_category: three-pedal-set
@@ -355,8 +349,8 @@ commercial:
         url: https://simagic.com/products/p1000i-rs
         region: Global
   - product_name: P2000 Pedal
-    description: Simagic P2000 Pedal. hydraulic pedal set. in stock on official
-      shop. P2000 hydraulic pedal platform with 100 kg and 200 kg sensor variants.
+    description: Simagic P2000 Pedal. hydraulic pedal set. in stock on official shop. P2000
+      hydraulic pedal platform with 100 kg and 200 kg sensor variants.
     manufacturer: Simagic
     component_category: pedals
     component_sub_category: hydraulic-pedals
@@ -369,10 +363,9 @@ commercial:
         url: https://simagic.com/products/p2000-r
         region: Global
   - product_name: SP01 Core
-    description: Cube Controls SP01 Core. load-cell sim racing pedal set. in stock
-      on official shop. Fully customizable weight, travel, and preload with
-      swappable dampers, springs, and elastomers; compact design without external
-      electronics.
+    description: Cube Controls SP01 Core. load-cell sim racing pedal set. in stock on official
+      shop. Fully customizable weight, travel, and preload with swappable dampers, springs,
+      and elastomers; compact design without external electronics.
     manufacturer: Cube Controls
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -385,9 +378,9 @@ commercial:
         url: https://www.cubecontrols.com/product/sp01-core/
         region: EU
   - product_name: Pedal Set XP1 Loadcell
-    description: Sim-Lab XP1 Loadcell Pedals. modular load-cell pedal set. in
-      stock on official EU shop. 200 kg load-cell brake design with up to 100 kg
-      pedal pressure, hall sensors, elastomers, and spring tuning.
+    description: Sim-Lab XP1 Loadcell Pedals. modular load-cell pedal set. in stock on official
+      EU shop. 200 kg load-cell brake design with up to 100 kg pedal pressure, hall sensors,
+      elastomers, and spring tuning.
     manufacturer: Sim-Lab
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -399,6 +392,11 @@ commercial:
         currency: EUR
         url: https://sim-lab.eu/en-de/products/pedal-set-xp1-loadcell-sim-racing
         region: EU
+      - name: Sim Lab
+        price: 399
+        currency: USD
+        url: https://sim-lab.eu/products/pedal-set-xp1-loadcell-sim-racing
+        region: Unknown
   - product_name: PRO Racing Pedals
     description: Logitech G PRO Racing Pedals. modular load-cell pedal set. Current Logitech
       product. Load-cell brake rated 100 kg / 220.4 lb in Logitech listing.
@@ -414,8 +412,8 @@ commercial:
         url: https://www.logitechg.com/en-us/products/driving/pro-racing-pedals.html
         region: US
   - product_name: RS Pedals
-    description: Logitech G RS Pedals. budget/mid load-cell pedal set. Current Logitech
-      product in official category listing. Load-cell and Hall-effect pedal set.
+    description: Logitech G RS Pedals. budget/mid load-cell pedal set. Current Logitech product
+      in official category listing. Load-cell and Hall-effect pedal set.
     manufacturer: Logitech G
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -428,9 +426,9 @@ commercial:
         url: https://www.logitechg.com/en-us/products/driving.html
         region: US
   - product_name: Sprint Pedals Black
-    description: Heusinkveld Sprint 2-pedal set. high-end load-cell pedal set.
-      in stock on official EU shop. Compact adjustable throttle/brake set with
-      load sensors designed for consistent simulator input.
+    description: Heusinkveld Sprint 2-pedal set. high-end load-cell pedal set. in stock on
+      official EU shop. Compact adjustable throttle/brake set with load sensors designed for
+      consistent simulator input.
     manufacturer: Heusinkveld
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -457,9 +455,9 @@ commercial:
         url: https://www.thrustmaster.com/products/t-lcm-pedals/
         region: Unknown
   - product_name: Ultimate+ Pedals
-    description: Heusinkveld Ultimate+ 2-pedal set Black. pro load-cell pedal
-      set. in stock on official EU shop. Professional simulator pedals capable
-      of up to 140 kg force with 9 brake resistance settings.
+    description: Heusinkveld Ultimate+ 2-pedal set Black. pro load-cell pedal set. in stock on
+      official EU shop. Professional simulator pedals capable of up to 140 kg force with 9
+      brake resistance settings.
     manufacturer: Heusinkveld
     component_category: pedals
     component_sub_category: hydraulic-pedals
@@ -472,10 +470,9 @@ commercial:
         url: https://heusinkveld.com/eu/shop/pedals/ultimate-2-pedal-set-black/
         region: EU
   - product_name: RaceCenter 2-pedal set
-    description: Heusinkveld RaceCenter 2-pedal set. commercial simulator pedal
-      set. currently out of stock on official EU shop. Heavy-duty steel pedals
-      with oversized load-cell sensors and overload protection for
-      high-frequency commercial use.
+    description: Heusinkveld RaceCenter 2-pedal set. commercial simulator pedal set. currently
+      out of stock on official EU shop. Heavy-duty steel pedals with oversized load-cell
+      sensors and overload protection for high-frequency commercial use.
     manufacturer: Heusinkveld
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -503,9 +500,9 @@ commercial:
         url: https://simgrade.fi/product/vx-pro-pedals/
         region: EU
   - product_name: Pro-Sim Evo Pedals
-    description: Pro-Sim Evo Pedals. high-end hydraulic simulator pedal set. in
-      stock on official UK shop. Driver-training pedal set supplied with
-      Pro-Sim professional simulators and used for F1-level training.
+    description: Pro-Sim Evo Pedals. high-end hydraulic simulator pedal set. in stock on
+      official UK shop. Driver-training pedal set supplied with Pro-Sim professional
+      simulators and used for F1-level training.
     manufacturer: Pro-Sim
     component_category: pedals
     component_sub_category: hydraulic-pedals
@@ -518,9 +515,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/evo-pro-pedals/
         region: UK
   - product_name: GTpro1-S Triple Overhung Wilwood Pedal Assembly
-    description: RealGear GTpro1-S. overhung professional simulator pedal set.
-      official Ricmotech store listing. Wilwood-based triple overhung pedal
-      assembly for racing simulator builds.
+    description: RealGear GTpro1-S. overhung professional simulator pedal set. official
+      Ricmotech store listing. Wilwood-based triple overhung pedal assembly for racing
+      simulator builds.
     manufacturer: RealGear
     component_category: pedals
     component_sub_category: load-cell-pedals
@@ -533,9 +530,9 @@ commercial:
         url: https://www.ricmotech.com/realgear-gtpro-triple-overhung-wilwood-edition-pedals
         region: US
   - product_name: GTpro3 Xtreme Tilton Pedals Gen2
-    description: RealGear GTpro3 Xtreme Tilton Gen2. hydraulic sim racing pedal
-      set. made to order on official Ricmotech store. Tilton-based professional
-      three-pedal simulator assembly.
+    description: RealGear GTpro3 Xtreme Tilton Gen2. hydraulic sim racing pedal set. made to
+      order on official Ricmotech store. Tilton-based professional three-pedal simulator
+      assembly.
     manufacturer: RealGear
     component_category: pedals
     component_sub_category: hydraulic-pedals
@@ -548,9 +545,9 @@ commercial:
         url: https://www.ricmotech.com/realgear-gtpro3-tilton-hydraulic-sim-pedals-gen2
         region: US
   - product_name: Raceline Pedals III
-    description: Thrustmaster Raceline Pedals III. modular three-pedal sim racing
-      pedal set. in stock on official US shop. Three-pedal H.E.A.R.T sensor set with
-      metal structure, modular layout, and upgrade path.
+    description: Thrustmaster Raceline Pedals III. modular three-pedal sim racing pedal set. in
+      stock on official US shop. Three-pedal H.E.A.R.T sensor set with metal structure,
+      modular layout, and upgrade path.
     manufacturer: Thrustmaster
     component_category: pedals
     component_sub_category: three-pedal-set
@@ -563,9 +560,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/raceline-pedals-iii/
         region: US
   - product_name: Raceline Pedals LTE
-    description: Thrustmaster Raceline Pedals LTE. entry sim racing pedal set. in
-      stock on official US shop. Modular Raceline pedal set designed for
-      Thrustmaster racing-wheel setups.
+    description: Thrustmaster Raceline Pedals LTE. entry sim racing pedal set. in stock on
+      official US shop. Modular Raceline pedal set designed for Thrustmaster racing-wheel
+      setups.
     manufacturer: Thrustmaster
     component_category: pedals
     component_sub_category: two-pedal-set
@@ -578,9 +575,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/raceline-pedals-lte/
         region: US
   - product_name: T3PM
-    description: Thrustmaster T3PM. magnetic three-pedal sim racing set. in stock
-      on official US shop. Three-pedal magnetic pedal set with adjustable brake
-      pressure options.
+    description: Thrustmaster T3PM. magnetic three-pedal sim racing set. in stock on official US
+      shop. Three-pedal magnetic pedal set with adjustable brake pressure options.
     manufacturer: Thrustmaster
     component_category: pedals
     component_sub_category: three-pedal-set
@@ -593,9 +589,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/t3pm/
         region: US
   - product_name: T3PA Add-On
-    description: Thrustmaster T3PA Add-On. three-pedal add-on set. in stock on
-      official US shop. Clutch, brake, and throttle pedal add-on for compatible
-      Thrustmaster racing wheels.
+    description: Thrustmaster T3PA Add-On. three-pedal add-on set. in stock on official US shop.
+      Clutch, brake, and throttle pedal add-on for compatible Thrustmaster racing wheels.
     manufacturer: Thrustmaster
     component_category: pedals
     component_sub_category: three-pedal-set
@@ -607,10 +602,86 @@ commercial:
         currency: USD
         url: https://www.thrustmaster.com/en-us/products/t3pa-add-on/
         region: US
+  - product_name: Inverted Pedal Rack V2
+    description: Sim Lab Inverted Pedal Rack V2. two pedal set. listed on Sim Lab. This inverted
+      pedal rack supports an inverted pedal configuration for a GT-style pedal position.
+      Redesigned as V2 to match our current design language and material standards, it...
+    manufacturer: Sim Lab
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://sim-lab.eu/products/inverted-pedal-rack-v2
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Inv_Pedal_Rack_V2_-_Mounted_A_trans.png?v=1773126895
+    shops:
+      - name: Sim Lab
+        price: 199
+        currency: USD
+        url: https://sim-lab.eu/products/inverted-pedal-rack-v2
+        region: Unknown
+  - product_name: Pedal slider baseplate
+    description: Sim Lab Pedal slider baseplate. two pedal set. listed on Sim Lab. The baseplate
+      ensures secure pedal mounting on the Sim-Lab seat slider for easy pedal position
+      adjustments. It can also be used without the seat slider as a heel rest and a stab...
+    manufacturer: Sim Lab
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://sim-lab.eu/products/pedal-slider-baseplate-sim-racing
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Pedalsliderbaseplate4_48ebebe3-2f0d-4ebd-83b1-918ca5f4349f.jpg?v=1744198710
+    shops:
+      - name: Sim Lab
+        price: 159
+        currency: USD
+        url: https://sim-lab.eu/products/pedal-slider-baseplate-sim-racing
+        region: Unknown
+  - product_name: Sim pedal heel rest
+    description: "Sim Lab Sim pedal heel rest. two pedal set. listed on Sim Lab. Product
+      Description: The Sim Pedal Heel Rest provides support for the back of your feet,
+      enhancing comfort and stability while operating the pedals. Specifications: Material:
+      4..."
+    manufacturer: Sim Lab
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://sim-lab.eu/products/pedal-heel-rest-sim-racing-accessories
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/SLA063_Simpedalheelrest.jpg?v=1744198942
+    shops:
+      - name: Sim Lab
+        price: 39.95
+        currency: USD
+        url: https://sim-lab.eu/products/pedal-heel-rest-sim-racing-accessories
+        region: Unknown
+  - product_name: Black Conversion Kit
+    description: XP1 Black Conversion Kit. two pedal set. listed on Sim Lab. The XP1 Black
+      Conversion Kit allows you to change your pedals' appearance by switching from the
+      iconic blue parts to these black ones. Remove all blue parts from your pedals and...
+    manufacturer: XP1
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://sim-lab.eu/products/xp1-pedals-black-conversion-kit
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/XP1_3P_Black_Conversion_-_Black_Parts_Only.png?v=1769595393
+    shops:
+      - name: Sim Lab
+        price: 14.95
+        currency: USD
+        url: https://sim-lab.eu/products/xp1-pedals-black-conversion-kit
+        region: Unknown
+  - product_name: Foot Support
+    description: XP1 Foot Support. two pedal set. listed on Sim Lab. The foot support improves
+      stability when using your throttle pedal for example. It can be easily installed
+      between the pedal face and pedal face bracket. Due to its symmetrical...
+    manufacturer: XP1
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://sim-lab.eu/products/xp1-pedals-foot-support
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/xp1footsupport_1.jpg?v=1744707523
+    shops:
+      - name: Sim Lab
+        price: 19.95
+        currency: USD
+        url: https://sim-lab.eu/products/xp1-pedals-foot-support
+        region: Unknown
 opensource:
   - project_name: CNCDan Sim Pedals
-    description: CNCDan Sim Pedals. laser-cut and 3D-printed load-cell/hall pedal set.
-      Active open-hardware pedal design; repo recently updated and moderately popular.
+    description: CNCDan Sim Pedals. laser-cut and 3D-printed load-cell/hall pedal set. Active
+      open-hardware pedal design; repo recently updated and moderately popular.
       Interchangeable pedal bodies for any 1/2/3 pedal combination.
     maker: dmcke5 / CNCDan
     component_category: pedals
@@ -630,10 +701,10 @@ opensource:
     project_url: https://github.com/tbattz/DIYLoadCellSimRacingPedals
     picture_url: https://opengraph.githubassets.com/aadf3a5f300964cd095338bcec06cd234fddac9d598d5bb231b57b47ad56539f/MHeironimus/ArduinoJoystickLibrary
   - project_name: DIY Sim Racing FFB Pedal
-    description: DIY Sim Racing FFB Pedal. active force-feedback pedal. Large active DIY
-      project with firmware, SimHub plugin, mechanical design, PCB repositories, wiki,
-      Discord, and build automation. Servo-driven active pedal using linear rail and
-      high-power actuator behavior.
+    description: DIY Sim Racing FFB Pedal. active force-feedback pedal. Large active DIY project
+      with firmware, SimHub plugin, mechanical design, PCB repositories, wiki, Discord, and
+      build automation. Servo-driven active pedal using linear rail and high-power actuator
+      behavior.
     maker: ChrGri and contributors
     component_category: pedals
     component_sub_category: ffb-pedal
@@ -651,10 +722,10 @@ opensource:
     project_url: https://github.com/MorGuux/PedalManager
     picture_url: https://repository-images.githubusercontent.com/317222975/9e45fe18-9316-4d28-92c3-cd36bbc21d68
   - project_name: SRT P1 Pedals
-    description: Lebois Racing SRT P1 Pedals. DIY throttle/clutch and hydraulic/load-cell
-      brake family. Older DIY SRT project with public docs/downloads; current support
-      level unclear. P1 throttle/clutch based on compression spring with adjustable
-      start/finish position, preload, and spring force.
+    description: Lebois Racing SRT P1 Pedals. DIY throttle/clutch and hydraulic/load-cell brake
+      family. Older DIY SRT project with public docs/downloads; current support level
+      unclear. P1 throttle/clutch based on compression spring with adjustable start/finish
+      position, preload, and spring force.
     maker: Lebois Racing
     component_category: pedals
     component_sub_category: hydraulic-pedals
@@ -662,9 +733,9 @@ opensource:
     project_url: "null"
     picture_url: https://lebois-racing.com/wp-content/uploads/2024/08/eclutch-v10-600x400.jpg
   - project_name: USB Sim Racing Pedals with Load Cell
-    description: USB Sim Racing Pedals With Load Cell. Arduino load-cell brake and
-      potentiometer pedal controller. Small stable firmware project; simple scope. Turns
-      Arduino Micro plus HX711 into inexpensive USB pedal control board.
+    description: USB Sim Racing Pedals With Load Cell. Arduino load-cell brake and potentiometer
+      pedal controller. Small stable firmware project; simple scope. Turns Arduino Micro
+      plus HX711 into inexpensive USB pedal control board.
     maker: MauriceRowe
     component_category: pedals
     component_sub_category: pedal-firmware

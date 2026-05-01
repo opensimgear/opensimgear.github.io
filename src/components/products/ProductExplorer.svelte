@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import type { Attachment } from 'svelte/attachments';
+  import { on } from 'svelte/events';
   import { productImages } from '~/data/3rdparty-product-images';
 
   type ProductKind = 'commercial' | 'opensource';
@@ -150,6 +152,7 @@
   let showAllCategories = $state(false);
   let showAllGroups = $state(false);
   let showAllMakers = $state(false);
+  let filterPanelOpen = $state(false);
   let priceLocale = $state('en-US');
   let priceCurrency = $state('USD');
   let imageOverlay: ImageOverlay | null = $state(null);
@@ -157,6 +160,29 @@
   let imageOverlayToken = 0;
   let mounted = false;
   let suppressUrlSync = false;
+
+  const portal: Attachment<HTMLElement> = (node) => {
+    if (typeof document === 'undefined' || !document.body) {
+      return undefined;
+    }
+
+    const placeholder = document.createComment('product-detail-modal');
+    const parent = node.parentNode;
+    parent?.insertBefore(placeholder, node);
+    document.body.appendChild(node);
+    const removeClickListener = on(node, 'click', (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (event.target === node || target?.closest('[data-product-detail-close]')) {
+        closeProductDetail();
+      }
+    });
+
+    return () => {
+      removeClickListener();
+      node.remove();
+      placeholder.remove();
+    };
+  };
 
   onMount(() => {
     let cancelled = false;
@@ -1170,29 +1196,54 @@
 
   <div class="grid min-h-0 gap-4 [grid-template-columns:minmax(16.5rem,18rem)_minmax(0,1fr)] max-[72rem]:grid-cols-1">
     <aside
-      class="grid min-w-0 content-start gap-5 self-start rounded-[16px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] p-4"
+      class="grid min-w-0 content-start gap-5 self-start rounded-[16px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] p-4 max-[72rem]:gap-3"
       aria-label="Product filters"
     >
-      <section class="grid min-w-0 gap-3">
-        <div class="flex items-center justify-between">
-          <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Search</h2>
-        </div>
-        <label class="relative block min-w-0">
-          <input
-            class="box-border w-full min-w-0 rounded-[10px] border border-[var(--sl-color-gray-5)] bg-[rgba(9,13,20,0.75)] py-2 pl-3 pr-10 text-[0.85rem] text-[var(--sl-color-text)] outline-none placeholder:text-[var(--sl-color-gray-3)] focus:border-[var(--sl-color-accent)]"
-            bind:value={query}
-            type="search"
-            placeholder="Search name, maker, category..."
-            oninput={resetPage}
-          />
-          <span class="pointer-events-none absolute inset-y-0 right-3 grid place-items-center text-[var(--sl-color-gray-3)]">
-            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" />
-              <path d="m20 20-3.5-3.5" />
-            </svg>
-          </span>
-        </label>
-      </section>
+      <button
+        class="hidden w-full items-center justify-between gap-3 rounded-[12px] border border-[var(--sl-color-gray-5)] bg-[rgba(9,13,20,0.75)] px-3 py-2 text-left text-[0.9rem] font-[700] text-[var(--sl-color-text)] max-[72rem]:flex"
+        type="button"
+        aria-controls="product-filter-panel"
+        aria-expanded={filterPanelOpen}
+        onclick={() => (filterPanelOpen = !filterPanelOpen)}
+      >
+        <span class="inline-flex min-w-0 items-center gap-2">
+          <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M4 6h16M7 12h10M10 18h4" />
+          </svg>
+          Filters
+          {#if activeFilters.length}
+            <span class="rounded-full bg-[var(--sl-color-accent)] px-2 py-0.5 text-[0.72rem] font-[750] leading-none text-white">{activeFilters.length}</span>
+          {/if}
+        </span>
+        <svg class={['h-4 w-4 shrink-0 transition-transform', filterPanelOpen && 'rotate-180']} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+
+      <div
+        id="product-filter-panel"
+        class={[filterPanelOpen ? 'grid' : 'hidden', 'min-w-0 content-start gap-5 min-[72.01rem]:grid']}
+      >
+        <section class="grid min-w-0 gap-3">
+          <div class="flex items-center justify-between">
+            <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Search</h2>
+          </div>
+          <label class="relative block min-w-0">
+            <input
+              class="box-border w-full min-w-0 rounded-[10px] border border-[var(--sl-color-gray-5)] bg-[rgba(9,13,20,0.75)] py-2 pl-3 pr-10 text-[0.85rem] text-[var(--sl-color-text)] outline-none placeholder:text-[var(--sl-color-gray-3)] focus:border-[var(--sl-color-accent)]"
+              bind:value={query}
+              type="search"
+              placeholder="Search name, maker, category..."
+              oninput={resetPage}
+            />
+            <span class="pointer-events-none absolute inset-y-0 right-3 grid place-items-center text-[var(--sl-color-gray-3)]">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" />
+              </svg>
+            </span>
+          </label>
+        </section>
 
       <section class="grid min-w-0 gap-2">
         <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Type</h2>
@@ -1349,6 +1400,7 @@
         {/each}
       </section>
 
+      </div>
     </aside>
 
     <section
@@ -1431,10 +1483,10 @@
           {#each paginatedProducts as product (product.id)}
             {@const image = productImage(product)}
             {@const maker = makerName(product)}
-            <article class="grid min-h-[10.5rem] gap-4 rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(12,18,28,0.72)] p-3 [grid-template-columns:10.5rem_minmax(0,1fr)_11.5rem] max-[80rem]:[grid-template-columns:9rem_minmax(0,1fr)] max-[56rem]:grid-cols-1">
+            <article class="grid min-h-[10.5rem] gap-4 rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(12,18,28,0.72)] p-3 [grid-template-columns:minmax(0,1fr)] min-[56.01rem]:[grid-template-columns:9rem_minmax(0,1fr)] min-[80.01rem]:[grid-template-columns:10.5rem_minmax(0,1fr)_11.5rem]">
               {#if image}
                 <button
-                  class="grid aspect-square w-full place-items-center overflow-hidden rounded-[10px] border border-[var(--sl-color-gray-5)] bg-white p-0"
+                  class="grid aspect-square w-full place-items-center overflow-hidden rounded-[10px] border border-[var(--sl-color-gray-5)] bg-white p-0 max-[56rem]:order-first"
                   type="button"
                   aria-label={`View ${displayName(product)}`}
                   onclick={() => openProductDetail(product)}
@@ -1452,6 +1504,19 @@
                     loading="lazy"
                     decoding="async"
                   />
+                </button>
+              {:else}
+                <button
+                  class="grid aspect-square w-full place-items-center rounded-[10px] border border-dashed border-[var(--sl-color-gray-5)] bg-[rgba(255,255,255,0.04)] text-[var(--sl-color-gray-3)] max-[56rem]:order-first"
+                  type="button"
+                  aria-label={`Open ${displayName(product)}`}
+                  onclick={() => openProductDetail(product)}
+                >
+                  <svg class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <circle cx="9" cy="10" r="1.6" />
+                    <path d="m21 15-4.5-4.5L9 18" />
+                  </svg>
                 </button>
               {/if}
 
@@ -1531,7 +1596,7 @@
                 </div>
               </div>
 
-              <div class="grid content-start justify-items-start gap-3 border-l border-[var(--sl-color-gray-5)] pl-4 text-left max-[80rem]:col-span-2 max-[80rem]:grid-cols-[1fr_1fr] max-[80rem]:border-l-0 max-[80rem]:border-t max-[80rem]:pl-0 max-[80rem]:pt-3 max-[56rem]:grid-cols-1">
+              <div class="grid content-start justify-items-start gap-3 border-t border-[var(--sl-color-gray-5)] pt-3 text-left min-[56.01rem]:col-span-2 min-[56.01rem]:grid-cols-[1fr_1fr] min-[80.01rem]:col-span-1 min-[80.01rem]:grid-cols-1 min-[80.01rem]:border-l min-[80.01rem]:border-t-0 min-[80.01rem]:pl-4 min-[80.01rem]:pt-0">
                 <div class="flex min-w-0 justify-self-end">
                   <span
                     class={[
@@ -1628,19 +1693,17 @@
     {@const modalMaker = makerName(selectedProduct)}
     {@const modalShops = productShopLinks(selectedProduct)}
     <div
-      class="fixed inset-0 z-[2147483646] grid place-items-center bg-black/70 p-4 backdrop-blur-sm"
+      {@attach portal}
+      class="fixed inset-0 z-[2147483646] grid place-items-center overflow-y-auto bg-black/70 p-4 backdrop-blur-sm max-[52rem]:p-2"
       role="presentation"
-      onclick={(event) => {
-        if (event.target === event.currentTarget) closeProductDetail();
-      }}
     >
       <div
-        class="grid max-h-[min(44rem,calc(100vh-2rem))] w-full max-w-5xl overflow-hidden rounded-[16px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] shadow-[0_22px_70px_rgba(0,0,0,0.45)]"
+        class="grid max-h-[calc(100dvh-2rem)] min-h-0 w-full max-w-5xl grid-rows-[auto_minmax(0,1fr)] overflow-hidden rounded-[16px] border border-[var(--sl-color-gray-5)] bg-[var(--sl-color-bg)] shadow-[0_22px_70px_rgba(0,0,0,0.45)] max-[52rem]:max-h-[calc(100dvh-1rem)] max-[52rem]:rounded-[12px]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="product-detail-title"
       >
-        <header class="flex items-start justify-between gap-4 border-b border-[var(--sl-color-gray-5)] px-5 py-4">
+        <header class="flex items-start justify-between gap-4 border-b border-[var(--sl-color-gray-5)] px-5 py-4 max-[52rem]:px-3 max-[52rem]:py-3">
           <div class="grid min-w-0 gap-1">
             {#if modalMaker}
               <p class="m-0 text-[0.8rem] font-[650] text-[var(--sl-color-gray-2)]">{modalMaker}</p>
@@ -1652,7 +1715,7 @@
           <button
             class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border border-[var(--sl-color-gray-5)] bg-transparent text-[var(--sl-color-text)] hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
             type="button"
-            onclick={closeProductDetail}
+            data-product-detail-close
             aria-label="Close product detail"
             title="Close"
           >
@@ -1662,7 +1725,7 @@
           </button>
         </header>
 
-        <div class="grid gap-5 overflow-auto p-5">
+        <div class="grid min-h-0 gap-5 overflow-y-auto p-5 max-[52rem]:gap-4 max-[52rem]:p-3">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <nav class="flex flex-wrap items-center gap-1 text-[0.76rem] font-[650] text-[var(--sl-color-gray-2)]" aria-label="Product category breadcrumb">
               {#each productBreadcrumb(selectedProduct) as crumb, index (index)}
@@ -1706,6 +1769,16 @@
                   loading="eager"
                   decoding="async"
                 />
+              </figure>
+            {:else}
+              <figure class="m-0 grid content-start gap-2">
+                <div class="grid aspect-[4/3] w-full place-items-center rounded-[12px] border border-dashed border-[var(--sl-color-gray-5)] bg-[rgba(255,255,255,0.04)] text-[var(--sl-color-gray-3)]">
+                  <svg class="h-16 w-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <circle cx="9" cy="10" r="1.6" />
+                    <path d="m21 15-4.5-4.5L9 18" />
+                  </svg>
+                </div>
               </figure>
             {/if}
 

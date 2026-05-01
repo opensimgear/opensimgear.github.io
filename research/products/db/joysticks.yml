@@ -29,10 +29,9 @@ commercial:
         region: US
   - product_name: Constellation ALPHA Prime Grip plus WarBRD-D Base
     description: VIRPIL Constellation ALPHA Prime and WarBRD-D Base. modular enthusiast
-      combat/space joystick. Active/backorder for ALPHA Prime grip on VIRPIL US;
-      WarBRD-D base active. ALPHA Prime grip with metal grip body, metal flip trigger
-      and brake lever, digital brake lever axis, twist axis with lockout, adjustable
-      hand rest.
+      combat/space joystick. Active/backorder for ALPHA Prime grip on VIRPIL US; WarBRD-D
+      base active. ALPHA Prime grip with metal grip body, metal flip trigger and brake
+      lever, digital brake lever axis, twist axis with lockout, adjustable hand rest.
     manufacturer: VIRPIL Controls
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -45,9 +44,9 @@ commercial:
         url: https://virpil-controls.us.com/vpc-constellation-alpha-prime-r.html
         region: US
   - product_name: F-14 Combat Grip (Stand-Alone)
-    description: VKB FSC Europe F-14 Combat Grip (Stand-Alone). VKB flightstick base, grip,
-      or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. F-14
-      replica grip.
+    description: VKB FSC Europe F-14 Combat Grip (Stand-Alone). VKB flightstick base, grip, or
+      complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. F-14 replica
+      grip.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -55,14 +54,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2019/11/750-8.png
     shops:
       - name: VKB FSC Europe
-        price: 14700
+        price: 147
         currency: EUR
         url: https://flightsimcontrols.com/product/f-14-combat-grip-stand-alone/
         region: EU
   - product_name: Gladiator NXT EVO – Base Only
-    description: VKB FSC Europe Gladiator NXT EVO – Base Only. VKB flightstick base, grip,
-      or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. 1x
-      Gladiator NXT EVO Base.
+    description: VKB FSC Europe Gladiator NXT EVO – Base Only. VKB flightstick base, grip, or
+      complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. 1x Gladiator NXT
+      EVO Base.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -70,14 +69,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/09/GNE_Base_1200_02.jpg
     shops:
       - name: VKB FSC Europe
-        price: 10300
+        price: 103
         currency: EUR
         url: https://flightsimcontrols.com/product/gladiator-nxt-evo-base-only/
         region: EU
   - product_name: Gladiator NXT EVO ‘F-14 Combat Edition’
-    description: VKB FSC Europe Gladiator NXT EVO ‘F-14 Combat Edition’. VKB flightstick
-      base, grip, or complete joystick. In stock on VKB FSC Europe listing on
-      2026-04-29. 1 GNX F-14 Grip.
+    description: VKB FSC Europe Gladiator NXT EVO ‘F-14 Combat Edition’. VKB flightstick base,
+      grip, or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. 1 GNX
+      F-14 Grip.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -85,14 +84,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/71_GNX-EVOF-14_800_2.jpg
     shops:
       - name: VKB FSC Europe
-        price: 20400
+        price: 204
         currency: EUR
         url: https://flightsimcontrols.com/product/gladiator-nxt-evo-f-14-combat-edition/
         region: EU
   - product_name: Gladiator NXT EVO ‘Space Combat Edition’
-    description: VKB FSC Europe Gladiator NXT EVO ‘Space Combat Edition’. VKB flightstick
-      base, grip, or complete joystick. In stock on VKB FSC Europe listing on
-      2026-04-29. 1 GNX SCG Grip (Left or Right).
+    description: VKB FSC Europe Gladiator NXT EVO ‘Space Combat Edition’. VKB flightstick base,
+      grip, or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. 1 GNX
+      SCG Grip (Left or Right).
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -100,14 +99,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/70_GNX-EVOSCG-P_R_800_2.jpg
     shops:
       - name: VKB FSC Europe
-        price: 16100
+        price: 161
         currency: EUR
         url: https://flightsimcontrols.com/product/gladiator-evo-space-combat-edition/
         region: EU
   - product_name: Gladiator NXT EVO ‘WWII Combat Edition’
-    description: VKB FSC Europe Gladiator NXT EVO ‘WWII Combat Edition’. VKB flightstick
-      base, grip, or complete joystick. In stock on VKB FSC Europe listing on
-      2026-04-29. 1 GNX KG12 Grip.
+    description: VKB FSC Europe Gladiator NXT EVO ‘WWII Combat Edition’. VKB flightstick base,
+      grip, or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. 1 GNX
+      KG12 Grip.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -115,13 +114,13 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/72_GNX-EVOKG12_800_2.jpg
     shops:
       - name: VKB FSC Europe
-        price: 13500
+        price: 135
         currency: EUR
         url: https://flightsimcontrols.com/product/gladiator-nxt-evo-wwii-combat-edition/
         region: EU
   - product_name: Gladiator NXT EVO Omni Throttle
-    description: VKB FSC Europe Gladiator NXT EVO Omni Throttle. VKB flightstick base, grip,
-      or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. Complete
+    description: VKB FSC Europe Gladiator NXT EVO Omni Throttle. VKB flightstick base, grip, or
+      complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. Complete
       Gladiator NXT EVO Omni Throttle with SCG Premium Grip (Left).
     manufacturer: VKB-Sim
     component_category: joysticks
@@ -130,7 +129,7 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/73_GNX-EVOOMNI-THRT-L-P_800_1.jpg
     shops:
       - name: VKB FSC Europe
-        price: 20900
+        price: 209
         currency: EUR
         url: https://flightsimcontrols.com/product/gladiator-nxt-evo-omni-throttle/
         region: EU
@@ -149,9 +148,9 @@ commercial:
         url: https://vkbsimcontrollers.com/products/gladiator-nxt-evo-space-combat-edition-right-hand-us
         region: US
   - product_name: Gunfighter IV ‘F-14 Combat Edition’
-    description: VKB FSC Europe Gunfighter IV ‘F-14 Combat Edition’. VKB flightstick base,
-      grip, or complete joystick. Only 1 left in stock on VKB FSC Europe listing on
-      2026-04-29. 1 F-14 Combat Grip.
+    description: VKB FSC Europe Gunfighter IV ‘F-14 Combat Edition’. VKB flightstick base, grip,
+      or complete joystick. Only 1 left in stock on VKB FSC Europe listing on 2026-04-29. 1
+      F-14 Combat Grip.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -159,14 +158,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF4_F-14_03-scaled.jpg
     shops:
       - name: VKB FSC Europe
-        price: 44600
+        price: 446
         currency: EUR
         url: https://flightsimcontrols.com/product/gunfighter-iv-f-14-combat-edition/
         region: EU
   - product_name: Gunfighter IV ‘Modern Combat Edition’ Pro
-    description: VKB FSC Europe Gunfighter IV ‘Modern Combat Edition’ Pro. VKB flightstick
-      base, grip, or complete joystick. In stock on VKB FSC Europe listing on
-      2026-04-29. 1 MCG ‘Modern Combat Grip’ Pro.
+    description: VKB FSC Europe Gunfighter IV ‘Modern Combat Edition’ Pro. VKB flightstick base,
+      grip, or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. 1 MCG
+      ‘Modern Combat Grip’ Pro.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -174,14 +173,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF_MCG_Pro_EN_02-scaled.jpg
     shops:
       - name: VKB FSC Europe
-        price: 45600
+        price: 456
         currency: EUR
         url: https://flightsimcontrols.com/product/gunfighter-iv-modern-combat-edition/
         region: EU
   - product_name: Gunfighter IV ‘Modern Combat Edition’ Ultimate
-    description: VKB FSC Europe Gunfighter IV ‘Modern Combat Edition’ Ultimate. VKB
-      flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing
-      on 2026-04-29. 1 MCG ‘Modern Combat Grip’ – Ultimate.
+    description: VKB FSC Europe Gunfighter IV ‘Modern Combat Edition’ Ultimate. VKB flightstick
+      base, grip, or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. 1
+      MCG ‘Modern Combat Grip’ – Ultimate.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -189,15 +188,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF4_MCG_Ultimate_EN_02-scaled.jpg
     shops:
       - name: VKB FSC Europe
-        price: 58500
+        price: 585
         currency: EUR
         url: https://flightsimcontrols.com/product/gunfighter-iv-modern-combat-edition-ultimate/
         region: EU
   - product_name: Gunfighter IV ‘Space Combat Edition’ Premium Right- or Left-handed
     description: VKB FSC Europe Gunfighter IV ‘Space Combat Edition’ Premium Right- or
       Left-handed. VKB flightstick base, grip, or complete joystick. In stock on VKB FSC
-      Europe listing on 2026-04-29. 1 SCG ‘Space Combat Grip’ Premium Right- or
-      Left-handed.
+      Europe listing on 2026-04-29. 1 SCG ‘Space Combat Grip’ Premium Right- or Left-handed.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -205,14 +203,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF4_SCG-R-P_03-scaled.jpg
     shops:
       - name: VKB FSC Europe
-        price: 42700
+        price: 427
         currency: EUR
         url: https://flightsimcontrols.com/product/gunfighter-iv-space-combat-edition-premium/
         region: EU
   - product_name: Gunfighter IV ‘WWII Combat Edition’
-    description: VKB FSC Europe Gunfighter IV ‘WWII Combat Edition’. VKB flightstick base,
-      grip, or complete joystick. Out of stock on VKB FSC Europe listing on 2026-04-29.
-      1 KG12 ‘WWII Combat Grip’ (Gen.2).
+    description: VKB FSC Europe Gunfighter IV ‘WWII Combat Edition’. VKB flightstick base, grip,
+      or complete joystick. Out of stock on VKB FSC Europe listing on 2026-04-29. 1 KG12
+      ‘WWII Combat Grip’ (Gen.2).
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -220,14 +218,13 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF4_KG12_02-scaled.jpg
     shops:
       - name: VKB FSC Europe
-        price: 38300
+        price: 383
         currency: EUR
         url: https://flightsimcontrols.com/product/gunfighter-iv-wwii-combat-edition/
         region: EU
   - product_name: Gunfighter IV Base Only
-    description: VKB FSC Europe Gunfighter IV Base Only. VKB flightstick base, grip, or
-      complete joystick. Out of stock on VKB FSC Europe listing on 2026-04-29. 1
-      Gunfighter IV Base.
+    description: VKB FSC Europe Gunfighter IV Base Only. VKB flightstick base, grip, or complete
+      joystick. Out of stock on VKB FSC Europe listing on 2026-04-29. 1 Gunfighter IV Base.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -235,14 +232,13 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2024/06/GF_MKIV_1200_06.jpg
     shops:
       - name: VKB FSC Europe
-        price: 31900
+        price: 319
         currency: EUR
         url: https://flightsimcontrols.com/product/gunfighter-iv-base-only/
         region: EU
   - product_name: Gunfighter Mk.IV Modern Combat Edition Ultimate - Tabletop (US)
-    description: VKB Gunfighter Mk.IV Modern Combat Edition Ultimate. high-end modular
-      combat joystick. Active on VKBSIM US store. MCG Ultimate grip with Gunfighter
-      Mk.IV base.
+    description: VKB Gunfighter Mk.IV Modern Combat Edition Ultimate. high-end modular combat
+      joystick. Active on VKBSIM US store. MCG Ultimate grip with Gunfighter Mk.IV base.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -256,8 +252,7 @@ commercial:
         region: US
   - product_name: HOTAS Warthog Flight Stick
     description: Thrustmaster HOTAS Warthog Flight Stick. metal combat flight stick. Active
-      product on Thrustmaster US. A-10C flight-stick replica licensed by the U.S. Air
-      Force.
+      product on Thrustmaster US. A-10C flight-stick replica licensed by the U.S. Air Force.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -271,8 +266,8 @@ commercial:
         region: US
   - product_name: KG12 GF ‘WWII Combat Grip’ Gen.2 (Stand-Alone) rev.C
     description: VKB FSC Europe KG12 GF ‘WWII Combat Grip’ Gen.2 (Stand-Alone) rev.C. VKB
-      flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing
-      on 2026-04-29. 1 Folding metal trigger.
+      flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing on
+      2026-04-29. 1 Folding metal trigger.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -280,14 +275,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/07/65_KG-12_Grip4GF_800_1.jpg
     shops:
       - name: VKB FSC Europe
-        price: 8900
+        price: 89
         currency: EUR
         url: https://flightsimcontrols.com/product/kg12-gf-gen-2-grip/
         region: EU
   - product_name: Logitech Extreme 3D Pro Joystick
-    description: Logitech Extreme 3D Pro. desktop twist-stick joystick. Listed by Logitech
-      US as not available on 2026-04-29. Twist rudder axis, 12 programmable buttons,
-      8-way hat, rapid-fire trigger.
+    description: Logitech Extreme 3D Pro. desktop twist-stick joystick. Listed by Logitech US as
+      not available on 2026-04-29. Twist rudder axis, 12 programmable buttons, 8-way hat,
+      rapid-fire trigger.
     manufacturer: Logitech G
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -301,8 +296,8 @@ commercial:
         region: US
   - product_name: Modern Combat Grip (MCG) Pro (Stand-alone) Rev.C
     description: VKB FSC Europe Modern Combat Grip (MCG) Pro (Stand-alone) Rev.C. VKB
-      flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing
-      on 2026-04-29. Right-hand grip design.
+      flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing on
+      2026-04-29. Right-hand grip design.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -310,14 +305,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2018/04/MCG-captions-3.jpg
     shops:
       - name: VKB FSC Europe
-        price: 16100
+        price: 161
         currency: EUR
         url: https://flightsimcontrols.com/product/modern-combat-grip-mcg-socket-rev-b/
         region: EU
   - product_name: Modern Combat Grip Ultimate Edition
-    description: VKB FSC Europe Modern Combat Grip Ultimate Edition. VKB flightstick base,
-      grip, or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29.
-      Right-hand grip design.
+    description: VKB FSC Europe Modern Combat Grip Ultimate Edition. VKB flightstick base, grip,
+      or complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. Right-hand
+      grip design.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -325,13 +320,13 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2020/12/MCGU-2.jpg
     shops:
       - name: VKB FSC Europe
-        price: 29900
+        price: 299
         currency: EUR
         url: https://flightsimcontrols.com/product/modern-combat-grip-ultimate-edition/
         region: EU
   - product_name: NavyAce Metal Joystick Grip
-    description: NavyAce Metal Joystick Grip. joystick grip. Listed on EU WINCTRL store;
-      local stock not available in API response. NavyAce Metal Joystick Grip x1.
+    description: NavyAce Metal Joystick Grip. joystick grip. Listed on EU WINCTRL store; local
+      stock not available in API response. NavyAce Metal Joystick Grip x1.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: joystick-grip
@@ -345,8 +340,8 @@ commercial:
         region: EU
   - product_name: SCG “Kosmosima” Premium stand-alone grip for Gladiator
     description: VKB FSC Europe SCG “Kosmosima” Premium stand-alone grip for Gladiator. VKB
-      flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing
-      on 2026-04-29. Left- or Right-hand versions.
+      flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing on
+      2026-04-29. Left- or Right-hand versions.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -354,14 +349,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/07/SCG-R-P_For_GNE_1200_02.jpg
     shops:
       - name: VKB FSC Europe
-        price: 10300
+        price: 103
         currency: EUR
         url: https://flightsimcontrols.com/product/scg-kosmosima-premium-stand-alone-grip-gladiator/
         region: EU
   - product_name: SCG “Kosmosima” stand-alone grip for Gunfighter (Left-hand)
-    description: VKB FSC Europe SCG “Kosmosima” stand-alone grip for Gunfighter (Left-hand).
-      VKB flightstick base, grip, or complete joystick. In stock on VKB FSC Europe
-      listing on 2026-04-29. Left-hand version.
+    description: VKB FSC Europe SCG “Kosmosima” stand-alone grip for Gunfighter (Left-hand). VKB
+      flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing on
+      2026-04-29. Left-hand version.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -369,14 +364,14 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2018/12/SCG-L_Premium.jpg
     shops:
       - name: VKB FSC Europe
-        price: 12850
+        price: 128.5
         currency: EUR
         url: https://flightsimcontrols.com/product/scg-kosmosima-stand-alone-grip-for-gunfighter-left-hand/
         region: EU
   - product_name: SCG “Kosmosima” stand-alone grip for Gunfighter (Right-handed)
-    description: VKB FSC Europe SCG “Kosmosima” stand-alone grip for Gunfighter
-      (Right-handed). VKB flightstick base, grip, or complete joystick. In stock on VKB
-      FSC Europe listing on 2026-04-29. Right-hand version.
+    description: VKB FSC Europe SCG “Kosmosima” stand-alone grip for Gunfighter (Right-handed).
+      VKB flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing
+      on 2026-04-29. Right-hand version.
     manufacturer: VKB-Sim
     component_category: joysticks
     component_sub_category: joystick-base
@@ -384,13 +379,13 @@ commercial:
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2018/12/SCG-R_Premium.jpg
     shops:
       - name: VKB FSC Europe
-        price: 12850
+        price: 128.5
         currency: EUR
         url: https://flightsimcontrols.com/product/scg-kosmosima-premium-right-handed/
         region: EU
   - product_name: Super Libra 3X0 Joystick Combo
-    description: Super Libra 3X0 Joystick Combo. flight joystick. Suspended on EU WINCTRL
-      store; listed in catalog but not normally purchasable. Super Libra Joystick Base.
+    description: Super Libra 3X0 Joystick Combo. flight joystick. Suspended on EU WINCTRL store;
+      listed in catalog but not normally purchasable. Super Libra Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -403,8 +398,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=336
         region: EU
   - product_name: Super Libra Joystick Base
-    description: Super Libra Joystick Base. joystick base. Suspended on EU WINCTRL store;
-      listed in catalog but not normally purchasable. Super Libra Joystick Base.
+    description: Super Libra Joystick Base. joystick base. Suspended on EU WINCTRL store; listed
+      in catalog but not normally purchasable. Super Libra Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: joystick-base
@@ -417,9 +412,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=307
         region: EU
   - product_name: Super Libra NavyAce Joystick Combo
-    description: Super Libra NavyAce Joystick Combo. flight joystick. Suspended on EU
-      WINCTRL store; listed in catalog but not normally purchasable. Super Libra
-      Joystick Base.
+    description: Super Libra NavyAce Joystick Combo. flight joystick. Suspended on EU WINCTRL
+      store; listed in catalog but not normally purchasable. Super Libra Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -432,9 +426,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=317
         region: EU
   - product_name: Super Taurus/Super Libra HOTAS
-    description: Super Taurus/Super Libra HOTAS. HOTAS flight-control bundle. Suspended on
-      EU WINCTRL store; listed in catalog but not normally purchasable. Super Taurus
-      Throttle Base(PSU Include).
+    description: Super Taurus/Super Libra HOTAS. HOTAS flight-control bundle. Suspended on EU
+      WINCTRL store; listed in catalog but not normally purchasable. Super Taurus Throttle
+      Base(PSU Include).
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -448,8 +442,8 @@ commercial:
         region: EU
   - product_name: Super Taurus/Super Libra HOTAS with Mount
     description: Super Taurus/Super Libra HOTAS with Mount. HOTAS flight-control bundle.
-      Suspended on EU WINCTRL store; listed in catalog but not normally purchasable.
-      Super Taurus Throttle Base(PSU Include).
+      Suspended on EU WINCTRL store; listed in catalog but not normally purchasable. Super
+      Taurus Throttle Base(PSU Include).
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -462,9 +456,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=383
         region: EU
   - product_name: Super Taurus/WINCTRL Orion2 HOTAS
-    description: Super Taurus/WINCTRL Orion2 HOTAS. HOTAS flight-control bundle. Suspended
-      on EU WINCTRL store; listed in catalog but not normally purchasable. Super Taurus
-      Throttle Base(PSU Include).
+    description: Super Taurus/WINCTRL Orion2 HOTAS. HOTAS flight-control bundle. Suspended on EU
+      WINCTRL store; listed in catalog but not normally purchasable. Super Taurus Throttle
+      Base(PSU Include).
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -477,8 +471,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=313
         region: EU
   - product_name: T.16000M FCS
-    description: Thrustmaster T.16000M FCS. ambidextrous desktop twist-stick joystick.
-      Active product on Thrustmaster US. Four independent axes including twist rudder.
+    description: Thrustmaster T.16000M FCS. ambidextrous desktop twist-stick joystick. Active
+      product on Thrustmaster US. Four independent axes including twist rudder.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -505,8 +499,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/tca-sidestick-airbus-edition/
         region: US
   - product_name: URSA MINOR Airline Joystick L
-    description: URSA MINOR Airline Joystick L. flight joystick. Pre-order listing on EU
-      WINCTRL store. URSA MINOR Airline Joystick L.
+    description: URSA MINOR Airline Joystick L. flight joystick. Pre-order listing on EU WINCTRL
+      store. URSA MINOR Airline Joystick L.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -561,8 +555,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=905
         region: EU
   - product_name: URSA MINOR Space Joystick L
-    description: URSA MINOR Space Joystick L. flight joystick. Active EU WINCTRL store
-      listing; total_stock 4 from API. URSA MINOR Space Joystick L.
+    description: URSA MINOR Space Joystick L. flight joystick. Active EU WINCTRL store listing;
+      total_stock 4 from API. URSA MINOR Space Joystick L.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -575,8 +569,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=553
         region: EU
   - product_name: URSA MINOR Space Joystick R
-    description: URSA MINOR Space Joystick R. flight joystick. Active EU WINCTRL store
-      listing; total_stock 4 from API. URSA MINOR Space Joystick R.
+    description: URSA MINOR Space Joystick R. flight joystick. Active EU WINCTRL store listing;
+      total_stock 4 from API. URSA MINOR Space Joystick R.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -619,8 +613,8 @@ commercial:
         region: US
   - product_name: ViperAce EX Metal Joystick Grip(None Shaker Kit)
     description: ViperAce EX Metal Joystick Grip(None Shaker Kit). joystick grip. Active EU
-      WINCTRL store listing; total_stock 4 from API. ViperAce EX Metal Joystick
-      Grip(None Shake kits) x1.
+      WINCTRL store listing; total_stock 4 from API. ViperAce EX Metal Joystick Grip(None
+      Shake kits) x1.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: joystick-grip
@@ -634,8 +628,8 @@ commercial:
         region: EU
   - product_name: ViperAce EX Metal Joystick Grip(with Shaker Kit)
     description: ViperAce EX Metal Joystick Grip(with Shaker Kit). joystick grip. Active EU
-      WINCTRL store listing; total_stock 4 from API. ViperAce EX Metal Joystick
-      Grip(with Shake kits) x1.
+      WINCTRL store listing; total_stock 4 from API. ViperAce EX Metal Joystick Grip(with
+      Shake kits) x1.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: joystick-grip
@@ -648,10 +642,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=338
         region: EU
   - product_name: WINCTRL CarrierAce Joystick Grip R.Metal 2.0
-    description: "WINCTRL CarrierAce Joystick Grip R.Metal 2.0. joystick grip. Active EU
-      WINCTRL store listing; total_stock 4 from API. Primary product image:
-      https://eu.winctrl.com/static/ipfs/QmWWSzfXYPiwmK4fgyNjntejY71CeAmED81oPyuNLbEVH8\
-      ."
+    description: "WINCTRL CarrierAce Joystick Grip R.Metal 2.0. joystick grip. Active EU WINCTRL
+      store listing; total_stock 4 from API. Primary product image:
+      https://eu.winctrl.com/static/ipfs/QmWWSzfXYPiwmK4fgyNjntejY71CeAmED81oPyuNLbEVH8."
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: joystick-grip
@@ -664,11 +657,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=1685
         region: EU
   - product_name: WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.GB 1.0
-    description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.GB 1.0. joystick base.
-      Listed on EU WINCTRL store; local stock not available in API response. Primary
-      product image:
-      https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS\
-      ."
+    description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.GB 1.0. joystick base. Listed
+      on EU WINCTRL store; local stock not available in API response. Primary product image:
+      https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS."
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: joystick-base
@@ -681,11 +672,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=5445
         region: EU
   - product_name: WINCTRL Cyber Taurus Joystick Base E.D.16.Metal
-    description: "WINCTRL Cyber Taurus Joystick Base E.D.16.Metal. joystick base. Listed on
-      EU WINCTRL store; local stock not available in API response. Primary product
-      image:
-      https://eu.winctrl.com/static/ipfs/QmVCspiSPcSwXYyrJeQoNsGe4HriV4KPjSMdFqoN6ThPSb\
-      ."
+    description: "WINCTRL Cyber Taurus Joystick Base E.D.16.Metal. joystick base. Listed on EU
+      WINCTRL store; local stock not available in API response. Primary product image:
+      https://eu.winctrl.com/static/ipfs/QmVCspiSPcSwXYyrJeQoNsGe4HriV4KPjSMdFqoN6ThPSb."
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: joystick-base
@@ -698,11 +687,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=5945
         region: EU
   - product_name: WINCTRL Cyber Taurus Joystick Base E.D.16.Metal.EU 1.0
-    description: "WINCTRL Cyber Taurus Joystick Base E.D.16.Metal.EU 1.0. joystick base.
-      Listed on EU WINCTRL store; local stock not available in API response. Primary
-      product image:
-      https://eu.winctrl.com/static/ipfs/QmVCspiSPcSwXYyrJeQoNsGe4HriV4KPjSMdFqoN6ThPSb\
-      ."
+    description: "WINCTRL Cyber Taurus Joystick Base E.D.16.Metal.EU 1.0. joystick base. Listed
+      on EU WINCTRL store; local stock not available in API response. Primary product image:
+      https://eu.winctrl.com/static/ipfs/QmVCspiSPcSwXYyrJeQoNsGe4HriV4KPjSMdFqoN6ThPSb."
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: joystick-base
@@ -729,8 +716,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=1785
         region: EU
   - product_name: WINCTRL Orion2 HOTAS CarrierAce
-    description: WINCTRL Orion2 HOTAS CarrierAce. HOTAS flight-control bundle. Active EU
-      WINCTRL store listing; total_stock 4 from API. Tips:.
+    description: WINCTRL Orion2 HOTAS CarrierAce. HOTAS flight-control bundle. Active EU WINCTRL
+      store listing; total_stock 4 from API. Tips:.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -743,8 +730,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=1805
         region: EU
   - product_name: WINCTRL Orion2 HOTAS MAX
-    description: WINCTRL Orion2 HOTAS MAX. HOTAS flight-control bundle. Active EU WINCTRL
-      store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
+    description: WINCTRL Orion2 HOTAS MAX. HOTAS flight-control bundle. Active EU WINCTRL store
+      listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -771,9 +758,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=324
         region: EU
   - product_name: WINCTRL Orion2 HOTAS NavyAce
-    description: WINCTRL Orion2 HOTAS NavyAce. HOTAS flight-control bundle. Listed on EU
-      WINCTRL store; local stock not available in API response. WINCTRL Orion2 Joystick
-      Base.
+    description: WINCTRL Orion2 HOTAS NavyAce. HOTAS flight-control bundle. Listed on EU WINCTRL
+      store; local stock not available in API response. WINCTRL Orion2 Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -787,8 +773,7 @@ commercial:
         region: EU
   - product_name: WINCTRL Orion2 HOTAS StrikeAce E/EX
     description: WINCTRL Orion2 HOTAS StrikeAce E/EX. HOTAS flight-control bundle. Active EU
-      WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 HOTAS StrikeAce
-      E/EX.
+      WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 HOTAS StrikeAce E/EX.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -801,9 +786,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=1825
         region: EU
   - product_name: WINCTRL Orion2 HOTAS StrikeAce E/EX
-    description: WINCTRL Orion2 HOTAS StrikeAce E/EX. HOTAS flight-control bundle. Listed on
-      EU WINCTRL store; local stock not available in API response. WINCTRL Orion2
-      Joystick Base.
+    description: WINCTRL Orion2 HOTAS StrikeAce E/EX. HOTAS flight-control bundle. Listed on EU
+      WINCTRL store; local stock not available in API response. WINCTRL Orion2 Joystick
+      Base.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -816,14 +801,14 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=303
         region: EU
   - product_name: WINCTRL Orion2 HOTAS ViperAce
-    description: WINCTRL Orion2 HOTAS ViperAce. HOTAS flight-control bundle. Active EU
-      WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
+    description: WINCTRL Orion2 HOTAS ViperAce. HOTAS flight-control bundle. Active EU WINCTRL
+      store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=340
-    picture_url: https://eu.winctrl.com/upload/picture/2023-07-10/Orion2 HOTAS F-16
-      Vipeer_None Shake kits.jpg
+    picture_url: https://eu.winctrl.com/upload/picture/2023-07-10/Orion2 HOTAS F-16 Vipeer_None
+      Shake kits.jpg
     shops:
       - name: WINCTRL EU
         price: 468.57
@@ -831,8 +816,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=340
         region: EU
   - product_name: WINCTRL Orion2 Joystick Base
-    description: WINCTRL Orion2 Joystick Base. joystick base. Active EU WINCTRL store
-      listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base x1.
+    description: WINCTRL Orion2 Joystick Base. joystick base. Active EU WINCTRL store listing;
+      total_stock 4 from API. WINCTRL Orion2 Joystick Base x1.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: joystick-base
@@ -845,8 +830,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=333
         region: EU
   - product_name: WINCTRL Orion2 MFSSB Version(Pre-install)
-    description: WINCTRL Orion2 MFSSB Version(Pre-install). joystick base. Listed on EU
-      WINCTRL store; local stock not available in API response. WINCTRL Orion2 MFSSB
+    description: WINCTRL Orion2 MFSSB Version(Pre-install). joystick base. Listed on EU WINCTRL
+      store; local stock not available in API response. WINCTRL Orion2 MFSSB
       Version(Pre-install).
     manufacturer: WINCTRL
     component_category: joysticks
@@ -860,9 +845,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=373
         region: EU
   - product_name: WINCTRL Orion2 NavyAce Joystick Combo
-    description: WINCTRL Orion2 NavyAce Joystick Combo. flight joystick. Listed on EU
-      WINCTRL store; local stock not available in API response. WINCTRL Orion2 Joystick
-      Base.
+    description: WINCTRL Orion2 NavyAce Joystick Combo. flight joystick. Listed on EU WINCTRL
+      store; local stock not available in API response. WINCTRL Orion2 Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -875,8 +859,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=332
         region: EU
   - product_name: WINCTRL Orion2 ViperAce(EX) Joystick Combo
-    description: WINCTRL Orion2 ViperAce(EX) Joystick Combo. flight joystick. Active EU
-      WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
+    description: WINCTRL Orion2 ViperAce(EX) Joystick Combo. flight joystick. Active EU WINCTRL
+      store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -889,9 +873,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=374
         region: EU
   - product_name: AVA Base
-    description: Thrustmaster AVA Base. modular flight joystick base. in stock on
-      official US shop. Scalable joystick base for advanced flight and combat
-      simulation setups.
+    description: Thrustmaster AVA Base. modular flight joystick base. in stock on official US
+      shop. Scalable joystick base for advanced flight and combat simulation setups.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: joystick-base
@@ -904,9 +887,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/ava-base/
         region: US
   - product_name: AVA FA18 Super Hornet Flight Stick
-    description: Thrustmaster AVA FA18 Super Hornet Flight Stick. modular combat
-      flight stick. in stock on official US shop. AVA base bundle with F/A-18C
-      Hornet grip for flight simulation.
+    description: Thrustmaster AVA FA18 Super Hornet Flight Stick. modular combat flight stick.
+      in stock on official US shop. AVA base bundle with F/A-18C Hornet grip for flight
+      simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -919,9 +902,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/ava-fa18-super-hornet-flight-stick/
         region: US
   - product_name: HOTAS Magnetic Base
-    description: Thrustmaster HOTAS Magnetic Base. metal flight-stick base. in
-      stock on official US shop. Standalone magnetic joystick base for compatible
-      Thrustmaster HOTAS grips.
+    description: Thrustmaster HOTAS Magnetic Base. metal flight-stick base. in stock on official
+      US shop. Standalone magnetic joystick base for compatible Thrustmaster HOTAS grips.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: joystick-base
@@ -934,9 +916,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/hotas-magnetic-base/
         region: US
   - product_name: Sol-R 1 Flightstick
-    description: Thrustmaster Sol-R 1 Flightstick. space-sim flightstick. in
-      stock on official US shop. Desktop flightstick for space and flight
-      simulation setups.
+    description: Thrustmaster Sol-R 1 Flightstick. space-sim flightstick. in stock on official
+      US shop. Desktop flightstick for space and flight simulation setups.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -949,9 +930,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/sol-r-1-flightstick/
         region: US
   - product_name: Sol-R 2 HOSAS Space Sim Duo
-    description: Thrustmaster Sol-R 2 HOSAS Space Sim Duo. dual-stick space-sim
-      bundle. in stock on official US shop. HOSAS pair for six-degree space
-      flight control.
+    description: Thrustmaster Sol-R 2 HOSAS Space Sim Duo. dual-stick space-sim bundle. in stock
+      on official US shop. HOSAS pair for six-degree space flight control.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: hosas-bundle
@@ -964,8 +944,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/sol-r-2-hosas-space-sim-duo/
         region: US
   - product_name: Sol-R 5 Base
-    description: Thrustmaster Sol-R 5 Base. standalone joystick base. in stock on
-      official US shop. Modular base for the Sol-R space-sim control ecosystem.
+    description: Thrustmaster Sol-R 5 Base. standalone joystick base. in stock on official US
+      shop. Modular base for the Sol-R space-sim control ecosystem.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: joystick-base
@@ -978,9 +958,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/sol-r-5-base/
         region: US
   - product_name: TCA Sidestick X Airbus Edition
-    description: Thrustmaster TCA Sidestick X Airbus Edition. Airbus-style flight
-      joystick. in stock on official US shop. Licensed sidestick for Airbus
-      airliner simulation.
+    description: Thrustmaster TCA Sidestick X Airbus Edition. Airbus-style flight joystick. in
+      stock on official US shop. Licensed sidestick for Airbus airliner simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -993,9 +972,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/tca-sidestick-x-airbus-edition/
         region: US
   - product_name: T.Flight Hotas One
-    description: Thrustmaster T.Flight Hotas One. entry HOTAS bundle. in stock on
-      official US shop. Joystick and throttle set for Xbox and PC flight
-      simulation.
+    description: Thrustmaster T.Flight Hotas One. entry HOTAS bundle. in stock on official US
+      shop. Joystick and throttle set for Xbox and PC flight simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -1008,9 +986,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/t-flight-hotas-one/
         region: US
   - product_name: T.Flight Hotas 4
-    description: Thrustmaster T.Flight Hotas 4. entry HOTAS bundle. in stock on
-      official US shop. Joystick and throttle set for PlayStation and PC flight
-      simulation.
+    description: Thrustmaster T.Flight Hotas 4. entry HOTAS bundle. in stock on official US
+      shop. Joystick and throttle set for PlayStation and PC flight simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: hotas-bundle
@@ -1023,8 +1000,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/t-flight-hotas-4/
         region: US
   - product_name: T.Flight Stick X
-    description: Thrustmaster T.Flight Stick X. desktop flight joystick. in stock
-      on official US shop. Plug-and-play flight stick for PC flight simulation.
+    description: Thrustmaster T.Flight Stick X. desktop flight joystick. in stock on official US
+      shop. Plug-and-play flight stick for PC flight simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -1037,8 +1014,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/t-flight-stick-x/
         region: US
   - product_name: USB Joystick
-    description: Thrustmaster USB Joystick. budget desktop flight joystick. in
-      stock on official US shop. Simple USB joystick for PC flight controls.
+    description: Thrustmaster USB Joystick. budget desktop flight joystick. in stock on official
+      US shop. Simple USB joystick for PC flight controls.
     manufacturer: Thrustmaster
     component_category: joysticks
     component_sub_category: flight-joystick
@@ -1063,8 +1040,8 @@ opensource:
     picture_url: https://raw.githubusercontent.com/bhowiebkr/open-joystick/develop/images/joystick_gimbal_v2.0_front.png
   - project_name: OpenFFBoard
     description: "OpenFFBoard. universal force-feedback USB HID controller platform. Active
-      advanced project. Latest GitHub release observed: OpenFFBoard v1.17.0 on
-      2026-04-17. Universal open force-feedback interface for DIY simulation devices."
+      advanced project. Latest GitHub release observed: OpenFFBoard v1.17.0 on 2026-04-17.
+      Universal open force-feedback interface for DIY simulation devices."
     maker: Ultrawipf / OpenFFBoard community
     component_category: joysticks
     component_sub_category: ffb-joystick
@@ -1073,12 +1050,12 @@ opensource:
     picture_url: https://cdn.hackaday.io/images/resize/600x600/5931891612360518072.JPG
   - project_name: OpenJoystick
     description: OpenJoystick. 3D-printable parametric flight joystick and throttle. Legacy
-      public design. Repository remains available, but no recent release activity was
-      found. 3D-printable joystick and throttle design for flight simulators.
+      public design. Repository remains available, but no recent release activity was found.
+      3D-printable joystick and throttle design for flight simulators.
     maker: Tom Howse / `tjhowse`
     component_category: joysticks
     component_sub_category: flight-joystick
-    license: GPL per project README; no GitHub license file detected, so exact SPDX status
-      is [uncertain].
+    license: GPL per project README; no GitHub license file detected, so exact SPDX status is
+      [uncertain].
     project_url: https://github.com/tjhowse/OpenJoystick
     picture_url: https://github.com/fluidicon.png

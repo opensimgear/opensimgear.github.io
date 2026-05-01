@@ -1,4 +1,4 @@
-import { access, copyFile, mkdir, readFile, readdir, rename, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { constants as fsConstants } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -468,14 +468,27 @@ function githubFallbackForProduct(product) {
   return githubOpenGraphFallback(product.project_url ?? product.product_url);
 }
 
+async function writeBufferIfChanged(path, buffer) {
+  try {
+    const current = await readFile(path);
+    if (hashBuffer(current) === hashBuffer(buffer)) {
+      return false;
+    }
+  } catch {
+    // Missing or unreadable output gets replaced below.
+  }
+
+  await writeFile(path, buffer);
+  return true;
+}
+
 async function convertImageBuffer(buffer, outputPath) {
-  const temporaryOutputPath = `${outputPath}.tmp`;
-  await sharp(buffer, { failOn: 'none' })
+  const outputBuffer = await sharp(buffer, { failOn: 'none' })
     .rotate()
     .resize({ width: MAX_WIDTH, height: MAX_HEIGHT, fit: 'inside', withoutEnlargement: true })
     .webp({ quality: 78 })
-    .toFile(temporaryOutputPath);
-  await rename(temporaryOutputPath, outputPath);
+    .toBuffer();
+  return writeBufferIfChanged(outputPath, outputBuffer);
 }
 
 function isCachedImageSource(cachedSource, sourceUrl) {
@@ -489,11 +502,7 @@ async function ensureProductImage(product, cachedSource) {
   const sourceUrl = productImageSource(product);
 
   if (!sourceUrl) {
-    if (product.kind !== 'opensource') {
-      throw new Error(`${product.id}: missing picture_url`);
-    }
-
-    throw new Error(`${product.id}: missing picture_url and no github fallback`);
+    return { filename: null, sourceUrl: null, changed: false };
   }
 
   const { cacheKey: sourceCacheKey, buffer: sourceBuffer } = await imageSourceCacheEntry(sourceUrl);
@@ -501,12 +510,12 @@ async function ensureProductImage(product, cachedSource) {
 
   if (cacheHit && (await exists(outputPath))) {
     await sharp(outputPath).metadata();
-    return { filename, sourceUrl: sourceCacheKey };
+    return { filename, sourceUrl: sourceCacheKey, changed: false };
   }
 
   if (cacheHit && (await exists(legacyPath))) {
-    await copyFile(legacyPath, outputPath);
-    return { filename, sourceUrl: sourceCacheKey };
+    const changed = await writeBufferIfChanged(outputPath, await readFile(legacyPath));
+    return { filename, sourceUrl: sourceCacheKey, changed };
   }
 
   const referer = product.product_url ?? product.project_url ?? product.picture_url ?? '';
@@ -515,7 +524,8 @@ async function ensureProductImage(product, cachedSource) {
 
   try {
     const buffer = isRemoteImageSource(finalSourceUrl) ? await fetchImageBuffer(finalSourceUrl, referer) : sourceBuffer;
-    await convertImageBuffer(buffer, outputPath);
+    const changed = await convertImageBuffer(buffer, outputPath);
+    return { filename, sourceUrl: finalSourceCacheKey, changed };
   } catch (error) {
     if (!isRemoteImageSource(finalSourceUrl)) {
       throw new Error(`${product.id}: ${error.message}`);
@@ -529,10 +539,9 @@ async function ensureProductImage(product, cachedSource) {
 
     finalSourceUrl = fallback;
     finalSourceCacheKey = fallback;
-    await convertImageBuffer(await fetchImageBuffer(finalSourceUrl, referer), outputPath);
+    const changed = await convertImageBuffer(await fetchImageBuffer(finalSourceUrl, referer), outputPath);
+    return { filename, sourceUrl: finalSourceCacheKey, changed };
   }
-
-  return { filename, sourceUrl: finalSourceCacheKey };
 }
 
 async function runQueue(items, worker) {
@@ -580,15 +589,19 @@ await writeFile(jsonPath, `${JSON.stringify(databaseFor(products), null, 2)}\n`)
 if (!skipImages) {
   await mkdir(assetDir, { recursive: true });
 
-  let completed = 0;
-  const filenames = await runQueue(products, async (product) => {
+  const imageResults = await runQueue(products, async (product) => {
     const cachedSource = imageSourceCache[product.id] ?? null;
-    const { filename, sourceUrl } = await ensureProductImage(product, cachedSource);
-    updatedImageSourceCache[product.id] = sourceUrl;
-    completed += 1;
-    console.log(`${completed}/${products.length} ${filename}`);
-    return filename;
+    const { filename, sourceUrl, changed } = await ensureProductImage(product, cachedSource);
+    if (sourceUrl) updatedImageSourceCache[product.id] = sourceUrl;
+    return { filename, changed };
   });
+  const filenames = imageResults.map(({ filename }) => filename);
+
+  for (const { filename, changed } of imageResults) {
+    if (changed && filename) {
+      console.log(`Image changed: ${filename}`);
+    }
+  }
 
   await writeImageMap(products, filenames);
   await writeJson(imageSourceCachePath, sortObject(updatedImageSourceCache));
