@@ -21,6 +21,8 @@ const VERBOSE = args.includes('--verbose');
 const LIMIT = numberArg('--limit');
 const MAX_CRAWL_PAGES = numberArg('--max-pages') ?? 50;
 const MATCH_THRESHOLD = numberArg('--threshold') ?? 0.72;
+const RATE_LIMIT_MS = numberArg('--rate-limit-ms') ?? 750;
+const MAX_RETRIES = numberArg('--retries') ?? 3;
 const shopNameOverride = stringArg('--shop-name');
 const manufacturerOverride = stringArg('--manufacturer');
 const categoryOverride = stringArg('--category');
@@ -30,7 +32,7 @@ const mappings = mappingArgs();
 
 if (!startUrl) {
   console.error(
-    'Usage: pnpm products:scrape:shop -- <url> [--write] [--build] [--max-pages 50] [--map "shop name=product:id"]',
+    'Usage: pnpm products:update -- <url> [--write] [--build] [--max-pages 50] [--rate-limit-ms 750] [--retries 3] [--map "shop name=product:id"]',
   );
   process.exit(1);
 }
@@ -40,6 +42,8 @@ async function main() {
   verbose(`mode: ${WRITE ? 'write' : 'dry-run'}`);
   verbose(`max pages: ${MAX_CRAWL_PAGES}`);
   verbose(`match threshold: ${MATCH_THRESHOLD}`);
+  verbose(`rate limit: ${RATE_LIMIT_MS}ms`);
+  verbose(`retries: ${MAX_RETRIES}`);
 
   const source = await scrapeShop(startUrl);
   const databases = await loadDatabases();
@@ -73,7 +77,7 @@ async function main() {
 }
 
 function positionalUrl() {
-  return args.find((arg, index) => !arg.startsWith('--') && !['--map', '--limit', '--max-pages', '--threshold', '--shop-name', '--manufacturer', '--category', '--subcategory', '--region'].includes(args[index - 1]));
+  return args.find((arg, index) => !arg.startsWith('--') && !['--map', '--limit', '--max-pages', '--threshold', '--rate-limit-ms', '--retries', '--shop-name', '--manufacturer', '--category', '--subcategory', '--region'].includes(args[index - 1]));
 }
 
 function stringArg(name) {
@@ -152,7 +156,7 @@ async function scrapeWooCommerce(base) {
   for (let page = 1; page <= 20; page += 1) {
     endpoint.search = new URLSearchParams({ per_page: '100', page: String(page) }).toString();
     verbose(`  fetch WooCommerce page ${page}: ${endpoint}`);
-    const response = await fetch(endpoint, { headers: requestHeaders('application/json') });
+    const response = await fetchWithRetry(endpoint, { headers: requestHeaders('application/json') });
     if (!response.ok) break;
 
     const data = await response.json();
@@ -188,7 +192,7 @@ async function scrapeShopify(base) {
 
   for (const url of urls) {
     verbose(`  fetch Shopify feed: ${url}`);
-    const response = await fetch(url, { headers: requestHeaders('application/json') });
+    const response = await fetchWithRetry(url, { headers: requestHeaders('application/json') });
     if (!response.ok) continue;
 
     const data = await response.json();
@@ -749,12 +753,73 @@ function requestHeaders(accept) {
 }
 
 async function fetchText(url) {
-  const response = await fetch(url, {
+  const response = await fetchWithRetry(url, {
     headers: requestHeaders('text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),
     signal: AbortSignal.timeout(30_000),
   });
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
   return response.text();
+}
+
+let nextFetchAt = 0;
+
+async function fetchWithRetry(url, options = {}) {
+  let lastResponse = null;
+  let lastError = null;
+
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt += 1) {
+    if (attempt > 0) {
+      const delay = retryDelayMs(lastResponse, attempt);
+      verbose(`  retry ${attempt}/${MAX_RETRIES} after ${delay}ms: ${url}`);
+      await sleep(delay);
+    }
+
+    await waitForRateLimit();
+
+    try {
+      const response = await fetch(url, options);
+      if (!shouldRetryResponse(response) || attempt === MAX_RETRIES) return response;
+      lastResponse = response;
+      lastError = null;
+    } catch (error) {
+      if (attempt === MAX_RETRIES) throw error;
+      lastResponse = null;
+      lastError = error;
+    }
+  }
+
+  if (lastError) throw lastError;
+  return lastResponse;
+}
+
+async function waitForRateLimit() {
+  const now = Date.now();
+  const waitMs = Math.max(0, nextFetchAt - now);
+  nextFetchAt = Math.max(now, nextFetchAt) + RATE_LIMIT_MS;
+  if (waitMs > 0) await sleep(waitMs);
+}
+
+function shouldRetryResponse(response) {
+  return response.status === 429 || response.status === 408 || response.status === 425 || response.status === 502 || response.status === 503 || response.status === 504;
+}
+
+function retryDelayMs(response, attempt) {
+  const retryAfter = response?.headers?.get('retry-after');
+  const retryAfterMs = parseRetryAfterMs(retryAfter);
+  if (retryAfterMs !== null) return retryAfterMs;
+  return Math.min(30_000, RATE_LIMIT_MS * 2 ** attempt);
+}
+
+function parseRetryAfterMs(value) {
+  if (!value) return null;
+  const seconds = Number(value);
+  if (Number.isFinite(seconds)) return Math.max(0, seconds * 1000);
+  const timestamp = Date.parse(value);
+  return Number.isFinite(timestamp) ? Math.max(0, timestamp - Date.now()) : null;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function extractLinks(html, baseUrl) {

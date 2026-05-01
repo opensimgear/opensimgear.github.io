@@ -1,4 +1,34 @@
 commercial:
+  - product_name: WINCTRL Orion Metal Flight Rudder Pedals (Damper Kit)
+    description: WINCTRL Orion Metal Flight Rudder Pedals (Damper Kit). flight-control mounts
+      and accessories. Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL
+      Orion Metal Flight Rudder Pedals (Damper Kit).
+    manufacturer: WINCTRL
+    component_category: rudder-pedals
+    component_sub_category: rudder-damper-kit
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=805
+    picture_url: https://eu.winctrl.com/static/ipfs/QmUR2XLYLinqFX92Mj1sY8jF4XZKrgNFVY1fEQx2bYe3A2
+    shops:
+      - name: WINCTRL EU
+        price: 38.42
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=805
+        region: EU
+  - product_name: Rudder Tray
+    description: Sim Lab Rudder Tray. rig mounts. listed on Sim Lab. The Rudder Tray is built
+      for durability and stability. It accommodates a wide range of rudder pedals, allowing
+      you to perfect your footwork for precision landings and aerial acr...
+    manufacturer: Sim Lab
+    component_category: rudder-pedals
+    component_sub_category: rudder-accessories
+    product_url: https://sim-lab.eu/products/flight-sim-rudder-tray
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/rudder_tray_flightsim_f77a4f50-c52c-4e6f-a224-9a3cad137e42.png?v=1744267251
+    shops:
+      - name: Sim Lab
+        price: 69.95
+        currency: USD
+        url: https://sim-lab.eu/products/flight-sim-rudder-tray
+        region: Unknown
   - product_name: Alloy RD1
     description: Redbird Alloy RD1. professional-grade GA rudder pedals. Active related product
       on Redbird Alloy page. Rudder pedals designed to mimic real aircraft feel per Redbird

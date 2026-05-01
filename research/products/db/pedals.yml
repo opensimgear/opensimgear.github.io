@@ -608,7 +608,7 @@ commercial:
       Redesigned as V2 to match our current design language and material standards, it...
     manufacturer: Sim Lab
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: pedal-mount
     product_url: https://sim-lab.eu/products/inverted-pedal-rack-v2
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Inv_Pedal_Rack_V2_-_Mounted_A_trans.png?v=1773126895
     shops:
@@ -623,7 +623,7 @@ commercial:
       adjustments. It can also be used without the seat slider as a heel rest and a stab...
     manufacturer: Sim Lab
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: pedal-mount
     product_url: https://sim-lab.eu/products/pedal-slider-baseplate-sim-racing
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Pedalsliderbaseplate4_48ebebe3-2f0d-4ebd-83b1-918ca5f4349f.jpg?v=1744198710
     shops:
@@ -639,7 +639,7 @@ commercial:
       4..."
     manufacturer: Sim Lab
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: pedal-accessories
     product_url: https://sim-lab.eu/products/pedal-heel-rest-sim-racing-accessories
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/SLA063_Simpedalheelrest.jpg?v=1744198942
     shops:
@@ -659,7 +659,7 @@ commercial:
       iconic blue parts to these black ones. Remove all blue parts from your pedals and...
     manufacturer: XP1
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: pedal-upgrade-kit
     product_url: https://sim-lab.eu/products/xp1-pedals-black-conversion-kit
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/XP1_3P_Black_Conversion_-_Black_Parts_Only.png?v=1769595393
     shops:
@@ -674,7 +674,7 @@ commercial:
       between the pedal face and pedal face bracket. Due to its symmetrical...
     manufacturer: XP1
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: pedal-accessories
     product_url: https://sim-lab.eu/products/xp1-pedals-foot-support
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/xp1footsupport_1.jpg?v=1744707523
     shops:
@@ -690,7 +690,7 @@ commercial:
       is focuse...
     manufacturer: Heusinkveld
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: single-pedal
     product_url: https://heusinkveld.com/shop/single-pedals/1-pedal-set/
     picture_url: https://heusinkveld.com/wp-content/uploads/2025/04/HE-SPRCE2SC-2.-Race-Center-Clutch-and-Throttle1024x768.png
     shops:
@@ -705,7 +705,7 @@ commercial:
       for you ! A strong, accurate, and customizable pedal set designed to elevate your r...
     manufacturer: Heusinkveld
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: three-pedal-set
     product_url: https://heusinkveld.com/shop/sprint-pedals/sprint-3-pedal-set/
     picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204341-1-Sprint-3-pedal-set_1024x768.png
     shops:
@@ -720,7 +720,7 @@ commercial:
       for you ! A strong, accurate, and customizable pedal set designed to elevate your r...
     manufacturer: Heusinkveld
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: single-pedal
     product_url: https://heusinkveld.com/shop/single-pedals/sprint-1-pedal/
     picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204310-9-Sprint-Clutch_1024x768.png
     shops:
@@ -736,7 +736,7 @@ commercial:
       are a...
     manufacturer: Heusinkveld
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: three-pedal-set
     product_url: https://heusinkveld.com/shop/pedals/ultimate-3-pedal-set-black/
     picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204372-1-Ultimate-BLACK-3-pedal-set-1024x768-1-1.png
     shops:
@@ -752,7 +752,7 @@ commercial:
       possible...
     manufacturer: Heusinkveld
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: three-pedal-set
     product_url: https://heusinkveld.com/shop/pedals-2/ultimate-3-pedal-set-silver/
     picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204228-1-Ultimate-SILVER-3-pedal-set-1024x768-2.png
     shops:
@@ -800,7 +800,7 @@ commercial:
       possible...
     manufacturer: Heusinkveld
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: single-pedal
     product_url: https://heusinkveld.com/shop/pedals/ultimate-1-pedal-set-black/
     picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204372-2-Ultimate-BLACK-Clutch-1024x768-2.png
     shops:
@@ -816,7 +816,7 @@ commercial:
       possible...
     manufacturer: Heusinkveld
     component_category: pedals
-    component_sub_category: two-pedal-set
+    component_sub_category: single-pedal
     product_url: https://heusinkveld.com/shop/pedals-2/ultimate-1-pedal-set-silver/
     picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204228-2-Ultimate-SILVER-Clutch-1024x768-1.png
     shops:

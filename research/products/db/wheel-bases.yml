@@ -1,8 +1,8 @@
 commercial:
   - product_name: C5 Direct Drive Steering Wheel
-    description: CAMMUS C5. integrated direct-drive wheel base and steering wheel.
-      in stock on official shop. 5 Nm holding torque, 7 Nm peak torque, with
-      included T-bracket for clamp or frame mounting.
+    description: CAMMUS C5. integrated direct-drive wheel base and steering wheel. in stock on
+      official shop. 5 Nm holding torque, 7 Nm peak torque, with included T-bracket for
+      clamp or frame mounting.
     manufacturer: CAMMUS
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -15,9 +15,8 @@ commercial:
         url: https://cammusracing.com/product/global-first-cammus-c5-direct-drive-steering-wheel/
         region: Global
   - product_name: C12 Direct Drive Steering Wheel
-    description: CAMMUS C12. integrated 12 Nm direct-drive steering wheel. in
-      stock on official shop. New-version C12 sold with T-bracket and optional
-      GT/GT3 rim add-on.
+    description: CAMMUS C12. integrated 12 Nm direct-drive steering wheel. in stock on official
+      shop. New-version C12 sold with T-bracket and optional GT/GT3 rim add-on.
     manufacturer: CAMMUS
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -30,9 +29,9 @@ commercial:
         url: https://cammusracing.com/product/cammus-c12-direct-drive-steering-wheel/
         region: Global
   - product_name: DDWB 15Nm Wheelbase
-    description: CAMMUS DDWB 15Nm. direct-drive wheel base. in stock on official
-      shop. 15 Nm maximum torque servo-motor base with aluminum shell, active
-      cooling, buttons, rotary controls, and software lighting customization.
+    description: CAMMUS DDWB 15Nm. direct-drive wheel base. in stock on official shop. 15 Nm
+      maximum torque servo-motor base with aluminum shell, active cooling, buttons, rotary
+      controls, and software lighting customization.
     manufacturer: CAMMUS
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -45,9 +44,9 @@ commercial:
         url: https://cammusracing.com/product/cammus-wheelbase-gt1-ddwb-15nm/
         region: Global
   - product_name: ClubSport DD
-    description: Fanatec ClubSport DD 12 Nm. mid/high direct-drive wheel base. in
-      stock on official EU catalog. 12 Nm consistent torque with FullForce
-      high-fidelity force feedback support.
+    description: Fanatec ClubSport DD 12 Nm. mid/high direct-drive wheel base. in stock on
+      official EU catalog. 12 Nm consistent torque with FullForce high-fidelity force
+      feedback support.
     manufacturer: Fanatec
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -60,9 +59,9 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/wheel-bases/cs_dd_eu/clubsport-dd-eu
         region: EU
   - product_name: ClubSport DD+ (15 Nm)
-    description: Fanatec ClubSport DD+ 15 Nm. PlayStation-compatible high-torque
-      direct-drive wheel base. in stock on official EU catalog. 15 Nm consistent
-      torque with FullForce high-fidelity force feedback support.
+    description: Fanatec ClubSport DD+ 15 Nm. PlayStation-compatible high-torque direct-drive
+      wheel base. in stock on official EU catalog. 15 Nm consistent torque with FullForce
+      high-fidelity force feedback support.
     manufacturer: Fanatec
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -75,9 +74,8 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/wheel-bases/cs_dd+_eu/clubsport-dd-plus-eu
         region: EU
   - product_name: CSL DD QR2 (5 Nm)
-    description: Fanatec CSL DD QR2 5 Nm. entry direct-drive wheel base. in stock on
-      official EU catalog. Compact direct drive base with QR2 Lite and 5 Nm peak
-      torque.
+    description: Fanatec CSL DD QR2 5 Nm. entry direct-drive wheel base. in stock on official EU
+      catalog. Compact direct drive base with QR2 Lite and 5 Nm peak torque.
     manufacturer: Fanatec
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -90,9 +88,8 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/wheel-bases/csl_dd_qr2l_90_eu/csl-dd-qr2l-5-nm-eu
         region: EU
   - product_name: CSL DD QR2 (8 Nm)
-    description: Fanatec CSL DD QR2 8 Nm. compact direct-drive wheel base. in stock
-      on official EU catalog. QR2 Lite-equipped CSL DD with boosted 8 Nm force
-      feedback.
+    description: Fanatec CSL DD QR2 8 Nm. compact direct-drive wheel base. in stock on official
+      EU catalog. QR2 Lite-equipped CSL DD with boosted 8 Nm force feedback.
     manufacturer: Fanatec
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -120,9 +117,8 @@ commercial:
         url: https://vrs.racing/shop
         region: US
   - product_name: Gran Turismo DD Pro Wheel Base (8 Nm)
-    description: Fanatec Gran Turismo DD Pro Wheel Base 8 Nm. official
-      PlayStation-compatible Gran Turismo direct-drive wheel base. in stock on
-      official EU catalog with QR2.
+    description: Fanatec Gran Turismo DD Pro Wheel Base 8 Nm. official PlayStation-compatible
+      Gran Turismo direct-drive wheel base. in stock on official EU catalog with QR2.
     manufacturer: Fanatec
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -135,9 +131,8 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/wheel-bases/crd-9020006-eu/gran-turismo-dd-pro-wheel-base-qr2-eu
         region: EU
   - product_name: Podium DD (25 Nm)
-    description: Fanatec Podium DD 25 Nm. flagship direct-drive wheel base. in stock
-      on official EU catalog. 25 Nm holding torque with FullForce high-resolution
-      force feedback detail.
+    description: Fanatec Podium DD 25 Nm. flagship direct-drive wheel base. in stock on official
+      EU catalog. 25 Nm holding torque with FullForce high-resolution force feedback detail.
     manufacturer: Fanatec
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -150,9 +145,9 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/wheel-bases/crd-9020022-eu/podium-dd-eu
         region: EU
   - product_name: Invicta Direct Drive Wheelbase 27 Nm
-    description: Asetek Invicta Direct Drive Wheelbase 27 Nm. pro high-torque direct-drive
-      wheel base. in stock on official global shop. 27 Nm direct-drive wheel base
-      with 22-bit encoder.
+    description: Asetek Invicta Direct Drive Wheelbase 27 Nm. pro high-torque direct-drive wheel
+      base. in stock on official global shop. 27 Nm direct-drive wheel base with 22-bit
+      encoder.
     manufacturer: Asetek Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -165,9 +160,9 @@ commercial:
         url: https://www.asetek.com/simsports/global/product/invicta-direct-drive-wheelbase-27nm/
         region: Global
   - product_name: Initium Direct Drive Wheelbase EU
-    description: Asetek Initium Direct Drive Wheelbase EU. entry direct-drive wheel
-      base. in stock on official global shop. 5.5 Nm direct-drive base with
-      14-bit encoder and optional 8 Nm boost kit.
+    description: Asetek Initium Direct Drive Wheelbase EU. entry direct-drive wheel base. in
+      stock on official global shop. 5.5 Nm direct-drive base with 14-bit encoder and
+      optional 8 Nm boost kit.
     manufacturer: Asetek Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -180,10 +175,9 @@ commercial:
         url: https://www.asetek.com/simsports/global/product/initium-direct-drive-wheelbase-eu/
         region: Global
   - product_name: VNM x Cube Controls Direct Drives
-    description: VNM x Cube Controls Direct Drives. direct-drive wheel base
-      collaboration. in stock on Cube Controls official shop. Telemetry-based
-      force feedback wheel base line built with VNM and sold through Cube
-      Controls.
+    description: VNM x Cube Controls Direct Drives. direct-drive wheel base collaboration. in
+      stock on Cube Controls official shop. Telemetry-based force feedback wheel base line
+      built with VNM and sold through Cube Controls.
     manufacturer: VNM / Cube Controls
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -211,9 +205,8 @@ commercial:
         url: https://www.logitechg.com/en-us/products/driving/pro-dd11-base.html
         region: US
   - product_name: R12 V2 Wheel Base
-    description: MOZA R12 V2 Wheel Base. mid/high direct-drive wheel base. Current MOZA
-      product; US product page showed sale pricing. 12 Nm direct drive, 21-bit magnetic
-      encoder.
+    description: MOZA R12 V2 Wheel Base. mid/high direct-drive wheel base. Current MOZA product;
+      US product page showed sale pricing. 12 Nm direct drive, 21-bit magnetic encoder.
     manufacturer: MOZA Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -226,9 +219,9 @@ commercial:
         url: https://us.mozaracing.com/products/r12-wheelbase
         region: US
   - product_name: R21 V2 Wheel Base
-    description: MOZA R21 V2 Wheel Base. high-torque direct-drive wheel base. MOZA product
-      page showed sold out on one official page; global page showed selectable variants.
-      21 Nm direct drive, 21-bit magnetic encoder, 1000 Hz USB refresh.
+    description: MOZA R21 V2 Wheel Base. high-torque direct-drive wheel base. MOZA product page
+      showed sold out on one official page; global page showed selectable variants. 21 Nm
+      direct drive, 21-bit magnetic encoder, 1000 Hz USB refresh.
     manufacturer: MOZA Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -241,8 +234,8 @@ commercial:
         url: https://mozaracing.com/en-us/product/wheel-base-r21/
         region: Unknown
   - product_name: R5 Wheel Base
-    description: MOZA R5 Wheel Base. entry direct-drive wheel base. Current MOZA product.
-      5.5 Nm peak torque direct drive.
+    description: MOZA R5 Wheel Base. entry direct-drive wheel base. Current MOZA product. 5.5 Nm
+      peak torque direct drive.
     manufacturer: MOZA Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -250,8 +243,8 @@ commercial:
     picture_url: https://mozaracing.com/cdn/shop/files/R5_fd53ca42-18cd-480a-a4a7-b8dca179d5dc.png?v=1753256093
     shops: []
   - product_name: R9 V3 Direct Drive Wheel Base
-    description: MOZA R9 V3 Wheel Base. compact midrange direct-drive wheel base. In stock
-      and dispatched within 2 business days on official US page in search result. 9 Nm
+    description: MOZA R9 V3 Wheel Base. compact midrange direct-drive wheel base. In stock and
+      dispatched within 2 business days on official US page in search result. 9 Nm
       direct-drive servo base.
     manufacturer: MOZA Racing
     component_category: wheel-bases
@@ -280,8 +273,8 @@ commercial:
         url: https://www.logitechg.com/en-us/products/driving.html
         region: US
   - product_name: Simucube 2 Pro
-    description: Simucube 2 Pro. pro direct-drive wheel base. in stock on official
-      US shop. 25 Nm max torque direct-drive wheel base.
+    description: Simucube 2 Pro. pro direct-drive wheel base. in stock on official US shop. 25
+      Nm max torque direct-drive wheel base.
     manufacturer: Simucube
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -294,9 +287,8 @@ commercial:
         url: https://simucube.com/en-us/simucube-2-pro/
         region: US
   - product_name: Simucube 2 Sport
-    description: Simucube 2 Sport. direct-drive wheel base. in stock on official
-      US shop. Entry Simucube 2 direct-drive base with 360 Hz force feedback support
-      for iRacing.
+    description: Simucube 2 Sport. direct-drive wheel base. in stock on official US shop. Entry
+      Simucube 2 direct-drive base with 360 Hz force feedback support for iRacing.
     manufacturer: Simucube
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -309,9 +301,9 @@ commercial:
         url: https://simucube.com/en-us/simucube-2-sport/
         region: US
   - product_name: Simucube 3 Sport
-    description: Simucube 3 Sport. direct-drive wheel base. out of stock on official
-      US shop. 15 Nm Simucube 3 wheel base with telemetry-based effects and
-      re-engineered control algorithm.
+    description: Simucube 3 Sport. direct-drive wheel base. out of stock on official US shop. 15
+      Nm Simucube 3 wheel base with telemetry-based effects and re-engineered control
+      algorithm.
     manufacturer: Simucube
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -324,9 +316,9 @@ commercial:
         url: https://simucube.com/en-us/simucube-3-sport/
         region: US
   - product_name: Simucube 3 Pro
-    description: Simucube 3 Pro. pro direct-drive wheel base. in stock on official
-      US shop. 25 Nm Simucube 3 wheel base with telemetry-based effects and
-      re-engineered control algorithm.
+    description: Simucube 3 Pro. pro direct-drive wheel base. in stock on official US shop. 25
+      Nm Simucube 3 wheel base with telemetry-based effects and re-engineered control
+      algorithm.
     manufacturer: Simucube
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -339,9 +331,9 @@ commercial:
         url: https://simucube.com/en-us/simucube-3-pro/
         region: US
   - product_name: Simucube 3 Ultimate
-    description: Simucube 3 Ultimate. flagship direct-drive wheel base. out of stock
-      on official US shop. 35 Nm Simucube 3 wheel base with telemetry-based effects
-      and re-engineered control algorithm.
+    description: Simucube 3 Ultimate. flagship direct-drive wheel base. out of stock on official
+      US shop. 35 Nm Simucube 3 wheel base with telemetry-based effects and re-engineered
+      control algorithm.
     manufacturer: Simucube
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -354,8 +346,8 @@ commercial:
         url: https://simucube.com/en-us/simucube-3-ultimate/
         region: US
   - product_name: Simagic Alpha Mini
-    description: Simagic Alpha Mini. compact direct-drive wheel base. in stock on
-      official shop. 10 Nm servo wheel base with compact housing.
+    description: Simagic Alpha Mini. compact direct-drive wheel base. in stock on official shop.
+      10 Nm servo wheel base with compact housing.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -368,8 +360,8 @@ commercial:
         url: https://simagic.com/products/alpha-mini
         region: Global
   - product_name: Simagic Alpha Wheelbase
-    description: Simagic Alpha Wheelbase. direct-drive wheel base. in stock on
-      official shop. 15 Nm servo wheel base with Simagic quick release support.
+    description: Simagic Alpha Wheelbase. direct-drive wheel base. in stock on official shop. 15
+      Nm servo wheel base with Simagic quick release support.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -382,9 +374,9 @@ commercial:
         url: https://simagic.com/products/alpha
         region: Global
   - product_name: Simagic Alpha Ultimate
-    description: Simagic Alpha Ultimate. high-torque direct-drive wheel base. in
-      stock on official shop. 23 Nm direct-drive base with custom servo motor and
-      262144 ppr encoder resolution.
+    description: Simagic Alpha Ultimate. high-torque direct-drive wheel base. in stock on
+      official shop. 23 Nm direct-drive base with custom servo motor and 262144 ppr encoder
+      resolution.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -397,9 +389,8 @@ commercial:
         url: https://simagic.com/products/alpha-u
         region: Global
   - product_name: Simagic Alpha EVO Sport 9 Nm
-    description: Simagic Alpha EVO Sport 9 Nm. compact direct-drive wheel base. in
-      stock on official shop. 9 Nm Alpha EVO base with 5-pole direct-drive servo
-      motor.
+    description: Simagic Alpha EVO Sport 9 Nm. compact direct-drive wheel base. in stock on
+      official shop. 9 Nm Alpha EVO base with 5-pole direct-drive servo motor.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -412,8 +403,8 @@ commercial:
         url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
         region: Global
   - product_name: Simagic Alpha EVO 12 Nm
-    description: Simagic Alpha EVO 12 Nm. direct-drive wheel base. in stock on
-      official shop. 12 Nm Alpha EVO base with 5-pole direct-drive servo motor.
+    description: Simagic Alpha EVO 12 Nm. direct-drive wheel base. in stock on official shop. 12
+      Nm Alpha EVO base with 5-pole direct-drive servo motor.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -426,8 +417,8 @@ commercial:
         url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
         region: Global
   - product_name: Simagic Alpha EVO Pro 18 Nm
-    description: Simagic Alpha EVO Pro 18 Nm. direct-drive wheel base. in stock on
-      official shop. 18 Nm Alpha EVO Pro base for high force-feedback output.
+    description: Simagic Alpha EVO Pro 18 Nm. direct-drive wheel base. in stock on official
+      shop. 18 Nm Alpha EVO Pro base for high force-feedback output.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -440,9 +431,8 @@ commercial:
         url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
         region: Global
   - product_name: Simagic Alpha EVO Ultra 28 Nm
-    description: Simagic Alpha EVO Ultra 28 Nm. high-torque direct-drive wheel base.
-      in stock on official shop. 28 Nm Alpha EVO Ultra base for maximum
-      force-feedback output.
+    description: Simagic Alpha EVO Ultra 28 Nm. high-torque direct-drive wheel base. in stock on
+      official shop. 28 Nm Alpha EVO Ultra base for maximum force-feedback output.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -455,9 +445,9 @@ commercial:
         url: https://simagic.com/products/simagic-alpha-evo-ultra-28nm-direct-drive-wheel-base
         region: Global
   - product_name: MOZA R16 Wheel Base V2
-    description: MOZA R16 Wheel Base V2. direct-drive wheel base. listed on
-      GermanSimRacing wheelbase collection. 16 Nm industrial-grade motor with
-      ultra-low static torque design.
+    description: MOZA R16 Wheel Base V2. direct-drive wheel base. listed on GermanSimRacing
+      wheelbase collection. 16 Nm industrial-grade motor with ultra-low static torque
+      design.
     manufacturer: MOZA Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -470,9 +460,9 @@ commercial:
         url: https://shop.germansimracing.de/en/products/r16-wheel-base-v2
         region: DE
   - product_name: MOZA R21 Ultra DD Wheelbase
-    description: MOZA R21 Ultra DD Wheelbase. high-torque direct-drive wheel base.
-      listed on GermanSimRacing wheelbase collection. 21 Nm continuous-torque
-      base with 21-bit precision and updated force-feedback algorithm.
+    description: MOZA R21 Ultra DD Wheelbase. high-torque direct-drive wheel base. listed on
+      GermanSimRacing wheelbase collection. 21 Nm continuous-torque base with 21-bit
+      precision and updated force-feedback algorithm.
     manufacturer: MOZA Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -485,9 +475,9 @@ commercial:
         url: https://shop.germansimracing.de/en/products/moza-r21-ultra-dd-wheelbase
         region: DE
   - product_name: MOZA R25 Ultra DD Wheelbase
-    description: MOZA R25 Ultra DD Wheelbase. flagship direct-drive wheel base.
-      listed on GermanSimRacing wheelbase collection. 25 Nm continuous-torque
-      base with real-time torque sensor and cogging-free flat-wire motor.
+    description: MOZA R25 Ultra DD Wheelbase. flagship direct-drive wheel base. listed on
+      GermanSimRacing wheelbase collection. 25 Nm continuous-torque base with real-time
+      torque sensor and cogging-free flat-wire motor.
     manufacturer: MOZA Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -500,9 +490,9 @@ commercial:
         url: https://shop.germansimracing.de/en/products/moza-r25-ultra-wheelbase
         region: DE
   - product_name: Asetek La Prima Direct Drive Wheelbase 12 Nm
-    description: Asetek La Prima Direct Drive Wheelbase 12 Nm. direct-drive wheel
-      base. out of stock on official global shop. 12 Nm base with 22-bit encoder
-      and Asetek quick release.
+    description: Asetek La Prima Direct Drive Wheelbase 12 Nm. direct-drive wheel base. out of
+      stock on official global shop. 12 Nm base with 22-bit encoder and Asetek quick
+      release.
     manufacturer: Asetek Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -515,9 +505,9 @@ commercial:
         url: https://www.asetek.com/simsports/global/product/la-prima-direct-drive-wheelbase-12nm/
         region: Global
   - product_name: Asetek Forte Direct Drive Wheelbase 18 Nm
-    description: Asetek Forte Direct Drive Wheelbase 18 Nm. direct-drive wheel base.
-      in stock on official global shop. Danish-made 18 Nm base with 22-bit encoder
-      and programmable RGB LEDs.
+    description: Asetek Forte Direct Drive Wheelbase 18 Nm. direct-drive wheel base. in stock on
+      official global shop. Danish-made 18 Nm base with 22-bit encoder and programmable RGB
+      LEDs.
     manufacturer: Asetek Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -544,9 +534,8 @@ commercial:
         url: https://shop.germansimracing.de/en/products/podium-wheel-base-dd1
         region: DE
   - product_name: Fanatec Podium Wheel Base DD2
-    description: Fanatec Podium Wheel Base DD2. high-torque direct-drive wheel base.
-      listed on GermanSimRacing wheelbase collection. Podium-series direct-drive
-      base.
+    description: Fanatec Podium Wheel Base DD2. high-torque direct-drive wheel base. listed on
+      GermanSimRacing wheelbase collection. Podium-series direct-drive base.
     manufacturer: Fanatec
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -559,8 +548,8 @@ commercial:
         url: https://shop.germansimracing.de/en/products/podium-wheel-base-dd2
         region: DE
   - product_name: Conspit Ares
-    description: Conspit Ares. direct-drive wheel base. listed on GermanSimRacing
-      wheelbase collection. 12 Nm Ares-series sim racing wheelbase.
+    description: Conspit Ares. direct-drive wheel base. listed on GermanSimRacing wheelbase
+      collection. 12 Nm Ares-series sim racing wheelbase.
     manufacturer: Conspit
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -573,9 +562,8 @@ commercial:
         url: https://shop.germansimracing.de/en/products/ares
         region: DE
   - product_name: Conspit Ares Platinum
-    description: Conspit Ares Platinum. high-torque direct-drive wheel base. out of
-      stock on GermanSimRacing wheelbase collection. 20 Nm Ares Platinum sim racing
-      wheelbase.
+    description: Conspit Ares Platinum. high-torque direct-drive wheel base. out of stock on
+      GermanSimRacing wheelbase collection. 20 Nm Ares Platinum sim racing wheelbase.
     manufacturer: Conspit
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -588,9 +576,9 @@ commercial:
         url: https://shop.germansimracing.de/en/products/ares-platinum
         region: DE
   - product_name: VNM Direct Drive Xtreme
-    description: VNM Direct Drive Xtreme. high-torque direct-drive wheel base. listed
-      on GermanSimRacing wheelbase collection. 32 Nm direct-drive base with 23-bit
-      absolute encoder.
+    description: VNM Direct Drive Xtreme. high-torque direct-drive wheel base. listed on
+      GermanSimRacing wheelbase collection. 32 Nm direct-drive base with 23-bit absolute
+      encoder.
     manufacturer: VNM
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -603,8 +591,8 @@ commercial:
         url: https://shop.germansimracing.de/en/products/direct-drive-xtreme
         region: DE
   - product_name: VNM Direct Drive Supreme
-    description: VNM Direct Drive Supreme. high-torque direct-drive wheel base. out
-      of stock on GermanSimRacing wheelbase collection. 25 Nm direct-drive base.
+    description: VNM Direct Drive Supreme. high-torque direct-drive wheel base. out of stock on
+      GermanSimRacing wheelbase collection. 25 Nm direct-drive base.
     manufacturer: VNM
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -646,8 +634,8 @@ commercial:
         region: DE
   - product_name: VRS DFP15 Wheelbase
     description: VRS DFP15 Wheelbase. direct-drive wheel base. listed on GermanSimRacing
-      wheelbase collection. 15 Nm direct-drive base with 21-bit encoder and 1000 Hz
-      USB refresh rate.
+      wheelbase collection. 15 Nm direct-drive base with 21-bit encoder and 1000 Hz USB
+      refresh rate.
     manufacturer: Virtual Racing School
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -660,9 +648,9 @@ commercial:
         url: https://shop.germansimracing.de/en/products/dfp15-wheelbase
         region: DE
   - product_name: VRS Upgradable Torque Wheel Base
-    description: VRS Upgradable Torque Wheel Base. direct-drive wheel base. listed
-      on GermanSimRacing wheelbase collection. DirectForce wheel base with software
-      upgrade path to higher torque levels.
+    description: VRS Upgradable Torque Wheel Base. direct-drive wheel base. listed on
+      GermanSimRacing wheelbase collection. DirectForce wheel base with software upgrade
+      path to higher torque levels.
     manufacturer: Virtual Racing School
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -676,8 +664,8 @@ commercial:
         region: DE
   - product_name: T818 Direct Drive
     description: Thrustmaster T818. direct-drive wheel base. Current Thrustmaster product;
-      official product page describes T818 V2. Direct drive with 10 Nm constant torque
-      per official product snippet.
+      official product page describes T818 V2. Direct drive with 10 Nm constant torque per
+      official product snippet.
     manufacturer: Thrustmaster
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -685,9 +673,9 @@ commercial:
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/12/T818-Black-Edition-list.png
     shops: []
   - product_name: Pro-Sim Spec SimSteering2 FFB System 54 26Nm
-    description: Pro-Sim Spec SimSteering2 FFB System 54. pro direct-drive FFB
-      wheel base. in stock on official UK shop. Leo Bodnar SimSteering2-based
-      26 Nm system tuned by Pro-Sim for race-driver simulator use.
+    description: Pro-Sim Spec SimSteering2 FFB System 54. pro direct-drive FFB wheel base. in
+      stock on official UK shop. Leo Bodnar SimSteering2-based 26 Nm system tuned by Pro-Sim
+      for race-driver simulator use.
     manufacturer: Pro-Sim
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -700,9 +688,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/pro-sim-spec-simsteering2-ffb-system-54-26nm/
         region: UK
   - product_name: SimSteering2 FFB System 52 16Nm
-    description: Pro-Sim SimSteering2 FFB System 52. professional direct-drive
-      FFB wheel base. in stock on official UK shop. High-precision linear
-      response force-feedback system rated 16 Nm.
+    description: Pro-Sim SimSteering2 FFB System 52. professional direct-drive FFB wheel base.
+      in stock on official UK shop. High-precision linear response force-feedback system
+      rated 16 Nm.
     manufacturer: Pro-Sim
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -715,9 +703,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/simsteering2-ffb-system-52/
         region: UK
   - product_name: SimSteering2 FFB System 53 20.5Nm
-    description: Pro-Sim SimSteering2 FFB System 53. professional direct-drive
-      FFB wheel base. in stock on official UK shop. High-precision linear
-      response force-feedback system rated 20.5 Nm.
+    description: Pro-Sim SimSteering2 FFB System 53. professional direct-drive FFB wheel base.
+      in stock on official UK shop. High-precision linear response force-feedback system
+      rated 20.5 Nm.
     manufacturer: Pro-Sim
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -730,9 +718,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/simsteering2-ffb-system-53/
         region: UK
   - product_name: SimSteering2 FFB System 54 26Nm
-    description: Pro-Sim SimSteering2 FFB System 54. professional direct-drive
-      FFB wheel base. in stock on official UK shop. High-precision linear
-      response force-feedback system rated 26 Nm.
+    description: Pro-Sim SimSteering2 FFB System 54. professional direct-drive FFB wheel base.
+      in stock on official UK shop. High-precision linear response force-feedback system
+      rated 26 Nm.
     manufacturer: Pro-Sim
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -745,9 +733,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/simsteering2-ffb-system-54/
         region: UK
   - product_name: T598 Servo Base
-    description: Thrustmaster T598 Servo Base. direct-drive axial-flux wheel
-      base. in stock on official US shop. Direct Axial Drive force-feedback
-      base for Formula, GT, racing, and rally setups.
+    description: Thrustmaster T598 Servo Base. direct-drive axial-flux wheel base. in stock on
+      official US shop. Direct Axial Drive force-feedback base for Formula, GT, racing, and
+      rally setups.
     manufacturer: Thrustmaster
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -760,9 +748,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/t598-servo-base/
         region: US
   - product_name: T-GT II Servo Base
-    description: Thrustmaster T-GT II Servo Base. belt-driven force-feedback
-      wheel base. in stock on official US shop. PlayStation and PC compatible
-      racing base in the Thrustmaster racing ecosystem.
+    description: Thrustmaster T-GT II Servo Base. belt-driven force-feedback wheel base. in
+      stock on official US shop. PlayStation and PC compatible racing base in the
+      Thrustmaster racing ecosystem.
     manufacturer: Thrustmaster
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -775,9 +763,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/t-gt-ii-servo-base/
         region: US
   - product_name: T300 Racing Wheel Servo Base
-    description: Thrustmaster T300 Racing Wheel Servo Base. belt-driven
-      force-feedback wheel base. in stock on official US shop. PC, PS4, and PS5
-      compatible servo base for the Thrustmaster racing ecosystem.
+    description: Thrustmaster T300 Racing Wheel Servo Base. belt-driven force-feedback wheel
+      base. in stock on official US shop. PC, PS4, and PS5 compatible servo base for the
+      Thrustmaster racing ecosystem.
     manufacturer: Thrustmaster
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -790,9 +778,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/t300-racing-wheel-servo-base/
         region: US
   - product_name: TS-PC Racer Servo Base
-    description: Thrustmaster TS-PC Racer Servo Base. belt-driven
-      force-feedback wheel base. in stock on official US shop. PC racing wheel
-      base for the Thrustmaster detachable wheel ecosystem.
+    description: Thrustmaster TS-PC Racer Servo Base. belt-driven force-feedback wheel base. in
+      stock on official US shop. PC racing wheel base for the Thrustmaster detachable wheel
+      ecosystem.
     manufacturer: Thrustmaster
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -805,9 +793,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/ts-pc-racer-servo-base/
         region: US
   - product_name: TS-XW Servo Base
-    description: Thrustmaster TS-XW Servo Base. belt-driven force-feedback wheel
-      base. in stock on official US shop. PC and Xbox compatible servo base for
-      the Thrustmaster detachable wheel ecosystem.
+    description: Thrustmaster TS-XW Servo Base. belt-driven force-feedback wheel base. in stock
+      on official US shop. PC and Xbox compatible servo base for the Thrustmaster detachable
+      wheel ecosystem.
     manufacturer: Thrustmaster
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -820,9 +808,9 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/ts-xw-servo-base/
         region: US
   - product_name: TX Racing Wheel Servo Base
-    description: Thrustmaster TX Racing Wheel Servo Base. belt-driven
-      force-feedback wheel base. in stock on official US shop. PC and Xbox
-      compatible servo base for Thrustmaster detachable wheels.
+    description: Thrustmaster TX Racing Wheel Servo Base. belt-driven force-feedback wheel base.
+      in stock on official US shop. PC and Xbox compatible servo base for Thrustmaster
+      detachable wheels.
     manufacturer: Thrustmaster
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -836,9 +824,9 @@ commercial:
         region: US
 opensource:
   - project_name: AFFBWheel
-    description: AFFBWheel. Arduino force-feedback wheel controller. Active-ish hobby
-      firmware; 160+ stars and ongoing issue activity, but still DIY experimental.
-      Arduino ATmega32U4 wheel controller with force feedback.
+    description: AFFBWheel. Arduino force-feedback wheel controller. Active-ish hobby firmware;
+      160+ stars and ongoing issue activity, but still DIY experimental. Arduino ATmega32U4
+      wheel controller with force feedback.
     maker: vsulako
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -856,10 +844,10 @@ opensource:
     project_url: https://github.com/ranenbg/Arduino-FFB-wheel
     picture_url: https://raw.githubusercontent.com/ranenbg/Arduino-FFB-wheel/master/brWheel_my/wirings/Firmware-v250%20pinout.png
   - project_name: DIY-DirectDrive
-    description: DIY-DirectDrive. ODrive-based direct-drive wheel software. Source
-      available, small historic Python project; site and repo still reachable but low
-      recent activity. Python software for creating a direct-drive force-feedback wheel
-      with an ODrive Robotics board and industrial servo motor.
+    description: DIY-DirectDrive. ODrive-based direct-drive wheel software. Source available,
+      small historic Python project; site and repo still reachable but low recent activity.
+      Python software for creating a direct-drive force-feedback wheel with an ODrive
+      Robotics board and industrial servo motor.
     maker: Jan Balke
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -869,8 +857,8 @@ opensource:
   - project_name: OpenFFBoard
     description: OpenFFBoard. modular force-feedback controller and motor-driver ecosystem.
       Active ongoing project with current firmware, hardware, wiki, and configurator
-      repositories. Universal USB HID force-feedback interface for DIY wheels,
-      joysticks, and other simulator controls.
+      repositories. Universal USB HID force-feedback interface for DIY wheels, joysticks,
+      and other simulator controls.
     maker: Yannick Richter / Ultrawipf
     component_category: wheel-bases
     component_sub_category: ffb-controller
@@ -879,15 +867,15 @@ opensource:
     project_url: https://github.com/Ultrawipf/OpenFFBoard
     picture_url: https://raw.githubusercontent.com/wiki/Ultrawipf/OpenFFBoard/img/ffboard_firmware_overview.png
   - project_name: OpenSimWheel / OSW
-    description: OpenSimWheel / OSW. legacy direct-drive servo wheel-base architecture.
-      Historic DIY direct-drive reference; largely superseded by Simucube-era commercial
-      products and newer open stacks such as OpenFFBoard. Direct-drive wheel using
-      off-the-shelf industrial servo drive, servo motor, STM32F4DISCOVERY controller,
-      and wheel shaft adapter.
+    description: OpenSimWheel / OSW. legacy direct-drive servo wheel-base architecture. Historic
+      DIY direct-drive reference; largely superseded by Simucube-era commercial products and
+      newer open stacks such as OpenFFBoard. Direct-drive wheel using off-the-shelf
+      industrial servo drive, servo motor, STM32F4DISCOVERY controller, and wheel shaft
+      adapter.
     maker: Early Virtual-Racing community; tutorial by Martin Ascher / Ascher Racing
     component_category: wheel-bases
     component_sub_category: ffb-controller
-    license: Original tutorial calls it an open-source software project, but exact license
-      and firmware availability are unclear in current archives [uncertain].
+    license: Original tutorial calls it an open-source software project, but exact license and
+      firmware availability are unclear in current archives [uncertain].
     project_url: "null"
     picture_url: https://raw.githubusercontent.com/wiki/Ultrawipf/OpenFFBoard/img/odrive/OD_DFU_Jumper.jpg

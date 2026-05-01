@@ -1,4 +1,163 @@
 commercial:
+  - product_name: GNX THQ (Throttle Quadrant)
+    description: VKB FSC Europe GNX THQ (Throttle Quadrant). VKB modular flight-control panel.
+      In stock on VKB FSC Europe listing on 2026-04-29. Gladiator NXT joystick base (from
+      either side).
+    manufacturer: VKB-Sim
+    component_category: throttles
+    component_sub_category: throttle-module
+    product_url: https://flightsimcontrols.com/product/gnx-thq-throttle-quadrant/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/10/15_THQ_4SH_750_2.jpg
+    shops:
+      - name: VKB FSC Europe
+        price: 98
+        currency: EUR
+        url: https://flightsimcontrols.com/product/gnx-thq-throttle-quadrant/
+        region: EU
+  - product_name: GNX THQ-V (Throttle Quadrant – Vertical)
+    description: VKB FSC Europe GNX THQ-V (Throttle Quadrant – Vertical). VKB modular
+      flight-control panel. In stock on VKB FSC Europe listing on 2026-04-29. Requires GNX
+      MFH (Multi Functional Holder) in order to mount module.
+    manufacturer: VKB-Sim
+    component_category: throttles
+    component_sub_category: throttle-module
+    product_url: https://flightsimcontrols.com/product/gnx-thq-v-throttle-quadrant-vertical/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/10/18_THQ-V_4SH_750_1.jpg
+    shops:
+      - name: VKB FSC Europe
+        price: 103.8
+        currency: EUR
+        url: https://flightsimcontrols.com/product/gnx-thq-v-throttle-quadrant-vertical/
+        region: EU
+  - product_name: STECS ATEM (Auxiliary Throttle Extension Module)
+    description: VKB FSC Europe STECS ATEM (Auxiliary Throttle Extension Module). VKB modular
+      flight-control panel. In stock on VKB FSC Europe listing on 2026-04-29. 1 ATEM Module.
+    manufacturer: VKB-Sim
+    component_category: throttles
+    component_sub_category: throttle-module
+    product_url: https://flightsimcontrols.com/product/stecs-atem-auxiliary-throttle-extension-module/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/09/ATEM_1200_03.jpg
+    shops:
+      - name: VKB FSC Europe
+        price: 4850
+        currency: EUR
+        url: https://flightsimcontrols.com/product/stecs-atem-auxiliary-throttle-extension-module/
+        region: EU
+  - product_name: STECS STEM (Standard Throttle Extension Module)
+    description: VKB FSC Europe STECS STEM (Standard Throttle Extension Module). VKB modular
+      flight-control panel. In stock on VKB FSC Europe listing on 2026-04-29. 1 STEM Module.
+    manufacturer: VKB-Sim
+    component_category: throttles
+    component_sub_category: throttle-module
+    product_url: https://flightsimcontrols.com/product/stecs-stem-standard-throttle-extension-module/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/09/3T2A5734-scaled.jpg
+    shops:
+      - name: VKB FSC Europe
+        price: 7500
+        currency: EUR
+        url: https://flightsimcontrols.com/product/stecs-stem-standard-throttle-extension-module/
+        region: EU
+  - product_name: Gladiator NXT EVO Omni Throttle
+    description: VKB FSC Europe Gladiator NXT EVO Omni Throttle. VKB flightstick base, grip, or
+      complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. Complete
+      Gladiator NXT EVO Omni Throttle with SCG Premium Grip (Left).
+    manufacturer: VKB-Sim
+    component_category: throttles
+    component_sub_category: flight-throttle
+    product_url: https://flightsimcontrols.com/product/gladiator-nxt-evo-omni-throttle/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/73_GNX-EVOOMNI-THRT-L-P_800_1.jpg
+    shops:
+      - name: VKB FSC Europe
+        price: 209
+        currency: EUR
+        url: https://flightsimcontrols.com/product/gladiator-nxt-evo-omni-throttle/
+        region: EU
+  - product_name: Dual Throttle connector for WINCTRL Orion/Gemini Base
+    description: Dual Throttle connector for WINCTRL Orion/Gemini Base. flight-control mounts
+      and accessories. Active EU WINCTRL store listing; total_stock 4 from API. Dual
+      Throttle connector for WINCTRL Orion/Gemini Base x1.
+    manufacturer: WINCTRL
+    component_category: throttles
+    component_sub_category: throttle-accessories
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=381
+    picture_url: https://eu.winctrl.com/static/ipfs/QmaXkLe2FHqK1ic7oC5pR86gRfFSNQDWqqRpaLoNEajVhm
+    shops:
+      - name: WINCTRL EU
+        price: 19.72
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=381
+        region: EU
+  - product_name: Super Taurus Desk Mount
+    description: Super Taurus Desk Mount. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Taurus
+      Desk Mount.
+    manufacturer: WINCTRL
+    component_category: throttles
+    component_sub_category: throttle-mount
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=310
+    picture_url: https://eu.winctrl.com/static/ipfs/Qmc7TEvqmMykaL1TFBfBKN9cyBddua4ZuRPPsQDv1L6kmu
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=310
+        region: EU
+  - product_name: Throttle Mount
+    description: Sim Lab Throttle Mount. rig mounts. listed on Sim Lab. The Throttle Mount
+      provides stable, reliable support, keeping your controls secure during every flight,
+      and is built to last through countless hours of use. Stable and Reliable...
+    manufacturer: Sim Lab
+    component_category: throttles
+    component_sub_category: throttle-mount
+    product_url: https://sim-lab.eu/products/flight-sim-throttle-mount
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/throttlemount_1.png?v=1744703435
+    shops:
+      - name: Sim Lab
+        price: 47.95
+        currency: USD
+        url: https://sim-lab.eu/products/flight-sim-throttle-mount
+        region: Unknown
+  - product_name: Modern Throttle Grip Mk.II Premium
+    description: STECS Modern Throttle Grip Mk.II Premium. rig mounts. listed on
+      Flightsimcontrols. Official shop listing.
+    manufacturer: STECS
+    component_category: throttles
+    component_sub_category: throttle-accessories
+    product_url: https://flightsimcontrols.com/product/stecs-modern-throttle-grip-mk-ii-premium/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2026/03/MTG_Grip-PREM.webp
+    shops:
+      - name: Flightsimcontrols
+        price: 158
+        currency: EUR
+        url: https://flightsimcontrols.com/product/stecs-modern-throttle-grip-mk-ii-premium/
+        region: Unknown
+  - product_name: Modern Throttle Grip Mk.II Upgrade Kit
+    description: STECS Modern Throttle Grip Mk.II Upgrade Kit. rig mounts. listed on
+      Flightsimcontrols. Official shop listing.
+    manufacturer: STECS
+    component_category: throttles
+    component_sub_category: throttle-upgrade-kit
+    product_url: https://flightsimcontrols.com/product/stecs-mtg-grip-mk2-upgrade-kit/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/05/MTG-R_half_grip-1.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 63.9
+        currency: EUR
+        url: https://flightsimcontrols.com/product/stecs-mtg-grip-mk2-upgrade-kit/
+        region: Unknown
+  - product_name: for STECS
+    description: UCM-S for STECS. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: UCM-S
+    component_category: throttles
+    component_sub_category: throttle-accessories
+    product_url: https://flightsimcontrols.com/product/ucm-for-stecs/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2024/01/UCM_Standard_1200_01.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 133
+        currency: EUR
+        url: https://flightsimcontrols.com/product/ucm-for-stecs/
+        region: Unknown
   - product_name: Alloy TH1
     description: Redbird Alloy TH1. single-engine vernier throttle quadrant. Active related
       product on Redbird Alloy page. Vernier-style throttle quadrant for single-engine

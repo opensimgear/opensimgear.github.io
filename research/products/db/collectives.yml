@@ -1,8 +1,8 @@
 commercial:
   - product_name: Black Shark Collective System for Desktop
-    description: "Black Shark Collective System for Desktop. helicopter collective /
-      throttle base. Listed on EU WINCTRL store; local stock not available in API
-      response. Supported devices: PC."
+    description: "Black Shark Collective System for Desktop. helicopter collective / throttle
+      base. Listed on EU WINCTRL store; local stock not available in API response. Supported
+      devices: PC."
     manufacturer: WINCTRL
     component_category: collectives
     component_sub_category: collective-base
@@ -15,8 +15,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=330
         region: EU
   - product_name: Gemini Throttle/Collective Base
-    description: Gemini Throttle/Collective Base. throttle/collective base. Active EU
-      WINCTRL store listing; total_stock 4 from API. Gemini Throttle/Collective Base x1.
+    description: Gemini Throttle/Collective Base. throttle/collective base. Active EU WINCTRL
+      store listing; total_stock 4 from API. Gemini Throttle/Collective Base x1.
     manufacturer: WINCTRL
     component_category: collectives
     component_sub_category: collective-base
@@ -29,9 +29,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=326
         region: EU
   - product_name: Helicopter Simulator Collective with Twist Throttle
-    description: Digital Reality Helicopter Simulator Collective with Twist Throttle.
-      standalone helicopter collective. Active product page found. Collective control
-      with twist throttle.
+    description: Digital Reality Helicopter Simulator Collective with Twist Throttle. standalone
+      helicopter collective. Active product page found. Collective control with twist
+      throttle.
     manufacturer: Digital Reality / SimulationDevices.com
     component_category: collectives
     component_sub_category: collective-set
@@ -45,8 +45,8 @@ commercial:
         region: Unknown
   - product_name: KA-50 Black Shark Metal Collective Grip
     description: KA-50 Black Shark Metal Collective Grip. collective grip. Suspended on EU
-      WINCTRL store; listed in catalog but not normally purchasable. KA-50 Black Shark
-      Metal Collective Grip x1.
+      WINCTRL store; listed in catalog but not normally purchasable. KA-50 Black Shark Metal
+      Collective Grip x1.
     manufacturer: WINCTRL
     component_category: collectives
     component_sub_category: collective-grip
@@ -59,9 +59,9 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=325
         region: EU
   - product_name: PUMA X 2025 - inspired by Airbus
-    description: Pro Flight Trainer PUMA X 2025 A-Style. complete helicopter control set
-      with collective. Active configurable product on Pro Flight Trainer store.
-      Single-pilot 8-axis HID USB helicopter control device.
+    description: Pro Flight Trainer PUMA X 2025 A-Style. complete helicopter control set with
+      collective. Active configurable product on Pro Flight Trainer store. Single-pilot
+      8-axis HID USB helicopter control device.
     manufacturer: Pro Flight Trainer LLC
     component_category: collectives
     component_sub_category: collective-set
@@ -74,10 +74,10 @@ commercial:
         url: https://pro-flight-trainer.com/product/a-style-puma-x/
         region: EU
   - product_name: Rotor TCS Plus Base [UPGRADED] plus Dual-SF Collective Grip
-    description: VIRPIL Rotor TCS Plus with Dual-SF Grip. modular attack-helicopter
-      collective. Backorder on VIRPIL US components on 2026-04-29. Rotor TCS Plus base
-      with counter-balance, adjustable clutch, travel limiter, twist throttle axis, idle
-      button, and restrictor switch.
+    description: VIRPIL Rotor TCS Plus with Dual-SF Grip. modular attack-helicopter collective.
+      Backorder on VIRPIL US components on 2026-04-29. Rotor TCS Plus base with
+      counter-balance, adjustable clutch, travel limiter, twist throttle axis, idle button,
+      and restrictor switch.
     manufacturer: VIRPIL Controls
     component_category: collectives
     component_sub_category: collective-set
@@ -90,10 +90,10 @@ commercial:
         url: https://virpil-controls.us.com/vpc-dual-sf-collective-grip.html
         region: US
   - product_name: Rotor TCS Plus Base [UPGRADED] plus Hawk-60 Collective Grip
-    description: VIRPIL Rotor TCS Plus with Hawk-60 Grip. modular utility-helicopter
-      collective. Base backorder; Hawk-60 grip shown as backorder/stock incoming on
-      VIRPIL US. Rotor TCS Plus collective base with counter-balance, adjustable clutch,
-      twist throttle axis, idle button, and travel limiter.
+    description: VIRPIL Rotor TCS Plus with Hawk-60 Grip. modular utility-helicopter collective.
+      Base backorder; Hawk-60 grip shown as backorder/stock incoming on VIRPIL US. Rotor TCS
+      Plus collective base with counter-balance, adjustable clutch, twist throttle axis,
+      idle button, and travel limiter.
     manufacturer: VIRPIL Controls
     component_category: collectives
     component_sub_category: collective-set
@@ -121,9 +121,9 @@ commercial:
         url: https://virpil-controls.us.com/vpc-rotor-tcs-plus-base-upgraded.html
         region: US
   - product_name: WINCTRL Orion2 Black Shark Collective Combo
-    description: WINCTRL Orion2 Black Shark Collective Combo. helicopter collective /
-      throttle base. Listed on EU WINCTRL store; local stock not available in API
-      response. WINCTRL Orion2 Throttle Base.
+    description: WINCTRL Orion2 Black Shark Collective Combo. helicopter collective / throttle
+      base. Listed on EU WINCTRL store; local stock not available in API response. WINCTRL
+      Orion2 Throttle Base.
     manufacturer: WINCTRL
     component_category: collectives
     component_sub_category: collective-base
@@ -138,9 +138,9 @@ commercial:
 opensource:
   - project_name: Simchair MKIII
     description: Simchair MKIII. 3D-printable modular helicopter/flight control ecosystem.
-      Legacy but substantial public project. MKIII models and I2C controller
-      repositories are public; no GitHub releases observed. 3D-printable Simchair MKIII
-      models with source files and oriented STL files.
+      Legacy but substantial public project. MKIII models and I2C controller repositories
+      are public; no GitHub releases observed. 3D-printable Simchair MKIII models with
+      source files and oriented STL files.
     maker: hc625ma
     component_category: collectives
     component_sub_category: collective-set

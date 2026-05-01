@@ -20,8 +20,8 @@ description:
 3. Research live source link. Browse if data may be current, price/availability changed, or source attribution matters.
    - Prefer official vendor/product/collection pages.
    - Use Shopify `.js` endpoints when available: `https://host/products/<handle>.js`.
-   - For exact product lists on a vendor site, open shop/collection pages and product pages; avoid adding accessories
-     unless user asks.
+   - For exact product lists on a vendor site, open shop/collection pages and product pages; include simulator-specific
+     accessories, mounts, adapters, upgrade kits, replacement modules, and vendor accessory products.
 4. Decide add vs update:
    - Update existing manufacturer/product rows when same product already exists.
    - Add only missing products from requested link/scope.
@@ -76,7 +76,10 @@ For open-source projects, follow existing `opensource` rows in same category. Do
 - Mark uncertainty explicitly in description instead of omitting risk.
 - Do not add duplicates for mere variants unless the site sells them as distinct product lines and existing DB style
   supports separate rows.
-- Do not add accessory/service pages as products unless user explicitly requests those.
+- Include simulator-specific accessories, mounts, adapters, brackets, upgrade kits, replacement modules, and vendor
+  accessory products when they belong to a simulator component category.
+- Skip unrelated merch, warranty/service pages, generic cables, and non-simulator products unless already present or the
+  user explicitly requests those.
 
 ## Commands
 

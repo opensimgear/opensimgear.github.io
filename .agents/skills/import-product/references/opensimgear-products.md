@@ -5,9 +5,9 @@
 - Source YAML: `research/products/db/*.yml`
 - Generated database: `src/data/3rdparty-products.json`
 - Generated image map: `src/data/3rdparty-product-images.ts`
-- Image source cache: `scripts/3rdparty-product-image-sources.json`
+- Image source cache: `research/products/3rdparty-product-image-sources.json`
 - Product assets: `src/assets/products/*.webp`
-- Generator: `scripts/build-products-database.mjs`
+- Generator: `research/products/build-products-database.mjs`
 
 ## Generator Behavior
 
@@ -37,9 +37,9 @@ renaming an existing product, check generated id did not unexpectedly churn.
 The database is for simulator hardware/software. For vendor links with broad catalogs:
 
 - Include products relevant to simulation input, cockpit, display, motion, tactile, wind, VR/head tracking, seats/rigs,
-  or simulator software.
-- Skip merch, spare parts, cables, warranty, subscriptions, generic accessories, and unrelated gaming products unless
-  user asks.
+  simulator software, and simulator-specific accessories, mounts, adapters, upgrade kits, and replacement modules.
+- Skip unrelated merch, warranty, subscriptions, generic cables, generic accessories, and unrelated gaming products
+  unless already present or the user asks.
 - For bundles, add when sold as primary simulator product/bundle and existing DB has comparable bundle rows.
 
 ## Verification Checklist
@@ -47,5 +47,5 @@ The database is for simulator hardware/software. For vendor links with broad cat
 - `git status --short` before edits to spot unrelated user changes.
 - YAML parse all DB files.
 - `pnpm products:build` succeeds.
-- `rg -n "<new product name>|<new id>" research/products/db src/data/3rdparty-products.json src/data/3rdparty-product-images.ts scripts/3rdparty-product-image-sources.json`
+- `rg -n "<new product name>|<new id>" research/products/db src/data/3rdparty-products.json src/data/3rdparty-product-images.ts research/products/3rdparty-product-image-sources.json`
 - Diff new rows and generated assets only.

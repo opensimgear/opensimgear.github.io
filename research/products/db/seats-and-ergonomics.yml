@@ -1,4 +1,239 @@
 commercial:
+  - product_name: TR160 V5 Racing Simulator with Seat Slider Kit
+    description: Trak Racer TR160 V5. heavy-duty aluminum profile cockpit. current on official
+      US shop. 160 mm profile sim racing cockpit with seat slider kit.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-accessories
+    product_url: https://trakracer.com/products/tr160-v5
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR1605Blacke-cm05-min_d3dbb0cb-e499-4a52-81c5-abb112834010.png?v=1734837861
+    shops:
+      - name: Trak Racer
+        price: 730
+        currency: USD
+        url: https://trakracer.com/products/tr160-v5
+        region: US
+  - product_name: TR120S V2 Racing Simulator with Seat Slider Kit
+    description: Trak Racer TR120S V2. aluminum profile cockpit. current on official US shop.
+      120 mm profile cockpit with seat slider kit.
+    manufacturer: Trak Racer
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-accessories
+    product_url: https://trakracer.com/products/tr120s-v2-racing-simulator-new
+    picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR120S-BLKe02-min.png?v=1735332033
+    shops:
+      - name: Trak Racer
+        price: 570
+        currency: USD
+        url: https://trakracer.com/products/tr120s-v2-racing-simulator-new
+        region: US
+  - product_name: Bucket Seat Bracket Set
+    description: Sim Lab Bucket Seat Bracket Set. cockpit frame. listed on Sim Lab. The bucket
+      seat bracket set is made from durable 4 mm aluminum plates and features a versatile
+      design to fit any seat. These brackets are mounted using 4x M8 bolts on 40 mm, 45...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://sim-lab.eu/products/bucket-seat-bracket-set-sim-racing
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Seatbrackets_1.png?v=1744706384
+    shops:
+      - name: Sim Lab
+        price: 39.95
+        currency: USD
+        url: https://sim-lab.eu/products/bucket-seat-bracket-set-sim-racing
+        region: Unknown
+  - product_name: Sim Gloves
+    description: F33L Sim Gloves. rig mounts. listed on Sim Lab. F33L Sim Gloves are designed
+      for sim racers, offering breathable, flexible materials for enhanced control and
+      comfort. The ergonomic rubber grip reduces hand fatigue during inte...
+    manufacturer: F33L
+    component_category: seats-and-ergonomics
+    component_sub_category: sim-apparel
+    product_url: https://sim-lab.eu/products/f33l-sim-racing-gloves
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/F33LSimGloves.jpg?v=1744273006
+    shops:
+      - name: Sim Lab
+        price: 39.95
+        currency: USD
+        url: https://sim-lab.eu/products/f33l-sim-racing-gloves
+        region: Unknown
+  - product_name: Sim Seatbelt 4-point Harness
+    description: Sim Lab Sim Seatbelt 4-point Harness. cockpit frame. listed on Sim Lab. To
+      maximize the immersion of driving your favorite car in the sim, consider adding a
+      4-point seat belt harness. This real-life Sim-Lab branded harness bolts on any
+      aluminum cock...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-accessories
+    product_url: https://sim-lab.eu/products/seatbelt-4-point-harness-sim-racing
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/SLA100_SimSeatbelt4-pointHarness_Black.jpg?v=1744285547
+    shops:
+      - name: Sim Lab
+        price: 129
+        currency: USD
+        url: https://sim-lab.eu/products/seatbelt-4-point-harness-sim-racing
+        region: Unknown
+  - product_name: Sim-Lab Tee
+    description: Sim Lab Sim-Lab Tee. rig mounts. listed on Sim Lab. Race in style with the
+      everyday Sim-lab T-shirt featuring a regular fit, round neck, and 100% cotton to keep
+      you cool on every virtual lap. Specifications Size S, M, L, XL, XXL...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: sim-apparel
+    product_url: https://sim-lab.eu/products/sim-lab-tee-sim-racing
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/products/sltee_1.jpg?v=1744711802
+    shops:
+      - name: Sim Lab
+        price: 29.95
+        currency: USD
+        url: https://sim-lab.eu/products/sim-lab-tee-sim-racing
+        region: Unknown
+  - product_name: Sparco Evo L QRT
+    description: Sim Lab Sparco Evo L QRT. cockpit frame. listed on Sim Lab. The Sparco Evo L
+      QRT Motorsport bucket seat has been designed based on the Sparco Rev with the new
+      Sparco QRT technology. The shell is made from fiberglass with strengthening ri...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://sim-lab.eu/products/sparco-evo-l-qrt-sim-racing-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/SparcoEVOL_11_6cecdc74-e6ea-4075-b594-b188bc4e05ee.jpg?v=1745926048
+    shops:
+      - name: Sim Lab
+        price: 615
+        currency: USD
+        url: https://sim-lab.eu/products/sparco-evo-l-qrt-sim-racing-seat
+        region: Unknown
+  - product_name: Sparco Pro 2000 QRT
+    description: Sim Lab Sparco Pro 2000 QRT. rig mounts. listed on Sim Lab. The Pro 2000 QRT is
+      the latest version of the best-selling seat from Sparco, used by professional racers
+      worldwide. The Pro 2000 QRT is made with all-new QRT Technology, resulti...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://sim-lab.eu/products/sparco-pro-2000-qrt-sim-racing
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/SparcoPro2000QRT_e34db46b-25ad-4ecb-aeb5-b93514f5b67c.jpg?v=1744290386
+    shops:
+      - name: Sim Lab
+        price: 629
+        currency: USD
+        url: https://sim-lab.eu/products/sparco-pro-2000-qrt-sim-racing
+        region: Unknown
+  - product_name: Sparco R100
+    description: Sim Lab Sparco R100. cockpit frame. listed on Sim Lab. The Sparco R100 sport
+      seat is lightweight, compact, and fits most cars. It includes backrest harness slots
+      for a race harness or seatbelt, and a smooth recline mechanism with co...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://sim-lab.eu/products/sparco-r100-sim-racing-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/sparcor100_1.jpg?v=1744712043
+    shops:
+      - name: Sim Lab
+        price: 389
+        currency: USD
+        url: https://sim-lab.eu/products/sparco-r100-sim-racing-seat
+        region: Unknown
+  - product_name: Sparco R333
+    description: Sim Lab Sparco R333. cockpit frame. listed on Sim Lab. Description Tubular
+      frame Double adjustment and reclining lever Bottom fixing (271 x 345)* Compatible with
+      3 or 4 fixing point harnesses * Base mounted. This means no additional...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://sim-lab.eu/products/sparco-r333-sim-racing-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/sparcor333_1_826b75e0-b4d1-48fe-8769-fd2124f2f5c1.jpg?v=1745926004
+    shops:
+      - name: Sim Lab
+        price: 519
+        currency: USD
+        url: https://sim-lab.eu/products/sparco-r333-sim-racing-seat
+        region: Unknown
+  - product_name: Sparco REV QRT
+    description: "Sim Lab Sparco REV QRT. cockpit frame. listed on Sim Lab. Specifications
+      Material: QRT ultra-compact seat self-extinguishing fabric lining Non-slip fabric for
+      shoulder and seat restraint Divisible leg rest and seat cushion Fixed using..."
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://sim-lab.eu/products/sparco-rev-qrt-sim-racing-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/SLR008_SparcoREVQRT.jpg?v=1744290125
+    shops:
+      - name: Sim Lab
+        price: 439
+        currency: USD
+        url: https://sim-lab.eu/products/sparco-rev-qrt-sim-racing-seat
+        region: Unknown
+  - product_name: Sparco Seat Slider
+    description: Sim Lab Sparco Seat Slider. cockpit frame. listed on Sim Lab. The seat slider
+      can be used in combination with the Sim-Lab seat brackets. See below how this works.
+      The width of the seat slider can be adjusted by slightly bending the middle...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-accessories
+    product_url: https://sim-lab.eu/products/sparco-seat-slider
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Seat_slider_01.jpg?v=1744706446
+    shops:
+      - name: Sim Lab
+        price: 39.95
+        currency: USD
+        url: https://sim-lab.eu/products/sparco-seat-slider
+        region: Unknown
+  - product_name: Gloves Long M
+    description: Heusinkveld Gloves Long M. rig mounts. listed on Heusinkveld. All you need is
+      glove 😉 Add Heusinkveld gloves to your look and you are good to go!.
+    manufacturer: Heusinkveld
+    component_category: seats-and-ergonomics
+    component_sub_category: sim-apparel
+    product_url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-m/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/08/long-gloves-website-image.png
+    shops:
+      - name: Heusinkveld
+        price: 39
+        currency: EUR
+        url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-m/
+        region: Unknown
+  - product_name: Gloves Long XL
+    description: Heusinkveld Gloves Long XL. rig mounts. listed on Heusinkveld. All you need is
+      glove 😉 Add Heusinkveld gloves to your look and you are good to go!.
+    manufacturer: Heusinkveld
+    component_category: seats-and-ergonomics
+    component_sub_category: sim-apparel
+    product_url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-xl/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/08/long-gloves-website-image.png
+    shops:
+      - name: Heusinkveld
+        price: 39
+        currency: EUR
+        url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-xl/
+        region: Unknown
+  - product_name: Gloves Short M
+    description: Heusinkveld Gloves Short M. rig mounts. listed on Heusinkveld. All you need is
+      glove 😉 Add Heusinkveld gloves to your look and you are good to go!.
+    manufacturer: Heusinkveld
+    component_category: seats-and-ergonomics
+    component_sub_category: sim-apparel
+    product_url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-m/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/08/short-gloves-website-image.png
+    shops:
+      - name: Heusinkveld
+        price: 39
+        currency: EUR
+        url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-m/
+        region: Unknown
+  - product_name: Gloves Short XL
+    description: Heusinkveld Gloves Short XL. rig mounts. listed on Heusinkveld. All you need is
+      glove 😉 Add Heusinkveld gloves to your look and you are good to go!.
+    manufacturer: Heusinkveld
+    component_category: seats-and-ergonomics
+    component_sub_category: sim-apparel
+    product_url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-xl/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/08/short-gloves-website-image.png
+    shops:
+      - name: Heusinkveld
+        price: 39
+        currency: EUR
+        url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-xl/
+        region: Unknown
   - product_name: Elite ES1 Seat
     description: Next Level Racing Elite ES1 Seat. fixed sim racing seat. in stock on official
       store. Fixed Elite-series sim racing seat developed from motorsport and sim feedback.

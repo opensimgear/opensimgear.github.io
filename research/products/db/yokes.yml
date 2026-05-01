@@ -1,4 +1,19 @@
 commercial:
+  - product_name: Yoke Deck
+    description: Sim Lab Yoke Deck. rig mounts. listed on Sim Lab. The Yoke Deck offers a stable
+      platform for flight yokes of all sizes, ensuring smooth and realistic control.
+      Ergonomically designed for comfort and quick to set up, it’s the per...
+    manufacturer: Sim Lab
+    component_category: yokes
+    component_sub_category: yoke-accessories
+    product_url: https://sim-lab.eu/products/flight-sim-yoke-deck
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/yokedeck_1.png?v=1744703375
+    shops:
+      - name: Sim Lab
+        price: 69.95
+        currency: USD
+        url: https://sim-lab.eu/products/flight-sim-yoke-deck
+        region: Unknown
   - product_name: Alloy YK1
     description: Redbird Alloy YK1. professional-grade GA yoke. Active Redbird product;
       contact-sales flow on product page. Metal construction.
@@ -37,8 +52,8 @@ commercial:
     picture_url: https://brunner-innovation.swiss/wp-content/uploads/2018/08/download-clsengyoke.jpg
     shops: []
   - product_name: Flight Yoke System
-    description: Logitech Flight Yoke System. desktop yoke with bundled throttle quadrant.
-      In stock on Logitech US on 2026-04-29. Yoke plus throttle quadrant bundle.
+    description: Logitech Flight Yoke System. desktop yoke with bundled throttle quadrant. In
+      stock on Logitech US on 2026-04-29. Yoke plus throttle quadrant bundle.
     manufacturer: Logitech G
     component_category: yokes
     component_sub_category: yoke-panel
@@ -51,9 +66,9 @@ commercial:
         url: https://www.logitechg.com/en-us/shop/p/flight-simulator-yoke-system
         region: US
   - product_name: Fulcrum One Yoke
-    description: Fulcrum One Yoke. enthusiast desktop/cockpit yoke. Active product page
-      found; detailed price/stock not reliably captured. Removable solid desktop clamp
-      and rubber feet.
+    description: Fulcrum One Yoke. enthusiast desktop/cockpit yoke. Active product page found;
+      detailed price/stock not reliably captured. Removable solid desktop clamp and rubber
+      feet.
     manufacturer: Fulcrum Sim
     component_category: yokes
     component_sub_category: flight-yoke
@@ -71,10 +86,10 @@ commercial:
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/TCA-Yoke-Boeing-PC-XBOX-768x768-1.webp
     shops: []
   - product_name: VelocityOne Flight Universal Control System
-    description: Turtle Beach VelocityOne Flight. integrated yoke, throttle quadrant, trim,
-      and status panel. Active on Turtle Beach US. All-in-one yoke with throttle
-      quadrant, trim wheel, rudder/brake finger controls, flight management display, and
-      status indicator panel.
+    description: Turtle Beach VelocityOne Flight. integrated yoke, throttle quadrant, trim, and
+      status panel. Active on Turtle Beach US. All-in-one yoke with throttle quadrant, trim
+      wheel, rudder/brake finger controls, flight management display, and status indicator
+      panel.
     manufacturer: Turtle Beach
     component_category: yokes
     component_sub_category: yoke-panel
@@ -88,8 +103,8 @@ commercial:
         region: US
   - product_name: YOKO+
     description: Virtual Fly YOKO+. high-end GA yoke. In stock on Virtual Fly page on
-      2026-04-29. Hall Effect contactless sensors with 12-bit / 4096-value resolution
-      per axis.
+      2026-04-29. Hall Effect contactless sensors with 12-bit / 4096-value resolution per
+      axis.
     manufacturer: Virtual Fly
     component_category: yokes
     component_sub_category: flight-yoke
@@ -103,10 +118,10 @@ commercial:
         region: EU
 opensource:
   - project_name: Arduino_FFB_Yoke
-    description: "Arduino FFB Yoke. Arduino-based force-feedback flight yoke. Active
-      advanced DIY project. Latest GitHub release observed: Version 2.0.0 on 2025-03-21.
-      README says project is still in development. Force-feedback yoke for flight
-      simulators using Arduino."
+    description: "Arduino FFB Yoke. Arduino-based force-feedback flight yoke. Active advanced
+      DIY project. Latest GitHub release observed: Version 2.0.0 on 2025-03-21. README says
+      project is still in development. Force-feedback yoke for flight simulators using
+      Arduino."
     maker: gagagu
     component_category: yokes
     component_sub_category: ffb-yoke

@@ -118,21 +118,6 @@ commercial:
         currency: EUR
         url: https://flightsimcontrols.com/product/gladiator-nxt-evo-wwii-combat-edition/
         region: EU
-  - product_name: Gladiator NXT EVO Omni Throttle
-    description: VKB FSC Europe Gladiator NXT EVO Omni Throttle. VKB flightstick base, grip, or
-      complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. Complete
-      Gladiator NXT EVO Omni Throttle with SCG Premium Grip (Left).
-    manufacturer: VKB-Sim
-    component_category: joysticks
-    component_sub_category: joystick-base
-    product_url: https://flightsimcontrols.com/product/gladiator-nxt-evo-omni-throttle/
-    picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/73_GNX-EVOOMNI-THRT-L-P_800_1.jpg
-    shops:
-      - name: VKB FSC Europe
-        price: 209
-        currency: EUR
-        url: https://flightsimcontrols.com/product/gladiator-nxt-evo-omni-throttle/
-        region: EU
   - product_name: Gladiator NXT EVO Space Combat Edition - Right Hand (US)
     description: VKB Gladiator NXT EVO Space Combat Edition. enthusiast desktop cam-gimbal
       joystick. Active on VKBSIM US store. GNX EVO base with Space Combat Grip.
@@ -1027,6 +1012,342 @@ commercial:
         currency: USD
         url: https://www.thrustmaster.com/en-us/products/usb-joystick/
         region: US
+  - product_name: Joystick Extension Rod
+    description: Joystick Extension Rod. flight-control mounts and accessories. Active EU
+      WINCTRL store listing; total_stock 4 from API. Joystick Extension Rod.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: joystick-accessories
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=311
+    picture_url: https://eu.winctrl.com/static/ipfs/QmQV3FYkMUheJyfioLm2Nkn9DrFYcnA9bgDBmxyYm443X6
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=311
+        region: EU
+  - product_name: Joystick Z-Axis module
+    description: Joystick Z-Axis module. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Joystick
+      Z-Axis module.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: joystick-accessories
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=312
+    picture_url: https://eu.winctrl.com/static/ipfs/QmdBVVSZdVkf8VACdhSJWkH9H8tCtY5gDqWXtcU4rfkJAV
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=312
+        region: EU
+  - product_name: Joystick / HOTAS Desk Mount
+    description: MONSTERTECH Joystick / HOTAS Desk Mount. desk-mounted flight control mount. in
+      stock on official EU store. Aluminum mount for joystick, throttle, and HOTAS systems.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://www.monster.tech/en/product/joystick-hotas-table-mount/
+    picture_url: https://www.monster.tech/wp-content/uploads/2015/08/mtsim_desk_mount_tm_ava_03b-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 105.04
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-table-mount/
+        region: EU
+      - name: Sim Lab
+        price: 47.95
+        currency: USD
+        url: https://sim-lab.eu/products/flight-sim-joystick-mount
+        region: Unknown
+  - product_name: Joystick / HOTAS Desk Mount Long
+    description: MONSTERTECH Joystick / HOTAS Desk Mount Long. extended desk-mounted flight
+      control mount. in stock on official EU store. Long aluminum mount for joysticks with
+      extensions and HOTAS systems.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://www.monster.tech/en/product/joystick-hotas-table-mount-long/
+    picture_url: https://www.monster.tech/wp-content/uploads/2017/10/tbm_long_b_01b-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 116.81
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-table-mount-long/
+        region: EU
+  - product_name: Joystick / HOTAS Chair Mount
+    description: MONSTERTECH Joystick / HOTAS Chair Mount. chair-mounted flight control mount.
+      in stock on official EU store. Mount module for attaching a joystick or throttle to a
+      chair-based flight setup.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://www.monster.tech/en/product/joystick-hotas-chair-mount-single/
+    picture_url: https://www.monster.tech/wp-content/uploads/2018/03/monstertech_hotas_chair_mount_product.jpg
+    shops:
+      - name: Monstertech
+        price: 91.6
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-chair-mount-single/
+        region: EU
+  - product_name: Joystick / HOTAS Rail Mount
+    description: MONSTERTECH Joystick / HOTAS Rail Mount. rail-mounted flight control mount. in
+      stock on official EU store. Mount for attaching joystick or throttle controls to a
+      slide rail.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://www.monster.tech/en/product/joystick-hotas-rail-mount/
+    picture_url: https://www.monster.tech/wp-content/uploads/2022/03/monstertech_rail_mount_warthog_joystick_01-1-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 116.81
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-rail-mount/
+        region: EU
+  - product_name: Joystick / HOTAS Rail Mount Long
+    description: MONSTERTECH Joystick / HOTAS Rail Mount Long. extended rail-mounted flight
+      control mount. in stock on official EU store. Long rail mount for joysticks with
+      extensions.
+    manufacturer: MONSTERTECH / MTSIM
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://www.monster.tech/en/product/joystick-hotas-rail-mount-long-version/
+    picture_url: https://www.monster.tech/wp-content/uploads/2022/03/monstertech_schienenhalterung_rail_mount_lang_mit_joystick_01b-scaled.jpg
+    shops:
+      - name: Monstertech
+        price: 133.61
+        currency: EUR
+        url: https://www.monster.tech/en/product/joystick-hotas-rail-mount-long-version/
+        region: EU
+  - product_name: Super Libra Desk Mount
+    description: Super Libra Desk Mount. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Libra
+      Desk Mount.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=309
+    picture_url: https://eu.winctrl.com/static/ipfs/QmXP2BkkJDkEhLz5yLA7YeTbXuukGUF6zBnHBiyHzwjGVT
+    shops:
+      - name: WINCTRL EU
+        price: 999999
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=309
+        region: EU
+  - product_name: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit
+    description: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit. flight-control
+      mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API.
+      WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=370
+    picture_url: https://eu.winctrl.com/static/ipfs/Qmen1expyzeVxexrYHGNhgkiJbvykXxQNu6romTg8gbJLH
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=370
+        region: EU
+  - product_name: Aviation Cams Kit
+    description: Flightsimcontrols Aviation Cams Kit. rig mounts. listed on Flightsimcontrols.
+      Meant for customers who wish to upgrade their existing VKB Gladiator Pro or Gunfighter
+      to the latest cams standard.
+    manufacturer: Flightsimcontrols
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://flightsimcontrols.com/product/aviation-cams-kit/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2020/01/Avia-Kit.png
+    shops:
+      - name: Flightsimcontrols
+        price: 10.5
+        currency: EUR
+        url: https://flightsimcontrols.com/product/aviation-cams-kit/
+        region: Unknown
+  - product_name: Combo Cams Kit
+    description: Flightsimcontrols Combo Cams Kit. rig mounts. listed on Flightsimcontrols.
+      Meant for customers who wish to upgrade their existing VKB Gladiator Pro or Gunfighter
+      to the latest cams standard.
+    manufacturer: Flightsimcontrols
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://flightsimcontrols.com/product/combo-cams-kit/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2020/01/Cams-combo-kit.png
+    shops:
+      - name: Flightsimcontrols
+        price: 15
+        currency: EUR
+        url: https://flightsimcontrols.com/product/combo-cams-kit/
+        region: Unknown
+  - product_name: Full Mk.III upgrade set for Gunfighter Mk.I / Mk.II
+    description: Flightsimcontrols Full Mk.III upgrade set for Gunfighter Mk.I / Mk.II. rig
+      mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: Flightsimcontrols
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://flightsimcontrols.com/product/full-mk-iii-upgrade-set-for-gunfighter/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2020/06/full-upgrade-set-mk3_1.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 93
+        currency: EUR
+        url: https://flightsimcontrols.com/product/full-mk-iii-upgrade-set-for-gunfighter/
+        region: Unknown
+  - product_name: Gladiator NXT to EVO Upgrade Kit
+    description: Flightsimcontrols Gladiator NXT to EVO Upgrade Kit. rig mounts. listed on
+      Flightsimcontrols. Meant for customers who wish to upgrade their existing Gladiator
+      NXT joystick to the gimbal of the Gladiator NXT EVO to take advantage of the ball
+      bearings and adjustable dry cl...
+    manufacturer: Flightsimcontrols
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://flightsimcontrols.com/product/gladiator-nxt-to-evo-upgrade-kit/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/07/GNX-EVO-Upgrade_shell_800_1.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 69
+        currency: EUR
+        url: https://flightsimcontrols.com/product/gladiator-nxt-to-evo-upgrade-kit/
+        region: Unknown
+  - product_name: Module to Gladiator NXT base (L) Reinforcing Plate
+    description: GNX Module to Gladiator NXT base (L) Reinforcing Plate. rig mounts. listed on
+      Flightsimcontrols. Official shop listing.
+    manufacturer: GNX
+    component_category: joysticks
+    component_sub_category: joystick-accessories
+    product_url: https://flightsimcontrols.com/product/gnx-module-to-gladiator-nxt-base-l-reinforcing-plate/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/10/L_metall_4SH_750.webp
+    shops:
+      - name: Flightsimcontrols
+        price: 6.3
+        currency: EUR
+        url: https://flightsimcontrols.com/product/gnx-module-to-gladiator-nxt-base-l-reinforcing-plate/
+        region: Unknown
+  - product_name: Module to Gladiator NXT base (R) Reinforcing Plate
+    description: GNX Module to Gladiator NXT base (R) Reinforcing Plate. rig mounts. listed on
+      Flightsimcontrols. Official shop listing.
+    manufacturer: GNX
+    component_category: joysticks
+    component_sub_category: joystick-accessories
+    product_url: https://flightsimcontrols.com/product/gnx-module-to-gladiator-nxt-base-r-reinforcing-plate/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/10/R_metall_4SH_750.webp
+    shops:
+      - name: Flightsimcontrols
+        price: 6.3
+        currency: EUR
+        url: https://flightsimcontrols.com/product/gnx-module-to-gladiator-nxt-base-r-reinforcing-plate/
+        region: Unknown
+  - product_name: Gunfighter Grip Fasteners (Set of 2)
+    description: Flightsimcontrols Gunfighter Grip Fasteners (Set of 2). rig mounts. listed on
+      Flightsimcontrols. Official shop listing.
+    manufacturer: Flightsimcontrols
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://flightsimcontrols.com/product/gunfighter-grip-fasteners-set-of-2/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/11/Rusk1.webp
+    shops:
+      - name: Flightsimcontrols
+        price: 8.5
+        currency: EUR
+        url: https://flightsimcontrols.com/product/gunfighter-grip-fasteners-set-of-2/
+        region: Unknown
+  - product_name: Gunfighter Mk.III Base (no grip) Open Box
+    description: Flightsimcontrols Gunfighter Mk.III Base (no grip) Open Box. rig mounts. listed
+      on Flightsimcontrols. Official shop listing.
+    manufacturer: Flightsimcontrols
+    component_category: joysticks
+    component_sub_category: joystick-accessories
+    product_url: https://flightsimcontrols.com/product/gunfighter-mk-iii-base-no-grip-ob/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/05/GF_stand-alone-750.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 215
+        currency: EUR
+        url: https://flightsimcontrols.com/product/gunfighter-mk-iii-base-no-grip-ob/
+        region: Unknown
+  - product_name: Space Cams Kit
+    description: Flightsimcontrols Space Cams Kit. rig mounts. listed on Flightsimcontrols.
+      Official shop listing.
+    manufacturer: Flightsimcontrols
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://flightsimcontrols.com/product/space-cams-kit/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2020/01/Space-Kit.png
+    shops:
+      - name: Flightsimcontrols
+        price: 10.5
+        currency: EUR
+        url: https://flightsimcontrols.com/product/space-cams-kit/
+        region: Unknown
+  - product_name: for Gunfighter
+    description: UCM-L for Gunfighter. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: UCM-L
+    component_category: joysticks
+    component_sub_category: joystick-accessories
+    product_url: https://flightsimcontrols.com/product/ucm-l-for-gunfighter/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2024/10/UCM-L-GF_1200_01.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 165
+        currency: EUR
+        url: https://flightsimcontrols.com/product/ucm-l-for-gunfighter/
+        region: Unknown
+  - product_name: for Gladiator
+    description: UCM-S for Gladiator. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: UCM-S
+    component_category: joysticks
+    component_sub_category: joystick-accessories
+    product_url: https://flightsimcontrols.com/product/ucm-s-for-gladiator/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2024/04/UCM-S-GL_800_01.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 139
+        currency: EUR
+        url: https://flightsimcontrols.com/product/ucm-s-for-gladiator/
+        region: Unknown
+  - product_name: for Gunfighter
+    description: UCM-S for Gunfighter. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: UCM-S
+    component_category: joysticks
+    component_sub_category: joystick-accessories
+    product_url: https://flightsimcontrols.com/product/ucm-s-for-gunfighter/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2024/01/GF-S_1200_02.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 139
+        currency: EUR
+        url: https://flightsimcontrols.com/product/ucm-s-for-gunfighter/
+        region: Unknown
+  - product_name: Upgrade Kit Lite for Gladiator Mk.II
+    description: Flightsimcontrols Upgrade Kit Lite for Gladiator Mk.II. rig mounts. listed on
+      Flightsimcontrols. Upgrade kit to convert VKB-Sim Gladiator Mk.II to became compatible
+      with swappable VKB-sim grips with rev.B socket.
+    manufacturer: Flightsimcontrols
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://flightsimcontrols.com/product/gladiator-upgrade-kit-lite-for-gladiator-mk-ii/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2019/11/Gladiator-Upgrade-Kit-Lite.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 25
+        currency: EUR
+        url: https://flightsimcontrols.com/product/gladiator-upgrade-kit-lite-for-gladiator-mk-ii/
+        region: Unknown
+  - product_name: VKB-Sim Gladiator Mk.II Joystick
+    description: Flightsimcontrols VKB-Sim Gladiator Mk.II Joystick. rig mounts. listed on
+      Flightsimcontrols. Official shop listing.
+    manufacturer: Flightsimcontrols
+    component_category: joysticks
+    component_sub_category: joystick-accessories
+    product_url: https://flightsimcontrols.com/product/vkb-sim-gladiator-mk-ii-joystick/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2017/09/GladMkIIFront.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 94
+        currency: EUR
+        url: https://flightsimcontrols.com/product/vkb-sim-gladiator-mk-ii-joystick/
+        region: Unknown
 opensource:
   - project_name: Open Joystick
     description: Open Joystick FFB. open-source force-feedback joystick concept. Early-stage

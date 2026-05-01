@@ -8,7 +8,7 @@ import { promisify } from 'node:util';
 import { parse as parseYaml } from 'yaml';
 import sharp from 'sharp';
 
-const rootDir = fileURLToPath(new URL('../', import.meta.url));
+const rootDir = fileURLToPath(new URL('../../', import.meta.url));
 const yamlDir = join(rootDir, 'research/products/db');
 const jsonPath = join(rootDir, 'src/data/3rdparty-products.json');
 const distJsonPath = join(rootDir, 'dist/products/products.json');
