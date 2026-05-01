@@ -207,18 +207,18 @@ function shouldImport(product) {
 
 function inferCategory(name) {
   if (/dashboard|display|ddu/i.test(name)) {
-    return { category: 'button-boxes-and-panels', subCategory: 'Control panel' };
+    return { category: 'button-boxes-and-panels', subCategory: 'control-panel' };
   }
 
   if (/b16|b24|button\s*plate/i.test(name)) {
-    return { category: 'steering-wheels', subCategory: 'Wheel electronics' };
+    return { category: 'steering-wheels', subCategory: 'wheel-electronics' };
   }
 
   if (/sabelt|sw1/i.test(name)) {
-    return { category: 'steering-wheels', subCategory: 'GT wheel' };
+    return { category: 'steering-wheels', subCategory: 'gt-wheel' };
   }
 
-  return { category: 'steering-wheels', subCategory: 'Formula wheel' };
+  return { category: 'steering-wheels', subCategory: 'formula-wheel' };
 }
 
 function buildDescription(name, subCategory, html, metaDescription) {
@@ -226,7 +226,7 @@ function buildDescription(name, subCategory, html, metaDescription) {
   const detail = metaDescription
     ? ` ${sentence(cleanText(metaDescription.replace(/^Ascher Racing\s*/i, '')))}`
     : '';
-  return `Ascher Racing ${name}. ${subCategory.toLowerCase()}. ${stock} on official shop.${detail}`.trim();
+  return `Ascher Racing ${name}. ${labelFromSlug(subCategory).toLowerCase()}. ${stock} on official shop.${detail}`.trim();
 }
 
 function stockText(html) {
@@ -489,6 +489,19 @@ function decodeHtml(value) {
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&nbsp;/g, ' ');
+}
+
+function labelFromSlug(value) {
+  const acronyms = {
+    ffb: 'FFB',
+    gt: 'GT',
+    vr: 'VR',
+  };
+
+  return value
+    .split('-')
+    .map((part, index) => acronyms[part] ?? (index === 0 ? part.charAt(0).toUpperCase() + part.slice(1) : part))
+    .join(' ');
 }
 
 function sentence(value) {

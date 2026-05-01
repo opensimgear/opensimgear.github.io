@@ -5,7 +5,7 @@ commercial:
       through current global channel.
     manufacturer: CAMMUS
     component_category: shifters
-    component_sub_category: H-pattern shifter
+    component_sub_category: h-pattern-shifter
     product_url: https://cammusracing.com/product/cammus-h-shifter/
     picture_url: https://cammusracing.com/wp-content/uploads/2025/08/CAMMUS-H-Shifter-05.png
     shops:
@@ -21,7 +21,7 @@ commercial:
       push-pull sequential shift action.
     manufacturer: Apex Sim Racing
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://www.apexsimracing.com/en-de/products/apex-sim-racing-push-pull-sequential-rally-paddle-shifter
     picture_url: https://cdn.shopify.com/s/files/1/0031/7987/2365/files/IMG_6062.jpg?v=1714414832
     shops:
@@ -37,7 +37,7 @@ commercial:
       brake-bias adjustment.
     manufacturer: Jinx Shifters
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://jinxshifters.com/products/jinx-shifter-combo
     picture_url: https://cdn.shopify.com/s/files/1/0112/7635/3632/products/image_28582a4a-552c-4259-b9cf-0590722d6247.jpg?v=1626683987
     shops:
@@ -53,7 +53,7 @@ commercial:
       brake-bias adjustment.
     manufacturer: Jinx Shifters
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://jinxshifters.com/products/full-black-combo-unit
     picture_url: https://cdn.shopify.com/s/files/1/0112/7635/3632/products/IMG_7521.jpg?v=1585195503
     shops:
@@ -69,7 +69,7 @@ commercial:
       knobs and 12-step ARB/brake-bias adjustment.
     manufacturer: Jinx Shifters
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://jinxshifters.com/products/v3-jinx-arb-shifter-brake-bias-gaming-combo-silver
     picture_url: https://cdn.shopify.com/s/files/1/0112/7635/3632/products/IMG_6096_2.jpg?v=1670196589
     shops:
@@ -84,7 +84,7 @@ commercial:
       profiles, quick-adjust tension, and Hall-sensor technology.
     manufacturer: Sim-Lab
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://sim-lab.eu/en-de/products/sequential-shifter-sq1
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/sq1shifter_1.png?v=1744704979
     shops:
@@ -99,7 +99,7 @@ commercial:
       paddle and wheelbase mounting compatibility.
     manufacturer: Sim-Lab
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://sim-lab.eu/en-de/products/push-pull-rally-shifter-sim-racing
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/pushpull_1.png?v=1744711353
     shops:
@@ -114,7 +114,7 @@ commercial:
       with ClubSport USB Adapter included.
     manufacturer: Fanatec
     component_category: shifters
-    component_sub_category: Hybrid shifter
+    component_sub_category: hybrid-shifter
     product_url: https://www.fanatec.com/eu/en/p/add-ons/crd-9040002-ww/clubsport-shifter-sq
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Add-ons/CSS_SQ/CSS_SQ-01.png
     shops:
@@ -129,7 +129,7 @@ commercial:
       Logitech G racing wheels.
     manufacturer: Logitech G
     component_category: shifters
-    component_sub_category: H-pattern shifter
+    component_sub_category: h-pattern-shifter
     product_url: https://www.logitechg.com/en-us/products/driving/driving-force-shifter.html
     picture_url: https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/driving-force-shifter/shifter-gallery-1.png
     shops:
@@ -143,7 +143,7 @@ commercial:
       in stock on official shop. Hybrid H-pattern/sequential shifter.
     manufacturer: Simagic
     component_category: shifters
-    component_sub_category: Hybrid shifter
+    component_sub_category: hybrid-shifter
     product_url: https://simagic.com/products/ds-8x-shifter
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/DS-8X_transparent_base.png?v=1766649384
     shops:
@@ -158,7 +158,7 @@ commercial:
       aluminum.
     manufacturer: MOZA Racing
     component_category: shifters
-    component_sub_category: H-pattern shifter
+    component_sub_category: h-pattern-shifter
     product_url: https://mozaracing.com/product/moza-hgp-shifter/
     picture_url: https://mozaracing.com/cdn/shop/files/MOZA-HGP-Shifter-1-update.webp?v=1752228791&width=1920
     shops:
@@ -173,7 +173,7 @@ commercial:
       peak shift force, integrated mini button box, and opto-electronic sensors.
     manufacturer: Heusinkveld
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift/
     picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2024/12/8719689204419-1-Heusinkveld-MagShift-1-1.png
     shops:
@@ -188,7 +188,7 @@ commercial:
       adjustable magnetic shift system and up to 8 kg shift force.
     manufacturer: Heusinkveld
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift-mini/
     picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/04/Magshift-Mini-Heusinkveld1323_1024x768.png
     shops:
@@ -202,7 +202,7 @@ commercial:
       official shop. Sequential shifter with adjustable damping.
     manufacturer: Simagic
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://simagic.com/products/sequential-shifter-q1s
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Q1S_transparent_base.png?v=1766649338
     shops:
@@ -216,7 +216,7 @@ commercial:
       official shop. Sequential shifter sold in Q1 and Q1-P variants.
     manufacturer: Simagic
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://simagic.com/products/sequential-shifter-q1
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Q1_transparent_base.png?v=1766649236
     shops:
@@ -231,7 +231,7 @@ commercial:
       and high-strength steel.
     manufacturer: MOZA Racing
     component_category: shifters
-    component_sub_category: Hybrid shifter
+    component_sub_category: hybrid-shifter
     product_url: https://us.mozaracing.com/products/sgp-shifter
     picture_url: https://us.mozaracing.com/cdn/shop/files/SGP_Sequential_Shifter-1.png?v=1767606044&width=1920
     shops:
@@ -246,7 +246,7 @@ commercial:
       case 64 x 54 x 115 mm with plexiglass top cover.
     manufacturer: Aiologs
     component_category: shifters
-    component_sub_category: Hybrid shifter
+    component_sub_category: hybrid-shifter
     product_url: https://shop.aiologs.net/new/product/shifter/
     picture_url: https://shop.aiologs.net/new/wp-content/uploads/2020/01/s-a1.jpg
     shops:
@@ -262,7 +262,7 @@ commercial:
       current kit].
     manufacturer: Thrustmaster
     component_category: shifters
-    component_sub_category: Hybrid shifter
+    component_sub_category: hybrid-shifter
     product_url: https://www.thrustmaster.com/products/th8a-shifter-add-on/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/P_List-TH8A-SHIFTER-add-on-1-1.webp
     shops:
@@ -277,7 +277,7 @@ commercial:
       forward gears plus reverse [uncertain].
     manufacturer: Thrustmaster
     component_category: shifters
-    component_sub_category: H-pattern shifter
+    component_sub_category: h-pattern-shifter
     product_url: https://www.thrustmaster.com/products/th8s-shifter-add-on/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/06/TH8S_800x800-transparency-768x768-1.webp
     shops:
@@ -292,7 +292,7 @@ commercial:
       mechanism with robust real-car-style feel and 5 year warranty.
     manufacturer: Pro-Sim
     component_category: shifters
-    component_sub_category: H-pattern shifter
+    component_sub_category: h-pattern-shifter
     product_url: https://www.pro-sim.co.uk/shop/h-pattern-shifter/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/07/Left-1-Final-scaled.jpg
     shops:
@@ -307,7 +307,7 @@ commercial:
       with visible Perspex cover and robust real-car-style action.
     manufacturer: Pro-Sim
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://www.pro-sim.co.uk/shop/sequential-shifter/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/07/20210318_164840.jpg
     shops:
@@ -322,7 +322,7 @@ commercial:
       2.8 kg body, and USB PC compatibility.
     manufacturer: Pro-Sim
     component_category: shifters
-    component_sub_category: Sequential shifter
+    component_sub_category: sequential-shifter
     product_url: https://www.pro-sim.co.uk/shop/psl-sequential-shifter/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/09/psl-sequential-front-1-scaled.jpg
     shops:
@@ -337,7 +337,7 @@ commercial:
       shift-lock behavior for simulator gear changes.
     manufacturer: Pro-Sim
     component_category: shifters
-    component_sub_category: Shifter adapter
+    component_sub_category: shifter-adapter
     product_url: https://www.pro-sim.co.uk/shop/shift-lock/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2021/03/side-mount-lock2.jpg
     shops:
@@ -353,7 +353,7 @@ commercial:
       multiple mount options.
     manufacturer: SHH Simulation
     component_category: shifters
-    component_sub_category: Hybrid shifter
+    component_sub_category: hybrid-shifter
     product_url: https://www.shiftershh.com/en/home/26-shh-shifter-hubb.html
     picture_url: https://www.shiftershh.com/923-large_default/shh-shifter-hubb.jpg
     shops:
@@ -369,7 +369,7 @@ opensource:
       3D printable 8-speed H-pattern shifter.
     maker: akakikuumeri
     component_category: shifters
-    component_sub_category: H-pattern shifter
+    component_sub_category: h-pattern-shifter
     license: No repository license found [uncertain].
     project_url: https://github.com/akakikuumeri/Akaki-H-shifter
     picture_url: https://opengraph.githubassets.com/19094c5ad327c7f35eddd4e12ed96379094b16b8f024be78cb14c45131f295fd/akakikuumeri/Akaki-H-shifter
@@ -379,7 +379,7 @@ opensource:
       sequential shifter designed for strength, longevity, and low cost.
     maker: brendanbeavis / Beavis Motorsport
     component_category: shifters
-    component_sub_category: Hybrid shifter
+    component_sub_category: hybrid-shifter
     license: No repository license found [uncertain].
     project_url: https://github.com/brendanbeavis/DIYSimShifter
     picture_url: https://beavismotorsport.com/sim-racing/images/SHIFTER.jpg
@@ -390,7 +390,7 @@ opensource:
       such as pedals, analog shifters, analog handbrakes, and Logitech shifters.
     maker: dmadison
     component_category: shifters
-    component_sub_category: Shifter adapter
+    component_sub_category: shifter-adapter
     license: LGPL-3.0 for library; shield hardware license not verified [uncertain].
     project_url: https://github.com/dmadison/Sim-Racing-Arduino
     picture_url: https://raw.githubusercontent.com/dmadison/Sim-Racing-Shields/master/images/Sim-Racing-Shields_Header.jpg
@@ -400,7 +400,7 @@ opensource:
       community support exist. 6-speed H-pattern plus reverse.
     maker: Lebois Racing
     component_category: shifters
-    component_sub_category: Hybrid shifter
+    component_sub_category: hybrid-shifter
     license: Not clearly declared on public documentation [uncertain].
     project_url: "null"
     picture_url: https://lebois-racing.com/wp-content/uploads/2024/03/Mod-HSS-600x400.jpg

@@ -4,7 +4,7 @@ commercial:
       official store. 4 ohm low-frequency transducer.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://thebuttkicker.com/products/buttkicker-advance-haptic-transducer
     picture_url: https://thebuttkicker.com/cdn/shop/products/bk-advance-transducer-2000x2000-1_2000x.jpg?v=1654195528
     shops:
@@ -19,7 +19,7 @@ commercial:
       universal clamp, cables, and mounting feet.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
-    component_sub_category: Seat haptics
+    component_sub_category: seat-haptics
     product_url: https://thebuttkicker.com/products/buttkicker-gamer-plus
     picture_url: https://thebuttkicker.com/cdn/shop/products/gamer-plus-2000x2000-1_2000x.jpg?v=1654195556
     shops:
@@ -34,7 +34,7 @@ commercial:
       amplifier, universal clamp, and cables.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
-    component_sub_category: Seat haptics
+    component_sub_category: seat-haptics
     product_url: https://thebuttkicker.com/products/buttkicker-gamer-pro
     picture_url: https://thebuttkicker.com/cdn/shop/products/bk-gamer-pro-2000x2000-1_2000x.jpg?v=1654195555
     shops:
@@ -48,7 +48,7 @@ commercial:
       official store. 4 ohm large low-frequency transducer.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://thebuttkicker.com/products/buttkicker-lfe-haptic-transducer
     picture_url: https://thebuttkicker.com/cdn/shop/products/bk-lfe-transducer-2000x2000-1_2000x.jpg?v=1654195575
     shops:
@@ -62,7 +62,7 @@ commercial:
       store. 4 ohm low-frequency transducer.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://thebuttkicker.com/products/buttkicker-mini-lfe-haptic-transducer
     picture_url: https://thebuttkicker.com/cdn/shop/products/bk-mini-lfe-2000x2000-1_2000x.jpg?v=1654195592
     shops:
@@ -76,7 +76,7 @@ commercial:
       Audio buying links and retailers. 50 W tactile bass shaker.
     manufacturer: Dayton Audio
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://www.daytonaudio.com/product/1245/bst-1-high-power-pro-tactile-bass-shaker-50-watts
     picture_url: https://www.daytonaudio.com/images/product/medium/1245.jpg
     shops: []
@@ -85,7 +85,7 @@ commercial:
       Dayton Audio buying links and retailers. 300 W tactile bass shaker.
     manufacturer: Dayton Audio
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://www.daytonaudio.com/product/1953/bst-300ex-extreme-high-power-pro-tactile-bass-shaker-300-watts
     picture_url: https://www.daytonaudio.com/images/product/medium/1953.jpg
     shops:
@@ -99,7 +99,7 @@ commercial:
       retailers; official manual available. Compact puck-style tactile transducer.
     manufacturer: Dayton Audio
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://www.daytonaudio.com/images/resources/dayton-audio-tt25-8-tt25-16-user-manual.pdf
     picture_url: https://www.daytonaudio.com/images/product/medium/1104.jpg
     shops: []
@@ -108,7 +108,7 @@ commercial:
       stock on official store. Seat pad with 8 vibration zones/motors.
     manufacturer: Next Level Racing
     component_category: tactile-feedback
-    component_sub_category: Seat haptics
+    component_sub_category: seat-haptics
     product_url: https://nextlevelracing.com/product/hf8-haptic-gaming-pad/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2022/12/hf8_gallery_4-1.webp
     shops:
@@ -123,7 +123,7 @@ commercial:
       motors than HF8.
     manufacturer: Next Level Racing
     component_category: tactile-feedback
-    component_sub_category: Seat haptics
+    component_sub_category: seat-haptics
     product_url: https://nextlevelracing.com/product/hf8-pro-haptic-feedback-pad/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2025/04/hf8pro_web_gallery_1_vibration.png
     shops:
@@ -138,7 +138,7 @@ commercial:
       integrated haptic feedback.
     manufacturer: Next Level Racing
     component_category: tactile-feedback
-    component_sub_category: Seat haptics
+    component_sub_category: seat-haptics
     product_url: https://nextlevelracing.com/product/ers3-haptic-feedback-sim-racing-seat/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2026/02/Next-Level-Racing-ERS3-Haptic-Seat-AMZ-1.jpg
     shops:
@@ -152,7 +152,7 @@ commercial:
       from manufacturer/retailers. Tactile performance down to 15 Hz per official page.
     manufacturer: Earthquake Sound
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://earthquakesound.com/product/mqb-1-2/
     picture_url: https://earthquakesound.eu/cdn/shop/files/MQB-1_02.webp?crop=center&height=84&v=1717572984&width=84
     shops:
@@ -167,7 +167,7 @@ commercial:
       TST429 Platinum.
     manufacturer: Clark Synthesis
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://clarksynthesis.com/tst329-gold-transducer/
     picture_url: https://clarksynthesis.com/wp-content/uploads/2021/08/TI-300-Superb-ProdShot-Color-Hi-Res_Transparent-1.png
     shops: []
@@ -176,7 +176,7 @@ commercial:
       available from manufacturer/retailers. 5 Hz to 17 kHz frequency response.
     manufacturer: Clark Synthesis
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://clarksynthesis.com/tst429-platinum-transducer/
     picture_url: https://clarksynthesis.com/wp-content/uploads/2021/08/TI-300-Superb-ProdShot-Color-Hi-Res_Transparent-1.png
     shops: []
@@ -185,7 +185,7 @@ commercial:
       Six-zone haptic seat pad system.
     manufacturer: Sim Racing Studio
     component_category: tactile-feedback
-    component_sub_category: Seat haptics
+    component_sub_category: seat-haptics
     product_url: https://www.simracingstudio.com/shop
     picture_url: https://static.wixstatic.com/media/b5302b_a2a38e9ca37e4cb29fc28a5936cf6018%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/b5302b_a2a38e9ca37e4cb29fc28a5936cf6018%7Emv2.jpg
     shops:
@@ -200,7 +200,7 @@ commercial:
       haptic feedback.
     manufacturer: Trak Racer
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://trakracer.com/products/100w-haptic-bass-shaker
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR-BSA200-KIT.2.png?v=1718672819
     shops:
@@ -215,7 +215,7 @@ commercial:
       simulator haptic feedback.
     manufacturer: Trak Racer
     component_category: tactile-feedback
-    component_sub_category: Tactile transducer
+    component_sub_category: tactile-transducer
     product_url: https://trakracer.com/products/10w-pro-haptic-bass-shaker-set-of-2
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRR115_BS-10W_Top01_1x2_f0d8966a-0624-43be-9777-102e373a3d93.png?v=1774558525
     shops:
@@ -230,7 +230,7 @@ commercial:
       bass shakers and rig mounts.
     manufacturer: Trak Racer
     component_category: tactile-feedback
-    component_sub_category: Seat haptics
+    component_sub_category: seat-haptics
     product_url: https://trakracer.com/products/trak-racer-4ch-40w-low-frequency-class-d-amplifier-with-2-bass-shakers-and-rig-mounts
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRR115_TRBSA4AKIT_FrontRight01_1-combined.png?v=1774558817
     shops:
@@ -247,7 +247,7 @@ opensource:
       audio for bass shakers.
     maker: Helskov
     component_category: tactile-feedback
-    component_sub_category: Haptics software
+    component_sub_category: haptics-software
     license: GPL-3.0
     project_url: https://github.com/Helskov/GT7-Shaker-for-linux
     picture_url: https://raw.githubusercontent.com/Helskov/GT7-Shaker-for-linux/main/src/gt_shaker/assets/welcome.png
@@ -257,7 +257,7 @@ opensource:
       bass-shaker, simwind, simlight, tachometer, wheel/pedal, and serial outputs.
     maker: Spacefreak18
     component_category: tactile-feedback
-    component_sub_category: Haptics software
+    component_sub_category: haptics-software
     license: GPL-3.0
     project_url: https://github.com/Spacefreak18/monocoque
     picture_url: https://opengraph.githubassets.com/4ee1e2043804c0cbe8122bd6154eed8cc6d4445a26c821c82b57c3050ccb0098/Spacefreak18/monocoque
@@ -268,7 +268,7 @@ opensource:
       telemetry.
     maker: PHARTGAMES
     component_category: tactile-feedback
-    component_sub_category: Haptics software
+    component_sub_category: haptics-software
     license: MIT
     project_url: https://github.com/PHARTGAMES/SpaceMonkey
     picture_url: https://raw.githubusercontent.com/PHARTGAMES/SpaceMonkey/main/Documentation/MainInterface.png

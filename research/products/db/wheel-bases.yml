@@ -5,7 +5,7 @@ commercial:
       included T-bracket for clamp or frame mounting.
     manufacturer: CAMMUS
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://cammusracing.com/product/global-first-cammus-c5-direct-drive-steering-wheel/
     picture_url: https://cammusracing.com/wp-content/uploads/2023/04/CAMMUS-C5-new-2.png
     shops:
@@ -20,7 +20,7 @@ commercial:
       GT/GT3 rim add-on.
     manufacturer: CAMMUS
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://cammusracing.com/product/cammus-c12-direct-drive-steering-wheel/
     picture_url: https://cammusracing.com/wp-content/uploads/2024/02/C12-01-1.png
     shops:
@@ -35,7 +35,7 @@ commercial:
       cooling, buttons, rotary controls, and software lighting customization.
     manufacturer: CAMMUS
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://cammusracing.com/product/cammus-wheelbase-gt1-ddwb-15nm/
     picture_url: https://cammusracing.com/wp-content/uploads/2022/12/CAMMUS-DDWB15Nm-2025-New-9.png
     shops:
@@ -50,7 +50,7 @@ commercial:
       high-fidelity force feedback support.
     manufacturer: Fanatec
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.fanatec.com/eu/en/p/wheel-bases/cs_dd_eu/clubsport-dd-eu
     picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CS_DD/cs_dd-01.png
     shops:
@@ -65,7 +65,7 @@ commercial:
       torque with FullForce high-fidelity force feedback support.
     manufacturer: Fanatec
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.fanatec.com/eu/en/p/wheel-bases/cs_dd+_eu/clubsport-dd-plus-eu
     picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CS_DD-P/CS_DD-P-01.png
     shops:
@@ -80,7 +80,7 @@ commercial:
       torque.
     manufacturer: Fanatec
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.fanatec.com/eu/en/p/wheel-bases/csl_dd_qr2l_90_eu/csl-dd-qr2l-5-nm-eu
     picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CSL_DD_QR2L_90/CSL_DD_QR2L_90-01.png
     shops:
@@ -95,7 +95,7 @@ commercial:
       feedback.
     manufacturer: Fanatec
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.fanatec.com/eu/en/p/wheel-bases/csl_dd_qr2l_8nm_eu/csl-dd-qr2-lite-8-nm-eu
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CSL_DD_QR2L_180/CSL_DD_QR2L_180-01.png
     shops:
@@ -110,7 +110,7 @@ commercial:
       [uncertain]. 20 Nm class direct-drive system [uncertain current package].
     manufacturer: Virtual Racing School
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://vrs.racing/shop
     picture_url: https://www.velocityprosims.com/cdn/shop/files/motor-and-controller-transparent.png?v=1716639109&width={width}
     shops:
@@ -125,7 +125,7 @@ commercial:
       official EU catalog with QR2.
     manufacturer: Fanatec
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.fanatec.com/eu/en/p/wheel-bases/crd-9020006-eu/gran-turismo-dd-pro-wheel-base-qr2-eu
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CRD-9020006/CRD-9020006_01.png
     shops:
@@ -140,7 +140,7 @@ commercial:
       force feedback detail.
     manufacturer: Fanatec
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.fanatec.com/eu/en/p/wheel-bases/crd-9020022-eu/podium-dd-eu
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Wheel-Bases/CRD-9020022/CRD-9020022-05.png
     shops:
@@ -155,7 +155,7 @@ commercial:
       with 22-bit encoder.
     manufacturer: Asetek Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.asetek.com/simsports/global/product/invicta-direct-drive-wheelbase-27nm/
     picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/05/Invicta-Wheelbase-Front-Orange-LED_NoBG-300x300.png
     shops:
@@ -170,7 +170,7 @@ commercial:
       14-bit encoder and optional 8 Nm boost kit.
     manufacturer: Asetek Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.asetek.com/simsports/global/product/initium-direct-drive-wheelbase-eu/
     picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2025/06/initium-direct-drive-wheelbase-600x600-1-300x300.png
     shops:
@@ -186,7 +186,7 @@ commercial:
       Controls.
     manufacturer: VNM / Cube Controls
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.cubecontrols.com/product/vnm-direct-drive/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2025/05/VNMBASE-EXT-BLK1.webp
     shops:
@@ -201,7 +201,7 @@ commercial:
       with TRUEFORCE.
     manufacturer: Logitech G
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.logitechg.com/en-us/products/driving/pro-dd11-base.html
     picture_url: https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-racing/pro-racing-wheel/2024-updates/pro-racing-base-ps-gallery1.png
     shops:
@@ -216,7 +216,7 @@ commercial:
       encoder.
     manufacturer: MOZA Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://us.mozaracing.com/products/r12-wheelbase
     picture_url: https://us.mozaracing.com/cdn/shop/files/preview_images/hqdefault_9d60cb41-f7be-4041-a624-0dc1cb5d15e3.jpg?v=1767606042&width=480
     shops:
@@ -231,7 +231,7 @@ commercial:
       21 Nm direct drive, 21-bit magnetic encoder, 1000 Hz USB refresh.
     manufacturer: MOZA Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://mozaracing.com/en-us/product/wheel-base-r21/
     picture_url: https://mozaracing.com/cdn/shop/files/R21-Cloud-based-Mobile-App-Control_01b72ff3-0cc9-4f93-b0e4-1de2a618df93.webp?v=1749013177&width=1676
     shops:
@@ -245,7 +245,7 @@ commercial:
       5.5 Nm peak torque direct drive.
     manufacturer: MOZA Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://mozaracing.com/en-us/wheel-base-r5/
     picture_url: https://mozaracing.com/cdn/shop/files/R5_fd53ca42-18cd-480a-a4a7-b8dca179d5dc.png?v=1753256093
     shops: []
@@ -255,7 +255,7 @@ commercial:
       direct-drive servo base.
     manufacturer: MOZA Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://us.mozaracing.com/products/r9-wheelbase
     picture_url: https://us.mozaracing.com/cdn/shop/files/r9_1_3f9de0b1-4d1a-4099-a5e2-389a02092d41.webp?v=1752745276&width=1000
     shops:
@@ -270,7 +270,7 @@ commercial:
       according to Logitech category listing.
     manufacturer: Logitech G
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.logitechg.com/en-us/products/driving.html
     picture_url: https://resource.logitechg.com/w_416,h_312,ar_4:3,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/rs50-base-pdp/gallery/rs50-base-wheel-hub-front-angle-gallery-1.png
     shops:
@@ -284,7 +284,7 @@ commercial:
       US shop. 25 Nm max torque direct-drive wheel base.
     manufacturer: Simucube
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simucube.com/en-us/simucube-2-pro/
     picture_url: https://simucube.com/app/uploads/sites/5/2023/09/WB-PRO-1-FRONTRIGHT.webp
     shops:
@@ -299,7 +299,7 @@ commercial:
       for iRacing.
     manufacturer: Simucube
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simucube.com/en-us/simucube-2-sport/
     picture_url: https://simucube.com/app/uploads/sites/5/2023/09/WB-SPORT-1-FRONTRIGHT.webp
     shops:
@@ -314,7 +314,7 @@ commercial:
       re-engineered control algorithm.
     manufacturer: Simucube
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simucube.com/en-us/simucube-3-sport/
     picture_url: https://simucube.com/app/uploads/sites/5/2025/10/SC3SPORT-1-1.webp
     shops:
@@ -329,7 +329,7 @@ commercial:
       re-engineered control algorithm.
     manufacturer: Simucube
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simucube.com/en-us/simucube-3-pro/
     picture_url: https://simucube.com/app/uploads/sites/5/2025/10/SC3PRO-1-1.webp
     shops:
@@ -344,7 +344,7 @@ commercial:
       and re-engineered control algorithm.
     manufacturer: Simucube
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simucube.com/en-us/simucube-3-ultimate/
     picture_url: https://simucube.com/app/uploads/sites/5/2025/10/SC3ULT-1-1.webp
     shops:
@@ -358,7 +358,7 @@ commercial:
       official shop. 10 Nm servo wheel base with compact housing.
     manufacturer: Simagic
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simagic.com/products/alpha-mini
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_Mini_transparent_base.png?v=1766649121
     shops:
@@ -372,7 +372,7 @@ commercial:
       official shop. 15 Nm servo wheel base with Simagic quick release support.
     manufacturer: Simagic
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simagic.com/products/alpha
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_transparent_base.png?v=1766651649
     shops:
@@ -387,7 +387,7 @@ commercial:
       262144 ppr encoder resolution.
     manufacturer: Simagic
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simagic.com/products/alpha-u
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_U_transparent_base.png?v=1766651871
     shops:
@@ -402,7 +402,7 @@ commercial:
       motor.
     manufacturer: Simagic
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_EVO-9_12NM-11-12_c93b1965-3f94-40fa-a957-89e082de7766.png?v=1766651998
     shops:
@@ -416,7 +416,7 @@ commercial:
       official shop. 12 Nm Alpha EVO base with 5-pole direct-drive servo motor.
     manufacturer: Simagic
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_EVO-9_12NM-11-12_c93b1965-3f94-40fa-a957-89e082de7766.png?v=1766651998
     shops:
@@ -430,7 +430,7 @@ commercial:
       official shop. 18 Nm Alpha EVO Pro base for high force-feedback output.
     manufacturer: Simagic
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_EVO-9_12NM-11-12_c93b1965-3f94-40fa-a957-89e082de7766.png?v=1766651998
     shops:
@@ -445,7 +445,7 @@ commercial:
       force-feedback output.
     manufacturer: Simagic
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://simagic.com/products/simagic-alpha-evo-ultra-28nm-direct-drive-wheel-base
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/alpha-evo-ultra-28nm-main-transparent.png?v=1772682087
     shops:
@@ -460,7 +460,7 @@ commercial:
       ultra-low static torque design.
     manufacturer: MOZA Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/r16-wheel-base-v2
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/R16-Wheel-Base-V2-GermanSimRacing-76287125.png?v=1728900905
     shops:
@@ -475,7 +475,7 @@ commercial:
       base with 21-bit precision and updated force-feedback algorithm.
     manufacturer: MOZA Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/moza-r21-ultra-dd-wheelbase
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/R21_Ultra_DD_Wheelbase-GermanSimRacing-155941624.jpg?v=1764754452
     shops:
@@ -490,7 +490,7 @@ commercial:
       base with real-time torque sensor and cogging-free flat-wire motor.
     manufacturer: MOZA Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/moza-r25-ultra-wheelbase
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/MOZA-R25-Ultra-Wheelbase-GermanSimRacing-155941485.jpg?v=1764754529
     shops:
@@ -505,7 +505,7 @@ commercial:
       and Asetek quick release.
     manufacturer: Asetek Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.asetek.com/simsports/global/product/la-prima-direct-drive-wheelbase-12nm/
     picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/05/La-Prima-Wheelbase-Front-Left_NoBG-300x300.png
     shops:
@@ -520,7 +520,7 @@ commercial:
       and programmable RGB LEDs.
     manufacturer: Asetek Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.asetek.com/simsports/global/product/forte-direct-drive-wheelbase-18nm/
     picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/05/Forte-Wheelbase-Front-Right-Raised-Orange-LED_NoBG-300x300.png
     shops:
@@ -534,7 +534,7 @@ commercial:
       GermanSimRacing wheelbase collection. Podium-series direct-drive base.
     manufacturer: Fanatec
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/podium-wheel-base-dd1
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Podium-Wheel-Base-DD1-GermanSimRacing-76136862.jpg?v=1732869952
     shops:
@@ -549,7 +549,7 @@ commercial:
       base.
     manufacturer: Fanatec
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/podium-wheel-base-dd2
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Podium-Wheel-Base-DD2-GermanSimRacing-76136347.jpg?v=1732869963
     shops:
@@ -563,7 +563,7 @@ commercial:
       wheelbase collection. 12 Nm Ares-series sim racing wheelbase.
     manufacturer: Conspit
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/ares
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Ares-GermanSimRacing-132429728.jpg?v=1733602623
     shops:
@@ -578,7 +578,7 @@ commercial:
       wheelbase.
     manufacturer: Conspit
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/ares-platinum
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Ares-Platinum-GermanSimRacing-132429445.jpg?v=1733602628
     shops:
@@ -593,7 +593,7 @@ commercial:
       absolute encoder.
     manufacturer: VNM
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/direct-drive-xtreme
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/VNM-Direct-Drive-Xtreme-GermanSimRacing-138420134.jpg?v=1736001352
     shops:
@@ -607,7 +607,7 @@ commercial:
       of stock on GermanSimRacing wheelbase collection. 25 Nm direct-drive base.
     manufacturer: VNM
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/vnm-direct-drive-supreme-25nm
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Direct-Drive-Supreme-GermanSimRacing-152155459.jpg?v=1755783834
     shops:
@@ -621,7 +621,7 @@ commercial:
       GermanSimRacing wheelbase collection. 18 Nm direct-drive base.
     manufacturer: VNM
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/vnm-direct-drive-elite-18nm
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Direct-Drive-Elite-GermanSimRacing-152154994.jpg?v=1755783821
     shops:
@@ -635,7 +635,7 @@ commercial:
       GermanSimRacing wheelbase collection. 13 Nm direct-drive base.
     manufacturer: VNM
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/vnm-direct-drive-premier-13nm
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Direct-Drive-Premier-GermanSimRacing-152154482.jpg?v=1755283096
     shops:
@@ -650,7 +650,7 @@ commercial:
       USB refresh rate.
     manufacturer: Virtual Racing School
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/dfp15-wheelbase
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/DFP15-Wheelbase-GermanSimRacing-146594041.webp?v=1744654638
     shops:
@@ -665,7 +665,7 @@ commercial:
       upgrade path to higher torque levels.
     manufacturer: Virtual Racing School
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://shop.germansimracing.de/en/products/upgradable-torque-wheel-base
     picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Upgradable-Torque-Wheel-Base-GermanSimRacing-139434665.png?v=1736773223
     shops:
@@ -680,7 +680,7 @@ commercial:
       per official product snippet.
     manufacturer: Thrustmaster
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.thrustmaster.com/products/t818-black-edition/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/12/T818-Black-Edition-list.png
     shops: []
@@ -690,7 +690,7 @@ commercial:
       26 Nm system tuned by Pro-Sim for race-driver simulator use.
     manufacturer: Pro-Sim
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.pro-sim.co.uk/shop/pro-sim-spec-simsteering2-ffb-system-54-26nm/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2017/09/Steering-03-pro-sim-600x600-1.jpg
     shops:
@@ -705,7 +705,7 @@ commercial:
       response force-feedback system rated 16 Nm.
     manufacturer: Pro-Sim
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.pro-sim.co.uk/shop/simsteering2-ffb-system-52/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/06/Steering-01.jpg
     shops:
@@ -720,7 +720,7 @@ commercial:
       response force-feedback system rated 20.5 Nm.
     manufacturer: Pro-Sim
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.pro-sim.co.uk/shop/simsteering2-ffb-system-53/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/06/Steering-02.jpg
     shops:
@@ -735,7 +735,7 @@ commercial:
       response force-feedback system rated 26 Nm.
     manufacturer: Pro-Sim
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.pro-sim.co.uk/shop/simsteering2-ffb-system-54/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/06/Steering-03.jpg
     shops:
@@ -750,7 +750,7 @@ commercial:
       base for Formula, GT, racing, and rally setups.
     manufacturer: Thrustmaster
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.thrustmaster.com/en-us/products/t598-servo-base/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/04/Website_ProductPageListing-T598-SB_800x800_2.webp
     shops:
@@ -765,7 +765,7 @@ commercial:
       racing base in the Thrustmaster racing ecosystem.
     manufacturer: Thrustmaster
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.thrustmaster.com/en-us/products/t-gt-ii-servo-base/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2021/12/T-GT-2-servo-base-ps5-ps4-racing-1-768x768-2.webp
     shops:
@@ -780,7 +780,7 @@ commercial:
       compatible servo base for the Thrustmaster racing ecosystem.
     manufacturer: Thrustmaster
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.thrustmaster.com/en-us/products/t300-racing-wheel-servo-base/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/list-T300RS-servo-base-ecosystem-ps4-768x768-1.webp
     shops:
@@ -795,7 +795,7 @@ commercial:
       base for the Thrustmaster detachable wheel ecosystem.
     manufacturer: Thrustmaster
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.thrustmaster.com/en-us/products/ts-pc-racer-servo-base/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2021/12/TS-PC-Racer-Servo-Base-768x768-1.webp
     shops:
@@ -810,7 +810,7 @@ commercial:
       the Thrustmaster detachable wheel ecosystem.
     manufacturer: Thrustmaster
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.thrustmaster.com/en-us/products/ts-xw-servo-base/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2021/09/TS-XWServoBase-pichi-768x768-1.webp
     shops:
@@ -825,7 +825,7 @@ commercial:
       compatible servo base for Thrustmaster detachable wheels.
     manufacturer: Thrustmaster
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     product_url: https://www.thrustmaster.com/en-us/products/tx-racing-wheel-servo-base/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2021/09/list-TX-SERVO-BASE-xbox-768x768-1.webp
     shops:
@@ -841,7 +841,7 @@ opensource:
       Arduino ATmega32U4 wheel controller with force feedback.
     maker: vsulako
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     license: MIT
     project_url: https://github.com/vsulako/AFFBWheel
     picture_url: https://raw.githubusercontent.com/vsulako/AFFBWheel/master/images/firmware-instructions/install_arduino_lib_en.png
@@ -851,7 +851,7 @@ opensource:
       Standalone DirectInput USB joystick with force feedback on ATmega32U4 boards.
     maker: ranenbg, based on BRWheel by Fernando Igor and others
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     license: No repository license found [uncertain].
     project_url: https://github.com/ranenbg/Arduino-FFB-wheel
     picture_url: https://raw.githubusercontent.com/ranenbg/Arduino-FFB-wheel/master/brWheel_my/wirings/Firmware-v250%20pinout.png
@@ -862,7 +862,7 @@ opensource:
       with an ODrive Robotics board and industrial servo motor.
     maker: Jan Balke
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     license: GPL-3.0
     project_url: https://github.com/JanBalke420/DIY-DirectDrive
     picture_url: https://jan-balke.com/img/ODrive.jpg
@@ -873,7 +873,7 @@ opensource:
       joysticks, and other simulator controls.
     maker: Yannick Richter / Ultrawipf
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     license: MIT for main firmware; MIT top-level hardware license with possible subfolder
       exceptions; GPL-3.0 for configurator.
     project_url: https://github.com/Ultrawipf/OpenFFBoard
@@ -886,7 +886,7 @@ opensource:
       and wheel shaft adapter.
     maker: Early Virtual-Racing community; tutorial by Martin Ascher / Ascher Racing
     component_category: wheel-bases
-    component_sub_category: FFB controller
+    component_sub_category: ffb-controller
     license: Original tutorial calls it an open-source software project, but exact license
       and firmware availability are unclear in current archives [uncertain].
     project_url: "null"

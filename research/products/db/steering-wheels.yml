@@ -6,7 +6,7 @@ commercial:
       70 mm motorsport quick release.
     manufacturer: CAMMUS
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://cammusracing.com/product/new-upgrade-cammus-gt2-steering-wheel/
     picture_url: https://cammusracing.com/wp-content/uploads/2026/03/CAMMUS-GT2-Steering-Wheel-00.png
     shops:
@@ -21,7 +21,7 @@ commercial:
       Alcantara-style grip finishes and carbon-look accents.
     manufacturer: Apex Sim Racing
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.apexsimracing.com/en-de/products/aero-sim-racing-steering-wheel
     picture_url: https://cdn.shopify.com/s/files/1/0031/7987/2365/files/Apex_Sim_Racing_Aero_Steering_Wheel_-_Black_Carbon.jpg?v=1731434249
     shops:
@@ -36,7 +36,7 @@ commercial:
       paddles, dual clutch paddles, four push rotaries, and two 7-way switches.
     manufacturer: Heusinkveld
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://heusinkveld.com/eu/shop/steering-wheel/one/
     picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/12/Heusinkveld4749-BEW-1024x768-1.png
     shops:
@@ -52,7 +52,7 @@ commercial:
       magnetic double shifter and clutch paddles.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://ascher-racing.com/de/shop/ascher-racing-x-simucube-ultimate/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/b/a/baseangle1.jpg
     shops:
@@ -67,7 +67,7 @@ commercial:
       shifters.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: Wheel electronics
+    component_sub_category: wheel-electronics
     product_url: https://ascher-racing.com/de/shop/ascher-racing-b16-usb/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/a/s/ascher_steering_wheel_b16m-usb_02_1.jpg
     shops:
@@ -82,7 +82,7 @@ commercial:
       for Simucube systems.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: Wheel electronics
+    component_sub_category: wheel-electronics
     product_url: https://ascher-racing.com/de/shop/ascher-racing-b24-sc/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/7/6/76080030_002_1_1.jpg
     shops:
@@ -97,7 +97,7 @@ commercial:
       sellable. 270 mm formula rim with 5 mm carbon-fiber front plate.
     manufacturer: Fanatec
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.fanatec.com/eu/en/p/steering-wheels/crd-9020012-ww/clubsport-steering-wheel-formula-v2-5
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Steering-Wheels/CS_SWFORM_V25/CS_SWFORM_V25-01A.png
     shops:
@@ -112,7 +112,7 @@ commercial:
       OLED display.
     manufacturer: Fanatec
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.fanatec.com/eu/en/p/steering-wheels/crd-9020019-ww/clubsport-formula-v3
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Steering-Wheels/CRD-9020019-WW/CRD-9020019-WW-01.png
     shops:
@@ -127,7 +127,7 @@ commercial:
       rim with authentic materials.
     manufacturer: Fanatec
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.fanatec.com/eu/en/p/steering-wheels/crd-9020011-ww/clubsport-steering-wheel-rs
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Steering-Wheels/CS_SW_RS/cs_sw_rs-01.png
     shops:
@@ -142,7 +142,7 @@ commercial:
       controls for Simucube systems.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://ascher-racing.com/de/catalog/product/view/id/225/s/ascher-racing-f28-sc-v2/category/57/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/a/s/ascher_steering_wheel_f28-sc_v2_02_1.jpg
     shops:
@@ -157,7 +157,7 @@ commercial:
       switches, thumb encoders, and motorsport clutch paddles.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://ascher-racing.com/de/shop/ascher-racing-f64-v3/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/a/r/ar_f64_usb_v3_004_700x700_300dpi_1.png
     shops:
@@ -172,7 +172,7 @@ commercial:
       wheel based on the McLaren Artura GT4 steering wheel design.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://ascher-racing.com/de/shop/ascher-racing-mclaren-artura-gt4/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/a/s/ascherracing_mclaren_pa3_usb_masterlayer.0002.png
     shops:
@@ -187,7 +187,7 @@ commercial:
       USB variants.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://ascher-racing.com/de/shop/ascher-racing-mclaren-artura-pro/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/a/s/ascherracing_regius_pro_sc_masterlayer.0002_1.png
     shops:
@@ -202,7 +202,7 @@ commercial:
       USB variants.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://ascher-racing.com/de/shop/ascher-racing-mclaren-artura-sport/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/a/s/ascherracing_regius_sport_sc_masterlayer.0002.png
     shops:
@@ -218,7 +218,7 @@ commercial:
       motorsport clutch paddles.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://ascher-racing.com/de/shop/ascher-racing-mclaren-artura-ultimate/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/a/s/ascherracing_artura_regius_ultimate_004_masterlayer.0002.png
     shops:
@@ -233,7 +233,7 @@ commercial:
       polyurethane-grip wheel with magnetic Gen5 paddle shifters.
     manufacturer: Ascher Racing
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://ascher-racing.com/de/shop/ascher-racing-sabelt-sw1-r-plus/
     picture_url: https://ascher-racing.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/a/s/ascher_sabelt_sw1-r_black_b24_01_700x700.png
     shops:
@@ -248,7 +248,7 @@ commercial:
       300 mm wheel for CSL DD and other Fanatec wheel bases.
     manufacturer: Fanatec
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.fanatec.com/eu/en/p/steering-wheels/csl_sw_p1_v2r_qr2l/csl-steering-wheel-p1-v2-qr2-lite
     picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Steering-Wheels/CSL_SW_P1_V2R_QR2L/CSL_SW_P1_V2R-01.png
     shops:
@@ -262,7 +262,7 @@ commercial:
       in stock on official EU catalog. Licensed Xbox-ready wheel for GT racing.
     manufacturer: Fanatec
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.fanatec.com/eu/en/p/steering-wheels/crd-9020021-ww/csl-steering-wheel-gt3
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Steering-Wheels/CRD-9020021-WW/CRD-9020021-WW-01.png
     shops:
@@ -277,7 +277,7 @@ commercial:
       reworked grips, new processor, and Eloi shifter/clutch system.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.cubecontrols.com/product/astra/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2025/07/prmblk-gallery01.avif
     shops:
@@ -292,7 +292,7 @@ commercial:
       full-color touchscreen LCD, carbon-fiber front plate, and CNC aluminum body.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.cubecontrols.com/product/formula-csx-3/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2022/09/cube-controls-cx3-front-lights-on-1200x800-1.webp
     shops:
@@ -308,7 +308,7 @@ commercial:
       CNC aluminum body.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.cubecontrols.com/product/csx-3-color-edition/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2025/04/CSX3RED6NL-front.webp
     shops:
@@ -323,7 +323,7 @@ commercial:
       Mode, carbon-fiber front plate, and configurable clutch/shifter options.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.cubecontrols.com/product/fcore/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2022/11/gallery1-1.webp
     shops:
@@ -338,7 +338,7 @@ commercial:
       stock. Full metal encoders, revised modern body, and new shifters.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.cubecontrols.com/product/f-core-evo-formula-blue/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2025/03/evo_blue2_2.webp
     shops:
@@ -353,7 +353,7 @@ commercial:
       body, and new shifters.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/f-core-evo-gt-red/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2025/03/evo_red2_2.png
     shops:
@@ -369,7 +369,7 @@ commercial:
       front plate, and die-cast aluminum main body.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.cubecontrols.com/product/f-pro-formula-steering-wheel/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2022/01/gallery1.webp
     shops:
@@ -385,7 +385,7 @@ commercial:
       carbon-fiber front plate.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.cubecontrols.com/product/f-pro-color-edition/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2025/04/FPROBLUNL-front.webp
     shops:
@@ -401,7 +401,7 @@ commercial:
       included.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: Wheel electronics
+    component_sub_category: wheel-electronics
     product_url: https://www.cubecontrols.com/product/gtprov2-button-box/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/11/buttonbox-4P_BLK_01.avif
     shops:
@@ -416,7 +416,7 @@ commercial:
       Bluetooth or Q-CONN cable, with two- or four-paddle options.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gt-pro-v2-cube/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/11/gallery1.webp
     shops:
@@ -431,7 +431,7 @@ commercial:
       button box with Dual Mode Bluetooth or Q-CONN cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-perforated/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/11/gallery1-1.webp
     shops:
@@ -447,7 +447,7 @@ commercial:
       connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-round-suede/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2024/03/gallery1.webp
     shops:
@@ -462,7 +462,7 @@ commercial:
       Bluetooth or Q-CONN cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-suede/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/11/gallery1-4.webp
     shops:
@@ -477,7 +477,7 @@ commercial:
       Mode Bluetooth or Q-CONN cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-zero-leather/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/12/gallery1.webp
     shops:
@@ -492,7 +492,7 @@ commercial:
       Mode Bluetooth or Q-CONN cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gt-pro-v2-reparto-corse-zero-suede/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/12/gallery1-1.webp
     shops:
@@ -507,7 +507,7 @@ commercial:
       or Q-CONN cable connection.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gt-pro-v2-rubber/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/11/gallery1-2.webp
     shops:
@@ -522,7 +522,7 @@ commercial:
       Bluetooth or Q-CONN cable, with two- or four-paddle options.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gt-pro-v2-sport/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/11/gallery1-3.webp
     shops:
@@ -537,7 +537,7 @@ commercial:
       Bluetooth or Q-CONN cable, with two- or four-paddle options.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gt-pro-v2-zero/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/11/gallery1-5.webp
     shops:
@@ -552,7 +552,7 @@ commercial:
       buttons, front/rear toggles, encoders, thumb encoders, and funky switches.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/gtx2/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2024/01/Edit-rosso-gallery1.webp
     shops:
@@ -567,7 +567,7 @@ commercial:
       official shop. Uses high-end GT-style shifters and pro-racer ergonomics.
     manufacturer: Cube Controls
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.cubecontrols.com/product/mercedes-amg-gt-edition-sim-wheel/
     picture_url: https://www.cubecontrols.com/wp-content/uploads/2023/08/amg-gallery1.webp
     shops:
@@ -583,7 +583,7 @@ commercial:
       [uncertain].
     manufacturer: MOZA Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://mozaracing.com/en-us/product/fsr-formula-wheel/
     picture_url: https://mozaracing.com/cdn/shop/files/FSR2_Formula_Wheel-1.webp?v=1752135264&width=1920
     shops: []
@@ -592,7 +592,7 @@ commercial:
       shop. 290 mm formula wheel with integrated display.
     manufacturer: Simagic
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://simagic.com/products/fx-pro
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/FX_Pro-transparent_base.png?v=1766645403
     shops:
@@ -606,7 +606,7 @@ commercial:
       in stock on official shop. 300 mm diameter, 1100 g excluding QR.
     manufacturer: Simagic
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://simagic.com/products/gt-neo
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/GT_Neo-transparent_base.png?v=1766651757
     shops:
@@ -620,7 +620,7 @@ commercial:
       official shop. Compact formula wheel in the Simagic Alpha ecosystem.
     manufacturer: Simagic
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://simagic.com/products/fx-formula
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/FX-transparent_base.png?v=1766651541
     shops:
@@ -634,7 +634,7 @@ commercial:
       shop. Simagic GT4-style racing wheel.
     manufacturer: Simagic
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://simagic.com/products/gt4-formula
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/GT4-transparent_base.png?v=1766651798
     shops:
@@ -648,7 +648,7 @@ commercial:
       Round racing wheel sold in leather and suede variants.
     manufacturer: Simagic
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simagic.com/products/gts
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/GTS-transparent_base.png?v=1766651306
     shops:
@@ -662,7 +662,7 @@ commercial:
       GT1 wheel sold in round and D-shape leather/suede variants.
     manufacturer: Simagic
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simagic.com/products/gt1
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/GT1-11-12_54331472-e5d5-4d63-af9e-b0949100479b.png?v=1766647716
     shops:
@@ -677,7 +677,7 @@ commercial:
       and 350 mm variants.
     manufacturer: Simagic
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simagic.com/products/simagic-neo-x-series-steering-wheels
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Neo_X-310G-1.png?v=1766651600
     shops:
@@ -692,7 +692,7 @@ commercial:
       compatible wheel rims.
     manufacturer: Simagic
     component_category: steering-wheels
-    component_sub_category: Wheel electronics
+    component_sub_category: wheel-electronics
     product_url: https://simagic.com/products/simagic-neo-x-hub
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Neo_X_Hub-transparent_base.png?v=1766651834
     shops:
@@ -706,7 +706,7 @@ commercial:
       [uncertain stock by region]. 300 mm GT/formula-style rim [uncertain].
     manufacturer: MOZA Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://mozaracing.com/en-us/product/ks-steering-wheel/
     picture_url: https://mozaracing.com/cdn/shop/files/KS_Steering_Wheel-1.webp?v=1752135237&width=1920
     shops:
@@ -721,7 +721,7 @@ commercial:
       racers from beginner to professional level.
     manufacturer: Simucube
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simucube.com/en-us/tahko/
     picture_url: https://simucube.com/app/uploads/sites/5/2023/09/ST-TAHKOORANGE-1-FRONT.webp
     shops:
@@ -736,7 +736,7 @@ commercial:
       the Simucube ecosystem.
     manufacturer: Simucube
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simucube.com/en-us/simucube-tahko-gt-21-black-edition/
     picture_url: https://simucube.com/app/uploads/sites/5/2023/09/ST-TAHKOBLACK-1-FRONT-1.webp
     shops:
@@ -751,7 +751,7 @@ commercial:
       leather rim and magnetic shifters.
     manufacturer: Simucube
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simucube.com/en-us/simucube-tahko-round-orange/
     picture_url: https://simucube.com/app/uploads/sites/5/2023/11/TAHKO-ROUND-1-FRONT-ORANGE.webp
     shops:
@@ -766,7 +766,7 @@ commercial:
       with leather rim and magnetic shifters.
     manufacturer: Simucube
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simucube.com/en-us/simucube-tahko-round-black/
     picture_url: https://simucube.com/app/uploads/sites/5/2023/11/TAHKO-ROUND-1-FRONT-BLACK.webp
     shops:
@@ -781,7 +781,7 @@ commercial:
       feedback.
     manufacturer: Simucube
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simucube.com/en-us/simucube-valo-gt-23/
     picture_url: https://simucube.com/app/uploads/sites/5/2023/10/VALO-1-FRONT-2048x1366-1.webp
     shops:
@@ -796,7 +796,7 @@ commercial:
       shifter feedback.
     manufacturer: Simucube
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simucube.com/en-us/simucube-valo-gt-23-leather-version/
     picture_url: https://simucube.com/app/uploads/sites/5/2024/05/SC_Valo_Leather_Front.webp
     shops:
@@ -811,7 +811,7 @@ commercial:
       backlit buttons, and quiet paddles.
     manufacturer: Simucube
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simucube.com/en-us/simucube-savu-sport/
     picture_url: https://simucube.com/app/uploads/sites/5/2025/09/SAVUSPORT-1.webp
     shops:
@@ -826,7 +826,7 @@ commercial:
       buttons, and quiet paddles.
     manufacturer: Simucube
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://simucube.com/en-us/simucube-savu-pro/
     picture_url: https://simucube.com/app/uploads/sites/5/2025/09/SAVUPRO-1.webp
     shops:
@@ -841,7 +841,7 @@ commercial:
       and Simucube 3 compatibility.
     manufacturer: Simucube x BavarianSimTec
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://simucube.com/en-us/simucube-x-bavariansimtec-delta-pro-sc/
     picture_url: https://simucube.com/app/uploads/sites/5/2025/10/BAVARIAN-1.webp
     shops:
@@ -856,7 +856,7 @@ commercial:
       weight, revised ergonomics, and illuminated controls.
     manufacturer: GSI x Simucube
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://simucube.com/en-us/limited-edition-gsi-x-simucube-formula-pro-elite-v2/
     picture_url: https://simucube.com/app/uploads/sites/5/2024/03/ST-FPE-1.png
     shops:
@@ -871,7 +871,7 @@ commercial:
       motorsport input, broad controls, and multi-function hat switch.
     manufacturer: Pro-Sim
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.pro-sim.co.uk/shop/cp-s-simulator-steering-wheel/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2023/05/C-PSTransFront.png
     shops:
@@ -886,7 +886,7 @@ commercial:
       encoders, and replaceable industrial coiled cable.
     manufacturer: Pro-Sim
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.pro-sim.co.uk/shop/lm-pro-simulator-steering-wheel/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2020/05/LM-Pro.jpg
     shops:
@@ -901,7 +901,7 @@ commercial:
       replicate the look and feel of a modern F1 steering wheel.
     manufacturer: Pro-Sim
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.pro-sim.co.uk/shop/gpx-simulator-steering-wheel/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2019/12/F1-steering-wheel.jpg
     shops:
@@ -917,7 +917,7 @@ commercial:
       electronics.
     manufacturer: Pro-Sim
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.pro-sim.co.uk/shop/lm-ps-simulator-steering-wheel/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2019/11/LM-PS-scaled.jpeg
     shops:
@@ -932,7 +932,7 @@ commercial:
       LCD data display, buttons, toggles, encoders, and coiled cable.
     manufacturer: Pro-Sim
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.pro-sim.co.uk/shop/gt1-simulator-wheel/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2018/05/gt1-steering-wheel.jpg
     shops:
@@ -947,7 +947,7 @@ commercial:
       direct-drive servo systems.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.ricmotech.com/realgear-wheelpro-mpi-f13-add-on-wheel
     picture_url: https://www.ricmotech.com/assets/images/RGR-DDWKITPRO-F13-1.jpg
     shops:
@@ -962,7 +962,7 @@ commercial:
       integrated RealGear button and paddle hardware.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.ricmotech.com/realgear-wheelpro-mpi-f4-wheel-direct-drive
     picture_url: https://www.ricmotech.com/assets/images/MPI-F4-front2.jpg
     shops:
@@ -977,7 +977,7 @@ commercial:
       direct-drive controls.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/realgear-wheelpro-mpi-gt11a-wheel-direct-drive
     picture_url: https://www.ricmotech.com/assets/images/MPI-GT11ARG-1.jpg
     shops:
@@ -992,7 +992,7 @@ commercial:
       direct-drive controls.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/realgear-wheelpro-mpi-gt11c-wheel-direct-drive
     picture_url: https://www.ricmotech.com/assets/images/GT11CRG.jpg
     shops:
@@ -1007,7 +1007,7 @@ commercial:
       super-grip wheel for sim-racing rigs.
     manufacturer: RealGear / MPI / Ricmotech
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/realgear-wheelpro-mpi-ricmotech-supergrip-wheel
     picture_url: https://www.ricmotech.com/assets/images/DDWKITPRO-GT13ARG-2.jpg
     shops:
@@ -1022,7 +1022,7 @@ commercial:
       MPI wheel for direct-drive servo systems.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/realgear-wheelpro-mpi-mx-5-add-on-wheel
     picture_url: https://www.ricmotech.com/assets/images/Mazda-2022a.jpg
     shops:
@@ -1037,7 +1037,7 @@ commercial:
       adapted for Thrustmaster wheelbases.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/realgear-mpi-gt11a-alcantara-rim-thrustmaster
     picture_url: https://www.ricmotech.com/assets/images/GT11A-007.jpg
     shops:
@@ -1052,7 +1052,7 @@ commercial:
       adapted for Thrustmaster wheelbases.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/realgear-mpi-gt11c-alcantara-rim-thrustmaster
     picture_url: https://www.ricmotech.com/assets/images/RGR-THWKIT-GT11C-2.jpg
     shops:
@@ -1067,7 +1067,7 @@ commercial:
       aluminum magnetic paddle shifters.
     manufacturer: RealGear / OMP
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/realgear-gte
     picture_url: https://www.ricmotech.com/assets/images/ALU310a.jpg
     shops:
@@ -1082,7 +1082,7 @@ commercial:
       controls on the spokes and around the hub.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/RealGear-WHEELpro-MPI-Stock-Car-Sim-Wheel-with-Buttons_p_430.html
     picture_url: https://www.ricmotech.com/assets/images/DDWKIT-MP15B-1.jpg
     shops:
@@ -1097,7 +1097,7 @@ commercial:
       wheel configured with simulator controls.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/RealGear-WHEELpro-MPI-15-inch-Sprint-Car-Sim-Wheel-with-Buttons_p_433.html
     picture_url: https://www.ricmotech.com/assets/images/MPI%20SimLab%20Wheels_01-web.jpg
     shops:
@@ -1112,7 +1112,7 @@ commercial:
       wheel configured with simulator controls.
     manufacturer: RealGear / MPI
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.ricmotech.com/RealGear-WHEELpro-MPI-350mm-Sim-Drifting-Wheel-with-Buttons_p_480.html
     picture_url: https://www.ricmotech.com/assets/images/MPI%20SimDrift%20Wheel_01.jpg
     shops:
@@ -1127,7 +1127,7 @@ commercial:
       Scuderia Ferrari SF-25 steering wheel replica.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.thrustmaster.com/en-us/products/formula-wheel-add-on-ferrari-sf-25-edition/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2026/03/Website_ProductPageListing_SF25_800x800.webp
     shops:
@@ -1142,7 +1142,7 @@ commercial:
       wheel with integrated display for supported Thrustmaster bases.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.thrustmaster.com/en-us/products/formula-wheel-add-on-ferrari-sf1000-edition-us-can/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2021/09/wheel-add-on-Ferrari-SF1000.png
     shops:
@@ -1157,7 +1157,7 @@ commercial:
       Thrustmaster racing wheel bases.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.thrustmaster.com/en-us/products/ferrari-488-gt3-wheel-add-on/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/09/Ferrari488GT3_WheelAddOn-3.webp
     shops:
@@ -1171,7 +1171,7 @@ commercial:
       official US shop. Gran Turismo-branded successor to the T-GT wheel rim.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.thrustmaster.com/en-us/products/gt-wheel-add-on/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2026/03/GT_WheelAddon_Listing.png
     shops:
@@ -1186,7 +1186,7 @@ commercial:
       hypercar racing simulations.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.thrustmaster.com/en-us/products/hypercar-wheel-add-on/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2024/10/website_ProductPageProductListing-HypercarWheelAddOn-800x800-2.webp
     shops:
@@ -1201,7 +1201,7 @@ commercial:
       Alcantara wheel rim.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.thrustmaster.com/en-us/products/599xx-evo-30-wheel-add-on-alcantara-edition/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/list-599XX-EVO-wheel-768x768-3.webp
     shops:
@@ -1216,7 +1216,7 @@ commercial:
       compatible Thrustmaster bases.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.thrustmaster.com/en-us/products/ferrari-250-gto-wheel-add-on/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/Ferrari-250-GTO-wheel-add-on-1-768x768-2.webp
     shops:
@@ -1231,7 +1231,7 @@ commercial:
       Thrustmaster racing wheel bases.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.thrustmaster.com/en-us/products/ferrari-f1-wheel-add-on/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/P_List-Thrustmaster-FERRARI-F1-WHEEL-ADD-ON-768x768-4.webp
     shops:
@@ -1246,7 +1246,7 @@ commercial:
       Thrustmaster bases.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.thrustmaster.com/en-us/products/tm-open-wheel-add-on/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/SF_List-TM-OPEN-WHEEL-add-on-racing-1-768x768-1.webp
     shops:
@@ -1261,7 +1261,7 @@ commercial:
       leather rim.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.thrustmaster.com/en-us/products/evo-racing-31u-leather/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2026/03/EVOR31UL_Website-PageProductListing_800x800-1.webp
     shops:
@@ -1276,7 +1276,7 @@ commercial:
       wheel rim.
     manufacturer: Thrustmaster
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.thrustmaster.com/en-us/products/evo-racing-32r-leather/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2024/03/EVORacingHub32RLeather_ProductPageGallery-ProductListing_800x800_2-pichi.webp
     shops:
@@ -1291,7 +1291,7 @@ commercial:
       hand grips.
     manufacturer: Trak Racer
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://trakracer.com/products/trak-tour-steering-wheel-d-shape
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRSWH2A.6790.webp?v=1774906768
     shops:
@@ -1306,7 +1306,7 @@ commercial:
       rim with silicone hand grips.
     manufacturer: Trak Racer
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://trakracer.com/products/trak-tour-steering-wheel-open-d-shape
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRSWH4A.6794.webp?v=1774906810
     shops:
@@ -1321,7 +1321,7 @@ commercial:
       hand grips.
     manufacturer: Trak Racer
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://trakracer.com/products/trak-rally-steering-wheel
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRSWH1A.6786.webp?v=1774906841
     shops:
@@ -1336,7 +1336,7 @@ commercial:
       simulator steering hubs.
     manufacturer: Trak Racer
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://trakracer.com/products/trak-drift-deep-dish-steering-wheel
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/Frontonwithplate.png?v=1742172784
     shops:
@@ -1351,7 +1351,7 @@ commercial:
       hubs.
     manufacturer: Sparco
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.sparco-official.com/de/r383-logo.html
     picture_url: https://www.sparco-official.com/media/catalog/product/0/1/015r383psnlogo_01_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1366,7 +1366,7 @@ commercial:
       simulator hubs.
     manufacturer: Sparco
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.sparco-official.com/de/p310-open-015p310opn.html
     picture_url: https://www.sparco-official.com/media/catalog/product/0/1/015p310opn.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1380,7 +1380,7 @@ commercial:
       German shop. 330 mm leather steering wheel rim for simulator hubs.
     manufacturer: Sparco
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.sparco-official.com/de/r330.html
     picture_url: https://www.sparco-official.com/media/catalog/product/0/1/015r330clo.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1394,7 +1394,7 @@ commercial:
       German shop. 345 mm Sparco wheel rim for simulator and kart-style setups.
     manufacturer: Sparco
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.sparco-official.com/de/kg-345.html
     picture_url: https://www.sparco-official.com/media/catalog/product/0/1/0158kg345nr_01_pvetnnkmys81hb74.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1409,7 +1409,7 @@ commercial:
       magnetic shifter paddles, and programmable ARGB LEDs.
     manufacturer: Asetek Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.asetek.com/simsports/global/product/forte-formula-steering-wheel/
     picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/03/Forte-Wheel-Photo-03_NoBG-600x600-1-300x300.png
     shops:
@@ -1424,7 +1424,7 @@ commercial:
       buttons, two 7-way switches, rotary encoders, and magnetic shifter paddles.
     manufacturer: Asetek Racing
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     product_url: https://www.asetek.com/simsports/global/product/la-prima-formula-steering-wheel/
     picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/03/La-Prima-Wheel-Photo-01_NoBG-300x300.png
     shops:
@@ -1439,7 +1439,7 @@ commercial:
       magnetic shifters, 21 inputs, and reactive ARGB LEDs.
     manufacturer: Asetek Racing
     component_category: steering-wheels
-    component_sub_category: GT wheel
+    component_sub_category: gt-wheel
     product_url: https://www.asetek.com/simsports/global/product/initium-steering-wheel-pc/
     picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2025/06/Initium_Steering-Wheel-PC_45-Hero-LED_40-036-0036001-300x300.png
     shops:
@@ -1456,7 +1456,7 @@ opensource:
       boards.
     maker: FreeJoy-Team
     component_category: steering-wheels
-    component_sub_category: Wheel electronics
+    component_sub_category: wheel-electronics
     license: GPL-3.0
     project_url: https://github.com/FreeJoy-Team/FreeJoy
     picture_url: https://raw.githubusercontent.com/FreeJoy-Team/FreeJoy/master/images/main.png
@@ -1467,7 +1467,7 @@ opensource:
       simulator use.
     maker: Nolimy
     component_category: steering-wheels
-    component_sub_category: Formula wheel
+    component_sub_category: formula-wheel
     license: GPL-3.0
     project_url: https://github.com/Nolimy/steeringWheel_MeterBox_STM32_FreeRTOS
     picture_url: https://raw.githubusercontent.com/Nolimy/steeringWheel_MeterBox_STM32_FreeRTOS/main/readme%20md/simhub1.png
@@ -1477,7 +1477,7 @@ opensource:
       documentation. Open hardware/software for ESP32 sim-racing wheel or button box.
     maker: afpineda
     component_category: steering-wheels
-    component_sub_category: Wheel electronics
+    component_sub_category: wheel-electronics
     license: EUPL-1.2
     project_url: https://github.com/afpineda/OpenSourceSimWheelESP32
     picture_url: https://repository-images.githubusercontent.com/489044238/1d81d5ed-5a48-4502-8079-3e7befab7929
@@ -1487,7 +1487,7 @@ opensource:
       Pi Pico and AS5600 magnetic encoder.
     maker: khui0
     component_category: steering-wheels
-    component_sub_category: Wheel electronics
+    component_sub_category: wheel-electronics
     license: GPL-3.0
     project_url: https://github.com/khui0/pico-wheel
     picture_url: https://github.com/khui0/pico-wheel/assets/101839505/29395627-e298-49d1-adba-7828c009001b
@@ -1499,7 +1499,7 @@ opensource:
       [uncertain exact current repo coverage].
     maker: Turn Racing community
     component_category: steering-wheels
-    component_sub_category: Wheel archive
+    component_sub_category: wheel-archive
     license: CC BY-NC-ND 4.0; source-available but not OSI/open-hardware-compliant because
       commercial use and derivative sharing are restricted.
     project_url: https://github.com/turnracing/turnracing-diy
@@ -1510,7 +1510,7 @@ opensource:
       steering wheel with buttons, LEDs, Nextion display, and SimHub support.
     maker: MorGuux
     component_category: steering-wheels
-    component_sub_category: Wheel electronics
+    component_sub_category: wheel-electronics
     license: GPL-3.0
     project_url: https://github.com/MorGuux/WirelessWheel
     picture_url: https://repository-images.githubusercontent.com/298696858/beb10cdf-2252-4644-bd03-47356db0214f

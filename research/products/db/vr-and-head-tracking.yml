@@ -5,7 +5,7 @@ commercial:
       VR headset; review source cites 107 g.
     manufacturer: Bigscreen
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://store.bigscreenvr.com/products/bigscreen-beyond-2
     picture_url: https://store.bigscreenvr.com/cdn/shop/files/Black_with_strap.png?v=1775701046&width=480
     shops:
@@ -19,7 +19,7 @@ commercial:
       current. 2880 x 2880 pixels per eye.
     manufacturer: Pimax
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://pimax.com/products/pimax-crystal-light
     picture_url: https://pimax.com/cdn/shop/files/product_pimaxcrystallight_headsetwithcontrollers_2405_00537d9f-5f8a-4ca0-ba20-07de3b678991.webp?v=1754989215&width=1920
     shops:
@@ -34,7 +34,7 @@ commercial:
       per eye.
     manufacturer: Pimax
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://pimax.com/products/pimax-crystal-super
     picture_url: https://pimax.com/cdn/shop/files/product_pimaxcrystalsuper-withcontrollers_white.webp?v=1756796355&width=1920
     shops:
@@ -49,7 +49,7 @@ commercial:
       eye, 53 PPD, and 116 degree horizontal FOV.
     manufacturer: Pimax
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://pimax.com/products/pimax-crystal-super-sony-8k-micro-oled
     picture_url: https://cdn.shopify.com/s/files/1/0127/3767/5323/files/micro-OLED_1_adf58c8a-a860-4b6b-bf90-7096c8440395.webp?v=1764653377
     shops:
@@ -64,7 +64,7 @@ commercial:
       DelanCam1.
     manufacturer: Delan Engineering / DelanClip
     component_category: vr-and-head-tracking
-    component_sub_category: Head tracking
+    component_sub_category: head-tracking
     product_url: https://delanclip.com/product/delanclip-fusion-pro/
     picture_url: https://delanclip.com/wp-content/uploads/2025/09/Delanclip-Fusion-Pro-Bundle.avif
     shops:
@@ -79,7 +79,7 @@ commercial:
       eye, 110 degree horizontal FOV, and under 170 g headset weight.
     manufacturer: Pimax
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://pimax.com/products/pimax-dream-air
     picture_url: https://cdn.shopify.com/s/files/1/0127/3767/5323/files/20260425-203244.jpg?v=1777120392
     shops:
@@ -94,7 +94,7 @@ commercial:
       degree horizontal FOV, and under 140 g headset weight.
     manufacturer: Pimax
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://pimax.com/products/pimax-dream-air-se
     picture_url: https://cdn.shopify.com/s/files/1/0127/3767/5323/files/k10_1_d2d915e7-24b1-4ac3-8711-f787e094b36b.jpg?v=1777120155
     shops:
@@ -109,7 +109,7 @@ commercial:
       simultaneously.
     manufacturer: Tobii Gaming
     component_category: vr-and-head-tracking
-    component_sub_category: Head tracking
+    component_sub_category: head-tracking
     product_url: https://gaming.tobii.com/product/eye-tracker-5/
     picture_url: https://gaming.tobii.com/wp-content/uploads/2020/05/product-image-tobii-eye-tracker-5.png
     shops:
@@ -123,7 +123,7 @@ commercial:
       Standalone headset with Qualcomm Snapdragon XR2 Gen 2.
     manufacturer: Meta
     component_category: vr-and-head-tracking
-    component_sub_category: MR headset
+    component_sub_category: mr-headset
     product_url: https://www.meta.com/quest/quest-3/
     picture_url: https://cdn.mos.cms.futurecdn.net/m2PdBpqN7Mtfr23zxqPK2E.jpg
     shops:
@@ -137,7 +137,7 @@ commercial:
       Snapdragon XR2 Gen 2 and 8 GB RAM class hardware.
     manufacturer: Meta
     component_category: vr-and-head-tracking
-    component_sub_category: MR headset
+    component_sub_category: mr-headset
     product_url: https://www.meta.com/quest/quest-3s/
     picture_url: https://cdn.mos.cms.futurecdn.net/CdZCYhEC9iA5Qwp6iTuFL.jpg
     shops:
@@ -152,7 +152,7 @@ commercial:
       110 degree field of view, and PS5 required.
     manufacturer: Sony Interactive Entertainment
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://direct.playstation.com/en-us/buy-consoles/playstationvr2
     picture_url: https://media.direct.playstation.com/is/image/sierialto/ps-vr2-headset-controllers-angle
     shops:
@@ -166,7 +166,7 @@ commercial:
       camera/head tracker for home flight simulation.
     manufacturer: TrackHat
     component_category: vr-and-head-tracking
-    component_sub_category: Head tracking
+    component_sub_category: head-tracking
     product_url: https://www.trackhat.org/product-page/trackhat-sensor-v2
     picture_url: https://static.wixstatic.com/media/5e6547_52a286c8814e4d11aed90944c02c9a42~mv2.png/v1/fill/w_113,h_113,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/5e6547_52a286c8814e4d11aed90944c02c9a42~mv2.png
     shops:
@@ -181,7 +181,7 @@ commercial:
       Infrared optical 6DoF head tracking.
     manufacturer: NaturalPoint
     component_category: vr-and-head-tracking
-    component_sub_category: Head tracking
+    component_sub_category: head-tracking
     product_url: https://trackir.com/products/trackir5/
     picture_url: https://d1rhoi6onixddn.cloudfront.net/website-images/homepage-demo-static@2x.png
     shops:
@@ -196,7 +196,7 @@ commercial:
       controllers, and two SteamVR 2.0 base stations in full kit.
     manufacturer: Valve
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://store.steampowered.com/sub/354231/Valve_Index_VR_Kit/
     picture_url: https://store.akamai.steamstatic.com/public/images/valveindex/marketing_site_preview.png?t=1337
     shops:
@@ -210,7 +210,7 @@ commercial:
       foldable HMD for immersive content with phone or controller.
     manufacturer: HTC VIVE
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://www.vive.com/us/product/vive-flow/overview/
     picture_url: https://www.vive.com/media/filer_public/vive/product/comparison/flow-360.png
     shops:
@@ -225,7 +225,7 @@ commercial:
       eye tracking, and DisplayPort mode.
     manufacturer: HTC VIVE
     component_category: vr-and-head-tracking
-    component_sub_category: MR headset
+    component_sub_category: mr-headset
     product_url: https://www.vive.com/us/product/vive-focus-vision/overview/
     picture_url: https://shop-us.vive.com/cdn/shop/files/shopify_hmd_focus-vision.jpg?v=1767729889
     shops:
@@ -241,7 +241,7 @@ commercial:
       stations, and controllers.
     manufacturer: HTC VIVE
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://www.vive.com/us/product/vive-pro2-full-kit/overview/
     picture_url: https://www.vive.com/media/filer_public/fed-assets/vive-pro2-full-kit/images/pro-2-full-kit-meta-image.jpg
     shops: []
@@ -252,7 +252,7 @@ commercial:
       controllers sold separately.
     manufacturer: HTC VIVE
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     product_url: https://www.vive.com/us/product/vive-pro2/overview/
     picture_url: https://www.vive.com/media/filer_public/fed-assets/vivepro2/images/pro2-meta.jpg
     shops: []
@@ -262,7 +262,7 @@ commercial:
       with high-resolution passthrough and glasses-like form factor.
     manufacturer: HTC VIVE
     component_category: vr-and-head-tracking
-    component_sub_category: MR headset
+    component_sub_category: mr-headset
     product_url: https://www.vive.com/us/product/vive-xr-elite/overview/
     picture_url: https://www.vive.com/media/filer_public/vive/product-listing/hero-vive-xr-elite-full-kit-687.png
     shops:
@@ -276,7 +276,7 @@ commercial:
       mini-LED displays.
     manufacturer: Varjo
     component_category: vr-and-head-tracking
-    component_sub_category: MR headset
+    component_sub_category: mr-headset
     product_url: https://varjo.com/products/xr-4/
     picture_url: https://varjo.com/hs-fs/hubfs/Accesories-1.png?width=1057&height=680&name=Accesories-1.png
     shops:
@@ -292,7 +292,7 @@ opensource:
       software designed to work alongside opentrack.
     maker: AIRLegend
     component_category: vr-and-head-tracking
-    component_sub_category: Head tracking
+    component_sub_category: head-tracking
     license: MIT
     project_url: https://github.com/AIRLegend/aitrack
     picture_url: https://opengraph.githubassets.com/6b706df3f3310e0ad786ad4d86844b33c49917c4faa245765b0b23419459cfd2/AIRLegend/aitrack
@@ -302,7 +302,7 @@ opensource:
       and active docs. DIY SteamVR-compatible VR setup for tinkerers.
     maker: HadesVR
     component_category: vr-and-head-tracking
-    component_sub_category: VR runtime
+    component_sub_category: vr-runtime
     license: MIT
     project_url: https://github.com/HadesVR/HadesVR
     picture_url: https://raw.githubusercontent.com/HadesVR/HadesVR/main/docs/img/Headset.png
@@ -313,7 +313,7 @@ opensource:
       Windows, and other devices.
     maker: Monado / freedesktop.org / Collabora contributors
     component_category: vr-and-head-tracking
-    component_sub_category: VR runtime
+    component_sub_category: vr-runtime
     license: Permissive open-source licenses; exact components vary by repository
     project_url: https://gitlab.freedesktop.org/monado/monado
     picture_url: https://gitlab.freedesktop.org/.within.website/x/cmd/anubis/static/img/pensive.webp?cacheBuster=v1.25.0-10-ga2a4cde
@@ -324,7 +324,7 @@ opensource:
       head-mounted displays with built-in head tracking.
     maker: OpenHMD community
     component_category: vr-and-head-tracking
-    component_sub_category: VR runtime
+    component_sub_category: vr-runtime
     license: Boost Software License 1.0
     project_url: https://github.com/OpenHMD/OpenHMD
     picture_url: http://www.openhmd.net/wordpress/wp-content/uploads/2018/06/3glasses-pre.png
@@ -334,7 +334,7 @@ opensource:
       rotation/position and relays it to games and flight simulation software.
     maker: opentrack contributors / Stanislaw Halik
     component_category: vr-and-head-tracking
-    component_sub_category: VR runtime
+    component_sub_category: vr-runtime
     license: Mostly ISC, with a few proprietary dependencies noted by project
     project_url: https://github.com/opentrack/opentrack
     picture_url: https://opengraph.githubassets.com/3a141d2a0e47de2893955e811ce5c00254ff8010b4b73f296cafd407a618e01c/opentrack/opentrack
@@ -346,7 +346,7 @@ opensource:
       space.
     maker: pushrax
     component_category: vr-and-head-tracking
-    component_sub_category: VR calibration
+    component_sub_category: vr-calibration
     license: MIT
     project_url: https://github.com/pushrax/OpenVR-SpaceCalibrator
     picture_url: https://wiki.vronlinux.org/logo.webp
@@ -357,7 +357,7 @@ opensource:
       operation of VR/AR devices and peripherals.
     maker: OSVR / Sensics and contributors
     component_category: vr-and-head-tracking
-    component_sub_category: VR runtime
+    component_sub_category: vr-runtime
     license: Apache-2.0
     project_url: https://github.com/OSVR/OSVR-Core
     picture_url: https://github.com/fluidicon.png
@@ -367,7 +367,7 @@ opensource:
       files for Leap Motion's Project North Star AR headset.
     maker: Leap Motion / Ultraleap community
     component_category: vr-and-head-tracking
-    component_sub_category: AR headset
+    component_sub_category: ar-headset
     license: GPL-3.0 in GitHub sidebar; project blog/docs mention Apache license for
       original package [uncertain conflict]
     project_url: https://github.com/leapmotion/ProjectNorthStar
@@ -379,7 +379,7 @@ opensource:
       SteamVR support.
     maker: Relativty / Maxim xyz and Gabriel Combe
     component_category: vr-and-head-tracking
-    component_sub_category: VR headset
+    component_sub_category: vr-headset
     license: GPL-3.0
     project_url: https://github.com/relativty/Relativty
     picture_url: https://raw.githubusercontent.com/relativty/Relativty/master/ressources/img/open.jpg

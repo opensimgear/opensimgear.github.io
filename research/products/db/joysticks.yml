@@ -4,7 +4,7 @@ commercial:
       catalog but not normally purchasable. 3X0 Joystick Grip x1.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick grip
+    component_sub_category: joystick-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=335
     picture_url: https://eu.winctrl.com/static/ipfs/QmPnLmy39KvYMQSweU8s4quXi5SDisUDQwav4Jd82wzPxN
     shops:
@@ -18,7 +18,7 @@ commercial:
       Active/backorder on VIRPIL US. Compact all-in-one right-hand flightstick.
     manufacturer: VIRPIL Controls
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://virpil-controls.us.com/cdt-aeromax-r-flightstick.html
     picture_url: https://virpil-controls.us.com/media/catalog/product/cache/86ea3b320f2d2e3b9be724ff3ef6735b/v/p/vpc-120-r_01.jpg
     shops:
@@ -35,7 +35,7 @@ commercial:
       hand rest.
     manufacturer: VIRPIL Controls
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://virpil-controls.us.com/vpc-constellation-alpha-prime-r.html
     picture_url: https://virpil-controls.us.com/media/catalog/product/cache/a4d9809fa9f5cf72bca38b0996da933b/v/p/vpc-009-prime-r_2024_01.jpg
     shops:
@@ -50,7 +50,7 @@ commercial:
       replica grip.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/f-14-combat-grip-stand-alone/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2019/11/750-8.png
     shops:
@@ -65,7 +65,7 @@ commercial:
       Gladiator NXT EVO Base.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gladiator-nxt-evo-base-only/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/09/GNE_Base_1200_02.jpg
     shops:
@@ -80,7 +80,7 @@ commercial:
       2026-04-29. 1 GNX F-14 Grip.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gladiator-nxt-evo-f-14-combat-edition/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/71_GNX-EVOF-14_800_2.jpg
     shops:
@@ -95,7 +95,7 @@ commercial:
       2026-04-29. 1 GNX SCG Grip (Left or Right).
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gladiator-evo-space-combat-edition/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/70_GNX-EVOSCG-P_R_800_2.jpg
     shops:
@@ -110,7 +110,7 @@ commercial:
       2026-04-29. 1 GNX KG12 Grip.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gladiator-nxt-evo-wwii-combat-edition/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/72_GNX-EVOKG12_800_2.jpg
     shops:
@@ -125,7 +125,7 @@ commercial:
       Gladiator NXT EVO Omni Throttle with SCG Premium Grip (Left).
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gladiator-nxt-evo-omni-throttle/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/03/73_GNX-EVOOMNI-THRT-L-P_800_1.jpg
     shops:
@@ -139,7 +139,7 @@ commercial:
       joystick. Active on VKBSIM US store. GNX EVO base with Space Combat Grip.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://vkbsimcontrollers.com/products/gladiator-nxt-evo-space-combat-edition-right-hand-us
     picture_url: https://vkbsimcontrollers.com/cdn/shop/files/GNE_SCG-L_01.webp?v=1769290077&width=533
     shops:
@@ -154,7 +154,7 @@ commercial:
       2026-04-29. 1 F-14 Combat Grip.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gunfighter-iv-f-14-combat-edition/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF4_F-14_03-scaled.jpg
     shops:
@@ -169,7 +169,7 @@ commercial:
       2026-04-29. 1 MCG ‘Modern Combat Grip’ Pro.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gunfighter-iv-modern-combat-edition/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF_MCG_Pro_EN_02-scaled.jpg
     shops:
@@ -184,7 +184,7 @@ commercial:
       on 2026-04-29. 1 MCG ‘Modern Combat Grip’ – Ultimate.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gunfighter-iv-modern-combat-edition-ultimate/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF4_MCG_Ultimate_EN_02-scaled.jpg
     shops:
@@ -200,7 +200,7 @@ commercial:
       Left-handed.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gunfighter-iv-space-combat-edition-premium/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF4_SCG-R-P_03-scaled.jpg
     shops:
@@ -215,7 +215,7 @@ commercial:
       1 KG12 ‘WWII Combat Grip’ (Gen.2).
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gunfighter-iv-wwii-combat-edition/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/08/GF4_KG12_02-scaled.jpg
     shops:
@@ -230,7 +230,7 @@ commercial:
       Gunfighter IV Base.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/gunfighter-iv-base-only/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2024/06/GF_MKIV_1200_06.jpg
     shops:
@@ -245,7 +245,7 @@ commercial:
       Mk.IV base.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://vkbsimcontrollers.com/products/gunfighter-iv-modern-combat-edition-ultimate-tabletop-us-1
     picture_url: https://vkbsimcontrollers.com/cdn/shop/files/GF_MKIV_MCG_Ultimate_EN_1200_02.webp?v=1771003318&width=1920
     shops:
@@ -260,7 +260,7 @@ commercial:
       Force.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.thrustmaster.com/en-us/products/hotas-warthog-flight-stick/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/HotasWarthoFlightStick-pichi-768x768-2.webp
     shops:
@@ -275,7 +275,7 @@ commercial:
       on 2026-04-29. 1 Folding metal trigger.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/kg12-gf-gen-2-grip/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/07/65_KG-12_Grip4GF_800_1.jpg
     shops:
@@ -290,7 +290,7 @@ commercial:
       8-way hat, rapid-fire trigger.
     manufacturer: Logitech G
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.logitechg.com/en-us/shop/p/extreme-3d-pro-joystick
     picture_url: https://resource.logitechg.com/w_1440,h_810,ar_16:9,c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/xtreme-3d-pro-joystick/2025/extreme-3d-pro-joystick-intro.jpg
     shops:
@@ -305,7 +305,7 @@ commercial:
       on 2026-04-29. Right-hand grip design.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/modern-combat-grip-mcg-socket-rev-b/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2018/04/MCG-captions-3.jpg
     shops:
@@ -320,7 +320,7 @@ commercial:
       Right-hand grip design.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/modern-combat-grip-ultimate-edition/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2020/12/MCGU-2.jpg
     shops:
@@ -334,7 +334,7 @@ commercial:
       local stock not available in API response. NavyAce Metal Joystick Grip x1.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick grip
+    component_sub_category: joystick-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=305
     picture_url: https://eu.winctrl.com/static/ipfs/QmSjWgThT1cMzea5DfYiwPuPq5EihvrSc2X3VpqCAVyrft
     shops:
@@ -349,7 +349,7 @@ commercial:
       on 2026-04-29. Left- or Right-hand versions.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/scg-kosmosima-premium-stand-alone-grip-gladiator/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/07/SCG-R-P_For_GNE_1200_02.jpg
     shops:
@@ -364,7 +364,7 @@ commercial:
       listing on 2026-04-29. Left-hand version.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/scg-kosmosima-stand-alone-grip-for-gunfighter-left-hand/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2018/12/SCG-L_Premium.jpg
     shops:
@@ -379,7 +379,7 @@ commercial:
       FSC Europe listing on 2026-04-29. Right-hand version.
     manufacturer: VKB-Sim
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://flightsimcontrols.com/product/scg-kosmosima-premium-right-handed/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2018/12/SCG-R_Premium.jpg
     shops:
@@ -393,7 +393,7 @@ commercial:
       store; listed in catalog but not normally purchasable. Super Libra Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=336
     picture_url: https://eu.winctrl.com/static/ipfs/QmeSNFMx4F19Bro14aGo9gSKz6BCTFXrEWc6S6eFGk33Yx
     shops:
@@ -407,7 +407,7 @@ commercial:
       listed in catalog but not normally purchasable. Super Libra Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=307
     picture_url: https://eu.winctrl.com/static/ipfs/QmPw8YC1MrWXpfHdZUnimqq9iPw9xdTsvqQ8onHQRHTqXv
     shops:
@@ -422,7 +422,7 @@ commercial:
       Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=317
     picture_url: https://eu.winctrl.com/static/ipfs/QmXhv8n23Vm2R7a2xFg7tqeCFj5K9acs4N2JwbLxz8np1N
     shops:
@@ -437,7 +437,7 @@ commercial:
       Throttle Base(PSU Include).
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=314
     picture_url: https://eu.winctrl.com/static/ipfs/QmVCJTeJRSPxxQBe3WRCuAmdCzn79PPW6543EYkmcimevF
     shops:
@@ -452,7 +452,7 @@ commercial:
       Super Taurus Throttle Base(PSU Include).
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=383
     picture_url: https://eu.winctrl.com/static/ipfs/QmZZWcUzYAiwxgvNE4LJzWpv4TfV6Rm7GXur6hk9DqrnkQ
     shops:
@@ -467,7 +467,7 @@ commercial:
       Throttle Base(PSU Include).
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=313
     picture_url: https://eu.winctrl.com/static/ipfs/QmbvchpLafVMoSgc7Vm39n79gHPqJUTiM37VXibdPrXHn1
     shops:
@@ -481,7 +481,7 @@ commercial:
       Active product on Thrustmaster US. Four independent axes including twist rudder.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.thrustmaster.com/en-us/products/t-16000m-fcs/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/P_List-T16000M-FCS-joystick-pc-1-1-768x768-1.webp
     shops:
@@ -495,7 +495,7 @@ commercial:
       product on Thrustmaster US. Airbus-inspired civil aviation sidestick.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.thrustmaster.com/en-us/products/tca-sidestick-airbus-edition/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/P_List-TCA-sidestick-joystick-Airbus-1-1-768x768-1.webp
     shops:
@@ -509,7 +509,7 @@ commercial:
       WINCTRL store. URSA MINOR Airline Joystick L.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=556
     picture_url: https://eu.winctrl.com/static/ipfs/QmeQFa4TKJhuv9eVSRhyQNA4qwHjKafm4bj5U9rey2bQFM
     shops:
@@ -523,7 +523,7 @@ commercial:
       listing; total_stock 4 from API. URSA MINOR Airline Joystick R.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=555
     picture_url: https://eu.winctrl.com/static/ipfs/Qmc5VBeZ6mXuTQF4FzrxtHJUXExGrbXE2Q2veoD37hEt1T
     shops:
@@ -537,7 +537,7 @@ commercial:
       listing; total_stock 4 from API. URSA MINOR Fighter Joystick L.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=705
     picture_url: https://eu.winctrl.com/static/ipfs/Qmf5RuH2116M8r8Zw1yGjs8yKcBUyaWd3umTBpsKhbDdjm
     shops:
@@ -551,7 +551,7 @@ commercial:
       listing; total_stock 4 from API. URSA MINOR Fighter Joystick R.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=905
     picture_url: https://eu.winctrl.com/static/ipfs/QmZoJpPqr7a8bitto8kRzwQeB9hgQ48pkf7dcCrZ8JgaBo
     shops:
@@ -565,7 +565,7 @@ commercial:
       listing; total_stock 4 from API. URSA MINOR Space Joystick L.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=553
     picture_url: https://eu.winctrl.com/static/ipfs/QmVU6nR7cpKavjiCoLX8Ncg3pqND4kDzziesjtUUfaKtPo
     shops:
@@ -579,7 +579,7 @@ commercial:
       listing; total_stock 4 from API. URSA MINOR Space Joystick R.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=552
     picture_url: https://eu.winctrl.com/static/ipfs/QmVyL7WEJjnpjsrcBgoPBJbWNBAug8agSnLsuziCp69zpe
     shops:
@@ -593,7 +593,7 @@ commercial:
       store listing; total_stock 4 from API. URSA MINOR Space/Fighter HOSAS.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOSAS bundle
+    component_sub_category: hosas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=725
     picture_url: https://eu.winctrl.com/upload/picture/S1_F1_L&R/F1_R_S1_L.jpg
     shops:
@@ -608,7 +608,7 @@ commercial:
       ecosystem [uncertain from direct product page].
     manufacturer: Turtle Beach
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.turtlebeach.com/products/velocity-one-flightstick
     picture_url: https://cdn.shopify.com/s/files/1/0556/5795/5430/files/TB-VelocityOne-FlightUniversalControlSystem.png?v=1706659941
     shops:
@@ -623,7 +623,7 @@ commercial:
       Grip(None Shake kits) x1.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick grip
+    component_sub_category: joystick-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=377
     picture_url: https://eu.winctrl.com/static/ipfs/QmV3Q65tLgmFdRGVpmNMUKnQc3uR5Du72gj1pxYnv1J5S6
     shops:
@@ -638,7 +638,7 @@ commercial:
       Grip(with Shake kits) x1.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick grip
+    component_sub_category: joystick-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=338
     picture_url: https://eu.winctrl.com/static/ipfs/QmSXddA3pBz88J8JzUEpukr5gTYNYvc1AjcBooYKA1xm51
     shops:
@@ -654,7 +654,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick grip
+    component_sub_category: joystick-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1685
     picture_url: https://eu.winctrl.com/static/ipfs/QmWWSzfXYPiwmK4fgyNjntejY71CeAmED81oPyuNLbEVH8
     shops:
@@ -671,7 +671,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=5445
     picture_url: https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS
     shops:
@@ -688,7 +688,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=5945
     picture_url: https://eu.winctrl.com/static/ipfs/QmVCspiSPcSwXYyrJeQoNsGe4HriV4KPjSMdFqoN6ThPSb
     shops:
@@ -705,7 +705,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=5585
     picture_url: https://eu.winctrl.com/static/ipfs/QmVCspiSPcSwXYyrJeQoNsGe4HriV4KPjSMdFqoN6ThPSb
     shops:
@@ -719,7 +719,7 @@ commercial:
       store listing; total_stock 4 from API. WINCTRL Orion2 CarrierAce Joystick Combo.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1785
     picture_url: https://eu.winctrl.com/static/ipfs/QmeNYJYjUtitpAMmwtSohpXQPqksxvPxamXiBG2ryTkPA2
     shops:
@@ -733,7 +733,7 @@ commercial:
       WINCTRL store listing; total_stock 4 from API. Tips:.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1805
     picture_url: https://eu.winctrl.com/static/ipfs/QmbN4sNBrE4QehJfP2pYu1ibFdu6vNdW76t4G2xUeXW2JU
     shops:
@@ -747,7 +747,7 @@ commercial:
       store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=343
     picture_url: https://eu.winctrl.com/upload/picture/2023-07-19/HOTAS_MAX_F15EX.jpg
     shops:
@@ -761,7 +761,7 @@ commercial:
       WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=324
     picture_url: https://eu.winctrl.com/upload/picture/2023-07-19/HOTAS_METAL_F15E.jpg
     shops:
@@ -776,7 +776,7 @@ commercial:
       Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=369
     picture_url: https://eu.winctrl.com/upload/picture/2023-05-24/upload_903b2946637a84f2f1ca0457046b9275.jpg
     shops:
@@ -791,7 +791,7 @@ commercial:
       E/EX.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1825
     picture_url: https://eu.winctrl.com/static/ipfs/QmQu8USu3CjcUrpLX78iiSFqRLs48KmEVGoat2p3QZCZrH
     shops:
@@ -806,7 +806,7 @@ commercial:
       Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=303
     picture_url: https://eu.winctrl.com/upload/picture/2023-07-08/upload_32c93c80cc11a796b94ffc3a06704fb9.jpg
     shops:
@@ -820,7 +820,7 @@ commercial:
       WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=340
     picture_url: https://eu.winctrl.com/upload/picture/2023-07-10/Orion2 HOTAS F-16
       Vipeer_None Shake kits.jpg
@@ -835,7 +835,7 @@ commercial:
       listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base x1.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=333
     picture_url: https://eu.winctrl.com/static/ipfs/QmdG1Beco7VDEbcN8HPV8HaAqNaqG1gWWBuPnbLukqNbsB
     shops:
@@ -850,7 +850,7 @@ commercial:
       Version(Pre-install).
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=373
     picture_url: https://eu.winctrl.com/static/ipfs/QmV3Emnd3CaFRHy2jXcLH9xyo3QuQMZkVj2sN4NSHw2UAC
     shops:
@@ -865,7 +865,7 @@ commercial:
       Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=332
     picture_url: https://eu.winctrl.com/static/ipfs/QmbBcgQKY9DTvz7y6ftnKpjoPbje59ocm5S7fMJpBrHxB7
     shops:
@@ -879,7 +879,7 @@ commercial:
       WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
     manufacturer: WINCTRL
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://eu.winctrl.com/view/goods-details.html?id=374
     picture_url: https://eu.winctrl.com/upload/picture/2022-07-05/upload_028b767ef9420d029d9a4f7c9b225531.jpg
     shops:
@@ -894,7 +894,7 @@ commercial:
       simulation setups.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://www.thrustmaster.com/en-us/products/ava-base/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2024/04/website_ProductListing-AVA-1_800x800.webp
     shops:
@@ -909,7 +909,7 @@ commercial:
       Hornet grip for flight simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.thrustmaster.com/en-us/products/ava-fa18-super-hornet-flight-stick/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2024/04/website_ProductListing-AVABundle-1_800x800.webp
     shops:
@@ -924,7 +924,7 @@ commercial:
       Thrustmaster HOTAS grips.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://www.thrustmaster.com/en-us/products/hotas-magnetic-base/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/list-Hotas-Magnetic-Base-pc-flight-sim-1-768x768-1.webp
     shops:
@@ -939,7 +939,7 @@ commercial:
       simulation setups.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.thrustmaster.com/en-us/products/sol-r-1-flightstick/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/03/Website_ProductPageListing_SolR1_800x800_1.webp
     shops:
@@ -954,7 +954,7 @@ commercial:
       flight control.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: HOSAS bundle
+    component_sub_category: hosas-bundle
     product_url: https://www.thrustmaster.com/en-us/products/sol-r-2-hosas-space-sim-duo/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/03/Website_ProductPageListing_SolR2_800x800_1.webp
     shops:
@@ -968,7 +968,7 @@ commercial:
       official US shop. Modular base for the Sol-R space-sim control ecosystem.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Joystick base
+    component_sub_category: joystick-base
     product_url: https://www.thrustmaster.com/en-us/products/sol-r-5-base/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/10/Website_ProductPageListing_SolR5_800x800_1.webp
     shops:
@@ -983,7 +983,7 @@ commercial:
       airliner simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.thrustmaster.com/en-us/products/tca-sidestick-x-airbus-edition/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/SidestickX-website-800x800-listing-1-768x768-1.webp
     shops:
@@ -998,7 +998,7 @@ commercial:
       simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://www.thrustmaster.com/en-us/products/t-flight-hotas-one/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/SF_List-T-FLIGHT-HOTAS-ONE-XBOX-X-S-PC-1-1-768x768-2.webp
     shops:
@@ -1013,7 +1013,7 @@ commercial:
       simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: HOTAS bundle
+    component_sub_category: hotas-bundle
     product_url: https://www.thrustmaster.com/en-us/products/t-flight-hotas-4/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2021/09/list-flight-hotas-4-ps4-pc-768x768-1.webp
     shops:
@@ -1027,7 +1027,7 @@ commercial:
       on official US shop. Plug-and-play flight stick for PC flight simulation.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.thrustmaster.com/en-us/products/t-flight-stick-x/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/list-t-flight-stick-x-768x768-1.webp
     shops:
@@ -1041,7 +1041,7 @@ commercial:
       stock on official US shop. Simple USB joystick for PC flight controls.
     manufacturer: Thrustmaster
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     product_url: https://www.thrustmaster.com/en-us/products/usb-joystick/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/USB-joystick-pc-768x768-1.webp
     shops:
@@ -1057,7 +1057,7 @@ opensource:
       off-the-shelf parts and 3D-printed parts.
     maker: bhowiebkr
     component_category: joysticks
-    component_sub_category: FFB joystick
+    component_sub_category: ffb-joystick
     license: GPL-3.0
     project_url: https://github.com/bhowiebkr/open-joystick
     picture_url: https://raw.githubusercontent.com/bhowiebkr/open-joystick/develop/images/joystick_gimbal_v2.0_front.png
@@ -1067,7 +1067,7 @@ opensource:
       2026-04-17. Universal open force-feedback interface for DIY simulation devices."
     maker: Ultrawipf / OpenFFBoard community
     component_category: joysticks
-    component_sub_category: FFB joystick
+    component_sub_category: ffb-joystick
     license: MIT
     project_url: https://github.com/Ultrawipf/OpenFFBoard
     picture_url: https://cdn.hackaday.io/images/resize/600x600/5931891612360518072.JPG
@@ -1077,7 +1077,7 @@ opensource:
       found. 3D-printable joystick and throttle design for flight simulators.
     maker: Tom Howse / `tjhowse`
     component_category: joysticks
-    component_sub_category: Flight joystick
+    component_sub_category: flight-joystick
     license: GPL per project README; no GitHub license file detected, so exact SPDX status
       is [uncertain].
     project_url: https://github.com/tjhowse/OpenJoystick

@@ -5,7 +5,7 @@ commercial:
       response. Supported devices: PC."
     manufacturer: WINCTRL
     component_category: collectives
-    component_sub_category: Collective base
+    component_sub_category: collective-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=330
     picture_url: https://eu.winctrl.com/static/ipfs/QmfQ62FnMR9EsV4LL8oAKGiLdL3MBh2jFApZbQdNo9eZGS
     shops:
@@ -19,7 +19,7 @@ commercial:
       WINCTRL store listing; total_stock 4 from API. Gemini Throttle/Collective Base x1.
     manufacturer: WINCTRL
     component_category: collectives
-    component_sub_category: Collective base
+    component_sub_category: collective-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=326
     picture_url: https://eu.winctrl.com/static/ipfs/Qmc8g3XERGX3aUTAwAzHYFxMVjKbMn2KxEsrMjFBzAoNSg
     shops:
@@ -34,7 +34,7 @@ commercial:
       with twist throttle.
     manufacturer: Digital Reality / SimulationDevices.com
     component_category: collectives
-    component_sub_category: Collective set
+    component_sub_category: collective-set
     product_url: https://www.simulationdevices.com/collective.html
     picture_url: https://simulationdevices.com/images/944_Helicopter_simulator_collective.JPG
     shops:
@@ -49,7 +49,7 @@ commercial:
       Metal Collective Grip x1.
     manufacturer: WINCTRL
     component_category: collectives
-    component_sub_category: Collective grip
+    component_sub_category: collective-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=325
     picture_url: https://eu.winctrl.com/static/ipfs/QmaecQeC8VFeasS7AAV6HFuATXuMzmc2vpxtSodE7MR7G9
     shops:
@@ -64,7 +64,7 @@ commercial:
       Single-pilot 8-axis HID USB helicopter control device.
     manufacturer: Pro Flight Trainer LLC
     component_category: collectives
-    component_sub_category: Collective set
+    component_sub_category: collective-set
     product_url: https://pro-flight-trainer.com/product/a-style-puma-x/
     picture_url: https://i0.wp.com/pro-flight-trainer.com/wp-content/uploads/2023/10/A-Style-PUMA-X-side-front.png?fit=416%2C355&ssl=1
     shops:
@@ -80,7 +80,7 @@ commercial:
       button, and restrictor switch.
     manufacturer: VIRPIL Controls
     component_category: collectives
-    component_sub_category: Collective set
+    component_sub_category: collective-set
     product_url: https://virpil-controls.us.com/vpc-dual-sf-collective-grip.html
     picture_url: https://virpil-controls.us.com/media/catalog/product/cache/86ea3b320f2d2e3b9be724ff3ef6735b/v/p/vpc-014_03.jpg
     shops:
@@ -96,7 +96,7 @@ commercial:
       twist throttle axis, idle button, and travel limiter.
     manufacturer: VIRPIL Controls
     component_category: collectives
-    component_sub_category: Collective set
+    component_sub_category: collective-set
     product_url: https://virpil-controls.us.com/vpc-rotor-tcs-plus-base-upgraded.html
     picture_url: https://virpil-controls.us.com/media/catalog/product/cache/86ea3b320f2d2e3b9be724ff3ef6735b/v/p/vpc-112-001_01.jpg
     shops:
@@ -111,7 +111,7 @@ commercial:
       pre-installed counter-balance kit.
     manufacturer: VIRPIL Controls
     component_category: collectives
-    component_sub_category: Collective set
+    component_sub_category: collective-set
     product_url: https://virpil-controls.us.com/vpc-rotor-tcs-plus-base-upgraded.html
     picture_url: https://virpil-controls.us.com/media/catalog/product/cache/86ea3b320f2d2e3b9be724ff3ef6735b/v/p/vpc-112-001_01.jpg
     shops:
@@ -126,7 +126,7 @@ commercial:
       response. WINCTRL Orion2 Throttle Base.
     manufacturer: WINCTRL
     component_category: collectives
-    component_sub_category: Collective base
+    component_sub_category: collective-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=344
     picture_url: https://eu.winctrl.com/upload/picture/2022-07-05/upload_716eb4ab5cbb57b5fcb1c7e4ee103f33.jpg
     shops:
@@ -143,7 +143,7 @@ opensource:
       models with source files and oriented STL files.
     maker: hc625ma
     component_category: collectives
-    component_sub_category: Collective set
+    component_sub_category: collective-set
     license: GPL-3.0
     project_url: https://github.com/hc625ma/simchair_models
     picture_url: http://hc625ma.org/wp-content/uploads/2019/07/cropped-27wxe8l.jpg.png

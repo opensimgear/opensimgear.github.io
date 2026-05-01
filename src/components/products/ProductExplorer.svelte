@@ -223,7 +223,7 @@
     buildOptions(filterProductsForOptions('category'), (product) => product.component_category, titleCaseSlug)
   );
   let groupOptions = $derived(
-    buildOptions(filterProductsForOptions('group'), componentGroup, titleCaseSlug)
+    buildOptions(filterProductsForOptions('group'), componentGroup, subCategoryLabel)
   );
   let makerOptions = $derived(buildOptions(filterProductsForOptions('maker'), makerName, (value) => value));
   let availabilityOptions = $derived(
@@ -284,7 +284,7 @@
       filters.push({
         key: 'group',
         label: 'Subcategory',
-        value: titleCaseSlug(value),
+        value: subCategoryLabel(value),
         rawValue: value,
         token: `group:${value}`,
       });
@@ -333,6 +333,37 @@
     return value
       .split('-')
       .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ');
+  }
+
+  function subCategoryLabel(value: string): string {
+    const phraseLabels: Record<string, string> = {
+      'g-seat': 'G-seat',
+      'g-seat-controller': 'G-seat controller',
+      'g-seat-cues': 'G-seat cues',
+      'h-pattern-shifter': 'H-pattern shifter',
+      'load-cell-pedals': 'Load-cell pedals',
+      'toe-brake-pedals': 'Toe-brake pedals',
+    };
+    const acronyms: Record<string, string> = {
+      ar: 'AR',
+      ffb: 'FFB',
+      gt: 'GT',
+      hosas: 'HOSAS',
+      hotas: 'HOTAS',
+      mr: 'MR',
+      vr: 'VR',
+    };
+
+    if (phraseLabels[value]) return phraseLabels[value];
+
+    return value
+      .split('-')
+      .map((part, index) => {
+        if (/^\d+dof$/.test(part)) return `${part.slice(0, -3)}DOF`;
+        if (acronyms[part]) return acronyms[part];
+        return index === 0 ? part.charAt(0).toUpperCase() + part.slice(1) : part;
+      })
       .join(' ');
   }
 
@@ -499,7 +530,9 @@
   }
 
   function productMetaGroup(product: Product): string {
-    return product.component_sub_category ?? titleCaseSlug(product.component_category);
+    return product.component_sub_category
+      ? subCategoryLabel(product.component_sub_category)
+      : titleCaseSlug(product.component_category);
   }
 
   function productBreadcrumb(product: Product): ProductBreadcrumbItem[] {
@@ -513,7 +546,7 @@
 
     if (product.component_sub_category) {
       crumbs.push({
-        label: titleCaseSlug(product.component_sub_category),
+        label: subCategoryLabel(product.component_sub_category),
         value: product.component_sub_category,
         filter: 'group',
       });
@@ -551,6 +584,7 @@
         kindLabel(product.kind),
         product.component_category,
         product.component_sub_category,
+        product.component_sub_category ? subCategoryLabel(product.component_sub_category) : null,
         makerName(product),
         product.description,
         product.product_url,
@@ -917,7 +951,7 @@
     );
     groupFilter = normalizeFilterValues(
       groupFilter,
-      buildOptions(filterProductsForOptions('group'), componentGroup, titleCaseSlug)
+      buildOptions(filterProductsForOptions('group'), componentGroup, subCategoryLabel)
     );
     makerFilter = normalizeFilterValues(
       makerFilter,

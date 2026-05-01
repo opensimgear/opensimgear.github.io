@@ -6,7 +6,7 @@ commercial:
       support, and Windows USB control.
     manufacturer: CAMMUS
     component_category: motion-platforms
-    component_sub_category: 4DOF platform
+    component_sub_category: 4dof-platform
     product_url: https://cammusracing.com/product/2026-new-arrival-cammus-rds4-motion-kit-4-actuator-for-sim-racing/
     picture_url: https://cammusracing.com/wp-content/uploads/2026/01/CAMMUS-RDS4-Motion-Kit-10.png
     shops:
@@ -21,7 +21,7 @@ commercial:
       power cabinets, and one QS-MC6 controller."
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://qubicsystem.com/product/3dof-motion-set-qs-210-qs-220/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/12/QS-210_3DOF_bundle_product_01.jpg
     shops:
@@ -36,7 +36,7 @@ commercial:
       power cabinets, and one QS-MC6 controller."
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://qubicsystem.com/product/3dof-motion-set-qs-210-qs-220/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/12/QS-210_3DOF_bundle_product_01.jpg
     shops:
@@ -50,7 +50,7 @@ commercial:
       available by reservation/quote process. APEX 3 GT: roll, pitch, yaw."
     manufacturer: SimCraft
     component_category: motion-platforms
-    component_sub_category: 6DOF platform
+    component_sub_category: 6dof-platform
     product_url: https://simcraft.com/racing-simulators/products/apex-gt/
     picture_url: https://simcraftacademy.com/wp-content/uploads/slider2/simcraft_realistic_motion_simulator_based_on_physics.jpeg
     shops:
@@ -64,7 +64,7 @@ commercial:
       available from Sigma Integrale. 2 in / 50 mm travel.
     manufacturer: Sigma Integrale
     component_category: motion-platforms
-    component_sub_category: 4DOF platform
+    component_sub_category: 4dof-platform
     product_url: https://www.sigmaintegrale.com/
     picture_url: https://www.sigmaintegrale.com/cdn/shop/articles/Motion_Integrity_Sigma_Integrale_Motion_Systems_EXPLAINED_c154411e-df55-4dff-96d6-531dfe7e3e76.png?v=1777411772&width=1044
     shops:
@@ -78,7 +78,7 @@ commercial:
       from Sigma Integrale. Four-actuator premium 2 in / 50 mm system.
     manufacturer: Sigma Integrale
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://www.sigmaintegrale.com/products/dk2-plus-billet-motion-system
     picture_url: https://www.sigmaintegrale.com/cdn/shop/files/DK2_Dimensional_Drawings.png?v=1771276244&width=3000
     shops:
@@ -92,7 +92,7 @@ commercial:
       from Sigma Integrale. Four-actuator 6 in / 150 mm travel system.
     manufacturer: Sigma Integrale
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://www.sigmaintegrale.com/products/dk6-motion-system
     picture_url: https://www.sigmaintegrale.com/cdn/shop/files/DK6_4_Actuator_Motion_System_2_-_explained.jpg?v=1758315535&width=1920
     shops:
@@ -108,7 +108,7 @@ commercial:
       an original F1 monocoque.
     manufacturer: AXSIM / Cranfield Simulation
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://axsim.racing/products/
     picture_url: https://axsim.racing/wp-content/uploads/2025/05/FORMULA-SIMULATOR.webp
     shops: []
@@ -118,7 +118,7 @@ commercial:
       haptic actuators with USB-connected controller.
     manufacturer: D-BOX
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://www.d-box.com/the-new-g5-actuators
     picture_url: https://www.d-box.com/hs-fs/hubfs/D-BOX_Landing%20G5%20page_600x500_Bloc%202_Actuator.jpg?width=600&height=500&name=D-BOX_Landing%20G5%20page_600x500_Bloc%202_Actuator.jpg
     shops: []
@@ -129,7 +129,7 @@ commercial:
       steel structure.
     manufacturer: AXSIM / Cranfield Simulation
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://axsim.racing/products/
     picture_url: https://axsim.racing/wp-content/uploads/2025/05/gfq-sim-5.webp
     shops: []
@@ -140,7 +140,7 @@ commercial:
       facility use.
     manufacturer: AXSIM / Cranfield Simulation
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://axsim.racing/products/
     picture_url: https://axsim.racing/wp-content/uploads/2025/05/gt-sim-2.webp
     shops: []
@@ -149,7 +149,7 @@ commercial:
       Reality. Moves seat and controls on pitch and roll axes.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 2DOF platform
+    component_sub_category: 2dof-platform
     product_url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-hero-h2/
     picture_url: https://dofreality.com/wp-content/uploads/H2_universal_0.png
     shops:
@@ -163,7 +163,7 @@ commercial:
       Reality. Provides pitch, roll, yaw, and traction-loss motion cues.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://dofreality.com/product/universal/universal-motion-platform-3-axis-hero-h3/
     picture_url: https://dofreality.com/wp-content/uploads/H3_universal_0.png
     shops:
@@ -177,7 +177,7 @@ commercial:
       Reality. Adds heave to HERO pitch, roll, yaw, and traction-loss cues.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 4DOF platform
+    component_sub_category: 4dof-platform
     product_url: https://dofreality.com/product/universal/universal-motion-platform-4-axis-hero-h4-with-sfu-and-xtra-smooth-gearing/
     picture_url: https://dofreality.com/wp-content/uploads/h4_universal_0.png
     shops:
@@ -191,7 +191,7 @@ commercial:
       Reality. Delivers heave, roll, pitch, surge, sway, and yaw.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 6DOF platform
+    component_sub_category: 6dof-platform
     product_url: https://dofreality.com/product/universal/universal-motion-platform-6-axis-hero-h6/
     picture_url: https://dofreality.com/wp-content/uploads/h6_universal_0.png
     shops:
@@ -206,7 +206,7 @@ commercial:
       frames.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 2DOF platform
+    component_sub_category: 2dof-platform
     product_url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-mover-m2/
     picture_url: https://dofreality.com/wp-content/uploads/m2_universal_0.png
     shops:
@@ -221,7 +221,7 @@ commercial:
       installations.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 2DOF platform
+    component_sub_category: 2dof-platform
     product_url: https://dofreality.com/product/universal/motion-universal-platform-2-axis-pro-mover-mp2/
     picture_url: https://dofreality.com/wp-content/uploads/m2_universal_0.png
     shops:
@@ -236,7 +236,7 @@ commercial:
       integrated sway, surge, yaw basement and CANBus control center.
     manufacturer: PT Actuator
     component_category: motion-platforms
-    component_sub_category: 6DOF platform
+    component_sub_category: 6dof-platform
     product_url: https://www.pt-actuator.com/product/legend-6dof-motion-platform/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2025/05/1-1%E5%8E%8B%E7%BC%A91.jpg
     shops:
@@ -251,7 +251,7 @@ commercial:
       actuators, 80 kg single-actuator thrust, and 320 kg system payload.
     manufacturer: PT Actuator
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://www.pt-actuator.com/product/champion-gt/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/08/General-Assembly-Drawing_1.jpg
     shops:
@@ -266,7 +266,7 @@ commercial:
       actuators with 60 kg single-actuator thrust and 240 kg payload.
     manufacturer: PT Actuator
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://www.pt-actuator.com/product/3dof-rhino-gt-motion-system-2/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2025/03/General-Assembly-Drawing_1.jpg
     shops:
@@ -282,7 +282,7 @@ commercial:
       and tower.
     manufacturer: PT Actuator
     component_category: motion-platforms
-    component_sub_category: 6DOF platform
+    component_sub_category: 6dof-platform
     product_url: https://www.pt-actuator.com/product/motion-dragon-6dof-gt/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/08/1-1-1.jpg
     shops:
@@ -297,7 +297,7 @@ commercial:
       two modules for 3DOF."
     manufacturer: Next Level Racing
     component_category: motion-platforms
-    component_sub_category: Motion kit
+    component_sub_category: motion-kit
     product_url: https://nextlevelracing.com/product/motion-plus-platform/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2022/03/motion_plus_web_1.png
     shops:
@@ -312,7 +312,7 @@ commercial:
       cornering cues.
     manufacturer: Next Level Racing
     component_category: motion-platforms
-    component_sub_category: Motion software
+    component_sub_category: motion-software
     product_url: https://nextlevelracing.com/product/motion-platform-v3/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2019/12/Motion_v3_feature-1.png
     shops:
@@ -326,7 +326,7 @@ commercial:
       available from DOF Reality. Moves seat and controls on pitch and roll axes.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 2DOF platform
+    component_sub_category: 2dof-platform
     product_url: https://dofreality.com/product/universal/universal-motion-platform-2-axis-pro-p2/
     picture_url: https://dofreality.com/wp-content/uploads/p2_universal_0-1.png
     shops:
@@ -341,7 +341,7 @@ commercial:
       motion cues.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://dofreality.com/product/universal/universal-motion-platform-3-axis-pro-p3/
     picture_url: https://dofreality.com/wp-content/uploads/p3_universal_0-1.png
     shops:
@@ -356,7 +356,7 @@ commercial:
       helicopter simulation with added heave axis.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 4DOF platform
+    component_sub_category: 4dof-platform
     product_url: https://dofreality.com/product/universal/universal-motion-platform-4-axis-pro-p4-with-sfu-and-xtra-smooth-gearing/
     picture_url: https://dofreality.com/wp-content/uploads/p4_universal_0_.png
     shops:
@@ -371,7 +371,7 @@ commercial:
       yaw.
     manufacturer: DOF Reality
     component_category: motion-platforms
-    component_sub_category: 6DOF platform
+    component_sub_category: 6dof-platform
     product_url: https://dofreality.com/product/universal/universal-motion-platform-6-axis-pro-p6/
     picture_url: https://dofreality.com/wp-content/uploads/p6_universal_0-1.png
     shops:
@@ -386,7 +386,7 @@ commercial:
       heave, load change, and weight-transfer motion cues with two actuators.
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: Motion kit
+    component_sub_category: motion-kit
     product_url: https://qubicsystem.com/product/2-5dof-motion-set-qs-210-qs-220-qs-pivot/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/12/QS-210_QS-Pivot_bundle_product_01-700x700.jpg
     shops:
@@ -401,7 +401,7 @@ commercial:
       effects to the 3DOF actuator platform.
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: 5DOF platform
+    component_sub_category: 5dof-platform
     product_url: https://qubicsystem.com/product/5dof-motion-set-qs-210-qs-220-qs-ch2/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/12/QS-CH2_QS-210_5DOF_bundle_product_01-700x700.jpg
     shops:
@@ -416,7 +416,7 @@ commercial:
       travel actuator configurations up to the 3DOF motion set.
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://qubicsystem.com/product/qs-210/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2023/06/QS-210_3dof_product_00-700x700.jpg
     shops:
@@ -431,7 +431,7 @@ commercial:
       faster actuator configurations up to the 3DOF motion set.
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://qubicsystem.com/product/qs-220/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2019/12/QS-220_3dof_product_00-700x700.jpg
     shops:
@@ -446,7 +446,7 @@ commercial:
       yaw movement cues to supported simulator rigs.
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: Traction platform
+    component_sub_category: traction-platform
     product_url: https://qubicsystem.com/product/qs-ch2/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2022/11/QS-CH2-thumb_01-700x700.jpg
     shops:
@@ -461,7 +461,7 @@ commercial:
       compact motion in home simulator setups.
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: 2DOF platform
+    component_sub_category: 2dof-platform
     product_url: https://qubicsystem.com/product/qs-h13/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2024/12/QS-H13_R12_product_04b-700x700.jpg
     shops:
@@ -476,7 +476,7 @@ commercial:
       six-axis motion for high-end simulator use.
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: 6DOF platform
+    component_sub_category: 6dof-platform
     product_url: https://qubicsystem.com/product/qs-s25/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2019/11/QS-S25_product_01-700x700.jpg
     shops:
@@ -490,7 +490,7 @@ commercial:
       distributor/contact. 6DOF platform with long-travel actuators.
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: 6DOF platform
+    component_sub_category: 6dof-platform
     product_url: https://qubicsystem.com/product/qs-s35/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2025/06/QS-S35_flight_crop_07.jpg
     shops:
@@ -505,7 +505,7 @@ commercial:
       advanced sim racers and professional racing simulation.
     manufacturer: Qubic System
     component_category: motion-platforms
-    component_sub_category: 4DOF platform
+    component_sub_category: 4dof-platform
     product_url: https://qubicsystem.com/product/qs-v20/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2021/09/QS-V20_product_04-700x700.jpg
     shops:
@@ -519,7 +519,7 @@ commercial:
       eRacing-Lab shop. Four actuators included.
     manufacturer: eRacing-Lab
     component_category: motion-platforms
-    component_sub_category: 4DOF platform
+    component_sub_category: 4dof-platform
     product_url: https://eracing-lab.com/products/rs-mega-plus
     picture_url: https://eracing-lab.com/cdn/shop/files/RSMEGAAMCRedc_1200x1200.jpg?v=1697723983
     shops:
@@ -534,7 +534,7 @@ commercial:
       4-actuator, commercial, and 6DOF Ultimate configurations.
     manufacturer: PT Actuator
     component_category: motion-platforms
-    component_sub_category: Motion kit
+    component_sub_category: motion-kit
     product_url: https://www.pt-actuator.com/product/scorpion-actuator-kits/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/07/Feature_1.jpg
     shops:
@@ -550,7 +550,7 @@ commercial:
       loaded packages.
     manufacturer: SimXperience
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://www.simxperience.com/shop/stage-5-full-motion-racing-simulator-18
     picture_url: https://www.simxperience.com/web/image/product.product/976/image_128/%5BSX-STG5-2024%5D%20Stage%205%20Full%20Motion%20Racing%20Simulator%20%28Standard%20Crate%20To%20Exterior%20of%20Home%2C%20Default%20Pro%20Package%29?unique=1f5d2d4
     shops:
@@ -564,7 +564,7 @@ commercial:
       from ProSimu. 2DOF dynamic cockpit based on T1000 chassis.
     manufacturer: ProSimu
     component_category: motion-platforms
-    component_sub_category: 2DOF platform
+    component_sub_category: 2dof-platform
     product_url: https://www.prosimu.com/en/t1000-2motions.html
     picture_url: https://www.prosimu.com/wafx_res/Images/0-375-untitled.117.png
     shops: []
@@ -574,7 +574,7 @@ commercial:
       chassis.
     manufacturer: ProSimu
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://www.prosimu.com/en/t1000-3motions.html
     picture_url: https://www.prosimu.com/wafx_res/Images/0-249-untitled.80.webp
     shops: []
@@ -584,7 +584,7 @@ commercial:
       one PRS50 actuator for traction loss."
     manufacturer: ProSimu
     component_category: motion-platforms
-    component_sub_category: 5DOF platform
+    component_sub_category: 5dof-platform
     product_url: https://www.prosimu.com/en/t1000-5motions.html
     picture_url: https://www.prosimu.com/wafx_res/Images/0-262-t10005m-04726x494.png
     shops: []
@@ -595,7 +595,7 @@ commercial:
       oversteer, and traction-loss cues.
     manufacturer: Next Level Racing
     component_category: motion-platforms
-    component_sub_category: Traction platform
+    component_sub_category: traction-platform
     product_url: https://nextlevelracing.com/faq/traction-plus-platform/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2019/12/TRACTION_PLUS_FEATURE.png
     shops:
@@ -609,7 +609,7 @@ commercial:
       Yaw VR shop. Roll range: 40 deg."
     manufacturer: Yaw VR
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://shop.yawvr.com/product/yaw3-motion-simulator/
     picture_url: https://shop.yawvr.com/wp-content/uploads/yaw3-central-module-1200x1200.jpg
     shops:
@@ -624,7 +624,7 @@ commercial:
       actuators, TrackTime racing seat, 4K monitor, gaming PC, and sound system.
     manufacturer: RaceRoom / TrackTime
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://www.raceroomstore.com/shop_en/3motion.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/3/m/3motionbild1.jpg
     shops:
@@ -639,7 +639,7 @@ commercial:
       SilentForce actuators, Sparco Grid Q seat, Samsung Odyssey display, and PC.
     manufacturer: RaceRoom / TrackTime
     component_category: motion-platforms
-    component_sub_category: Motion simulator
+    component_sub_category: motion-simulator
     product_url: https://www.raceroomstore.com/shop_en/3motion-advanced-547.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/3/m/3motionadvanced_002_1_2.png
     shops:
@@ -655,7 +655,7 @@ commercial:
       TrackTime shell seat.
     manufacturer: RaceRoom / TrackTime
     component_category: motion-platforms
-    component_sub_category: Motion kit
+    component_sub_category: motion-kit
     product_url: https://www.raceroomstore.com/shop_en/3motion-689.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/3/m/3mot_kit_4.png
     shops:
@@ -671,7 +671,7 @@ commercial:
       and plug-in power-cable variants.
     manufacturer: COG-SHH / SHH Simulation
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     product_url: https://www.shiftershh.com/en/home/21-cog-shh-3dof-motion-system.html
     picture_url: https://www.shiftershh.com/314-large_default/cog-shh-3dof-motion-system.jpg
     shops:
@@ -688,7 +688,7 @@ opensource:
       motion simulator platform.
     maker: Simmetrik
     component_category: motion-platforms
-    component_sub_category: 6DOF platform
+    component_sub_category: 6dof-platform
     license: CERN-OHL-S-2.0
     project_url: https://github.com/Simmetrik/6DOF-Motion-Platform
     picture_url: research/products/local_images/6DOF_Motion_Platform.jpg
@@ -699,7 +699,7 @@ opensource:
       Stewart geometry.
     maker: knaufinator
     component_category: motion-platforms
-    component_sub_category: 6DOF platform
+    component_sub_category: 6dof-platform
     license: MIT
     project_url: https://github.com/knaufinator/6DOF-Rotary-Stewart-Motion-Simulator
     picture_url: https://raw.githubusercontent.com/knaufinator/6DOF-Rotary-Stewart-Motion-Simulator/phoenix/documentation/images/stewart_platform_controller.png
@@ -710,7 +710,7 @@ opensource:
       controller family.
     maker: motion4sim
     component_category: motion-platforms
-    component_sub_category: Motion controller
+    component_sub_category: motion-controller
     license: No explicit license found.
     project_url: https://github.com/motion4sim/AASD15A-Servo-Controller-for-Motion-Simrigs
     picture_url: https://github.com/fluidicon.png
@@ -720,7 +720,7 @@ opensource:
       Firmware/manual repository for AMC-AASD15A controller.
     maker: Thanos / tronicgr
     component_category: motion-platforms
-    component_sub_category: Motion controller
+    component_sub_category: motion-controller
     license: No explicit open-source license found; firmware/source openness unclear
       [uncertain].
     project_url: https://github.com/tronicgr/AMC-AASD15A-Firmware
@@ -732,7 +732,7 @@ opensource:
       and rig previews.
     maker: FlyPTMover / FlyPT
     component_category: motion-platforms
-    component_sub_category: Motion software
+    component_sub_category: motion-software
     license: Free for personal home use; not confirmed open source.
     project_url: https://github.com/FlyPTMover
     picture_url: https://opengraph.githubassets.com/1/FlyPTMover/Releases
@@ -742,7 +742,7 @@ opensource:
       chassis 1.0. 3DOF sim rig made from 80/20 T-slot aluminum extrusions.
     maker: OpenSimCraft
     component_category: motion-platforms
-    component_sub_category: 3DOF platform
+    component_sub_category: 3dof-platform
     license: No explicit license found in repository.
     project_url: https://github.com/OpenSimCraft/theta-8020-3dof
     picture_url: https://raw.githubusercontent.com/opensimcraft/theta-8020-3dof/master/SC230%20Theta%20Large%20Screen.png
@@ -753,7 +753,7 @@ opensource:
       servos and ball screws.
     maker: Rausch IT / SimFeedback community
     component_category: motion-platforms
-    component_sub_category: 4DOF platform
+    component_sub_category: 4dof-platform
     license: "Mixed: documentation/images/STLs under CC BY-NC-SA 4.0; SimFeedback
       core and Arduino firmware are freeware/donationware, not open source;
       telemetry plugins on GitHub are MIT-style per official downloads page."
@@ -765,7 +765,7 @@ opensource:
       controller for up to three motion-simulator motors.
     maker: SimulatorMotorController
     component_category: motion-platforms
-    component_sub_category: Motion controller
+    component_sub_category: motion-controller
     license: MIT
     project_url: https://github.com/SimulatorMotorController/SMC3
     picture_url: https://github.com/fluidicon.png
@@ -775,7 +775,7 @@ opensource:
       progress. 6DOF simulator with Arduino controllers for FlyPT Mover.
     maker: Bjoes
     component_category: motion-platforms
-    component_sub_category: Motion software
+    component_sub_category: motion-software
     license: No explicit license found.
     project_url: https://github.com/Bjoes/Stewart-platform-6DOF
     picture_url: https://github.com/Bjoes/Stewart-platform-6DOF/assets/79850208/ee65c17e-6068-451a-889e-bb3d4af36408

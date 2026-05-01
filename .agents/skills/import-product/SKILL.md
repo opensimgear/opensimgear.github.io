@@ -48,7 +48,7 @@ commercial:
       Manufacturer Product Name. compact product type. current/pre-order/out of stock if relevant. Key official spec(s).
     manufacturer: Manufacturer
     component_category: category-file-name
-    component_sub_category: Existing subcategory style
+    component_sub_category: dash-separated-subcategory
     product_url: https://official/product
     picture_url: https://official/image.webp
     shops:
@@ -65,7 +65,8 @@ For open-source projects, follow existing `opensource` rows in same category. Do
 ## Data Rules
 
 - Use existing category file naming exactly for `component_category`.
-- Reuse existing `component_sub_category` vocabulary where possible.
+- Reuse existing `component_sub_category` vocabulary where possible. Store values as dash-separated slugs
+  (`load-cell-pedals`, `ffb-controller`), not display labels.
 - Keep descriptions compact: `Brand Model. type. status. key specs/source facts.`
 - Prices must be numbers, not strings. Use full-payment/current displayed price unless existing DB pattern clearly uses
   entry price or bundle price.

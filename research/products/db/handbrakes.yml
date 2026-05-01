@@ -5,7 +5,7 @@ commercial:
       warehouse through current global channel.
     manufacturer: CAMMUS
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://cammusracing.com/product/cammus-handbrake/
     picture_url: https://cammusracing.com/wp-content/uploads/2025/08/CAMMUS-HANDBRAKE-03.jpg
     shops:
@@ -20,7 +20,7 @@ commercial:
       electronics and included ClubSport USB Adapter.
     manufacturer: Fanatec
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://www.fanatec.com/eu/en/p/add-ons/crd-9050002-ww/clubsport-handbrake
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Add-ons/CS_HB_V2/CS_HB_V2-01.png
     shops:
@@ -35,7 +35,7 @@ commercial:
       digital button modes.
     manufacturer: Aiologs
     component_category: handbrakes
-    component_sub_category: Handbrake firmware
+    component_sub_category: handbrake-firmware
     product_url: https://shop.aiologs.net/new/product/handbrake/
     picture_url: https://shop.aiologs.net/new/wp-content/uploads/2020/01/h-a1.jpg
     shops:
@@ -51,7 +51,7 @@ commercial:
       included elastomers.
     manufacturer: Heusinkveld
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://heusinkveld.com/eu/shop/handbrake-shifters/handbrake/
     picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/01/8719689204402-1-Handbrake-standing-lever_1024x768.png
     shops:
@@ -65,7 +65,7 @@ commercial:
       page showed 29 in stock, can be backordered. All-aluminum black anodized design.
     manufacturer: VNM Simulation
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://vnmsimulation.com/product/vnm-handbrake-v1-5-rally-version/
     picture_url: https://vnmsimulation.com/wp-content/uploads/2024/12/output-onlinepngtools-150x150.png
     shops:
@@ -79,7 +79,7 @@ commercial:
       dispatched within 3 business days. CNC-machined aviation-grade aluminum body.
     manufacturer: MOZA Racing
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://us.mozaracing.com/products/hbp-handbrake
     picture_url: https://us.mozaracing.com/cdn/shop/files/MOZA-HBP-Handbrake-1.webp?v=1767606020&width=1920
     shops:
@@ -94,7 +94,7 @@ commercial:
       shifter and handbrake.
     manufacturer: Logitech G
     component_category: handbrakes
-    component_sub_category: Hybrid handbrake
+    component_sub_category: hybrid-handbrake
     product_url: https://www.logitechg.com/en-us/products/driving/rs-shifter-handbrake.html
     picture_url: https://www.logitech.com/assets/65578/jumpstart-smartdock.jpg
     shops:
@@ -108,7 +108,7 @@ commercial:
       official shop. Full-metal CNC construction.
     manufacturer: Simagic
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://simagic.com/products/tb-1-handbrake
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/TB-1_transparent_base.png?v=1766649428
     shops:
@@ -122,7 +122,7 @@ commercial:
       stock on official shop. Hydraulic handbrake with adjustable damping.
     manufacturer: Simagic
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://simagic.com/products/simagic-tb-rs
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/TB-RS_transparent_base.png?v=1766649288
     shops:
@@ -137,7 +137,7 @@ commercial:
       replica.
     manufacturer: Thrustmaster
     component_category: handbrakes
-    component_sub_category: Hybrid handbrake
+    component_sub_category: hybrid-handbrake
     product_url: https://www.thrustmaster.com/products/tss-handbrake-sparco-mod/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/TSS-Handbrake-Sparco-Mod-768x768-1.webp
     shops: []
@@ -147,7 +147,7 @@ commercial:
       damper resistance, and full aluminum construction.
     manufacturer: Sim-Lab
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://sim-lab.eu/en-de/products/handbrake-xb1-loadcell-sim-racing
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/xb1handbrake2.jpg?v=1744267566
     shops:
@@ -162,7 +162,7 @@ commercial:
       e-brake for drift and rally use.
     manufacturer: RealGear
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://www.ricmotech.com/realgear-driftpro-load-cell-e-brake
     picture_url: https://www.ricmotech.com/assets/images/RGR-DPHB-2.jpg
     shops:
@@ -177,7 +177,7 @@ commercial:
       handbrake for racing simulators.
     manufacturer: RealGear
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://www.ricmotech.com/realgear-rallypro-hydraulic-vertical-hand-brake
     picture_url: https://www.ricmotech.com/assets/images/RGR-RPHBV-2.jpg
     shops:
@@ -192,7 +192,7 @@ commercial:
       sim-racing use.
     manufacturer: RealGear
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     product_url: https://www.ricmotech.com/realgear-rallypro-xtreme-hand-brake
     picture_url: https://www.ricmotech.com/assets/images/RGR-RPHBVW-2.jpg
     shops:
@@ -208,7 +208,7 @@ opensource:
       firmware/sketch for sim racing.
     maker: AM-STUDIO
     component_category: handbrakes
-    component_sub_category: Handbrake firmware
+    component_sub_category: handbrake-firmware
     license: CC BY-NC-ND 4.0; source-available but not OSI/open-hardware-compliant because
       commercial use and derivative sharing are restricted.
     project_url: https://github.com/AM-STUDIO/Analog-E-Brake
@@ -219,7 +219,7 @@ opensource:
       real-car drift/race handbrake into analog USB handbrake for racing sims.
     maker: obsoletenerd
     component_category: handbrakes
-    component_sub_category: Handbrake conversion
+    component_sub_category: handbrake-conversion
     license: No repository license found [uncertain].
     project_url: https://github.com/obsoletenerd/analog-usb-handbrake
     picture_url: https://raw.githubusercontent.com/obsoletenerd/analog-usb-handbrake/master/Meta/Analog-USB-Handbrake-Lever.jpg
@@ -230,7 +230,7 @@ opensource:
       Chinese "14 Bit" handbrakes using Pro Micro and Hall sensor.
     maker: Daniel Korgel / Dak0r
     component_category: handbrakes
-    component_sub_category: Handbrake firmware
+    component_sub_category: handbrake-firmware
     license: Apache-2.0
     project_url: https://github.com/Dak0r/Chinese-SimRacing-14Bit-Handbrake-Custom-Firmware-Arduino-Sketch
     picture_url: https://raw.githubusercontent.com/Dak0r/Chinese-SimRacing-14Bit-Handbrake-Custom-Firmware-Arduino-Sketch/master/14bit%20v3%20images/pcb_v3_top_anot.jpg
@@ -241,7 +241,7 @@ opensource:
       using load cell rather than displacement.
     maker: zhyma
     component_category: handbrakes
-    component_sub_category: Analog handbrake
+    component_sub_category: analog-handbrake
     license: CC-BY-4.0
     project_url: https://github.com/zhyma/force_sensing_handbrake
     picture_url: https://raw.githubusercontent.com/zhyma/force_sensing_handbrake/master/img/comics.jpg
@@ -251,7 +251,7 @@ opensource:
       controller and hardware project for a simple, non-FFB sim racing handbrake.
     maker: BiggiePete
     component_category: handbrakes
-    component_sub_category: Handbrake firmware
+    component_sub_category: handbrake-firmware
     license: MIT
     project_url: https://github.com/BiggiePete/OpenHandbrake
     picture_url: https://github.com/fluidicon.png

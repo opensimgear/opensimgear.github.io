@@ -4,7 +4,7 @@ commercial:
       contact-sales flow on product page. Metal construction.
     manufacturer: Redbird Flight
     component_category: yokes
-    component_sub_category: Flight yoke
+    component_sub_category: flight-yoke
     product_url: https://simulators.redbirdflight.com/products/yk1
     picture_url: https://no-cache.hubspot.com/cta/default/358371/41b30c04-a0f2-43c6-9816-fa622e8bdb8d.png
     shops:
@@ -18,7 +18,7 @@ commercial:
       stock on Honeycomb store page on 2026-04-29. 180 deg yoke rotation.
     manufacturer: Honeycomb Aeronautical
     component_category: yokes
-    component_sub_category: Yoke panel
+    component_sub_category: yoke-panel
     product_url: https://flyhoneycomb.com/products/alpha-flight-controls-xpc
     picture_url: https://flyhoneycomb.com/cdn/shop/files/HC003653_ALPHAFLIGHTCONTROLSXPC_1.jpg?v=1756653189&width=1920
     shops:
@@ -32,7 +32,7 @@ commercial:
       product. Force feedback yoke with integrated control unit.
     manufacturer: BRUNNER Elektronik AG
     component_category: yokes
-    component_sub_category: FFB yoke
+    component_sub_category: ffb-yoke
     product_url: https://brunner-innovation.swiss/product/cls-e-ng-yoke/
     picture_url: https://brunner-innovation.swiss/wp-content/uploads/2018/08/download-clsengyoke.jpg
     shops: []
@@ -41,7 +41,7 @@ commercial:
       In stock on Logitech US on 2026-04-29. Yoke plus throttle quadrant bundle.
     manufacturer: Logitech G
     component_category: yokes
-    component_sub_category: Yoke panel
+    component_sub_category: yoke-panel
     product_url: https://www.logitechg.com/en-us/shop/p/flight-simulator-yoke-system
     picture_url: https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/flight-yoke-system/yoke-gallery-1.png
     shops:
@@ -56,7 +56,7 @@ commercial:
       and rubber feet.
     manufacturer: Fulcrum Sim
     component_category: yokes
-    component_sub_category: Flight yoke
+    component_sub_category: flight-yoke
     product_url: https://www.fulcrumsim.com/product/fulcrum-yoke/
     picture_url: https://www.fulcrumsim.com/wp-content/uploads/2019/09/One-Yoke-Product-images-new.jpg
     shops: []
@@ -66,7 +66,7 @@ commercial:
       compatible.
     manufacturer: Thrustmaster
     component_category: yokes
-    component_sub_category: Flight yoke
+    component_sub_category: flight-yoke
     product_url: https://www.thrustmaster.com/products/tca-yoke-boeing-edition/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/TCA-Yoke-Boeing-PC-XBOX-768x768-1.webp
     shops: []
@@ -77,7 +77,7 @@ commercial:
       status indicator panel.
     manufacturer: Turtle Beach
     component_category: yokes
-    component_sub_category: Yoke panel
+    component_sub_category: yoke-panel
     product_url: https://www.turtlebeach.com/products/velocity-one-flight
     picture_url: https://cdn.shopify.com/s/files/1/0556/5795/5430/files/TB-VelocityOne-FlightUniversalControlSystem.png?v=1706659941
     shops:
@@ -92,7 +92,7 @@ commercial:
       per axis.
     manufacturer: Virtual Fly
     component_category: yokes
-    component_sub_category: Flight yoke
+    component_sub_category: flight-yoke
     product_url: https://www.virtual-fly.com/shop/controls/yoko-plus
     picture_url: https://www.virtual-fly.com/wp-content/uploads/cutout_yoko.jpg
     shops:
@@ -109,7 +109,7 @@ opensource:
       simulators using Arduino."
     maker: gagagu
     component_category: yokes
-    component_sub_category: FFB yoke
+    component_sub_category: ffb-yoke
     license: GPL-3.0 in repository; README also says commercial use is not allowed, so reuse
       terms need maintainer clarification.
     project_url: https://github.com/gagagu/Arduino_FFB_Yoke
@@ -120,7 +120,7 @@ opensource:
       yoke intended for flight simulators.
     maker: Vince_Prints / `VincePrints`
     component_category: yokes
-    component_sub_category: Flight yoke
+    component_sub_category: flight-yoke
     license: Creative Commons Attribution-NonCommercial-ShareAlike
     project_url: https://github.com/VincePrints/cadet_yoke_v2
     picture_url: https://resize.thingiverse.com/?url=https://cdn.thingiverse.com/assets/da/84/83/eb/d8/20210520_19434253453453952.jpg&w=628&h=472&fit=contain&cbg=white&n=-1

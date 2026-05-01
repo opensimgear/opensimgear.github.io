@@ -4,7 +4,7 @@ commercial:
       limited regional availability [uncertain]. 49 in OLED, 32:9 DQHD 5120 x 1440.
     manufacturer: Gigabyte
     component_category: display-systems
-    component_sub_category: Monitor
+    component_sub_category: monitor
     product_url: https://www.gigabyte.com/Monitor/AORUS-CO49DQ
     picture_url: https://static.gigabyte.com/StaticFile/Image/Global/be9bcbc502c7d2b8a19b3d603a1817ed/ProductRemoveBg/45066
     shops:
@@ -19,7 +19,7 @@ commercial:
       Aluminum extrusion monitor stand for triple-display sim rigs.
     manufacturer: Next Level Racing
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://nextlevelracing.com/product/elite-free-standing-triple-monitor-stand-black-edition/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2023/02/elite_triple_web_3_11zon.png
     shops:
@@ -34,7 +34,7 @@ commercial:
       extrusion single-display stand for Elite cockpits and standalone rigs.
     manufacturer: Next Level Racing
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://nextlevelracing.com/product/elite-freestanding-single-monitor-stand-black-edition/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2023/02/elite_single_monitor_3.webp
     shops:
@@ -49,7 +49,7 @@ commercial:
       stand for racing and flight simulator display setups.
     manufacturer: Next Level Racing
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://nextlevelracing.com/product/round-tube-freestanding-triple-monitor-stand/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2026/01/round_tube_triple_monitor_stand_gallery_1.webp
     shops:
@@ -64,7 +64,7 @@ commercial:
       display stand for racing and flight simulator setups.
     manufacturer: Next Level Racing
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://nextlevelracing.com/product/round-tube-freestanding-single-monitor-stand/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2026/01/round_tube_single_monitor_stand_gallery_3-1.webp
     shops:
@@ -79,7 +79,7 @@ commercial:
       stand for triple monitors up to 45 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/floor-triple-monitor-stand
     picture_url: https://trakracer.com/cdn/shop/files/MS-CM-SIN-TR2_06_81ed3728-9855-47ba-9ab6-e9c8f617e571_1200x1200.png?v=1746416521
     shops:
@@ -94,7 +94,7 @@ commercial:
       stand with Vario-VESA alignment and sag-free pivot adapters.
     manufacturer: Sim-Lab
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://sim-lab.eu/en-de/products/vario-triple-monitor-mount-sim-racing
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/TriplestandVARIO2_c38b10f1-498f-4d83-8697-cbb2186dd222.jpg?v=1752590611
     shops:
@@ -109,7 +109,7 @@ commercial:
       mount with Vario VESA plates for P1X, GT1, and Mercedes-AMG cockpits.
     manufacturer: Sim-Lab
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://sim-lab.eu/en-de/products/integrated-monitor-mount-sim-racing
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Integratedmonitormount-simpleV26.png?v=1744265819
     shops:
@@ -124,7 +124,7 @@ commercial:
       monitors up to 20 kg.
     manufacturer: GT Omega
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://www.gtomega.co.uk/products/portable-monitor-stand
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/products/PortableMonitorStand_01.webp?v=1705057201
     shops:
@@ -139,7 +139,7 @@ commercial:
       sim racing monitor stand with single, triple, and quad variants.
     manufacturer: GT Omega
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://www.gtomega.co.uk/products/simulator-monitor-stand
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/products/Simulator_Monitor_Stand_Single_01.webp?v=1739279991
     shops:
@@ -154,7 +154,7 @@ commercial:
       variants for sim racing displays.
     manufacturer: GT Omega
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://www.gtomega.co.uk/products/pro-monitor-stand
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/products/C-2_8acd5153-960b-475a-a21e-3f1327d81baf.jpg?v=1755786189
     shops:
@@ -168,7 +168,7 @@ commercial:
       HD DLP laser projector.
     manufacturer: Optoma
     component_category: display-systems
-    component_sub_category: Projector
+    component_sub_category: projector
     product_url: https://www.optomausa.com/product/gt2000hdr
     picture_url: https://region-resource.optoma.com/country/ig4Jh8LWF0uqQAoDpEV0qNhWtjuQPVexkNYv4Q3k.png
     shops: []
@@ -177,7 +177,7 @@ commercial:
       software. current. Software for multi-projector warping and edge blending.
     manufacturer: Fly Elise-ng
     component_category: display-systems
-    component_sub_category: Projection mapping
+    component_sub_category: projection-mapping
     product_url: https://fly.elise-ng.net/immersive-display-pro-licence/
     picture_url: https://fly.elise-ng.net/wp-content/uploads/2018/12/Untitled-2-22.png
     shops: []
@@ -187,7 +187,7 @@ commercial:
       check. 57 in 32:9 Dual UHD, 7680 x 2160.
     manufacturer: Samsung
     component_category: display-systems
-    component_sub_category: Monitor
+    component_sub_category: monitor
     product_url: https://www.samsung.com/us/business/computing/monitors/gaming/57-odyssey-neo-g9-dual-4k-uhd-quantum-mini-led-240hz-1ms-hdr-1000-curved-gaming-monitor-ls57cg952nnxza/
     picture_url: https://images.samsung.com/is/image/samsung/p6pim/us/ls57cg952nnxza/gallery/us-odyssey-neo-g9-g95nc-ls57cg952nnxza-550299919
     shops:
@@ -201,7 +201,7 @@ commercial:
       32:9 Dual QHD, 5120 x 1440 OLED.
     manufacturer: Samsung
     component_category: display-systems
-    component_sub_category: Monitor
+    component_sub_category: monitor
     product_url: https://www.samsung.com/us/computing/monitors/oled-monitor/49-odyssey-oled-g9-g95sd-dual-qhd-240hz-0-03ms-curved-gaming-monitor-with-glare-free-and-smart-features-ls49dg956snxgo/
     picture_url: https://images.samsung.com/is/image/samsung/p6pim/us/ls49dg956snxgo/gallery/us-odyssey-oled-g9-g95sd-570122-ls49dg956snxgo-549841426
     shops:
@@ -216,7 +216,7 @@ commercial:
       across monitor bezels.
     manufacturer: ASUS
     component_category: display-systems
-    component_sub_category: Monitor
+    component_sub_category: monitor
     product_url: https://rog.asus.com/us/monitors/accessories/rog-bezel-free-kit-abf01-model/
     picture_url: https://dlcdnwebimgs.asus.com/gain/89CB37E9-9C2B-4625-B71E-AE6B71F567F5/fwebp
     shops:
@@ -230,7 +230,7 @@ commercial:
       32:9 QD-OLED, 5120 x 1440.
     manufacturer: ASUS
     component_category: display-systems
-    component_sub_category: Monitor
+    component_sub_category: monitor
     product_url: https://rog.asus.com/us/monitors/above-34-inches/rog-swift-oled-pg49wcd/
     picture_url: https://dlcdnwebimgs.asus.com/gain/89CB37E9-9C2B-4625-B71E-AE6B71F567F5/fwebp
     shops: []
@@ -240,7 +240,7 @@ commercial:
       3000 ANSI lumens.
     manufacturer: BenQ
     component_category: display-systems
-    component_sub_category: Projector
+    component_sub_category: projector
     product_url: https://www.benq.com/en-us/projector/gaming-projector/tk700sti.html
     picture_url: https://image.benq.com/is/image/benqco/gaming-tk700sti-kv?$ResponsivePreset$
     shops:
@@ -254,7 +254,7 @@ commercial:
       21:9 5K2K WUHD 5120 x 2160.
     manufacturer: LG
     component_category: display-systems
-    component_sub_category: Monitor
+    component_sub_category: monitor
     product_url: https://www.lg.com/us/monitors/lg-45gx950a-b-gaming-monitor
     picture_url: https://img.youtube.com/vi/HpWJKhqjeQQ/2.jpg?io=transform:fill,width:1536
     shops:
@@ -269,7 +269,7 @@ commercial:
       height, depth, tilt, and PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://rseat.net/products/tx60-triple-tv-monitor-stand-for-up-to-3-x-60-inch-tv-monitors
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-tx60-triple-screen-stand-alone-tv-stand-06.png?v=1729499028
     shops:
@@ -284,7 +284,7 @@ commercial:
       displays with height, depth, tilt, and PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://rseat.net/products/tx43-triple-tv-monitor-stand-for-up-to-3-x-43-inch-tv-monitors
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-tx43-triple-screen-stand-alone-monitor-stand-06.png?v=1729495347
     shops:
@@ -299,7 +299,7 @@ commercial:
       monitors with height, depth, tilt, and PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://rseat.net/products/tx32-triple-monitor-stand-for-up-to-3-x-32-inch-monitors
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-tx32-triple-screen-stand-alone-monitor-stand-06.png?v=1729490971
     shops:
@@ -314,7 +314,7 @@ commercial:
       with height, depth, tilt, and PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://rseat.net/products/sx90-single-tv-monitor-stand-for-up-to-90-inch-tvs
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-sx90-single-screen-stand-alone-stand-90-inch-09.png?v=1729427783
     shops:
@@ -329,7 +329,7 @@ commercial:
       displays with PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://rseat.net/products/a1-tx32-triple-monitor-stand-for-up-to-3-x-32-inch-monitors
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-a1-tx32-triple-screen-integrated-monitor-stand-06.png?v=1729426527
     shops:
@@ -344,7 +344,7 @@ commercial:
       ultrawide with PRO VESA adjustment.
     manufacturer: RSEAT
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://rseat.net/products/a1-sx57-monitor-stand-for-up-to-57-inch-single-monitor
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-a1-sx57-single-screen-integrated-monitor-stand-06.png?v=1729423046
     shops:
@@ -359,7 +359,7 @@ commercial:
       up to 49 in with adjustable height and VESA fine adjustment.
     manufacturer: RSEAT
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://rseat.net/products/sx49-monitor-stand-for-p1-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-p1-SX49-monitor-stand-01.png?v=1731604310
     shops:
@@ -373,7 +373,7 @@ commercial:
       monitor stand. current on official US shop. Supports displays up to 80 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/tr8020-single-monitor-stand-3
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/MS-FS-SIN6_06-min_25ae6a4b-8f25-448f-b8b7-59b16dae80e9.png?v=1746416495
     shops:
@@ -388,7 +388,7 @@ commercial:
       80 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/copy-of-freestanding-dual-monitor-stand-up-to-80-display
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/products/MS-BDL.6.png?v=1700827901
     shops:
@@ -403,7 +403,7 @@ commercial:
       Supports triple displays up to 55 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/large-freestanding-triple-monitor-stand-1200mm-47-25-wide-2
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/MS-FM-SIN-TR2-FM_06-min.png?v=1730338188
     shops:
@@ -418,7 +418,7 @@ commercial:
       45 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/aluminum-quad-monitor-stand
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/MS-FM-QD2_06_f0452cc7-9d47-4585-9a81-822303de7a80.png?v=1746416559
     shops:
@@ -433,7 +433,7 @@ commercial:
       Supports quad displays up to 55 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/large-freestanding-quad-monitor-stand-1200mm-47-25-wide-1
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/MS-FM-QD2-FM_06-min.png?v=1730338213
     shops:
@@ -448,7 +448,7 @@ commercial:
       to 80 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/tr8020-single-monitor-stand-2
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/MS-CM-SIN2_05-min_1.png?v=1764196220
     shops:
@@ -463,7 +463,7 @@ commercial:
       up to 80 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/copy-of-cockpit-mounted-quad-monitor-stand-up-to-45-displays
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/MS-CM-DL2_eTR120S.png?v=1764196321
     shops:
@@ -478,7 +478,7 @@ commercial:
       displays up to 45 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/cockpit-triple-monitor-stand
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/MS-CM-SIN-TR2_06_4052240d-b251-4723-b467-25b5f7ed7632.png?v=1760640983
     shops:
@@ -493,7 +493,7 @@ commercial:
       up to 45 in.
     manufacturer: Trak Racer
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://trakracer.com/products/black-cockpit-mounted-monitor-stand-with-quad-monitor-mount
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/MS-CM-QD2_06_6e70184c-30ae-413f-b6d8-fc80dc173a29.png?v=1760640933
     shops:
@@ -508,7 +508,7 @@ commercial:
       Evolve Kart simulator setups.
     manufacturer: Sparco
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://www.sparco-official.com/de/tm-stand-pro-g02386nrrs.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g02386nrrs.png?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=&format=jpeg
     shops:
@@ -523,7 +523,7 @@ commercial:
       simulator frames.
     manufacturer: Sparco
     component_category: display-systems
-    component_sub_category: Monitor mount
+    component_sub_category: monitor-mount
     product_url: https://www.sparco-official.com/de/supporto-monitor-singolo-cockpit-evolve-nr-rs-2019.html
     picture_url: https://www.sparco-official.com/media/catalog/product/0/3/03_8thfw7mgz1ilzdbj.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -539,7 +539,7 @@ opensource:
       software for Windows, macOS, and Linux.
     maker: MapMap team
     component_category: display-systems
-    component_sub_category: Projection mapping
+    component_sub_category: projection-mapping
     license: GPL-3.0
     project_url: https://github.com/mapmapteam/mapmap
     picture_url: https://mapmapteam.github.io/documentation_images/toggle_display_controls.png
@@ -550,7 +550,7 @@ opensource:
       designed to run on Raspberry Pi.
     maker: Krisjanis Rijnieks / kr15h
     component_category: display-systems
-    component_sub_category: Projection mapping
+    component_sub_category: projection-mapping
     license: MIT-style or open-source license in repository LICENSE.md [uncertain exact SPDX]
     project_url: https://github.com/kr15h/ofxPiMapper
     picture_url: https://ofxpimapper.com/assets/images/ofxpimapper-ogimage.jpg
@@ -560,7 +560,7 @@ opensource:
       add-on that splits an application into two or more projector outputs.
     maker: Flightphase / James George / Jeff Crouse fork lineage
     component_category: display-systems
-    component_sub_category: Projector
+    component_sub_category: projector
     license: MIT-style permissive license text in README
     project_url: https://github.com/Flightphase/ofxProjectorBlend
     picture_url: https://opengraph.githubassets.com/64f1add62be39ec1cb6072eeb3354547531f8bc67d7d9d780c160a4e4defbe93/Flightphase/ofxProjectorBlend
@@ -570,7 +570,7 @@ opensource:
       flightdeck glass cockpit displays.
     maker: Damion Shelton / OpenGC project
     component_category: display-systems
-    component_sub_category: Display software
+    component_sub_category: display-software
     license: Example application GPL; libraries BSD-style per project home page
     project_url: https://sourceforge.net/projects/opengc/
     picture_url: https://a.fsdn.com/con/img/hi-text.png
@@ -581,7 +581,7 @@ opensource:
       tracked target objects.
     maker: Philipp Kurth
     component_category: display-systems
-    component_sub_category: Projection mapping
+    component_sub_category: projection-mapping
     license: MIT
     project_url: https://github.com/pkurth/ProjectionMapping
     picture_url: https://raw.githubusercontent.com/pkurth/ProjectionMapping/master/assets/samples/teaser.jpg
@@ -591,7 +591,7 @@ opensource:
       0.10.8 from 2024. Modular multi-projector video-mapping software.
     maker: Emmanuel Durand / SAT Metalab / Lab148 contributors
     component_category: display-systems
-    component_sub_category: Projection mapping
+    component_sub_category: projection-mapping
     license: GPL-3.0-or-later
     project_url: https://gitlab.com/splashmapper/splash
     picture_url: https://opengraph.githubassets.com/60b9272bd7988eb798f2b9d14291472661efb35ca0f9e38d4d804964dc115875/paperManu/splash

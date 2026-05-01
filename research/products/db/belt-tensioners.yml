@@ -6,7 +6,7 @@ commercial:
       SimHub/PT-Actuator SDK support."
     manufacturer: PT Actuator
     component_category: belt-tensioners
-    component_sub_category: Belt tensioner
+    component_sub_category: belt-tensioner
     product_url: https://www.pt-actuator.com/product/belt-force/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2025/09/BeltForce-Grey-2-670x670.jpg
     shops:
@@ -21,7 +21,7 @@ commercial:
       flight or racing simulation.
     manufacturer: SimXperience
     component_category: belt-tensioners
-    component_sub_category: Belt tensioner
+    component_sub_category: belt-tensioner
     product_url: https://www.simxperience.com/shop/sx-sbt-001-g-belt-dual-axis-active-seat-belt-tensioning-system-712
     picture_url: https://www.simxperience.com/web/image/product.product/715/image_1024/%5BSX-SBT-001%5D%20G-Belt%20Dual%20Axis%20Active%20Seat%20Belt%20Tensioning%20System?unique=0c36168
     shops:
@@ -37,7 +37,7 @@ commercial:
       381 mm / 15 in stroke.
     manufacturer: PT Actuator
     component_category: belt-tensioners
-    component_sub_category: Belt tensioner
+    component_sub_category: belt-tensioner
     product_url: https://www.pt-actuator.com/product/pt-active-belt-tensioner-2/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/09/%E7%BB%84%E5%90%88-380x380-1.jpg
     shops:
@@ -52,7 +52,7 @@ commercial:
       system with 15 kg max pull force and Sim Racing Studio integration.
     manufacturer: PT Actuator
     component_category: belt-tensioners
-    component_sub_category: Belt tensioner
+    component_sub_category: belt-tensioner
     product_url: https://www.pt-actuator.com/product/pt-active-belt-tensioner-tower/
     picture_url: https://www.pt-actuator.com/wp-content/uploads/2023/12/%E7%BB%84%E5%90%88.jpg
     shops:
@@ -67,7 +67,7 @@ commercial:
       direct-drive seat belt tensioner.
     manufacturer: Qubic System
     component_category: belt-tensioners
-    component_sub_category: Belt tensioner
+    component_sub_category: belt-tensioner
     product_url: https://qubicsystem.com/product/qs-bt1/
     picture_url: https://qubicsystem.b-cdn.net/wp-content/uploads/2023/12/QS-BT1_R3_product_01b.jpg
     shops:
@@ -83,7 +83,7 @@ commercial:
       5-point 2.5 in quick-buckle belt.
     manufacturer: eRacing-Lab
     component_category: belt-tensioners
-    component_sub_category: Belt tensioner
+    component_sub_category: belt-tensioner
     product_url: https://eracing-lab.com/products/rs-solo-active-belt-kit-copy
     picture_url: https://eracing-lab.com/cdn/shop/files/RS_SOLO_-_ACTIVE_FORCE_RED_9e3bfacd-a9e6-4f10-8d81-95e96e7ce6f8_1200x1200.jpg?v=1749819379
     shops:
@@ -100,7 +100,7 @@ opensource:
       SimHub.
     maker: StuyoP
     component_category: belt-tensioners
-    component_sub_category: Belt controller
+    component_sub_category: belt-controller
     license: GPL-3.0
     project_url: https://github.com/StuyoP/Belt-Tensioner-Robot-Servo
     picture_url: https://resize.thingiverse.com/?url=https://cdn.thingiverse.com/assets/78/96/16/53/d9/06e9d9c3-5580-4cc9-b90d-3a36de56d5c9.JPG&w=1024&h=1024&fit=contain&cbg=white&n=-1
@@ -112,7 +112,7 @@ opensource:
       design for sim racing harness cueing.
     maker: FlagGhost / community plan seller through Thanos Discord
     component_category: belt-tensioners
-    component_sub_category: Belt tensioner
+    component_sub_category: belt-tensioner
     license: Unknown; no explicit open-source license found. Plans are reported as
       available for purchase from FlagGhost.
     project_url: https://www.youtube.com/watch?v=fOlSEwAlbic
@@ -123,7 +123,7 @@ opensource:
       plugin controls a seat belt/harness from telemetry.
     maker: BojoteX / Jesus Altuve
     component_category: belt-tensioners
-    component_sub_category: Belt controller
+    component_sub_category: belt-controller
     license: MIT, stated in README.
     project_url: https://github.com/BojoteX/gTenxor
     picture_url: https://raw.githubusercontent.com/BojoteX/gTenxor/master/images/gTenxor_hq.jpg
@@ -135,7 +135,7 @@ opensource:
       harness pull for sustained braking and lateral-force cueing.
     maker: Hoernle / OverTake and Virtual Racing community
     component_category: belt-tensioners
-    component_sub_category: Belt tensioner
+    component_sub_category: belt-tensioner
     license: Free community project; explicit hardware/software license not found in
       researched sources.
     project_url: https://www.overtake.gg/threads/hoernles-belt-tensioner-detailed-build-instructions.249951/
@@ -148,7 +148,7 @@ opensource:
       tensioner for braking, ABS, shifting, and negative-G style cues.
     maker: Lebois Racing
     component_category: belt-tensioners
-    component_sub_category: Belt controller
+    component_sub_category: belt-controller
     license: 3D files download page states Creative Commons BY-NC-ND for distributed
       files.
     project_url: https://lebois-racing.com/seat-belt-tensioner-gt/
@@ -161,7 +161,7 @@ opensource:
       tensioner built around ODrive motor control.
     maker: SilentChill 6DOF Motion Gaming
     component_category: belt-tensioners
-    component_sub_category: Belt tensioner
+    component_sub_category: belt-tensioner
     license: Unknown; no explicit open-source license found for STL/config sharing.
     project_url: https://www.youtube.com/watch?v=vuurS1u4X_c
     picture_url: https://i.ytimg.com/vi/vuurS1u4X_c/maxresdefault.jpg
@@ -172,7 +172,7 @@ opensource:
       for Arduino/Blue Pill style devices.
     maker: blekenbleu
     component_category: belt-tensioners
-    component_sub_category: Belt controller
+    component_sub_category: belt-controller
     license: CC0-1.0 for SimHub-Profiles repository.
     project_url: https://github.com/blekenbleu/SimHub-Profiles
     picture_url: https://blekenbleu.github.io/Arduino/SimHubCustomSerial.gif

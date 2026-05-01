@@ -5,7 +5,7 @@ commercial:
       airplane simulation.
     manufacturer: Redbird Flight
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://simulators.redbirdflight.com/products/th1
     picture_url: https://simulators.redbirdflight.com/hubfs/TH1%20(6)-1.png
     shops:
@@ -20,7 +20,7 @@ commercial:
       throttle quadrant [official product detail not fully captured in this pass].
     manufacturer: Honeycomb Aeronautical
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flyhoneycomb.com/products/bravo-throttle-quadrant
     picture_url: https://flyhoneycomb.com/cdn/shop/files/HC003042_BravoThrottleQuadrant_1.jpg?v=1756653266&width=1920
     shops:
@@ -34,7 +34,7 @@ commercial:
       stock on Logitech US on 2026-04-29. Three programmable axis levers.
     manufacturer: Logitech G
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://www.logitechg.com/en-us/shop/p/flight-simulator-throttle-quadrant
     picture_url: https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/flight-throttle-quadrant/throttle-gallery-1.png
     shops:
@@ -48,7 +48,7 @@ commercial:
       quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 2 GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/gnx-dual-thq-fsm-ga-combo/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/11/09_THQFSM-GATHQ_4SH_750_2.jpg
     shops:
@@ -63,7 +63,7 @@ commercial:
       THQ.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/gnx-dual-thq-sem-fsm-ga-combo/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/11/07_THQFSM-GATHQSEM_4SH_750_3.jpg
     shops:
@@ -77,7 +77,7 @@ commercial:
       quadrant. Out of stock on VKB FSC Europe listing on 2026-04-29. 2 GNX GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/gnx-dual-thq-sem-v-combo/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/11/06_THQSEM-VTHQ_4SH_750_3.jpg
     shops:
@@ -91,7 +91,7 @@ commercial:
       throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 2 GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/gnx-dual-thq-thq-v-sem-combo/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/11/24_THQTHQTHQ-VSEM-V_4SH_750_1.jpg
     shops:
@@ -105,7 +105,7 @@ commercial:
       throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 3 GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/gnx-triple-thq-fsm-ga-combo/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/11/25_THQTHQTHQFSM-GA_4SH_750_3.jpg
     shops:
@@ -119,7 +119,7 @@ commercial:
       throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 3 GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/gnx-triple-thq-sem-v-combo/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2021/11/26_THQTHQTHQSEM-V_4SH_750_1.jpg
     shops:
@@ -133,7 +133,7 @@ commercial:
       In stock on VKB FSC Europe listing on 2026-04-29. 1 WWII THQ Grip.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/gnx-wwii-throttle/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2022/09/THQWWII_SEM-V_800_3.jpg
     shops:
@@ -148,7 +148,7 @@ commercial:
       mechanics.
     manufacturer: VIRPIL Controls
     component_category: throttles
-    component_sub_category: HOTAS throttle
+    component_sub_category: hotas-throttle
     product_url: https://virpil-controls.us.com/vpc-mongoost-50cm3-throttle.html
     picture_url: https://virpil-controls.us.com/media/catalog/product/cache/86ea3b320f2d2e3b9be724ff3ef6735b/v/p/vpc-201-23.jpg
     shops:
@@ -162,7 +162,7 @@ commercial:
       listing; total_stock 4 from API. NavyAce Metal Throttle Grip x1.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle grip
+    component_sub_category: throttle-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=306
     picture_url: https://eu.winctrl.com/static/ipfs/QmcqEEabLkziz7C5icbwVRdQQxiiDC3VTN1k4LiwgMQJjk
     shops:
@@ -177,7 +177,7 @@ commercial:
       baseplate and non-slip rubber pads.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: HOTAS throttle
+    component_sub_category: hotas-throttle
     product_url: https://vkbsimcontrollers.com/products/stecs-throttle-system-mk-ii-standard-us
     picture_url: https://vkbsimcontrollers.com/cdn/shop/files/STECS_Standard_Mk2_1200_04.webp?v=1769349136&width=1920
     shops:
@@ -192,7 +192,7 @@ commercial:
       STECS Left-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-space-throttle-system-max-left-handed/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/08/STECS-MAX-STG-L_02_1200.webp
     shops:
@@ -207,7 +207,7 @@ commercial:
       1x STECS Right-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-space-throttle-system-max-right-handed/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/08/STECS-MAX-STG-R_03_1200.jpg
     shops:
@@ -222,7 +222,7 @@ commercial:
       STECS Left-Hand Base -or- 1x STECS Right-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-left-hand/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/08/STECS-Mini-STG-L_05_1200.webp
     shops:
@@ -237,7 +237,7 @@ commercial:
       2026-04-29. 1x STECS Left-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-plus-left-handed/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/08/STECS-MiniP-STG-L_05_1200.webp
     shops:
@@ -252,7 +252,7 @@ commercial:
       2026-04-29. 1x STECS Right-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-plus-right-handed/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/08/STECS-MiniP-STG-R_04_1200.webp
     shops:
@@ -267,7 +267,7 @@ commercial:
       STECS Left-Hand Base -or- 1x STECS Right-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-right-hand/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/08/STECS-Mini-STG-R_04_1200.jpg
     shops:
@@ -282,7 +282,7 @@ commercial:
       2026-04-29. 1x STECS Left-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-space-throttle-system-standard-left-hand/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/08/STECS-Standard-STG-L_05_1200.webp
     shops:
@@ -297,7 +297,7 @@ commercial:
       2026-04-29. 1x STECS Right-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-space-throttle-system-standard-right-hand/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/08/STECS-Standard-STG-R_04_1200.webp
     shops:
@@ -312,7 +312,7 @@ commercial:
       STECS base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-throttle-system-max/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/09/STECS_PM_1200_04.jpg
     shops:
@@ -327,7 +327,7 @@ commercial:
       base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-throttle-system-max-mk-ii/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/03/STECS_Max_Mk2_1200_02.jpg
     shops:
@@ -341,7 +341,7 @@ commercial:
       throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1 STECS base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-throttle-system-mini-mk-ii/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/04/STECS_Mini_Mk2_1200_04.jpg
     shops:
@@ -356,7 +356,7 @@ commercial:
       STECS base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-throttle-system-mini-plus-mk-ii/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/04/STECS_Mini_Plus_Mk2_1200_04.jpg
     shops:
@@ -371,7 +371,7 @@ commercial:
       STECS base.
     manufacturer: VKB-Sim
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://flightsimcontrols.com/product/stecs-throttle-system-standard-mk-ii/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/04/STECS_Standard_Mk2_1200_04.jpg
     shops:
@@ -385,7 +385,7 @@ commercial:
       WINCTRL store. StrikeAce E Metal Throttle Grip x1.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle grip
+    component_sub_category: throttle-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=476
     picture_url: https://eu.winctrl.com/static/ipfs/QmYineDfhhYqaSqi3yiF8LFryZydZTtGwWAGFhAp1vJtDg
     shops:
@@ -399,7 +399,7 @@ commercial:
       WINCTRL store. StrikeAce EX II Metal Throttle Grip x1.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle grip
+    component_sub_category: throttle-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=471
     picture_url: https://eu.winctrl.com/static/ipfs/QmQYEJKNSVeeVUB52nzK3htknFXrzDq7HQVtZCqCAdN2vm
     shops:
@@ -414,7 +414,7 @@ commercial:
       Throttle Base(PSU Include).
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Flight throttle
+    component_sub_category: flight-throttle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=316
     picture_url: https://eu.winctrl.com/static/ipfs/QmW5Htemtmfvx8w9vALeo2yhhR9tqCkUN5ZNTPuW1mq5DY
     shops:
@@ -429,7 +429,7 @@ commercial:
       Throttle Base(PSU Include).
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Flight throttle
+    component_sub_category: flight-throttle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=384
     picture_url: https://eu.winctrl.com/static/ipfs/QmWeZVjeEDrqbJgHzHhkPjcXvPeuNkhWc5h4M46y2Fv6uE
     shops:
@@ -444,7 +444,7 @@ commercial:
       purchasable. Super Taurus Throttle Base(PSU Exclusive).
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Flight throttle
+    component_sub_category: flight-throttle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=315
     picture_url: https://eu.winctrl.com/static/ipfs/QmZRqnQEL8UuLtbpVz3FNxCppdnnLZBzY8MaoDw5oCdRVG
     shops:
@@ -459,7 +459,7 @@ commercial:
       Throttle Base(PSU Include) x1.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle base
+    component_sub_category: throttle-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=308
     picture_url: https://eu.winctrl.com/static/ipfs/QmUrjLoRv2JmtteEYfQc45C24po9e6xaYtAcGrkFYScyPX
     shops:
@@ -473,7 +473,7 @@ commercial:
       Active product on Thrustmaster US. Airbus A320neo-inspired dual thrust levers.
     manufacturer: Thrustmaster
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://www.thrustmaster.com/en-us/products/tca-quadrant-airbus-edition/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/tca-quadrant-add-on-airbus-edition-pc-768x768-2.webp
     shops:
@@ -488,7 +488,7 @@ commercial:
       listing only].
     manufacturer: Virtual Fly
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://www.virtual-fly.com/shop/controls/tq6-plus
     picture_url: https://www.virtual-fly.com/wp-content/uploads/tq6-v3-destacada-Photoroom-1200x900.png
     shops:
@@ -503,7 +503,7 @@ commercial:
       multiple axes and buttons.
     manufacturer: Thrustmaster
     component_category: throttles
-    component_sub_category: HOTAS throttle
+    component_sub_category: hotas-throttle
     product_url: https://www.thrustmaster.com/en-us/products/twcs-throttle/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/TWCS-throttle-pc-768x768-2.webp
     shops:
@@ -517,7 +517,7 @@ commercial:
       WINCTRL store listing; total_stock 4 from API. URSA MINOR 32 Throttle Metal.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Flight throttle
+    component_sub_category: flight-throttle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1665
     picture_url: https://eu.winctrl.com/static/ipfs/QmUBdY4WU8iYkvCrGPnaAXd5jy5FFQ5AYvvgzrVYoJ6AGJ
     shops:
@@ -532,7 +532,7 @@ commercial:
       stick [uncertain from current official capture].
     manufacturer: Turtle Beach
     component_category: throttles
-    component_sub_category: HOTAS throttle
+    component_sub_category: hotas-throttle
     product_url: https://www.turtlebeach.com/products/velocity-one-flightdeck
     picture_url: https://cdn.shopify.com/s/files/1/0556/5795/5430/files/TB-VelocityOne-FlightUniversalControlSystem.png?v=1706659941
     shops:
@@ -546,7 +546,7 @@ commercial:
       Thrustmaster US. 1:1 scale Viper/F-16 throttle quadrant system replica.
     manufacturer: Thrustmaster
     component_category: throttles
-    component_sub_category: Flight throttle
+    component_sub_category: flight-throttle
     product_url: https://www.thrustmaster.com/en-us/products/viper-tqs/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/07/ProductListing-ViperTQS-800x8002000x2000-768x768-1.webp
     shops:
@@ -560,7 +560,7 @@ commercial:
       listing; total_stock 4 from API. ViperAce EX Metal Throttle Grip x1.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle grip
+    component_sub_category: throttle-grip
     product_url: https://eu.winctrl.com/view/goods-details.html?id=339
     picture_url: https://eu.winctrl.com/static/ipfs/QmQbZURKosh89qWSrpAVTeBocFdiKTfVJ4TVsoP35zq8FV
     shops:
@@ -577,7 +577,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle base
+    component_sub_category: throttle-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=5885
     picture_url: https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS
     shops:
@@ -594,7 +594,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle base
+    component_sub_category: throttle-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=5205
     picture_url: https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS
     shops:
@@ -611,7 +611,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle base
+    component_sub_category: throttle-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=5625
     picture_url: https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS
     shops:
@@ -628,7 +628,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle base
+    component_sub_category: throttle-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=5925
     picture_url: https://eu.winctrl.com/static/ipfs/QmZLcHhuwCWMMHrGXErSveoNPJ4sfLQWiGMPXQFfQzTgc6
     shops:
@@ -645,7 +645,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle base
+    component_sub_category: throttle-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=5705
     picture_url: https://eu.winctrl.com/static/ipfs/QmZLcHhuwCWMMHrGXErSveoNPJ4sfLQWiGMPXQFfQzTgc6
     shops:
@@ -662,7 +662,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle base
+    component_sub_category: throttle-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=5765
     picture_url: https://eu.winctrl.com/static/ipfs/QmVCspiSPcSwXYyrJeQoNsGe4HriV4KPjSMdFqoN6ThPSb
     shops:
@@ -676,7 +676,7 @@ commercial:
       store listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Flight throttle
+    component_sub_category: flight-throttle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=375
     picture_url: https://eu.winctrl.com/upload/picture/2023-05-24/upload_14364475d22c0b8012d8035013632615.jpg
     shops:
@@ -691,7 +691,7 @@ commercial:
       Base.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Flight throttle
+    component_sub_category: flight-throttle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=385
     picture_url: https://eu.winctrl.com/upload/picture/2023-07-19/F15EX_T22_FL/F15EX_T22_FL_0000.jpg
     shops:
@@ -705,7 +705,7 @@ commercial:
       listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base x1.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle base
+    component_sub_category: throttle-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=334
     picture_url: https://eu.winctrl.com/static/ipfs/QmTnN1LrpV8tN3yq5ErMgXK6f73zTBrCahHBnpFZaeEon5
     shops:
@@ -720,7 +720,7 @@ commercial:
       purchasable. WINCTRL Orion2 Throttle Base 10th Anniversary Limited Version  x1.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Throttle base
+    component_sub_category: throttle-base
     product_url: https://eu.winctrl.com/view/goods-details.html?id=466
     picture_url: https://eu.winctrl.com/static/ipfs/QmXHdPQ7TpGq2g4p4gN5RdpuU1MgqBAtRwBwxSV7wcVKkF
     shops:
@@ -734,7 +734,7 @@ commercial:
       WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Flight throttle
+    component_sub_category: flight-throttle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=342
     picture_url: https://eu.winctrl.com/upload/picture/2023-05-24/upload_3c3002f0db6b6ba95861491a92c93236.jpg
     shops:
@@ -748,7 +748,7 @@ commercial:
       store listing; total_stock 4 from API. WINCTRL URSA MINOR 32 Throttle Metal.
     manufacturer: WINCTRL
     component_category: throttles
-    component_sub_category: Flight throttle
+    component_sub_category: flight-throttle
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1385
     picture_url: https://eu.winctrl.com/static/ipfs/QmcAs1HRGd5i5a9YsrMgrjowYK1Ggmyss16WMy93bwx5Tc
     shops:
@@ -763,7 +763,7 @@ commercial:
       controller for flight simulation.
     manufacturer: Thrustmaster
     component_category: throttles
-    component_sub_category: HOTAS throttle
+    component_sub_category: hotas-throttle
     product_url: https://www.thrustmaster.com/en-us/products/hotas-warthog-dual-throttle/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/04/HotasWarthog_DualThrottle_800x800_1-768x768-1.webp
     shops:
@@ -778,7 +778,7 @@ commercial:
       ecosystem.
     manufacturer: Thrustmaster
     component_category: throttles
-    component_sub_category: HOTAS throttle
+    component_sub_category: hotas-throttle
     product_url: https://www.thrustmaster.com/en-us/products/sol-r-6-throttle/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2025/10/Website-SolR6-800x800-1.png
     shops:
@@ -793,7 +793,7 @@ commercial:
       for Boeing airliner simulation.
     manufacturer: Thrustmaster
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://www.thrustmaster.com/en-us/products/tca-quadrant-boeing-edition/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/TCABoeingEdition_6-removebg-preview.webp
     shops:
@@ -808,7 +808,7 @@ commercial:
       Airbus airliner simulation controls.
     manufacturer: Thrustmaster
     component_category: throttles
-    component_sub_category: Throttle quadrant
+    component_sub_category: throttle-quadrant
     product_url: https://www.thrustmaster.com/en-us/products/tca-quadrant-add-on-airbus-edition/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/tca-quadrant-add-on-airbus-edition-pc-768x768-2.webp
     shops:
@@ -826,7 +826,7 @@ opensource:
       trim/rudder-bias wheels, flaps lever, gear lever, gunsight, and rudder pedals."
     maker: AuthentiKit community / AuthentiKit.org
     component_category: throttles
-    component_sub_category: Throttle controls
+    component_sub_category: throttle-controls
     license: Freeware/community free-download model; specific open-source/open-hardware
       license not found [uncertain].
     project_url: N/A

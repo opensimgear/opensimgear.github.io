@@ -6,7 +6,7 @@ commercial:
       and LC100 hardware.
     manufacturer: CAMMUS
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://cammusracing.com/product/cammus-ss8-ss15-racing-cockpit-with-seat/
     picture_url: https://cammusracing.com/wp-content/uploads/2025/11/SS15.1_9200.png
     shops:
@@ -20,7 +20,7 @@ commercial:
       Generation 2 profile chassis with 1.5 x 1.5 in base.
     manufacturer: Advanced SimRacing
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://www.advancedsimracing.com/products/asr-1
     picture_url: https://www.advancedsimracing.com/cdn/shop/files/Advanced_SimRacing_-_ASR_1_Main_View_4fbac7c1-8c58-47bd-96ea-71ebfcffe9d5.jpg?v=1755411305&width=1920
     shops:
@@ -35,7 +35,7 @@ commercial:
       reinforced steering column.
     manufacturer: Advanced SimRacing
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://www.advancedsimracing.com/products/asr-4-open-face
     picture_url: https://www.advancedsimracing.com/cdn/shop/files/ASR_4_open_Transparent_no_shadow.Main34SideView_2801a917-3162-47fe-8115-0cd3ba6714be.png?v=1755411307&width=1920
     shops:
@@ -50,7 +50,7 @@ commercial:
       aluminum profile with reinforced 6 in base.
     manufacturer: Advanced SimRacing
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://www.advancedsimracing.com/products/asr-pro
     picture_url: https://www.advancedsimracing.com/cdn/shop/files/ASR_PRO_Transparent_No_shadow.Main34FrontView_7e586e55-7ba8-4ea3-b341-76bad42c30f5.png?v=1750944136&width=1920
     shops:
@@ -65,7 +65,7 @@ commercial:
       color options.
     manufacturer: Fanatec
     component_category: rigs-and-cockpits
-    component_sub_category: Cockpit frame
+    component_sub_category: cockpit-frame
     product_url: https://www.fanatec.com/eu/en/p/cockpits/cs_gt_c_blk/clubsport-gt-cockpit-black
     picture_url: https://res.cloudinary.com/fanatec-pwa/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Cockpits/CS_GT_C_BLK/CS_GT_C_BLK-01.png
     shops:
@@ -80,7 +80,7 @@ commercial:
       support for Fanatec and third-party hardware.
     manufacturer: Fanatec
     component_category: rigs-and-cockpits
-    component_sub_category: Cockpit frame
+    component_sub_category: cockpit-frame
     product_url: https://www.fanatec.com/eu/en/p/cockpits/crd-9010009-ww/csl-cockpit-v1-5
     picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Cockpits/CRD-9010009-WW/CRD-9010009-WW-01.png
     shops:
@@ -95,7 +95,7 @@ commercial:
       Extension.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=328
     picture_url: https://eu.winctrl.com/static/ipfs/QmUTbwDVSzqcUQCC24a3mjEhS1y3HBCdzqbS5gJiqRj2NM
     shops:
@@ -110,7 +110,7 @@ commercial:
       Dual Throttle connector for WINCTRL Orion/Gemini Base x1.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=381
     picture_url: https://eu.winctrl.com/static/ipfs/QmaXkLe2FHqK1ic7oC5pR86gRfFSNQDWqqRpaLoNEajVhm
     shops:
@@ -124,7 +124,7 @@ commercial:
       local stock not available in API response. EXPED.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=825
     picture_url: https://eu.winctrl.com/static/ipfs/QmRA4AQRPRZh9EeFdLW2uzNuMqXVoZZK6RqsdEGX8yjBCC
     shops:
@@ -139,7 +139,7 @@ commercial:
       Gemini Only.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=346
     picture_url: https://eu.winctrl.com/static/ipfs/QmcBHEoU3AToENNGEHn9gAMbj1Sjdq82o1xx4B6jYSgzHo
     shops:
@@ -154,7 +154,7 @@ commercial:
       Orion1 Only.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=345
     picture_url: https://eu.winctrl.com/static/ipfs/QmTg5wn759a1kjaA2hfyDaJKAMzH8wAirEhMNG2SkEZjbU
     shops:
@@ -168,7 +168,7 @@ commercial:
       Pre-order listing on EU WINCTRL store. Finger Lift for WINCTRL Orion2 Only x1.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=347
     picture_url: https://eu.winctrl.com/static/ipfs/QmXVVAuAh3GSVhmHE2JobNxLDva7nEFnJT8GY5rp4eR4Jk
     shops:
@@ -182,7 +182,7 @@ commercial:
       seating posture with ForceLock adjustment system.
     manufacturer: Playseat
     component_category: rigs-and-cockpits
-    component_sub_category: Formula cockpit
+    component_sub_category: formula-cockpit
     product_url: https://www.playseat.com/products/playseat-formula-intelligence-black
     picture_url: https://www.playseat.com/cdn/shop/collections/Screenshot_2025-06-03_at_16.32.12_bea07877-6eeb-4630-a92f-4ff9fe6cfb6c.png?v=1764770232&width=800
     shops:
@@ -197,7 +197,7 @@ commercial:
       Chair Mount.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=327
     picture_url: https://eu.winctrl.com/static/ipfs/QmQYH5P8PSJJYMV5zUP2hDcAnr6Zi5KVuKKAcHZfZW5Zx3
     shops:
@@ -212,7 +212,7 @@ commercial:
       plate, accessory side mount, and direct-drive upgrade options.
     manufacturer: Sim-Lab
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://sim-lab.eu/en-de/products/gt1-evo-sim-racing-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/GT1_Evo_Sim-LabBlue_VarioSingle_3febb7ea-0c94-4d64-9c98-0e8dd374d917.jpg?v=1762974780
     shops:
@@ -227,7 +227,7 @@ commercial:
       Desk Mount2 with Profile Bar 1.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1185
     picture_url: https://eu.winctrl.com/static/ipfs/QmVibjhxqfrmTDcGPprYSdr2TWrMgBjCKA8DfhA2815PS6
     shops:
@@ -241,7 +241,7 @@ commercial:
       WINCTRL store listing; total_stock 4 from API. Joystick Extension Rod.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=311
     picture_url: https://eu.winctrl.com/static/ipfs/QmQV3FYkMUheJyfioLm2Nkn9DrFYcnA9bgDBmxyYm443X6
     shops:
@@ -256,7 +256,7 @@ commercial:
       Z-Axis module.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=312
     picture_url: https://eu.winctrl.com/static/ipfs/QmdBVVSZdVkf8VACdhSJWkH9H8tCtY5gDqWXtcU4rfkJAV
     shops:
@@ -270,7 +270,7 @@ commercial:
       store listing; total_stock 4 from API. MAG Switch1 TS.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1105
     picture_url: https://eu.winctrl.com/static/ipfs/QmPzqtqusthK61hCBtnBFNqGSFrWbPFtBjN9zuEMhcDL1s
     shops:
@@ -285,7 +285,7 @@ commercial:
       expandable with flight, racing, and office modules.
     manufacturer: MONSTERTECH / MTSIM
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://www.monster.tech/en/product/mts-base-frame/
     picture_url: https://www.monster.tech/wp-content/uploads/2021/10/monstertech_mts_baseframe_b_01-scaled.jpg
     shops:
@@ -299,7 +299,7 @@ commercial:
       on official EU store. Base frame module for the Sim Stand ecosystem.
     manufacturer: MONSTERTECH / MTSIM
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://www.monster.tech/en/product/sim-stand-frame/
     picture_url: https://www.monster.tech/wp-content/uploads/2025/11/sim_stand_frame_b_10-scaled.jpg
     shops:
@@ -314,7 +314,7 @@ commercial:
       throttle, and HOTAS systems.
     manufacturer: MONSTERTECH / MTSIM
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://www.monster.tech/en/product/joystick-hotas-table-mount/
     picture_url: https://www.monster.tech/wp-content/uploads/2015/08/mtsim_desk_mount_tm_ava_03b-scaled.jpg
     shops:
@@ -329,7 +329,7 @@ commercial:
       aluminum mount for joysticks with extensions and HOTAS systems.
     manufacturer: MONSTERTECH / MTSIM
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://www.monster.tech/en/product/joystick-hotas-table-mount-long/
     picture_url: https://www.monster.tech/wp-content/uploads/2017/10/tbm_long_b_01b-scaled.jpg
     shops:
@@ -344,7 +344,7 @@ commercial:
       joystick or throttle to a chair-based flight setup.
     manufacturer: MONSTERTECH / MTSIM
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://www.monster.tech/en/product/joystick-hotas-chair-mount-single/
     picture_url: https://www.monster.tech/wp-content/uploads/2018/03/monstertech_hotas_chair_mount_product.jpg
     shops:
@@ -359,7 +359,7 @@ commercial:
       or throttle controls to a slide rail.
     manufacturer: MONSTERTECH / MTSIM
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://www.monster.tech/en/product/joystick-hotas-rail-mount/
     picture_url: https://www.monster.tech/wp-content/uploads/2022/03/monstertech_rail_mount_warthog_joystick_01-1-scaled.jpg
     shops:
@@ -374,7 +374,7 @@ commercial:
       mount for joysticks with extensions.
     manufacturer: MONSTERTECH / MTSIM
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://www.monster.tech/en/product/joystick-hotas-rail-mount-long-version/
     picture_url: https://www.monster.tech/wp-content/uploads/2022/03/monstertech_schienenhalterung_rail_mount_lang_mit_joystick_01b-scaled.jpg
     shops:
@@ -389,7 +389,7 @@ commercial:
       drive wheels and load-cell pedals.
     manufacturer: Sim-Lab
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://sim-lab.eu/en-de/products/p1x-pro-sim-racing-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/PX1_Pro_Wheeldeck_Sim-LabBlue_VarioSingle_45afb94c-4d36-4dcd-a7a7-96eed6de601f.jpg?v=1762973240
     shops:
@@ -404,7 +404,7 @@ commercial:
       slotted profiles, straight uprights, and modular assembly.
     manufacturer: Sim-Lab
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://sim-lab.eu/en-de/products/p1x-ultimate-simracing-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/PX1_Ultimate_Wheeldeck_Sim-LabBlue_VarioSingle_bca39084-b038-47ca-baad-b8760410ce76.jpg?v=1762973864
     shops:
@@ -419,7 +419,7 @@ commercial:
       wheelbases with side mounts for shifters and accessories.
     manufacturer: Sim-Lab
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://sim-lab.eu/en-de/products/gt1-pro-sim-racing-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/GT1_Pro_Sim-LabBlue_VarioSingle_e5d044dd-ef80-4b56-99c9-435eb2ecdda6.jpg?v=1762974564
     shops:
@@ -434,7 +434,7 @@ commercial:
       Rigid formula cockpit with front, side, and wheeldeck mounts included.
     manufacturer: Sim-Lab / Mercedes-AMG PETRONAS
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://sim-lab.eu/en-de/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Sim-Lab_F1_SeatBrackets_Cockpit_56290bdc-89c4-46d8-b8eb-337743d6d621.jpg?v=1763049167
     shops:
@@ -448,7 +448,7 @@ commercial:
       EU WINCTRL store. Panel Mount1.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=645
     picture_url: https://eu.winctrl.com/static/ipfs/QmbqZ1wpLiC25QGXjKaPGnTNJQ2pGaNnNMnNDP5GC2yBBT
     shops:
@@ -462,7 +462,7 @@ commercial:
       store listing; total_stock 4 from API. Panel Mount1x3.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=665
     picture_url: https://eu.winctrl.com/static/ipfs/QmcYPG5bMiNFf3dquahLi6pqQqQEx4zmguAkNpohvaEK73
     shops:
@@ -476,7 +476,7 @@ commercial:
       Foldable cockpit with carbon steel frame and ActiFit fabric.
     manufacturer: Playseat / Logitech G
     component_category: rigs-and-cockpits
-    component_sub_category: Portable cockpit
+    component_sub_category: portable-cockpit
     product_url: https://www.logitechg.com/en-us/products/gaming-furniture/playseat-challenge-x-sim-racing-seat.html
     picture_url: https://www.playseat.com/cdn/shop/collections/Screenshot2025-06-02at12.15.21_34e13864-39c6-4dbb-98ab-a57fedf18715.png?v=1764770168&width=800
     shops:
@@ -490,7 +490,7 @@ commercial:
       body-conforming seat on high-carbon steel frame.
     manufacturer: Playseat
     component_category: rigs-and-cockpits
-    component_sub_category: Portable cockpit
+    component_sub_category: portable-cockpit
     product_url: https://www.playseat.com/en-us/products/playseat-trophy-black
     picture_url: https://www.playseat.com/cdn/shop/files/playseat-trophy-black-01_1.png?v=1764770405&width=1920
     shops:
@@ -505,7 +505,7 @@ commercial:
       drive wheelbases and high-end pedals.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://www.gtomega.co.uk/products/prime-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Prime_2026_01_e4a939aa-2c63-4617-b19d-49981d9acefe.webp?v=1774430611
     shops:
@@ -520,7 +520,7 @@ commercial:
       compatible with the PRIME range.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://www.gtomega.co.uk/products/prime-lite-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_PrimeLite_2025_00_L_F.webp?v=1765377668
     shops:
@@ -535,7 +535,7 @@ commercial:
       cockpit focused on stability, adjustability, and compact size.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://www.gtomega.co.uk/products/prime-lite-r
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Prime_Lite-R_2025_00.webp?v=1765378153
     shops:
@@ -550,7 +550,7 @@ commercial:
       length, and seat position.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.gtomega.co.uk/products/art-racing-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Art_2025_00_L.webp?v=1775766898
     shops:
@@ -565,7 +565,7 @@ commercial:
       pedal plates.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.gtomega.co.uk/products/titan-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Titan_V1_2026_01.webp?v=1772700988
     shops:
@@ -580,7 +580,7 @@ commercial:
       racing positions with PRIME pedal tray and seat adjustment system.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.gtomega.co.uk/products/hybrid-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Cockpit_Hybrid_F_2026_00.webp?v=1767792809
     shops:
@@ -595,7 +595,7 @@ commercial:
       position and included shifter/handbrake mount.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Portable cockpit
+    component_sub_category: portable-cockpit
     product_url: https://www.gtomega.co.uk/products/sprint-folding-cockpit
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Sprint_Cockpit_00.webp?v=1774649552
     shops:
@@ -610,7 +610,7 @@ commercial:
       21 Nm.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Wheel stand
+    component_sub_category: wheel-stand
     product_url: https://www.gtomega.co.uk/products/dd-x-wheel-stand
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Wheelstand_DD-X_2025_00.webp?v=1770904113
     shops:
@@ -625,7 +625,7 @@ commercial:
       wheel stand design.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Wheel stand
+    component_sub_category: wheel-stand
     product_url: https://www.gtomega.co.uk/products/pro-steering-wheel-stand
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Wheelstand_Pro_2025_01.webp?v=1772112607
     shops:
@@ -640,7 +640,7 @@ commercial:
       and compact fold-away storage.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
-    component_sub_category: Wheel stand
+    component_sub_category: wheel-stand
     product_url: https://www.gtomega.co.uk/products/apex-steering-wheel-stand
     picture_url: https://cdn.shopify.com/s/files/1/0795/3727/5194/files/Apex_LifestyleSet_01.webp?v=1774650822
     shops:
@@ -654,7 +654,7 @@ commercial:
       on official product page. Steel tube cockpit with reclinable sports seat.
     manufacturer: Obutto
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://obutto.com/product/r3volution-cockpit/
     picture_url: https://obutto.com/wp-content/uploads/2018/12/obutto-r3volution-600x338.png
     shops:
@@ -669,7 +669,7 @@ commercial:
       Libra Desk Mount.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=309
     picture_url: https://eu.winctrl.com/static/ipfs/QmXP2BkkJDkEhLz5yLA7YeTbXuukGUF6zBnHBiyHzwjGVT
     shops:
@@ -684,7 +684,7 @@ commercial:
       Libra Desk Plate.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=320
     picture_url: https://eu.winctrl.com/static/ipfs/QmRSLfot1B89xUbczpuSHCZbexJMNLMNxhsSRDtM9p8EmZ
     shops:
@@ -699,7 +699,7 @@ commercial:
       Taurus Desk Mount.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=310
     picture_url: https://eu.winctrl.com/static/ipfs/Qmc7TEvqmMykaL1TFBfBKN9cyBddua4ZuRPPsQDv1L6kmu
     shops:
@@ -714,7 +714,7 @@ commercial:
       [uncertain]. Super Taurus ViperAce Adapter.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=376
     picture_url: https://eu.winctrl.com/static/ipfs/QmQy2t7Qx9inqErBQFvsWyzrSvzEvL2qs8gX82MRnPD9Cs
     shops:
@@ -729,7 +729,7 @@ commercial:
       Profile Bar 1.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1225
     picture_url: https://eu.winctrl.com/static/ipfs/QmfXaWbFjki79uwaAiyFGAivfNmaBF95kjkJzmBT417o7j
     shops:
@@ -744,7 +744,7 @@ commercial:
       Conversion Kit.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=321
     picture_url: https://eu.winctrl.com/static/ipfs/Qme5R55cN7ExC7jpdqCh6uLusbJoKBJYYySHfaVBzqPjTS
     shops:
@@ -758,7 +758,7 @@ commercial:
       on official US shop. 160 mm profile sim racing cockpit with seat slider kit.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://trakracer.com/products/tr160-v5
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR1605Blacke-cm05-min_d3dbb0cb-e499-4a52-81c5-abb112834010.png?v=1734837861
     shops:
@@ -772,7 +772,7 @@ commercial:
       US shop. Formula and GT hybrid pedal plate with side-mounted wheel uprights.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://trakracer.com/products/tr80s-racing-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR80S_eNoMonitor01-min_912d07bc-22b0-4f8b-9790-40c093816d14.png?v=1764113221
     shops:
@@ -786,7 +786,7 @@ commercial:
       WINCTRL store listing; total_stock 4 from API. ViperAce EX Shake Kits.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=372
     picture_url: https://eu.winctrl.com/static/ipfs/QmW4dKCB5hs6vwASBH3JnUkJhggFpXMc7v47fwLLYJuU9s
     shops:
@@ -801,7 +801,7 @@ commercial:
       steel chassis with real racing-style seat.
     manufacturer: Volair Sim
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://volairsim.com/
     picture_url: https://volairsim.com/wp-content/uploads/2021/04/VS_Price-1-768x543.jpg
     shops:
@@ -816,7 +816,7 @@ commercial:
       plates.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Wheel stand
+    component_sub_category: wheel-stand
     product_url: https://nextlevelracing.com/product/wheel-stand/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2021/11/ws2_web_11-1.png
     shops:
@@ -831,7 +831,7 @@ commercial:
       setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Wheel stand
+    component_sub_category: wheel-stand
     product_url: https://nextlevelracing.com/product/wheel-stand-lite-2-0/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2024/10/ws_lite_web_1.webp
     shops:
@@ -845,7 +845,7 @@ commercial:
       official store. Compact wheel and pedal stand for racing simulator setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Wheel stand
+    component_sub_category: wheel-stand
     product_url: https://nextlevelracing.com/product/next-level-racing-wheel-stand-racer/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2019/12/HEEL_STAND_RACER_HERO_3.png
     shops:
@@ -860,7 +860,7 @@ commercial:
       GT driving-position support.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://nextlevelracing.com/product/f-gt-pro/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2025/04/fgt_pro_web_1-1.webp
     shops:
@@ -875,7 +875,7 @@ commercial:
       setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://nextlevelracing.com/product/gtracer-2-0/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2025/01/GTRacer2.0-Features-1.png
     shops:
@@ -890,7 +890,7 @@ commercial:
       pedal setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://nextlevelracing.com/product/victory-simulator-cockpit/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2024/11/victory_cockpit_web_1.webp
     shops:
@@ -905,7 +905,7 @@ commercial:
       Ferrari-licensed Elite 160 cockpit.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://nextlevelracing.com/product/f-gt-elite-160-scuderia-ferrari-edition/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2023/03/fgt_elite_ferrari_1.webp
     shops:
@@ -920,7 +920,7 @@ commercial:
       GT cockpit with front and side mount wheel-base support.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://nextlevelracing.com/product/gtelite-racing-simulator-cockpit-front-side-mount-edition/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2022/03/gt_elite_sidemount_gallery_6.png
     shops:
@@ -935,7 +935,7 @@ commercial:
       edition cockpit for yoke, joystick, throttle, and rudder setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://nextlevelracing.com/product/flight-simulator-msfs-edition/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2025/05/fs_msfs_edition_web_1.webp
     shops:
@@ -950,7 +950,7 @@ commercial:
       commercial and combat flight controls.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://nextlevelracing.com/product/flight-simulator-pro-2/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2023/06/Flight-Simulator-Pro.webp
     shops:
@@ -965,7 +965,7 @@ commercial:
       setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://nextlevelracing.com/product/flight-stand-pro/
     picture_url: https://nextlevelracing.com/wp-content/uploads/2023/06/flight_stand_pro_web_1-1.webp
     shops:
@@ -980,7 +980,7 @@ commercial:
       WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=370
     picture_url: https://eu.winctrl.com/static/ipfs/Qmen1expyzeVxexrYHGNhgkiJbvykXxQNu6romTg8gbJLH
     shops:
@@ -995,7 +995,7 @@ commercial:
       WINCTRL Orion Metal Flight Rudder Pedals (Damper Kit).
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=805
     picture_url: https://eu.winctrl.com/static/ipfs/QmUR2XLYLinqFX92Mj1sY8jF4XZKrgNFVY1fEQx2bYe3A2
     shops:
@@ -1010,7 +1010,7 @@ commercial:
       Kits.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
-    component_sub_category: Rig mounts
+    component_sub_category: rig-mounts
     product_url: https://eu.winctrl.com/view/goods-details.html?id=371
     picture_url: https://eu.winctrl.com/static/ipfs/QmXghES91mNqbc7iFeRAmbvPufz6pcRECUCom7kSYhpxfR
     shops:
@@ -1025,7 +1025,7 @@ commercial:
       seat, high-foot driving position, and compact footprint.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
-    component_sub_category: Formula cockpit
+    component_sub_category: formula-cockpit
     product_url: https://www.pro-sim.co.uk/shop/pro-sim-formula-evo-sport/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2025/06/01.1150-1-e1750009343482.jpg
     shops:
@@ -1040,7 +1040,7 @@ commercial:
       components with adjustable pedal height and stocked for dispatch.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.pro-sim.co.uk/shop/psl-gt/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2022/07/Pro-Sim-7-scaled.jpg
     shops:
@@ -1055,7 +1055,7 @@ commercial:
       25 Nm-class direct-drive system.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.pro-sim.co.uk/shop/psl-pro-esport-package/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2020/01/PSL-GT-scaled.jpg
     shops:
@@ -1070,7 +1070,7 @@ commercial:
       colour options and stated 10-week shipping window.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
-    component_sub_category: Formula cockpit
+    component_sub_category: formula-cockpit
     product_url: https://www.pro-sim.co.uk/shop/pro-sim-half-f1-car/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2017/10/P1040594-scaled.jpg
     shops:
@@ -1085,7 +1085,7 @@ commercial:
       Sparco bucket seat as standard and stocked for dispatch.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.pro-sim.co.uk/shop/pro-sim-evolution-gt/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2016/12/Pro-Sim-9.jpg
     shops:
@@ -1101,7 +1101,7 @@ commercial:
       position.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
-    component_sub_category: Formula cockpit
+    component_sub_category: formula-cockpit
     product_url: https://www.pro-sim.co.uk/shop/pro-sim-formula-evolution/
     picture_url: https://www.pro-sim.co.uk/wp-content/uploads/2025/03/Formula-simulator-3-website-small.jpg
     shops:
@@ -1117,7 +1117,7 @@ commercial:
       PC, PlayStation, and Xbox.
     manufacturer: RaceRoom / TrackTime
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/game-seat-rr3055.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/r/r/rr3055-raceroom_02_1_2.jpg
     shops:
@@ -1132,7 +1132,7 @@ commercial:
       RR33 synthetic-leather sport seat, wheel plate, and pedal mount.
     manufacturer: RaceRoom / TrackTime
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/game-seat-rr3033.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/m/a/maxi_product_2.jpg
     shops:
@@ -1147,7 +1147,7 @@ commercial:
       foldable sport seat, wheel mount, and pedal tray.
     manufacturer: RaceRoom / TrackTime
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3055.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/t/t/tt3055.jpg
     shops:
@@ -1162,7 +1162,7 @@ commercial:
       sport seat, adjustable wheel bracket, and pedal mount.
     manufacturer: RaceRoom / TrackTime
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3033.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/t/t/tt3033.jpg
     shops:
@@ -1177,7 +1177,7 @@ commercial:
       wheel/pedal set, monitor, gaming PC, and 5.1 sound system.
     manufacturer: RaceRoom / TrackTime
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/simulator-rr3055.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/s/i/simulator_rr3055-1.jpg
     shops:
@@ -1192,7 +1192,7 @@ commercial:
       frame, wheel/pedal set, monitor, gaming PC, and 5.1 sound system.
     manufacturer: RaceRoom / TrackTime
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/simulator-rr3033.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/s/i/simulator_rr_3033-1.jpg
     shops:
@@ -1207,7 +1207,7 @@ commercial:
       simulator with flight case, wheel/pedal set, monitor, PC, and 5.1 sound.
     manufacturer: RaceRoom / TrackTime
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/flight-case-simulator-rr4055.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/f/l/flight_case_rr4055-2.jpg
     shops:
@@ -1222,7 +1222,7 @@ commercial:
       simulator with flight case, wheel/pedal set, monitor, PC, and 5.1 sound.
     manufacturer: RaceRoom / TrackTime
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/flight-case-simulator-rr4027.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/f/l/flight_case_rr_4027-2.jpg
     shops:
@@ -1238,7 +1238,7 @@ commercial:
       RaceRoom hardware/software package.
     manufacturer: RaceRoom / TrackTime
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3033-basic-bundle-691.html
     picture_url: https://www.raceroomstore.com/media/catalog/product/cache/2/image/1200x/040ec09b1e35df139433887a97daa66f/t/r/tracktime_racerig_multihalterung_75105485_014_1_2_-_kopie_1.png
     shops:
@@ -1253,7 +1253,7 @@ commercial:
       sim-racing cockpit builds.
     manufacturer: Ricmotech / AP-Xtreme
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.ricmotech.com/ap-xtreme-1000-racing-simulator-chassis
     picture_url: https://www.ricmotech.com/assets/images/apx-1000-2.jpg
     shops:
@@ -1268,7 +1268,7 @@ commercial:
       integrated single-monitor support.
     manufacturer: Ricmotech / AP-Xtreme
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.ricmotech.com/single-monitor-racing-simulator-chassis
     picture_url: https://www.ricmotech.com/assets/images/APX-2000-2.jpg
     shops:
@@ -1283,7 +1283,7 @@ commercial:
       modular rails and integrated triple-monitor stand.
     manufacturer: Ricmotech / AP-Xtreme
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.ricmotech.com/ap-xtreme-sim-racing-chassis
     picture_url: https://www.ricmotech.com/assets/images/APX-3000-2.jpg
     shops:
@@ -1298,7 +1298,7 @@ commercial:
       wide triple-monitor simulator setups.
     manufacturer: Ricmotech / AP-Xtreme
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.ricmotech.com/ap-xtreme-3000uw-sim-racing-chassis
     picture_url: https://www.ricmotech.com/assets/images/APX-3000UW-2.jpg
     shops:
@@ -1313,7 +1313,7 @@ commercial:
       for sim-racing cockpit builds.
     manufacturer: Ricmotech / AP-Xtreme
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.ricmotech.com/ap-xtreme-lite-sim-racing-chassis
     picture_url: https://www.ricmotech.com/assets/images/APX-500-2.jpg
     shops:
@@ -1328,7 +1328,7 @@ commercial:
       RSEAT GT seat; base frame-only variant captured for price.
     manufacturer: RSEAT
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://rseat.net/products/p1-black
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-p1-black-store-10.png?v=1729241100
     shops:
@@ -1343,7 +1343,7 @@ commercial:
       chassis with wheel-mount and optional seat variants.
     manufacturer: RSEAT
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://rseat.net/products/a1-pro-gt-black
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-a1-pro-gt-black-store-09.png?v=1726779191
     shops:
@@ -1358,7 +1358,7 @@ commercial:
       extrusion chassis with formula seating and optional seat variants.
     manufacturer: RSEAT
     component_category: rigs-and-cockpits
-    component_sub_category: Formula cockpit
+    component_sub_category: formula-cockpit
     product_url: https://rseat.net/products/a1-pro-formula-black
     picture_url: https://cdn.shopify.com/s/files/1/0768/7906/9509/files/rseat-a1-pro-formula-black-store-01.png?v=1727255476
     shops:
@@ -1373,7 +1373,7 @@ commercial:
       GT seating position adjustment.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://trakracer.com/products/alpine-trx-v2
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRX-V2-ALP24_eHero_6f515fc4-ae08-459c-b043-199ec1250111.webp?v=1763514318
     shops:
@@ -1388,7 +1388,7 @@ commercial:
       Formula and GT pedal adjustment.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://trakracer.com/products/alpine-racing-tra-hybrid-extrusion-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRAPDPHero_3000x2000_91f89d40-1c33-4753-8fcb-2c59e17c0990.webp?v=1773898509
     shops:
@@ -1403,7 +1403,7 @@ commercial:
       GT adjustment.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://trakracer.com/products/carbon-fibre-trx-racing-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/Image1.webp?v=1760680106
     shops:
@@ -1417,7 +1417,7 @@ commercial:
       official US shop. 120 mm profile cockpit with seat slider kit.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://trakracer.com/products/tr120s-v2-racing-simulator-new
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR120S-BLKe02-min.png?v=1735332033
     shops:
@@ -1432,7 +1432,7 @@ commercial:
       positions.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://trakracer.com/products/tr8-pro-racing-simulator-1
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR8_Pro_V2_s-e-cm1_01.webp?v=1758687555
     shops:
@@ -1447,7 +1447,7 @@ commercial:
       and flight-sim expandability.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://trakracer.com/products/tr40s-racing-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR40S_e01-min_60bd3152-e101-4518-9ac7-5b0de933aff4.png?v=1736301057
     shops:
@@ -1462,7 +1462,7 @@ commercial:
       simulator cockpit.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     product_url: https://trakracer.com/products/tr5
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR5-White_e01_1.png?v=1759295535
     shops:
@@ -1477,7 +1477,7 @@ commercial:
       shifter mounting.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Wheel stand
+    component_sub_category: wheel-stand
     product_url: https://trakracer.com/products/fs3-steering-wheel-stand-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/FS3-03_s03-min.png?v=1736474426
     shops:
@@ -1492,7 +1492,7 @@ commercial:
       mount.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://trakracer.com/products/tr160-flight-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR160M5_Flight_Hero01_0.webp?v=1769728911
     shops:
@@ -1507,7 +1507,7 @@ commercial:
       profile cockpit frame.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://trakracer.com/products/tr120s-flight-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR120S_Hero01_5.webp?v=1769729895
     shops:
@@ -1522,7 +1522,7 @@ commercial:
       wide-body profile frame.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://trakracer.com/products/tr80s-flight-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR80S_Hero01_6.webp?v=1770933454
     shops:
@@ -1537,7 +1537,7 @@ commercial:
       aluminum profile frame.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://trakracer.com/products/tr40s-flight-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR40S_F_Hero01_4.webp?v=1770934975
     shops:
@@ -1552,7 +1552,7 @@ commercial:
       and flight-control mounting.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://trakracer.com/products/tr8-pro-flight-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TR8Pro_Hero01_2.webp?v=1770932997
     shops:
@@ -1567,7 +1567,7 @@ commercial:
       sim mount.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://trakracer.com/products/tr5-flight-simulator-with-mount
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/TRR061_HEROFLIGHT01_1.png?v=1771592679
     shops:
@@ -1582,7 +1582,7 @@ commercial:
       simulation controls.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     product_url: https://trakracer.com/products/fs3-flight-simulator-wheel-stand
     picture_url: https://cdn.shopify.com/s/files/1/0268/8149/1135/files/FS3-03-FLT_tm01-min.png?v=1736473994
     shops:
@@ -1597,7 +1597,7 @@ commercial:
       P310 Open wheel, PC, keyboard stand, and monitor.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Formula cockpit
+    component_sub_category: formula-cockpit
     product_url: https://www.sparco-official.com/de/gp-rig-ii-gp-pro-fanatec-sim-kit-p310-open-pc-keybord-monitor-g03304.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03304_01_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1612,7 +1612,7 @@ commercial:
       wheel.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Formula cockpit
+    component_sub_category: formula-cockpit
     product_url: https://www.sparco-official.com/de/gp-rig-i-gp-pro-fanatec-sim-kit-p310-open-g03305-1.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03305_02.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1627,7 +1627,7 @@ commercial:
       R330 leather wheel, PC, keyboard stand, and monitor.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/gt-r-rig-ii-gt-r-pro-fanatec-sim-kit-r330-leather-pc-keybord-stand-monitor-g034018011gnr-1.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g034018011gnr_02_3.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1642,7 +1642,7 @@ commercial:
       leather wheel.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/gt-r-rig-i-gt-r-pro-fanatec-sim-kit-r330-leather-g035018011gnr-1.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g035018011gnr_01_3.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1657,7 +1657,7 @@ commercial:
       KG345 wheel, PC, keyboard stand, and monitor.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/kart-rig-ii-kart-pro-fanatec-sim-kit-kg345-pc-keybord-stand-monitor-g03904-1.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03904_01_2.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1672,7 +1672,7 @@ commercial:
       wheel.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/kart-rig-i-kart-pro-fanatec-sim-kit-kg345-g03905.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03905_01_3.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1687,7 +1687,7 @@ commercial:
       QRT-R seat.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/sim-gt-r-rig-ii-qrt-r-special-edition.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g034028012gnr_01.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1701,7 +1701,7 @@ commercial:
       current on official German shop. Evolve GT-R rig bundle with QRT-R seat.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/sim-gt-r-rig-i-qrt-r-special-edition.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g035028012gnr_01.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1715,7 +1715,7 @@ commercial:
       official German shop. Evolve Kart chassis for endurance kart simulation.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/evolve-kart-endurance-g03920.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03920.png?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=&format=jpeg
     shops:
@@ -1729,7 +1729,7 @@ commercial:
       official German shop. Evolve GT-R Pro frame with QRT-R seat.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/evolve-pro-qrt-r.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g0328012gnr_01_kvdqkbglq5roqs15.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1743,7 +1743,7 @@ commercial:
       official German shop. Evolve GP Pro formula-style simulator frame.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Formula cockpit
+    component_sub_category: formula-cockpit
     product_url: https://www.sparco-official.com/de/evolve-gp-g03800nr.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03800_01_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1757,7 +1757,7 @@ commercial:
       official German shop. Evolve Kart Pro chassis for kart simulation.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/evolve-kart-pro-g03900.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03900_01.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1772,7 +1772,7 @@ commercial:
       simulation.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/evolve-kart-pro-g03910.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g03900_01_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1786,7 +1786,7 @@ commercial:
       on official German shop. Evolve GT-R Pro frame with Circuit II seat.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
-    component_sub_category: Racing cockpit
+    component_sub_category: racing-cockpit
     product_url: https://www.sparco-official.com/de/evolve-gt-r-pro-frame-pro-brackets-circuit-ii-seat-g0328011gnr.html
     picture_url: https://www.sparco-official.com/media/catalog/product/g/0/g0328011gnr_01.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=
     shops:
@@ -1801,7 +1801,7 @@ commercial:
       Fanatec, Moza, Logitech, and Thrustmaster mounting support.
     manufacturer: Asetek Racing
     component_category: rigs-and-cockpits
-    component_sub_category: Cockpit frame
+    component_sub_category: cockpit-frame
     product_url: https://www.asetek.com/simsports/global/product/initium-2-in-1-cockpit/
     picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2025/06/Initium_2-in-1-Cockpit_45-Hero-Formula_40-060-0060001-300x300.png
     shops:
@@ -1818,7 +1818,7 @@ opensource:
       extrusion cockpit inspired by Sim-Lab GT1 Evo and P1-X geometry.
     maker: djpr1me
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     license: CC0-1.0
     project_url: https://github.com/djpr1me/Sim-Rig-Cockpit
     picture_url: https://raw.githubusercontent.com/djpr1me/Sim-Rig-Cockpit/main/pr1me_simrig_rotated_pedals.png
@@ -1829,7 +1829,7 @@ opensource:
       Dzus/MS25212C-style aircraft panel dimensions.
     maker: MobiFlight community / Tuomas Kuosmanen and contributors
     component_category: rigs-and-cockpits
-    component_sub_category: Cockpit plans
+    component_sub_category: cockpit-plans
     license: GPL-3.0
     project_url: https://github.com/MobiFlight/mobiflight-templates
     picture_url: https://user-images.githubusercontent.com/2587818/119951371-8b725600-bfa4-11eb-8002-0fe23cdbc718.png
@@ -1839,7 +1839,7 @@ opensource:
       AV-8B Harrier simulation cockpit.
     maker: OpenHarrier
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     license: GPL-3.0 in AV8B-NA repository
     project_url: https://github.com/OpenHarrier/AV8B-NA
     picture_url: https://openharrier.org/wp-content/uploads/2023/06/20230523_204630.jpg
@@ -1850,7 +1850,7 @@ opensource:
       F/A-18C simulator cockpit.
     maker: OpenHornet / jrsteensen and contributors
     component_category: rigs-and-cockpits
-    component_sub_category: Flight cockpit
+    component_sub_category: flight-cockpit
     license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International for
       OpenHornet works
     project_url: https://github.com/jrsteensen/OpenHornet
@@ -1862,7 +1862,7 @@ opensource:
       aluminum extrusion.
     maker: OpenSimCraft
     component_category: rigs-and-cockpits
-    component_sub_category: Aluminum cockpit
+    component_sub_category: aluminum-cockpit
     license: CERN-OHL-S for OpenSimCraft hardware designs
     project_url: https://github.com/OpenSimCraft/theta-8020-3dof
     picture_url: https://opengraph.githubassets.com/f9f08651b538cdc60cab352eb8c2ce9b405ed5249cd2fa54b1c9e79c88097d23/opensimcraft/theta-8020-3dof

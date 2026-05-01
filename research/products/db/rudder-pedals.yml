@@ -5,7 +5,7 @@ commercial:
       per Redbird related listing.
     manufacturer: Redbird Flight
     component_category: rudder-pedals
-    component_sub_category: Civil pedals
+    component_sub_category: civil-pedals
     product_url: https://simulators.redbirdflight.com/products/rd1
     picture_url: https://static.redbirdflight.net/images/rd1/rd1-featured.jpg
     shops:
@@ -20,7 +20,7 @@ commercial:
       current official capture].
     manufacturer: Honeycomb Aeronautical
     component_category: rudder-pedals
-    component_sub_category: Toe-brake pedals
+    component_sub_category: toe-brake-pedals
     product_url: https://flyhoneycomb.com/products/charlie-rudder-pedals
     picture_url: https://flyhoneycomb.com/cdn/shop/files/HC003073_CHARLIERUDDERPEDALS_1.jpg?v=1756653139&width=1920
     shops:
@@ -34,7 +34,7 @@ commercial:
       Low stock on Logitech US on 2026-04-29. Self-centering rudder pedals.
     manufacturer: Logitech G
     component_category: rudder-pedals
-    component_sub_category: Toe-brake pedals
+    component_sub_category: toe-brake-pedals
     product_url: https://www.logitechg.com/en-us/shop/p/flight-simulator-rudder-pedals
     picture_url: https://resource.logitechg.com/c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/flight-rudder-pedals/flight-rudder-pedals-gallery-1.png
     shops:
@@ -49,7 +49,7 @@ commercial:
       third-party spec page [uncertain]."
     manufacturer: MFG Sim
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://mfg-sim.com/rudders/mfg-crosswind-v3-combat-rudder-pedals.html
     picture_url: https://mfg-sim.com/498-large_default/mfg-crosswind-v3-combat-rudder-pedals.jpg
     shops: []
@@ -60,7 +60,7 @@ commercial:
       per Slaw Device category listing.
     manufacturer: Slaw Device
     component_category: rudder-pedals
-    component_sub_category: Helicopter pedals
+    component_sub_category: helicopter-pedals
     product_url: https://slawdevice.com/en/4-rudder-pedals
     picture_url: https://media1.slawdevice.com/641-home_default/pre-order-rh-rotor-v2-rudder-pedals.jpg
     shops:
@@ -74,7 +74,7 @@ commercial:
       related product on Virtual Fly page. Rudder pedals in Virtual Fly control family.
     manufacturer: Virtual Fly
     component_category: rudder-pedals
-    component_sub_category: Toe-brake pedals
+    component_sub_category: toe-brake-pedals
     product_url: https://www.virtual-fly.com/shop/controls/ruddo-plus
     picture_url: https://www.virtual-fly.com/wp-content/uploads/ruddo-v3-destacada-removebg-preview-1200x900.png
     shops:
@@ -89,7 +89,7 @@ commercial:
       rudder pedals for rudder plus two separate toe brakes.
     manufacturer: Slaw Device
     component_category: rudder-pedals
-    component_sub_category: Combat pedals
+    component_sub_category: combat-pedals
     product_url: https://slawdevice.com/en/4-rudder-pedals
     picture_url: https://slawdevice.com/modules/ybc_blog/views/img/post/thumb/Orange%20RX%20Viper%20V3%20Front%2016-9%20350x197.jpg
     shops:
@@ -103,7 +103,7 @@ commercial:
       US; add-to-cart status visible in listing. Compact vertical-action rudder pedals.
     manufacturer: VKB-Sim
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://vkbsimcontrollers.com/products/t-rudders-mk-v-rudder-pedals-us
     picture_url: https://vkbsimcontrollers.com/cdn/shop/files/T-Rudder_1200_03.webp?v=1769348192&width=1920
     shops:
@@ -117,7 +117,7 @@ commercial:
       Active product on Thrustmaster US. S.M.A.R.T Sliding Motion Advanced Rail Track.
     manufacturer: Thrustmaster
     component_category: rudder-pedals
-    component_sub_category: Toe-brake pedals
+    component_sub_category: toe-brake-pedals
     product_url: https://www.thrustmaster.com/en-us/products/t-flight-rudder-pedals/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/list-TFRP-rudder-flightsim-768x768-2.webp
     shops:
@@ -132,7 +132,7 @@ commercial:
       suspended mechanism.
     manufacturer: Thrustmaster
     component_category: rudder-pedals
-    component_sub_category: Toe-brake pedals
+    component_sub_category: toe-brake-pedals
     product_url: https://www.thrustmaster.com/products/tpr-thrustmaster-pendular-rudder/
     picture_url: https://www.thrustmaster.com/wp-content/uploads/2023/03/list-TPR-pendular-rudder-flight-sim-pc-768x768-2.webp
     shops:
@@ -147,7 +147,7 @@ commercial:
       ecosystem.
     manufacturer: Turtle Beach
     component_category: rudder-pedals
-    component_sub_category: Toe-brake pedals
+    component_sub_category: toe-brake-pedals
     product_url: https://www.turtlebeach.com/products/velocity-one-rudder
     picture_url: https://cdn.shopify.com/s/files/1/0556/5795/5430/files/velocity-one-rudder.png?v=1707532922
     shops:
@@ -161,7 +161,7 @@ commercial:
       VKB FSC Europe listing on 2026-04-29. 1 T-Rudder Mk.V.
     manufacturer: VKB-Sim
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://flightsimcontrols.com/product/vkb-sim-t-rudder-pedals-mk-v/
     picture_url: https://flightsimcontrols.com/wp-content/uploads/2023/10/T-Rudder5_1200_03.jpg
     shops:
@@ -175,7 +175,7 @@ commercial:
       stock on VIRPIL EU page on 2026-04-29. Single-axis pedal set.
     manufacturer: VIRPIL Controls
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://virpil-controls.eu/vpc-ace-torq-rudder-pedals.html
     picture_url: https://virpil-controls.eu/media/catalog/product/cache/86ea3b320f2d2e3b9be724ff3ef6735b/v/p/vpc-304_2022_01.jpg
     shops:
@@ -192,7 +192,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://eu.winctrl.com/view/goods-details.html?id=2825
     picture_url: https://eu.winctrl.com/static/ipfs/QmWZa87H43nuptgSTMRPsX6UPC9kcnPp8hGGts8iuaastF
     shops:
@@ -209,7 +209,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://eu.winctrl.com/view/goods-details.html?id=2945
     picture_url: https://eu.winctrl.com/static/ipfs/QmaYwv3B2mueLqGov18AWYeydLX7sC89SQNX8UF98ve7qV
     shops:
@@ -226,7 +226,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: rudder-pedals
-    component_sub_category: Combat pedals
+    component_sub_category: combat-pedals
     product_url: https://eu.winctrl.com/view/goods-details.html?id=2585
     picture_url: https://eu.winctrl.com/static/ipfs/QmaSgLdMjBEjDii5Db1jZ8gFDDH9Lg29PyNMUTEKmEPjpm
     shops:
@@ -243,7 +243,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: rudder-pedals
-    component_sub_category: Combat pedals
+    component_sub_category: combat-pedals
     product_url: https://eu.winctrl.com/view/goods-details.html?id=2645
     picture_url: https://eu.winctrl.com/static/ipfs/QmaSgLdMjBEjDii5Db1jZ8gFDDH9Lg29PyNMUTEKmEPjpm
     shops:
@@ -260,7 +260,7 @@ commercial:
       ."
     manufacturer: WINCTRL
     component_category: rudder-pedals
-    component_sub_category: Combat pedals
+    component_sub_category: combat-pedals
     product_url: https://eu.winctrl.com/view/goods-details.html?id=2705
     picture_url: https://eu.winctrl.com/static/ipfs/QmdfKQHchXEbwKPwiiE7RJec33rixWBa2PDSDKdxQvQ3HP
     shops:
@@ -274,7 +274,7 @@ commercial:
       listing on EU WINCTRL store. WINCTRL Orion 32 Rudder Pedals Metal 1.0.
     manufacturer: WINCTRL
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1705
     picture_url: https://eu.winctrl.com/static/ipfs/QmdtSn9qg55eGsr9DkE7SL7B39RDJxyHVadWkaUivLag4k
     shops:
@@ -289,7 +289,7 @@ commercial:
       Damper 1.0.
     manufacturer: WINCTRL
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://eu.winctrl.com/view/goods-details.html?id=1845
     picture_url: https://eu.winctrl.com/static/ipfs/QmQRSgwYcGBdSEJN9Yqr4BqxsE6De9jJYSGnWaUk8rNa1D
     shops:
@@ -304,7 +304,7 @@ commercial:
       Metal Flight Rudder Pedals (Standard Edition).
     manufacturer: WINCTRL
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://eu.winctrl.com/view/goods-details.html?id=785
     picture_url: https://eu.winctrl.com/static/ipfs/QmYdPyER29hTnkxBteo5cEYZV6fTdQZ6CuiG9jZ9TJ3b4z
     shops:
@@ -319,7 +319,7 @@ commercial:
       Orion Metal Flight Rudder Pedals (With Damper Edition).
     manufacturer: WINCTRL
     component_category: rudder-pedals
-    component_sub_category: Rudder pedals
+    component_sub_category: rudder-pedals
     product_url: https://eu.winctrl.com/view/goods-details.html?id=765
     picture_url: https://eu.winctrl.com/static/ipfs/QmYyaBG1toSrw5RCoDM2wMK7Tgtb8LvYQnC1iQSBxyiyya
     shops:
@@ -335,7 +335,7 @@ opensource:
       3D-printable stick, throttle, and rudder pedal ecosystem.
     maker: Akaki Kuumeri / `akakikuumeri`
     component_category: rudder-pedals
-    component_sub_category: Pedal controller
+    component_sub_category: pedal-controller
     license: GPL-3.0
     project_url: https://github.com/akakikuumeri/Akaki-Joystick
     picture_url: https://cdn.thingiverse.com/site/img/ThingiverseOpenGraph.webp

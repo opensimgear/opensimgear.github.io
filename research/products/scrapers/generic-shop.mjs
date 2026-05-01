@@ -507,7 +507,7 @@ function newProduct(action) {
   const name = cleanProductName(action.found.name, action.manufacturer);
   return {
     product_name: name,
-    description: `${action.manufacturer} ${name}. ${action.subCategory.toLowerCase()}. listed on ${action.shop.name}. ${sentence(action.found.description)}`.trim(),
+    description: `${action.manufacturer} ${name}. ${labelFromSlug(action.subCategory).toLowerCase()}. listed on ${action.shop.name}. ${sentence(action.found.description)}`.trim(),
     manufacturer: action.manufacturer,
     component_category: action.category,
     component_sub_category: action.subCategory,
@@ -559,31 +559,31 @@ function verbose(message) {
 function inferCategory(product) {
   const text = normalizeName(`${product.name} ${(product.categories ?? []).join(' ')} ${product.url}`);
   if (hasAny(text, ['pedal', 'pedals', 'loadcell', 'load cell'])) {
-    return { category: 'pedals', subCategory: text.includes('hydraulic') ? 'Hydraulic pedals' : text.includes('load') ? 'Load-cell pedals' : 'Two-pedal set' };
+    return { category: 'pedals', subCategory: text.includes('hydraulic') ? 'hydraulic-pedals' : text.includes('load') ? 'load-cell-pedals' : 'two-pedal-set' };
   }
   if (hasAny(text, ['wheelbase', 'wheel base', 'direct drive', 'ddwb', 'servo base'])) {
-    return { category: 'wheel-bases', subCategory: 'FFB controller' };
+    return { category: 'wheel-bases', subCategory: 'ffb-controller' };
   }
   if (hasAny(text, ['steering wheel', 'wheel rim', 'formula wheel', 'gt wheel'])) {
-    return { category: 'steering-wheels', subCategory: text.includes('formula') ? 'Formula wheel' : 'GT wheel' };
+    return { category: 'steering-wheels', subCategory: text.includes('formula') ? 'formula-wheel' : 'gt-wheel' };
   }
   if (hasAny(text, ['shifter', 'shift'])) {
-    return { category: 'shifters', subCategory: hasAny(text, ['h shifter', 'h-pattern']) ? 'H-pattern shifter' : 'Sequential shifter' };
+    return { category: 'shifters', subCategory: hasAny(text, ['h shifter', 'h-pattern']) ? 'h-pattern-shifter' : 'sequential-shifter' };
   }
   if (hasAny(text, ['handbrake', 'e brake', 'e-brake'])) {
-    return { category: 'handbrakes', subCategory: 'Analog handbrake' };
+    return { category: 'handbrakes', subCategory: 'analog-handbrake' };
   }
   if (hasAny(text, ['motion', 'actuator', 'dof'])) {
-    return { category: 'motion-platforms', subCategory: text.includes('4') ? '4DOF platform' : 'Motion simulator' };
+    return { category: 'motion-platforms', subCategory: text.includes('4') ? '4dof-platform' : 'motion-simulator' };
   }
   if (hasAny(text, ['cockpit', 'rig', 'chassis', 'seat'])) {
-    return { category: 'rigs-and-cockpits', subCategory: text.includes('aluminum') ? 'Aluminum cockpit' : 'Cockpit frame' };
+    return { category: 'rigs-and-cockpits', subCategory: text.includes('aluminum') ? 'aluminum-cockpit' : 'cockpit-frame' };
   }
   if (hasAny(text, ['button box', 'dashboard', 'display', 'ddu', 'panel'])) {
-    return { category: 'button-boxes-and-panels', subCategory: 'Control panel' };
+    return { category: 'button-boxes-and-panels', subCategory: 'control-panel' };
   }
 
-  return { category: categoryOverride ?? 'rigs-and-cockpits', subCategory: subcategoryOverride ?? 'Rig mounts' };
+  return { category: categoryOverride ?? 'rigs-and-cockpits', subCategory: subcategoryOverride ?? 'rig-mounts' };
 }
 
 function inferManufacturer(product, shopName) {
@@ -880,6 +880,37 @@ function hostShopName(hostname) {
   return name
     .split(/[-_]/)
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function labelFromSlug(value) {
+  const phraseLabels = {
+    'g-seat': 'G-seat',
+    'g-seat-controller': 'G-seat controller',
+    'g-seat-cues': 'G-seat cues',
+    'h-pattern-shifter': 'H-pattern shifter',
+    'load-cell-pedals': 'Load-cell pedals',
+    'toe-brake-pedals': 'Toe-brake pedals',
+  };
+  const acronyms = {
+    ar: 'AR',
+    ffb: 'FFB',
+    gt: 'GT',
+    hosas: 'HOSAS',
+    hotas: 'HOTAS',
+    mr: 'MR',
+    vr: 'VR',
+  };
+
+  if (phraseLabels[value]) return phraseLabels[value];
+
+  return value
+    .split('-')
+    .map((part, index) => {
+      if (/^\d+dof$/.test(part)) return `${part.slice(0, -3)}DOF`;
+      if (acronyms[part]) return acronyms[part];
+      return index === 0 ? part.charAt(0).toUpperCase() + part.slice(1) : part;
+    })
     .join(' ');
 }
 
