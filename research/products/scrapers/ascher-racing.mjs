@@ -193,9 +193,11 @@ function parseProductPage(html, fallbackUrl) {
 
 function shouldImport(product) {
   if (product.manufacturer !== 'Ascher Racing') return false;
-  if (INCLUDE_ACCESSORIES) return true;
 
   const text = `${product.product_name} ${product.product_url}`.toLowerCase();
+  if (/(bundle|bundles|set|kit|combo|paket)/.test(text)) return false;
+  if (INCLUDE_ACCESSORIES) return true;
+
   if (/(sticker|spacer|adapter|cable|screw|merchandise|cap|shirt|hoodie|mount|halter|qr|quick-release)/.test(text)) {
     return false;
   }
