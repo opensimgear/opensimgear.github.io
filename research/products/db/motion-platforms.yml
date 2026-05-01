@@ -1,4 +1,20 @@
 commercial:
+  - product_name: RDS4 Motion Kit
+    description: CAMMUS RDS4 Motion Kit. four-actuator motion kit. in stock on
+      official shop. 4-actuator independent motion system with 750 W actuators,
+      80/100/150 mm stroke options, up to 240 kg load per actuator, SimHub
+      support, and Windows USB control.
+    manufacturer: CAMMUS
+    component_category: motion-platforms
+    component_sub_category: 4DOF platform
+    product_url: https://cammusracing.com/product/2026-new-arrival-cammus-rds4-motion-kit-4-actuator-for-sim-racing/
+    picture_url: https://cammusracing.com/wp-content/uploads/2026/01/CAMMUS-RDS4-Motion-Kit-10.png
+    shops:
+      - name: CAMMUS
+        price: 4999
+        currency: USD
+        url: https://cammusracing.com/product/2026-new-arrival-cammus-rds4-motion-kit-4-actuator-for-sim-racing/
+        region: Global
   - product_name: 3DOF Motion Set QS-210
     description: "Qubic System QS-210 3DOF Motion Set. linear-actuator 3DOF kit.
       available via Qubic distributors. 3DOF bundle: four QS-210 actuators, two

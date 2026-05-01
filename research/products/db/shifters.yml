@@ -1,4 +1,19 @@
 commercial:
+  - product_name: H Shifter
+    description: CAMMUS H Shifter. H-pattern sim racing shifter. pre-order on
+      official shop. Official CAMMUS shifter listing; ships from China warehouse
+      through current global channel.
+    manufacturer: CAMMUS
+    component_category: shifters
+    component_sub_category: H-pattern shifter
+    product_url: https://cammusracing.com/product/cammus-h-shifter/
+    picture_url: https://cammusracing.com/wp-content/uploads/2025/08/CAMMUS-H-Shifter-05.png
+    shops:
+      - name: CAMMUS
+        price: 299
+        currency: USD
+        url: https://cammusracing.com/product/cammus-h-shifter/
+        region: Global
   - product_name: Push Pull Sequential Rally Paddle Shifter
     description: Apex Sim Racing Push Pull Sequential Rally Paddle Shifter.
       push-pull sequential paddle shifter for rally sim racing. in stock on
@@ -124,19 +139,19 @@ commercial:
         url: https://www.logitechg.com/en-us/products/driving/driving-force-shifter.html
         region: Unknown
   - product_name: DS-8X Shifter
-    description: SIMAGIC DS-8X Shifter. hybrid H-pattern and sequential shifter. In stock on
-      official page in search result. Hybrid H-pattern/sequential shifter.
-    manufacturer: SIMAGIC
+    description: Simagic DS-8X Shifter. hybrid H-pattern and sequential shifter.
+      in stock on official shop. Hybrid H-pattern/sequential shifter.
+    manufacturer: Simagic
     component_category: shifters
     component_sub_category: Hybrid shifter
-    product_url: https://simagic.com/pages/details-ds-8x
-    picture_url: https://simagic.com/cdn/shop/files/Q1_transparent_base.png?v=1766649236&width=500
+    product_url: https://simagic.com/products/ds-8x-shifter
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/DS-8X_transparent_base.png?v=1766649384
     shops:
-      - name: SIMAGIC
+      - name: Simagic
         price: 299
         currency: USD
-        url: https://simagic.com/pages/details-ds-8x
-        region: Unknown
+        url: https://simagic.com/products/ds-8x-shifter
+        region: Global
   - product_name: HGP Shifter
     description: MOZA HGP Shifter. H-pattern shifter. Current product; official product page
       showed dispatched within 3 business days. CNC-machined anodized aviation-grade
@@ -183,20 +198,33 @@ commercial:
         url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift-mini/
         region: EU
   - product_name: Q1S Sequential Shifter
-    description: SIMAGIC Q1S Sequential Shifter. sequential shifter. Official US distributor
-      page showed out of stock; SIMAGIC ecosystem product [stock varies]. Sequential
-      shifter with adjustable damping.
-    manufacturer: SIMAGIC
+    description: Simagic Q1S Sequential Shifter. sequential shifter. in stock on
+      official shop. Sequential shifter with adjustable damping.
+    manufacturer: Simagic
     component_category: shifters
-    component_sub_category: Hybrid shifter
-    product_url: https://simagicusa.com/products/simagic-q1s-sequential-shifter
-    picture_url: https://simagic-usa.myshopify.com/cdn/shop/files/SIMAGIC-Q1S-SEQUENTIAL-SHIFTER-Simagic-84797959.jpg?v=1748875424
+    component_sub_category: Sequential shifter
+    product_url: https://simagic.com/products/sequential-shifter-q1s
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Q1S_transparent_base.png?v=1766649338
     shops:
-      - name: SIMAGIC US
+      - name: Simagic
         price: 239
         currency: USD
-        url: https://simagicusa.com/products/simagic-q1s-sequential-shifter
-        region: Unknown
+        url: https://simagic.com/products/sequential-shifter-q1s
+        region: Global
+  - product_name: Q1 Sequential Shifter
+    description: Simagic Q1 Sequential Shifter. sequential shifter. in stock on
+      official shop. Sequential shifter sold in Q1 and Q1-P variants.
+    manufacturer: Simagic
+    component_category: shifters
+    component_sub_category: Sequential shifter
+    product_url: https://simagic.com/products/sequential-shifter-q1
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Q1_transparent_base.png?v=1766649236
+    shops:
+      - name: Simagic
+        price: 239
+        currency: USD
+        url: https://simagic.com/products/sequential-shifter-q1
+        region: Global
   - product_name: SGP Sequential Shifter
     description: MOZA SGP Sequential Shifter. sequential shifter. Current product; official
       US page showed dispatched within 3 business days. Aerospace-grade aluminum alloy

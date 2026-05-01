@@ -1,4 +1,49 @@
 commercial:
+  - product_name: C5 Direct Drive Steering Wheel
+    description: CAMMUS C5. integrated direct-drive wheel base and steering wheel.
+      in stock on official shop. 5 Nm holding torque, 7 Nm peak torque, with
+      included T-bracket for clamp or frame mounting.
+    manufacturer: CAMMUS
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://cammusracing.com/product/global-first-cammus-c5-direct-drive-steering-wheel/
+    picture_url: https://cammusracing.com/wp-content/uploads/2023/04/CAMMUS-C5-new-2.png
+    shops:
+      - name: CAMMUS
+        price: 269
+        currency: USD
+        url: https://cammusracing.com/product/global-first-cammus-c5-direct-drive-steering-wheel/
+        region: Global
+  - product_name: C12 Direct Drive Steering Wheel
+    description: CAMMUS C12. integrated 12 Nm direct-drive steering wheel. in
+      stock on official shop. New-version C12 sold with T-bracket and optional
+      GT/GT3 rim add-on.
+    manufacturer: CAMMUS
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://cammusracing.com/product/cammus-c12-direct-drive-steering-wheel/
+    picture_url: https://cammusracing.com/wp-content/uploads/2024/02/C12-01-1.png
+    shops:
+      - name: CAMMUS
+        price: 599
+        currency: USD
+        url: https://cammusracing.com/product/cammus-c12-direct-drive-steering-wheel/
+        region: Global
+  - product_name: DDWB 15Nm Wheelbase
+    description: CAMMUS DDWB 15Nm. direct-drive wheel base. in stock on official
+      shop. 15 Nm maximum torque servo-motor base with aluminum shell, active
+      cooling, buttons, rotary controls, and software lighting customization.
+    manufacturer: CAMMUS
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://cammusracing.com/product/cammus-wheelbase-gt1-ddwb-15nm/
+    picture_url: https://cammusracing.com/wp-content/uploads/2022/12/CAMMUS-DDWB15Nm-2025-New-9.png
+    shops:
+      - name: CAMMUS
+        price: 559
+        currency: USD
+        url: https://cammusracing.com/product/cammus-wheelbase-gt1-ddwb-15nm/
+        region: Global
   - product_name: ClubSport DD
     description: Fanatec ClubSport DD 12 Nm. mid/high direct-drive wheel base. in
       stock on official EU catalog. 12 Nm consistent torque with FullForce
@@ -106,19 +151,34 @@ commercial:
         region: EU
   - product_name: Invicta Direct Drive Wheelbase 27 Nm
     description: Asetek Invicta Direct Drive Wheelbase 27 Nm. pro high-torque direct-drive
-      wheel base. In stock on official global product snippet. 27 Nm direct-drive wheel
-      base.
+      wheel base. in stock on official global shop. 27 Nm direct-drive wheel base
+      with 22-bit encoder.
     manufacturer: Asetek Racing
     component_category: wheel-bases
     component_sub_category: FFB controller
-    product_url: https://www.asetek.com/simsports/product/invicta-direct-drive-wheelbase-27nm/
-    picture_url: https://www.asetek.com/simsports/us/wp-content/uploads/sites/2/2024/05/Invicta-Wheelbase-Front-Right-Raised-Orange-LED_NoBG.png
+    product_url: https://www.asetek.com/simsports/global/product/invicta-direct-drive-wheelbase-27nm/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/05/Invicta-Wheelbase-Front-Orange-LED_NoBG-300x300.png
     shops:
       - name: Asetek
-        price: 1175.63
-        currency: EUR
-        url: https://www.asetek.com/simsports/product/invicta-direct-drive-wheelbase-27nm/
-        region: US
+        price: 1349
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/invicta-direct-drive-wheelbase-27nm/
+        region: Global
+  - product_name: Initium Direct Drive Wheelbase EU
+    description: Asetek Initium Direct Drive Wheelbase EU. entry direct-drive wheel
+      base. in stock on official global shop. 5.5 Nm direct-drive base with
+      14-bit encoder and optional 8 Nm boost kit.
+    manufacturer: Asetek Racing
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://www.asetek.com/simsports/global/product/initium-direct-drive-wheelbase-eu/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2025/06/initium-direct-drive-wheelbase-600x600-1-300x300.png
+    shops:
+      - name: Asetek
+        price: 349
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/initium-direct-drive-wheelbase-eu/
+        region: Global
   - product_name: VNM x Cube Controls Direct Drives
     description: VNM x Cube Controls Direct Drives. direct-drive wheel base
       collaboration. in stock on Cube Controls official shop. Telemetry-based
@@ -294,110 +354,106 @@ commercial:
         url: https://simucube.com/en-us/simucube-3-ultimate/
         region: US
   - product_name: Simagic Alpha Mini
-    description: Simagic Alpha Mini. compact direct-drive wheel base. listed on
-      GermanSimRacing wheelbase collection. 10 Nm servo wheel base with 2.4 GHz
-      wheel connection and compact housing.
+    description: Simagic Alpha Mini. compact direct-drive wheel base. in stock on
+      official shop. 10 Nm servo wheel base with compact housing.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: FFB controller
-    product_url: https://shop.germansimracing.de/en/products/alpha-mini
-    picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Alpha-Mini-GermanSimRacing-132423114.jpg?v=1733597166
+    product_url: https://simagic.com/products/alpha-mini
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_Mini_transparent_base.png?v=1766649121
     shops:
-      - name: GermanSimRacing
-        price: 629
-        currency: EUR
-        url: https://shop.germansimracing.de/en/products/alpha-mini
-        region: DE
+      - name: Simagic
+        price: 399
+        currency: USD
+        url: https://simagic.com/products/alpha-mini
+        region: Global
   - product_name: Simagic Alpha Wheelbase
-    description: Simagic Alpha Wheelbase. direct-drive wheel base. listed on
-      GermanSimRacing wheelbase collection. 15 Nm servo wheel base with Simagic
-      quick release support.
+    description: Simagic Alpha Wheelbase. direct-drive wheel base. in stock on
+      official shop. 15 Nm servo wheel base with Simagic quick release support.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: FFB controller
-    product_url: https://shop.germansimracing.de/en/products/alpha-wheelbase
-    picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Alpha-Wheelbase-GermanSimRacing-132423374.png?v=1733602748
+    product_url: https://simagic.com/products/alpha
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_transparent_base.png?v=1766651649
     shops:
-      - name: GermanSimRacing
-        price: 929
-        currency: EUR
-        url: https://shop.germansimracing.de/en/products/alpha-wheelbase
-        region: DE
+      - name: Simagic
+        price: 649
+        currency: USD
+        url: https://simagic.com/products/alpha
+        region: Global
   - product_name: Simagic Alpha Ultimate
-    description: Simagic Alpha Ultimate. high-torque direct-drive wheel base. listed
-      on GermanSimRacing wheelbase collection. 23 Nm direct-drive base with custom
-      servo motor and 262144 ppr encoder resolution.
+    description: Simagic Alpha Ultimate. high-torque direct-drive wheel base. in
+      stock on official shop. 23 Nm direct-drive base with custom servo motor and
+      262144 ppr encoder resolution.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: FFB controller
-    product_url: https://shop.germansimracing.de/en/products/alpha-ultimate
-    picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Alpha-Ultimate-GermanSimRacing-132445035.jpg?v=1733602743
+    product_url: https://simagic.com/products/alpha-u
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_U_transparent_base.png?v=1766651871
     shops:
-      - name: GermanSimRacing
-        price: 1149
-        currency: EUR
-        url: https://shop.germansimracing.de/en/products/alpha-ultimate
-        region: DE
+      - name: Simagic
+        price: 899
+        currency: USD
+        url: https://simagic.com/products/alpha-u
+        region: Global
   - product_name: Simagic Alpha EVO Sport 9 Nm
-    description: Simagic Alpha EVO Sport 9 Nm. compact direct-drive wheel base. listed
-      on GermanSimRacing wheelbase collection. 9 Nm Alpha EVO base with 5-pole
-      direct-drive servo motor.
+    description: Simagic Alpha EVO Sport 9 Nm. compact direct-drive wheel base. in
+      stock on official shop. 9 Nm Alpha EVO base with 5-pole direct-drive servo
+      motor.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: FFB controller
-    product_url: https://shop.germansimracing.de/en/products/alpha-evo-sport-9nm
-    picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Alpha-EVO-Sport-9Nm-GermanSimRacing-146593473.png?v=1744652616
+    product_url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_EVO-9_12NM-11-12_c93b1965-3f94-40fa-a957-89e082de7766.png?v=1766651998
     shops:
-      - name: GermanSimRacing
-        price: 479
-        currency: EUR
-        url: https://shop.germansimracing.de/en/products/alpha-evo-sport-9nm
-        region: DE
+      - name: Simagic
+        price: 399
+        currency: USD
+        url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
+        region: Global
   - product_name: Simagic Alpha EVO 12 Nm
-    description: Simagic Alpha EVO 12 Nm. direct-drive wheel base. listed on
-      GermanSimRacing wheelbase collection. 12 Nm Alpha EVO base with 5-pole
-      direct-drive servo motor.
+    description: Simagic Alpha EVO 12 Nm. direct-drive wheel base. in stock on
+      official shop. 12 Nm Alpha EVO base with 5-pole direct-drive servo motor.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: FFB controller
-    product_url: https://shop.germansimracing.de/en/products/alpha-evo-12nm
-    picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Alpha-EVO-12Nm-GermanSimRacing-146597748.png?v=1744654471
+    product_url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_EVO-9_12NM-11-12_c93b1965-3f94-40fa-a957-89e082de7766.png?v=1766651998
     shops:
-      - name: GermanSimRacing
-        price: 659
-        currency: EUR
-        url: https://shop.germansimracing.de/en/products/alpha-evo-12nm
-        region: DE
+      - name: Simagic
+        price: 519
+        currency: USD
+        url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
+        region: Global
   - product_name: Simagic Alpha EVO Pro 18 Nm
-    description: Simagic Alpha EVO Pro 18 Nm. direct-drive wheel base. listed on
-      GermanSimRacing wheelbase collection. 18 Nm Alpha EVO Pro base for high
+    description: Simagic Alpha EVO Pro 18 Nm. direct-drive wheel base. in stock on
+      official shop. 18 Nm Alpha EVO Pro base for high force-feedback output.
+    manufacturer: Simagic
+    component_category: wheel-bases
+    component_sub_category: FFB controller
+    product_url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha_EVO-9_12NM-11-12_c93b1965-3f94-40fa-a957-89e082de7766.png?v=1766651998
+    shops:
+      - name: Simagic
+        price: 699
+        currency: USD
+        url: https://simagic.com/products/simagic-alpha-evo-wheel-base-9nm-12nm-18nm
+        region: Global
+  - product_name: Simagic Alpha EVO Ultra 28 Nm
+    description: Simagic Alpha EVO Ultra 28 Nm. high-torque direct-drive wheel base.
+      in stock on official shop. 28 Nm Alpha EVO Ultra base for maximum
       force-feedback output.
     manufacturer: Simagic
     component_category: wheel-bases
     component_sub_category: FFB controller
-    product_url: https://shop.germansimracing.de/en/products/alpha-evo-pro-18nm
-    picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Simagic-Alpha-EVO-Pro-18Nm-GermanSimRacing-146593365.png?v=1744652591
+    product_url: https://simagic.com/products/simagic-alpha-evo-ultra-28nm-direct-drive-wheel-base
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/alpha-evo-ultra-28nm-main-transparent.png?v=1772682087
     shops:
-      - name: GermanSimRacing
-        price: 839
-        currency: EUR
-        url: https://shop.germansimracing.de/en/products/alpha-evo-pro-18nm
-        region: DE
-  - product_name: Simagic Alpha EVO Ultra 28 Nm
-    description: Simagic Alpha EVO Ultra 28 Nm. high-torque direct-drive wheel base.
-      listed on GermanSimRacing wheelbase collection. 28 Nm Alpha EVO Ultra base
-      for maximum force-feedback output.
-    manufacturer: Simagic
-    component_category: wheel-bases
-    component_sub_category: FFB controller
-    product_url: https://shop.germansimracing.de/en/products/simagic-alpha-evo-ultra
-    picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Simagic-Alpha-Evo-Ultra-GermanSimRacing-158883732.jpg?v=1774983817
-    shops:
-      - name: GermanSimRacing
-        price: 1139
-        currency: EUR
-        url: https://shop.germansimracing.de/en/products/simagic-alpha-evo-ultra
-        region: DE
+      - name: Simagic
+        price: 969
+        currency: USD
+        url: https://simagic.com/products/simagic-alpha-evo-ultra-28nm-direct-drive-wheel-base
+        region: Global
   - product_name: MOZA R16 Wheel Base V2
     description: MOZA R16 Wheel Base V2. direct-drive wheel base. listed on
       GermanSimRacing wheelbase collection. 16 Nm industrial-grade motor with
@@ -445,34 +501,34 @@ commercial:
         region: DE
   - product_name: Asetek La Prima Direct Drive Wheelbase 12 Nm
     description: Asetek La Prima Direct Drive Wheelbase 12 Nm. direct-drive wheel
-      base. listed on GermanSimRacing wheelbase collection. Danish-made 12 Nm
-      base with 22-bit encoder and Asetek quick release.
+      base. out of stock on official global shop. 12 Nm base with 22-bit encoder
+      and Asetek quick release.
     manufacturer: Asetek Racing
     component_category: wheel-bases
     component_sub_category: FFB controller
-    product_url: https://shop.germansimracing.de/en/products/la-prima%E2%84%A2-direct-drive-wheelbase-12nm
-    picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/La-Prima_-Direct-Drive-Wheelbase-12Nm-GermanSimRacing-76279616.png?v=1728900676
+    product_url: https://www.asetek.com/simsports/global/product/la-prima-direct-drive-wheelbase-12nm/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/05/La-Prima-Wheelbase-Front-Left_NoBG-300x300.png
     shops:
-      - name: GermanSimRacing
-        price: 787.49
-        currency: EUR
-        url: https://shop.germansimracing.de/en/products/la-prima%E2%84%A2-direct-drive-wheelbase-12nm
-        region: DE
+      - name: Asetek
+        price: 679
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/la-prima-direct-drive-wheelbase-12nm/
+        region: Global
   - product_name: Asetek Forte Direct Drive Wheelbase 18 Nm
     description: Asetek Forte Direct Drive Wheelbase 18 Nm. direct-drive wheel base.
-      listed on GermanSimRacing wheelbase collection. Danish-made 18 Nm base with
-      22-bit encoder and programmable RGB LEDs.
+      in stock on official global shop. Danish-made 18 Nm base with 22-bit encoder
+      and programmable RGB LEDs.
     manufacturer: Asetek Racing
     component_category: wheel-bases
     component_sub_category: FFB controller
-    product_url: https://shop.germansimracing.de/en/products/forte%C2%AE-direct-drive-wheelbase-18nm
-    picture_url: https://cdn.shopify.com/s/files/1/0820/7885/9591/files/Forte_-Direct-Drive-Wheelbase-18Nm-GermanSimRacing-76276637.png?v=1728900584
+    product_url: https://www.asetek.com/simsports/global/product/forte-direct-drive-wheelbase-18nm/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/05/Forte-Wheelbase-Front-Right-Raised-Orange-LED_NoBG-300x300.png
     shops:
-      - name: GermanSimRacing
-        price: 1124.99
-        currency: EUR
-        url: https://shop.germansimracing.de/en/products/forte%C2%AE-direct-drive-wheelbase-18nm
-        region: DE
+      - name: Asetek
+        price: 949
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/forte-direct-drive-wheelbase-18nm/
+        region: Global
   - product_name: Fanatec Podium Wheel Base DD1
     description: Fanatec Podium Wheel Base DD1. direct-drive wheel base. listed on
       GermanSimRacing wheelbase collection. Podium-series direct-drive base.

@@ -1,4 +1,20 @@
 commercial:
+  - product_name: GT2 Steering Wheel
+    description: CAMMUS GT2 Steering Wheel. GT steering wheel. in stock on official
+      shop. 300 mm leather-grip wheel with real carbon-fiber construction, CNC
+      aluminum components, magnetic paddle shifters, RGB backlit buttons, and
+      70 mm motorsport quick release.
+    manufacturer: CAMMUS
+    component_category: steering-wheels
+    component_sub_category: GT wheel
+    product_url: https://cammusracing.com/product/new-upgrade-cammus-gt2-steering-wheel/
+    picture_url: https://cammusracing.com/wp-content/uploads/2026/03/CAMMUS-GT2-Steering-Wheel-00.png
+    shops:
+      - name: CAMMUS
+        price: 299
+        currency: USD
+        url: https://cammusracing.com/product/new-upgrade-cammus-gt2-steering-wheel/
+        region: Global
   - product_name: Aero Sim Racing Steering Wheel
     description: Apex Sim Racing Aero Steering Wheel. 330 mm D-shaped sim racing
       wheel rim. in stock on official shop. Brushed aluminum wheel available with
@@ -572,33 +588,119 @@ commercial:
     picture_url: https://mozaracing.com/cdn/shop/files/FSR2_Formula_Wheel-1.webp?v=1752135264&width=1920
     shops: []
   - product_name: FX Pro Formula Steering Wheel
-    description: SIMAGIC FX Pro. formula wheel with display. In stock on official page in
-      search result. 290 mm formula wheel, 1750 g.
-    manufacturer: SIMAGIC
+    description: Simagic FX Pro. formula wheel with display. in stock on official
+      shop. 290 mm formula wheel with integrated display.
+    manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: Formula wheel
-    product_url: https://simagic.com/pages/details-fx-pro
-    picture_url: https://simagic.com/cdn/shop/files/FX_Pro-transparent_base.png?v=1766645403&width=500
+    product_url: https://simagic.com/products/fx-pro
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/FX_Pro-transparent_base.png?v=1766645403
     shops:
-      - name: SIMAGIC
+      - name: Simagic
         price: 549
         currency: USD
-        url: https://simagic.com/pages/details-fx-pro
-        region: Unknown
+        url: https://simagic.com/products/fx-pro
+        region: Global
   - product_name: GT Neo
-    description: SIMAGIC GT Neo. GT/formula-style wheel with open-ecosystem option. In stock
-      on official page in search result. 300 mm diameter, 1100 g excluding QR.
-    manufacturer: SIMAGIC
+    description: Simagic GT Neo. GT/formula-style wheel with open-ecosystem option.
+      in stock on official shop. 300 mm diameter, 1100 g excluding QR.
+    manufacturer: Simagic
     component_category: steering-wheels
     component_sub_category: Formula wheel
-    product_url: https://simagic.com/pages/details-gt-neo
-    picture_url: https://simagic.com/cdn/shop/files/FX_Pro-transparent_base.png?v=1766645403&width=500
+    product_url: https://simagic.com/products/gt-neo
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/GT_Neo-transparent_base.png?v=1766651757
     shops:
-      - name: SIMAGIC
-        price: 269
+      - name: Simagic
+        price: 239
         currency: USD
-        url: https://simagic.com/pages/details-gt-neo
-        region: Unknown
+        url: https://simagic.com/products/gt-neo
+        region: Global
+  - product_name: FX Formula Steering Wheel
+    description: Simagic FX Formula Steering Wheel. formula wheel. in stock on
+      official shop. Compact formula wheel in the Simagic Alpha ecosystem.
+    manufacturer: Simagic
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://simagic.com/products/fx-formula
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/FX-transparent_base.png?v=1766651541
+    shops:
+      - name: Simagic
+        price: 289
+        currency: USD
+        url: https://simagic.com/products/fx-formula
+        region: Global
+  - product_name: GT4 Steering Wheel
+    description: Simagic GT4 Steering Wheel. formula/GT wheel. in stock on official
+      shop. Simagic GT4-style racing wheel.
+    manufacturer: Simagic
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://simagic.com/products/gt4-formula
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/GT4-transparent_base.png?v=1766651798
+    shops:
+      - name: Simagic
+        price: 259
+        currency: USD
+        url: https://simagic.com/products/gt4-formula
+        region: Global
+  - product_name: GTS Steering Wheel
+    description: Simagic GTS Steering Wheel. GT wheel. in stock on official shop.
+      Round racing wheel sold in leather and suede variants.
+    manufacturer: Simagic
+    component_category: steering-wheels
+    component_sub_category: GT wheel
+    product_url: https://simagic.com/products/gts
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/GTS-transparent_base.png?v=1766651306
+    shops:
+      - name: Simagic
+        price: 239
+        currency: USD
+        url: https://simagic.com/products/gts
+        region: Global
+  - product_name: GT1 Steering Wheel
+    description: Simagic GT1 Steering Wheel. GT wheel. in stock on official shop.
+      GT1 wheel sold in round and D-shape leather/suede variants.
+    manufacturer: Simagic
+    component_category: steering-wheels
+    component_sub_category: GT wheel
+    product_url: https://simagic.com/products/gt1
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/GT1-11-12_54331472-e5d5-4d63-af9e-b0949100479b.png?v=1766647716
+    shops:
+      - name: Simagic
+        price: 309
+        currency: USD
+        url: https://simagic.com/products/gt1
+        region: Global
+  - product_name: Neo X Series Steering Wheels
+    description: Simagic Neo X Series Steering Wheels. modular GT/rally/drift wheel
+      line. in stock on official shop. Neo X wheel series with 310 mm, 330 mm,
+      and 350 mm variants.
+    manufacturer: Simagic
+    component_category: steering-wheels
+    component_sub_category: GT wheel
+    product_url: https://simagic.com/products/simagic-neo-x-series-steering-wheels
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Neo_X-310G-1.png?v=1766651600
+    shops:
+      - name: Simagic
+        price: 249
+        currency: USD
+        url: https://simagic.com/products/simagic-neo-x-series-steering-wheels
+        region: Global
+  - product_name: Neo X Hub
+    description: Simagic Neo X Hub. modular wheel hub / wheel electronics. in stock
+      on official shop. Hub supports optional single or dual paddle modules and
+      compatible wheel rims.
+    manufacturer: Simagic
+    component_category: steering-wheels
+    component_sub_category: Wheel electronics
+    product_url: https://simagic.com/products/simagic-neo-x-hub
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Neo_X_Hub-transparent_base.png?v=1766651834
+    shops:
+      - name: Simagic
+        price: 199
+        currency: USD
+        url: https://simagic.com/products/simagic-neo-x-hub
+        region: Global
   - product_name: KS Steering Wheel
     description: MOZA KS Steering Wheel. GT/formula-style wheel. Current MOZA product
       [uncertain stock by region]. 300 mm GT/formula-style rim [uncertain].
@@ -1301,6 +1403,51 @@ commercial:
         currency: EUR
         url: https://www.sparco-official.com/de/kg-345.html
         region: DE
+  - product_name: Forte Formula Steering Wheel
+    description: Asetek Forte Formula Steering Wheel. formula-style steering wheel.
+      in stock on official global shop. 290 mm wheel with 128 input options,
+      magnetic shifter paddles, and programmable ARGB LEDs.
+    manufacturer: Asetek Racing
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://www.asetek.com/simsports/global/product/forte-formula-steering-wheel/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/03/Forte-Wheel-Photo-03_NoBG-600x600-1-300x300.png
+    shops:
+      - name: Asetek
+        price: 529
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/forte-formula-steering-wheel/
+        region: Global
+  - product_name: La Prima Formula Steering Wheel
+    description: Asetek La Prima Formula Steering Wheel. formula-style steering
+      wheel. out of stock on official global shop. 290 mm wheel with 12 push
+      buttons, two 7-way switches, rotary encoders, and magnetic shifter paddles.
+    manufacturer: Asetek Racing
+    component_category: steering-wheels
+    component_sub_category: Formula wheel
+    product_url: https://www.asetek.com/simsports/global/product/la-prima-formula-steering-wheel/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/03/La-Prima-Wheel-Photo-01_NoBG-300x300.png
+    shops:
+      - name: Asetek
+        price: 349
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/la-prima-formula-steering-wheel/
+        region: Global
+  - product_name: Initium Steering Wheel (PC)
+    description: Asetek Initium Steering Wheel PC. entry GT-style steering wheel.
+      in stock on official global shop. 300 mm wheel with integrated quick release,
+      magnetic shifters, 21 inputs, and reactive ARGB LEDs.
+    manufacturer: Asetek Racing
+    component_category: steering-wheels
+    component_sub_category: GT wheel
+    product_url: https://www.asetek.com/simsports/global/product/initium-steering-wheel-pc/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2025/06/Initium_Steering-Wheel-PC_45-Hero-LED_40-036-0036001-300x300.png
+    shops:
+      - name: Asetek
+        price: 149
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/initium-steering-wheel-pc/
+        region: Global
 opensource:
   - project_name: FreeJoy
     description: FreeJoy. configurable USB HID input controller for wheels, pedals,

@@ -58,6 +58,21 @@ commercial:
         currency: USD
         url: https://nextlevelracing.com/product/ers3-hypercool-ventilated-sim-racing-seat/
         region: US
+  - product_name: Initium Compact Race Seat
+    description: Asetek Initium Compact Race Seat. compact fixed sim racing seat.
+      in stock on official global shop. Foldable black fabric race seat for
+      Initium 2-in-1 Cockpit with steel frame.
+    manufacturer: Asetek Racing
+    component_category: seats-and-ergonomics
+    component_sub_category: Racing seat
+    product_url: https://www.asetek.com/simsports/global/product/initium-compact-race-seat/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2025/06/Initium_Compact-Race-Seat_45-Hero_40-050-0050001-300x300.png
+    shops:
+      - name: Asetek
+        price: 159
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/initium-compact-race-seat/
+        region: Global
   - product_name: PRS1 Performance Reclining Seat
     description: Next Level Racing PRS1 Performance Reclining Seat. reclining sim
       racing seat. in stock on official store. Performance reclining seat for

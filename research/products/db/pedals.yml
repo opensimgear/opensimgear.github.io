@@ -1,4 +1,34 @@
 commercial:
+  - product_name: CP5 Pedals
+    description: CAMMUS CP5 Pedals. entry sim racing pedal set. in stock on
+      official shop. Budget CAMMUS pedal set shipped from official global store;
+      detailed sensor specs not stated on current listing [uncertain].
+    manufacturer: CAMMUS
+    component_category: pedals
+    component_sub_category: Two-pedal set
+    product_url: https://cammusracing.com/product/cammus-cp5-pedals/
+    picture_url: https://cammusracing.com/wp-content/uploads/2023/05/CP5%E7%99%BD%E5%BA%95%E5%9B%BE540x720-1.jpg
+    shops:
+      - name: CAMMUS
+        price: 79
+        currency: USD
+        url: https://cammusracing.com/product/cammus-cp5-pedals/
+        region: Global
+  - product_name: LC100 Pedals V4
+    description: CAMMUS LC100 Pedals V4. load-cell pedal set. in stock on official
+      shop. V4 upgrade with 200 kg brake load-cell sensor, adjustable throw and
+      stiffness, Hall-effect throttle/clutch sensors, and steel pedal arms.
+    manufacturer: CAMMUS
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://cammusracing.com/product/cammus-lc100-pedals/
+    picture_url: https://cammusracing.com/wp-content/uploads/2023/03/CAMMUS-LC100-V4-2.png
+    shops:
+      - name: CAMMUS
+        price: 339
+        currency: USD
+        url: https://cammusracing.com/product/cammus-lc100-pedals/
+        region: Global
   - product_name: ActivePedal Pro
     description: Simucube ActivePedal Pro. active force-feedback pedal. in stock
       on official US shop. Active pedal configurable as brake, throttle, or
@@ -151,19 +181,193 @@ commercial:
         region: Unknown
   - product_name: Invicta Pedals T.H.O.R.P. II
     description: Asetek Invicta Pedals T.H.O.R.P. II. hydraulic brake and throttle pedal
-      set. In stock and ready to ship on official US page in search result. Two-pedal
-      brake/throttle set with T.H.O.R.P. II hydraulic brake cylinder.
+      set. in stock on official global shop. Two-pedal brake/throttle set with
+      T.H.O.R.P. II hydraulic brake cylinder.
     manufacturer: Asetek Racing
     component_category: pedals
     component_sub_category: Hydraulic pedals
-    product_url: https://www.asetek.com/simsports/us/product/invicta-pedals-thorp-2/
+    product_url: https://www.asetek.com/simsports/global/product/invicta-pedals-thorp-2/
     picture_url: https://www.asetek.com/simsports/us/wp-content/uploads/sites/2/2025/01/Invicta-Pedals-THORP-II-Close-up-2_NoBG.png
     shops:
       - name: Asetek
         price: 829
         currency: USD
-        url: https://www.asetek.com/simsports/us/product/invicta-pedals-thorp-2/
-        region: US
+        url: https://www.asetek.com/simsports/global/product/invicta-pedals-thorp-2/
+        region: Global
+  - product_name: Forte Sim Racing Pedals Brake & Throttle
+    description: Asetek Forte Sim Racing Pedals Brake & Throttle. load-cell pedal
+      set. in stock on official global shop. M.L.C.P.C. brake cylinder simulates
+      hydraulic feel without full hydraulics.
+    manufacturer: Asetek Racing
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://www.asetek.com/simsports/global/product/forte-sim-racing-pedals-brake-throttle/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/03/Forte-BrakeThrottle-MLCPC-Side-Right-600x600-2-300x300.png
+    shops:
+      - name: Asetek
+        price: 479
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/forte-sim-racing-pedals-brake-throttle/
+        region: Global
+  - product_name: La Prima Sim Racing Pedals Brake & Throttle
+    description: Asetek La Prima Sim Racing Pedals Brake & Throttle. entry load-cell
+      pedal set. medium stock on official global shop. Two-pedal set with
+      M.L.C.P.C. brake technology and upgrade path to Forte or Invicta.
+    manufacturer: Asetek Racing
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://www.asetek.com/simsports/global/product/la-prima-sim-racing-pedals-brake-throttle/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2024/03/La-Prima-BrakeThrottle10_NoBG-600x600-1-300x300.png
+    shops:
+      - name: Asetek
+        price: 349
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/la-prima-sim-racing-pedals-brake-throttle/
+        region: Global
+  - product_name: Initium Pedal Set
+    description: Asetek Initium Pedal Set. entry two-pedal set. in stock on official
+      global shop. Floor or cockpit mode pedals with hall sensor mechanisms and
+      optional load-cell or hydraulic brake upgrades.
+    manufacturer: Asetek Racing
+    component_category: pedals
+    component_sub_category: Two-pedal set
+    product_url: https://www.asetek.com/simsports/global/product/initium-pedal-set/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2025/06/Initium_Brake-Throttle-Pedal-Set_Side-Left_40-010-0010010-scaled.png
+    shops:
+      - name: Asetek
+        price: 119
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/initium-pedal-set/
+        region: Global
+  - product_name: P500 Pedal
+    description: Simagic P500 Pedal. entry load-cell pedal set. in stock on official
+      shop. Modular pedal set with optional clutch add-on.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://simagic.com/products/simagic-p500-pedals
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P500_transparent_base.png?v=1766649167
+    shops:
+      - name: Simagic
+        price: 149
+        currency: USD
+        url: https://simagic.com/products/simagic-p500-pedals
+        region: Global
+  - product_name: P700 Pedals
+    description: Simagic P700 Pedals. load-cell pedal set. in stock on official
+      shop. Upgraded entry pedal set with 150 kg load cell and 35 adjustable
+      brake settings.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://simagic.com/products/simagic-p700-pedal
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P700-Two-Pedal-2026-2-12.png?v=1773932144
+    shops:
+      - name: Simagic
+        price: 189
+        currency: USD
+        url: https://simagic.com/products/simagic-p700-pedal
+        region: Global
+  - product_name: P1000 Pedal
+    description: Simagic P1000 Pedal. modular load-cell pedal set. in stock on
+      official shop. P1000-series pedal platform with optional hydraulic and
+      haptic upgrades.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://simagic.com/products/p1000
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P1000-11-12.png?v=1766651958
+    shops:
+      - name: Simagic
+        price: 469
+        currency: USD
+        url: https://simagic.com/products/p1000
+        region: Global
+  - product_name: P1000i Pedal
+    description: Simagic P1000i Pedal. inverted modular load-cell pedal set. in
+      stock on official shop. Inverted P1000-series pedal platform with optional
+      hydraulic and haptic upgrades.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: Load-cell pedals
+    product_url: https://simagic.com/products/p1000i
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P1000i-RS-11-12.png?v=1766652192
+    shops:
+      - name: Simagic
+        price: 539
+        currency: USD
+        url: https://simagic.com/products/p1000i
+        region: Global
+  - product_name: P1000-F Pedal
+    description: Simagic P1000-F Pedal. two-pedal load-cell set. in stock on
+      official shop. P1000-series throttle and brake set.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: Two-pedal set
+    product_url: https://simagic.com/products/p1000-f
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P1000-F-11-12.png?v=1766648467
+    shops:
+      - name: Simagic
+        price: 419
+        currency: USD
+        url: https://simagic.com/products/p1000-f
+        region: Global
+  - product_name: P1000-RS Pedal
+    description: Simagic P1000-RS Pedal. three-pedal load-cell set. in stock on
+      official shop. P1000-series racing pedal set with clutch.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: Three-pedal set
+    product_url: https://simagic.com/products/p1000-rs
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P1000-RS-11-12.png?v=1766652079
+    shops:
+      - name: Simagic
+        price: 579
+        currency: USD
+        url: https://simagic.com/products/p1000-rs
+        region: Global
+  - product_name: P1000-FRS Pedal
+    description: Simagic P1000-FRS Pedal. three-pedal load-cell set. in stock on
+      official shop. P1000-series racing pedal set variant.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: Three-pedal set
+    product_url: https://simagic.com/products/p1000-frs
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P1000-FRS-11-12.png?v=1762936258
+    shops:
+      - name: Simagic
+        price: 549
+        currency: USD
+        url: https://simagic.com/products/p1000-frs
+        region: Global
+  - product_name: P1000i-RS Pedal
+    description: Simagic P1000i-RS Pedal. inverted three-pedal load-cell set. in
+      stock on official shop. Inverted P1000-series racing pedal set.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: Three-pedal set
+    product_url: https://simagic.com/products/p1000i-rs
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P1000i-RS-11-12.png?v=1766652192
+    shops:
+      - name: Simagic
+        price: 699
+        currency: USD
+        url: https://simagic.com/products/p1000i-rs
+        region: Global
+  - product_name: P2000 Pedal
+    description: Simagic P2000 Pedal. hydraulic pedal set. in stock on official
+      shop. P2000 hydraulic pedal platform with 100 kg and 200 kg sensor variants.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: Hydraulic pedals
+    product_url: https://simagic.com/products/p2000-r
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P2000-R-11-12.png?v=1766648511
+    shops:
+      - name: Simagic
+        price: 679
+        currency: USD
+        url: https://simagic.com/products/p2000-r
+        region: Global
   - product_name: SP01 Core
     description: Cube Controls SP01 Core. load-cell sim racing pedal set. in stock
       on official shop. Fully customizable weight, travel, and preload with

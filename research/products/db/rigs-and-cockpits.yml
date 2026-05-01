@@ -1,4 +1,20 @@
 commercial:
+  - product_name: SS15 Racing Cockpit with Seat
+    description: CAMMUS SS15 Racing Cockpit with Seat. aluminum-profile cockpit.
+      available by official quote flow. 1300 x 600 x 1100 mm 4080L-profile rig
+      with adjustable seat, wheel, and pedal positions for C5, C12, WB15, CP5,
+      and LC100 hardware.
+    manufacturer: CAMMUS
+    component_category: rigs-and-cockpits
+    component_sub_category: Aluminum cockpit
+    product_url: https://cammusracing.com/product/cammus-ss8-ss15-racing-cockpit-with-seat/
+    picture_url: https://cammusracing.com/wp-content/uploads/2025/11/SS15.1_9200.png
+    shops:
+      - name: CAMMUS
+        price: 599
+        currency: USD
+        url: https://cammusracing.com/product/cammus-ss8-ss15-racing-cockpit-with-seat/
+        region: Global
   - product_name: ASR 1 Chassis
     description: Advanced SimRacing ASR 1. entry aluminum profile cockpit. current.
       Generation 2 profile chassis with 1.5 x 1.5 in base.
@@ -1779,6 +1795,21 @@ commercial:
         currency: EUR
         url: https://www.sparco-official.com/de/evolve-gt-r-pro-frame-pro-brackets-circuit-ii-seat-g0328011gnr.html
         region: DE
+  - product_name: Initium 2-in-1 Cockpit
+    description: Asetek Initium 2-in-1 Cockpit. steel cockpit frame. in stock on
+      official global shop. Adjustable GT/formula cockpit frame with Asetek,
+      Fanatec, Moza, Logitech, and Thrustmaster mounting support.
+    manufacturer: Asetek Racing
+    component_category: rigs-and-cockpits
+    component_sub_category: Cockpit frame
+    product_url: https://www.asetek.com/simsports/global/product/initium-2-in-1-cockpit/
+    picture_url: https://www.asetek.com/simsports/global/wp-content/uploads/sites/4/2025/06/Initium_2-in-1-Cockpit_45-Hero-Formula_40-060-0060001-300x300.png
+    shops:
+      - name: Asetek
+        price: 299
+        currency: USD
+        url: https://www.asetek.com/simsports/global/product/initium-2-in-1-cockpit/
+        region: Global
 opensource:
   - project_name: DIY Aluminium Profile Sim Rig
     description: DIY Aluminium Profile Sim Rig. aluminum profile cockpit. Personal build

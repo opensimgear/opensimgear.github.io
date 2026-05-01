@@ -96,6 +96,7 @@ function canonicalProduct(product, kind) {
       manufacturer: product.manufacturer?.toString() ?? '',
       component_category: product.component_category?.toString() ?? '',
       component_sub_category: product.component_sub_category?.toString() ?? '',
+      license: 'Commercial',
       product_url: normalizeUrl(product.product_url),
       shops: (product.shops ?? []).map((shop) => ({
         name: shop.name?.toString() ?? '',
@@ -256,6 +257,7 @@ function databaseFor(products) {
         manufacturer: 'Product manufacturer.',
         component_category: 'Primary component category.',
         component_sub_category: 'Component subcategory.',
+        license: 'Commercial.',
         product_url: 'Canonical product URL.',
         shops: 'Array of shop entries with name, region, numeric price, currency, and URL.',
       },
@@ -316,6 +318,7 @@ function validateProducts(products) {
             'manufacturer',
             'component_category',
             'component_sub_category',
+            'license',
             'product_url',
             'shops',
           ]

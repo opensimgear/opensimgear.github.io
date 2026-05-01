@@ -1,4 +1,19 @@
 commercial:
+  - product_name: Handbrake
+    description: CAMMUS Handbrake. analog sim racing handbrake. pre-order on
+      official shop. Official CAMMUS handbrake listing; ships from China
+      warehouse through current global channel.
+    manufacturer: CAMMUS
+    component_category: handbrakes
+    component_sub_category: Analog handbrake
+    product_url: https://cammusracing.com/product/cammus-handbrake/
+    picture_url: https://cammusracing.com/wp-content/uploads/2025/08/CAMMUS-HANDBRAKE-03.jpg
+    shops:
+      - name: CAMMUS
+        price: 199
+        currency: USD
+        url: https://cammusracing.com/product/cammus-handbrake/
+        region: Global
   - product_name: ClubSport Handbrake V2
     description: Fanatec ClubSport Handbrake V2. load-cell analog handbrake. in
       stock on official EU catalog. Stronger rally/drift handbrake with improved
@@ -89,33 +104,33 @@ commercial:
         url: https://www.logitechg.com/en-us/products/driving/rs-shifter-handbrake.html
         region: Unknown
   - product_name: TB-1 Handbrake
-    description: SIMAGIC TB-1 Handbrake. compact analog handbrake. In stock on official page
-      in search result. Full-metal CNC construction.
-    manufacturer: SIMAGIC
+    description: Simagic TB-1 Handbrake. compact analog handbrake. in stock on
+      official shop. Full-metal CNC construction.
+    manufacturer: Simagic
     component_category: handbrakes
     component_sub_category: Analog handbrake
-    product_url: https://simagic.com/pages/details-tb1
-    picture_url: https://simagic.com/cdn/shop/files/TB-1_transparent_base.png?v=1766649428&width=500
+    product_url: https://simagic.com/products/tb-1-handbrake
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/TB-1_transparent_base.png?v=1766649428
     shops:
-      - name: SIMAGIC
+      - name: Simagic
         price: 139
         currency: USD
-        url: https://simagic.com/pages/details-tb1
-        region: Unknown
+        url: https://simagic.com/products/tb-1-handbrake
+        region: Global
   - product_name: TB-RS Hydraulic Handbrake
-    description: SIMAGIC TB-RS Hydraulic Handbrake. hydraulic analog handbrake. In stock on
-      official page in search result. Hydraulic handbrake with adjustable damping.
-    manufacturer: SIMAGIC
+    description: Simagic TB-RS Hydraulic Handbrake. hydraulic analog handbrake. in
+      stock on official shop. Hydraulic handbrake with adjustable damping.
+    manufacturer: Simagic
     component_category: handbrakes
     component_sub_category: Analog handbrake
-    product_url: https://simagic.com/pages/details-tb-rs
-    picture_url: https://simagic.com/cdn/shop/files/TB-RS_transparent_base.png?v=1766649288&width=500
+    product_url: https://simagic.com/products/simagic-tb-rs
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/TB-RS_transparent_base.png?v=1766649288
     shops:
-      - name: SIMAGIC
+      - name: Simagic
         price: 239
         currency: USD
-        url: https://simagic.com/pages/details-tb-rs
-        region: Unknown
+        url: https://simagic.com/products/simagic-tb-rs
+        region: Global
   - product_name: TSS Handbrake Sparco Mod Plus
     description: Thrustmaster TSS Handbrake Sparco Mod Plus. 2-in-1 progressive handbrake
       and sequential shifter. Current Thrustmaster product. Official Sparco-licensed 1:1
