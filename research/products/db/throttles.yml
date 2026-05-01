@@ -1,8 +1,7 @@
 commercial:
   - product_name: GNX THQ (Throttle Quadrant)
-    description: VKB FSC Europe GNX THQ (Throttle Quadrant). VKB modular flight-control panel.
-      In stock on VKB FSC Europe listing on 2026-04-29. Gladiator NXT joystick base (from
-      either side).
+    description: VKB FSC Europe GNX THQ (Throttle Quadrant). VKB modular flight-control panel. In stock
+      on VKB FSC Europe listing on 2026-04-29. Gladiator NXT joystick base (from either side).
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-module
@@ -15,9 +14,9 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-thq-throttle-quadrant/
         region: EU
   - product_name: GNX THQ-V (Throttle Quadrant – Vertical)
-    description: VKB FSC Europe GNX THQ-V (Throttle Quadrant – Vertical). VKB modular
-      flight-control panel. In stock on VKB FSC Europe listing on 2026-04-29. Requires GNX
-      MFH (Multi Functional Holder) in order to mount module.
+    description: VKB FSC Europe GNX THQ-V (Throttle Quadrant – Vertical). VKB modular flight-control
+      panel. In stock on VKB FSC Europe listing on 2026-04-29. Requires GNX MFH (Multi Functional
+      Holder) in order to mount module.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-module
@@ -58,9 +57,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-stem-standard-throttle-extension-module/
         region: EU
   - product_name: Gladiator NXT EVO Omni Throttle
-    description: VKB FSC Europe Gladiator NXT EVO Omni Throttle. VKB flightstick base, grip, or
-      complete joystick. In stock on VKB FSC Europe listing on 2026-04-29. Complete
-      Gladiator NXT EVO Omni Throttle with SCG Premium Grip (Left).
+    description: VKB FSC Europe Gladiator NXT EVO Omni Throttle. VKB flightstick base, grip, or complete
+      joystick. In stock on VKB FSC Europe listing on 2026-04-29. Complete Gladiator NXT EVO Omni
+      Throttle with SCG Premium Grip (Left).
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: flight-throttle
@@ -73,9 +72,9 @@ commercial:
         url: https://flightsimcontrols.com/product/gladiator-nxt-evo-omni-throttle/
         region: EU
   - product_name: Dual Throttle connector for WINCTRL Orion/Gemini Base
-    description: Dual Throttle connector for WINCTRL Orion/Gemini Base. flight-control mounts
-      and accessories. Active EU WINCTRL store listing; total_stock 4 from API. Dual
-      Throttle connector for WINCTRL Orion/Gemini Base x1.
+    description: Dual Throttle connector for WINCTRL Orion/Gemini Base. flight-control mounts and
+      accessories. Active EU WINCTRL store listing; total_stock 4 from API. Dual Throttle connector
+      for WINCTRL Orion/Gemini Base x1.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-accessories
@@ -88,16 +87,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=381
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 22.63
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=381
         region: US
         status: available
   - product_name: Super Taurus Desk Mount
-    description: Super Taurus Desk Mount. flight-control mounts and accessories. Listed on EU
-      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Taurus
-      Desk Mount.
+    description: Super Taurus Desk Mount. flight-control mounts and accessories. Listed on EU WINCTRL
+      store with placeholder price/out-of-stock behavior [uncertain]. Super Taurus Desk Mount.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-mount
@@ -117,9 +115,9 @@ commercial:
         region: US
         status: out-of-stock
   - product_name: Throttle Mount
-    description: Sim Lab Throttle Mount. rig mounts. listed on Sim Lab. The Throttle Mount
-      provides stable, reliable support, keeping your controls secure during every flight,
-      and is built to last through countless hours of use. Stable and Reliable...
+    description: Sim Lab Throttle Mount. rig mounts. listed on Sim Lab. The Throttle Mount provides
+      stable, reliable support, keeping your controls secure during every flight, and is built to
+      last through countless hours of use. Stable and Reliable...
     manufacturer: Sim Lab
     component_category: throttles
     component_sub_category: throttle-mount
@@ -133,9 +131,9 @@ commercial:
         region: EU
         status: available
   - product_name: Modern Throttle Grip Mk.II Premium
-    description: STECS Modern Throttle Grip Mk.II Premium. rig mounts. listed on
-      Flightsimcontrols. Official shop listing.
-    manufacturer: STECS
+    description: VKB-Sim Modern Throttle Grip Mk.II Premium. rig mounts. listed on Flightsimcontrols.
+      Official shop listing.
+    manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-accessories
     product_url: https://flightsimcontrols.com/product/stecs-modern-throttle-grip-mk-ii-premium/
@@ -147,9 +145,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-modern-throttle-grip-mk-ii-premium/
         region: Unknown
   - product_name: Modern Throttle Grip Mk.II Upgrade Kit
-    description: STECS Modern Throttle Grip Mk.II Upgrade Kit. rig mounts. listed on
+    description: VKB-Sim Modern Throttle Grip Mk.II Upgrade Kit. rig mounts. listed on
       Flightsimcontrols. Official shop listing.
-    manufacturer: STECS
+    manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-upgrade-kit
     product_url: https://flightsimcontrols.com/product/stecs-mtg-grip-mk2-upgrade-kit/
@@ -161,8 +159,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-mtg-grip-mk2-upgrade-kit/
         region: Unknown
   - product_name: for STECS
-    description: UCM-S for STECS. rig mounts. listed on Flightsimcontrols. Official shop listing.
-    manufacturer: UCM-S
+    description: VKB-Sim for STECS. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-accessories
     product_url: https://flightsimcontrols.com/product/ucm-for-stecs/
@@ -174,9 +172,8 @@ commercial:
         url: https://flightsimcontrols.com/product/ucm-for-stecs/
         region: Unknown
   - product_name: Alloy TH1
-    description: Redbird Alloy TH1. single-engine vernier throttle quadrant. Active related
-      product on Redbird Alloy page. Vernier-style throttle quadrant for single-engine
-      airplane simulation.
+    description: Redbird Alloy TH1. single-engine vernier throttle quadrant. Active related product on
+      Redbird Alloy page. Vernier-style throttle quadrant for single-engine airplane simulation.
     manufacturer: Redbird Flight
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -190,8 +187,8 @@ commercial:
         region: US
   - product_name: Bravo Throttle Quadrant
     description: Honeycomb Bravo Throttle Quadrant. multi-engine civil throttle quadrant. Active
-      Honeycomb product; listed in Honeycomb collection. Six-lever configurable throttle
-      quadrant [official product detail not fully captured in this pass].
+      Honeycomb product; listed in Honeycomb collection. Six-lever configurable throttle quadrant
+      [official product detail not fully captured in this pass].
     manufacturer: Honeycomb Aeronautical
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -204,8 +201,8 @@ commercial:
         url: https://flyhoneycomb.com/products/bravo-throttle-quadrant
         region: Unknown
   - product_name: Flight Throttle Quadrant
-    description: Logitech Flight Throttle Quadrant. simple multi-axis throttle quadrant. In
-      stock on Logitech US on 2026-04-29. Three programmable axis levers.
+    description: Logitech Flight Throttle Quadrant. simple multi-axis throttle quadrant. In stock on
+      Logitech US on 2026-04-29. Three programmable axis levers.
     manufacturer: Logitech G
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -218,8 +215,8 @@ commercial:
         url: https://www.logitechg.com/en-us/shop/p/flight-simulator-throttle-quadrant
         region: US
   - product_name: GNX Dual THQ + FSM-GA Combo
-    description: VKB FSC Europe GNX Dual THQ + FSM-GA Combo. VKB throttle system or throttle
-      quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 2 GNX THQ.
+    description: VKB FSC Europe GNX Dual THQ + FSM-GA Combo. VKB throttle system or throttle quadrant.
+      In stock on VKB FSC Europe listing on 2026-04-29. 2 GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -232,8 +229,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-dual-thq-fsm-ga-combo/
         region: EU
   - product_name: GNX Dual THQ + SEM + FSM-GA Combo
-    description: VKB FSC Europe GNX Dual THQ + SEM + FSM-GA Combo. VKB throttle system or
-      throttle quadrant. Out of stock on VKB FSC Europe listing on 2026-04-29. 2 GNX THQ.
+    description: VKB FSC Europe GNX Dual THQ + SEM + FSM-GA Combo. VKB throttle system or throttle
+      quadrant. Out of stock on VKB FSC Europe listing on 2026-04-29. 2 GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -246,8 +243,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-dual-thq-sem-fsm-ga-combo/
         region: EU
   - product_name: GNX Dual THQ + SEM-V Combo
-    description: VKB FSC Europe GNX Dual THQ + SEM-V Combo. VKB throttle system or throttle
-      quadrant. Out of stock on VKB FSC Europe listing on 2026-04-29. 2 GNX GNX THQ.
+    description: VKB FSC Europe GNX Dual THQ + SEM-V Combo. VKB throttle system or throttle quadrant.
+      Out of stock on VKB FSC Europe listing on 2026-04-29. 2 GNX GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -260,8 +257,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-dual-thq-sem-v-combo/
         region: EU
   - product_name: GNX Dual THQ + THQ-V + SEM-V Combo
-    description: VKB FSC Europe GNX Dual THQ + THQ-V + SEM-V Combo. VKB throttle system or
-      throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 2 GNX THQ.
+    description: VKB FSC Europe GNX Dual THQ + THQ-V + SEM-V Combo. VKB throttle system or throttle
+      quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 2 GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -274,8 +271,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-dual-thq-thq-v-sem-combo/
         region: EU
   - product_name: GNX Triple THQ + FSM-GA Combo
-    description: VKB FSC Europe GNX Triple THQ + FSM-GA Combo. VKB throttle system or throttle
-      quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 3 GNX THQ.
+    description: VKB FSC Europe GNX Triple THQ + FSM-GA Combo. VKB throttle system or throttle quadrant.
+      In stock on VKB FSC Europe listing on 2026-04-29. 3 GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -288,8 +285,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-triple-thq-fsm-ga-combo/
         region: EU
   - product_name: GNX Triple THQ + SEM-V Combo
-    description: VKB FSC Europe GNX Triple THQ + SEM-V Combo. VKB throttle system or throttle
-      quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 3 GNX THQ.
+    description: VKB FSC Europe GNX Triple THQ + SEM-V Combo. VKB throttle system or throttle quadrant.
+      In stock on VKB FSC Europe listing on 2026-04-29. 3 GNX THQ.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -302,8 +299,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-triple-thq-sem-v-combo/
         region: EU
   - product_name: GNX WWII Throttle
-    description: VKB FSC Europe GNX WWII Throttle. VKB throttle system or throttle quadrant. In
-      stock on VKB FSC Europe listing on 2026-04-29. 1 WWII THQ Grip.
+    description: VKB FSC Europe GNX WWII Throttle. VKB throttle system or throttle quadrant. In stock on
+      VKB FSC Europe listing on 2026-04-29. 1 WWII THQ Grip.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -316,8 +313,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-wwii-throttle/
         region: EU
   - product_name: MongoosT-50CM3 Throttle
-    description: VIRPIL MongoosT-50CM3 Throttle. premium dual HOTAS throttle. Backorder/final
-      batch due May 2026 on VIRPIL US. Aircraft-grade duralumin mechanics.
+    description: VIRPIL MongoosT-50CM3 Throttle. premium dual HOTAS throttle. Backorder/final batch due
+      May 2026 on VIRPIL US. Aircraft-grade duralumin mechanics.
     manufacturer: VIRPIL Controls
     component_category: throttles
     component_sub_category: hotas-throttle
@@ -345,9 +342,9 @@ commercial:
         region: EU
         status: available
   - product_name: STECS Modern Throttle System Mk.II - Standard (US)
-    description: VKB STECS Modern Throttle System Mk.II Standard. modular HOTAS throttle. Sold
-      out on VKBSIM US listing on 2026-04-29. Standard STECS base with sturdy steel
-      baseplate and non-slip rubber pads.
+    description: VKB STECS Modern Throttle System Mk.II Standard. modular HOTAS throttle. Sold out on
+      VKBSIM US listing on 2026-04-29. Standard STECS base with sturdy steel baseplate and non-slip
+      rubber pads.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: hotas-throttle
@@ -365,9 +362,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-mtg-grip-standard/
         region: Unknown
   - product_name: STECS Space Throttle System – Max Left-Handed
-    description: VKB FSC Europe STECS Space Throttle System – Max Left-Handed. VKB throttle
-      system or throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x
-      STECS Left-Hand Base.
+    description: VKB FSC Europe STECS Space Throttle System – Max Left-Handed. VKB throttle system or
+      throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x STECS Left-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -380,9 +376,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-space-throttle-system-max-left-handed/
         region: EU
   - product_name: STECS Space Throttle System – Max Right-Handed
-    description: VKB FSC Europe STECS Space Throttle System – Max Right-Handed. VKB throttle
-      system or throttle quadrant. Out of stock on VKB FSC Europe listing on 2026-04-29. 1x
-      STECS Right-Hand Base.
+    description: VKB FSC Europe STECS Space Throttle System – Max Right-Handed. VKB throttle system or
+      throttle quadrant. Out of stock on VKB FSC Europe listing on 2026-04-29. 1x STECS Right-Hand
+      Base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -395,9 +391,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-space-throttle-system-max-right-handed/
         region: EU
   - product_name: STECS Space Throttle System – Mini Left-Hand
-    description: VKB FSC Europe STECS Space Throttle System – Mini Left-Hand. VKB throttle
-      system or throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x
-      STECS Left-Hand Base -or- 1x STECS Right-Hand Base.
+    description: VKB FSC Europe STECS Space Throttle System – Mini Left-Hand. VKB throttle system or
+      throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x STECS Left-Hand Base
+      -or- 1x STECS Right-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -410,9 +406,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-left-hand/
         region: EU
   - product_name: STECS Space Throttle System – Mini Plus Left-Handed
-    description: VKB FSC Europe STECS Space Throttle System – Mini Plus Left-Handed. VKB
-      throttle system or throttle quadrant. In stock on VKB FSC Europe listing on
-      2026-04-29. 1x STECS Left-Hand Base.
+    description: VKB FSC Europe STECS Space Throttle System – Mini Plus Left-Handed. VKB throttle system
+      or throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x STECS Left-Hand
+      Base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -425,9 +421,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-plus-left-handed/
         region: EU
   - product_name: STECS Space Throttle System – Mini Plus Right-Handed
-    description: VKB FSC Europe STECS Space Throttle System – Mini Plus Right-Handed. VKB
-      throttle system or throttle quadrant. In stock on VKB FSC Europe listing on
-      2026-04-29. 1x STECS Right-Hand Base.
+    description: VKB FSC Europe STECS Space Throttle System – Mini Plus Right-Handed. VKB throttle
+      system or throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x STECS
+      Right-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -440,9 +436,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-plus-right-handed/
         region: EU
   - product_name: STECS Space Throttle System – Mini Right-Hand
-    description: VKB FSC Europe STECS Space Throttle System – Mini Right-Hand. VKB throttle
-      system or throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x
-      STECS Left-Hand Base -or- 1x STECS Right-Hand Base.
+    description: VKB FSC Europe STECS Space Throttle System – Mini Right-Hand. VKB throttle system or
+      throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x STECS Left-Hand Base
+      -or- 1x STECS Right-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -455,9 +451,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-space-throttle-system-mini-right-hand/
         region: EU
   - product_name: STECS Space Throttle System – Standard Left-Hand
-    description: VKB FSC Europe STECS Space Throttle System – Standard Left-Hand. VKB throttle
-      system or throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x
-      STECS Left-Hand Base.
+    description: VKB FSC Europe STECS Space Throttle System – Standard Left-Hand. VKB throttle system or
+      throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x STECS Left-Hand Base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -470,9 +465,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-space-throttle-system-standard-left-hand/
         region: EU
   - product_name: STECS Space Throttle System – Standard Right-Hand
-    description: VKB FSC Europe STECS Space Throttle System – Standard Right-Hand. VKB throttle
-      system or throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x
-      STECS Right-Hand Base.
+    description: VKB FSC Europe STECS Space Throttle System – Standard Right-Hand. VKB throttle system
+      or throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x STECS Right-Hand
+      Base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -485,9 +480,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-space-throttle-system-standard-right-hand/
         region: EU
   - product_name: STECS Throttle System – Max (Mk.I)
-    description: VKB FSC Europe STECS Throttle System – Max (Mk.I). VKB throttle system or
-      throttle quadrant. Only 3 left in stock on VKB FSC Europe listing on 2026-04-29. 1
-      STECS base.
+    description: VKB FSC Europe STECS Throttle System – Max (Mk.I). VKB throttle system or throttle
+      quadrant. Only 3 left in stock on VKB FSC Europe listing on 2026-04-29. 1 STECS base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -500,8 +494,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-throttle-system-max/
         region: EU
   - product_name: STECS Throttle System – Max (Mk.II)
-    description: VKB FSC Europe STECS Throttle System – Max (Mk.II). VKB throttle system or
-      throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x STECS base.
+    description: VKB FSC Europe STECS Throttle System – Max (Mk.II). VKB throttle system or throttle
+      quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1x STECS base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -514,8 +508,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-throttle-system-max-mk-ii/
         region: EU
   - product_name: STECS Throttle System – Mini (Mk.II)
-    description: VKB FSC Europe STECS Throttle System – Mini (Mk.II). VKB throttle system or
-      throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1 STECS base.
+    description: VKB FSC Europe STECS Throttle System – Mini (Mk.II). VKB throttle system or throttle
+      quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1 STECS base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -528,8 +522,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-throttle-system-mini-mk-ii/
         region: EU
   - product_name: STECS Throttle System – Mini Plus (Mk.II)
-    description: VKB FSC Europe STECS Throttle System – Mini Plus (Mk.II). VKB throttle system
-      or throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1 STECS base.
+    description: VKB FSC Europe STECS Throttle System – Mini Plus (Mk.II). VKB throttle system or
+      throttle quadrant. In stock on VKB FSC Europe listing on 2026-04-29. 1 STECS base.
     manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -556,8 +550,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-throttle-system-standard-mk-ii/
         region: EU
   - product_name: StrikeAce E Metal Throttle Grip
-    description: StrikeAce E Metal Throttle Grip. throttle grip. Pre-order listing on EU WINCTRL
-      store. StrikeAce E Metal Throttle Grip x1.
+    description: StrikeAce E Metal Throttle Grip. throttle grip. Pre-order listing on EU WINCTRL store.
+      StrikeAce E Metal Throttle Grip x1.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-grip
@@ -571,8 +565,8 @@ commercial:
         region: EU
         status: available
   - product_name: StrikeAce EX II Metal Throttle Grip
-    description: StrikeAce EX II Metal Throttle Grip. throttle grip. Pre-order listing on EU
-      WINCTRL store. StrikeAce EX II Metal Throttle Grip x1.
+    description: StrikeAce EX II Metal Throttle Grip. throttle grip. Pre-order listing on EU WINCTRL
+      store. StrikeAce EX II Metal Throttle Grip x1.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-grip
@@ -586,9 +580,8 @@ commercial:
         region: EU
         status: available
   - product_name: Super Taurus NavyAce Throttle Combo
-    description: Super Taurus NavyAce Throttle Combo. flight throttle. Suspended on EU WINCTRL
-      store; listed in catalog but not normally purchasable. Super Taurus Throttle Base(PSU
-      Include).
+    description: Super Taurus NavyAce Throttle Combo. flight throttle. Suspended on EU WINCTRL store;
+      listed in catalog but not normally purchasable. Super Taurus Throttle Base(PSU Include).
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: flight-throttle
@@ -602,9 +595,9 @@ commercial:
         region: EU
         status: out-of-stock
   - product_name: Super Taurus NavyAce Throttle Combo(With Mount)
-    description: Super Taurus NavyAce Throttle Combo(With Mount). flight throttle. Suspended on
-      EU WINCTRL store; listed in catalog but not normally purchasable. Super Taurus
-      Throttle Base(PSU Include).
+    description: Super Taurus NavyAce Throttle Combo(With Mount). flight throttle. Suspended on EU
+      WINCTRL store; listed in catalog but not normally purchasable. Super Taurus Throttle Base(PSU
+      Include).
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: flight-throttle
@@ -624,9 +617,9 @@ commercial:
         region: US
         status: out-of-stock
   - product_name: Super Taurus NavyAce Throttle Combo(With Mount/Without PSU)
-    description: Super Taurus NavyAce Throttle Combo(With Mount/Without PSU). flight throttle.
-      Suspended on EU WINCTRL store; listed in catalog but not normally purchasable. Super
-      Taurus Throttle Base(PSU Exclusive).
+    description: Super Taurus NavyAce Throttle Combo(With Mount/Without PSU). flight throttle. Suspended
+      on EU WINCTRL store; listed in catalog but not normally purchasable. Super Taurus Throttle
+      Base(PSU Exclusive).
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: flight-throttle
@@ -646,9 +639,8 @@ commercial:
         region: US
         status: out-of-stock
   - product_name: Super Taurus Throttle Base(PSU Include)
-    description: Super Taurus Throttle Base(PSU Include). throttle base. Suspended on EU WINCTRL
-      store; listed in catalog but not normally purchasable. Super Taurus Throttle Base(PSU
-      Include) x1.
+    description: Super Taurus Throttle Base(PSU Include). throttle base. Suspended on EU WINCTRL store;
+      listed in catalog but not normally purchasable. Super Taurus Throttle Base(PSU Include) x1.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-base
@@ -662,8 +654,8 @@ commercial:
         region: EU
         status: out-of-stock
   - product_name: TCA Quadrant Airbus Edition
-    description: Thrustmaster TCA Quadrant Airbus Edition. airliner throttle quadrant. Active
-      product on Thrustmaster US. Airbus A320neo-inspired dual thrust levers.
+    description: Thrustmaster TCA Quadrant Airbus Edition. airliner throttle quadrant. Active product on
+      Thrustmaster US. Airbus A320neo-inspired dual thrust levers.
     manufacturer: Thrustmaster
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -676,9 +668,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/tca-quadrant-airbus-edition/
         region: US
   - product_name: TQ6+
-    description: Virtual Fly TQ6+. high-end six-lever throttle quadrant. Active related product
-      on Virtual Fly page. Six-lever throttle quadrant [uncertain from related listing
-      only].
+    description: Virtual Fly TQ6+. high-end six-lever throttle quadrant. Active related product on
+      Virtual Fly page. Six-lever throttle quadrant [uncertain from related listing only].
     manufacturer: Virtual Fly
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -691,9 +682,9 @@ commercial:
         url: https://www.virtual-fly.com/shop/controls/tq6-plus
         region: EU
   - product_name: TWCS Throttle
-    description: Thrustmaster TWCS Throttle. sliding HOTAS throttle. Active product; shown out
-      of stock in Thrustmaster US configurator on 2026-04-29. Sliding throttle with multiple
-      axes and buttons.
+    description: Thrustmaster TWCS Throttle. sliding HOTAS throttle. Active product; shown out of stock
+      in Thrustmaster US configurator on 2026-04-29. Sliding throttle with multiple axes and
+      buttons.
     manufacturer: Thrustmaster
     component_category: throttles
     component_sub_category: hotas-throttle
@@ -706,8 +697,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/twcs-throttle/
         region: US
   - product_name: URSA MINOR 32 Throttle Metal / 32 PAC Metal
-    description: URSA MINOR 32 Throttle Metal / 32 PAC Metal. flight throttle. Active EU WINCTRL
-      store listing; total_stock 4 from API. URSA MINOR 32 Throttle Metal.
+    description: URSA MINOR 32 Throttle Metal / 32 PAC Metal. flight throttle. Active EU WINCTRL store
+      listing; total_stock 4 from API. URSA MINOR 32 Throttle Metal.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: flight-throttle
@@ -721,9 +712,9 @@ commercial:
         region: EU
         status: available
   - product_name: VelocityOne Flightdeck
-    description: Turtle Beach VelocityOne Flightdeck. HOTAS throttle and stick system. Active
-      Turtle Beach product listing. HOTAS system with dedicated throttle and stick
-      [uncertain from current official capture].
+    description: Turtle Beach VelocityOne Flightdeck. HOTAS throttle and stick system. Active Turtle
+      Beach product listing. HOTAS system with dedicated throttle and stick [uncertain from current
+      official capture].
     manufacturer: Turtle Beach
     component_category: throttles
     component_sub_category: hotas-throttle
@@ -736,8 +727,8 @@ commercial:
         url: https://www.turtlebeach.com/products/velocity-one-flightdeck
         region: US
   - product_name: Viper TQS
-    description: Thrustmaster Viper TQS. F-16-style combat throttle. Active product on
-      Thrustmaster US. 1:1 scale Viper/F-16 throttle quadrant system replica.
+    description: Thrustmaster Viper TQS. F-16-style combat throttle. Active product on Thrustmaster US.
+      1:1 scale Viper/F-16 throttle quadrant system replica.
     manufacturer: Thrustmaster
     component_category: throttles
     component_sub_category: flight-throttle
@@ -750,8 +741,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/viper-tqs/
         region: US
   - product_name: ViperAce EX Metal Throttle Grip
-    description: ViperAce EX Metal Throttle Grip. throttle grip. Active EU WINCTRL store
-      listing; total_stock 4 from API. ViperAce EX Metal Throttle Grip x1.
+    description: ViperAce EX Metal Throttle Grip. throttle grip. Active EU WINCTRL store listing;
+      total_stock 4 from API. ViperAce EX Metal Throttle Grip x1.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-grip
@@ -765,8 +756,8 @@ commercial:
         region: EU
         status: available
   - product_name: WINCTRL Cyber Taurus Joystick Base E.B.29.Metal
-    description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal. throttle base. Listed on EU
-      WINCTRL store; local stock not available in API response. Primary product image:
+    description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal. throttle base. Listed on EU WINCTRL
+      store; local stock not available in API response. Primary product image:
       https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS."
     manufacturer: WINCTRL
     component_category: throttles
@@ -780,8 +771,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=5885
         region: EU
   - product_name: WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.EU 1.0
-    description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.EU 1.0. throttle base. Listed
-      on EU WINCTRL store; local stock not available in API response. Primary product image:
+    description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.EU 1.0. throttle base. Listed on EU
+      WINCTRL store; local stock not available in API response. Primary product image:
       https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS."
     manufacturer: WINCTRL
     component_category: throttles
@@ -795,8 +786,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=5205
         region: EU
   - product_name: WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.GB 1.0
-    description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.GB 1.0. throttle base. Listed
-      on EU WINCTRL store; local stock not available in API response. Primary product image:
+    description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.GB 1.0. throttle base. Listed on EU
+      WINCTRL store; local stock not available in API response. Primary product image:
       https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS."
     manufacturer: WINCTRL
     component_category: throttles
@@ -811,8 +802,8 @@ commercial:
         region: EU
         status: available
   - product_name: WINCTRL Cyber Taurus Joystick Base E.B.82.Metal
-    description: "WINCTRL Cyber Taurus Joystick Base E.B.82.Metal. throttle base. Listed on EU
-      WINCTRL store; local stock not available in API response. Primary product image:
+    description: "WINCTRL Cyber Taurus Joystick Base E.B.82.Metal. throttle base. Listed on EU WINCTRL
+      store; local stock not available in API response. Primary product image:
       https://eu.winctrl.com/static/ipfs/QmZLcHhuwCWMMHrGXErSveoNPJ4sfLQWiGMPXQFfQzTgc6."
     manufacturer: WINCTRL
     component_category: throttles
@@ -826,8 +817,8 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=5925
         region: EU
   - product_name: WINCTRL Cyber Taurus Joystick Base E.B.82.Metal.EU 1.0
-    description: "WINCTRL Cyber Taurus Joystick Base E.B.82.Metal.EU 1.0. throttle base. Listed
-      on EU WINCTRL store; local stock not available in API response. Primary product image:
+    description: "WINCTRL Cyber Taurus Joystick Base E.B.82.Metal.EU 1.0. throttle base. Listed on EU
+      WINCTRL store; local stock not available in API response. Primary product image:
       https://eu.winctrl.com/static/ipfs/QmZLcHhuwCWMMHrGXErSveoNPJ4sfLQWiGMPXQFfQzTgc6."
     manufacturer: WINCTRL
     component_category: throttles
@@ -841,15 +832,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=5705
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 865.22
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=5725
         region: US
         status: available
   - product_name: WINCTRL Cyber Taurus Joystick Base E.D.16.Metal.EU 1.0
-    description: "WINCTRL Cyber Taurus Joystick Base E.D.16.Metal.EU 1.0. throttle base. Listed
-      on EU WINCTRL store; local stock not available in API response. Primary product image:
+    description: "WINCTRL Cyber Taurus Joystick Base E.D.16.Metal.EU 1.0. throttle base. Listed on EU
+      WINCTRL store; local stock not available in API response. Primary product image:
       https://eu.winctrl.com/static/ipfs/QmVCspiSPcSwXYyrJeQoNsGe4HriV4KPjSMdFqoN6ThPSb."
     manufacturer: WINCTRL
     component_category: throttles
@@ -878,15 +869,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=375
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 260.78
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=375
         region: US
         status: available
   - product_name: WINCTRL Orion2 StrikeAce E / StrikeAce EX Throttle Combo
-    description: WINCTRL Orion2 StrikeAce E / StrikeAce EX Throttle Combo. flight throttle.
-      Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base.
+    description: WINCTRL Orion2 StrikeAce E / StrikeAce EX Throttle Combo. flight throttle. Active EU
+      WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: flight-throttle
@@ -899,7 +890,7 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=385
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 315.45
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=385
@@ -920,16 +911,16 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=334
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 233.55
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=334
         region: US
         status: available
   - product_name: WINCTRL Orion2 Throttle Base 10th Anniversary Limited Version
-    description: WINCTRL Orion2 Throttle Base 10th Anniversary Limited Version. throttle base.
-      Suspended on EU WINCTRL store; listed in catalog but not normally purchasable. WINCTRL
-      Orion2 Throttle Base 10th Anniversary Limited Version  x1.
+    description: WINCTRL Orion2 Throttle Base 10th Anniversary Limited Version. throttle base. Suspended
+      on EU WINCTRL store; listed in catalog but not normally purchasable. WINCTRL Orion2 Throttle
+      Base 10th Anniversary Limited Version  x1.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-base
@@ -942,15 +933,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=466
         region: EU
         status: out-of-stock
-      - name: Ea
+      - name: WINCTRL
         url: https://ea.winctrl.com/view/goods-details.html?id=466
         region: US
         status: out-of-stock
         price: Unknown
         currency: USD
   - product_name: WINCTRL Orion2 ViperAce EX Throttle Combo
-    description: WINCTRL Orion2 ViperAce EX Throttle Combo. flight throttle. Active EU WINCTRL
-      store listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base.
+    description: WINCTRL Orion2 ViperAce EX Throttle Combo. flight throttle. Active EU WINCTRL store
+      listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: flight-throttle
@@ -963,15 +954,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=342
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 365.4
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=342
         region: US
         status: available
   - product_name: WINCTRL URSA MINOR 32 Throttle Metal
-    description: WINCTRL URSA MINOR 32 Throttle Metal. flight throttle. Active EU WINCTRL store
-      listing; total_stock 4 from API. WINCTRL URSA MINOR 32 Throttle Metal.
+    description: WINCTRL URSA MINOR 32 Throttle Metal. flight throttle. Active EU WINCTRL store listing;
+      total_stock 4 from API. WINCTRL URSA MINOR 32 Throttle Metal.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: flight-throttle
@@ -984,16 +975,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=1385
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 145.1
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=1385
         region: US
         status: available
   - product_name: HOTAS Warthog Dual Throttle
-    description: Thrustmaster HOTAS Warthog Dual Throttle. dual-engine combat throttle. in stock
-      on official US shop. Metal A-10C-inspired dual throttle controller for flight
-      simulation.
+    description: Thrustmaster HOTAS Warthog Dual Throttle. dual-engine combat throttle. in stock on
+      official US shop. Metal A-10C-inspired dual throttle controller for flight simulation.
     manufacturer: Thrustmaster
     component_category: throttles
     component_sub_category: hotas-throttle
@@ -1006,8 +996,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/hotas-warthog-dual-throttle/
         region: US
   - product_name: Sol-R 6 Throttle
-    description: Thrustmaster Sol-R 6 Throttle. space-sim throttle. in stock on official US
-      shop. Modular throttle for the Sol-R space-sim control ecosystem.
+    description: Thrustmaster Sol-R 6 Throttle. space-sim throttle. in stock on official US shop.
+      Modular throttle for the Sol-R space-sim control ecosystem.
     manufacturer: Thrustmaster
     component_category: throttles
     component_sub_category: hotas-throttle
@@ -1020,9 +1010,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/sol-r-6-throttle/
         region: US
   - product_name: TCA Quadrant Boeing Edition
-    description: Thrustmaster TCA Quadrant Boeing Edition. Boeing-style throttle quadrant. in
-      stock on official US shop. Civil aviation throttle quadrant for Boeing airliner
-      simulation.
+    description: Thrustmaster TCA Quadrant Boeing Edition. Boeing-style throttle quadrant. in stock on
+      official US shop. Civil aviation throttle quadrant for Boeing airliner simulation.
     manufacturer: Thrustmaster
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -1035,9 +1024,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/tca-quadrant-boeing-edition/
         region: US
   - product_name: TCA Quadrant Add-On Airbus Edition
-    description: Thrustmaster TCA Quadrant Add-On Airbus Edition. Airbus-style throttle quadrant
-      add-on. in stock on official US shop. Add-on quadrant for Airbus airliner simulation
-      controls.
+    description: Thrustmaster TCA Quadrant Add-On Airbus Edition. Airbus-style throttle quadrant add-on.
+      in stock on official US shop. Add-on quadrant for Airbus airliner simulation controls.
     manufacturer: Thrustmaster
     component_category: throttles
     component_sub_category: throttle-quadrant
@@ -1050,16 +1038,16 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/tca-quadrant-add-on-airbus-edition/
         region: US
   - product_name: MTQ Throttle Quadrant
-    description: MOZA MTQ Throttle Quadrant. control panel. listed on Eu. The MOZA MTQ Throttle
-      Quadrant delivers modular versatility with interchangeable Boeing, Airbus, and
-      fighter-jet style levers. Featuring quad-axis precision, realistic detents,...
+    description: MOZA MTQ Throttle Quadrant. control panel. listed on Eu. The MOZA MTQ Throttle Quadrant
+      delivers modular versatility with interchangeable Boeing, Airbus, and fighter-jet style
+      levers. Featuring quad-axis precision, realistic detents,...
     manufacturer: MOZA
     component_category: throttles
     component_sub_category: throttle-quadrant
     product_url: https://eu.mozaracing.com/products/mtq-throttle
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZAMTQ-1_af06d2c7-2bce-479e-92b0-6e6fc9d07172.png?v=1767606253
     shops:
-      - name: Eu
+      - name: MOZA
         price: 219
         currency: USD
         url: https://eu.mozaracing.com/products/mtq-throttle
@@ -1068,8 +1056,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Gemini Chair Mount
-    description: Gemini Chair Mount. flight-control mounts and accessories. Listed on EU WINCTRL
-      store with placeholder price/out-of-stock behavior [uncertain]. Gemini Chair Mount.
+    description: Gemini Chair Mount. flight-control mounts and accessories. Listed on EU WINCTRL store
+      with placeholder price/out-of-stock behavior [uncertain]. Gemini Chair Mount.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-mount
@@ -1109,15 +1097,15 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Throttle Desk Mount5 with Profile Bar 1
-    description: Ea Throttle Desk Mount5 with Profile Bar 1. rig mounts. listed on Ea. Throttle
+    description: WINCTRL Throttle Desk Mount5 with Profile Bar 1. rig mounts. listed on Ea. Throttle
       Desk Mount5 with Profile Bar 1.
-    manufacturer: Ea
+    manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-mount
     product_url: https://ea.winctrl.com/view/goods-details.html?id=1225
     picture_url: https://ea.winctrl.com/static/ipfs/QmfXaWbFjki79uwaAiyFGAivfNmaBF95kjkJzmBT417o7j
     shops:
-      - name: Ea
+      - name: WINCTRL
         price: 39.69
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=1225
@@ -1126,15 +1114,14 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: NavyAce Metal Throttle Grip
-    description: Ea NavyAce Metal Throttle Grip. rig mounts. listed on Ea. NavyAce Metal
-      Throttle Grip x1.
-    manufacturer: Ea
+    description: WINCTRL NavyAce Metal Throttle Grip. rig mounts. listed on Ea. NavyAce Metal Throttle Grip x1.
+    manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-grip
     product_url: https://ea.winctrl.com/view/goods-details.html?id=306
     picture_url: https://ea.winctrl.com/static/ipfs/QmcqEEabLkziz7C5icbwVRdQQxiiDC3VTN1k4LiwgMQJjk
     shops:
-      - name: Ea
+      - name: WINCTRL
         price: 155.3
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=306
@@ -1143,15 +1130,15 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: StrikeAce E Metal Throttle Grip
-    description: Ea StrikeAce E Metal Throttle Grip. rig mounts. listed on Ea. StrikeAce E Metal
+    description: WINCTRL StrikeAce E Metal Throttle Grip. rig mounts. listed on Ea. StrikeAce E Metal
       Throttle Grip x1.
-    manufacturer: Ea
+    manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-grip
     product_url: https://ea.winctrl.com/view/goods-details.html?id=476
     picture_url: https://ea.winctrl.com/static/ipfs/QmYineDfhhYqaSqi3yiF8LFryZydZTtGwWAGFhAp1vJtDg
     shops:
-      - name: Ea
+      - name: WINCTRL
         price: 155.3
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=476
@@ -1160,15 +1147,15 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: StrikeAce EX II Metal Throttle Grip
-    description: Ea StrikeAce EX II Metal Throttle Grip. rig mounts. listed on Ea. StrikeAce EX
-      II Metal Throttle Grip x1.
-    manufacturer: Ea
+    description: WINCTRL StrikeAce EX II Metal Throttle Grip. rig mounts. listed on Ea. StrikeAce EX II
+      Metal Throttle Grip x1.
+    manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-grip
     product_url: https://ea.winctrl.com/view/goods-details.html?id=471
     picture_url: https://ea.winctrl.com/static/ipfs/QmQYEJKNSVeeVUB52nzK3htknFXrzDq7HQVtZCqCAdN2vm
     shops:
-      - name: Ea
+      - name: WINCTRL
         price: 188.19
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=471
@@ -1177,15 +1164,15 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: MINOR 32 Throttle Metal / 32 PAC Metal
-    description: URSA MINOR 32 Throttle Metal / 32 PAC Metal. rig mounts. listed on Ea. URSA
-      MINOR 32 Throttle Metal / 32 PAC Metal.
-    manufacturer: URSA
+    description: WINCTRL MINOR 32 Throttle Metal / 32 PAC Metal. rig mounts. listed on Ea. URSA MINOR 32
+      Throttle Metal / 32 PAC Metal.
+    manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-grip
     product_url: https://ea.winctrl.com/view/goods-details.html?id=1665
     picture_url: https://ea.winctrl.com/static/ipfs/QmUBdY4WU8iYkvCrGPnaAXd5jy5FFQ5AYvvgzrVYoJ6AGJ
     shops:
-      - name: Ea
+      - name: WINCTRL
         price: 267.52
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=1665
@@ -1194,15 +1181,15 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: ViperAce EX Metal Throttle Grip
-    description: Ea ViperAce EX Metal Throttle Grip. rig mounts. listed on Ea. ViperAce EX Metal
+    description: WINCTRL ViperAce EX Metal Throttle Grip. rig mounts. listed on Ea. ViperAce EX Metal
       Throttle Grip x1.
-    manufacturer: Ea
+    manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-grip
     product_url: https://ea.winctrl.com/view/goods-details.html?id=339
     picture_url: https://ea.winctrl.com/static/ipfs/QmQbZURKosh89qWSrpAVTeBocFdiKTfVJ4TVsoP35zq8FV
     shops:
-      - name: Ea
+      - name: WINCTRL
         price: 268.7
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=339
@@ -1211,9 +1198,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Space Throttle Add-On Grip (STG) Left-Hand
-    description: STECS Space Throttle Add-On Grip (STG) Left-Hand. rig mounts. listed on
+    description: VKB-Sim Space Throttle Add-On Grip (STG) Left-Hand. rig mounts. listed on
       Flightsimcontrols. Official shop listing.
-    manufacturer: STECS
+    manufacturer: VKB-Sim
     component_category: throttles
     component_sub_category: throttle-grip
     product_url: https://flightsimcontrols.com/product/stecs-space-throttle-add-on-grip-stg-left-hand/
@@ -1227,9 +1214,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Finger Lift for Gemini Only
-    description: Finger Lift for Gemini Only. flight-control mounts and accessories. Listed on
-      EU WINCTRL store; local stock not available in API response. Finger Lift for Gemini
-      Only.
+    description: Finger Lift for Gemini Only. flight-control mounts and accessories. Listed on EU
+      WINCTRL store; local stock not available in API response. Finger Lift for Gemini Only.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-accessories
@@ -1243,7 +1229,7 @@ commercial:
         region: EU
         status: available
         last_updated: 2026-05-01
-      - name: Ea
+      - name: WINCTRL
         price: 56.65
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=346
@@ -1252,9 +1238,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Super Taurus ViperAce Adapter
-    description: Super Taurus ViperAce Adapter. flight-control mounts and accessories. Listed on
-      EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super
-      Taurus ViperAce Adapter.
+    description: Super Taurus ViperAce Adapter. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Taurus ViperAce
+      Adapter.
     manufacturer: WINCTRL
     component_category: throttles
     component_sub_category: throttle-accessories
@@ -1270,16 +1256,16 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: TQA Throttle Module
-    description: MOZA TQA Throttle Module. rig mounts. listed on Eu. The MOZA TQA Airbus-style
-      throttle module recreates the distinctive detent structure and reverse thrust behavior
-      of the A3X series. With clearly defined tactile detents and auth...
+    description: MOZA TQA Throttle Module. rig mounts. listed on Eu. The MOZA TQA Airbus-style throttle
+      module recreates the distinctive detent structure and reverse thrust behavior of the A3X
+      series. With clearly defined tactile detents and auth...
     manufacturer: MOZA
     component_category: throttles
     component_sub_category: throttle-module
     product_url: https://eu.mozaracing.com/products/tqa-mod
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZATQAThrottleModule-1.png?v=1761114968
     shops:
-      - name: Eu
+      - name: MOZA
         price: 45
         currency: USD
         url: https://eu.mozaracing.com/products/tqa-mod
@@ -1288,16 +1274,16 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: TQB Throttle Module
-    description: MOZA TQB Throttle Module. rig mounts. listed on Eu. The MOZA TQB Boeing-style
-      throttle module offers extended forward travel, a lift-to-arm reverse thrust lever,
-      and a TO/GA button for authentic takeoff and go-around procedures....
+    description: MOZA TQB Throttle Module. rig mounts. listed on Eu. The MOZA TQB Boeing-style throttle
+      module offers extended forward travel, a lift-to-arm reverse thrust lever, and a TO/GA button
+      for authentic takeoff and go-around procedures....
     manufacturer: MOZA
     component_category: throttles
     component_sub_category: throttle-module
     product_url: https://eu.mozaracing.com/products/tqb-mod
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZATQBThrottleModule-1.png?v=1761114969
     shops:
-      - name: Eu
+      - name: MOZA
         price: 45
         currency: USD
         url: https://eu.mozaracing.com/products/tqb-mod
@@ -1307,15 +1293,17 @@ commercial:
     last_updated: 2026-05-01
 opensource:
   - project_name: AuthentiKit Spitfire MkIX
-    description: "AuthentiKit Spitfire MkIX. self-build replica Spitfire MkIX flight controls.
-      Active community/hybrid project. Spitfire MkIX controls released 2020-12-05;
-      AuthentiKit reports 30,000+ downloads since December 2020. Replica Spitfire MkIX
-      control ecosystem: spade grip flight stick, throttle quadrant, trim/rudder-bias
-      wheels, flaps lever, gear lever, gunsight, and rudder pedals."
-    maker: AuthentiKit community / AuthentiKit.org
+    description: "AuthentiKit Spitfire MkIX. self-build replica Spitfire MkIX flight controls. Active
+      community/hybrid project. Spitfire MkIX controls released 2020-12-05; AuthentiKit reports
+      30,000+ downloads since December 2020. Replica Spitfire MkIX control ecosystem: spade grip
+      flight stick, throttle quadrant, trim/rudder-bias wheels, flaps lever, gear lever, gunsight,
+      and rudder pedals."
+    maker:
+      - AuthentiKit community
+      - AuthentiKit.org
     component_category: throttles
     component_sub_category: throttle-controls
-    license: Freeware/community free-download model; specific open-source/open-hardware license
-      not found [uncertain].
+    license: Freeware/community free-download model; specific open-source/open-hardware license not
+      found [uncertain].
     project_url: N/A
     picture_url: https://authentikit.org/atk/wp-content/uploads/2020/10/spitfire-mkix-cockpit.jpg

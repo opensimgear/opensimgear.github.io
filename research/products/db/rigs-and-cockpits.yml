@@ -1,8 +1,8 @@
 commercial:
   - product_name: SS15 Racing Cockpit with Seat
-    description: CAMMUS SS15 Racing Cockpit with Seat. aluminum-profile cockpit. available by
-      official quote flow. 1300 x 600 x 1100 mm 4080L-profile rig with adjustable seat,
-      wheel, and pedal positions for C5, C12, WB15, CP5, and LC100 hardware.
+    description: CAMMUS SS15 Racing Cockpit with Seat. aluminum-profile cockpit. available by official
+      quote flow. 1300 x 600 x 1100 mm 4080L-profile rig with adjustable seat, wheel, and pedal
+      positions for C5, C12, WB15, CP5, and LC100 hardware.
     manufacturer: CAMMUS
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -16,8 +16,8 @@ commercial:
         region: Global
         status: available
   - product_name: ASR 1 Chassis
-    description: Advanced SimRacing ASR 1. entry aluminum profile cockpit. current. Generation 2
-      profile chassis with 1.5 x 1.5 in base.
+    description: Advanced SimRacing ASR 1. entry aluminum profile cockpit. current. Generation 2 profile
+      chassis with 1.5 x 1.5 in base.
     manufacturer: Advanced SimRacing
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -30,9 +30,9 @@ commercial:
         url: https://www.advancedsimracing.com/products/asr-1
         region: Canada
   - product_name: ASR 4 Chassis Open Face
-    description: Advanced SimRacing ASR 4. high-end aluminum profile cockpit. current; EVO wheel
-      deck variants on back order during check. 4.5 x 1.5 in aluminum base and reinforced
-      steering column.
+    description: Advanced SimRacing ASR 4. high-end aluminum profile cockpit. current; EVO wheel deck
+      variants on back order during check. 4.5 x 1.5 in aluminum base and reinforced steering
+      column.
     manufacturer: Advanced SimRacing
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -45,9 +45,9 @@ commercial:
         url: https://www.advancedsimracing.com/products/asr-4-open-face
         region: US
   - product_name: ASR Pro Chassis Generation 2
-    description: Advanced SimRacing ASR Pro. professional aluminum profile cockpit. current;
-      back order alert showed week of 2026-05-11 during check. Generation 2 flat-face
-      aluminum profile with reinforced 6 in base.
+    description: Advanced SimRacing ASR Pro. professional aluminum profile cockpit. current; back order
+      alert showed week of 2026-05-11 during check. Generation 2 flat-face aluminum profile with
+      reinforced 6 in base.
     manufacturer: Advanced SimRacing
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -60,8 +60,8 @@ commercial:
         url: https://www.advancedsimracing.com/products/asr-pro
         region: Canada
   - product_name: ClubSport GT Cockpit
-    description: Fanatec ClubSport GT Cockpit. adjustable sim racing cockpit. in stock on
-      official EU catalog. Hybrid cockpit frame with black and white color options.
+    description: Fanatec ClubSport GT Cockpit. adjustable sim racing cockpit. in stock on official EU
+      catalog. Hybrid cockpit frame with black and white color options.
     manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
@@ -74,9 +74,9 @@ commercial:
         url: https://www.fanatec.com/eu/en/p/cockpits/cs_gt_c_blk/clubsport-gt-cockpit-black
         region: EU
   - product_name: CSL Cockpit V1.5
-    description: Fanatec CSL Cockpit V1.5. entry aluminum and steel cockpit. in stock on
-      official EU catalog. Compact frame optimized for low flex and support for Fanatec and
-      third-party hardware.
+    description: Fanatec CSL Cockpit V1.5. entry aluminum and steel cockpit. in stock on official EU
+      catalog. Compact frame optimized for low flex and support for Fanatec and third-party
+      hardware.
     manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
@@ -90,8 +90,8 @@ commercial:
         region: EU
         status: available
   - product_name: Collective Extension
-    description: Collective Extension. flight-control mounts and accessories. Suspended on EU
-      WINCTRL store; listed in catalog but not normally purchasable. Collective Extension.
+    description: Collective Extension. flight-control mounts and accessories. Suspended on EU WINCTRL
+      store; listed in catalog but not normally purchasable. Collective Extension.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -105,8 +105,8 @@ commercial:
         region: EU
         status: out-of-stock
   - product_name: EXPED
-    description: EXPED. flight-control mounts and accessories. Listed on EU WINCTRL store; local
-      stock not available in API response. EXPED.
+    description: EXPED. flight-control mounts and accessories. Listed on EU WINCTRL store; local stock
+      not available in API response. EXPED.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -119,16 +119,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=825
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 1.13
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=825
         region: US
         status: available
   - product_name: Finger Lift for WINCTRL Orion1 Only
-    description: Finger Lift for WINCTRL Orion1 Only. flight-control mounts and accessories.
-      Active EU WINCTRL store listing; total_stock 4 from API. Finger Lift for WINCTRL
-      Orion1 Only.
+    description: Finger Lift for WINCTRL Orion1 Only. flight-control mounts and accessories. Active EU
+      WINCTRL store listing; total_stock 4 from API. Finger Lift for WINCTRL Orion1 Only.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -141,15 +140,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=345
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 56.65
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=345
         region: US
         status: available
   - product_name: Finger Lift for WINCTRL Orion2 Only
-    description: Finger Lift for WINCTRL Orion2 Only. flight-control mounts and accessories.
-      Pre-order listing on EU WINCTRL store. Finger Lift for WINCTRL Orion2 Only x1.
+    description: Finger Lift for WINCTRL Orion2 Only. flight-control mounts and accessories. Pre-order
+      listing on EU WINCTRL store. Finger Lift for WINCTRL Orion2 Only x1.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -162,15 +161,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=347
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 56.65
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=347
         region: US
         status: available
   - product_name: Formula Intelligence
-    description: Playseat Formula Intelligence. formula-style cockpit. current. Formula seating
-      posture with ForceLock adjustment system.
+    description: Playseat Formula Intelligence. formula-style cockpit. current. Formula seating posture
+      with ForceLock adjustment system.
     manufacturer: Playseat
     component_category: rigs-and-cockpits
     component_sub_category: formula-cockpit
@@ -183,10 +182,10 @@ commercial:
         url: https://www.playseat.com/products/playseat-formula-intelligence-black
         region: Global
   - product_name: GT1 Evo Simracing Cockpit
-    description: Sim-Lab GT1 Evo Sim Racing Cockpit. aluminum profile cockpit. in stock on
-      official EU shop. Rigid profile cockpit with sturdy pedal plate, accessory side mount,
-      and direct-drive upgrade options.
-    manufacturer: Sim-Lab
+    description: Sim Lab GT1 Evo Sim Racing Cockpit. aluminum profile cockpit. in stock on official EU
+      shop. Rigid profile cockpit with sturdy pedal plate, accessory side mount, and direct-drive
+      upgrade options.
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
     product_url: https://sim-lab.eu/en-de/products/gt1-evo-sim-racing-cockpit
@@ -198,8 +197,8 @@ commercial:
         url: https://sim-lab.eu/en-de/products/gt1-evo-sim-racing-cockpit
         region: EU
   - product_name: MAG Switch1 TS
-    description: MAG Switch1 TS. flight-control mounts and accessories. Active EU WINCTRL store
-      listing; total_stock 4 from API. MAG Switch1 TS.
+    description: MAG Switch1 TS. flight-control mounts and accessories. Active EU WINCTRL store listing;
+      total_stock 4 from API. MAG Switch1 TS.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -212,17 +211,19 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=1105
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 56.65
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=1105
         region: US
         status: available
   - product_name: MTS Base Frame
-    description: MONSTERTECH MTS Base Frame. modular flight/racing cockpit. in stock on official
-      EU store. Base module for a complete MTS cockpit, expandable with flight, racing, and
-      office modules.
-    manufacturer: MONSTERTECH / MTSIM
+    description: MONSTERTECH MTS Base Frame. modular flight/racing cockpit. in stock on official EU
+      store. Base module for a complete MTS cockpit, expandable with flight, racing, and office
+      modules.
+    manufacturer:
+      - MONSTERTECH
+      - MTSIM
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
     product_url: https://www.monster.tech/en/product/mts-base-frame/
@@ -234,9 +235,11 @@ commercial:
         url: https://www.monster.tech/en/product/mts-base-frame/
         region: EU
   - product_name: Sim Stand Frame
-    description: MONSTERTECH Sim Stand Frame. modular simulator stand frame. in stock on
-      official EU store. Base frame module for the Sim Stand ecosystem.
-    manufacturer: MONSTERTECH / MTSIM
+    description: MONSTERTECH Sim Stand Frame. modular simulator stand frame. in stock on official EU
+      store. Base frame module for the Sim Stand ecosystem.
+    manufacturer:
+      - MONSTERTECH
+      - MTSIM
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://www.monster.tech/en/product/sim-stand-frame/
@@ -248,10 +251,9 @@ commercial:
         url: https://www.monster.tech/en/product/sim-stand-frame/
         region: EU
   - product_name: P1X Pro Sim Racing Cockpit
-    description: Sim-Lab P1X Pro Sim Racing Cockpit. high-end aluminum profile cockpit. in stock
-      on official EU shop. Modular rigid chassis for direct drive wheels and load-cell
-      pedals.
-    manufacturer: Sim-Lab
+    description: Sim Lab P1X Pro Sim Racing Cockpit. high-end aluminum profile cockpit. in stock on
+      official EU shop. Modular rigid chassis for direct drive wheels and load-cell pedals.
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
     product_url: https://sim-lab.eu/en-de/products/p1x-pro-sim-racing-cockpit
@@ -263,10 +265,10 @@ commercial:
         url: https://sim-lab.eu/en-de/products/p1x-pro-sim-racing-cockpit
         region: EU
   - product_name: P1X Ultimate Simracing Cockpit
-    description: Sim-Lab P1X Ultimate Simracing Cockpit. flagship aluminum profile cockpit. in
-      stock on official EU shop. Latest P1 cockpit with slotted profiles, straight uprights,
-      and modular assembly.
-    manufacturer: Sim-Lab
+    description: Sim Lab P1X Ultimate Simracing Cockpit. flagship aluminum profile cockpit. in stock on
+      official EU shop. Latest P1 cockpit with slotted profiles, straight uprights, and modular
+      assembly.
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
     product_url: https://sim-lab.eu/en-de/products/p1x-ultimate-simracing-cockpit
@@ -279,9 +281,11 @@ commercial:
         region: EU
   - product_name: Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit
     description: Sim-Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit. licensed
-      formula-position cockpit. in stock on official EU shop. Rigid formula cockpit with
-      front, side, and wheeldeck mounts included.
-    manufacturer: Sim-Lab / Mercedes-AMG PETRONAS
+      formula-position cockpit. in stock on official EU shop. Rigid formula cockpit with front,
+      side, and wheeldeck mounts included.
+    manufacturer:
+      - Sim Lab
+      - Mercedes-AMG PETRONAS
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://sim-lab.eu/en-de/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit
@@ -293,8 +297,8 @@ commercial:
         url: https://sim-lab.eu/en-de/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit
         region: EU
   - product_name: Panel Mount1
-    description: Panel Mount1. flight-control mounts and accessories. Pre-order listing on EU
-      WINCTRL store. Panel Mount1.
+    description: Panel Mount1. flight-control mounts and accessories. Pre-order listing on EU WINCTRL
+      store. Panel Mount1.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -307,15 +311,15 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=645
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 32.78
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=645
         region: US
         status: available
   - product_name: Panel Mount1(x3)
-    description: Panel Mount1(x3). flight-control mounts and accessories. Active EU WINCTRL
-      store listing; total_stock 4 from API. Panel Mount1x3.
+    description: Panel Mount1(x3). flight-control mounts and accessories. Active EU WINCTRL store
+      listing; total_stock 4 from API. Panel Mount1x3.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -328,16 +332,18 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=665
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 81.31
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=665
         region: US
         status: available
   - product_name: Playseat Challenge X Logitech G Edition
-    description: Playseat Challenge X Logitech G Edition. foldable cockpit. current. Foldable
-      cockpit with carbon steel frame and ActiFit fabric.
-    manufacturer: Playseat / Logitech G
+    description: Playseat Challenge X Logitech G Edition. foldable cockpit. current. Foldable cockpit
+      with carbon steel frame and ActiFit fabric.
+    manufacturer:
+      - Playseat
+      - Logitech G
     component_category: rigs-and-cockpits
     component_sub_category: portable-cockpit
     product_url: https://www.logitechg.com/en-us/products/gaming-furniture/playseat-challenge-x-sim-racing-seat.html
@@ -349,8 +355,8 @@ commercial:
         url: https://www.logitechg.com/en-us/products/gaming-furniture/playseat-challenge-x-sim-racing-seat.html
         region: US
   - product_name: Playseat Trophy
-    description: Playseat Trophy. lightweight tubular cockpit. current. Frameless
-      body-conforming seat on high-carbon steel frame.
+    description: Playseat Trophy. lightweight tubular cockpit. current. Frameless body-conforming seat
+      on high-carbon steel frame.
     manufacturer: Playseat
     component_category: rigs-and-cockpits
     component_sub_category: portable-cockpit
@@ -364,8 +370,7 @@ commercial:
         region: Global
   - product_name: PRIME Cockpit
     description: GT Omega PRIME Cockpit. aluminum profile cockpit. in stock on official UK shop.
-      Heavy-duty 160x40 aluminum-profile frame for direct drive wheelbases and high-end
-      pedals.
+      Heavy-duty 160x40 aluminum-profile frame for direct drive wheelbases and high-end pedals.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -378,9 +383,8 @@ commercial:
         url: https://www.gtomega.co.uk/products/prime-cockpit
         region: UK
   - product_name: PRIME Lite Cockpit
-    description: GT Omega PRIME Lite Cockpit. aluminum profile cockpit. in stock on official UK
-      shop. Compact 8040 aluminum-profile sim racing cockpit compatible with the PRIME
-      range.
+    description: GT Omega PRIME Lite Cockpit. aluminum profile cockpit. in stock on official UK shop.
+      Compact 8040 aluminum-profile sim racing cockpit compatible with the PRIME range.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -393,8 +397,8 @@ commercial:
         url: https://www.gtomega.co.uk/products/prime-lite-cockpit
         region: UK
   - product_name: PRIME Lite-R Cockpit
-    description: GT Omega PRIME Lite-R Cockpit. entry aluminum profile cockpit. currently out of
-      stock on official UK shop. Streamlined ultra-light PRIME cockpit focused on stability,
+    description: GT Omega PRIME Lite-R Cockpit. entry aluminum profile cockpit. currently out of stock
+      on official UK shop. Streamlined ultra-light PRIME cockpit focused on stability,
       adjustability, and compact size.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
@@ -408,9 +412,8 @@ commercial:
         url: https://www.gtomega.co.uk/products/prime-lite-r
         region: UK
   - product_name: ART Cockpit
-    description: GT Omega ART Cockpit. steel racing cockpit. in stock on official UK shop.
-      Adjustable wheel platform, pedal platform, gear mount, frame length, and seat
-      position.
+    description: GT Omega ART Cockpit. steel racing cockpit. in stock on official UK shop. Adjustable
+      wheel platform, pedal platform, gear mount, frame length, and seat position.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -423,8 +426,8 @@ commercial:
         url: https://www.gtomega.co.uk/products/art-racing-cockpit
         region: UK
   - product_name: TITAN Cockpit
-    description: GT Omega TITAN Cockpit. steel tube racing cockpit. in stock on official UK
-      shop. 2 in diameter steel tube frame with adjustable wheel and pedal plates.
+    description: GT Omega TITAN Cockpit. steel tube racing cockpit. in stock on official UK shop. 2 in
+      diameter steel tube frame with adjustable wheel and pedal plates.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -437,9 +440,9 @@ commercial:
         url: https://www.gtomega.co.uk/products/titan-cockpit
         region: UK
   - product_name: HYBRID Cockpit
-    description: GT Omega HYBRID Cockpit. adjustable GT/formula racing cockpit. in stock on
-      official UK shop. Supports transitions between hybrid and GT racing positions with
-      PRIME pedal tray and seat adjustment system.
+    description: GT Omega HYBRID Cockpit. adjustable GT/formula racing cockpit. in stock on official UK
+      shop. Supports transitions between hybrid and GT racing positions with PRIME pedal tray and
+      seat adjustment system.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -452,8 +455,8 @@ commercial:
         url: https://www.gtomega.co.uk/products/hybrid-cockpit
         region: UK
   - product_name: DD-X Wheel Stand
-    description: GT Omega DD-X Wheel Stand. direct-drive wheel stand. in stock on official UK
-      shop. Fixed Y-frame wheel stand engineered for forces up to 21 Nm.
+    description: GT Omega DD-X Wheel Stand. direct-drive wheel stand. in stock on official UK shop.
+      Fixed Y-frame wheel stand engineered for forces up to 21 Nm.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
     component_sub_category: wheel-stand
@@ -494,8 +497,8 @@ commercial:
         url: https://www.gtomega.co.uk/products/apex-steering-wheel-stand
         region: UK
   - product_name: r3volution cockpit
-    description: Obutto r3volution. hybrid workstation/flight/racing cockpit. out of stock on
-      official product page. Steel tube cockpit with reclinable sports seat.
+    description: Obutto r3volution. hybrid workstation/flight/racing cockpit. out of stock on official
+      product page. Steel tube cockpit with reclinable sports seat.
     manufacturer: Obutto
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -508,9 +511,8 @@ commercial:
         url: https://obutto.com/product/r3volution-cockpit/
         region: Unknown
   - product_name: Super Libra Desk Plate
-    description: Super Libra Desk Plate. flight-control mounts and accessories. Listed on EU
-      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Libra
-      Desk Plate.
+    description: Super Libra Desk Plate. flight-control mounts and accessories. Listed on EU WINCTRL
+      store with placeholder price/out-of-stock behavior [uncertain]. Super Libra Desk Plate.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -524,8 +526,8 @@ commercial:
         region: EU
         status: out-of-stock
   - product_name: TR80S Racing Simulator
-    description: Trak Racer TR80S. aluminum profile cockpit. current on official US shop.
-      Formula and GT hybrid pedal plate with side-mounted wheel uprights.
+    description: Trak Racer TR80S. aluminum profile cockpit. current on official US shop. Formula and GT
+      hybrid pedal plate with side-mounted wheel uprights.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -537,15 +539,15 @@ commercial:
         currency: USD
         url: https://trakracer.com/products/tr80s-racing-simulator
         region: US
-      - name: Trakracer
+      - name: Trak Racer
         price: 449
         currency: USD
         url: https://trakracer.eu/products/tr80s-racing-simulator
         region: EU
         status: available
   - product_name: ViperAce EX Shaker Kit
-    description: ViperAce EX Shaker Kit. flight-control mounts and accessories. Active EU
-      WINCTRL store listing; total_stock 4 from API. ViperAce EX Shake Kits.
+    description: ViperAce EX Shaker Kit. flight-control mounts and accessories. Active EU WINCTRL store
+      listing; total_stock 4 from API. ViperAce EX Shake Kits.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -558,7 +560,7 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=372
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 56.65
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=372
@@ -566,8 +568,8 @@ commercial:
         status: available
   - product_name: Volair Sim Flight and Racing Simulation Cockpit Chassis
     description: Volair Sim VS-01. universal flight/racing cockpit. current site active; chassis
-      purchase listing not captured in shop [uncertain]. Universal flight/racing steel
-      chassis with real racing-style seat.
+      purchase listing not captured in shop [uncertain]. Universal flight/racing steel chassis with
+      real racing-style seat.
     manufacturer: Volair Sim
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -580,8 +582,8 @@ commercial:
         url: https://volairsim.com/
         region: US
   - product_name: Wheel Stand 2.0
-    description: Next Level Racing Wheel Stand 2.0. wheel stand. in stock on official store.
-      Foldable steel wheel stand with adjustable wheel and pedal plates.
+    description: Next Level Racing Wheel Stand 2.0. wheel stand. in stock on official store. Foldable
+      steel wheel stand with adjustable wheel and pedal plates.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: wheel-stand
@@ -594,8 +596,8 @@ commercial:
         url: https://nextlevelracing.com/product/wheel-stand/
         region: US
   - product_name: Wheel Stand Lite 2.0
-    description: Next Level Racing Wheel Stand Lite 2.0. compact wheel stand. in stock on
-      official store. Foldable entry wheel stand for compact racing setups.
+    description: Next Level Racing Wheel Stand Lite 2.0. compact wheel stand. in stock on official
+      store. Foldable entry wheel stand for compact racing setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: wheel-stand
@@ -608,8 +610,8 @@ commercial:
         url: https://nextlevelracing.com/product/wheel-stand-lite-2-0/
         region: US
   - product_name: Wheel Stand Racer
-    description: Next Level Racing Wheel Stand Racer. entry wheel stand. in stock on official
-      store. Compact wheel and pedal stand for racing simulator setups.
+    description: Next Level Racing Wheel Stand Racer. entry wheel stand. in stock on official store.
+      Compact wheel and pedal stand for racing simulator setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: wheel-stand
@@ -622,8 +624,8 @@ commercial:
         url: https://nextlevelracing.com/product/next-level-racing-wheel-stand-racer/
         region: US
   - product_name: F-GT Pro Formula and GT Racing Simulator Cockpit
-    description: Next Level Racing F-GT Pro. formula and GT racing simulator cockpit. in stock
-      on official store. Round-tube cockpit with Formula and GT driving-position support.
+    description: Next Level Racing F-GT Pro. formula and GT racing simulator cockpit. in stock on
+      official store. Round-tube cockpit with Formula and GT driving-position support.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -636,8 +638,8 @@ commercial:
         url: https://nextlevelracing.com/product/f-gt-pro/
         region: US
   - product_name: GTRacer 2.0
-    description: Next Level Racing GTRacer 2.0. GT racing simulator cockpit. in stock on
-      official store. Round-tube pre-fabricated cockpit for GT racing setups.
+    description: Next Level Racing GTRacer 2.0. GT racing simulator cockpit. in stock on official store.
+      Round-tube pre-fabricated cockpit for GT racing setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -650,8 +652,8 @@ commercial:
         url: https://nextlevelracing.com/product/gtracer-2-0/
         region: US
   - product_name: Victory Simulator Cockpit
-    description: Next Level Racing Victory Simulator Cockpit. entry racing cockpit. in stock on
-      official store. Pre-fabricated racing cockpit for wheel and pedal setups.
+    description: Next Level Racing Victory Simulator Cockpit. entry racing cockpit. in stock on official
+      store. Pre-fabricated racing cockpit for wheel and pedal setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -664,9 +666,8 @@ commercial:
         url: https://nextlevelracing.com/product/victory-simulator-cockpit/
         region: US
   - product_name: F-GT Elite 160 Scuderia Ferrari Edition
-    description: Next Level Racing F-GT Elite 160 Scuderia Ferrari Edition. licensed
-      aluminum-profile racing cockpit. in stock on official store. Ferrari-licensed Elite
-      160 cockpit.
+    description: Next Level Racing F-GT Elite 160 Scuderia Ferrari Edition. licensed aluminum-profile
+      racing cockpit. in stock on official store. Ferrari-licensed Elite 160 cockpit.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -679,9 +680,9 @@ commercial:
         url: https://nextlevelracing.com/product/f-gt-elite-160-scuderia-ferrari-edition/
         region: US
   - product_name: GTElite Racing Simulator Cockpit Front and Side Mount Edition
-    description: Next Level Racing GTElite Racing Simulator Cockpit Front and Side Mount
-      Edition. aluminum-profile cockpit. in stock on official store. Elite GT cockpit with
-      front and side mount wheel-base support.
+    description: Next Level Racing GTElite Racing Simulator Cockpit Front and Side Mount Edition.
+      aluminum-profile cockpit. in stock on official store. Elite GT cockpit with front and side
+      mount wheel-base support.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -694,9 +695,8 @@ commercial:
         url: https://nextlevelracing.com/product/gtelite-racing-simulator-cockpit-front-side-mount-edition/
         region: US
   - product_name: Flight Simulator Pro
-    description: Next Level Racing Flight Simulator Pro. flight simulator cockpit. in stock on
-      official store. Full flight cockpit and seat package for commercial and combat flight
-      controls.
+    description: Next Level Racing Flight Simulator Pro. flight simulator cockpit. in stock on official
+      store. Full flight cockpit and seat package for commercial and combat flight controls.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -709,8 +709,8 @@ commercial:
         url: https://nextlevelracing.com/product/flight-simulator-pro-2/
         region: US
   - product_name: WINCTRL Orion2 MFSSB Kits
-    description: WINCTRL Orion2 MFSSB Kits. flight-control mounts and accessories. Listed on EU
-      WINCTRL store; local stock not available in API response. WINCTRL Orion2 MFSSB Kits.
+    description: WINCTRL Orion2 MFSSB Kits. flight-control mounts and accessories. Listed on EU WINCTRL
+      store; local stock not available in API response. WINCTRL Orion2 MFSSB Kits.
     manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -723,16 +723,16 @@ commercial:
         url: https://eu.winctrl.com/view/goods-details.html?id=371
         region: EU
         status: available
-      - name: Ea
+      - name: WINCTRL
         price: 306.13
         currency: USD
         url: https://ea.winctrl.com/view/goods-details.html?id=371
         region: US
         status: available
   - product_name: Pro-Sim Formula Evo Sport
-    description: Pro-Sim Formula Evo Sport. formula racing simulator cockpit. in stock on
-      official UK shop. Tubular formula-position simulator with bespoke seat, high-foot
-      driving position, and compact footprint.
+    description: Pro-Sim Formula Evo Sport. formula racing simulator cockpit. in stock on official UK
+      shop. Tubular formula-position simulator with bespoke seat, high-foot driving position, and
+      compact footprint.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
     component_sub_category: formula-cockpit
@@ -745,9 +745,9 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/pro-sim-formula-evo-sport/
         region: UK
   - product_name: PSL GT
-    description: Pro-Sim PSL GT. professional GT simulator cockpit. in stock on official UK
-      shop. Entry professional GT frame using Pro-Sim core components with adjustable pedal
-      height and stocked for dispatch.
+    description: Pro-Sim PSL GT. professional GT simulator cockpit. in stock on official UK shop. Entry
+      professional GT frame using Pro-Sim core components with adjustable pedal height and stocked
+      for dispatch.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -760,8 +760,8 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/psl-gt/
         region: UK
   - product_name: PSL Sport
-    description: Pro-Sim PSL Sport. esports GT simulator package. in stock on official UK shop.
-      Pro-Sim GT simulator package with Evo pedals and 25 Nm-class direct-drive system.
+    description: Pro-Sim PSL Sport. esports GT simulator package. in stock on official UK shop. Pro-Sim
+      GT simulator package with Evo pedals and 25 Nm-class direct-drive system.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -774,9 +774,8 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/psl-pro-esport-package/
         region: UK
   - product_name: Pro-Sim Formula Cockpit
-    description: Pro-Sim Formula Cockpit. full-body formula simulator cockpit. in stock on
-      official UK shop. Real F1-car-mould cockpit with custom colour options and stated
-      10-week shipping window.
+    description: Pro-Sim Formula Cockpit. full-body formula simulator cockpit. in stock on official UK
+      shop. Real F1-car-mould cockpit with custom colour options and stated 10-week shipping window.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
     component_sub_category: formula-cockpit
@@ -789,8 +788,8 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/pro-sim-half-f1-car/
         region: UK
   - product_name: Pro-Sim Formula Evolution
-    description: Pro-Sim Formula Evolution. professional formula simulator cockpit. in stock on
-      official UK shop. Formula driver-development simulator with bespoke seat and high-foot
+    description: Pro-Sim Formula Evolution. professional formula simulator cockpit. in stock on official
+      UK shop. Formula driver-development simulator with bespoke seat and high-foot
       formula/prototype driving position.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
@@ -804,10 +803,12 @@ commercial:
         url: https://www.pro-sim.co.uk/shop/pro-sim-formula-evolution/
         region: UK
   - product_name: TrackTime Game Seat RR3055 in RaceRoom Design
-    description: RaceRoom / TrackTime Game Seat RR3055. foldable sim racing cockpit. ready for
-      shipment on official shop. Adjustable tubular frame, RR55 synthetic-leather foldable
-      seat, wheel plate, and pedal mount for PC, PlayStation, and Xbox.
-    manufacturer: RaceRoom / TrackTime
+    description: RaceRoom / TrackTime Game Seat RR3055. foldable sim racing cockpit. ready for shipment
+      on official shop. Adjustable tubular frame, RR55 synthetic-leather foldable seat, wheel plate,
+      and pedal mount for PC, PlayStation, and Xbox.
+    manufacturer:
+      - RaceRoom
+      - TrackTime
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/game-seat-rr3055.html
@@ -820,9 +821,11 @@ commercial:
         region: EU
   - product_name: TrackTime Game Seat RR3033 in RaceRoom Design
     description: RaceRoom / TrackTime Game Seat RR3033. adjustable sim racing cockpit. ready for
-      shipment on official shop. Adjustable tubular frame, RR33 synthetic-leather sport
-      seat, wheel plate, and pedal mount.
-    manufacturer: RaceRoom / TrackTime
+      shipment on official shop. Adjustable tubular frame, RR33 synthetic-leather sport seat, wheel
+      plate, and pedal mount.
+    manufacturer:
+      - RaceRoom
+      - TrackTime
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/game-seat-rr3033.html
@@ -834,10 +837,11 @@ commercial:
         url: https://www.raceroomstore.com/shop_en/game-seat-rr3033.html
         region: EU
   - product_name: TrackTime Game Seat TT3055
-    description: RaceRoom / TrackTime Game Seat TT3055. foldable sim racing cockpit. ready for
-      shipment on official shop. Steel tube frame with TT55 foldable sport seat, wheel
-      mount, and pedal tray.
-    manufacturer: RaceRoom / TrackTime
+    description: RaceRoom / TrackTime Game Seat TT3055. foldable sim racing cockpit. ready for shipment
+      on official shop. Steel tube frame with TT55 foldable sport seat, wheel mount, and pedal tray.
+    manufacturer:
+      - RaceRoom
+      - TrackTime
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3055.html
@@ -850,9 +854,11 @@ commercial:
         region: EU
   - product_name: TrackTime Game Seat TT3033
     description: RaceRoom / TrackTime Game Seat TT3033. adjustable sim racing cockpit. ready for
-      shipment on official shop. Steel tube frame with TT33 sport seat, adjustable wheel
-      bracket, and pedal mount.
-    manufacturer: RaceRoom / TrackTime
+      shipment on official shop. Steel tube frame with TT33 sport seat, adjustable wheel bracket,
+      and pedal mount.
+    manufacturer:
+      - RaceRoom
+      - TrackTime
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3033.html
@@ -864,9 +870,11 @@ commercial:
         url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3033.html
         region: EU
   - product_name: AP-Xtreme APX-1000 Sim Chassis
-    description: Ricmotech AP-Xtreme APX-1000. bare racing simulator chassis. official Ricmotech
-      store listing. Tubular steel AP-Xtreme chassis for sim-racing cockpit builds.
-    manufacturer: Ricmotech / AP-Xtreme
+    description: Ricmotech AP-Xtreme APX-1000. bare racing simulator chassis. official Ricmotech store
+      listing. Tubular steel AP-Xtreme chassis for sim-racing cockpit builds.
+    manufacturer:
+      - Ricmotech
+      - AP-Xtreme
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.ricmotech.com/ap-xtreme-1000-racing-simulator-chassis
@@ -878,10 +886,11 @@ commercial:
         url: https://www.ricmotech.com/ap-xtreme-1000-racing-simulator-chassis
         region: US
   - product_name: AP-Xtreme Lite APX-500 Bare Sim Chassis
-    description: Ricmotech AP-Xtreme Lite APX-500. compact bare racing simulator chassis.
-      official Ricmotech store listing. Small-format AP-Xtreme chassis for sim-racing
-      cockpit builds.
-    manufacturer: Ricmotech / AP-Xtreme
+    description: Ricmotech AP-Xtreme Lite APX-500. compact bare racing simulator chassis. official
+      Ricmotech store listing. Small-format AP-Xtreme chassis for sim-racing cockpit builds.
+    manufacturer:
+      - Ricmotech
+      - AP-Xtreme
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.ricmotech.com/ap-xtreme-lite-sim-racing-chassis
@@ -893,9 +902,9 @@ commercial:
         url: https://www.ricmotech.com/ap-xtreme-lite-sim-racing-chassis
         region: US
   - product_name: P1 Cockpit
-    description: RSEAT P1. configurable aluminum-profile sim racing cockpit. available on
-      official store. Front or bottom mount variants with optional RSEAT GT seat; base
-      frame-only variant captured for price.
+    description: RSEAT P1. configurable aluminum-profile sim racing cockpit. available on official
+      store. Front or bottom mount variants with optional RSEAT GT seat; base frame-only variant
+      captured for price.
     manufacturer: RSEAT
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -908,9 +917,8 @@ commercial:
         url: https://rseat.net/products/p1-black
         region: US
   - product_name: A1 PRO GT Cockpit
-    description: RSEAT A1 PRO GT. aluminum-profile GT sim racing cockpit. available on official
-      store. 40 x 160 mm 6063-T6 aluminum extrusion chassis with wheel-mount and optional
-      seat variants.
+    description: RSEAT A1 PRO GT. aluminum-profile GT sim racing cockpit. available on official store.
+      40 x 160 mm 6063-T6 aluminum extrusion chassis with wheel-mount and optional seat variants.
     manufacturer: RSEAT
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -924,8 +932,8 @@ commercial:
         region: US
   - product_name: A1 PRO Formula Cockpit
     description: RSEAT A1 PRO Formula. aluminum-profile formula sim racing cockpit. available on
-      official store. 40 x 160 mm 6063-T6 aluminum extrusion chassis with formula seating
-      and optional seat variants.
+      official store. 40 x 160 mm 6063-T6 aluminum extrusion chassis with formula seating and
+      optional seat variants.
     manufacturer: RSEAT
     component_category: rigs-and-cockpits
     component_sub_category: formula-cockpit
@@ -938,9 +946,8 @@ commercial:
         url: https://rseat.net/products/a1-pro-formula-black
         region: US
   - product_name: Alpine Racing TRX
-    description: Trak Racer Alpine Racing TRX. hybrid Formula/GT cockpit. current on official US
-      shop. Alpine F1-engineered simulator with rapid Formula and GT seating position
-      adjustment.
+    description: Trak Racer Alpine Racing TRX. hybrid Formula/GT cockpit. current on official US shop.
+      Alpine F1-engineered simulator with rapid Formula and GT seating position adjustment.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -953,9 +960,8 @@ commercial:
         url: https://trakracer.com/products/alpine-trx-v2
         region: US
   - product_name: BWT Alpine Formula One Team TRA Hybrid Racing Simulator
-    description: Trak Racer TRA Hybrid. aluminum Formula/GT cockpit. current on official US
-      shop. BWT Alpine Formula One Team simulator with tool-free Formula and GT pedal
-      adjustment.
+    description: Trak Racer TRA Hybrid. aluminum Formula/GT cockpit. current on official US shop. BWT
+      Alpine Formula One Team simulator with tool-free Formula and GT pedal adjustment.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -981,15 +987,15 @@ commercial:
         currency: USD
         url: https://trakracer.com/products/carbon-fibre-trx-racing-simulator
         region: US
-      - name: Trakracer
+      - name: Trak Racer
         price: 3499
         currency: USD
         url: https://trakracer.eu/products/carbon-fibre-trx
         region: EU
         status: available
   - product_name: TR8 PRO V2 Racing Simulator
-    description: Trak Racer TR8 PRO V2. tubular racing simulator cockpit. current on official US
-      shop. Rigid fixed-frame simulator for Formula and GT driving positions.
+    description: Trak Racer TR8 PRO V2. tubular racing simulator cockpit. current on official US shop.
+      Rigid fixed-frame simulator for Formula and GT driving positions.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -1002,8 +1008,8 @@ commercial:
         url: https://trakracer.com/products/tr8-pro-racing-simulator-1
         region: US
   - product_name: TR40S Racing Simulator
-    description: Trak Racer TR40S. entry aluminum profile cockpit. current on official US shop.
-      Compact profile simulator with pre-drilled pedal mount and flight-sim expandability.
+    description: Trak Racer TR40S. entry aluminum profile cockpit. current on official US shop. Compact
+      profile simulator with pre-drilled pedal mount and flight-sim expandability.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -1015,15 +1021,15 @@ commercial:
         currency: USD
         url: https://trakracer.com/products/tr40s-racing-simulator
         region: US
-      - name: Trakracer
+      - name: Trak Racer
         price: 299
         currency: USD
         url: https://trakracer.eu/products/tr40s-racing-simulator-1
         region: EU
         status: available
   - product_name: TR5 Formula and GT Racing Simulator Cockpit
-    description: Trak Racer TR5. Formula and GT racing cockpit. current on official US shop.
-      Adjustable wheelbase, pedal plate, and seat-position simulator cockpit.
+    description: Trak Racer TR5. Formula and GT racing cockpit. current on official US shop. Adjustable
+      wheelbase, pedal plate, and seat-position simulator cockpit.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -1036,8 +1042,8 @@ commercial:
         url: https://trakracer.com/products/tr5
         region: US
   - product_name: FS3 V2 Wheel Stand
-    description: Trak Racer FS3 V2 Wheel Stand. folding wheel stand. current on official US
-      shop. Compact simulator stand for wheelbase, pedals, and shifter mounting.
+    description: Trak Racer FS3 V2 Wheel Stand. folding wheel stand. current on official US shop.
+      Compact simulator stand for wheelbase, pedals, and shifter mounting.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: wheel-stand
@@ -1050,8 +1056,8 @@ commercial:
         url: https://trakracer.com/products/fs3-steering-wheel-stand-simulator
         region: US
   - product_name: TR160 Flight with Flight Seat
-    description: Trak Racer TR160 Flight. aluminum flight cockpit. current on official US shop.
-      TR160 flight package with seat, flight mounts, and shifter mount.
+    description: Trak Racer TR160 Flight. aluminum flight cockpit. current on official US shop. TR160
+      flight package with seat, flight mounts, and shifter mount.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -1064,8 +1070,8 @@ commercial:
         url: https://trakracer.com/products/tr160-flight-simulator
         region: US
   - product_name: TR120S Flight with Flight Seat
-    description: Trak Racer TR120S Flight. aluminum flight cockpit. current on official US shop.
-      TR120S flight package with seat, flight mounts, and profile cockpit frame.
+    description: Trak Racer TR120S Flight. aluminum flight cockpit. current on official US shop. TR120S
+      flight package with seat, flight mounts, and profile cockpit frame.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -1078,8 +1084,8 @@ commercial:
         url: https://trakracer.com/products/tr120s-flight-simulator
         region: US
   - product_name: TR80S Flight with Flight Seat
-    description: Trak Racer TR80S Flight. aluminum flight cockpit. current on official US shop.
-      TR80S flight package with seat, flight mounts, and wide-body profile frame.
+    description: Trak Racer TR80S Flight. aluminum flight cockpit. current on official US shop. TR80S
+      flight package with seat, flight mounts, and wide-body profile frame.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -1092,8 +1098,8 @@ commercial:
         url: https://trakracer.com/products/tr80s-flight-simulator
         region: US
   - product_name: TR40S Flight with Flight Seat
-    description: Trak Racer TR40S Flight. compact flight cockpit. current on official US shop.
-      TR40S flight package with seat, flight mounts, and aluminum profile frame.
+    description: Trak Racer TR40S Flight. compact flight cockpit. current on official US shop. TR40S
+      flight package with seat, flight mounts, and aluminum profile frame.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -1106,8 +1112,8 @@ commercial:
         url: https://trakracer.com/products/tr40s-flight-simulator
         region: US
   - product_name: TR8 Pro Flight with Flight Seat
-    description: Trak Racer TR8 Pro Flight. tubular flight cockpit. current on official US shop.
-      TR8 Pro flight package with seat, yoke/rudder adjustment, and flight-control mounting.
+    description: Trak Racer TR8 Pro Flight. tubular flight cockpit. current on official US shop. TR8 Pro
+      flight package with seat, yoke/rudder adjustment, and flight-control mounting.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -1120,8 +1126,8 @@ commercial:
         url: https://trakracer.com/products/tr8-pro-flight-simulator
         region: US
   - product_name: TR5 Flight Simulator with Mount
-    description: Trak Racer TR5 Flight Simulator. racing and flight cockpit bundle. current on
-      official US shop. TR5 cockpit bundled with dual flight sim mount.
+    description: Trak Racer TR5 Flight Simulator. racing and flight cockpit bundle. current on official
+      US shop. TR5 cockpit bundled with dual flight sim mount.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -1133,15 +1139,15 @@ commercial:
         currency: USD
         url: https://trakracer.com/products/tr5-flight-simulator-with-mount
         region: US
-      - name: Trakracer
+      - name: Trak Racer
         price: 89
         currency: USD
         url: https://trakracer.eu/products/tr5-flight-simulator-with-mount
         region: EU
         status: available
   - product_name: FS3 V2 Flight Simulator Stand
-    description: Trak Racer FS3 V2 Flight Stand. compact flight simulator stand. current on
-      official US shop. Wheel-stand style frame configured for flight simulation controls.
+    description: Trak Racer FS3 V2 Flight Stand. compact flight simulator stand. current on official US
+      shop. Wheel-stand style frame configured for flight simulation controls.
     manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -1174,8 +1180,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: GT-R RIG I - CIRCUIT II
-    description: Sparco GT-R Rig I Circuit II. GT simulator rig. current on official German
-      shop. GT-R Pro package with Fanatec sim kit and R330 leather wheel.
+    description: Sparco GT-R Rig I Circuit II. GT simulator rig. current on official German shop. GT-R
+      Pro package with Fanatec sim kit and R330 leather wheel.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -1188,8 +1194,8 @@ commercial:
         url: https://www.sparco-official.com/de/gt-r-rig-i-gt-r-pro-fanatec-sim-kit-r330-leather-g035018011gnr-1.html
         region: DE
   - product_name: KIT KART RIG I
-    description: Sparco Kart Rig I. kart simulator rig. current on official German shop. Kart
-      Pro simulator package with Fanatec sim kit and KG345 wheel.
+    description: Sparco Kart Rig I. kart simulator rig. current on official German shop. Kart Pro
+      simulator package with Fanatec sim kit and KG345 wheel.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -1202,8 +1208,8 @@ commercial:
         url: https://www.sparco-official.com/de/kart-rig-i-kart-pro-fanatec-sim-kit-kg345-g03905.html
         region: DE
   - product_name: SIM GT-R RIG II - QRT-R SPECIAL EDITION
-    description: Sparco SIM GT-R Rig II QRT-R Special Edition. complete GT simulator rig.
-      current on official German shop. Evolve GT-R rig bundle with QRT-R seat.
+    description: Sparco SIM GT-R Rig II QRT-R Special Edition. complete GT simulator rig. current on
+      official German shop. Evolve GT-R rig bundle with QRT-R seat.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -1216,8 +1222,8 @@ commercial:
         url: https://www.sparco-official.com/de/sim-gt-r-rig-ii-qrt-r-special-edition.html
         region: DE
   - product_name: SIM GT-R RIG I - QRT-R SPECIAL EDITION
-    description: Sparco SIM GT-R Rig I QRT-R Special Edition. GT simulator rig. current on
-      official German shop. Evolve GT-R rig bundle with QRT-R seat.
+    description: Sparco SIM GT-R Rig I QRT-R Special Edition. GT simulator rig. current on official
+      German shop. Evolve GT-R rig bundle with QRT-R seat.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -1230,8 +1236,8 @@ commercial:
         url: https://www.sparco-official.com/de/sim-gt-r-rig-i-qrt-r-special-edition.html
         region: DE
   - product_name: EVOLVE KART ENDURANCE
-    description: Sparco Evolve Kart Endurance. kart simulator cockpit. current on official
-      German shop. Evolve Kart chassis for endurance kart simulation.
+    description: Sparco Evolve Kart Endurance. kart simulator cockpit. current on official German shop.
+      Evolve Kart chassis for endurance kart simulation.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -1244,8 +1250,8 @@ commercial:
         url: https://www.sparco-official.com/de/evolve-kart-endurance-g03920.html
         region: DE
   - product_name: EVOLVE GT-R PRO | QRT-R
-    description: Sparco Evolve GT-R Pro QRT-R. GT simulator cockpit. current on official German
-      shop. Evolve GT-R Pro frame with QRT-R seat.
+    description: Sparco Evolve GT-R Pro QRT-R. GT simulator cockpit. current on official German shop.
+      Evolve GT-R Pro frame with QRT-R seat.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -1258,8 +1264,8 @@ commercial:
         url: https://www.sparco-official.com/de/evolve-pro-qrt-r.html
         region: DE
   - product_name: EVOLVE GP PRO NR
-    description: Sparco Evolve GP Pro NR. formula simulator cockpit. current on official German
-      shop. Evolve GP Pro formula-style simulator frame.
+    description: Sparco Evolve GP Pro NR. formula simulator cockpit. current on official German shop.
+      Evolve GP Pro formula-style simulator frame.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: formula-cockpit
@@ -1272,8 +1278,8 @@ commercial:
         url: https://www.sparco-official.com/de/evolve-gp-g03800nr.html
         region: DE
   - product_name: EVOLVE KART PRO
-    description: Sparco Evolve Kart Pro. kart simulator cockpit. current on official German
-      shop. Evolve Kart Pro chassis for kart simulation.
+    description: Sparco Evolve Kart Pro. kart simulator cockpit. current on official German shop. Evolve
+      Kart Pro chassis for kart simulation.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -1286,8 +1292,8 @@ commercial:
         url: https://www.sparco-official.com/de/evolve-kart-pro-g03900.html
         region: DE
   - product_name: EVOLVE KART PRO-JUNIOR
-    description: Sparco Evolve Kart Pro-Junior. junior kart simulator cockpit. current on
-      official German shop. Junior Evolve Kart chassis for kart simulation.
+    description: Sparco Evolve Kart Pro-Junior. junior kart simulator cockpit. current on official
+      German shop. Junior Evolve Kart chassis for kart simulation.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -1300,8 +1306,8 @@ commercial:
         url: https://www.sparco-official.com/de/evolve-kart-pro-g03910.html
         region: DE
   - product_name: EVOLVE GT-R PRO - CIRCUIT II
-    description: Sparco Evolve GT-R Pro Circuit II. GT simulator cockpit. current on official
-      German shop. Evolve GT-R Pro frame with Circuit II seat.
+    description: Sparco Evolve GT-R Pro Circuit II. GT simulator cockpit. current on official German
+      shop. Evolve GT-R Pro frame with Circuit II seat.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -1314,10 +1320,10 @@ commercial:
         url: https://www.sparco-official.com/de/evolve-gt-r-pro-frame-pro-brackets-circuit-ii-seat-g0328011gnr.html
         region: DE
   - product_name: Initium 2-in-1 Cockpit
-    description: Asetek Initium 2-in-1 Cockpit. steel cockpit frame. in stock on official global
-      shop. Adjustable GT/formula cockpit frame with Asetek, Fanatec, Moza, Logitech, and
-      Thrustmaster mounting support.
-    manufacturer: Asetek Racing
+    description: Asetek Initium 2-in-1 Cockpit. steel cockpit frame. in stock on official global shop.
+      Adjustable GT/formula cockpit frame with Asetek, Fanatec, Moza, Logitech, and Thrustmaster
+      mounting support.
+    manufacturer: Asetek
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://www.asetek.com/simsports/global/product/initium-2-in-1-cockpit/
@@ -1330,9 +1336,9 @@ commercial:
         region: Global
         status: available
   - product_name: Adjustable Sim Feet
-    description: Sim Lab Adjustable Sim Feet. cockpit frame. listed on Sim Lab. Sim Feet are
-      adjustable feet for sim racing cockpits*, allowing for increased stability and better
-      ergonomics. The adjustable feet let you customize the height of the racing rig...
+    description: Sim Lab Adjustable Sim Feet. cockpit frame. listed on Sim Lab. Sim Feet are adjustable
+      feet for sim racing cockpits*, allowing for increased stability and better ergonomics. The
+      adjustable feet let you customize the height of the racing rig...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
@@ -1346,9 +1352,9 @@ commercial:
         region: EU
         status: available
   - product_name: Caster Wheels Set
-    description: Sim Lab Caster Wheels Set. rig mounts. listed on Sim Lab. Built with a sturdy
-      black steel housing and a robust trunnion featuring a double ball ring for smooth
-      swiveling. The wheel combines a durable polypropylene core with a polyureth...
+    description: Sim Lab Caster Wheels Set. rig mounts. listed on Sim Lab. Built with a sturdy black
+      steel housing and a robust trunnion featuring a double ball ring for smooth swiveling. The
+      wheel combines a durable polypropylene core with a polyureth...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1363,8 +1369,8 @@ commercial:
         status: available
   - product_name: Center Post
     description: Sim Lab Center Post. rig mounts. listed on Sim Lab. The Center Post supports
-      center-mounted flight sticks or yokes, offering a sturdy, ergonomic base for immersive
-      flight simulation, blending seamlessly with your cockpit. Ergonom...
+      center-mounted flight sticks or yokes, offering a sturdy, ergonomic base for immersive flight
+      simulation, blending seamlessly with your cockpit. Ergonom...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1378,9 +1384,9 @@ commercial:
         region: EU
         status: available
   - product_name: Corner Bracket 40 mm slot 8
-    description: Sim Lab Corner Bracket 40 mm slot 8. rig mounts. listed on Sim Lab. This corner
-      bracket set includes caps and all necessary fasteners, providing a secure and reliable
-      solution for 40 mm profiles with 8 mm slot grooves. Each bracket is designed f...
+    description: Sim Lab Corner Bracket 40 mm slot 8. rig mounts. listed on Sim Lab. This corner bracket
+      set includes caps and all necessary fasteners, providing a secure and reliable solution for 40
+      mm profiles with 8 mm slot grooves. Each bracket is designed f...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1394,9 +1400,9 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Front mount EVO
-    description: Sim Lab Front mount EVO. rig mounts. listed on Sim Lab. The Evo front mounting
-      bracket is made from a 15mm black-coated aluminum plate. The side plates are both 10
-      mm thick. It is compatible with the GT1 Evo cockpit. Supports the fol...
+    description: Sim Lab Front mount EVO. rig mounts. listed on Sim Lab. The Evo front mounting bracket
+      is made from a 15mm black-coated aluminum plate. The side plates are both 10 mm thick. It is
+      compatible with the GT1 Evo cockpit. Supports the fol...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1410,9 +1416,9 @@ commercial:
         region: EU
         status: available
   - product_name: MPX V2
-    description: GRID MPX V2. rig mounts. listed on Sim Lab. Utilizing GRID signature
-      electronics and construction methods, along with the best components available, we are
-      bringing our signature quality and feel to a new price point. At...
+    description: GRID MPX V2. rig mounts. listed on Sim Lab. Utilizing GRID signature electronics and
+      construction methods, along with the best components available, we are bringing our signature
+      quality and feel to a new price point. At...
     manufacturer: GRID
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -1426,8 +1432,8 @@ commercial:
         region: EU
         status: available
   - product_name: PRO base cockpit
-    description: GT1 PRO base cockpit. cockpit frame. listed on Sim Lab. Official shop listing.
-    manufacturer: GT1
+    description: Sim Lab PRO base cockpit. cockpit frame. listed on Sim Lab. Official shop listing.
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://sim-lab.eu/products/gt1-pro-base-cockpit
@@ -1439,9 +1445,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Keyboard Tray
-    description: Sim Lab Keyboard Tray. rig mounts. listed on Sim Lab. The keyboard tray mounts
-      directly to your profile rig and can be positioned on either the left or right side.
-      It measures 500×200 mm, which fits most keyboards, and you can tilt...
+    description: Sim Lab Keyboard Tray. rig mounts. listed on Sim Lab. The keyboard tray mounts directly
+      to your profile rig and can be positioned on either the left or right side. It measures
+      500×200 mm, which fits most keyboards, and you can tilt...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1461,8 +1467,8 @@ commercial:
         region: EU
         status: available
   - product_name: pro base cockpit ALL
-    description: P1X pro base cockpit ALL. cockpit frame. listed on Sim Lab. Official shop listing.
-    manufacturer: P1X
+    description: Sim Lab pro base cockpit ALL. cockpit frame. listed on Sim Lab. Official shop listing.
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://sim-lab.eu/products/p1x-pro-base-cookpit-all
@@ -1475,10 +1481,10 @@ commercial:
         region: EU
         status: available
   - product_name: Pro Front Mount
-    description: P1X Pro Front Mount. rig mounts. listed on Sim Lab. The P1X Pro Front Mount is
+    description: Sim Lab Pro Front Mount. rig mounts. listed on Sim Lab. The P1X Pro Front Mount is
       designed for use with our P1X PRO, P1X Ultimate, P1X, and P1 cockpits, as well as most
       third-party 8020 cockpits.* Wheelbase Compatibility Bodnar 50 s...
-    manufacturer: P1X
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
     product_url: https://sim-lab.eu/products/p1x-pro-front-wheel-mount
@@ -1491,10 +1497,10 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: PRO Podium Bracket Set
-    description: P1X PRO Podium Bracket Set. rig mounts. listed on Sim Lab. The P1X PRO Podium
+    description: Sim Lab PRO Podium Bracket Set. rig mounts. listed on Sim Lab. The P1X PRO Podium
       Bracket Set is designed to side-mount your Fanatec wheelbases to your aluminum profile
       cockpit. This set provides a secure and adjustable fit. The P1X Pro Pod...
-    manufacturer: P1X
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
     product_url: https://sim-lab.eu/products/p1x-pro-podium-wheel-brackets
@@ -1507,10 +1513,10 @@ commercial:
         region: EU
         status: available
   - product_name: Pro Sim Racing Cockpit
-    description: P1X Pro Sim Racing Cockpit. cockpit frame. listed on Sim Lab. The P1X Pro Sim
-      Racing Cockpit sets a new standard for stability and adjustability, designed for the
-      most demanding sim racers. Its aluminum profile ensures top-tier rigidity, s...
-    manufacturer: P1X
+    description: Sim Lab Pro Sim Racing Cockpit. cockpit frame. listed on Sim Lab. The P1X Pro Sim
+      Racing Cockpit sets a new standard for stability and adjustability, designed for the most
+      demanding sim racers. Its aluminum profile ensures top-tier rigidity, s...
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit
@@ -1523,10 +1529,10 @@ commercial:
         region: EU
         status: available
   - product_name: Pro Simracing cockpit
-    description: P1X Pro Simracing cockpit. cockpit frame. listed on Sim Lab. The P1X Pro Sim
-      Racing Cockpit sets a new standard for stability and adjustability, designed for the
-      most demanding sim racers. Its aluminum profile ensures top-tier rigidity, s...
-    manufacturer: P1X
+    description: Sim Lab Pro Simracing cockpit. cockpit frame. listed on Sim Lab. The P1X Pro Sim Racing
+      Cockpit sets a new standard for stability and adjustability, designed for the most demanding
+      sim racers. Its aluminum profile ensures top-tier rigidity, s...
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://sim-lab.eu/products/p1x-pro-sim-racing-cockpit-int
@@ -1539,10 +1545,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: Pro Wheeldeck
-    description: P1X Pro Wheeldeck. rig mounts. listed on Sim Lab. The P1X Pro Wheeldeck is the
-      perfect addition to your sim racing setup. Compatible with our P1X PRO, P1X Ultimate,
-      P1X, and P1 cockpit and most third-party 8020 cockpits*, this...
-    manufacturer: P1X
+    description: Sim Lab Pro Wheeldeck. rig mounts. listed on Sim Lab. The P1X Pro Wheeldeck is the
+      perfect addition to your sim racing setup. Compatible with our P1X PRO, P1X Ultimate, P1X, and
+      P1 cockpit and most third-party 8020 cockpits*, this...
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
     product_url: https://sim-lab.eu/products/p1x-pro-wheeldeck-mount
@@ -1555,9 +1561,9 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Ultimate - Base cockpit (all variants)
-    description: P1X Ultimate - Base cockpit (all variants). cockpit frame. listed on Sim Lab.
+    description: Sim Lab Ultimate - Base cockpit (all variants). cockpit frame. listed on Sim Lab.
       Official shop listing.
-    manufacturer: P1X
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://sim-lab.eu/products/p1x-ultimate-fanatec-dd-mount-base-cockpit
@@ -1570,9 +1576,9 @@ commercial:
         region: EU
         status: available
   - product_name: Podium Bracket Set
-    description: Sim Lab Podium Bracket Set. rig mounts. listed on Sim Lab. Fanatec podium
-      mounting bracket This Fanatec podium mounting bracket is used to side-mount the DD1,
-      DD2, and CSL DD/DD PRO Fanatec podium drive wheel to your aluminum profile (8...
+    description: Sim Lab Podium Bracket Set. rig mounts. listed on Sim Lab. Fanatec podium mounting
+      bracket This Fanatec podium mounting bracket is used to side-mount the DD1, DD2, and CSL DD/DD
+      PRO Fanatec podium drive wheel to your aluminum profile (8...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1586,9 +1592,8 @@ commercial:
         region: EU
         status: available
   - product_name: Sim Cup holder
-    description: "Sim Lab Sim Cup holder. rig mounts. listed on Sim Lab. Cup holder made of
-      solid plastic. Mounts straight to profile. Included in package: Cup Mounting plate
-      Nuts and bolts."
+    description: "Sim Lab Sim Cup holder. rig mounts. listed on Sim Lab. Cup holder made of solid
+      plastic. Mounts straight to profile. Included in package: Cup Mounting plate Nuts and bolts."
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1602,9 +1607,9 @@ commercial:
         region: EU
         status: available
   - product_name: Sim Floor
-    description: Sim Lab Sim Floor. rig mounts. listed on Sim Lab. The Sim Floor adds comfort
-      and support for extended gaming sessions. Made from a durable 4mm aluminum diamond
-      plate, it works great as a footrest. It's compatible with our P1X,...
+    description: Sim Lab Sim Floor. rig mounts. listed on Sim Lab. The Sim Floor adds comfort and
+      support for extended gaming sessions. Made from a durable 4mm aluminum diamond plate, it works
+      great as a footrest. It's compatible with our P1X,...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1618,9 +1623,9 @@ commercial:
         region: EU
         status: available
   - product_name: Sim Foot rest
-    description: Sim Lab Sim Foot rest. rig mounts. listed on Sim Lab. Sim foot rest can be
-      mounted on profiles or on baseplates with slotted holes. Intended to be mounted next
-      to the pedals to give the left foot support when not using it to operat...
+    description: Sim Lab Sim Foot rest. rig mounts. listed on Sim Lab. Sim foot rest can be mounted on
+      profiles or on baseplates with slotted holes. Intended to be mounted next to the pedals to
+      give the left foot support when not using it to operat...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1634,8 +1639,8 @@ commercial:
         region: EU
         status: available
   - product_name: Sim holder
-    description: Sim Lab Sim holder. rig mounts. listed on Sim Lab. Sim Holder - Wheel and
-      headphones storage device. Bolts for mounting included.
+    description: Sim Lab Sim holder. rig mounts. listed on Sim Lab. Sim Holder - Wheel and headphones
+      storage device. Bolts for mounting included.
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1649,9 +1654,9 @@ commercial:
         region: EU
         status: available
   - product_name: Sim Mousepad
-    description: Sim Lab Sim Mousepad. rig mounts. listed on Sim Lab. Premium mouse pad plate
-      crafted from durable aluminum, measuring 240 x 200 x 3 mm. Features precision pre-cut
-      holes for effortless mounting. Finished with a sleek black RAL 9005...
+    description: Sim Lab Sim Mousepad. rig mounts. listed on Sim Lab. Premium mouse pad plate crafted
+      from durable aluminum, measuring 240 x 200 x 3 mm. Features precision pre-cut holes for
+      effortless mounting. Finished with a sleek black RAL 9005...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1665,9 +1670,9 @@ commercial:
         region: EU
         status: available
   - product_name: Sim Shelf Universal
-    description: Sim Lab Sim Shelf Universal. rig mounts. listed on Sim Lab. The Sim Shelf
-      Universal is a great addition for placing your PC or control boxes in your cockpits.
-      It is designed to be compatible with all our current and most of our previous-...
+    description: Sim Lab Sim Shelf Universal. rig mounts. listed on Sim Lab. The Sim Shelf Universal is
+      a great addition for placing your PC or control boxes in your cockpits. It is designed to be
+      compatible with all our current and most of our previous-...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1681,9 +1686,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Sim-Lab Allen Key Set
-    description: Sim Lab Sim-Lab Allen Key Set. rig mounts. listed on Sim Lab. Our Sim-Lab Allen
-      Key Set offers nine metric keys in a convenient plastic holder for easy
-      identification.
+    description: Sim Lab Sim-Lab Allen Key Set. rig mounts. listed on Sim Lab. Our Sim-Lab Allen Key Set
+      offers nine metric keys in a convenient plastic holder for easy identification.
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1697,10 +1701,10 @@ commercial:
         region: EU
         status: available
   - product_name: Track Pack
-    description: SQ1 Track Pack. rig mounts. listed on Sim Lab. The SQ1 Track Pack accessory
-      bundle includes a black adjustment knob, short lever, and straight shift knob. The
-      black adjustment knob lets you match the look of your cockpit or...
-    manufacturer: SQ1
+    description: Sim Lab Track Pack. rig mounts. listed on Sim Lab. The SQ1 Track Pack accessory bundle
+      includes a black adjustment knob, short lever, and straight shift knob. The black adjustment
+      knob lets you match the look of your cockpit or...
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
     product_url: https://sim-lab.eu/products/sq1-track-pack
@@ -1713,9 +1717,9 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Swivel Mounting Point
-    description: Sim Lab Swivel Mounting Point. rig mounts. listed on Sim Lab. The Swivel
-      Mounting Point offers 180-degree rotation for precise placement of secondary controls,
-      adding flexibility and realism to your flight setup. Designed to be compatible...
+    description: Sim Lab Swivel Mounting Point. rig mounts. listed on Sim Lab. The Swivel Mounting Point
+      offers 180-degree rotation for precise placement of secondary controls, adding flexibility and
+      realism to your flight setup. Designed to be compatible...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1729,9 +1733,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Dust Cover Set
-    description: Flightsimcontrols Dust Cover Set. rig mounts. listed on Flightsimcontrols.
-      Meant for customers who wish to upgrade their existing VKB Gunfighter Mk.I and Mk.II
-      dust cover.
+    description: Flightsimcontrols Dust Cover Set. rig mounts. listed on Flightsimcontrols. Meant for
+      customers who wish to upgrade their existing VKB Gunfighter Mk.I and Mk.II dust cover.
     manufacturer: Flightsimcontrols
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1744,9 +1747,9 @@ commercial:
         url: https://flightsimcontrols.com/product/dust-cover-set/
         region: Unknown
   - product_name: Intermodular Reinforcing Plate
-    description: GNX Intermodular Reinforcing Plate. rig mounts. listed on Flightsimcontrols.
+    description: VKB-Sim Intermodular Reinforcing Plate. rig mounts. listed on Flightsimcontrols.
       Official shop listing.
-    manufacturer: GNX
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
     product_url: https://flightsimcontrols.com/product/gnx-intermodular-reinforcing-plate/
@@ -1758,9 +1761,9 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-intermodular-reinforcing-plate/
         region: Unknown
   - product_name: Module Coupler (Set of 2)
-    description: GNX Module Coupler (Set of 2). rig mounts. listed on Flightsimcontrols.
-      Official shop listing.
-    manufacturer: GNX
+    description: VKB-Sim Module Coupler (Set of 2). rig mounts. listed on Flightsimcontrols. Official
+      shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
     product_url: https://flightsimcontrols.com/product/gnx-module-coupler-set/
@@ -1772,8 +1775,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-module-coupler-set/
         region: Unknown
   - product_name: Plastic Spacers
-    description: GNX Plastic Spacers. rig mounts. listed on Flightsimcontrols. Official shop listing.
-    manufacturer: GNX
+    description: VKB-Sim Plastic Spacers. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
     product_url: https://flightsimcontrols.com/product/gnx-plastic-spacers/
@@ -1785,8 +1788,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-plastic-spacers/
         region: Unknown
   - product_name: Springs Set
-    description: GNX Springs Set. rig mounts. listed on Flightsimcontrols. Official shop listing.
-    manufacturer: GNX
+    description: VKB-Sim Springs Set. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/gnx-springs-set/
@@ -1798,9 +1801,9 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-springs-set/
         region: Unknown
   - product_name: USB Controller (HID-Main)
-    description: GNX USB Controller (HID-Main). rig mounts. listed on Flightsimcontrols.
-      Official shop listing.
-    manufacturer: GNX
+    description: VKB-Sim USB Controller (HID-Main). rig mounts. listed on Flightsimcontrols. Official
+      shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/gnx-usb-controller-hid-main/
@@ -1812,9 +1815,9 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-usb-controller-hid-main/
         region: Unknown
   - product_name: Ultimate Twist Module (rev.B)
-    description: MCG Ultimate Twist Module (rev.B). rig mounts. listed on Flightsimcontrols.
+    description: VKB-Sim Ultimate Twist Module (rev.B). rig mounts. listed on Flightsimcontrols.
       Official shop listing.
-    manufacturer: MCG
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/mcg-ultimate-twist-module/
@@ -1826,8 +1829,8 @@ commercial:
         url: https://flightsimcontrols.com/product/mcg-ultimate-twist-module/
         region: Unknown
   - product_name: Small Base Plate
-    description: Flightsimcontrols Small Base Plate. rig mounts. listed on Flightsimcontrols.
-      Official shop listing.
+    description: Flightsimcontrols Small Base Plate. rig mounts. listed on Flightsimcontrols. Official
+      shop listing.
     manufacturer: Flightsimcontrols
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -1840,9 +1843,8 @@ commercial:
         url: https://flightsimcontrols.com/product/small-base-plate/
         region: Unknown
   - product_name: Accessory Magazine
-    description: STECS Accessory Magazine. rig mounts. listed on Flightsimcontrols. Official
-      shop listing.
-    manufacturer: STECS
+    description: VKB-Sim Accessory Magazine. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/stecs-accessory-magazine/
@@ -1854,9 +1856,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-accessory-magazine/
         region: Unknown
   - product_name: Button Module Upgrade Kit + Magazine
-    description: STECS Button Module Upgrade Kit + Magazine. rig mounts. listed on
-      Flightsimcontrols. Official shop listing.
-    manufacturer: STECS
+    description: VKB-Sim Button Module Upgrade Kit + Magazine. rig mounts. listed on Flightsimcontrols.
+      Official shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/stecs-button-module-upgrade-kit/
@@ -1868,9 +1870,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-button-module-upgrade-kit/
         region: Unknown
   - product_name: Detent Frames Module
-    description: STECS Detent Frames Module. rig mounts. listed on Flightsimcontrols. Official
-      shop listing.
-    manufacturer: STECS
+    description: VKB-Sim Detent Frames Module. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/stecs-detent-frames-module/
@@ -1882,8 +1883,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-detent-frames-module/
         region: Unknown
   - product_name: MFH Fixture
-    description: STECS MFH Fixture. rig mounts. listed on Flightsimcontrols. Official shop listing.
-    manufacturer: STECS
+    description: VKB-Sim MFH Fixture. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/stecs-mfh-fixture/
@@ -1895,8 +1896,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-mfh-fixture/
         region: Unknown
   - product_name: Mini Baseplate
-    description: STECS Mini Baseplate. rig mounts. listed on Flightsimcontrols. Official shop listing.
-    manufacturer: STECS
+    description: VKB-Sim Mini Baseplate. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/stecs-mini/
@@ -1914,9 +1915,9 @@ commercial:
         region: EU
         status: available
   - product_name: Mini Plus/Max Baseplate
-    description: STECS Mini Plus/Max Baseplate. rig mounts. listed on Flightsimcontrols.
-      Official shop listing.
-    manufacturer: STECS
+    description: VKB-Sim Mini Plus/Max Baseplate. rig mounts. listed on Flightsimcontrols. Official shop
+      listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/stecs-mini-plus-max-baseplate/
@@ -1928,9 +1929,9 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-mini-plus-max-baseplate/
         region: Unknown
   - product_name: Rubberized Grip Pads – Set of 2
-    description: STECS Rubberized Grip Pads – Set of 2. rig mounts. listed on Flightsimcontrols.
+    description: VKB-Sim Rubberized Grip Pads – Set of 2. rig mounts. listed on Flightsimcontrols.
       Official shop listing.
-    manufacturer: STECS
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/stecs-rubberized-grip-pads-set-of-2/
@@ -1942,9 +1943,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-rubberized-grip-pads-set-of-2/
         region: Unknown
   - product_name: Standard Baseplate
-    description: STECS Standard Baseplate. rig mounts. listed on Flightsimcontrols. Official
-      shop listing.
-    manufacturer: STECS
+    description: VKB-Sim Standard Baseplate. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/stecs-standard-baseplate/
@@ -1956,8 +1956,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-standard-baseplate/
         region: Unknown
   - product_name: STEM Back Cover
-    description: STECS STEM Back Cover. rig mounts. listed on Flightsimcontrols. Official shop listing.
-    manufacturer: STECS
+    description: VKB-Sim STEM Back Cover. rig mounts. listed on Flightsimcontrols. Official shop listing.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/stecs-stem-back-cover/
@@ -1969,8 +1969,8 @@ commercial:
         url: https://flightsimcontrols.com/product/stecs-stem-back-cover/
         region: Unknown
   - product_name: Upgrade SCG “Kosmosima” Grip Standard to Premium
-    description: Flightsimcontrols Upgrade SCG “Kosmosima” Grip Standard to Premium. rig mounts.
-      listed on Flightsimcontrols. Official shop listing.
+    description: Flightsimcontrols Upgrade SCG “Kosmosima” Grip Standard to Premium. rig mounts. listed
+      on Flightsimcontrols. Official shop listing.
     manufacturer: Flightsimcontrols
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -1996,8 +1996,8 @@ commercial:
         url: https://flightsimcontrols.com/product/grip-stand/
         region: Unknown
   - product_name: Main Controller (BlackBox) Stand-Alone
-    description: VKB Main Controller (BlackBox) Stand-Alone. rig mounts. listed on
-      Flightsimcontrols. Official shop listing.
+    description: VKB Main Controller (BlackBox) Stand-Alone. rig mounts. listed on Flightsimcontrols.
+      Official shop listing.
     manufacturer: VKB
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2036,8 +2036,7 @@ commercial:
         url: https://flightsimcontrols.com/product/vkb-ucm-cup-holder/
         region: Unknown
   - product_name: UCM Keyboard Holder
-    description: VKB UCM Keyboard Holder. rig mounts. listed on Flightsimcontrols. Official shop
-      listing.
+    description: VKB UCM Keyboard Holder. rig mounts. listed on Flightsimcontrols. Official shop listing.
     manufacturer: VKB
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2063,10 +2062,10 @@ commercial:
         url: https://flightsimcontrols.com/product/vkb-ucm-phone-holder/
         region: Unknown
   - product_name: THQ Grip (Add-On)
-    description: WWII THQ Grip (Add-On). rig mounts. listed on Flightsimcontrols. Meant for VKB
-      customers who already own a GNX THQ Module and wish to use it with the WWII THQ Grip.
-      Scroll down for Product Description and Details.
-    manufacturer: WWII
+    description: VKB-Sim THQ Grip (Add-On). rig mounts. listed on Flightsimcontrols. Meant for VKB
+      customers who already own a GNX THQ Module and wish to use it with the WWII THQ Grip. Scroll
+      down for Product Description and Details.
+    manufacturer: VKB-Sim
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://flightsimcontrols.com/product/wwii-thq-grip-add-on/
@@ -2078,10 +2077,9 @@ commercial:
         url: https://flightsimcontrols.com/product/wwii-thq-grip-add-on/
         region: Unknown
   - product_name: Classic Ultimate Upgrade Kit
-    description: Heusinkveld Classic Ultimate Upgrade Kit. rig mounts. listed on Heusinkveld.
-      Give your classic Ultimate pedals a meaningful upgrade with modern innovations as seen
-      on the Ultimate+. With this upgrade kit you’ll be able to benefit from the latest
-      Heusinkv...
+    description: Heusinkveld Classic Ultimate Upgrade Kit. rig mounts. listed on Heusinkveld. Give your
+      classic Ultimate pedals a meaningful upgrade with modern innovations as seen on the Ultimate+.
+      With this upgrade kit you’ll be able to benefit from the latest Heusinkv...
     manufacturer: Heusinkveld
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2095,9 +2093,9 @@ commercial:
         region: EU
         status: available
   - product_name: Elastomer Kit Sprint
-    description: Heusinkveld Elastomer Kit Sprint. rig mounts. listed on Heusinkveld. This
-      Elastomer Kit allows you to upgrade your Sprint brake pedals to our latest injection
-      molded thermoset brake elastomers.
+    description: Heusinkveld Elastomer Kit Sprint. rig mounts. listed on Heusinkveld. This Elastomer Kit
+      allows you to upgrade your Sprint brake pedals to our latest injection molded thermoset brake
+      elastomers.
     manufacturer: Heusinkveld
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2111,9 +2109,9 @@ commercial:
         region: EU
         status: available
   - product_name: Elastomer Kit Ultimate+
-    description: Heusinkveld Elastomer Kit Ultimate+. rig mounts. listed on Heusinkveld. This
-      kit can be used to replace/renew the elastomers of the Ultimate+ brake pedal as well
-      as the elastomers in the Classic Sim Pedals Ultimate Upgrade Kit.
+    description: Heusinkveld Elastomer Kit Ultimate+. rig mounts. listed on Heusinkveld. This kit can be
+      used to replace/renew the elastomers of the Ultimate+ brake pedal as well as the elastomers in
+      the Classic Sim Pedals Ultimate Upgrade Kit.
     manufacturer: Heusinkveld
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2127,10 +2125,9 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Ultimate+ Baseplate
-    description: Heusinkveld Ultimate+ Baseplate. rig mounts. listed on Heusinkveld. With the
-      Ultimate+ pedals being able to cope with the forces experienced in real life racing
-      cars, a sturdy mount is an absolute must . If you want to mount the pedals to a
-      base...
+    description: Heusinkveld Ultimate+ Baseplate. rig mounts. listed on Heusinkveld. With the Ultimate+
+      pedals being able to cope with the forces experienced in real life racing cars, a sturdy mount
+      is an absolute must . If you want to mount the pedals to a base...
     manufacturer: Heusinkveld
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2144,24 +2141,24 @@ commercial:
         region: EU
         status: available
   - product_name: Black Shark Metal Collective Grip
-    description: KA-50 Black Shark Metal Collective Grip. rig mounts. listed on Ea. KA-50 Black
-      Shark Metal Collective Grip x1.
-    manufacturer: KA-50
+    description: WINCTRL Black Shark Metal Collective Grip. rig mounts. listed on Ea. KA-50 Black Shark
+      Metal Collective Grip x1.
+    manufacturer: WINCTRL
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://ea.winctrl.com/view/goods-details.html?id=325
     picture_url: https://ea.winctrl.com/static/ipfs/QmaecQeC8VFeasS7AAV6HFuATXuMzmc2vpxtSodE7MR7G9
     shops:
-      - name: Ea
+      - name: WINCTRL
         url: https://ea.winctrl.com/view/goods-details.html?id=325
         region: US
         status: out-of-stock
         price: Unknown
         currency: USD
   - product_name: Wheel Hub
-    description: Fanatec Wheel Hub. rig mounts. listed on Fanatec. The Fanatec Wheel Hub is a
-      simplified version of the Podium Hub, designed primarily for third-party steering
-      wheels. It contains the electronics required to activate force feedb...
+    description: Fanatec Wheel Hub. rig mounts. listed on Fanatec. The Fanatec Wheel Hub is a simplified
+      version of the Podium Hub, designed primarily for third-party steering wheels. It contains the
+      electronics required to activate force feedb...
     manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2175,10 +2172,10 @@ commercial:
         region: EU
         status: available
   - product_name: Cockpit Accessory Mount (Black)
-    description: GT Cockpit Accessory Mount (Black). cockpit frame. listed on Fanatec. This
-      versatile mounting kit makes it easy to add additional accessories to your cockpit,
-      from Elgato Stream Decks and cameras to button boxes, we have you covered.
-    manufacturer: GT
+    description: Fanatec Cockpit Accessory Mount (Black). cockpit frame. listed on Fanatec. This
+      versatile mounting kit makes it easy to add additional accessories to your cockpit, from
+      Elgato Stream Decks and cameras to button boxes, we have you covered.
+    manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900003-ww/gt-cockpit-accessory-mount-black
@@ -2191,10 +2188,10 @@ commercial:
         region: EU
         status: available
   - product_name: Cockpit Accessory Mount (White)
-    description: GT Cockpit Accessory Mount (White). cockpit frame. listed on Fanatec. This
-      versatile mounting kit makes it easy to add additional accessories to your cockpit,
-      from Elgato Stream Decks and cameras to button boxes, we have you covered.
-    manufacturer: GT
+    description: Fanatec Cockpit Accessory Mount (White). cockpit frame. listed on Fanatec. This
+      versatile mounting kit makes it easy to add additional accessories to your cockpit, from
+      Elgato Stream Decks and cameras to button boxes, we have you covered.
+    manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900004-ww/gt-cockpit-accessory-mount-white
@@ -2207,10 +2204,10 @@ commercial:
         region: EU
         status: available
   - product_name: Cockpit PC Tray
-    description: GT Cockpit PC Tray. cockpit frame. listed on Fanatec. A secure and versatile
-      tray for your PC or console, offering easy access to your ports and connections while
-      saving floor space. Lifting your system off the carpet improves airf...
-    manufacturer: GT
+    description: Fanatec Cockpit PC Tray. cockpit frame. listed on Fanatec. A secure and versatile tray
+      for your PC or console, offering easy access to your ports and connections while saving floor
+      space. Lifting your system off the carpet improves airf...
+    manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900001-ww/gt-cockpit-pc-tray
@@ -2223,10 +2220,10 @@ commercial:
         region: EU
         status: available
   - product_name: Cockpit Seat (Black)
-    description: GT Cockpit Seat (Black). cockpit frame. listed on Fanatec. Concentrate on lap
-      times in comfort with a fiber-reinforced plastic shell covered with a padded and
-      breathable fabric to ensure that even endurance racing sessions leave you coo...
-    manufacturer: GT
+    description: Fanatec Cockpit Seat (Black). cockpit frame. listed on Fanatec. Concentrate on lap
+      times in comfort with a fiber-reinforced plastic shell covered with a padded and breathable
+      fabric to ensure that even endurance racing sessions leave you coo...
+    manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://www.fanatec.com/eu/en/p/cockpits/crd-9010003-ww/gt-cockpit-seat-black
@@ -2239,10 +2236,10 @@ commercial:
         region: EU
         status: available
   - product_name: Cockpit Seat (White)
-    description: GT Cockpit Seat (White). cockpit frame. listed on Fanatec. Concentrate on lap
-      times in comfort with a fiber-reinforced plastic shell covered with a padded and
-      breathable fabric to ensure that even endurance racing sessions leave you coo...
-    manufacturer: GT
+    description: Fanatec Cockpit Seat (White). cockpit frame. listed on Fanatec. Concentrate on lap
+      times in comfort with a fiber-reinforced plastic shell covered with a padded and breathable
+      fabric to ensure that even endurance racing sessions leave you coo...
+    manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://www.fanatec.com/eu/en/p/cockpits/crd-9010004-ww/gt-cockpit-seat-white
@@ -2255,9 +2252,9 @@ commercial:
         region: EU
         status: available
   - product_name: ClubSport Universal Hub V2 for Xbox
-    description: Fanatec ClubSport Universal Hub V2 for Xbox. rig mounts. listed on Fanatec.
-      Attach any wheel rim with a 6 x 70 mm or 3 x 50 mm mounting pattern to this hub for
-      use with a FANATEC® wheel base.
+    description: Fanatec ClubSport Universal Hub V2 for Xbox. rig mounts. listed on Fanatec. Attach any
+      wheel rim with a 6 x 70 mm or 3 x 50 mm mounting pattern to this hub for use with a FANATEC®
+      wheel base.
     manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2271,10 +2268,10 @@ commercial:
         region: US
         status: available
   - product_name: Cockpit V1.5
-    description: CSL Cockpit V1.5. cockpit frame. listed on Fanatec. The CSL Cockpit punches
-      well above its weight. Every part of the aluminium and steel construction is optimised
-      for minimum flex and strength. Supports Fanatec hardware and most...
-    manufacturer: CSL
+    description: Fanatec Cockpit V1.5. cockpit frame. listed on Fanatec. The CSL Cockpit punches well
+      above its weight. Every part of the aluminium and steel construction is optimised for minimum
+      flex and strength. Supports Fanatec hardware and most...
+    manufacturer: Fanatec
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://www.fanatec.com/us/en/p/cockpits/crd-9010009-ww/csl-cockpit-v1-5
@@ -2287,112 +2284,112 @@ commercial:
         region: US
         status: available
   - product_name: E-Stop Switch
-    description: Eu E-Stop Switch. rig mounts. listed on Eu. Compatible with MOZA simulators,
-      offering multiple protection modes for safety and control. Versatile connectivity.
-      Tailor your experience with three modes. It is built to last....
-    manufacturer: Eu
+    description: MOZA E-Stop Switch. rig mounts. listed on Eu. Compatible with MOZA simulators, offering
+      multiple protection modes for safety and control. Versatile connectivity. Tailor your
+      experience with three modes. It is built to last....
+    manufacturer: MOZA
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://eu.mozaracing.com/products/estop-switch
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/E-Stop_1000_1000_converted.png?v=1751281058
     shops:
-      - name: Eu
+      - name: MOZA
         price: 39
         currency: USD
         url: https://eu.mozaracing.com/products/estop-switch
         region: EU
         status: available
   - product_name: Flight Base Table Clamp
-    description: Eu Flight Base Table Clamp. rig mounts. listed on Eu. The MOZA Flight Base
-      Table Clamp is engineered for both stability and versatility, making it an essential
-      addition to your flight simulation setup. Crafted from high-strength st...
-    manufacturer: Eu
+    description: MOZA Flight Base Table Clamp. rig mounts. listed on Eu. The MOZA Flight Base Table
+      Clamp is engineered for both stability and versatility, making it an essential addition to
+      your flight simulation setup. Crafted from high-strength st...
+    manufacturer: MOZA
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://eu.mozaracing.com/products/flightbase-table-clamp
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/flight-base-table-clamp_view-right-side.png?v=1770175547
     shops:
-      - name: Eu
+      - name: MOZA
         price: 65
         currency: USD
         url: https://eu.mozaracing.com/products/flightbase-table-clamp
         region: EU
         status: available
   - product_name: AB9 FFB Base
-    description: MOZA AB9 FFB Base. rig mounts. listed on Eu. The MOZA AB9 Base is equipped with
-      dual servo motors delivering a peak torque of 12Nm, offering precise, dynamic feedback
-      that simulates various flight conditions such as taxiin...
+    description: MOZA AB9 FFB Base. rig mounts. listed on Eu. The MOZA AB9 Base is equipped with dual
+      servo motors delivering a peak torque of 12Nm, offering precise, dynamic feedback that
+      simulates various flight conditions such as taxiin...
     manufacturer: MOZA
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://eu.mozaracing.com/products/ab9-base
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZA-AB9-1-1_ac95300f-fcd5-4534-b86a-28068c843c77.jpg?v=1767606111
     shops:
-      - name: Eu
+      - name: MOZA
         price: 529
         currency: USD
         url: https://eu.mozaracing.com/products/ab9-base
         region: EU
         status: available
   - product_name: MA3X Side Stick
-    description: MOZA MA3X Side Stick. rig mounts. listed on Eu. The MOZA MA3X Side Stick is
-      designed to bring a realistic aircraft feel to your flight simulation. Inspired by
-      traditional aircraft controls, it features a classic design enhanc...
+    description: MOZA MA3X Side Stick. rig mounts. listed on Eu. The MOZA MA3X Side Stick is designed to
+      bring a realistic aircraft feel to your flight simulation. Inspired by traditional aircraft
+      controls, it features a classic design enhanc...
     manufacturer: MOZA
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://eu.mozaracing.com/products/ma3x-sidestick
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZA-MA3X-Side-Stick-1-png_converted.png?v=1751281057
     shops:
-      - name: Eu
+      - name: MOZA
         price: 89
         currency: USD
         url: https://eu.mozaracing.com/products/ma3x-sidestick
         region: EU
         status: available
   - product_name: MRP Adjustable Damper
-    description: MOZA MRP Adjustable Damper. rig mounts. listed on Eu. The MOZA MRP Adjustable
-      Damper lets you fine-tune resistance to match aircraft type, from helicopters to heavy
-      airliners, delivering enhanced realism and immersion.
+    description: MOZA MRP Adjustable Damper. rig mounts. listed on Eu. The MOZA MRP Adjustable Damper
+      lets you fine-tune resistance to match aircraft type, from helicopters to heavy airliners,
+      delivering enhanced realism and immersion.
     manufacturer: MOZA
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://eu.mozaracing.com/products/mrp-damper
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZA_MRP_Adjustable_Damper-Main.png?v=1767686314
     shops:
-      - name: Eu
+      - name: MOZA
         price: 69
         currency: USD
         url: https://eu.mozaracing.com/products/mrp-damper
         region: EU
         status: available
   - product_name: Multi-function Stalks
-    description: Eu Multi-function Stalks. rig mounts. listed on Eu. The MOZA Multi-function
-      Stalks are designed to elevate your driving simulation experience with authentic
-      car-grade components, delivering a true-to-life feel. With 28 programmab...
-    manufacturer: Eu
+    description: MOZA Multi-function Stalks. rig mounts. listed on Eu. The MOZA Multi-function Stalks
+      are designed to elevate your driving simulation experience with authentic car-grade
+      components, delivering a true-to-life feel. With 28 programmab...
+    manufacturer: MOZA
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://eu.mozaracing.com/products/multi-function-stalks
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/Multi-function-Stalks-1.png?v=1767606125
     shops:
-      - name: Eu
+      - name: MOZA
         price: 215
         currency: USD
         url: https://eu.mozaracing.com/products/multi-function-stalks
         region: EU
         status: available
   - product_name: Table Clamp For Yoke
-    description: Eu Table Clamp For Yoke. rig mounts. listed on Eu. Secure your flight
-      simulation setup with the Table Clamp for Yoke. Designed for stability and easy
-      installation, this durable clamp ensures your yoke stays firmly in place, prov...
-    manufacturer: Eu
+    description: MOZA Table Clamp For Yoke. rig mounts. listed on Eu. Secure your flight simulation
+      setup with the Table Clamp for Yoke. Designed for stability and easy installation, this
+      durable clamp ensures your yoke stays firmly in place, prov...
+    manufacturer: MOZA
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://eu.mozaracing.com/products/yoke-table-clamp
     picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/Table-Clamp-For-Yoke.webp?v=1751281057
     shops:
-      - name: Eu
+      - name: MOZA
         price: 29
         currency: USD
         url: https://eu.mozaracing.com/products/yoke-table-clamp
@@ -2413,8 +2410,7 @@ commercial:
         region: Unknown
         status: available
   - product_name: Heusinkveld accessories
-    description: Simucube Heusinkveld accessories. rig mounts. listed on Simucube. Official shop
-      listing.
+    description: Simucube Heusinkveld accessories. rig mounts. listed on Simucube. Official shop listing.
     manufacturer: Simucube
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2428,10 +2424,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Official Simucube College Sweater
-    description: Simucube Official Simucube College Sweater. rig mounts. listed on Simucube.
-      Unisex round-neck sweatshirt with heavy neck tape and elastic rib at the bottom of the
-      sleeve and hem. The soft, stabilized fabric is suitable for intensive washing and
-      features...
+    description: Simucube Official Simucube College Sweater. rig mounts. listed on Simucube. Unisex
+      round-neck sweatshirt with heavy neck tape and elastic rib at the bottom of the sleeve and
+      hem. The soft, stabilized fabric is suitable for intensive washing and features...
     manufacturer: Simucube
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2445,9 +2440,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Gift Card
-    description: "Simucube Gift Card. rig mounts. listed on Simucube. Surprise someone special
-      with a Simucube Gift Card that can help them purchase anything in our online store.
-      Note: Gift cards purchased in the EU store work only in the EU store."
+    description: "Simucube Gift Card. rig mounts. listed on Simucube. Surprise someone special with a
+      Simucube Gift Card that can help them purchase anything in our online store. Note: Gift cards
+      purchased in the EU store work only in the EU store."
     manufacturer: Simucube
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2460,46 +2455,18 @@ commercial:
         url: https://simucube.com/gift-card/
         region: Unknown
         status: available
-      - name: Trakracer
+      - name: Trak Racer
         price: 25
         currency: USD
         url: https://trakracer.eu/products/online-gift-card
         region: EU
         status: available
-  - product_name: Accessories Power Supply
-    description: Simagic Accessories Power Supply. rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-aps
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/aps-11-12.png?v=1762937987
-    shops:
-      - name: Simagic
-        price: 25
-        currency: USD
-        url: https://simagic.com/products/p-aps
-        region: Unknown
-        status: available
-  - product_name: Alpha Base+GTS(Leather)
-    description: Simagic Alpha Base+GTS(Leather). rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/alpha-base-gtsleather
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Alpha-BW_GTS_Leather.png?v=1739356194
-    shops:
-      - name: Simagic
-        price: 889
-        currency: USD
-        url: https://simagic.com/products/alpha-base-gtsleather
-        region: Unknown
-        status: available
   - product_name: Carpet
-    description: Simagic Carpet. rig mounts. listed on Simagic. Simagic logoed (186*96CM)
+    description: Simagic Carpet. rig accessories. listed on Simagic. Simagic logoed (186*96CM)
       Dispatched within 3 business days of ordering; transit time 7–8 business days.
     manufacturer: Simagic
     component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
+    component_sub_category: rig-accessories
     product_url: https://simagic.com/products/carpet
     picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Carpet-4-9-2.png?v=1775729546
     shops:
@@ -2509,8 +2476,9 @@ commercial:
         url: https://simagic.com/products/carpet
         region: Unknown
         status: available
-  - product_name: Desk Fixture（P-DFT）
-    description: Simagic Desk Fixture（P-DFT）. rig mounts. listed on Simagic. Dispatched within 3
+    license: Commercial
+  - product_name: Desk Fixture (P-DFT)
+    description: Simagic Desk Fixture (P-DFT). rig mounts. listed on Simagic. Dispatched within 3
       business days of ordering; transit time 7–8 business days.
     manufacturer: Simagic
     component_category: rigs-and-cockpits
@@ -2524,53 +2492,9 @@ commercial:
         url: https://simagic.com/products/p-dft
         region: Unknown
         status: available
-  - product_name: Exterior Seams Gloves
-    description: Simagic Exterior Seams Gloves. rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/exterior-seams-gloves
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/ExteriorSeamsGloves-4-9-3.png?v=1775729398
-    shops:
-      - name: Simagic
-        price: 75.9
-        currency: USD
-        url: https://simagic.com/products/exterior-seams-gloves
-        region: Unknown
-        status: available
-  - product_name: Interior Seams Gloves
-    description: Simagic Interior Seams Gloves. rig mounts. listed on Simagic. Dispatched within
-      3 business days of ordering; transit time 7–8 business days.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/interior-seams-gloves
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/Interior_Seams_Gloves-4-9.png?v=1775728941
-    shops:
-      - name: Simagic
-        price: 59.9
-        currency: USD
-        url: https://simagic.com/products/interior-seams-gloves
-        region: Unknown
-        status: available
-  - product_name: MagLink
-    description: Simagic MagLink(In stock). rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/simagic-maglink
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/MagLink-11-12.png?v=1762935739
-    shops:
-      - name: Simagic
-        price: 19.9
-        currency: USD
-        url: https://simagic.com/products/simagic-maglink
-        region: Unknown
-        status: available
     license: Commercial
-    last_updated: 2026-05-01
-  - product_name: Multi Function L Shaped Bracket(P-LOK)
-    description: Simagic Multi Function L Shaped Bracket(P-LOK). rig mounts. listed on Simagic.
+  - product_name: Multi Function L Shaped Bracket (P-LOK)
+    description: Simagic Multi Function L Shaped Bracket (P-LOK). rig mounts. listed on Simagic.
       Dispatched within 3 business days of ordering; transit time 7–8 business days.
     manufacturer: Simagic
     component_category: rigs-and-cockpits
@@ -2584,148 +2508,9 @@ commercial:
         url: https://simagic.com/products/p-lok
         region: Unknown
         status: available
-  - product_name: Cut-off top Wheel
-    description: "P-325C Cut-off top Wheel. rig mounts. listed on Simagic. Usage tip: For
-      optimal comfort and durability, use without gloves to prevent pilling on suede
-      surfaces."
-    manufacturer: P-325C
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-325c
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/3_48a67806-4869-4ec6-8c8e-cb9112b55db3.png?v=1690940089
-    shops:
-      - name: Simagic
-        price: 59
-        currency: USD
-        url: https://simagic.com/products/p-325c
-        region: Unknown
-        status: available
-  - product_name: D-Shaped Wheel
-    description: "P-325D D-Shaped Wheel. rig mounts. listed on Simagic. Usage tip: For optimal
-      comfort and durability, use without gloves to prevent pilling on suede surfaces."
-    manufacturer: P-325D
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-325d
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-325D_K_Leather.jpg?v=1738921891
-    shops:
-      - name: Simagic
-        price: 59
-        currency: USD
-        url: https://simagic.com/products/p-325d
-        region: Unknown
-        status: available
-  - product_name: Round Wheel
-    description: "P-330R Round Wheel. rig mounts. listed on Simagic. Usage tip: For optimal
-      comfort and durability, use without gloves to prevent pilling on suede surfaces."
-    manufacturer: P-330R
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-330r
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-330R_K_Leather_Backside.jpg?v=1738922186
-    shops:
-      - name: Simagic
-        price: 59
-        currency: USD
-        url: https://simagic.com/products/p-330r
-        region: Unknown
-        status: available
-  - product_name: P-HYS
-    description: Simagic P-HYS(In stock). rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-hys
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-HYS-11-12.png?v=1762936220
-    shops:
-      - name: Simagic
-        price: 159
-        currency: USD
-        url: https://simagic.com/products/p-hys
-        region: Unknown
-        status: available
     license: Commercial
-    last_updated: 2026-05-01
-  - product_name: P-HYSi
-    description: Simagic P-HYSi(In stock). rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-hysi
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-HYSi-11-12.png?v=1762936209
-    shops:
-      - name: Simagic
-        price: 179
-        currency: USD
-        url: https://simagic.com/products/p-hysi
-        region: Unknown
-        status: available
-    license: Commercial
-    last_updated: 2026-05-01
-  - product_name: P-ORP & P-ORP(H)
-    description: P-ORP & P-ORP(H)-In Stock. rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-orp
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-ORP_H_-11-12.png?v=1762937498
-    shops:
-      - name: Simagic
-        price: 16.9
-        currency: USD
-        url: https://simagic.com/products/p-orp
-        region: Unknown
-        status: available
-    license: Commercial
-    last_updated: 2026-05-01
-  - product_name: Long Handle
-    description: Q1 Long Handle. rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Q1
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-q1-p
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-Q1-P-11-12.png?v=1762937312
-    shops:
-      - name: Simagic
-        price: 24.9
-        currency: USD
-        url: https://simagic.com/products/p-q1-p
-        region: Unknown
-        status: available
-  - product_name: Sim Ray-Bar(Pre Order)
-    description: Simagic Sim Ray-Bar(Pre Order). rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-srb
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-SRB-11-12_91ebce3c-6ed1-400e-b58b-2bd7a350c48f.png?v=1762937548
-    shops:
-      - name: Simagic
-        price: 39
-        currency: USD
-        url: https://simagic.com/products/p-srb
-        region: Unknown
-        status: available
-  - product_name: EVO Front Mounting Bracket (MB-F)-In stock
-    description: Simagic EVO Front Mounting Bracket (MB-F)-In stock. rig mounts. listed on
-      Simagic. NOTE The MB-F is not compatible with products that require front-facing
-      installation(e.g., magnetic screens).
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/simagic-evo-front-mounting-bracket
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/MB-F-11-12.png?v=1762935272
-    shops:
-      - name: Simagic
-        price: 49
-        currency: USD
-        url: https://simagic.com/products/simagic-evo-front-mounting-bracket
-        region: Unknown
-        status: available
-    license: Commercial
-    last_updated: 2026-05-01
   - product_name: T-LOC
-    description: T-LOC (In stock). rig mounts. listed on Simagic. Official shop listing.
+    description: Simagic T-LOC. rig mounts. listed on Simagic. Official shop listing.
     manufacturer: Simagic
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
@@ -2740,25 +2525,11 @@ commercial:
         status: available
     license: Commercial
     last_updated: 2026-05-01
-  - product_name: Wheel Mount
-    description: Simagic Wheel Mount. rig mounts. listed on Simagic. Official shop listing.
-    manufacturer: Simagic
-    component_category: rigs-and-cockpits
-    component_sub_category: rig-mounts
-    product_url: https://simagic.com/products/p-wmt
-    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/wmt-11-12.png?v=1762937584
-    shops:
-      - name: Simagic
-        price: 12
-        currency: USD
-        url: https://simagic.com/products/p-wmt
-        region: Unknown
-        status: available
   - product_name: Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit
-    description: Sim Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit. cockpit
-      frame. listed on Sim Lab. The Mercedes-AMG PETRONAS Formula One Team Sim Racing
-      Cockpit redefines the formula position genre with its high-quality and super-rigid
-      frame. All new profiles and brackets wer...
+    description: Sim Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit. cockpit frame.
+      listed on Sim Lab. The Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit redefines the
+      formula position genre with its high-quality and super-rigid frame. All new profiles and
+      brackets wer...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
@@ -2772,10 +2543,10 @@ commercial:
         region: EU
         status: available
   - product_name: Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit
-    description: Sim Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit. cockpit
-      frame. listed on Sim Lab. The Mercedes-AMG PETRONAS Formula One Team Sim Racing
-      Cockpit redefines the formula position genre with its high-quality and super-rigid
-      frame. The formula-inspired seat, based...
+    description: Sim Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit. cockpit frame.
+      listed on Sim Lab. The Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit redefines the
+      formula position genre with its high-quality and super-rigid frame. The formula-inspired seat,
+      based...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
@@ -2788,209 +2559,205 @@ commercial:
         url: https://sim-lab.eu/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit
         region: EU
         status: available
-  - product_name: 2m/79" Black Rubber Dust/Design Strip – Anti-Slip Protective Edge Trim for
-      Aluminium Profile Sim Rigs
-    description: Trakracer 2m/79" Black Rubber Dust/Design Strip – Anti-Slip Protective Edge
-      Trim for Aluminium Profile Sim Rigs. cockpit frame. listed on Trakracer. Trak Racer
-      Black Rubber Strip Protect Your Rig, Reduce Vibration & Improve Grip for Aluminium
-      Profile Cockpits Enhance the durability, noise resistance, and professional finish...
-    manufacturer: Trakracer
+  - product_name: 2m/79" Black Rubber Dust/Design Strip – Anti-Slip Protective Edge Trim for Aluminium
+      Profile Sim Rigs
+    description: Trak Racer 2m/79" Black Rubber Dust/Design Strip – Anti-Slip Protective Edge Trim for
+      Aluminium Profile Sim Rigs. cockpit frame. listed on Trakracer. Trak Racer Black Rubber Strip
+      Protect Your Rig, Reduce Vibration & Improve Grip for Aluminium Profile Cockpits Enhance the
+      durability, noise resistance, and professional finish...
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://trakracer.eu/products/black-rubber-strip-1
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/4AAED84C-3372-46BE-9C52-5FEADD83D4BD_9275c962-6592-4a67-af9d-4686881f8b8a.png?v=1644791429
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: Unknown
         currency: USD
         url: https://trakracer.eu/products/black-rubber-strip-1
         region: EU
         status: out-of-stock
   - product_name: Adjustable Free-Standing Keyboard and Mouse Tray
-    description: Trakracer Adjustable Free-Standing Keyboard and Mouse Tray. cockpit frame.
-      listed on Trakracer. Upgrade Your Racing Simulator or Flight Sim Setup with Trak
-      Racer's Adjustable and Freestanding Keyboard and Mouse Stand Looking to enhance your
-      racing simulator cockpit or flig...
-    manufacturer: Trakracer
+    description: Trak Racer Adjustable Free-Standing Keyboard and Mouse Tray. cockpit frame. listed on
+      Trakracer. Upgrade Your Racing Simulator or Flight Sim Setup with Trak Racer's Adjustable and
+      Freestanding Keyboard and Mouse Stand Looking to enhance your racing simulator cockpit or
+      flig...
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://trakracer.eu/products/keyboard-and-mouse-mount-tr8-pro-and-alpine-racing-trx
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR-FLKBM_e01.png?v=1746080205
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 99
         currency: USD
         url: https://trakracer.eu/products/keyboard-and-mouse-mount-tr8-pro-and-alpine-racing-trx
         region: EU
         status: available
   - product_name: Alpine Racing TRX V2
-    description: Trakracer Alpine Racing TRX V2. cockpit frame. listed on Trakracer. The Alpine
-      Racing TRX by Trak Racer is a state-of-the-art racing simulator developed
-      collaboratively by Trak Racer and Alpine F1 engineers. This cutting-edge simulator
-      allows us...
-    manufacturer: Trakracer
+    description: Trak Racer Alpine Racing TRX V2. cockpit frame. listed on Trakracer. The Alpine Racing
+      TRX by Trak Racer is a state-of-the-art racing simulator developed collaboratively by Trak
+      Racer and Alpine F1 engineers. This cutting-edge simulator allows us...
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://trakracer.eu/products/alpine-trx-blue-v2-new
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRX-V2-ALP24_eHero_973f77c9-ed88-46fe-ad80-a49e8234895b.webp?v=1763514482
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 999
         currency: USD
         url: https://trakracer.eu/products/alpine-trx-blue-v2-new
         region: EU
         status: available
   - product_name: Alpine Formula One™ Team TRA Hybrid Racing Simulator
-    description: BWT Alpine Formula One™ Team TRA Hybrid Racing Simulator. cockpit frame. listed
-      on Trakracer. Ultimate Adjustability for Every Driver Fine-tune your TRA for the
-      perfect fit. Pedal Plate Engineered for versatility, the TRA’s pedal plate offers
-      rapid, tool-free angle and d...
+    description: BWT Alpine Formula One™ Team TRA Hybrid Racing Simulator. cockpit frame. listed on
+      Trakracer. Ultimate Adjustability for Every Driver Fine-tune your TRA for the perfect fit.
+      Pedal Plate Engineered for versatility, the TRA’s pedal plate offers rapid, tool-free angle
+      and d...
     manufacturer: BWT
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://trakracer.eu/products/alpine-racing-tra-hybrid-extrusion-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRAPDPHero_3000x2000_cff350f8-3452-498d-b710-ab271caa7f33.webp?v=1773898555
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 1099
         currency: USD
         url: https://trakracer.eu/products/alpine-racing-tra-hybrid-extrusion-simulator
         region: EU
         status: available
   - product_name: Pimax Crystal Light Premium Virtual Reality Gaming Headset
-    description: Trakracer Pimax Crystal Light Premium Virtual Reality Gaming Headset. rig
-      mounts. listed on Trakracer. Pimax Crystal Light – High-Fidelity VR for Sim Racing and
-      Flight Designed for serious sim racers and flight sim enthusiasts, the Pimax Crystal
-      Light offers exceptional clarity w...
-    manufacturer: Trakracer
+    description: Trak Racer Pimax Crystal Light Premium Virtual Reality Gaming Headset. rig mounts.
+      listed on Trakracer. Pimax Crystal Light – High-Fidelity VR for Sim Racing and Flight Designed
+      for serious sim racers and flight sim enthusiasts, the Pimax Crystal Light offers exceptional
+      clarity w...
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://trakracer.eu/products/pimax-crystal-light
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/PIMAX-CLImage1.webp?v=1761541065
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 999
         currency: USD
         url: https://trakracer.eu/products/pimax-crystal-light
         region: EU
         status: available
   - product_name: TRX SUNSET ORANGE
-    description: RACING TRX SUNSET ORANGE. cockpit frame. listed on Trakracer. Official shop listing.
-    manufacturer: RACING
+    description: Trak Racer TRX SUNSET ORANGE. cockpit frame. listed on Trakracer. Official shop listing.
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://trakracer.eu/products/racing-trx-sunset-orange
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRX-New-Orange-e_01-min.webp?v=1749000101
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 999
         currency: USD
         url: https://trakracer.eu/products/racing-trx-sunset-orange
         region: EU
         status: available
   - product_name: TRX TIFOSI RED
-    description: RACING TRX TIFOSI RED. cockpit frame. listed on Trakracer. Racing TRX Tifosi
-      Red Racing Simulator.
-    manufacturer: RACING
+    description: Trak Racer TRX TIFOSI RED. cockpit frame. listed on Trakracer. Racing TRX Tifosi Red
+      Racing Simulator.
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://trakracer.eu/products/racing-trx-tifosi-red
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRX-V2-Red_eHero.webp?v=1759351728
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 999
         currency: USD
         url: https://trakracer.eu/products/racing-trx-tifosi-red
         region: EU
         status: available
   - product_name: Simulator Assembly Service
-    description: Trakracer Simulator Assembly Service. rig mounts. listed on Trakracer. Complete
-      & custom assembly Component calibration PC setup (if applicable) Cable management
-      Final inspection Shipping of assembled rig 2 hour video call intro Ongoing remote
-      supp...
-    manufacturer: Trakracer
+    description: Trak Racer Simulator Assembly Service. rig mounts. listed on Trakracer. Complete &
+      custom assembly Component calibration PC setup (if applicable) Cable management Final
+      inspection Shipping of assembled rig 2 hour video call intro Ongoing remote supp...
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://trakracer.eu/products/simulator-assembly-service
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Assembly-Main-Image.jpg?v=1749537641
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 3000
         currency: USD
         url: https://trakracer.eu/products/simulator-assembly-service
         region: EU
         status: available
   - product_name: "Spec 1: TR8 Pro"
-    description: "Trakracer Spec 1: TR8 Pro. rig mounts. listed on Trakracer. Spec 1 Plug & Play
-      Racing Simulator – Pre-Built & Ready to Race Delivered in 2-4 weeks, the Trak Racer
-      Spec 1 is a pre-built racing simulator designed for seamless plug-and-play..."
-    manufacturer: Trakracer
+    description: "Trak Racer Spec 1: TR8 Pro. rig mounts. listed on Trakracer. Spec 1 Plug & Play Racing
+      Simulator – Pre-Built & Ready to Race Delivered in 2-4 weeks, the Trak Racer Spec 1 is a
+      pre-built racing simulator designed for seamless plug-and-play..."
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://trakracer.eu/products/spec-1-plug-and-play-simulator
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/SPEC_1_05.jpg?v=1697013984
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 7228
         currency: USD
         url: https://trakracer.eu/products/spec-1-plug-and-play-simulator
         region: EU
         status: available
   - product_name: Trak Racer Computer PC Control Box Shelf
-    description: Trakracer Trak Racer Computer PC Control Box Shelf. rig mounts. listed on
-      Trakracer. Trak Racer PC Shelf – Secure & Rigid Mounting for Your Setup The Trak Racer
-      PC Shelf is the perfect solution for mounting your control box or computer securely.
-      Designed to bolt...
-    manufacturer: Trakracer
+    description: Trak Racer Trak Racer Computer PC Control Box Shelf. rig mounts. listed on Trakracer.
+      Trak Racer PC Shelf – Secure & Rigid Mounting for Your Setup The Trak Racer PC Shelf is the
+      perfect solution for mounting your control box or computer securely. Designed to bolt...
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://trakracer.eu/products/trak-racer-computer-pc-control-box-shelf
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/45.8_Shopify.png?v=1707128926
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 79
         currency: USD
         url: https://trakracer.eu/products/trak-racer-computer-pc-control-box-shelf
         region: EU
         status: available
   - product_name: Trak Racer Wireless Gaming Headset
-    description: "Trakracer Trak Racer Wireless Gaming Headset. rig mounts. listed on Trakracer.
-      WIRELESS COMFORT FOR UP TO 12 HOURS Immerse yourself in rich, high-quality audio with
-      superior sound technology that will immerse you into your gaming world.
-      Specifications: Adj..."
-    manufacturer: Trakracer
+    description: "Trak Racer Trak Racer Wireless Gaming Headset. rig mounts. listed on Trakracer.
+      WIRELESS COMFORT FOR UP TO 12 HOURS Immerse yourself in rich, high-quality audio with superior
+      sound technology that will immerse you into your gaming world. Specifications: Adj..."
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://trakracer.eu/products/trak-racer-wireless-gaming-headset
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Copy_of_TR_HEADPHONES.2.png?v=1705417181
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: Unknown
         currency: USD
         url: https://trakracer.eu/products/trak-racer-wireless-gaming-headset
         region: EU
         status: out-of-stock
   - product_name: Universal Sim Racing & Flight Simulator Keyboard Holder for Aluminum Cockpits
-    description: Trakracer Universal Sim Racing & Flight Simulator Keyboard Holder for Aluminum
-      Cockpits. aluminum cockpit. listed on Trakracer. The Trak Racer Universal Keyboard
-      Holder is a premium, heavy-duty keyboard mount designed for sim racing and flight
-      simulation cockpits built from extruded aluminium profiles ....
-    manufacturer: Trakracer
+    description: Trak Racer Universal Sim Racing & Flight Simulator Keyboard Holder for Aluminum
+      Cockpits. aluminum cockpit. listed on Trakracer. The Trak Racer Universal Keyboard Holder is a
+      premium, heavy-duty keyboard mount designed for sim racing and flight simulation cockpits
+      built from extruded aluminium profiles ....
+    manufacturer: Trak Racer
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
     product_url: https://trakracer.eu/products/adjustable-keyboard-holder-for-aluminum-cockpits
     picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/KeyboardHolder.299.png?v=1773106065
     shops:
-      - name: Trakracer
+      - name: Trak Racer
         price: 25
         currency: USD
         url: https://trakracer.eu/products/adjustable-keyboard-holder-for-aluminum-cockpits
         region: EU
         status: available
   - product_name: Single Screen Freestanding Stand
-    description: Vnmsimulation Single Screen Freestanding Stand. rig mounts. listed on
-      Vnmsimulation. Official shop listing.
-    manufacturer: Vnmsimulation
+    description: VNM Single Screen Freestanding Stand. rig mounts. listed on Vnmsimulation. Official
+      shop listing.
+    manufacturer: VNM
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://vnmsimulation.com/vi/product/single-screen-freestanding-stand/
@@ -3003,9 +2770,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Single Screen Freestanding Stand
-    description: Vnmsimulation Single Screen Freestanding Stand. cockpit frame. listed on
-      Vnmsimulation. Official shop listing.
-    manufacturer: Vnmsimulation
+    description: VNM Single Screen Freestanding Stand. cockpit frame. listed on Vnmsimulation. Official
+      shop listing.
+    manufacturer: VNM
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://vnmsimulation.com/product/single-screen-freestanding-stand/
@@ -3018,9 +2785,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Triple Screen Freestanding Stand
-    description: Vnmsimulation Triple Screen Freestanding Stand. rig mounts. listed on
-      Vnmsimulation. Official shop listing.
-    manufacturer: Vnmsimulation
+    description: VNM Triple Screen Freestanding Stand. rig mounts. listed on Vnmsimulation. Official
+      shop listing.
+    manufacturer: VNM
     component_category: rigs-and-cockpits
     component_sub_category: rig-mounts
     product_url: https://vnmsimulation.com/vi/product/triple-screen-freestanding-stand/
@@ -3033,9 +2800,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Triple Screen Freestanding Stand
-    description: Vnmsimulation Triple Screen Freestanding Stand. cockpit frame. listed on
-      Vnmsimulation. Official shop listing.
-    manufacturer: Vnmsimulation
+    description: VNM Triple Screen Freestanding Stand. cockpit frame. listed on Vnmsimulation. Official
+      shop listing.
+    manufacturer: VNM
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://vnmsimulation.com/product/triple-screen-freestanding-stand/
@@ -3104,8 +2871,7 @@ commercial:
         region: Unknown
         status: available
   - product_name: Static Feet – Set of 4
-    description: VNM Static Feet – Set of 4. cockpit frame. listed on Vnmsimulation. Official
-      shop listing.
+    description: VNM Static Feet – Set of 4. cockpit frame. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
@@ -3119,9 +2885,8 @@ commercial:
         region: Unknown
         status: available
   - product_name: V1 (chưa có ghế)
-    description: VNM-RIG V1 (chưa có ghế). cockpit frame. listed on Vnmsimulation. Official shop
-      listing.
-    manufacturer: VNM-RIG
+    description: VNM V1 (chưa có ghế). cockpit frame. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://vnmsimulation.com/vi/product/vnm-rig-v1/
@@ -3134,8 +2899,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: V1 (excl. Seat)
-    description: VNM-RIG V1 (excl. Seat). cockpit frame. listed on Vnmsimulation. Official shop listing.
-    manufacturer: VNM-RIG
+    description: VNM V1 (excl. Seat). cockpit frame. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://vnmsimulation.com/product/vnm-rig-v1/
@@ -3148,9 +2913,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: V2 (chưa có ghế)
-    description: VNM-RIG V2 (chưa có ghế). cockpit frame. listed on Vnmsimulation. Official shop
-      listing.
-    manufacturer: VNM-RIG
+    description: VNM V2 (chưa có ghế). cockpit frame. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://vnmsimulation.com/vi/product/vnm-rig-v2/
@@ -3163,8 +2927,8 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: V2 (excl. Seat)
-    description: VNM-RIG V2 (excl. Seat). cockpit frame. listed on Vnmsimulation. Official shop listing.
-    manufacturer: VNM-RIG
+    description: VNM V2 (excl. Seat). cockpit frame. listed on Vnmsimulation. Official shop listing.
+    manufacturer: VNM
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://vnmsimulation.com/product/vnm-rig-v2/
@@ -3177,9 +2941,9 @@ commercial:
         region: Unknown
         status: out-of-stock
   - product_name: Initium Compact Race Seat
-    description: Asetek Initium Compact Race Seat. cockpit frame. listed on Asetek. High density
-      padding and durable fabric bring comfort, precision, and an authentic feel to any
-      driving experience you experience. Ultra durable fabric with red detail stitching...
+    description: Asetek Initium Compact Race Seat. cockpit frame. listed on Asetek. High density padding
+      and durable fabric bring comfort, precision, and an authentic feel to any driving experience
+      you experience. Ultra durable fabric with red detail stitching...
     manufacturer: Asetek
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
@@ -3191,10 +2955,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: GT1 Pro Sim Racing Cockpit
-    description: Sim-Lab GT1 Pro Sim Racing Cockpit. aluminum profile cockpit. in stock on
-      official EU shop. Rigid pre-drilled chassis for direct-drive wheelbases with side
-      mounts for shifters and accessories.
-    manufacturer: Sim-Lab
+    description: Sim Lab GT1 Pro Sim Racing Cockpit. aluminum profile cockpit. in stock on official EU
+      shop. Rigid pre-drilled chassis for direct-drive wheelbases with side mounts for shifters and
+      accessories.
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
     product_url: https://sim-lab.eu/en-de/products/gt1-pro-sim-racing-cockpit
@@ -3208,9 +2972,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: SPRINT Folding Cockpit
-    description: GT Omega SPRINT Folding Cockpit. foldable sim racing cockpit. in stock on
-      official UK shop. Compact cockpit with formula-inspired seating position and included
-      shifter/handbrake mount.
+    description: GT Omega SPRINT Folding Cockpit. foldable sim racing cockpit. in stock on official UK
+      shop. Compact cockpit with formula-inspired seating position and included shifter/handbrake
+      mount.
     manufacturer: GT Omega
     component_category: rigs-and-cockpits
     component_sub_category: portable-cockpit
@@ -3225,9 +2989,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Flight Simulator MSFS Edition
-    description: Next Level Racing Flight Simulator MSFS Edition. licensed flight simulator
-      cockpit. in stock on official store. Microsoft Flight Simulator edition cockpit for
-      yoke, joystick, throttle, and rudder setups.
+    description: Next Level Racing Flight Simulator MSFS Edition. licensed flight simulator cockpit. in
+      stock on official store. Microsoft Flight Simulator edition cockpit for yoke, joystick,
+      throttle, and rudder setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -3242,8 +3006,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Flight Stand Pro
-    description: Next Level Racing Flight Stand Pro. flight simulator stand. in stock on
-      official store. Stand for yoke, joystick, throttle, and rudder pedal setups.
+    description: Next Level Racing Flight Stand Pro. flight simulator stand. in stock on official store.
+      Stand for yoke, joystick, throttle, and rudder pedal setups.
     manufacturer: Next Level Racing
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -3258,9 +3022,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Pro-Sim Evolution GT
-    description: Pro-Sim Evolution GT. professional GT simulator cockpit. in stock on official
-      UK shop. Adjustable GT driving-position simulator with Sparco bucket seat as standard
-      and stocked for dispatch.
+    description: Pro-Sim Evolution GT. professional GT simulator cockpit. in stock on official UK shop.
+      Adjustable GT driving-position simulator with Sparco bucket seat as standard and stocked for
+      dispatch.
     manufacturer: Pro-Sim
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -3275,10 +3039,12 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Simulator RR3055
-    description: RaceRoom Simulator RR3055. ready-to-race simulator package. available on
-      official shop. RR55 seat simulator with tubular frame, wheel/pedal set, monitor,
-      gaming PC, and 5.1 sound system.
-    manufacturer: RaceRoom / TrackTime
+    description: RaceRoom Simulator RR3055. ready-to-race simulator package. available on official shop.
+      RR55 seat simulator with tubular frame, wheel/pedal set, monitor, gaming PC, and 5.1 sound
+      system.
+    manufacturer:
+      - RaceRoom
+      - TrackTime
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/simulator-rr3055.html
@@ -3292,10 +3058,12 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Simulator RR3033
-    description: RaceRoom Simulator RR3033. ready-to-race simulator package. available on
-      official shop. RR33 adjustable-seat simulator with tubular frame, wheel/pedal set,
-      monitor, gaming PC, and 5.1 sound system.
-    manufacturer: RaceRoom / TrackTime
+    description: RaceRoom Simulator RR3033. ready-to-race simulator package. available on official shop.
+      RR33 adjustable-seat simulator with tubular frame, wheel/pedal set, monitor, gaming PC, and
+      5.1 sound system.
+    manufacturer:
+      - RaceRoom
+      - TrackTime
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/simulator-rr3033.html
@@ -3309,10 +3077,12 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Flight Case Simulator RR4055
-    description: RaceRoom Flight Case Simulator RR4055. transportable ready-to-race simulator
-      package. available on official shop. RR55 simulator with flight case, wheel/pedal set,
-      monitor, PC, and 5.1 sound.
-    manufacturer: RaceRoom / TrackTime
+    description: RaceRoom Flight Case Simulator RR4055. transportable ready-to-race simulator package.
+      available on official shop. RR55 simulator with flight case, wheel/pedal set, monitor, PC, and
+      5.1 sound.
+    manufacturer:
+      - RaceRoom
+      - TrackTime
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/flight-case-simulator-rr4055.html
@@ -3326,10 +3096,12 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Flight Case Simulator RR4027
-    description: RaceRoom Flight Case Simulator RR4027. transportable ready-to-race simulator
-      package. available on official shop. RR27-seat simulator with flight case, wheel/pedal
-      set, monitor, PC, and 5.1 sound.
-    manufacturer: RaceRoom / TrackTime
+    description: RaceRoom Flight Case Simulator RR4027. transportable ready-to-race simulator package.
+      available on official shop. RR27-seat simulator with flight case, wheel/pedal set, monitor,
+      PC, and 5.1 sound.
+    manufacturer:
+      - RaceRoom
+      - TrackTime
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/flight-case-simulator-rr4027.html
@@ -3343,10 +3115,12 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: TrackTime Race Rig Simulator
-    description: RaceRoom / TrackTime Race Rig Simulator. assembled race simulator package.
-      available on official shop. Race Rig frame with TT07 bucket seat, 49 in Samsung
-      Odyssey monitor, Lenovo gaming PC, and RaceRoom hardware/software package.
-    manufacturer: RaceRoom / TrackTime
+    description: RaceRoom / TrackTime Race Rig Simulator. assembled race simulator package. available on
+      official shop. Race Rig frame with TT07 bucket seat, 49 in Samsung Odyssey monitor, Lenovo
+      gaming PC, and RaceRoom hardware/software package.
+    manufacturer:
+      - RaceRoom
+      - TrackTime
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
     product_url: https://www.raceroomstore.com/shop_en/tracktime-game-seat-tt3033-basic-bundle-691.html
@@ -3360,9 +3134,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: GP RIG II
-    description: Sparco GP Rig II. complete formula simulator rig. current on official German
-      shop. GP Pro simulator package with Fanatec sim kit, P310 Open wheel, PC, keyboard
-      stand, and monitor.
+    description: Sparco GP Rig II. complete formula simulator rig. current on official German shop. GP
+      Pro simulator package with Fanatec sim kit, P310 Open wheel, PC, keyboard stand, and monitor.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: formula-cockpit
@@ -3377,9 +3150,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: GT-R RIG II - CIRCUIT II
-    description: Sparco GT-R Rig II Circuit II. complete GT simulator rig. current on official
-      German shop. GT-R Pro package with Fanatec sim kit, R330 leather wheel, PC, keyboard
-      stand, and monitor.
+    description: Sparco GT-R Rig II Circuit II. complete GT simulator rig. current on official German
+      shop. GT-R Pro package with Fanatec sim kit, R330 leather wheel, PC, keyboard stand, and
+      monitor.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -3394,9 +3167,8 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: KIT KART RIG II
-    description: Sparco Kart Rig II. complete kart simulator rig. current on official German
-      shop. Kart Pro simulator package with Fanatec sim kit, KG345 wheel, PC, keyboard
-      stand, and monitor.
+    description: Sparco Kart Rig II. complete kart simulator rig. current on official German shop. Kart
+      Pro simulator package with Fanatec sim kit, KG345 wheel, PC, keyboard stand, and monitor.
     manufacturer: Sparco
     component_category: rigs-and-cockpits
     component_sub_category: racing-cockpit
@@ -3411,10 +3183,10 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Pro Sim Racing Cockpit
-    description: GT1 Pro Sim Racing Cockpit. cockpit frame. listed on Sim Lab. The GT1 Pro
-      redefines accessible high-end sim racing with its rigid design, effortless assembly,
-      and flex-free mounting, complete with side mounts for shifters and accessories....
-    manufacturer: GT1
+    description: Sim Lab Pro Sim Racing Cockpit. cockpit frame. listed on Sim Lab. The GT1 Pro redefines
+      accessible high-end sim racing with its rigid design, effortless assembly, and flex-free
+      mounting, complete with side mounts for shifters and accessories....
+    manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-frame
     product_url: https://sim-lab.eu/products/gt1-pro-sim-racing-cockpit-int
@@ -3429,9 +3201,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Sim Floor Mat
-    description: Sim Lab Sim Floor Mat. rig mounts. listed on Sim Lab. Anti-slip floor mat.
-      Ideal for floor protection and adding finishing touches to your cockpit. Compatible
-      with all Sim-Lab cockpits, with enough space to fit the monitor mounts....
+    description: Sim Lab Sim Floor Mat. rig mounts. listed on Sim Lab. Anti-slip floor mat. Ideal for
+      floor protection and adding finishing touches to your cockpit. Compatible with all Sim-Lab
+      cockpits, with enough space to fit the monitor mounts....
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -3452,10 +3224,9 @@ commercial:
         last_updated: 2026-05-01
     last_updated: 2026-05-01
   - product_name: Speaker mounting brackets (set)
-    description: Sim Lab Speaker mounting brackets (set). rig mounts. listed on Sim Lab. These
-      speaker mounts let you mount your speakers onto an aluminum frame. The brackets are
-      made for speakers with an M6 mounting hole and are sold as a set of 2 (left and right
-      v...
+    description: Sim Lab Speaker mounting brackets (set). rig mounts. listed on Sim Lab. These speaker
+      mounts let you mount your speakers onto an aluminum frame. The brackets are made for speakers
+      with an M6 mounting hole and are sold as a set of 2 (left and right v...
     manufacturer: Sim Lab
     component_category: rigs-and-cockpits
     component_sub_category: rig-accessories
@@ -3479,10 +3250,10 @@ commercial:
     last_updated: 2026-05-01
 opensource:
   - project_name: DIY Aluminium Profile Sim Rig
-    description: DIY Aluminium Profile Sim Rig. aluminum profile cockpit. Personal build design;
-      README includes cockpit updates through 2025, but project is still a shared plan
-      rather than a maintained product line. Compact 40 mm aluminum extrusion cockpit
-      inspired by Sim-Lab GT1 Evo and P1-X geometry.
+    description: DIY Aluminium Profile Sim Rig. aluminum profile cockpit. Personal build design; README
+      includes cockpit updates through 2025, but project is still a shared plan rather than a
+      maintained product line. Compact 40 mm aluminum extrusion cockpit inspired by Sim-Lab GT1 Evo
+      and P1-X geometry.
     maker: djpr1me
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit
@@ -3490,20 +3261,21 @@ opensource:
     project_url: https://github.com/djpr1me/Sim-Rig-Cockpit
     picture_url: https://raw.githubusercontent.com/djpr1me/Sim-Rig-Cockpit/main/pr1me_simrig_rotated_pedals.png
   - project_name: MobiFlight panel design templates
-    description: MobiFlight Panel Design Templates. home cockpit panel templates. Work in
-      progress; latest GitHub release captured from 2021, but broader MobiFlight ecosystem
-      remains active. Open SVG cockpit-panel design template based on Dzus/MS25212C-style
-      aircraft panel dimensions.
-    maker: MobiFlight community / Tuomas Kuosmanen and contributors
+    description: MobiFlight Panel Design Templates. home cockpit panel templates. Work in progress;
+      latest GitHub release captured from 2021, but broader MobiFlight ecosystem remains active.
+      Open SVG cockpit-panel design template based on Dzus/MS25212C-style aircraft panel dimensions.
+    maker:
+      - MobiFlight community
+      - Tuomas Kuosmanen and contributors
     component_category: rigs-and-cockpits
     component_sub_category: cockpit-plans
     license: GPL-3.0
     project_url: https://github.com/MobiFlight/mobiflight-templates
     picture_url: https://user-images.githubusercontent.com/2587818/119951371-8b725600-bfa4-11eb-8002-0fe23cdbc718.png
   - project_name: OpenHarrier AV8B-NA
-    description: OpenHarrier AV8B-NA. full-scale flight cockpit. Active/open project; GitHub org
-      shows AV8B-NA repo updated January 2026. Open source design for a full-scale AV-8B
-      Harrier simulation cockpit.
+    description: OpenHarrier AV8B-NA. full-scale flight cockpit. Active/open project; GitHub org shows
+      AV8B-NA repo updated January 2026. Open source design for a full-scale AV-8B Harrier
+      simulation cockpit.
     maker: OpenHarrier
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
@@ -3511,21 +3283,21 @@ opensource:
     project_url: https://github.com/OpenHarrier/AV8B-NA
     picture_url: https://openharrier.org/wp-content/uploads/2023/06/20230523_204630.jpg
   - project_name: OpenHornet
-    description: OpenHornet. full-scale flight cockpit. Public beta hardware build package;
-      latest captured GitHub release is v0.3.0 "Advancing the Airframe" in April 2026
-      [uncertain year from GitHub page]. Open hardware package for a high-fidelity F/A-18C
-      simulator cockpit.
-    maker: OpenHornet / jrsteensen and contributors
+    description: OpenHornet. full-scale flight cockpit. Public beta hardware build package; latest
+      captured GitHub release is v0.3.0 "Advancing the Airframe" in April 2026 [uncertain year from
+      GitHub page]. Open hardware package for a high-fidelity F/A-18C simulator cockpit.
+    maker:
+      - OpenHornet
+      - jrsteensen and contributors
     component_category: rigs-and-cockpits
     component_sub_category: flight-cockpit
-    license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International for
-      OpenHornet works
+    license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International for OpenHornet works
     project_url: https://github.com/jrsteensen/OpenHornet
     picture_url: https://openhornet.com/wp-content/uploads/2018/04/open_hornet_horizontal_final-300x47.png
   - project_name: theta-8020-3dof
-    description: OpenSimCraft theta-8020-3dof. aluminum profile motion cockpit. Dormant public
-      design; GitHub org shows last activity around 2020 for this chassis [uncertain].
-      3-degrees-of-freedom sim racing chassis built from 80/20 T-slot aluminum extrusion.
+    description: OpenSimCraft theta-8020-3dof. aluminum profile motion cockpit. Dormant public design;
+      GitHub org shows last activity around 2020 for this chassis [uncertain]. 3-degrees-of-freedom
+      sim racing chassis built from 80/20 T-slot aluminum extrusion.
     maker: OpenSimCraft
     component_category: rigs-and-cockpits
     component_sub_category: aluminum-cockpit

@@ -49,8 +49,8 @@
     product_name?: string;
     project_name?: string;
     description: string | null;
-    manufacturer?: string | null;
-    maker?: string | null;
+    manufacturer?: string | string[] | null;
+    maker?: string | string[] | null;
     component_category: string;
     component_sub_category: string | null;
     product_url?: string | null;
@@ -127,6 +127,7 @@
   const pageSizeOptions = [10, 24, 48, 96];
   const defaultSortKey: SortKey = 'name-asc';
   const defaultPageSize = 10;
+  const loadingSkeletonRows = Array.from({ length: 4 });
 
   const QUERY_PARAM_KEYS = {
     query: 'q',
@@ -248,7 +249,7 @@
     commercial: products.filter((product) => product.kind === 'commercial').length,
     opensource: products.filter((product) => product.kind === 'opensource').length,
     categories: new Set(products.map((product) => product.component_category)).size,
-    makers: new Set(products.map((product) => makerName(product)).filter(Boolean)).size,
+    makers: new Set(products.flatMap((product) => makerNames(product))).size,
   }));
 
   let kindOptions = $derived(buildOptions(filterProductsForOptions('kind'), (product) => product.kind, kindLabel));
@@ -258,7 +259,7 @@
   let groupOptions = $derived(
     buildOptions(filterProductsForOptions('group'), componentGroup, subCategoryLabel)
   );
-  let makerOptions = $derived(buildOptions(filterProductsForOptions('maker'), makerName, (value) => value));
+  let makerOptions = $derived(buildOptions(filterProductsForOptions('maker'), makerNames, (value) => value));
   let availabilityOptions = $derived(
     buildOptions(
       filterProductsForOptions('availability'),
@@ -282,7 +283,7 @@
       .filter((product) => matchesFilter(kindFilter, product.kind))
       .filter((product) => matchesFilter(categoryFilter, product.component_category))
       .filter((product) => matchesFilter(groupFilter, componentGroup(product)))
-      .filter((product) => matchesFilter(makerFilter, makerName(product)))
+      .filter((product) => matchesAnyFilter(makerFilter, makerNames(product)))
       .filter((product) => matchesFilter(availabilityFilter, availabilityBucket(product)))
       .filter((product) => matchesFilter(licenseFilter, licenseBucket(product)))
       .toSorted(compareProducts);
@@ -405,7 +406,17 @@
   }
 
   function makerName(product: Product): string {
-    return product.manufacturer ?? product.maker ?? '';
+    return makerNames(product).join(' / ');
+  }
+
+  function makerNames(product: Product): string[] {
+    if (Array.isArray(product.manufacturer)) {
+      return product.manufacturer.filter(Boolean);
+    }
+    if (Array.isArray(product.maker)) {
+      return product.maker.filter(Boolean);
+    }
+    return [product.manufacturer ?? product.maker ?? ''].filter(Boolean);
   }
 
   function displayName(product: Product): string {
@@ -597,7 +608,7 @@
   }
 
   function applyMakerFilter(product: Product): void {
-    const maker = makerName(product);
+    const [maker] = makerNames(product);
     if (maker) {
       toggleFilterValue(makerFilter, maker);
     }
@@ -622,7 +633,7 @@
         product.component_category,
         product.component_sub_category,
         product.component_sub_category ? subCategoryLabel(product.component_sub_category) : null,
-        makerName(product),
+        makerNames(product).join(' '),
         product.description,
         product.product_url,
         product.project_url,
@@ -644,22 +655,27 @@
     return filter.length === 0 || (value !== null && filter.includes(value));
   }
 
+  function matchesAnyFilter(filter: FilterValue, values: string[]): boolean {
+    return filter.length === 0 || values.some((value) => filter.includes(value));
+  }
+
   function buildOptions(
     sourceProducts: Product[],
-    getValue: (product: Product) => string | null,
+    getValue: (product: Product) => string | string[] | null,
     getLabel: (value: string) => string
   ): Option[] {
     const options: Option[] = [];
 
     for (const product of sourceProducts) {
-      const value = getValue(product);
-      if (!value) continue;
+      const values = [getValue(product)].flat().filter((value): value is string => Boolean(value));
 
-      const option = options.find((candidate) => candidate.value === value);
-      if (option) {
-        option.count += 1;
-      } else {
-        options.push({ value, label: getLabel(value), count: 1 });
+      for (const value of values) {
+        const option = options.find((candidate) => candidate.value === value);
+        if (option) {
+          option.count += 1;
+        } else {
+          options.push({ value, label: getLabel(value), count: 1 });
+        }
       }
     }
 
@@ -674,7 +690,7 @@
       .filter((product) => exclude === 'kind' || matchesFilter(kindFilter, product.kind))
       .filter((product) => exclude === 'category' || matchesFilter(categoryFilter, product.component_category))
       .filter((product) => exclude === 'group' || matchesFilter(groupFilter, componentGroup(product)))
-      .filter((product) => exclude === 'maker' || matchesFilter(makerFilter, makerName(product)))
+      .filter((product) => exclude === 'maker' || matchesAnyFilter(makerFilter, makerNames(product)))
       .filter((product) => exclude === 'availability' || matchesFilter(availabilityFilter, availabilityBucket(product)))
       .filter((product) => exclude === 'license' || matchesFilter(licenseFilter, licenseBucket(product)));
   }
@@ -1032,7 +1048,7 @@
     );
     makerFilter = normalizeFilterValues(
       makerFilter,
-      buildOptions(filterProductsForOptions('maker'), makerName, (value) => value)
+      buildOptions(filterProductsForOptions('maker'), makerNames, (value) => value)
     );
     availabilityFilter = normalizeFilterValues(
       availabilityFilter,
@@ -1168,6 +1184,7 @@
   <div
     class="grid auto-rows-fr gap-3 [grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))]"
     aria-label="Product totals"
+    aria-busy={loadState === 'loading'}
   >
     <article class="rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(13,19,30,0.55)] px-4 py-3">
       <div class="flex items-center gap-3">
@@ -1179,7 +1196,12 @@
         </span>
         <div>
           <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Products</p>
-          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.all)}</strong>
+          {#if loadState === 'loading'}
+            <span class="mt-1 block h-8 w-20 animate-pulse rounded-full bg-[rgba(255,255,255,0.14)]" aria-hidden="true"></span>
+            <span class="sr-only">Loading product count...</span>
+          {:else}
+            <strong class="block text-[1.9rem] leading-none">{formatCount(totals.all)}</strong>
+          {/if}
         </div>
       </div>
     </article>
@@ -1192,7 +1214,12 @@
         </span>
         <div>
           <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Commercial</p>
-          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.commercial)}</strong>
+          {#if loadState === 'loading'}
+            <span class="mt-1 block h-8 w-20 animate-pulse rounded-full bg-[rgba(255,255,255,0.14)]" aria-hidden="true"></span>
+            <span class="sr-only">Loading commercial count...</span>
+          {:else}
+            <strong class="block text-[1.9rem] leading-none">{formatCount(totals.commercial)}</strong>
+          {/if}
         </div>
       </div>
     </article>
@@ -1207,7 +1234,12 @@
         </span>
         <div>
           <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Open Source</p>
-          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.opensource)}</strong>
+          {#if loadState === 'loading'}
+            <span class="mt-1 block h-8 w-20 animate-pulse rounded-full bg-[rgba(255,255,255,0.14)]" aria-hidden="true"></span>
+            <span class="sr-only">Loading open source count...</span>
+          {:else}
+            <strong class="block text-[1.9rem] leading-none">{formatCount(totals.opensource)}</strong>
+          {/if}
         </div>
       </div>
     </article>
@@ -1223,7 +1255,12 @@
         </span>
         <div>
           <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Categories</p>
-          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.categories)}</strong>
+          {#if loadState === 'loading'}
+            <span class="mt-1 block h-8 w-20 animate-pulse rounded-full bg-[rgba(255,255,255,0.14)]" aria-hidden="true"></span>
+            <span class="sr-only">Loading category count...</span>
+          {:else}
+            <strong class="block text-[1.9rem] leading-none">{formatCount(totals.categories)}</strong>
+          {/if}
         </div>
       </div>
     </article>
@@ -1239,7 +1276,12 @@
         </span>
         <div>
           <p class="m-0 text-[0.75rem] font-[650] text-[var(--sl-color-gray-2)]">Makers</p>
-          <strong class="block text-[1.9rem] leading-none">{formatCount(totals.makers)}</strong>
+          {#if loadState === 'loading'}
+            <span class="mt-1 block h-8 w-20 animate-pulse rounded-full bg-[rgba(255,255,255,0.14)]" aria-hidden="true"></span>
+            <span class="sr-only">Loading maker count...</span>
+          {:else}
+            <strong class="block text-[1.9rem] leading-none">{formatCount(totals.makers)}</strong>
+          {/if}
         </div>
       </div>
     </article>
@@ -1460,7 +1502,10 @@
     >
       <div class="flex items-center justify-between gap-3 border-b border-[var(--sl-color-gray-5)] px-4 py-3 max-[56rem]:flex-col max-[56rem]:items-stretch">
         {#if loadState === 'loading'}
-          <p class="m-0 text-[0.92rem] text-[var(--sl-color-gray-2)]" aria-live="polite">Loading products...</p>
+          <div class="inline-flex items-center gap-2 text-[0.92rem] text-[var(--sl-color-gray-2)]" aria-live="polite">
+            <span class="h-4 w-4 animate-spin rounded-full border-2 border-[var(--sl-color-gray-5)] border-t-[var(--sl-color-accent)]" aria-hidden="true"></span>
+            <span>Loading products...</span>
+          </div>
         {:else if loadState === 'error'}
           <p class="m-0 text-[0.92rem] text-[var(--sl-color-gray-2)]" aria-live="polite">Load failed.</p>
         {:else}
@@ -1527,7 +1572,32 @@
 
       <div class="grid min-h-0 content-start gap-3 overflow-auto p-4 max-[72rem]:overflow-visible">
         {#if loadState === 'loading'}
-          <p class="m-0 rounded-[14px] border border-[var(--sl-color-gray-5)] px-4 py-6 text-[var(--sl-color-gray-2)]">Loading products...</p>
+          <div class="grid gap-3" role="status" aria-live="polite" aria-busy="true">
+            <span class="sr-only">Loading products...</span>
+            {#each loadingSkeletonRows as _, index (index)}
+              <article class="grid min-h-[10.5rem] gap-4 rounded-[14px] border border-[var(--sl-color-gray-5)] bg-[rgba(12,18,28,0.72)] p-3 [grid-template-columns:minmax(0,1fr)] min-[56.01rem]:[grid-template-columns:9rem_minmax(0,1fr)] min-[80.01rem]:[grid-template-columns:10.5rem_minmax(0,1fr)_11.5rem]">
+                <div class="aspect-square w-full animate-pulse rounded-[10px] border border-[var(--sl-color-gray-5)] bg-[rgba(255,255,255,0.08)] max-[56rem]:order-first"></div>
+                <div class="grid min-w-0 content-start gap-3">
+                  <div class="h-4 w-28 animate-pulse rounded-full bg-[rgba(255,255,255,0.1)]"></div>
+                  <div class="h-6 w-3/4 animate-pulse rounded-full bg-[rgba(255,255,255,0.14)]"></div>
+                  <div class="grid gap-2">
+                    <div class="h-3 w-full animate-pulse rounded-full bg-[rgba(255,255,255,0.08)]"></div>
+                    <div class="h-3 w-5/6 animate-pulse rounded-full bg-[rgba(255,255,255,0.08)]"></div>
+                    <div class="h-3 w-2/3 animate-pulse rounded-full bg-[rgba(255,255,255,0.08)]"></div>
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    <div class="h-6 w-24 animate-pulse rounded-full bg-[rgba(255,255,255,0.1)]"></div>
+                    <div class="h-6 w-32 animate-pulse rounded-full bg-[rgba(255,255,255,0.1)]"></div>
+                  </div>
+                </div>
+                <div class="grid content-start gap-3 border-t border-[var(--sl-color-gray-5)] pt-3 min-[80.01rem]:border-l min-[80.01rem]:border-t-0 min-[80.01rem]:pl-4 min-[80.01rem]:pt-0">
+                  <div class="h-7 w-28 animate-pulse rounded-full bg-[rgba(255,255,255,0.14)]"></div>
+                  <div class="h-4 w-20 animate-pulse rounded-full bg-[rgba(255,255,255,0.08)]"></div>
+                  <div class="h-9 w-full animate-pulse rounded-[10px] bg-[rgba(255,255,255,0.1)]"></div>
+                </div>
+              </article>
+            {/each}
+          </div>
         {:else if loadState === 'error'}
           <p class="m-0 rounded-[14px] border border-[var(--sl-color-gray-5)] px-4 py-6 text-[var(--sl-color-gray-2)]">{loadError}</p>
         {:else}

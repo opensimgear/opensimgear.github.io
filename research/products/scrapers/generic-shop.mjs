@@ -6,6 +6,7 @@ import { basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse, stringify } from 'yaml';
 import { fanatecShopName, inferFanatecRegion, isFanatecShop, scrapeFanatec } from './libs/fanatec.mjs';
+import { inferSimagicCategory, isSimagicShop, normalizeSimagicProduct, simagicShopName } from './libs/simagic.mjs';
 import { inferWinCtrlRegion, isWinCtrlShop, scrapeWinCtrl, winCtrlShopName } from './libs/winctrl.mjs';
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
@@ -176,7 +177,7 @@ async function scrapeShop(url) {
   const base = new URL(url);
   await assertUrlReachable(base);
 
-  const shopName = shopNameOverride ?? winCtrlShopName(base) ?? fanatecShopName(base) ?? hostShopName(base.hostname);
+  const shopName = shopNameOverride ?? winCtrlShopName(base) ?? fanatecShopName(base) ?? simagicShopName(base) ?? mozaShopName(base) ?? hostShopName(base.hostname);
   const region = regionOverride ?? inferWinCtrlRegion(base) ?? inferFanatecRegion(base) ?? inferShopRegion(base);
 
   verbose(`shop name: ${shopName}`);
@@ -254,7 +255,7 @@ async function scrapeShop(url) {
     startUrl: base.toString(),
     shopName,
     region,
-    products: uniqueProducts(products).sort((a, b) => a.name.localeCompare(b.name)),
+    products: uniqueProducts(products).map(normalizeSimagicProduct).sort((a, b) => a.name.localeCompare(b.name)),
   };
 }
 
@@ -616,12 +617,13 @@ function buildProductIndex(databases, generatedProducts) {
   for (const [category, database] of Object.entries(databases)) {
     for (const product of database.data.commercial) {
       const generated = generatedProducts.find((item) => generatedMatchesYaml(item, product, category));
+      const manufacturer = displayManufacturer(product.manufacturer);
       records.push({
-        id: generated?.id ?? `commercial:${category}:${slugify(`${product.manufacturer} ${product.product_name}`)}`,
+        id: generated?.id ?? `commercial:${category}:${slugify(`${manufacturer} ${product.product_name}`)}`,
         category,
         database,
         product,
-        searchName: normalizeName(`${product.manufacturer} ${product.product_name}`),
+        searchName: normalizeName(`${manufacturer} ${product.product_name}`),
         productName: normalizeName(product.product_name),
         urls: productUrls(product).map(urlKey),
       });
@@ -636,7 +638,7 @@ function generatedMatchesYaml(generated, product, category) {
     generated.kind === 'commercial' &&
     generated.component_category === category &&
     generated.product_name === product.product_name &&
-    generated.manufacturer === product.manufacturer
+    displayManufacturer(generated.manufacturer) === displayManufacturer(product.manufacturer)
   );
 }
 
@@ -661,7 +663,7 @@ function matchProduct(index, found, inferredCategory) {
 
   for (const record of index) {
     if (namedManufacturers.size) {
-      const recordManufacturer = normalizeName(record.product.manufacturer);
+      const recordManufacturer = normalizeName(displayManufacturer(record.product.manufacturer));
       if (![...namedManufacturers].some((manufacturer) => recordManufacturer.includes(manufacturer) || manufacturer.includes(recordManufacturer))) {
         continue;
       }
@@ -792,9 +794,10 @@ function missingShopFields(existingShop, shop) {
 
 function newProduct(action) {
   const name = cleanProductName(action.found.name, action.manufacturer);
+  const manufacturer = displayManufacturer(action.manufacturer);
   return {
     product_name: name,
-    description: `${action.manufacturer} ${name}. ${labelFromSlug(action.subCategory).toLowerCase()}. listed on ${action.shop.name}. ${sentence(action.found.description)}`.trim(),
+    description: `${manufacturer} ${name}. ${labelFromSlug(action.subCategory).toLowerCase()}. listed on ${action.shop.name}. ${sentence(action.found.description)}`.trim(),
     manufacturer: action.manufacturer,
     component_category: action.category,
     component_sub_category: action.subCategory,
@@ -894,7 +897,13 @@ function normalizeShopStatus(value) {
 }
 
 function inferCategory(product) {
+  const simagicCategory = inferSimagicCategory(product);
+  if (simagicCategory) return simagicCategory;
+
   const text = normalizeName(`${product.name} ${(product.categories ?? []).join(' ')} ${product.url}`);
+  if (hasAny(text, ['bass shaker', 'buttkicker', 'tactile transducer', 'haptic feedback', 'haptic bass'])) {
+    return { category: 'tactile-feedback', subCategory: text.includes('kit') ? 'seat-haptics' : 'tactile-transducer' };
+  }
   if (hasAny(text, ['pedal', 'pedals', 'loadcell', 'load cell'])) {
     return { category: 'pedals', subCategory: text.includes('hydraulic') ? 'hydraulic-pedals' : text.includes('load') ? 'load-cell-pedals' : 'two-pedal-set' };
   }
@@ -925,9 +934,23 @@ function inferCategory(product) {
 
 function inferManufacturer(product, shopName) {
   if (manufacturerOverride) return manufacturerOverride;
+  if (isShopUrl(product.url, isSimagicShop)) return shopName;
   const words = cleanText(product.name).split(/\s+/);
   const first = words[0] ?? shopName;
+  if (isSpecificationToken(first)) return shopName;
   return /^[A-Z0-9-]{2,}$/.test(first) ? first : shopName;
+}
+
+function isShopUrl(value, predicate) {
+  try {
+    return predicate(new URL(value));
+  } catch {
+    return false;
+  }
+}
+
+function isSpecificationToken(value) {
+  return /^(?:\d+(?:\.\d+)?(?:w|kw|nm|mm|cm|kg|ch|dof)|\d+ch)$/i.test(String(value ?? ''));
 }
 
 function isUsefulShopProduct(product) {
@@ -1248,7 +1271,11 @@ function normalizeName(value) {
 }
 
 function cleanProductName(name, manufacturer) {
-  return cleanText(name).replace(new RegExp(`^${escapeRegExp(manufacturer)}\\s+`, 'i'), '').trim();
+  return cleanText(name).replace(new RegExp(`^${escapeRegExp(displayManufacturer(manufacturer))}\\s+`, 'i'), '').trim();
+}
+
+function displayManufacturer(value) {
+  return Array.isArray(value) ? value.filter(Boolean).join(' / ') : String(value ?? '');
 }
 
 function cleanText(value) {
@@ -1310,7 +1337,7 @@ function modelTokens(value) {
 function manufacturerNamesIn(foundName, index) {
   const manufacturers = new Set();
   for (const record of index) {
-    const manufacturer = normalizeName(record.product.manufacturer);
+    const manufacturer = normalizeName(displayManufacturer(record.product.manufacturer));
     if (manufacturer && foundName.includes(manufacturer)) manufacturers.add(manufacturer);
   }
   return manufacturers;
@@ -1345,6 +1372,10 @@ function hostShopName(hostname) {
     .split(/[-_]/)
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(' ');
+}
+
+function mozaShopName(url) {
+  return /(^|\.)mozaracing\.com$/i.test(url.hostname) ? 'MOZA' : null;
 }
 
 function inferShopRegion(url) {

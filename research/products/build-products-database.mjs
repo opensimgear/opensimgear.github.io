@@ -71,6 +71,25 @@ function productDisplayName(product) {
   return product.product_name ?? product.project_name ?? '';
 }
 
+function canonicalNameList(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => item?.toString().trim()).filter(Boolean);
+  }
+
+  const name = value?.toString().trim() ?? '';
+  if (!name) return [];
+  return [name];
+}
+
+function canonicalNameValue(value) {
+  const names = canonicalNameList(value);
+  return names.length <= 1 ? (names[0] ?? '') : names;
+}
+
+function displayNameList(value) {
+  return canonicalNameList(value).join(' / ');
+}
+
 function primaryUrl(product) {
   return product.product_url ?? product.project_url ?? null;
 }
@@ -111,7 +130,7 @@ function canonicalProduct(product, kind) {
       picture_url: pictureUrl,
       product_name: product.product_name?.toString() ?? '',
       description: product.description?.toString() ?? '',
-      manufacturer: product.manufacturer?.toString() ?? '',
+      manufacturer: canonicalNameValue(product.manufacturer),
       component_category: product.component_category?.toString() ?? '',
       component_sub_category: product.component_sub_category?.toString() ?? '',
       license: 'Commercial',
@@ -134,7 +153,7 @@ function canonicalProduct(product, kind) {
     picture_url: pictureUrl,
     project_name: product.project_name?.toString() ?? '',
     description: product.description?.toString() ?? '',
-    maker: product.maker?.toString() ?? '',
+    maker: canonicalNameValue(product.maker),
     component_category: product.component_category?.toString() ?? '',
     component_sub_category: product.component_sub_category?.toString() ?? '',
     license: product.license?.toString() ?? '',
@@ -212,7 +231,7 @@ function assignStableIds(products, stableProducts) {
 
   return products.map((product) => {
     const stableProduct = findStableProduct(product, lookup);
-    const maker = product.manufacturer ?? product.maker ?? '';
+    const maker = displayNameList(product.manufacturer ?? product.maker);
     const generatedSlug = slugify([maker, productDisplayName(product)].filter(Boolean).join(' '));
     const baseSlug = stableProduct?.slug ?? generatedSlug;
     const baseId = stableProduct?.id ?? `${product.kind}:${product.component_category}:${baseSlug}`;
@@ -276,7 +295,7 @@ function databaseFor(products) {
         slug: 'Stable route slug.',
         product_name: 'Product display name.',
         description: 'Short product description.',
-        manufacturer: 'Product manufacturer.',
+        manufacturer: 'Product manufacturer list.',
         component_category: 'Primary component category.',
         component_sub_category: 'Component subcategory slug.',
         license: 'Commercial.',

@@ -1,7 +1,7 @@
 commercial:
   - product_name: ButtKicker Advance
-    description: ButtKicker Advance. mid-size standalone tactile transducer. available from
-      official store. 4 ohm low-frequency transducer.
+    description: ButtKicker Advance. mid-size standalone tactile transducer. available from official
+      store. 4 ohm low-frequency transducer.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
     component_sub_category: tactile-transducer
@@ -14,9 +14,9 @@ commercial:
         url: https://thebuttkicker.com/products/buttkicker-advance-haptic-transducer
         region: US
   - product_name: ButtKicker Gamer PLUS
-    description: ButtKicker Gamer PLUS. seat-mounted tactile transducer kit. available from
-      official store. Complete kit with Gamer PLUS transducer, BKA-PLUS amplifier, universal
-      clamp, cables, and mounting feet.
+    description: ButtKicker Gamer PLUS. seat-mounted tactile transducer kit. available from official
+      store. Complete kit with Gamer PLUS transducer, BKA-PLUS amplifier, universal clamp, cables,
+      and mounting feet.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
     component_sub_category: seat-haptics
@@ -29,9 +29,9 @@ commercial:
         url: https://thebuttkicker.com/products/buttkicker-gamer-plus
         region: US
   - product_name: ButtKicker Gamer PRO
-    description: ButtKicker Gamer PRO. seat-mounted tactile transducer kit. official store
-      showed sold out in captured page. Complete kit with Gamer PRO transducer, BKA-PRO
-      amplifier, universal clamp, and cables.
+    description: ButtKicker Gamer PRO. seat-mounted tactile transducer kit. official store showed sold
+      out in captured page. Complete kit with Gamer PRO transducer, BKA-PRO amplifier, universal
+      clamp, and cables.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
     component_sub_category: seat-haptics
@@ -44,8 +44,8 @@ commercial:
         url: https://thebuttkicker.com/products/buttkicker-gamer-pro
         region: US
   - product_name: ButtKicker LFE
-    description: ButtKicker LFE. high-output standalone tactile transducer. available from
-      official store. 4 ohm large low-frequency transducer.
+    description: ButtKicker LFE. high-output standalone tactile transducer. available from official
+      store. 4 ohm large low-frequency transducer.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
     component_sub_category: tactile-transducer
@@ -58,8 +58,8 @@ commercial:
         url: https://thebuttkicker.com/products/buttkicker-lfe-haptic-transducer
         region: US
   - product_name: ButtKicker Mini LFE
-    description: ButtKicker Mini LFE. standalone tactile transducer. available from official
-      store. 4 ohm low-frequency transducer.
+    description: ButtKicker Mini LFE. standalone tactile transducer. available from official store. 4
+      ohm low-frequency transducer.
     manufacturer: ButtKicker Haptics
     component_category: tactile-feedback
     component_sub_category: tactile-transducer
@@ -72,8 +72,8 @@ commercial:
         url: https://thebuttkicker.com/products/buttkicker-mini-lfe-haptic-transducer
         region: US
   - product_name: Dayton Audio BST-1 High Power Pro Tactile Bass Shaker
-    description: Dayton Audio BST-1. budget standalone bass shaker. available via Dayton Audio
-      buying links and retailers. 50 W tactile bass shaker.
+    description: Dayton Audio BST-1. budget standalone bass shaker. available via Dayton Audio buying
+      links and retailers. 50 W tactile bass shaker.
     manufacturer: Dayton Audio
     component_category: tactile-feedback
     component_sub_category: tactile-transducer
@@ -81,8 +81,8 @@ commercial:
     picture_url: https://www.daytonaudio.com/images/product/medium/1245.jpg
     shops: []
   - product_name: Dayton Audio BST-300EX Extreme High Power Pro Tactile Bass Shaker
-    description: Dayton Audio BST-300EX. high-power standalone bass shaker. available via Dayton
-      Audio buying links and retailers. 300 W tactile bass shaker.
+    description: Dayton Audio BST-300EX. high-power standalone bass shaker. available via Dayton Audio
+      buying links and retailers. 300 W tactile bass shaker.
     manufacturer: Dayton Audio
     component_category: tactile-feedback
     component_sub_category: tactile-transducer
@@ -104,8 +104,8 @@ commercial:
     picture_url: https://www.daytonaudio.com/images/product/medium/1104.jpg
     shops: []
   - product_name: HF8 Haptic Feedback Gaming Pad
-    description: Next Level Racing HF8 Haptic Gaming Pad. haptic seat pad. in stock on official
-      store. Seat pad with 8 vibration zones/motors.
+    description: Next Level Racing HF8 Haptic Gaming Pad. haptic seat pad. in stock on official store.
+      Seat pad with 8 vibration zones/motors.
     manufacturer: Next Level Racing
     component_category: tactile-feedback
     component_sub_category: seat-haptics
@@ -118,8 +118,8 @@ commercial:
         url: https://nextlevelracing.com/product/hf8-haptic-gaming-pad/
         region: US
   - product_name: HF8 Pro Haptic Feedback Pad
-    description: Next Level Racing HF8 Pro Haptic Feedback Pad. haptic seat pad. in stock on
-      official store. Updated haptic feedback pad with stronger motors than HF8.
+    description: Next Level Racing HF8 Pro Haptic Feedback Pad. haptic seat pad. in stock on official
+      store. Updated haptic feedback pad with stronger motors than HF8.
     manufacturer: Next Level Racing
     component_category: tactile-feedback
     component_sub_category: seat-haptics
@@ -132,8 +132,8 @@ commercial:
         url: https://nextlevelracing.com/product/hf8-pro-haptic-feedback-pad/
         region: US
   - product_name: ERS3 Haptic Feedback Sim Racing Seat
-    description: Next Level Racing ERS3 Haptic Feedback Sim Racing Seat. haptic reclining sim
-      racing seat. in stock on official store. ERS3 seat with integrated haptic feedback.
+    description: Next Level Racing ERS3 Haptic Feedback Sim Racing Seat. haptic reclining sim racing
+      seat. in stock on official store. ERS3 seat with integrated haptic feedback.
     manufacturer: Next Level Racing
     component_category: tactile-feedback
     component_sub_category: seat-haptics
@@ -160,8 +160,8 @@ commercial:
         url: https://earthquakesound.com/product/mqb-1-2/
         region: US
   - product_name: TST329 Gold Professional Transducer
-    description: Clark Synthesis TST329 Gold. full-frequency tactile sound transducer. available
-      from manufacturer/retailers. Premium tactile sound transducer below TST429 Platinum.
+    description: Clark Synthesis TST329 Gold. full-frequency tactile sound transducer. available from
+      manufacturer/retailers. Premium tactile sound transducer below TST429 Platinum.
     manufacturer: Clark Synthesis
     component_category: tactile-feedback
     component_sub_category: tactile-transducer
@@ -169,8 +169,8 @@ commercial:
     picture_url: https://clarksynthesis.com/wp-content/uploads/2021/08/TI-300-Superb-ProdShot-Color-Hi-Res_Transparent-1.png
     shops: []
   - product_name: TST429 Platinum Professional Transducer
-    description: Clark Synthesis TST429 Platinum. full-frequency tactile sound transducer.
-      available from manufacturer/retailers. 5 Hz to 17 kHz frequency response.
+    description: Clark Synthesis TST429 Platinum. full-frequency tactile sound transducer. available
+      from manufacturer/retailers. 5 Hz to 17 kHz frequency response.
     manufacturer: Clark Synthesis
     component_category: tactile-feedback
     component_sub_category: tactile-transducer
@@ -178,8 +178,8 @@ commercial:
     picture_url: https://clarksynthesis.com/wp-content/uploads/2021/08/TI-300-Superb-ProdShot-Color-Hi-Res_Transparent-1.png
     shops: []
   - product_name: U-Shake6
-    description: Sim Racing Studio U-Shake6. haptic seat pad. available from SRS shop. Six-zone
-      haptic seat pad system.
+    description: Sim Racing Studio U-Shake6. haptic seat pad. available from SRS shop. Six-zone haptic
+      seat pad system.
     manufacturer: Sim Racing Studio
     component_category: tactile-feedback
     component_sub_category: seat-haptics
@@ -192,8 +192,8 @@ commercial:
         url: https://www.simracingstudio.com/shop
         region: Global
   - product_name: 100W Pro Haptic Bass Shaker
-    description: Trak Racer 100W Pro Haptic Bass Shaker. standalone tactile transducer. current
-      on official US shop. 100 W bass shaker for simulator haptic feedback.
+    description: Trak Racer 100W Pro Haptic Bass Shaker. standalone tactile transducer. current on
+      official US shop. 100 W bass shaker for simulator haptic feedback.
     manufacturer: Trak Racer
     component_category: tactile-feedback
     component_sub_category: tactile-transducer
@@ -205,9 +205,15 @@ commercial:
         currency: USD
         url: https://trakracer.com/products/100w-haptic-bass-shaker
         region: US
+      - name: Trak Racer
+        price: 69
+        currency: EUR
+        url: https://trakracer.eu/products/100w-pro-haptic-bass-shaker
+        region: EU
+        status: available
   - product_name: 10W Pro Haptic Bass Shaker - Set of 2
-    description: Trak Racer 10W Pro Haptic Bass Shaker Set. compact tactile transducer pair.
-      current on official US shop. Two 10 W bass shakers for simulator haptic feedback.
+    description: Trak Racer 10W Pro Haptic Bass Shaker Set. compact tactile transducer pair. current on
+      official US shop. Two 10 W bass shakers for simulator haptic feedback.
     manufacturer: Trak Racer
     component_category: tactile-feedback
     component_sub_category: tactile-transducer
@@ -219,6 +225,12 @@ commercial:
         currency: USD
         url: https://trakracer.com/products/10w-pro-haptic-bass-shaker-set-of-2
         region: US
+      - name: Trak Racer
+        price: 59
+        currency: EUR
+        url: https://trakracer.eu/products/10w-pro-haptic-bass-shaker-set-of-2
+        region: EU
+        status: available
   - product_name: 4CH 40W Low-Frequency Amplifier with 2 Bass Shakers and Rig Mounts
     description: Trak Racer 4CH 40W Low-Frequency Amplifier Kit. haptic feedback kit. current on
       official US shop. Four-channel amplifier bundle with two bass shakers and rig mounts.
@@ -233,7 +245,7 @@ commercial:
         currency: USD
         url: https://trakracer.com/products/trak-racer-4ch-40w-low-frequency-class-d-amplifier-with-2-bass-shakers-and-rig-mounts
         region: US
-      - name: Trakracer
+      - name: Trak Racer
         price: 179
         currency: USD
         url: https://trakracer.eu/products/trak-racer-4ch-40w-low-frequency-class-d-amplifier-with-2-bass-shakers-and-rig-mounts
@@ -241,10 +253,9 @@ commercial:
         status: available
 opensource:
   - project_name: GT7 Shaker for Linux
-    description: GT7 Shaker for Linux. Gran Turismo 7 bass-shaker telemetry converter. Active
-      personal project; README states it is still under development and bugs are expected.
-      Reads GT7 network telemetry from PS4/PS5 and converts it to low-latency audio for bass
-      shakers.
+    description: GT7 Shaker for Linux. Gran Turismo 7 bass-shaker telemetry converter. Active personal
+      project; README states it is still under development and bugs are expected. Reads GT7 network
+      telemetry from PS4/PS5 and converts it to low-latency audio for bass shakers.
     maker: Helskov
     component_category: tactile-feedback
     component_sub_category: haptics-software
@@ -252,9 +263,9 @@ opensource:
     project_url: https://github.com/Helskov/GT7-Shaker-for-linux
     picture_url: https://raw.githubusercontent.com/Helskov/GT7-Shaker-for-linux/main/src/gt_shaker/assets/welcome.png
   - project_name: Monocoque
-    description: Monocoque. open telemetry-to-haptics and device manager. Active Linux-first
-      project; GitHub metadata showed updates in April 2026. Converts sim telemetry into
-      bass-shaker, simwind, simlight, tachometer, wheel/pedal, and serial outputs.
+    description: Monocoque. open telemetry-to-haptics and device manager. Active Linux-first project;
+      GitHub metadata showed updates in April 2026. Converts sim telemetry into bass-shaker,
+      simwind, simlight, tachometer, wheel/pedal, and serial outputs.
     maker: Spacefreak18
     component_category: tactile-feedback
     component_sub_category: haptics-software
@@ -262,9 +273,9 @@ opensource:
     project_url: https://github.com/Spacefreak18/monocoque
     picture_url: https://opengraph.githubassets.com/4ee1e2043804c0cbe8122bd6154eed8cc6d4445a26c821c82b57c3050ccb0098/Spacefreak18/monocoque
   - project_name: SpaceMonkey
-    description: SpaceMonkey. telemetry provider for motion, wind, shakers, and LEDs. Released
-      Windows telemetry provider with broad game support and ongoing release notes through
-      2020s. Adds telemetry output for games with weak or missing native telemetry.
+    description: SpaceMonkey. telemetry provider for motion, wind, shakers, and LEDs. Released Windows
+      telemetry provider with broad game support and ongoing release notes through 2020s. Adds
+      telemetry output for games with weak or missing native telemetry.
     maker: PHARTGAMES
     component_category: tactile-feedback
     component_sub_category: haptics-software
