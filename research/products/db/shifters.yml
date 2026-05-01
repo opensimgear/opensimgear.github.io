@@ -644,6 +644,8 @@ commercial:
         url: https://vnmsimulation.com/product/7-gears-6r-h-pattern-plate/
         region: Unknown
         status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
   - product_name: 6-gears (5+R) H-pattern Plate
     description: Vnmsimulation 6-gears (5+R) H-pattern Plate. sequential shifter. listed on
       Vnmsimulation. Official shop listing.
@@ -659,6 +661,8 @@ commercial:
         url: https://vnmsimulation.com/product/6-gears-5r-h-pattern-plate/
         region: Unknown
         status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
   - product_name: 8-gears (7+R) H-pattern Plate
     description: Vnmsimulation 8-gears (7+R) H-pattern Plate. sequential shifter. listed on
       Vnmsimulation. Official shop listing.
@@ -674,6 +678,8 @@ commercial:
         url: https://vnmsimulation.com/product/8-gears-7r-h-pattern-plate/
         region: Unknown
         status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
   - product_name: Optional H-Pattern Plates
     description: Vnmsimulation Optional H-Pattern Plates. sequential shifter. listed on
       Vnmsimulation. Official shop listing.
@@ -689,6 +695,8 @@ commercial:
         url: https://vnmsimulation.com/product/optional-h-pattern-plates/
         region: Unknown
         status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
   - product_name: Table Clamps for VNM Shifter (2 pcs)
     description: Vnmsimulation Table Clamps for VNM Shifter (2 pcs). sequential shifter. listed
       on Vnmsimulation. Official shop listing.
@@ -824,6 +832,41 @@ commercial:
         url: https://cammusracing.com/product/cammus-new-metal-shift-paddle-for-c5/
         region: Unknown
         status: available
+  - product_name: Universal Mounting Plate
+    description: MOZA Universal Mounting Plate. rig mounts. listed on Eu. Mount both your
+      shifter and handbrake with a single, ambidextrous bracket. Featuring adjustable height
+      and handbrake angle, multiple mounting options—including tabletop, profile...
+    manufacturer: MOZA
+    component_category: shifters
+    component_sub_category: shifter-adapter
+    product_url: https://eu.mozaracing.com/products/universal-mounting-plate
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZAUniversalMountingPlate2.webp?v=1756345418
+    shops:
+      - name: Eu
+        price: 35
+        currency: USD
+        url: https://eu.mozaracing.com/products/universal-mounting-plate
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Sequential Plate V2
+    description: Vnmsimulation Sequential Plate V2. rig mounts. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: shifters
+    component_sub_category: shifter-adapter
+    product_url: https://vnmsimulation.com/vi/product/sequential-plate-v2/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/20210427-100741-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 50
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/sequential-plate-v2/
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
 opensource:
   - project_name: Akaki-H-shifter
     description: Akaki H Shifter. 3D printable H-pattern shifter with optional handbrake. Small

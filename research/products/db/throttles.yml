@@ -1049,6 +1049,262 @@ commercial:
         currency: USD
         url: https://www.thrustmaster.com/en-us/products/tca-quadrant-add-on-airbus-edition/
         region: US
+  - product_name: MTQ Throttle Quadrant
+    description: MOZA MTQ Throttle Quadrant. control panel. listed on Eu. The MOZA MTQ Throttle
+      Quadrant delivers modular versatility with interchangeable Boeing, Airbus, and
+      fighter-jet style levers. Featuring quad-axis precision, realistic detents,...
+    manufacturer: MOZA
+    component_category: throttles
+    component_sub_category: throttle-quadrant
+    product_url: https://eu.mozaracing.com/products/mtq-throttle
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZAMTQ-1_af06d2c7-2bce-479e-92b0-6e6fc9d07172.png?v=1767606253
+    shops:
+      - name: Eu
+        price: 219
+        currency: USD
+        url: https://eu.mozaracing.com/products/mtq-throttle
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Gemini Chair Mount
+    description: Gemini Chair Mount. flight-control mounts and accessories. Listed on EU WINCTRL
+      store with placeholder price/out-of-stock behavior [uncertain]. Gemini Chair Mount.
+    manufacturer: WINCTRL
+    component_category: throttles
+    component_sub_category: throttle-mount
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=327
+    picture_url: https://eu.winctrl.com/static/ipfs/QmQYH5P8PSJJYMV5zUP2hDcAnr6Zi5KVuKKAcHZfZW5Zx3
+    shops:
+      - name: WINCTRL EU
+        price: Unknown
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=327
+        region: EU
+        status: out-of-stock
+        last_updated: 2026-05-01
+      - name: WINCTRL
+        price: Unknown
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=327
+        region: US
+        status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Throttle Desk Mount5 with Profile Bar 1
+    description: Throttle Desk Mount5 with Profile Bar 1. flight-control mounts and accessories.
+      Pre-order listing on EU WINCTRL store. Throttle Desk Mount5 with Profile Bar 1.
+    manufacturer: WINCTRL
+    component_category: throttles
+    component_sub_category: throttle-mount
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=1225
+    picture_url: https://eu.winctrl.com/static/ipfs/QmfXaWbFjki79uwaAiyFGAivfNmaBF95kjkJzmBT417o7j
+    shops:
+      - name: WINCTRL EU
+        price: 34.61
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=1225
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Throttle Desk Mount5 with Profile Bar 1
+    description: Ea Throttle Desk Mount5 with Profile Bar 1. rig mounts. listed on Ea. Throttle
+      Desk Mount5 with Profile Bar 1.
+    manufacturer: Ea
+    component_category: throttles
+    component_sub_category: throttle-mount
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=1225
+    picture_url: https://ea.winctrl.com/static/ipfs/QmfXaWbFjki79uwaAiyFGAivfNmaBF95kjkJzmBT417o7j
+    shops:
+      - name: Ea
+        price: 39.69
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1225
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: NavyAce Metal Throttle Grip
+    description: Ea NavyAce Metal Throttle Grip. rig mounts. listed on Ea. NavyAce Metal
+      Throttle Grip x1.
+    manufacturer: Ea
+    component_category: throttles
+    component_sub_category: throttle-grip
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=306
+    picture_url: https://ea.winctrl.com/static/ipfs/QmcqEEabLkziz7C5icbwVRdQQxiiDC3VTN1k4LiwgMQJjk
+    shops:
+      - name: Ea
+        price: 155.3
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=306
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: StrikeAce E Metal Throttle Grip
+    description: Ea StrikeAce E Metal Throttle Grip. rig mounts. listed on Ea. StrikeAce E Metal
+      Throttle Grip x1.
+    manufacturer: Ea
+    component_category: throttles
+    component_sub_category: throttle-grip
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=476
+    picture_url: https://ea.winctrl.com/static/ipfs/QmYineDfhhYqaSqi3yiF8LFryZydZTtGwWAGFhAp1vJtDg
+    shops:
+      - name: Ea
+        price: 155.3
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=476
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: StrikeAce EX II Metal Throttle Grip
+    description: Ea StrikeAce EX II Metal Throttle Grip. rig mounts. listed on Ea. StrikeAce EX
+      II Metal Throttle Grip x1.
+    manufacturer: Ea
+    component_category: throttles
+    component_sub_category: throttle-grip
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=471
+    picture_url: https://ea.winctrl.com/static/ipfs/QmQYEJKNSVeeVUB52nzK3htknFXrzDq7HQVtZCqCAdN2vm
+    shops:
+      - name: Ea
+        price: 188.19
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=471
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: MINOR 32 Throttle Metal / 32 PAC Metal
+    description: URSA MINOR 32 Throttle Metal / 32 PAC Metal. rig mounts. listed on Ea. URSA
+      MINOR 32 Throttle Metal / 32 PAC Metal.
+    manufacturer: URSA
+    component_category: throttles
+    component_sub_category: throttle-grip
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=1665
+    picture_url: https://ea.winctrl.com/static/ipfs/QmUBdY4WU8iYkvCrGPnaAXd5jy5FFQ5AYvvgzrVYoJ6AGJ
+    shops:
+      - name: Ea
+        price: 267.52
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1665
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: ViperAce EX Metal Throttle Grip
+    description: Ea ViperAce EX Metal Throttle Grip. rig mounts. listed on Ea. ViperAce EX Metal
+      Throttle Grip x1.
+    manufacturer: Ea
+    component_category: throttles
+    component_sub_category: throttle-grip
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=339
+    picture_url: https://ea.winctrl.com/static/ipfs/QmQbZURKosh89qWSrpAVTeBocFdiKTfVJ4TVsoP35zq8FV
+    shops:
+      - name: Ea
+        price: 268.7
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=339
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Space Throttle Add-On Grip (STG) Left-Hand
+    description: STECS Space Throttle Add-On Grip (STG) Left-Hand. rig mounts. listed on
+      Flightsimcontrols. Official shop listing.
+    manufacturer: STECS
+    component_category: throttles
+    component_sub_category: throttle-grip
+    product_url: https://flightsimcontrols.com/product/stecs-space-throttle-add-on-grip-stg-left-hand/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2025/05/STG_Grip-L_01_1200.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 108
+        currency: EUR
+        url: https://flightsimcontrols.com/product/stecs-space-throttle-add-on-grip-stg-left-hand/
+        region: Unknown
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Finger Lift for Gemini Only
+    description: Finger Lift for Gemini Only. flight-control mounts and accessories. Listed on
+      EU WINCTRL store; local stock not available in API response. Finger Lift for Gemini
+      Only.
+    manufacturer: WINCTRL
+    component_category: throttles
+    component_sub_category: throttle-accessories
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=346
+    picture_url: https://eu.winctrl.com/static/ipfs/QmcBHEoU3AToENNGEHn9gAMbj1Sjdq82o1xx4B6jYSgzHo
+    shops:
+      - name: WINCTRL EU
+        price: 49.39
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=346
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+      - name: Ea
+        price: 56.65
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=346
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Super Taurus ViperAce Adapter
+    description: Super Taurus ViperAce Adapter. flight-control mounts and accessories. Listed on
+      EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super
+      Taurus ViperAce Adapter.
+    manufacturer: WINCTRL
+    component_category: throttles
+    component_sub_category: throttle-accessories
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=376
+    picture_url: https://eu.winctrl.com/static/ipfs/QmQy2t7Qx9inqErBQFvsWyzrSvzEvL2qs8gX82MRnPD9Cs
+    shops:
+      - name: WINCTRL EU
+        price: Unknown
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=376
+        region: EU
+        status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: TQA Throttle Module
+    description: MOZA TQA Throttle Module. rig mounts. listed on Eu. The MOZA TQA Airbus-style
+      throttle module recreates the distinctive detent structure and reverse thrust behavior
+      of the A3X series. With clearly defined tactile detents and auth...
+    manufacturer: MOZA
+    component_category: throttles
+    component_sub_category: throttle-module
+    product_url: https://eu.mozaracing.com/products/tqa-mod
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZATQAThrottleModule-1.png?v=1761114968
+    shops:
+      - name: Eu
+        price: 45
+        currency: USD
+        url: https://eu.mozaracing.com/products/tqa-mod
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: TQB Throttle Module
+    description: MOZA TQB Throttle Module. rig mounts. listed on Eu. The MOZA TQB Boeing-style
+      throttle module offers extended forward travel, a lift-to-arm reverse thrust lever,
+      and a TO/GA button for authentic takeoff and go-around procedures....
+    manufacturer: MOZA
+    component_category: throttles
+    component_sub_category: throttle-module
+    product_url: https://eu.mozaracing.com/products/tqb-mod
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZATQBThrottleModule-1.png?v=1761114969
+    shops:
+      - name: Eu
+        price: 45
+        currency: USD
+        url: https://eu.mozaracing.com/products/tqb-mod
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
 opensource:
   - project_name: AuthentiKit Spitfire MkIX
     description: "AuthentiKit Spitfire MkIX. self-build replica Spitfire MkIX flight controls.

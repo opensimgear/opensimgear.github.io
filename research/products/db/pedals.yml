@@ -2129,6 +2129,262 @@ commercial:
         url: https://www.asetek.com/simsports/product/la-prima-to-forte-pedal-set-upgrade-kit/
         region: Unknown
         status: available
+  - product_name: C-P1000
+    description: C-P1000 C-P1000. rig mounts. listed on Simagic. Official shop listing.
+    manufacturer: C-P1000
+    component_category: pedals
+    component_sub_category: pedal-mount
+    product_url: https://simagic.com/products/c-p1000
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/C-P1000-11-12.png?v=1762936193
+    shops:
+      - name: Simagic
+        price: 109
+        currency: USD
+        url: https://simagic.com/products/c-p1000
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: C-P2000
+    description: C-P2000 C-P2000. rig mounts. listed on Simagic. Official shop listing.
+    manufacturer: C-P2000
+    component_category: pedals
+    component_sub_category: pedal-mount
+    product_url: https://simagic.com/products/c-p2000
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/C-P2000-11-12.png?v=1762936124
+    shops:
+      - name: Simagic
+        price: 189
+        currency: USD
+        url: https://simagic.com/products/c-p2000
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: inversion kit
+    description: P1000 inversion kit(In stock). rig mounts. listed on Simagic. Official shop listing.
+    manufacturer: P1000
+    component_category: pedals
+    component_sub_category: pedal-upgrade-kit
+    product_url: https://simagic.com/products/p1000-inversion-kit
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P1000_-inver-kit-11-12.png?v=1762936098
+    shops:
+      - name: Simagic
+        price: 189
+        currency: USD
+        url: https://simagic.com/products/p1000-inversion-kit
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    license: Commercial
+    last_updated: 2026-05-01
+  - product_name: Haptic bracket
+    description: P2000 Haptic bracket (In stock). rig mounts. listed on Simagic. Official shop listing.
+    manufacturer: P2000
+    component_category: pedals
+    component_sub_category: pedal-mount
+    product_url: https://simagic.com/products/p2000-haptic-bracket
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P2000-bracket-11-12.png?v=1762935643
+    shops:
+      - name: Simagic
+        price: 15.9
+        currency: USD
+        url: https://simagic.com/products/p2000-haptic-bracket
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    license: Commercial
+    last_updated: 2026-05-01
+  - product_name: P2000 100KG Load Sell Sensor
+    description: Simagic P2000 100KG Load Sell Sensor. rig mounts. listed on Simagic. Dispatched
+      within 3 business days of ordering; transit time 7–8 business days.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: pedal-upgrade-kit
+    product_url: https://simagic.com/products/p-s100
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-S100-11-12.png?v=1762937407
+    shops:
+      - name: Simagic
+        price: 69
+        currency: USD
+        url: https://simagic.com/products/p-s100
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: P2000 200KG Load Sell Sensor
+    description: Simagic P2000 200KG Load Sell Sensor. rig mounts. listed on Simagic. Dispatched
+      within 3 business days of ordering; Transit time 7–8 business days.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: pedal-upgrade-kit
+    product_url: https://simagic.com/products/p-s200
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-S200-11-12.png?v=1762937419
+    shops:
+      - name: Simagic
+        price: 89
+        currency: USD
+        url: https://simagic.com/products/p-s200
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: hydraulic throttle system(P-HTS)-In Stock
+    description: P1000 hydraulic throttle system(P-HTS)-In Stock. rig mounts. listed on Simagic.
+      Official shop listing.
+    manufacturer: P1000
+    component_category: pedals
+    component_sub_category: pedal-upgrade-kit
+    product_url: https://simagic.com/products/p-hts
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-HTS-11-12.png?v=1762935725
+    shops:
+      - name: Simagic
+        price: 139
+        currency: USD
+        url: https://simagic.com/products/p-hts
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    license: Commercial
+    last_updated: 2026-05-01
+  - product_name: P2000 Long Throttle Plate (P-L200)-In Stock
+    description: Simagic P2000 Long Throttle Plate (P-L200)-In Stock. rig mounts. listed on
+      Simagic. Only compatible with P2000 pedal.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: pedal-upgrade-kit
+    product_url: https://simagic.com/products/p-l200
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/p-l200-11-12.png?v=1762937471
+    shops:
+      - name: Simagic
+        price: 28.9
+        currency: USD
+        url: https://simagic.com/products/p-l200
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    license: Commercial
+    last_updated: 2026-05-01
+  - product_name: Side Throttle Plate
+    description: Simagic Side Throttle Plate. rig mounts. listed on Simagic. Official shop listing.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: pedal-upgrade-kit
+    product_url: https://simagic.com/products/p-l201
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-L201-11-12.png?v=1762937432
+    shops:
+      - name: Simagic
+        price: 11.9
+        currency: USD
+        url: https://simagic.com/products/p-l201
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Haptic Control Box（P2000 HCB）
+    description: P2000 Haptic Control Box（P2000 HCB）. rig mounts. listed on Simagic. Pre-Order.
+      US warehouses sold out. Ships in 6-7 business days after order placement.
+    manufacturer: P2000
+    component_category: pedals
+    component_sub_category: pedal-accessories
+    product_url: https://simagic.com/products/p2000-haptic-control-box
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P2000_Haptic_Control_Box-11-12.png?v=1762938083
+    shops:
+      - name: Simagic
+        price: 29.9
+        currency: USD
+        url: https://simagic.com/products/p2000-haptic-control-box
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Haptic Control Box+Bracket
+    description: P2000-HCB Haptic Control Box+Bracket(In stock). rig mounts. listed on Simagic.
+      Official shop listing.
+    manufacturer: P2000-HCB
+    component_category: pedals
+    component_sub_category: pedal-accessories
+    product_url: https://simagic.com/products/p2000-hcb
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P2000-HCB_bracket-11-12.png?v=1762935898
+    shops:
+      - name: Simagic
+        price: 44.9
+        currency: USD
+        url: https://simagic.com/products/p2000-hcb
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    license: Commercial
+    last_updated: 2026-05-01
+  - product_name: Heel Stop(P-F168) -In stock
+    description: P1000 Heel Stop(P-F168) -In stock. rig mounts. listed on Simagic. Official shop
+      listing.
+    manufacturer: P1000
+    component_category: pedals
+    component_sub_category: pedal-accessories
+    product_url: https://simagic.com/products/p-f168
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-F168_-11-12.png?v=1762935449
+    shops:
+      - name: Simagic
+        price: 39.9
+        currency: USD
+        url: https://simagic.com/products/p-f168
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    license: Commercial
+    last_updated: 2026-05-01
+  - product_name: Heel Stop(P-F268)-In stock
+    description: P2000 Heel Stop(P-F268)-In stock. rig mounts. listed on Simagic. Official shop listing.
+    manufacturer: P2000
+    component_category: pedals
+    component_sub_category: pedal-accessories
+    product_url: https://simagic.com/products/p-f268
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-F268-11-12.png?v=1762937370
+    shops:
+      - name: Simagic
+        price: 44.9
+        currency: USD
+        url: https://simagic.com/products/p-f268
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    license: Commercial
+    last_updated: 2026-05-01
+  - product_name: Carbon Fiber Heel Riser
+    description: P2000 Carbon Fiber Heel Riser(In stock). rig mounts. listed on Simagic.
+      Official shop listing.
+    manufacturer: P2000
+    component_category: pedals
+    component_sub_category: pedal-accessories
+    product_url: https://simagic.com/products/p-c200
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/p-c200-11-12.png?v=1762937386
+    shops:
+      - name: Simagic
+        price: 54.9
+        currency: USD
+        url: https://simagic.com/products/p-c200
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    license: Commercial
+    last_updated: 2026-05-01
+  - product_name: Sim Ray-Heel Stop
+    description: Simagic Sim Ray-Heel Stop. rig mounts. listed on Simagic. Official shop listing.
+    manufacturer: Simagic
+    component_category: pedals
+    component_sub_category: pedal-accessories
+    product_url: https://simagic.com/products/p-srh
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/P-SRH-11-12.png?v=1762937564
+    shops:
+      - name: Simagic
+        price: 79
+        currency: USD
+        url: https://simagic.com/products/p-srh
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
 opensource:
   - project_name: CNCDan Sim Pedals
     description: CNCDan Sim Pedals. laser-cut and 3D-printed load-cell/hall pedal set. Active

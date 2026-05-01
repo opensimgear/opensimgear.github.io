@@ -111,11 +111,15 @@ export default defineConfig({
       insertAppleTouchLinks: true,
     }),
     playformCompress(),
-    sentry({
-      org: 'qantic-ntrp',
-      project: 'open-sim-gear',
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-    }),
+    ...(process.env.NODE_ENV === 'development'
+      ? []
+      : [
+          sentry({
+            org: 'qantic-ntrp',
+            project: 'open-sim-gear',
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+          }),
+        ]),
     // spotlightjs(),
     checks({
       mode: 'full', // 'auto' | 'full' | 'essential'

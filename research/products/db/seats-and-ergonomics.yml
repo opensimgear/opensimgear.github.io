@@ -1087,6 +1087,259 @@ commercial:
         currency: EUR
         url: https://www.sparco-official.com/de/coach-office-seat.html
         region: DE
+  - product_name: Mercedes-AMG PETRONAS Formula One Team Sim Racing Seat
+    description: Sim Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Seat. cockpit frame.
+      listed on Sim Lab. Our newly developed seat, made from reinforced GRP, is proprietary
+      in design and precisely engineered to mimic the seating position of a real Formula One
+      car. We paid special at...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://sim-lab.eu/products/mercedes-amg-petronas-formula-one-team-sim-racing-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Frame_300_2.png?v=1766149308
+    shops:
+      - name: Sim Lab
+        price: Unknown
+        currency: USD
+        url: https://sim-lab.eu/products/mercedes-amg-petronas-formula-one-team-sim-racing-seat
+        region: EU
+        status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Enduro GT Seat
+    description: S1 Enduro GT Seat. cockpit frame. listed on Sim Lab. The Sim-Lab S1 Enduro
+      Bucket seat is designed around a true GT driving position, delivering a natural,
+      upright posture that balances control, comfort, and long-term support. Dev...
+    manufacturer: S1
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://sim-lab.eu/products/s1-enduro-gt-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/enduro-front.png?v=1771592525
+    shops:
+      - name: Sim Lab
+        price: 449
+        currency: USD
+        url: https://sim-lab.eu/products/s1-enduro-gt-seat
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Seat mounting for Mercedes-AMG PETRONAS Formula One Team Sim Racing seat
+    description: Sim Lab Seat mounting for Mercedes-AMG PETRONAS Formula One Team Sim Racing
+      seat. cockpit frame. listed on Sim Lab. Seat mounting bundle exclusively designed for
+      mounting the Mercedes-AMG PETRONAS Formula One Team Sim Racing seat. Includes seat
+      slider and seat brackets Durable construction De...
+    manufacturer: Sim Lab
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://sim-lab.eu/products/seat-mounting-for-mercedes-amg-petronas-formula-one-team-sim-racing-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0665/7268/1510/files/Frame_302_1.png?v=1766140033
+    shops:
+      - name: Sim Lab
+        price: 99
+        currency: USD
+        url: https://sim-lab.eu/products/seat-mounting-for-mercedes-amg-petronas-formula-one-team-sim-racing-seat
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Flight Simulator Seat (Includes Seat Bracket Set)
+    description: "Trakracer Flight Simulator Seat (Includes Seat Bracket Set). cockpit frame.
+      listed on Trakracer. /* ========================= TRAK RACER SAFE SCOPE Bulletproof
+      against Shopify theme overrides ========================= */ .tr-seat-scope,
+      .tr-seat-scope * { box-sizing: border..."
+    manufacturer: Trakracer
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://trakracer.eu/products/recliner-seat-3
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRR093_FRONTLEFT01_1.webp?v=1768275151
+    shops:
+      - name: Trakracer
+        price: 199
+        currency: USD
+        url: https://trakracer.eu/products/recliner-seat-3
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Pro Racing Seat - Carbon Fiber Finish
+    description: "GT Pro Racing Seat - Carbon Fiber Finish. cockpit frame. listed on Trakracer.
+      /* ========================= TRAK RACER SAFE SCOPE Bulletproof against Shopify theme
+      overrides ========================= */ .tr-seat-scope, .tr-seat-scope * { box-sizing:
+      border..."
+    manufacturer: GT
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://trakracer.eu/products/gt-style-fiberglass-bucket-seat-carbon-fibre-finish-1
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/SA-15_Hero_0.webp?v=1776135092
+    shops:
+      - name: Trakracer
+        price: 399
+        currency: USD
+        url: https://trakracer.eu/products/gt-style-fiberglass-bucket-seat-carbon-fibre-finish-1
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Hybrid Formula Pro Racing Seat - Full Carbon Fiber
+    description: "HCF Hybrid Formula Pro Racing Seat - Full Carbon Fiber. cockpit frame. listed
+      on Trakracer. /* ========================= TRAK RACER SAFE SCOPE Bulletproof against
+      Shopify theme overrides ========================= */ .tr-seat-scope, .tr-seat-scope *
+      { box-sizing: border..."
+    manufacturer: HCF
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://trakracer.eu/products/hybrid-formula-gt-position-carbon-fibre-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRX-SCF_HCF_Hero.webp?v=1776327218
+    shops:
+      - name: Trakracer
+        price: 799
+        currency: USD
+        url: https://trakracer.eu/products/hybrid-formula-gt-position-carbon-fibre-seat
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: GT Rally-Pro Racing Seat - Carbon Fiber Finish
+    description: "RS GT Rally-Pro Racing Seat - Carbon Fiber Finish. cockpit frame. listed on
+      Trakracer. /* ========================= TRAK RACER SAFE SCOPE Bulletproof against
+      Shopify theme overrides ========================= */ .tr-seat-scope, .tr-seat-scope *
+      { box-sizing: border..."
+    manufacturer: RS
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://trakracer.eu/products/rally-style-fixed-carbon-fiber-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/SA-14_Hero_0.webp?v=1776134848
+    shops:
+      - name: Trakracer
+        price: 399
+        currency: USD
+        url: https://trakracer.eu/products/rally-style-fixed-carbon-fiber-seat
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Trak Racer Motorised Seat Slider
+    description: Trakracer Trak Racer Motorised Seat Slider. cockpit frame. listed on Trakracer.
+      The Trak Racer Motorised Seat Slider brings high-end automotive comfort and
+      adjustability to any sim racing cockpit. Engineered for compatibility and constructed
+      from premium st...
+    manufacturer: Trakracer
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://trakracer.eu/products/trak-racer-motorized-seat-slider
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/MainImageUpdated_1080x_39ced412-d2fc-4445-ae2d-b10d78e5f8d7.webp?v=1760561908
+    shops:
+      - name: Trakracer
+        price: 249
+        currency: USD
+        url: https://trakracer.eu/products/trak-racer-motorized-seat-slider
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: TR Series GT Pro Racing Seat - Full Carbon Fiber
+    description: "TRS TR Series GT Pro Racing Seat - Full Carbon Fiber. cockpit frame. listed on
+      Trakracer. /* ========================= TRAK RACER SAFE SCOPE Bulletproof against
+      Shopify theme overrides ========================= */ .tr-seat-scope, .tr-seat-scope *
+      { box-sizing: border..."
+    manufacturer: TRS
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://trakracer.eu/products/gt-style-carbon-fibre-seat
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/SA-16_Hero_0.webp?v=1776135570
+    shops:
+      - name: Trakracer
+        price: 799
+        currency: USD
+        url: https://trakracer.eu/products/gt-style-carbon-fibre-seat
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Sim Racing Bucket Seat VNM-BKST02
+    description: Vnmsimulation Sim Racing Bucket Seat VNM-BKST02. cockpit frame. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://vnmsimulation.com/vi/product/sim-racing-bucket-seat-vnm-bkst02/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/z5011150649232-9f1e56338e4c692b0ff363924ae6ebe6.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/sim-racing-bucket-seat-vnm-bkst02/
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Sim Racing Bucket Seat VNM-BKST03
+    description: Vnmsimulation Sim Racing Bucket Seat VNM-BKST03. cockpit frame. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://vnmsimulation.com/vi/product/sim-racing-bucket-seat-vnm-bkst03/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/z5010022232541-a1f5f7153948346d1d0772ba7cd9480d.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/sim-racing-bucket-seat-vnm-bkst03/
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Sim Racing Recline Seat VNM-RLST03
+    description: Vnmsimulation Sim Racing Recline Seat VNM-RLST03. cockpit frame. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: Vnmsimulation
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://vnmsimulation.com/vi/product/sim-racing-recline-seat-vnm-rlst03/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2024/08/z5010060990077-da657c6c6fe16ce2fd4160a586a0ee66.jpg
+    shops:
+      - name: Vnmsimulation
+        price: Unknown
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/sim-racing-recline-seat-vnm-rlst03/
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Forte Racing Seat
+    description: Asetek Forte Racing Seat. cockpit frame. listed on Asetek. Bring a feel of
+      luxury to your racing, with the Forte Racing Seat, featuring high density foam padding
+      and a faux leather exterior that supports and focuses you through every la...
+    manufacturer: Asetek
+    component_category: seats-and-ergonomics
+    component_sub_category: racing-seat
+    product_url: https://www.asetek.com/simsports/product/forte-racing-seat/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2025/06/Forte_Racing-Seat_45-Hero_40-050-0050002.png
+    shops:
+      - name: Asetek
+        url: https://www.asetek.com/simsports/product/forte-racing-seat/
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Initium Seat Slider
+    description: Asetek Initium Seat Slider. cockpit frame. listed on Asetek. Make getting in
+      and out of your cockpit simple with the Initium Seat Slider; the perfect way to enter
+      and exit your driving sessions. A heavy-duty steel construction ensures lon...
+    manufacturer: Asetek
+    component_category: seats-and-ergonomics
+    component_sub_category: seat-bracket
+    product_url: https://www.asetek.com/simsports/product/initium-seat-slider/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2025/06/Initium_Seat-Slider_45-Hero_40-052-0052001.png
+    shops:
+      - name: Asetek
+        url: https://www.asetek.com/simsports/product/initium-seat-slider/
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
 opensource:
   - project_name: OpenHarrier SJU-4A Ejection Seat
     description: OpenHarrier SJU-4A Ejection Seat. flight replica seat. Public build

@@ -426,27 +426,6 @@ commercial:
         url: https://ea.winctrl.com/view/goods-details.html?id=407
         region: US
         status: available
-  - product_name: MFD1(With USB3.0 Display)
-    description: MFD1(With USB3.0 Display). cockpit panel bundle / MIP. Pre-order listing on EU
-      WINCTRL store. MFD Unit1 x1.
-    manufacturer: WINCTRL
-    component_category: button-boxes-and-panels
-    component_sub_category: panel-bundle
-    product_url: https://eu.winctrl.com/view/goods-details.html?id=417
-    picture_url: https://eu.winctrl.com/static/ipfs/QmbeWTnM1fpwVQ15L2ETZSRRfazivkLSXHxwKqdMQGhBm7
-    shops:
-      - name: WINCTRL EU
-        price: 172.83
-        currency: EUR
-        url: https://eu.winctrl.com/view/goods-details.html?id=417
-        region: EU
-        status: available
-      - name: Ea
-        price: 198.23
-        currency: USD
-        url: https://ea.winctrl.com/view/goods-details.html?id=417
-        region: US
-        status: available
   - product_name: NavyAce UFC&HUD With Mount
     description: NavyAce UFC&HUD With Mount. cockpit panel bundle / MIP. Listed on EU WINCTRL
       store; local stock not available in API response. NavyAce-UFC Unit x1.
@@ -1257,39 +1236,6 @@ commercial:
         price: 359
         currency: USD
         url: https://eu.mozaracing.com/products/mtp-throttle
-        region: EU
-        status: available
-  - product_name: MTQ Throttle Quadrant
-    description: MOZA MTQ Throttle Quadrant. control panel. listed on Eu. The MOZA MTQ Throttle
-      Quadrant delivers modular versatility with interchangeable Boeing, Airbus, and
-      fighter-jet style levers. Featuring quad-axis precision, realistic detents,...
-    manufacturer: MOZA
-    component_category: button-boxes-and-panels
-    component_sub_category: control-panel
-    product_url: https://eu.mozaracing.com/products/mtq-throttle
-    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZAMTQ-1_af06d2c7-2bce-479e-92b0-6e6fc9d07172.png?v=1767606253
-    shops:
-      - name: Eu
-        price: 219
-        currency: USD
-        url: https://eu.mozaracing.com/products/mtq-throttle
-        region: EU
-        status: available
-  - product_name: Add-on Side Arms for Triple Monitor Stand 30-45"
-    description: Trakracer Add-on Side Arms for Triple Monitor Stand 30-45". control panel.
-      listed on Trakracer. Trak Racer Black Steel Add-On Side Arms for an existing
-      Tube-Style Single Monitor Stand Trak Racer is the Official Simulator Supplier of
-      Alpine F1 Team and Partner of Airbus Air...
-    manufacturer: Trakracer
-    component_category: button-boxes-and-panels
-    component_sub_category: control-panel
-    product_url: https://trakracer.eu/products/add-on-side-arms-for-triple-monitor-stand-34-45
-    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/TM-B3-27-3_01S_117e5c86-2c1b-441b-aaab-f86c859d7481.png?v=1653969693
-    shops:
-      - name: Trakracer
-        price: 39
-        currency: USD
-        url: https://trakracer.eu/products/add-on-side-arms-for-triple-monitor-stand-34-45
         region: EU
         status: available
   - product_name: Tablet and Button Box Holder Upgrade Kit v1- Black

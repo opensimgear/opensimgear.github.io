@@ -2338,6 +2338,285 @@ commercial:
         url: https://cammusracing.com/product/cammus-gtr-steering-wheel/
         region: Unknown
         status: available
+  - product_name: Universal Hub Kit
+    description: MOZA Universal Hub Kit. ffb controller. listed on Eu. The MOZA Universal Hub
+      Kit provides a versatile and reliable solution for integrating the MOZA steering wheel
+      with various third-party bases, enhancing your simulation experienc...
+    manufacturer: MOZA
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://eu.mozaracing.com/products/universal-hub
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZA-Universal-Hub-Kit-4.webp?v=1751281058
+    shops:
+      - name: Eu
+        price: 49
+        currency: USD
+        url: https://eu.mozaracing.com/products/universal-hub
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Savu Extra Paddle Kit
+    description: Simucube Savu Extra Paddle Kit. ffb controller. listed on Simucube. Simucube
+      Savu extra paddle kit compatible with both sim racing wheel models Simucube Savu Sport
+      and Pro. Upgrade your steering wheel for maximum performance.
+    manufacturer: Simucube
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://simucube.com/simucube-savu-extra-paddle-kit/
+    picture_url: https://simucube.com/app/uploads/2025/09/SAVU-EXTRA-PADDLE-3.webp
+    shops:
+      - name: Simucube
+        price: 81
+        currency: EUR
+        url: https://simucube.com/simucube-savu-extra-paddle-kit/
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Alpine Formula One™ Team A525 REPLICA Sim Racing Steering Wheel
+    description: BWT Alpine Formula One™ Team A525 REPLICA Sim Racing Steering Wheel. ffb
+      controller. listed on Trakracer. The A525 is the most authentic BWT Alpine Formula
+      One™ Team steering wheel ever built for sim racing. Developed in close collaboration
+      with BWT Alpine Formula One™ Team engineer...
+    manufacturer: BWT
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://trakracer.eu/products/bwt-alpine-formula-onetm-team-a525-replica-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/ALP-REP104.png?v=1760496687
+    shops:
+      - name: Trakracer
+        price: 1999
+        currency: USD
+        url: https://trakracer.eu/products/bwt-alpine-formula-onetm-team-a525-replica-steering-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Conspit 290GP Formula Steering Wheel – 3D Ergonomic Formula-Class Wheel
+    description: Trakracer Conspit 290GP Formula Steering Wheel – 3D Ergonomic Formula-Class
+      Wheel. ffb controller. listed on Trakracer. The Conspit 290GP Formula Wheel is a
+      next-generation, high-performance Formula-style racing wheel, built for sim racers who
+      want extreme control, comfort, and endurance. The 290...
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: formula-wheel
+    product_url: https://trakracer.eu/products/290gp-formula-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/conspit_290_gt_sim_racing_wheel.png?v=1764061897
+    shops:
+      - name: Trakracer
+        price: 719
+        currency: USD
+        url: https://trakracer.eu/products/290gp-formula-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Conspit 300GT Steering Wheel
+    description: Trakracer Conspit 300GT Steering Wheel. ffb controller. listed on Trakracer.
+      The Conspit 300 GT introduces a groundbreaking combination of Conspit’s proprietary
+      technologies, built upon a race-grade carbon fiber lightweight structure. It
+      integrates cutti...
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://trakracer.eu/products/300gt-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Conspit-300GT-Steering-Wheel-Front.webp?v=1757577189
+    shops:
+      - name: Trakracer
+        price: 449
+        currency: USD
+        url: https://trakracer.eu/products/300gt-steering-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Conspit 310 APEX Steering Wheel
+    description: Trakracer Conspit 310 APEX Steering Wheel. ffb controller. listed on Trakracer.
+      .pd-row{display:flex;flex-wrap:wrap;align-items:center;margin:32px 0;} .pd-text{flex:1
+      1 50%;padding:16px;box-sizing:border-box;} .pd-img{flex:1 1
+      50%;padding:16px;box-sizing:bo...
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://trakracer.eu/products/conspit-310-apex-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/ConspitQuickCon_1.png?v=1773698972
+    shops:
+      - name: Trakracer
+        price: 319
+        currency: USD
+        url: https://trakracer.eu/products/conspit-310-apex-steering-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Conspit CP105 MAX01 Formula Wheel
+    description: Trakracer Conspit CP105 MAX01 Formula Wheel. ffb controller. listed on
+      Trakracer. Conspit CP105 MAX01 Formula Wheel.
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: formula-wheel
+    product_url: https://trakracer.eu/products/conspit-cp105-max01-formula-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Max01-1.png?v=1764206599
+    shops:
+      - name: Trakracer
+        price: 799
+        currency: USD
+        url: https://trakracer.eu/products/conspit-cp105-max01-formula-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: FORMULA MAYARIS 2 CARBON FIBER FORMULA STEERING WHEEL (4 PADDLE VERSION)
+    description: REXING FORMULA MAYARIS 2 CARBON FIBER FORMULA STEERING WHEEL (4 PADDLE
+      VERSION). ffb controller. listed on Trakracer. Rexing Formula Steering Wheel –
+      Pro-Level Control for Serious Sim Racers Built for the most demanding sim racing
+      professionals and enthusiasts, the Rexing Formula Steering Wheel...
+    manufacturer: REXING
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://trakracer.eu/products/rexing-formula-steering-wheel-mayaris-2
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/product-image-1.png?v=1717052135
+    shops:
+      - name: Trakracer
+        price: 1619
+        currency: USD
+        url: https://trakracer.eu/products/rexing-formula-steering-wheel-mayaris-2
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Simagic GT NEO Formula Wheel – Carbon & LCD Display, 12 Buttons
+    description: Trakracer Simagic GT NEO Formula Wheel – Carbon & LCD Display, 12 Buttons. ffb
+      controller. listed on Trakracer. Product Description The Simagic GT NEO Steering Wheel
+      is a premium sim racing wheel designed for excellence in Formula, GT, and open-wheel
+      simulation. It features a front panel...
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: formula-wheel
+    product_url: https://trakracer.eu/products/simagic-gt-neo-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Simagic_GTNEO_2.png?v=1759211598
+    shops:
+      - name: Trakracer
+        price: 325
+        currency: USD
+        url: https://trakracer.eu/products/simagic-gt-neo-steering-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Simagic NEO X Hub – Modular DIY Steering Wheel Button Hub
+    description: Trakracer Simagic NEO X Hub – Modular DIY Steering Wheel Button Hub. ffb
+      controller. listed on Trakracer. Product Description The Simagic NEO X Hub is a
+      next-generation, fully modular button hub designed for sim racers who demand maximum
+      flexibility, precision, and control in their...
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/Frame541.png?v=1759211526
+    shops:
+      - name: Trakracer
+        price: 239
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Simagic NEO X Hub with Alpha EVO 12nm Wheel Base and Leather Steering Wheel
+    description: Trakracer Simagic NEO X Hub with Alpha EVO 12nm Wheel Base and Leather Steering
+      Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle? Combining
+      modular input flexibility, premium leather steering control, and high-torque
+      direct-drive performance, this bundle is perfect for home...
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-12nm-wheel-base-and-leather-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTHubwith9nmwheelbase_a8a5e784-189b-4c71-b0ac-0c10d0f4cf1e.png?v=1763092849
+    shops:
+      - name: Trakracer
+        price: 879
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-12nm-wheel-base-and-leather-steering-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Simagic NEO X Hub with Alpha EVO Pro 18nm Wheel Base and Leather Steering Wheel
+    description: Trakracer Simagic NEO X Hub with Alpha EVO Pro 18nm Wheel Base and Leather
+      Steering Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle?
+      Combining modular hub flexibility, premium leather steering control, and the ultimate
+      high-torque direct-drive experience, this bundle delivers u...
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-pro-18nm-wheel-base-and-leather-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTHubwith18nmwheelbase_fb0731b3-e3d4-4da8-9a65-207b4ecdded3.png?v=1763092848
+    shops:
+      - name: Trakracer
+        price: 1082
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-pro-18nm-wheel-base-and-leather-steering-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Simagic NEO X Hub with Alpha EVO Sport 9nm Wheel Base and Leather Steering Wheel
+    description: Trakracer Simagic NEO X Hub with Alpha EVO Sport 9nm Wheel Base and Leather
+      Steering Wheel. ffb controller. listed on Trakracer. Why Choose This Simagic Bundle?
+      This bundle pairs modular input control with a premium leather rim and a refined
+      belt-drive base to deliver a versatile, realistic steering solut...
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-sport-9nm-wheel-base-and-leather-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTHubwith9nmwheelbase.png?v=1763092848
+    shops:
+      - name: Trakracer
+        price: 740
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub-with-alpha-evo-sport-9nm-wheel-base-and-leather-steering-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Simagic NEO X Hub with Leather Steering Wheel
+    description: Trakracer Simagic NEO X Hub with Leather Steering Wheel. ffb controller. listed
+      on Trakracer. Why Choose This Simagic Bundle? This two-part bundle merges advanced
+      modular control with classic racecar realism. The NEO X Hub delivers flexible inputs,
+      customizable paddles,...
+    manufacturer: Trakracer
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://trakracer.eu/products/simagic-neo-x-hub-with-leather-steering-wheel
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/GTHubwithSimagicLeatherWheelRound.png?v=1763092846
+    shops:
+      - name: Trakracer
+        price: 293
+        currency: USD
+        url: https://trakracer.eu/products/simagic-neo-x-hub-with-leather-steering-wheel
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: QR-A
+    description: Simagic QR-A. rig mounts. listed on Simagic. Seamlessly mount third-party
+      steering wheels with a standard 70mm hole pattern onto Alpha Evo Wheelbase.
+    manufacturer: Simagic
+    component_category: steering-wheels
+    component_sub_category: wheel-electronics
+    product_url: https://simagic.com/products/simagic-qr-a
+    picture_url: https://cdn.shopify.com/s/files/1/0764/6756/8943/files/QR-A-11-12.png?v=1762939917
+    shops:
+      - name: Simagic
+        price: 89
+        currency: USD
+        url: https://simagic.com/products/simagic-qr-a
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
 opensource:
   - project_name: FreeJoy
     description: FreeJoy. configurable USB HID input controller for wheels, pedals, shifters,

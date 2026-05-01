@@ -1530,6 +1530,369 @@ commercial:
         currency: EUR
         url: https://flightsimcontrols.com/product/vkb-sim-gladiator-mk-ii-joystick/
         region: Unknown
+  - product_name: Joystick Desk Mount2 with Profile Bar 1
+    description: Joystick Desk Mount2 with Profile Bar 1. flight-control mounts and accessories.
+      Active EU WINCTRL store listing; total_stock 4 from API. Joystick Desk Mount2 with
+      Profile Bar 1.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=1185
+    picture_url: https://eu.winctrl.com/static/ipfs/QmVibjhxqfrmTDcGPprYSdr2TWrMgBjCKA8DfhA2815PS6
+    shops:
+      - name: WINCTRL EU
+        price: 34.61
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=1185
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: for Warthog Flightstick/ Warthog Throttle/ Mouse-KeyPad
+    description: UCM for Warthog Flightstick/ Warthog Throttle/ Mouse-KeyPad. rig mounts. listed
+      on Flightsimcontrols. Official shop listing.
+    manufacturer: UCM
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://flightsimcontrols.com/product/vkb-ucm-stronghold-warthog-mouse-keypad/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2020/05/UCM-L-TM-BM.png
+    shops:
+      - name: Flightsimcontrols
+        price: 135
+        currency: EUR
+        url: https://flightsimcontrols.com/product/vkb-ucm-stronghold-warthog-mouse-keypad/
+        region: Unknown
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Joystick Desk Mount Metal 2.0
+    description: WINCTRL Joystick Desk Mount Metal 2.0. rig mounts. listed on Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=3025
+    picture_url: https://eu.winctrl.com/static/ipfs/QmbpEbH3sEaC7E6VKxMtxhb3fiuuTeoewzF5PNwnSPyyyE
+    shops:
+      - name: Eu
+        price: 84
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=3025
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+      - name: Ea
+        price: 96.34
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=3025
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Joystick Desk Mount2 with Profile Bar 1
+    description: Ea Joystick Desk Mount2 with Profile Bar 1. rig mounts. listed on Ea. Joystick
+      Desk Mount2 with Profile Bar 1.
+    manufacturer: Ea
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=1185
+    picture_url: https://ea.winctrl.com/static/ipfs/QmVibjhxqfrmTDcGPprYSdr2TWrMgBjCKA8DfhA2815PS6
+    shops:
+      - name: Ea
+        price: 39.69
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1185
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: MH16 Flightstick
+    description: MOZA MH16 Flightstick. rig mounts. listed on Eu. The MOZA MH16 Flightstick,
+      crafted from aviation-grade aluminum alloy with automotive-grade paint, offers
+      exceptional durability and a classic fighter aircraft design. It featur...
+    manufacturer: MOZA
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://eu.mozaracing.com/products/mh16-flightstick
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MH16-1_converted.png?v=1751281058
+    shops:
+      - name: Eu
+        price: 159
+        currency: USD
+        url: https://eu.mozaracing.com/products/mh16-flightstick
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: MHG Flightstick
+    description: MOZA MHG Flightstick. rig mounts. listed on Eu. The MOZA MHG Flightstick is
+      built with reinforced carbon fiber composite for durability and precision. Featuring
+      Hall-effect sensors, a two-stage trigger, customizable RGB light...
+    manufacturer: MOZA
+    component_category: joysticks
+    component_sub_category: joystick-mount
+    product_url: https://eu.mozaracing.com/products/mhg-flightstick
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/MOZAMHGFLightstick-1_83bf3dec-cb60-4aa5-864d-18fe0b7e1522.png?v=1761617051
+    shops:
+      - name: Eu
+        price: 109
+        currency: USD
+        url: https://eu.mozaracing.com/products/mhg-flightstick
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cyber Taurus E.B.29 FFB CarrierAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.B.29 FFB CarrierAce Joystick Combo. rig mounts. listed
+      on Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: ffb-joystick
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=5985
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_EB29_18V2Grip/EC_CT_EB29_18V2Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 575.36
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=5985
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+      - name: Ea
+        price: 659.87
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=5985
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cyber Taurus E.B.29 FFB ViperAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.B.29 FFB ViperAce Joystick Combo. rig mounts. listed on
+      Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: ffb-joystick
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=3185
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_EB29_16Grip/EC_CT_EB29_16Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 490.37
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=3185
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+      - name: Ea
+        price: 562.4
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=3185
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cyber Taurus E.B.82 FFB CarrierAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.B.82 FFB CarrierAce Joystick Combo. rig mounts. listed
+      on Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: ffb-joystick
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=6005
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_EB82_18V2Grip/EC_CT_EB82_18V2Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 918.52
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=6005
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+      - name: WINCTRL
+        price: 1053.41
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=6005
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cyber Taurus E.B.82 FFB ViperAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.B.82 FFB ViperAce Joystick Combo. rig mounts. listed on
+      Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: ffb-joystick
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=3205
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_EB82_16Grip/EC_CT_EB82_16Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 833.53
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=3205
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+      - name: WINCTRL
+        price: 1053.41
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=3205
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cyber Taurus E.D.16 FFB CarrierAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.D.16 FFB CarrierAce Joystick Combo. rig mounts. listed
+      on Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: ffb-joystick
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=6025
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_ED16_18V2Grip/EC_CT_ED16_18V2Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 918.52
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=6025
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+      - name: WINCTRL
+        price: 1053.41
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=6025
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cyber Taurus E.D.16 FFB ViperAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.D.16 FFB ViperAce Joystick Combo. rig mounts. listed on
+      Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: ffb-joystick
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=3225
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_ED16_16EXGrip/EC_CT_ED16_16EXGrip_00.jpg
+    shops:
+      - name: Eu
+        price: 882.92
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=3225
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+      - name: WINCTRL
+        price: 1012.59
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=3225
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: NavyAce Metal Joystick Grip
+    description: Ea NavyAce Metal Joystick Grip. rig mounts. listed on Ea. NavyAce Metal
+      Joystick Grip x1.
+    manufacturer: Ea
+    component_category: joysticks
+    component_sub_category: joystick-grip
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=305
+    picture_url: https://ea.winctrl.com/static/ipfs/QmSjWgThT1cMzea5DfYiwPuPq5EihvrSc2X3VpqCAVyrft
+    shops:
+      - name: Ea
+        price: 188.19
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=305
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: ViperAce EX Metal Joystick Grip(None Shaker Kit)
+    description: Ea ViperAce EX Metal Joystick Grip(None Shaker Kit). rig mounts. listed on Ea.
+      ViperAce EX Metal Joystick Grip(None Shake kits) x1.
+    manufacturer: Ea
+    component_category: joysticks
+    component_sub_category: joystick-grip
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=377
+    picture_url: https://ea.winctrl.com/static/ipfs/QmV3Q65tLgmFdRGVpmNMUKnQc3uR5Du72gj1pxYnv1J5S6
+    shops:
+      - name: Ea
+        price: 90.72
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=377
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: ViperAce EX Metal Joystick Grip(with Shaker Kit)
+    description: Ea ViperAce EX Metal Joystick Grip(with Shaker Kit). rig mounts. listed on Ea.
+      ViperAce EX Metal Joystick Grip(with Shake kits) x1.
+    manufacturer: Ea
+    component_category: joysticks
+    component_sub_category: joystick-grip
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=338
+    picture_url: https://ea.winctrl.com/static/ipfs/QmSXddA3pBz88J8JzUEpukr5gTYNYvc1AjcBooYKA1xm51
+    shops:
+      - name: Ea
+        price: 147.37
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=338
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: TM Grip Conversion Kit
+    description: TM Grip Conversion Kit. flight-control mounts and accessories. Listed on EU
+      WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. TM Grip
+      Conversion Kit.
+    manufacturer: WINCTRL
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=321
+    picture_url: https://eu.winctrl.com/static/ipfs/Qme5R55cN7ExC7jpdqCh6uLusbJoKBJYYySHfaVBzqPjTS
+    shops:
+      - name: WINCTRL EU
+        price: Unknown
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=321
+        region: EU
+        status: out-of-stock
+        last_updated: 2026-05-01
+      - name: Flightsimcontrols
+        price: 28
+        currency: EUR
+        url: https://flightsimcontrols.com/product/scg-grip-conversion-kit/
+        region: Unknown
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Grip Conversion Kit (RevB to RevC)
+    description: SCG Grip Conversion Kit (RevB to RevC). rig mounts. listed on
+      Flightsimcontrols. Official shop listing.
+    manufacturer: SCG
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://flightsimcontrols.com/product/scg-grip-conversion-kit-revb-to-revc/
+    picture_url: https://flightsimcontrols.com/wp-content/uploads/2024/06/04_for_Grip_Rev-C_1.jpg
+    shops:
+      - name: Flightsimcontrols
+        price: 19
+        currency: EUR
+        url: https://flightsimcontrols.com/product/scg-grip-conversion-kit-revb-to-revc/
+        region: Unknown
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Z-Axis Module
+    description: MOZA Z-Axis Module. rig mounts. listed on Eu. The MOZA Z-Axis Module serves as
+      a yaw control axis with a ±20° range and an extension kit adding 97mm in length. It
+      features a 16-bit Hall sensor for precise control, aerospace...
+    manufacturer: MOZA
+    component_category: joysticks
+    component_sub_category: joystick-upgrade-kit
+    product_url: https://eu.mozaracing.com/products/z-axis-module
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/5_converted.png?v=1751281058
+    shops:
+      - name: Eu
+        price: 99
+        currency: USD
+        url: https://eu.mozaracing.com/products/z-axis-module
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
 opensource:
   - project_name: Open Joystick
     description: Open Joystick FFB. open-source force-feedback joystick concept. Early-stage

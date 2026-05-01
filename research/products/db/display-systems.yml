@@ -769,6 +769,544 @@ commercial:
         url: https://sim-lab.eu/products/x1-pro-integrated-monitor-mount
         region: EU
         status: available
+  - product_name: MFD1(With USB3.0 Display)
+    description: MFD1(With USB3.0 Display). cockpit panel bundle / MIP. Pre-order listing on EU
+      WINCTRL store. MFD Unit1 x1.
+    manufacturer: WINCTRL
+    component_category: display-systems
+    component_sub_category: dashboard-display
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=417
+    picture_url: https://eu.winctrl.com/static/ipfs/QmbeWTnM1fpwVQ15L2ETZSRRfazivkLSXHxwKqdMQGhBm7
+    shops:
+      - name: WINCTRL EU
+        price: 172.83
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=417
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+      - name: Ea
+        price: 198.23
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=417
+        region: US
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Add-on Side Arms for Triple Monitor Stand 30-45"
+    description: Trakracer Add-on Side Arms for Triple Monitor Stand 30-45". control panel.
+      listed on Trakracer. Trak Racer Black Steel Add-On Side Arms for an existing
+      Tube-Style Single Monitor Stand Trak Racer is the Official Simulator Supplier of
+      Alpine F1 Team and Partner of Airbus Air...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/add-on-side-arms-for-triple-monitor-stand-34-45
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/TM-B3-27-3_01S_117e5c86-2c1b-441b-aaab-f86c859d7481.png?v=1653969693
+    shops:
+      - name: Trakracer
+        price: 39
+        currency: USD
+        url: https://trakracer.eu/products/add-on-side-arms-for-triple-monitor-stand-34-45
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: AP-Xtreme APX-2000 Single Monitor Chassis
+    description: Ricmotech AP-Xtreme APX-2000. single-monitor racing simulator chassis. official
+      Ricmotech store listing. AP-Xtreme cockpit chassis with integrated single-monitor
+      support.
+    manufacturer: Ricmotech / AP-Xtreme
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://www.ricmotech.com/single-monitor-racing-simulator-chassis
+    picture_url: https://www.ricmotech.com/assets/images/APX-2000-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 1745
+        currency: USD
+        url: https://www.ricmotech.com/single-monitor-racing-simulator-chassis
+        region: US
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: AP-Xtreme APX-3000 Triple Monitor Chassis
+    description: Ricmotech AP-Xtreme APX-3000. triple-monitor racing simulator chassis. official
+      Ricmotech store listing. AP-Xtreme cockpit chassis with modular rails and integrated
+      triple-monitor stand.
+    manufacturer: Ricmotech / AP-Xtreme
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://www.ricmotech.com/ap-xtreme-sim-racing-chassis
+    picture_url: https://www.ricmotech.com/assets/images/APX-3000-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 1995
+        currency: USD
+        url: https://www.ricmotech.com/ap-xtreme-sim-racing-chassis
+        region: US
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: AP-Xtreme APX-3000UW Wide Triple Monitor Chassis
+    description: Ricmotech AP-Xtreme APX-3000UW. wide triple-monitor racing simulator chassis.
+      official Ricmotech store listing. AP-Xtreme cockpit for wide triple-monitor simulator
+      setups.
+    manufacturer: Ricmotech / AP-Xtreme
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://www.ricmotech.com/ap-xtreme-3000uw-sim-racing-chassis
+    picture_url: https://www.ricmotech.com/assets/images/APX-3000UW-2.jpg
+    shops:
+      - name: Ricmotech
+        price: 2225
+        currency: USD
+        url: https://www.ricmotech.com/ap-xtreme-3000uw-sim-racing-chassis
+        region: US
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cockpit Monitor Stand (Black)
+    description: GT Cockpit Monitor Stand (Black). cockpit frame. listed on Fanatec. Upgrade
+      your sim racing setup with the GT Cockpit Monitor Stand, perfectly complementing the
+      ClubSport GT Cockpit. It supports 32" to 65" screens, with an included overhead
+      moun...
+    manufacturer: GT
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://www.fanatec.com/eu/en/p/cockpits/crd-9060001-ww/gt-cockpit-monitor-stand-black
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Cockpits/CRD-9060001-WW/CRD-9060001-WW-01.webp
+    shops:
+      - name: Fanatec
+        price: 329.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/cockpits/crd-9060001-ww/gt-cockpit-monitor-stand-black
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cockpit Monitor Stand (White)
+    description: GT Cockpit Monitor Stand (White). cockpit frame. listed on Fanatec. Upgrade
+      your sim racing setup with the GT Cockpit Monitor Stand, perfectly complementing the
+      ClubSport GT Cockpit. It supports 32" to 65" screens, with an included overhead
+      moun...
+    manufacturer: GT
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://www.fanatec.com/eu/en/p/cockpits/crd-9060002-ww/gt-cockpit-monitor-stand-white
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Cockpits/CRD-9060002-WW/CRD-9060002-WW-01.webp
+    shops:
+      - name: Fanatec
+        price: 329.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/cockpits/crd-9060002-ww/gt-cockpit-monitor-stand-white
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cockpit Triple Monitor Expansion Kit (black)
+    description: GT Cockpit Triple Monitor Expansion Kit (black). cockpit frame. listed on
+      Fanatec. Upgrade your ClubSport GT Cockpit with the GT Cockpit Triple Monitor
+      Expansion Kit to transform a single monitor setup into a panoramic showcase,
+      supporting three 32" to 55" scr...
+    manufacturer: GT
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9060003-ww/gt-cockpit-triple-monitor-expansion-kit-black
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Accessories/Cockpit-Accessories/CRD-9060003-WW/CRD-9060003-WW-01B.webp
+    shops:
+      - name: Fanatec
+        price: 169.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9060003-ww/gt-cockpit-triple-monitor-expansion-kit-black
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cockpit Triple Monitor Expansion Kit (white)
+    description: GT Cockpit Triple Monitor Expansion Kit (white). cockpit frame. listed on
+      Fanatec. Upgrade your ClubSport GT Cockpit with the GT Cockpit Triple Monitor
+      Expansion Kit to transform a single monitor setup into a panoramic showcase,
+      supporting three 32" to 55" scr...
+    manufacturer: GT
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9060004-ww/gt-cockpit-triple-monitor-expansion-kit-white
+    picture_url: https://assets.fanatec.com/image/upload/c_fill,q_auto,h_1024,w_1024,f_auto/products/Accessories/Cockpit-Accessories/CRD-9060004-WW/CRD-9060004-WW-01B.webp
+    shops:
+      - name: Fanatec
+        price: 169.95
+        currency: EUR
+        url: https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9060004-ww/gt-cockpit-triple-monitor-expansion-kit-white
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: CM2 HD Racing Dash
+    description: MOZA CM2 HD Racing Dash. rig mounts. listed on Eu. Take control with the MOZA
+      CM2 HD Racing Dash. Equipped with a 5-inch 720P touchscreen, customizable UI, 10 RGB
+      shift indicators, and 6 flag lights, this dashboard delivers real...
+    manufacturer: MOZA
+    component_category: display-systems
+    component_sub_category: dashboard-display
+    product_url: https://eu.mozaracing.com/products/cm2-dash
+    picture_url: https://cdn.shopify.com/s/files/1/0961/3803/5494/files/CM2-1.webp?v=1751281057
+    shops:
+      - name: Eu
+        price: 219
+        currency: USD
+        url: https://eu.mozaracing.com/products/cm2-dash
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: 1200mm 80x40 Extruded Alum. + VESA Monitor Mount
+    description: "Trakracer 1200mm 80x40 Extruded Alum. + VESA Monitor Mount. rig mounts. listed
+      on Trakracer. this product ships from spain The 1200mm long anodized black 80mm x 40mm
+      extruded aluminium with VESA mount is used for fitting both flat and curved monitors.
+      Includes: 1x 1200m..."
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/1200mm-80x40-extruded-alum-vesa-monitor-mount
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/TR8_TMSIN_BLKS.png?v=1653971114
+    shops:
+      - name: Trakracer
+        price: 25
+        currency: USD
+        url: https://trakracer.eu/products/1200mm-80x40-extruded-alum-vesa-monitor-mount
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: 580mm/22.8" Triple Monitor Add-on Arms with VESA Mounts
+    description: Trakracer 580mm/22.8" Triple Monitor Add-on Arms with VESA Mounts. rig mounts.
+      listed on Trakracer. 580mm/22.8" Triple Monitor Add-on Arms for a Single Monitor Stand
+      Suits Monitors up to 45" Trak Racer is the Official Simulator Supplier of Alpine F1
+      Team and Partner of Airbus...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/aluminium-add-on-arms-for-triple-monitor-stand-with-vesa-mounts
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR80-TMARM5_01-min_2_7754080f-fff1-4b50-bfe0-77613e4169d7.png?v=1741230048
+    shops:
+      - name: Trakracer
+        price: 109
+        currency: USD
+        url: https://trakracer.eu/products/aluminium-add-on-arms-for-triple-monitor-stand-with-vesa-mounts
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: 980mm/38.58" Triple Monitor Add-on Arms with VESA Mounts
+    description: Trakracer 980mm/38.58" Triple Monitor Add-on Arms with VESA Mounts. rig mounts.
+      listed on Trakracer. 980mm/38.58" Triple Monitor Add-on Arms for a Single Monitor
+      Stand Suits Monitors up to 45" Trak Racer is the Official Simulator Supplier of Alpine
+      F1 Team and Partner of Airbus...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/aluminium-add-on-arms-for-triple-monitor-stand-with-vesa-mounts-2
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR80-TMARM6_01-min_1.png?v=1732860807
+    shops:
+      - name: Trakracer
+        price: 119
+        currency: USD
+        url: https://trakracer.eu/products/aluminium-add-on-arms-for-triple-monitor-stand-with-vesa-mounts-2
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Add-on Side Arms for Triple Monitor Stand 22-32"
+    description: Trakracer Add-on Side Arms for Triple Monitor Stand 22-32". rig mounts. listed
+      on Trakracer. Trak Racer Black Steel Add-On Side Arms for an existing Tube-Style
+      Single Monitor Stand Trak Racer is the Official Simulator Supplier of Alpine F1 Team
+      and Partner of Airbus Air...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/add-on-side-arms-for-triple-monitor-stand-22-35
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/TM-B3-27-3_01S_fe9325ae-c42d-41a1-9d88-f6a07f4d005a.png?v=1708536560
+    shops:
+      - name: Trakracer
+        price: 39
+        currency: USD
+        url: https://trakracer.eu/products/add-on-side-arms-for-triple-monitor-stand-22-35
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cockpit-Mounted Single Monitor Stand for TR8 Pro & TRX
+    description: Trakracer Cockpit-Mounted Single Monitor Stand for TR8 Pro & TRX. cockpit
+      frame. listed on Trakracer. Trak Racer TR8 Pro and TRX Integrated Single Monitor Stand
+      Provision for displays with VESA Mounting at 75mm and 100mm (via main plate) and
+      200mm, 300mm and 400mm (via the inclu...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/cockpit-mounted-single-monitor-stand-for-trak-racer-tr8-pro-1
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR-TR8-SING3_05-min_1.png?v=1766978401
+    shops:
+      - name: Trakracer
+        price: 99
+        currency: USD
+        url: https://trakracer.eu/products/cockpit-mounted-single-monitor-stand-for-trak-racer-tr8-pro-1
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Cockpit-Mounted Single Monitor Stand for Trak Racer TR5 Sim Racing and Flight Sim Rig
+    description: Trakracer Cockpit-Mounted Single Monitor Stand for Trak Racer TR5 Sim Racing
+      and Flight Sim Rig. cockpit frame. listed on Trakracer. Trak Racer TR5 Integrated
+      Single Monitor Stand – Cockpit-Mounted Display Solution for Sim Racing & Flight
+      Simulation The Trak Racer TR5 Integrated Single Monitor Stand is a cock...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/cockpit-mounted-single-monitor-stand-for-trak-racer-tr5-sim-racing-and-flight-sim-rig
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR5.222.png?v=1773106065
+    shops:
+      - name: Trakracer
+        price: 79
+        currency: USD
+        url: https://trakracer.eu/products/cockpit-mounted-single-monitor-stand-for-trak-racer-tr5-sim-racing-and-flight-sim-rig
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Integrated Triple Monitor Stand for Trak Racer TR8 PRO
+    description: Trakracer Integrated Triple Monitor Stand for Trak Racer TR8 PRO. rig mounts.
+      listed on Trakracer. Integrated Triple Monitor Stand for Trak Racer TR8 PRO Suitable
+      for TR8 Pro Suitable for three monitors or TVs (27 - 45") for both curved and flat
+      monitors. Suits most monitors...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/integrated-triple-monitor-stand-for-trak-racer-tr8-pro-1
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/TR8-TR-M3.6_1_1fbd8a1a-08c3-4459-9f63-71d0bfd60164.png?v=1665988726
+    shops:
+      - name: Trakracer
+        price: Unknown
+        currency: USD
+        url: https://trakracer.eu/products/integrated-triple-monitor-stand-for-trak-racer-tr8-pro-1
+        region: EU
+        status: out-of-stock
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Large Cockpit-Mounted Single Monitor Stand - 1200mm / 47.25" Wide / Version 3
+    description: Trakracer Large Cockpit-Mounted Single Monitor Stand - 1200mm / 47.25" Wide /
+      Version 3. aluminum cockpit. listed on Trakracer. Trak Racer Integrated Single Monitor
+      Stand - For Monitors and TVs up to 80" Centre monitor profile is 1200mm / 47.25" wide.
+      Upgrade later to Triple Monitor Setup up to 45" in si...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/large-cockpit-mounted-single-monitor-stand-1200mm-47-25-wide-copy
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/MS-CM-SIN2_05-min.png?v=1755818331
+    shops:
+      - name: Trakracer
+        price: 199
+        currency: USD
+        url: https://trakracer.eu/products/large-cockpit-mounted-single-monitor-stand-1200mm-47-25-wide-copy
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Large Monitor Stand Center Piece with Vesa Mount - 1200mm / 47.25" Wide
+    description: 'Trakracer Large Monitor Stand Center Piece with Vesa Mount - 1200mm / 47.25"
+      Wide. rig mounts. listed on Trakracer. 1200mm / 47.25" Long 80mm x 40mm Extruded
+      Aluminium with VESA Mount Trak Racer is the Official Simulator Supplier of Alpine F1
+      Team and Partner of Airbus Aircraft. Warranty: Lif...'
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/large-monitor-stand-center-piece-with-vesa-mount-1200mm-47-25-wide
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR80-TMSIN4-BLK_WHITE-TEXT.png?v=1777028381
+    shops:
+      - name: Trakracer
+        price: 45
+        currency: USD
+        url: https://trakracer.eu/products/large-monitor-stand-center-piece-with-vesa-mount-1200mm-47-25-wide
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Large Monitor Stand Center Piece with Vesa Mount - 1500mm / 59" Wide
+    description: Trakracer Large Monitor Stand Center Piece with Vesa Mount - 1500mm / 59" Wide.
+      rig mounts. listed on Trakracer. 1500mm / 59" Long 80mm x 40mm Extruded Aluminium with
+      VESA Mount The 1500mm / 59" length consists of 1 x 800mm (31.5") and 2 x 350mm (13.8")
+      high quality black anodized extrusio...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/1200mm-80x40-extruded-alum-vesa-monitor-mount-2
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TRR096_BACK_1.png?v=1768274547
+    shops:
+      - name: Trakracer
+        price: 60
+        currency: USD
+        url: https://trakracer.eu/products/1200mm-80x40-extruded-alum-vesa-monitor-mount-2
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Small Cockpit-Mounted Single Monitor Stand - 800mm / 31.5" Wide
+    description: Trakracer Small Cockpit-Mounted Single Monitor Stand - 800mm / 31.5" Wide.
+      cockpit frame. listed on Trakracer. Trak Racer Integrated Single Monitor Stand - For
+      Monitors and TVs up to 80" Centre monitor profile is 800mm / 31.5". Upgrade later to
+      Triple Monitor Setup up to 22-34" in size (...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/800mm-long-cockpit-mounted-single-monitor-stand-1
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/KIT-TR80SMLSINCM2-BLK2_6_3e02f26a-4828-4f4f-885a-1fc02b6c85b3.png?v=1734655225
+    shops:
+      - name: Trakracer
+        price: 179
+        currency: USD
+        url: https://trakracer.eu/products/800mm-long-cockpit-mounted-single-monitor-stand-1
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Universal Integrated Monitor Mounts for Aluminium Extrusion Mounting
+    description: "Trakracer Universal Integrated Monitor Mounts for Aluminium Extrusion
+      Mounting. rig mounts. listed on Trakracer. Trak Racer Black Anodized Aluminium Sim-Rig
+      Integrated Mounts Trak Racer is the Official Simulator Supplier of Alpine F1 Team and
+      Partner of Airbus Aircraft. Warranty: Lifetime..."
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/integrated-alum-profile-monitor-mounts-for-tr8020-1
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/TR80-TMKIT3-BLK_3000x2000_ef3bc02e-29db-4a62-9bc1-c4e9ad8419c6.webp?v=1763348443
+    shops:
+      - name: Trakracer
+        price: 99
+        currency: USD
+        url: https://trakracer.eu/products/integrated-alum-profile-monitor-mounts-for-tr8020-1
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: TV Monitor Universal Bracket Mounting Kit
+    description: VESA TV Monitor Universal Bracket Mounting Kit. rig mounts. listed on
+      Trakracer. Single TR8020 VESA TV/monitor universal bracket mounting kit for flat and
+      curved monitors. TR8020 VESA TV/monitor universal bracket mounting kit with angle
+      adjustment and VESA m...
+    manufacturer: VESA
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://trakracer.eu/products/vesa-tv-monitor-universal-bracket-mounting-kit-1
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/products/TR-VESA3-6.png?v=1740379360
+    shops:
+      - name: Trakracer
+        price: 20
+        currency: USD
+        url: https://trakracer.eu/products/vesa-tv-monitor-universal-bracket-mounting-kit-1
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Quad monitor upgrade
+    description: VNM Quad monitor upgrade. cockpit frame. listed on Vnmsimulation. Official shop
+      listing.
+    manufacturer: VNM
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://vnmsimulation.com/product/vnm-quad-monitor-upgrade/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/Quad-Monitor-Upgrade.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 107
+        currency: USD
+        url: https://vnmsimulation.com/product/vnm-quad-monitor-upgrade/
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: RIG-Mounted Single Monitor stand 4080
+    description: VNM RIG-Mounted Single Monitor stand 4080. cockpit frame. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://vnmsimulation.com/vi/product/vnm-rig-mounted-single-monitor-stand-4080/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/06/4.png
+    shops:
+      - name: Vnmsimulation
+        price: 114
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-rig-mounted-single-monitor-stand-4080/
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: RIG-mounted Triple Monitor stand
+    description: VNM RIG-mounted Triple Monitor stand. cockpit frame. listed on Vnmsimulation.
+      Official shop listing.
+    manufacturer: VNM
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://vnmsimulation.com/vi/product/vnm-rig-mounted-triple-monitor-stand/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/06/ga-3-man-hinh-gan-rig-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 266
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-rig-mounted-triple-monitor-stand/
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Triple Monitor Upgrade for Single Monitor Stand
+    description: VNM Triple Monitor Upgrade for Single Monitor Stand. rig mounts. listed on
+      Vnmsimulation. Official shop listing.
+    manufacturer: VNM
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://vnmsimulation.com/vi/product/vnm-triple-monitor-upgrade-for-single-monitor-stand/
+    picture_url: https://vnmsimulation.com/wp-content/uploads/2025/03/Upgrade-1to3-scaled.jpg
+    shops:
+      - name: Vnmsimulation
+        price: 116
+        currency: USD
+        url: https://vnmsimulation.com/vi/product/vnm-triple-monitor-upgrade-for-single-monitor-stand/
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Initium Monitor Mount
+    description: Asetek Initium Monitor Mount. rig mounts. listed on Asetek. Perfect your racing
+      set-up with the Initium Monitor Mount - the perfect way to bring the action to you.
+      Rigid steel construction – No flex or wobble during intense races. Bring...
+    manufacturer: Asetek
+    component_category: display-systems
+    component_sub_category: monitor-mount
+    product_url: https://www.asetek.com/simsports/product/initium-monitor-mount/
+    picture_url: https://www.asetek.com/simsports/wp-content/uploads/2025/06/Initium_Monitor-Mount_45-hero_40-062-0062001.png
+    shops:
+      - name: Asetek
+        url: https://www.asetek.com/simsports/product/initium-monitor-mount/
+        region: Unknown
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
+  - product_name: Conspit CSD SimHub Dashboard – 5″ IPS Race Display with RGB Alerts
+    description: Trakracer Conspit CSD SimHub Dashboard – 5″ IPS Race Display with RGB Alerts.
+      ffb controller. listed on Trakracer. The Conspit CSD SimHub Dashboard brings
+      race-grade instrumentation to your sim racing cockpit with precision, clarity, and
+      immersive feedback. This dashboard features a 5-inch I...
+    manufacturer: Trakracer
+    component_category: display-systems
+    component_sub_category: dashboard-display
+    product_url: https://trakracer.eu/products/csd-simhub-dashboard
+    picture_url: https://cdn.shopify.com/s/files/1/0603/6268/6658/files/conspit_csd_dashboard_sim_racing_dash.png?v=1764061897
+    shops:
+      - name: Trakracer
+        price: 299
+        currency: USD
+        url: https://trakracer.eu/products/csd-simhub-dashboard
+        region: EU
+        status: available
+        last_updated: 2026-05-01
+    last_updated: 2026-05-01
 opensource:
   - project_name: MapMap
     description: MapMap. projection mapping software. Mature but low/reduced activity; public
