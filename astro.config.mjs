@@ -79,8 +79,8 @@ export default defineConfig({
           autogenerate: { directory: 'calculators' },
         },
         {
-          label: '3rd Party Database',
-          items: [{ label: 'Product Database', link: '/product-db/' }],
+          label: '3rd Party',
+          items: [{ label: 'Sim Database', link: '/3rd-party-sim-database/' }],
           badge: {
             text: 'WIP',
             variant: 'caution',
@@ -114,12 +114,12 @@ export default defineConfig({
     ...(process.env.NODE_ENV === 'development'
       ? []
       : [
-          sentry({
-            org: 'qantic-ntrp',
-            project: 'open-sim-gear',
-            authToken: process.env.SENTRY_AUTH_TOKEN,
-          }),
-        ]),
+        sentry({
+          org: 'qantic-ntrp',
+          project: 'open-sim-gear',
+          authToken: process.env.SENTRY_AUTH_TOKEN,
+        }),
+      ]),
     // spotlightjs(),
     checks({
       mode: 'full', // 'auto' | 'full' | 'essential'
