@@ -28,6 +28,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=326
         region: EU
+        status: available
+      - name: Ea
+        price: 147.37
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=326
+        region: US
+        status: available
   - product_name: Helicopter Simulator Collective with Twist Throttle
     description: Digital Reality Helicopter Simulator Collective with Twist Throttle. standalone
       helicopter collective. Active product page found. Collective control with twist
@@ -54,10 +61,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmaecQeC8VFeasS7AAV6HFuATXuMzmc2vpxtSodE7MR7G9
     shops:
       - name: WINCTRL EU
-        price: 287.95
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=325
         region: EU
+        status: out-of-stock
   - product_name: PUMA X 2025 - inspired by Airbus
     description: Pro Flight Trainer PUMA X 2025 A-Style. complete helicopter control set with
       collective. Active configurable product on Pro Flight Trainer store. Single-pilot
@@ -135,6 +143,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=344
         region: EU
+        status: available
+      - name: Ea
+        price: 428.3
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=344
+        region: US
+        status: available
 opensource:
   - project_name: Simchair MKIII
     description: Simchair MKIII. 3D-printable modular helicopter/flight control ecosystem.

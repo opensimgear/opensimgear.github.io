@@ -27,11 +27,16 @@
   type Shop = {
     name: string | null;
     region: string;
-    price: number;
+    price: number | 'Unknown';
     currency: string;
+    status: 'available' | 'eol' | 'out-of-stock';
     url: string | null;
   };
   type PriceSource = {
+    price: number | 'Unknown';
+    currency: string;
+  };
+  type NumericPriceSource = {
     price: number;
     currency: string;
   };
@@ -598,7 +603,11 @@
 
   function searchableText(product: Product): string {
     const shopText = (product.shops ?? [])
-      .map((shop) => [shop.name, shop.region, shop.price, shop.currency, shop.url].filter(Boolean).join(' '))
+      .map((shop) =>
+        [shop.name, shop.region, shop.status, shopStatusLabel(shop.status), shop.price, shop.currency, shop.url]
+          .filter(Boolean)
+          .join(' ')
+      )
       .join(' ');
     const estimateText = product.estimated_price
       ? [product.estimated_price.price, product.estimated_price.currency].join(' ')
@@ -671,7 +680,9 @@
   function availabilityBucket(product: Product): AvailabilityBucket {
     const value = normalizeText(
       product.kind === 'commercial'
-        ? (product.shops ?? []).map((shop) => [shop.name, shop.region, shop.url].filter(Boolean).join(' ')).join(' ')
+        ? (product.shops ?? [])
+            .map((shop) => [shop.name, shop.region, shop.status, shop.url].filter(Boolean).join(' '))
+            .join(' ')
         : [product.project_url, product.description].filter(Boolean).join(' ')
     );
 
@@ -724,9 +735,47 @@
     return (product.shops ?? []).filter((shop) => isHttpUrl(shop.url));
   }
 
-  function validPriceSource(source: PriceSource | null | undefined): PriceSource | null {
+  function regionFlag(region: string): string {
+    const normalized = region.trim().toLowerCase();
+    const flags: Record<string, string> = {
+      eu: '🇪🇺',
+      europe: '🇪🇺',
+      us: '🇺🇸',
+      usa: '🇺🇸',
+      uk: '🇬🇧',
+      gb: '🇬🇧',
+      de: '🇩🇪',
+      germany: '🇩🇪',
+      au: '🇦🇺',
+      australia: '🇦🇺',
+      canada: '🇨🇦',
+      ca: '🇨🇦',
+      china: '🇨🇳',
+      cn: '🇨🇳',
+      japan: '🇯🇵',
+      jp: '🇯🇵',
+      global: '🌐',
+    };
+
+    return flags[normalized] ?? '';
+  }
+
+  function shopRegionLabel(shop: Shop): string {
+    return shop.region || 'Unknown';
+  }
+
+  function shopStatusLabel(status: Shop['status'] | undefined): string {
+    const labels: Record<Shop['status'], string> = {
+      available: 'Available',
+      eol: 'EOL',
+      'out-of-stock': 'Out of stock',
+    };
+    return status ? labels[status] : 'Available';
+  }
+
+  function validPriceSource(source: PriceSource | null | undefined): NumericPriceSource | null {
     if (!source || !Number.isFinite(source.price) || !source.currency) return null;
-    return source;
+    return source as NumericPriceSource;
   }
 
   function currencyForLocale(locale: string): string {
@@ -780,14 +829,14 @@
     return multipliers[currency] ?? 1;
   }
 
-  function convertPrice(source: PriceSource, currency: string): PriceSource {
+  function convertPrice(source: NumericPriceSource, currency: string): NumericPriceSource {
     return {
       price: (source.price * usdMultiplier(source.currency)) / usdMultiplier(currency),
       currency,
     };
   }
 
-  function productPriceSource(product: Product): PriceSource | null {
+  function productPriceSource(product: Product): NumericPriceSource | null {
     if (product.kind === 'opensource') {
       const estimate = validPriceSource(product.estimated_price);
       return estimate ? convertPrice(estimate, priceCurrency) : null;
@@ -795,7 +844,7 @@
 
     const prices = (product.shops ?? [])
       .map((shop) => validPriceSource(shop))
-      .filter((source): source is PriceSource => Boolean(source))
+      .filter((source): source is NumericPriceSource => Boolean(source))
       .map((source) => convertPrice(source, priceCurrency));
     if (!prices.length) return null;
 
@@ -805,7 +854,7 @@
     };
   }
 
-  function formatPrice(source: PriceSource): string {
+  function formatPrice(source: NumericPriceSource): string {
     try {
       return new Intl.NumberFormat(priceLocale, {
         style: 'currency',
@@ -1833,6 +1882,8 @@
                     <thead class="border-b border-[var(--sl-color-gray-5)] text-[0.76rem] uppercase tracking-[0] text-[var(--sl-color-gray-3)]">
                       <tr>
                         <th class="px-4 py-3 font-[700]">Name</th>
+                        <th class="px-4 py-3 font-[700]">Region</th>
+                        <th class="px-4 py-3 font-[700]">Status</th>
                         <th class="px-4 py-3 text-right font-[700]">Price</th>
                         <th class="px-4 py-3 text-right font-[700]">Link</th>
                       </tr>
@@ -1841,6 +1892,15 @@
                       {#each modalShops as shop (shop.url)}
                         <tr class="border-b border-[var(--sl-color-gray-6)] last:border-b-0">
                           <td class="px-4 py-3">{shop.name ?? 'Shop'}</td>
+                          <td class="px-4 py-3">
+                            <span class="inline-flex items-center gap-2 whitespace-nowrap">
+                              {#if regionFlag(shop.region)}
+                                <span aria-hidden="true">{regionFlag(shop.region)}</span>
+                              {/if}
+                              <span>{shopRegionLabel(shop)}</span>
+                            </span>
+                          </td>
+                          <td class="px-4 py-3">{shopStatusLabel(shop.status)}</td>
                           <td class="px-4 py-3 text-right font-[650]">{formatPrice(shop)}</td>
                           <td class="px-4 py-3 text-right">
                             <a

@@ -9,8 +9,9 @@ import { autoSidebarSchema } from 'starlight-auto-sidebar/schema';
 const shopSchema = z.object({
   name: z.string().nullable(),
   region: z.string(),
-  price: z.number(),
+  price: z.union([z.number(), z.literal('Unknown')]),
   currency: z.string(),
+  status: z.enum(['available', 'eol', 'out-of-stock']),
   url: z.string().nullable(),
 });
 

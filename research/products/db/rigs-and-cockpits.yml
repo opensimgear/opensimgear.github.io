@@ -97,10 +97,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmUTbwDVSzqcUQCC24a3mjEhS1y3HBCdzqbS5gJiqRj2NM
     shops:
       - name: WINCTRL EU
-        price: 47.95
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=328
         region: EU
+        status: out-of-stock
   - product_name: EXPED
     description: EXPED. flight-control mounts and accessories. Listed on EU WINCTRL store; local
       stock not available in API response. EXPED.
@@ -115,6 +116,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=825
         region: EU
+        status: available
+      - name: Ea
+        price: 1.13
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=825
+        region: US
+        status: available
   - product_name: Finger Lift for Gemini Only
     description: Finger Lift for Gemini Only. flight-control mounts and accessories. Listed on
       EU WINCTRL store; local stock not available in API response. Finger Lift for Gemini
@@ -130,6 +138,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=346
         region: EU
+        status: available
+      - name: Ea
+        price: 56.65
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=346
+        region: US
+        status: available
   - product_name: Finger Lift for WINCTRL Orion1 Only
     description: Finger Lift for WINCTRL Orion1 Only. flight-control mounts and accessories.
       Active EU WINCTRL store listing; total_stock 4 from API. Finger Lift for WINCTRL
@@ -145,6 +160,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=345
         region: EU
+        status: available
+      - name: Ea
+        price: 56.65
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=345
+        region: US
+        status: available
   - product_name: Finger Lift for WINCTRL Orion2 Only
     description: Finger Lift for WINCTRL Orion2 Only. flight-control mounts and accessories.
       Pre-order listing on EU WINCTRL store. Finger Lift for WINCTRL Orion2 Only x1.
@@ -159,6 +181,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=347
         region: EU
+        status: available
+      - name: Ea
+        price: 56.65
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=347
+        region: US
+        status: available
   - product_name: Formula Intelligence
     description: Playseat Formula Intelligence. formula-style cockpit. current. Formula seating
       posture with ForceLock adjustment system.
@@ -183,10 +212,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmQYH5P8PSJJYMV5zUP2hDcAnr6Zi5KVuKKAcHZfZW5Zx3
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=327
         region: EU
+        status: out-of-stock
+      - name: WINCTRL
+        price: Unknown
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=327
+        region: US
+        status: out-of-stock
   - product_name: GT1 Evo Simracing Cockpit
     description: Sim-Lab GT1 Evo Sim Racing Cockpit. aluminum profile cockpit. in stock on
       official EU shop. Rigid profile cockpit with sturdy pedal plate, accessory side mount,
@@ -202,11 +238,6 @@ commercial:
         currency: EUR
         url: https://sim-lab.eu/en-de/products/gt1-evo-sim-racing-cockpit
         region: EU
-      - name: Sim Lab
-        price: 379
-        currency: USD
-        url: https://sim-lab.eu/products/gt1-evo-base-product
-        region: Unknown
   - product_name: Joystick Desk Mount2 with Profile Bar 1
     description: Joystick Desk Mount2 with Profile Bar 1. flight-control mounts and accessories.
       Active EU WINCTRL store listing; total_stock 4 from API. Joystick Desk Mount2 with
@@ -222,6 +253,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1185
         region: EU
+        status: available
   - product_name: MAG Switch1 TS
     description: MAG Switch1 TS. flight-control mounts and accessories. Active EU WINCTRL store
       listing; total_stock 4 from API. MAG Switch1 TS.
@@ -236,6 +268,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1105
         region: EU
+        status: available
+      - name: Ea
+        price: 56.65
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1105
+        region: US
+        status: available
   - product_name: MTS Base Frame
     description: MONSTERTECH MTS Base Frame. modular flight/racing cockpit. in stock on official
       EU store. Base module for a complete MTS cockpit, expandable with flight, racing, and
@@ -295,11 +334,6 @@ commercial:
         currency: EUR
         url: https://sim-lab.eu/en-de/products/p1x-ultimate-simracing-cockpit
         region: EU
-      - name: Sim Lab
-        price: 1088
-        currency: USD
-        url: https://sim-lab.eu/products/p1x-ultimate-simracing-cockpit-us
-        region: Unknown
   - product_name: GT1 Pro Sim Racing Cockpit
     description: Sim-Lab GT1 Pro Sim Racing Cockpit. aluminum profile cockpit. in stock on
       official EU shop. Rigid pre-drilled chassis for direct-drive wheelbases with side
@@ -315,11 +349,6 @@ commercial:
         currency: EUR
         url: https://sim-lab.eu/en-de/products/gt1-pro-sim-racing-cockpit
         region: EU
-      - name: Sim Lab
-        price: 399
-        currency: USD
-        url: https://sim-lab.eu/products/gt1-evo-sim-racing-cockpit-1
-        region: Unknown
   - product_name: Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit
     description: Sim-Lab Mercedes-AMG PETRONAS Formula One Team Sim Racing Cockpit. licensed
       formula-position cockpit. in stock on official EU shop. Rigid formula cockpit with
@@ -335,11 +364,6 @@ commercial:
         currency: EUR
         url: https://sim-lab.eu/en-de/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit
         region: EU
-      - name: Sim Lab
-        price: 99
-        currency: USD
-        url: https://sim-lab.eu/products/mercedes-amg-petronas-formula-one-team-sim-racing-cockpit-int
-        region: Unknown
   - product_name: Panel Mount1
     description: Panel Mount1. flight-control mounts and accessories. Pre-order listing on EU
       WINCTRL store. Panel Mount1.
@@ -354,6 +378,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=645
         region: EU
+        status: available
+      - name: Ea
+        price: 32.78
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=645
+        region: US
+        status: available
   - product_name: Panel Mount1(x3)
     description: Panel Mount1(x3). flight-control mounts and accessories. Active EU WINCTRL
       store listing; total_stock 4 from API. Panel Mount1x3.
@@ -368,6 +399,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=665
         region: EU
+        status: available
+      - name: Ea
+        price: 81.31
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=665
+        region: US
+        status: available
   - product_name: Playseat Challenge X Logitech G Edition
     description: Playseat Challenge X Logitech G Edition. foldable cockpit. current. Foldable
       cockpit with carbon steel frame and ActiFit fabric.
@@ -567,10 +605,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmRSLfot1B89xUbczpuSHCZbexJMNLMNxhsSRDtM9p8EmZ
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=320
         region: EU
+        status: out-of-stock
   - product_name: Super Taurus ViperAce Adapter
     description: Super Taurus ViperAce Adapter. flight-control mounts and accessories. Listed on
       EU WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super
@@ -582,10 +621,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmQy2t7Qx9inqErBQFvsWyzrSvzEvL2qs8gX82MRnPD9Cs
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=376
         region: EU
+        status: out-of-stock
   - product_name: Throttle Desk Mount5 with Profile Bar 1
     description: Throttle Desk Mount5 with Profile Bar 1. flight-control mounts and accessories.
       Pre-order listing on EU WINCTRL store. Throttle Desk Mount5 with Profile Bar 1.
@@ -600,6 +640,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1225
         region: EU
+        status: available
   - product_name: TM Grip Conversion Kit
     description: TM Grip Conversion Kit. flight-control mounts and accessories. Listed on EU
       WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. TM Grip
@@ -611,10 +652,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/Qme5R55cN7ExC7jpdqCh6uLusbJoKBJYYySHfaVBzqPjTS
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=321
         region: EU
+        status: out-of-stock
       - name: Flightsimcontrols
         price: 28
         currency: EUR
@@ -648,6 +690,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=372
         region: EU
+        status: available
+      - name: Ea
+        price: 56.65
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=372
+        region: US
+        status: available
   - product_name: Volair Sim Flight and Racing Simulation Cockpit Chassis
     description: Volair Sim VS-01. universal flight/racing cockpit. current site active; chassis
       purchase listing not captured in shop [uncertain]. Universal flight/racing steel
@@ -835,6 +884,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=371
         region: EU
+        status: available
+      - name: Ea
+        price: 306.13
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=371
+        region: US
+        status: available
   - product_name: Pro-Sim Formula Evo Sport
     description: Pro-Sim Formula Evo Sport. formula racing simulator cockpit. in stock on
       official UK shop. Tubular formula-position simulator with bespoke seat, high-foot
@@ -2476,6 +2532,317 @@ commercial:
         currency: EUR
         url: https://heusinkveld.com/shop/accessories/baseplate-ultimate/
         region: Unknown
+  - product_name: Cyber Taurus E.B.29 FFB CarrierAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.B.29 FFB CarrierAce Joystick Combo. rig mounts. listed
+      on Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=5985
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_EB29_18V2Grip/EC_CT_EB29_18V2Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 575.36
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=5985
+        region: EU
+        status: available
+      - name: Ea
+        price: 659.87
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=5985
+        region: US
+        status: available
+  - product_name: Cyber Taurus E.B.29 FFB ViperAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.B.29 FFB ViperAce Joystick Combo. rig mounts. listed on
+      Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=3185
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_EB29_16Grip/EC_CT_EB29_16Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 490.37
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=3185
+        region: EU
+        status: available
+      - name: Ea
+        price: 562.4
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=3185
+        region: US
+        status: available
+  - product_name: Cyber Taurus E.B.82 FFB CarrierAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.B.82 FFB CarrierAce Joystick Combo. rig mounts. listed
+      on Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=6005
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_EB82_18V2Grip/EC_CT_EB82_18V2Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 918.52
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=6005
+        region: EU
+        status: available
+      - name: WINCTRL
+        price: 1053.41
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=6005
+        region: US
+        status: available
+  - product_name: Cyber Taurus E.B.82 FFB ViperAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.B.82 FFB ViperAce Joystick Combo. rig mounts. listed on
+      Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=3205
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_EB82_16Grip/EC_CT_EB82_16Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 833.53
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=3205
+        region: EU
+        status: available
+      - name: WINCTRL
+        price: 1053.41
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=3205
+        region: US
+        status: available
+  - product_name: Cyber Taurus E.D.16 FFB CarrierAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.D.16 FFB CarrierAce Joystick Combo. rig mounts. listed
+      on Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=6025
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_ED16_18V2Grip/EC_CT_ED16_18V2Grip_00.jpg
+    shops:
+      - name: Eu
+        price: 918.52
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=6025
+        region: EU
+        status: available
+      - name: WINCTRL
+        price: 1053.41
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=6025
+        region: US
+        status: available
+  - product_name: Cyber Taurus E.D.16 FFB ViperAce Joystick Combo
+    description: WINCTRL Cyber Taurus E.D.16 FFB ViperAce Joystick Combo. rig mounts. listed on
+      Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=3225
+    picture_url: https://eu.winctrl.com/upload/picture/EJ1_Combo/CT_ED16_16EXGrip/EC_CT_ED16_16EXGrip_00.jpg
+    shops:
+      - name: Eu
+        price: 882.92
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=3225
+        region: EU
+        status: available
+      - name: WINCTRL
+        price: 1012.59
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=3225
+        region: US
+        status: available
+  - product_name: Joystick Desk Mount Metal 2.0
+    description: WINCTRL Joystick Desk Mount Metal 2.0. rig mounts. listed on Eu. Official shop listing.
+    manufacturer: WINCTRL
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://eu.winctrl.com/view/goods-details.html?id=3025
+    picture_url: https://eu.winctrl.com/static/ipfs/QmbpEbH3sEaC7E6VKxMtxhb3fiuuTeoewzF5PNwnSPyyyE
+    shops:
+      - name: Eu
+        price: 84
+        currency: EUR
+        url: https://eu.winctrl.com/view/goods-details.html?id=3025
+        region: EU
+        status: available
+      - name: Ea
+        price: 96.34
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=3025
+        region: US
+        status: available
+  - product_name: Joystick Desk Mount2 with Profile Bar 1
+    description: Ea Joystick Desk Mount2 with Profile Bar 1. rig mounts. listed on Ea. Joystick
+      Desk Mount2 with Profile Bar 1.
+    manufacturer: Ea
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=1185
+    picture_url: https://ea.winctrl.com/static/ipfs/QmVibjhxqfrmTDcGPprYSdr2TWrMgBjCKA8DfhA2815PS6
+    shops:
+      - name: Ea
+        price: 39.69
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1185
+        region: US
+        status: available
+  - product_name: Black Shark Metal Collective Grip
+    description: KA-50 Black Shark Metal Collective Grip. rig mounts. listed on Ea. KA-50 Black
+      Shark Metal Collective Grip x1.
+    manufacturer: KA-50
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=325
+    picture_url: https://ea.winctrl.com/static/ipfs/QmaecQeC8VFeasS7AAV6HFuATXuMzmc2vpxtSodE7MR7G9
+    shops:
+      - name: Ea
+        url: https://ea.winctrl.com/view/goods-details.html?id=325
+        region: US
+        status: out-of-stock
+        price: Unknown
+        currency: USD
+  - product_name: NavyAce Metal Joystick Grip
+    description: Ea NavyAce Metal Joystick Grip. rig mounts. listed on Ea. NavyAce Metal
+      Joystick Grip x1.
+    manufacturer: Ea
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=305
+    picture_url: https://ea.winctrl.com/static/ipfs/QmSjWgThT1cMzea5DfYiwPuPq5EihvrSc2X3VpqCAVyrft
+    shops:
+      - name: Ea
+        price: 188.19
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=305
+        region: US
+        status: available
+  - product_name: NavyAce Metal Throttle Grip
+    description: Ea NavyAce Metal Throttle Grip. rig mounts. listed on Ea. NavyAce Metal
+      Throttle Grip x1.
+    manufacturer: Ea
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=306
+    picture_url: https://ea.winctrl.com/static/ipfs/QmcqEEabLkziz7C5icbwVRdQQxiiDC3VTN1k4LiwgMQJjk
+    shops:
+      - name: Ea
+        price: 155.3
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=306
+        region: US
+        status: available
+  - product_name: StrikeAce E Metal Throttle Grip
+    description: Ea StrikeAce E Metal Throttle Grip. rig mounts. listed on Ea. StrikeAce E Metal
+      Throttle Grip x1.
+    manufacturer: Ea
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=476
+    picture_url: https://ea.winctrl.com/static/ipfs/QmYineDfhhYqaSqi3yiF8LFryZydZTtGwWAGFhAp1vJtDg
+    shops:
+      - name: Ea
+        price: 155.3
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=476
+        region: US
+        status: available
+  - product_name: StrikeAce EX II Metal Throttle Grip
+    description: Ea StrikeAce EX II Metal Throttle Grip. rig mounts. listed on Ea. StrikeAce EX
+      II Metal Throttle Grip x1.
+    manufacturer: Ea
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=471
+    picture_url: https://ea.winctrl.com/static/ipfs/QmQYEJKNSVeeVUB52nzK3htknFXrzDq7HQVtZCqCAdN2vm
+    shops:
+      - name: Ea
+        price: 188.19
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=471
+        region: US
+        status: available
+  - product_name: Throttle Desk Mount5 with Profile Bar 1
+    description: Ea Throttle Desk Mount5 with Profile Bar 1. rig mounts. listed on Ea. Throttle
+      Desk Mount5 with Profile Bar 1.
+    manufacturer: Ea
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=1225
+    picture_url: https://ea.winctrl.com/static/ipfs/QmfXaWbFjki79uwaAiyFGAivfNmaBF95kjkJzmBT417o7j
+    shops:
+      - name: Ea
+        price: 39.69
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1225
+        region: US
+        status: available
+  - product_name: MINOR 32 Throttle Metal / 32 PAC Metal
+    description: URSA MINOR 32 Throttle Metal / 32 PAC Metal. rig mounts. listed on Ea. URSA
+      MINOR 32 Throttle Metal / 32 PAC Metal.
+    manufacturer: URSA
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=1665
+    picture_url: https://ea.winctrl.com/static/ipfs/QmUBdY4WU8iYkvCrGPnaAXd5jy5FFQ5AYvvgzrVYoJ6AGJ
+    shops:
+      - name: Ea
+        price: 267.52
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1665
+        region: US
+        status: available
+  - product_name: ViperAce EX Metal Joystick Grip(None Shaker Kit)
+    description: Ea ViperAce EX Metal Joystick Grip(None Shaker Kit). rig mounts. listed on Ea.
+      ViperAce EX Metal Joystick Grip(None Shake kits) x1.
+    manufacturer: Ea
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=377
+    picture_url: https://ea.winctrl.com/static/ipfs/QmV3Q65tLgmFdRGVpmNMUKnQc3uR5Du72gj1pxYnv1J5S6
+    shops:
+      - name: Ea
+        price: 90.72
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=377
+        region: US
+        status: available
+  - product_name: ViperAce EX Metal Joystick Grip(with Shaker Kit)
+    description: Ea ViperAce EX Metal Joystick Grip(with Shaker Kit). rig mounts. listed on Ea.
+      ViperAce EX Metal Joystick Grip(with Shake kits) x1.
+    manufacturer: Ea
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=338
+    picture_url: https://ea.winctrl.com/static/ipfs/QmSXddA3pBz88J8JzUEpukr5gTYNYvc1AjcBooYKA1xm51
+    shops:
+      - name: Ea
+        price: 147.37
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=338
+        region: US
+        status: available
+  - product_name: ViperAce EX Metal Throttle Grip
+    description: Ea ViperAce EX Metal Throttle Grip. rig mounts. listed on Ea. ViperAce EX Metal
+      Throttle Grip x1.
+    manufacturer: Ea
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://ea.winctrl.com/view/goods-details.html?id=339
+    picture_url: https://ea.winctrl.com/static/ipfs/QmQbZURKosh89qWSrpAVTeBocFdiKTfVJ4TVsoP35zq8FV
+    shops:
+      - name: Ea
+        price: 268.7
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=339
+        region: US
+        status: available
 opensource:
   - project_name: DIY Aluminium Profile Sim Rig
     description: DIY Aluminium Profile Sim Rig. aluminum profile cockpit. Personal build design;

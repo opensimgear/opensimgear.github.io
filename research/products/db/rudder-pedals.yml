@@ -14,6 +14,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=805
         region: EU
+        status: available
+      - name: Ea
+        price: 44.05
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=805
+        region: US
+        status: available
   - product_name: Rudder Tray
     description: Sim Lab Rudder Tray. rig mounts. listed on Sim Lab. The Rudder Tray is built
       for durability and stability. It accommodates a wide range of rudder pedals, allowing
@@ -229,6 +236,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=2825
         region: EU
+        status: available
+      - name: Ea
+        price: 597.61
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=2885
+        region: US
+        status: available
   - product_name: WINCTRL Cyber Taurus 32 Rudder Pedals E.B.530.Metal.EU 1.0
     description: "WINCTRL Cyber Taurus 32 Rudder Pedals E.B.530.Metal.EU 1.0. flight rudder
       pedals. Listed on EU WINCTRL store; local stock not available in API response. Primary
@@ -245,6 +259,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=2945
         region: EU
+        status: available
+      - name: Ea
+        price: 717.14
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=3005
+        region: US
+        status: available
   - product_name: WINCTRL Cyber Taurus Combat Rudder Pedals E.B.192.Metal.EU 1.0
     description: "WINCTRL Cyber Taurus Combat Rudder Pedals E.B.192.Metal.EU 1.0.
       combat/aircraft rudder pedals. Listed on EU WINCTRL store; local stock not available
@@ -261,6 +282,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=2585
         region: EU
+        status: available
   - product_name: WINCTRL Cyber Taurus Combat Rudder Pedals E.B.192.Metal.US 1.0
     description: "WINCTRL Cyber Taurus Combat Rudder Pedals E.B.192.Metal.US 1.0.
       combat/aircraft rudder pedals. Listed on EU WINCTRL store; local stock not available
@@ -277,6 +299,12 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=2645
         region: EU
+      - name: Ea
+        price: 597.61
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=2645
+        region: US
+        status: available
   - product_name: WINCTRL Cyber Taurus Combat Rudder Pedals E.B.530.Metal.EU 1.0
     description: "WINCTRL Cyber Taurus Combat Rudder Pedals E.B.530.Metal.EU 1.0.
       combat/aircraft rudder pedals. Listed on EU WINCTRL store; local stock not available
@@ -293,6 +321,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=2705
         region: EU
+        status: available
+      - name: Ea
+        price: 717.14
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=2765
+        region: US
+        status: available
   - product_name: WINCTRL Orion 32 Rudder Pedals Metal 1.0
     description: WINCTRL Orion 32 Rudder Pedals Metal 1.0. flight rudder pedals. Pre-order
       listing on EU WINCTRL store. WINCTRL Orion 32 Rudder Pedals Metal 1.0.
@@ -307,6 +342,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1705
         region: EU
+        status: available
+      - name: Ea
+        price: 328.69
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1705
+        region: US
+        status: available
   - product_name: WINCTRL Orion 32 Rudder Pedals Metal.With Damper 1.0
     description: WINCTRL Orion 32 Rudder Pedals Metal.With Damper 1.0. flight rudder pedals.
       Pre-order listing on EU WINCTRL store. WINCTRL Orion 32 Rudder Pedals Metal.With
@@ -322,6 +364,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1845
         region: EU
+        status: available
+      - name: Ea
+        price: 372.75
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1845
+        region: US
+        status: available
   - product_name: WINCTRL Orion Metal Flight Rudder Pedals (Standard Edition)
     description: WINCTRL Orion Metal Flight Rudder Pedals (Standard Edition). flight rudder
       pedals. Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL Orion Metal
@@ -337,6 +386,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=785
         region: EU
+        status: available
+      - name: Ea
+        price: 328.69
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=785
+        region: US
+        status: available
   - product_name: WINCTRL Orion Metal Flight Rudder Pedals (With Damper Edition)
     description: WINCTRL Orion Metal Flight Rudder Pedals (With Damper Edition). flight rudder
       pedals. Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL Orion Metal
@@ -352,6 +408,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=765
         region: EU
+        status: available
+      - name: Ea
+        price: 372.75
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=765
+        region: US
+        status: available
 opensource:
   - project_name: Akaki Joystick
     description: Akaki Joystick. 3D-printable USB HID joystick, throttle, and pedals. Small

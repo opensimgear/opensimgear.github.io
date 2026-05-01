@@ -87,6 +87,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=381
         region: EU
+        status: available
+      - name: Ea
+        price: 22.63
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=381
+        region: US
+        status: available
   - product_name: Super Taurus Desk Mount
     description: Super Taurus Desk Mount. flight-control mounts and accessories. Listed on EU
       WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Super Taurus
@@ -98,10 +105,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/Qmc7TEvqmMykaL1TFBfBKN9cyBddua4ZuRPPsQDv1L6kmu
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=310
         region: EU
+        status: out-of-stock
+      - name: WINCTRL
+        price: Unknown
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=310
+        region: US
+        status: out-of-stock
   - product_name: Throttle Mount
     description: Sim Lab Throttle Mount. rig mounts. listed on Sim Lab. The Throttle Mount
       provides stable, reliable support, keeping your controls secure during every flight,
@@ -328,6 +342,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=306
         region: EU
+        status: available
   - product_name: STECS Modern Throttle System Mk.II - Standard (US)
     description: VKB STECS Modern Throttle System Mk.II Standard. modular HOTAS throttle. Sold
       out on VKBSIM US listing on 2026-04-29. Standard STECS base with sturdy steel
@@ -553,6 +568,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=476
         region: EU
+        status: available
   - product_name: StrikeAce EX II Metal Throttle Grip
     description: StrikeAce EX II Metal Throttle Grip. throttle grip. Pre-order listing on EU
       WINCTRL store. StrikeAce EX II Metal Throttle Grip x1.
@@ -567,6 +583,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=471
         region: EU
+        status: available
   - product_name: Super Taurus NavyAce Throttle Combo
     description: Super Taurus NavyAce Throttle Combo. flight throttle. Suspended on EU WINCTRL
       store; listed in catalog but not normally purchasable. Super Taurus Throttle Base(PSU
@@ -578,10 +595,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmW5Htemtmfvx8w9vALeo2yhhR9tqCkUN5ZNTPuW1mq5DY
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=316
         region: EU
+        status: out-of-stock
   - product_name: Super Taurus NavyAce Throttle Combo(With Mount)
     description: Super Taurus NavyAce Throttle Combo(With Mount). flight throttle. Suspended on
       EU WINCTRL store; listed in catalog but not normally purchasable. Super Taurus
@@ -593,10 +611,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmWeZVjeEDrqbJgHzHhkPjcXvPeuNkhWc5h4M46y2Fv6uE
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=384
         region: EU
+        status: out-of-stock
+      - name: WINCTRL
+        price: Unknown
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=384
+        region: US
+        status: out-of-stock
   - product_name: Super Taurus NavyAce Throttle Combo(With Mount/Without PSU)
     description: Super Taurus NavyAce Throttle Combo(With Mount/Without PSU). flight throttle.
       Suspended on EU WINCTRL store; listed in catalog but not normally purchasable. Super
@@ -608,10 +633,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmZRqnQEL8UuLtbpVz3FNxCppdnnLZBzY8MaoDw5oCdRVG
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=315
         region: EU
+        status: out-of-stock
+      - name: WINCTRL
+        price: Unknown
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=315
+        region: US
+        status: out-of-stock
   - product_name: Super Taurus Throttle Base(PSU Include)
     description: Super Taurus Throttle Base(PSU Include). throttle base. Suspended on EU WINCTRL
       store; listed in catalog but not normally purchasable. Super Taurus Throttle Base(PSU
@@ -623,10 +655,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmUrjLoRv2JmtteEYfQc45C24po9e6xaYtAcGrkFYScyPX
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=308
         region: EU
+        status: out-of-stock
   - product_name: TCA Quadrant Airbus Edition
     description: Thrustmaster TCA Quadrant Airbus Edition. airliner throttle quadrant. Active
       product on Thrustmaster US. Airbus A320neo-inspired dual thrust levers.
@@ -685,6 +718,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1665
         region: EU
+        status: available
   - product_name: VelocityOne Flightdeck
     description: Turtle Beach VelocityOne Flightdeck. HOTAS throttle and stick system. Active
       Turtle Beach product listing. HOTAS system with dedicated throttle and stick
@@ -728,6 +762,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=339
         region: EU
+        status: available
   - product_name: WINCTRL Cyber Taurus Joystick Base E.B.29.Metal
     description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal. throttle base. Listed on EU
       WINCTRL store; local stock not available in API response. Primary product image:
@@ -769,10 +804,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmX9MpXrZv5aiEW1TinCrE41Ew3tC1WfstEhNTZbzhPCKS
     shops:
       - name: WINCTRL EU
-        price: 473.27
+        price: 411.27
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=5625
         region: EU
+        status: available
   - product_name: WINCTRL Cyber Taurus Joystick Base E.B.82.Metal
     description: "WINCTRL Cyber Taurus Joystick Base E.B.82.Metal. throttle base. Listed on EU
       WINCTRL store; local stock not available in API response. Primary product image:
@@ -799,10 +835,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmZLcHhuwCWMMHrGXErSveoNPJ4sfLQWiGMPXQFfQzTgc6
     shops:
       - name: WINCTRL EU
-        price: 822.72
+        price: 754.43
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=5705
         region: EU
+        status: available
+      - name: Ea
+        price: 865.22
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=5725
+        region: US
+        status: available
   - product_name: WINCTRL Cyber Taurus Joystick Base E.D.16.Metal.EU 1.0
     description: "WINCTRL Cyber Taurus Joystick Base E.D.16.Metal.EU 1.0. throttle base. Listed
       on EU WINCTRL store; local stock not available in API response. Primary product image:
@@ -814,10 +857,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmVCspiSPcSwXYyrJeQoNsGe4HriV4KPjSMdFqoN6ThPSb
     shops:
       - name: WINCTRL EU
-        price: 822.72
+        price: 754.43
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=5765
         region: EU
+        status: available
   - product_name: WINCTRL Orion2 NavyAce Throttle Combo
     description: WINCTRL Orion2 NavyAce Throttle Combo. flight throttle. Active EU WINCTRL store
       listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base.
@@ -832,6 +876,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=375
         region: EU
+        status: available
+      - name: Ea
+        price: 260.78
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=375
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 StrikeAce E / StrikeAce EX Throttle Combo
     description: WINCTRL Orion2 StrikeAce E / StrikeAce EX Throttle Combo. flight throttle.
       Active EU WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base.
@@ -842,10 +893,17 @@ commercial:
     picture_url: https://eu.winctrl.com/upload/picture/2023-07-19/F15EX_T22_FL/F15EX_T22_FL_0000.jpg
     shops:
       - name: WINCTRL EU
-        price: 276.47
+        price: 253.72
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=385
         region: EU
+        status: available
+      - name: Ea
+        price: 315.45
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=385
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 Throttle Base
     description: WINCTRL Orion2 Throttle Base. throttle base. Active EU WINCTRL store listing;
       total_stock 4 from API. WINCTRL Orion2 Throttle Base x1.
@@ -860,6 +918,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=334
         region: EU
+        status: available
+      - name: Ea
+        price: 233.55
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=334
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 Throttle Base 10th Anniversary Limited Version
     description: WINCTRL Orion2 Throttle Base 10th Anniversary Limited Version. throttle base.
       Suspended on EU WINCTRL store; listed in catalog but not normally purchasable. WINCTRL
@@ -871,10 +936,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmXHdPQ7TpGq2g4p4gN5RdpuU1MgqBAtRwBwxSV7wcVKkF
     shops:
       - name: WINCTRL EU
-        price: 213.53
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=466
         region: EU
+        status: out-of-stock
+      - name: Ea
+        url: https://ea.winctrl.com/view/goods-details.html?id=466
+        region: US
+        status: out-of-stock
+        price: Unknown
+        currency: USD
   - product_name: WINCTRL Orion2 ViperAce EX Throttle Combo
     description: WINCTRL Orion2 ViperAce EX Throttle Combo. flight throttle. Active EU WINCTRL
       store listing; total_stock 4 from API. WINCTRL Orion2 Throttle Base.
@@ -889,6 +961,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=342
         region: EU
+        status: available
+      - name: Ea
+        price: 365.4
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=342
+        region: US
+        status: available
   - product_name: WINCTRL URSA MINOR 32 Throttle Metal
     description: WINCTRL URSA MINOR 32 Throttle Metal. flight throttle. Active EU WINCTRL store
       listing; total_stock 4 from API. WINCTRL URSA MINOR 32 Throttle Metal.
@@ -903,6 +982,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1385
         region: EU
+        status: available
+      - name: Ea
+        price: 145.1
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1385
+        region: US
+        status: available
   - product_name: HOTAS Warthog Dual Throttle
     description: Thrustmaster HOTAS Warthog Dual Throttle. dual-engine combat throttle. in stock
       on official US shop. Metal A-10C-inspired dual throttle controller for flight

@@ -5,6 +5,7 @@ import path from 'node:path';
 import { basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse, stringify } from 'yaml';
+import { inferWinCtrlRegion, scrapeWinCtrl, winCtrlShopName } from './libs/winctrl.mjs';
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const DB_DIR = path.join(ROOT, 'research/products/db');
@@ -12,32 +13,34 @@ const GENERATED_PRODUCTS = path.join(ROOT, 'src/data/3rdparty-products.json');
 const USER_AGENT =
   'Mozilla/5.0 (compatible; OpenSimGearShopScraper/1.0; +https://opensimgear.com)';
 
-const args = process.argv.slice(2);
-const startUrl = positionalUrl();
-const WRITE = args.includes('--write');
-const BUILD = args.includes('--build');
-const INCLUDE_ACCESSORIES = args.includes('--include-accessories');
-const VERBOSE = args.includes('--verbose');
-const LIMIT = numberArg('--limit');
-const MAX_CRAWL_PAGES = numberArg('--max-pages') ?? 50;
-const MATCH_THRESHOLD = numberArg('--threshold') ?? 0.72;
-const RATE_LIMIT_MS = numberArg('--rate-limit-ms') ?? 750;
-const MAX_RETRIES = numberArg('--retries') ?? 3;
-const shopNameOverride = stringArg('--shop-name');
-const manufacturerOverride = stringArg('--manufacturer');
-const categoryOverride = stringArg('--category');
-const subcategoryOverride = stringArg('--subcategory');
-const regionOverride = stringArg('--region') ?? 'Unknown';
-const mappings = mappingArgs();
+let args = [];
+let startUrl = null;
+let WRITE = false;
+let BUILD = false;
+let INCLUDE_ACCESSORIES = false;
+let VERBOSE = false;
+let LIMIT = null;
+let MAX_CRAWL_PAGES = 50;
+let MATCH_THRESHOLD = 0.72;
+let RATE_LIMIT_MS = 750;
+let MAX_RETRIES = 3;
+let shopNameOverride = null;
+let manufacturerOverride = null;
+let categoryOverride = null;
+let subcategoryOverride = null;
+let regionOverride = null;
+let mappings = [];
 
-if (!startUrl) {
-  console.error(
-    'Usage: pnpm products:update -- <url> [--write] [--build] [--max-pages 50] [--rate-limit-ms 750] [--retries 3] [--map "shop name=product:id"]',
-  );
-  process.exit(1);
-}
+async function main(argv = process.argv.slice(2)) {
+  parseCliArgs(argv);
 
-async function main() {
+  if (!startUrl) {
+    console.error(
+      'Usage: pnpm products:update -- <url> [--write] [--build] [--max-pages 50] [--rate-limit-ms 750] [--retries 3] [--map "shop name=product:id"]',
+    );
+    process.exit(1);
+  }
+
   verbose(`start url: ${startUrl}`);
   verbose(`mode: ${WRITE ? 'write' : 'dry-run'}`);
   verbose(`max pages: ${MAX_CRAWL_PAGES}`);
@@ -74,6 +77,26 @@ async function main() {
     await writeTouchedDatabases(databases);
     if (BUILD) await run('pnpm', ['products:build']);
   }
+}
+
+function parseCliArgs(argv) {
+  args = argv;
+  startUrl = positionalUrl();
+  WRITE = args.includes('--write');
+  BUILD = args.includes('--build');
+  INCLUDE_ACCESSORIES = args.includes('--include-accessories');
+  VERBOSE = args.includes('--verbose');
+  LIMIT = numberArg('--limit');
+  MAX_CRAWL_PAGES = numberArg('--max-pages') ?? 50;
+  MATCH_THRESHOLD = numberArg('--threshold') ?? 0.72;
+  RATE_LIMIT_MS = numberArg('--rate-limit-ms') ?? 750;
+  MAX_RETRIES = numberArg('--retries') ?? 3;
+  shopNameOverride = stringArg('--shop-name');
+  manufacturerOverride = stringArg('--manufacturer');
+  categoryOverride = stringArg('--category');
+  subcategoryOverride = stringArg('--subcategory');
+  regionOverride = stringArg('--region');
+  mappings = mappingArgs();
 }
 
 function positionalUrl() {
@@ -113,9 +136,23 @@ function mappingFor(name) {
 
 async function scrapeShop(url) {
   const base = new URL(url);
-  const shopName = shopNameOverride ?? hostShopName(base.hostname);
+  const shopName = shopNameOverride ?? winCtrlShopName(base) ?? hostShopName(base.hostname);
+  const region = regionOverride ?? inferWinCtrlRegion(base) ?? inferShopRegion(base);
 
   verbose(`shop name: ${shopName}`);
+  verbose(`shop region: ${region}`);
+  verbose('try WinCtrl list API');
+  const winCtrlProducts = await scrapeWinCtrl(base, {
+    fetchWithRetry,
+    requestHeaders,
+    isUsefulShopProduct,
+    verbose,
+  }).catch((error) => {
+    verbose(`  WinCtrl failed: ${error.message}`);
+    return [];
+  });
+  verbose(`  WinCtrl products: ${winCtrlProducts.length}`);
+
   verbose('try WooCommerce Store API');
   const wooCommerceProducts = await scrapeWooCommerce(base).catch((error) => {
     verbose(`  WooCommerce failed: ${error.message}`);
@@ -131,6 +168,7 @@ async function scrapeShop(url) {
   verbose(`  Shopify products: ${shopifyProducts.length}`);
 
   const products = [
+    ...winCtrlProducts,
     ...wooCommerceProducts,
     ...shopifyProducts,
   ];
@@ -144,7 +182,7 @@ async function scrapeShop(url) {
   return {
     startUrl: base.toString(),
     shopName,
-    region: regionOverride,
+    region,
     products: uniqueProducts(products).sort((a, b) => a.name.localeCompare(b.name)),
   };
 }
@@ -169,6 +207,7 @@ async function scrapeWooCommerce(base) {
         image: product.images?.[0]?.src,
         price: parseMinorPrice(product.prices?.price, product.prices?.currency_minor_unit),
         currency: product.prices?.currency_code,
+        status: wooCommerceStatus(product),
         description: cleanText(product.short_description),
         categories: (product.categories ?? []).map((category) => category.name),
       })),
@@ -206,6 +245,7 @@ async function scrapeShopify(base) {
           image: product.images?.[0]?.src ?? product.image?.src,
           price: parsePrice(variant?.price),
           currency: variant?.price_currency ?? null,
+          status: variant?.available === false ? 'out-of-stock' : 'available',
           description: cleanText(product.body_html),
           categories: [product.product_type, ...(product.tags ?? [])].filter(Boolean),
         };
@@ -303,13 +343,18 @@ function parseGenericProduct(html, fallbackUrl) {
 
   const url = normalizeUrl(jsonProduct?.url ?? meta(html, 'property', 'og:url') ?? canonicalUrl(html) ?? fallbackUrl);
   const offer = Array.isArray(jsonProduct?.offers) ? jsonProduct.offers[0] : jsonProduct?.offers;
+  const description = cleanText(jsonProduct?.description ?? meta(html, 'name', 'description'));
   return {
     name,
     url,
     image: extractProductImage(html, url, jsonProduct, name),
     price: parsePrice(offer?.price ?? meta(html, 'property', 'product:price:amount') ?? firstMatch(html, /data-price-amount=["']([^"']+)["']/i)),
     currency: offer?.priceCurrency ?? meta(html, 'property', 'product:price:currency'),
-    description: cleanText(jsonProduct?.description ?? meta(html, 'name', 'description')),
+    status: detectShopStatus({
+      availability: offer?.availability ?? meta(html, 'property', 'product:availability'),
+      text: `${name} ${description} ${html.slice(0, 50_000)}`,
+    }),
+    description,
     categories: [],
   };
 }
@@ -502,12 +547,15 @@ function matchProduct(index, found, inferredCategory) {
 
 function decideAction(found, match, source) {
   const inferred = inferCategory(found);
+  const status = normalizeShopStatus(found.status);
+  const parsedPrice = usablePrice(found.price);
+  const price = status === 'out-of-stock' ? 'Unknown' : parsedPrice;
   const shop = {
     name: source.shopName,
-    price: found.price,
-    currency: found.currency ?? 'USD',
+    ...(price !== undefined ? { price, currency: found.currency ?? 'USD' } : {}),
     url: normalizeUrl(found.url),
     region: source.region,
+    status,
   };
 
   if (!match) {
@@ -527,13 +575,17 @@ function decideAction(found, match, source) {
     return { type: 'add-shop', found, shop, match };
   }
 
-  const priceChanged = found.price !== undefined && Number(existingShop.price) !== Number(found.price);
+  const priceChanged =
+    price !== undefined &&
+    (price === 'Unknown' ? existingShop.price !== 'Unknown' : Number(existingShop.price) !== Number(price));
+  const missingFields = missingShopFields(existingShop, shop);
   return {
-    type: priceChanged ? 'update-price' : 'no-change',
+    type: priceChanged ? 'update-price' : missingFields.length ? 'update-shop-fields' : 'no-change',
     found,
     shop,
     match,
     existingShop,
+    missingFields,
   };
 }
 
@@ -556,8 +608,31 @@ function applyAction(databases, action, source) {
   if (action.type === 'update-price') {
     action.existingShop.price = action.shop.price;
     action.existingShop.currency = action.shop.currency;
+    action.existingShop.status = action.shop.status;
+    action.match.record.database.touched = true;
+    return;
+  }
+
+  if (action.type === 'update-shop-fields') {
+    for (const field of action.missingFields) {
+      action.existingShop[field] = action.shop[field];
+    }
     action.match.record.database.touched = true;
   }
+}
+
+function missingShopFields(existingShop, shop) {
+  return ['price', 'currency', 'region', 'status'].filter(
+    (field) =>
+      shop[field] !== undefined &&
+      shop[field] !== null &&
+      shop[field] !== '' &&
+      (existingShop[field] === undefined ||
+        existingShop[field] === null ||
+        existingShop[field] === '' ||
+        (field === 'region' && existingShop[field] === 'Unknown' && shop[field] !== 'Unknown') ||
+        (field === 'status' && existingShop[field] !== shop[field])),
+  );
 }
 
 function newProduct(action) {
@@ -597,15 +672,21 @@ async function writeTouchedDatabases(databases) {
 function printReport(source, actions) {
   console.log(`${WRITE ? 'Write' : 'Dry run'}: ${source.startUrl}`);
   console.log(`Shop: ${source.shopName}`);
+  console.log(`Region: ${source.region}`);
   console.log(`Products found: ${actions.length}`);
   console.log('');
 
   for (const action of actions) {
-    const price = action.shop.price === undefined ? 'unknown price' : `${action.shop.price} ${action.shop.currency}`;
+    const price =
+      action.shop.status === 'out-of-stock'
+        ? 'out of stock'
+        : action.shop.price === undefined
+          ? 'unknown price'
+          : `${action.shop.price} ${action.shop.currency}`;
     const match = action.match
       ? `${action.match.record.id} (${action.match.reason}, ${action.match.score.toFixed(2)})`
       : `${action.category}/${action.subCategory}`;
-    console.log(`- ${action.found.name} | ${price} | ${action.type} | ${match}`);
+    console.log(`- ${action.found.name} | ${action.shop.status} | ${price} | ${action.type} | ${match}`);
   }
 
   const summary = actions.reduce((counts, action) => {
@@ -619,6 +700,37 @@ function printReport(source, actions) {
 
 function verbose(message) {
   if (VERBOSE) console.error(`[shop-scraper] ${message}`);
+}
+
+function wooCommerceStatus(product) {
+  if (product.is_in_stock === false) return 'out-of-stock';
+  if (product.is_purchasable === false && product.is_in_stock !== true) return 'eol';
+  return 'available';
+}
+
+function detectShopStatus({ availability, text }) {
+  const availabilityText = normalizeName(availability);
+  const pageText = normalizeName(text);
+
+  if (hasAny(availabilityText, ['discontinued', 'eol'])) return 'eol';
+  if (hasAny(availabilityText, ['outofstock', 'out stock', 'soldout', 'sold out'])) return 'out-of-stock';
+  if (hasAny(availabilityText, ['instock', 'in stock', 'preorder', 'pre order'])) return 'available';
+
+  if (hasAny(pageText, ['discontinued', 'end of life', 'end-of-life', 'no longer available', 'eol'])) {
+    return 'eol';
+  }
+  if (hasAny(pageText, ['out of stock', 'sold out', 'unavailable', 'backorder', 'back order'])) {
+    return 'out-of-stock';
+  }
+
+  return 'available';
+}
+
+function normalizeShopStatus(value) {
+  const status = normalizeName(value);
+  if (hasAny(status, ['eol', 'discontinued', 'end of life'])) return 'eol';
+  if (hasAny(status, ['out of stock', 'outofstock', 'sold out', 'unavailable'])) return 'out-of-stock';
+  return 'available';
 }
 
 function inferCategory(product) {
@@ -708,6 +820,8 @@ function isUsefulShopProduct(product) {
     'display',
     'rig',
     'seat',
+    'chair',
+    'mount',
   ]);
 }
 
@@ -864,11 +978,17 @@ function urlKey(url) {
   try {
     const parsed = new URL(url);
     parsed.hash = '';
-    parsed.search = '';
+    for (const key of [...parsed.searchParams.keys()]) {
+      if (isTrackingParam(key)) parsed.searchParams.delete(key);
+    }
     return parsed.toString().replace(/\/$/, '').toLowerCase();
   } catch {
     return String(url).toLowerCase();
   }
+}
+
+function isTrackingParam(key) {
+  return /^(utm_|fbclid$|gclid$|msclkid$|mc_cid$|mc_eid$|igshid$|ref$|referrer$)/i.test(key);
 }
 
 function shopDomain(url) {
@@ -909,14 +1029,27 @@ function parseMinorPrice(value, minorUnit = 2) {
 
 function parsePrice(value) {
   if (value === undefined || value === null || value === '') return undefined;
-  const number = Number(String(value).replace(',', '.').replace(/[^0-9.]/g, ''));
+  const normalized = normalizePriceText(value);
+  const number = Number(normalized);
   return Number.isFinite(number) ? number : undefined;
+}
+
+function normalizePriceText(value) {
+  const text = String(value).trim().replace(/[^0-9.,-]/g, '');
+  if (text.includes(',') && text.includes('.')) return text.replace(/,/g, '');
+  if (text.includes(',') && !text.includes('.')) return text.replace(',', '.');
+  return text;
+}
+
+function usablePrice(value) {
+  const price = parsePrice(value);
+  return price !== undefined && price < 999999 ? price : undefined;
 }
 
 function uniqueProducts(products) {
   const byUrl = new Map();
   for (const product of products) {
-    const key = urlKey(product.url) || normalizeName(product.name);
+    const key = product.sourceKey || urlKey(product.url) || normalizeName(product.name);
     if (!byUrl.has(key)) byUrl.set(key, product);
   }
   return [...byUrl.values()];
@@ -1030,6 +1163,41 @@ function hostShopName(hostname) {
     .split(/[-_]/)
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(' ');
+}
+
+function inferShopRegion(url) {
+  const host = url.hostname.toLowerCase().replace(/^www\./, '');
+  const labels = host.split('.');
+  const pathParts = url.pathname.toLowerCase().split('/').filter(Boolean);
+  const tokens = new Set([
+    ...labels,
+    ...pathParts,
+    ...pathParts.flatMap((part) => part.split(/[-_]/)),
+  ]);
+
+  if (hasToken(tokens, ['eu', 'europe', 'european', 'en-eu'])) return 'EU';
+  if (hasToken(tokens, ['us', 'usa', 'united-states', 'en-us'])) return 'US';
+  if (hasToken(tokens, ['uk', 'gb', 'en-gb', 'en-uk'])) return 'UK';
+  if (hasToken(tokens, ['de', 'deutschland', 'germany', 'en-de', 'de-de'])) return 'DE';
+  if (hasToken(tokens, ['au', 'australia', 'en-au'])) return 'AU';
+  if (hasToken(tokens, ['ca', 'canada', 'en-ca'])) return 'Canada';
+  if (hasToken(tokens, ['cn', 'china', 'zh-cn'])) return 'China';
+  if (hasToken(tokens, ['jp', 'japan', 'ja-jp'])) return 'Japan';
+  if (hasToken(tokens, ['global', 'world', 'international', 'intl'])) return 'Global';
+
+  if (host.endsWith('.de')) return 'DE';
+  if (host.endsWith('.co.uk') || host.endsWith('.uk')) return 'UK';
+  if (host.endsWith('.eu')) return 'EU';
+  if (host.endsWith('.com.au') || host.endsWith('.au')) return 'AU';
+  if (host.endsWith('.ca')) return 'Canada';
+  if (host.endsWith('.cn')) return 'China';
+  if (host.endsWith('.jp')) return 'Japan';
+
+  return 'Unknown';
+}
+
+function hasToken(tokens, values) {
+  return values.some((value) => tokens.has(value));
 }
 
 function labelFromSlug(value) {

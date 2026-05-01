@@ -58,6 +58,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=925
         region: EU
+        status: available
+      - name: Ea
+        price: 351.27
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=925
+        region: US
+        status: available
   - product_name: EFIS Combo
     description: EFIS Combo. cockpit panel bundle / MIP. Active EU WINCTRL store listing;
       total_stock 4 from API. EFIS Combo.
@@ -72,6 +79,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=885
         region: EU
+        status: available
+      - name: Ea
+        price: 192.68
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=885
+        region: US
+        status: available
   - product_name: EFIS L
     description: EFIS L. cockpit panel module. Active EU WINCTRL store listing; total_stock 4
       from API. EFIS L.
@@ -86,6 +100,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=845
         region: EU
+        status: available
+      - name: Ea
+        price: 96.34
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=845
+        region: US
+        status: available
   - product_name: EFIS R
     description: EFIS R. cockpit panel module. Active EU WINCTRL store listing; total_stock 4
       from API. EFIS R.
@@ -100,6 +121,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=865
         region: EU
+        status: available
+      - name: Ea
+        price: 96.34
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=865
+        region: US
+        status: available
   - product_name: Downforce Sim Racing Button Box
     description: Apex Sim Racing Downforce. USB sim racing button box. in stock on official shop
       with multi-function option. Carbon-fiber front/rear plates, seven rotary encoders,
@@ -149,6 +177,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=550
         region: EU
+        status: available
+      - name: Ea
+        price: 158.59
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=550
+        region: US
+        status: available
   - product_name: Flight Multi Panel
     description: Logitech Flight Multi Panel. autopilot and trim panel. In stock on Logitech US
       on 2026-04-29. LED autopilot display.
@@ -265,6 +300,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=379
         region: EU
+        status: available
+      - name: Ea
+        price: 611.81
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=379
+        region: US
+        status: available
   - product_name: ICP
     description: ICP. cockpit panel module. Active EU WINCTRL store listing; total_stock 4 from
       API. ICP.
@@ -279,6 +321,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=544
         region: EU
+        status: available
+      - name: Ea
+        price: 222.21
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=544
+        region: US
+        status: available
   - product_name: Legend MIP
     description: Legend MIP. cockpit panel bundle / MIP. Listed on EU WINCTRL store; local stock
       not available in API response. Legend MIP.
@@ -293,6 +342,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=549
         region: EU
+        status: available
+      - name: WINCTRL
+        price: 1175.9
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=549
+        region: US
+        status: available
   - product_name: MCDU
     description: MCDU. cockpit panel module. Active EU WINCTRL store listing; total_stock 4 from
       API. MCDU.
@@ -307,6 +363,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=945
         region: EU
+        status: available
+      - name: Ea
+        price: 147.37
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=945
+        region: US
+        status: available
   - product_name: MFD Cougar Pack
     description: Thrustmaster MFD Cougar Pack. MFD button frames. Active product on Thrustmaster
       US. Pack of two USB MFD frames.
@@ -334,6 +397,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=402
         region: EU
+        status: available
+      - name: Ea
+        price: 62.26
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=402
+        region: US
+        status: available
   - product_name: MFD Unit1(x3)
     description: MFD Unit1(x3). cockpit panel module. Active EU WINCTRL store listing;
       total_stock 4 from API. MFD Unit 1x3.
@@ -348,6 +418,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=407
         region: EU
+        status: available
+      - name: Ea
+        price: 186.78
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=407
+        region: US
+        status: available
   - product_name: MFD1(With USB3.0 Display)
     description: MFD1(With USB3.0 Display). cockpit panel bundle / MIP. Pre-order listing on EU
       WINCTRL store. MFD Unit1 x1.
@@ -362,6 +439,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=417
         region: EU
+        status: available
+      - name: Ea
+        price: 198.23
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=417
+        region: US
+        status: available
   - product_name: NavyAce UFC&HUD With Mount
     description: NavyAce UFC&HUD With Mount. cockpit panel bundle / MIP. Listed on EU WINCTRL
       store; local stock not available in API response. NavyAce-UFC Unit x1.
@@ -376,6 +460,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=432
         region: EU
+        status: available
+      - name: Ea
+        price: 310.39
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=432
+        region: US
+        status: available
   - product_name: NavyAce-HUD Unit1
     description: NavyAce-HUD Unit1. cockpit panel module. Active EU WINCTRL store listing;
       total_stock 4 from API. NavyAce-HUD Unit1 x1.
@@ -390,6 +481,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=412
         region: EU
+        status: available
+      - name: Ea
+        price: 62.26
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=412
+        region: US
+        status: available
   - product_name: NavyAce-UFC Unit1
     description: NavyAce-UFC Unit1. cockpit panel module. Listed on EU WINCTRL store; local
       stock not available in API response. NavyAce-UFC Unit1 x1.
@@ -404,6 +502,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=397
         region: EU
+        status: available
+      - name: Ea
+        price: 215.35
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=397
+        region: US
+        status: available
   - product_name: Panel of Auto Pilot 3
     description: Panel of Auto Pilot 3. cockpit panel module. Active EU WINCTRL store listing;
       total_stock 4 from API. Panel of Auto Pilot 3.
@@ -418,6 +523,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1065
         region: EU
+        status: available
+      - name: Ea
+        price: 170.05
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1065
+        region: US
+        status: available
   - product_name: PCR Panel of Combat Ready
     description: PCR Panel of Combat Ready. cockpit panel module. Suspended on EU WINCTRL store;
       listed in catalog but not normally purchasable. PCR Panel of Combat Ready.
@@ -428,10 +540,17 @@ commercial:
     picture_url: https://eu.winctrl.com/upload/picture/2022-07-06/upload_2f87d52134c987516dfb276886b596a6.jpg
     shops:
       - name: WINCTRL EU
-        price: 130.51
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=322
         region: EU
+        status: out-of-stock
+      - name: Ea
+        url: https://ea.winctrl.com/view/goods-details.html?id=322
+        region: US
+        status: out-of-stock
+        price: Unknown
+        currency: USD
   - product_name: PFP 3N (Panel of Flight Plan)
     description: PFP 3N (Panel of Flight Plan). cockpit panel module. Active EU WINCTRL store
       listing; total_stock 4 from API. PFP 3N (Panel of Flight Plan).
@@ -446,6 +565,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=965
         region: EU
+        status: available
+      - name: Ea
+        price: 147.37
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=965
+        region: US
+        status: available
   - product_name: PFP 4 (Panel of Flight Plan)
     description: PFP 4 (Panel of Flight Plan). cockpit panel module. Active EU WINCTRL store
       listing; total_stock 4 from API. PFP 4 (Panel of Flight Plan).
@@ -460,6 +586,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1005
         region: EU
+        status: available
+      - name: Ea
+        price: 147.37
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1005
+        region: US
+        status: available
   - product_name: PFP 7 (Panel of Flight Plan)
     description: PFP 7 (Panel of Flight Plan). cockpit panel module. Active EU WINCTRL store
       listing; total_stock 4 from API. PFP 7 (Panel of Flight Plan).
@@ -474,6 +607,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=985
         region: EU
+        status: available
+      - name: Ea
+        price: 147.37
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=985
+        region: US
+        status: available
   - product_name: Phoenix MIP(VR)
     description: Phoenix MIP(VR). cockpit panel bundle / MIP. Listed on EU WINCTRL store; local
       stock not available in API response. NavyAce-UFC Unit.
@@ -488,6 +628,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=380
         region: EU
+        status: available
+      - name: Ea
+        price: 545.7
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=380
+        region: US
+        status: available
   - product_name: PTO 2 Panel of Take Off
     description: PTO 2 Panel of Take Off. cockpit panel module. Active EU WINCTRL store listing;
       total_stock 4 from API. PTO 2 Panel of Take Off.
@@ -502,6 +649,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=542
         region: EU
+        status: available
+      - name: Ea
+        price: 131.01
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=542
+        region: US
+        status: available
   - product_name: PTO Panel of Take Off
     description: PTO Panel of Take Off. cockpit panel module. Suspended on EU WINCTRL store;
       listed in catalog but not normally purchasable. PTO Panel of Take Off.
@@ -512,10 +666,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmZuJPB4yDP4V2UWiKKqbMgRd3f8Hv9GnJujC5JhtZ2vom
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=323
         region: EU
+        status: out-of-stock
   - product_name: Push To Talk Button Box
     description: Apex Sim Racing Push To Talk Button Box. USB push-to-talk control box for sim
       racing. in stock on official shop. Small or large kit with PTT button, coiled cable,
@@ -635,6 +790,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=378
         region: EU
+        status: available
+      - name: Ea
+        price: 953.69
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=378
+        region: US
+        status: available
   - product_name: "Universal Control Panel #1"
     description: "VIRPIL Universal Control Panel #1. generic programmable control panel.
       Backorder on VIRPIL US on 2026-04-29. 12 customizable RGB momentary buttons."
@@ -693,6 +855,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=422
         region: EU
+        status: available
+      - name: Ea
+        price: 135.97
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=422
+        region: US
+        status: available
   - product_name: USB3.0 Instrument Display1(x3)
     description: USB3.0 Instrument Display1(x3). cockpit panel module. Active EU WINCTRL store
       listing; total_stock 4 from API. USB3.0 Instrument Display1 x3.
@@ -707,6 +876,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=427
         region: EU
+        status: available
+      - name: Ea
+        price: 407.99
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=427
+        region: US
+        status: available
   - product_name: Viper MIP
     description: Viper MIP. cockpit panel bundle / MIP. Pre-order listing on EU WINCTRL store.
       Viper MIP.
@@ -721,6 +897,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=547
         region: EU
+        status: available
+      - name: Ea
+        price: 618.67
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=547
+        region: US
+        status: available
   - product_name: Viper MIP(VR)
     description: Viper MIP(VR). cockpit panel bundle / MIP. Pre-order listing on EU WINCTRL
       store. Viper MIP(VR).
@@ -735,6 +918,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=548
         region: EU
+        status: available
+      - name: Ea
+        price: 346.73
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=548
+        region: US
+        status: available
   - product_name: Viper Panel
     description: Thrustmaster Viper Panel. aircraft-specific combat control panel. Active
       product on Thrustmaster US. Official U.S. Air Force licensed Viper/F-16 control panel.
@@ -763,6 +953,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1485
         region: EU
+        status: available
+      - name: Ea
+        price: 419.37
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1485
+        region: US
+        status: available
   - product_name: WINCTRL 3 PDC Combo
     description: WINCTRL 3 PDC Combo. cockpit panel bundle / MIP. Active EU WINCTRL store
       listing; total_stock 4 from API. 3 PDC Combo is the mixed combo for versatility,
@@ -778,6 +975,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1645
         region: EU
+        status: available
+      - name: Ea
+        price: 192.68
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1645
+        region: US
+        status: available
   - product_name: WINCTRL 32 AGP Metal
     description: WINCTRL 32 AGP Metal. cockpit panel module. Active EU WINCTRL store listing;
       total_stock 4 from API. WINCTRL 32 AGP Metal.
@@ -792,6 +996,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1585
         region: EU
+        status: available
+      - name: Ea
+        price: 128.09
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1585
+        region: US
+        status: available
   - product_name: WINCTRL 32 ECAM
     description: WINCTRL 32 ECAM. cockpit panel module. Active EU WINCTRL store listing;
       total_stock 4 from API. WINCTRL 32 ECAM.
@@ -806,6 +1017,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1565
         region: EU
+        status: available
+      - name: Ea
+        price: 78.45
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1565
+        region: US
+        status: available
   - product_name: WINCTRL 32 PAC Metal
     description: WINCTRL 32 PAC Metal. cockpit panel module. Active EU WINCTRL store listing;
       total_stock 4 from API. WINCTRL 32 PAC Metal.
@@ -820,6 +1038,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1405
         region: EU
+        status: available
+      - name: Ea
+        price: 122.42
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1405
+        region: US
+        status: available
   - product_name: WINCTRL 32 TCAS 1.0
     description: WINCTRL 32 TCAS 1.0. cockpit panel module. Pre-order listing on EU WINCTRL
       store. WINCTRL 32 TCAS 1.0.
@@ -834,6 +1059,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1865
         region: EU
+        status: available
+      - name: Ea
+        price: 85.32
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1865
+        region: US
+        status: available
   - product_name: WINCTRL 3M PDC
     description: WINCTRL 3M PDC. cockpit panel module. Active EU WINCTRL store listing;
       total_stock 4 from API. WINCTRL 3M PDC.
@@ -848,6 +1080,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1245
         region: EU
+        status: available
+      - name: Ea
+        price: 96.34
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1245
+        region: US
+        status: available
   - product_name: WINCTRL 3N PDC
     description: WINCTRL 3N PDC. cockpit panel module. Active EU WINCTRL store listing;
       total_stock 4 from API. WINCTRL 3N PDC.
@@ -862,6 +1101,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1265
         region: EU
+        status: available
+      - name: Ea
+        price: 96.34
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1265
+        region: US
+        status: available
   - product_name: WHEELpro Large Button Box with Paddles
     description: RealGear WHEELpro Large Button Box with Paddles. wheel button box and
       paddle-shifter module. made to order on official Ricmotech store. Direct-drive wheel

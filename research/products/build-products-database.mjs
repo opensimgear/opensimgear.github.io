@@ -79,9 +79,22 @@ function canonicalPrice(value) {
   if (!value || typeof value !== 'object') return undefined;
 
   return {
-    price: Number(value.price),
-    currency: value.currency?.toString() ?? '',
+    price: canonicalPriceValue(value.price),
+    currency: value.currency?.toString() || 'Unknown',
   };
+}
+
+function canonicalPriceValue(value) {
+  if (value === undefined || value === null || value === '') return 'Unknown';
+  const number = Number(value);
+  return Number.isFinite(number) ? number : 'Unknown';
+}
+
+function canonicalShopStatus(value) {
+  const status = value?.toString().trim().toLowerCase().replace(/\s+/g, '-');
+  if (status === 'eol') return 'eol';
+  if (status === 'out-of-stock' || status === 'outofstock') return 'out-of-stock';
+  return 'available';
 }
 
 function canonicalProduct(product, kind) {
@@ -101,8 +114,9 @@ function canonicalProduct(product, kind) {
       shops: (product.shops ?? []).map((shop) => ({
         name: shop.name?.toString() ?? '',
         region: shop.region?.toString() ?? '',
-        price: Number(shop.price),
-        currency: shop.currency?.toString() ?? '',
+        price: canonicalPriceValue(shop.price),
+        currency: shop.currency?.toString() || 'Unknown',
+        status: canonicalShopStatus(shop.status),
         url: normalizeUrl(shop.url),
       })),
     };
@@ -259,7 +273,7 @@ function databaseFor(products) {
         component_sub_category: 'Component subcategory slug.',
         license: 'Commercial.',
         product_url: 'Canonical product URL.',
-        shops: 'Array of shop entries with name, region, numeric price, currency, and URL.',
+        shops: 'Array of shop entries with name, region, price or Unknown, currency, and URL.',
       },
       opensource_project: {
         id: 'Stable id in form opensource:component-category:slug.',
@@ -342,8 +356,8 @@ function validateProducts(products) {
     if (product.kind === 'commercial') {
       if (!Array.isArray(product.shops)) throw new Error(`${product.id}: shops must be an array`);
       for (const shop of product.shops) {
-        if (typeof shop.price !== 'number' || Number.isNaN(shop.price)) {
-          throw new Error(`${product.id}: shop price must be a number`);
+        if ((typeof shop.price !== 'number' || Number.isNaN(shop.price)) && shop.price !== 'Unknown') {
+          throw new Error(`${product.id}: shop price must be a number or Unknown`);
         }
         for (const key of ['name', 'region', 'currency', 'url']) {
           if (!(key in shop)) throw new Error(`${product.id}: shop missing ${key}`);

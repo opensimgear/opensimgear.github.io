@@ -9,10 +9,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmPnLmy39KvYMQSweU8s4quXi5SDisUDQwav4Jd82wzPxN
     shops:
       - name: WINCTRL EU
-        price: 268.75
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=335
         region: EU
+        status: out-of-stock
+      - name: Ea
+        url: https://ea.winctrl.com/view/goods-details.html?id=335
+        region: US
+        status: out-of-stock
+        price: Unknown
+        currency: USD
   - product_name: CDT-AEROMAX-R Flightstick
     description: VIRPIL CDT-AEROMAX-R Flightstick. compact enthusiast desktop flightstick.
       Active/backorder on VIRPIL US. Compact all-in-one right-hand flightstick.
@@ -323,6 +330,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=305
         region: EU
+        status: available
   - product_name: SCG “Kosmosima” Premium stand-alone grip for Gladiator
     description: VKB FSC Europe SCG “Kosmosima” Premium stand-alone grip for Gladiator. VKB
       flightstick base, grip, or complete joystick. In stock on VKB FSC Europe listing on
@@ -378,10 +386,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmeSNFMx4F19Bro14aGo9gSKz6BCTFXrEWc6S6eFGk33Yx
     shops:
       - name: WINCTRL EU
-        price: 508.7
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=336
         region: EU
+        status: out-of-stock
+      - name: Ea
+        url: https://ea.winctrl.com/view/goods-details.html?id=336
+        region: US
+        status: out-of-stock
+        price: Unknown
+        currency: USD
   - product_name: Super Libra Joystick Base
     description: Super Libra Joystick Base. joystick base. Suspended on EU WINCTRL store; listed
       in catalog but not normally purchasable. Super Libra Joystick Base.
@@ -392,10 +407,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmPw8YC1MrWXpfHdZUnimqq9iPw9xdTsvqQ8onHQRHTqXv
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=307
         region: EU
+        status: out-of-stock
   - product_name: Super Libra NavyAce Joystick Combo
     description: Super Libra NavyAce Joystick Combo. flight joystick. Suspended on EU WINCTRL
       store; listed in catalog but not normally purchasable. Super Libra Joystick Base.
@@ -451,10 +467,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmbvchpLafVMoSgc7Vm39n79gHPqJUTiM37VXibdPrXHn1
     shops:
       - name: WINCTRL EU
-        price: 276.76
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=313
         region: EU
+        status: out-of-stock
+      - name: Ea
+        url: https://ea.winctrl.com/view/goods-details.html?id=313
+        region: US
+        status: out-of-stock
+        price: Unknown
+        currency: USD
   - product_name: T.16000M FCS
     description: Thrustmaster T.16000M FCS. ambidextrous desktop twist-stick joystick. Active
       product on Thrustmaster US. Four independent axes including twist rudder.
@@ -497,6 +520,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=556
         region: EU
+        status: available
+      - name: Ea
+        price: 68.7
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=556
+        region: US
+        status: available
   - product_name: URSA MINOR Airline Joystick R
     description: URSA MINOR Airline Joystick R. flight joystick. Active EU WINCTRL store
       listing; total_stock 4 from API. URSA MINOR Airline Joystick R.
@@ -511,6 +541,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=555
         region: EU
+        status: available
+      - name: Ea
+        price: 68.7
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=555
+        region: US
+        status: available
   - product_name: URSA MINOR Fighter Joystick L
     description: URSA MINOR Fighter Joystick L. flight joystick. Active EU WINCTRL store
       listing; total_stock 4 from API. URSA MINOR Fighter Joystick L.
@@ -525,6 +562,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=705
         region: EU
+        status: available
+      - name: Ea
+        price: 124.74
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=705
+        region: US
+        status: available
   - product_name: URSA MINOR Fighter Joystick R
     description: URSA MINOR Fighter Joystick R. flight joystick. Active EU WINCTRL store
       listing; total_stock 4 from API. URSA MINOR Fighter Joystick R.
@@ -539,6 +583,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=905
         region: EU
+        status: available
+      - name: Ea
+        price: 124.74
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=905
+        region: US
+        status: available
   - product_name: URSA MINOR Space Joystick L
     description: URSA MINOR Space Joystick L. flight joystick. Active EU WINCTRL store listing;
       total_stock 4 from API. URSA MINOR Space Joystick L.
@@ -553,6 +604,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=553
         region: EU
+        status: available
+      - name: Ea
+        price: 136.03
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=553
+        region: US
+        status: available
   - product_name: URSA MINOR Space Joystick R
     description: URSA MINOR Space Joystick R. flight joystick. Active EU WINCTRL store listing;
       total_stock 4 from API. URSA MINOR Space Joystick R.
@@ -567,6 +625,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=552
         region: EU
+        status: available
+      - name: Ea
+        price: 136.03
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=552
+        region: US
+        status: available
   - product_name: URSA MINOR Space/Fighter HOSAS
     description: URSA MINOR Space/Fighter HOSAS. dual-stick HOSAS bundle. Active EU WINCTRL
       store listing; total_stock 4 from API. URSA MINOR Space/Fighter HOSAS.
@@ -581,6 +646,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=725
         region: EU
+        status: available
+      - name: Ea
+        price: 260.77
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=725
+        region: US
+        status: available
   - product_name: VelocityOne Flightstick
     description: Turtle Beach VelocityOne Flightstick. compact desktop flightstick. Active
       product shown on Turtle Beach ecosystem listings. Compact stick for Xbox and PC
@@ -611,6 +683,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=377
         region: EU
+        status: available
   - product_name: ViperAce EX Metal Joystick Grip(with Shaker Kit)
     description: ViperAce EX Metal Joystick Grip(with Shaker Kit). joystick grip. Active EU
       WINCTRL store listing; total_stock 4 from API. ViperAce EX Metal Joystick Grip(with
@@ -626,6 +699,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=338
         region: EU
+        status: available
   - product_name: WINCTRL CarrierAce Joystick Grip R.Metal 2.0
     description: "WINCTRL CarrierAce Joystick Grip R.Metal 2.0. joystick grip. Active EU WINCTRL
       store listing; total_stock 4 from API. Primary product image:
@@ -641,6 +715,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1685
         region: EU
+        status: available
+      - name: Ea
+        price: 244.89
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1685
+        region: US
+        status: available
   - product_name: WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.GB 1.0
     description: "WINCTRL Cyber Taurus Joystick Base E.B.29.Metal.GB 1.0. joystick base. Listed
       on EU WINCTRL store; local stock not available in API response. Primary product image:
@@ -656,6 +737,12 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=5445
         region: EU
+      - name: Ea
+        price: 471.68
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=5665
+        region: US
+        status: available
   - product_name: WINCTRL Cyber Taurus Joystick Base E.D.16.Metal
     description: "WINCTRL Cyber Taurus Joystick Base E.D.16.Metal. joystick base. Listed on EU
       WINCTRL store; local stock not available in API response. Primary product image:
@@ -686,6 +773,12 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=5585
         region: EU
+      - name: Ea
+        price: 865.22
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=5785
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 CarrierAce Joystick Combo
     description: WINCTRL Orion2 CarrierAce Joystick Combo. joystick base. Active EU WINCTRL
       store listing; total_stock 4 from API. WINCTRL Orion2 CarrierAce Joystick Combo.
@@ -700,6 +793,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1785
         region: EU
+        status: available
+      - name: Ea
+        price: 358.24
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1785
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 HOTAS CarrierAce
     description: WINCTRL Orion2 HOTAS CarrierAce. HOTAS flight-control bundle. Active EU WINCTRL
       store listing; total_stock 4 from API. Tips:.
@@ -714,6 +814,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1805
         region: EU
+        status: available
+      - name: Ea
+        price: 583.53
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1805
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 HOTAS MAX
     description: WINCTRL Orion2 HOTAS MAX. HOTAS flight-control bundle. Active EU WINCTRL store
       listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
@@ -728,6 +835,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=343
         region: EU
+        status: available
+      - name: Ea
+        price: 566.52
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=343
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 HOTAS Metal Warthog
     description: WINCTRL Orion2 HOTAS Metal Warthog. HOTAS flight-control bundle. Active EU
       WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
@@ -742,6 +856,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=324
         region: EU
+        status: available
+      - name: Ea
+        price: 432.64
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=324
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 HOTAS NavyAce
     description: WINCTRL Orion2 HOTAS NavyAce. HOTAS flight-control bundle. Listed on EU WINCTRL
       store; local stock not available in API response. WINCTRL Orion2 Joystick Base.
@@ -756,6 +877,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=369
         region: EU
+        status: available
+      - name: Ea
+        price: 583.53
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=369
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 HOTAS StrikeAce E/EX
     description: WINCTRL Orion2 HOTAS StrikeAce E/EX. HOTAS flight-control bundle. Active EU
       WINCTRL store listing; total_stock 4 from API. WINCTRL Orion2 HOTAS StrikeAce E/EX.
@@ -766,10 +894,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmQu8USu3CjcUrpLX78iiSFqRLs48KmEVGoat2p3QZCZrH
     shops:
       - name: WINCTRL EU
-        price: 524.84
+        price: 504.07
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=1825
         region: EU
+        status: available
+      - name: Ea
+        price: 583.53
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=1825
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 HOTAS StrikeAce E/EX
     description: WINCTRL Orion2 HOTAS StrikeAce E/EX. HOTAS flight-control bundle. Listed on EU
       WINCTRL store; local stock not available in API response. WINCTRL Orion2 Joystick
@@ -785,6 +920,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=303
         region: EU
+        status: available
   - product_name: WINCTRL Orion2 HOTAS ViperAce
     description: WINCTRL Orion2 HOTAS ViperAce. HOTAS flight-control bundle. Active EU WINCTRL
       store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
@@ -800,6 +936,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=340
         region: EU
+        status: available
+      - name: Ea
+        price: 542.81
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=340
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 Joystick Base
     description: WINCTRL Orion2 Joystick Base. joystick base. Active EU WINCTRL store listing;
       total_stock 4 from API. WINCTRL Orion2 Joystick Base x1.
@@ -814,6 +957,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=333
         region: EU
+        status: available
+      - name: Ea
+        price: 244.89
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=333
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 MFSSB Version(Pre-install)
     description: WINCTRL Orion2 MFSSB Version(Pre-install). joystick base. Listed on EU WINCTRL
       store; local stock not available in API response. WINCTRL Orion2 MFSSB
@@ -829,6 +979,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=373
         region: EU
+        status: available
+      - name: Ea
+        price: 442.15
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=373
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 NavyAce Joystick Combo
     description: WINCTRL Orion2 NavyAce Joystick Combo. flight joystick. Listed on EU WINCTRL
       store; local stock not available in API response. WINCTRL Orion2 Joystick Base.
@@ -843,6 +1000,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=332
         region: EU
+        status: available
+      - name: Ea
+        price: 358.24
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=332
+        region: US
+        status: available
   - product_name: WINCTRL Orion2 ViperAce(EX) Joystick Combo
     description: WINCTRL Orion2 ViperAce(EX) Joystick Combo. flight joystick. Active EU WINCTRL
       store listing; total_stock 4 from API. WINCTRL Orion2 Joystick Base.
@@ -857,6 +1021,13 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=374
         region: EU
+        status: available
+      - name: Ea
+        price: 260.77
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=374
+        region: US
+        status: available
   - product_name: AVA Base
     description: Thrustmaster AVA Base. modular flight joystick base. in stock on official US
       shop. Scalable joystick base for advanced flight and combat simulation setups.
@@ -1026,6 +1197,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=311
         region: EU
+        status: available
   - product_name: Joystick Z-Axis module
     description: Joystick Z-Axis module. flight-control mounts and accessories. Listed on EU
       WINCTRL store with placeholder price/out-of-stock behavior [uncertain]. Joystick
@@ -1037,10 +1209,11 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmdBVVSZdVkf8VACdhSJWkH9H8tCtY5gDqWXtcU4rfkJAV
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=312
         region: EU
+        status: out-of-stock
   - product_name: Joystick / HOTAS Desk Mount
     description: MONSTERTECH Joystick / HOTAS Desk Mount. desk-mounted flight control mount. in
       stock on official EU store. Aluminum mount for joystick, throttle, and HOTAS systems.
@@ -1131,10 +1304,17 @@ commercial:
     picture_url: https://eu.winctrl.com/static/ipfs/QmXP2BkkJDkEhLz5yLA7YeTbXuukGUF6zBnHBiyHzwjGVT
     shops:
       - name: WINCTRL EU
-        price: 999999
+        price: Unknown
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=309
         region: EU
+        status: out-of-stock
+      - name: WINCTRL
+        price: Unknown
+        currency: USD
+        url: https://ea.winctrl.com/view/goods-details.html?id=309
+        region: US
+        status: out-of-stock
   - product_name: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit
     description: WINCTRL Orion 2 Joystick CAM/Spring/Damping Extension Kit. flight-control
       mounts and accessories. Active EU WINCTRL store listing; total_stock 4 from API.
@@ -1150,6 +1330,7 @@ commercial:
         currency: EUR
         url: https://eu.winctrl.com/view/goods-details.html?id=370
         region: EU
+        status: available
   - product_name: Aviation Cams Kit
     description: Flightsimcontrols Aviation Cams Kit. rig mounts. listed on Flightsimcontrols.
       Meant for customers who wish to upgrade their existing VKB Gladiator Pro or Gunfighter
