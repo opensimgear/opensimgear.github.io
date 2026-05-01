@@ -802,7 +802,7 @@
     const text = priceText(product);
     if (!text) return 'Price unknown';
 
-    return product.kind === 'commercial' ? `Avg ${text}` : text;
+    return product.kind === 'commercial' && (product.shops?.length ?? 0) > 1 ? `~${text}` : text;
   }
 
   function priceValue(product: Product): number | null {
