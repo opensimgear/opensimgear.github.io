@@ -4,11 +4,10 @@
 
   type ProductKind = 'commercial' | 'opensource';
   type AvailabilityBucket = 'available' | 'active' | 'limited' | 'unknown';
-  type LicenseBucket = 'known' | 'permissive' | 'copyleft' | 'noncommercial' | 'unknown';
+  type LicenseBucket = 'commercial' | 'known' | 'permissive' | 'copyleft' | 'noncommercial' | 'unknown';
   type FilterValue = string[];
   type LoadState = 'loading' | 'ready' | 'error';
-  type SourceFilter = 'primary' | 'shop' | 'image';
-  type FacetKey = 'kind' | 'category' | 'group' | 'maker' | 'availability' | 'license' | 'source';
+  type FacetKey = 'kind' | 'category' | 'group' | 'maker' | 'availability' | 'license';
   type SortKey =
     | 'name-asc'
     | 'name-desc'
@@ -108,17 +107,12 @@
   };
 
   const licenseLabels: Record<LicenseBucket, string> = {
+    commercial: 'Commercial',
     known: 'Known license',
     permissive: 'Permissive',
     copyleft: 'Copyleft/open hardware',
     noncommercial: 'Non-commercial/source-available',
     unknown: 'Unknown',
-  };
-
-  const sourceLabels: Record<SourceFilter, string> = {
-    primary: 'Product or project URL',
-    shop: 'Shop URL',
-    image: 'Local image',
   };
 
   const pageSizeOptions = [10, 24, 48, 96];
@@ -133,7 +127,6 @@
     maker: 'maker',
     availability: 'availability',
     license: 'license',
-    source: 'source',
     sort: 'sort',
     page: 'page',
     pageSize: 'pageSize',
@@ -150,7 +143,6 @@
   let makerFilter: FilterValue = $state([]);
   let availabilityFilter: FilterValue = $state([]);
   let licenseFilter: FilterValue = $state([]);
-  let sourceFilter: SourceFilter[] = $state([]);
   let sortKey: SortKey = $state(defaultSortKey);
   let currentPage = $state(1);
   let pageSize = $state(defaultPageSize);
@@ -248,9 +240,6 @@
       (value) => licenseLabels[value as LicenseBucket] ?? value
     )
   );
-  let sourceOptions = $derived(
-    buildSourceOptions(filterProductsForOptions('source')).filter((option) => option.count > 0)
-  );
 
   let filteredProducts = $derived.by(() => {
     const normalizedQuery = normalizeText(query);
@@ -263,7 +252,6 @@
       .filter((product) => matchesFilter(makerFilter, makerName(product)))
       .filter((product) => matchesFilter(availabilityFilter, availabilityBucket(product)))
       .filter((product) => matchesFilter(licenseFilter, licenseBucket(product)))
-      .filter((product) => matchesSourceFilter(product, sourceFilter))
       .toSorted(compareProducts);
   });
 
@@ -322,16 +310,6 @@
         token: `license:${value}`,
       });
     }
-    for (const value of sourceFilter) {
-      filters.push({
-        key: 'source',
-        label: 'Source',
-        value: sourceLabels[value],
-        rawValue: value,
-        token: `source:${value}`,
-      });
-    }
-
     return filters;
   });
 
@@ -516,17 +494,6 @@
     syncUrlState();
   }
 
-  function toggleSourceFilterValue(value: SourceFilter): void {
-    if (sourceFilter.includes(value)) {
-      sourceFilter = sourceFilter.filter((item) => item !== value);
-    } else {
-      sourceFilter = [...sourceFilter, value];
-    }
-
-    currentPage = 1;
-    syncUrlState();
-  }
-
   function optionCountText(count: number): string {
     return formatCount(count);
   }
@@ -606,15 +573,6 @@
     return filter.length === 0 || (value !== null && filter.includes(value));
   }
 
-  function matchesSourceFilter(product: Product, filter: SourceFilter[]): boolean {
-    if (filter.length === 0) return true;
-    return filter.some((value) => {
-      if (value === 'primary') return isHttpUrl(primaryUrl(product));
-      if (value === 'image') return Boolean(productImage(product));
-      return (product.shops ?? []).some((shop) => isHttpUrl(shop.url));
-    });
-  }
-
   function buildOptions(
     sourceProducts: Product[],
     getValue: (product: Product) => string | null,
@@ -647,16 +605,7 @@
       .filter((product) => exclude === 'group' || matchesFilter(groupFilter, componentGroup(product)))
       .filter((product) => exclude === 'maker' || matchesFilter(makerFilter, makerName(product)))
       .filter((product) => exclude === 'availability' || matchesFilter(availabilityFilter, availabilityBucket(product)))
-      .filter((product) => exclude === 'license' || matchesFilter(licenseFilter, licenseBucket(product)))
-      .filter((product) => exclude === 'source' || matchesSourceFilter(product, sourceFilter));
-  }
-
-  function buildSourceOptions(sourceProducts: Product[]): Option[] {
-    return (['primary', 'shop', 'image'] as const).map((value) => ({
-      value,
-      label: sourceLabels[value],
-      count: sourceProducts.filter((product) => matchesSourceFilter(product, [value])).length,
-    }));
+      .filter((product) => exclude === 'license' || matchesFilter(licenseFilter, licenseBucket(product)));
   }
 
   function availabilityBucket(product: Product): AvailabilityBucket {
@@ -681,6 +630,8 @@
   }
 
   function licenseBucket(product: Product): LicenseBucket {
+    if (product.kind === 'commercial') return 'commercial';
+
     const value = normalizeText(product.license ?? '');
 
     if (!value || /unknown|not found|unclear|not clearly|not verified|no explicit/.test(value)) {
@@ -873,10 +824,6 @@
     return sortOptions.some((option) => option.value === value);
   }
 
-  function isSourceFilter(value: string | null): value is SourceFilter {
-    return value === 'primary' || value === 'shop' || value === 'image';
-  }
-
   function hasOptionValue(options: Option[], value: string): boolean {
     return options.some((option) => option.value === value);
   }
@@ -915,7 +862,6 @@
     makerFilter = parseFilterValues(params, QUERY_PARAM_KEYS.maker);
     availabilityFilter = parseFilterValues(params, QUERY_PARAM_KEYS.availability);
     licenseFilter = parseFilterValues(params, QUERY_PARAM_KEYS.license);
-    sourceFilter = parseFilterValues(params, QUERY_PARAM_KEYS.source).filter(isSourceFilter);
     sortKey = isSortKey(sortParam) ? sortParam : defaultSortKey;
     pageSize = pageSizeOptions.includes(pageSizeParam) ? pageSizeParam : defaultPageSize;
     currentPage = parsePageValue(params.get(QUERY_PARAM_KEYS.page));
@@ -938,7 +884,7 @@
     replaceSearchParams(url.searchParams, QUERY_PARAM_KEYS.maker, makerFilter);
     replaceSearchParams(url.searchParams, QUERY_PARAM_KEYS.availability, availabilityFilter);
     replaceSearchParams(url.searchParams, QUERY_PARAM_KEYS.license, licenseFilter);
-    replaceSearchParams(url.searchParams, QUERY_PARAM_KEYS.source, sourceFilter);
+    url.searchParams.delete('source');
     setOptionalSearchParam(url.searchParams, QUERY_PARAM_KEYS.sort, sortKey, defaultSortKey);
     setOptionalSearchParam(url.searchParams, QUERY_PARAM_KEYS.page, String(activePage), '1');
     setOptionalSearchParam(url.searchParams, QUERY_PARAM_KEYS.pageSize, String(pageSize), String(defaultPageSize));
@@ -993,11 +939,6 @@
         (value) => licenseLabels[value as LicenseBucket] ?? value
       )
     );
-    sourceFilter = [...new Set(sourceFilter)].filter((value) =>
-      buildSourceOptions(filterProductsForOptions('source')).some(
-        (option) => option.value === value && option.count > 0
-      )
-    );
     if (!pageSizeOptions.includes(pageSize)) {
       pageSize = defaultPageSize;
     }
@@ -1017,7 +958,6 @@
     makerFilter = [];
     availabilityFilter = [];
     licenseFilter = [];
-    sourceFilter = [];
     sortKey = defaultSortKey;
     currentPage = 1;
     syncUrlState();
@@ -1050,9 +990,6 @@
         break;
       case 'license':
         licenseFilter = value ? removeFilterValue(licenseFilter, value) : [];
-        break;
-      case 'source':
-        sourceFilter = value ? sourceFilter.filter((item) => item !== value) : [];
         break;
     }
 
@@ -1378,21 +1315,6 @@
         {/each}
       </section>
 
-      <section class="grid min-w-0 gap-2">
-        <h2 class="m-0 text-[0.75rem] font-[700] uppercase tracking-[0] text-[var(--sl-color-gray-2)]">Links</h2>
-        {#each sourceOptions as option (option.value)}
-          <label class="flex min-w-0 items-center gap-2 text-[0.84rem] text-[var(--sl-color-text)]">
-            <input
-              class="h-4 w-4 rounded border-[var(--sl-color-gray-4)] bg-transparent text-[var(--sl-color-accent)] focus:ring-0"
-              type="checkbox"
-              checked={sourceFilter.includes(option.value as SourceFilter)}
-              onchange={() => toggleSourceFilterValue(option.value as SourceFilter)}
-            />
-            <span class="min-w-0 flex-1 truncate" title={option.label}>{option.label}</span>
-            <span class="w-10 shrink-0 text-right text-[0.74rem] tabular-nums text-[var(--sl-color-gray-2)]">{optionCountText(option.count)}</span>
-          </label>
-        {/each}
-      </section>
     </aside>
 
     <section
