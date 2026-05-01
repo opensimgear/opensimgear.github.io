@@ -199,7 +199,7 @@ commercial:
     picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/04/Magshift-Mini-Heusinkveld1323_1024x768.png
     shops:
       - name: Heusinkveld
-        price: 259
+        price: 14
         currency: EUR
         url: https://heusinkveld.com/eu/shop/handbrake-shifters/magshift-mini/
         region: EU

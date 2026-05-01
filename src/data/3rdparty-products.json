@@ -31,9 +31,9 @@
     }
   },
   "summary": {
-    "total_records": 993,
+    "total_records": 1010,
     "by_kind": {
-      "commercial": 905,
+      "commercial": 922,
       "opensource": 88
     },
     "by_component_category": {
@@ -45,8 +45,8 @@
       "handbrakes": 20,
       "joysticks": 74,
       "motion-platforms": 57,
-      "pedals": 52,
-      "rigs-and-cockpits": 218,
+      "pedals": 61,
+      "rigs-and-cockpits": 226,
       "rudder-pedals": 23,
       "seats-and-ergonomics": 59,
       "shifters": 30,
@@ -3304,6 +3304,13 @@
           "price": 199,
           "currency": "USD",
           "url": "https://cammusracing.com/product/cammus-handbrake/"
+        },
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 279,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/handbrake-shifters/handbrake/"
         }
       ]
     },
@@ -6941,7 +6948,7 @@
         {
           "name": "Heusinkveld",
           "region": "EU",
-          "price": 600,
+          "price": 974,
           "currency": "EUR",
           "url": "https://heusinkveld.com/eu/shop/racecenter-pedals/3-pedal-set-silver-copy/"
         }
@@ -7175,6 +7182,13 @@
           "price": 39.95,
           "currency": "USD",
           "url": "https://sim-lab.eu/products/pedal-heel-rest-sim-racing-accessories"
+        },
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 74,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/accessories/rest-pedal/"
         }
       ]
     },
@@ -7217,6 +7231,195 @@
           "price": 19.95,
           "currency": "USD",
           "url": "https://sim-lab.eu/products/xp1-pedals-foot-support"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:heusinkveld-racecenter-clutch-only",
+      "kind": "commercial",
+      "slug": "heusinkveld-racecenter-clutch-only",
+      "product_name": "RaceCenter Clutch only",
+      "description": "Heusinkveld RaceCenter Clutch only. two pedal set. listed on Heusinkveld. Looking for the perfect pedal for commercial environments? RaceCenter pedals are engineered for commercial use, made to perform in the most demanding areas. The design is focuse...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/single-pedals/1-pedal-set/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 214,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/single-pedals/1-pedal-set/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:heusinkveld-sprint-3-pedal-set",
+      "kind": "commercial",
+      "slug": "heusinkveld-sprint-3-pedal-set",
+      "product_name": "Sprint 3-pedal set",
+      "description": "Heusinkveld Sprint 3-pedal set. two pedal set. listed on Heusinkveld. Want to improve your lap times and race with more consistency ? The Sprint pedals are perfect for you ! A strong, accurate, and customizable pedal set designed to elevate your r...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/sprint-pedals/sprint-3-pedal-set/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 539,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/sprint-pedals/sprint-3-pedal-set/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:heusinkveld-sprint-clutch-only",
+      "kind": "commercial",
+      "slug": "heusinkveld-sprint-clutch-only",
+      "product_name": "Sprint Clutch only",
+      "description": "Heusinkveld Sprint Clutch only. two pedal set. listed on Heusinkveld. Want to improve your lap times and race with more consistency ? The Sprint pedals are perfect for you ! A strong, accurate, and customizable pedal set designed to elevate your r...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/single-pedals/sprint-1-pedal/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 134,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/single-pedals/sprint-1-pedal/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:heusinkveld-ultimate-3-pedal-set-black",
+      "kind": "commercial",
+      "slug": "heusinkveld-ultimate-3-pedal-set-black",
+      "product_name": "Ultimate+ 3-pedal set Black",
+      "description": "Heusinkveld Ultimate+ 3-pedal set Black. two pedal set. listed on Heusinkveld. Improve your lap times in terms of consistency & speed. Whether you are training for professional racing or aiming to boost your Esports performance, the Ultimate+ pedals are a...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/pedals/ultimate-3-pedal-set-black/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 1199,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/pedals/ultimate-3-pedal-set-black/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:heusinkveld-ultimate-3-pedal-set-silver",
+      "kind": "commercial",
+      "slug": "heusinkveld-ultimate-3-pedal-set-silver",
+      "product_name": "Ultimate+ 3-pedal set Silver",
+      "description": "Heusinkveld Ultimate+ 3-pedal set Silver. two pedal set. listed on Heusinkveld. Improve your laptimes in terms of consistency & accuracy. Whether you are training for professional racing or aiming to boost your performance. Choose from a total of 9 possible...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/pedals-2/ultimate-3-pedal-set-silver/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 1199,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/pedals-2/ultimate-3-pedal-set-silver/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:heusinkveld-ultimate-black-throttle",
+      "kind": "commercial",
+      "slug": "heusinkveld-ultimate-black-throttle",
+      "product_name": "Ultimate+ Black Throttle",
+      "description": "Heusinkveld Ultimate+ Black Throttle. two pedal set. listed on Heusinkveld. Are you looking for additional pedals to perform together with a Simucube active brake pedal? We offer an add-on which contains our Ultimate+ Black Throttle and Clutch or just o...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/pedals/ultimate-black-throttle/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 389,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/pedals/ultimate-black-throttle/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:heusinkveld-ultimate-black-throttle-clutch",
+      "kind": "commercial",
+      "slug": "heusinkveld-ultimate-black-throttle-clutch",
+      "product_name": "Ultimate+ Black Throttle & Clutch",
+      "description": "Heusinkveld Ultimate+ Black Throttle & Clutch. two pedal set. listed on Heusinkveld. Are you looking for additional pedals to perform together with a Simucube active brake pedal? We offer an add-on which contains our Ultimate+ Black Throttle and Clutch or just o...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/single-pedals/active-kit-ultimate-black/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 699,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/single-pedals/active-kit-ultimate-black/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:heusinkveld-ultimate-clutch-only-black",
+      "kind": "commercial",
+      "slug": "heusinkveld-ultimate-clutch-only-black",
+      "product_name": "Ultimate+ Clutch only Black",
+      "description": "Heusinkveld Ultimate+ Clutch only Black. two pedal set. listed on Heusinkveld. Improve your laptimes in terms of consistency & accuracy. Whether you are training for professional racing or aiming to boost your performance. Choose from a total of 9 possible...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/pedals/ultimate-1-pedal-set-black/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 314,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/pedals/ultimate-1-pedal-set-black/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:heusinkveld-ultimate-clutch-only-silver",
+      "kind": "commercial",
+      "slug": "heusinkveld-ultimate-clutch-only-silver",
+      "product_name": "Ultimate+ Clutch only Silver",
+      "description": "Heusinkveld Ultimate+ Clutch only Silver. two pedal set. listed on Heusinkveld. Improve your laptimes in terms of consistency & accuracy. Whether you are training for professional racing or aiming to boost your performance. Choose from a total of 9 possible...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/pedals-2/ultimate-1-pedal-set-silver/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 314,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/pedals-2/ultimate-1-pedal-set-silver/"
         }
       ]
     },
@@ -11349,6 +11552,13 @@
           "price": 13,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/stecs-mini/"
+        },
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 104,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/accessories/baseplate-sprint/"
         }
       ]
     },
@@ -11811,6 +12021,174 @@
           "price": 31,
           "currency": "EUR",
           "url": "https://flightsimcontrols.com/product/wwii-thq-grip-add-on/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:heusinkveld-classic-ultimate-upgrade-kit",
+      "kind": "commercial",
+      "slug": "heusinkveld-classic-ultimate-upgrade-kit",
+      "product_name": "Classic Ultimate Upgrade Kit",
+      "description": "Heusinkveld Classic Ultimate Upgrade Kit. rig mounts. listed on Heusinkveld. Give your classic Ultimate pedals a meaningful upgrade with modern innovations as seen on the Ultimate+. With this upgrade kit you’ll be able to benefit from the latest Heusinkv...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/upgrades/classic-ultimate-upgrade-kit/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 179,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/upgrades/classic-ultimate-upgrade-kit/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:heusinkveld-elastomer-kit-sprint",
+      "kind": "commercial",
+      "slug": "heusinkveld-elastomer-kit-sprint",
+      "product_name": "Elastomer Kit Sprint",
+      "description": "Heusinkveld Elastomer Kit Sprint. rig mounts. listed on Heusinkveld. This Elastomer Kit allows you to upgrade your Sprint brake pedals to our latest injection molded thermoset brake elastomers.",
+      "manufacturer": "Heusinkveld",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/upgrades/elastomer-kit-sprint/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 29,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/upgrades/elastomer-kit-sprint/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:heusinkveld-elastomer-kit-ultimate",
+      "kind": "commercial",
+      "slug": "heusinkveld-elastomer-kit-ultimate",
+      "product_name": "Elastomer Kit Ultimate+",
+      "description": "Heusinkveld Elastomer Kit Ultimate+. rig mounts. listed on Heusinkveld. This kit can be used to replace/renew the elastomers of the Ultimate+ brake pedal as well as the elastomers in the Classic Sim Pedals Ultimate Upgrade Kit.",
+      "manufacturer": "Heusinkveld",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/upgrades/elastomer-kit-ultimate/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 34,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/upgrades/elastomer-kit-ultimate/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:heusinkveld-gloves-long-m",
+      "kind": "commercial",
+      "slug": "heusinkveld-gloves-long-m",
+      "product_name": "Gloves Long M",
+      "description": "Heusinkveld Gloves Long M. rig mounts. listed on Heusinkveld. All you need is glove 😉 Add Heusinkveld gloves to your look and you are good to go!.",
+      "manufacturer": "Heusinkveld",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-m/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 39,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-m/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:heusinkveld-gloves-long-xl",
+      "kind": "commercial",
+      "slug": "heusinkveld-gloves-long-xl",
+      "product_name": "Gloves Long XL",
+      "description": "Heusinkveld Gloves Long XL. rig mounts. listed on Heusinkveld. All you need is glove 😉 Add Heusinkveld gloves to your look and you are good to go!.",
+      "manufacturer": "Heusinkveld",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-xl/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 39,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-xl/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:heusinkveld-gloves-short-m",
+      "kind": "commercial",
+      "slug": "heusinkveld-gloves-short-m",
+      "product_name": "Gloves Short M",
+      "description": "Heusinkveld Gloves Short M. rig mounts. listed on Heusinkveld. All you need is glove 😉 Add Heusinkveld gloves to your look and you are good to go!.",
+      "manufacturer": "Heusinkveld",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-m/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 39,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-m/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:heusinkveld-gloves-short-xl",
+      "kind": "commercial",
+      "slug": "heusinkveld-gloves-short-xl",
+      "product_name": "Gloves Short XL",
+      "description": "Heusinkveld Gloves Short XL. rig mounts. listed on Heusinkveld. All you need is glove 😉 Add Heusinkveld gloves to your look and you are good to go!.",
+      "manufacturer": "Heusinkveld",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-xl/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 39,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-xl/"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:heusinkveld-ultimate-baseplate",
+      "kind": "commercial",
+      "slug": "heusinkveld-ultimate-baseplate",
+      "product_name": "Ultimate+ Baseplate",
+      "description": "Heusinkveld Ultimate+ Baseplate. rig mounts. listed on Heusinkveld. With the Ultimate+ pedals being able to cope with the forces experienced in real life racing cars, a sturdy mount is an absolute must . If you want to mount the pedals to a base...",
+      "manufacturer": "Heusinkveld",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://heusinkveld.com/shop/accessories/baseplate-ultimate/",
+      "shops": [
+        {
+          "name": "Heusinkveld",
+          "region": "Unknown",
+          "price": 104,
+          "currency": "EUR",
+          "url": "https://heusinkveld.com/shop/accessories/baseplate-ultimate/"
         }
       ]
     },
@@ -13877,7 +14255,7 @@
         {
           "name": "Heusinkveld",
           "region": "EU",
-          "price": 259,
+          "price": 14,
           "currency": "EUR",
           "url": "https://heusinkveld.com/eu/shop/handbrake-shifters/magshift-mini/"
         }
@@ -14261,7 +14639,7 @@
         {
           "name": "Heusinkveld",
           "region": "EU",
-          "price": 599,
+          "price": 499,
           "currency": "EUR",
           "url": "https://heusinkveld.com/eu/shop/steering-wheel/one/"
         }

@@ -14,6 +14,11 @@ commercial:
         currency: USD
         url: https://cammusracing.com/product/cammus-handbrake/
         region: Global
+      - name: Heusinkveld
+        price: 279
+        currency: EUR
+        url: https://heusinkveld.com/shop/handbrake-shifters/handbrake/
+        region: Unknown
   - product_name: ClubSport Handbrake V2
     description: Fanatec ClubSport Handbrake V2. load-cell analog handbrake. in stock on
       official EU catalog. Stronger rally/drift handbrake with improved electronics and

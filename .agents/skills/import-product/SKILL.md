@@ -30,7 +30,7 @@ description:
 6. Regenerate from repo root:
    - `pnpm products:build`
    - This updates `src/data/3rdparty-products.json`, `src/data/3rdparty-product-images.ts`,
-     `scripts/3rdparty-product-image-sources.json`, and may create `src/assets/products/*.webp`.
+     `research/products/3rdparty-product-image-sources.json`, and may create `src/assets/products/*.webp`.
 7. Verify:
    - YAML parses.
    - Generator exits 0.
@@ -85,7 +85,7 @@ Use from repo root:
 ```bash
 ruby -e 'require "yaml"; Dir["research/products/db/*.yml"].each { |f| YAML.load_file(f) }; puts "ok"'
 pnpm products:build
-git diff -- research/products/db src/data/3rdparty-products.json src/data/3rdparty-product-images.ts scripts/3rdparty-product-image-sources.json src/assets/products
+git diff -- research/products/db src/data/3rdparty-products.json src/data/3rdparty-product-images.ts research/products/3rdparty-product-image-sources.json src/assets/products
 ```
 
 If `ruby` is unavailable, use Node with `yaml` dependency or the generator as parse validation.

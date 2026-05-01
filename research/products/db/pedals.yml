@@ -480,7 +480,7 @@ commercial:
     picture_url: https://heusinkveld.com/eu/wp-content/uploads/sites/7/2025/04/RC-productfoto-1024x768-1.png
     shops:
       - name: Heusinkveld
-        price: 600
+        price: 974
         currency: EUR
         url: https://heusinkveld.com/eu/shop/racecenter-pedals/3-pedal-set-silver-copy/
         region: EU
@@ -648,6 +648,11 @@ commercial:
         currency: USD
         url: https://sim-lab.eu/products/pedal-heel-rest-sim-racing-accessories
         region: Unknown
+      - name: Heusinkveld
+        price: 74
+        currency: EUR
+        url: https://heusinkveld.com/shop/accessories/rest-pedal/
+        region: Unknown
   - product_name: Black Conversion Kit
     description: XP1 Black Conversion Kit. two pedal set. listed on Sim Lab. The XP1 Black
       Conversion Kit allows you to change your pedals' appearance by switching from the
@@ -677,6 +682,148 @@ commercial:
         price: 19.95
         currency: USD
         url: https://sim-lab.eu/products/xp1-pedals-foot-support
+        region: Unknown
+  - product_name: RaceCenter Clutch only
+    description: Heusinkveld RaceCenter Clutch only. two pedal set. listed on Heusinkveld.
+      Looking for the perfect pedal for commercial environments? RaceCenter pedals are
+      engineered for commercial use, made to perform in the most demanding areas. The design
+      is focuse...
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://heusinkveld.com/shop/single-pedals/1-pedal-set/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/04/HE-SPRCE2SC-2.-Race-Center-Clutch-and-Throttle1024x768.png
+    shops:
+      - name: Heusinkveld
+        price: 214
+        currency: EUR
+        url: https://heusinkveld.com/shop/single-pedals/1-pedal-set/
+        region: Unknown
+  - product_name: Sprint 3-pedal set
+    description: Heusinkveld Sprint 3-pedal set. two pedal set. listed on Heusinkveld. Want to
+      improve your lap times and race with more consistency ? The Sprint pedals are perfect
+      for you ! A strong, accurate, and customizable pedal set designed to elevate your r...
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://heusinkveld.com/shop/sprint-pedals/sprint-3-pedal-set/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204341-1-Sprint-3-pedal-set_1024x768.png
+    shops:
+      - name: Heusinkveld
+        price: 539
+        currency: EUR
+        url: https://heusinkveld.com/shop/sprint-pedals/sprint-3-pedal-set/
+        region: Unknown
+  - product_name: Sprint Clutch only
+    description: Heusinkveld Sprint Clutch only. two pedal set. listed on Heusinkveld. Want to
+      improve your lap times and race with more consistency ? The Sprint pedals are perfect
+      for you ! A strong, accurate, and customizable pedal set designed to elevate your r...
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://heusinkveld.com/shop/single-pedals/sprint-1-pedal/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204310-9-Sprint-Clutch_1024x768.png
+    shops:
+      - name: Heusinkveld
+        price: 134
+        currency: EUR
+        url: https://heusinkveld.com/shop/single-pedals/sprint-1-pedal/
+        region: Unknown
+  - product_name: Ultimate+ 3-pedal set Black
+    description: Heusinkveld Ultimate+ 3-pedal set Black. two pedal set. listed on Heusinkveld.
+      Improve your lap times in terms of consistency & speed. Whether you are training for
+      professional racing or aiming to boost your Esports performance, the Ultimate+ pedals
+      are a...
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://heusinkveld.com/shop/pedals/ultimate-3-pedal-set-black/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204372-1-Ultimate-BLACK-3-pedal-set-1024x768-1-1.png
+    shops:
+      - name: Heusinkveld
+        price: 1199
+        currency: EUR
+        url: https://heusinkveld.com/shop/pedals/ultimate-3-pedal-set-black/
+        region: Unknown
+  - product_name: Ultimate+ 3-pedal set Silver
+    description: Heusinkveld Ultimate+ 3-pedal set Silver. two pedal set. listed on Heusinkveld.
+      Improve your laptimes in terms of consistency & accuracy. Whether you are training for
+      professional racing or aiming to boost your performance. Choose from a total of 9
+      possible...
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://heusinkveld.com/shop/pedals-2/ultimate-3-pedal-set-silver/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204228-1-Ultimate-SILVER-3-pedal-set-1024x768-2.png
+    shops:
+      - name: Heusinkveld
+        price: 1199
+        currency: EUR
+        url: https://heusinkveld.com/shop/pedals-2/ultimate-3-pedal-set-silver/
+        region: Unknown
+  - product_name: Ultimate+ Black Throttle
+    description: Heusinkveld Ultimate+ Black Throttle. two pedal set. listed on Heusinkveld. Are
+      you looking for additional pedals to perform together with a Simucube active brake
+      pedal? We offer an add-on which contains our Ultimate+ Black Throttle and Clutch or
+      just o...
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://heusinkveld.com/shop/pedals/ultimate-black-throttle/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/03/8719689204372-4-Ultimate-BLACK-Throttle-1024x768-1.png
+    shops:
+      - name: Heusinkveld
+        price: 389
+        currency: EUR
+        url: https://heusinkveld.com/shop/pedals/ultimate-black-throttle/
+        region: Unknown
+  - product_name: Ultimate+ Black Throttle & Clutch
+    description: Heusinkveld Ultimate+ Black Throttle & Clutch. two pedal set. listed on
+      Heusinkveld. Are you looking for additional pedals to perform together with a Simucube
+      active brake pedal? We offer an add-on which contains our Ultimate+ Black Throttle and
+      Clutch or just o...
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://heusinkveld.com/shop/single-pedals/active-kit-ultimate-black/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/03/Active-kit-Ultimate.png
+    shops:
+      - name: Heusinkveld
+        price: 699
+        currency: EUR
+        url: https://heusinkveld.com/shop/single-pedals/active-kit-ultimate-black/
+        region: Unknown
+  - product_name: Ultimate+ Clutch only Black
+    description: Heusinkveld Ultimate+ Clutch only Black. two pedal set. listed on Heusinkveld.
+      Improve your laptimes in terms of consistency & accuracy. Whether you are training for
+      professional racing or aiming to boost your performance. Choose from a total of 9
+      possible...
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://heusinkveld.com/shop/pedals/ultimate-1-pedal-set-black/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204372-2-Ultimate-BLACK-Clutch-1024x768-2.png
+    shops:
+      - name: Heusinkveld
+        price: 314
+        currency: EUR
+        url: https://heusinkveld.com/shop/pedals/ultimate-1-pedal-set-black/
+        region: Unknown
+  - product_name: Ultimate+ Clutch only Silver
+    description: Heusinkveld Ultimate+ Clutch only Silver. two pedal set. listed on Heusinkveld.
+      Improve your laptimes in terms of consistency & accuracy. Whether you are training for
+      professional racing or aiming to boost your performance. Choose from a total of 9
+      possible...
+    manufacturer: Heusinkveld
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://heusinkveld.com/shop/pedals-2/ultimate-1-pedal-set-silver/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/02/8719689204228-2-Ultimate-SILVER-Clutch-1024x768-1.png
+    shops:
+      - name: Heusinkveld
+        price: 314
+        currency: EUR
+        url: https://heusinkveld.com/shop/pedals-2/ultimate-1-pedal-set-silver/
         region: Unknown
 opensource:
   - project_name: CNCDan Sim Pedals

@@ -14,7 +14,7 @@ const jsonPath = join(rootDir, 'src/data/3rdparty-products.json');
 const distJsonPath = join(rootDir, 'dist/products/products.json');
 const assetDir = join(rootDir, 'src/assets/products');
 const imageMapPath = join(rootDir, 'src/data/3rdparty-product-images.ts');
-const imageSourceCachePath = join(rootDir, 'scripts/3rdparty-product-image-sources.json');
+const imageSourceCachePath = join(rootDir, 'research/products/3rdparty-product-image-sources.json');
 
 const MAX_WIDTH = 720;
 const MAX_HEIGHT = 540;
@@ -310,30 +310,30 @@ function validateProducts(products) {
     const required =
       product.kind === 'commercial'
         ? [
-            'id',
-            'kind',
-            'slug',
-            'product_name',
-            'description',
-            'manufacturer',
-            'component_category',
-            'component_sub_category',
-            'license',
-            'product_url',
-            'shops',
-          ]
+          'id',
+          'kind',
+          'slug',
+          'product_name',
+          'description',
+          'manufacturer',
+          'component_category',
+          'component_sub_category',
+          'license',
+          'product_url',
+          'shops',
+        ]
         : [
-            'id',
-            'kind',
-            'slug',
-            'project_name',
-            'description',
-            'maker',
-            'component_category',
-            'component_sub_category',
-            'license',
-            'project_url',
-          ];
+          'id',
+          'kind',
+          'slug',
+          'project_name',
+          'description',
+          'maker',
+          'component_category',
+          'component_sub_category',
+          'license',
+          'project_url',
+        ];
 
     for (const key of required) {
       if (!(key in product)) throw new Error(`${product.id}: missing ${key}`);

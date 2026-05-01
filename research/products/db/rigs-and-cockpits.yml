@@ -2813,6 +2813,11 @@ commercial:
         currency: EUR
         url: https://flightsimcontrols.com/product/stecs-mini/
         region: Unknown
+      - name: Heusinkveld
+        price: 104
+        currency: EUR
+        url: https://heusinkveld.com/shop/accessories/baseplate-sprint/
+        region: Unknown
   - product_name: Mini Plus/Max Baseplate
     description: STECS Mini Plus/Max Baseplate. rig mounts. listed on Flightsimcontrols.
       Official shop listing.
@@ -3113,6 +3118,124 @@ commercial:
         price: 31
         currency: EUR
         url: https://flightsimcontrols.com/product/wwii-thq-grip-add-on/
+        region: Unknown
+  - product_name: Classic Ultimate Upgrade Kit
+    description: Heusinkveld Classic Ultimate Upgrade Kit. rig mounts. listed on Heusinkveld.
+      Give your classic Ultimate pedals a meaningful upgrade with modern innovations as seen
+      on the Ultimate+. With this upgrade kit you’ll be able to benefit from the latest
+      Heusinkv...
+    manufacturer: Heusinkveld
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://heusinkveld.com/shop/upgrades/classic-ultimate-upgrade-kit/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/04/ult-new-controller.png
+    shops:
+      - name: Heusinkveld
+        price: 179
+        currency: EUR
+        url: https://heusinkveld.com/shop/upgrades/classic-ultimate-upgrade-kit/
+        region: Unknown
+  - product_name: Elastomer Kit Sprint
+    description: Heusinkveld Elastomer Kit Sprint. rig mounts. listed on Heusinkveld. This
+      Elastomer Kit allows you to upgrade your Sprint brake pedals to our latest injection
+      molded thermoset brake elastomers.
+    manufacturer: Heusinkveld
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://heusinkveld.com/shop/upgrades/elastomer-kit-sprint/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/04/8719689204693-2.-Elastomer-kit-elastomers.png
+    shops:
+      - name: Heusinkveld
+        price: 29
+        currency: EUR
+        url: https://heusinkveld.com/shop/upgrades/elastomer-kit-sprint/
+        region: Unknown
+  - product_name: Elastomer Kit Ultimate+
+    description: Heusinkveld Elastomer Kit Ultimate+. rig mounts. listed on Heusinkveld. This
+      kit can be used to replace/renew the elastomers of the Ultimate+ brake pedal as well
+      as the elastomers in the Classic Sim Pedals Ultimate Upgrade Kit.
+    manufacturer: Heusinkveld
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://heusinkveld.com/shop/upgrades/elastomer-kit-ultimate/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/04/8719689204457-1-Elastomer-Kit-Ultimate.png
+    shops:
+      - name: Heusinkveld
+        price: 34
+        currency: EUR
+        url: https://heusinkveld.com/shop/upgrades/elastomer-kit-ultimate/
+        region: Unknown
+  - product_name: Gloves Long M
+    description: Heusinkveld Gloves Long M. rig mounts. listed on Heusinkveld. All you need is
+      glove 😉 Add Heusinkveld gloves to your look and you are good to go!.
+    manufacturer: Heusinkveld
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-m/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/08/long-gloves-website-image.png
+    shops:
+      - name: Heusinkveld
+        price: 39
+        currency: EUR
+        url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-m/
+        region: Unknown
+  - product_name: Gloves Long XL
+    description: Heusinkveld Gloves Long XL. rig mounts. listed on Heusinkveld. All you need is
+      glove 😉 Add Heusinkveld gloves to your look and you are good to go!.
+    manufacturer: Heusinkveld
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-xl/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/08/long-gloves-website-image.png
+    shops:
+      - name: Heusinkveld
+        price: 39
+        currency: EUR
+        url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-long-xl/
+        region: Unknown
+  - product_name: Gloves Short M
+    description: Heusinkveld Gloves Short M. rig mounts. listed on Heusinkveld. All you need is
+      glove 😉 Add Heusinkveld gloves to your look and you are good to go!.
+    manufacturer: Heusinkveld
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-m/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/08/short-gloves-website-image.png
+    shops:
+      - name: Heusinkveld
+        price: 39
+        currency: EUR
+        url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-m/
+        region: Unknown
+  - product_name: Gloves Short XL
+    description: Heusinkveld Gloves Short XL. rig mounts. listed on Heusinkveld. All you need is
+      glove 😉 Add Heusinkveld gloves to your look and you are good to go!.
+    manufacturer: Heusinkveld
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-xl/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/08/short-gloves-website-image.png
+    shops:
+      - name: Heusinkveld
+        price: 39
+        currency: EUR
+        url: https://heusinkveld.com/shop/gloves/heusinkveld-gloves-short-xl/
+        region: Unknown
+  - product_name: Ultimate+ Baseplate
+    description: Heusinkveld Ultimate+ Baseplate. rig mounts. listed on Heusinkveld. With the
+      Ultimate+ pedals being able to cope with the forces experienced in real life racing
+      cars, a sturdy mount is an absolute must . If you want to mount the pedals to a
+      base...
+    manufacturer: Heusinkveld
+    component_category: rigs-and-cockpits
+    component_sub_category: rig-mounts
+    product_url: https://heusinkveld.com/shop/accessories/baseplate-ultimate/
+    picture_url: https://heusinkveld.com/wp-content/uploads/2025/04/8719689204396-1-Baseplate-Ultimate-Black_1024x768-1.png
+    shops:
+      - name: Heusinkveld
+        price: 104
+        currency: EUR
+        url: https://heusinkveld.com/shop/accessories/baseplate-ultimate/
         region: Unknown
 opensource:
   - project_name: DIY Aluminium Profile Sim Rig
