@@ -7,6 +7,7 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "products:build": "node scripts/build-products-database.mjs",
+    "products:scrape:ascher": "node research/products/scrapers/ascher-racing.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",
