@@ -1914,7 +1914,7 @@ opensource:
       joystick and throttle design for flight simulators.
     maker:
       - Tom Howse
-      - "`tjhowse`"
+      - tjhowse
     component_category: joysticks
     component_sub_category: flight-joystick
     license: GPL per project README; no GitHub license file detected, so exact SPDX status is [uncertain].

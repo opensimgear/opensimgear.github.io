@@ -429,7 +429,6 @@ import productImage428_opensource_motion_platforms_simmetrik_6dof_motion_platfor
 import productImage429_opensource_motion_platforms_knaufinator_6dof_rotary_stewart from '~/assets/products/opensource:motion-platforms:knaufinator-6dof-rotary-stewart.webp';
 import productImage430_opensource_motion_platforms_motion4sim_aasd15a_servo_controller from '~/assets/products/opensource:motion-platforms:motion4sim-aasd15a-servo-controller.webp';
 import productImage431_opensource_motion_platforms_amc_aasd15a_firmware from '~/assets/products/opensource:motion-platforms:amc-aasd15a-firmware.webp';
-import productImage432_opensource_motion_platforms_flypt_mover from '~/assets/products/opensource:motion-platforms:flypt-mover.webp';
 import productImage433_opensource_motion_platforms_opensimcraft_theta_8020_3dof from '~/assets/products/opensource:motion-platforms:opensimcraft-theta-8020-3dof.webp';
 import productImage434_opensource_motion_platforms_sfx_100_simfeedback from '~/assets/products/opensource:motion-platforms:sfx-100-simfeedback.webp';
 import productImage435_opensource_motion_platforms_smc3 from '~/assets/products/opensource:motion-platforms:smc3.webp';
@@ -587,7 +586,6 @@ import productImage586_commercial_pedals_simagic_p_hysi_hydraulic_system from '~
 import productImage587_commercial_pedals_simagic_p_hys_hydraulic_system from '~/assets/products/commercial:pedals:simagic-p-hys-hydraulic-system.webp';
 import productImage588_commercial_pedals_simagic_accessories_power_supply_p_aps from '~/assets/products/commercial:pedals:simagic-accessories-power-supply-p-aps.webp';
 import productImage589_opensource_pedals_cncdan_sim_pedals from '~/assets/products/opensource:pedals:cncdan-sim-pedals.webp';
-import productImage590_opensource_pedals_diy_load_cell_sim_racing_pedals from '~/assets/products/opensource:pedals:diy-load-cell-sim-racing-pedals.webp';
 import productImage591_opensource_pedals_diy_sim_racing_ffb_pedal from '~/assets/products/opensource:pedals:diy-sim-racing-ffb-pedal.webp';
 import productImage592_opensource_pedals_pedalmanager from '~/assets/products/opensource:pedals:pedalmanager.webp';
 import productImage593_opensource_pedals_lebois_racing_srt_p1_pedals from '~/assets/products/opensource:pedals:lebois-racing-srt-p1-pedals.webp';
@@ -1173,7 +1171,6 @@ import productImage1173_commercial_tactile_feedback_trak_racer_100w_pro_haptic_b
 import productImage1174_commercial_tactile_feedback_trak_racer_10w_pro_haptic_bass_shaker_set_of_2 from '~/assets/products/commercial:tactile-feedback:trak-racer-10w-pro-haptic-bass-shaker-set-of-2.webp';
 import productImage1175_commercial_tactile_feedback_trak_racer_4ch_40w_low_frequency_amplifier_with_2_bass_shakers_and_rig_mounts from '~/assets/products/commercial:tactile-feedback:trak-racer-4ch-40w-low-frequency-amplifier-with-2-bass-shakers-and-rig-mounts.webp';
 import productImage1176_opensource_tactile_feedback_gt7_shaker_for_linux from '~/assets/products/opensource:tactile-feedback:gt7-shaker-for-linux.webp';
-import productImage1177_opensource_tactile_feedback_monocoque from '~/assets/products/opensource:tactile-feedback:monocoque.webp';
 import productImage1178_opensource_tactile_feedback_spacemonkey from '~/assets/products/opensource:tactile-feedback:spacemonkey.webp';
 import productImage1179_commercial_throttles_vkb_sim_gnx_thq_throttle_quadrant from '~/assets/products/commercial:throttles:vkb-sim-gnx-thq-throttle-quadrant.webp';
 import productImage1180_commercial_throttles_vkb_sim_gnx_thq_v_throttle_quadrant_vertical from '~/assets/products/commercial:throttles:vkb-sim-gnx-thq-v-throttle-quadrant-vertical.webp';
@@ -1853,7 +1850,6 @@ export const productImages: Record<string, ImageMetadata> = {
   "opensource:motion-platforms:knaufinator-6dof-rotary-stewart": productImage429_opensource_motion_platforms_knaufinator_6dof_rotary_stewart,
   "opensource:motion-platforms:motion4sim-aasd15a-servo-controller": productImage430_opensource_motion_platforms_motion4sim_aasd15a_servo_controller,
   "opensource:motion-platforms:amc-aasd15a-firmware": productImage431_opensource_motion_platforms_amc_aasd15a_firmware,
-  "opensource:motion-platforms:flypt-mover": productImage432_opensource_motion_platforms_flypt_mover,
   "opensource:motion-platforms:opensimcraft-theta-8020-3dof": productImage433_opensource_motion_platforms_opensimcraft_theta_8020_3dof,
   "opensource:motion-platforms:sfx-100-simfeedback": productImage434_opensource_motion_platforms_sfx_100_simfeedback,
   "opensource:motion-platforms:smc3": productImage435_opensource_motion_platforms_smc3,
@@ -2011,7 +2007,6 @@ export const productImages: Record<string, ImageMetadata> = {
   "commercial:pedals:simagic-p-hys-hydraulic-system": productImage587_commercial_pedals_simagic_p_hys_hydraulic_system,
   "commercial:pedals:simagic-accessories-power-supply-p-aps": productImage588_commercial_pedals_simagic_accessories_power_supply_p_aps,
   "opensource:pedals:cncdan-sim-pedals": productImage589_opensource_pedals_cncdan_sim_pedals,
-  "opensource:pedals:diy-load-cell-sim-racing-pedals": productImage590_opensource_pedals_diy_load_cell_sim_racing_pedals,
   "opensource:pedals:diy-sim-racing-ffb-pedal": productImage591_opensource_pedals_diy_sim_racing_ffb_pedal,
   "opensource:pedals:pedalmanager": productImage592_opensource_pedals_pedalmanager,
   "opensource:pedals:lebois-racing-srt-p1-pedals": productImage593_opensource_pedals_lebois_racing_srt_p1_pedals,
@@ -2597,7 +2592,6 @@ export const productImages: Record<string, ImageMetadata> = {
   "commercial:tactile-feedback:trak-racer-10w-pro-haptic-bass-shaker-set-of-2": productImage1174_commercial_tactile_feedback_trak_racer_10w_pro_haptic_bass_shaker_set_of_2,
   "commercial:tactile-feedback:trak-racer-4ch-40w-low-frequency-amplifier-with-2-bass-shakers-and-rig-mounts": productImage1175_commercial_tactile_feedback_trak_racer_4ch_40w_low_frequency_amplifier_with_2_bass_shakers_and_rig_mounts,
   "opensource:tactile-feedback:gt7-shaker-for-linux": productImage1176_opensource_tactile_feedback_gt7_shaker_for_linux,
-  "opensource:tactile-feedback:monocoque": productImage1177_opensource_tactile_feedback_monocoque,
   "opensource:tactile-feedback:spacemonkey": productImage1178_opensource_tactile_feedback_spacemonkey,
   "commercial:throttles:vkb-sim-gnx-thq-throttle-quadrant": productImage1179_commercial_throttles_vkb_sim_gnx_thq_throttle_quadrant,
   "commercial:throttles:vkb-sim-gnx-thq-v-throttle-quadrant-vertical": productImage1180_commercial_throttles_vkb_sim_gnx_thq_v_throttle_quadrant_vertical,

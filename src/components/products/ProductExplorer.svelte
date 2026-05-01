@@ -1688,7 +1688,7 @@
 
                 <div class="flex flex-wrap gap-2">
                   <button
-                    class="inline-flex items-center gap-2 rounded-[10px] border border-[var(--sl-color-gray-5)] px-3 py-2 text-[0.82rem] font-[650] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
+                    class="inline-flex items-center gap-2 rounded-[10px] border border-[var(--sl-color-gray-5)] bg-transparent px-3 py-2 text-[0.82rem] font-[650] text-[var(--sl-color-text)] no-underline hover:border-[var(--sl-color-accent)] hover:text-[var(--sl-color-accent-high)]"
                     type="button"
                     onclick={() => openProductDetail(product)}
                   >

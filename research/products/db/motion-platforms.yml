@@ -1331,7 +1331,6 @@ opensource:
     component_sub_category: motion-software
     license: Free for personal home use; not confirmed open source.
     project_url: https://github.com/FlyPTMover
-    picture_url: https://opengraph.githubassets.com/1/FlyPTMover/Releases
   - project_name: SC230 Theta 3DOF Sim Rig
     description: OpenSimCraft Theta 8020 3DOF. 80/20 aluminum 3DOF motion cockpit.
       Early open hardware design; README says current work is finalizing cockpit

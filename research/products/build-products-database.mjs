@@ -191,8 +191,7 @@ function sortObject(value) {
 
 function productImageSource(product) {
   if (product.picture_url) return product.picture_url;
-  if (product.kind !== 'opensource') return null;
-  return githubFallbackForProduct(product);
+  return null;
 }
 
 function buildStableLookup(stableProducts) {
@@ -493,22 +492,6 @@ async function imageSourceCacheEntry(source) {
   return { cacheKey: `${source}#sha256=${hashBuffer(buffer)}`, buffer };
 }
 
-function githubOpenGraphFallback(sourceUrl) {
-  try {
-    const url = new URL(sourceUrl);
-    if (url.hostname !== 'github.com') return null;
-    const [owner, repo] = url.pathname.split('/').filter(Boolean);
-    if (!owner || !repo) return null;
-    return `https://opengraph.githubassets.com/1/${owner}/${repo}`;
-  } catch {
-    return null;
-  }
-}
-
-function githubFallbackForProduct(product) {
-  return githubOpenGraphFallback(product.project_url ?? product.product_url);
-}
-
 async function writeBufferIfChanged(path, buffer) {
   try {
     const current = await readFile(path);
@@ -572,16 +555,8 @@ async function ensureProductImage(product, cachedSource) {
       throw new Error(`${product.id}: ${error.message}`);
     }
 
-    const fallback =
-      finalSourceUrl === product.picture_url ? githubFallbackForProduct(product) : githubOpenGraphFallback(referer);
-    if (!fallback) {
-      throw new Error(`${product.id}: image fetch failed: ${error.message}`);
-    }
-
-    finalSourceUrl = fallback;
-    finalSourceCacheKey = fallback;
-    const changed = await convertImageBuffer(await fetchImageBuffer(finalSourceUrl, referer), outputPath);
-    return { filename, sourceUrl: finalSourceCacheKey, changed };
+    console.warn(`Image skipped: ${product.id}: ${error.message}`);
+    return { filename: null, sourceUrl: null, changed: false };
   }
 }
 

@@ -271,7 +271,6 @@ opensource:
     component_sub_category: haptics-software
     license: GPL-3.0
     project_url: https://github.com/Spacefreak18/monocoque
-    picture_url: https://opengraph.githubassets.com/4ee1e2043804c0cbe8122bd6154eed8cc6d4445a26c821c82b57c3050ccb0098/Spacefreak18/monocoque
   - project_name: SpaceMonkey
     description: SpaceMonkey. telemetry provider for motion, wind, shakers, and LEDs. Released Windows
       telemetry provider with broad game support and ongoing release notes through 2020s. Adds

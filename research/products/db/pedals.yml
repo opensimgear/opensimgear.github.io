@@ -2458,7 +2458,6 @@ opensource:
     component_sub_category: pedal-firmware
     license: GPL-3.0
     project_url: https://github.com/tbattz/DIYLoadCellSimRacingPedals
-    picture_url: https://opengraph.githubassets.com/aadf3a5f300964cd095338bcec06cd234fddac9d598d5bb231b57b47ad56539f/MHeironimus/ArduinoJoystickLibrary
   - project_name: DIY Sim Racing FFB Pedal
     description: DIY Sim Racing FFB Pedal. active force-feedback pedal. Large active DIY project with
       firmware, SimHub plugin, mechanical design, PCB repositories, wiki, Discord, and build
@@ -2468,7 +2467,7 @@ opensource:
     component_sub_category: ffb-pedal
     license: CC BY-NC-SA 4.0; source-available/noncommercial, not OSI-open because of NC restriction.
     project_url: https://github.com/ChrGri/DIY-Sim-Racing-FFB-Pedal
-    picture_url: https://opengraph.githubassets.com/8c049ed9f198c665b9b2bdd1f6aff196cf9bbc9a563d5f9a2b7cbc15fb9903ae/ChrGri/DIY-Sim-Racing-FFB-Pedal
+    picture_url: https://github.com/user-attachments/assets/f1a54fd9-5949-4dc0-b573-b34a77b52dd7
   - project_name: PedalManager
     description: PedalManager. Arduino pedal firmware/calibration library. Small but focused firmware
       project; last updated recently. Arduino-powered sim racing pedal manager.
@@ -2498,4 +2497,4 @@ opensource:
     component_sub_category: pedal-firmware
     license: MIT
     project_url: https://github.com/MauriceRowe/USB-Sim-Racing-Pedals-with-Load-Cell
-    picture_url: https://opengraph.githubassets.com/f8d6dfd08b6c9bf2383e5eea1edf362488038fcdfea6a6a86fe483cd5871f006/MauriceRowe/USB-Sim-Racing-Pedals-with-Load-Cell
+    picture_url: https://raw.githubusercontent.com/MauriceRowe/USB-Sim-Racing-Pedals-with-Load-Cell/master/Sim_Pedals_Board.jpg

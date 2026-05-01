@@ -1387,7 +1387,7 @@ opensource:
       Cessna 172 instrument panel for simulator training.
     maker:
       - Allan Glen
-      - "`allanglen`"
+      - allanglen
     component_category: button-boxes-and-panels
     component_sub_category: cockpit-plans
     license: Apache-2.0
@@ -1437,7 +1437,7 @@ opensource:
     component_sub_category: panel-firmware
     license: MIT
     project_url: https://github.com/MobiFlight/MobiFlight-Connector
-    picture_url: https://opengraph.githubassets.com/daf2fded449f812164fc74bf68afef1595d0ad84468d2a892ac4afadca810277/MobiFlight/MobiFlight-Connector
+    picture_url: https://shop.mobiflight.com/wp-content/uploads/2026/02/mobiflight-logo-wide-small.png
   - project_name: MobiFlight Panels
     description: MobiFlight Panels. open-hardware flight simulator panel designs. Active
       work-in-progress repository with community contributions. Open-hardware panel designs for
@@ -1447,14 +1447,14 @@ opensource:
     component_sub_category: control-panel
     license: GPL-3.0
     project_url: https://github.com/MobiFlight/mobiflight-panels
-    picture_url: https://opengraph.githubassets.com/a2ee8cc0d9852784a0c4eba25789c28e98e4f5fc86065704e5d0ab681015240b/MobiFlight/mobiflight-templates
+    picture_url: https://raw.githubusercontent.com/MobiFlight/mobiflight-panels/main/pcb-modules/max-displays/OnePiece/OnePiece_Front.PNG
   - project_name: OpenHornet
     description: OpenHornet. 1:1 F/A-18C Lot 20 cockpit replica. Active advanced cockpit project. GitHub
       repository and official site are current; build is substantial and maker-heavy. 1:1 replica
       F/A-18C Lot 20 cockpit for home entertainment.
     maker:
       - OpenHornet community
-      - "`jrsteensen`"
+      - jrsteensen
     component_category: button-boxes-and-panels
     component_sub_category: cockpit-plans
     license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
@@ -1466,7 +1466,7 @@ opensource:
       Free/pay-what-you-want Cessna 172 project files published on GitHub.
     maker:
       - Captain Bob Sim
-      - "`CaptainBobSim`"
+      - CaptainBobSim
     component_category: button-boxes-and-panels
     component_sub_category: cockpit-plans
     license: Creative Commons non-commercial / not-for-resale license link in repository; exact CC code
@@ -1482,4 +1482,4 @@ opensource:
     component_sub_category: panel-firmware
     license: GPL-3.0
     project_url: https://github.com/escaner/ufc
-    picture_url: https://opengraph.githubassets.com/aadf3a5f300964cd095338bcec06cd234fddac9d598d5bb231b57b47ad56539f/MHeironimus/ArduinoJoystickLibrary
+    picture_url: https://raw.githubusercontent.com/escaner/ufc/master/doc/pictures/photo_2022-01-24_09-33-50.jpg

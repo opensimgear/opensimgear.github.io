@@ -2523,7 +2523,7 @@
       "description": "Cessna 172 Flight Sim Panel. desk-mounted Cessna 172 instrument panel. Legacy public project with detailed project site and repository. No GitHub releases observed. Desk-mounted Cessna 172 instrument panel for simulator training.",
       "maker": [
         "Allan Glen",
-        "`allanglen`"
+        "allanglen"
       ],
       "component_category": "button-boxes-and-panels",
       "component_sub_category": "cockpit-plans",
@@ -2610,7 +2610,7 @@
       "description": "OpenHornet. 1:1 F/A-18C Lot 20 cockpit replica. Active advanced cockpit project. GitHub repository and official site are current; build is substantial and maker-heavy. 1:1 replica F/A-18C Lot 20 cockpit for home entertainment.",
       "maker": [
         "OpenHornet community",
-        "`jrsteensen`"
+        "jrsteensen"
       ],
       "component_category": "button-boxes-and-panels",
       "component_sub_category": "cockpit-plans",
@@ -2626,7 +2626,7 @@
       "description": "Captain Bob Cessna 172 Project. full Cessna 172 cockpit plans and panel/instrument library. Active source-available plan repository. Repository showed ongoing commits in 2026. Free/pay-what-you-want Cessna 172 project files published on GitHub.",
       "maker": [
         "Captain Bob Sim",
-        "`CaptainBobSim`"
+        "CaptainBobSim"
       ],
       "component_category": "button-boxes-and-panels",
       "component_sub_category": "cockpit-plans",
@@ -8605,7 +8605,7 @@
       "description": "OpenJoystick. 3D-printable parametric flight joystick and throttle. Legacy public design. Repository remains available, but no recent release activity was found. 3D-printable joystick and throttle design for flight simulators.",
       "maker": [
         "Tom Howse",
-        "`tjhowse`"
+        "tjhowse"
       ],
       "component_category": "joysticks",
       "component_sub_category": "flight-joystick",
@@ -20438,7 +20438,7 @@
       "description": "Akaki Joystick. 3D-printable USB HID joystick, throttle, and pedals. Small public project, last repository activity appears legacy. No GitHub releases. 3D-printable stick, throttle, and rudder pedal ecosystem.",
       "maker": [
         "Akaki Kuumeri",
-        "`akakikuumeri`"
+        "akakikuumeri"
       ],
       "component_category": "rudder-pedals",
       "component_sub_category": "pedal-controller",
@@ -34588,7 +34588,7 @@
       "description": "CadetYoke v2.0. 3D-printable flight simulator yoke. Public printable design with user guide. Repository has no GitHub releases and appears legacy. Open-source yoke intended for flight simulators.",
       "maker": [
         "Vince_Prints",
-        "`VincePrints`"
+        "VincePrints"
       ],
       "component_category": "yokes",
       "component_sub_category": "flight-yoke",

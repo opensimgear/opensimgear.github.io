@@ -1343,7 +1343,7 @@ opensource:
     component_sub_category: projector
     license: MIT-style permissive license text in README
     project_url: https://github.com/Flightphase/ofxProjectorBlend
-    picture_url: https://opengraph.githubassets.com/64f1add62be39ec1cb6072eeb3354547531f8bc67d7d9d780c160a4e4defbe93/Flightphase/ofxProjectorBlend
+    picture_url: https://raw.githubusercontent.com/Flightphase/ofxProjectorBlend/master/04_blendClown/bin/data/blendClown.png
   - project_name: OpenGC
     description: OpenGC. glass cockpit instrument display software. Dormant; home page last updated
       April 24, 2006. Multi-platform, multi-simulator C++ toolkit for simulated flightdeck glass
@@ -1378,4 +1378,4 @@ opensource:
     component_sub_category: projection-mapping
     license: GPL-3.0-or-later
     project_url: https://gitlab.com/splashmapper/splash
-    picture_url: https://opengraph.githubassets.com/60b9272bd7988eb798f2b9d14291472661efb35ca0f9e38d4d804964dc115875/paperManu/splash
+    picture_url: https://gitlab.com/uploads/-/system/project/avatar/2101217/Splash_RGB.png

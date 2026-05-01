@@ -131,7 +131,7 @@ opensource:
       flight simulators.
     maker:
       - Vince_Prints
-      - "`VincePrints`"
+      - VincePrints
     component_category: yokes
     component_sub_category: flight-yoke
     license: Creative Commons Attribution-NonCommercial-ShareAlike

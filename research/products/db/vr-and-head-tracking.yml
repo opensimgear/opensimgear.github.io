@@ -286,7 +286,7 @@ opensource:
     component_sub_category: head-tracking
     license: MIT
     project_url: https://github.com/AIRLegend/aitrack
-    picture_url: https://opengraph.githubassets.com/6b706df3f3310e0ad786ad4d86844b33c49917c4faa245765b0b23419459cfd2/AIRLegend/aitrack
+    picture_url: https://raw.githubusercontent.com/AIRLegend/aitrack/master/Images/Logo.png
   - project_name: HadesVR
     description: HadesVR. DIY SteamVR-compatible headset/controllers. Active-ish DIY project; latest
       captured GitHub release 1.5 from 2023, with open issues and active docs. DIY
@@ -331,7 +331,7 @@ opensource:
     component_sub_category: vr-runtime
     license: Mostly ISC, with a few proprietary dependencies noted by project
     project_url: https://github.com/opentrack/opentrack
-    picture_url: https://opengraph.githubassets.com/3a141d2a0e47de2893955e811ce5c00254ff8010b4b73f296cafd407a618e01c/opentrack/opentrack
+    picture_url: https://raw.githubusercontent.com/opentrack/opentrack/master/gui/images/opentrack.png
   - project_name: OpenVR Space Calibrator
     description: OpenVR Space Calibrator. mixed tracking-space calibration. Mature but old upstream;
       latest captured release v1.4 from 2022, with community forks in use [uncertain]. Aligns
