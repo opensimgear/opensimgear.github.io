@@ -1,5 +1,6 @@
 <script lang="ts">
   import { buildPlannerPrintDocument, hasSelectedPlannerExportSections, type PlannerExportSections } from './export';
+  import type { PlannerHardwareSummaryRow } from './hardware';
   import type {
     CutListEntry,
     PlannerCurrencyCode,
@@ -33,6 +34,7 @@
     isNarrowViewport?: boolean;
     optimizationResult: PlannerOptimizationResult;
     optimizationSettings: PlannerOptimizationSettings;
+    hardwareSummaryRows: PlannerHardwareSummaryRow[];
     profileColor: string;
     onHoveredCutListKeyChange: (key: string | null) => void;
   }
@@ -45,6 +47,7 @@
     isNarrowViewport = false,
     optimizationResult,
     optimizationSettings,
+    hardwareSummaryRows,
     profileColor,
     onHoveredCutListKeyChange,
   }: Props = $props();
@@ -138,6 +141,8 @@
       0
     )
   );
+  const hardwareTotalCost = $derived(hardwareSummaryRows.reduce((sum, row) => sum + row.totalCost, 0));
+  const purchaseSummaryTotalCost = $derived(optimizationResult.totalCost + hardwareTotalCost);
   const BAR_RULER_STEP_MM = 100;
   const WHOLE_METER_MM = 1000;
 
@@ -798,72 +803,120 @@
                   ', '
                 )}.
               </div>
-            {:else if optimizationResult.barCount === 0}
-              <div class="p-3 text-sm text-zinc-500">No purchasable bars needed yet.</div>
+            {:else if optimizationResult.barCount === 0 && hardwareSummaryRows.length === 0}
+              <div class="p-3 text-sm text-zinc-500">No purchasable items needed yet.</div>
             {:else}
               <div>
-                <table
-                  class="min-w-full w-max table-auto border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
-                >
-                  <thead>
-                    <tr class="border-b border-zinc-200 bg-white text-zinc-600">
-                      <th class="px-2 py-1 text-left font-medium">Profile</th>
-                      <th class="px-2 py-1 text-left font-medium">Stock</th>
-                      <th class="px-2 py-1 text-center font-medium">Qty</th>
-                      <th class="px-2 py-1 text-right font-medium">Mass</th>
-                      <th class="px-2 py-1 text-right font-medium">Cost</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {#each purchaseSummaryRows as row (row.key)}
-                      <tr class="border-b border-zinc-100 last:border-b-0">
-                        <td class="px-2 py-1 font-medium text-zinc-800">{row.profileType}</td>
-                        <td class="px-2 py-1 text-zinc-600">{formatStockLength(row.stockLengthMm)}</td>
-                        <td class="px-2 py-1 text-center text-zinc-600">{row.quantity}</td>
-                        <td class="px-2 py-1 text-right text-zinc-600">{formatWeight(row.totalMassKg)}</td>
-                        <td class="px-2 py-1 text-right text-zinc-600">{formatMoney(row.totalCost)}</td>
+                {#if optimizationResult.barCount > 0}
+                  <table
+                    class="min-w-full w-max table-auto border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
+                  >
+                    <thead>
+                      <tr class="border-b border-zinc-200 bg-white text-zinc-600">
+                        <th class="px-2 py-1 text-left font-medium">Profile</th>
+                        <th class="px-2 py-1 text-left font-medium">Stock</th>
+                        <th class="px-2 py-1 text-center font-medium">Qty</th>
+                        <th class="px-2 py-1 text-right font-medium">Mass</th>
+                        <th class="px-2 py-1 text-right font-medium">Cost</th>
                       </tr>
-                    {/each}
-                  </tbody>
-                  <tfoot class="align-bottom">
-                    <tr class="border-t-2 border-zinc-300 bg-zinc-50">
-                      <td class="px-2 py-2 font-semibold uppercase tracking-wide text-zinc-700"> Total </td>
-                      <td class="px-2 py-2 text-[10px] font-normal text-zinc-500">
-                        {formatStockLength(optimizationResult.totalPurchasedLengthMm)}
-                      </td>
-                      <td class="px-2 py-2 text-center text-[10px] font-normal text-zinc-500">
-                        {optimizationResult.barCount}
-                      </td>
-                      <td class="px-2 py-2 text-right font-semibold text-zinc-900">
-                        <div>{formatWeight(optimizationResult.totalMassKg)}</div>
-                      </td>
-                      <td class="px-2 py-2 text-right font-semibold text-zinc-900">
-                        <div class="mb-1 flex items-center justify-end gap-1 text-[10px] font-normal text-zinc-500">
-                          <svg
-                            viewBox="0 0 24 24"
-                            class="h-3 w-3 shrink-0"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true"
-                          >
-                            <path d="M3 17h2"></path>
-                            <path d="M7 17h8"></path>
-                            <path d="M17 17h2"></path>
-                            <path d="M5 17V7h10v10"></path>
-                            <path d="M15 10h3l3 3v4"></path>
-                            <path d="M7 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
-                            <path d="M17 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
-                          </svg>
-                          <span>{formatMoney(optimizationResult.shippingCost)}</span>
-                        </div>
-                        <div>{formatMoney(optimizationResult.totalCost)}</div>
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
+                    </thead>
+                    <tbody>
+                      {#each purchaseSummaryRows as row (row.key)}
+                        <tr class="border-b border-zinc-100 last:border-b-0">
+                          <td class="px-2 py-1 font-medium text-zinc-800">{row.profileType}</td>
+                          <td class="px-2 py-1 text-zinc-600">{formatStockLength(row.stockLengthMm)}</td>
+                          <td class="px-2 py-1 text-center text-zinc-600">{row.quantity}</td>
+                          <td class="px-2 py-1 text-right text-zinc-600">{formatWeight(row.totalMassKg)}</td>
+                          <td class="px-2 py-1 text-right text-zinc-600">{formatMoney(row.totalCost)}</td>
+                        </tr>
+                      {/each}
+                    </tbody>
+                    <tfoot class="align-bottom">
+                      <tr class="border-t-2 border-zinc-300 bg-zinc-50">
+                        <td class="px-2 py-2 font-semibold uppercase tracking-wide text-zinc-700">Profiles</td>
+                        <td class="px-2 py-2 text-[10px] font-normal text-zinc-500">
+                          {formatStockLength(optimizationResult.totalPurchasedLengthMm)}
+                        </td>
+                        <td class="px-2 py-2 text-center text-[10px] font-normal text-zinc-500">
+                          {optimizationResult.barCount}
+                        </td>
+                        <td class="px-2 py-2 text-right font-semibold text-zinc-900">
+                          <div>{formatWeight(optimizationResult.totalMassKg)}</div>
+                        </td>
+                        <td class="px-2 py-2 text-right font-semibold text-zinc-900">
+                          <div class="mb-1 flex items-center justify-end gap-1 text-[10px] font-normal text-zinc-500">
+                            <svg
+                              viewBox="0 0 24 24"
+                              class="h-3 w-3 shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              aria-hidden="true"
+                            >
+                              <path d="M3 17h2"></path>
+                              <path d="M7 17h8"></path>
+                              <path d="M17 17h2"></path>
+                              <path d="M5 17V7h10v10"></path>
+                              <path d="M15 10h3l3 3v4"></path>
+                              <path d="M7 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                              <path d="M17 17a2 2 0 1 0 4 0a2 2 0 1 0-4 0"></path>
+                            </svg>
+                            <span>{formatMoney(optimizationResult.shippingCost)}</span>
+                          </div>
+                          <div>{formatMoney(optimizationResult.totalCost)}</div>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                {/if}
+
+                {#if hardwareSummaryRows.length > 0}
+                  <div class="border-t border-zinc-200 bg-white px-2 py-1 text-[11px] font-semibold text-zinc-700">
+                    Hardware
+                  </div>
+                  <table
+                    class="min-w-full w-max table-auto border-collapse font-['Roboto_Mono',monospace] text-[12px] leading-tight text-zinc-900 whitespace-nowrap"
+                  >
+                    <thead>
+                      <tr class="border-b border-zinc-200 bg-white text-zinc-600">
+                        <th class="px-2 py-1 text-left font-medium">Item</th>
+                        <th class="px-2 py-1 text-center font-medium">Qty</th>
+                        <th class="px-2 py-1 text-right font-medium">Unit</th>
+                        <th class="px-2 py-1 text-right font-medium">Cost</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {#each hardwareSummaryRows as row (row.key)}
+                        <tr class="border-b border-zinc-100 last:border-b-0">
+                          <td class="px-2 py-1 font-medium text-zinc-800">{row.label}</td>
+                          <td class="px-2 py-1 text-center text-zinc-600">{row.quantity}</td>
+                          <td class="px-2 py-1 text-right text-zinc-600">{formatMoney(row.unitCost)}</td>
+                          <td class="px-2 py-1 text-right text-zinc-600">{formatMoney(row.totalCost)}</td>
+                        </tr>
+                      {/each}
+                    </tbody>
+                    <tfoot class="align-bottom">
+                      <tr class="border-t-2 border-zinc-300 bg-zinc-50">
+                        <td class="px-2 py-2 font-semibold uppercase tracking-wide text-zinc-700">Hardware</td>
+                        <td class="px-2 py-2 text-center text-[10px] font-normal text-zinc-500"></td>
+                        <td class="px-2 py-2 text-right text-[10px] font-normal text-zinc-500"></td>
+                        <td class="px-2 py-2 text-right font-semibold text-zinc-900">
+                          {formatMoney(hardwareTotalCost)}
+                        </td>
+                      </tr>
+                      <tr class="border-t border-zinc-300 bg-zinc-100">
+                        <td class="px-2 py-2 font-semibold uppercase tracking-wide text-zinc-900">Grand Total</td>
+                        <td class="px-2 py-2"></td>
+                        <td class="px-2 py-2"></td>
+                        <td class="px-2 py-2 text-right font-semibold text-zinc-900">
+                          {formatMoney(purchaseSummaryTotalCost)}
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                {/if}
               </div>
             {/if}
           </div>

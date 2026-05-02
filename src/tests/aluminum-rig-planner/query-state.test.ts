@@ -109,6 +109,9 @@ describe('aluminum rig planner query state', () => {
           '40x40': -1,
           '80x40': 3.4,
         },
+        hardwareUnitCosts: {
+          rubberFeet: 2.5,
+        },
         stockOptions: [
           {
             id: 'stock-1',
@@ -144,6 +147,7 @@ describe('aluminum rig planner query state', () => {
     expect(state.optimizationSettings.shippingRatePerKg).toBe(0);
     expect(state.optimizationSettings.profileWeightsKgPerMeter['40x40']).toBe(0);
     expect(state.optimizationSettings.profileWeightsKgPerMeter['80x40']).toBe(3.4);
+    expect(state.optimizationSettings.hardwareUnitCosts.rubberFeet).toBe(2.5);
     expect(state.optimizationSettings.stockOptions).toHaveLength(2);
     expect(state.optimizationSettings.stockOptions[0]).toEqual({
       id: 'stock-1',

@@ -1,4 +1,8 @@
-import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS, getPlannerStockCostMax } from './constants/optimizer';
+import {
+  DEFAULT_HARDWARE_UNIT_COSTS,
+  DEFAULT_PLANNER_OPTIMIZATION_SETTINGS,
+  getPlannerStockCostMax,
+} from './constants/optimizer';
 import {
   BASE_FEET_TYPE_OPTIONS,
   DEFAULT_BASE_RUBBER_FEET_HEIGHT_MM,
@@ -55,7 +59,7 @@ export type PlannerQueryState = Partial<Omit<PlannerInput, 'baseFeetType'>> & {
   optimizer?: Partial<
     Omit<
       PlannerOptimizationSettings,
-      'mode' | 'currencyMode' | 'shippingMode' | 'profileWeightsKgPerMeter' | 'stockOptions'
+      'mode' | 'currencyMode' | 'shippingMode' | 'profileWeightsKgPerMeter' | 'hardwareUnitCosts' | 'stockOptions'
     >
   > & {
     mode?: unknown;
@@ -64,6 +68,9 @@ export type PlannerQueryState = Partial<Omit<PlannerInput, 'baseFeetType'>> & {
     profileWeightsKgPerMeter?: {
       '40x40'?: unknown;
       '80x40'?: unknown;
+    };
+    hardwareUnitCosts?: {
+      rubberFeet?: unknown;
     };
     stockOptions?: Array<{
       id?: unknown;
@@ -183,6 +190,12 @@ function sanitizeOptimizationSettings(state: PlannerQueryState['optimizer']) {
       '80x40': readNonNegativeNumber(
         state?.profileWeightsKgPerMeter?.['80x40'],
         defaults.profileWeightsKgPerMeter['80x40']
+      ),
+    },
+    hardwareUnitCosts: {
+      rubberFeet: readNonNegativeNumber(
+        state?.hardwareUnitCosts?.rubberFeet,
+        defaults.hardwareUnitCosts.rubberFeet ?? DEFAULT_HARDWARE_UNIT_COSTS.rubberFeet
       ),
     },
     stockOptions: sanitizeStockOptions(state, defaults.stockOptions),

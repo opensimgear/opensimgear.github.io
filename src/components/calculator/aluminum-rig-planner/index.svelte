@@ -22,6 +22,7 @@
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
   import { decodeQueryState, encodeQueryState } from '../shared/query-state';
   import { getMonitorStandLayoutMm } from '~/components/calculator/aluminum-rig-planner/modules/monitor-stand';
+  import { createPlannerHardwareSummaryRows } from '~/components/calculator/aluminum-rig-planner/cut-list/hardware';
   import CutOptimizerPanel from './cut-list/CutOptimizerPanel.svelte';
   import { createPlannerCutListEntries } from './cut-list/cut-list';
   import { COLOR_MODE_OPTIONS, DEFAULT_CUSTOM_PROFILE_COLOR } from './constants/scene';
@@ -110,6 +111,7 @@
     CutListProfileType,
     PlannerFeetType,
     PlannerCurrencyCode,
+    PlannerHardwareType,
     PlannerInput,
     PlannerMonitorAspectRatio,
     PlannerMonitorCurvature,
@@ -209,6 +211,7 @@
     flatShippingCostMax: 500,
     shippingRatePerKgMax: 50,
     profileWeightMaxKgPerMeter: 10,
+    hardwareUnitCostMax: 100,
     stockLengthMinMm: 100,
     stockLengthMaxMm: 6000,
   } as const;
@@ -226,6 +229,7 @@
     return {
       ...settings,
       profileWeightsKgPerMeter: { ...settings.profileWeightsKgPerMeter },
+      hardwareUnitCosts: { ...settings.hardwareUnitCosts },
       stockOptions: settings.stockOptions.map((option) => ({ ...option })),
     };
   }
@@ -487,6 +491,16 @@
     min: monitorStandLayout?.footLengthMinMm ?? PLANNER_POSTURE_LIMITS.monitorStandFootLengthMinMm,
     max: monitorStandLayout?.footLengthMaxMm ?? PLANNER_POSTURE_LIMITS.monitorStandFootLengthMaxMm,
   }));
+  const hardwareSummaryRows = $derived(
+    createPlannerHardwareSummaryRows(
+      geometry.input,
+      visibleModules,
+      postureSettings,
+      monitorStandLayout,
+      optimizationSettings
+    )
+  );
+  const enabledHardwareTypes = $derived(hardwareSummaryRows.map((row) => row.key));
   const optimizationResult = $derived(createPlannerOptimizationResult(cutListEntries, optimizationSettings));
   const highlightedBeamIds = $derived(cutListEntries.find((entry) => entry.key === hoveredCutListKey)?.beamIds ?? []);
   const currencyCode = $derived<PlannerCurrencyCode>(
@@ -686,7 +700,13 @@
       const easedProgress = 1 - (1 - progress) ** 3;
 
       for (const key of Object.keys(targetInput) as Array<keyof PlannerInput>) {
-        animatedPlannerInput[key] = fromInput[key] + (targetInput[key] - fromInput[key]) * easedProgress;
+        const fromValue = fromInput[key];
+        const targetValue = targetInput[key];
+
+        animatedPlannerInput[key] =
+          typeof fromValue === 'number' && typeof targetValue === 'number'
+            ? fromValue + (targetValue - fromValue) * easedProgress
+            : targetValue;
       }
 
       if (progress < 1) {
@@ -1697,6 +1717,11 @@
     syncPlannerUrlState();
   }
 
+  function setHardwareUnitCost(hardwareType: PlannerHardwareType, value: number) {
+    optimizationSettings.hardwareUnitCosts[hardwareType] = Math.max(0, value);
+    syncPlannerUrlState();
+  }
+
   function addStockOption(profileType: '40x40' | '80x40') {
     optimizationSettings.stockOptions.push({
       id: createStockOptionId(),
@@ -1806,6 +1831,7 @@
           {isNarrowViewport}
           {optimizationResult}
           {optimizationSettings}
+          {hardwareSummaryRows}
           {profileColor}
           onHoveredCutListKeyChange={(key) => {
             hoveredCutListKey = key;
@@ -2289,6 +2315,25 @@
               />
             {/if}
           </Folder>
+          {#if enabledHardwareTypes.length > 0}
+            <Folder title="Hardware">
+              {#if enabledHardwareTypes.includes('rubberFeet')}
+                <Folder title="Rubber Feet">
+                  <Slider
+                    bind:value={
+                      () => optimizationSettings.hardwareUnitCosts.rubberFeet,
+                      (value) => setHardwareUnitCost('rubberFeet', value)
+                    }
+                    label="Cost / Unit"
+                    min={0}
+                    max={OPTIMIZER_LIMITS.hardwareUnitCostMax}
+                    step={1}
+                    format={formatCurrencyValue}
+                  />
+                </Folder>
+              {/if}
+            </Folder>
+          {/if}
           <Folder title="Stock Configuration" bind:expanded={stockConfigurationExpanded}>
             {#each PROFILE_TYPES as profileType (profileType)}
               <Folder title={profileType}>

@@ -8,6 +8,7 @@ export type PlannerOptimizerMode = 'cost' | 'waste';
 export type ShippingMode = 'flat' | 'per-kg';
 export type PlannerCurrencyMode = 'auto' | 'eur' | 'usd';
 export type PlannerCurrencyCode = 'EUR' | 'USD';
+export type PlannerHardwareType = 'rubberFeet';
 export type PlannerPosturePreset = 'gt' | 'rally' | 'drift' | 'road' | 'custom';
 export type PlannerSolvablePosturePreset = Exclude<PlannerPosturePreset, 'custom'>;
 export type PlannerPostureTargetKey =
@@ -90,6 +91,7 @@ export type PlannerPostureSettings<Preset extends PlannerPosturePreset = Planner
 };
 
 export type PlannerProfileShipping = Record<CutListProfileType, number>;
+export type PlannerHardwareUnitCosts = Record<PlannerHardwareType, number>;
 
 export type CutListRow = {
   profileType: CutListProfileType;
@@ -118,6 +120,7 @@ export type PlannerOptimizationSettings = {
   flatShippingCost: number;
   shippingRatePerKg: number;
   profileWeightsKgPerMeter: PlannerProfileShipping;
+  hardwareUnitCosts: PlannerHardwareUnitCosts;
   stockOptions: PlannerStockOption[];
 };
 

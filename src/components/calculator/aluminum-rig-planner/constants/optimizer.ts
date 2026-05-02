@@ -2,7 +2,12 @@
  * Cut-list optimizer defaults and cost estimation helpers.
  */
 
-import type { CutListProfileType, PlannerOptimizationSettings, PlannerProfileShipping } from '../types';
+import type {
+  CutListProfileType,
+  PlannerHardwareUnitCosts,
+  PlannerOptimizationSettings,
+  PlannerProfileShipping,
+} from '../types';
 
 /** Reference profile cross-section area used as the cost basis (mm²). */
 const COST_REFERENCE_AREA_MM2 = 1600;
@@ -35,6 +40,10 @@ export const DEFAULT_PROFILE_WEIGHTS_KG_PER_METER: PlannerProfileShipping = {
   '80x40': 3.0,
 };
 
+export const DEFAULT_HARDWARE_UNIT_COSTS: PlannerHardwareUnitCosts = {
+  rubberFeet: 0,
+};
+
 /** Default optimization settings applied when no user overrides are present. */
 export const DEFAULT_PLANNER_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings = {
   mode: 'waste',
@@ -46,6 +55,9 @@ export const DEFAULT_PLANNER_OPTIMIZATION_SETTINGS: PlannerOptimizationSettings 
   shippingRatePerKg: 0,
   profileWeightsKgPerMeter: {
     ...DEFAULT_PROFILE_WEIGHTS_KG_PER_METER,
+  },
+  hardwareUnitCosts: {
+    ...DEFAULT_HARDWARE_UNIT_COSTS,
   },
   stockOptions: [
     {
