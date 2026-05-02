@@ -241,7 +241,7 @@ describe('aluminum rig planner monitor stand module', () => {
     expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.shape).toBe('trapezoid-plate');
     expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.materialKind).toBe('metal');
     expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.size[1]).toBe(0.006);
-    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.size[2]).toBe(0.16);
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.size[2]).toBe(0.12);
     expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.trapezoidPlateBottomRise).toBe(
       0.04
     );
@@ -351,7 +351,7 @@ describe('aluminum rig planner monitor stand module', () => {
     const cappedPlate = cappedMeshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate');
 
     expect(shortPlate?.size[0]).toBe(0.3);
-    expect(shortPlate?.size[2]).toBe(0.16);
+    expect(shortPlate?.size[2]).toBe(0.12);
     expect(shortPlate?.trapezoidPlateBottomRise).toBe(0.04);
     expect(cappedPlate?.size[0]).toBe(0.4);
     expect(cappedPlate?.trapezoidPlateBottomRise).toBe(0.04);
