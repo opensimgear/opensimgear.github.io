@@ -46,11 +46,11 @@ describe('aluminum rig planner monitor stand module', () => {
     expect(layout.internalWidthMm).toBe(540);
     expect(layout.crossBeamCenterXMm).toBe(1260);
     expect(layout.legCenterXMm).toBe(1320);
-    expect(layout.footLengthMinMm).toBe(457);
-    expect(layout.footLengthMaxMm).toBe(915);
+    expect(layout.footLengthMinMm).toBe(447);
+    expect(layout.footLengthMaxMm).toBe(895);
     expect(layout.footLengthMm).toBe(500);
     expect(layout.footCenterXMm).toBe(1195);
-    expect(layout.legLengthMm).toBeCloseTo(994.6, 1);
+    expect(layout.legLengthMm).toBeCloseTo(974.6, 1);
   });
 
   it('clamps configured foot length between half leg height and leg height', () => {
@@ -77,8 +77,8 @@ describe('aluminum rig planner monitor stand module', () => {
       narrowBaseWidthMm
     );
 
-    expect(shortFoot.footLengthMm).toBe(457);
-    expect(longFoot.footLengthMm).toBe(915);
+    expect(shortFoot.footLengthMm).toBe(447);
+    expect(longFoot.footLengthMm).toBe(895);
   });
 
   it('does not apply extra leg margin to foot length', () => {
@@ -115,7 +115,7 @@ describe('aluminum rig planner monitor stand module', () => {
       narrowBaseWidthMm
     );
 
-    expect(layout.legLengthMm).toBeCloseTo(954.6, 1);
+    expect(layout.legLengthMm).toBeCloseTo(934.6, 1);
   });
 
   it('keeps internal stand width at least 5 percent wider than the rig base', () => {
@@ -210,6 +210,8 @@ describe('aluminum rig planner monitor stand module', () => {
 
   it('keeps cross beams fixed while feet height raises feet and shortens legs', () => {
     const feetHeightMm = PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm;
+    const defaultFeetHeightMm = DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandFeetHeightMm;
+    const feetHeightDeltaMm = feetHeightMm - defaultFeetHeightMm;
     const defaultMeshes = createMonitorStandModule(
       monitorDebug,
       DEFAULT_PLANNER_POSTURE_SETTINGS,
@@ -244,10 +246,10 @@ describe('aluminum rig planner monitor stand module', () => {
     const raisedFoot = raisedMeshes.find((mesh) => mesh.id === 'monitor-stand-left-foot');
 
     expect(raisedCrossBeam?.position[2]).toBeCloseTo(defaultCrossBeam?.position[2] ?? 0);
-    expect(raisedFoot?.position[2]).toBeCloseTo((defaultFoot?.position[2] ?? 0) + feetHeightMm / 1000);
-    expect(raisedLeg?.size[2]).toBeCloseTo((defaultLeg?.size[2] ?? 0) - feetHeightMm / 1000);
-    expect(raisedLayout.legBottomHeightMm).toBe(defaultLayout.legBottomHeightMm + feetHeightMm);
-    expect(raisedLayout.legLengthMm).toBeCloseTo(defaultLayout.legLengthMm - feetHeightMm, 1);
+    expect(raisedFoot?.position[2]).toBeCloseTo((defaultFoot?.position[2] ?? 0) + feetHeightDeltaMm / 1000);
+    expect(raisedLeg?.size[2]).toBeCloseTo((defaultLeg?.size[2] ?? 0) - feetHeightDeltaMm / 1000);
+    expect(raisedLayout.legBottomHeightMm).toBe(defaultLayout.legBottomHeightMm + feetHeightDeltaMm);
+    expect(raisedLayout.legLengthMm).toBeCloseTo(defaultLayout.legLengthMm - feetHeightDeltaMm, 1);
   });
 
   it('renders rubber pads under both ends of each stand foot when rubber feet are selected', () => {

@@ -47,13 +47,14 @@ describe('aluminum rig planner FOV overlay', () => {
   it('uses world eye height when base feet raise the cockpit', () => {
     const input = {
       ...DEFAULT_PLANNER_INPUT,
-      baseFeetHeightMm: 50,
+      baseFeetType: 'rubber' as const,
+      baseFeetHeightMm: 40,
     };
     const report = createPlannerPostureReport(input, DEFAULT_PLANNER_POSTURE_SETTINGS, postureModel);
     const overlay = createPlannerFovOverlay(input, DEFAULT_PLANNER_POSTURE_SETTINGS, report, postureModel);
     const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, postureModel);
 
-    expect(overlay?.eyeCenter[2]).toBeCloseTo(skeleton.joints.eyeCenter[2] + 0.05, 6);
+    expect(overlay?.eyeCenter[2]).toBeCloseTo(skeleton.joints.eyeCenter[2] + 0.04, 6);
     expect(overlay?.summary.eyeDistanceToPanelMm).toBe(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorDistanceFromEyesMm);
   });
 

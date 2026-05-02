@@ -220,7 +220,7 @@ describe('aluminum rig planner posture report', () => {
     );
     expect(monitorDebug.position[1]).toBe(0);
     expect(monitorDebug.position[2]).toBeCloseTo(
-      (BASE_BEAM_HEIGHT_MM + postureSettings.monitorHeightFromBaseMm) * 0.001,
+      (DEFAULT_PLANNER_INPUT.baseFeetHeightMm + BASE_BEAM_HEIGHT_MM + postureSettings.monitorHeightFromBaseMm) * 0.001,
       6
     );
   });
@@ -228,7 +228,8 @@ describe('aluminum rig planner posture report', () => {
   it('keeps eye-to-monitor math aligned when base feet raise the cockpit', () => {
     const input = {
       ...DEFAULT_PLANNER_INPUT,
-      baseFeetHeightMm: 50,
+      baseFeetType: 'rubber' as const,
+      baseFeetHeightMm: 40,
     };
     const skeleton = createPlannerPostureSkeleton(input, DEFAULT_PLANNER_POSTURE_SETTINGS, modelMetrics);
     const monitorHeightFromBaseMm = skeleton.joints.eyeCenter[2] * 1000 - BASE_BEAM_HEIGHT_MM;

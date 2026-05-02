@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  DEFAULT_BASE_RUBBER_FEET_HEIGHT_MM,
   DEFAULT_PLANNER_INPUT,
   PLANNER_DIMENSION_LIMITS,
 } from '~/components/calculator/aluminum-rig-planner/constants/planner';
@@ -40,6 +41,7 @@ describe('aluminum rig planner query state', () => {
     });
 
     expect(state.plannerInput.baseWidthMm).toBe(PLANNER_DIMENSION_LIMITS.baseWidthMaxMm);
+    expect(state.plannerInput.baseFeetType).toBe('rubber');
     expect(state.plannerInput.baseFeetHeightMm).toBe(PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm);
     expect(state.plannerInput.seatLengthMm).toBe(PLANNER_DIMENSION_LIMITS.seatLengthMaxMm);
     expect(state.plannerInput.seatDeltaMm).toBe(PLANNER_DIMENSION_LIMITS.seatDeltaMaxMm);
@@ -52,6 +54,25 @@ describe('aluminum rig planner query state', () => {
     expect(state.plannerInput.steeringColumnDistanceMm).toBe(getSteeringColumnDistanceMaxMm(state.plannerInput));
     expect(state.plannerInput.steeringColumnBaseHeightMm).toBe(300);
     expect(state.plannerInput.steeringColumnHeightMm).toBe(380);
+  });
+
+  it('clears base feet height when feet type is none from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      baseFeetType: 'none',
+      baseFeetHeightMm: 30,
+    });
+
+    expect(state.plannerInput.baseFeetType).toBe('none');
+    expect(state.plannerInput.baseFeetHeightMm).toBe(0);
+  });
+
+  it('uses rubber base feet default when height is absent from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      baseFeetType: 'rubber',
+    });
+
+    expect(state.plannerInput.baseFeetType).toBe('rubber');
+    expect(state.plannerInput.baseFeetHeightMm).toBe(DEFAULT_BASE_RUBBER_FEET_HEIGHT_MM);
   });
 
   it('keeps steering column base height within column height clearance', () => {

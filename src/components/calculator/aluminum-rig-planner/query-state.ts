@@ -1,5 +1,10 @@
 import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS, getPlannerStockCostMax } from './constants/optimizer';
 import {
+  BASE_FEET_TYPE_OPTIONS,
+  DEFAULT_BASE_RUBBER_FEET_HEIGHT_MM,
+  PLANNER_DIMENSION_LIMITS,
+} from './constants/planner';
+import {
   DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
   DEFAULT_MONITOR_STAND_RUBBER_FEET_HEIGHT_MM,
   MONITOR_ARC_CENTER_AT_EYES_FALLBACK_CURVATURE,
@@ -27,6 +32,7 @@ import {
   PLANNER_POSTURE_TARGET_KEYS,
 } from './posture/posture-targets';
 import type {
+  PlannerFeetType,
   PlannerInput,
   PlannerMonitorAspectRatio,
   PlannerMonitorCurvature,
@@ -43,7 +49,8 @@ import type {
   PlannerVisibleModules,
 } from './types';
 
-export type PlannerQueryState = Partial<PlannerInput> & {
+export type PlannerQueryState = Partial<Omit<PlannerInput, 'baseFeetType'>> & {
+  baseFeetType?: unknown;
   wheelRadiusMm?: unknown;
   optimizer?: Partial<
     Omit<
@@ -242,6 +249,10 @@ function isMonitorStandFeetType(value: unknown): value is PlannerMonitorStandFee
   return MONITOR_STAND_FEET_TYPE_OPTIONS.some((option) => option.value === value);
 }
 
+function isFeetType(value: unknown): value is PlannerFeetType {
+  return BASE_FEET_TYPE_OPTIONS.some((option) => option.value === value);
+}
+
 function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const defaults = DEFAULT_PLANNER_POSTURE_SETTINGS;
   const preset =
@@ -431,10 +442,24 @@ function sanitizeVisibleModules(state: PlannerQueryState['modules']): PlannerVis
 }
 
 export function mergePlannerQueryState(defaultInput: PlannerInput, state: PlannerQueryState) {
+  const rawBaseFeetHeightMm = readNumber(state.baseFeetHeightMm, defaultInput.baseFeetHeightMm);
+  const baseFeetType = isFeetType(state.baseFeetType)
+    ? state.baseFeetType
+    : rawBaseFeetHeightMm > 0
+      ? 'rubber'
+      : defaultInput.baseFeetType;
   const plannerInput = clampPlannerInput({
     baseLengthMm: readNumber(state.baseLengthMm, defaultInput.baseLengthMm),
     baseWidthMm: readNumber(state.baseWidthMm, defaultInput.baseWidthMm),
-    baseFeetHeightMm: readNumber(state.baseFeetHeightMm, defaultInput.baseFeetHeightMm),
+    baseFeetType,
+    baseFeetHeightMm:
+      baseFeetType === 'none'
+        ? 0
+        : clampNumber(
+            readNumber(state.baseFeetHeightMm, DEFAULT_BASE_RUBBER_FEET_HEIGHT_MM),
+            PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm,
+            PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm
+          ),
     seatBaseDepthMm: readNumber(state.seatBaseDepthMm, defaultInput.seatBaseDepthMm),
     baseInnerBeamSpacingMm: readNumber(state.baseInnerBeamSpacingMm, defaultInput.baseInnerBeamSpacingMm),
     seatLengthMm: readNumber(state.seatLengthMm, defaultInput.seatLengthMm),

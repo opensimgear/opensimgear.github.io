@@ -2,7 +2,7 @@
  * Planner dimension defaults, limits, and structural layout constants.
  */
 
-import type { PlannerInput } from '../types';
+import type { PlannerFeetType, PlannerInput } from '../types';
 import { HALF_PROFILE_SHORT_MM, PROFILE_SHORT_MM, PROFILE_TALL_MM } from './profile';
 
 /** Step size for planner dimension sliders (mm). */
@@ -10,16 +10,25 @@ export const PLANNER_CONTROL_STEP_MM = 10;
 /** Debounce delay before syncing planner state to URL (ms). */
 export const URL_STATE_DEBOUNCE_MS = 300;
 
+export const BASE_FEET_TYPE_OPTIONS = [
+  { text: 'None', value: 'none' },
+  { text: 'Rubber', value: 'rubber' },
+] as const satisfies ReadonlyArray<{ text: string; value: PlannerFeetType }>;
+
+export const DEFAULT_BASE_FEET_TYPE: PlannerFeetType = 'rubber';
+export const DEFAULT_BASE_RUBBER_FEET_HEIGHT_MM = 20;
+
 /** Default planner input values representing a typical GT rig. */
 export const DEFAULT_PLANNER_INPUT: PlannerInput = {
   baseLengthMm: 1350,
   baseWidthMm: 580,
-  baseFeetHeightMm: 0,
+  baseFeetType: DEFAULT_BASE_FEET_TYPE,
+  baseFeetHeightMm: DEFAULT_BASE_RUBBER_FEET_HEIGHT_MM,
   seatBaseDepthMm: 400,
   baseInnerBeamSpacingMm: 420,
   seatLengthMm: 440,
   seatDeltaMm: 100,
-  seatHeightFromBaseInnerBeamsMm: 100,
+  seatHeightFromBaseInnerBeamsMm: 80,
   seatAngleDeg: 5,
   backrestAngleDeg: 95,
   pedalTrayDepthMm: 300,
@@ -46,8 +55,8 @@ export const PLANNER_DIMENSION_LIMITS = {
   baseLengthMaxMm: 1400,
   baseWidthMinMm: 400,
   baseWidthMaxMm: 700,
-  baseFeetHeightMinMm: 0,
-  baseFeetHeightMaxMm: 120,
+  baseFeetHeightMinMm: 10,
+  baseFeetHeightMaxMm: 40,
   seatBaseDepthMinMm: 240,
   seatBaseDepthMaxMm: 600,
   baseInnerBeamSpacingMinMm: 120,

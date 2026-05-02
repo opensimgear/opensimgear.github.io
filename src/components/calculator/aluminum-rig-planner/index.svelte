@@ -46,6 +46,8 @@
     getPlannerStockCostMax,
   } from './constants/optimizer';
   import {
+    BASE_FEET_TYPE_OPTIONS,
+    DEFAULT_BASE_RUBBER_FEET_HEIGHT_MM,
     DEFAULT_PLANNER_INPUT,
     PLANNER_CONTROL_STEP_MM,
     PLANNER_DIMENSION_LIMITS,
@@ -106,6 +108,7 @@
   import { createRiggedHumanModel, type RiggedHumanModel } from './posture/human-model-rig';
   import type {
     CutListProfileType,
+    PlannerFeetType,
     PlannerCurrencyCode,
     PlannerInput,
     PlannerMonitorAspectRatio,
@@ -941,8 +944,27 @@
     scheduleMeasurementOverlay('baseWidthMm');
   }
 
+  function setBaseFeetType(value: PlannerFeetType) {
+    markPosturePresetCustom();
+    plannerInput.baseFeetType = value;
+    if (value === 'none') {
+      plannerInput.baseFeetHeightMm = 0;
+    } else if (
+      plannerInput.baseFeetHeightMm < PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm ||
+      plannerInput.baseFeetHeightMm > PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm
+    ) {
+      plannerInput.baseFeetHeightMm = DEFAULT_BASE_RUBBER_FEET_HEIGHT_MM;
+    }
+    syncPlannerUrlState();
+  }
+
   function setBaseFeetHeightMm(value: number) {
     markPosturePresetCustom();
+    if (plannerInput.baseFeetType === 'none') {
+      plannerInput.baseFeetHeightMm = 0;
+      syncPlannerUrlState();
+      return;
+    }
     plannerInput.baseFeetHeightMm = Math.max(
       PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm,
       Math.min(PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm, value)
@@ -1194,6 +1216,7 @@
   function resetBaseModule() {
     setBaseLengthMm(defaultModelInput.baseLengthMm);
     setBaseWidthMm(defaultModelInput.baseWidthMm);
+    setBaseFeetType(defaultModelInput.baseFeetType);
     setBaseFeetHeightMm(defaultModelInput.baseFeetHeightMm);
     setSeatBaseDepthMm(defaultModelInput.seatBaseDepthMm);
     setBaseInnerBeamSpacingMm(defaultModelInput.baseInnerBeamSpacingMm);
@@ -1995,14 +2018,21 @@
               step={PLANNER_CONTROL_STEP_MM}
               format={(value) => `${value} mm`}
             />
-            <Slider
-              bind:value={() => plannerInput.baseFeetHeightMm, setBaseFeetHeightMm}
-              label="Feet Height"
-              min={PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm}
-              max={PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm}
-              step={PLANNER_CONTROL_STEP_MM}
-              format={(value) => `${value} mm`}
+            <List
+              bind:value={() => plannerInput.baseFeetType, setBaseFeetType}
+              options={BASE_FEET_TYPE_OPTIONS}
+              label="Feet Type"
             />
+            {#if plannerInput.baseFeetType !== 'none'}
+              <Slider
+                bind:value={() => plannerInput.baseFeetHeightMm, setBaseFeetHeightMm}
+                label="Feet Height"
+                min={PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm}
+                max={PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm}
+                step={PLANNER_CONTROL_STEP_MM}
+                format={(value) => `${value} mm`}
+              />
+            {/if}
             <Slider
               bind:value={() => plannerInput.seatBaseDepthMm, setSeatBaseDepthMm}
               label="Seat Base Depth"

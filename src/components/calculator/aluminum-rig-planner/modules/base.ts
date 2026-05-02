@@ -1,5 +1,5 @@
 import type { CutListRow, PlannerInput } from '../types';
-import { BASE_MODULE_LAYOUT } from '../constants/planner';
+import { BASE_MODULE_LAYOUT, PLANNER_DIMENSION_LIMITS } from '../constants/planner';
 import { BASE_PROFILE_MATERIAL } from '../constants/profile';
 import {
   BASE_BEAM_HEIGHT,
@@ -11,6 +11,62 @@ import {
   PROFILE_SHORT,
   type MeshSpec,
 } from './shared';
+
+const BASE_RUBBER_FOOT_TOP_LENGTH_MM = 80;
+const BASE_RUBBER_FOOT_TOP_WIDTH_MM = 40;
+const BASE_RUBBER_FOOT_BOTTOM_LENGTH_MM = 70;
+const BASE_RUBBER_FOOT_BOTTOM_WIDTH_MM = 35;
+const BASE_RUBBER_FOOT_COLOR = '#111111';
+const BASE_RUBBER_FOOT_MATERIAL = {
+  metalness: 0.05,
+  roughness: 0.75,
+} as const;
+
+function getEffectiveBaseFeetHeightMm(input: PlannerInput) {
+  return input.baseFeetType === 'rubber'
+    ? Math.max(
+        PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm,
+        Math.min(PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm, input.baseFeetHeightMm)
+      )
+    : 0;
+}
+
+function createBaseRubberFootMeshes(input: PlannerInput): MeshSpec[] {
+  const heightMm = getEffectiveBaseFeetHeightMm(input);
+  if (heightMm <= 0) {
+    return [];
+  }
+
+  const railCenterOffsetMm = BASE_MODULE_LAYOUT.railCenterOffsetMm;
+  const footCenterXMm = [
+    BASE_RUBBER_FOOT_TOP_LENGTH_MM / 2,
+    input.baseLengthMm - BASE_RUBBER_FOOT_TOP_LENGTH_MM / 2,
+  ];
+  const footCenterYMm = [
+    centeredY(railCenterOffsetMm, input.baseWidthMm),
+    centeredY(input.baseWidthMm - railCenterOffsetMm, input.baseWidthMm),
+  ];
+
+  return footCenterYMm.flatMap((centerY, railIndex) =>
+    footCenterXMm.map((centerX, endIndex) => ({
+      id: `base-${railIndex === 0 ? 'left' : 'right'}-rail-rubber-${endIndex === 0 ? 'rear' : 'front'}`,
+      shape: 'truncated-box' as const,
+      size: [
+        mm(BASE_RUBBER_FOOT_TOP_LENGTH_MM),
+        mm(BASE_RUBBER_FOOT_TOP_WIDTH_MM),
+        mm(heightMm),
+      ] as [number, number, number],
+      truncatedBoxBottomSize: [
+        mm(BASE_RUBBER_FOOT_BOTTOM_LENGTH_MM),
+        mm(BASE_RUBBER_FOOT_BOTTOM_WIDTH_MM),
+      ] as [number, number],
+      position: [mm(centerX), centerY, -mm(heightMm) / 2] as [number, number, number],
+      color: BASE_RUBBER_FOOT_COLOR,
+      metalness: BASE_RUBBER_FOOT_MATERIAL.metalness,
+      roughness: BASE_RUBBER_FOOT_MATERIAL.roughness,
+    }))
+  );
+}
 
 export function createBaseModule(input: PlannerInput, profileColor: string): MeshSpec[] {
   const baseCenterX = mm(input.baseLengthMm / 2);
@@ -29,6 +85,7 @@ export function createBaseModule(input: PlannerInput, profileColor: string): Mes
   const baseCrossBeamLength = mm(input.baseWidthMm) - BASE_BEAM_WIDTH * 2;
 
   return [
+    ...createBaseRubberFootMeshes(input),
     {
       id: 'left-rail',
       size: [mm(input.baseLengthMm), BASE_BEAM_WIDTH, BASE_BEAM_HEIGHT] as [number, number, number],

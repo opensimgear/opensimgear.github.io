@@ -110,6 +110,15 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
     PLANNER_DIMENSION_LIMITS.baseWidthMinMm,
     PLANNER_DIMENSION_LIMITS.baseWidthMaxMm
   );
+  const baseFeetType = input.baseFeetType === 'rubber' ? 'rubber' : 'none';
+  const baseFeetHeightMm =
+    baseFeetType === 'none'
+      ? 0
+      : clamp(
+          input.baseFeetHeightMm,
+          PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm,
+          PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm
+        );
   const seatBaseDepthMm = clamp(
     input.seatBaseDepthMm,
     PLANNER_DIMENSION_LIMITS.seatBaseDepthMinMm,
@@ -147,11 +156,8 @@ export function clampPlannerInput(input: PlannerInput): PlannerInput {
     ...input,
     baseLengthMm,
     baseWidthMm,
-    baseFeetHeightMm: clamp(
-      input.baseFeetHeightMm,
-      PLANNER_DIMENSION_LIMITS.baseFeetHeightMinMm,
-      PLANNER_DIMENSION_LIMITS.baseFeetHeightMaxMm
-    ),
+    baseFeetType,
+    baseFeetHeightMm,
     seatBaseDepthMm,
     baseInnerBeamSpacingMm: clamp(
       input.baseInnerBeamSpacingMm,
