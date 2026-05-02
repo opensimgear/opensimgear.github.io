@@ -1,6 +1,7 @@
 import type {
   PlannerMonitorAspectRatio,
   PlannerMonitorCurvature,
+  PlannerMonitorStandFeetType,
   PlannerMonitorVesaType,
   PlannerPosturePreset,
   PlannerPostureSettings,
@@ -37,8 +38,8 @@ export const PLANNER_POSTURE_LIMITS = {
   monitorStandLegExtraMarginMaxMm: 300,
   monitorStandFootLengthMinMm: 0,
   monitorStandFootLengthMaxMm: 2000,
-  monitorStandFeetHeightMinMm: 0,
-  monitorStandFeetHeightMaxMm: 120,
+  monitorStandFeetHeightMinMm: 10,
+  monitorStandFeetHeightMaxMm: 40,
 } as const;
 
 export const POSTURE_PRESET_OPTIONS = [
@@ -91,6 +92,11 @@ export const MONITOR_VESA_OPTIONS = [
   { text: '400 x 400', value: '400x400' },
 ] as const satisfies ReadonlyArray<{ text: string; value: PlannerMonitorVesaType }>;
 
+export const MONITOR_STAND_FEET_TYPE_OPTIONS = [
+  { text: 'None', value: 'none' },
+  { text: 'Rubber', value: 'rubber' },
+] as const satisfies ReadonlyArray<{ text: string; value: PlannerMonitorStandFeetType }>;
+
 export function isMonitorArcCenterAtEyesCurvature(curvature: PlannerMonitorCurvature) {
   return MONITOR_ARC_CENTER_AT_EYES_CURVATURE_OPTIONS.some((option) => option.value === curvature);
 }
@@ -110,6 +116,8 @@ export const DEFAULT_MONITOR_BOTTOM_VESA_HOLE_DISTANCE_MM = 86;
 export const DEFAULT_MONITOR_BOTTOM_VESA_HOLES_TO_CROSS_BEAM_TOP_MM = 100;
 export const DEFAULT_MONITOR_STAND_LEG_EXTRA_MARGIN_MM = 80;
 export const DEFAULT_MONITOR_STAND_FOOT_LENGTH_MM = 500;
+export const DEFAULT_MONITOR_STAND_FEET_TYPE: PlannerMonitorStandFeetType = 'none';
+export const DEFAULT_MONITOR_STAND_RUBBER_FEET_HEIGHT_MM = 20;
 export const DEFAULT_MONITOR_STAND_FEET_HEIGHT_MM = 0;
 export const LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM = 1200;
 
@@ -134,5 +142,6 @@ export const DEFAULT_PLANNER_POSTURE_SETTINGS: PlannerPostureSettings = {
   monitorBottomVesaHolesToCrossBeamTopMm: DEFAULT_MONITOR_BOTTOM_VESA_HOLES_TO_CROSS_BEAM_TOP_MM,
   monitorStandLegExtraMarginMm: DEFAULT_MONITOR_STAND_LEG_EXTRA_MARGIN_MM,
   monitorStandFootLengthMm: DEFAULT_MONITOR_STAND_FOOT_LENGTH_MM,
+  monitorStandFeetType: DEFAULT_MONITOR_STAND_FEET_TYPE,
   monitorStandFeetHeightMm: DEFAULT_MONITOR_STAND_FEET_HEIGHT_MM,
 };

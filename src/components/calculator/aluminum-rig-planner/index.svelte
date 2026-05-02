@@ -27,6 +27,7 @@
   import { COLOR_MODE_OPTIONS, DEFAULT_CUSTOM_PROFILE_COLOR } from './constants/scene';
   import {
     DEFAULT_ACTIVE_POSTURE_PRESET,
+    DEFAULT_MONITOR_STAND_RUBBER_FEET_HEIGHT_MM,
     DEFAULT_PLANNER_POSTURE_SETTINGS,
     DEFAULT_POSTURE_HEIGHT_CM,
     isMonitorArcCenterAtEyesCurvature,
@@ -34,6 +35,7 @@
     MONITOR_ARC_CENTER_AT_EYES_CURVATURE_OPTIONS,
     MONITOR_ARC_CENTER_AT_EYES_FALLBACK_CURVATURE,
     MONITOR_CURVATURE_OPTIONS,
+    MONITOR_STAND_FEET_TYPE_OPTIONS,
     MONITOR_VESA_OPTIONS,
     PLANNER_POSTURE_LIMITS,
     POSTURE_PRESET_OPTIONS,
@@ -108,6 +110,7 @@
     PlannerInput,
     PlannerMonitorAspectRatio,
     PlannerMonitorCurvature,
+    PlannerMonitorStandFeetType,
     PlannerMonitorVesaType,
     PlannerOptimizationSettings,
     PlannerPosturePreset,
@@ -1184,6 +1187,7 @@
     );
     setMonitorStandLegExtraMarginMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandLegExtraMarginMm);
     setMonitorStandFootLengthMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandFootLengthMm);
+    setMonitorStandFeetType(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandFeetType);
     setMonitorStandFeetHeightMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandFeetHeightMm);
   }
 
@@ -1557,7 +1561,25 @@
     syncPlannerUrlState();
   }
 
+  function setMonitorStandFeetType(value: PlannerMonitorStandFeetType) {
+    postureSettings.monitorStandFeetType = value;
+    if (value === 'none') {
+      postureSettings.monitorStandFeetHeightMm = 0;
+    } else if (
+      postureSettings.monitorStandFeetHeightMm < PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm ||
+      postureSettings.monitorStandFeetHeightMm > PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm
+    ) {
+      postureSettings.monitorStandFeetHeightMm = DEFAULT_MONITOR_STAND_RUBBER_FEET_HEIGHT_MM;
+    }
+    syncPlannerUrlState();
+  }
+
   function setMonitorStandFeetHeightMm(value: number) {
+    if (postureSettings.monitorStandFeetType === 'none') {
+      postureSettings.monitorStandFeetHeightMm = 0;
+      syncPlannerUrlState();
+      return;
+    }
     postureSettings.monitorStandFeetHeightMm = Math.max(
       PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm,
       Math.min(PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm, value)
@@ -1938,14 +1960,21 @@
                 step={PLANNER_CONTROL_STEP_MM}
                 format={(value) => `${value} mm`}
               />
-              <Slider
-                bind:value={() => postureSettings.monitorStandFeetHeightMm, setMonitorStandFeetHeightMm}
-                label="Feet Height"
-                min={PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm}
-                max={PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm}
-                step={PLANNER_CONTROL_STEP_MM}
-                format={(value) => `${value} mm`}
+              <List
+                bind:value={() => postureSettings.monitorStandFeetType, setMonitorStandFeetType}
+                options={MONITOR_STAND_FEET_TYPE_OPTIONS}
+                label="Feet Type"
               />
+              {#if postureSettings.monitorStandFeetType !== 'none'}
+                <Slider
+                  bind:value={() => postureSettings.monitorStandFeetHeightMm, setMonitorStandFeetHeightMm}
+                  label="Feet Height"
+                  min={PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm}
+                  max={PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm}
+                  step={PLANNER_CONTROL_STEP_MM}
+                  format={(value) => `${value} mm`}
+                />
+              {/if}
               <Button on:click={resetMonitorStandModule} label="" title="Reset" />
             </Folder>
           {/if}

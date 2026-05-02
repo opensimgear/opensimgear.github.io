@@ -1,12 +1,14 @@
 import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS, getPlannerStockCostMax } from './constants/optimizer';
 import {
   DEFAULT_MONITOR_DISTANCE_FROM_EYES_MM,
+  DEFAULT_MONITOR_STAND_RUBBER_FEET_HEIGHT_MM,
   MONITOR_ARC_CENTER_AT_EYES_FALLBACK_CURVATURE,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   isMonitorArcCenterAtEyesCurvature,
   LEGACY_DEFAULT_MONITOR_MIDPOINT_X_MM,
   MONITOR_ASPECT_RATIO_OPTIONS,
   MONITOR_CURVATURE_OPTIONS,
+  MONITOR_STAND_FEET_TYPE_OPTIONS,
   MONITOR_VESA_OPTIONS,
   PLANNER_POSTURE_LIMITS,
 } from './constants/posture';
@@ -28,6 +30,7 @@ import type {
   PlannerInput,
   PlannerMonitorAspectRatio,
   PlannerMonitorCurvature,
+  PlannerMonitorStandFeetType,
   PlannerMonitorVesaType,
   PlannerOptimizationSettings,
   PlannerPosturePreset,
@@ -70,6 +73,7 @@ export type PlannerQueryState = Partial<PlannerInput> & {
   > & {
     monitorAspectRatio?: unknown;
     monitorCurvature?: unknown;
+    monitorStandFeetType?: unknown;
     monitorVesaType?: unknown;
     monitorMidpointXMm?: unknown;
     monitorMidpointYMm?: unknown;
@@ -234,6 +238,10 @@ function isMonitorVesaType(value: unknown): value is PlannerMonitorVesaType {
   return MONITOR_VESA_OPTIONS.some((option) => option.value === value);
 }
 
+function isMonitorStandFeetType(value: unknown): value is PlannerMonitorStandFeetType {
+  return MONITOR_STAND_FEET_TYPE_OPTIONS.some((option) => option.value === value);
+}
+
 function sanitizePostureSettings(state: PlannerQueryState['posture']) {
   const defaults = DEFAULT_PLANNER_POSTURE_SETTINGS;
   const preset =
@@ -344,6 +352,17 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     : isFiniteNumber(legacyMonitorMidpointHeightMm)
       ? legacyMonitorMidpointHeightMm - BASE_BEAM_HEIGHT_MM
       : defaults.monitorHeightFromBaseMm;
+  const monitorStandFeetType = isMonitorStandFeetType(state?.monitorStandFeetType)
+    ? state.monitorStandFeetType
+    : defaults.monitorStandFeetType;
+  const monitorStandFeetHeightMm =
+    monitorStandFeetType === 'none'
+      ? 0
+      : clampNumber(
+          readNumber(state?.monitorStandFeetHeightMm, DEFAULT_MONITOR_STAND_RUBBER_FEET_HEIGHT_MM),
+          PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm,
+          PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm
+        );
 
   return {
     preset,
@@ -396,11 +415,8 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
       PLANNER_POSTURE_LIMITS.monitorStandFootLengthMinMm,
       PLANNER_POSTURE_LIMITS.monitorStandFootLengthMaxMm
     ),
-    monitorStandFeetHeightMm: clampNumber(
-      readNumber(state?.monitorStandFeetHeightMm, defaults.monitorStandFeetHeightMm),
-      PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm,
-      PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm
-    ),
+    monitorStandFeetType,
+    monitorStandFeetHeightMm,
   } satisfies PlannerPostureSettings<PlannerPosturePreset>;
 }
 

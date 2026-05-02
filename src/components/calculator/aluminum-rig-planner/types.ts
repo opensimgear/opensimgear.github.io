@@ -39,6 +39,7 @@ export type PlannerMonitorCurvature =
   | '1000r'
   | '800r';
 export type PlannerMonitorVesaType = '75x75' | '100x100' | '200x100' | '200x200' | '300x200' | '400x200' | '400x400';
+export type PlannerMonitorStandFeetType = 'none' | 'rubber';
 
 export type PlannerAnthropometryRatios = {
   sittingHeight: number;
@@ -83,6 +84,7 @@ export type PlannerPostureSettings<Preset extends PlannerPosturePreset = Planner
   monitorBottomVesaHolesToCrossBeamTopMm: number;
   monitorStandLegExtraMarginMm: number;
   monitorStandFootLengthMm: number;
+  monitorStandFeetType: PlannerMonitorStandFeetType;
   monitorStandFeetHeightMm: number;
 };
 

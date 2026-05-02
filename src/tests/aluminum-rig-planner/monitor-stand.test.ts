@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_PLANNER_POSTURE_SETTINGS } from '~/components/calculator/aluminum-rig-planner/constants/posture';
+import {
+  DEFAULT_PLANNER_POSTURE_SETTINGS,
+  PLANNER_POSTURE_LIMITS,
+} from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import {
   createMonitorStandModule,
   getMonitorStandLayoutMm,
@@ -206,6 +209,7 @@ describe('aluminum rig planner monitor stand module', () => {
   });
 
   it('keeps cross beams fixed while feet height raises feet and shortens legs', () => {
+    const feetHeightMm = PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm;
     const defaultMeshes = createMonitorStandModule(
       monitorDebug,
       DEFAULT_PLANNER_POSTURE_SETTINGS,
@@ -216,7 +220,8 @@ describe('aluminum rig planner monitor stand module', () => {
       monitorDebug,
       {
         ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-        monitorStandFeetHeightMm: 50,
+        monitorStandFeetType: 'rubber',
+        monitorStandFeetHeightMm: feetHeightMm,
       },
       '#222222',
       narrowBaseWidthMm
@@ -226,7 +231,8 @@ describe('aluminum rig planner monitor stand module', () => {
       monitorDebug,
       {
         ...DEFAULT_PLANNER_POSTURE_SETTINGS,
-        monitorStandFeetHeightMm: 50,
+        monitorStandFeetType: 'rubber',
+        monitorStandFeetHeightMm: feetHeightMm,
       },
       narrowBaseWidthMm
     );
@@ -238,10 +244,86 @@ describe('aluminum rig planner monitor stand module', () => {
     const raisedFoot = raisedMeshes.find((mesh) => mesh.id === 'monitor-stand-left-foot');
 
     expect(raisedCrossBeam?.position[2]).toBeCloseTo(defaultCrossBeam?.position[2] ?? 0);
-    expect(raisedFoot?.position[2]).toBeCloseTo((defaultFoot?.position[2] ?? 0) + 0.05);
-    expect(raisedLeg?.size[2]).toBeCloseTo((defaultLeg?.size[2] ?? 0) - 0.05);
-    expect(raisedLayout.legBottomHeightMm).toBe(defaultLayout.legBottomHeightMm + 50);
-    expect(raisedLayout.legLengthMm).toBeCloseTo(defaultLayout.legLengthMm - 50, 1);
+    expect(raisedFoot?.position[2]).toBeCloseTo((defaultFoot?.position[2] ?? 0) + feetHeightMm / 1000);
+    expect(raisedLeg?.size[2]).toBeCloseTo((defaultLeg?.size[2] ?? 0) - feetHeightMm / 1000);
+    expect(raisedLayout.legBottomHeightMm).toBe(defaultLayout.legBottomHeightMm + feetHeightMm);
+    expect(raisedLayout.legLengthMm).toBeCloseTo(defaultLayout.legLengthMm - feetHeightMm, 1);
+  });
+
+  it('renders rubber pads under both ends of each stand foot when rubber feet are selected', () => {
+    const meshes = createMonitorStandModule(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandFeetType: 'rubber',
+        monitorStandFeetHeightMm: 30,
+      },
+      '#222222',
+      narrowBaseWidthMm
+    );
+    const rubberPads = meshes.filter((mesh) => mesh.id.includes('-rubber-'));
+
+    expect(rubberPads.map((mesh) => mesh.id)).toEqual(
+      expect.arrayContaining([
+        'monitor-stand-left-foot-rubber-rear',
+        'monitor-stand-left-foot-rubber-front',
+        'monitor-stand-right-foot-rubber-rear',
+        'monitor-stand-right-foot-rubber-front',
+      ])
+    );
+    expect(rubberPads).toHaveLength(4);
+    expect(rubberPads.every((mesh) => mesh.shape === 'truncated-box')).toBe(true);
+    expect(rubberPads[0]?.size).toEqual([0.08, 0.04, 0.03]);
+    expect(rubberPads[0]?.truncatedBoxBottomSize).toEqual([0.07, 0.035]);
+  });
+
+  it('clamps rubber monitor stand feet height to the allowed range', () => {
+    const lowLayout = getMonitorStandLayoutMm(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandFeetType: 'rubber',
+        monitorStandFeetHeightMm: 1,
+      },
+      narrowBaseWidthMm
+    );
+    const highLayout = getMonitorStandLayoutMm(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandFeetType: 'rubber',
+        monitorStandFeetHeightMm: 999,
+      },
+      narrowBaseWidthMm
+    );
+
+    expect(lowLayout.legBottomHeightMm).toBe(40 + PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm);
+    expect(highLayout.legBottomHeightMm).toBe(40 + PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm);
+  });
+
+  it('does not use feet height or render pads when monitor stand feet type is none', () => {
+    const layout = getMonitorStandLayoutMm(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandFeetType: 'none',
+        monitorStandFeetHeightMm: 50,
+      },
+      narrowBaseWidthMm
+    );
+    const meshes = createMonitorStandModule(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandFeetType: 'none',
+        monitorStandFeetHeightMm: 50,
+      },
+      '#222222',
+      narrowBaseWidthMm
+    );
+
+    expect(layout.legBottomHeightMm).toBe(40);
+    expect(meshes.some((mesh) => mesh.id.includes('-rubber-'))).toBe(false);
   });
 
   it('uses 8040 single-monitor cross beams above 48 inch only', () => {

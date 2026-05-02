@@ -8,6 +8,7 @@ import {
   getMonitorVesaDimensionsMm,
   getTripleScreenSidePanels,
 } from '~/components/calculator/aluminum-rig-planner/modules/monitor';
+import { PLANNER_POSTURE_LIMITS } from '~/components/calculator/aluminum-rig-planner/constants/posture';
 import {
   mm,
   PROFILE_SHORT,
@@ -31,6 +32,15 @@ const MONITOR_STAND_SINGLE_4040_CROSS_BEAM_MAX_MONITOR_SIZE_IN = 48;
 const MONITOR_STAND_SIDE_LEG_MIN_MONITOR_SIZE_IN = 43;
 const MONITOR_STAND_LEG_EXTRA_MARGIN_MIN_MM = 40;
 const MONITOR_STAND_SIDE_LEG_POSITION_RATIO = 0.9;
+const MONITOR_STAND_RUBBER_FOOT_TOP_LENGTH_MM = 80;
+const MONITOR_STAND_RUBBER_FOOT_TOP_WIDTH_MM = 40;
+const MONITOR_STAND_RUBBER_FOOT_BOTTOM_LENGTH_MM = 70;
+const MONITOR_STAND_RUBBER_FOOT_BOTTOM_WIDTH_MM = 35;
+const MONITOR_STAND_RUBBER_FOOT_COLOR = '#111111';
+const MONITOR_STAND_RUBBER_FOOT_MATERIAL = {
+  metalness: 0.05,
+  roughness: 0.75,
+} as const;
 
 export type MonitorStandCrossBeamLayoutMm = {
   id: string;
@@ -85,6 +95,15 @@ function getOffsetPointMm(position: [number, number, number], yawRadians: number
   };
 }
 
+function getEffectiveFeetHeightMm(settings: PlannerPostureSettings<PlannerPosturePreset>) {
+  return settings.monitorStandFeetType === 'rubber'
+    ? Math.max(
+        PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm,
+        Math.min(PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm, settings.monitorStandFeetHeightMm)
+      )
+    : 0;
+}
+
 export function getMonitorStandLayoutMm(
   monitorDebug: PlannerPostureMonitorDebug,
   settings: PlannerPostureSettings<PlannerPosturePreset>,
@@ -116,7 +135,7 @@ export function getMonitorStandLayoutMm(
   const crossBeamLengthMm = Math.round(Math.max(requestedCrossBeamLengthMm, legSpanLengthMm));
   const internalWidthMm = legSpanLengthMm - UPRIGHT_BEAM_DEPTH_MM * 2;
   const legExtraMarginMm = Math.max(MONITOR_STAND_LEG_EXTRA_MARGIN_MIN_MM, settings.monitorStandLegExtraMarginMm);
-  const feetHeightMm = Math.max(0, settings.monitorStandFeetHeightMm);
+  const feetHeightMm = getEffectiveFeetHeightMm(settings);
   const legBottomHeightMm = PROFILE_SHORT_MM + feetHeightMm;
   const legTopHeightMm = Math.max(crossBeamTopHeightMm + legExtraMarginMm, legBottomHeightMm + PROFILE_SHORT_MM);
   const legLengthMm = Math.max(PROFILE_SHORT_MM, legTopHeightMm - legBottomHeightMm);
@@ -218,6 +237,47 @@ export function getMonitorStandLayoutMm(
   };
 }
 
+function createRubberFootMeshes(
+  footId: string,
+  centerXMm: number,
+  centerYMm: number,
+  yawRadians: number,
+  lengthMm: number,
+  heightMm: number
+): MeshSpec[] {
+  if (heightMm <= 0) {
+    return [];
+  }
+
+  return [-1, 1].map((sign) => {
+    const padCenter = getOffsetPointMm(
+      [mm(centerXMm), mm(centerYMm), 0],
+      yawRadians,
+      sign * (lengthMm / 2 - MONITOR_STAND_RUBBER_FOOT_TOP_LENGTH_MM / 2)
+    );
+
+    return {
+      id: `${footId}-rubber-${sign < 0 ? 'rear' : 'front'}`,
+      shape: 'truncated-box' as const,
+      size: [mm(MONITOR_STAND_RUBBER_FOOT_TOP_LENGTH_MM), mm(MONITOR_STAND_RUBBER_FOOT_TOP_WIDTH_MM), mm(heightMm)] as [
+        number,
+        number,
+        number,
+      ],
+      truncatedBoxBottomSize: [
+        mm(MONITOR_STAND_RUBBER_FOOT_BOTTOM_LENGTH_MM),
+        mm(MONITOR_STAND_RUBBER_FOOT_BOTTOM_WIDTH_MM),
+      ] as [number, number],
+      position: [mm(padCenter.xMm), mm(padCenter.yMm), mm(heightMm / 2)] as [number, number, number],
+      rotation: [0, 0, yawRadians] as [number, number, number],
+      materialKind: 'plastic' as const,
+      color: MONITOR_STAND_RUBBER_FOOT_COLOR,
+      metalness: MONITOR_STAND_RUBBER_FOOT_MATERIAL.metalness,
+      roughness: MONITOR_STAND_RUBBER_FOOT_MATERIAL.roughness,
+    } satisfies MeshSpec;
+  });
+}
+
 export function createMonitorStandModule(
   monitorDebug: PlannerPostureMonitorDebug,
   settings: PlannerPostureSettings<PlannerPosturePreset>,
@@ -233,6 +293,7 @@ export function createMonitorStandModule(
   };
   const footCenterZ = mm(layout.legBottomHeightMm - PROFILE_SHORT_MM / 2);
   const legCenterZ = mm(layout.legBottomHeightMm + layout.legLengthMm / 2);
+  const rubberFootHeightMm = getEffectiveFeetHeightMm(settings);
   const sideLegMeshes = layout.sideLegs.map(
     (sideLeg) =>
       ({
@@ -245,7 +306,7 @@ export function createMonitorStandModule(
         ...profileProps,
       }) satisfies MeshSpec
   );
-  const sideLegFootMeshes = layout.sideLegs.map((sideLeg) => {
+  const sideLegFootLayouts = layout.sideLegs.map((sideLeg) => {
     const center = getOffsetPointMm(
       [mm(sideLeg.centerXMm), mm(sideLeg.centerYMm), 0],
       sideLeg.yawRadians,
@@ -254,14 +315,33 @@ export function createMonitorStandModule(
 
     return {
       id: `${sideLeg.id}-foot`,
-      size: [mm(layout.footLengthMm), PROFILE_SHORT, PROFILE_SHORT] as [number, number, number],
-      position: [mm(center.xMm), mm(center.yMm), footCenterZ] as [number, number, number],
-      rotation: [0, 0, sideLeg.yawRadians] as [number, number, number],
-      profileType: 'alu40x40' as const,
-      openEnds: ['negative' as const, 'positive' as const],
-      ...profileProps,
-    } satisfies MeshSpec;
+      centerXMm: center.xMm,
+      centerYMm: center.yMm,
+      yawRadians: sideLeg.yawRadians,
+    };
   });
+  const sideLegFootMeshes = sideLegFootLayouts.map(
+    (foot) =>
+      ({
+        id: foot.id,
+        size: [mm(layout.footLengthMm), PROFILE_SHORT, PROFILE_SHORT] as [number, number, number],
+        position: [mm(foot.centerXMm), mm(foot.centerYMm), footCenterZ] as [number, number, number],
+        rotation: [0, 0, foot.yawRadians] as [number, number, number],
+        profileType: 'alu40x40' as const,
+        openEnds: ['negative' as const, 'positive' as const],
+        ...profileProps,
+      }) satisfies MeshSpec
+  );
+  const sideLegRubberFootMeshes = sideLegFootLayouts.flatMap((foot) =>
+    createRubberFootMeshes(
+      foot.id,
+      foot.centerXMm,
+      foot.centerYMm,
+      foot.yawRadians,
+      layout.footLengthMm,
+      rubberFootHeightMm
+    )
+  );
 
   return [
     ...layout.crossBeams.map((crossBeam) => ({
@@ -279,6 +359,7 @@ export function createMonitorStandModule(
     })),
     ...sideYPositions.flatMap<MeshSpec>((sideYPositionMm, index) => {
       const side = index === 0 ? 'left' : 'right';
+      const footId = `monitor-stand-${side}-foot`;
 
       return [
         {
@@ -290,16 +371,25 @@ export function createMonitorStandModule(
           ...profileProps,
         },
         {
-          id: `monitor-stand-${side}-foot`,
+          id: footId,
           size: [mm(layout.footLengthMm), PROFILE_SHORT, PROFILE_SHORT] as [number, number, number],
           position: [mm(layout.footCenterXMm), mm(sideYPositionMm), footCenterZ] as [number, number, number],
           profileType: 'alu40x40' as const,
           openEnds: ['negative', 'positive'],
           ...profileProps,
         },
+        ...createRubberFootMeshes(
+          footId,
+          layout.footCenterXMm,
+          sideYPositionMm,
+          0,
+          layout.footLengthMm,
+          rubberFootHeightMm
+        ),
       ];
     }),
     ...sideLegMeshes,
     ...sideLegFootMeshes,
+    ...sideLegRubberFootMeshes,
   ];
 }

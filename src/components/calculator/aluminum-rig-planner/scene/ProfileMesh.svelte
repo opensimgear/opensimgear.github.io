@@ -1,7 +1,7 @@
 <script lang="ts">
   import { T } from '@threlte/core';
   import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
-  import { BoxGeometry, CylinderGeometry, TorusGeometry } from 'three';
+  import { BoxGeometry, BufferGeometry, CylinderGeometry, Float32BufferAttribute, TorusGeometry } from 'three';
 
   import { ENDCAP_MATERIAL, PROFILE_APPEARANCE } from '../constants/profile';
   import {
@@ -111,6 +111,52 @@
         mesh.size[0],
         mesh.cylinderRadialSegments ?? 20
       );
+    }
+
+    if (mesh.shape === 'truncated-box') {
+      const [topWidth, topDepth, height] = mesh.size;
+      const [bottomWidth, bottomDepth] = mesh.truncatedBoxBottomSize ?? [topWidth, topDepth];
+      const topX = topWidth / 2;
+      const topY = topDepth / 2;
+      const bottomX = bottomWidth / 2;
+      const bottomY = bottomDepth / 2;
+      const halfHeight = height / 2;
+      const vertices = [
+        -bottomX,
+        -bottomY,
+        -halfHeight,
+        bottomX,
+        -bottomY,
+        -halfHeight,
+        bottomX,
+        bottomY,
+        -halfHeight,
+        -bottomX,
+        bottomY,
+        -halfHeight,
+        -topX,
+        -topY,
+        halfHeight,
+        topX,
+        -topY,
+        halfHeight,
+        topX,
+        topY,
+        halfHeight,
+        -topX,
+        topY,
+        halfHeight,
+      ];
+      const indices = [
+        0, 2, 1, 0, 3, 2, 4, 5, 6, 4, 6, 7, 0, 1, 5, 0, 5, 4, 1, 2, 6, 1, 6, 5, 2, 3, 7, 2, 7, 6, 3, 0, 4, 3,
+        4, 7,
+      ];
+      const geometry = new BufferGeometry();
+
+      geometry.setAttribute('position', new Float32BufferAttribute(vertices, 3));
+      geometry.setIndex(indices);
+      geometry.computeVertexNormals();
+      return geometry;
     }
 
     const [width, height, depth] = mesh.size;

@@ -6,6 +6,7 @@ import {
 } from '~/components/calculator/aluminum-rig-planner/constants/planner';
 import { DEFAULT_PLANNER_OPTIMIZATION_SETTINGS } from '~/components/calculator/aluminum-rig-planner/constants/optimizer';
 import {
+  DEFAULT_MONITOR_STAND_RUBBER_FEET_HEIGHT_MM,
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   MONITOR_ASPECT_RATIO_OPTIONS,
   MONITOR_CURVATURE_OPTIONS,
@@ -225,6 +226,7 @@ describe('aluminum rig planner query state', () => {
         monitorTargetFovDeg: 999,
         monitorDistanceFromEyesMm: Number.POSITIVE_INFINITY,
         monitorHeightFromBaseMm: -100,
+        monitorStandFeetType: 'rubber',
         monitorStandFeetHeightMm: 999,
       },
     });
@@ -240,6 +242,7 @@ describe('aluminum rig planner query state', () => {
       6
     );
     expect(state.postureSettings.monitorHeightFromBaseMm).toBe(PLANNER_POSTURE_LIMITS.monitorHeightFromBaseMinMm);
+    expect(state.postureSettings.monitorStandFeetType).toBe('rubber');
     expect(state.postureSettings.monitorStandFeetHeightMm).toBe(PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm);
     expect(
       MONITOR_ASPECT_RATIO_OPTIONS.some((option) => option.value === state.postureSettings.monitorAspectRatio)
@@ -247,6 +250,29 @@ describe('aluminum rig planner query state', () => {
     expect(MONITOR_CURVATURE_OPTIONS.some((option) => option.value === state.postureSettings.monitorCurvature)).toBe(
       true
     );
+  });
+
+  it('clears monitor stand feet height when feet type is none from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorStandFeetType: 'none',
+        monitorStandFeetHeightMm: 80,
+      },
+    });
+
+    expect(state.postureSettings.monitorStandFeetType).toBe('none');
+    expect(state.postureSettings.monitorStandFeetHeightMm).toBe(0);
+  });
+
+  it('uses rubber monitor stand feet default when height is absent from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorStandFeetType: 'rubber',
+      },
+    });
+
+    expect(state.postureSettings.monitorStandFeetType).toBe('rubber');
+    expect(state.postureSettings.monitorStandFeetHeightMm).toBe(DEFAULT_MONITOR_STAND_RUBBER_FEET_HEIGHT_MM);
   });
 
   it('sets monitor tilt to zero when triple screen hydrates from shared-link state', () => {
