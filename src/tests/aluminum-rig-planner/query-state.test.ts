@@ -13,6 +13,10 @@ import {
   MONITOR_CURVATURE_OPTIONS,
   PLANNER_POSTURE_LIMITS,
 } from '~/components/calculator/aluminum-rig-planner/constants/posture';
+import {
+  getAluminumRigFolderExpandedState,
+  getAluminumRigPaneExpandedState,
+} from '~/components/calculator/aluminum-rig-planner/constants/ui';
 import { getSteeringColumnDistanceMaxMm } from '~/components/calculator/aluminum-rig-planner/scene/geometry';
 import {
   getArcCenterDistanceMm,
@@ -203,6 +207,49 @@ describe('aluminum rig planner query state', () => {
     });
   });
 
+  it('sanitizes UI panel and folder open state from shared-link state', () => {
+    const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      ui: {
+        panes: {
+          general: false,
+          setup: true,
+          posture: 'open',
+        },
+        folders: {
+          monitor: true,
+          monitorStand: true,
+          base: true,
+          seat: 'closed',
+          stockConfiguration: true,
+          stockProfile40x40: false,
+        },
+        stockOptions: {
+          'stock-1': false,
+          'stock-2': true,
+          'stock-3': 'open',
+        },
+      },
+    });
+
+    expect(state.uiState.paneExpanded).toEqual({
+      ...getAluminumRigPaneExpandedState(false),
+      general: false,
+      setup: true,
+    });
+    expect(state.uiState.folderExpanded).toEqual({
+      ...getAluminumRigFolderExpandedState(),
+      monitor: true,
+      monitorStand: true,
+      base: true,
+      stockConfiguration: true,
+      stockProfile40x40: false,
+    });
+    expect(state.uiState.stockOptionFolderExpanded).toEqual({
+      'stock-1': false,
+      'stock-2': true,
+    });
+  });
+
   it('sanitizes posture settings from shared-link state', () => {
     const state = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
       posture: {
@@ -275,6 +322,28 @@ describe('aluminum rig planner query state', () => {
     expect(MONITOR_CURVATURE_OPTIONS.some((option) => option.value === state.postureSettings.monitorCurvature)).toBe(
       true
     );
+  });
+
+  it('hydrates integrated monitor stand only for monitor sizes up to 32 inch', () => {
+    const integrated = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorSizeIn: 32,
+        monitorStandVariant: 'integrated',
+        monitorStandIntegratedPlateLengthMm: 9999,
+      },
+    });
+    const oversized = mergePlannerQueryState(DEFAULT_PLANNER_INPUT, {
+      posture: {
+        monitorSizeIn: 33,
+        monitorStandVariant: 'integrated',
+      },
+    });
+
+    expect(integrated.postureSettings.monitorStandVariant).toBe('integrated');
+    expect(integrated.postureSettings.monitorStandIntegratedPlateLengthMm).toBe(
+      PLANNER_POSTURE_LIMITS.monitorStandIntegratedPlateLengthMaxMm
+    );
+    expect(oversized.postureSettings.monitorStandVariant).toBe('freestand');
   });
 
   it('clears monitor stand feet height when feet type is none from shared-link state', () => {

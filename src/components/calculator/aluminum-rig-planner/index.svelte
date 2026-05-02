@@ -37,6 +37,7 @@
     MONITOR_ARC_CENTER_AT_EYES_FALLBACK_CURVATURE,
     MONITOR_CURVATURE_OPTIONS,
     MONITOR_STAND_FEET_TYPE_OPTIONS,
+    MONITOR_STAND_VARIANT_OPTIONS,
     MONITOR_VESA_OPTIONS,
     PLANNER_POSTURE_LIMITS,
     POSTURE_PRESET_OPTIONS,
@@ -100,7 +101,9 @@
   } from './posture/presets';
   import { mergePlannerQueryState, type PlannerQueryState } from './query-state';
   import {
+    type AluminumRigFolderExpandedState,
     type AluminumRigPaneExpandedState,
+    getAluminumRigFolderExpandedState,
     getAluminumRigPaneExpandedState,
     getNextAluminumRigPaneExpandedState,
     isNarrowAluminumRigViewport,
@@ -116,12 +119,14 @@
     PlannerMonitorAspectRatio,
     PlannerMonitorCurvature,
     PlannerMonitorStandFeetType,
+    PlannerMonitorStandVariant,
     PlannerMonitorVesaType,
     PlannerOptimizationSettings,
     PlannerPosturePreset,
     PlannerPostureSettings,
     PlannerPostureTargetKey,
     PlannerPostureTargetRange,
+    PlannerStockOption,
     PlannerVisibleModules,
   } from './types';
 
@@ -251,6 +256,9 @@
     Object.assign(optimizationSettings, cloneOptimizationSettings(mergedState.optimizationSettings));
     Object.assign(postureSettings, clonePostureSettings(mergedState.postureSettings));
     Object.assign(visibleModules, mergedState.visibleModules);
+    Object.assign(paneExpanded, mergedState.uiState.paneExpanded);
+    Object.assign(folderExpanded, mergedState.uiState.folderExpanded);
+    Object.assign(stockOptionFolderExpanded, mergedState.uiState.stockOptionFolderExpanded);
     postureHeightControlValue = postureSettings.heightCm;
     animatedPostureHeightCm = postureSettings.heightCm;
 
@@ -261,6 +269,8 @@
         stockOptionIdSequence = Math.max(stockOptionIdSequence, numericSuffix);
       }
     }
+
+    return Boolean(state.ui?.panes);
   }
 
   let plannerInput = $state<PlannerInput>({ ...DEFAULT_INPUT });
@@ -282,7 +292,8 @@
   let showEndCaps = $state(true);
   let isNarrowViewport = $state(false);
   let paneExpanded = $state<AluminumRigPaneExpandedState>(getAluminumRigPaneExpandedState(false));
-  let stockConfigurationExpanded = $state(false);
+  let folderExpanded = $state<AluminumRigFolderExpandedState>(getAluminumRigFolderExpandedState());
+  let stockOptionFolderExpanded = $state<Record<string, boolean>>({});
   let mounted = $state(false);
   let PlannerScene = $state<PlannerSceneComponent | null>(null);
   let sceneStatus = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
@@ -390,12 +401,14 @@
 
     if (nextPaneExpanded !== paneExpanded) {
       paneExpanded = nextPaneExpanded;
+      syncPlannerUrlState();
     }
   }
 
   onMount(() => {
     plannerUnmounted = false;
     currencyLocale = resolvePlannerLocale();
+    let hasUiState = false;
 
     const encoded = new URLSearchParams(window.location.search).get(STATE_KEY);
 
@@ -403,11 +416,11 @@
       const state = decodeQueryState<PlannerQueryState>(encoded);
 
       if (state) {
-        applyQueryState(state);
+        hasUiState = applyQueryState(state);
       }
     }
 
-    syncViewportState(window.innerWidth, true);
+    syncViewportState(window.innerWidth, !hasUiState);
 
     const handleResize = () => syncViewportState(window.innerWidth);
     window.addEventListener('resize', handleResize);
@@ -484,7 +497,7 @@
   );
   const monitorStandLayout = $derived(
     postureReport?.monitorDebug
-      ? getMonitorStandLayoutMm(postureReport.monitorDebug, postureSettings, geometry.input.baseWidthMm)
+      ? getMonitorStandLayoutMm(postureReport.monitorDebug, postureSettings, geometry.input)
       : null
   );
   const monitorStandFootLengthLimits = $derived.by(() => ({
@@ -545,6 +558,11 @@
   const isMonitorArcCenterAtEyesActive = $derived(shouldUseMonitorArcCenterAtEyes());
   const monitorCurvatureOptions = $derived(
     postureSettings.monitorArcCenterAtEyes ? MONITOR_ARC_CENTER_AT_EYES_CURVATURE_OPTIONS : MONITOR_CURVATURE_OPTIONS
+  );
+  const monitorStandVariantOptions = $derived(
+    postureSettings.monitorSizeIn <= 32
+      ? MONITOR_STAND_VARIANT_OPTIONS
+      : MONITOR_STAND_VARIANT_OPTIONS.filter((option) => option.value !== 'integrated')
   );
   const monitorTargetFovLimits = $derived.by(() => {
     const arcFovDeg = isMonitorArcCenterAtEyesActive ? getArcCenterFovDeg(postureSettings) : null;
@@ -885,6 +903,11 @@
       optimizer: $state.snapshot(optimizationSettings),
       posture: $state.snapshot(postureSettings),
       modules: $state.snapshot(visibleModules),
+      ui: {
+        panes: $state.snapshot(paneExpanded),
+        folders: $state.snapshot(folderExpanded),
+        stockOptions: $state.snapshot(stockOptionFolderExpanded),
+      },
     });
     const url = new URL(window.location.href);
 
@@ -895,6 +918,48 @@
 
     url.searchParams.set(STATE_KEY, encodedPlannerState);
     debouncedUrlStateWriter.schedule(url.toString());
+  }
+
+  function getStockProfileFolderExpanded(profileType: PlannerStockOption['profileType']) {
+    return profileType === '40x40' ? folderExpanded.stockProfile40x40 : folderExpanded.stockProfile80x40;
+  }
+
+  function setStockProfileFolderExpanded(profileType: PlannerStockOption['profileType'], value: boolean) {
+    if (profileType === '40x40') {
+      folderExpanded.stockProfile40x40 = value;
+      syncPlannerUrlState();
+      return;
+    }
+
+    folderExpanded.stockProfile80x40 = value;
+    syncPlannerUrlState();
+  }
+
+  function getPaneExpanded(key: keyof AluminumRigPaneExpandedState) {
+    return paneExpanded[key];
+  }
+
+  function setPaneExpanded(key: keyof AluminumRigPaneExpandedState, value: boolean) {
+    paneExpanded[key] = value;
+    syncPlannerUrlState();
+  }
+
+  function getFolderExpanded(key: keyof AluminumRigFolderExpandedState) {
+    return folderExpanded[key];
+  }
+
+  function setFolderExpanded(key: keyof AluminumRigFolderExpandedState, value: boolean) {
+    folderExpanded[key] = value;
+    syncPlannerUrlState();
+  }
+
+  function getStockOptionFolderExpanded(stockOptionId: string) {
+    return stockOptionFolderExpanded[stockOptionId] ?? true;
+  }
+
+  function setStockOptionFolderExpanded(stockOptionId: string, value: boolean) {
+    stockOptionFolderExpanded[stockOptionId] = value;
+    syncPlannerUrlState();
   }
 
   function markPosturePresetCustom() {
@@ -1220,6 +1285,7 @@
     setMonitorTripleScreen(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorTripleScreen);
     setMonitorArcCenterAtEyes(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorArcCenterAtEyes);
     setMonitorVesaType(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorVesaType);
+    setMonitorStandVariant(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandVariant);
     syncSolvedMonitorDistanceFromEyesMm();
   }
 
@@ -1229,6 +1295,7 @@
     );
     setMonitorStandLegExtraMarginMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandLegExtraMarginMm);
     setMonitorStandFootLengthMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandFootLengthMm);
+    setMonitorStandIntegratedPlateLengthMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandIntegratedPlateLengthMm);
     setMonitorStandFeetType(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandFeetType);
     setMonitorStandFeetHeightMm(DEFAULT_PLANNER_POSTURE_SETTINGS.monitorStandFeetHeightMm);
   }
@@ -1399,6 +1466,7 @@
     postureSettings.monitorSizeIn = Math.round(
       Math.max(PLANNER_POSTURE_LIMITS.monitorSizeMinIn, Math.min(PLANNER_POSTURE_LIMITS.monitorSizeMaxIn, value))
     );
+    syncMonitorStandVariantAvailability();
     syncMonitorBottomVesaHoleDistanceFromMonitor();
     syncSolvedMonitorDistanceFromEyesMm();
     syncPlannerUrlState();
@@ -1538,6 +1606,18 @@
     syncPlannerUrlState();
   }
 
+  function syncMonitorStandVariantAvailability() {
+    if (postureSettings.monitorStandVariant === 'integrated' && postureSettings.monitorSizeIn > 32) {
+      postureSettings.monitorStandVariant = 'freestand';
+    }
+  }
+
+  function setMonitorStandVariant(value: PlannerMonitorStandVariant) {
+    postureSettings.monitorStandVariant =
+      value === 'integrated' && postureSettings.monitorSizeIn <= 32 ? 'integrated' : 'freestand';
+    syncPlannerUrlState();
+  }
+
   function setMonitorTripleScreen(value: boolean) {
     postureSettings.monitorTripleScreen = value;
 
@@ -1600,6 +1680,14 @@
     postureSettings.monitorStandFootLengthMm = Math.max(
       monitorStandFootLengthLimits.min,
       Math.min(monitorStandFootLengthLimits.max, value)
+    );
+    syncPlannerUrlState();
+  }
+
+  function setMonitorStandIntegratedPlateLengthMm(value: number) {
+    postureSettings.monitorStandIntegratedPlateLengthMm = Math.max(
+      PLANNER_POSTURE_LIMITS.monitorStandIntegratedPlateLengthMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorStandIntegratedPlateLengthMaxMm, value)
     );
     syncPlannerUrlState();
   }
@@ -1769,6 +1857,7 @@
     }
 
     optimizationSettings.stockOptions.splice(stockOptionIndex, 1);
+    delete stockOptionFolderExpanded[stockOptionId];
     syncPlannerUrlState();
   }
 
@@ -1844,7 +1933,11 @@
           ? 'flex shrink-0 flex-col divide-y divide-zinc-300'
           : 'flex shrink-0 flex-col divide-y divide-zinc-300 bg-white'}
       >
-        <Pane title="General" position="inline" bind:expanded={paneExpanded.general}>
+        <Pane
+          title="General"
+          position="inline"
+          bind:expanded={() => getPaneExpanded('general'), (value) => setPaneExpanded('general', value)}
+        >
           <List bind:value={profileColorMode} options={COLOR_MODE_OPTIONS} label="Finish" />
           {#if profileColorMode === 'custom'}
             <Color bind:value={customProfileColor} label="Custom" />
@@ -1852,8 +1945,15 @@
           <Checkbox bind:value={showEndCaps} label="Endcaps" />
           <Checkbox bind:value={() => postureSettings.advanced, setPostureAdvanced} label="Advanced" />
         </Pane>
-        <Pane title="Posture" position="inline" bind:expanded={paneExpanded.posture}>
-          <Folder title="Driver">
+        <Pane
+          title="Posture"
+          position="inline"
+          bind:expanded={() => getPaneExpanded('posture'), (value) => setPaneExpanded('posture', value)}
+        >
+          <Folder
+            title="Driver"
+            bind:expanded={() => getFolderExpanded('driver'), (value) => setFolderExpanded('driver', value)}
+          >
             <List
               bind:value={() => postureSettings.preset, setPosturePreset}
               options={POSTURE_PRESET_OPTIONS}
@@ -1873,7 +1973,10 @@
             <Checkbox bind:value={() => postureSettings.showSkeleton, setShowPostureSkeleton} label="Show Skeleton" />
           </Folder>
           {#if postureSettings.advanced}
-            <Folder title="Posture Target">
+            <Folder
+              title="Posture Target"
+              bind:expanded={() => getFolderExpanded('postureTarget'), (value) => setFolderExpanded('postureTarget', value)}
+            >
               {#if postureReport}
                 {#each postureReport.metrics as metric (metric.key)}
                   {@const sliderLimits = getPlannerPostureTargetRangeControlLimits(postureSettings.preset, metric.key)}
@@ -1892,15 +1995,25 @@
             </Folder>
           {/if}
         </Pane>
-        <Pane title="Rig Settings" position="inline" bind:expanded={paneExpanded.setup}>
-          <Folder title="Enabled Modules">
+        <Pane
+          title="Rig Settings"
+          position="inline"
+          bind:expanded={() => getPaneExpanded('setup'), (value) => setPaneExpanded('setup', value)}
+        >
+          <Folder
+            title="Enabled Modules"
+            bind:expanded={() => getFolderExpanded('enabledModules'), (value) => setFolderExpanded('enabledModules', value)}
+          >
             <Checkbox bind:value={() => visibleModules.monitor, setMonitorVisible} label="Monitor" />
             {#if visibleModules.monitor}
               <Checkbox bind:value={() => visibleModules.monitorStand, setMonitorStandVisible} label="Monitor Stand" />
             {/if}
           </Folder>
           {#if visibleModules.monitor}
-            <Folder title="Monitor" expanded={false}>
+            <Folder
+              title="Monitor"
+              bind:expanded={() => getFolderExpanded('monitor'), (value) => setFolderExpanded('monitor', value)}
+            >
               <Slider
                 bind:value={() => postureSettings.monitorSizeIn, setMonitorSizeIn}
                 label="Size"
@@ -1981,7 +2094,15 @@
             </Folder>
           {/if}
           {#if visibleModules.monitor && visibleModules.monitorStand}
-            <Folder title="Monitor Stand" expanded={false}>
+            <Folder
+              title="Monitor Stand"
+              bind:expanded={() => getFolderExpanded('monitorStand'), (value) => setFolderExpanded('monitorStand', value)}
+            >
+              <List
+                bind:value={() => postureSettings.monitorStandVariant, setMonitorStandVariant}
+                options={monitorStandVariantOptions}
+                label="Variant"
+              />
               <Slider
                 bind:value={
                   () => postureSettings.monitorBottomVesaHolesToCrossBeamTopMm,
@@ -1993,28 +2114,42 @@
                 step={1}
                 format={(value) => `${value} mm`}
               />
-              <Slider
-                bind:value={() => postureSettings.monitorStandLegExtraMarginMm, setMonitorStandLegExtraMarginMm}
-                label="Leg Margin"
-                min={PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMinMm}
-                max={PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMaxMm}
-                step={PLANNER_CONTROL_STEP_MM}
-                format={(value) => `${value} mm`}
-              />
-              <Slider
-                bind:value={() => postureSettings.monitorStandFootLengthMm, setMonitorStandFootLengthMm}
-                label="Foot Length"
-                min={monitorStandFootLengthLimits.min}
-                max={monitorStandFootLengthLimits.max}
-                step={PLANNER_CONTROL_STEP_MM}
-                format={(value) => `${value} mm`}
-              />
-              <List
-                bind:value={() => postureSettings.monitorStandFeetType, setMonitorStandFeetType}
-                options={MONITOR_STAND_FEET_TYPE_OPTIONS}
-                label="Feet Type"
-              />
-              {#if postureSettings.monitorStandFeetType !== 'none'}
+              {#if postureSettings.monitorStandVariant === 'freestand'}
+                <Slider
+                  bind:value={() => postureSettings.monitorStandLegExtraMarginMm, setMonitorStandLegExtraMarginMm}
+                  label="Leg Margin"
+                  min={PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMinMm}
+                  max={PLANNER_POSTURE_LIMITS.monitorStandLegExtraMarginMaxMm}
+                  step={PLANNER_CONTROL_STEP_MM}
+                  format={(value) => `${value} mm`}
+                />
+                <Slider
+                  bind:value={() => postureSettings.monitorStandFootLengthMm, setMonitorStandFootLengthMm}
+                  label="Foot Length"
+                  min={monitorStandFootLengthLimits.min}
+                  max={monitorStandFootLengthLimits.max}
+                  step={PLANNER_CONTROL_STEP_MM}
+                  format={(value) => `${value} mm`}
+                />
+                <List
+                  bind:value={() => postureSettings.monitorStandFeetType, setMonitorStandFeetType}
+                  options={MONITOR_STAND_FEET_TYPE_OPTIONS}
+                  label="Feet Type"
+                />
+              {:else}
+                <Slider
+                  bind:value={
+                    () => postureSettings.monitorStandIntegratedPlateLengthMm,
+                    setMonitorStandIntegratedPlateLengthMm
+                  }
+                  label="Plate Length"
+                  min={PLANNER_POSTURE_LIMITS.monitorStandIntegratedPlateLengthMinMm}
+                  max={PLANNER_POSTURE_LIMITS.monitorStandIntegratedPlateLengthMaxMm}
+                  step={PLANNER_CONTROL_STEP_MM}
+                  format={(value) => `${value} mm`}
+                />
+              {/if}
+              {#if postureSettings.monitorStandVariant === 'freestand' && postureSettings.monitorStandFeetType !== 'none'}
                 <Slider
                   bind:value={() => postureSettings.monitorStandFeetHeightMm, setMonitorStandFeetHeightMm}
                   label="Feet Height"
@@ -2027,7 +2162,10 @@
               <Button on:click={resetMonitorStandModule} label="" title="Reset" />
             </Folder>
           {/if}
-          <Folder title="Base" expanded={false}>
+          <Folder
+            title="Base"
+            bind:expanded={() => getFolderExpanded('base'), (value) => setFolderExpanded('base', value)}
+          >
             <Slider
               bind:value={() => plannerInput.baseLengthMm, setBaseLengthMm}
               label="Length"
@@ -2077,7 +2215,10 @@
             />
             <Button on:click={resetBaseModule} label="" title="Reset" />
           </Folder>
-          <Folder title="Seat" expanded={false}>
+          <Folder
+            title="Seat"
+            bind:expanded={() => getFolderExpanded('seat'), (value) => setFolderExpanded('seat', value)}
+          >
             <Slider
               bind:value={() => plannerInput.seatHeightFromBaseInnerBeamsMm, setSeatHeightFromBaseInnerBeamsMm}
               label="Height"
@@ -2121,7 +2262,10 @@
             />
             <Button on:click={resetSeatModule} label="" title="Reset" />
           </Folder>
-          <Folder title="Wheel" expanded={false}>
+          <Folder
+            title="Wheel"
+            bind:expanded={() => getFolderExpanded('wheel'), (value) => setFolderExpanded('wheel', value)}
+          >
             <Slider
               bind:value={() => plannerInput.wheelDiameterMm, setWheelDiameterMm}
               label="Diameter"
@@ -2156,7 +2300,10 @@
             />
             <Button on:click={resetWheelModule} label="" title="Reset" />
           </Folder>
-          <Folder title="Steering Column" expanded={false}>
+          <Folder
+            title="Steering Column"
+            bind:expanded={() => getFolderExpanded('steeringColumn'), (value) => setFolderExpanded('steeringColumn', value)}
+          >
             <Slider
               bind:value={() => plannerInput.steeringColumnHeightMm, setSteeringColumnHeightMm}
               label="Height"
@@ -2183,7 +2330,10 @@
             />
             <Button on:click={resetSteeringColumnModule} label="" title="Reset" />
           </Folder>
-          <Folder title="Pedal Tray" expanded={false}>
+          <Folder
+            title="Pedal Tray"
+            bind:expanded={() => getFolderExpanded('pedalTray'), (value) => setFolderExpanded('pedalTray', value)}
+          >
             <Slider
               bind:value={() => plannerInput.pedalTrayDepthMm, setPedalTrayDepthMm}
               label="Depth"
@@ -2202,7 +2352,10 @@
             />
             <Button on:click={resetPedalTrayModule} label="Reset" title="Reset" />
           </Folder>
-          <Folder title="Pedals" expanded={false}>
+          <Folder
+            title="Pedals"
+            bind:expanded={() => getFolderExpanded('pedals'), (value) => setFolderExpanded('pedals', value)}
+          >
             <Slider
               bind:value={() => plannerInput.pedalLengthMm, setPedalLengthMm}
               label="Length"
@@ -2262,8 +2415,15 @@
             <Button on:click={resetPedalsModule} label="" title="Reset" />
           </Folder>
         </Pane>
-        <Pane title="Cutlist Optimizer" position="inline" bind:expanded={paneExpanded.optimizer}>
-          <Folder title="Settings">
+        <Pane
+          title="Cutlist Optimizer"
+          position="inline"
+          bind:expanded={() => getPaneExpanded('optimizer'), (value) => setPaneExpanded('optimizer', value)}
+        >
+          <Folder
+            title="Settings"
+            bind:expanded={() => getFolderExpanded('optimizerSettings'), (value) => setFolderExpanded('optimizerSettings', value)}
+          >
             <List
               bind:value={() => optimizationSettings.mode, setOptimizerMode}
               options={OPTIMIZER_MODE_OPTIONS}
@@ -2315,28 +2475,19 @@
               />
             {/if}
           </Folder>
-          {#if enabledHardwareTypes.length > 0}
-            <Folder title="Hardware">
-              {#if enabledHardwareTypes.includes('rubberFeet')}
-                <Folder title="Rubber Feet">
-                  <Slider
-                    bind:value={
-                      () => optimizationSettings.hardwareUnitCosts.rubberFeet,
-                      (value) => setHardwareUnitCost('rubberFeet', value)
-                    }
-                    label="Cost / Unit"
-                    min={0}
-                    max={OPTIMIZER_LIMITS.hardwareUnitCostMax}
-                    step={1}
-                    format={formatCurrencyValue}
-                  />
-                </Folder>
-              {/if}
-            </Folder>
-          {/if}
-          <Folder title="Stock Configuration" bind:expanded={stockConfigurationExpanded}>
+          <Folder
+            title="Stock Configuration"
+            bind:expanded={() =>
+              getFolderExpanded('stockConfiguration'), (value) => setFolderExpanded('stockConfiguration', value)}
+          >
             {#each PROFILE_TYPES as profileType (profileType)}
-              <Folder title={profileType}>
+              <Folder
+                title={profileType}
+                bind:expanded={
+                  () => getStockProfileFolderExpanded(profileType),
+                  (value) => setStockProfileFolderExpanded(profileType, value)
+                }
+              >
                 <Slider
                   bind:value={
                     () => optimizationSettings.profileWeightsKgPerMeter[profileType],
@@ -2350,7 +2501,13 @@
                 />
                 {#if stockOptionsByProfile[profileType].length > 0}
                   {#each stockOptionsByProfile[profileType] as stockOption (stockOption.id)}
-                    <Folder title={formatStockLengthMeters(stockOption.lengthMm)}>
+                    <Folder
+                      title={formatStockLengthMeters(stockOption.lengthMm)}
+                      bind:expanded={
+                        () => getStockOptionFolderExpanded(stockOption.id),
+                        (value) => setStockOptionFolderExpanded(stockOption.id, value)
+                      }
+                    >
                       <Slider
                         bind:value={
                           () => stockOption.lengthMm, (value) => updateStockOptionLengthMm(stockOption.id, value)
@@ -2380,6 +2537,34 @@
                 <Button on:click={() => addStockOption(profileType)} label="" title="Add stock length" />
               </Folder>
             {/each}
+            {#if enabledHardwareTypes.length > 0}
+              <Folder
+                title="Hardware"
+                bind:expanded={() =>
+                  getFolderExpanded('optimizerHardware'), (value) => setFolderExpanded('optimizerHardware', value)}
+              >
+                {#if enabledHardwareTypes.includes('rubberFeet')}
+                  <Folder
+                    title="Rubber Feet"
+                    bind:expanded={() =>
+                      getFolderExpanded('optimizerRubberFeet'), (value) =>
+                        setFolderExpanded('optimizerRubberFeet', value)}
+                  >
+                    <Slider
+                      bind:value={
+                        () => optimizationSettings.hardwareUnitCosts.rubberFeet,
+                        (value) => setHardwareUnitCost('rubberFeet', value)
+                      }
+                      label="Cost / Unit"
+                      min={0}
+                      max={OPTIMIZER_LIMITS.hardwareUnitCostMax}
+                      step={1}
+                      format={formatCurrencyValue}
+                    />
+                  </Folder>
+                {/if}
+              </Folder>
+            {/if}
           </Folder>
         </Pane>
       </div>

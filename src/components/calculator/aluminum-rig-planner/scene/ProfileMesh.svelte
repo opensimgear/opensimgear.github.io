@@ -1,7 +1,13 @@
 <script lang="ts">
   import { T } from '@threlte/core';
   import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
-  import { BoxGeometry, BufferGeometry, CylinderGeometry, Float32BufferAttribute, TorusGeometry } from 'three';
+  import {
+    BoxGeometry,
+    BufferGeometry,
+    CylinderGeometry,
+    Float32BufferAttribute,
+    TorusGeometry,
+  } from 'three';
 
   import { ENDCAP_MATERIAL, PROFILE_APPEARANCE } from '../constants/profile';
   import {
@@ -159,6 +165,95 @@
       return geometry;
     }
 
+    if (mesh.shape === 'trapezoid-plate') {
+      const [length, thickness, height] = mesh.size;
+      const halfLength = length / 2;
+      const halfThickness = thickness / 2;
+      const halfHeight = height / 2;
+      const bottomRise = Math.min(Math.max(mesh.trapezoidPlateBottomRise ?? 0, 0), height - Number.EPSILON);
+      const cornerRadius = Math.min(Math.max(mesh.trapezoidPlateCornerRadius ?? 0, 0), height / 2, length / 2);
+      const cornerSegments = 8;
+      const corners = [
+        { x: -halfLength, z: -halfHeight },
+        { x: halfLength, z: -halfHeight + bottomRise },
+        { x: halfLength, z: halfHeight },
+        { x: -halfLength, z: halfHeight },
+      ];
+      const outline = corners.flatMap((corner, index) => {
+        const previous = corners[(index + corners.length - 1) % corners.length];
+        const next = corners[(index + 1) % corners.length];
+        const previousLength = Math.hypot(previous.x - corner.x, previous.z - corner.z);
+        const nextLength = Math.hypot(next.x - corner.x, next.z - corner.z);
+        const radius = Math.min(cornerRadius, previousLength / 2, nextLength / 2);
+
+        if (radius <= Number.EPSILON) {
+          return [corner];
+        }
+
+        const start = {
+          x: corner.x + ((previous.x - corner.x) / previousLength) * radius,
+          z: corner.z + ((previous.z - corner.z) / previousLength) * radius,
+        };
+        const end = {
+          x: corner.x + ((next.x - corner.x) / nextLength) * radius,
+          z: corner.z + ((next.z - corner.z) / nextLength) * radius,
+        };
+        const points = [];
+
+        for (let step = 0; step <= cornerSegments; step += 1) {
+          const t = step / cornerSegments;
+          const inverseT = 1 - t;
+
+          points.push({
+            x: inverseT * inverseT * start.x + 2 * inverseT * t * corner.x + t * t * end.x,
+            z: inverseT * inverseT * start.z + 2 * inverseT * t * corner.z + t * t * end.z,
+          });
+        }
+
+        return points;
+      });
+      const vertices: number[] = [];
+      const normals: number[] = [];
+      const indices: number[] = [];
+
+      const pushVertex = (x: number, y: number, z: number, normal: [number, number, number]) => {
+        vertices.push(x, y, z);
+        normals.push(...normal);
+        return vertices.length / 3 - 1;
+      };
+
+      const frontIndices = outline.map((point) => pushVertex(point.x, -halfThickness, point.z, [0, -1, 0]));
+      const backIndices = outline.map((point) => pushVertex(point.x, halfThickness, point.z, [0, 1, 0]));
+
+      for (let index = 1; index < outline.length - 1; index += 1) {
+        indices.push(frontIndices[0], frontIndices[index], frontIndices[index + 1]);
+        indices.push(backIndices[0], backIndices[index + 1], backIndices[index]);
+      }
+
+      for (let index = 0; index < outline.length; index += 1) {
+        const nextIndex = (index + 1) % outline.length;
+        const point = outline[index];
+        const nextPoint = outline[nextIndex];
+        const edgeX = nextPoint.x - point.x;
+        const edgeZ = nextPoint.z - point.z;
+        const edgeLength = Math.hypot(edgeX, edgeZ) || 1;
+        const normal = [edgeZ / edgeLength, 0, -edgeX / edgeLength] as [number, number, number];
+        const frontStart = pushVertex(point.x, -halfThickness, point.z, normal);
+        const backStart = pushVertex(point.x, halfThickness, point.z, normal);
+        const backEnd = pushVertex(nextPoint.x, halfThickness, nextPoint.z, normal);
+        const frontEnd = pushVertex(nextPoint.x, -halfThickness, nextPoint.z, normal);
+
+        indices.push(frontStart, backStart, backEnd, frontStart, backEnd, frontEnd);
+      }
+
+      const geometry = new BufferGeometry();
+
+      geometry.setAttribute('position', new Float32BufferAttribute(vertices, 3));
+      geometry.setAttribute('normal', new Float32BufferAttribute(normals, 3));
+      geometry.setIndex(indices);
+      return geometry;
+    }
+
     const [width, height, depth] = mesh.size;
     const minDimension = Math.min(width, height, depth);
     const radiusLimit = Math.max(0, minDimension / 2 - Number.EPSILON);
@@ -189,13 +284,14 @@
 {:else}
   <T.Mesh
     castShadow
-    receiveShadow
+    receiveShadow={mesh.shape !== 'trapezoid-plate'}
     geometry={fallbackGeometry}
     position={mesh.position}
     rotation={mesh.rotation ?? PROFILE_APPEARANCE.zeroRotation}
   >
     <T.MeshStandardMaterial
       color={materialProps.color}
+      flatShading={mesh.shape === 'trapezoid-plate'}
       metalness={materialProps.metalness}
       roughness={materialProps.roughness}
     />

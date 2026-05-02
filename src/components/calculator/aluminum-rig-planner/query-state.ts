@@ -18,10 +18,17 @@ import {
   MONITOR_ASPECT_RATIO_OPTIONS,
   MONITOR_CURVATURE_OPTIONS,
   MONITOR_STAND_FEET_TYPE_OPTIONS,
+  MONITOR_STAND_VARIANT_OPTIONS,
   MONITOR_VESA_OPTIONS,
   PLANNER_POSTURE_LIMITS,
 } from './constants/posture';
 import { BASE_BEAM_HEIGHT_MM } from './constants/profile';
+import {
+  type AluminumRigFolderExpandedState,
+  type AluminumRigPaneExpandedState,
+  getAluminumRigFolderExpandedState,
+  getAluminumRigPaneExpandedState,
+} from './constants/ui';
 import {
   getArcCenterDistanceMm,
   getArcCenterFovDeg,
@@ -41,6 +48,7 @@ import type {
   PlannerMonitorAspectRatio,
   PlannerMonitorCurvature,
   PlannerMonitorStandFeetType,
+  PlannerMonitorStandVariant,
   PlannerMonitorVesaType,
   PlannerOptimizationSettings,
   PlannerPosturePreset,
@@ -88,6 +96,8 @@ export type PlannerQueryState = Partial<Omit<PlannerInput, 'baseFeetType'>> & {
     monitorAspectRatio?: unknown;
     monitorCurvature?: unknown;
     monitorStandFeetType?: unknown;
+    monitorStandVariant?: unknown;
+    monitorStandIntegratedPlateLengthMm?: unknown;
     monitorVesaType?: unknown;
     monitorMidpointXMm?: unknown;
     monitorMidpointYMm?: unknown;
@@ -99,6 +109,11 @@ export type PlannerQueryState = Partial<Omit<PlannerInput, 'baseFeetType'>> & {
     targetRangesByPreset?: unknown;
   };
   modules?: Partial<Record<keyof PlannerVisibleModules, unknown>>;
+  ui?: {
+    panes?: Partial<Record<keyof AluminumRigPaneExpandedState, unknown>>;
+    folders?: Partial<Record<keyof AluminumRigFolderExpandedState, unknown>>;
+    stockOptions?: Record<string, unknown>;
+  };
 };
 
 let stockOptionIdSequence = 0;
@@ -262,6 +277,10 @@ function isMonitorStandFeetType(value: unknown): value is PlannerMonitorStandFee
   return MONITOR_STAND_FEET_TYPE_OPTIONS.some((option) => option.value === value);
 }
 
+function isMonitorStandVariant(value: unknown): value is PlannerMonitorStandVariant {
+  return MONITOR_STAND_VARIANT_OPTIONS.some((option) => option.value === value);
+}
+
 function isFeetType(value: unknown): value is PlannerFeetType {
   return BASE_FEET_TYPE_OPTIONS.some((option) => option.value === value);
 }
@@ -387,6 +406,11 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
           PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm,
           PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm
         );
+  const rawMonitorStandVariant = isMonitorStandVariant(state?.monitorStandVariant)
+    ? state.monitorStandVariant
+    : defaults.monitorStandVariant;
+  const monitorStandVariant =
+    rawMonitorStandVariant === 'integrated' && monitorSizeIn > 32 ? 'freestand' : rawMonitorStandVariant;
 
   return {
     preset,
@@ -419,6 +443,12 @@ function sanitizePostureSettings(state: PlannerQueryState['posture']) {
     monitorTripleScreen,
     monitorArcCenterAtEyes,
     monitorVesaType,
+    monitorStandVariant,
+    monitorStandIntegratedPlateLengthMm: clampNumber(
+      readNumber(state?.monitorStandIntegratedPlateLengthMm, defaults.monitorStandIntegratedPlateLengthMm),
+      PLANNER_POSTURE_LIMITS.monitorStandIntegratedPlateLengthMinMm,
+      PLANNER_POSTURE_LIMITS.monitorStandIntegratedPlateLengthMaxMm
+    ),
     monitorBottomVesaHoleDistanceMm: clampNumber(
       readNumber(state?.monitorBottomVesaHoleDistanceMm, defaultMonitorBottomVesaHoleDistanceMm),
       PLANNER_POSTURE_LIMITS.monitorBottomVesaHoleDistanceMinMm,
@@ -451,6 +481,30 @@ function sanitizeVisibleModules(state: PlannerQueryState['modules']): PlannerVis
   return {
     monitor,
     monitorStand,
+  };
+}
+
+function sanitizeBooleanState<TState extends Record<string, boolean>>(state: unknown, defaults: TState): TState {
+  const source = isRecord(state) ? state : {};
+
+  return Object.fromEntries(
+    Object.entries(defaults).map(([key, fallback]) => [key, typeof source[key] === 'boolean' ? source[key] : fallback])
+  ) as TState;
+}
+
+function sanitizeUiState(state: PlannerQueryState['ui']) {
+  const stockOptions = isRecord(state?.stockOptions)
+    ? Object.fromEntries(
+        Object.entries(state.stockOptions).flatMap(([key, value]) =>
+          typeof value === 'boolean' && key.length > 0 ? [[key, value]] : []
+        )
+      )
+    : {};
+
+  return {
+    paneExpanded: sanitizeBooleanState(state?.panes, getAluminumRigPaneExpandedState(false)),
+    folderExpanded: sanitizeBooleanState(state?.folders, getAluminumRigFolderExpandedState()),
+    stockOptionFolderExpanded: stockOptions,
   };
 }
 
@@ -512,5 +566,6 @@ export function mergePlannerQueryState(defaultInput: PlannerInput, state: Planne
     optimizationSettings: sanitizeOptimizationSettings(state.optimizer),
     postureSettings: sanitizePostureSettings(state.posture),
     visibleModules: sanitizeVisibleModules(state.modules),
+    uiState: sanitizeUiState(state.ui),
   };
 }

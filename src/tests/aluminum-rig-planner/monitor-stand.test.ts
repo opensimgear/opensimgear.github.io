@@ -4,8 +4,10 @@ import {
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   PLANNER_POSTURE_LIMITS,
 } from '~/components/calculator/aluminum-rig-planner/constants/posture';
+import { DEFAULT_PLANNER_INPUT } from '~/components/calculator/aluminum-rig-planner/constants/planner';
 import {
   createMonitorStandModule,
+  getEffectiveMonitorStandVariant,
   getMonitorStandLayoutMm,
   getMonitorVesaDimensionsMm,
 } from '~/components/calculator/aluminum-rig-planner/modules/monitor-stand';
@@ -206,6 +208,200 @@ describe('aluminum rig planner monitor stand module', () => {
     expect(meshes.find((mesh) => mesh.id === 'monitor-stand-crossbeam')?.profileType).toBe('alu40x40');
     expect(meshes.find((mesh) => mesh.id === 'monitor-stand-left-leg')?.profileType).toBe('alu80x40');
     expect(meshes.find((mesh) => mesh.id === 'monitor-stand-left-foot')?.profileType).toBe('alu40x40');
+  });
+
+  it('generates integrated plates, 4040 uprights, and top T arms up to 32 inch monitors', () => {
+    const meshes = createMonitorStandModule(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandVariant: 'integrated',
+      },
+      '#222222',
+      DEFAULT_PLANNER_INPUT
+    );
+
+    expect(
+      getEffectiveMonitorStandVariant({ ...DEFAULT_PLANNER_POSTURE_SETTINGS, monitorStandVariant: 'integrated' })
+    ).toBe('integrated');
+    expect(meshes.map((mesh) => mesh.id)).toEqual(
+      expect.arrayContaining([
+        'monitor-stand-crossbeam',
+        'monitor-stand-integrated-left-plate',
+        'monitor-stand-integrated-right-plate',
+        'monitor-stand-integrated-left-upright',
+        'monitor-stand-integrated-right-upright',
+        'monitor-stand-integrated-left-top-arm',
+        'monitor-stand-integrated-right-top-arm',
+      ])
+    );
+    expect(meshes.some((mesh) => mesh.id === 'monitor-stand-left-foot')).toBe(false);
+    expect(meshes.some((mesh) => mesh.id === 'monitor-stand-left-leg')).toBe(false);
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.profileType).toBeUndefined();
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.shape).toBe('trapezoid-plate');
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.materialKind).toBe('metal');
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.size[1]).toBe(0.006);
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.size[2]).toBe(0.16);
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.trapezoidPlateBottomRise).toBe(
+      0.04
+    );
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.trapezoidPlateCornerRadius).toBe(
+      0.003
+    );
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate')?.color).not.toBe('#222222');
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-upright')?.profileType).toBe('alu40x40');
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-top-arm')?.profileType).toBe('alu40x40');
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-top-arm')?.rotation?.[2]).toBeCloseTo(
+      Math.PI / 2
+    );
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-upright')?.openEnds).toEqual(['negative']);
+    expect(meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-top-arm')?.openEnds).toEqual(['negative']);
+  });
+
+  it('butts integrated top arm negative X ends to the crossbeam positive X face and extends past uprights', () => {
+    const layout = getMonitorStandLayoutMm(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandVariant: 'integrated',
+      },
+      DEFAULT_PLANNER_INPUT
+    );
+    const meshes = createMonitorStandModule(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandVariant: 'integrated',
+      },
+      '#222222',
+      DEFAULT_PLANNER_INPUT
+    );
+    const crossBeam = meshes.find((mesh) => mesh.id === 'monitor-stand-crossbeam');
+    const topArm = meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-top-arm');
+
+    expect(topArm?.position[2]).toBeCloseTo(crossBeam?.position[2] ?? 0);
+    expect((topArm?.position[0] ?? 0) - (topArm?.size[1] ?? 0) / 2).toBeCloseTo(
+      (crossBeam?.position[0] ?? 0) + (crossBeam?.size[0] ?? 0) / 2
+    );
+    expect(layout.integratedMounts[0]?.topArmCenterXMm).toBeGreaterThan(layout.crossBeamCenterXMm);
+    expect((topArm?.position[0] ?? 0) + (topArm?.size[1] ?? 0) / 2).toBeGreaterThanOrEqual(
+      (layout.integratedMounts[0]?.verticalCenterXMm ?? 0) / 1000 + 0.08
+    );
+  });
+
+  it('starts integrated uprights below the steering column top and aligns them with steering pillars', () => {
+    const meshes = createMonitorStandModule(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandVariant: 'integrated',
+      },
+      '#222222',
+      DEFAULT_PLANNER_INPUT
+    );
+    const leftPlate = meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate');
+    const rightPlate = meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-right-plate');
+    const leftUpright = meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-upright');
+    const leftTopArm = meshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-top-arm');
+    const steeringColumnTopMm = 80 + DEFAULT_PLANNER_INPUT.steeringColumnHeightMm;
+    const uprightBottomMm = ((leftUpright?.position[2] ?? 0) - (leftUpright?.size[2] ?? 0) / 2) * 1000;
+
+    expect(uprightBottomMm).toBeCloseTo(80 + DEFAULT_PLANNER_INPUT.steeringColumnHeightMm * 0.8);
+    expect(uprightBottomMm).toBeLessThan(steeringColumnTopMm);
+    expect((leftUpright?.position[2] ?? 0) + (leftUpright?.size[2] ?? 0) / 2).toBeCloseTo(
+      (leftTopArm?.position[2] ?? 0) - (leftTopArm?.size[2] ?? 0) / 2
+    );
+    expect((leftPlate?.position[1] ?? 0) + (leftPlate?.size[1] ?? 0) / 2).toBeCloseTo(
+      -DEFAULT_PLANNER_INPUT.baseWidthMm / 2 / 1000
+    );
+    expect((rightPlate?.position[1] ?? 0) - (rightPlate?.size[1] ?? 0) / 2).toBeCloseTo(
+      DEFAULT_PLANNER_INPUT.baseWidthMm / 2 / 1000
+    );
+    expect(leftUpright?.position[1]).toBeCloseTo(-(DEFAULT_PLANNER_INPUT.baseWidthMm / 2 - 20) / 1000);
+    expect((leftPlate?.position[0] ?? 0) - (leftPlate?.size[0] ?? 0) / 2).toBeCloseTo(
+      (DEFAULT_PLANNER_INPUT.seatBaseDepthMm + DEFAULT_PLANNER_INPUT.steeringColumnDistanceMm + 40 - 40) / 1000
+    );
+    expect((leftPlate?.position[0] ?? 0) + (leftPlate?.size[0] ?? 0) / 2).toBeCloseTo(
+      (leftUpright?.position[0] ?? 0) + (leftUpright?.size[0] ?? 0) / 2
+    );
+  });
+
+  it('uses integrated plate length and fixed vertical edge heights', () => {
+    const shortMeshes = createMonitorStandModule(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandVariant: 'integrated',
+        monitorStandIntegratedPlateLengthMm: 300,
+      },
+      '#222222',
+      DEFAULT_PLANNER_INPUT
+    );
+    const cappedMeshes = createMonitorStandModule(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandVariant: 'integrated',
+        monitorStandIntegratedPlateLengthMm: 500,
+      },
+      '#222222',
+      DEFAULT_PLANNER_INPUT
+    );
+    const shortPlate = shortMeshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate');
+    const cappedPlate = cappedMeshes.find((mesh) => mesh.id === 'monitor-stand-integrated-left-plate');
+
+    expect(shortPlate?.size[0]).toBe(0.3);
+    expect(shortPlate?.size[2]).toBe(0.16);
+    expect(shortPlate?.trapezoidPlateBottomRise).toBe(0.04);
+    expect(cappedPlate?.size[0]).toBe(0.4);
+    expect(cappedPlate?.trapezoidPlateBottomRise).toBe(0.04);
+  });
+
+  it('falls back from integrated to freestand above 32 inch monitors', () => {
+    const settings = {
+      ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+      monitorSizeIn: 33,
+      monitorStandVariant: 'integrated' as const,
+    };
+    const layout = getMonitorStandLayoutMm(monitorDebug, settings, DEFAULT_PLANNER_INPUT);
+    const meshes = createMonitorStandModule(monitorDebug, settings, '#222222', DEFAULT_PLANNER_INPUT);
+
+    expect(layout.variant).toBe('freestand');
+    expect(getEffectiveMonitorStandVariant(settings)).toBe('freestand');
+    expect(meshes.some((mesh) => mesh.id === 'monitor-stand-left-foot')).toBe(true);
+    expect(meshes.some((mesh) => mesh.id.includes('integrated'))).toBe(false);
+  });
+
+  it('keeps side cross beams for integrated triple monitors', () => {
+    const layout = getMonitorStandLayoutMm(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandVariant: 'integrated',
+        monitorTripleScreen: true,
+      },
+      DEFAULT_PLANNER_INPUT
+    );
+    const meshes = createMonitorStandModule(
+      monitorDebug,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandVariant: 'integrated',
+        monitorTripleScreen: true,
+      },
+      '#222222',
+      DEFAULT_PLANNER_INPUT
+    );
+
+    expect(layout.variant).toBe('integrated');
+    expect(layout.crossBeams.map((crossBeam) => crossBeam.id)).toEqual([
+      'monitor-stand-crossbeam',
+      'monitor-stand-left-crossbeam',
+      'monitor-stand-right-crossbeam',
+    ]);
+    expect(meshes.some((mesh) => mesh.id === 'monitor-stand-left-crossbeam')).toBe(true);
+    expect(meshes.some((mesh) => mesh.id === 'monitor-stand-right-crossbeam')).toBe(true);
+    expect(meshes.some((mesh) => mesh.id.endsWith('support-leg'))).toBe(false);
   });
 
   it('keeps cross beams fixed while feet height raises feet and shortens legs', () => {

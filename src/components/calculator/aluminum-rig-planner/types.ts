@@ -40,6 +40,7 @@ export type PlannerMonitorCurvature =
   | '1000r'
   | '800r';
 export type PlannerMonitorVesaType = '75x75' | '100x100' | '200x100' | '200x200' | '300x200' | '400x200' | '400x400';
+export type PlannerMonitorStandVariant = 'freestand' | 'integrated';
 export type PlannerFeetType = 'none' | 'rubber';
 export type PlannerMonitorStandFeetType = PlannerFeetType;
 
@@ -82,6 +83,8 @@ export type PlannerPostureSettings<Preset extends PlannerPosturePreset = Planner
   monitorTripleScreen: boolean;
   monitorArcCenterAtEyes: boolean;
   monitorVesaType: PlannerMonitorVesaType;
+  monitorStandVariant: PlannerMonitorStandVariant;
+  monitorStandIntegratedPlateLengthMm: number;
   monitorBottomVesaHoleDistanceMm: number;
   monitorBottomVesaHolesToCrossBeamTopMm: number;
   monitorStandLegExtraMarginMm: number;

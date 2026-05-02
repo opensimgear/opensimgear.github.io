@@ -63,7 +63,7 @@
   const monitorModule = $derived(visibleModules.monitor ? createMonitorModule(postureReport, postureSettings) : []);
   const monitorStandModule = $derived(
     visibleModules.monitor && visibleModules.monitorStand && postureReport.monitorDebug
-      ? createMonitorStandModule(postureReport.monitorDebug, postureSettings, profileColor, input.baseWidthMm)
+      ? createMonitorStandModule(postureReport.monitorDebug, postureSettings, profileColor, input)
       : []
   );
   const postureSkeleton = $derived(

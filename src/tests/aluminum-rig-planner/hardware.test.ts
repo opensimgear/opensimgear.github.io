@@ -30,6 +30,14 @@ const monitorStandLayout = getMonitorStandLayoutMm(
   DEFAULT_PLANNER_POSTURE_SETTINGS,
   DEFAULT_PLANNER_INPUT.baseWidthMm
 );
+const integratedMonitorStandLayout = getMonitorStandLayoutMm(
+  monitorDebug,
+  {
+    ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+    monitorStandVariant: 'integrated',
+  },
+  DEFAULT_PLANNER_INPUT
+);
 
 describe('aluminum rig planner hardware summary', () => {
   it('counts enabled rubber feet and applies unit cost', () => {
@@ -83,6 +91,21 @@ describe('aluminum rig planner hardware summary', () => {
       hiddenMonitorStand,
       DEFAULT_PLANNER_POSTURE_SETTINGS,
       monitorStandLayout,
+      DEFAULT_PLANNER_OPTIMIZATION_SETTINGS
+    );
+
+    expect(rows[0]?.quantity).toBe(4);
+  });
+
+  it('does not count monitor stand feet for integrated stand variant', () => {
+    const rows = createPlannerHardwareSummaryRows(
+      DEFAULT_PLANNER_INPUT,
+      visibleMonitorStand,
+      {
+        ...DEFAULT_PLANNER_POSTURE_SETTINGS,
+        monitorStandVariant: 'integrated',
+      },
+      integratedMonitorStandLayout,
       DEFAULT_PLANNER_OPTIMIZATION_SETTINGS
     );
 

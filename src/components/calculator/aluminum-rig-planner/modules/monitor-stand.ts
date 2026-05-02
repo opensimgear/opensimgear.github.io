@@ -1,4 +1,5 @@
 import {
+  BASE_BEAM_HEIGHT_MM,
   MODULE_PROFILE_MATERIAL,
   UPRIGHT_BEAM_DEPTH_MM,
   UPRIGHT_BEAM_WIDTH_MM,
@@ -17,7 +18,11 @@ import {
   type MeshSpec,
 } from '~/components/calculator/aluminum-rig-planner/modules/shared';
 import type { PlannerPostureMonitorDebug } from '~/components/calculator/aluminum-rig-planner/posture/posture-report';
-import type { PlannerPosturePreset, PlannerPostureSettings } from '~/components/calculator/aluminum-rig-planner/types';
+import type {
+  PlannerInput,
+  PlannerPosturePreset,
+  PlannerPostureSettings,
+} from '~/components/calculator/aluminum-rig-planner/types';
 
 const PROFILE_SHORT_MM = 40;
 const MONITOR_STAND_BEHIND_MONITOR_OFFSET_MM = 60;
@@ -32,6 +37,18 @@ const MONITOR_STAND_SINGLE_4040_CROSS_BEAM_MAX_MONITOR_SIZE_IN = 48;
 const MONITOR_STAND_SIDE_LEG_MIN_MONITOR_SIZE_IN = 43;
 const MONITOR_STAND_LEG_EXTRA_MARGIN_MIN_MM = 40;
 const MONITOR_STAND_SIDE_LEG_POSITION_RATIO = 0.9;
+const INTEGRATED_MONITOR_STAND_MAX_MONITOR_SIZE_IN = 32;
+const INTEGRATED_MONITOR_STAND_TOP_ARM_FRONT_OVERHANG_MM = 80;
+const INTEGRATED_MONITOR_STAND_PLATE_THICKNESS_MM = 6;
+const INTEGRATED_MONITOR_STAND_PLATE_LONG_EDGE_HEIGHT_MM = 120;
+const INTEGRATED_MONITOR_STAND_PLATE_SHORT_EDGE_HEIGHT_MM = 80;
+const INTEGRATED_MONITOR_STAND_PLATE_CORNER_RADIUS_MM = 3;
+const INTEGRATED_MONITOR_STAND_VERTICAL_START_HEIGHT_RATIO = 0.8;
+const INTEGRATED_MONITOR_STAND_STEEL_COLOR = '#7f858b';
+const INTEGRATED_MONITOR_STAND_STEEL_MATERIAL = {
+  metalness: 0.72,
+  roughness: 0.42,
+} as const;
 const MONITOR_STAND_RUBBER_FOOT_TOP_LENGTH_MM = 80;
 const MONITOR_STAND_RUBBER_FOOT_TOP_WIDTH_MM = 40;
 const MONITOR_STAND_RUBBER_FOOT_BOTTOM_LENGTH_MM = 70;
@@ -60,7 +77,27 @@ export type MonitorStandSideLegLayoutMm = {
   yawRadians: number;
 };
 
+export type MonitorStandIntegratedMountLayoutMm = {
+  side: 'left' | 'right';
+  plateCenterXMm: number;
+  plateCenterYMm: number;
+  plateCenterZMm: number;
+  plateLengthMm: number;
+  plateThicknessMm: number;
+  plateHeightMm: number;
+  plateBottomRiseMm: number;
+  plateCornerRadiusMm: number;
+  verticalCenterXMm: number;
+  verticalCenterYMm: number;
+  verticalCenterZMm: number;
+  verticalLengthMm: number;
+  topArmCenterXMm: number;
+  topArmCenterYMm: number;
+  topArmLengthMm: number;
+};
+
 export type MonitorStandLayoutMm = {
+  variant: 'freestand' | 'integrated';
   monitorBottomHeightMm: number;
   bottomVesaHoleHeightMm: number;
   topVesaHoleHeightMm: number;
@@ -69,6 +106,7 @@ export type MonitorStandLayoutMm = {
   crossBeamLengthMm: number;
   crossBeams: MonitorStandCrossBeamLayoutMm[];
   sideLegs: MonitorStandSideLegLayoutMm[];
+  integratedMounts: MonitorStandIntegratedMountLayoutMm[];
   internalWidthMm: number;
   legTopHeightMm: number;
   legBottomHeightMm: number;
@@ -98,17 +136,104 @@ function getOffsetPointMm(position: [number, number, number], yawRadians: number
 function getEffectiveFeetHeightMm(settings: PlannerPostureSettings<PlannerPosturePreset>) {
   return settings.monitorStandFeetType === 'rubber'
     ? Math.max(
-        PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm,
-        Math.min(PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm, settings.monitorStandFeetHeightMm)
-      )
+      PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMinMm,
+      Math.min(PLANNER_POSTURE_LIMITS.monitorStandFeetHeightMaxMm, settings.monitorStandFeetHeightMm)
+    )
     : 0;
+}
+
+export function getEffectiveMonitorStandVariant(settings: PlannerPostureSettings<PlannerPosturePreset>) {
+  return settings.monitorStandVariant === 'integrated' &&
+    settings.monitorSizeIn <= INTEGRATED_MONITOR_STAND_MAX_MONITOR_SIZE_IN
+    ? 'integrated'
+    : 'freestand';
+}
+
+function getBaseWidthMm(inputOrBaseWidthMm: PlannerInput | number) {
+  return typeof inputOrBaseWidthMm === 'number' ? inputOrBaseWidthMm : inputOrBaseWidthMm.baseWidthMm;
+}
+
+function getIntegratedMonitorStandMountsMm(
+  inputOrBaseWidthMm: PlannerInput | number,
+  settings: PlannerPostureSettings<PlannerPosturePreset>,
+  crossBeamCenterXMm: number,
+  crossBeamCenterHeightMm: number
+): MonitorStandIntegratedMountLayoutMm[] {
+  if (typeof inputOrBaseWidthMm === 'number') {
+    return [];
+  }
+
+  const input = inputOrBaseWidthMm;
+  const steeringColumnCenterXMm = input.seatBaseDepthMm + input.steeringColumnDistanceMm + UPRIGHT_BEAM_DEPTH_MM;
+  const steeringColumnHeightMm = Math.max(
+    PROFILE_SHORT_MM,
+    input.steeringColumnHeightMm,
+    input.steeringColumnBaseHeightMm + UPRIGHT_BEAM_WIDTH_MM
+  );
+  const steeringColumnNegativeXFaceXMm = steeringColumnCenterXMm - UPRIGHT_BEAM_WIDTH_MM / 2;
+  const crossBeamPositiveXFaceMm = crossBeamCenterXMm + PROFILE_SHORT_MM / 2;
+  const configuredPlateLengthMm = Math.max(
+    PLANNER_POSTURE_LIMITS.monitorStandIntegratedPlateLengthMinMm,
+    Math.min(
+      PLANNER_POSTURE_LIMITS.monitorStandIntegratedPlateLengthMaxMm,
+      settings.monitorStandIntegratedPlateLengthMm
+    )
+  );
+  const verticalCenterXMm = steeringColumnNegativeXFaceXMm + configuredPlateLengthMm - PROFILE_SHORT_MM / 2;
+  const verticalArmPositiveXFaceXMm = verticalCenterXMm + PROFILE_SHORT_MM / 2;
+  const plateLengthMm = verticalArmPositiveXFaceXMm - steeringColumnNegativeXFaceXMm;
+  const plateHeightMm = INTEGRATED_MONITOR_STAND_PLATE_LONG_EDGE_HEIGHT_MM;
+  const plateBottomRiseMm =
+    INTEGRATED_MONITOR_STAND_PLATE_LONG_EDGE_HEIGHT_MM - INTEGRATED_MONITOR_STAND_PLATE_SHORT_EDGE_HEIGHT_MM;
+  const topArmNegativeXEndMm = crossBeamPositiveXFaceMm;
+  const topArmPositiveXEndMm = verticalCenterXMm + INTEGRATED_MONITOR_STAND_TOP_ARM_FRONT_OVERHANG_MM;
+  const topArmLengthMm = Math.max(PROFILE_SHORT_MM, topArmPositiveXEndMm - topArmNegativeXEndMm);
+  const verticalBottomHeightMm =
+    BASE_BEAM_HEIGHT_MM + steeringColumnHeightMm * INTEGRATED_MONITOR_STAND_VERTICAL_START_HEIGHT_RATIO;
+  const verticalTopHeightMm = Math.max(
+    crossBeamCenterHeightMm - PROFILE_SHORT_MM / 2,
+    verticalBottomHeightMm + PROFILE_SHORT_MM
+  );
+  const verticalLengthMm = Math.max(PROFILE_SHORT_MM, verticalTopHeightMm - verticalBottomHeightMm);
+  const verticalCenterZMm = verticalBottomHeightMm + verticalLengthMm / 2;
+  const plateCenterZMm = verticalBottomHeightMm + plateHeightMm / 2;
+
+  return [
+    { side: 'left' as const, sign: -1 },
+    { side: 'right' as const, sign: 1 },
+  ].map(({ side, sign }) => {
+    const steeringColumnCenterYMm = sign * (input.baseWidthMm / 2 - UPRIGHT_BEAM_DEPTH_MM / 2);
+    const steeringColumnExternalFaceYMm = sign * (input.baseWidthMm / 2);
+    const plateCenterYMm = steeringColumnExternalFaceYMm + sign * (INTEGRATED_MONITOR_STAND_PLATE_THICKNESS_MM / 2);
+
+    return {
+      side,
+      plateCenterXMm: steeringColumnNegativeXFaceXMm + plateLengthMm / 2,
+      plateCenterYMm,
+      plateLengthMm,
+      plateThicknessMm: INTEGRATED_MONITOR_STAND_PLATE_THICKNESS_MM,
+      plateHeightMm,
+      plateBottomRiseMm,
+      plateCornerRadiusMm: INTEGRATED_MONITOR_STAND_PLATE_CORNER_RADIUS_MM,
+      verticalCenterXMm,
+      verticalCenterYMm: steeringColumnCenterYMm,
+      verticalCenterZMm,
+      verticalLengthMm,
+      topArmCenterXMm: topArmNegativeXEndMm + topArmLengthMm / 2,
+      topArmCenterYMm: steeringColumnCenterYMm,
+      topArmLengthMm,
+      plateCenterZMm,
+    };
+  });
 }
 
 export function getMonitorStandLayoutMm(
   monitorDebug: PlannerPostureMonitorDebug,
   settings: PlannerPostureSettings<PlannerPosturePreset>,
-  baseWidthMm: number
+  inputOrBaseWidthMm: PlannerInput | number
 ): MonitorStandLayoutMm {
+  const baseWidthMm = getBaseWidthMm(inputOrBaseWidthMm);
+  const variant = getEffectiveMonitorStandVariant(settings);
   const monitorDimensions = getMonitorDimensionsMm(settings);
   const vesaDimensions = getMonitorVesaDimensionsMm(settings.monitorVesaType);
   const monitorMidpointHeightMm = monitorDebug.position[2] / 0.001;
@@ -163,57 +288,64 @@ export function getMonitorStandLayoutMm(
   } satisfies MonitorStandCrossBeamLayoutMm;
   const sideBeamLayouts = settings.monitorTripleScreen
     ? Object.entries(getTripleScreenSidePanels(monitorDebug.position, settings)).map(([side, panel]) => {
-        const sideLengthMm = Math.round(crossBeamLengthMm * MONITOR_STAND_TRIPLE_SIDE_WIDTH_RATIO);
-        const sideInnerEdgeMm = side === 'right' ? -monitorDimensions.widthMm / 2 : monitorDimensions.widthMm / 2;
-        const sideDirection = side === 'right' ? 1 : -1;
-        const sideCenterLocalYMm =
-          sideInnerEdgeMm +
-          sideDirection * (crossBeamLengthMm * MONITOR_STAND_TRIPLE_SIDE_START_RATIO + sideLengthMm / 2);
-        const center = getOffsetPointMm(
-          panel.position,
-          panel.yawRadians,
-          MONITOR_STAND_BEHIND_MONITOR_OFFSET_MM,
-          sideCenterLocalYMm
-        );
+      const sideLengthMm = Math.round(crossBeamLengthMm * MONITOR_STAND_TRIPLE_SIDE_WIDTH_RATIO);
+      const sideInnerEdgeMm = side === 'right' ? -monitorDimensions.widthMm / 2 : monitorDimensions.widthMm / 2;
+      const sideDirection = side === 'right' ? 1 : -1;
+      const sideCenterLocalYMm =
+        sideInnerEdgeMm +
+        sideDirection * (crossBeamLengthMm * MONITOR_STAND_TRIPLE_SIDE_START_RATIO + sideLengthMm / 2);
+      const center = getOffsetPointMm(
+        panel.position,
+        panel.yawRadians,
+        MONITOR_STAND_BEHIND_MONITOR_OFFSET_MM,
+        sideCenterLocalYMm
+      );
 
-        return {
-          crossBeam: {
-            id: `monitor-stand-${side}-crossbeam`,
-            centerXMm: center.xMm,
-            centerYMm: center.yMm,
-            yawRadians: panel.yawRadians,
-            lengthMm: sideLengthMm,
-            depthMm: crossBeamDepthMm,
-            heightMm: crossBeamHeightMm,
-            profileType: crossBeamProfileType,
-          } satisfies MonitorStandCrossBeamLayoutMm,
-          sideDirection,
-        };
-      })
+      return {
+        crossBeam: {
+          id: `monitor-stand-${side}-crossbeam`,
+          centerXMm: center.xMm,
+          centerYMm: center.yMm,
+          yawRadians: panel.yawRadians,
+          lengthMm: sideLengthMm,
+          depthMm: crossBeamDepthMm,
+          heightMm: crossBeamHeightMm,
+          profileType: crossBeamProfileType,
+        } satisfies MonitorStandCrossBeamLayoutMm,
+        sideDirection,
+      };
+    })
     : [];
   const sideCrossBeams = sideBeamLayouts.map((layout) => layout.crossBeam);
   const sideLegs =
-    settings.monitorTripleScreen && settings.monitorSizeIn > MONITOR_STAND_SIDE_LEG_MIN_MONITOR_SIZE_IN
+    variant === 'freestand' &&
+      settings.monitorTripleScreen &&
+      settings.monitorSizeIn > MONITOR_STAND_SIDE_LEG_MIN_MONITOR_SIZE_IN
       ? sideBeamLayouts.map(({ crossBeam, sideDirection }) => {
-          const legPositionOnBeamMm =
-            sideDirection * (crossBeam.lengthMm * (MONITOR_STAND_SIDE_LEG_POSITION_RATIO - 0.5));
-          const center = getOffsetPointMm(
-            [mm(crossBeam.centerXMm), mm(crossBeam.centerYMm), 0],
-            crossBeam.yawRadians,
-            crossBeam.depthMm / 2 + UPRIGHT_BEAM_WIDTH_MM / 2,
-            legPositionOnBeamMm
-          );
+        const legPositionOnBeamMm =
+          sideDirection * (crossBeam.lengthMm * (MONITOR_STAND_SIDE_LEG_POSITION_RATIO - 0.5));
+        const center = getOffsetPointMm(
+          [mm(crossBeam.centerXMm), mm(crossBeam.centerYMm), 0],
+          crossBeam.yawRadians,
+          crossBeam.depthMm / 2 + UPRIGHT_BEAM_WIDTH_MM / 2,
+          legPositionOnBeamMm
+        );
 
-          return {
-            id: `${crossBeam.id.replace('-crossbeam', '')}-support-leg`,
-            centerXMm: center.xMm,
-            centerYMm: center.yMm,
-            yawRadians: crossBeam.yawRadians,
-          } satisfies MonitorStandSideLegLayoutMm;
-        })
+        return {
+          id: `${crossBeam.id.replace('-crossbeam', '')}-support-leg`,
+          centerXMm: center.xMm,
+          centerYMm: center.yMm,
+          yawRadians: crossBeam.yawRadians,
+        } satisfies MonitorStandSideLegLayoutMm;
+      })
+      : [];
+  const integratedMounts =
+    variant === 'integrated'
+      ? getIntegratedMonitorStandMountsMm(inputOrBaseWidthMm, settings, crossBeamCenterXMm, crossBeamCenterHeightMm)
       : [];
 
   return {
+    variant,
     monitorBottomHeightMm,
     bottomVesaHoleHeightMm,
     topVesaHoleHeightMm,
@@ -222,6 +354,7 @@ export function getMonitorStandLayoutMm(
     crossBeamLengthMm,
     crossBeams: [centerCrossBeam, ...sideCrossBeams],
     sideLegs,
+    integratedMounts,
     internalWidthMm,
     legTopHeightMm,
     legBottomHeightMm,
@@ -282,9 +415,9 @@ export function createMonitorStandModule(
   monitorDebug: PlannerPostureMonitorDebug,
   settings: PlannerPostureSettings<PlannerPosturePreset>,
   profileColor: string,
-  baseWidthMm: number
+  inputOrBaseWidthMm: PlannerInput | number
 ): MeshSpec[] {
-  const layout = getMonitorStandLayoutMm(monitorDebug, settings, baseWidthMm);
+  const layout = getMonitorStandLayoutMm(monitorDebug, settings, inputOrBaseWidthMm);
   const sideYPositions = [-layout.legCenterYAbsMm, layout.legCenterYAbsMm];
   const profileProps = {
     color: profileColor,
@@ -342,6 +475,49 @@ export function createMonitorStandModule(
       rubberFootHeightMm
     )
   );
+  const integratedMountMeshes = layout.integratedMounts.flatMap<MeshSpec>((mount) => [
+    {
+      id: `monitor-stand-integrated-${mount.side}-plate`,
+      shape: 'trapezoid-plate' as const,
+      size: [mm(mount.plateLengthMm), mm(mount.plateThicknessMm), mm(mount.plateHeightMm)] as [number, number, number],
+      position: [mm(mount.plateCenterXMm), mm(mount.plateCenterYMm), mm(mount.plateCenterZMm)] as [
+        number,
+        number,
+        number,
+      ],
+      trapezoidPlateBottomRise: mm(mount.plateBottomRiseMm),
+      trapezoidPlateCornerRadius: mm(mount.plateCornerRadiusMm),
+      materialKind: 'metal' as const,
+      color: INTEGRATED_MONITOR_STAND_STEEL_COLOR,
+      metalness: INTEGRATED_MONITOR_STAND_STEEL_MATERIAL.metalness,
+      roughness: INTEGRATED_MONITOR_STAND_STEEL_MATERIAL.roughness,
+    },
+    {
+      id: `monitor-stand-integrated-${mount.side}-upright`,
+      size: [PROFILE_SHORT, PROFILE_SHORT, mm(mount.verticalLengthMm)] as [number, number, number],
+      position: [mm(mount.verticalCenterXMm), mm(mount.verticalCenterYMm), mm(mount.verticalCenterZMm)] as [
+        number,
+        number,
+        number,
+      ],
+      profileType: 'alu40x40' as const,
+      openEnds: ['negative' as const],
+      ...profileProps,
+    },
+    {
+      id: `monitor-stand-integrated-${mount.side}-top-arm`,
+      size: [PROFILE_SHORT, mm(mount.topArmLengthMm), PROFILE_SHORT] as [number, number, number],
+      position: [mm(mount.topArmCenterXMm), mm(mount.topArmCenterYMm), mm(layout.crossBeamCenterHeightMm)] as [
+        number,
+        number,
+        number,
+      ],
+      rotation: [0, 0, Math.PI / 2] as [number, number, number],
+      profileType: 'alu40x40' as const,
+      openEnds: ['negative' as const],
+      ...profileProps,
+    },
+  ]);
 
   return [
     ...layout.crossBeams.map((crossBeam) => ({
@@ -357,37 +533,40 @@ export function createMonitorStandModule(
       openEnds: ['negative' as const, 'positive' as const],
       ...profileProps,
     })),
-    ...sideYPositions.flatMap<MeshSpec>((sideYPositionMm, index) => {
-      const side = index === 0 ? 'left' : 'right';
-      const footId = `monitor-stand-${side}-foot`;
+    ...(layout.variant === 'freestand'
+      ? sideYPositions.flatMap<MeshSpec>((sideYPositionMm, index) => {
+        const side = index === 0 ? 'left' : 'right';
+        const footId = `monitor-stand-${side}-foot`;
 
-      return [
-        {
-          id: `monitor-stand-${side}-leg`,
-          size: [UPRIGHT_BEAM_WIDTH, UPRIGHT_BEAM_DEPTH, mm(layout.legLengthMm)] as [number, number, number],
-          position: [mm(layout.legCenterXMm), mm(sideYPositionMm), legCenterZ] as [number, number, number],
-          profileType: 'alu80x40' as const,
-          openEnds: ['positive'],
-          ...profileProps,
-        },
-        {
-          id: footId,
-          size: [mm(layout.footLengthMm), PROFILE_SHORT, PROFILE_SHORT] as [number, number, number],
-          position: [mm(layout.footCenterXMm), mm(sideYPositionMm), footCenterZ] as [number, number, number],
-          profileType: 'alu40x40' as const,
-          openEnds: ['negative', 'positive'],
-          ...profileProps,
-        },
-        ...createRubberFootMeshes(
-          footId,
-          layout.footCenterXMm,
-          sideYPositionMm,
-          0,
-          layout.footLengthMm,
-          rubberFootHeightMm
-        ),
-      ];
-    }),
+        return [
+          {
+            id: `monitor-stand-${side}-leg`,
+            size: [UPRIGHT_BEAM_WIDTH, UPRIGHT_BEAM_DEPTH, mm(layout.legLengthMm)] as [number, number, number],
+            position: [mm(layout.legCenterXMm), mm(sideYPositionMm), legCenterZ] as [number, number, number],
+            profileType: 'alu80x40' as const,
+            openEnds: ['positive'],
+            ...profileProps,
+          },
+          {
+            id: footId,
+            size: [mm(layout.footLengthMm), PROFILE_SHORT, PROFILE_SHORT] as [number, number, number],
+            position: [mm(layout.footCenterXMm), mm(sideYPositionMm), footCenterZ] as [number, number, number],
+            profileType: 'alu40x40' as const,
+            openEnds: ['negative', 'positive'],
+            ...profileProps,
+          },
+          ...createRubberFootMeshes(
+            footId,
+            layout.footCenterXMm,
+            sideYPositionMm,
+            0,
+            layout.footLengthMm,
+            rubberFootHeightMm
+          ),
+        ];
+      })
+      : []),
+    ...integratedMountMeshes,
     ...sideLegMeshes,
     ...sideLegFootMeshes,
     ...sideLegRubberFootMeshes,

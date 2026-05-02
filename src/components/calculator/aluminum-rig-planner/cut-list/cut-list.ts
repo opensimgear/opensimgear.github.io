@@ -82,7 +82,7 @@ function getPlannerMeshes(
 
   return [
     ...fixedMeshes,
-    ...createMonitorStandModule(postureReport.monitorDebug, postureSettings, BLACK_PROFILE_COLOR, geometry.input.baseWidthMm),
+    ...createMonitorStandModule(postureReport.monitorDebug, postureSettings, BLACK_PROFILE_COLOR, geometry.input),
   ];
 }
 

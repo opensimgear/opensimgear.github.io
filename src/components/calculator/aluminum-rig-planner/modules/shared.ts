@@ -34,7 +34,7 @@ export type MeshSpec = {
   rotation?: [number, number, number];
   axis?: BeamAxis;
   profileType?: ProfileType;
-  shape?: 'beam' | 'endcap' | 'torus' | 'cylinder' | 'truncated-box';
+  shape?: 'beam' | 'endcap' | 'torus' | 'cylinder' | 'truncated-box' | 'trapezoid-plate';
   openEnds?: OpenBeamEnd[];
   materialKind?: 'metal' | 'plastic';
   color: string;
@@ -50,6 +50,8 @@ export type MeshSpec = {
   cylinderRadiusBottom?: number;
   cylinderRadialSegments?: number;
   truncatedBoxBottomSize?: [number, number];
+  trapezoidPlateBottomRise?: number;
+  trapezoidPlateCornerRadius?: number;
 };
 
 // Re-export conversion helpers from math module

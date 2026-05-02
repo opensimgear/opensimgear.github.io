@@ -27,6 +27,7 @@ function getRubberFeetQuantity(
     visibleModules.monitor &&
     visibleModules.monitorStand &&
     postureSettings.monitorStandFeetType === 'rubber' &&
+    monitorStandLayout?.variant === 'freestand' &&
     monitorStandLayout
       ? 4 + monitorStandLayout.sideLegs.length * 2
       : 0;

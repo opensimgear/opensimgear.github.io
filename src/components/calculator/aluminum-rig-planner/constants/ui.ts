@@ -29,6 +29,48 @@ export type AluminumRigPaneExpandedState = {
   optimizer: boolean;
 };
 
+/** Aluminum rig folder expanded state type. */
+export type AluminumRigFolderExpandedState = {
+  driver: boolean;
+  postureTarget: boolean;
+  enabledModules: boolean;
+  monitor: boolean;
+  monitorStand: boolean;
+  base: boolean;
+  seat: boolean;
+  wheel: boolean;
+  steeringColumn: boolean;
+  pedalTray: boolean;
+  pedals: boolean;
+  optimizerSettings: boolean;
+  optimizerHardware: boolean;
+  optimizerRubberFeet: boolean;
+  stockConfiguration: boolean;
+  stockProfile40x40: boolean;
+  stockProfile80x40: boolean;
+};
+
+/** Default folder expanded state. */
+export const DEFAULT_FOLDER_EXPANDED_STATE = {
+  driver: true,
+  postureTarget: true,
+  enabledModules: true,
+  monitor: false,
+  monitorStand: false,
+  base: false,
+  seat: false,
+  wheel: false,
+  steeringColumn: false,
+  pedalTray: false,
+  pedals: false,
+  optimizerSettings: true,
+  optimizerHardware: true,
+  optimizerRubberFeet: true,
+  stockConfiguration: false,
+  stockProfile40x40: true,
+  stockProfile80x40: true,
+} as const satisfies AluminumRigFolderExpandedState;
+
 /** Check whether the viewport is below the mobile breakpoint. */
 export function isNarrowAluminumRigViewport(width: number) {
   return width < ALUMINUM_RIG_MOBILE_BREAKPOINT;
@@ -41,6 +83,11 @@ export function getAluminumRigPaneExpandedState(isNarrow: boolean): AluminumRigP
   }
 
   return { ...DESKTOP_PANE_EXPANDED_STATE };
+}
+
+/** Return the default folder expanded state. */
+export function getAluminumRigFolderExpandedState(): AluminumRigFolderExpandedState {
+  return { ...DEFAULT_FOLDER_EXPANDED_STATE };
 }
 
 /**
