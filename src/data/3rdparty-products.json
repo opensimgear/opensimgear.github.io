@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "generated_on": "2026-05-01",
+  "generated_on": "2026-05-02",
   "description": "Third-party simulator hardware/software database generated from research/products/db YAML category files.",
   "schema": {
     "commercial_product": {
@@ -31,26 +31,26 @@
     }
   },
   "summary": {
-    "total_records": 1426,
+    "total_records": 1508,
     "by_kind": {
-      "commercial": 1338,
+      "commercial": 1420,
       "opensource": 88
     },
     "by_component_category": {
       "belt-tensioners": 13,
-      "button-boxes-and-panels": 88,
+      "button-boxes-and-panels": 89,
       "collectives": 10,
       "display-systems": 88,
       "g-seats": 8,
       "handbrakes": 22,
       "joysticks": 114,
       "motion-platforms": 94,
-      "pedals": 158,
-      "rigs-and-cockpits": 214,
+      "pedals": 163,
+      "rigs-and-cockpits": 284,
       "rudder-pedals": 25,
       "seats-and-ergonomics": 91,
-      "shifters": 59,
-      "steering-wheels": 175,
+      "shifters": 63,
+      "steering-wheels": 177,
       "tactile-feedback": 21,
       "throttles": 81,
       "vr-and-head-tracking": 29,
@@ -2512,6 +2512,30 @@
           "status": "available",
           "url": "https://www.asetek.com/simsports/product/la-prima-button-box/",
           "last_updated": null
+        }
+      ]
+    },
+    {
+      "id": "commercial:button-boxes-and-panels:treq-sim-bavariansimtec-ddu5",
+      "kind": "commercial",
+      "slug": "treq-sim-bavariansimtec-ddu5",
+      "product_name": "BavarianSimTec - DDU5",
+      "description": "Treq Sim BavarianSimTec - DDU5. control panel. listed on Treq Sim. Beautiful 5-inch DDU with aluminum construction.",
+      "manufacturer": "Treq Sim",
+      "component_category": "button-boxes-and-panels",
+      "component_sub_category": "control-panel",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-bst-ddu5-bavariansimtec-ddu5-400",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "EUR",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/tbv-bst-ddu5-bavariansimtec-ddu5-400",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -11776,7 +11800,7 @@
       "component_sub_category": "pedal-mount",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/pedal-slider-baseplate-sim-racing",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Sim Lab",
@@ -11786,6 +11810,15 @@
           "status": "available",
           "url": "https://sim-lab.eu/products/pedal-slider-baseplate-sim-racing",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/accessories-5/pedal-slider-23",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -13723,7 +13756,7 @@
       "component_sub_category": "two-pedal-set",
       "license": "Commercial",
       "product_url": "https://vnmsimulation.com/vi/product/vnm-pedal-damper-kit/",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Vnmsimulation",
@@ -13733,6 +13766,15 @@
           "status": "available",
           "url": "https://vnmsimulation.com/vi/product/vnm-pedal-damper-kit/",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/accessories-5/pedal-raise-kit-457",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -14429,6 +14471,126 @@
           "status": "available",
           "url": "https://simagic.com/products/p-aps",
           "last_updated": null
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:treq-sim-inverted-pedal-deck",
+      "kind": "commercial",
+      "slug": "treq-sim-inverted-pedal-deck",
+      "product_name": "Inverted Pedal Deck",
+      "description": "Treq Sim Inverted Pedal Deck. two pedal set. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/accessories-5/inverted-pedal-deck-458",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/accessories-5/inverted-pedal-deck-458",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:treq-sim-inverted-pedal-deck-2",
+      "kind": "commercial",
+      "slug": "treq-sim-inverted-pedal-deck-2",
+      "product_name": "Inverted Pedal Deck",
+      "description": "Treq Sim Inverted Pedal Deck. two pedal set. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/nl/shop/accessoires-5/inverted-pedal-deck-458",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/nl/shop/accessoires-5/inverted-pedal-deck-458",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:treq-sim-inverted-pedal-deck-3",
+      "kind": "commercial",
+      "slug": "treq-sim-inverted-pedal-deck-3",
+      "product_name": "Inverted Pedal Deck",
+      "description": "Treq Sim Inverted Pedal Deck. two pedal set. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/fr/shop/accessories-5/inverted-pedal-deck-458",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/fr/shop/accessories-5/inverted-pedal-deck-458",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:treq-sim-inverted-pedal-deck-4",
+      "kind": "commercial",
+      "slug": "treq-sim-inverted-pedal-deck-4",
+      "product_name": "Inverted Pedal Deck",
+      "description": "Treq Sim Inverted Pedal Deck. two pedal set. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/de/shop/zubehor-5/inverted-pedal-deck-458",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/de/shop/zubehor-5/inverted-pedal-deck-458",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:pedals:treq-sim-pedal-deck-assembly",
+      "kind": "commercial",
+      "slug": "treq-sim-pedal-deck-assembly",
+      "product_name": "Pedal Deck Assembly",
+      "description": "Treq Sim Pedal Deck Assembly. two pedal set. listed on Treq Sim. Building your own simulator, and in need of a fancy pedal mounting solution? We’ve got you covered.",
+      "manufacturer": "Treq Sim",
+      "component_category": "pedals",
+      "component_sub_category": "two-pedal-set",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/diy-parts-3/pedal-deck-assembly-142",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/diy-parts-3/pedal-deck-assembly-142",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -16438,7 +16600,7 @@
       "component_sub_category": "formula-cockpit",
       "license": "Commercial",
       "product_url": "https://www.sparco-official.com/de/gp-rig-i-gp-pro-fanatec-sim-kit-p310-open-g03305-1.html",
-      "last_updated": "2026-05-01",
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Sparco Official DE",
@@ -16457,6 +16619,15 @@
           "status": "out-of-stock",
           "url": "https://sim-lab.eu/products/sparco-grid-q-sim-racing",
           "last_updated": "2026-05-01"
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 486.82,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-p-gridq-sparco-grid-q-153",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -16759,7 +16930,7 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/caster-wheels-set",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Sim Lab",
@@ -16769,6 +16940,15 @@
           "status": "available",
           "url": "https://sim-lab.eu/products/caster-wheels-set",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/caster-wheels-108",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -16831,7 +17011,7 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/front-mount-gt1-evo-sim-racing",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Sim Lab",
@@ -16841,6 +17021,15 @@
           "status": "available",
           "url": "https://sim-lab.eu/products/front-mount-gt1-evo-sim-racing",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/accessories-5/front-wheel-mount-324",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -16903,7 +17092,7 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/keyboard-tray-sim-racing-accessories",
-      "last_updated": "2026-05-01",
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Sim Lab",
@@ -16922,6 +17111,15 @@
           "status": "available",
           "url": "https://www.fanatec.com/eu/en/p/sim-racing-accessories/crd-9900015-ww/gt-cockpit-keyboard-tray",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 58.02,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/advanced-keyboard-tray-63",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -17128,7 +17326,7 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/cup-holder-sim-racing-accessories",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Sim Lab",
@@ -17138,6 +17336,15 @@
           "status": "available",
           "url": "https://sim-lab.eu/products/cup-holder-sim-racing-accessories",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 9.83,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-cup-001-cup-holder-28",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -17152,7 +17359,7 @@
       "component_sub_category": "rig-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/sim-floor-racing-accessories",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Sim Lab",
@@ -17162,6 +17369,15 @@
           "status": "available",
           "url": "https://sim-lab.eu/products/sim-floor-racing-accessories",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 53.11,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-floor-002-sim-rig-floor-167",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -17833,7 +18049,7 @@
       "component_sub_category": "rig-mounts",
       "license": "Commercial",
       "product_url": "https://flightsimcontrols.com/product/vkb-ucm-bracket/",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Flightsimcontrols",
@@ -17843,6 +18059,15 @@
           "status": "available",
           "url": "https://flightsimcontrols.com/product/vkb-ucm-bracket/",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/monitor-mounting-2/vesa-bracket-157",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -17905,7 +18130,7 @@
       "component_sub_category": "rig-mounts",
       "license": "Commercial",
       "product_url": "https://flightsimcontrols.com/product/vkb-ucm-phone-holder/",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Flightsimcontrols",
@@ -17915,6 +18140,15 @@
           "status": "available",
           "url": "https://flightsimcontrols.com/product/vkb-ucm-phone-holder/",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 11.8,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-hph-001-headphone-holder-7",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -19737,6 +19971,1686 @@
       ]
     },
     {
+      "id": "commercial:rigs-and-cockpits:treq-sim-asus-bezel-free-kit",
+      "kind": "commercial",
+      "slug": "treq-sim-asus-bezel-free-kit",
+      "product_name": "Asus Bezel Free Kit",
+      "description": "Treq Sim Asus Bezel Free Kit. rig mounts. listed on Treq Sim. The ROG Bezel-Free Kit is an accessory that enables gamers with multiple-monitor setups to visually eliminate the gaps where their displays connect, creating the appearance of o...",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/bezel-free-kit-100",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "EUR",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/bezel-free-kit-100",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-basic-monitor-mount",
+      "kind": "commercial",
+      "slug": "treq-sim-basic-monitor-mount",
+      "product_name": "Basic Monitor Mount",
+      "description": "Treq Sim Basic Monitor Mount. rig mounts. listed on Treq Sim. Our most cost effective solution to mount a monitor.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-bmm-002-basic-monitor-mount-411",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 48.2,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-bmm-002-basic-monitor-mount-411",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-bavariansimtec-beacon-lights",
+      "kind": "commercial",
+      "slug": "treq-sim-bavariansimtec-beacon-lights",
+      "product_name": "BavarianSimTec - Beacon Lights",
+      "description": "Treq Sim BavarianSimTec - Beacon Lights. rig mounts. listed on Treq Sim. Two LED-strips for ABS, TC, wheel slip and spotter info.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-bst-bl-bavariansimtec-beacon-lights-401",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 99,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-bst-bl-bavariansimtec-beacon-lights-401",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-bavariansimtec-mounting-plate",
+      "kind": "commercial",
+      "slug": "treq-sim-bavariansimtec-mounting-plate",
+      "product_name": "BavarianSimTec - Mounting Plate",
+      "description": "Treq Sim BavarianSimTec - Mounting Plate. rig mounts. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-bst-mp-bavariansimtec-mounting-plate-359",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 19.67,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-bst-mp-bavariansimtec-mounting-plate-359",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-bekerhouder",
+      "kind": "commercial",
+      "slug": "treq-sim-bekerhouder",
+      "product_name": "Bekerhouder",
+      "description": "Treq Sim Bekerhouder. rig mounts. listed on Treq Sim. Holder for cups, mugs and glasses.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-cup-001-bekerhouder-28",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 9.83,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-cup-001-bekerhouder-28",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-black-sim-racing-rug",
+      "kind": "commercial",
+      "slug": "treq-sim-black-sim-racing-rug",
+      "product_name": "Black Sim Racing Rug",
+      "description": "Treq Sim Black Sim Racing Rug. rig mounts. listed on Treq Sim. Protect your floor with this black rug.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-sr-black-001-black-sim-racing-rug-413",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 54.09,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-sr-black-001-black-sim-racing-rug-413",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-bow-tie",
+      "kind": "commercial",
+      "slug": "treq-sim-bow-tie",
+      "product_name": "Bow Tie",
+      "description": "Treq Sim Bow Tie. rig mounts. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-bt-001-bow-tie-335",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 18.68,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-bt-001-bow-tie-335",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-computer-mount",
+      "kind": "commercial",
+      "slug": "treq-sim-computer-mount",
+      "product_name": "Computer Mount",
+      "description": "Treq Sim Computer Mount. rig mounts. listed on Treq Sim. The ideal accessory to mount your gaming PC behind your monitor.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-pcm-002-computer-mount-111",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 83.6,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-pcm-002-computer-mount-111",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-easy-monitor-alignment-kit",
+      "kind": "commercial",
+      "slug": "treq-sim-easy-monitor-alignment-kit",
+      "product_name": "Easy Monitor Alignment Kit",
+      "description": "Treq Sim Easy Monitor Alignment Kit. rig mounts. listed on Treq Sim. Set up your monitor with 6 degrees of freedom with this Easy Monitor Alignment Kit!.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/monitor-mounting-2/easy-monitor-alignment-kit-140",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/monitor-mounting-2/easy-monitor-alignment-kit-140",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-formula-side-mount",
+      "kind": "commercial",
+      "slug": "treq-sim-formula-side-mount",
+      "product_name": "Formula Side Mount",
+      "description": "Treq Sim Formula Side Mount. rig mounts. listed on Treq Sim. An extra mounting plate to attach accessories like the mouse tray, shifter frame or keyboard tray to the Formula rig.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-fsm-001-formula-side-mount-164",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 18.68,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-fsm-001-formula-side-mount-164",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-getr-nkehalter",
+      "kind": "commercial",
+      "slug": "treq-sim-getr-nkehalter",
+      "product_name": "Getränkehalter",
+      "description": "Treq Sim Getränkehalter. rig mounts. listed on Treq Sim. Holder for cups, mugs and glasses.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-cup-001-getrankehalter-28",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 9.83,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-cup-001-getrankehalter-28",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-hinge-connector-180",
+      "kind": "commercial",
+      "slug": "treq-sim-hinge-connector-180",
+      "product_name": "Hinge Connector 180",
+      "description": "Treq Sim Hinge Connector 180. rig mounts. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-p-hinge180-black-hinge-connector-180-61",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 28.52,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-p-hinge180-black-hinge-connector-180-61",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-hinge-connector-4040",
+      "kind": "commercial",
+      "slug": "treq-sim-hinge-connector-4040",
+      "product_name": "Hinge Connector 4040",
+      "description": "Treq Sim Hinge Connector 4040. rig mounts. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-p-hinge4040-hinge-connector-4040-96",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 9.83,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-p-hinge4040-hinge-connector-4040-96",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-kopfh-rer-halter",
+      "kind": "commercial",
+      "slug": "treq-sim-kopfh-rer-halter",
+      "product_name": "Kopfhörer-Halter",
+      "description": "Treq Sim Kopfhörer-Halter. rig mounts. listed on Treq Sim. Ein nettes kleines Accessoire, um Ihren Kopfhörer oder Ihr Headset zu befestigen.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-hph-001-kopfhorer-halter-7",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 11.8,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-hph-001-kopfhorer-halter-7",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-l-bracket-4040",
+      "kind": "commercial",
+      "slug": "treq-sim-l-bracket-4040",
+      "product_name": "L-Bracket 4040",
+      "description": "Treq Sim L-Bracket 4040. rig mounts. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-p-lbracket-l-bracket-4040-125",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 1.82,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-p-lbracket-l-bracket-4040-125",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-leveling-feet",
+      "kind": "commercial",
+      "slug": "treq-sim-leveling-feet",
+      "product_name": "Leveling Feet",
+      "description": "Treq Sim Leveling Feet. rig mounts. listed on Treq Sim. With these 4 adjustable feet you can level your sim rig on an uneven floor.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-lf-003-leveling-feet-364",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 38.35,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-lf-003-leveling-feet-364",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-phone-holder-for-fanatec",
+      "kind": "commercial",
+      "slug": "treq-sim-phone-holder-for-fanatec",
+      "product_name": "Phone Holder for Fanatec",
+      "description": "Treq Sim Phone Holder for Fanatec. rig mounts. listed on Treq Sim. The perfect tool to use SimHub dashboard with your Fanatec wheel.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-fph-001-phone-holder-for-fanatec-129",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 11.8,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-fph-001-phone-holder-for-fanatec-129",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-porte-gobelet",
+      "kind": "commercial",
+      "slug": "treq-sim-porte-gobelet",
+      "product_name": "Porte Gobelet",
+      "description": "Treq Sim Porte Gobelet. rig mounts. listed on Treq Sim. Holder for cups, mugs and glasses.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-cup-001-porte-gobelet-28",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 9.83,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-cup-001-porte-gobelet-28",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-rear-view-mirror",
+      "kind": "commercial",
+      "slug": "treq-sim-rear-view-mirror",
+      "product_name": "Rear View Mirror",
+      "description": "Treq Sim Rear View Mirror. rig mounts. listed on Treq Sim. See what's behind you in your sim rig with this rear view mirror!.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/rear-view-mirror-499",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 28.52,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/rear-view-mirror-499",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-sabelt-sim-foam-pro-kit",
+      "kind": "commercial",
+      "slug": "treq-sim-sabelt-sim-foam-pro-kit",
+      "product_name": "Sabelt - Sim Foam Pro Kit",
+      "description": "Treq Sim Sabelt - Sim Foam Pro Kit. cockpit frame. listed on Treq Sim. Cushions that form to your body for ultimate racing comfort.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-sim-foam-pro-kit-402",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-sim-foam-pro-kit-402",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-sabelt-sim-seatbelt",
+      "kind": "commercial",
+      "slug": "treq-sim-sabelt-sim-seatbelt",
+      "product_name": "Sabelt Sim Seatbelt",
+      "description": "Treq Sim Sabelt Sim Seatbelt. cockpit frame. listed on Treq Sim. 4-point seatbelts equipped with aluminum buckle and quick release adjusters for shoulders and legs. Mounting kit included.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-sim-seatbelt-374",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-sim-seatbelt-374",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-sabelt-srp-1",
+      "kind": "commercial",
+      "slug": "treq-sim-sabelt-srp-1",
+      "product_name": "Sabelt SRP-1",
+      "description": "Treq Sim Sabelt SRP-1. cockpit frame. listed on Treq Sim. The most comfortable formula position seat on the market. Get an immersive experience with this seat in combination with our Treq Formula.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-srp-1-273",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-srp-1-273",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-sabelt-srs-1",
+      "kind": "commercial",
+      "slug": "treq-sim-sabelt-srs-1",
+      "product_name": "Sabelt SRS-1",
+      "description": "Treq Sim Sabelt SRS-1. cockpit frame. listed on Treq Sim. De Sabelt SRS-1 is de perfecte keus voor zij die comfort zoeken in hun sim racing stoel.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-srs-1-272",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-srs-1-272",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-sabelt-srx-1",
+      "kind": "commercial",
+      "slug": "treq-sim-sabelt-srx-1",
+      "product_name": "Sabelt SRX-1",
+      "description": "Treq Sim Sabelt SRX-1. cockpit frame. listed on Treq Sim. Sabelt's ultimate sim racing seat. Aggressive, tough, but still comfortable.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-srx-1-274",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/racing-seats-4/sabelt-srx-1-274",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-seat-brackets",
+      "kind": "commercial",
+      "slug": "treq-sim-seat-brackets",
+      "product_name": "Seat Brackets",
+      "description": "Treq Sim Seat Brackets. cockpit frame. listed on Treq Sim. Set of brackets to mount a bucket seat.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-sb-004-seat-brackets-149",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 48.2,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-sb-004-seat-brackets-149",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-side-mount",
+      "kind": "commercial",
+      "slug": "treq-sim-side-mount",
+      "product_name": "Side Mount",
+      "description": "Treq Sim Side Mount. rig mounts. listed on Treq Sim. A Side Mount designed to mount Fanatec and Simagic wheel bases from the side.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/accessories-5/side-mount-332",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/accessories-5/side-mount-332",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-side-mount-2",
+      "kind": "commercial",
+      "slug": "treq-sim-side-mount-2",
+      "product_name": "Side Mount",
+      "description": "Treq Sim Side Mount. rig mounts. listed on Treq Sim. Een Side Mount, geschikt voor Fanatec en Simagic wheel bases.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/nl/shop/accessoires-5/side-mount-332",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/nl/shop/accessoires-5/side-mount-332",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-side-mount-3",
+      "kind": "commercial",
+      "slug": "treq-sim-side-mount-3",
+      "product_name": "Side Mount",
+      "description": "Treq Sim Side Mount. rig mounts. listed on Treq Sim. Een Front Mount ontworpen om Simucube, Asetek, VRS en Simagic wheelbases aan te monteren.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/fr/shop/accessories-5/side-mount-332",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/fr/shop/accessories-5/side-mount-332",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-side-mount-4",
+      "kind": "commercial",
+      "slug": "treq-sim-side-mount-4",
+      "product_name": "Side Mount",
+      "description": "Treq Sim Side Mount. rig mounts. listed on Treq Sim. Eine Seitenhalterung für die seitliche Montage von Fanatec- und Simagic-Wheel Bases.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/de/shop/zubehor-5/side-mount-332",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/de/shop/zubehor-5/side-mount-332",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-single-monitor-stand",
+      "kind": "commercial",
+      "slug": "treq-sim-single-monitor-stand",
+      "product_name": "Single Monitor Stand",
+      "description": "Treq Sim Single Monitor Stand. rig mounts. listed on Treq Sim. A single free standing monitor stand.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/monitor-mounting-2/single-monitor-stand-433",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/monitor-mounting-2/single-monitor-stand-433",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-single-to-triple-upgrade-kit",
+      "kind": "commercial",
+      "slug": "treq-sim-single-to-triple-upgrade-kit",
+      "product_name": "Single to Triple - Upgrade Kit",
+      "description": "Treq Sim Single to Triple - Upgrade Kit. rig mounts. listed on Treq Sim. Transform your single monitor mounting solution to one with triples!.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/monitor-mounting-2/single-to-triple-upgrade-kit-435",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/monitor-mounting-2/single-to-triple-upgrade-kit-435",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-spacer-m4x10",
+      "kind": "commercial",
+      "slug": "treq-sim-spacer-m4x10",
+      "product_name": "Spacer M4x10",
+      "description": "Treq Sim Spacer M4x10. rig mounts. listed on Treq Sim. This spacer can be used between your monitor and the VESA mount.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/spacer-m4x10-73",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 0.38,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/spacer-m4x10-73",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-sparco-lumbar-backrest",
+      "kind": "commercial",
+      "slug": "treq-sim-sparco-lumbar-backrest",
+      "product_name": "Sparco Lumbar Backrest",
+      "description": "Treq Sim Sparco Lumbar Backrest. rig mounts. listed on Treq Sim. Universal support for the lower or middle back.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-p-sparco-lumbar-sparco-lumbar-backrest-155",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 37.37,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-p-sparco-lumbar-sparco-lumbar-backrest-155",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-sparco-r100-blue",
+      "kind": "commercial",
+      "slug": "treq-sim-sparco-r100-blue",
+      "product_name": "Sparco R100 (Blue)",
+      "description": "Treq Sim Sparco R100 (Blue). rig mounts. listed on Treq Sim. Recliner seat with a tubular steel frame from Sparco.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-p-r100-sparco-r100-blue-154",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 323.56,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-p-r100-sparco-r100-blue-154",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-tastaturhalter",
+      "kind": "commercial",
+      "slug": "treq-sim-tastaturhalter",
+      "product_name": "Tastaturhalter",
+      "description": "Treq Sim Tastaturhalter. rig mounts. listed on Treq Sim. Ein dreh- und neigbarer Tastaturhalter.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-kbt-002-tastaturhalter-98",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 58.02,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-kbt-002-tastaturhalter-98",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-television-stand",
+      "kind": "commercial",
+      "slug": "treq-sim-television-stand",
+      "product_name": "Television Stand",
+      "description": "Treq Sim Television Stand. rig mounts. listed on Treq Sim. A single television stand for big screens.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-tvs-003-television-stand-227",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 176.04,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-tvs-003-television-stand-227",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-towbar",
+      "kind": "commercial",
+      "slug": "treq-sim-towbar",
+      "product_name": "Towbar",
+      "description": "Treq Sim Towbar. rig mounts. listed on Treq Sim. The ultimate accessory to tow your teammates to a better result. The STL-file can be downloaded for free if you want to print it yourself.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-towbar-001-towbar-305",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 7.87,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-towbar-001-towbar-305",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-ace",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-ace",
+      "product_name": "Treq Ace",
+      "description": "Treq Sim Treq Ace. cockpit frame. listed on Treq Sim. The ultimate sim racing rig: the Treq Ace. The most modular cockpit in the industry.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-ace-331",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-ace-331",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-cxx",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-cxx",
+      "product_name": "Treq CXX",
+      "description": "Treq Sim Treq CXX. cockpit frame. listed on Treq Sim. The latest addition to the Treq family: the CXX. A chassis based on 120x40 profiles with a newly developed invisible profile connection.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-cxx-416",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-cxx-416",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-cxx-2",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-cxx-2",
+      "product_name": "Treq CXX",
+      "description": "Treq Sim Treq CXX. cockpit frame. listed on Treq Sim. The ultimate sim racing rig: the Treq Ace. The most modular cockpit in the industry.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/nl/shop/sim-racing-rigs-1/treq-cxx-416",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/nl/shop/sim-racing-rigs-1/treq-cxx-416",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-cxx-3",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-cxx-3",
+      "product_name": "Treq CXX",
+      "description": "Treq Sim Treq CXX. cockpit frame. listed on Treq Sim. The ultimate sim racing rig: the Treq Ace. The most modular cockpit in the industry.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/fr/shop/sim-rigs-1/treq-cxx-416",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/fr/shop/sim-rigs-1/treq-cxx-416",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-cxx-4",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-cxx-4",
+      "product_name": "Treq CXX",
+      "description": "Treq Sim Treq CXX. cockpit frame. listed on Treq Sim. The ultimate sim racing rig: the Treq Ace. The most modular cockpit in the industry.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/de/shop/sim-rigs-1/treq-cxx-416",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/de/shop/sim-rigs-1/treq-cxx-416",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-formula-rig",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-formula-rig",
+      "product_name": "Treq Formula Rig",
+      "description": "Treq Sim Treq Formula Rig. cockpit frame. listed on Treq Sim. The Treq Formula Rig! Get the F1 style seating position with the rigidity of aluminum extrusion.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/treq-formula-rig-327",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/treq-formula-rig-327",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-formula-rig-2",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-formula-rig-2",
+      "product_name": "Treq Formula Rig",
+      "description": "Treq Sim Treq Formula Rig. cockpit frame. listed on Treq Sim. The Treq Formula Rig! Get the F1 style seating position with the rigidity of aluminum extrusion.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-formula-rig-327",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-formula-rig-327",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-formula-rig-3",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-formula-rig-3",
+      "product_name": "Treq Formula Rig",
+      "description": "Treq Sim Treq Formula Rig. cockpit frame. listed on Treq Sim. The Treq Formula Rig! Get the F1 style seating position with the rigidity of aluminum extrusion.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/nl/shop/treq-formula-rig-327",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/nl/shop/treq-formula-rig-327",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-formula-rig-4",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-formula-rig-4",
+      "product_name": "Treq Formula Rig",
+      "description": "Treq Sim Treq Formula Rig. cockpit frame. listed on Treq Sim. The Treq Formula Rig! Get the F1 style seating position with the rigidity of aluminum extrusion.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/fr/shop/treq-formula-rig-327",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/fr/shop/treq-formula-rig-327",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-formula-rig-5",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-formula-rig-5",
+      "product_name": "Treq Formula Rig",
+      "description": "Treq Sim Treq Formula Rig. cockpit frame. listed on Treq Sim. The Treq Formula Rig! Get the F1 style seating position with the rigidity of aluminum extrusion.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/de/shop/treq-formula-rig-327",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/de/shop/treq-formula-rig-327",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-formula-srp",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-formula-srp",
+      "product_name": "Treq Formula SRP",
+      "description": "Treq Sim Treq Formula SRP. cockpit frame. listed on Treq Sim. Feel like an F1 driver, while experiencing the strength of an 80/20 chassis.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-formula-srp-304",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-formula-srp-304",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-formula-srp-2",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-formula-srp-2",
+      "product_name": "Treq Formula SRP",
+      "description": "Treq Sim Treq Formula SRP. cockpit frame. listed on Treq Sim. Feel like an F1 driver, while experiencing the strength of an 80/20 chassis.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/nl/shop/sim-racing-rigs-1/treq-formula-srp-304",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/nl/shop/sim-racing-rigs-1/treq-formula-srp-304",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-formula-srp-3",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-formula-srp-3",
+      "product_name": "Treq Formula SRP",
+      "description": "Treq Sim Treq Formula SRP. cockpit frame. listed on Treq Sim. Feel like an F1 driver, while experiencing the strength of an 80/20 chassis.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/fr/shop/sim-rigs-1/treq-formula-srp-304",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/fr/shop/sim-rigs-1/treq-formula-srp-304",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-formula-srp-4",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-formula-srp-4",
+      "product_name": "Treq Formula SRP",
+      "description": "Treq Sim Treq Formula SRP. cockpit frame. listed on Treq Sim. Feel like an F1 driver, while experiencing the strength of an 80/20 chassis.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/de/shop/sim-rigs-1/treq-formula-srp-304",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/de/shop/sim-rigs-1/treq-formula-srp-304",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-one",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-one",
+      "product_name": "Treq One",
+      "description": "Treq Sim Treq One. cockpit frame. listed on Treq Sim. The new and updated Treq One. From the heavy force of a load cell brake, to the high torque from direct drive wheels, this rig can handle it all.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "cockpit-frame",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-one-298",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/sim-racing-rigs-1/treq-one-298",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-rookie",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-rookie",
+      "product_name": "Treq Rookie",
+      "description": "Treq Sim Treq Rookie. rig mounts. listed on Treq Sim. The ideal entry rig for serious sim racers. With a ton of upgrade possibilities.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/treq-rookie-296",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 323.56,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/treq-rookie-296",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-racing-rug",
+      "kind": "commercial",
+      "slug": "treq-sim-racing-rug",
+      "product_name": "Racing Rug",
+      "description": "Treq Sim Racing Rug. rig mounts. listed on Treq Sim. Protect your floor and improve the look of your sim racing corner with the Treq Rug!.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-sr-treq-001-treq-sim-racing-rug-186",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 54.09,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-sr-treq-001-treq-sim-racing-rug-186",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-st1",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-st1",
+      "product_name": "Treq ST1",
+      "description": "Treq Sim Treq ST1. rig mounts. listed on Treq Sim. The Treq ST1 is a non FIA homologated bucket seat, ideal for sim racing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/treq-st1-151",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 368.8,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/treq-st1-151",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-sts",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-sts",
+      "product_name": "Treq STS",
+      "description": "Treq Sim Treq STS. rig mounts. listed on Treq Sim. Treq STS bucket seat.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-p-sts-001-treq-sts-16",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 368.8,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-p-sts-001-treq-sts-16",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-sts-2nd-chance",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-sts-2nd-chance",
+      "product_name": "Treq STS (2nd Chance)",
+      "description": "Treq Sim Treq STS (2nd Chance). rig mounts. listed on Treq Sim. The Treq ST1 is a non FIA homologated bucket seat, ideal for sim racing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/treq-st1-351",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 331.93,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/treq-st1-351",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-treq-stx",
+      "kind": "commercial",
+      "slug": "treq-sim-treq-stx",
+      "product_name": "Treq STX",
+      "description": "Treq Sim Treq STX. rig mounts. listed on Treq Sim. Treq STX bucket seat.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-p-stx-001-treq-stx-152",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 392.4,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-p-stx-001-treq-stx-152",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-triple-monitor-stand",
+      "kind": "commercial",
+      "slug": "treq-sim-triple-monitor-stand",
+      "product_name": "Triple Monitor Stand",
+      "description": "Treq Sim Triple Monitor Stand. rig mounts. listed on Treq Sim. A freestanding triple monitor stand, available in various configurations.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/monitor-mounting-2/triple-monitor-stand-428",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/monitor-mounting-2/triple-monitor-stand-428",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-unified-single-monitor-mount",
+      "kind": "commercial",
+      "slug": "treq-sim-unified-single-monitor-mount",
+      "product_name": "Unified Single Monitor Mount",
+      "description": "Treq Sim Unified Single Monitor Mount. rig mounts. listed on Treq Sim. An adjustable Single Screen Monitor Mount that mounts directly to your rig.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/monitor-mounting-2/unified-single-monitor-mount-454",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/monitor-mounting-2/unified-single-monitor-mount-454",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-unified-single-monitor-mount-2",
+      "kind": "commercial",
+      "slug": "treq-sim-unified-single-monitor-mount-2",
+      "product_name": "Unified Single Monitor Mount",
+      "description": "Treq Sim Unified Single Monitor Mount. rig mounts. listed on Treq Sim. An adjustable Single Screen Monitor Mount that mounts directly to your rig.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/unified-single-monitor-mount-454",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/unified-single-monitor-mount-454",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-unified-triple-monitor-mount",
+      "kind": "commercial",
+      "slug": "treq-sim-unified-triple-monitor-mount",
+      "product_name": "Unified Triple Monitor Mount",
+      "description": "Treq Sim Unified Triple Monitor Mount. rig mounts. listed on Treq Sim. A triple monitor mount, attached to the sim rig.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/monitor-mounting-2/unified-triple-monitor-mount-449",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/monitor-mounting-2/unified-triple-monitor-mount-449",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-unified-triple-monitor-mount-2",
+      "kind": "commercial",
+      "slug": "treq-sim-unified-triple-monitor-mount-2",
+      "product_name": "Unified Triple Monitor Mount",
+      "description": "Treq Sim Unified Triple Monitor Mount. rig mounts. listed on Treq Sim. A triple monitor mount, attached to the sim rig.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/unified-triple-monitor-mount-449",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/unified-triple-monitor-mount-449",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-upper-monitor-mount",
+      "kind": "commercial",
+      "slug": "treq-sim-upper-monitor-mount",
+      "product_name": "Upper Monitor Mount",
+      "description": "Treq Sim Upper Monitor Mount. rig mounts. listed on Treq Sim. A monitor mount that goes on top of your main screen.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-upmm-001-upper-monitor-mount-74",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 93.43,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-upmm-001-upper-monitor-mount-74",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:vr-headset-holder",
+      "kind": "commercial",
+      "slug": "vr-headset-holder",
+      "product_name": "Headset Holder",
+      "description": "VR Headset Holder. rig mounts. listed on Treq Sim. A mount to hang your VR Glasses on while you’re not racing.",
+      "manufacturer": "VR",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/tbv-a-vrh-001-vr-headset-holder-171",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 14.76,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-vrh-001-vr-headset-holder-171",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-wheel-deck",
+      "kind": "commercial",
+      "slug": "treq-sim-wheel-deck",
+      "product_name": "Wheel Deck",
+      "description": "Treq Sim Wheel Deck. rig mounts. listed on Treq Sim. The Wheel Deck that comes as a standard on our rigs.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/accessories-5/wheel-deck-333",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/accessories-5/wheel-deck-333",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-wheel-deck-2",
+      "kind": "commercial",
+      "slug": "treq-sim-wheel-deck-2",
+      "product_name": "Wheel Deck",
+      "description": "Treq Sim Wheel Deck. rig mounts. listed on Treq Sim. Het Wheel Deck wat standaard wordt geleverd op onze rigs.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/nl/shop/accessoires-5/wheel-deck-333",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/nl/shop/accessoires-5/wheel-deck-333",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-wheel-deck-3",
+      "kind": "commercial",
+      "slug": "treq-sim-wheel-deck-3",
+      "product_name": "Wheel Deck",
+      "description": "Treq Sim Wheel Deck. rig mounts. listed on Treq Sim. Het Wheel Deck wat standaard wordt geleverd op onze rigs.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/fr/shop/accessories-5/wheel-deck-333",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/fr/shop/accessories-5/wheel-deck-333",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-wheel-deck-4",
+      "kind": "commercial",
+      "slug": "treq-sim-wheel-deck-4",
+      "product_name": "Wheel Deck",
+      "description": "Treq Sim Wheel Deck. rig mounts. listed on Treq Sim. Das Wheel Deck, das zur Standardausstattung unserer Rigs gehört.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/de/shop/zubehor-5/wheel-deck-333",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/de/shop/zubehor-5/wheel-deck-333",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:rigs-and-cockpits:treq-sim-wind-sim-mount",
+      "kind": "commercial",
+      "slug": "treq-sim-wind-sim-mount",
+      "product_name": "Wind Sim Mount",
+      "description": "Treq Sim Wind Sim Mount. rig mounts. listed on Treq Sim. Want to enjoy extra realism in open wheel cars? Or is it just so hot in your simulator that you can use some extra cooling? Than this is the set you’re looking for!.",
+      "manufacturer": "Treq Sim",
+      "component_category": "rigs-and-cockpits",
+      "component_sub_category": "rig-mounts",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/diy-parts-3/wind-sim-mount-177",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/diy-parts-3/wind-sim-mount-177",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
       "id": "opensource:rigs-and-cockpits:djpr1me-sim-rig-cockpit",
       "kind": "opensource",
       "slug": "djpr1me-sim-rig-cockpit",
@@ -20745,7 +22659,7 @@
       "component_sub_category": "seat-accessories",
       "license": "Commercial",
       "product_url": "https://sim-lab.eu/products/sparco-seat-slider",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Sim Lab",
@@ -20755,6 +22669,15 @@
           "status": "available",
           "url": "https://sim-lab.eu/products/sparco-seat-slider",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 44.26,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/seat-slider-13",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -23843,7 +25766,7 @@
       "component_sub_category": "sequential-shifter",
       "license": "Commercial",
       "product_url": "https://vnmsimulation.com/vi/product/vnm-shifter-and-handbrake-mounting-kit/",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "Vnmsimulation",
@@ -23853,6 +25776,15 @@
           "status": "available",
           "url": "https://vnmsimulation.com/vi/product/vnm-shifter-and-handbrake-mounting-kit/",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 28.52,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-shifterplate-001-shifter-handbrake-plate-39",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -23963,7 +25895,7 @@
       "component_sub_category": "shifter-adapter",
       "license": "Commercial",
       "product_url": "https://eu.mozaracing.com/products/universal-mounting-plate",
-      "last_updated": "2026-05-01",
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "MOZA",
@@ -23973,6 +25905,15 @@
           "status": "available",
           "url": "https://eu.mozaracing.com/products/universal-mounting-plate",
           "last_updated": "2026-05-01"
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/accessories-5/universal-mounting-plates-488",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -24021,6 +25962,102 @@
           "status": "available",
           "url": "https://simagic.com/products/p-q1-p",
           "last_updated": null
+        }
+      ]
+    },
+    {
+      "id": "commercial:shifters:treq-sim-shifter-frame",
+      "kind": "commercial",
+      "slug": "treq-sim-shifter-frame",
+      "product_name": "Shifter Frame",
+      "description": "Treq Sim Shifter Frame. sequential shifter. listed on Treq Sim. An additional frame to mount your shifter, handbrake our mouse pad.",
+      "manufacturer": "Treq Sim",
+      "component_category": "shifters",
+      "component_sub_category": "sequential-shifter",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/accessories-5/shifter-frame-45",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/accessories-5/shifter-frame-45",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:shifters:treq-sim-shifter-frame-2",
+      "kind": "commercial",
+      "slug": "treq-sim-shifter-frame-2",
+      "product_name": "Shifter Frame",
+      "description": "Treq Sim Shifter Frame. sequential shifter. listed on Treq Sim. An additional frame to mount your shifter, handbrake our mouse pad.",
+      "manufacturer": "Treq Sim",
+      "component_category": "shifters",
+      "component_sub_category": "sequential-shifter",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/nl/shop/accessoires-5/shifter-frame-45",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/nl/shop/accessoires-5/shifter-frame-45",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:shifters:treq-sim-shifter-frame-3",
+      "kind": "commercial",
+      "slug": "treq-sim-shifter-frame-3",
+      "product_name": "Shifter Frame",
+      "description": "Treq Sim Shifter Frame. sequential shifter. listed on Treq Sim. An additional frame to mount your shifter, handbrake our mouse pad.",
+      "manufacturer": "Treq Sim",
+      "component_category": "shifters",
+      "component_sub_category": "sequential-shifter",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/fr/shop/accessories-5/shifter-frame-45",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/fr/shop/accessories-5/shifter-frame-45",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:shifters:treq-sim-shifter-frame-4",
+      "kind": "commercial",
+      "slug": "treq-sim-shifter-frame-4",
+      "product_name": "Shifter Frame",
+      "description": "Treq Sim Shifter Frame. sequential shifter. listed on Treq Sim. An additional frame to mount your shifter, handbrake our mouse pad.",
+      "manufacturer": "Treq Sim",
+      "component_category": "shifters",
+      "component_sub_category": "sequential-shifter",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/de/shop/zubehor-5/shifter-frame-45",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/de/shop/zubehor-5/shifter-frame-45",
+          "last_updated": "2026-05-02"
         }
       ]
     },
@@ -28296,6 +30333,54 @@
       ]
     },
     {
+      "id": "commercial:steering-wheels:treq-sim-bavariansimtec-alpha",
+      "kind": "commercial",
+      "slug": "treq-sim-bavariansimtec-alpha",
+      "product_name": "BavarianSimTec - Alpha",
+      "description": "Treq Sim BavarianSimTec - Alpha. gt wheel. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "steering-wheels",
+      "component_sub_category": "gt-wheel",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/steering-wheels-8/bavariansimtec-alpha-300",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/steering-wheels-8/bavariansimtec-alpha-300",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
+      "id": "commercial:steering-wheels:treq-sim-bavariansimtec-spacer",
+      "kind": "commercial",
+      "slug": "treq-sim-bavariansimtec-spacer",
+      "product_name": "BavarianSimTec - Spacer",
+      "description": "Treq Sim BavarianSimTec - Spacer. gt wheel. listed on Treq Sim. Official shop listing.",
+      "manufacturer": "Treq Sim",
+      "component_category": "steering-wheels",
+      "component_sub_category": "gt-wheel",
+      "license": "Commercial",
+      "product_url": "https://www.treq-sim.com/shop/steering-wheels-8/bavariansimtec-spacer-349",
+      "last_updated": "2026-05-02",
+      "shops": [
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": "Unknown",
+          "currency": "USD",
+          "status": "out-of-stock",
+          "url": "https://www.treq-sim.com/shop/steering-wheels-8/bavariansimtec-spacer-349",
+          "last_updated": "2026-05-02"
+        }
+      ]
+    },
+    {
       "id": "opensource:steering-wheels:freejoy",
       "kind": "opensource",
       "slug": "freejoy",
@@ -28456,7 +30541,7 @@
       "component_sub_category": "tactile-transducer",
       "license": "Commercial",
       "product_url": "https://thebuttkicker.com/products/buttkicker-lfe-haptic-transducer",
-      "last_updated": null,
+      "last_updated": "2026-05-02",
       "shops": [
         {
           "name": "ButtKicker",
@@ -28466,6 +30551,15 @@
           "status": "available",
           "url": "https://thebuttkicker.com/products/buttkicker-lfe-haptic-transducer",
           "last_updated": null
+        },
+        {
+          "name": "Treq Sim",
+          "region": "Unknown",
+          "price": 14.76,
+          "currency": "EUR",
+          "status": "available",
+          "url": "https://www.treq-sim.com/shop/tbv-a-bkm-001-buttkicker-mount-87",
+          "last_updated": "2026-05-02"
         }
       ]
     },

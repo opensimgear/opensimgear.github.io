@@ -777,6 +777,14 @@ commercial:
         url: https://vnmsimulation.com/vi/product/vnm-shifter-and-handbrake-mounting-kit/
         region: Unknown
         status: available
+      - name: Treq Sim
+        price: 28.52
+        currency: EUR
+        url: https://www.treq-sim.com/shop/tbv-a-shifterplate-001-shifter-handbrake-plate-39
+        region: Unknown
+        status: available
+        last_updated: 2026-05-02
+    last_updated: 2026-05-02
   - product_name: Shifter and Handbrake Mounting Kit
     description: VNM Shifter and Handbrake Mounting Kit. sequential shifter. listed on
       Vnmsimulation. Official shop listing.
@@ -856,7 +864,14 @@ commercial:
         region: EU
         status: available
         last_updated: 2026-05-01
-    last_updated: 2026-05-01
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/shop/accessories-5/universal-mounting-plates-488
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+    last_updated: 2026-05-02
   - product_name: Sequential Plate V2
     description: VNM Sequential Plate V2. rig mounts. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
@@ -888,6 +903,74 @@ commercial:
         region: Unknown
         status: available
     license: Commercial
+  - product_name: Shifter Frame
+    description: Treq Sim Shifter Frame. sequential shifter. listed on Treq Sim. An additional
+      frame to mount your shifter, handbrake our mouse pad.
+    manufacturer: Treq Sim
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://www.treq-sim.com/shop/accessories-5/shifter-frame-45
+    picture_url: https://www.treq-sim.com/web/image/product.template/45/image_1024?unique=884c0e6
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/shop/accessories-5/shifter-frame-45
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+  - product_name: Shifter Frame
+    description: Treq Sim Shifter Frame. sequential shifter. listed on Treq Sim. An additional
+      frame to mount your shifter, handbrake our mouse pad.
+    manufacturer: Treq Sim
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://www.treq-sim.com/nl/shop/accessoires-5/shifter-frame-45
+    picture_url: https://www.treq-sim.com/web/image/product.template/45/image_1024?unique=884c0e6
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/nl/shop/accessoires-5/shifter-frame-45
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+  - product_name: Shifter Frame
+    description: Treq Sim Shifter Frame. sequential shifter. listed on Treq Sim. An additional
+      frame to mount your shifter, handbrake our mouse pad.
+    manufacturer: Treq Sim
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://www.treq-sim.com/fr/shop/accessories-5/shifter-frame-45
+    picture_url: https://www.treq-sim.com/web/image/product.template/45/image_1024?unique=884c0e6
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/fr/shop/accessories-5/shifter-frame-45
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+  - product_name: Shifter Frame
+    description: Treq Sim Shifter Frame. sequential shifter. listed on Treq Sim. An additional
+      frame to mount your shifter, handbrake our mouse pad.
+    manufacturer: Treq Sim
+    component_category: shifters
+    component_sub_category: sequential-shifter
+    product_url: https://www.treq-sim.com/de/shop/zubehor-5/shifter-frame-45
+    picture_url: https://www.treq-sim.com/web/image/product.template/45/image_1024?unique=884c0e6
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/de/shop/zubehor-5/shifter-frame-45
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
 opensource:
   - project_name: Akaki-H-shifter
     description: Akaki H Shifter. 3D printable H-pattern shifter with optional handbrake. Small

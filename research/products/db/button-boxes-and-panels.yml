@@ -1,8 +1,8 @@
 commercial:
   - product_name: Apex Button Box Horizontal Mount V2
-    description: Apex Sim Racing Apex Button Box Horizontal Mount V2. carbon-fiber sim racing button
-      box. currently out of stock on official shop. Horizontal layout with carbon-fiber front/rear
-      plates and USB PC connection.
+    description: Apex Sim Racing Apex Button Box Horizontal Mount V2. carbon-fiber sim racing
+      button box. currently out of stock on official shop. Horizontal layout with
+      carbon-fiber front/rear plates and USB PC connection.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -15,9 +15,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/apex-sim-racing-button-box-v2-1
         region: US
   - product_name: Apex Button Box Vertical Mount V2
-    description: Apex Sim Racing Apex Button Box Vertical Mount V2. carbon-fiber sim racing button box.
-      currently out of stock on official shop. Vertical layout with carbon-fiber front/rear plates
-      and USB PC connection.
+    description: Apex Sim Racing Apex Button Box Vertical Mount V2. carbon-fiber sim racing
+      button box. currently out of stock on official shop. Vertical layout with carbon-fiber
+      front/rear plates and USB PC connection.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -30,8 +30,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/apex-sim-racing-button-box-v2
         region: US
   - product_name: Black Box Mini Sim Racing Button Box
-    description: Apex Sim Racing Black Box Mini. compact USB sim racing button box. in stock on official
-      shop. Slim carbon-fiber button box with two 7-in-1 switches for 14 total inputs.
+    description: Apex Sim Racing Black Box Mini. compact USB sim racing button box. in stock on
+      official shop. Slim carbon-fiber button box with two 7-in-1 switches for 14 total
+      inputs.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -65,8 +66,8 @@ commercial:
         region: US
         status: available
   - product_name: EFIS Combo
-    description: EFIS Combo. cockpit panel bundle / MIP. Active EU WINCTRL store listing; total_stock 4
-      from API. EFIS Combo.
+    description: EFIS Combo. cockpit panel bundle / MIP. Active EU WINCTRL store listing;
+      total_stock 4 from API. EFIS Combo.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -86,7 +87,8 @@ commercial:
         region: US
         status: available
   - product_name: EFIS L
-    description: EFIS L. cockpit panel module. Active EU WINCTRL store listing; total_stock 4 from API. EFIS L.
+    description: EFIS L. cockpit panel module. Active EU WINCTRL store listing; total_stock 4
+      from API. EFIS L.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -106,7 +108,8 @@ commercial:
         region: US
         status: available
   - product_name: EFIS R
-    description: EFIS R. cockpit panel module. Active EU WINCTRL store listing; total_stock 4 from API. EFIS R.
+    description: EFIS R. cockpit panel module. Active EU WINCTRL store listing; total_stock 4
+      from API. EFIS R.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -126,9 +129,9 @@ commercial:
         region: US
         status: available
   - product_name: Downforce Sim Racing Button Box
-    description: Apex Sim Racing Downforce. USB sim racing button box. in stock on official shop with
-      multi-function option. Carbon-fiber front/rear plates, seven rotary encoders, toggles, and
-      push buttons for PC sim racing control.
+    description: Apex Sim Racing Downforce. USB sim racing button box. in stock on official shop
+      with multi-function option. Carbon-fiber front/rear plates, seven rotary encoders,
+      toggles, and push buttons for PC sim racing control.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -147,9 +150,9 @@ commercial:
         region: EU
         status: available
   - product_name: Dual Sim Racing Emergency Switch
-    description: Apex Sim Racing Dual Sim Racing Emergency Switch. dual kill-switch control box for sim
-      rigs. in stock on official shop. DIY-wired dual emergency switch box with carbon-fiber top
-      plate.
+    description: Apex Sim Racing Dual Sim Racing Emergency Switch. dual kill-switch control box
+      for sim rigs. in stock on official shop. DIY-wired dual emergency switch box with
+      carbon-fiber top plate.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -162,8 +165,8 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/dual-sim-racing-emergency-switch
         region: US
   - product_name: FCU Unit1
-    description: FCU Unit1. cockpit panel module. Active EU WINCTRL store listing; total_stock 4 from
-      API. FCU Unit1.
+    description: FCU Unit1. cockpit panel module. Active EU WINCTRL store listing; total_stock 4
+      from API. FCU Unit1.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -183,8 +186,8 @@ commercial:
         region: US
         status: available
   - product_name: Flight Multi Panel
-    description: Logitech Flight Multi Panel. autopilot and trim panel. In stock on Logitech US on
-      2026-04-29. LED autopilot display.
+    description: Logitech Flight Multi Panel. autopilot and trim panel. In stock on Logitech US
+      on 2026-04-29. LED autopilot display.
     manufacturer: Logitech G
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -225,9 +228,9 @@ commercial:
         url: https://www.logitechg.com/en-us/shop/p/flight-simulator-switch-panel
         region: US
   - product_name: GNX FSM-GA (Front Switchboard Module – General Aviation)
-    description: VKB FSC Europe GNX FSM-GA (Front Switchboard Module – General Aviation). VKB modular
-      flight-control panel. In stock on VKB FSC Europe listing on 2026-04-29. Requires GNX MFH
-      (Multi Functional Holder) in order to mount module.
+    description: VKB FSC Europe GNX FSM-GA (Front Switchboard Module – General Aviation). VKB
+      modular flight-control panel. In stock on VKB FSC Europe listing on 2026-04-29.
+      Requires GNX MFH (Multi Functional Holder) in order to mount module.
     manufacturer: VKB-Sim
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -240,9 +243,9 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-fsm-ga-front-switchboard-module-general-aviation/
         region: EU
   - product_name: GNX MFH (Multi Functional Holder)
-    description: VKB FSC Europe GNX MFH (Multi Functional Holder). VKB modular flight-control panel. In
-      stock on VKB FSC Europe listing on 2026-04-29. Designed to mount GNX extension modules (FSM,
-      SEM-V, THQ-V).
+    description: VKB FSC Europe GNX MFH (Multi Functional Holder). VKB modular flight-control
+      panel. In stock on VKB FSC Europe listing on 2026-04-29. Designed to mount GNX
+      extension modules (FSM, SEM-V, THQ-V).
     manufacturer: VKB-Sim
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -255,8 +258,9 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-mfh-multi-functional-holder/
         region: EU
   - product_name: GNX SEM (Side Extension Module)
-    description: VKB FSC Europe GNX SEM (Side Extension Module). VKB modular flight-control panel. In
-      stock on VKB FSC Europe listing on 2026-04-29. Gladiator NXT joystick base (from either side).
+    description: VKB FSC Europe GNX SEM (Side Extension Module). VKB modular flight-control
+      panel. In stock on VKB FSC Europe listing on 2026-04-29. Gladiator NXT joystick base
+      (from either side).
     manufacturer: VKB-Sim
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -269,9 +273,9 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-sem-side-extension-module/
         region: EU
   - product_name: GNX SEM-V (Side Extension Module – Vertical)
-    description: VKB FSC Europe GNX SEM-V (Side Extension Module – Vertical). VKB modular flight-control
-      panel. In stock on VKB FSC Europe listing on 2026-04-29. Requires GNX MFH (Multi Functional
-      Holder) in order to mount module.
+    description: VKB FSC Europe GNX SEM-V (Side Extension Module – Vertical). VKB modular
+      flight-control panel. In stock on VKB FSC Europe listing on 2026-04-29. Requires GNX
+      MFH (Multi Functional Holder) in order to mount module.
     manufacturer: VKB-Sim
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -284,8 +288,8 @@ commercial:
         url: https://flightsimcontrols.com/product/gnx-sem-v-side-extension-module-vertical/
         region: EU
   - product_name: ICE MAN MIP
-    description: ICE MAN MIP. cockpit panel bundle / MIP. Listed on EU WINCTRL store; local stock not
-      available in API response. NavyAce-UFC Unit x1.
+    description: ICE MAN MIP. cockpit panel bundle / MIP. Listed on EU WINCTRL store; local
+      stock not available in API response. NavyAce-UFC Unit x1.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -305,7 +309,8 @@ commercial:
         region: US
         status: available
   - product_name: ICP
-    description: ICP. cockpit panel module. Active EU WINCTRL store listing; total_stock 4 from API. ICP.
+    description: ICP. cockpit panel module. Active EU WINCTRL store listing; total_stock 4 from
+      API. ICP.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -325,8 +330,8 @@ commercial:
         region: US
         status: available
   - product_name: Legend MIP
-    description: Legend MIP. cockpit panel bundle / MIP. Listed on EU WINCTRL store; local stock not
-      available in API response. Legend MIP.
+    description: Legend MIP. cockpit panel bundle / MIP. Listed on EU WINCTRL store; local stock
+      not available in API response. Legend MIP.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -346,7 +351,8 @@ commercial:
         region: US
         status: available
   - product_name: MCDU
-    description: MCDU. cockpit panel module. Active EU WINCTRL store listing; total_stock 4 from API. MCDU.
+    description: MCDU. cockpit panel module. Active EU WINCTRL store listing; total_stock 4 from
+      API. MCDU.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -366,8 +372,8 @@ commercial:
         region: US
         status: available
   - product_name: MFD Cougar Pack
-    description: Thrustmaster MFD Cougar Pack. MFD button frames. Active product on Thrustmaster US.
-      Pack of two USB MFD frames.
+    description: Thrustmaster MFD Cougar Pack. MFD button frames. Active product on Thrustmaster
+      US. Pack of two USB MFD frames.
     manufacturer: Thrustmaster
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -400,8 +406,8 @@ commercial:
         region: US
         status: available
   - product_name: MFD Unit1(x3)
-    description: MFD Unit1(x3). cockpit panel module. Active EU WINCTRL store listing; total_stock 4
-      from API. MFD Unit 1x3.
+    description: MFD Unit1(x3). cockpit panel module. Active EU WINCTRL store listing;
+      total_stock 4 from API. MFD Unit 1x3.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -421,8 +427,8 @@ commercial:
         region: US
         status: available
   - product_name: NavyAce UFC&HUD With Mount
-    description: NavyAce UFC&HUD With Mount. cockpit panel bundle / MIP. Listed on EU WINCTRL store;
-      local stock not available in API response. NavyAce-UFC Unit x1.
+    description: NavyAce UFC&HUD With Mount. cockpit panel bundle / MIP. Listed on EU WINCTRL
+      store; local stock not available in API response. NavyAce-UFC Unit x1.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -442,8 +448,8 @@ commercial:
         region: US
         status: available
   - product_name: NavyAce-HUD Unit1
-    description: NavyAce-HUD Unit1. cockpit panel module. Active EU WINCTRL store listing; total_stock 4
-      from API. NavyAce-HUD Unit1 x1.
+    description: NavyAce-HUD Unit1. cockpit panel module. Active EU WINCTRL store listing;
+      total_stock 4 from API. NavyAce-HUD Unit1 x1.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -463,8 +469,8 @@ commercial:
         region: US
         status: available
   - product_name: NavyAce-UFC Unit1
-    description: NavyAce-UFC Unit1. cockpit panel module. Listed on EU WINCTRL store; local stock not
-      available in API response. NavyAce-UFC Unit1 x1.
+    description: NavyAce-UFC Unit1. cockpit panel module. Listed on EU WINCTRL store; local
+      stock not available in API response. NavyAce-UFC Unit1 x1.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -505,8 +511,8 @@ commercial:
         region: US
         status: available
   - product_name: PCR Panel of Combat Ready
-    description: PCR Panel of Combat Ready. cockpit panel module. Suspended on EU WINCTRL store; listed
-      in catalog but not normally purchasable. PCR Panel of Combat Ready.
+    description: PCR Panel of Combat Ready. cockpit panel module. Suspended on EU WINCTRL store;
+      listed in catalog but not normally purchasable. PCR Panel of Combat Ready.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -526,8 +532,8 @@ commercial:
         price: Unknown
         currency: USD
   - product_name: PFP 3N (Panel of Flight Plan)
-    description: PFP 3N (Panel of Flight Plan). cockpit panel module. Active EU WINCTRL store listing;
-      total_stock 4 from API. PFP 3N (Panel of Flight Plan).
+    description: PFP 3N (Panel of Flight Plan). cockpit panel module. Active EU WINCTRL store
+      listing; total_stock 4 from API. PFP 3N (Panel of Flight Plan).
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -547,8 +553,8 @@ commercial:
         region: US
         status: available
   - product_name: PFP 4 (Panel of Flight Plan)
-    description: PFP 4 (Panel of Flight Plan). cockpit panel module. Active EU WINCTRL store listing;
-      total_stock 4 from API. PFP 4 (Panel of Flight Plan).
+    description: PFP 4 (Panel of Flight Plan). cockpit panel module. Active EU WINCTRL store
+      listing; total_stock 4 from API. PFP 4 (Panel of Flight Plan).
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -568,8 +574,8 @@ commercial:
         region: US
         status: available
   - product_name: PFP 7 (Panel of Flight Plan)
-    description: PFP 7 (Panel of Flight Plan). cockpit panel module. Active EU WINCTRL store listing;
-      total_stock 4 from API. PFP 7 (Panel of Flight Plan).
+    description: PFP 7 (Panel of Flight Plan). cockpit panel module. Active EU WINCTRL store
+      listing; total_stock 4 from API. PFP 7 (Panel of Flight Plan).
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -589,8 +595,8 @@ commercial:
         region: US
         status: available
   - product_name: Phoenix MIP(VR)
-    description: Phoenix MIP(VR). cockpit panel bundle / MIP. Listed on EU WINCTRL store; local stock
-      not available in API response. NavyAce-UFC Unit.
+    description: Phoenix MIP(VR). cockpit panel bundle / MIP. Listed on EU WINCTRL store; local
+      stock not available in API response. NavyAce-UFC Unit.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -631,8 +637,8 @@ commercial:
         region: US
         status: available
   - product_name: PTO Panel of Take Off
-    description: PTO Panel of Take Off. cockpit panel module. Suspended on EU WINCTRL store; listed in
-      catalog but not normally purchasable. PTO Panel of Take Off.
+    description: PTO Panel of Take Off. cockpit panel module. Suspended on EU WINCTRL store;
+      listed in catalog but not normally purchasable. PTO Panel of Take Off.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -646,9 +652,9 @@ commercial:
         region: EU
         status: out-of-stock
   - product_name: Push To Talk Button Box
-    description: Apex Sim Racing Push To Talk Button Box. USB push-to-talk control box for sim racing.
-      in stock on official shop. Small or large kit with PTT button, coiled cable, carbon-fiber
-      plate, and multi-switch or brake-bias knob options.
+    description: Apex Sim Racing Push To Talk Button Box. USB push-to-talk control box for sim
+      racing. in stock on official shop. Small or large kit with PTT button, coiled cable,
+      carbon-fiber plate, and multi-switch or brake-bias knob options.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -661,9 +667,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/push-to-talk-ptt-button-box
         region: US
   - product_name: Race Deck
-    description: Apex Sim Racing Race Deck. Stream Deck-based sim racing button box. currently out of
-      stock on official shop. Control hub built around Elgato Stream Deck with carbon-fiber plates
-      and USB PC integration.
+    description: Apex Sim Racing Race Deck. Stream Deck-based sim racing button box. currently
+      out of stock on official shop. Control hub built around Elgato Stream Deck with
+      carbon-fiber plates and USB PC integration.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -676,9 +682,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/race-deck
         region: US
   - product_name: Race Deck XL Button Box
-    description: Apex Sim Racing Race Deck XL. Stream Deck XL-based sim racing button box. in stock on
-      official shop. Control hub for Elgato Stream Deck XL with carbon-fiber plates and USB PC
-      integration.
+    description: Apex Sim Racing Race Deck XL. Stream Deck XL-based sim racing button box. in
+      stock on official shop. Control hub for Elgato Stream Deck XL with carbon-fiber plates
+      and USB PC integration.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -691,9 +697,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/race-deck-xl-button-box
         region: US
   - product_name: Race Flag Pro V2
-    description: Apex Sim Racing Race Flag Pro V2. LED sim racing flag indicator kit. in stock on
-      official shop. SimHub-compatible LED flag, spotter, gear, and red-line indicator with CNC
-      anodized aluminum body and carbon-fiber mount.
+    description: Apex Sim Racing Race Flag Pro V2. LED sim racing flag indicator kit. in stock
+      on official shop. SimHub-compatible LED flag, spotter, gear, and red-line indicator
+      with CNC anodized aluminum body and carbon-fiber mount.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -706,9 +712,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/race-flag-pro-v2-led-sim-racing-flag-indicator-kit
         region: US
   - product_name: SOLO GA Flight Sim Panel
-    description: Virtual Fly SOLO GA. integrated GA cockpit panel. Active related product on Virtual Fly
-      page. GA-oriented flight sim panel designed around Virtual Fly controls [uncertain from
-      related listing].
+    description: Virtual Fly SOLO GA. integrated GA cockpit panel. Active related product on
+      Virtual Fly page. GA-oriented flight sim panel designed around Virtual Fly controls
+      [uncertain from related listing].
     manufacturer: Virtual Fly
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -721,9 +727,9 @@ commercial:
         url: https://www.virtual-fly.com/shop/panels/solo-ga
         region: EU
   - product_name: Single Emergency Stop Switch Box
-    description: Apex Sim Racing Single Emergency Stop Switch Box. emergency-stop control box for sim
-      rigs. in stock for wheel variant on official shop. Carbon-fiber top plate with 22 mm aluminum
-      e-stop switch and mounting hardware.
+    description: Apex Sim Racing Single Emergency Stop Switch Box. emergency-stop control box
+      for sim rigs. in stock for wheel variant on official shop. Carbon-fiber top plate with
+      22 mm aluminum e-stop switch and mounting hardware.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -736,9 +742,9 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/single-emergency-stop-switch-box
         region: US
   - product_name: Slim Racer Button Boxes
-    description: Apex Sim Racing Slim Racer Button Boxes. compact USB sim racing button box family.
-      currently out of stock on official shop. Carbon-fiber slim panels with push-button, encoder,
-      or multi-switch layouts.
+    description: Apex Sim Racing Slim Racer Button Boxes. compact USB sim racing button box
+      family. currently out of stock on official shop. Carbon-fiber slim panels with
+      push-button, encoder, or multi-switch layouts.
     manufacturer: Apex Sim Racing
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -751,8 +757,8 @@ commercial:
         url: https://www.apexsimracing.com/en-de/products/slim-racer-button-boxes
         region: US
   - product_name: TOP GUN MIP
-    description: TOP GUN MIP. cockpit panel bundle / MIP. Listed on EU WINCTRL store; local stock not
-      available in API response. NavyAce-UFC Unit x1.
+    description: TOP GUN MIP. cockpit panel bundle / MIP. Listed on EU WINCTRL store; local
+      stock not available in API response. NavyAce-UFC Unit x1.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -772,8 +778,8 @@ commercial:
         region: US
         status: available
   - product_name: "Universal Control Panel #1"
-    description: "VIRPIL Universal Control Panel #1. generic programmable control panel. Backorder on
-      VIRPIL US on 2026-04-29. 12 customizable RGB momentary buttons."
+    description: "VIRPIL Universal Control Panel #1. generic programmable control panel.
+      Backorder on VIRPIL US on 2026-04-29. 12 customizable RGB momentary buttons."
     manufacturer: VIRPIL Controls
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -786,9 +792,9 @@ commercial:
         url: https://virpil-controls.us.com/vpc-control-panel-1.html
         region: US
   - product_name: "Universal Control Panel #2"
-    description: "VIRPIL Universal Control Panel #2. programmable aircraft control panel with gear
-      lever. Backorder on VIRPIL US on 2026-04-29. Multi-position landing gear lever with aircraft
-      gear status LEDs."
+    description: "VIRPIL Universal Control Panel #2. programmable aircraft control panel with
+      gear lever. Backorder on VIRPIL US on 2026-04-29. Multi-position landing gear lever
+      with aircraft gear status LEDs."
     manufacturer: VIRPIL Controls
     component_category: button-boxes-and-panels
     component_sub_category: cockpit-plans
@@ -801,9 +807,9 @@ commercial:
         url: https://virpil-controls.us.com/vpc-control-panel-2.html
         region: US
   - product_name: "Universal Control Panel #3"
-    description: "VIRPIL Universal Control Panel #3. programmable control panel. Active/backorder status
-      not fully captured; listed in VIRPIL US control panel shop. Universal Control Panel series
-      product."
+    description: "VIRPIL Universal Control Panel #3. programmable control panel.
+      Active/backorder status not fully captured; listed in VIRPIL US control panel shop.
+      Universal Control Panel series product."
     manufacturer: VIRPIL Controls
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -816,8 +822,8 @@ commercial:
         url: https://virpil-controls.us.com/vpc-control-panel-3.html
         region: US
   - product_name: USB3.0 Instrument Display1
-    description: USB3.0 Instrument Display1. cockpit panel module. Active EU WINCTRL store listing;
-      total_stock 4 from API. USB3.0 Instrument Display1.
+    description: USB3.0 Instrument Display1. cockpit panel module. Active EU WINCTRL store
+      listing; total_stock 4 from API. USB3.0 Instrument Display1.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -837,8 +843,8 @@ commercial:
         region: US
         status: available
   - product_name: USB3.0 Instrument Display1(x3)
-    description: USB3.0 Instrument Display1(x3). cockpit panel module. Active EU WINCTRL store listing;
-      total_stock 4 from API. USB3.0 Instrument Display1 x3.
+    description: USB3.0 Instrument Display1(x3). cockpit panel module. Active EU WINCTRL store
+      listing; total_stock 4 from API. USB3.0 Instrument Display1 x3.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -858,7 +864,8 @@ commercial:
         region: US
         status: available
   - product_name: Viper MIP
-    description: Viper MIP. cockpit panel bundle / MIP. Pre-order listing on EU WINCTRL store. Viper MIP.
+    description: Viper MIP. cockpit panel bundle / MIP. Pre-order listing on EU WINCTRL store.
+      Viper MIP.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -878,8 +885,8 @@ commercial:
         region: US
         status: available
   - product_name: Viper MIP(VR)
-    description: Viper MIP(VR). cockpit panel bundle / MIP. Pre-order listing on EU WINCTRL store. Viper
-      MIP(VR).
+    description: Viper MIP(VR). cockpit panel bundle / MIP. Pre-order listing on EU WINCTRL
+      store. Viper MIP(VR).
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -899,8 +906,8 @@ commercial:
         region: US
         status: available
   - product_name: Viper Panel
-    description: Thrustmaster Viper Panel. aircraft-specific combat control panel. Active product on
-      Thrustmaster US. Official U.S. Air Force licensed Viper/F-16 control panel.
+    description: Thrustmaster Viper Panel. aircraft-specific combat control panel. Active
+      product on Thrustmaster US. Official U.S. Air Force licensed Viper/F-16 control panel.
     manufacturer: Thrustmaster
     component_category: button-boxes-and-panels
     component_sub_category: cockpit-plans
@@ -913,8 +920,8 @@ commercial:
         url: https://www.thrustmaster.com/en-us/products/viper-panel/
         region: US
   - product_name: WINCTRL 3 GLARESHIELD MAG
-    description: WINCTRL 3 GLARESHIELD MAG. cockpit panel bundle / MIP. Active EU WINCTRL store listing;
-      total_stock 4 from API. 3N PAP MAG*1,WINCTRL 3M PDC*1,WINCTRL 3N PDC*1.
+    description: WINCTRL 3 GLARESHIELD MAG. cockpit panel bundle / MIP. Active EU WINCTRL store
+      listing; total_stock 4 from API. 3N PAP MAG*1,WINCTRL 3M PDC*1,WINCTRL 3N PDC*1.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -934,9 +941,9 @@ commercial:
         region: US
         status: available
   - product_name: WINCTRL 3 PDC Combo
-    description: WINCTRL 3 PDC Combo. cockpit panel bundle / MIP. Active EU WINCTRL store listing;
-      total_stock 4 from API. 3 PDC Combo is the mixed combo for versatility, including one 3N PDC
-      unit and one 3M PDC unit.
+    description: WINCTRL 3 PDC Combo. cockpit panel bundle / MIP. Active EU WINCTRL store
+      listing; total_stock 4 from API. 3 PDC Combo is the mixed combo for versatility,
+      including one 3N PDC unit and one 3M PDC unit.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: panel-bundle
@@ -977,8 +984,8 @@ commercial:
         region: US
         status: available
   - product_name: WINCTRL 32 ECAM
-    description: WINCTRL 32 ECAM. cockpit panel module. Active EU WINCTRL store listing; total_stock 4
-      from API. WINCTRL 32 ECAM.
+    description: WINCTRL 32 ECAM. cockpit panel module. Active EU WINCTRL store listing;
+      total_stock 4 from API. WINCTRL 32 ECAM.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1019,8 +1026,8 @@ commercial:
         region: US
         status: available
   - product_name: WINCTRL 32 TCAS 1.0
-    description: WINCTRL 32 TCAS 1.0. cockpit panel module. Pre-order listing on EU WINCTRL store.
-      WINCTRL 32 TCAS 1.0.
+    description: WINCTRL 32 TCAS 1.0. cockpit panel module. Pre-order listing on EU WINCTRL
+      store. WINCTRL 32 TCAS 1.0.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1040,8 +1047,8 @@ commercial:
         region: US
         status: available
   - product_name: WINCTRL 3M PDC
-    description: WINCTRL 3M PDC. cockpit panel module. Active EU WINCTRL store listing; total_stock 4
-      from API. WINCTRL 3M PDC.
+    description: WINCTRL 3M PDC. cockpit panel module. Active EU WINCTRL store listing;
+      total_stock 4 from API. WINCTRL 3M PDC.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1061,8 +1068,8 @@ commercial:
         region: US
         status: available
   - product_name: WINCTRL 3N PDC
-    description: WINCTRL 3N PDC. cockpit panel module. Active EU WINCTRL store listing; total_stock 4
-      from API. WINCTRL 3N PDC.
+    description: WINCTRL 3N PDC. cockpit panel module. Active EU WINCTRL store listing;
+      total_stock 4 from API. WINCTRL 3N PDC.
     manufacturer: WINCTRL
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1082,9 +1089,9 @@ commercial:
         region: US
         status: available
   - product_name: WHEELpro Large Button Box with Paddles
-    description: RealGear WHEELpro Large Button Box with Paddles. wheel button box and paddle-shifter
-      module. made to order on official Ricmotech store. Direct-drive wheel button plate with
-      magnetic paddle shifters.
+    description: RealGear WHEELpro Large Button Box with Paddles. wheel button box and
+      paddle-shifter module. made to order on official Ricmotech store. Direct-drive wheel
+      button plate with magnetic paddle shifters.
     manufacturer: RealGear
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -1098,8 +1105,8 @@ commercial:
         region: US
   - product_name: WHEELpro Small Button Box with Paddles
     description: RealGear WHEELpro Small Button Box with Paddles. compact wheel button box and
-      paddle-shifter module. made to order on official Ricmotech store. Direct-drive wheel control
-      module with magnetic paddle shifters.
+      paddle-shifter module. made to order on official Ricmotech store. Direct-drive wheel
+      control module with magnetic paddle shifters.
     manufacturer: RealGear
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -1112,8 +1119,8 @@ commercial:
         url: https://www.ricmotech.com/realgear-wheelpro-small-button-box-with-paddles
         region: US
   - product_name: RACEpro D22 Programmable Button Box
-    description: RealGear RACEpro D22. programmable sim-racing button box. official Ricmotech store
-      listing. USB control panel with buttons, switches, and rotary controls.
+    description: RealGear RACEpro D22. programmable sim-racing button box. official Ricmotech
+      store listing. USB control panel with buttons, switches, and rotary controls.
     manufacturer: RealGear
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -1140,8 +1147,8 @@ commercial:
         url: https://www.ricmotech.com/realgear-racepro-h20-button-box
         region: US
   - product_name: RACEpro H22 Programmable Button Box
-    description: RealGear RACEpro H22. programmable race-car switch panel. official Ricmotech store
-      listing. USB button box with switches and panel-style simulator controls.
+    description: RealGear RACEpro H22. programmable race-car switch panel. official Ricmotech
+      store listing. USB button box with switches and panel-style simulator controls.
     manufacturer: RealGear
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -1154,9 +1161,9 @@ commercial:
         url: https://www.ricmotech.com/realgear-racepro-h22-button-box
         region: US
   - product_name: USB Push-to-Talk 3 Function
-    description: Ricmotech USB Push-to-Talk. compact three-function USB button controller. official
-      Ricmotech store listing. Mini button box for wheel-mounted push-to-talk and assignable
-      controls.
+    description: Ricmotech USB Push-to-Talk. compact three-function USB button controller.
+      official Ricmotech store listing. Mini button box for wheel-mounted push-to-talk and
+      assignable controls.
     manufacturer: Ricmotech
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1169,8 +1176,8 @@ commercial:
         url: https://www.ricmotech.com/push-talk-button-box
         region: US
   - product_name: SlimBox Button Box
-    description: Ricmotech SlimBox RMT-SB1. slim USB sim-racing button box. official Ricmotech store
-      listing. Low-profile control box for cockpit button and dial access.
+    description: Ricmotech SlimBox RMT-SB1. slim USB sim-racing button box. official Ricmotech
+      store listing. Low-profile control box for cockpit button and dial access.
     manufacturer: Ricmotech
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -1183,9 +1190,10 @@ commercial:
         url: https://www.ricmotech.com/slimbox
         region: US
   - product_name: Porsche 911 GT3 Cup (991) Button Box Console
-    description: Sim Lab Porsche 911 GT3 Cup (991) Button Box Console. control panel. listed on Sim Lab.
-      The officially licensed Porsche 911 GT3 Cup (991) Button Box Console provides users with 42
-      individual inputs and is constructed using the best components and materials availabl...
+    description: Sim Lab Porsche 911 GT3 Cup (991) Button Box Console. control panel. listed on
+      Sim Lab. The officially licensed Porsche 911 GT3 Cup (991) Button Box Console provides
+      users with 42 individual inputs and is constructed using the best components and
+      materials availabl...
     manufacturer: Sim Lab
     component_category: button-boxes-and-panels
     component_sub_category: button-box
@@ -1199,9 +1207,9 @@ commercial:
         region: EU
         status: available
   - product_name: MTLP Panel
-    description: MOZA MTLP Panel. control panel. listed on Eu. The MOZA MTLP Panel is a high-fidelity
-      multi-function landing panel, designed for precision control and immersive flight simulation.
-      Modeled after the F/A-18 landing panel, it f...
+    description: MOZA MTLP Panel. control panel. listed on Eu. The MOZA MTLP Panel is a
+      high-fidelity multi-function landing panel, designed for precision control and
+      immersive flight simulation. Modeled after the F/A-18 landing panel, it f...
     manufacturer: MOZA
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1216,8 +1224,8 @@ commercial:
         status: available
   - product_name: MTP Throttle
     description: MOZA MTP Throttle. control panel. listed on Eu. Designed for professional and
-      enthusiast flight sim pilots, the MOZA MTP Throttle offers an authentic fighter jet-inspired
-      experience. Its durable aluminum alloy grip, 27 progra...
+      enthusiast flight sim pilots, the MOZA MTP Throttle offers an authentic fighter
+      jet-inspired experience. Its durable aluminum alloy grip, 27 progra...
     manufacturer: MOZA
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1231,10 +1239,10 @@ commercial:
         region: EU
         status: available
   - product_name: Tablet and Button Box Holder Upgrade Kit v1- Black
-    description: Trak Racer Tablet and Button Box Holder Upgrade Kit v1- Black. control panel. listed on
-      Trakracer. The Trak Racer tablet and button box upgrade kit has been designed to mount on any
-      DIY sim rig with T-Slot. It includes 2 pivot points to enable it to swivel. Unlike others on
-      t...
+    description: Trak Racer Tablet and Button Box Holder Upgrade Kit v1- Black. control panel.
+      listed on Trakracer. The Trak Racer tablet and button box upgrade kit has been
+      designed to mount on any DIY sim rig with T-Slot. It includes 2 pivot points to enable
+      it to swivel. Unlike others on t...
     manufacturer: Trak Racer
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1248,10 +1256,10 @@ commercial:
         region: EU
         status: available
   - product_name: Tablet and Button Box Holder Upgrade Kit v3- Black
-    description: Trak Racer Tablet and Button Box Holder Upgrade Kit v3- Black. control panel. listed on
-      Trakracer. The Trak Racer tablet and button box upgrade kit has been designed to mount on any
-      DIY sim rig with T-Slot. It includes 2 pivot points to enable it to swivel. Unlike others on
-      t...
+    description: Trak Racer Tablet and Button Box Holder Upgrade Kit v3- Black. control panel.
+      listed on Trakracer. The Trak Racer tablet and button box upgrade kit has been
+      designed to mount on any DIY sim rig with T-Slot. It includes 2 pivot points to enable
+      it to swivel. Unlike others on t...
     manufacturer: Trak Racer
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1265,9 +1273,10 @@ commercial:
         region: EU
         status: available
   - product_name: Tablet and Button Box Holder V2 Mount
-    description: Trak Racer Tablet and Button Box Holder V2 Mount. control panel. listed on Trakracer.
-      Trak Racer Tablet and Button Box Upgrade Kit – Universal Mount for Driving and Flight
-      Simulators Upgrade your driving simulator or flight simulator with the Trak Racer Tablet an...
+    description: Trak Racer Tablet and Button Box Holder V2 Mount. control panel. listed on
+      Trakracer. Trak Racer Tablet and Button Box Upgrade Kit – Universal Mount for Driving
+      and Flight Simulators Upgrade your driving simulator or flight simulator with the Trak
+      Racer Tablet an...
     manufacturer: Trak Racer
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1281,9 +1290,10 @@ commercial:
         region: EU
         status: available
   - product_name: Tablet, LCD or Button Box Upgrade Kit
-    description: Trak Racer Tablet, LCD or Button Box Upgrade Kit. control panel. listed on Trakracer.
-      Trak Racer Tablet, LCD or Button Box Upgrade Kit – Universal Mount for Driving and Flight
-      Simulators Upgrade your driving simulator or flight simulator with the Trak Racer Table...
+    description: Trak Racer Tablet, LCD or Button Box Upgrade Kit. control panel. listed on
+      Trakracer. Trak Racer Tablet, LCD or Button Box Upgrade Kit – Universal Mount for
+      Driving and Flight Simulators Upgrade your driving simulator or flight simulator with
+      the Trak Racer Table...
     manufacturer: Trak Racer
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1325,9 +1335,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: Forte Formula Button Box (B/G)
-    description: Asetek Forte Formula Button Box (B/G). control panel. listed on Asetek. Inspired by
-      real-world Formula and LMP race cars, the Forte Formula Button Box is built to deliver a
-      solid, precise driving feel. Its rigid, non-flexing construction keeps every...
+    description: Asetek Forte Formula Button Box (B/G). control panel. listed on Asetek.
+      Inspired by real-world Formula and LMP race cars, the Forte Formula Button Box is
+      built to deliver a solid, precise driving feel. Its rigid, non-flexing construction
+      keeps every...
     manufacturer: Asetek
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1339,9 +1350,9 @@ commercial:
         region: Unknown
         status: available
   - product_name: Forte GT Button Box (B/G)
-    description: Asetek Forte GT Button Box (B/G). control panel. listed on Asetek. The Forte GT Button
-      Box is designed for drivers who want flexibility and control, allowing you to quickly change
-      rims and tailor your setup to each race or discipline. With up t...
+    description: Asetek Forte GT Button Box (B/G). control panel. listed on Asetek. The Forte GT
+      Button Box is designed for drivers who want flexibility and control, allowing you to
+      quickly change rims and tailor your setup to each race or discipline. With up t...
     manufacturer: Asetek
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1353,9 +1364,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: Forte® GT Button Box (Orange)
-    description: "Asetek Forte® GT Button Box (Orange). control panel. listed on Asetek. From track to
-      trail: Introducing the Forte Button Box. Customize your racing experience by easily swapping
-      rims to fit your preferred racing style. With 112 individual input opt..."
+    description: "Asetek Forte® GT Button Box (Orange). control panel. listed on Asetek. From
+      track to trail: Introducing the Forte Button Box. Customize your racing experience by
+      easily swapping rims to fit your preferred racing style. With 112 individual input
+      opt..."
     manufacturer: Asetek
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1367,9 +1379,10 @@ commercial:
         region: Unknown
         status: available
   - product_name: La Prima™ GT Button Box (Orange)
-    description: "Asetek La Prima™ GT Button Box (Orange). control panel. listed on Asetek. From rally
-      to GT – A wheel for every race style: When getting an La Prima Button Box, you will be able to
-      get different rim styles and materials, essentially unlocking a wide ar..."
+    description: "Asetek La Prima™ GT Button Box (Orange). control panel. listed on Asetek. From
+      rally to GT – A wheel for every race style: When getting an La Prima Button Box, you
+      will be able to get different rim styles and materials, essentially unlocking a wide
+      ar..."
     manufacturer: Asetek
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1380,11 +1393,28 @@ commercial:
         url: https://www.asetek.com/simsports/product/la-prima-button-box/
         region: Unknown
         status: available
+  - product_name: BavarianSimTec - DDU5
+    description: Treq Sim BavarianSimTec - DDU5. control panel. listed on Treq Sim. Beautiful
+      5-inch DDU with aluminum construction.
+    manufacturer: Treq Sim
+    component_category: button-boxes-and-panels
+    component_sub_category: control-panel
+    product_url: https://www.treq-sim.com/shop/tbv-bst-ddu5-bavariansimtec-ddu5-400
+    picture_url: https://www.treq-sim.com/web/image/product.product/1421/image_1920?unique=234f92b
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: EUR
+        url: https://www.treq-sim.com/shop/tbv-bst-ddu5-bavariansimtec-ddu5-400
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
 opensource:
   - project_name: Cessna 172 Skyhawk Flight Simulator Panel
-    description: Cessna 172 Flight Sim Panel. desk-mounted Cessna 172 instrument panel. Legacy public
-      project with detailed project site and repository. No GitHub releases observed. Desk-mounted
-      Cessna 172 instrument panel for simulator training.
+    description: Cessna 172 Flight Sim Panel. desk-mounted Cessna 172 instrument panel. Legacy
+      public project with detailed project site and repository. No GitHub releases observed.
+      Desk-mounted Cessna 172 instrument panel for simulator training.
     maker:
       - Allan Glen
       - allanglen
@@ -1394,8 +1424,8 @@ opensource:
     project_url: https://github.com/allanglen/c172-flight-sim-panel
     picture_url: https://cessna172sim.allanglen.com/assets/images/hero.jpg
   - project_name: DCS-BIOS
-    description: "DCS-BIOS. DCS cockpit data export and hardware interface. Active continuation of
-      original DCS-BIOS. Latest GitHub release observed: DCS-BIOS v0.11.3 on 2026-03-22.
+    description: "DCS-BIOS. DCS cockpit data export and hardware interface. Active continuation
+      of original DCS-BIOS. Latest GitHub release observed: DCS-BIOS v0.11.3 on 2026-03-22.
       `Export.lua` script for DCS: World that lets external hardware/software interact with
       clickable cockpits."
     maker:
@@ -1407,9 +1437,9 @@ opensource:
     project_url: https://github.com/DCS-Skunkworks/dcs-bios
     picture_url: https://repository-images.githubusercontent.com/115350359/9dc3d1bf-a3b0-400a-95a1-54216071c60f
   - project_name: FreeJoy
-    description: "FreeJoy. configurable STM32 USB HID game-device firmware. Active project. Latest
-      GitHub release observed: v1.7.3 on 2026-02-21. STM32F103C8 USB HID game-device controller
-      firmware."
+    description: "FreeJoy. configurable STM32 USB HID game-device firmware. Active project.
+      Latest GitHub release observed: v1.7.3 on 2026-02-21. STM32F103C8 USB HID game-device
+      controller firmware."
     maker: FreeJoy Team
     component_category: button-boxes-and-panels
     component_sub_category: panel-firmware
@@ -1417,9 +1447,9 @@ opensource:
     project_url: https://github.com/FreeJoy-Team/FreeJoy
     picture_url: https://raw.githubusercontent.com/FreeJoy-Team/FreeJoy/master/images/main.png
   - project_name: MMJoy2 English mirror
-    description: MMJoy2. legacy joystick controller firmware and configurator documentation. Archived
-      read-only GitHub mirror since 2018-10-31. Legacy firmware/software archive, still referenced
-      by DIY builders. English documentation mirror for MMJoy2.
+    description: MMJoy2. legacy joystick controller firmware and configurator documentation.
+      Archived read-only GitHub mirror since 2018-10-31. Legacy firmware/software archive,
+      still referenced by DIY builders. English documentation mirror for MMJoy2.
     maker:
       - MMjoy project
       - English mirror maintainers
@@ -1440,8 +1470,8 @@ opensource:
     picture_url: https://shop.mobiflight.com/wp-content/uploads/2026/02/mobiflight-logo-wide-small.png
   - project_name: MobiFlight Panels
     description: MobiFlight Panels. open-hardware flight simulator panel designs. Active
-      work-in-progress repository with community contributions. Open-hardware panel designs for
-      flight simulation.
+      work-in-progress repository with community contributions. Open-hardware panel designs
+      for flight simulation.
     maker: MobiFlight
     component_category: button-boxes-and-panels
     component_sub_category: control-panel
@@ -1449,9 +1479,9 @@ opensource:
     project_url: https://github.com/MobiFlight/mobiflight-panels
     picture_url: https://raw.githubusercontent.com/MobiFlight/mobiflight-panels/main/pcb-modules/max-displays/OnePiece/OnePiece_Front.PNG
   - project_name: OpenHornet
-    description: OpenHornet. 1:1 F/A-18C Lot 20 cockpit replica. Active advanced cockpit project. GitHub
-      repository and official site are current; build is substantial and maker-heavy. 1:1 replica
-      F/A-18C Lot 20 cockpit for home entertainment.
+    description: OpenHornet. 1:1 F/A-18C Lot 20 cockpit replica. Active advanced cockpit
+      project. GitHub repository and official site are current; build is substantial and
+      maker-heavy. 1:1 replica F/A-18C Lot 20 cockpit for home entertainment.
     maker:
       - OpenHornet community
       - jrsteensen
@@ -1461,22 +1491,23 @@ opensource:
     project_url: https://github.com/jrsteensen/OpenHornet
     picture_url: https://openhornet.com/wp-content/uploads/2018/04/open_hornet_horizontal_final-300x47.png
   - project_name: The Cessna 172 Project V3
-    description: Captain Bob Cessna 172 Project. full Cessna 172 cockpit plans and panel/instrument
-      library. Active source-available plan repository. Repository showed ongoing commits in 2026.
-      Free/pay-what-you-want Cessna 172 project files published on GitHub.
+    description: Captain Bob Cessna 172 Project. full Cessna 172 cockpit plans and
+      panel/instrument library. Active source-available plan repository. Repository showed
+      ongoing commits in 2026. Free/pay-what-you-want Cessna 172 project files published on
+      GitHub.
     maker:
       - Captain Bob Sim
       - CaptainBobSim
     component_category: button-boxes-and-panels
     component_sub_category: cockpit-plans
-    license: Creative Commons non-commercial / not-for-resale license link in repository; exact CC code
-      is [uncertain].
+    license: Creative Commons non-commercial / not-for-resale license link in repository; exact
+      CC code is [uncertain].
     project_url: https://github.com/CaptainBobSim/The-Cessna-172-Project-V3
     picture_url: https://i0.wp.com/captainbobsim.com/wp-content/uploads/2023/04/2-0-000_Full_Assembly_Section_2_2022-Dec-29_05-45-53PM-000_CustomizedView5984404674.png?fit=600%2C480&ssl=1
   - project_name: UFC
-    description: UFC. DCS up-front control panel / Arduino button box. Small active-ish public project;
-      repository activity observed after 2025, but no major release stream. Arduino project for a
-      button-box style up-front control panel.
+    description: UFC. DCS up-front control panel / Arduino button box. Small active-ish public
+      project; repository activity observed after 2025, but no major release stream. Arduino
+      project for a button-box style up-front control panel.
     maker: escaner
     component_category: button-boxes-and-panels
     component_sub_category: panel-firmware

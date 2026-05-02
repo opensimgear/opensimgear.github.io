@@ -2741,6 +2741,38 @@ commercial:
         status: available
     license: Commercial
     last_updated: 2026-05-01
+  - product_name: BavarianSimTec - Alpha
+    description: Treq Sim BavarianSimTec - Alpha. gt wheel. listed on Treq Sim. Official shop listing.
+    manufacturer: Treq Sim
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://www.treq-sim.com/shop/steering-wheels-8/bavariansimtec-alpha-300
+    picture_url: https://www.treq-sim.com/web/image/product.template/300/image_1024?unique=eded1da
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/shop/steering-wheels-8/bavariansimtec-alpha-300
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+  - product_name: BavarianSimTec - Spacer
+    description: Treq Sim BavarianSimTec - Spacer. gt wheel. listed on Treq Sim. Official shop listing.
+    manufacturer: Treq Sim
+    component_category: steering-wheels
+    component_sub_category: gt-wheel
+    product_url: https://www.treq-sim.com/shop/steering-wheels-8/bavariansimtec-spacer-349
+    picture_url: https://www.treq-sim.com/web/image/product.template/349/image_1024?unique=c6daeec
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/shop/steering-wheels-8/bavariansimtec-spacer-349
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
 opensource:
   - project_name: FreeJoy
     description: FreeJoy. configurable USB HID input controller for wheels, pedals, shifters,

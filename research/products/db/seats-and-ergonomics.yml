@@ -200,6 +200,14 @@ commercial:
         url: https://sim-lab.eu/products/sparco-seat-slider
         region: EU
         status: available
+      - name: Treq Sim
+        price: 44.26
+        currency: EUR
+        url: https://www.treq-sim.com/shop/seat-slider-13
+        region: Unknown
+        status: available
+        last_updated: 2026-05-02
+    last_updated: 2026-05-02
   - product_name: Gloves Long M
     description: Heusinkveld Gloves Long M. rig mounts. listed on Heusinkveld. All you need is
       glove 😉 Add Heusinkveld gloves to your look and you are good to go!.

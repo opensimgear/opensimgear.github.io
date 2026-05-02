@@ -677,6 +677,14 @@ commercial:
         url: https://sim-lab.eu/products/pedal-slider-baseplate-sim-racing
         region: EU
         status: available
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/shop/accessories-5/pedal-slider-23
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+    last_updated: 2026-05-02
   - product_name: Sim pedal heel rest
     description: "Sim Lab Sim pedal heel rest. two pedal set. listed on Sim Lab. Product
       Description: The Sim Pedal Heel Rest provides support for the back of your feet,
@@ -2003,6 +2011,14 @@ commercial:
         url: https://vnmsimulation.com/vi/product/vnm-pedal-damper-kit/
         region: Unknown
         status: available
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/shop/accessories-5/pedal-raise-kit-457
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+    last_updated: 2026-05-02
   - product_name: Pedal Damper Kit
     description: VNM Pedal Damper Kit. two pedal set. listed on Vnmsimulation. Official shop listing.
     manufacturer: VNM
@@ -2482,6 +2498,87 @@ commercial:
         region: Unknown
         status: available
     license: Commercial
+  - product_name: Inverted Pedal Deck
+    description: Treq Sim Inverted Pedal Deck. two pedal set. listed on Treq Sim. Official shop listing.
+    manufacturer: Treq Sim
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://www.treq-sim.com/shop/accessories-5/inverted-pedal-deck-458
+    picture_url: https://www.treq-sim.com/web/image/product.template/458/image_1024?unique=626cf36
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/shop/accessories-5/inverted-pedal-deck-458
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+  - product_name: Inverted Pedal Deck
+    description: Treq Sim Inverted Pedal Deck. two pedal set. listed on Treq Sim. Official shop listing.
+    manufacturer: Treq Sim
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://www.treq-sim.com/nl/shop/accessoires-5/inverted-pedal-deck-458
+    picture_url: https://www.treq-sim.com/web/image/product.template/458/image_1024?unique=626cf36
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/nl/shop/accessoires-5/inverted-pedal-deck-458
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+  - product_name: Inverted Pedal Deck
+    description: Treq Sim Inverted Pedal Deck. two pedal set. listed on Treq Sim. Official shop listing.
+    manufacturer: Treq Sim
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://www.treq-sim.com/fr/shop/accessories-5/inverted-pedal-deck-458
+    picture_url: https://www.treq-sim.com/web/image/product.template/458/image_1024?unique=626cf36
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/fr/shop/accessories-5/inverted-pedal-deck-458
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+  - product_name: Inverted Pedal Deck
+    description: Treq Sim Inverted Pedal Deck. two pedal set. listed on Treq Sim. Official shop listing.
+    manufacturer: Treq Sim
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://www.treq-sim.com/de/shop/zubehor-5/inverted-pedal-deck-458
+    picture_url: https://www.treq-sim.com/web/image/product.template/458/image_1024?unique=626cf36
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/de/shop/zubehor-5/inverted-pedal-deck-458
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
+  - product_name: Pedal Deck Assembly
+    description: Treq Sim Pedal Deck Assembly. two pedal set. listed on Treq Sim. Building your
+      own simulator, and in need of a fancy pedal mounting solution? We’ve got you covered.
+    manufacturer: Treq Sim
+    component_category: pedals
+    component_sub_category: two-pedal-set
+    product_url: https://www.treq-sim.com/shop/diy-parts-3/pedal-deck-assembly-142
+    picture_url: https://www.treq-sim.com/web/image/product.template/142/image_1024?unique=234f92b
+    last_updated: 2026-05-02
+    shops:
+      - name: Treq Sim
+        price: Unknown
+        currency: USD
+        url: https://www.treq-sim.com/shop/diy-parts-3/pedal-deck-assembly-142
+        region: Unknown
+        status: out-of-stock
+        last_updated: 2026-05-02
 opensource:
   - project_name: CNCDan Sim Pedals
     description: CNCDan Sim Pedals. laser-cut and 3D-printed load-cell/hall pedal set. Active
