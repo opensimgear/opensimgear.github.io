@@ -64,6 +64,7 @@
   };
 
   type StewartSceneHandle = {
+    activateSpaceMouse: () => Promise<boolean>;
     resetCameraView: () => Promise<void>;
     setCameraMode: (mode: CameraProjectionMode) => Promise<void>;
   };
@@ -105,6 +106,7 @@
   let viewportElement = $state<HTMLDivElement | null>(null);
   let sceneCameraMode = $state<CameraProjectionMode>('perspective');
   let spaceMouseMotionTarget = $state<ThreeSpaceMouseMotionTarget>('scene');
+  let spaceMouseActive = $state(false);
   let sceneRef = $state<StewartSceneHandle | null>(null);
   let statusPanelOpen = $state(false);
 
@@ -478,6 +480,11 @@
               onSetCameraMode={async (mode) => {
                 await sceneRef?.setCameraMode(mode);
                 sceneCameraMode = mode;
+                focusViewport();
+              }}
+              {spaceMouseActive}
+              onActivateSpaceMouse={async () => {
+                spaceMouseActive = (await sceneRef?.activateSpaceMouse()) ?? false;
                 focusViewport();
               }}
               onSetSpaceMouseMotionTarget={isNarrowViewport

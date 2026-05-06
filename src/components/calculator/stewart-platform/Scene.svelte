@@ -59,7 +59,6 @@
   let orbitControlsRef: ThreeOrbitControls | null = null;
   let modelRootRef: Group | null = null;
   let spaceMouseBridge: ThreeSpaceMouseBridge | null = null;
-  let spaceMouseConnectRequested = false;
   let savedView: {
     position: [number, number, number];
     target: [number, number, number];
@@ -262,6 +261,10 @@
     applySavedView();
   }
 
+  export async function activateSpaceMouse() {
+    return spaceMouseBridge?.connect() ?? false;
+  }
+
   onMount(() => {
     spaceMouseBridge = new ThreeSpaceMouseBridge({
       scene: {
@@ -301,11 +304,6 @@
       spaceMouseBridge = null;
     };
   });
-
-  $: if (!spaceMouseConnectRequested && spaceMouseBridge && viewportElement) {
-    spaceMouseConnectRequested = true;
-    void spaceMouseBridge.connect();
-  }
 
   $: if (spaceMouseBridge) {
     spaceMouseBridge.setMotionTarget(spaceMouseMotionTarget);

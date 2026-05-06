@@ -318,10 +318,14 @@ export class ThreeSpaceMouseBridge {
   }
 
   async connect() {
+    if (this.controller) {
+      return true;
+    }
+
     const ControllerCtor = await loadSpaceMouseScript();
     const viewport = this.options.getViewport();
 
-    if (!ControllerCtor || !viewport || this.disposed || this.controller) {
+    if (!ControllerCtor || !viewport || this.disposed) {
       return false;
     }
 

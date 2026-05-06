@@ -72,6 +72,7 @@
   let tooltipElement = $state<HTMLDivElement | null>(null);
   let humanRigTooltip = $state<HumanRigHoverTooltip | null>(null);
   let spaceMouseBridge = $state<ThreeSpaceMouseBridge | null>(null);
+  let spaceMouseActive = $state(false);
   const createPlannerRenderer = (canvas: HTMLCanvasElement) =>
     new WebGLRenderer({
       canvas,
@@ -311,6 +312,14 @@
     posturePanelOpen = false;
   }
 
+  async function activateSpaceMouse() {
+    if (!spaceMouseBridge) {
+      return;
+    }
+
+    spaceMouseActive = await spaceMouseBridge.connect();
+  }
+
   onMount(() => {
     spaceMouseBridge = new ThreeSpaceMouseBridge({
       scene: {
@@ -323,7 +332,6 @@
       getModelRoot: () => rigRootRef,
       getActiveCamera: () => (useOrthographicCamera ? orthographicCameraRef : perspectiveCameraRef),
     });
-    void spaceMouseBridge.connect();
     void tick().then(() => {
       viewportElement?.querySelector('canvas')?.setAttribute('data-testid', 'aluminum-rig-planner-preview-canvas');
       applySavedView();
@@ -332,6 +340,7 @@
     return () => {
       spaceMouseBridge?.destroy();
       spaceMouseBridge = null;
+      spaceMouseActive = false;
     };
   });
 </script>
@@ -361,6 +370,11 @@
       : null}
     onSetCameraMode={async (mode) => {
       await setCameraMode(mode === 'orthographic');
+      focusViewport();
+    }}
+    {spaceMouseActive}
+    onActivateSpaceMouse={async () => {
+      await activateSpaceMouse();
       focusViewport();
     }}
   />
