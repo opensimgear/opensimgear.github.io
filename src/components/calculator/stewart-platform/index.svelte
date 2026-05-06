@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Canvas } from '@threlte/core';
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import { Button, Monitor, Pane, Point, RotationEuler, Slider } from 'svelte-tweakpane-ui';
   import { Matrix3, Vector3 } from 'three';
   import { createDebouncedUrlStateWriter } from '../shared/debounced-url-state';
@@ -491,6 +491,10 @@
                 ? null
                 : async (target) => {
                     spaceMouseMotionTarget = target;
+                    if (target === 'platform') {
+                      await tick();
+                      spaceMouseActive = (await sceneRef?.activateSpaceMouse()) ?? false;
+                    }
                     focusViewport();
                   }}
             />

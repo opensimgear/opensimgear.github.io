@@ -82,6 +82,7 @@ jobs:
           if-no-files-found: ignore
   deployment-changelog:
     needs: deploy
+    if: ${{ false }} # Temporarily disabled.
     runs-on: ubuntu-latest
     outputs:
       changelog: ${{ steps.publish-metadata.outputs.changelog }}
@@ -241,7 +242,7 @@ jobs:
     needs:
       - deployment-changelog
       - e2e
-    if: ${{ needs.deployment-changelog.outputs.has_changelog == 'true' }}
+    if: ${{ false && needs.deployment-changelog.outputs.has_changelog == 'true' }} # Temporarily disabled.
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -274,7 +275,7 @@ jobs:
     needs:
       - deployment-changelog
       - create-release
-    if: ${{ needs.deployment-changelog.outputs.has_changelog == 'true' }}
+    if: ${{ false && needs.deployment-changelog.outputs.has_changelog == 'true' }} # Temporarily disabled.
     runs-on: ubuntu-latest
     steps:
       - name: Check Discord webhook configuration
