@@ -7,6 +7,8 @@ on:
     paths:
       - src/**
       - public/**
+      - .github/actions/**
+      - .github/workflows/ci.yml
       - astro.config.mjs
       - package.json
       - playwright.config.ts
