@@ -55,7 +55,7 @@ When direct USB disconnects, input automatically resumes through the available C
 
 ## SimHub outputs and readouts
 
-Both standalone modules and the gateway expose USB CDC serial alongside HID over the same USB cable. SimHub is the initial integration for LEDs, backlights, and small readouts. The [desktop cockpit](/docs/architecture/desktop-cockpit/) uses serial for configuration, registration, calibration, diagnostics, and updates on Windows, Linux, and macOS. SimHub remains the initial Windows output integration. SimHub's [custom serial device support](https://github.com/SHWotever/SimHub/wiki/Custom-serial-devices) provides the host-side starting point; OpenSimGear's message framing, addressing, and configuration commands still need definition and testing.
+Both standalone modules and the gateway expose USB CDC serial alongside HID over the same USB cable. SimHub is the initial integration for LEDs, backlights, and small readouts. The [desktop cockpit](/gear/architecture/desktop-cockpit/) uses serial for configuration, registration, calibration, diagnostics, and updates on Windows, Linux, and macOS. SimHub remains the initial Windows output integration. SimHub's [custom serial device support](https://github.com/SHWotever/SimHub/wiki/Custom-serial-devices) provides the host-side starting point; OpenSimGear's message framing, addressing, and configuration commands still need definition and testing.
 
 The host translates simulator telemetry into physical output values. Modules do not encode game-specific telemetry semantics. Gateway serial messages identify the destination module, and the gateway carries those commands over CAN. With multiple gateways, bind each serial output session/profile to the stable gateway identity and its module identities; node IDs alone are insufficient. Gateway moves require updating the output route/profile, and expired commands must not follow the move. Small readouts carry bounded values/text or display commands, not video streams. Future video panels would need a separate HDMI/DisplayPort connection.
 
@@ -65,7 +65,7 @@ Setup can reach a module over direct USB serial or via the USB-connected gateway
 
 Output ownership is distinct from HID input ownership. An active direct USB serial command session takes priority over gateway outputs; a cable or idle open COM port alone does not claim ownership. Explicit claim/keepalive/release handling remains to be implemented, with one source controlling a module at a time and fresh valid commands required after handoff. When that session ends, control automatically falls back to fresh valid gateway commands.
 
-The agreed fallback when neither eligible source has fresh valid output commands clears status indicators and readouts while retaining configured static background lighting, and restores telemetry-driven outputs only from fresh valid commands from the authorized owner. Timeout values remain to be measured; see [communication](/docs/architecture/communication/). Standard input operation remains independent of SimHub.
+The agreed fallback when neither eligible source has fresh valid output commands clears status indicators and readouts while retaining configured static background lighting, and restores telemetry-driven outputs only from fresh valid commands from the authorized owner. Timeout values remain to be measured; see [communication](/gear/architecture/communication/). Standard input operation remains independent of SimHub.
 
 ## Host validation
 

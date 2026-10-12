@@ -36,7 +36,7 @@ sidebar:
 | Output takeover | When the active direct USB serial command session ends, automatically use fresh valid gateway commands; otherwise use the agreed fallback. |
 | Shifter contact conflict | Suppress all three commands and report a diagnostic; rearm only after all contacts have a debounced release. |
 | Desktop cockpit | Configuration, registration, calibration, diagnostics, and updates on Windows, Linux, and macOS, using explicit serial sessions released for SimHub. |
-| Desktop stack | [Tauri 2 with TypeScript/Svelte and Rust](/docs/architecture/desktop-cockpit/) is the selected prototype baseline; implementation and hardware validation on all three systems remain pending. |
+| Desktop stack | [Tauri 2 with TypeScript/Svelte and Rust](/gear/architecture/desktop-cockpit/) is the selected prototype baseline; implementation and hardware validation on all three systems remain pending. |
 | Axis failure policy | Document a default per axis type with optional explicit user override persisted on the module. Gateway retains effective policy even when the module is absent; diagnostics distinguish unavailable input from the numeric HID value. |
 | Lost output updates | When neither eligible source is fresh, clear status indicators and blank readouts while retaining configured static background lighting; restore telemetry-driven outputs only from fresh valid commands. Numerical timeout remains to be measured. |
 | Node allocation and mappings | Each gateway reserves its address and allocates IDs on its own chain; host routes scope node IDs by stable gateway identity and verify module identity/current session. Compatible moves along the same chain retain slots; cross-gateway moves retain logical identity but destination registration is explicit. |

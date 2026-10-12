@@ -37,15 +37,15 @@ Build modules one at a time toward a system of approximately five to ten. The in
 
 ## Read the design
 
-- [Hardware](/docs/architecture/hardware/) covers the controller baseline, connectors, power, and physical network topology.
-- [Communication](/docs/architecture/communication/) covers discovery, input delivery, and failure handling.
-- [USB HID](/docs/architecture/usb-hid/) covers standalone operation and gateway mappings.
-- [Desktop cockpit](/docs/architecture/desktop-cockpit/) compares application stacks and defines the cross-platform hardware validation.
-- [Repository structure proposal](/docs/architecture/repositories/) describes device repositories, shared firmware, protocol definitions, and release ownership.
-- [Open decisions and validation](/docs/architecture/decisions/) records unresolved choices and the prototype acceptance matrix.
+- [Hardware](/gear/architecture/hardware/) covers the controller baseline, connectors, power, and physical network topology.
+- [Communication](/gear/architecture/communication/) covers discovery, input delivery, and failure handling.
+- [USB HID](/gear/architecture/usb-hid/) covers standalone operation and gateway mappings.
+- [Desktop cockpit](/gear/architecture/desktop-cockpit/) compares application stacks and defines the cross-platform hardware validation.
+- [Repository structure proposal](/gear/architecture/repositories/) describes device repositories, shared firmware, protocol definitions, and release ownership.
+- [Open decisions and validation](/gear/architecture/decisions/) records unresolved choices and the prototype acceptance matrix.
 
 ## First prototype
 
 Start with a sequential shifter using three digital contacts: shift up, shift down, and an explicit neutral command. Once armed, each debounced contact drives a held HID button; firmware does not synthesize pulses. At startup, reconnect, or USB/CAN handoff, any held contact stays blocked until its debounced release and a fresh press. Conflicting contacts suppress all three commands and raise a diagnostic until all contacts have a debounced release. A resting lever sends no command. Stale input releases all three buttons and never generates a neutral command.
 
-Validate standalone USB first, then add the gateway and a second module to exercise controller separation, ownership, output routing, and failure recovery. See the [decision and validation plan](/docs/architecture/decisions/) before committing to a connector pinout or production PCB.
+Validate standalone USB first, then add the gateway and a second module to exercise controller separation, ownership, output routing, and failure recovery. See the [decision and validation plan](/gear/architecture/decisions/) before committing to a connector pinout or production PCB.

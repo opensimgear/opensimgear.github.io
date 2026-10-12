@@ -31,7 +31,7 @@ Initial cockpit state and diagnostics should travel over CDC serial so the app d
 
 ## Session and protocol boundaries
 
-Keep UI state, the shared application protocol, and platform device handling separate. Configuration includes explicit registration, replacement assignment, and notified descriptor changes; it must respect the [registered controller layout](/docs/architecture/usb-hid/). USB configuration and CAN share a versioned, bounded capability model, with transport-specific framing allowed. Incompatible versions produce a diagnostic; backward-compatible additions follow explicit compatibility rules. Exact framing, bounds, acknowledgements, and recovery messages remain implementation work.
+Keep UI state, the shared application protocol, and platform device handling separate. Configuration includes explicit registration, replacement assignment, and notified descriptor changes; it must respect the [registered controller layout](/gear/architecture/usb-hid/). USB configuration and CAN share a versioned, bounded capability model, with transport-specific framing allowed. Incompatible versions produce a diagnostic; backward-compatible additions follow explicit compatibility rules. Exact framing, bounds, acknowledgements, and recovery messages remain implementation work.
 
 The cockpit can configure modules connected directly by USB or through CAN behind any connected gateway. Resolve actions through the current route to the intended stable module identity and confirm the module’s committed result. Firmware updates remain direct-USB-only to the device being updated in v1.
 
@@ -41,7 +41,7 @@ Replacement setup preserves compatible non-calibration settings and the compatib
 
 Each module allows one configuration writer across direct USB and gateway/CAN access. Show a busy error for a competing writer rather than taking over. Session release, disconnect cleanup, and expiry handling remain implementation work; configuration ownership is separate from output command ownership.
 
-The cockpit owns a serial port only during an explicit configuration or test session and releases it for SimHub. Explain busy-port failures and provide a clear disconnect action. A future broker could coordinate clients, but a permanently running shared-port service is not part of the initial design. Configuration access alone must not claim telemetry output ownership; an output test needs the explicit command session described under [communication](/docs/architecture/communication/).
+The cockpit owns a serial port only during an explicit configuration or test session and releases it for SimHub. Explain busy-port failures and provide a clear disconnect action. A future broker could coordinate clients, but a permanently running shared-port service is not part of the initial design. Configuration access alone must not claim telemetry output ownership; an output test needs the explicit command session described under [communication](/gear/architecture/communication/).
 
 Firmware updating is an explicit manual action, never automatic flashing. Verify the model and hardware compatibility before writing firmware and test recovery after interruption. Updating may restart the device and expose a different bootloader port. Preserve the intended target identity through that transition and report failure clearly. Direct-USB updates and SWD recovery are agreed; exact bootloader tooling remains to be selected.
 
