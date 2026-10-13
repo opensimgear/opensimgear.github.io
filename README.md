@@ -11,7 +11,7 @@
 - Unit tests with Vitest and browser smoke tests with Playwright BDD.
 - GitHub Actions builds and deploys the static site to GitHub Pages, then runs smoke tests against the deployed URL. Automated deployment changelog/release/Discord jobs are currently disabled.
 
-Architecture pages describe current Cyphal/CAN input delivery, runtime configuration/calibration, automatic enrollment with remembered device visibility and simultaneous gateway management. The device repositories record implementation and validation separately. Physical macOS Pico simulator acceptance does not establish STM32 or Windows/Linux acceptance. Implementation and qualification work is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
+Architecture pages describe current Cyphal/CAN input delivery, CDC v3, runtime configuration/calibration, automatic enrollment with remembered device visibility, simultaneous gateway management and device-advertised manual actions. Current outputs include the board status LED mode and simulated RGB/boolean LEDs. Milestone stories track [manual actions](https://github.com/opensimgear/cockpit/issues/13), [DCS-BIOS bindings](https://github.com/opensimgear/cockpit/issues/14), [displays and encoders](https://github.com/opensimgear/cockpit/issues/15) and [profiles/hardware qualification](https://github.com/opensimgear/cockpit/issues/16). The device repositories record implementation and validation separately. Native action readback and physical macOS Pico simulator acceptance do not establish assembled STM32 LED/USB/CAN or Windows/Linux acceptance. Implementation and qualification work is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
 
 ## Requirements and development
 
@@ -72,8 +72,8 @@ Review source changes and generated output together. `pnpm products:update` and 
 
 ## Related repositories
 
-- [Device gateway](https://github.com/opensimgear/device-gateway): STM32 USB-to-CAN FD gateway with two parallel powered 4P4C sockets.
-- [Device template](https://github.com/opensimgear/device-template): generic STM32 Rev B module, input profiles and production/home-milling PCB sources.
-- [Firmware common](https://github.com/opensimgear/firmware-common): shared C input/USB support and pinned dependencies.
-- [Protocol](https://github.com/opensimgear/protocol): Cyphal DSDL/transport, CDC/runtime configuration contracts, historical private-v2 reference and conformance tests.
-- [Cockpit](https://github.com/opensimgear/cockpit): Tauri/Rust/Svelte desktop app for gateway discovery, enabled-device management and input views.
+- [Device gateway](https://github.com/opensimgear/device-gateway): STM32 USB-to-CAN FD gateway with two parallel powered 4P4C sockets and guarded configuration/action routing.
+- [Device template](https://github.com/opensimgear/device-template): STM32G0B1CBT6 v0.1.0 starter, input profiles, status LED actions, native RGB/boolean simulation and production/home-milling PCB sources.
+- [Firmware common](https://github.com/opensimgear/firmware-common): shared C input/USB/action support and pinned dependencies.
+- [Protocol](https://github.com/opensimgear/protocol): Cyphal DSDL/transport, CDC/runtime configuration/device action contracts, historical private-v2 reference and conformance tests.
+- [Cockpit](https://github.com/opensimgear/cockpit): Tauri/Rust/Svelte desktop app for gateway discovery, enabled-device management, manual device actions and input views.

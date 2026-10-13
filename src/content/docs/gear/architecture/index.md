@@ -5,16 +5,17 @@ sidebar:
   order: 1
 ---
 
-OpenSimGear's input prototype supports standalone USB HID modules and Cyphal/CAN modules connected through a USB gateway. The module and gateway firmware use C, TinyUSB and libcanard on STM32G0B1CBT6. Cockpit is a Tauri 2 application with Rust, Svelte and TypeScript.
+OpenSimGear's prototype supports standalone USB HID modules and Cyphal/CAN modules connected through a USB gateway, with configurable inputs and advertised manual output actions. The module and gateway firmware use C, TinyUSB and libcanard on STM32G0B1CBT6. Cockpit is a Tauri 2 application with Rust, Svelte and TypeScript.
 
 ## Current behavior
 
-- Modules acquire and map local inputs, apply calibration and expose USB HID plus CDC configuration.
-- A gateway discovers module identities and capabilities, routes configuration over CAN and automatically enables new compatible devices and appends their USB HID collections in persistent descriptor order.
+- Modules acquire and map local inputs, apply calibration and expose USB HID plus CDC configuration and device actions.
+- A gateway discovers module identities and capabilities, routes configuration/actions over CAN and automatically enables new compatible devices and appends their USB HID collections in persistent descriptor order.
 - Each gateway supports up to 32 runtime modules, remembered identities and enabled controllers; each profile supports 128 buttons, four hats and eight axes. Temporary absence retains enabled controllers with configured neutral values.
 - Direct USB input takes priority. Gateway input resumes from fresh state after direct USB ownership ends.
 - Runtime configuration uses one writer, separate drafts, explicit Apply/Save and interrupted-write-safe storage. The gateway saves and publishes controller lifecycle changes automatically; changes to retained control definitions require explicit profile update and USB reconnection.
 - Cockpit connects to multiple gateways independently and combines their inventories. Gateway identity scopes requests and separates identical module sightings on different chains.
+- Cockpit builds manual controls from device-advertised action metadata and reads applied state. The current board exposes its status LED mode; native devices simulate RGB and boolean LEDs. These temporary outputs remain available online with HID disabled or direct USB input ownership. DCS-BIOS bindings are later [milestones](/gear/architecture/desktop-cockpit/#device-action-and-dcs-bios-milestones).
 
 ## Controller visibility
 
@@ -33,7 +34,7 @@ The shifter profile has three digital commands: up, down and explicit neutral. A
 ## Architecture references
 
 - [Hardware](/gear/architecture/hardware/): current connectors, controllers, power and topology.
-- [Communication](/gear/architecture/communication/): implemented discovery, delivery and configuration.
+- [Communication](/gear/architecture/communication/): implemented discovery, delivery, configuration and device actions.
 - [USB HID](/gear/architecture/usb-hid/): standalone input and retained gateway controllers.
 - [Desktop cockpit](/gear/architecture/desktop-cockpit/): current host behavior and acceptance evidence.
 - [Repositories](/gear/architecture/repositories/): source ownership and independent builds.
