@@ -11,7 +11,7 @@
 - Unit tests with Vitest and browser smoke tests with Playwright BDD.
 - GitHub Actions builds and deploys the static site to GitHub Pages, then runs smoke tests against the deployed URL. Automated deployment changelog/release/Discord jobs are currently disabled.
 
-Architecture pages include intended production behavior. Current STM32 implementations use private CAN FD v2; Cyphal, runtime module configuration/calibration, output sessions and multi-gateway routing remain future work. The device repositories record implementation and hardware validation separately. Physical macOS Pico simulator acceptance does not establish STM32 or Windows/Linux acceptance.
+Architecture pages describe current Cyphal/CAN input delivery, runtime configuration/calibration and simultaneous gateway management. The device repositories record implementation and validation separately. Physical macOS Pico simulator acceptance does not establish STM32 or Windows/Linux acceptance. Implementation and qualification work is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
 
 ## Requirements and development
 
@@ -75,5 +75,5 @@ Review source changes and generated output together. `pnpm products:update` and 
 - [Device gateway](https://github.com/opensimgear/device-gateway): STM32 USB-to-CAN FD gateway with two parallel powered 4P4C sockets.
 - [Device template](https://github.com/opensimgear/device-template): generic STM32 Rev B module, input profiles and production/home-milling PCB sources.
 - [Firmware common](https://github.com/opensimgear/firmware-common): shared C input/USB support and pinned dependencies.
-- [Protocol](https://github.com/opensimgear/protocol): private v2 contracts, reference codec and conformance tests; future Cyphal definitions.
+- [Protocol](https://github.com/opensimgear/protocol): Cyphal DSDL/transport, CDC/runtime configuration contracts, historical private-v2 reference and conformance tests.
 - [Cockpit](https://github.com/opensimgear/cockpit): Tauri/Rust/Svelte desktop app for gateway discovery, registration and input views.

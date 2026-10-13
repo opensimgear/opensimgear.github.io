@@ -1,9 +1,7 @@
 ---
 title: Hand Brake
-description:
-  Open-source DIY hand brake for sim racing. Design plans and build guide for a USB hand brake peripheral compatible
-  with major sim racing titles. Coming soon.
+description: Hand brake documentation.
 draft: true
 ---
 
-Coming Soon! (Hopefully..)
+No build guide is published. Implementation is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
