@@ -9,7 +9,7 @@ OpenSimGear has six repositories. Device firmware and electronics live with thei
 
 | Repository | Current responsibility |
 | --- | --- |
-| [device-gateway](https://github.com/opensimgear/device-gateway) | STM32G0B1CBT6 USB/Cyphal gateway, PCB 0.1.0 with powered parallel 4P4C sockets, persistent slots, dynamic HID layouts, routed configuration and independent native/Pico simulations. |
+| [device-gateway](https://github.com/opensimgear/device-gateway) | STM32G0B1CBT6 USB/Cyphal gateway, PCB 0.1.0 with powered parallel 4P4C sockets, automatic enrollment, persistent enabled controller order, dynamic HID layouts, routed configuration and independent native/Pico simulations. |
 | [device-template](https://github.com/opensimgear/device-template) | STM32G0B1CBT6 module, eight analogue inputs, 24 digital lines, optional TCA9555 banks, persistent runtime configuration/calibration, direct USB/Cyphal input, production/home-milling PCB 0.1.0 and independent JSON-configured simulation. |
 | [firmware-common](https://github.com/opensimgear/firmware-common) | Shared C input acquisition, debounce/rearm, axes/hats/encoders, profile/report packing, configuration line parsing, USB helpers and pinned dependencies. |
 | [protocol](https://github.com/opensimgear/protocol) | Canonical Cyphal application DSDL, generated bindings, shared transport, gateway CDC/runtime configuration contracts, fixtures and cross-firmware conformance. Private CAN FD v2 is historical reference. |
@@ -20,7 +20,7 @@ OpenSimGear has six repositories. Device firmware and electronics live with thei
 
 Firmware builds use full-commit dependency pins. Device repositories include checked shared Cyphal snapshots from `protocol`; `protocol/tools/verify_can_vendors.py` checks those snapshots and gateway formatter fixtures. Cross-firmware tests link actual gateway/module code with common source. Change the canonical contract and checked consumers together.
 
-Each repository's integration runner provisions and builds its dependencies independently. Cockpit consumes the normal gateway endpoint and does not launch simulations. Module settings live on modules; persistent controller assignments live on gateways.
+Each repository's integration runner provisions and builds its dependencies independently. Cockpit consumes the normal gateway endpoint and does not launch simulations. Module settings live on modules; remembered device identities, disabled intent and enabled controller order live on gateways.
 
 ## Version and validation boundaries
 

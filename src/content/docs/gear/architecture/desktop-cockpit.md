@@ -1,15 +1,15 @@
 ---
 title: Desktop cockpit
-description: Implemented multi-gateway discovery, input configuration and controller registration.
+description: Multi-gateway configuration, automatic enrollment and device visibility.
 sidebar:
   order: 6
 ---
 
-[Cockpit](https://github.com/opensimgear/cockpit) is a working Tauri 2 desktop application with a Svelte 5/TypeScript interface and Rust native adapters. It discovers gateways, edits device input configuration/calibration, manages retained controller slots and displays live inputs. HID operation remains independent of the application.
+[Cockpit](https://github.com/opensimgear/cockpit) is a working Tauri 2 desktop application with a Svelte 5/TypeScript interface and Rust native adapters. It discovers gateways, edits device input configuration/calibration, manages enabled controllers and remembered devices and displays live inputs. HID operation remains independent of the application.
 
 ## Native access
 
-Rust owns USB serial enumeration, protocol handshakes, connection state and bounded requests. The frontend consumes typed state through Tauri IPC. Browser development uses an HTTP bridge to the same native gateway service; it does not rely on Web Serial availability in an OS webview. STM32 discovery verifies manufacturer/product metadata, a 24-hex UID and a bounded CDC version-2 snapshot.
+Rust owns USB serial enumeration, protocol handshakes, connection state and bounded requests. The frontend consumes typed state through Tauri IPC. Browser development uses an HTTP bridge to the same native gateway service; it does not rely on Web Serial availability in an OS webview. STM32 discovery verifies manufacturer/product metadata, a 24-hex UID and a bounded CDC v3 automatic-lifecycle snapshot, with a separate CDC v2 legacy adapter.
 
 ## Multiple gateways
 
@@ -21,9 +21,19 @@ Operations and drafts are scoped by gateway and module identity. Identical modul
 
 The STM32 adapter uses the production Cyphal/CAN configuration path. Setup edits names, expansion banks, buttons, hats, encoders, selectors and calibrated axes. Apply activates a validated draft; Apply & save persists settings on the module. Readback follows a renewed lease with bounded retries; reboot stops reconciliation and writes are never replayed.
 
-Add controller stages discovered capabilities. Explicit Apply layout saves the registry, rebuilds USB HID and reconnects by gateway UID. Stale/offline devices and changed profiles retain neutral slots until valid configuration and layout are active. Direct device USB input leaves its gateway slot neutral.
+The STM32 gateway automatically enrolls compatible new devices and publishes saved layouts. Cockpit follows requested and published state through reconnects by gateway UID. Changed profiles remain neutral until an explicit profile update; direct device USB input leaves its enabled gateway controller neutral.
 
-The Pico adapter retains discovery, setup claims and reconnection. Its settings are in RAM until reset. On macOS, Rust applies individual controller names through IOKit.
+The separate legacy CDC v2 and Pico adapters retain their manual controller workflow. The Pico adapter retains discovery, setup claims and reconnection. Its settings are in RAM until reset. On macOS, Rust applies individual controller names through IOKit.
+
+## Controller visibility workflow
+
+The [USB HID architecture](/gear/architecture/usb-hid/#automatic-enrollment-architecture) uses gateway-owned automatic enrollment, independently of Cockpit.
+
+New identities automatically enable and append to descriptor order. Cockpit shows enabled devices that temporarily disconnect as ghosted, while their Windows HID controllers remain present with neutral inputs. Disable removes a controller from Windows but retains the remembered device and explicit disabled state. An online disabled device remains configurable. Enable appends its collection to the currently enabled list; that controller may need rebinding. Remove forgets an offline record; later rediscovery treats it as new.
+
+Actions that remove a published collection warn that USB reconnects and remaining game bindings may need updating. There is no permanent management collection, unused controller placeholder or user slot allocation. The UI follows gateway state, displays capacity/persistence/profile failures, and retains inventory and selection through expected reconnection by gateway UID without replaying ambiguous mutations.
+
+A module move leaves the source gateway's enabled offline ghost until explicit disable/removal; the destination automatically enrolls an unknown identity. A destination's remembered disabled identity stays disabled. On-module settings/calibration follow the module, but game bindings need not survive a change of gateway USB identity. [Cockpit #4](https://github.com/opensimgear/cockpit/issues/4) tracks moves and duplicate live identities.
 
 ## Independent simulation and evidence
 

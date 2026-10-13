@@ -7,6 +7,14 @@ sidebar:
 
 This page records the implemented prototype baseline. Open implementation and qualification work is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
 
+## Automatic controller enrollment
+
+The 2026-10-13 decision is automatic CAN-device enrollment into a persistent ordered HID controller list. New identities enable and append automatically. Enabled devices retain neutral collections during temporary absence; explicit Disable removes a collection while remembering the device, and manual Remove forgets an offline record. There is no permanent management collection, unused joystick placeholder or user slot assignment.
+
+Collection removal can shift Windows identities and require game rebinding. Automatic append preserves existing order/controls but also needs Windows/game qualification, especially the single-to-multiple collection transition. See the [complete lifecycle](/gear/architecture/usb-hid/#automatic-enrollment-architecture), [gateway #8](https://github.com/opensimgear/device-gateway/issues/8), [protocol #6](https://github.com/opensimgear/protocol/issues/6) and [Cockpit #5](https://github.com/opensimgear/cockpit/issues/5). The table below records the implementation; physical qualification remains open.
+
+## Current implementation
+
 | Area | Current implementation |
 | --- | --- |
 | Controllers | STM32G0B1CBT6 on module and gateway PCB 0.1.0; one CAN controller/transceiver per board. |
@@ -14,8 +22,8 @@ This page records the implemented prototype baseline. Open implementation and qu
 | Network | Generated Cyphal application v3 types, Heartbeat/GetInfo, node-ID autoconfiguration and bounded input/configuration transfers. |
 | Connectors | USB-C and two parallel 4P4C sockets; contacts 1–4 are BUS_12V, CAN_H, CAN_L and GND. |
 | Topology | One linear chain and one external 12 V injection source per gateway; two physical endpoint plugs, no inline termination. |
-| Gateway layout | Ten retained slots, up to 128 buttons/four hats/eight axes per profile; explicit registration and Apply layout with USB reconnection. |
-| Input ownership | Active direct USB takes priority; retained gateway slots stay neutral and resume only from fresh CAN input. |
+| Gateway layout | 32 remembered identities and enabled controllers, up to 128 buttons/four hats/eight axes per profile; automatic append, offline ghosts, disable/enable and guarded removal with saved USB publication. |
+| Input ownership | Active direct USB takes priority; enabled gateway controllers stay neutral and resume only from fresh CAN input. |
 | Configuration | One writer, validated drafts, explicit Apply/Save/Discard, stored mapping/calibration and interrupted-write-safe journals. |
 | Encoder delivery | Bounded queued press/release events credited by completed USB delivery, with overflow diagnostics and no replay after handoff/reset. |
 | Shifter | Three held commands, release-before-rearm and conflict suppression until every contact releases; no automatic neutral. |
