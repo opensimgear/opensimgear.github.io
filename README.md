@@ -11,7 +11,7 @@
 - Unit tests with Vitest and browser smoke tests with Playwright BDD.
 - GitHub Actions builds and deploys the static site to GitHub Pages, then runs smoke tests against the deployed URL. Automated deployment changelog/release/Discord jobs are currently disabled.
 
-Architecture pages describe current Cyphal/CAN input delivery, CDC v3, runtime configuration/calibration, automatic enrollment with remembered device visibility, simultaneous gateway management and device-advertised manual actions. Current outputs include the board status LED mode and simulated RGB/boolean LEDs. Milestone stories track [manual actions](https://github.com/opensimgear/cockpit/issues/13), [DCS-BIOS bindings](https://github.com/opensimgear/cockpit/issues/14), [displays and encoders](https://github.com/opensimgear/cockpit/issues/15) and [profiles/hardware qualification](https://github.com/opensimgear/cockpit/issues/16). The device repositories record implementation and validation separately. Native action readback and physical macOS Pico simulator acceptance do not establish assembled STM32 LED/USB/CAN or Windows/Linux acceptance. Implementation and qualification work is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
+Architecture pages describe current Cyphal/CAN inputs, CDC v3, runtime configuration, automatic enrollment, multi-gateway Cockpit, advertised actions, ordered panel events and the implemented simulated DCS-BIOS A-10C master-caution path. That path uses the current board's status LED action contract; RGB/boolean outputs remain available in simulation. Stories track [manual actions](https://github.com/opensimgear/cockpit/issues/13), [master caution](https://github.com/opensimgear/cockpit/issues/14), future [displays/encoders](https://github.com/opensimgear/cockpit/issues/15) and [profiles/hardware qualification](https://github.com/opensimgear/cockpit/issues/16). Native readback and synthetic UDP peers do not establish live DCS behavior, assembled STM32 LED/USB/CAN or Windows/Linux physical acceptance. Hardware validation is deferred beyond the simulated milestone. Implementation and qualification work is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
 
 ## Requirements and development
 
@@ -72,8 +72,8 @@ Review source changes and generated output together. `pnpm products:update` and 
 
 ## Related repositories
 
-- [Device gateway](https://github.com/opensimgear/device-gateway): STM32 USB-to-CAN FD gateway with two parallel powered 4P4C sockets and guarded configuration/action routing.
-- [Device template](https://github.com/opensimgear/device-template): STM32G0B1CBT6 v0.1.0 starter, input profiles, status LED actions, native RGB/boolean simulation and production/home-milling PCB sources.
-- [Firmware common](https://github.com/opensimgear/firmware-common): shared C input/USB/action support and pinned dependencies.
-- [Protocol](https://github.com/opensimgear/protocol): Cyphal DSDL/transport, CDC/runtime configuration/device action contracts, historical private-v2 reference and conformance tests.
-- [Cockpit](https://github.com/opensimgear/cockpit): Tauri/Rust/Svelte desktop app for gateway discovery, enabled-device management, manual device actions and input views.
+- [Device gateway](https://github.com/opensimgear/device-gateway): STM32 USB-to-CAN FD gateway with two parallel powered 4P4C sockets and guarded configuration/action/event routing.
+- [Device template](https://github.com/opensimgear/device-template): STM32G0B1CBT6 v0.1.0 starter, input profiles, ordered events, status LED actions, native simulation and production/home-milling PCB sources.
+- [Firmware common](https://github.com/opensimgear/firmware-common): shared C input/USB/action/event support and pinned dependencies.
+- [Protocol](https://github.com/opensimgear/protocol): Cyphal DSDL/transport, CDC/configuration/action/event contracts, historical private-v2 reference and conformance tests.
+- [Cockpit](https://github.com/opensimgear/cockpit): Tauri/Rust/Svelte app with gateway discovery, controller visibility, manual actions, live inputs and background DCS-BIOS master caution.

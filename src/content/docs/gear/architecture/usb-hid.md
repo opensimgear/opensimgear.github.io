@@ -47,6 +47,15 @@ Appending preserves existing descriptor order, but Windows' HID hardware-ID form
 
 An active direct USB host session takes input priority and leaves the gateway controller neutral. Power-only VBUS does not establish ownership. After direct USB ownership ends, gateway input resumes only from fresh valid state. Old encoder turns cannot replay. Software checks cover ownership transitions; assembled handoff and suspend/resume timing are unmeasured.
 
+The simulated DCS-BIOS master-caution binding uses the independent ordered panel
+event stream instead of a HID button binding. Start requires the bound panel's
+gateway controller disabled and unpublished, with no active direct USB input.
+Cockpit presents the existing Disable confirmation and waits for layout
+completion; it does not silently change controller visibility. This prevents
+duplicate simulator commands. Actions and event reads continue on the online CAN
+route with HID disabled. Stopping the integration does not re-enable HID. See
+[the setup flow](/gear/architecture/desktop-cockpit/#dcs-bios-master-caution).
+
 ## USB identifiers and evidence
 
 No public OpenSimGear VID/PID allocation is claimed. Build with identifiers you are authorized to use; `0xFFFF/0xFFFF` is a compile-only placeholder. Current firmware/CAD and native simulations have validation records, and the Pico simulator has physical macOS acceptance evidence. No STM32 USB/CAN chain or Windows/Linux physical acceptance is recorded.

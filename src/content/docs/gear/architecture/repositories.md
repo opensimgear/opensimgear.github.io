@@ -5,22 +5,22 @@ sidebar:
   order: 7
 ---
 
-OpenSimGear has six repositories. Device firmware and electronics live with their board targets, common input/USB/action code in `firmware-common`, canonical contracts in `protocol`, host adapters in `cockpit` and user documentation in the website.
+OpenSimGear has six repositories. Device firmware and electronics live with their board targets, common input/USB/action/event code in `firmware-common`, canonical contracts in `protocol`, host adapters and DCS-BIOS bindings in `cockpit` and user documentation in the website.
 
 | Repository | Current responsibility |
 | --- | --- |
-| [device-gateway](https://github.com/opensimgear/device-gateway) | STM32G0B1CBT6 USB/Cyphal gateway, PCB 0.1.0 with powered parallel 4P4C sockets, automatic enrollment, persistent enabled controller order, dynamic HID layouts, routed configuration/actions and independent native/Pico simulations. |
-| [device-template](https://github.com/opensimgear/device-template) | STM32G0B1CBT6 module, eight analogue inputs, 24 digital lines, optional TCA9555 banks, persistent runtime configuration/calibration, direct USB/Cyphal input and status LED actions, production/home-milling PCB 0.1.0 and independent JSON-configured simulation with RGB/boolean LED actions. |
-| [firmware-common](https://github.com/opensimgear/firmware-common) | Shared C input acquisition, debounce/rearm, axes/hats/encoders, profile/report packing, configuration line parsing, action descriptors/validation/dispatch, USB helpers and pinned dependencies. |
-| [protocol](https://github.com/opensimgear/protocol) | Canonical Cyphal application DSDL, generated bindings, shared transport, gateway CDC/runtime configuration/device action contracts, fixtures and cross-firmware conformance. Private CAN FD v2 is historical reference. |
-| [cockpit](https://github.com/opensimgear/cockpit) | Tauri/Rust/Svelte application with independent multi-gateway connections, combined inventories, configuration/calibration, automatic enrollment and remembered visibility controls, manual device actions and live input views. |
+| [device-gateway](https://github.com/opensimgear/device-gateway) | STM32G0B1CBT6 USB/Cyphal gateway, PCB 0.1.0 with powered parallel 4P4C sockets, automatic enrollment, persistent enabled controller order, dynamic HID layouts, routed configuration/actions/events and independent native/Pico simulations. |
+| [device-template](https://github.com/opensimgear/device-template) | STM32G0B1CBT6 module, eight analogue inputs, 24 digital lines, optional TCA9555 banks, persistent runtime configuration/calibration, direct USB/Cyphal input, ordered mapped-button events and status LED actions; PCB 0.1.0 and independent JSON-configured simulation including the same master-caution button/LED contract. |
+| [firmware-common](https://github.com/opensimgear/firmware-common) | Shared C input acquisition, debounce/rearm, axes/hats/encoders, profile/report packing, bounded independent event collector, configuration parsing, action descriptors/validation/dispatch, USB helpers and pinned dependencies. |
+| [protocol](https://github.com/opensimgear/protocol) | Canonical Cyphal application DSDL, generated bindings, shared transport, gateway CDC/runtime configuration/device action/panel event contracts, fixtures and cross-firmware conformance. Private CAN FD v2 is historical reference. |
+| [cockpit](https://github.com/opensimgear/cockpit) | Tauri/Rust/Svelte application with independent multi-gateway connections, configuration/calibration, automatic enrollment and visibility, manual actions, live inputs and a saved background DCS-BIOS master-caution binding with local UDP peer. |
 | [opensimgear.github.io](https://github.com/opensimgear/opensimgear.github.io) | Astro/Starlight documentation, component/DIY guides, third-party equipment database and calculators/rig planner. |
 
 ## Dependency ownership
 
 Firmware builds use full-commit dependency pins. Device repositories include checked shared Cyphal snapshots from `protocol`; `protocol/tools/verify_can_vendors.py` checks those snapshots and gateway formatter fixtures. Cross-firmware tests link actual gateway/module code with common source. Change the canonical contract and checked consumers together.
 
-Each repository's integration runner provisions and builds its dependencies independently. Cockpit consumes the normal gateway endpoint and does not launch simulations. Module settings and temporary action state live on modules; remembered device identities, disabled intent and enabled controller order live on gateways. Device callbacks own outputs, and the gateway forwards action metadata without saving it in the registry.
+Each repository's integration runner provisions and builds its dependencies independently. Cockpit consumes the normal gateway endpoint and does not launch simulated devices. Module settings, ordered input history and temporary action state live on modules; remembered identities, disabled intent and enabled controller order live on gateways. Device callbacks own outputs, and the gateway forwards metadata/events without storing simulator bindings. Cockpit saves the single master-caution profile in application settings, requires explicit Start and resolves control addresses from the installed DCS-BIOS catalogue. Its synthetic UDP peer and catalogue are development tools owned by Cockpit.
 
 ## Version and validation boundaries
 
