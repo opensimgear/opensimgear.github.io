@@ -75,6 +75,10 @@ export default defineConfig({
           },
         },
         {
+          label: 'Gear',
+          autogenerate: { directory: 'gear' },
+        },
+        {
           label: 'Calculators',
           autogenerate: { directory: 'calculators' },
         },
