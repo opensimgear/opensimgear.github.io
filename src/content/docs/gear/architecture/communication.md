@@ -1,53 +1,76 @@
 ---
-title: Communication
-description: Implemented Cyphal/CAN inputs, configuration, actions and ordered panel events.
+title: Device communication
+description: How OpenSimGear discovers modules, delivers inputs, stores settings and sends device feedback.
 sidebar:
   order: 3
 ---
 
-Module and gateway firmware use Cyphal/CAN with generated OpenSimGear DSDL, libcanard 5.0, standard Heartbeat/GetInfo and CAN node-ID autoconfiguration. The current application contract is version 3. Gateway USB CDC uses its correlated version-3 interface and reports `canProtocol=3`; Cockpit retains a separate adapter for legacy CDC v2 gateways. The replaced private CAN v1/v2 frames are incompatible with current firmware.
+Modules communicate with their gateway over CAN, using the Cyphal protocol. The gateway carries their inputs to the
+computer over USB. Cockpit uses a separate USB configuration connection to read device information, change settings and
+send actions.
 
-The canonical [protocol repository](https://github.com/opensimgear/protocol) owns the [DSDL](https://github.com/opensimgear/protocol/tree/main/dsdl), [transport](https://github.com/opensimgear/protocol/tree/main/cyphal), [gateway CDC API](https://github.com/opensimgear/protocol/blob/main/serial/stm32-gateway-v3.md), [runtime configuration contract](https://github.com/opensimgear/protocol/blob/main/serial/runtime-configuration.md), [device action contract](https://github.com/opensimgear/protocol/blob/main/serial/device-actions.md) and [panel event contract](https://github.com/opensimgear/protocol/blob/main/serial/panel-input-events.md). Firmware snapshots are checked against those sources.
+You do not need to manage CAN addresses for normal operation. Firmware handles discovery and address selection.
 
-## Identity and discovery
+## Recognizing devices
 
-Stable MCU-derived module identities are separate from chain-local node IDs and ordered USB controllers. Gateways discover bounded input profiles and maintain observed presence, enabled intent and published USB state. Multiple chains can reuse node IDs; Cockpit requests bind the intended gateway, module identity and current session. A physical socket is not an address.
+Each module has a stable identity derived from its controller. The gateway uses this identity to remember a device, even
+after it disconnects or restarts. A socket is a connection point, not a device address.
 
-## Input delivery
+Cockpit groups devices by gateway. Its topology view shows which gateway a device belongs to; it does not identify the
+physical cable order or socket position.
 
-Input transfers use source-node, boot/session, sequence and lease checks. The gateway keeps input freshness separate from node presence. Current gateway firmware uses a 250 ms input timeout and 1.5 s presence timeout; these configured values have no physical timing acceptance evidence.
+## Keeping inputs current
 
-Direct USB input ownership neutralizes the module's enabled gateway controller. When direct ownership ends, the CAN route requires fresh valid state before activation. Queued encoder turns are discarded on reset or ownership handoff. Gateway USB completion, rather than elapsed time alone, credits encoder press/release delivery. Overflow and unavailable inputs are diagnostic states.
+A connected module sends its mapped inputs to the gateway. If input stops arriving, the gateway releases buttons and
+returns axes to their configured neutral values. An enabled offline controller remains present on the computer, so a
+temporary cable interruption does not remove it from the controller list.
 
-Buttons release when unavailable; axes use neutral values retained in the retained profile. Shifter momentary contacts require release before rearming after startup, reconnect or handoff. Conflicting shifter contacts suppress all commands until all contacts release, without synthesizing neutral.
+A direct USB input connection takes priority over the gateway route. When it ends, gateway input resumes from fresh
+data. Encoder turns queued before a restart or connection handoff are discarded.
 
-## Configuration
+For momentary shifter contacts, a button held during startup or reconnection must be released before it can trigger a
+new press. Conflicting shifter contacts suppress all commands until every contact is released.
 
-One writer owns a module draft across direct USB and gateway/CAN access. Configuration maps buttons, hats, selectors, encoders, axes and expansion contacts, with calibration, inversion, deadzone and Unicode names. Apply activates a validated draft; Save persists it in interrupted-write-safe storage. Discard leaves committed settings intact.
+## Changing configuration
 
-Routed requests bind module identity, boot session, source node, lease and gateway epoch. Configuration activation renews the lease. Control-count, axis-usage or neutral-value changes produce a profile mismatch and require explicit profile update with a binding warning; unchanged-shape calibration and name changes retain the layout. Online disabled devices remain configurable. Stale routes and responses cannot commit settings or replay writes after reconnect.
+A module accepts one settings editor at a time. Cockpit prepares changes as a draft, validates them and applies them
+when requested. Saving stores the configuration on the module; leaving a draft unapplied does not change the active
+settings.
 
-## Device actions
+Changes to calibration or names can retain the existing controller layout. Changes to the number or type of controls
+require a [profile update](/gear/architecture/usb-hid/#changing-controls), which can affect simulator bindings.
 
-Devices advertise a bounded, revisioned action catalogue with stable identifiers, parameter types and readable-state metadata. Cockpit renders manual controls from that catalogue. The shared device handler supports booleans, enums, bounded integers, RGB colors, bounded UTF-8 strings and actions without arguments, and validates every invocation before calling the device.
+## Sending feedback
 
-Direct module CDC and routed gateway requests use the same action handler. CAN actions reuse the existing bounded configuration request/reply envelopes, with separate dispatch and a top-level `targetAction` result in the gateway reply. Actions do not claim a settings draft, write flash or change HID descriptors. Periodic application Status proves the current lease even when HID is disabled or direct USB owns inputs, so online devices remain reachable for actions.
+Online devices advertise the actions they provide. Cockpit uses that information to display the available controls. The
+current board offers status LED modes: automatic indication, on and off. Software simulations also offer RGB and on/off
+LED actions; those do not establish RGB hardware support on the board.
 
-The current board exposes its status LED's `auto`, `on` and `off` modes; the native device simulation exposes RGB and boolean LEDs, plus a master-caution profile with that same board-status action. Applied state confirms device callback application. LED overrides are temporary and reset on reboot. A lost invocation reply leaves its outcome uncertain; Cockpit never automatically replays it and can reconcile readable state. The simulated DCS-BIOS master-caution binding uses the status LED or a boolean action. The implemented A-10C panel profile also binds encoder steps, maintained switches and independently calibrated axes to named catalogue commands. Readable string setters advertise actual display cells, ASCII/UTF-8 encoding and byte limits; native formatting applies whole-character truncation or rejection and explicit unknown/stale fallbacks. Physical display support requires a fitted product driver, and current starter-board firmware still advertises only its actual LED. See the [milestones](/gear/architecture/desktop-cockpit/#device-action-and-dcs-bios-milestones).
+Actions remain available when the device's gateway controller is disabled. LED overrides are temporary and reset when
+the device restarts. If a reply is lost, Cockpit does not automatically repeat the action. Use **Refresh state** to
+check a readable action's result.
 
-## Ordered panel events
+## Inputs and displays for DCS-BIOS
 
-The shared event collector retains 64 debounced mapped-button transitions independently of HID enablement, direct USB ownership and encoder HID acknowledgements. `events state` establishes current head, held buttons, boot/stream and overflow. `events read` returns nonconsuming pages of up to 16 consecutive records. Acquisition preserves brief press/release pairs between host reads. Encoder detents produce ordered pairs independently of HID acknowledgements. Additive event metadata identifies contact/maintained/selector controls and independent calibrated axis values, availability, neutral values, usage and sample time. Milestone 3 uses these capabilities for typed bindings; its master-caution preset remains momentary.
+Modules retain an ordered history of mapped button presses and releases. DCS-BIOS reads those events independently of
+normal USB controller input, so short debounced presses and encoder turns can be captured between Cockpit reads.
+Advertised capabilities distinguish momentary buttons, maintained switches and encoder controls. Calibrated axis
+samples are available separately, including when the device's USB controller is disabled.
 
-Gateway requests reuse bounded configuration envelopes, seal identity/boot/source/node/lease/epoch and return a separate `targetEvents` result. Application Status maintains reachability with HID disabled. Configuration activation starts a new stream and clears history. Consumers baseline at the current head after startup, simulator recovery, route changes or cursor gaps, require a held momentary button to release before rearming, and never replay historical presses or encoder turns. Maintained switches and available axes synchronize their current absolute state at a fresh baseline. Disarming releases a previously forwarded press once without replaying a historical press. Ring overwrites report evictions; an actual cursor gap is a separate error and counter requiring rebaseline.
+After startup or recovery, the integration starts from the current state instead of replaying old commands. A held
+momentary button must release before a new press is accepted; maintained switches and available axes synchronize their
+current absolute state after a fresh baseline. Display and LED updates use complete DCS feedback frames; pending
+absolute values keep the newest update rather than accumulating obsolete output writes. Device output size and encoding
+determine what text can fit.
 
-Cockpit's Rust background worker consumes this stream and the DCS-BIOS UDP export stream. Installed catalogue metadata identifies aircraft, advancing update counter and named typed controls. Fresh supported-aircraft feedback gates commands; complete export frames update outputs atomically, and absolute display/LED writes coalesce to the newest value while input edges and detents remain ordered. Freshness loss requests configured display fallbacks and LED off. UI polling only presents status, including per-binding desired/applied values and per-gateway queue, write, coalescing, latency and polling metrics. See [the setup flow](/gear/architecture/desktop-cockpit/#dcs-bios-panel-integration).
+See [Cockpit setup](/gear/architecture/desktop-cockpit/#dcs-bios-panel-integration) for named catalogue selection, input
+requirements and validation limits.
 
-## Validation
+## Firmware compatibility
 
-Native tests cover ten concurrent clients, generated transfers, loss/delay/reordering, collision recovery, direct USB handoff, configuration ownership, flash interruption and gateway reconnection. Action acceptance exercises production firmware processes for catalogue discovery, LED invocation/readback, stale requests and lost replies. Seeded stress exercises malformed/duplicate frames, backpressure and simulated bus-off. These results establish software behavior; assembled electrical LED behavior, acquisition timing and physical USB/CAN recovery are unverified.
-
-Missing implementation and qualification is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
+Current module and gateway firmware use the version-3 communication contract. The older private CAN v1/v2 protocols are
+incompatible with it. Use matching firmware when connecting boards; a legacy Cockpit adapter does not make older CAN
+firmware compatible with current modules.
 
 ## Owned outputs and other games
 

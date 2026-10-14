@@ -1,29 +1,52 @@
 ---
-title: Repositories
-description: Current source ownership and independent OpenSimGear repository builds.
+title: Project sources
+description:
+  Find the maintained OpenSimGear hardware designs, firmware, desktop app and shared communication definitions.
 sidebar:
   order: 7
 ---
 
-OpenSimGear has six repositories. Device firmware and electronics live with their board targets, common input/USB/action/event code in `firmware-common`, canonical contracts in `protocol`, host adapters and DCS-BIOS bindings in `cockpit` and user documentation in the website.
+OpenSimGear's hardware designs and software are maintained in separate repositories. Use these sources to find board
+files, firmware instructions or the Cockpit app. For a user-level introduction, start with
+[how it works](/gear/architecture/).
 
-| Repository | Current responsibility |
-| --- | --- |
-| [device-gateway](https://github.com/opensimgear/device-gateway) | STM32G0B1CBT6 USB/Cyphal gateway, PCB 0.1.0 with powered parallel 4P4C sockets, automatic enrollment, persistent enabled controller order, dynamic HID layouts, routed configuration/actions/events and independent native/Pico simulations. |
-| [device-template](https://github.com/opensimgear/device-template) | STM32G0B1CBT6 module, eight analogue inputs, 24 digital lines, optional TCA9555 banks, persistent runtime configuration/calibration, direct USB/Cyphal input, ordered mapped-button events and status LED actions; PCB 0.1.0 and independent JSON-configured simulation including the same master-caution button/LED contract and a radio panel with typed inputs and bounded display ports. |
-| [firmware-common](https://github.com/opensimgear/firmware-common) | Shared C input acquisition, debounce/rearm, axes/hats/encoders, profile/report packing, bounded independent event collector, configuration parsing, action descriptors/validation/dispatch, USB helpers and pinned dependencies. |
-| [protocol](https://github.com/opensimgear/protocol) | Canonical Cyphal application DSDL, generated bindings, shared transport, gateway CDC/runtime configuration/device action/panel event contracts, fixtures and cross-firmware conformance. Private CAN FD v2 is historical reference. |
-| [cockpit](https://github.com/opensimgear/cockpit) | Tauri/Rust/Svelte application with independent multi-gateway connections, configuration/calibration, automatic enrollment and visibility, manual actions, live inputs and one saved background DCS-BIOS A-10C profile with typed multi-gateway input/output bindings, installed catalogue queries, display formatting, traffic metrics and a local UDP peer. |
-| [opensimgear.github.io](https://github.com/opensimgear/opensimgear.github.io) | Astro/Starlight documentation, component/DIY guides, third-party equipment database and calculators/rig planner. |
+## Hardware and firmware
 
-## Dependency ownership
+| Source                                                            | What you will find                                                                                                                                                                  |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Device template](https://github.com/opensimgear/device-template) | Generic module PCB, bill of materials, input wiring, firmware profiles and device simulations. This is the controller foundation for a peripheral, not a finished mechanical build. |
+| [Device gateway](https://github.com/opensimgear/device-gateway)   | USB-to-CAN gateway PCB, power and connector guidance, gateway firmware and gateway simulations.                                                                                     |
 
-Firmware builds use full-commit dependency pins. Device repositories include checked shared Cyphal snapshots from `protocol`; `protocol/tools/verify_can_vendors.py` checks those snapshots and gateway formatter fixtures. Cross-firmware tests link actual gateway/module code with common source. Change the canonical contract and checked consumers together.
+Both current PCB designs are **0.1.0** and remain prototypes. Read their fabrication and validation notes before
+ordering boards. Input controls, wiring and enclosures must be considered separately from the controller PCB.
 
-Each repository's integration runner provisions and builds its dependencies independently. Cockpit consumes the normal gateway endpoint and does not launch simulated devices. Module settings, ordered input history and temporary action state live on modules; remembered identities, disabled intent and enabled controller order live on gateways. Device callbacks own outputs, and the gateway forwards metadata/events without storing simulator bindings. Cockpit saves one A-10C panel profile in application settings, requires explicit Start and resolves named command interfaces and feedback addresses from the installed DCS-BIOS catalogue. Unchanged legacy master-caution settings remain usable and upgrade only on explicit Save; wider aircraft profiles and import/export remain future work. Its synthetic UDP peer and catalogue are development tools owned by Cockpit.
+## Desktop app
 
-## Version and validation boundaries
+[Cockpit](https://github.com/opensimgear/cockpit) contains the desktop app, build and run instructions, and verification
+records. It handles device configuration, controller visibility, live input display, actions and the implemented
+A-10C DCS-BIOS panel integration.
 
-One current design per board is identified as PCB 0.1.0 until launch. Firmware, protocol contract and mechanical identifiers have separate meanings; current contract versions do not declare production releases. Existing software/CAD checks and physical Pico macOS evidence have recorded limits. No assembled STM32 chain has physical acceptance evidence, and no public OpenSimGear USB allocation or license grant is claimed.
+Module mapping and calibration are stored on the module. Enabled controller lists are stored on the gateway. The saved
+DCS-BIOS panel profile belongs to Cockpit. This matters when moving hardware or using another computer:
+these settings are not all stored in the same place.
 
-Implementation, qualification and release work is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
+## Shared foundations
+
+[Protocol](https://github.com/opensimgear/protocol) defines communication between modules, gateways and Cockpit.
+[Firmware common](https://github.com/opensimgear/firmware-common) supplies shared input processing and USB support. You
+normally do not need to read these repositories to configure a device.
+
+Use matching module and gateway firmware. The current communication contract is version 3; its version is separate from
+the PCB version and does not indicate a production release.
+
+## Documentation and usage terms
+
+The [website repository](https://github.com/opensimgear/opensimgear.github.io) maintains these GEAR pages, equipment
+guides and calculators. Board-specific wiring and fabrication instructions stay with the hardware repositories so they
+can be read alongside the corresponding design files.
+
+Public source access does not by itself grant reuse rights. The repositories currently state that no license grant is
+implied for newly authored OpenSimGear code or designs; included third-party material retains its own terms. Check the
+relevant repository's notices before reuse or redistribution.
+
+For the current validation limits, see [current status](/gear/architecture/decisions/).

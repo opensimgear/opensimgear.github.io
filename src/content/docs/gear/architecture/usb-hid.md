@@ -1,63 +1,79 @@
 ---
-title: USB HID
-description: Current USB inputs, automatic enrollment and controller visibility.
+title: USB controllers
+description: How OpenSimGear controllers appear over USB, and what connecting, disabling or moving a device changes.
 sidebar:
   order: 4
 ---
 
-## Standalone inputs
+OpenSimGear firmware presents inputs through **USB HID**, the standard interface used by game controllers. A
+direct-connected module provides its own controller. A gateway provides a controller for each enabled module on its
+chain, through one USB connection.
 
-Module firmware acquires calibrated inputs and exposes USB HID alongside CDC configuration. The same runtime input model supplies CAN reports. Standalone USB input does not require an active gateway or Cockpit.
+Assign those controls in your simulator. Cockpit configures the devices, but ordinary HID input does not require the app
+to stay open.
 
-The sequential-shifter profile has three held, debounced buttons: up, down and explicit neutral. Rest/stale input releases all commands. Held contacts rearm only after release following startup, reconnect or handoff; conflicts suppress every command until all contacts release. Rotary encoders instead queue distinct direction-button presses and releases with bounded overflow diagnostics.
+## Automatic controller setup
 
-## Automatic enrollment architecture
+The current STM32 gateway automatically enables a newly discovered compatible module and adds it to the end of its saved
+controller list. You do not need Cockpit to perform this setup. Adding a controller can cause a USB reconnect while the
+computer reads the updated list.
 
-The STM32 gateway implements an ordered controller list with [CDC v3](https://github.com/opensimgear/protocol/blob/main/serial/stm32-gateway-v3.md). One gateway USB device has one joystick top-level collection per enabled module. All collections share its VID/PID and serial; modules behind it have no independent USB product identity. Multiple gateways enumerate independently.
+The gateway remembers devices and their enabled state across restarts. With no enabled devices, it exposes only its
+configuration connection and no empty game controllers.
 
-The implementation bounds runtime modules, remembered identities and enabled controllers at 32. Each profile supports 128 buttons, four hats and eight 16-bit axes. These are software resource bounds; host/game and physical chain acceptance have not been established at those maxima.
+| Device state             | What you see                                                                              |
+| ------------------------ | ----------------------------------------------------------------------------------------- |
+| New compatible device    | Automatically added as an enabled controller.                                             |
+| Enabled and connected    | A controller with live inputs.                                                            |
+| Enabled but disconnected | An offline entry in Cockpit; its controller remains present with neutral inputs.          |
+| Disabled                 | A remembered device with no gateway controller; an online device can still be configured. |
+| Removed while offline    | The gateway forgets the device. Reconnecting it treats it as new.                         |
 
-The gateway automatically enables each first-seen compatible CAN identity and appends its advertised HID collection to a persistent ordered controller list. Existing collections keep their relative order, report IDs and control definitions. There is no user slot assignment, Add controller or manual Apply layout onboarding. Enrollment and USB activation work with Cockpit closed.
+These behaviors are implemented in firmware and software simulations. Their effect on physical STM32 USB controllers and
+saved Windows/game bindings has not been validated.
 
-USB exposes the enabled controller list, with no permanent management collection or unused joystick placeholders. With no enabled controllers, the gateway uses CDC-only USB enumeration. Keep the gateway VID/PID, serial and interface numbering stable wherever the USB configuration permits. Snapshots publish resource bounds and identity-specific admission failures when capacity is exhausted.
+## Disable, enable and remove
 
-Presence and enabled state are independent:
+Use **Disable** to hide a device's gateway controller without erasing its settings. It stays disabled after reconnection
+or gateway restart. **Enable** adds it to the end of the enabled list again.
 
-| Device state | Cockpit | Windows HID visibility |
-| --- | --- | --- |
-| First discovery | Automatically enabled; appended at the end | New controller after automatic USB reconnect |
-| Enabled and connected | Online, with live input | Present controller |
-| Enabled and temporarily disconnected | Ghosted/offline, with cached identity and controls | Retained controller sending neutral inputs |
-| Explicitly disabled, connected or disconnected | Remembered and marked disabled | No collection for this device |
-| Manually removed while offline | Remembered entry deleted | Collection removed, if still enabled |
+Use **Remove** to forget an offline device. Temporary disconnection alone does not remove it.
 
-A returning enabled identity resumes its retained collection without USB reconnection when its profile is unchanged. Direct USB ownership continues to neutralize gateway input. A new replacement identity appends independently and uses its own settings/calibration; it does not take over another device's collection.
+Removing a published controller causes a USB reconnect and can require rebinding other controllers in your simulator.
+Cockpit shows a warning before such changes. A game may also need restarting after its controller list changes; binding
+retention is not guaranteed.
 
-Disable removes the collection but preserves remembered identity and the explicit disabled state, leaving device settings intact. Repeated announcements and gateway restarts retain it. A disabled device can still be configured over CAN while connected. Explicit Enable appends its collection at the end of the currently enabled list, preserving the order of controllers already exposed; the returning controller may need rebinding. Remove forgets an offline identity, so a later discovery enrolls it as new. Neither disappearance nor gateway startup automatically removes a retained controller.
+## Direct USB takes priority
 
-Before an action removes a published collection, Cockpit warns: “This reconnects the gateway and may require rebinding remaining controllers in your games.” Removing a disabled offline record needs no descriptor change. Survivors keep their relative order and report IDs, although their Windows collection numbers can change.
+When a module has an active direct USB input connection, its gateway controller remains present but sends neutral
+inputs. When direct USB input ends, fresh CAN inputs restore the gateway route. A USB connection that only supplies
+power does not take input ownership.
 
-The gateway batches closely spaced arrivals into a bounded save/reconnect transaction, validates and persists the exact layout before USB detaches, and activates that saved generation. Repeated unchanged announcements do not write flash or reconnect USB. Persistence/resource failure preserves the previous active descriptor and reports the failure. Changes to an existing identity's HID controls are a separate explicit profile-update operation, with binding-change notification.
+## Changing controls
 
-Publishing a visibility change renews the affected device's CAN lease. Its next assignment rearms acquisition and discards encoder turns made while disabled; configuration resumes after fresh traffic confirms the new route.
+Calibration and name changes that keep the same control layout do not require a new layout. If a device's configured
+buttons, hats or axes change its USB control profile, its enabled gateway controller stays neutral until you explicitly
+use **Update profile**.
 
-Appending preserves existing descriptor order, but Windows' HID hardware-ID format differs between single- and multiple-collection interfaces. With no permanent collection, one-to-two and two-to-one controller transitions need qualification alongside append, disable, removal, re-enable and reboot. Stable report IDs alone do not guarantee saved game bindings. See [Microsoft's collection identity rules](https://learn.microsoft.com/en-us/windows-hardware/drivers/hid/hidclass-hardware-ids-for-top-level-collections) and [gateway #6](https://github.com/opensimgear/device-gateway/issues/6).
+That update can reconnect USB and change simulator bindings. Check your assignments after changing the layout.
 
-## Input ownership
+## Moving a module
 
-An active direct USB host session takes input priority and leaves the gateway controller neutral. Power-only VBUS does not establish ownership. After direct USB ownership ends, gateway input resumes only from fresh valid state. Old encoder turns cannot replay. Software checks cover ownership transitions; assembled handoff and suspend/resume timing are unmeasured.
+Mapping and calibration are stored on the module and move with it. Gateway controller lists are stored on each gateway.
+The old gateway keeps the module's enabled offline entry until you disable or remove it; the new gateway automatically
+adds an unknown device.
 
-The simulated DCS-BIOS master-caution binding uses the independent ordered panel
-event stream instead of a HID button binding. Start requires the bound panel's
-gateway controller disabled and unpublished, with no active direct USB input.
-Cockpit presents the existing Disable confirmation and waits for layout
-completion; it does not silently change controller visibility. This prevents
-duplicate simulator commands. Actions and event reads continue on the online CAN
-route with HID disabled. Stopping the integration does not re-enable HID. See
-[the setup flow](/gear/architecture/desktop-cockpit/#dcs-bios-master-caution).
+If the destination already remembers the device as disabled, it remains disabled. Moving between gateways changes the
+USB connection identity, so game bindings may need updating.
 
-## USB identifiers and evidence
+## Capacity and compatibility
 
-No public OpenSimGear VID/PID allocation is claimed. Build with identifiers you are authorized to use; `0xFFFF/0xFFFF` is a compile-only placeholder. Current firmware/CAD and native simulations have validation records, and the Pico simulator has physical macOS acceptance evidence. No STM32 USB/CAN chain or Windows/Linux physical acceptance is recorded.
+The software supports up to 32 remembered devices and enabled controllers per gateway. A device profile can contain up
+to 128 buttons, four hats and eight axes. These are software limits, not tested physical chain ratings or guarantees
+that every simulator accepts that many controls.
 
-See the [gateway implementation](https://github.com/opensimgear/device-gateway), [module implementation](https://github.com/opensimgear/device-template) and [GitHub project](https://github.com/orgs/opensimgear/projects/2).
+No public OpenSimGear USB vendor/product identifier allocation is established. Firmware builders must use identifiers
+they are authorized to use; compile-only placeholders are not deployment identifiers.
+
+See [hardware requirements](/gear/architecture/hardware/) and [current validation status](/gear/architecture/decisions/)
+before planning a physical setup.

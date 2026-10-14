@@ -1,56 +1,52 @@
 ---
-title: Desktop cockpit
-description: Multi-gateway configuration, manual actions and simulated DCS-BIOS panel profiles.
+title: Cockpit
+description:
+  Configure OpenSimGear devices, inspect live inputs, manage controllers and configure the A-10C DCS-BIOS panel
+  integration.
 sidebar:
   order: 6
 ---
 
-[Cockpit](https://github.com/opensimgear/cockpit) is a working Tauri 2 desktop application with a Svelte 5/TypeScript interface and Rust native adapters. It discovers gateways, edits device input configuration/calibration, manages enabled controllers and remembered devices, displays live inputs, renders manual actions and runs a simulated DCS-BIOS A-10C panel profile. HID operation remains independent of the application.
+Cockpit is the OpenSimGear desktop app. It shows connected gateways and devices, edits control mappings and calibration,
+displays live inputs and provides device actions. It is still under development.
 
-## Native access
+Normal USB controller input works with Cockpit closed. Configuration uses the app, and the DCS-BIOS integration runs
+only while Cockpit is open and the integration is started.
 
-Rust owns USB serial enumeration, protocol handshakes, connection state and bounded requests. The frontend consumes typed state through Tauri IPC. Browser development uses an HTTP bridge to the same native gateway service; it does not rely on Web Serial availability in an OS webview. STM32 discovery verifies manufacturer/product metadata, a 24-hex UID and a bounded CDC v3 automatic-lifecycle snapshot, with a separate CDC v2 legacy adapter.
+## Finding your devices
 
-## Multiple gateways
+Compatible gateways connect automatically and independently. **Gateways** shows each gateway and its devices;
+**Devices** combines the inventories; **Topology** shows the computer and each gateway chain.
 
-Every compatible gateway connects independently. Gateways shows each gateway and its devices; Devices combines inventories; Topology branches from the computer to each gateway chain. One busy, restarting or failed gateway does not interrupt another. Previously connected gateways retain last-known device state while offline.
+A failed or restarting gateway does not interrupt the others. Previously connected gateways retain their last-known
+devices while offline. Topology shows gateway membership, not physical cable order.
 
-Operations and drafts are scoped by gateway and module identity. Identical module identities on independent chains currently keep separate state and drafts. Node IDs and USB paths are not global identity keys. A gateway's two sockets are one bus; the UI shows gateway attachment rather than inferred cable order or socket position.
+## Configuring controls
 
-## Configuration and layouts
+Select a device and open its setup controls to edit its name, input mapping and axis calibration. Supported controls
+include buttons, hats, encoders, selectors and analogue axes. Expansion inputs can also be configured.
 
-The STM32 adapter uses the production Cyphal/CAN configuration path. Setup edits names, expansion banks, buttons, hats, encoders, selectors and calibrated axes. Apply activates a validated draft; Apply & save persists settings on the module. Readback follows a renewed lease with bounded retries; reboot stops reconciliation and writes are never replayed.
+1. Edit the settings and inspect the resulting inputs.
+2. Use **Apply** to activate a valid draft.
+3. Use **Apply & save** to keep the settings after the module restarts.
 
-The STM32 gateway automatically enrolls compatible new devices and publishes saved layouts. Cockpit follows requested and published state through reconnects by gateway UID. Changed profiles remain neutral until an explicit profile update; direct device USB input leaves its enabled gateway controller neutral.
+For the current STM32 modules, saved settings live on the device. The separate Pico simulation adapter keeps settings in
+memory only until reset and uses a different, manual controller setup workflow.
 
-The separate legacy CDC v2 and Pico adapters retain their manual controller workflow. The Pico adapter retains discovery, setup claims and reconnection. Its settings are in RAM until reset. On macOS, Rust applies individual controller names through IOKit.
+If a change alters the USB control layout, follow the **Update profile** prompt and check your simulator bindings
+afterward. See [USB controllers](/gear/architecture/usb-hid/) for disabling, enabling and moving devices.
 
-## Controller visibility workflow
+## Device actions
 
-The [USB HID architecture](/gear/architecture/usb-hid/#automatic-enrollment-architecture) uses gateway-owned automatic enrollment, independently of Cockpit.
+The **Device actions** panel shows the actions offered by an online device. The current board offers a status LED with
+**auto**, **on** and **off** modes. **auto** restores the firmware's normal status indication. Native software
+simulations also provide RGB and on/off LED controls.
 
-New identities automatically enable and append to descriptor order. Cockpit shows enabled devices that temporarily disconnect as ghosted, while their Windows HID controllers remain present with neutral inputs. Disable removes a controller from Windows but retains the remembered device and explicit disabled state. An online disabled device remains configurable. Enable appends its collection to the currently enabled list; that controller may need rebinding. Remove forgets an offline record; later rediscovery treats it as new.
+Use the displayed **Apply** or **Run** control to send an action, and **Refresh state** to read its result when
+supported. If a response is lost, the outcome may be uncertain; check the state before sending it again.
 
-Visibility changes that remove a published collection warn that USB reconnects and remaining game bindings may need updating. There is no permanent management collection, unused controller placeholder or user slot allocation. The UI follows gateway state, displays capacity/persistence/profile failures, and retains inventory and selection through expected reconnection by gateway UID without replaying ambiguous mutations.
-
-A module move leaves the source gateway's enabled offline ghost until explicit disable/removal; the destination automatically enrolls an unknown identity. A destination's remembered disabled identity stays disabled. On-module settings/calibration follow the module, but game bindings need not survive a change of gateway USB identity. [Cockpit #4](https://github.com/opensimgear/cockpit/issues/4) tracks moves and duplicate live identities.
-
-## Manual device actions
-
-The device workspace's **Device actions** panel discovers an online device's advertised catalogue and provides Apply/Run controls plus Refresh state. Supported parameters include booleans, enums, bounded integers, RGB colors and bounded UTF-8 strings; actions without arguments are also supported. The current board advertises its status LED's `auto`, `on` and `off` modes, while the native simulation advertises RGB LED 1 and boolean LED 2. Older firmware continues to provide inputs with an explicit Unsupported action state.
-
-Actions remain available when the online device's HID controller is disabled or direct USB owns its inputs. These temporary outputs do not claim settings, save flash or change HID descriptors. LED overrides reset on device reboot, and readback confirms software application rather than measured electrical output.
-
-Catalogue and readback state are scoped to gateway identity, epoch, module identity, boot and route. Cockpit validates arguments against the current catalogue revision. Lost invocation replies remain uncertain and are never replayed automatically; Refresh state reconciles readable actions, and Discover again loads changed metadata. See the [action contract](https://github.com/opensimgear/protocol/blob/main/serial/device-actions.md).
-
-## Device action and DCS-BIOS milestones
-
-Manual actions provide the output interface used by the implemented DCS-BIOS panel profile. Progress is tracked in four milestone stories:
-
-1. [Manual device actions](https://github.com/opensimgear/cockpit/issues/13): implemented advertised actions, gateway routing and Cockpit controls.
-2. [First DCS-BIOS button and LED path](https://github.com/opensimgear/cockpit/issues/14): implemented simulated master-caution commands, ordered button events and LED feedback.
-3. [Displays and encoders](https://github.com/opensimgear/cockpit/issues/15): implemented configurable button/switch/encoder/axis bindings, bounded display formatting and per-gateway traffic measurements, building on the event stream introduced in Milestone 2.
-4. [Profiles and hardware qualification](https://github.com/opensimgear/cockpit/issues/16): future wider aircraft coverage, profile import/export, ownership and hardware qualification.
+Actions remain available with the gateway controller disabled or direct USB input active. LED overrides reset on device
+reboot. Older firmware without action support can still provide inputs through its compatible adapter.
 
 <span id="dcs-bios-master-caution"></span>
 
@@ -103,14 +99,15 @@ before a new press is accepted. Maintained switches and available axes synchroni
 baseline. A view showing fresh feedback can still show an input waiting for release. The running
 profile controls its selected output actions.
 
+## Exploring without assembled boards
 
-## Independent simulation and evidence
+Independent [gateway simulations](https://github.com/opensimgear/device-gateway/tree/main/simulation) and
+[device simulations](https://github.com/opensimgear/device-template/tree/main/simulation) let Cockpit discover and
+configure devices through the implemented firmware paths. They do not create operating-system USB controllers, and
+Cockpit does not start or manage their processes.
 
-Gateway and device simulations run from their owning repositories. Cockpit discovers ordinary gateway endpoints and does not create or manage simulated-device processes. Local streams exercise production handlers without creating OS USB/HID controllers.
-
-Native acceptance covers concurrent gateways, same-identity device isolation, configuration persistence and dynamic layouts. The [device actions acceptance record](https://github.com/opensimgear/cockpit/blob/main/docs/verification/2026-10-13-device-actions.md) covers production firmware processes and manual LED controls, including disabled HID, direct USB and lost-reply recovery. The master-caution record adds ordered events and simulated DCS-BIOS UDP feedback; the extended panel path adds typed inputs, bounded text displays and per-gateway traffic diagnostics. A visible macOS native UI run covered four gateways; physical Pico acceptance covers macOS. These results do not establish live DCS, assembled STM32 LED/USB/CAN or physical Windows/Linux acceptance.
-
-See [Cockpit's README](https://github.com/opensimgear/cockpit/blob/main/README.md), [verification records](https://github.com/opensimgear/cockpit/tree/main/docs/verification) and the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
+Application build and run instructions are in the [Cockpit repository](https://github.com/opensimgear/cockpit). See
+[current status](/gear/architecture/decisions/) for the limits of the available validation.
 
 ## Portable simulator integrations
 

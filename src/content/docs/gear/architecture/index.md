@@ -1,44 +1,62 @@
 ---
-title: Architecture
-description: Current prototype architecture for modular OpenSimGear controls.
+title: How it works
+description: How OpenSimGear device modules, gateways and Cockpit turn physical controls into simulator inputs.
 sidebar:
   order: 1
 ---
 
-OpenSimGear's prototype supports standalone USB HID modules and Cyphal/CAN modules connected through a USB gateway, with configurable inputs, advertised output actions and a configurable simulated DCS-BIOS A-10C panel profile. The module and gateway firmware use C, TinyUSB and libcanard on STM32G0B1CBT6. Cockpit is a Tauri 2 application with Rust, Svelte and TypeScript.
+OpenSimGear separates the controls you operate from the connection to your computer. A module reads the buttons and
+sensors in a peripheral. A gateway lets several modules share one USB connection. Cockpit provides a common place to
+adjust their settings.
 
-## Current behavior
+## Two ways to connect
 
-- Modules acquire and map local inputs, apply calibration and expose USB HID plus CDC configuration and device actions.
-- A gateway discovers module identities and capabilities, routes configuration/actions over CAN and automatically enables new compatible devices and appends their USB HID collections in persistent descriptor order.
-- Each gateway supports up to 32 runtime modules, remembered identities and enabled controllers; each profile supports 128 buttons, four hats and eight axes. Temporary absence retains enabled controllers with configured neutral values.
-- Direct USB input takes priority. Gateway input resumes from fresh state after direct USB ownership ends.
-- Runtime configuration uses one writer, separate drafts, explicit Apply/Save and interrupted-write-safe storage. The gateway saves and publishes controller lifecycle changes automatically; changes to retained control definitions require explicit profile update and USB reconnection.
-- Cockpit connects to multiple gateways independently and combines their inventories. Gateway identity scopes requests and separates identical module sightings on different chains.
-- Cockpit builds manual controls from device-advertised action metadata and reads applied state. The current board exposes its status LED mode; native devices simulate RGB and boolean LEDs. These temporary outputs remain available online with HID disabled or direct USB input ownership.
-- Modules retain bounded ordered button events independently of HID delivery. Cockpit's Rust background service uses them for named A-10C button, maintained-switch and encoder commands, with independent calibrated axis samples. Fresh DCS-BIOS feedback drives readable LEDs and bounded text display setters through one saved multi-gateway profile. Input targets require HID disabled and direct USB inactive; known output-only targets may keep HID enabled. Save and application restart never start the profile. Display formatting and gateway traffic metrics are implemented; wider aircraft profiles, import/export, ownership and hardware qualification remain future [milestones](/gear/architecture/desktop-cockpit/#device-action-and-dcs-bios-milestones).
+**Direct USB:** connect a module to the computer. Its firmware presents the configured controls as a USB controller,
+without a gateway or Cockpit running.
 
-## Controller visibility
+**Through a gateway:** connect modules along a CAN cable chain, then connect the gateway to the computer over USB. CAN
+is the communication bus between the boards. The gateway discovers compatible modules automatically and presents an
+enabled controller for each one.
 
-Enabled devices that temporarily disappear remain neutral controllers and ghosted Cockpit entries. Explicit Disable hides a controller from Windows while remembering it; manual Remove forgets an offline entry and warns about possible rebinding. No permanent management collection or unused controllers are exposed. See the [USB HID lifecycle](/gear/architecture/usb-hid/#automatic-enrollment-architecture).
+```text
+Direct:       Controls → Module → USB → Computer
 
-## Physical design
+Gateway:      Controls → Module → CAN → Gateway → USB → Computer
+                                           ↑
+                                     Cockpit settings
+```
 
-PCB version 0.1.0 uses USB-C and two parallel powered 4P4C CAN sockets. Both sockets continue one linear bus with one local CAN controller/transceiver; they are not separate segments. One external 12 V supply powers each gateway chain. Independent gateway CAN and power trunks remain separate. Termination belongs at the two physical endpoints; an inline gateway is unterminated.
+Each gateway serves its own chain. Cockpit can show multiple gateways together, while their USB connections and cable
+chains remain independent.
 
-The software accepts up to 32 modules. Ten modules and 5 m total cable remain initial bench targets, not qualified electrical limits. No assembled STM32 module/gateway chain has been physically validated. CAD checks and native simulation establish source behavior rather than measured power, timing or host compatibility. The DCS-BIOS panel milestones use a synthetic UDP peer and the production input/event/action contracts, including simulated displays; live DCS and assembled input/display/LED/USB/CAN checks are deferred.
+## From a movement to an input
 
-## Sequential shifter
+The module reads a contact or sensor and applies its configured mapping and calibration. For example, a pedal sensor
+becomes an axis, while a panel switch becomes a button. USB delivers those inputs to the computer; you then assign them
+to functions in your simulator.
 
-The shifter profile has three digital commands: up, down and explicit neutral. Armed buttons follow debounced held contacts without synthesized pulses. Rest and stale input release every command without generating neutral. A contact held at startup, reconnect or input handoff must release before a fresh press. Conflicting contacts suppress all commands until every contact has a debounced release.
+The firmware supports buttons, analogue axes, eight-way hats, rotary encoders and three-position selectors. The
+sequential-shifter profile provides up, down and explicit neutral buttons. Releasing the shifter does not send a neutral
+command.
 
-## Architecture references
+If a module has an active direct USB connection, that connection takes priority. Its gateway controller sends neutral
+inputs until direct USB input ends and fresh input arrives over CAN.
 
-- [Hardware](/gear/architecture/hardware/): current connectors, controllers, power and topology.
-- [Communication](/gear/architecture/communication/): implemented discovery, delivery, configuration, actions and ordered panel events.
-- [USB HID](/gear/architecture/usb-hid/): standalone input and retained gateway controllers.
-- [Desktop cockpit](/gear/architecture/desktop-cockpit/): current host behavior and acceptance evidence.
-- [Repositories](/gear/architecture/repositories/): source ownership and independent builds.
-- [Implementation baseline](/gear/architecture/decisions/): current design choices and validation boundaries.
+## Settings and feedback
 
-Implementation and qualification work is tracked in the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
+Cockpit edits the module's input mapping, name and calibration. **Apply** activates changes; **Apply & save** also
+stores them on the module for use after a restart. These settings travel with the module. The gateway separately
+remembers which devices are enabled as USB controllers.
+
+Feedback uses device actions: commands that an online module offers to Cockpit. The current board offers status LED
+modes. The A-10C DCS-BIOS integration connects configured panel inputs, LEDs and compatible displays; validation currently
+uses simulated feedback.
+
+## Explore the system
+
+- [Hardware and connections](/gear/architecture/hardware/): boards, chain wiring and power.
+- [Device communication](/gear/architecture/communication/): discovery, input delivery and feedback.
+- [USB controllers](/gear/architecture/usb-hid/): automatic setup and connection changes.
+- [Cockpit](/gear/architecture/desktop-cockpit/): configuration and DCS-BIOS panel setup.
+- [Current status](/gear/architecture/decisions/): what has been checked and what remains unverified.
+- [Project sources](/gear/architecture/repositories/): where the hardware and software are maintained.
