@@ -77,3 +77,5 @@ Review source changes and generated output together. `pnpm products:update` and 
 - [Firmware common](https://github.com/opensimgear/firmware-common): shared C input/USB/action/event support and pinned dependencies.
 - [Protocol](https://github.com/opensimgear/protocol): Cyphal DSDL/transport, CDC/configuration/action/event contracts, historical private-v2 reference and conformance tests.
 - [Cockpit](https://github.com/opensimgear/cockpit): Tauri/Rust/Svelte app with gateway discovery, controller visibility, manual actions, live inputs and background DCS-BIOS panel controls, LED and bounded display feedback.
+
+GEAR also documents portable simulator profiles, device-enforced output leases, output-only modules and the Assetto Corsa Rally telemetry starter. See [the simulator integration guide](src/content/docs/gear/architecture/simulator-integrations.md). Hardware and live-game qualification remain deferred.
