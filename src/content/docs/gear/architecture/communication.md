@@ -1,13 +1,13 @@
 ---
 title: Communication
-description: Implemented Cyphal/CAN input delivery, module configuration and device actions.
+description: Implemented Cyphal/CAN inputs, configuration, actions and ordered panel events.
 sidebar:
   order: 3
 ---
 
 Module and gateway firmware use Cyphal/CAN with generated OpenSimGear DSDL, libcanard 5.0, standard Heartbeat/GetInfo and CAN node-ID autoconfiguration. The current application contract is version 3. Gateway USB CDC uses its correlated version-3 interface and reports `canProtocol=3`; Cockpit retains a separate adapter for legacy CDC v2 gateways. The replaced private CAN v1/v2 frames are incompatible with current firmware.
 
-The canonical [protocol repository](https://github.com/opensimgear/protocol) owns the [DSDL](https://github.com/opensimgear/protocol/tree/main/dsdl), [transport](https://github.com/opensimgear/protocol/tree/main/cyphal), [gateway CDC API](https://github.com/opensimgear/protocol/blob/main/serial/stm32-gateway-v3.md), [runtime configuration contract](https://github.com/opensimgear/protocol/blob/main/serial/runtime-configuration.md) and [device action contract](https://github.com/opensimgear/protocol/blob/main/serial/device-actions.md). Firmware snapshots are checked against those sources.
+The canonical [protocol repository](https://github.com/opensimgear/protocol) owns the [DSDL](https://github.com/opensimgear/protocol/tree/main/dsdl), [transport](https://github.com/opensimgear/protocol/tree/main/cyphal), [gateway CDC API](https://github.com/opensimgear/protocol/blob/main/serial/stm32-gateway-v3.md), [runtime configuration contract](https://github.com/opensimgear/protocol/blob/main/serial/runtime-configuration.md), [device action contract](https://github.com/opensimgear/protocol/blob/main/serial/device-actions.md) and [panel event contract](https://github.com/opensimgear/protocol/blob/main/serial/panel-input-events.md). Firmware snapshots are checked against those sources.
 
 ## Identity and discovery
 
@@ -33,7 +33,15 @@ Devices advertise a bounded, revisioned action catalogue with stable identifiers
 
 Direct module CDC and routed gateway requests use the same action handler. CAN actions reuse the existing bounded configuration request/reply envelopes, with separate dispatch and a top-level `targetAction` result in the gateway reply. Actions do not claim a settings draft, write flash or change HID descriptors. Periodic application Status proves the current lease even when HID is disabled or direct USB owns inputs, so online devices remain reachable for actions.
 
-The current board exposes its status LED's `auto`, `on` and `off` modes; the native device simulation exposes RGB and boolean LEDs. Applied state confirms device callback application. LED overrides are temporary and reset on reboot. A lost invocation reply leaves its outcome uncertain; Cockpit never automatically replays it and can reconcile readable state. DCS-BIOS bindings, displays and ordered panel input events are later [milestones](/gear/architecture/desktop-cockpit/#device-action-and-dcs-bios-milestones).
+The current board exposes its status LED's `auto`, `on` and `off` modes; the native device simulation exposes RGB and boolean LEDs, plus a master-caution profile with that same board-status action. Applied state confirms device callback application. LED overrides are temporary and reset on reboot. A lost invocation reply leaves its outcome uncertain; Cockpit never automatically replays it and can reconcile readable state. The simulated DCS-BIOS master-caution binding uses the status LED or a boolean action. Displays and encoder simulator bindings remain future [milestones](/gear/architecture/desktop-cockpit/#device-action-and-dcs-bios-milestones).
+
+## Ordered panel events
+
+The shared event collector retains 64 debounced mapped-button transitions independently of HID enablement, direct USB ownership and encoder HID acknowledgements. `events state` establishes current head, held buttons, boot/stream and overflow. `events read` returns nonconsuming pages of up to 16 consecutive records. Acquisition preserves brief press/release pairs between host reads. Encoder detents produce ordered pairs, although Milestone 2 rejects encoder controls for its momentary binding.
+
+Gateway requests reuse bounded configuration envelopes, seal identity/boot/source/node/lease/epoch and return a separate `targetEvents` result. Application Status maintains reachability with HID disabled. Configuration activation starts a new stream and clears history. Consumers baseline at the current head after startup, simulator recovery, route changes or cursor gaps, require a held button to release before rearming, and never replay historical presses. Disarming releases a previously forwarded press once without replaying a historical press. Ring overwrites report evictions; an actual cursor gap is a separate error and counter requiring rebaseline.
+
+Cockpit's Rust background worker consumes this stream and the DCS-BIOS UDP export stream. Installed catalogue metadata identifies aircraft, advancing update counter and named master-caution feedback. Fresh supported-aircraft feedback gates commands, and freshness loss requests LED off. UI polling only presents status. See [the setup flow](/gear/architecture/desktop-cockpit/#dcs-bios-master-caution).
 
 ## Validation
 
