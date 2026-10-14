@@ -52,6 +52,8 @@ Manual actions provide the output interface used by the implemented DCS-BIOS pan
 3. [Displays and encoders](https://github.com/opensimgear/cockpit/issues/15): implemented configurable button/switch/encoder/axis bindings, bounded display formatting and per-gateway traffic measurements, building on the event stream introduced in Milestone 2.
 4. [Profiles and hardware qualification](https://github.com/opensimgear/cockpit/issues/16): future wider aircraft coverage, profile import/export, ownership and hardware qualification.
 
+<span id="dcs-bios-master-caution"></span>
+
 ## DCS-BIOS panel integration
 
 Cockpit provides one saved A-10C profile for buttons, maintained switches, encoders and calibrated axes, with LED and
