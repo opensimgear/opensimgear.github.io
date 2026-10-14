@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-OpenSimGear's prototype supports standalone USB HID modules and Cyphal/CAN modules connected through a USB gateway, with configurable inputs, advertised output actions and a simulated DCS-BIOS master-caution binding. The module and gateway firmware use C, TinyUSB and libcanard on STM32G0B1CBT6. Cockpit is a Tauri 2 application with Rust, Svelte and TypeScript.
+OpenSimGear's prototype supports standalone USB HID modules and Cyphal/CAN modules connected through a USB gateway, with configurable inputs, advertised output actions and a configurable simulated DCS-BIOS A-10C panel profile. The module and gateway firmware use C, TinyUSB and libcanard on STM32G0B1CBT6. Cockpit is a Tauri 2 application with Rust, Svelte and TypeScript.
 
 ## Current behavior
 
@@ -16,7 +16,7 @@ OpenSimGear's prototype supports standalone USB HID modules and Cyphal/CAN modul
 - Runtime configuration uses one writer, separate drafts, explicit Apply/Save and interrupted-write-safe storage. The gateway saves and publishes controller lifecycle changes automatically; changes to retained control definitions require explicit profile update and USB reconnection.
 - Cockpit connects to multiple gateways independently and combines their inventories. Gateway identity scopes requests and separates identical module sightings on different chains.
 - Cockpit builds manual controls from device-advertised action metadata and reads applied state. The current board exposes its status LED mode; native devices simulate RGB and boolean LEDs. These temporary outputs remain available online with HID disabled or direct USB input ownership.
-- Modules retain bounded ordered button events independently of HID delivery. Cockpit's Rust background worker uses them to send A-10C master-caution commands and drives the board-status or boolean LED from fresh DCS-BIOS feedback. This saved profile requires HID disabled, direct USB inactive and explicit Start. Displays, encoder bindings and wider profiles remain future [milestones](/gear/architecture/desktop-cockpit/#device-action-and-dcs-bios-milestones).
+- Modules retain bounded ordered button events independently of HID delivery. Cockpit's Rust background service uses them for named A-10C button, maintained-switch and encoder commands, with independent calibrated axis samples. Fresh DCS-BIOS feedback drives readable LEDs and bounded text display setters through one saved multi-gateway profile. Input targets require HID disabled and direct USB inactive; known output-only targets may keep HID enabled. Save and application restart never start the profile. Display formatting and gateway traffic metrics are implemented; wider aircraft profiles, import/export, ownership and hardware qualification remain future [milestones](/gear/architecture/desktop-cockpit/#device-action-and-dcs-bios-milestones).
 
 ## Controller visibility
 
@@ -26,7 +26,7 @@ Enabled devices that temporarily disappear remain neutral controllers and ghoste
 
 PCB version 0.1.0 uses USB-C and two parallel powered 4P4C CAN sockets. Both sockets continue one linear bus with one local CAN controller/transceiver; they are not separate segments. One external 12 V supply powers each gateway chain. Independent gateway CAN and power trunks remain separate. Termination belongs at the two physical endpoints; an inline gateway is unterminated.
 
-The software accepts up to 32 modules. Ten modules and 5 m total cable remain initial bench targets, not qualified electrical limits. No assembled STM32 module/gateway chain has been physically validated. CAD checks and native simulation establish source behavior rather than measured power, timing or host compatibility. The master-caution milestone uses a synthetic DCS-BIOS UDP peer and the production button/event/LED contract; live DCS and hardware checks are deferred.
+The software accepts up to 32 modules. Ten modules and 5 m total cable remain initial bench targets, not qualified electrical limits. No assembled STM32 module/gateway chain has been physically validated. CAD checks and native simulation establish source behavior rather than measured power, timing or host compatibility. The DCS-BIOS panel milestones use a synthetic UDP peer and the production input/event/action contracts, including simulated displays; live DCS and assembled input/display/LED/USB/CAN checks are deferred.
 
 ## Sequential shifter
 
