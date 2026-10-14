@@ -124,7 +124,8 @@ The layout and conversion are developer-derived from an
 [ACR-specific reader](https://github.com/LuizZak/AssettoCorsaRallyTelemetryReader/tree/8bb26990def38ffd0e4afe71e04e85e5ddeb3670)
 and an [independent graphics/status parser](https://github.com/decnet100/acr_telemetry/tree/eaef0f29c6712a2e0dbc3bfd8246b84dcdbb9586).
 They are not an officially guaranteed binary interface. Shared-memory mapping names are reused by other Assetto games;
-they alone do not identify the producer. Live game/version qualification remains pending.
+they alone do not identify the producer. Run only the selected game when using this source. Live game/version
+qualification remains pending.
 
 On every platform, the synthetic source supplies authored byte pages through the same decoder and output runtime.
 Controls let you change RPM, gear, speed, maximum RPM, source epoch, session status and physics progression. Freeze the
