@@ -1,11 +1,11 @@
 ---
 title: Desktop cockpit
-description: Multi-gateway configuration, manual actions and simulated DCS-BIOS master caution.
+description: Multi-gateway configuration, manual actions and simulated DCS-BIOS panel profiles.
 sidebar:
   order: 6
 ---
 
-[Cockpit](https://github.com/opensimgear/cockpit) is a working Tauri 2 desktop application with a Svelte 5/TypeScript interface and Rust native adapters. It discovers gateways, edits device input configuration/calibration, manages enabled controllers and remembered devices, displays live inputs, renders manual actions and runs a simulated DCS-BIOS master-caution binding. HID operation remains independent of the application.
+[Cockpit](https://github.com/opensimgear/cockpit) is a working Tauri 2 desktop application with a Svelte 5/TypeScript interface and Rust native adapters. It discovers gateways, edits device input configuration/calibration, manages enabled controllers and remembered devices, displays live inputs, renders manual actions and runs a simulated DCS-BIOS A-10C panel profile. HID operation remains independent of the application.
 
 ## Native access
 
@@ -45,29 +45,67 @@ Catalogue and readback state are scoped to gateway identity, epoch, module ident
 
 ## Device action and DCS-BIOS milestones
 
-Manual actions provide the output interface used by the implemented master-caution binding. Progress is tracked in four milestone stories:
+Manual actions provide the output interface used by the implemented DCS-BIOS panel profile. Progress is tracked in four milestone stories:
 
 1. [Manual device actions](https://github.com/opensimgear/cockpit/issues/13): implemented advertised actions, gateway routing and Cockpit controls.
 2. [First DCS-BIOS button and LED path](https://github.com/opensimgear/cockpit/issues/14): implemented simulated master-caution commands, ordered button events and LED feedback.
-3. [Displays and encoders](https://github.com/opensimgear/cockpit/issues/15): future bounded text, formatting, encoder bindings and traffic measurements, using the event stream introduced in Milestone 2.
-4. [Profiles and hardware qualification](https://github.com/opensimgear/cockpit/issues/16): future wider aircraft coverage, ownership, reconnects and hardware validation.
+3. [Displays and encoders](https://github.com/opensimgear/cockpit/issues/15): implemented configurable button/switch/encoder/axis bindings, bounded display formatting and per-gateway traffic measurements, building on the event stream introduced in Milestone 2.
+4. [Profiles and hardware qualification](https://github.com/opensimgear/cockpit/issues/16): future wider aircraft coverage, profile import/export, ownership and hardware qualification.
 
-## DCS-BIOS master caution
+## DCS-BIOS panel integration
 
-One saved A-10C profile sends `UFC_MASTER_CAUTION 1` for a fresh momentary press and `UFC_MASTER_CAUTION 0` for release. Fresh exported `MASTER_CAUTION` feedback drives a readable boolean action or `led.status.set_mode` with `on`/`off`. The native master-caution device simulation has the same logical button 0, ordered events and status LED action as current board firmware.
+Cockpit provides one saved A-10C profile for buttons, maintained switches, encoders and calibrated axes, with LED and
+display feedback. The master-caution button and LED remain available as a preset. Bindings can use several known
+modules on different gateways; each device choice includes its gateway.
 
-In an online CAN device's **DCS-BIOS** tab, use **Disable controller**, confirm its existing USB reconnect/binding warning and wait for layout completion. Disconnect active direct USB input. Enter the installed DCS-BIOS `doc/json` directory, zero-based momentary button index and advertised LED action, then **Save settings** and **Start DCS-BIOS**. The native service enforces disabled/unpublished HID and inactive direct USB to prevent duplicate bindings. Saving and application restart do not start the binding; Stop before editing settings.
+**Validation uses a synthetic DCS-BIOS peer and software panel simulations. Live DCS and assembled STM32 hardware
+remain unverified.** Simulated displays demonstrate the software interface, not physical display support on the
+current board.
 
-The catalogue loader resolves named controls, aliases, aircraft-name metadata and update counter from installed files rather than embedding feedback addresses. Defaults are commands to `127.0.0.1:7778`, exports on `0.0.0.0:5010`, multicast group `239.255.50.10` through `127.0.0.1`, and a 1500 ms freshness limit. An empty multicast group permits unicast exports.
+To configure a profile:
 
-A Rust background worker consumes ordered events while Cockpit is open; frontend polling displays status only. Startup, route/stream/boot changes, simulator recovery and cursor gaps establish a current baseline and discard historical presses. A held button must release before a fresh press. Disarm/Stop sends one release only for a press this binding previously forwarded. Missing/stale export, unsupported aircraft and Stop request LED off, with failures visible until the panel is reachable. The running profile manages its bound LED. Gateways provides global Stop even when the bound device is absent. Retained event overwrites count ring evictions rather than lost simulator commands; recovered cursor gaps have a separate counter.
+1. Open **DCS-BIOS** in the sidebar, or use the link on a device or gateway card.
+2. Enter the installed DCS-BIOS `doc/json` folder and use **Search catalogue**. Select commands and feedback by name
+   from the catalogue installed with DCS.
+3. Add an input and choose its device, physical control and catalogue command. The controls offered come from the
+   device's advertised capabilities. Momentary buttons and maintained switches send explicit states; encoder turns
+   send steps. Axes use device calibration and a change threshold in the command's units.
+4. For each input device, use **Disable controller**, confirm the USB reconnect/binding warning and wait for the
+   update to finish. Disconnect active direct USB input and finish any setup session. These input routes must be
+   inactive to avoid duplicate simulator commands. Devices used only for output can keep their USB controllers.
+5. Add LED or display feedback and choose an advertised device output. Displays show their size, encoding and byte
+   limit. Choose text or numeric formatting, any prefix or suffix, and what to show when feedback is unknown or stale.
+6. Adjust UDP settings if needed, then use **Save settings** and **Start DCS-BIOS**.
 
-The [local DCS-BIOS peer](https://github.com/opensimgear/cockpit/tree/main/simulation/dcs-bios) uses an authored synthetic catalogue for repeatable software acceptance. Use the installed catalogue with real DCS. [Milestone 2 verification](https://github.com/opensimgear/cockpit/blob/main/docs/verification/2026-10-13-dcs-bios-master-caution.md) records software evidence; assembled button/LED/USB/CAN and live DCS qualification are deferred and do not block this simulated milestone.
+The defaults send commands to `127.0.0.1:7778` and listen on `0.0.0.0:5010`, using multicast group `239.255.50.10`
+through `127.0.0.1`. Leaving the multicast group empty selects unicast feedback. The synthetic catalogue supplied for
+software development is only for the local peer; use your installed catalogue with DCS.
+
+A profile supports up to 16 inputs and 16 outputs on eight known modules across four gateways. Button and axis
+numbering starts at **0**. Three-position selectors are not offered as maintained switch bindings in this integration.
+Display text can be aligned, truncated at whole characters or rejected when it does not fit. The current board's status
+LED supports on/off feedback; compatible simulated displays provide bounded text outputs.
+
+Saving or restarting Cockpit does not start the integration. Stop it before editing. An unchanged saved master-caution
+profile can still start; saving the two bindings shown in the editor explicitly upgrades it. Unsaved edits remain when
+changing views. **Stop DCS-BIOS** is also available from Gateways when a target is offline, and does not re-enable its
+USB controller.
+
+The status view shows aircraft, freshness, input readiness, errors, desired and applied output values, and gateway
+traffic measurements. Feedback continues through a background service while Cockpit is open, independently of the
+view. Display updates use complete feedback frames and keep the newest pending value.
+
+Missing or stale feedback requests the configured fallback text and LED off. An unreachable device cannot confirm that
+change until it reconnects. After recovery, old presses and encoder turns are discarded; a held momentary button must release
+before a new press is accepted. Maintained switches and available axes synchronize their current state after a fresh
+baseline. A view showing fresh feedback can still show an input waiting for release. The running
+profile controls its selected output actions.
+
 
 ## Independent simulation and evidence
 
 Gateway and device simulations run from their owning repositories. Cockpit discovers ordinary gateway endpoints and does not create or manage simulated-device processes. Local streams exercise production handlers without creating OS USB/HID controllers.
 
-Native acceptance covers concurrent gateways, same-identity device isolation, configuration persistence and dynamic layouts. The [device actions acceptance record](https://github.com/opensimgear/cockpit/blob/main/docs/verification/2026-10-13-device-actions.md) covers production firmware processes and manual LED controls, including disabled HID, direct USB and lost-reply recovery. The master-caution record adds ordered events and simulated DCS-BIOS UDP feedback. A visible macOS native UI run covered four gateways; physical Pico acceptance covers macOS. These results do not establish live DCS, assembled STM32 LED/USB/CAN or physical Windows/Linux acceptance.
+Native acceptance covers concurrent gateways, same-identity device isolation, configuration persistence and dynamic layouts. The [device actions acceptance record](https://github.com/opensimgear/cockpit/blob/main/docs/verification/2026-10-13-device-actions.md) covers production firmware processes and manual LED controls, including disabled HID, direct USB and lost-reply recovery. The master-caution record adds ordered events and simulated DCS-BIOS UDP feedback; the extended panel path adds typed inputs, bounded text displays and per-gateway traffic diagnostics. A visible macOS native UI run covered four gateways; physical Pico acceptance covers macOS. These results do not establish live DCS, assembled STM32 LED/USB/CAN or physical Windows/Linux acceptance.
 
 See [Cockpit's README](https://github.com/opensimgear/cockpit/blob/main/README.md), [verification records](https://github.com/opensimgear/cockpit/tree/main/docs/verification) and the [GitHub project](https://github.com/orgs/opensimgear/projects/2).
