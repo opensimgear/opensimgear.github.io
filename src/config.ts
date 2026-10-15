@@ -53,7 +53,7 @@ export const config: Config = {
             path: '/policies/code-of-conduct',
           },
           {
-            title: 'Contributing',
+            title: 'Contribution policy',
             path: '/contributing',
           },
         ],
@@ -61,6 +61,10 @@ export const config: Config = {
       {
         title: 'Terms and Policies',
         children: [
+          {
+            title: 'Licensing and permissions',
+            path: '/policies/licensing',
+          },
           {
             title: 'Terms and Conditions',
             path: '/policies/terms-and-conditions',

@@ -4,6 +4,22 @@
 v4. It contains architecture and DIY guides, simulator-component documentation, a searchable third-party equipment
 database and interactive calculators.
 
+## Licensing and contributions
+
+Licensing is under review. Original OpenSimGear code, hardware designs, documentation and other first-party material
+are all rights reserved by Ivan Gregurić Ortolan, except where a specific notice identifies another rights holder.
+There is no general personal, noncommercial or commercial license grant. Public visibility alone does not authorize
+reuse, modification, redistribution, manufacturing or sales.
+
+Rights provided by applicable law, GitHub platform terms, third-party licenses and separate valid permissions remain
+applicable. Third-party licenses and attribution must be preserved. See [LICENSE](LICENSE) and
+[licensing and permissions](https://www.opensimgear.org/policies/licensing/).
+
+External creative contributions are paused while licensing and contribution terms are reviewed. Questions and factual
+bug reports remain possible without proposed patches, designs or replacement text. Submitting material does not
+automatically transfer its ownership. See [CONTRIBUTING.md](CONTRIBUTING.md) and the
+[contribution policy](https://www.opensimgear.org/contributing/).
+
 ## Current content and tools
 
 - User-focused GEAR documentation explaining the ecosystem, connections, configuration, Cockpit and current prototype

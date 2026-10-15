@@ -122,15 +122,15 @@
        id="g11"
        transform="translate(13.67397,-5.3646609)"><text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:295;font-stretch:normal;font-size:22.5778px;font-family:'.SF NS Mono';-inkscape-font-specification:'.SF NS Mono weight=295';text-align:start;letter-spacing:2.64583px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#999999;stroke-width:0.264583"
-         x="363.55774"
+         style="font-style:normal;font-variant:normal;font-weight:295;font-stretch:normal;font-size:22.5778px;font-family:monospace;text-align:center;letter-spacing:2.64583px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#999999;stroke-width:0.264583"
+         x="586.32603"
          y="571.38617"
          id="text4"><tspan
            sodipodi:role="line"
            id="tspan4"
-           style="font-style:normal;font-variant:normal;font-weight:571;font-stretch:normal;font-size:22.5778px;font-family:'.SF NS Mono';-inkscape-font-specification:'.SF NS Mono weight=571';letter-spacing:2.64583px;stroke-width:0.264583"
-           x="363.55774"
-           y="571.38617">BUILD YOUR OWN SIM HARDWARE</tspan></text><path
+           style="font-style:normal;font-variant:normal;font-weight:571;font-stretch:normal;font-size:22.5778px;font-family:monospace;letter-spacing:2.64583px;stroke-width:0.264583"
+           x="586.32603"
+           y="571.38617">SIMULATION HARDWARE &amp; SOFTWARE</tspan></text><path
          style="fill:#000000;fill-opacity:0.989071;stroke:#00a44f;stroke-width:4.03918;stroke-dasharray:none;stroke-opacity:1"
          d="m 234.30327,563.43211 h 87.12785"
          id="path11" /><path

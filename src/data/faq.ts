@@ -17,45 +17,34 @@ export const faqItems: FaqItem[] = [
   {
     question: 'What is OpenSimGear?',
     answer:
-      'OpenSimGear is an open-source project focused on sim racing and flight simulation hardware, firmware, software, calculators, and documentation. The goal is to make it easier for builders and enthusiasts to understand, build, and improve their own sim gear.',
+      'OpenSimGear develops sim racing and flight simulation hardware, firmware, software, calculators and documentation. The public website and repositories describe the architecture and current prototypes. Licensing is under review, and original project material is currently all rights reserved.',
   },
   {
-    question: 'Is OpenSimGear a store or a hardware manufacturer?',
+    question: 'Does OpenSimGear currently offer hardware or commercial software licenses?',
     answer:
-      'No. OpenSimGear is not a store and does not sell finished hardware. It is a documentation and open-source ecosystem project built around shared designs, technical references, and tools for the community.',
+      'The current hardware remains at prototype status. This website does not currently offer hardware sales or commercial software licenses. Permissions for software use, hardware production and hardware sales are under review; public source access does not authorize them.',
   },
   {
-    question: 'How can I help?',
-    answer: 'You can help in a few different ways:',
-    bullets: [
-      'improve docs that are thin, unclear, or outdated',
-      'share hardware designs, build notes, or project references',
-      'fix software issues or help shape site features',
-      'test calculators and pages, then report what feels broken or confusing',
-    ],
-    links: [{ label: 'Read the contributing page', href: '/contributing' }],
+    question: 'Are external contributions accepted?',
+    answer:
+      'External code, patches, hardware designs, documentation, artwork and other creative contributions are paused while licensing and contribution terms are reviewed. Submitting work does not automatically transfer ownership. Questions and factual bug reports remain possible without submitting proposed patches or designs.',
+    links: [{ label: 'Read the contribution policy', href: '/contributing' }],
   },
   {
     question: 'Which licenses are used in this project?',
-    answer: 'OpenSimGear mainly uses two licenses:',
-    bullets: [
-      'AGPL-3.0 for software-related work',
-      'CERN-OHL-S for hardware-related work',
-      'Check the license in the specific repository before you reuse anything.',
-    ],
-    links: [
-      { label: 'AGPL-3.0', href: 'https://www.gnu.org/licenses/agpl-3.0.txt' },
-      { label: 'CERN-OHL-S', href: 'https://ohwr.org/cern_ohl_s_v2.txt' },
-    ],
+    answer:
+      'Licensing is under review. First-party software, firmware, hardware designs and documentation are currently all rights reserved, with no general personal, noncommercial or commercial license grant. Applicable law, GitHub platform rights, third-party licenses and separate valid permissions remain applicable.',
+    links: [{ label: 'Licensing and permissions', href: '/policies/licensing' }],
   },
   {
-    question: 'Can I use OpenSimGear designs in my own project?',
+    question: 'Can I reuse code or designs for a personal or commercial project?',
     answer:
-      'Usually yes, but the exact answer depends on the license attached to the repository or design you want to reuse. If you plan to modify, redistribute, or commercialize the work, read that license first instead of guessing.',
+      'There is currently no general permission to reuse original OpenSimGear code or designs, including for personal or noncommercial projects. Public visibility alone does not authorize modification, redistribution, manufacturing or sales. Check the specific notices and any rights provided by law, platform terms, third-party licenses or a separate written agreement.',
+    links: [{ label: 'Licensing and permissions', href: '/policies/licensing' }],
   },
   {
     question: 'Where do I ask questions or get support?',
     answer:
-      'If you have a question, send an email or join the Discord community. If your question is about contributing, the contributing page is still the best place to start because it explains where help is useful and how to jump in.',
+      'The website contact details and Discord are available for questions. Factual bug reports can describe a problem and reproduction steps without including a proposed patch or design. Questions about permissions should go to legal@opensimgear.org.',
   },
 ];

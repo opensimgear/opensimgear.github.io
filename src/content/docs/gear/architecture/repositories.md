@@ -45,8 +45,11 @@ The [website repository](https://github.com/opensimgear/opensimgear.github.io) m
 guides and calculators. Board-specific wiring and fabrication instructions stay with the hardware repositories so they
 can be read alongside the corresponding design files.
 
-Public source access does not by itself grant reuse rights. The repositories currently state that no license grant is
-implied for newly authored OpenSimGear code or designs; included third-party material retains its own terms. Check the
-relevant repository's notices before reuse or redistribution.
+Licensing is under review. First-party OpenSimGear code, hardware designs and documentation are currently **all rights
+reserved**, with no general personal, noncommercial or commercial license grant. Public source access does not by
+itself grant reuse, manufacturing or sales rights. Applicable law, GitHub platform rights, third-party licenses and
+separate valid permissions remain applicable. Read [licensing and permissions](/policies/licensing/) and the relevant
+repository's notices before reuse. External creative contributions are paused; see the
+[contribution policy](/contributing/).
 
 For the current validation limits, see [current status](/gear/architecture/decisions/).

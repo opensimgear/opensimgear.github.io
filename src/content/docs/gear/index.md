@@ -12,6 +12,11 @@ sensors. You can connect a device directly to a computer over USB, or connect se
 The Cockpit desktop app brings connected devices into one place for configuration, calibration and live input checks.
 Normal USB controller input works without Cockpit running.
 
+Licensing is under review. Original project material is currently all rights reserved, with no general personal,
+noncommercial or commercial license grant. Read [licensing and permissions](/policies/licensing/) before reusing code
+or designs or building from project sources. Third-party licenses and rights provided by law, platform terms or a
+separate valid permission remain applicable.
+
 ## The three parts
 
 | Part          | What it does                                                                                                              |

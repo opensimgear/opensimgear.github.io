@@ -41,9 +41,6 @@ export default defineConfig({
         alt: `${title} Logo`,
         replacesTitle: false,
       },
-      editLink: {
-        baseUrl: 'https://github.com/opensimgear/opensimgear.github.io/edit/main/',
-      },
       social: [
         {
           label: 'Github',
@@ -62,7 +59,8 @@ export default defineConfig({
           label: 'Start Here',
           items: [
             { label: 'Getting started', link: '/getting-started' },
-            { label: 'Contributing', link: '/contributing' },
+            { label: 'Licensing and permissions', link: '/policies/licensing' },
+            { label: 'Contribution policy', link: '/contributing' },
             { label: 'FAQ', link: '/faq' },
           ],
         },
@@ -107,7 +105,7 @@ export default defineConfig({
       name: title,
       icon: 'src/assets/logo-light.svg',
       lang: 'en-US',
-      description: 'Open Source Sim Racing & Flight Simulation Hardware',
+      description: 'Sim Racing & Flight Simulation Hardware, Software and Documentation',
       start_url: '/',
       theme_color: '#ABD0A5',
       background_color: '#16181C',
