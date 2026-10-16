@@ -1,5 +1,9 @@
 # OpenSimGear website
 
+## Development status and disclaimer
+
+This project is heavily under development and is not ready for use. Use it entirely at your own risk. To the fullest extent permitted by applicable law, the authors and contributors disclaim all liability for any damage, loss, or other issues arising from its use.
+
 [OpenSimGear's public website](https://opensimgear.github.io), built with Astro 6, Starlight, Svelte 5 and Tailwind CSS
 v4. It contains architecture and DIY guides, simulator-component documentation, a searchable third-party equipment
 database and interactive calculators.
