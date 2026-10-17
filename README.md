@@ -90,7 +90,8 @@ PLAYWRIGHT_BASE_URL=http://127.0.0.1:4321 pnpm e2e --project=iphone
 An explicit URL disables automatic build and server startup. It must serve production output because module-recovery
 tests target emitted `/_astro/` JavaScript assets. CI builds once and passes the same static production output to every
 matrix entry. Firefox runs headed under a virtual display with Mesa software rendering on Linux CI so the 3D calculators
-have a WebGL context. All seven must pass before Pages deployment. Pull requests run the build and matrix without
+have a WebGL context. The planner smoke test allows up to two minutes for software 3D initialization; other smoke tests
+retain their one-minute limit. All seven must pass before Pages deployment. Pull requests run the build and matrix without
 deploying. Failures retain per-profile screenshots, traces, reports and server logs. Set `PLAYWRIGHT_OUTPUT_DIR` and
 `PLAYWRIGHT_REPORT_DIR` to put local artifacts under `.research/`.
 

@@ -51,6 +51,8 @@ test('home navigation survives translation-style nested text', async ({ page }) 
 
 for (const calculator of ['actuator-sizing', 'stewart-platform', 'aluminum-rig-planner']) {
   test(`${calculator} hydrates and accepts input`, async ({ page }) => {
+    // High-DPR software WebGL initialization can take over a minute on CI.
+    if (calculator === 'aluminum-rig-planner') test.setTimeout(120_000);
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     page.on('requestfailed', (request) => {
