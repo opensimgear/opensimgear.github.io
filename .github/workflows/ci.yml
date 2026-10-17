@@ -64,6 +64,7 @@ jobs:
   e2e:
     needs: test-and-build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
@@ -106,7 +107,11 @@ jobs:
             sleep 1
           done
           curl --fail --silent "$PLAYWRIGHT_BASE_URL/" > /dev/null
-          pnpm e2e --project=${{ matrix.project }}
+          if [ "${{ matrix.browser }}" = firefox ]; then
+            LIBGL_ALWAYS_SOFTWARE=1 xvfb-run --auto-servernum pnpm e2e --project=${{ matrix.project }} --headed
+          else
+            pnpm e2e --project=${{ matrix.project }}
+          fi
       - name: Upload Playwright failure artifacts
         if: failure()
         uses: actions/upload-artifact@v4

@@ -139,9 +139,14 @@ test('failed calculator import retains manual retry and recovers on reload', asy
   await page.goto('/calculators/actuator-sizing/?smoke=retry#calculator');
   const retry = page.getByRole('button', { name: 'Reload and try again' });
   await expect(retry).toBeVisible();
-  expect(failed).toBe(true);
+  await expect.poll(() => failed).toBe(true);
   await retry.click();
   await expect(page.locator('[data-calculator-retry]')).toHaveCount(0);
   await expect(page.getByRole('button', { name: '+ Add custom motor', exact: true })).toBeVisible();
-  await expect(page).toHaveURL(/\?smoke=retry#calculator$/);
+  await expect(page).toHaveURL(
+    (url) =>
+      url.pathname === '/calculators/actuator-sizing/' &&
+      url.searchParams.get('smoke') === 'retry' &&
+      url.hash === '#calculator'
+  );
 });
