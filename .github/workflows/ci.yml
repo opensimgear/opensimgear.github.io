@@ -18,6 +18,7 @@ on:
       - e2e/**
       - pnpm-lock.yaml
   # Allows you to run this workflow manually from the Actions tab on GitHub.
+  pull_request:
   workflow_dispatch:
     inputs:
       force_previous_sha:
@@ -40,8 +41,16 @@ jobs:
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         uses: ./.github/actions/astro-build
+      - name: Upload production site for smoke matrix
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-site
+          path: dist/
+          include-hidden-files: true
+          if-no-files-found: error
   deploy:
-    needs: test-and-build
+    needs: [test-and-build, e2e]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     outputs:
       page_url: ${{ steps.deployment.outputs.page_url }}
@@ -53,8 +62,19 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
   e2e:
-    needs: deploy
+    needs: test-and-build
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { project: chromium, browser: chromium }
+          - { project: firefox, browser: firefox }
+          - { project: webkit, browser: webkit }
+          - { project: android-phone, browser: chromium }
+          - { project: iphone, browser: webkit }
+          - { project: ipad, browser: webkit }
+          - { project: android-tablet, browser: chromium }
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -63,24 +83,39 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Download production site
+        uses: actions/download-artifact@v4
+        with:
+          name: production-site
+          path: dist/
       - name: Install Playwright browser
-        run: pnpm exec playwright install --with-deps chromium
-      - name: Run E2E smoke test
+        run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
+      - name: Serve production site and run smoke tests
         env:
-          PLAYWRIGHT_BASE_URL: ${{ needs.deploy.outputs.page_url }}
-        run: pnpm e2e
-      - name: Upload Playwright artifacts
+          PLAYWRIGHT_BASE_URL: http://127.0.0.1:4321
+        run: |
+          python3 -m http.server 4321 --bind 127.0.0.1 --directory dist > /tmp/smoke-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent "$PLAYWRIGHT_BASE_URL/" > /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent "$PLAYWRIGHT_BASE_URL/" > /dev/null
+          pnpm e2e --project=${{ matrix.project }}
+      - name: Upload Playwright failure artifacts
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-artifacts
+          name: playwright-${{ matrix.project }}
           path: |
             playwright-report/
             test-results/
+            /tmp/smoke-server.log
           if-no-files-found: ignore
   deployment-changelog:
     needs: deploy

@@ -1,0 +1,15 @@
+<div data-calculator-recovery>
+  <slot />
+  <p data-calculator-retry class="my-4 text-sm">
+    Calculator not loading? <button type="button" class="cursor-pointer underline" onclick="window.location.reload()"
+      >Reload and try again</button
+    >
+  </p>
+</div>
+<script>
+  import { installCalculatorRetry } from '~/utils/browser/module-recovery';
+
+  for (const container of document.querySelectorAll<HTMLElement>('[data-calculator-recovery]')) {
+    installCalculatorRetry(container);
+  }
+</script>
