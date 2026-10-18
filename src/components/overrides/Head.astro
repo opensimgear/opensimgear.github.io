@@ -4,6 +4,7 @@ import { config } from '~/config';
 import { buildDefaultSocialImageUrl, getSeoPolicy } from '~/utils/seo-policy';
 import { buildTwitterMetaHead } from '~/utils/social-meta';
 import { buildSiteSchemas } from '~/utils/structured-data';
+import { installModuleRecovery } from '~/utils/browser/module-recovery';
 
 const { head } = Astro.locals.starlightRoute;
 const pathname = Astro.url.pathname;
@@ -54,6 +55,7 @@ const routeSpecificHead =
     : [];
 ---
 
+<script is:inline set:html={`(${installModuleRecovery.toString()})(window);`} />
 {import.meta.env.PROD && <Analytics />}
 {
   [...filteredHead, ...socialImageHead, ...twitterMetaHead, ...routeSpecificHead].map((entry) => {

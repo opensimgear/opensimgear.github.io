@@ -22,6 +22,9 @@ const title = 'OpenSimGear';
 
 // https://astro.build/config
 export default defineConfig({
+  // Starlight enables speculative prefetch by default. Its fallback fetch can reject
+  // on mobile networks; navigation does not depend on these optional requests.
+  prefetch: false,
   experimental: {
     chromeDevtoolsWorkspace: true,
     queuedRendering: {

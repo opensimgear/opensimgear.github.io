@@ -6,6 +6,7 @@ description:
 tableOfContents: false
 ---
 
+import CalculatorRecovery from '~/components/calculator/CalculatorRecovery.astro';
 import StewartPlatform from '~/components/calculator/stewart-platform/index.svelte';
 
 <style>{`:root { --sl-content-width: 90rem; }`}</style>
@@ -26,7 +27,9 @@ motion and lets you preview any pose in 3D.
 
 ## Calculator
 
-<StewartPlatform client:load />
+<CalculatorRecovery>
+  <StewartPlatform client:load />
+</CalculatorRecovery>
 
 ## How to use
 

@@ -8,6 +8,7 @@ sidebar:
   label: Aluminum Rig Planner
 ---
 
+import CalculatorRecovery from '~/components/calculator/CalculatorRecovery.astro';
 import AluminumRigPlanner from '~/components/calculator/aluminum-rig-planner/index.svelte';
 
 <style>{`:root { --sl-content-width: 90rem; }`}</style>
@@ -27,7 +28,9 @@ to buy and cut before spending a cent.
 
 ## Planner
 
-<AluminumRigPlanner client:load />
+<CalculatorRecovery>
+  <AluminumRigPlanner client:load />
+</CalculatorRecovery>
 
 ## How to use
 

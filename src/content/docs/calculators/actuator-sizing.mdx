@@ -8,6 +8,7 @@ tableOfContents: false
 
 <style>{`:root { --sl-content-width: 90rem; }`}</style>
 
+import CalculatorRecovery from '~/components/calculator/CalculatorRecovery.astro';
 import ActuatorSizingCalc from '~/components/calculator/actuator-sizing/index.svelte';
 
 :::caution
@@ -27,7 +28,9 @@ safety factor.
 
 ## Calculator
 
-<ActuatorSizingCalc client:load />
+<CalculatorRecovery>
+  <ActuatorSizingCalc client:load />
+</CalculatorRecovery>
 
 ## How to use
 
