@@ -2,6 +2,10 @@ import * as Sentry from '@sentry/astro';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
+    // A production build can also run on localhost or a preview host.
+    environment: ['opensimgear.org', 'www.opensimgear.org'].includes(window.location.hostname)
+      ? 'production'
+      : 'preview',
     dsn: 'https://8453bfdc55a4896cbb5cfbe9f8b669a6@o4511237018681344.ingest.de.sentry.io/4511237021565008',
     sendDefaultPii: false,
     integrations: [
