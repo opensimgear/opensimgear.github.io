@@ -2,7 +2,9 @@
 
 ## Development status and disclaimer
 
-This project is heavily under development and is not ready for use. Use it entirely at your own risk. To the fullest extent permitted by applicable law, the authors and contributors disclaim all liability for any damage, loss, or other issues arising from its use.
+This project is heavily under development and is not ready for use. Use it entirely at your own risk. To the fullest
+extent permitted by applicable law, the authors and contributors disclaim all liability for any damage, loss, or other
+issues arising from its use.
 
 [OpenSimGear's public website](https://opensimgear.github.io), built with Astro 6, Starlight, Svelte 5 and Tailwind CSS
 v4. It contains architecture and DIY guides, simulator-component documentation, a searchable third-party equipment
@@ -60,6 +62,12 @@ pnpm preview
 
 `pnpm build` runs Astro checks before generating the static site in `dist/`.
 
+Production builds generate hidden browser source maps in Vite's `client` environment. The standard Sentry integration
+uploads them when `SENTRY_AUTH_TOKEN` is set and removes `dist/**/*.map` after upload. JavaScript and inline-script
+recompression are disabled to preserve source mappings. CI requires the token for deployments from `main`; local and
+fork pull-request builds can run without it. To load a local `.env` for an authenticated build, use
+`node --env-file=.env --run build`. Never commit the token or generated maps.
+
 ## Validation
 
 ```sh
@@ -91,9 +99,9 @@ An explicit URL disables automatic build and server startup. It must serve produ
 tests target emitted `/_astro/` JavaScript assets. CI builds once and passes the same static production output to every
 matrix entry. Firefox runs headed under a virtual display with Mesa software rendering on Linux CI so the 3D calculators
 have a WebGL context. The planner smoke test allows up to two minutes for software 3D initialization; other smoke tests
-retain their one-minute limit. All seven must pass before Pages deployment. Pull requests run the build and matrix without
-deploying. Failures retain per-profile screenshots, traces, reports and server logs. Set `PLAYWRIGHT_OUTPUT_DIR` and
-`PLAYWRIGHT_REPORT_DIR` to put local artifacts under `.research/`.
+retain their one-minute limit. All seven must pass before Pages deployment. Pull requests run the build and matrix
+without deploying. Failures retain per-profile screenshots, traces, reports and server logs. Set `PLAYWRIGHT_OUTPUT_DIR`
+and `PLAYWRIGHT_REPORT_DIR` to put local artifacts under `.research/`.
 
 ## Product data
 

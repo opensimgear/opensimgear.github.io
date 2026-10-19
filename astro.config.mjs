@@ -115,16 +115,20 @@ export default defineConfig({
       display: 'standalone',
       insertAppleTouchLinks: true,
     }),
-    playformCompress(),
+    playformCompress({
+      JavaScript: false,
+      HTML: { 'html-minifier-terser': { minifyJS: false } },
+    }),
     ...(process.env.NODE_ENV === 'development'
       ? []
       : [
-        sentry({
-          org: 'qantic-ntrp',
-          project: 'open-sim-gear',
-          authToken: process.env.SENTRY_AUTH_TOKEN,
-        }),
-      ]),
+          sentry({
+            org: 'qantic-ntrp',
+            project: 'open-sim-gear',
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+            sourcemaps: { filesToDeleteAfterUpload: ['./dist/**/*.map'] },
+          }),
+        ]),
     // spotlightjs(),
     checks({
       mode: 'full', // 'auto' | 'full' | 'essential'
@@ -150,9 +154,8 @@ export default defineConfig({
     ssr: {
       noExternal: ['three'],
     },
-    build: {
-      sourcemap: true,
-    },
+    // Astro 6 builds the browser bundle in Vite's client environment.
+    environments: { client: { build: { sourcemap: 'hidden' } } },
     plugins: [tailwindcss()],
   },
 });

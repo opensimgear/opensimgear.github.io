@@ -5,6 +5,8 @@ on:
   push:
     branches: [main]
     paths:
+      - scripts/**
+      - sentry.client.config.js
       - src/**
       - public/**
       - .github/actions/**
@@ -39,6 +41,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Test, Build, Upload
         env:
+          SENTRY_REQUIRE_UPLOAD: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         uses: ./.github/actions/astro-build
       - name: Upload production site for smoke matrix
@@ -63,7 +66,7 @@ jobs:
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
   e2e:
     needs: test-and-build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     strategy:
       fail-fast: false
