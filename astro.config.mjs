@@ -13,6 +13,7 @@ import tailwindcss from '@tailwindcss/vite';
 import robotsTxt from 'astro-robots-txt';
 import webmanifest from 'astro-webmanifest';
 import checks from '@nuasite/checks';
+import verifiedSentrySourceMaps from './scripts/sentry-sourcemaps.mjs';
 
 import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 
@@ -115,16 +116,23 @@ export default defineConfig({
       display: 'standalone',
       insertAppleTouchLinks: true,
     }),
-    playformCompress(),
+    playformCompress({
+      JavaScript: false,
+      HTML: { 'html-minifier-terser': { minifyJS: false } },
+    }),
     ...(process.env.NODE_ENV === 'development'
       ? []
       : [
-        sentry({
-          org: 'qantic-ntrp',
-          project: 'open-sim-gear',
-          authToken: process.env.SENTRY_AUTH_TOKEN,
-        }),
-      ]),
+          sentry({
+            org: 'qantic-ntrp',
+            project: 'open-sim-gear',
+            // Upload final client assets after compression and verification below.
+            sourcemaps: { filesToDeleteAfterUpload: [] },
+            // Disable only the core uploader: top-level disable would remove the
+            // entire Vite plugin, including automatic release metadata injection.
+            unstable_sentryVitePluginOptions: { sourcemaps: { disable: true } },
+          }),
+        ]),
     // spotlightjs(),
     checks({
       mode: 'full', // 'auto' | 'full' | 'essential'
@@ -139,6 +147,7 @@ export default defineConfig({
         'seo/noindex-detected': false, // disable entirely
       },
     }),
+    verifiedSentrySourceMaps(),
   ],
   vite: {
     assetsInclude: ['**/*.glb'],
@@ -150,9 +159,8 @@ export default defineConfig({
     ssr: {
       noExternal: ['three'],
     },
-    build: {
-      sourcemap: true,
-    },
+    // Astro 6 builds the browser bundle in Vite's client environment.
+    environments: { client: { build: { sourcemap: 'hidden' } } },
     plugins: [tailwindcss()],
   },
 });

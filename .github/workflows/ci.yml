@@ -5,6 +5,8 @@ on:
   push:
     branches: [main]
     paths:
+      - scripts/**
+      - sentry.client.config.js
       - src/**
       - public/**
       - .github/actions/**
@@ -39,6 +41,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Test, Build, Upload
         env:
+          SENTRY_REQUIRE_UPLOAD: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         uses: ./.github/actions/astro-build
       - name: Upload production site for smoke matrix
