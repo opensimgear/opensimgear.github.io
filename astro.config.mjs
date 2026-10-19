@@ -13,7 +13,6 @@ import tailwindcss from '@tailwindcss/vite';
 import robotsTxt from 'astro-robots-txt';
 import webmanifest from 'astro-webmanifest';
 import checks from '@nuasite/checks';
-import verifiedSentrySourceMaps from './scripts/sentry-sourcemaps.mjs';
 
 import { shouldIncludeInSitemap } from './src/utils/seo-policy.ts';
 
@@ -126,11 +125,8 @@ export default defineConfig({
           sentry({
             org: 'qantic-ntrp',
             project: 'open-sim-gear',
-            // Upload final client assets after compression and verification below.
-            sourcemaps: { filesToDeleteAfterUpload: [] },
-            // Disable only the core uploader: top-level disable would remove the
-            // entire Vite plugin, including automatic release metadata injection.
-            unstable_sentryVitePluginOptions: { sourcemaps: { disable: true } },
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+            sourcemaps: { filesToDeleteAfterUpload: ['./dist/**/*.map'] },
           }),
         ]),
     // spotlightjs(),
@@ -147,7 +143,6 @@ export default defineConfig({
         'seo/noindex-detected': false, // disable entirely
       },
     }),
-    verifiedSentrySourceMaps(),
   ],
   vite: {
     assetsInclude: ['**/*.glb'],

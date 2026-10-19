@@ -62,20 +62,11 @@ pnpm preview
 
 `pnpm build` runs Astro checks before generating the static site in `dist/`.
 
-Production builds generate hidden browser source maps in Vite's `client` environment. After compression, the final
-`dist/_astro/` JavaScript and maps receive matching Sentry debug IDs. The build verifies embedded original sources,
-uploads both to Sentry when `SENTRY_AUTH_TOKEN` is set, checks the upload report for every map, and removes the maps
-before packaging Pages artifacts. JavaScript and inline-script recompression are disabled to preserve source mappings. A
-Vite chunk inventory limits this pipeline to compiled browser chunks; copied vendor scripts (including assets inside
-`_astro/`) are excluded. Generated facades and virtual runtime helpers can have empty maps; chunks containing original
-source modules must embed their sources. Astro-inlined chunks are excluded after their JavaScript is removed. The Sentry
-Vite plugin still injects automatic release metadata; only its automatic source-map upload is disabled in favor of the
-final-asset upload gate.
-
-CI sets `SENTRY_REQUIRE_UPLOAD=true` for deployments from `main`; a missing token or failed upload blocks deployment.
-Local and fork pull-request builds can run without a token and still verify and remove their generated maps. The build
-reads the token from the process environment. To explicitly load a local `.env` for an authenticated build, use
-`node --env-file=.env --run build`. Never commit the token or generated source maps.
+Production builds generate hidden browser source maps in Vite's `client` environment. The standard Sentry integration
+uploads them when `SENTRY_AUTH_TOKEN` is set and removes `dist/**/*.map` after upload. JavaScript and inline-script
+recompression are disabled to preserve source mappings. CI requires the token for deployments from `main`; local and
+fork pull-request builds can run without it. To load a local `.env` for an authenticated build, use
+`node --env-file=.env --run build`. Never commit the token or generated maps.
 
 ## Validation
 

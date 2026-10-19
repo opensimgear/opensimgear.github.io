@@ -32,7 +32,12 @@ runs:
       run: pnpm test
     - name: Build
       shell: bash
-      run: pnpm build
+      run: |
+        if [[ "${SENTRY_REQUIRE_UPLOAD:-false}" == "true" && -z "${SENTRY_AUTH_TOKEN//[[:space:]]/}" ]]; then
+          echo "SENTRY_AUTH_TOKEN is required for production deployment" >&2
+          exit 1
+        fi
+        pnpm build
     - name: Save Astro cache
       if: ${{ steps.astro-cache-restore.outputs.cache-hit != 'true' }}
       uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
